@@ -1,0 +1,75 @@
+/* styles/_tokens.scss
+   Design tokens for iLab (SCSS-only)
+   - Colors: dark palette + aqua accent
+   - Typography: Inter, base 16px, Perfect Fourth scale
+   - Spacing: 4-pt base
+   - Breakpoints: md = 768px
+   - Z-index & layout constants
+*/
+
+/* ========== COLORS ========== */
+$color-background: #000000;
+$color-surface-1:  #0A0A0A;
+$color-surface-2:  #141414;
+$color-surface-3:  #1F1F1F;
+$color-border:     #2A2A2A;
+
+$color-text:   #F5F5F5; // primary
+$color-text-2: #B3B3B3; // secondary
+$color-text-3: #8C8C8C; // muted
+
+$color-accent:        #22D3EE;
+$color-accent-hover:  #06B6D4;
+$color-accent-active: #0891B2;
+
+/* ========== TYPOGRAPHY ========== */
+$font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+$font-weight-thin:     100;
+$font-weight-light:    300;
+$font-weight-regular:  400;
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+$font-weight-extrabold:800;
+
+$font-size-base: 16px;
+$font-size-sm:   0.75rem;   // 12px
+$font-size-p:    1rem;      // 16px
+$font-size-lg:   1.125rem;  // 18px
+$font-size-xl:   1.333rem;  // 21.33px
+$font-size-h5:   1.777rem;  // 28.43px
+$font-size-h4:   2.369rem;  // 37.90px
+$font-size-h3:   3.157rem;  // 50.51px
+$font-size-h2:   4.209rem;  // 67.34px
+$font-size-h1:   5.61rem;   // 89.76px
+
+$line-height-body:    1.6;
+$line-height-heading: 1.2;
+
+/* ========== SPACING (4-pt scale) ========== */
+$space-2xs: 2px;
+$space-xs:  4px;
+$space-sm:  8px;
+$space-md:  16px;
+$space-lg:  24px;
+$space-xl:  32px;
+$space-2xl: 48px;
+$space-3xl: 64px;
+
+/* ========== BREAKPOINTS ========== */
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+/* ========== Z-INDEX ========== */
+$z-nav:     50;
+$z-overlay: 100;
+$z-modal:   200;
+
+/* ========== LAYOUT ========== */
+$sidebar-width:        240px;
+$header-mobile-height: 56px;
+$header-desktop-height:72px;
+ 

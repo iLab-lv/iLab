@@ -1,0 +1,72 @@
+/* styles/globals.scss
+   Global stylesheet entry point
+   - Imports reset + tokens
+   - Applies project-wide base rules
+   - Keeps site/admin consistent
+*/
+
+/* --- Imports --- */
+@import './reset';
+@import './tokens';
+
+/* --- Base globals --- */
+html {
+  font-size: 100%; /* 16px base */
+  color-scheme: dark; /* ensure form controls, scrollbars use dark styling */
+}
+
+body {
+  font-family: $font-family-base;
+  font-weight: $font-weight-regular;
+  font-size: $font-size-p;
+  line-height: $line-height-body;
+  background: $color-background;
+  color: $color-text;
+  margin: 0;
+}
+
+/* Links */
+a {
+  color: $color-accent;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-accent-hover;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $color-accent-active;
+  }
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-bold;
+  line-height: $line-height-heading;
+  margin: 0 0 $space-md 0;
+}
+
+h1 { font-size: $font-size-h1; }
+h2 { font-size: $font-size-h2; }
+h3 { font-size: $font-size-h3; }
+h4 { font-size: $font-size-h4; }
+h5 { font-size: $font-size-h5; }
+h6 { font-size: $font-size-xl; }
+
+/* Paragraphs */
+p {
+  margin: 0 0 $space-md 0;
+  font-size: $font-size-p;
+  color: $color-text-2;
+}
+
+/* Utility resets */
+ul, ol {
+  margin: 0 0 $space-md 0;
+  padding-left: $space-lg;
+}
+
+button {
+  cursor: pointer;
+}
