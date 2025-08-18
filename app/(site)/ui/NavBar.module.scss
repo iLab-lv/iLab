@@ -1,0 +1,280 @@
+@use "@/styles/tokens" as t;
+
+/* ---------- Header shell ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: t.$z-nav;
+  background: t.$color-background;
+  border-bottom: 1px solid t.$color-border;
+  color: t.$color-text;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: t.$space-sm t.$space-md;
+  display: flex;
+  align-items: center;
+  gap: t.$space-md;
+}
+
+.brand a {
+  font-weight: t.$font-weight-extrabold;
+  font-size: t.$font-size-lg;
+  text-decoration: none;
+  color: t.$color-text;
+  &:hover { color: t.$color-accent; }
+}
+
+/* ---------- Primary nav (desktop) ---------- */
+.nav {
+  display: flex;
+  gap: t.$space-md;
+  margin-left: t.$space-lg;
+  flex: 1;
+}
+
+.navItem {
+  text-decoration: none;
+  color: t.$color-text-2;
+  padding: t.$space-xs t.$space-sm;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: t.$color-text;
+    background: t.$color-surface-2;
+    border-color: t.$color-border;
+  }
+}
+.navItemEmph {
+  color: t.$color-accent;
+  border: 1px solid t.$color-accent;
+  background: transparent;
+  font-weight: t.$font-weight-semibold;
+  &:hover { background: t.$color-surface-2; }
+}
+
+/* ---------- Desktop dropdown with second level ---------- */
+.ddWrap { position: relative; display: inline-block; }
+
+/* No gap between trigger and panel to avoid flicker */
+.dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: none;
+  width: clamp(280px, 32vw, 360px);
+  background: t.$color-surface-2;
+  border: 1px solid t.$color-border;
+  border-radius: 12px;
+  padding: t.$space-sm;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  z-index: t.$z-overlay;
+  color: t.$color-text;
+}
+.open { display: block; }
+
+.catList { list-style: none; padding: 0; margin: 0; }
+.catItem { position: relative; }
+.activeRow { background: t.$color-surface-3; border-radius: 8px; }
+
+.catButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+  color: t.$color-text-2;
+  padding: t.$space-2xs t.$space-xs;
+  border-radius: 8px;
+
+  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+}
+
+.chev { opacity: 0.6; }
+
+/* Second-level brands panel */
+.subpanel {
+  position: absolute;
+  top: 0;
+  left: calc(100% + t.$space-xs);
+  min-width: 240px;
+  background: t.$color-surface-2;
+  border: 1px solid t.$color-border;
+  border-radius: 12px;
+  padding: t.$space-sm;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+}
+.brandList { list-style: none; padding: 0; margin: 0; }
+.brandLink {
+  display: block;
+  text-decoration: none;
+  color: t.$color-text-2;
+  padding: t.$space-2xs 0;
+  border-radius: 6px;
+  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+}
+
+/* ---------- Right actions ---------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: t.$space-sm;
+  margin-left: auto;
+  position: relative;
+  z-index: t.$z-overlay;
+}
+.actionItem { position: relative; }
+
+.iconBtn {
+  appearance: none;
+  border: 1px solid t.$color-border;
+  background: t.$color-surface-1;
+  color: t.$color-text;
+  border-radius: 12px;
+  padding: t.$space-xs t.$space-sm;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: t.$space-xs;
+  cursor: pointer;
+
+  &:hover { background: t.$color-surface-2; border-color: t.$color-border; }
+}
+.primary {
+  border-color: t.$color-accent;
+  box-shadow: inset 0 0 0 1px t.$color-accent;
+  &:hover { background: t.$color-surface-2; }
+}
+.icon { font-size: 18px; line-height: 1; }
+.caption { font-size: t.$font-size-sm; color: t.$color-text-2; }
+
+/* ---------- Location popover (desktop) ---------- */
+.locMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  display: none;
+  min-width: 220px;
+  background: t.$color-surface-2;
+  border: 1px solid t.$color-border;
+  border-radius: 12px;
+  padding: t.$space-sm;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  z-index: t.$z-overlay;
+}
+.open { display: block; }
+
+.locRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: t.$space-sm;
+  padding: t.$space-xs 0;
+  & + & { border-top: 1px dashed t.$color-border; }
+}
+.locOption {
+  appearance: none;
+  background: transparent;
+  border: 1px solid t.$color-border;
+  color: t.$color-text;
+  padding: t.$space-xs t.$space-sm;
+  border-radius: 8px;
+  text-align: left; width: 100%;
+  cursor: pointer;
+  &:hover { background: t.$color-surface-3; }
+}
+.active { border-color: t.$color-accent; box-shadow: inset 0 0 0 1px t.$color-accent; }
+
+.locLinks { display: flex; gap: t.$space-xs; }
+.smallLink {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-2;
+  text-decoration: none;
+  padding: t.$space-2xs t.$space-xs;
+  border-radius: 6px;
+  border: 1px solid t.$color-border;
+  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+}
+
+/* ---------- Mobile slide-down menu ---------- */
+.mobileMenu {
+  display: none;               /* hidden by default, shown on mobile */
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 240ms ease;
+  background: t.$color-background;
+  border-bottom: 1px solid t.$color-border;
+}
+.mobileMenu.open { max-height: 85vh; }
+
+.mobileInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: t.$space-md;
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-sm;
+}
+
+/* Reuse drawer styles for items (renamed for mobile section) */
+.drawerItem {
+  text-decoration: none;
+  color: t.$color-text;
+  padding: t.$space-sm;
+  border-radius: 10px;
+  border: 1px solid t.$color-border;
+  background: t.$color-surface-1;
+  text-align: left;
+  cursor: pointer;
+  &:hover { background: t.$color-surface-2; }
+}
+.emph { color: t.$color-accent; border-color: t.$color-accent; background: transparent; }
+
+.drawerSubmenu { margin-top: t.$space-xs; }
+.drawerSubsection { & + & { margin-top: t.$space-sm; } }
+.drawerSublist { display: grid; grid-template-columns: 1fr; gap: t.$space-2xs; }
+
+.quick {
+  appearance: none;
+  border: 1px solid t.$color-border;
+  background: t.$color-surface-1;
+  color: t.$color-text;
+  border-radius: 10px;
+  padding: t.$space-sm;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover { background: t.$color-surface-2; }
+}
+
+.drawerCtas {
+  display: grid; grid-template-columns: 1fr;
+  gap: t.$space-sm; margin-top: t.$space-sm;
+}
+
+/* ---------- Hamburger ---------- */
+.hamburger {
+  display: none;
+  font-size: 20px;
+  background: transparent;
+  border: 1px solid t.$color-border;
+  color: t.$color-text;
+  border-radius: 10px;
+  padding: t.$space-2xs t.$space-sm;
+  cursor: pointer;
+  &:hover { background: t.$color-surface-2; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: t.$bp-lg) {
+  .nav { display: none; }          /* hide desktop nav */
+  .hamburger { display: inline-block; }
+  .mobileMenu { display: block; }  /* use slide-down menu */
+  .dropdown, .locMenu { display: none !important; } /* no desktop popovers */
+}
