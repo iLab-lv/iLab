@@ -19,12 +19,29 @@
   gap: t.$space-md;
 }
 
-.brand a {
-  font-weight: t.$font-weight-extrabold;
-  font-size: t.$font-size-lg;
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
+  /* if your SVG has no color, it’ll keep its own; if it uses currentColor, this will apply: */
   color: t.$color-text;
+
   &:hover { color: t.$color-accent; }
+}
+
+.logo {
+  display: block;
+  height: 28px;         /* mobile default */
+  width: auto;          /* preserve aspect ratio */
+}
+
+@media (min-width: t.$bp-lg) {
+  .logo { height: 32px; }
 }
 
 /* ---------- Primary nav (desktop) ---------- */

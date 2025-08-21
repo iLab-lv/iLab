@@ -4,12 +4,12 @@ import { useState, useMemo, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
 
-// exact path you requested
+// data
 import categories from '@/data/categories';
 
 const LOCATIONS = [
   { id: 'domina', label: 'Domina', tel: '+37123370088', wa: 'https://wa.me/37123370088', maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga' },
-  { id: 'spice',  label: 'Spice',  tel: '+37120887787', wa: 'https://wa.me/37120887787', maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga' },
+  { id: 'spice', label: 'Spice', tel: '+37120887787', wa: 'https://wa.me/37120887787', maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga' },
 ];
 
 export default function NavBar() {
@@ -93,7 +93,15 @@ export default function NavBar() {
         <div className={s.container}>
           {/* brand */}
           <div className={s.brand}>
-            <Link href="/" aria-label="iLab sākumlapa">iLab</Link>
+            <Link href="/" className={s.brandLink} aria-label="iLab sākumlapa">
+              <img
+                src="/brand/logo.svg"
+                alt="iLab"
+                className={s.logo}
+                loading="eager"
+                decoding="async"
+              />
+            </Link>
           </div>
 
           {/* desktop nav */}
@@ -124,7 +132,7 @@ export default function NavBar() {
               </button>
 
               <div className={`${s.dropdown} ${servicesOpen ? s.open : ''}`} role="menu" aria-hidden={!servicesOpen}>
-                {/* level 1: categories (clickable) */}
+                {/* level 1: categories */}
                 <ul className={s.catList}>
                   {catsForHeader.map(cat => {
                     const hasBrands = (cat.brands || []).some(b => b.showInDropdown);
@@ -137,7 +145,7 @@ export default function NavBar() {
                         onMouseEnter={() => setActiveCatSlug(cat.slug)}
                       >
                         <Link
-                          href={`/remonts/${cat.slug}`}
+                          href={`/${cat.slug}`}
                           className={s.catButton}
                           onClick={() => setServicesOpen(false)}
                         >
@@ -149,14 +157,14 @@ export default function NavBar() {
                   })}
                 </ul>
 
-                {/* level 2: brands (on hover) */}
+                {/* level 2: brands */}
                 {activeCatSlug && (
                   <div className={s.subpanel} role="menu">
                     <ul className={s.brandList}>
                       {brandsForCat(activeCatSlug).map(brand => (
                         <li key={`${activeCatSlug}__${brand.brandSlug}`}>
                           <Link
-                            href={`/remonts/${activeCatSlug}/${brand.brandSlug}`}
+                            href={`/${activeCatSlug}/${brand.brandSlug}`}
                             className={s.brandLink}
                             onClick={() => setServicesOpen(false)}
                           >
@@ -236,7 +244,7 @@ export default function NavBar() {
               </a>
             </div>
 
-            {/* hamburger toggles mobile slide-down */}
+            {/* hamburger */}
             <button
               type="button"
               className={s.hamburger}
@@ -254,7 +262,7 @@ export default function NavBar() {
         </div>
       </header>
 
-      {/* mobile slide-down (full width under header) */}
+      {/* mobile menu */}
       <div className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`} aria-hidden={!mobileOpen}>
         <nav className={s.mobileInner} aria-label="Mobilā navigācija">
           {/* Pakalpojumi accordion */}
@@ -274,11 +282,10 @@ export default function NavBar() {
                 if (brands.length === 0) return null;
 
                 const open = drawerActiveCat === cat.slug;
-                const catHref = `/remonts/${cat.slug}`;
+                const catHref = `/${cat.slug}`;
 
                 return (
                   <div key={cat.slug} className={s.drawerSubsection}>
-                    {/* first tap expands, second tap navigates */}
                     <Link
                       href={catHref}
                       className={s.drawerItem}
@@ -304,7 +311,7 @@ export default function NavBar() {
                         {brands.map(brand => (
                           <Link
                             key={`${cat.slug}__${brand.brandSlug}`}
-                            href={`/remonts/${cat.slug}/${brand.brandSlug}`}
+                            href={`/${cat.slug}/${brand.brandSlug}`}
                             className={s.drawerItem}
                             onClick={() => setMobileOpen(false)}
                           >
