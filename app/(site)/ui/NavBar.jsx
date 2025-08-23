@@ -4,81 +4,70 @@ import { useState, useMemo, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
 
-// data
-import categories from '@/data/categories';
-
+/* ---------- data (locator) ---------- */
 const LOCATIONS = [
   { id: 'domina', label: 'Domina', tel: '+37123370088', wa: 'https://wa.me/37123370088', maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga' },
-  { id: 'spice', label: 'Spice', tel: '+37120887787', wa: 'https://wa.me/37120887787', maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga' },
+  { id: 'spice',  label: 'Spice',  tel: '+37120887787', wa: 'https://wa.me/37120887787', maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga' },
+];
+
+/* ---------- SEO nav (Option B) ---------- */
+const NAV = [
+  { label: 'iPhone remonts', href: '/iphone-remonts' },
+  {
+    label: 'Telefonu remonts',
+    href: '/telefonu-remonts',
+    children: [
+      { label: 'Samsung', href: '/telefonu-remonts/samsung' },
+      { label: 'Huawei',  href: '/telefonu-remonts/huawei' },
+      { label: 'OnePlus', href: '/telefonu-remonts/oneplus' },
+    ],
+  },
+  { label: 'Planšetdatoru remonts', href: '/plansetdatoru-remonts' }, // children later
+  { label: 'Datoru remonts',        href: '/datoru-remonts' },        // children later
+  { label: 'Dyson remonts',         href: '/dyson-remonts' },
 ];
 
 export default function NavBar() {
-  /* ---------- desktop state ---------- */
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [activeCatSlug, setActiveCatSlug] = useState(null);
-  const [locOpen, setLocOpen] = useState(false);
-
-  /* ---------- mobile slide-down state ---------- */
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [drawerServicesOpen, setDrawerServicesOpen] = useState(false);
-  const [drawerLocOpen, setDrawerLocOpen] = useState(false);
-  const [drawerActiveCat, setDrawerActiveCat] = useState(null);
-  const [lastTapCat, setLastTapCat] = useState(null);
-
   /* ---------- location ---------- */
   const [locId, setLocId] = useState(LOCATIONS[0].id);
   const loc = useMemo(() => LOCATIONS.find(l => l.id === locId) ?? LOCATIONS[0], [locId]);
 
-  /* ---------- data ---------- */
-  const catsForHeader = useMemo(
-    () =>
-      [...categories]
-        .filter(c => c.showInHeader || c.showInDropdown)
-        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
-    []
-  );
-
-  const brandsForCat = (slug) => {
-    const cat = catsForHeader.find(c => c.slug === slug);
-    if (!cat) return [];
-    return (cat.brands || [])
-      .filter(b => b.showInDropdown)
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  };
-
-  /* ---------- refs & helpers ---------- */
-  const servicesRef = useRef(null);
-  const locRef = useRef(null);
+  /* ---------- desktop dropdown state ---------- */
+  const [openSlug, setOpenSlug] = useState(null); // e.g., 'telefonu-remonts'
+  const [locOpen, setLocOpen] = useState(false);
   const leaveT = useRef(null);
+
+  /* ---------- mobile state ---------- */
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null);
+  const [drawerLocOpen, setDrawerLocOpen] = useState(false);
+
+  /* ---------- refs ---------- */
+  const navRef = useRef(null);
+  const locRef = useRef(null);
 
   /* esc to close */
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') {
-        setServicesOpen(false);
-        setActiveCatSlug(null);
+        setOpenSlug(null);
         setLocOpen(false);
         setMobileOpen(false);
-        setDrawerServicesOpen(false);
+        setMobileExpandedSlug(null);
         setDrawerLocOpen(false);
-        setDrawerActiveCat(null);
-        setLastTapCat(null);
       }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  /* outside click (desktop) */
+  /* outside click close (dropdowns + locator) */
   useEffect(() => {
     const onClick = (e) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
-        setServicesOpen(false);
-        setActiveCatSlug(null);
-      }
-      if (locRef.current && !locRef.current.contains(e.target)) {
-        setLocOpen(false);
-      }
+      const inNav = navRef.current && navRef.current.contains(e.target);
+      const inLoc = locRef.current && locRef.current.contains(e.target);
+      if (!inNav) setOpenSlug(null);
+      if (!inLoc) setLocOpen(false);
     };
     document.addEventListener('mousedown', onClick);
     return () => document.removeEventListener('mousedown', onClick);
@@ -87,9 +76,11 @@ export default function NavBar() {
   /* clear hover delay on unmount */
   useEffect(() => () => clearTimeout(leaveT.current), []);
 
+  const hasChildren = (item) => Array.isArray(item.children) && item.children.length > 0;
+
   return (
     <Fragment>
-      <header className={s.header}>
+      <header className={s.header} role="banner">
         <div className={s.container}>
           {/* brand */}
           <div className={s.brand}>
@@ -105,239 +96,173 @@ export default function NavBar() {
           </div>
 
           {/* desktop nav */}
-          <nav className={s.nav} aria-label="Galvenā navigācija">
-            <div
-              className={s.ddWrap}
-              ref={servicesRef}
-              onMouseEnter={() => {
-                clearTimeout(leaveT.current);
-                setServicesOpen(true);
-              }}
-              onMouseLeave={() => {
-                clearTimeout(leaveT.current);
-                leaveT.current = setTimeout(() => {
-                  setServicesOpen(false);
-                  setActiveCatSlug(null);
-                }, 120);
-              }}
-            >
-              <button
-                type="button"
-                className={`${s.navItem} ${s.navItemEmph}`}
-                aria-haspopup="menu"
-                aria-expanded={servicesOpen}
-                onClick={() => setServicesOpen(v => !v)}
-              >
-                Pakalpojumi
-              </button>
+          <nav className={s.nav} aria-label="Galvenā navigācija" ref={navRef}>
+            {NAV.map((item) => {
+              const slug = item.href.replace(/^\//, '');
+              if (!hasChildren(item)) {
+                return (
+                  <Link key={slug} href={item.href} className={s.navItem}>
+                    {item.label}
+                  </Link>
+                );
+              }
 
-              <div className={`${s.dropdown} ${servicesOpen ? s.open : ''}`} role="menu" aria-hidden={!servicesOpen}>
-                {/* level 1: categories */}
-                <ul className={s.catList}>
-                  {catsForHeader.map(cat => {
-                    const hasBrands = (cat.brands || []).some(b => b.showInDropdown);
-                    if (!hasBrands) return null;
-                    const isActive = activeCatSlug === cat.slug;
-                    return (
-                      <li
-                        key={cat.slug}
-                        className={`${s.catItem} ${isActive ? s.activeRow : ''}`}
-                        onMouseEnter={() => setActiveCatSlug(cat.slug)}
-                      >
-                        <Link
-                          href={`/${cat.slug}`}
-                          className={s.catButton}
-                          onClick={() => setServicesOpen(false)}
-                        >
-                          {cat.name}
-                          <span className={s.chev} aria-hidden>›</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+              return (
+                <div
+                  key={slug}
+                  className={s.ddWrap}
+                  onMouseEnter={() => {
+                    clearTimeout(leaveT.current);
+                    setOpenSlug(slug);
+                  }}
+                  onMouseLeave={() => {
+                    clearTimeout(leaveT.current);
+                    leaveT.current = setTimeout(() => setOpenSlug(null), 120);
+                  }}
+                >
+                  <Link
+                    href={item.href}
+                    className={`${s.navItem} ${s.navParent}`}
+                    aria-haspopup="menu"
+                    aria-expanded={openSlug === slug}
+                    onClick={(e) => {
+                      // allow click-to-open; navigate on second click
+                      if (openSlug !== slug) {
+                        e.preventDefault();
+                        setOpenSlug(slug);
+                      }
+                    }}
+                  >
+                    {item.label}
+                    <span className={s.chev} aria-hidden>›</span>
+                  </Link>
 
-                {/* level 2: brands */}
-                {activeCatSlug && (
-                  <div className={s.subpanel} role="menu">
-                    <ul className={s.brandList}>
-                      {brandsForCat(activeCatSlug).map(brand => (
-                        <li key={`${activeCatSlug}__${brand.brandSlug}`}>
+                  <div
+                    className={`${s.dropdown} ${openSlug === slug ? s.open : ''}`}
+                    role="menu"
+                    aria-hidden={openSlug !== slug}
+                  >
+                    <ul className={s.menuCol}>
+                      {item.children.map((child) => (
+                        <li key={`${slug}__${child.href}`}>
                           <Link
-                            href={`/${activeCatSlug}/${brand.brandSlug}`}
-                            className={s.brandLink}
-                            onClick={() => setServicesOpen(false)}
+                            href={child.href}
+                            className={s.menuLink}
+                            onClick={() => setOpenSlug(null)}
+                            role="menuitem"
                           >
-                            {brand.name}
+                            {child.label}
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
-                )}
-              </div>
-            </div>
-
-            <Link href="/cenas" className={s.navItem}>Cenas</Link>
-            <Link href="/par-mums" className={s.navItem}>Par mums</Link>
-            <Link href="/kontakti" className={s.navItem}>Kontakti</Link>
+                </div>
+              );
+            })}
           </nav>
 
           {/* right actions */}
           <div className={s.actions}>
-            {/* locate */}
-            <div className={s.actionItem} ref={locRef}>
+            {/* group: hamburger + locator + utility slot */}
+            <div className={s.actionsCluster} ref={locRef}>
+              {/* hamburger (mobile only) */}
               <button
                 type="button"
-                className={s.iconBtn}
-                aria-haspopup="menu"
-                aria-expanded={locOpen}
-                onClick={() => { setLocOpen(v => !v); setServicesOpen(false); }}
+                className={s.hamburger}
+                aria-label="Atvērt izvēlni"
+                aria-expanded={mobileOpen}
+                onClick={() => {
+                  setMobileOpen(v => !v);
+                  setOpenSlug(null);
+                  setLocOpen(false);
+                }}
               >
-                <span className={s.icon} aria-hidden>📍</span>
-                <span className={s.caption}>Locate service</span>
+                ☰
               </button>
 
-              <div className={`${s.locMenu} ${locOpen ? s.open : ''}`} role="menu" aria-hidden={!locOpen}>
-                {LOCATIONS.map(l => (
-                  <div key={l.id} className={s.locRow}>
-                    <button
-                      type="button"
-                      className={`${s.locOption} ${l.id === locId ? s.active : ''}`}
-                      onClick={() => { setLocId(l.id); setLocOpen(false); }}
-                      aria-pressed={l.id === locId}
-                      role="menuitem"
-                    >
-                      {l.label}
-                    </button>
-                    <div className={s.locLinks}>
-                      <a href={l.maps} target="_blank" rel="noopener" className={s.smallLink}>Maps</a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* chat */}
-            <div className={s.actionItem}>
-              <a
-                href={loc.wa}
-                className={s.iconBtn}
-                aria-label="Open WhatsApp chat"
-                onClick={() => { setServicesOpen(false); setLocOpen(false); }}
+              {/* locator (link-styled, not a button chrome) */}
+              <button
+                type="button"
+                className={s.locator}
+                aria-haspopup="menu"
+                aria-expanded={locOpen}
+                onClick={() => {
+                  setLocOpen(v => !v);
+                  setOpenSlug(null);
+                }}
               >
-                <span className={s.icon} aria-hidden>💬</span>
-                <span className={s.caption}>Chat with us</span>
-              </a>
+                <span className={s.icon} aria-hidden>📍</span>
+                <span className={s.caption}>Atrast filiāli</span>
+              </button>
+
+              {/* utility slot (Language switcher mounts here on mobile) */}
+              <div id="topbar-right-utility" className={s.slotUtility} />
             </div>
 
-            {/* call */}
-            <div className={s.actionItem}>
-              <a
-                href={`tel:${loc.tel}`}
-                className={`${s.iconBtn} ${s.primary}`}
-                aria-label="Call us"
-                onClick={() => { setServicesOpen(false); setLocOpen(false); }}
-              >
-                <span className={s.icon} aria-hidden>📞</span>
-                <span className={s.caption}>Call us</span>
-              </a>
-            </div>
-
-            {/* hamburger */}
-            <button
-              type="button"
-              className={s.hamburger}
-              aria-label="Atvērt izvēlni"
-              aria-expanded={mobileOpen}
-              onClick={() => {
-                setMobileOpen(v => !v);
-                setServicesOpen(false);
-                setLocOpen(false);
-              }}
-            >
-              ☰
-            </button>
+            {/* primary slot (Sazināties mounts here on desktop) */}
+            <div id="topbar-right-primary" className={s.slotPrimary} />
           </div>
         </div>
       </header>
 
-      {/* mobile menu */}
+      {/* mobile drawer */}
       <div className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`} aria-hidden={!mobileOpen}>
         <nav className={s.mobileInner} aria-label="Mobilā navigācija">
-          {/* Pakalpojumi accordion */}
-          <button
-            type="button"
-            className={`${s.drawerItem} ${s.emph}`}
-            aria-expanded={drawerServicesOpen}
-            onClick={() => setDrawerServicesOpen(v => !v)}
-          >
-            Pakalpojumi
-          </button>
+          {NAV.map((item) => {
+            const slug = item.href.replace(/^\//, '');
+            const expanded = mobileExpandedSlug === slug;
+            const itemHasChildren = hasChildren(item);
 
-          {drawerServicesOpen && (
-            <div className={s.drawerSubmenu}>
-              {catsForHeader.map(cat => {
-                const brands = brandsForCat(cat.slug);
-                if (brands.length === 0) return null;
+            if (!itemHasChildren) {
+              return (
+                <Link
+                  key={slug}
+                  href={item.href}
+                  className={s.drawerItem}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
 
-                const open = drawerActiveCat === cat.slug;
-                const catHref = `/${cat.slug}`;
-
-                return (
-                  <div key={cat.slug} className={s.drawerSubsection}>
-                    <Link
-                      href={catHref}
-                      className={s.drawerItem}
-                      aria-expanded={open}
-                      onClick={(e) => {
-                        if (!open) {
-                          e.preventDefault();
-                          setDrawerActiveCat(cat.slug);
-                          setLastTapCat(cat.slug);
-                        } else if (lastTapCat !== cat.slug) {
-                          e.preventDefault();
-                          setLastTapCat(cat.slug);
-                        } else {
-                          setMobileOpen(false);
-                        }
-                      }}
-                    >
-                      {cat.name}
-                    </Link>
-
-                    {open && (
-                      <div className={s.drawerSublist}>
-                        {brands.map(brand => (
-                          <Link
-                            key={`${cat.slug}__${brand.brandSlug}`}
-                            href={`/${cat.slug}/${brand.brandSlug}`}
-                            className={s.drawerItem}
-                            onClick={() => setMobileOpen(false)}
-                          >
-                            {brand.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+            return (
+              <div key={slug} className={s.drawerGroup}>
+                <button
+                  type="button"
+                  className={`${s.drawerItem} ${s.emph}`}
+                  aria-expanded={expanded}
+                  onClick={() => setMobileExpandedSlug(expanded ? null : slug)}
+                >
+                  {item.label}
+                </button>
+                {expanded && (
+                  <div className={s.drawerSubmenu}>
+                    {item.children.map((child) => (
+                      <Link
+                        key={`${slug}__${child.href}`}
+                        href={child.href}
+                        className={s.drawerItem}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
-          )}
+                )}
+              </div>
+            );
+          })}
 
-          <Link href="/cenas" className={s.drawerItem} onClick={() => setMobileOpen(false)}>Cenas</Link>
-          <Link href="/par-mums" className={s.drawerItem} onClick={() => setMobileOpen(false)}>Par mums</Link>
-          <Link href="/kontakti" className={s.drawerItem} onClick={() => setMobileOpen(false)}>Kontakti</Link>
-
-          {/* Location accordion */}
+          {/* Locator quick switch */}
           <button
             type="button"
             className={s.drawerItem}
             aria-expanded={drawerLocOpen}
             onClick={() => setDrawerLocOpen(v => !v)}
           >
-            📍 Locate service
+            📍 Atrast filiāli
           </button>
           {drawerLocOpen && (
             <div className={s.drawerSubmenu}>
@@ -353,11 +278,6 @@ export default function NavBar() {
               ))}
             </div>
           )}
-
-          <div className={s.drawerCtas}>
-            <a href={loc.wa} className={s.quick} onClick={() => setMobileOpen(false)}>💬 Chat with us</a>
-            <a href={`tel:${loc.tel}`} className={s.quick} onClick={() => setMobileOpen(false)}>📞 Call us</a>
-          </div>
         </nav>
       </div>
     </Fragment>

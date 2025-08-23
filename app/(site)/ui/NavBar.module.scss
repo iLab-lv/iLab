@@ -1,297 +1,477 @@
-@use "@/styles/tokens" as t;
+/* NavBar.module.scss
+   Glossy fixed-frame header for iLab
+   - Dark palette + aqua accent
+   - Backdrop blur with opaque fallback
+   - Keyboard-focus visible, mobile-safe areas
+*/
 
-/* ---------- Header shell ---------- */
+/* ===== Tokens (local copy to keep the module standalone) ===== */
+$color-background: #000000;
+$color-surface-1:  #0A0A0A;
+$color-surface-2:  #141414;
+$color-surface-3:  #1F1F1F;
+$color-border:     #2A2A2A;
+
+$color-text:       #F5F5F5;
+$color-text-2:     #B3B3B3;
+$color-text-3:     #8C8C8C;
+
+$color-accent:        #22D3EE;
+$color-accent-hover:  #06B6D4;
+$color-accent-active: #0891B2;
+
+$z-nav:     50;
+$z-overlay: 100;
+
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+$header-h-mobile: 56px;
+$header-h-desktop:72px;
+
+/* ===== Header frame ===== */
 .header {
-  position: sticky;
-  top: 0;
-  z-index: t.$z-nav;
-  background: t.$color-background;
-  border-bottom: 1px solid t.$color-border;
-  color: t.$color-text;
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: $header-h-desktop;
+  z-index: $z-nav;
+  background: rgba(0,0,0,0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  backdrop-filter: saturate(140%) blur(8px);
+
+  /* Fallback */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $color-surface-2;
+  }
+
+  @media (max-width: $bp-md) {
+    height: calc(#{$header-h-mobile} + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
 .container {
-  max-width: 1200px;
+  height: 100%;
   margin: 0 auto;
-  padding: t.$space-sm t.$space-md;
-  display: flex;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: t.$space-md;
+  gap: 16px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-}
-
+/* ===== Brand ===== */
 .brandLink {
   display: inline-flex;
   align-items: center;
-  text-decoration: none;
-  /* if your SVG has no color, it’ll keep its own; if it uses currentColor, this will apply: */
-  color: t.$color-text;
-
-  &:hover { color: t.$color-accent; }
 }
 
 .logo {
   display: block;
-  height: 28px;         /* mobile default */
-  width: auto;          /* preserve aspect ratio */
+  height: 28px;
+  width: auto;
+
+  @media (min-width: $bp-md) {
+    height: 32px;
+  }
 }
 
-@media (min-width: t.$bp-lg) {
-  .logo { height: 32px; }
-}
-
-/* ---------- Primary nav (desktop) ---------- */
+/* ===== Desktop nav ===== */
 .nav {
-  display: flex;
-  gap: t.$space-md;
-  margin-left: t.$space-lg;
-  flex: 1;
+  display: none;
+  align-items: center;
+  gap: 8px;
+
+  @media (min-width: $bp-md) {
+    display: flex;
+  }
 }
 
 .navItem {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 12px;
+  font-size: 15px;
+  color: $color-text;
   text-decoration: none;
-  color: t.$color-text-2;
-  padding: t.$space-xs t.$space-sm;
   border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
-  cursor: pointer;
+  transition: color .16s ease, background-color .16s ease;
 
-  &:hover {
-    color: t.$color-text;
-    background: t.$color-surface-2;
-    border-color: t.$color-border;
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    outline: none;
+  }
+
+  /* glow underline */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 6px;
+    height: 2px;
+    background: transparent;
+    border-radius: 1px;
+    transition: background-color .16s ease, transform .16s ease, opacity .16s ease;
+    transform: scaleX(0.2);
+    opacity: 0;
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    background: $color-accent;
+    transform: scaleX(1);
+    opacity: 1;
   }
 }
-.navItemEmph {
-  color: t.$color-accent;
-  border: 1px solid t.$color-accent;
-  background: transparent;
-  font-weight: t.$font-weight-semibold;
-  &:hover { background: t.$color-surface-2; }
+
+.navParent {
+  padding-right: 8px; /* room for chevron */
 }
 
-/* ---------- Desktop dropdown with second level ---------- */
-.ddWrap { position: relative; display: inline-block; }
+.chev {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 14px;
+  opacity: .7;
+  transform: translateY(1px);
+}
 
-/* No gap between trigger and panel to avoid flicker */
+.ddWrap {
+  position: relative;
+}
+
+/* ===== Dropdown ===== */
 .dropdown {
   position: absolute;
+  top: calc(100% + 10px);
   left: 0;
-  top: 100%;
-  display: none;
-  width: clamp(280px, 32vw, 360px);
-  background: t.$color-surface-2;
-  border: 1px solid t.$color-border;
+  min-width: 220px;
+  background: rgba(10,10,10,0.9);
+  border: 1px solid $color-border;
   border-radius: 12px;
-  padding: t.$space-sm;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
-  z-index: t.$z-overlay;
-  color: t.$color-text;
-}
-.open { display: block; }
-
-.catList { list-style: none; padding: 0; margin: 0; }
-.catItem { position: relative; }
-.activeRow { background: t.$color-surface-3; border-radius: 8px; }
-
-.catButton {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  width: 100%;
-  text-decoration: none;
-  color: t.$color-text-2;
-  padding: t.$space-2xs t.$space-xs;
-  border-radius: 8px;
-
-  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+  padding: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .16s ease, transform .16s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
-.chev { opacity: 0.6; }
-
-/* Second-level brands panel */
-.subpanel {
-  position: absolute;
-  top: 0;
-  left: calc(100% + t.$space-xs);
-  min-width: 240px;
-  background: t.$color-surface-2;
-  border: 1px solid t.$color-border;
-  border-radius: 12px;
-  padding: t.$space-sm;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
-.brandList { list-style: none; padding: 0; margin: 0; }
-.brandLink {
+
+.menuCol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li { margin: 0; }
+}
+
+.menuLink {
   display: block;
+  padding: 10px 10px;
+  border-radius: 8px;
+  color: $color-text;
   text-decoration: none;
-  color: t.$color-text-2;
-  padding: t.$space-2xs 0;
-  border-radius: 6px;
-  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+  transition: background-color .16s ease, color .16s ease;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: rgba(34,211,238,0.08);
+  }
 }
 
-/* ---------- Right actions ---------- */
+/* ===== Right actions & slots ===== */
 .actions {
   display: flex;
   align-items: center;
-  gap: t.$space-sm;
-  margin-left: auto;
-  position: relative;
-  z-index: t.$z-overlay;
+  gap: 8px;
 }
-.actionItem { position: relative; }
 
-.iconBtn {
-  appearance: none;
-  border: 1px solid t.$color-border;
-  background: t.$color-surface-1;
-  color: t.$color-text;
-  border-radius: 12px;
-  padding: t.$space-xs t.$space-sm;
-  text-decoration: none;
+.actionItem {
+  position: relative;
+}
+
+.actionsCluster {
   display: inline-flex;
   align-items: center;
-  gap: t.$space-xs;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+.slotUtility { /* language switcher slot (mobile only) */
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+
+.slotPrimary { /* Sazināties slot (desktop only) */
+  display: none;
+  min-width: 0;
+
+  @media (min-width: $bp-md) {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ===== Locator (link-styled control) ===== */
+.icon { margin-right: 8px; }
+
+.caption {
+  font-size: 14px;
+  color: $color-text-2;
+}
+
+.locator {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  color: $color-text;
   cursor: pointer;
+  transition: color .16s ease, background-color .16s ease;
 
-  &:hover { background: t.$color-surface-2; border-color: t.$color-border; }
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: rgba(255,255,255,0.04);
+  }
 }
-.primary {
-  border-color: t.$color-accent;
-  box-shadow: inset 0 0 0 1px t.$color-accent;
-  &:hover { background: t.$color-surface-2; }
-}
-.icon { font-size: 18px; line-height: 1; }
-.caption { font-size: t.$font-size-sm; color: t.$color-text-2; }
 
-/* ---------- Location popover (desktop) ---------- */
 .locMenu {
   position: absolute;
   right: 0;
-  top: calc(100% + 6px);
-  display: none;
-  min-width: 220px;
-  background: t.$color-surface-2;
-  border: 1px solid t.$color-border;
+  top: calc(100% + 10px);
+  min-width: 260px;
+  background: rgba(10,10,10,0.9);
+  border: 1px solid $color-border;
   border-radius: 12px;
-  padding: t.$space-sm;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  z-index: t.$z-overlay;
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .16s ease, transform .16s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
-.open { display: block; }
+.locMenu.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 
 .locRow {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   align-items: center;
-  gap: t.$space-sm;
-  padding: t.$space-xs 0;
-  & + & { border-top: 1px dashed t.$color-border; }
+  justify-content: space-between;
 }
+
 .locOption {
-  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 2px 0;
+  border-radius: 10px;
   background: transparent;
-  border: 1px solid t.$color-border;
-  color: t.$color-text;
-  padding: t.$space-xs t.$space-sm;
-  border-radius: 8px;
-  text-align: left; width: 100%;
+  color: $color-text;
+  border: none;
   cursor: pointer;
-  &:hover { background: t.$color-surface-3; }
-}
-.active { border-color: t.$color-accent; box-shadow: inset 0 0 0 1px t.$color-accent; }
+  transition: background-color .16s ease, color .16s ease;
 
-.locLinks { display: flex; gap: t.$space-xs; }
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: rgba(255,255,255,0.04);
+  }
+  &.active {
+    background: rgba(34,211,238,0.08);
+    color: $color-accent;
+  }
+}
+
+.locLinks {
+  display: flex;
+  gap: 8px;
+}
+
 .smallLink {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-2;
+  color: $color-text-2;
   text-decoration: none;
-  padding: t.$space-2xs t.$space-xs;
-  border-radius: 6px;
-  border: 1px solid t.$color-border;
-  &:hover { color: t.$color-text; background: t.$color-surface-3; }
+  font-size: 13px;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    outline: none;
+    text-decoration: underline;
+  }
 }
 
-/* ---------- Mobile slide-down menu ---------- */
-.mobileMenu {
-  display: none;               /* hidden by default, shown on mobile */
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 240ms ease;
-  background: t.$color-background;
-  border-bottom: 1px solid t.$color-border;
+/* ===== CTA (used when Sazināties is portaled here on desktop) ===== */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  transition: transform .08s ease, box-shadow .16s ease, background-color .16s ease, color .16s ease;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
 }
-.mobileMenu.open { max-height: 85vh; }
+
+.primary {
+  background: $color-accent;
+  color: #00161A;
+  box-shadow: 0 8px 20px rgba(34,211,238,0.35);
+
+  &:hover {
+    background: $color-accent-hover;
+    box-shadow: 0 10px 24px rgba(34,211,238,0.45);
+  }
+  &:active {
+    background: $color-accent-active;
+    transform: translateY(1px);
+    box-shadow: 0 6px 16px rgba(34,211,238,0.3);
+  }
+}
+
+/* ===== Hamburger ===== */
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: $color-text;
+  cursor: pointer;
+  transition: background-color .16s ease, color .16s ease, border-color .16s ease;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba(34,211,238,0.35);
+    background: rgba(255,255,255,0.06);
+  }
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+
+/* ===== Mobile drawer ===== */
+.mobileMenu {
+  position: fixed;
+  inset: calc(#{$header-h-mobile} + env(safe-area-inset-top)) 0 0 0;
+  background: rgba(0,0,0,0.86);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  z-index: $z-overlay;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+.mobileMenu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .mobileInner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: t.$space-md;
-  display: flex;
-  flex-direction: column;
-  gap: t.$space-sm;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
-/* Reuse drawer styles for items (renamed for mobile section) */
 .drawerItem {
-  text-decoration: none;
-  color: t.$color-text;
-  padding: t.$space-sm;
-  border-radius: 10px;
-  border: 1px solid t.$color-border;
-  background: t.$color-surface-1;
+  width: 100%;
   text-align: left;
-  cursor: pointer;
-  &:hover { background: t.$color-surface-2; }
-}
-.emph { color: t.$color-accent; border-color: t.$color-accent; background: transparent; }
+  display: block;
+  padding: 12px 14px;
+  margin: 6px 0;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  color: $color-text;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background-color .16s ease, color .16s ease, border-color .16s ease;
 
-.drawerSubmenu { margin-top: t.$space-xs; }
-.drawerSubsection { & + & { margin-top: t.$space-sm; } }
-.drawerSublist { display: grid; grid-template-columns: 1fr; gap: t.$space-2xs; }
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba(34,211,238,0.35);
+    background: rgba(34,211,238,0.06);
+  }
+}
+
+.emph { font-weight: 600; }
+
+.drawerGroup { margin-bottom: 6px; }
+
+.drawerSubmenu {
+  margin: 4px 0 10px 8px;
+  padding-left: 8px;
+  border-left: 1px dashed rgba(255,255,255,0.08);
+}
 
 .quick {
-  appearance: none;
-  border: 1px solid t.$color-border;
-  background: t.$color-surface-1;
-  color: t.$color-text;
-  border-radius: 10px;
-  padding: t.$space-sm;
-  text-align: left;
-  cursor: pointer;
-  text-decoration: none;
-  &:hover { background: t.$color-surface-2; }
+  @extend .drawerItem;
+  display: inline-flex;
+  width: auto;
+  margin-right: 8px;
 }
 
-.drawerCtas {
-  display: grid; grid-template-columns: 1fr;
-  gap: t.$space-sm; margin-top: t.$space-sm;
+.active {
+  background: rgba(34,211,238,0.12);
+  border-color: rgba(34,211,238,0.45);
+  color: $color-accent;
 }
 
-/* ---------- Hamburger ---------- */
-.hamburger {
-  display: none;
-  font-size: 20px;
-  background: transparent;
-  border: 1px solid t.$color-border;
-  color: t.$color-text;
-  border-radius: 10px;
-  padding: t.$space-2xs t.$space-sm;
-  cursor: pointer;
-  &:hover { background: t.$color-surface-2; }
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: t.$bp-lg) {
-  .nav { display: none; }          /* hide desktop nav */
-  .hamburger { display: inline-block; }
-  .mobileMenu { display: block; }  /* use slide-down menu */
-  .dropdown, .locMenu { display: none !important; } /* no desktop popovers */
+/* ===== Misc helpers ===== */
+@media (max-width: $bp-md) {
+  /* Header CTA is portaled away on mobile, but ensure no accidental styles leak */
+  .actions .cta { display: none; }
 }
