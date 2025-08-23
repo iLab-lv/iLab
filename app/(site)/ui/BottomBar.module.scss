@@ -1,46 +1,26 @@
-/* BottomBar.module.scss
-   Mobile fixed bottom bar (glassy) with safe-area support
-   - Left: #bottombar-primary (SaziniesButton via portal)
-   - Right: Pieraksties (native secondary CTA)
-*/
-
-/* ===== Local tokens ===== */
-$color-background: #000000;
-$color-surface-2:  #141414;
-$color-border:     #2A2A2A;
-$color-text:       #F5F5F5;
-$color-text-2:     #B3B3B3;
-
-$color-accent:        #22D3EE;
-$color-accent-hover:  #06B6D4;
-$color-accent-active: #0891B2;
-
 $bp-md: 768px;
-$z-nav: 50;       /* header */
-$z-overlay: 100;  /* modals */
 
-/* ===== Bar ===== */
+$color-surface-2:  #141414;
+
 .bar {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: $z-nav; /* above content, below overlays/modals */
+  z-index: 60; /* below modals, above content */
   background: rgba(0,0,0,0.78);
   border-top: 1px solid rgba(255,255,255,0.06);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   backdrop-filter: saturate(140%) blur(10px);
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  padding-top: 8px;
 
-  /* Fallback for older browsers */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $color-surface-2;
   }
 
-  padding-bottom: calc(8px + env(safe-area-inset-bottom));
-  padding-top: 8px;
-
   @media (min-width: $bp-md) {
-    display: none; /* mobile only */
+    display: none;
   }
 }
 
@@ -51,52 +31,7 @@ $z-overlay: 100;  /* modals */
   padding: 0 12px;
 }
 
-/* ===== Slot for primary CTA (SaziniesButton) ===== */
-.slotPrimary {
+.slot {
   display: inline-flex;
   align-items: stretch;
-}
-
-/* ===== CTA styles ===== */
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px; /* ≥44px tap target */
-  width: 100%;
-  border-radius: 14px;
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.1px;
-  border: 1px solid rgba(255,255,255,0.08);
-  color: $color-text;
-  background: rgba(255,255,255,0.02);
-  transition: background-color .16s ease, color .16s ease, box-shadow .16s ease, transform .08s ease;
-
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 2px;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-}
-
-/* Secondary = glassy outline, hover lift */
-.secondary {
-  background: rgba(255,255,255,0.02);
-  color: $color-text;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-
-  &:hover {
-    background: rgba(255,255,255,0.06);
-    color: $color-accent;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.28);
-  }
-  &:active {
-    background: rgba(255,255,255,0.08);
-    color: $color-accent-active;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.22);
-  }
 }

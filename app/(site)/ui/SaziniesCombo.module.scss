@@ -1,0 +1,128 @@
+$bp-md: 768px;
+
+$color-text:   #F5F5F5;
+$color-text-2: #B3B3B3;
+$color-accent: #22D3EE;
+$color-accent-hover: #06B6D4;
+$color-accent-active:#0891B2;
+$color-border: rgba(255,255,255,0.08);
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Primary CTA style (shared with button modules) */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px; /* desktop comfortable; BottomBar provides 48px container */
+  padding: 0 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: .1px;
+  transition: transform .08s ease, box-shadow .16s ease, background-color .16s ease, color .16s ease;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+}
+.primary {
+  background: $color-accent;
+  color: #00161A;
+  box-shadow: 0 8px 20px rgba(34,211,238,0.35);
+
+  &:hover { background: $color-accent-hover; box-shadow: 0 10px 24px rgba(34,211,238,0.45); }
+  &:active { background: $color-accent-active; transform: translateY(1px); box-shadow: 0 6px 16px rgba(34,211,238,0.3); }
+}
+
+/* Locator trigger (inline, glassy chip) */
+.locTrigger {
+  appearance: none;
+  border: 1px solid $color-border;
+  background: rgba(255,255,255,0.02);
+  color: $color-text;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color .16s ease, color .16s ease, border-color .16s ease;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba(34,211,238,0.35);
+    background: rgba(255,255,255,0.06);
+  }
+}
+
+/* Popover menu */
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  min-width: 260px;
+  background: rgba(10,10,10,0.92);
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .16s ease, transform .16s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 2px 0;
+  border-radius: 10px;
+  background: transparent;
+  color: $color-text;
+  border: none;
+  cursor: pointer;
+  transition: background-color .16s ease, color .16s ease;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: rgba(255,255,255,0.04);
+  }
+  &.active {
+    background: rgba(34,211,238,0.08);
+    color: $color-accent;
+  }
+}
+.maps {
+  color: $color-text-2;
+  text-decoration: none;
+  font-size: 13px;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    text-decoration: underline;
+    outline: none;
+  }
+}

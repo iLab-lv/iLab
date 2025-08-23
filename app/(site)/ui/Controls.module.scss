@@ -60,3 +60,10 @@ $color-accent:#22D3EE;
     background: rgba(255,255,255,0.06);
   }
 }
+
+/* size the SVGs; they use currentColor so color comes from .ico */
+.svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}

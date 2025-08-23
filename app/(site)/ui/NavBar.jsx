@@ -1,16 +1,10 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect, Fragment } from 'react';
+import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
+import LanguageSwitcher from './LanguageSwitcher';
 
-/* ---------- data (locator) ---------- */
-const LOCATIONS = [
-  { id: 'domina', label: 'Domina', tel: '+37123370088', wa: 'https://wa.me/37123370088', maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga' },
-  { id: 'spice',  label: 'Spice',  tel: '+37120887787', wa: 'https://wa.me/37120887787', maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga' },
-];
-
-/* ---------- SEO nav (Option B) ---------- */
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },
   {
@@ -22,59 +16,39 @@ const NAV = [
       { label: 'OnePlus', href: '/telefonu-remonts/oneplus' },
     ],
   },
-  { label: 'Planšetdatoru remonts', href: '/plansetdatoru-remonts' }, // children later
-  { label: 'Datoru remonts',        href: '/datoru-remonts' },        // children later
+  { label: 'Planšetdatoru remonts', href: '/plansetdatoru-remonts' },
+  { label: 'Datoru remonts',        href: '/datoru-remonts' },
   { label: 'Dyson remonts',         href: '/dyson-remonts' },
 ];
 
 export default function NavBar() {
-  /* ---------- location ---------- */
-  const [locId, setLocId] = useState(LOCATIONS[0].id);
-  const loc = useMemo(() => LOCATIONS.find(l => l.id === locId) ?? LOCATIONS[0], [locId]);
-
-  /* ---------- desktop dropdown state ---------- */
-  const [openSlug, setOpenSlug] = useState(null); // e.g., 'telefonu-remonts'
-  const [locOpen, setLocOpen] = useState(false);
-  const leaveT = useRef(null);
-
-  /* ---------- mobile state ---------- */
+  const [openSlug, setOpenSlug] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null);
-  const [drawerLocOpen, setDrawerLocOpen] = useState(false);
 
-  /* ---------- refs ---------- */
   const navRef = useRef(null);
-  const locRef = useRef(null);
+  const leaveT = useRef(null);
 
-  /* esc to close */
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') {
         setOpenSlug(null);
-        setLocOpen(false);
         setMobileOpen(false);
         setMobileExpandedSlug(null);
-        setDrawerLocOpen(false);
       }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  /* outside click close (dropdowns + locator) */
   useEffect(() => {
     const onClick = (e) => {
       const inNav = navRef.current && navRef.current.contains(e.target);
-      const inLoc = locRef.current && locRef.current.contains(e.target);
       if (!inNav) setOpenSlug(null);
-      if (!inLoc) setLocOpen(false);
     };
     document.addEventListener('mousedown', onClick);
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
-
-  /* clear hover delay on unmount */
-  useEffect(() => () => clearTimeout(leaveT.current), []);
 
   const hasChildren = (item) => Array.isArray(item.children) && item.children.length > 0;
 
@@ -106,7 +80,6 @@ export default function NavBar() {
                   </Link>
                 );
               }
-
               return (
                 <div
                   key={slug}
@@ -126,7 +99,6 @@ export default function NavBar() {
                     aria-haspopup="menu"
                     aria-expanded={openSlug === slug}
                     onClick={(e) => {
-                      // allow click-to-open; navigate on second click
                       if (openSlug !== slug) {
                         e.preventDefault();
                         setOpenSlug(slug);
@@ -162,10 +134,9 @@ export default function NavBar() {
             })}
           </nav>
 
-          {/* right actions */}
+          {/* right actions: hamburger + (mobile) language switcher */}
           <div className={s.actions}>
-            {/* group: hamburger + locator + utility slot */}
-            <div className={s.actionsCluster} ref={locRef}>
+            <div className={s.actionsCluster}>
               {/* hamburger (mobile only) */}
               <button
                 type="button"
@@ -175,33 +146,16 @@ export default function NavBar() {
                 onClick={() => {
                   setMobileOpen(v => !v);
                   setOpenSlug(null);
-                  setLocOpen(false);
                 }}
               >
                 ☰
               </button>
 
-              {/* locator (link-styled, not a button chrome) */}
-              <button
-                type="button"
-                className={s.locator}
-                aria-haspopup="menu"
-                aria-expanded={locOpen}
-                onClick={() => {
-                  setLocOpen(v => !v);
-                  setOpenSlug(null);
-                }}
-              >
-                <span className={s.icon} aria-hidden>📍</span>
-                <span className={s.caption}>Atrast filiāli</span>
-              </button>
-
-              {/* utility slot (Language switcher mounts here on mobile) */}
-              <div id="topbar-right-utility" className={s.slotUtility} />
+              {/* mobile language switcher (hidden on desktop via CSS) */}
+              <div className={s.slotUtility}>
+                <LanguageSwitcher initial="lv" />
+              </div>
             </div>
-
-            {/* primary slot (Sazināties mounts here on desktop) */}
-            <div id="topbar-right-primary" className={s.slotPrimary} />
           </div>
         </div>
       </header>
@@ -212,9 +166,7 @@ export default function NavBar() {
           {NAV.map((item) => {
             const slug = item.href.replace(/^\//, '');
             const expanded = mobileExpandedSlug === slug;
-            const itemHasChildren = hasChildren(item);
-
-            if (!itemHasChildren) {
+            if (!hasChildren(item)) {
               return (
                 <Link
                   key={slug}
@@ -226,7 +178,6 @@ export default function NavBar() {
                 </Link>
               );
             }
-
             return (
               <div key={slug} className={s.drawerGroup}>
                 <button
@@ -254,30 +205,6 @@ export default function NavBar() {
               </div>
             );
           })}
-
-          {/* Locator quick switch */}
-          <button
-            type="button"
-            className={s.drawerItem}
-            aria-expanded={drawerLocOpen}
-            onClick={() => setDrawerLocOpen(v => !v)}
-          >
-            📍 Atrast filiāli
-          </button>
-          {drawerLocOpen && (
-            <div className={s.drawerSubmenu}>
-              {LOCATIONS.map(l => (
-                <button
-                  key={l.id}
-                  type="button"
-                  className={`${s.quick} ${l.id === locId ? s.active : ''}`}
-                  onClick={() => setLocId(l.id)}
-                >
-                  {l.label}
-                </button>
-              ))}
-            </div>
-          )}
         </nav>
       </div>
     </Fragment>

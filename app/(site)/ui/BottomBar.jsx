@@ -1,33 +1,17 @@
 'use client';
 
-import Link from 'next/link';
 import s from './BottomBar.module.scss';
 
-/**
- * Mobile-only fixed bottom bar with two CTAs:
- * - Primary slot (#bottombar-primary): SaziniesButton will be portaled here.
- * - Secondary button (Pieraksties): native link, configurable via props.
- *
- * Props:
- * - bookHref?: string      -> URL for "Pieraksties" (default: '#')
- * - onBookClick?: () => void  (optional analytics hook)
+/** Mobile-only fixed bottom bar with two slots:
+ *  - #bottombar-primary   (SaziniesCombo)
+ *  - #bottombar-secondary (PierakstiesButton)
  */
-export default function BottomBar({ bookHref = '#', onBookClick }) {
+export default function BottomBar() {
   return (
     <div className={s.bar} role="region" aria-label="Mobilās darbības josla">
       <div className={s.inner}>
-        {/* Primary slot — SaziniesButton mounts here on mobile via portal */}
-        <div id="bottombar-primary" className={s.slotPrimary} />
-
-        {/* Secondary CTA — native link */}
-        <Link
-          href={bookHref}
-          className={`${s.cta} ${s.secondary}`}
-          onClick={onBookClick}
-          aria-label="Pieraksties uz remontu"
-        >
-          Pieraksties
-        </Link>
+        <div id="bottombar-primary" className={s.slot} />
+        <div id="bottombar-secondary" className={s.slot} />
       </div>
     </div>
   );
