@@ -16,7 +16,6 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
   const loc = useMemo(() => LOCATIONS.find(l => l.id === locId) ?? LOCATIONS[0], [locId]);
   const ref = useRef(null);
 
-  // close locator popover on outside click
   useEffect(() => {
     const onDoc = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -45,7 +44,8 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           onClick={() => setOpen(v => !v)}
           title="Atrast filiāli"
         >
-          📍 {LOCATIONS.find(l => l.id === locId)?.label}
+          <LocationPin className={s.svg} aria-hidden="true" />
+          {LOCATIONS.find(l => l.id === locId)?.label}
         </button>
 
         {/* Popover (desktop only) */}
@@ -76,7 +76,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
       <div className={s.bottomRight}>
         <Link
           href={bookHref}
-          className={`${s.btn} ${s.secondary}`}
+          className={s.btn}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties
@@ -94,7 +94,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
         </Link>
         <Link
           href={bookHref}
-          className={`${s.mBtn} ${s.mSecondary}`}
+          className={s.mBtn}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties

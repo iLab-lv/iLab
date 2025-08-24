@@ -85,7 +85,6 @@ $z-over-header: 70;
   &:active { background: $color-accent-active; color: #00161A; box-shadow: 0 6px 16px rgba(34,211,238,0.30); }
 }
 
-.secondary { /* keep glassy outline look (already defined in .btn) */ }
 
 .locator { /* inline chip style for locator trigger */
   min-width: 130px;
@@ -207,4 +206,4 @@ $z-over-header: 70;
   &:active  { background: $color-accent-active; color: #00161A; box-shadow: 0 6px 16px rgba(34,211,238,0.30); }
 }
 
-.mSecondary { /* glassy outline already set by .mBtn */ }
+.svg { width: 18px; height: 18px; vertical-align: -2px; }
