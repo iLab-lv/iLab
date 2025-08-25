@@ -1,0 +1,316 @@
+/* app/(site)/ui/navbar/NavBar.module.scss
+   Glossy fixed-frame header for iLab
+   - Dark palette + aqua accent
+   - Backdrop blur with opaque fallback
+   - Keyboard-focus visible, mobile safe areas
+*/
+
+@import '@/styles/_tokens.scss';
+
+/* ===== Header frame ===== */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: $header-desktop-height;
+  z-index: $z-nav;
+
+  background: $glass-bg-strong;
+  border-bottom: 1px solid $glass-border;
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  /* Fallback when backdrop-filter unsupported */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+
+  @media (max-width: $bp-md) {
+    height: calc(#{$header-mobile-height} + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 $space-md; /* 16px */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: $space-md; /* 16px */
+}
+
+/* ===== Brand ===== */
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  height: 28px;
+  width: auto;
+
+  @media (min-width: $bp-md) {
+    height: 32px;
+  }
+}
+
+/* ===== Desktop nav ===== */
+.nav {
+  display: none;
+  align-items: center;
+  gap: $space-sm; /* 8px */
+
+  @media (min-width: $bp-md) {
+    display: flex;
+  }
+}
+
+.navItem {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 12px;
+  font-size: 15px;
+  color: $color-text;
+  text-decoration: none; /* keep off by default */
+  border-radius: $radius-md; /* 12px */
+  transition: color $dur-base $ease-std, background-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    text-decoration: none; /* prevent default underline so only glow line shows */
+    outline: none;
+  }
+
+  /* glow underline */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 6px;
+    height: 2px;
+    background: transparent;
+    border-radius: 1px;
+    transition: background-color $dur-base $ease-std, transform $dur-base $ease-std, opacity $dur-base $ease-std;
+    transform: scaleX(0.2);
+    opacity: 0;
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    background: $color-accent;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.navParent { padding-right: 8px; } /* room for chevron */
+
+.chev {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 14px;
+  opacity: .7;
+  transform: translateY(1px);
+}
+
+.ddWrap { position: relative; }
+
+/* ===== Dropdown ===== */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 220px;
+
+  background: $glass-bg-strong;
+  border: 1px solid $glass-border;
+  border-radius: $radius-lg; /* 14px */
+  padding: $space-xs; /* 4px */
+
+  box-shadow: $shadow-soft-lg;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
+
+  -webkit-backdrop-filter: blur($glass-blur);
+  backdrop-filter: blur($glass-blur);
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+}
+
+.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.menuCol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li { margin: 0; }
+}
+
+.menuLink {
+  display: block;
+  padding: 10px 10px;
+  border-radius: $radius-sm; /* 8px */
+  color: $color-text;
+  text-decoration: none; /* off by default */
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: rgba($color-accent, 0.08);
+    text-decoration: none; /* keep underline off here too */
+  }
+}
+
+/* ===== Right actions & slots ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-sm; /* 8px */
+}
+
+.actionItem { position: relative; }
+
+.actionsCluster {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-xs; /* 4px */
+  border-radius: $radius-lg; /* 14px */
+
+  background: $glass-bg-weak;
+  border: 1px solid $glass-border;
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+}
+
+/* language switcher slot (mobile only) */
+.slotUtility {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+
+/* ===== Hamburger ===== */
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: $radius-md; /* 12px */
+
+  border: 1px solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text;
+  cursor: pointer;
+
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba($color-accent, 0.35);
+    background: rgba(255,255,255,0.06);
+    text-decoration: none;
+  }
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+
+/* ===== Mobile drawer ===== */
+.mobileMenu {
+  position: fixed;
+  inset: calc(#{$header-mobile-height} + env(safe-area-inset-top)) 0 0 0;
+  background: $glass-bg-strong;
+  -webkit-backdrop-filter: saturate($glass-saturate) blur(12px);
+  backdrop-filter: saturate($glass-saturate) blur(12px);
+  border-top: 1px solid $glass-border;
+  z-index: $z-overlay;
+
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+.mobileMenu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileInner {
+  padding: $space-md; /* 16px */
+  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
+}
+
+.drawerItem {
+  width: 100%;
+  text-align: left;
+  display: block;
+  padding: 12px 14px;
+  margin: 6px 0;
+  border-radius: $radius-md; /* 12px */
+
+  background: $glass-bg-weak;
+  color: $color-text;
+  text-decoration: none;
+  border: 1px solid $glass-border;
+
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba($color-accent, 0.35);
+    background: rgba($color-accent, 0.06);
+    text-decoration: none; /* prevent underline from globals */
+  }
+}
+
+.emph { font-weight: $font-weight-semibold; }
+
+.drawerGroup { margin-bottom: 6px; }
+
+.drawerSubmenu {
+  margin: 4px 0 10px 8px;
+  padding-left: 8px;
+  border-left: 1px dashed $glass-border-2;
+}
+
+/* ===== Misc helpers ===== */
+@media (max-width: $bp-md) {
+  /* Ensure any legacy CTA styles in header don't show on mobile (not used now) */
+  .actions .cta { display: none; }
+}

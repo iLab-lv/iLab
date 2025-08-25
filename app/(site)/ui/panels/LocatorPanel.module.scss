@@ -1,0 +1,93 @@
+@use '../../../styles/tokens' as *;
+
+/* Fallbacks if tokens aren’t wired here */
+$color-surface-1: #0A0A0A !default;
+$color-surface-2: #141414 !default;
+$color-border: rgba(255,255,255,0.07) !default;
+$color-text: #F5F5F5 !default;
+$color-text-2: #B3B3B3 !default;
+
+.wrap {
+  display: grid;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Map placeholder */
+.map {
+  display: grid;
+  place-items: center;
+  height: 260px;
+  background:
+    linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
+    $color-surface-2;
+  color: $color-text-2;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  user-select: none;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* Grid of cards */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  background:
+    linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
+    $color-surface-1;
+  color: $color-text;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.cardHeader {
+  margin-bottom: 8px;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.address {
+  margin: 0;
+  color: $color-text-2;
+  font-size: 0.95rem;
+}
+
+.hours {
+  margin: 12px 0 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.hoursRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+
+  dt {
+    color: $color-text-2;
+  }
+  dd {
+    margin: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

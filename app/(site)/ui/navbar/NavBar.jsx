@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
-import LanguageSwitcher from './LanguageSwitcher';
+import LanguageSwitcher from '../controls/LanguageSwitcher';
 
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },

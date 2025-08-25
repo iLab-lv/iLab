@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo, useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
 import s from './CtaDock.module.scss';
-import LocationPin from './icons/LocationPin';
+import Button from '../../components/button/Button';
+import LocationPin from '../../components/icons/LocationPin';
 
 const LOCATIONS = [
   { id: 'domina', label: 'Domina', wa: 'https://wa.me/37123370088', maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga' },
@@ -16,6 +16,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
   const loc = useMemo(() => LOCATIONS.find(l => l.id === locId) ?? LOCATIONS[0], [locId]);
   const ref = useRef(null);
 
+  // close locator popover on outside click
   useEffect(() => {
     const onDoc = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -28,25 +29,28 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
     <div className={s.dock} aria-label="Galvenās darbības">
       {/* ===== Desktop: TOP-RIGHT cluster (Sazināties + Locator) ===== */}
       <div className={s.topRight} ref={ref}>
-        <Link
-          href={loc.wa}
-          className={`${s.btn} ${s.primary}`}
-          aria-label="Sazināties ar mums"
-        >
-          Sazināties
-        </Link>
+        
 
-        <button
-          type="button"
-          className={`${s.btn} ${s.locator}`}
+        <Button
+          variant="ghost"
+          size="md"
+          leadingIcon={LocationPin}
           aria-expanded={open}
           aria-controls="ctadock-loc-menu"
           onClick={() => setOpen(v => !v)}
           title="Atrast filiāli"
         >
-          <LocationPin className={s.svg} aria-hidden="true" />
-          {LOCATIONS.find(l => l.id === locId)?.label}
-        </button>
+          {loc.label}
+        </Button>
+
+        <Button
+          variant="primary"
+          size="md"
+          href={loc.wa}
+          aria-label="Sazināties ar mums"
+        >
+          Sazināties
+        </Button>
 
         {/* Popover (desktop only) */}
         <div
@@ -74,31 +78,37 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
 
       {/* ===== Desktop: BOTTOM-RIGHT (Pieraksties) ===== */}
       <div className={s.bottomRight}>
-        <Link
+        <Button
+          variant="secondary"
+          size="md"
           href={bookHref}
-          className={s.btn}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties
-        </Link>
+        </Button>
       </div>
 
       {/* ===== Mobile: Bottom bar with both CTAs (no locator) ===== */}
       <div className={s.bottomBar} role="region" aria-label="Mobilās darbības josla">
-        <Link
+        <Button
+          variant="primary"
+          size="lg"
+          block
           href={loc.wa}
-          className={`${s.mBtn} ${s.mPrimary}`}
           aria-label="Sazināties ar mums"
         >
           Sazināties
-        </Link>
-        <Link
+        </Button>
+
+        <Button
+          variant="secondary"
+          size="lg"
+          block
           href={bookHref}
-          className={s.mBtn}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties
-        </Link>
+        </Button>
       </div>
     </div>
   );

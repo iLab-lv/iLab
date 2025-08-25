@@ -4,9 +4,9 @@ import s from './Controls.module.scss';
 import LanguageSwitcher from './LanguageSwitcher';
 
 // NEW: import icons
-import Facebook from './icons/Facebook';
-import Instagram from './icons/Instagram';
-import TikTok from './icons/TikTok';
+import Facebook from '../../components/icons/Facebook';
+import Instagram from '../../components/icons/Instagram';
+import TikTok from '../../components/icons/TikTok';
 
 export default function Controls({ facebookUrl, instagramUrl, tiktokUrl }) {
   return (

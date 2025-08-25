@@ -1,8 +1,8 @@
 // app/(site)/layout.jsx
 import Link from 'next/link';
-import NavBar from './ui/NavBar';
-import Controls from './ui/Controls';
-import CtaDock from './ui/CtaDock';
+import NavBar from './ui/navbar/NavBar';
+import Controls from './ui/controls/Controls';
+import CtaDock from './ui/cta/CtaDock';
 import { SOCIALS } from '@/data/site.config';
 
 export default function SiteLayout({ children }) {
