@@ -3,7 +3,7 @@
 import FullscreenPanel from './FullscreenPanel';
 import s from './LocatorPanel.module.scss';
 import Button from '../../components/button/Button';
-import { LOCATIONS, HOURS } from '../../data/site.config';
+import { LOCATIONS, HOURS } from '@/data/site.config';
 
 export default function LocatorPanel({ open, onClose }) {
   return (

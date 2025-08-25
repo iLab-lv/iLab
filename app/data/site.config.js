@@ -26,7 +26,7 @@ export const HOURS = [
 export const LOCATIONS = [
   {
     id: 'domina',
-    label: 'Domina',
+    label: 'Domina Shopping',
     tel: '+37123370088',
     wa: 'https://wa.me/37123370088',
     maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga',
@@ -34,7 +34,7 @@ export const LOCATIONS = [
   },
   {
     id: 'spice',
-    label: 'Spice',
+    label: 'Spice Home',
     tel: '+37120887787',
     wa: 'https://wa.me/37120887787',
     maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga',
