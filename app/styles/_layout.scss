@@ -1,0 +1,14 @@
+/* styles/_layout.scss */
+/* Utility-only: no top-level CSS so it's safe inside CSS Modules */
+
+$container-max: 1100px !default;
+$gutter: 16px !default;
+
+@mixin container {
+  width: min($container-max, 100% - 2 * $gutter);
+  margin-inline: auto;
+}
+
+@mixin section-pad($y: 64px) {
+  padding-block: $y;
+}

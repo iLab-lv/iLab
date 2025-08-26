@@ -1,0 +1,141 @@
+/* app/(site)/components/button/Button.module.scss
+   Reusable Button for iLab
+   Variants: primary (filled), secondary (outlined accent + glass), ghost (glassy neutral)
+   Features: iconOnly, sizes (md|lg), block, link/button parity, focus ring
+*/
+
+@import '@/styles/_tokens.scss';
+
+/* minor computed tints */
+$accent-bg-hover:  rgba($color-accent, 0.06);
+$accent-bg-active: rgba($color-accent, 0.10);
+
+/* ===== Base ===== */
+.button {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center;
+  gap: $space-sm;                 /* 8px between icon+label */
+  height: $btn-h-md;              /* default size */
+  padding: 0 $space-md;           /* 16px sides */
+  border-radius: $radius-lg;      /* 14px */
+  border: 1px solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.1px;
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  box-shadow: $shadow-soft;
+  transition:
+    background-color $dur-base $ease-std,
+    color            $dur-base $ease-std,
+    border-color     $dur-base $ease-std,
+    box-shadow       $dur-base $ease-std,
+    transform        $dur-fast $ease-std;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+  &:active { transform: translateY(1px); }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:active { transform: none; }
+  }
+}
+
+/* ===== Sizes ===== */
+.md { height: $btn-h-md; }
+.lg { height: $btn-h-lg; }
+
+.block { width: 100%; }
+
+/* ===== Icon-only (square, circular) ===== */
+.iconOnly {
+  width: $btn-h-md;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+
+  &.lg { width: $btn-h-lg; }
+  .label { display: none; }
+}
+
+/* ===== Icon wrapper ===== */
+.icon {
+  width: $icon-size;
+  height: $icon-size;
+  display: inline-block;
+  line-height: 0;
+
+  svg { width: 100%; height: 100%; vertical-align: -2px; }
+}
+
+/* ===== Variants ===== */
+.primary {
+  background: $color-accent;
+  border-color: transparent;
+  box-shadow: $shadow-accent;
+
+  /* lock readable label color across states */
+  &,
+  &:hover,
+  &:focus-visible,
+  &:active {
+    color: #00161A;
+    text-decoration: none;
+  }
+
+  &:hover  { background: $color-accent-hover; box-shadow: $shadow-accent-lg; }
+  &:active { background: $color-accent-active; box-shadow: $shadow-accent-press; }
+}
+
+
+.secondary {
+  /* keep the base glass from .button */
+  color: $color-accent;
+  border-color: $color-accent;
+
+  &:hover  {
+    background: $accent-bg-hover;         /* tinted over glass */
+    border-color: rgba($color-accent, 0.85);
+  }
+  &:active {
+    background: $accent-bg-active;
+    border-color: $color-accent-active;
+    color: $color-accent-active;
+  }
+}
+
+.ghost {
+  background: $glass-bg-weak;
+  color: $color-text-2;
+  border-color: $glass-border;
+
+  &:hover {
+    color: $color-accent;
+    border-color: rgba($color-accent, 0.45);
+    background: $accent-bg-hover;
+  }
+  &:active {
+    color: $color-accent-active;
+    border-color: $color-accent-active;
+    background: $accent-bg-active;
+  }
+}
+
+/* ===== Disabled ===== */
+.disabled,
+:global(button[disabled]).button {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none;
+}

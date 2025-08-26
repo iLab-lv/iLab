@@ -1,0 +1,159 @@
+/* app/(site)/ui/cta/CtaDock.module.scss
+   Unified CTA dock:
+   - Desktop: top-right (Sazināties + Locator) + bottom-right (Pieraksties)
+   - Mobile: bottom full-width bar (Sazināties + Pieraksties)
+   - No dead overlay: wrapper ignores clicks; only buttons receive them
+   - Buttons are styled by components/button/Button.module.scss
+*/
+
+@import '@/styles/_tokens.scss';
+
+/* ===== Dock root ===== */
+.dock {
+  position: fixed;
+  inset: 0;                    /* anchors for children */
+  pointer-events: none;        /* pass-through by default */
+  z-index: $z-ctadock;         /* above header, below overlays */
+}
+
+/* ===== Desktop TOP-RIGHT cluster ===== */
+.topRight {
+  position: fixed;
+  top: calc(#{$space-sm + 4px} + env(safe-area-inset-top)); /* ~12px + notch */
+  right: $space-md;             /* 16px */
+  display: none;
+  gap: $space-sm;               /* 8px between buttons */
+  pointer-events: none;         /* container ignores clicks */
+
+  @media (min-width: $bp-md) {
+    display: inline-flex;
+  }
+}
+
+/* ===== Desktop BOTTOM-RIGHT button ===== */
+.bottomRight {
+  position: fixed;
+  right: $space-md;             /* 16px */
+  bottom: $space-md;            /* 16px */
+  display: none;
+  pointer-events: none;
+
+  @media (min-width: $bp-md) {
+    display: inline-flex;
+  }
+}
+
+/* ===== Locator popover (desktop only) ===== */
+.menu {
+  position: fixed;
+  right: $space-md; /* align with cluster */
+  top: calc(56px + env(safe-area-inset-top)); /* just below cluster */
+  min-width: 260px;
+
+  background: $glass-bg-strong;
+  border: 1px solid $glass-border;
+  border-radius: $radius-md;
+  padding: $space-xs; /* 4px */
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
+
+  -webkit-backdrop-filter: blur($glass-blur);
+  backdrop-filter: blur($glass-blur);
+
+  display: none;
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+
+  @media (min-width: $bp-md) {
+    display: block;
+  }
+}
+
+.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opt {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;            /* 8px */
+  padding: 10px 12px;
+  margin: 2px 0;
+  border-radius: 10px;
+  background: transparent;
+  color: $color-text;
+  border: none;
+  cursor: pointer;
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    background: $glass-bg-weak-hover;
+  }
+}
+
+.active {
+  background: $accent-tint-strong; /* consistent with tokens */
+  color: $color-accent;
+}
+
+.maps {
+  pointer-events: auto;
+  color: $color-text-2;
+  text-decoration: none;
+  font-size: 13px;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    text-decoration: underline;
+    outline: none;
+  }
+}
+
+/* ===== Mobile bottom bar ===== */
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-sm;                           /* 8px */
+  padding: $space-sm $space-md;             /* 8px 16px */
+  padding-bottom: calc(#{$space-sm} + env(safe-area-inset-bottom));
+
+  background: $glass-bg-strong;
+  border-top: 1px solid $glass-border;
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  pointer-events: none; /* let only buttons receive clicks */
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+
+  @media (min-width: $bp-md) {
+    display: none;
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .menu { transition: none; }
+}

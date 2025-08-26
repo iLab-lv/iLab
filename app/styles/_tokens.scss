@@ -4,7 +4,7 @@
    - Typography: Inter, base 16px, Perfect Fourth scale
    - Spacing: 4-pt base
    - Breakpoints: md = 768px
-   - Z-index & layout constants
+   - Z-index, layout, glass effects, motion
 */
 
 /* ========== COLORS ========== */
@@ -21,6 +21,35 @@ $color-text-3: #8C8C8C; // muted
 $color-accent:        #22D3EE;
 $color-accent-hover:  #06B6D4;
 $color-accent-active: #0891B2;
+
+/* ========== GLASS / EFFECT SURFACES ========== */
+/* Base glass tints (single source of truth) */
+$glass-tint-weak:   rgba(255, 255, 255, 0.06);
+$glass-tint-strong: rgba(255, 255, 255, 0.08);
+
+/* Background surfaces */
+$glass-bg-weak:   rgba(255, 255, 255, 0.02); // subtle panel / outline button
+$glass-bg-strong: rgba(0, 0, 0, 0.78);       // mobile bottom bar / menus
+
+/* Borders derived from the same tints */
+$glass-border:   $glass-tint-weak;   // subtle border on dark glass
+$glass-border-2: $glass-tint-strong; // slightly stronger border
+
+/* Hover / active background tints for glass */
+$glass-bg-weak-hover:  $glass-tint-weak;   // was rgba(255,255,255,.06)
+$glass-bg-weak-active: $glass-tint-strong; // was rgba(255,255,255,.08)
+
+/* Backdrop filters */
+$glass-blur:      10px;
+$glass-saturate:  140%;
+
+/* Fallback backgrounds when backdrop-filter unsupported */
+$glass-fallback-weak:   $color-surface-2;
+$glass-fallback-strong: $color-surface-2;
+
+/* ========== ACCENT TINTS (shared) ========== */
+$accent-tint-weak:   rgba($color-accent, 0.06); // e.g., hover on outlined/ghost
+$accent-tint-strong: rgba($color-accent, 0.10); // e.g., active on outlined/ghost
 
 /* ========== TYPOGRAPHY ========== */
 $font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -57,6 +86,37 @@ $space-xl:  32px;
 $space-2xl: 48px;
 $space-3xl: 64px;
 
+/* ========== SIZES ========== */
+$icon-size:     18px;
+$btn-h-md:      44px;  // desktop buttons
+$btn-h-lg:      48px;  // mobile buttons
+$container-max: 1200px;
+
+/* ========== RADII ========== */
+$radius-sm:   8px;
+$radius-md:   12px;
+$radius-lg:   14px;
+$radius-pill: 999px;
+
+/* ========== SHADOWS ========== */
+$shadow-soft:         0 8px 18px rgba(0, 0, 0, 0.25);
+$shadow-soft-lg:      0 10px 22px rgba(0, 0, 0, 0.28);
+$shadow-press:        0 6px 16px rgba(0, 0, 0, 0.22);
+$shadow-accent:       0 8px 20px rgba(34, 211, 238, 0.35);
+$shadow-accent-lg:    0 10px 24px rgba(34, 211, 238, 0.45);
+$shadow-accent-press: 0 6px 16px rgba(34, 211, 238, 0.30);
+
+/* ========== MOTION ========== */
+$dur-fast: 80ms;
+$dur-base: 160ms;
+$ease-std: ease;
+$ease-emph: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+/* ========== FOCUS ========== */
+$focus-ring-color:  $color-accent;
+$focus-ring-width:  2px;
+$focus-ring-offset: 2px;
+
 /* ========== BREAKPOINTS ========== */
 $bp-sm: 480px;
 $bp-md: 768px;
@@ -65,11 +125,11 @@ $bp-xl: 1280px;
 
 /* ========== Z-INDEX ========== */
 $z-nav:     50;
+$z-ctadock: 70;   // sits above header
 $z-overlay: 100;
 $z-modal:   200;
 
 /* ========== LAYOUT ========== */
-$sidebar-width:        240px;
-$header-mobile-height: 56px;
-$header-desktop-height:72px;
- 
+$sidebar-width:         240px;
+$header-mobile-height:  56px;
+$header-desktop-height: 72px;
