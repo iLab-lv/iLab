@@ -29,7 +29,8 @@ export const LOCATIONS = [
     label: 'Domina Shopping',
     tel: '+37123370088',
     wa: 'https://wa.me/37123370088',
-    maps: 'https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga',
+    maps: 'https://www.google.com/maps/search/?api=1&query=iLab Domina&query_place_id=PLACE_ID_DOMINA',
+    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab Domina&destination_place_id=PLACE_ID_DOMINA',
     address: 'Ieriķu iela 3, Rīga, LV-1084',
   },
   {
@@ -37,7 +38,8 @@ export const LOCATIONS = [
     label: 'Spice Home',
     tel: '+37120887787',
     wa: 'https://wa.me/37120887787',
-    maps: 'https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga',
+    maps: 'https://www.google.com/maps/search/?api=1&query=iLab Spice&query_place_id=PLACE_ID_SPICE',
+    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab Spice&destination_place_id=PLACE_ID_SPICE',
     address: 'Jaunmoku iela 13, Rīga, LV-1046',
   },
 ];

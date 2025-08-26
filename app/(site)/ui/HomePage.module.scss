@@ -1,0 +1,69 @@
+@use '../../styles/_tokens.scss' as *;
+@use '../../styles/_layout.scss' as layout;
+
+.hero {
+  background: var(--color-surface-2, #141414);
+  min-height: 100svh; /* full viewport height incl. mobile UI */
+  display: grid;
+  align-content: center;
+  position: relative;
+
+  /* account for fixed header so hero content isn't hidden */
+  padding-top: $header-desktop-height;
+  @media (max-width: $bp-md) {
+    padding-top: $header-mobile-height;
+  }
+}
+
+.container {
+  @include layout.container;
+  text-align: center;
+}
+
+.heading {
+  font-size: $font-size-h4;
+  line-height: $line-height-heading;
+  margin: 0 0 12px;
+  color: $color-text;
+}
+
+.sub {
+  color: $color-text-2;
+  max-width: 62ch;
+  margin: 0 auto 24px;
+}
+
+.cta {
+  margin-top: 8px;
+}
+
+.section {
+  &.services {
+    background: var(--color-surface-1, #0A0A0A);
+    @include layout.section-pad(48px);
+  }
+  &.why {
+    background: var(--color-surface-3, #1F1F1F);
+    @include layout.section-pad(48px);
+  }
+}
+
+.sectionTitle {
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+  color: $color-text;
+  margin: 0 0 12px;
+}
+
+.list {
+  color: $color-text-2;
+  margin: 0;
+  padding-left: 18px;
+  li { margin: 6px 0; }
+}
+
+.copy {
+  color: $color-text-2;
+  margin: 0;
+  max-width: 70ch;
+}

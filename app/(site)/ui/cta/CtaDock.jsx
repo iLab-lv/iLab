@@ -27,9 +27,9 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-controls="locator-panel"
           aria-expanded={locatorOpen}
           onClick={() => setLocatorOpen(true)}
-          title="Servisa lokators"
+          title="Servisa centri"
         >
-          Servisa lokators
+          Servisa centri
         </Button>
 
         <Button
