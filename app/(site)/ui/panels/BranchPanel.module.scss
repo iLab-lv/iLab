@@ -1,0 +1,145 @@
+@import '@/styles/_tokens.scss';
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle {
+  pointer-events: auto;
+  background: $color-surface-2;
+  color: $color-text;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    background: $color-surface-3;
+  }
+}
+
+.layout {
+  display: grid;
+  gap: $space-md;
+
+  // mobile: stacked
+  grid-template-columns: 1fr;
+
+  @media (min-width: $bp-md) {
+    // desktop: split view when map is open
+    &[data-mapopen='1'] {
+      grid-template-columns: 1fr 1.6fr; // list | map
+    }
+  }
+}
+
+.listCol {
+  min-width: 0;
+}
+
+.lead {
+  color: $color-text-2;
+  margin-bottom: $space-sm;
+}
+
+.grid {
+  display: grid;
+  gap: $space-md;
+}
+
+.card {
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: 14px;
+  padding: $space-md;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.cardPulse {
+  box-shadow: 0 0 0 2px $color-accent inset;
+}
+
+.title {
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  margin: 0 0 4px 0;
+}
+
+.address {
+  color: $color-text-2;
+  margin: 0 0 $space-sm 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+}
+
+.mapCol {
+  min-height: 260px;
+
+  @media (min-width: $bp-md) {
+    min-height: 420px;
+  }
+}
+
+.mapBox {
+  position: relative;
+  height: 100%;
+  border-radius: 14px;
+  border: 1px solid $color-border;
+  background:
+    radial-gradient(1200px 600px at 70% 60%, rgba(255,255,255,0.06), transparent 60%),
+    $color-surface-1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mapLabel {
+  color: $color-text-3;
+  font-size: $font-size-lg;
+  letter-spacing: 0.08em;
+  user-select: none;
+}
+
+.pin {
+  position: absolute;
+  transform: translate(-50%, -100%); // pointy base aligns to coordinate
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+}
+
+.pinDot {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 14px; height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: $color-accent;
+  box-shadow:
+    0 0 0 4px rgba(34, 211, 238, 0.18),
+    0 6px 16px rgba(0,0,0,0.35);
+}
+

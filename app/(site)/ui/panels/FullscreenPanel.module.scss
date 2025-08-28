@@ -1,12 +1,5 @@
-@use '../../../styles/tokens' as *; // if your tokens are available here; otherwise adjust/remove
-/* If you don't have a tokens entry point, you can @use the file where $z-overlay, colors, etc. live.
-   Fallbacks are included below. */
-
-/* ===== Fallbacks if tokens are not wired in this scope ===== */
-$z-overlay: 100 !default;
-$color-surface-1: #0A0A0A !default;
-$color-text: #F5F5F5 !default;
-$color-border: rgba(255,255,255,0.07) !default;
+/* app/(site)/ui/panels/FullscreenPanel.module.scss */
+@import '@/styles/_tokens.scss';
 
 /* ===== Overlay ===== */
 .overlay {
@@ -14,46 +7,40 @@ $color-border: rgba(255,255,255,0.07) !default;
   inset: 0;
   z-index: $z-overlay;
 
-  /* Backdrop */
   background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px) saturate(1.4);
-  -webkit-backdrop-filter: blur(8px) saturate(1.4);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
 
   display: grid;
-  place-items: stretch; /* panel will size itself */
+  place-items: stretch;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 160ms ease;
+  transition: opacity $dur-base $ease-std;
 
-  &.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  &.open { opacity: 1; pointer-events: auto; }
 
-  /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
 }
 
-/* ===== Panel ===== */
+/* ===== Panel (fullscreen modal) ===== */
 .panel {
-  /* Fullscreen sheet with safe-area padding */
   background: linear-gradient(0deg, rgba(10,10,10,0.96), rgba(10,10,10,0.96));
   color: $color-text;
-  border-left: 1px solid $color-border;
-  border-right: 1px solid $color-border;
+  border-left: 1px solid $glass-border;
+  border-right: 1px solid $glass-border;
 
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  height: 100dvh;
+  outline: none;
+  overflow: hidden;
 
-  padding-top: calc(env(safe-area-inset-top) + 16px);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 
   display: grid;
   grid-template-rows: auto 1fr;
-  outline: none;
 }
 
 /* ===== Top bar ===== */
@@ -61,44 +48,76 @@ $color-border: rgba(255,255,255,0.07) !default;
   position: sticky;
   top: 0;
   z-index: 1;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  padding: 12px 16px;
-  border-bottom: 1px solid $color-border;
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(6px) saturate(1.2);
-  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  padding: $space-sm $space-md;
+  padding-top: calc(#{$space-sm} + env(safe-area-inset-top));
+
+  border-bottom: 1px solid $glass-border;
+
+  background: $glass-bg-strong;
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
 }
 
 .title {
-  font-size: 1.125rem;
-  font-weight: 600;
   margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+  color: $color-text;
 }
 
+/* ===== Close button (styled as primary CTA, aligned to CtaDock margins) ===== */
 .close {
-  appearance: none;
-  border: 1px solid $color-border;
-  background: rgba(255,255,255,0.04);
-  color: inherit;
-  border-radius: 10px;
-  padding: 6px 10px;
-  line-height: 1;
-  cursor: pointer;
+  position: absolute;
+  top: calc(#{$space-sm + 4px} + env(safe-area-inset-top));
+  right: $space-md;
 
-  &:hover,
+  min-width: 44px;
+  height: 44px;
+  padding: 0 $space-md;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: $radius-md;
+
+  background: $color-accent;
+  color: #000;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  line-height: 1;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+
+  transition: background-color $dur-base $ease-std, transform 120ms ease;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+  &:active {
+    background: $color-accent-active;
+    transform: translateY(1px);
+  }
   &:focus-visible {
-    outline: 2px solid #22D3EE; /* accent focus ring */
+    outline: 2px solid $color-accent;
     outline-offset: 2px;
-    background: rgba(255,255,255,0.08);
   }
 }
 
-/* ===== Content area ===== */
+/* ===== Content ===== */
 .content {
-  padding: 16px;
-  display: block;
-  min-height: 0; /* allow content to scroll properly */
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  padding: $space-md;
+  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
+  min-height: 0;
 }

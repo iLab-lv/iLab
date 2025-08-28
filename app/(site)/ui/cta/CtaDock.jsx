@@ -1,8 +1,8 @@
-// app/(site)/ui/CtaDock.jsx
 'use client';
 
 import { useState } from 'react';
 import s from './CtaDock.module.scss';
+
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 
@@ -14,6 +14,15 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
   const [locatorOpen, setLocatorOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [bookOpen, setBookOpen] = useState(false);
+
+  // Shared small state to pass selected location from Locator -> Contacts
+  const [selectedLocId, setSelectedLocId] = useState(null);
+
+  const openContactsFor = (locId) => {
+    setSelectedLocId(locId || null);
+    setLocatorOpen(false);
+    setContactOpen(true);
+  };
 
   return (
     <div className={s.dock} aria-label="Galvenās darbības">
@@ -38,7 +47,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
-          onClick={() => setContactOpen(true)}
+          onClick={() => { setSelectedLocId(null); setContactOpen(true); }}
           aria-label="Sazināties ar mums"
         >
           Sazināties
@@ -69,7 +78,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
-          onClick={() => setContactOpen(true)}
+          onClick={() => { setSelectedLocId(null); setContactOpen(true); }}
           aria-label="Sazināties ar mums"
         >
           Sazināties
@@ -91,15 +100,23 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
 
       {/* ===== Panels ===== */}
       <div id="locator-panel" aria-hidden={!locatorOpen}>
-        <LocatorPanel open={locatorOpen} onClose={() => setLocatorOpen(false)} />
+        <LocatorPanel
+          open={locatorOpen}
+          onClose={() => setLocatorOpen(false)}
+          onSelectLocation={(locId) => openContactsFor(locId)}
+        />
       </div>
 
       <div id="sazinaties-panel" aria-hidden={!contactOpen}>
-        <SazinatiesPanel open={contactOpen} onClose={() => setContactOpen(false)} />
+        <SazinatiesPanel
+          open={contactOpen}
+          onClose={() => setContactOpen(false)}
+          initialLocId={selectedLocId}
+        />
       </div>
 
       <div id="pieraksties-panel" aria-hidden={!bookOpen}>
-        <PierakstiesPanel open={bookOpen} onClose={() => setBookOpen(false)} />
+        <PierakstiesPanel open={bookOpen} onClose={() => setBookOpen(false)} bookHref={bookHref} />
       </div>
     </div>
   );
