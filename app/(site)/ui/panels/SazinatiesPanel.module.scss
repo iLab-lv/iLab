@@ -1,13 +1,11 @@
 @import '@/styles/_tokens.scss';
 
-/* Layout: full-height card inside panel content.
-   Top info scrolls if long; bottom actions stay visually bottom-aligned. */
-
+/* Full-height card layout: tabs + card, bottom-aligned actions */
 .wrap {
   display: grid;
-  grid-template-rows: auto 1fr; /* tabs + card */
+  grid-template-rows: auto 1fr;
   gap: $space-md;
-  min-height: 100%; /* fill the panel's .content area */
+  min-height: 100%;
 }
 
 /* Tabs */
@@ -19,7 +17,6 @@
   border-radius: $radius-lg;
   padding: 4px;
 }
-
 .tab {
   background: transparent;
   color: $color-text-2;
@@ -36,17 +33,14 @@
     background: $glass-bg-weak-hover;
   }
 }
-.tabActive {
-  color: #000;
-  background: $color-accent;
-}
+.tabActive { color: #000; background: $color-accent; }
 
-/* Full-height card */
+/* Card shell */
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 0;       /* allow inner scrolling */
+  min-height: 0;
   height: 100%;
 
   padding: $space-lg;
@@ -62,47 +56,94 @@
   }
 }
 
-/* Info scrolls; actions sit at bottom */
+/* Scrollable info; actions stick to bottom via margin-top:auto on .actions */
 .info {
   min-height: 0;
   overflow: auto;
-  padding-right: 2px; /* prevent text jump on scrollbar */
+  padding-right: 2px;
 }
 
+/* Big badge at the very top-left */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: $radius-lg;
+  border: 1px solid $glass-border;
+  margin: 0 0 $space-md 0;
+
+  font-weight: $font-weight-medium;
+  letter-spacing: .01em;
+}
+.badgeOpen   { background: rgba($color-accent, .18); color: $color-accent; }
+.badgeClosed { background: rgba(255,255,255,.06);   color: $color-text-2; }
+
+/* Title & address */
 .title {
-  margin: 0 0 4px 0;
+  margin: -2px 0 2px 0; /* tiny negative to tighten rhythm */
   font-size: $font-size-h5;
   line-height: $line-height-heading;
 }
-.address { color: $color-text-2; margin: 0 0 $space-md 0; }
+.address { color: $color-text-2; margin: 0 0 $space-xs 0; }
 
-/* Hours */
-.hoursBlock { margin-bottom: $space-md; }
-.badge {
-  display: inline-block;
-  font-size: 13px;
-  line-height: 1;
-  padding: 6px 8px;
-  border-radius: 999px;
-  margin-bottom: $space-sm;
-  border: 1px solid $glass-border;
+/* Map links under address */
+.addrLinks {
+  margin: 0 0 $space-md 0;
+  color: $color-text-2;
 }
-.badgeOpen   { background: rgba($color-accent, .18); color: $color-accent; }
-.badgeClosed { background: rgba(255,255,255,.06); color: $color-text-2; }
+.link {
+  color: $color-text-2;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba($color-text-2,.5);
+  transition: color $dur-base $ease-std, border-color $dur-base $ease-std;
 
+  &:hover,
+  &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent,.6); }
+}
+.dot { margin: 0 8px; opacity: .6; }
+
+/* Special admin notice */
+.specialNote {
+  display: inline-block;
+  margin: 0 0 $space-sm 0;
+  padding: 8px 10px;
+  border-radius: $radius-md;
+  background: rgba(255,255,255,.06);
+  border: 1px solid $glass-border;
+  color: $color-text;
+}
+
+/* Hours list directly beneath the badge */
 .hoursList {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: $space-lg;
   row-gap: 6px;
-  margin: 0; padding: 0;
+  margin: 0 0 $space-md 0;
+  padding: 0;
 }
 .hoursRow { display: contents; }
 .hoursRow dt { color: $color-text-2; }
 .hoursRow dd { margin: 0; }
+.hoursToday dt,
+.hoursToday dd { color: $color-text; font-weight: $font-weight-medium; }
 
-/* Contact rows */
-.contacts { margin-top: $space-md; }
+/* Phone — very large with negative spacing to fill space smoothly */
+.phoneWrap { margin: -2px 0 $space-sm 0; }
+.phone {
+  display: inline-block;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem); /* big but responsive */
+  font-weight: $font-weight-semibold;
+  line-height: 1.1;
+  letter-spacing: .01em;
+  color: $color-text;
+  text-decoration: none;
+}
+.phone:hover,
+.phone:focus-visible { color: $color-accent; outline: none; text-decoration: underline; }
+
+/* Email row */
 .row {
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -114,33 +155,14 @@
 .val { color: $color-text; text-decoration: none; }
 .val:hover, .val:focus-visible { color: $color-accent; outline: none; text-decoration: underline; }
 
-.rowLinks {
-  margin-top: $space-sm;
-  color: $color-text-2;
-}
-.link {
-  color: $color-text-2;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba($color-text-2, .5);
-  transition: color $dur-base $ease-std, border-color $dur-base $ease-std;
-
-  &:hover,
-  &:focus-visible {
-    outline: none;
-    color: $color-accent;
-    border-color: rgba($color-accent, .6);
-  }
-}
-.dot { margin: 0 8px; opacity: .6; }
-
-/* Bottom actions — visually align near CTA area */
+/* Bottom actions aligned close to CTA area */
 .actions {
-  margin-top: auto;             /* push to bottom */
+  margin-top: auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: $space-sm;
 
   @media (min-width: $bp-md) {
-    grid-template-columns: 1fr 1fr; /* Call + WhatsApp side-by-side on desktop */
+    grid-template-columns: 1fr 1fr;
   }
 }
