@@ -8,8 +8,8 @@
   z-index: $z-overlay;
 
   background: rgba(0, 0, 0, 0.55);
-  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
-  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 
   display: grid;
   place-items: stretch;
@@ -19,12 +19,10 @@
 
   &.open { opacity: 1; pointer-events: auto; }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 
-/* ===== Panel (fullscreen modal) ===== */
+/* ===== Panel (fullscreen, content scrolls) ===== */
 .panel {
   background: linear-gradient(0deg, rgba(10,10,10,0.96), rgba(10,10,10,0.96));
   color: $color-text;
@@ -40,40 +38,51 @@
   padding-bottom: env(safe-area-inset-bottom);
 
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr; /* topbar + scrollable content */
 }
 
-/* ===== Top bar ===== */
+/* ===== Top bar (same height as NavBar) ===== */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 1;
 
+  /* same glossy surface as header */
+  background: $glass-bg-strong;
+  border-bottom: 1px solid $glass-border;
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  /* size matches header; center contents vertically */
+  height: $header-desktop-height;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: $space-sm $space-md;
-  padding-top: calc(#{$space-sm} + env(safe-area-inset-top));
+  padding: 0 $space-md; /* side gutters like header */
 
-  border-bottom: 1px solid $glass-border;
+  @media (max-width: $bp-md) {
+    height: calc(#{$header-mobile-height} + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top); /* keep vertical centering with notch */
+  }
 
-  background: $glass-bg-strong;
-  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
-  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  /* make sure absolutely positioned close sits relative to topbar */
+  position: sticky; /* stays at top while content scrolls */
 }
 
 .title {
   margin: 0;
+  text-align: center;
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
-  text-align: center;
   color: $color-text;
 }
 
-/* ===== Close button (styled as primary CTA, aligned to CtaDock margins) ===== */
+/* ===== Close button — primary, aligned to CtaDock top-right margins ===== */
 .close {
   position: absolute;
+
+  /* SAME offsets as CtaDock .topRight */
   top: calc(#{$space-sm + 4px} + env(safe-area-inset-top));
   right: $space-md;
 
@@ -87,31 +96,21 @@
 
   border: none;
   border-radius: $radius-md;
-
   background: $color-accent;
   color: #000;
   font-weight: $font-weight-medium;
   cursor: pointer;
   line-height: 1;
 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-
+  box-shadow: $shadow-soft-lg;
   transition: background-color $dur-base $ease-std, transform 120ms ease;
 
-  &:hover {
-    background: $color-accent-hover;
-  }
-  &:active {
-    background: $color-accent-active;
-    transform: translateY(1px);
-  }
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 2px;
-  }
+  &:hover   { background: $color-accent-hover; }
+  &:active  { background: $color-accent-active; transform: translateY(1px); }
+  &:focus-visible { outline: 2px solid $color-accent; outline-offset: 2px; }
 }
 
-/* ===== Content ===== */
+/* ===== Content (starts below topbar) ===== */
 .content {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -119,5 +118,5 @@
 
   padding: $space-md;
   padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
-  min-height: 0;
+  min-height: 0; /* proper child sizing */
 }
