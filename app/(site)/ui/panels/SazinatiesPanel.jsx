@@ -6,92 +6,73 @@ import s from './SazinatiesPanel.module.scss';
 import Button from '../../components/button/Button';
 import { LOCATIONS, HOURS as DEFAULT_HOURS } from '@/data/site.config';
 
-/**
- * Helpers
- */
+/* ===== Helpers ===== */
 function parseHM(hm) {
-  // "10:00" -> minutes since midnight
   if (!hm) return null;
   const [h, m] = hm.split(':').map(Number);
   if (Number.isNaN(h) || Number.isNaN(m)) return null;
   return h * 60 + m;
 }
-
-function getRigaNowMinutes() {
-  // current time in Europe/Riga as minutes since midnight
-  const parts = new Intl.DateTimeFormat('en-GB', {
+function getRigaNow() {
+  // Current date/time parts in Europe/Riga
+  const d = new Date();
+  const fmt = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Riga',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
     hour12: false,
     hour: '2-digit',
     minute: '2-digit',
-  })
-    .formatToParts(new Date())
-    .reduce((acc, p) => ((acc[p.type] = p.value), acc), {});
-  const h = parseInt(parts.hour, 10);
-  const m = parseInt(parts.minute, 10);
-  return h * 60 + m;
-}
-
-function getRigaWeekdayIndex() {
-  // 0=Mon,...,6=Sun (we align to typical store-hours arrays)
-  const wd = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Europe/Riga',
     weekday: 'short',
-  }).format(new Date()); // e.g. "Mon"
-  const map = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
-  return map[wd] ?? 0;
+  });
+  const parts = fmt.formatToParts(d).reduce((acc, p) => ((acc[p.type] = p.value), acc), {});
+  const date = `${parts.year}-${parts.month}-${parts.day}`; // YYYY-MM-DD
+  const hour = parseInt(parts.hour, 10);
+  const minute = parseInt(parts.minute, 10);
+  const weekdayMap = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
+  const weekday = weekdayMap[parts.weekday] ?? 0;
+  return { date, minutes: hour * 60 + minute, weekday };
 }
 
-function computeOpenState(hoursArr) {
-  // Expects an array of 7 entries (Mon..Sun): { day, opens, closes }
-  // Returns { open:boolean, closes:string|null, opensAt:string|null }
-  if (!Array.isArray(hoursArr) || hoursArr.length === 0) {
-    return { open: false, closes: null, opensAt: null };
+function computeOpenState(hoursArr, overrideForToday) {
+  // hoursArr: [{day, opens, closes} * 7]
+  // overrideForToday: { opens, closes } or null
+  const { minutes: nowM, weekday } = getRigaNow();
+
+  // Today’s slot
+  let today = hoursArr?.[weekday];
+  if (!today && hoursArr && hoursArr.length > 0) today = hoursArr[0];
+
+  // Apply override if present
+  if (overrideForToday?.opens && overrideForToday?.closes) {
+    today = { ...today, opens: overrideForToday.opens, closes: overrideForToday.closes };
   }
-  const idx = getRigaWeekdayIndex();
-  const today = hoursArr[idx] || hoursArr[0];
-  const now = getRigaNowMinutes();
+
   const openM = parseHM(today?.opens);
   const closeM = parseHM(today?.closes);
+  if (openM == null || closeM == null) return { open: false, badgeText: 'Slēgts', today };
 
-  if (openM == null || closeM == null) {
-    return { open: false, closes: null, opensAt: null };
+  if (nowM >= openM && nowM < closeM) {
+    return { open: true, badgeText: `Atvērts — līdz ${today.closes}`, today };
   }
-  if (now >= openM && now < closeM) {
-    return { open: true, closes: today.closes, opensAt: null };
-  }
-  return { open: false, closes: null, opensAt: today.opens };
+  return { open: false, badgeText: `Slēgts — atvērsies ${today?.opens ?? ''}`, today };
 }
 
-function buildDirectionsUrl(loc) {
-  // Prefer lat/lng if provided (loc.geo = {lat, lng} or [lat, lng]).
-  const g = loc?.geo;
-  let lat = null, lng = null;
-  if (Array.isArray(g) && g.length >= 2) {
-    [lat, lng] = g;
-  } else if (g && typeof g === 'object') {
-    lat = g.lat; lng = g.lng;
-  }
-  if (typeof lat === 'number' && typeof lng === 'number') {
-    const q = new URLSearchParams({
-      api: '1',
-      destination: `${lat},${lng}`,
-    });
-    return `https://www.google.com/maps/dir/?${q.toString()}`;
-  }
-  // Fallback: if we only have a 'maps' URL, use it (directions won’t be guaranteed)
-  return loc?.maps || '#';
+function formatSpecialNote(ovr) {
+  if (!ovr?.date || !ovr?.opens || !ovr?.closes) return null;
+  // Example copy: "10.09.25 strādājam 11:00–18:00"
+  const [y, m, d] = ovr.date.split('-');
+  const ddmmyy = `${d}.${m}.${String(y).slice(2)}`;
+  return `${ddmmyy} ${ovr.note ?? `strādājam ${ovr.opens}–${ovr.closes}`}`;
 }
 
-/**
- * Contacts panel with tabs & full-height card
- */
 export default function SazinatiesPanel({ open, onClose, initialLocId }) {
   const ids = useMemo(() => LOCATIONS.map(l => l.id), []);
   const defaultId = initialLocId && ids.includes(initialLocId) ? initialLocId : ids[0];
   const [activeId, setActiveId] = useState(defaultId);
 
-  // Sync active tab on open if coming from Locator
+  // Sync tab on open
   useEffect(() => {
     if (!open) return;
     if (initialLocId && ids.includes(initialLocId)) setActiveId(initialLocId);
@@ -99,7 +80,7 @@ export default function SazinatiesPanel({ open, onClose, initialLocId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, initialLocId]);
 
-  // Focus the first actionable button in the visible card
+  // Focus first action in active card
   const rootRef = useRef(null);
   useEffect(() => {
     if (!open) return;
@@ -112,10 +93,22 @@ export default function SazinatiesPanel({ open, onClose, initialLocId }) {
   }, [open, activeId]);
 
   const activeLoc = LOCATIONS.find(l => l.id === activeId) || LOCATIONS[0];
-  const hours = Array.isArray(activeLoc?.hours) && activeLoc.hours.length ? activeLoc.hours : DEFAULT_HOURS;
-  const state = computeOpenState(hours);
-  const dirUrl = buildDirectionsUrl(activeLoc);
-  const mapsUrl = activeLoc?.maps || dirUrl;
+
+  // Hours data: can be per-location or global default
+  const baseHours = Array.isArray(activeLoc?.hours) && activeLoc.hours.length ? activeLoc.hours : DEFAULT_HOURS;
+
+  // Admin override for a specific date (optional)
+  // Expected shape in site.config LOCATIONS[]:
+  // hoursOverride: { date: 'YYYY-MM-DD', opens: '11:00', closes: '18:00', note?: '...' }
+  const { date } = getRigaNow();
+  const todayOverride = activeLoc?.hoursOverride?.date === date ? activeLoc.hoursOverride : null;
+
+  const state = computeOpenState(baseHours, todayOverride);
+  const specialNote = formatSpecialNote(activeLoc?.hoursOverride);
+
+  // Map links from config (use destination when present)
+  const mapsUrl = activeLoc?.maps || '#';
+  const dirUrl = activeLoc?.destination || activeLoc?.maps || '#';
 
   return (
     <FullscreenPanel open={open} onClose={onClose} title="Sazināties" mountWhenClosed={true}>
@@ -140,7 +133,7 @@ export default function SazinatiesPanel({ open, onClose, initialLocId }) {
           })}
         </div>
 
-        {/* Full-height card (single visible) */}
+        {/* Full-height card */}
         <section
           id={`tab-panel-${activeLoc.id}`}
           role="tabpanel"
@@ -148,51 +141,67 @@ export default function SazinatiesPanel({ open, onClose, initialLocId }) {
           className={s.card}
           data-branch-card={activeLoc.id}
         >
-          {/* Top info block */}
+          {/* Info area */}
           <div className={s.info}>
-            <h3 className={s.title}>{activeLoc.label}</h3>
-            {activeLoc.address && <p className={s.address}>{activeLoc.address}</p>}
+            {/* Big open/closed badge at top-left */}
+            <div className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}>
+              {state.badgeText}
+            </div>
 
-            {/* Hours + open now */}
-            {Array.isArray(hours) && hours.length > 0 && (
-              <div className={s.hoursBlock} aria-label="Darba laiks">
-                <p className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}>
-                  {state.open ? `Atvērts — līdz ${state.closes}` : `Slēgts — atvērsies ${state.opensAt}`}
+            {/* Title & address */}
+            <h3 className={s.title}>{activeLoc.label}</h3>
+            {activeLoc.address && (
+              <>
+                <p className={s.address}>{activeLoc.address}</p>
+                <p className={s.addrLinks}>
+                  <a className={s.link} href={mapsUrl} target="_blank" rel="noopener">Skatīt Google Maps</a>
+                  <span className={s.dot} aria-hidden>•</span>
+                  <a className={s.link} href={dirUrl} target="_blank" rel="noopener">Maršruti</a>
                 </p>
-                <dl className={s.hoursList}>
-                  {hours.map((h, i) => (
-                    <div key={i} className={s.hoursRow}>
-                      <dt>{h.day}</dt>
-                      <dd>{h.opens} – {h.closes}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
+              </>
             )}
 
-            {/* Contacts */}
-            <div className={s.contacts}>
-              {activeLoc.tel && (
-                <p className={s.row}>
-                  <span className={s.key}>Tālrunis:</span>
-                  <a className={s.val} href={`tel:${activeLoc.tel.replace(/\s+/g, '')}`}>{activeLoc.tel}</a>
-                </p>
-              )}
-              {activeLoc.email && (
-                <p className={s.row}>
-                  <span className={s.key}>E-pasts:</span>
-                  <a className={s.val} href={`mailto:${activeLoc.email}`}>{activeLoc.email}</a>
-                </p>
-              )}
-              <p className={s.rowLinks}>
-                <a className={s.link} href={mapsUrl} target="_blank" rel="noopener">Skatīt Google Maps</a>
-                <span className={s.dot} aria-hidden>•</span>
-                <a className={s.link} href={dirUrl} target="_blank" rel="noopener">Maršruti</a>
+            {/* Special notice from admin (holiday hours) */}
+            {specialNote && (
+              <p className={s.specialNote} role="status">{specialNote}</p>
+            )}
+
+            {/* Hours list just under badge */}
+            {Array.isArray(baseHours) && baseHours.length > 0 && (
+              <dl className={s.hoursList} aria-label="Darba laiks">
+                {baseHours.map((h, i) => {
+                  // If today and override active, reflect override in today's row
+                  const isToday = state.today && h.day === state.today.day;
+                  const rowOpens  = (isToday && todayOverride?.opens)  ? todayOverride.opens  : h.opens;
+                  const rowCloses = (isToday && todayOverride?.closes) ? todayOverride.closes : h.closes;
+                return (
+                  <div key={i} className={s.hoursRow}>
+                    <dt className={isToday ? s.hoursToday : ''}>{h.day}</dt>
+                    <dd className={isToday ? s.hoursToday : ''}>{rowOpens} – {rowCloses}</dd>
+                  </div>
+                );})}
+              </dl>
+            )}
+
+            {/* Phone (very large, with subtle negative spacing) */}
+            {activeLoc.tel && (
+              <p className={s.phoneWrap}>
+                <a className={s.phone} href={`tel:${activeLoc.tel.replace(/\s+/g, '')}`}>
+                  {activeLoc.tel}
+                </a>
               </p>
-            </div>
+            )}
+
+            {/* Email (if provided) */}
+            {activeLoc.email && (
+              <p className={s.row}>
+                <span className={s.key}>E-pasts:</span>
+                <a className={s.val} href={`mailto:${activeLoc.email}`}>{activeLoc.email}</a>
+              </p>
+            )}
           </div>
 
-          {/* Bottom actions cluster */}
+          {/* Bottom actions */}
           <div className={s.actions}>
             {activeLoc.tel && (
               <Button
