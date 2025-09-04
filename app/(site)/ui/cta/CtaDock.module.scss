@@ -1,7 +1,7 @@
 /* app/(site)/ui/cta/CtaDock.module.scss
    Unified CTA dock:
    - Desktop: top-right (Sazināties + Locator) + bottom-right (Pieraksties)
-   - Mobile: bottom full-width bar (Sazināties + Pieraksties)
+   - Mobile: bottom full-width bar (icon-only Locator + Sazināties + Pieraksties)
    - No dead overlay: wrapper ignores clicks; only buttons receive them
    - Buttons are styled by components/button/Button.module.scss
 */
@@ -30,6 +30,9 @@
   }
 }
 
+/* Let contained buttons be clickable */
+.topRight > * { pointer-events: auto; }
+
 /* ===== Desktop BOTTOM-RIGHT button ===== */
 .bottomRight {
   position: fixed;
@@ -42,6 +45,9 @@
     display: inline-flex;
   }
 }
+
+/* Let contained buttons be clickable */
+.bottomRight > * { pointer-events: auto; }
 
 /* ===== Locator popover (desktop only) ===== */
 .menu {
@@ -131,7 +137,7 @@
   bottom: 0;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr;      /* added space for icon-only locator */
   gap: $space-sm;                           /* 8px */
   padding: $space-sm $space-md;             /* 8px 16px */
   padding-bottom: calc(#{$space-sm} + env(safe-area-inset-bottom));
@@ -150,6 +156,49 @@
 
   @media (min-width: $bp-md) {
     display: none;
+  }
+}
+
+/* Icon-only button (mobile locator) */
+.iconBtn {
+  pointer-events: auto;                 /* parent has none; enable click */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  border: 1px solid $glass-border;
+  background: $glass-bg-strong;
+  color: $color-text;
+  cursor: pointer;
+
+  -webkit-backdrop-filter: blur($glass-blur);
+  backdrop-filter: blur($glass-blur);
+
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
+    border-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    background: $glass-bg-weak-hover;
+    color: $color-accent;
+    border-color: $glass-border-2;
+  }
+
+  /* Ensure the SVG scales nicely */
+  svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
   }
 }
 

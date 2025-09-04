@@ -71,6 +71,20 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
 
       {/* ===== Mobile: Bottom bar ===== */}
       <div className={s.bottomBar} role="region" aria-label="Mobilās darbības josla">
+        {/* Icon-only locator (no text) */}
+        <button
+          className={s.iconBtn}
+          aria-haspopup="dialog"
+          aria-controls="locator-panel"
+          aria-expanded={locatorOpen}
+          onClick={() => setLocatorOpen(true)}
+          aria-label="Servisa centri"
+          title="Servisa centri"
+          type="button"
+        >
+          <LocationPin aria-hidden="true" />
+        </button>
+
         <Button
           variant="primary"
           size="lg"
@@ -116,7 +130,11 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
       </div>
 
       <div id="pieraksties-panel" aria-hidden={!bookOpen}>
-        <PierakstiesPanel open={bookOpen} onClose={() => setBookOpen(false)} bookHref={bookHref} />
+        <PierakstiesPanel
+          open={bookOpen}
+          onClose={() => setBookOpen(false)}
+          bookHref={bookHref}
+        />
       </div>
     </div>
   );
