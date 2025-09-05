@@ -1,28 +1,23 @@
+// app/(site)/ui/cta/CtaDock.jsx
 'use client';
 
-import { useState } from 'react';
 import s from './CtaDock.module.scss';
 
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 
-import LocatorPanel from '../panels/LocatorPanel';
-import SazinatiesPanel from '../panels/SazinatiesPanel';
-import PierakstiesPanel from '../panels/PierakstiesPanel';
+import { useUiDialogs } from '../providers/UiDialogsProvider';
 
-export default function CtaDock({ bookHref = '/pieraksties' }) {
-  const [locatorOpen, setLocatorOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [bookOpen, setBookOpen] = useState(false);
-
-  // Shared small state to pass selected location from Locator -> Contacts
-  const [selectedLocId, setSelectedLocId] = useState(null);
-
-  const openContactsFor = (locId) => {
-    setSelectedLocId(locId || null);
-    setLocatorOpen(false);
-    setContactOpen(true);
-  };
+export default function CtaDock() {
+  const {
+    locatorOpen,
+    contactOpen,
+    bookOpen,
+    openLocator,
+    openContact,
+    openBook,
+    setSelectedLocId,
+  } = useUiDialogs();
 
   return (
     <div className={s.dock} aria-label="Galvenās darbības">
@@ -35,7 +30,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="locator-panel"
           aria-expanded={locatorOpen}
-          onClick={() => setLocatorOpen(true)}
+          onClick={(e) => openLocator(e.currentTarget)}
           title="Servisa centri"
         >
           Servisa centri
@@ -47,7 +42,10 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
-          onClick={() => { setSelectedLocId(null); setContactOpen(true); }}
+          onClick={(e) => {
+            setSelectedLocId(null);
+            openContact(e.currentTarget);
+          }}
           aria-label="Sazināties ar mums"
         >
           Sazināties
@@ -62,7 +60,7 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="pieraksties-panel"
           aria-expanded={bookOpen}
-          onClick={() => setBookOpen(true)}
+          onClick={(e) => openBook(e.currentTarget)}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties
@@ -78,7 +76,10 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
-          onClick={() => { setSelectedLocId(null); setContactOpen(true); }}
+          onClick={(e) => {
+            setSelectedLocId(null);
+            openContact(e.currentTarget);
+          }}
           aria-label="Sazināties ar mums"
         >
           Sazināties
@@ -91,32 +92,11 @@ export default function CtaDock({ bookHref = '/pieraksties' }) {
           aria-haspopup="dialog"
           aria-controls="pieraksties-panel"
           aria-expanded={bookOpen}
-          onClick={() => setBookOpen(true)}
+          onClick={(e) => openBook(e.currentTarget)}
           aria-label="Pieraksties uz remontu"
         >
           Pieraksties
         </Button>
-      </div>
-
-      {/* ===== Panels ===== */}
-      <div id="locator-panel" aria-hidden={!locatorOpen}>
-        <LocatorPanel
-          open={locatorOpen}
-          onClose={() => setLocatorOpen(false)}
-          onSelectLocation={(locId) => openContactsFor(locId)}
-        />
-      </div>
-
-      <div id="sazinaties-panel" aria-hidden={!contactOpen}>
-        <SazinatiesPanel
-          open={contactOpen}
-          onClose={() => setContactOpen(false)}
-          initialLocId={selectedLocId}
-        />
-      </div>
-
-      <div id="pieraksties-panel" aria-hidden={!bookOpen}>
-        <PierakstiesPanel open={bookOpen} onClose={() => setBookOpen(false)} bookHref={bookHref} />
       </div>
     </div>
   );

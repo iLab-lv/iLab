@@ -1,11 +1,10 @@
 /* app/(site)/ui/navbar/NavBar.module.scss
-   Glossy fixed-frame header for iLab
-   - Dark palette + aqua accent
-   - Backdrop blur with opaque fallback
-   - Keyboard-focus visible, mobile safe areas
+   Fixed glossy header
+   - Desktop nav only from 1360px+
+   - Mobile (hamburger + mobile controls) under 1360px
 */
 
-@import '@/styles/_tokens.scss';
+@use '../../../styles/_tokens.scss' as *;
 
 /* ===== Header frame ===== */
 .header {
@@ -19,12 +18,11 @@
   -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
   backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 
-  /* Fallback when backdrop-filter unsupported */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $glass-fallback-strong;
   }
 
-  @media (max-width: $bp-md) {
+  @media (max-width: 1024px) {
     height: calc(#{$header-mobile-height} + env(safe-area-inset-top));
     padding-top: env(safe-area-inset-top);
   }
@@ -41,30 +39,23 @@
 }
 
 /* ===== Brand ===== */
-.brandLink {
-  display: inline-flex;
-  align-items: center;
-}
+.brandLink { display: inline-flex; align-items: center; }
 
 .logo {
   display: block;
   height: 28px;
   width: auto;
 
-  @media (min-width: $bp-md) {
-    height: 32px;
-  }
+  @media (min-width: 1024px) { height: 32px; }
 }
 
-/* ===== Desktop nav ===== */
+/* ===== Desktop nav (only from 1360px+) ===== */
 .nav {
   display: none;
   align-items: center;
-  gap: $space-sm; /* 8px */
+  gap: $space-sm;
 
-  @media (min-width: $bp-md) {
-    display: flex;
-  }
+  @media (min-width: 1360px) { display: flex; }
 }
 
 .navItem {
@@ -74,67 +65,34 @@
   padding: 10px 12px;
   font-size: 15px;
   color: $color-text;
-  text-decoration: none; /* keep off by default */
-  border-radius: $radius-md; /* 12px */
+  text-decoration: none;
+  border-radius: $radius-md;
   transition: color $dur-base $ease-std, background-color $dur-base $ease-std;
 
   &:hover,
-  &:focus-visible {
-    color: $color-accent;
-    text-decoration: none; /* prevent default underline so only glow line shows */
-    outline: none;
-  }
+  &:focus-visible { color: $color-accent; outline: none; }
 
-  /* glow underline */
   &::after {
     content: '';
     position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 6px;
-    height: 2px;
-    background: transparent;
-    border-radius: 1px;
+    left: 12px; right: 12px; bottom: 6px; height: 2px;
+    background: transparent; border-radius: 1px;
     transition: background-color $dur-base $ease-std, transform $dur-base $ease-std, opacity $dur-base $ease-std;
-    transform: scaleX(0.2);
-    opacity: 0;
+    transform: scaleX(0.2); opacity: 0;
   }
   &:hover::after,
-  &:focus-visible::after {
-    background: $color-accent;
-    transform: scaleX(1);
-    opacity: 1;
-  }
+  &:focus-visible::after { background: $color-accent; transform: scaleX(1); opacity: 1; }
 }
 
-.navParent { padding-right: 8px; } /* room for chevron */
-
-.chev {
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 14px;
-  opacity: .7;
-  transform: translateY(1px);
-}
-
+.navParent { padding-right: 8px; }
+.chev { display: inline-block; margin-left: 6px; font-size: 14px; opacity: .7; transform: translateY(1px); }
 .ddWrap { position: relative; }
 
 /* ===== Dropdown ===== */
 .dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  min-width: 220px;
-
-  background: $glass-bg-strong;
-  border: 1px solid $glass-border;
-  border-radius: $radius-lg; /* 14px */
-  padding: $space-xs; /* 4px */
-
-  box-shadow: $shadow-soft-lg;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-4px);
+  position: absolute; top: calc(100% + 10px); left: 0; min-width: 220px;
+  background: $glass-bg-strong; border: 1px solid $glass-border; border-radius: $radius-lg; padding: $space-xs;
+  box-shadow: $shadow-soft-lg; opacity: 0; pointer-events: none; transform: translateY(-4px);
   transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
 
   -webkit-backdrop-filter: blur($glass-blur);
@@ -145,100 +103,61 @@
   }
 }
 
-.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
+.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-.menuCol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  > li { margin: 0; }
-}
+.menuCol { list-style: none; margin: 0; padding: 0; > li { margin: 0; } }
 
 .menuLink {
-  display: block;
-  padding: 10px 10px;
-  border-radius: $radius-sm; /* 8px */
-  color: $color-text;
-  text-decoration: none; /* off by default */
+  display: block; padding: 10px 10px; border-radius: $radius-sm;
+  color: $color-text; text-decoration: none;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
 
   &:hover,
-  &:focus-visible {
-    outline: none;
-    color: $color-accent;
-    background: rgba($color-accent, 0.08);
-    text-decoration: none; /* keep underline off here too */
-  }
+  &:focus-visible { outline: none; color: $color-accent; background: $glass-bg-weak-hover; }
 }
 
 /* ===== Right actions & slots ===== */
 .actions {
-  display: flex;
-  align-items: center;
-  gap: $space-sm; /* 8px */
+  display: flex; align-items: center; gap: $space-sm;
+  justify-self: end; /* hug right edge */
 }
 
 .actionItem { position: relative; }
 
 .actionsCluster {
-  display: inline-flex;
-  align-items: center;
-  gap: $space-sm;
-  padding: $space-xs; /* 4px */
-  border-radius: $radius-lg; /* 14px */
-
-  background: $glass-bg-weak;
-  border: 1px solid $glass-border;
-
+  display: inline-flex; align-items: center; gap: $space-sm;
+  padding: $space-xs; border-radius: $radius-lg;
+  background: $glass-bg-weak; border: 1px solid $glass-border;
   -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
   backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 }
 
-/* language switcher slot (mobile only) */
+/* language switcher slot (hidden once desktop nav appears) */
 .slotUtility {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-
-  @media (min-width: $bp-md) {
-    display: none;
-  }
+  display: inline-flex; align-items: center; min-width: 0;
+  @media (min-width: 1360px) { display: none; }
 }
 
-/* ===== Hamburger ===== */
-.hamburger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: $radius-md; /* 12px */
-
-  border: 1px solid $glass-border;
-  background: $glass-bg-weak;
-  color: $color-text;
+/* ===== Buttons (mobile-only until 1360px) ===== */
+.hamburger,
+.iconBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: $radius-md;
+  border: 1px solid $glass-border; background: $glass-bg-weak; color: $color-text;
   cursor: pointer;
-
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
 
   &:hover,
-  &:focus-visible {
-    outline: none;
-    color: $color-accent;
-    border-color: rgba($color-accent, 0.35);
-    background: rgba(255,255,255,0.06);
-    text-decoration: none;
-  }
+  &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: rgba(255,255,255,0.06); }
 
-  @media (min-width: $bp-md) {
-    display: none;
-  }
+  @media (min-width: 1360px) { display: none; }
 }
+
+/* Locator SVG crispness */
+.iconBtn :where(svg) { display: block; width: 20px; height: 20px; vector-effect: non-scaling-stroke; }
+.iconBtn :where(svg [stroke]) { stroke: currentColor; }
+.iconBtn :where(svg [fill="none"]) { stroke: currentColor; }
+.iconBtn :where(svg [stroke-width]) { stroke-width: 1.75; }
 
 /* ===== Mobile drawer ===== */
 .mobileMenu {
@@ -247,70 +166,47 @@
   background: $glass-bg-strong;
   -webkit-backdrop-filter: saturate($glass-saturate) blur(12px);
   backdrop-filter: saturate($glass-saturate) blur(12px);
-  border-top: 1px solid $glass-border;
-  z-index: $z-overlay;
+  border-top: 1px solid $glass-border; z-index: $z-overlay;
 
-  transform: translateY(-8px);
-  opacity: 0;
-  pointer-events: none;
+  transform: translateY(-8px); opacity: 0; pointer-events: none;
   transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $glass-fallback-strong;
   }
 
-  @media (min-width: $bp-md) {
-    display: none;
-  }
+  @media (min-width: 1360px) { display: none; }
 }
-.mobileMenu.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
+.mobileMenu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
-.mobileInner {
-  padding: $space-md; /* 16px */
-  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
-}
+.mobileInner { padding: $space-md; padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom)); }
 
 .drawerItem {
-  width: 100%;
-  text-align: left;
-  display: block;
-  padding: 12px 14px;
-  margin: 6px 0;
-  border-radius: $radius-md; /* 12px */
-
-  background: $glass-bg-weak;
-  color: $color-text;
-  text-decoration: none;
-  border: 1px solid $glass-border;
-
+  width: 100%; text-align: left; display: block;
+  padding: 12px 14px; margin: 6px 0; border-radius: $radius-md;
+  background: $glass-bg-weak; color: $color-text; text-decoration: none; border: 1px solid $glass-border;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
 
   &:hover,
-  &:focus-visible {
-    outline: none;
-    color: $color-accent;
-    border-color: rgba($color-accent, 0.35);
-    background: rgba($color-accent, 0.06);
-    text-decoration: none; /* prevent underline from globals */
-  }
+  &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: $glass-bg-weak-hover; text-decoration: none; }
 }
 
 .emph { font-weight: $font-weight-semibold; }
-
 .drawerGroup { margin-bottom: 6px; }
+.drawerSubmenu { margin: 4px 0 10px 8px; padding-left: 8px; border-left: 1px dashed $glass-border-2; }
 
-.drawerSubmenu {
-  margin: 4px 0 10px 8px;
-  padding-left: 8px;
-  border-left: 1px dashed $glass-border-2;
+/* === Mobile tweaks (<1360px): no pill, set ordering, burger far-right === */
+@media (max-width: 1359px) {
+  .actionsCluster { background: transparent; border: 0; padding: 0; gap: $space-xs; }
+
+  /* Order: locator (left) → language (middle) → hamburger (right-most) */
+  .iconBtn     { order: 1; }
+  .slotUtility { order: 2; }
+  .hamburger   { order: 3; margin-right: 0; }
 }
 
-/* ===== Misc helpers ===== */
-@media (max-width: $bp-md) {
-  /* Ensure any legacy CTA styles in header don't show on mobile (not used now) */
-  .actions .cta { display: none; }
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .dropdown { transition: none; }
+  .mobileMenu { transition: none; }
 }

@@ -1,9 +1,12 @@
+// app/(site)/ui/navbar/NavBar.jsx
 'use client';
 
 import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
 import LanguageSwitcher from '../controls/LanguageSwitcher';
+import LocationPin from '../../components/icons/LocationPin';
+import { useUiDialogs } from '../providers/UiDialogsProvider';
 
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },
@@ -28,6 +31,8 @@ export default function NavBar() {
 
   const navRef = useRef(null);
   const leaveT = useRef(null);
+
+  const { locatorOpen, openLocator } = useUiDialogs();
 
   useEffect(() => {
     const onKey = (e) => {
@@ -75,11 +80,14 @@ export default function NavBar() {
               const slug = item.href.replace(/^\//, '');
               if (!hasChildren(item)) {
                 return (
-                  <Link key={slug} href={item.href} className={s.navItem}>
+                  <Link key={slug} href={item.href} className={s.navItem} aria-current={undefined}>
                     {item.label}
                   </Link>
                 );
               }
+
+              const panelId = `nav-dd-${slug}`;
+
               return (
                 <div
                   key={slug}
@@ -96,8 +104,10 @@ export default function NavBar() {
                   <Link
                     href={item.href}
                     className={`${s.navItem} ${s.navParent}`}
-                    aria-haspopup="menu"
+                    aria-haspopup="true"
                     aria-expanded={openSlug === slug}
+                    aria-controls={panelId}
+                    onFocus={() => setOpenSlug(slug)}
                     onClick={(e) => {
                       if (openSlug !== slug) {
                         e.preventDefault();
@@ -110,8 +120,8 @@ export default function NavBar() {
                   </Link>
 
                   <div
+                    id={panelId}
                     className={`${s.dropdown} ${openSlug === slug ? s.open : ''}`}
-                    role="menu"
                     aria-hidden={openSlug !== slug}
                   >
                     <ul className={s.menuCol}>
@@ -121,7 +131,6 @@ export default function NavBar() {
                             href={child.href}
                             className={s.menuLink}
                             onClick={() => setOpenSlug(null)}
-                            role="menuitem"
                           >
                             {child.label}
                           </Link>
@@ -134,21 +143,39 @@ export default function NavBar() {
             })}
           </nav>
 
-          {/* right actions: hamburger + (mobile) language switcher */}
+          {/* right actions: hamburger + (mobile) locator + (mobile) language switcher */}
           <div className={s.actions}>
             <div className={s.actionsCluster}>
               {/* hamburger (mobile only) */}
               <button
                 type="button"
                 className={s.hamburger}
-                aria-label="Atvērt izvēlni"
+                aria-label={mobileOpen ? 'Aizvērt izvēlni' : 'Atvērt izvēlni'}
                 aria-expanded={mobileOpen}
+                aria-controls="mobile-drawer"
                 onClick={() => {
                   setMobileOpen(v => !v);
                   setOpenSlug(null);
                 }}
               >
                 ☰
+              </button>
+
+              {/* mobile locator (NEW) */}
+              <button
+                type="button"
+                className={s.iconBtn}
+                aria-haspopup="dialog"
+                aria-controls="locator-panel"
+                aria-expanded={locatorOpen}
+                onClick={(e) => {
+                  if (mobileOpen) setMobileOpen(false);
+                  if (openSlug) setOpenSlug(null);
+                  openLocator(e.currentTarget);
+                }}
+                aria-label="Servisa centri"
+              >
+                <LocationPin aria-hidden focusable="false" />
               </button>
 
               {/* mobile language switcher (hidden on desktop via CSS) */}
@@ -161,11 +188,16 @@ export default function NavBar() {
       </header>
 
       {/* mobile drawer */}
-      <div className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`} aria-hidden={!mobileOpen}>
+      <div
+        id="mobile-drawer"
+        className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`}
+        aria-hidden={!mobileOpen}
+      >
         <nav className={s.mobileInner} aria-label="Mobilā navigācija">
           {NAV.map((item) => {
             const slug = item.href.replace(/^\//, '');
             const expanded = mobileExpandedSlug === slug;
+
             if (!hasChildren(item)) {
               return (
                 <Link
@@ -178,6 +210,7 @@ export default function NavBar() {
                 </Link>
               );
             }
+
             return (
               <div key={slug} className={s.drawerGroup}>
                 <button
