@@ -167,20 +167,24 @@
 .actions {
   margin-top: auto;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* mobile: full-width stacked */
   gap: $space-sm;
 
-  :where(a, button) { width: 100%; }
+  :where(a, button) { width: 100%; } /* mobile: stretch */
 
+  /* DESKTOP/TABLET: switch to flex to avoid the 1fr grid track eating space */
   @media (min-width: $bp-md) {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(240px, 360px);
-    justify-content: end;
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-sm;
 
+    /* wide, consistent buttons; shrink to 260px if space tight */
     :where(a, button) {
       width: auto;
-      max-width: 360px;
-      justify-self: end;
+      max-width: none;
+      flex: 0 1 360px;   /* preferred ~360px */
+      min-width: 260px;  /* never smaller than 260px */
+      justify-self: auto;
     }
   }
 }

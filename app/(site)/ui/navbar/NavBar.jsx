@@ -26,9 +26,9 @@ const NAV = [
 ];
 
 export default function NavBar() {
-  const [openSlug, setOpenSlug] = useState(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null);
+  const [openSlug, setOpenSlug] = useState(null);              // desktop dropdown slug
+  const [mobileOpen, setMobileOpen] = useState(false);         // drawer open
+  const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null); // which parent is expanded in drawer
 
   const navRef = useRef(null);
   const leaveT = useRef(null);
@@ -38,6 +38,7 @@ export default function NavBar() {
     openLocator, openContact,
   } = useUiDialogs();
 
+  // Esc closes things
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') {
@@ -50,6 +51,7 @@ export default function NavBar() {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
+  // Click outside closes desktop dropdown
   useEffect(() => {
     const onClick = (e) => {
       const inNav = navRef.current && navRef.current.contains(e.target);
@@ -65,7 +67,7 @@ export default function NavBar() {
     <Fragment>
       <header className={s.header} role="banner">
         <div className={s.container}>
-          {/* brand */}
+          {/* Brand */}
           <div className={s.brand}>
             <Link href="/" className={s.brandLink} aria-label="iLab sākumlapa">
               <img
@@ -78,7 +80,7 @@ export default function NavBar() {
             </Link>
           </div>
 
-          {/* desktop nav (≥1360px) */}
+          {/* Desktop nav (CSS shows only ≥1360px) */}
           <nav className={s.nav} aria-label="Galvenā navigācija" ref={navRef}>
             {NAV.map((item) => {
               const slug = item.href.replace(/^\//, '');
@@ -89,7 +91,9 @@ export default function NavBar() {
                   </Link>
                 );
               }
+
               const panelId = `nav-dd-${slug}`;
+
               return (
                 <div
                   key={slug}
@@ -145,10 +149,10 @@ export default function NavBar() {
             })}
           </nav>
 
-          {/* right actions */}
+          {/* Right actions */}
           <div className={s.actions}>
             <div className={s.actionsCluster}>
-              {/* TABLET & DESKTOP (≥768px): locator + sazinaties (full buttons) */}
+              {/* Tablet & Desktop (≥768px): full buttons (Locator + Sazināties) */}
               <div className={s.ctasTabletDesktop}>
                 <Button
                   variant="ghost"
@@ -175,7 +179,7 @@ export default function NavBar() {
                 </Button>
               </div>
 
-              {/* MOBILE (<768px): locator icon only (Sazināties moves to BottomBar) */}
+              {/* Mobile (<768px): locator icon (Sazināties moves to BottomBar) */}
               <button
                 type="button"
                 className={s.iconBtn}
@@ -192,12 +196,12 @@ export default function NavBar() {
                 <LocationPin aria-hidden focusable="false" />
               </button>
 
-              {/* Language switcher (visible <1360px) */}
+              {/* Mobile-only language switcher */}
               <div className={s.slotUtility}>
                 <LanguageSwitcher initial="lv" />
               </div>
 
-              {/* Hamburger (visible <1360px) */}
+              {/* Hamburger (<1360px) */}
               <button
                 type="button"
                 className={s.hamburger}
@@ -216,7 +220,7 @@ export default function NavBar() {
         </div>
       </header>
 
-      {/* mobile drawer (<1360px) */}
+      {/* Mobile/Tablet drawer (<1360px) */}
       <div
         id="mobile-drawer"
         className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`}
@@ -240,30 +244,41 @@ export default function NavBar() {
               );
             }
 
+            const submenuId = `drawer-sub-${slug}`;
+
             return (
               <div key={slug} className={s.drawerGroup}>
-                <button
-                  type="button"
+                {/* Parent row: first tap expands, second tap navigates */}
+                <Link
+                  href={item.href}
                   className={`${s.drawerItem} ${s.emph}`}
                   aria-expanded={expanded}
-                  onClick={() => setMobileExpandedSlug(expanded ? null : slug)}
+                  aria-controls={submenuId}
+                  onClick={(e) => {
+                    if (!expanded) {
+                      e.preventDefault();         // first tap → expand only
+                      setMobileExpandedSlug(slug);
+                    } else {
+                      setMobileOpen(false);       // second tap → navigate (no preventDefault)
+                    }
+                  }}
                 >
                   {item.label}
-                </button>
-                {expanded && (
-                  <div className={s.drawerSubmenu}>
-                    {item.children.map((child) => (
-                      <Link
-                        key={`${slug}__${child.href}`}
-                        href={child.href}
-                        className={s.drawerItem}
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                </Link>
+
+                {/* Submenu */}
+                <div id={submenuId} className={s.drawerSubmenu} hidden={!expanded}>
+                  {item.children.map((child) => (
+                    <Link
+                      key={`${slug}__${child.href}`}
+                      href={child.href}
+                      className={s.drawerItem}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             );
           })}
