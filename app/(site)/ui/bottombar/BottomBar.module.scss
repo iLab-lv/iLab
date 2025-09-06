@@ -1,94 +1,86 @@
 @use '../../../styles/_tokens.scss' as *;
 
-/* Bottom overlay, click-through outside children */
+/* ===== Bottom overlay (lifted above bottom, safe-area aware) ===== */
 .bottomBar {
+  /* spacing */
+  --bar-gap:        #{$space-sm};                 /* gap above device bottom area */
+  --bar-vpad:       #{$space-sm};                 /* vertical padding inside bar */
+  --safe:           env(safe-area-inset-bottom);  /* iOS home indicator etc. */
+
   position: fixed;
-  inset: auto 0 0 0;
-
-  /* GRID ensures perfect vertical centering for both sides */
-  display: grid;
-  grid-template-columns: 1fr;         /* mobile default: 2 CTAs will define columns below */
-  align-items: center;                /* ⬅ center everything vertically */
-  gap: $space-sm;
-
-  padding: $space-sm $space-md;
-  padding-bottom: calc(#{$space-sm} + env(safe-area-inset-bottom));
-
-  /* keep bar height stable so different pill heights don't shift baselines */
-  min-height: calc(#{$btn-h-lg} + #{$space-sm} * 2);
-
-  background: transparent;
-  border: 0;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--safe) + var(--bar-gap));
   z-index: $z-ctadock;
 
-  /* pass clicks through empty areas */
+  /* Grid layout; vertical centering guaranteed */
+  display: grid;
+  grid-template-columns: 1fr; /* overridden by breakpoints */
+  align-items: center;         /* ⬅ center everything vertically */
+  column-gap: $space-sm;
+
+  padding: var(--bar-vpad) $space-md;
+
+  /* keep height stable relative to lg button */
+  min-height: calc(#{$btn-h-lg} + var(--bar-vpad) * 2);
+
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+
+  /* pass clicks only to children */
   pointer-events: none;
   :where(a, button, div) { pointer-events: auto; }
+
+  /* avoid baseline quirks */
+  line-height: normal;
+  box-sizing: border-box;
 }
 
-/* ===== Mobile (<768px): two equal columns (Sazināties | Pieraksties) ===== */
-@media (max-width: 767px) {
-  .bottomBar {
-    grid-template-columns: 1fr 1fr;
-  }
+/* Every slot centers its content vertically */
+.controlsSlot,
+.contactSlot,
+.bookSlot {
+  display: flex;
+  align-items: center;  /* ⬅ ensures perfect vertical centering */
+  min-width: 0;
+}
 
-  .contactSlot,
-  .bookSlot {
-    display: inline-flex;
-    align-items: center;
-  }
+/* Neutralize outer margins on Controls, if any */
+.controlsSlot > * { margin: 0; }
+
+/* ===== Mobile (<768px): Sazināties | Pieraksties (50/50) ===== */
+@media (max-width: 767px) {
+  .bottomBar { grid-template-columns: 1fr 1fr; }
 
   .controlsSlot { display: none; }
 
-  /* full-width buttons inside their cells */
   .contactSlot :where(a,button),
-  .bookSlot :where(a,button) { width: 100%; }
+  .bookSlot :where(a,button) { width: 100%; } /* stretch inside halves */
 }
 
 /* ===== Tablet (768–1359px): Controls left, Pieraksties right ===== */
 @media (min-width: 768px) and (max-width: 1359px) {
-  .bottomBar {
-    grid-template-columns: auto 1fr auto;  /* Controls | spacer | Pieraksties */
-  }
+  .bottomBar { grid-template-columns: auto 1fr auto; } /* Controls | spacer | CTA */
 
-  .controlsSlot {
-    display: inline-flex;
-    align-items: center;
-    justify-self: start;
-  }
-
-  .contactSlot { display: none; }
+  .controlsSlot { justify-self: start; }
+  .contactSlot  { display: none; }
 
   .bookSlot {
-    display: inline-flex;
-    align-items: center;
-    justify-self: end;                    /* ⬅ flush to the right */
+    justify-self: end;           /* ⬅ flush right */
   }
-
-  /* hug content (don’t stretch) on tablet */
   .bookSlot :where(a,button) { width: auto !important; }
 }
 
-/* ===== Desktop (≥1360px): only Pieraksties on the right (if desired) ===== */
-/* If you still want Controls hidden on desktop, keep it `display: none` */
+/* ===== Desktop (≥1360px): spacer | Pieraksties ===== */
 @media (min-width: 1360px) {
-  .bottomBar {
-    grid-template-columns: 1fr auto;     /* spacer | Pieraksties */
-  }
+  .bottomBar { grid-template-columns: 1fr auto; }
 
   .controlsSlot,
   .contactSlot { display: none; }
 
   .bookSlot {
-    display: inline-flex;
-    align-items: center;
     justify-self: end;
   }
-
   .bookSlot :where(a,button) { width: auto !important; }
 }
-
-/* Optional: if Controls adds extra outer margins, neutralize them */
-.controlsSlot > * { margin: 0; }
