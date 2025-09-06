@@ -4,7 +4,7 @@ import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
 import { SOCIALS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
-import l from './layout.module.scss';
+import l from './Layout.module.scss';
 
 export default function SiteLayout({ children }) {
   const year = new Date().getFullYear();
