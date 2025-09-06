@@ -1,25 +1,26 @@
-// app/(site)/ui/providers/UiDialogsProvider.jsx
 'use client';
 
-import { createContext, useContext, useRef, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import LocatorPanel from '../../ui/panels/LocatorPanel';
-import SazinatiesPanel from '../../ui/panels/SazinatiesPanel';
-import PierakstiesPanel from '../../ui/panels/PierakstiesPanel';
+import FullscreenPanel from '../panels/FullscreenPanel';
+import LocatorPanel from '../panels/LocatorPanel';
+import SazinatiesPanel from '../panels/SazinatiesPanel';
+import PierakstiesPanel from '../panels/PierakstiesPanel';
 
 const UiDialogsContext = createContext(null);
 
 export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
-  const [locatorOpen, setLocatorOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [bookOpen, setBookOpen] = useState(false);
+  // One modal, three panes
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activePane, setActivePane] = useState(null); // 'locator' | 'sazinaties' | 'book' | null
+
+  // Data flowing into panes
   const [selectedLocId, setSelectedLocId] = useState(null);
 
-  // --- NEW: only render portals after hydration, and target a stable container
+  // Portal mount
   const [mounted, setMounted] = useState(false);
   const [portalEl, setPortalEl] = useState(null);
-
   useEffect(() => {
     setMounted(true);
     const id = 'dialogs-root';
@@ -31,67 +32,97 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
     }
     setPortalEl(el);
   }, []);
-  // --- END NEW
+
+  // For aria-controls compatibility with existing triggers
+  const locatorOpen  = modalOpen && activePane === 'locator';
+  const contactOpen  = modalOpen && activePane === 'sazinaties';
+  const bookOpen     = modalOpen && activePane === 'book';
 
   const lastOpenerRef = useRef(null);
-  const anyOpen = locatorOpen || contactOpen || bookOpen;
 
-  // Body scroll lock while any dialog is open
-  useEffect(() => {
-    if (!anyOpen) return;
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    return () => {
-      document.documentElement.style.overflow = prev || '';
-    };
-  }, [anyOpen]);
-
-  const restoreFocus = () => {
-    setTimeout(() => {
-      if (lastOpenerRef.current && typeof lastOpenerRef.current.focus === 'function') {
-        lastOpenerRef.current.focus();
-      }
-      lastOpenerRef.current = null;
-    }, 0);
-  };
-
+  // Public API (kept compatible)
   const openLocator = (openerEl) => {
     lastOpenerRef.current = openerEl || null;
-    setLocatorOpen(true);
+    setActivePane('locator');
+    setModalOpen(true);
   };
   const closeLocator = () => {
-    setLocatorOpen(false);
-    restoreFocus();
+    if (activePane === 'locator') setModalOpen(false);
   };
 
   const openContact = (openerEl, locId = null) => {
     lastOpenerRef.current = openerEl || null;
-    setSelectedLocId(locId);
-    setContactOpen(true);
+    if (locId !== undefined && locId !== null) setSelectedLocId(locId);
+    setActivePane('sazinaties');
+    setModalOpen(true);
   };
   const closeContact = () => {
-    setContactOpen(false);
-    restoreFocus();
+    if (activePane === 'sazinaties') setModalOpen(false);
   };
 
   const openBook = (openerEl) => {
     lastOpenerRef.current = openerEl || null;
-    setBookOpen(true);
+    setActivePane('book');
+    setModalOpen(true);
   };
   const closeBook = () => {
-    setBookOpen(false);
-    restoreFocus();
+    if (activePane === 'book') setModalOpen(false);
   };
 
+  // Seamless handoff: from Locator pin → Sazināties
   const openContactsFor = (locId, openerEl) => {
-    setSelectedLocId(locId || null);
-    setLocatorOpen(false);
     lastOpenerRef.current = openerEl || lastOpenerRef.current;
-    setContactOpen(true);
+    setSelectedLocId(locId || null);
+    if (modalOpen) {
+      setActivePane('sazinaties'); // triggers in-panel cross-slide
+    } else {
+      setActivePane('sazinaties');
+      setModalOpen(true);
+    }
+  };
+
+  const onClose = () => setModalOpen(false);
+
+  // Title per pane
+  const paneTitle =
+    activePane === 'locator' ? 'Atrast filiāli' :
+    activePane === 'sazinaties' ? 'Sazināties' :
+    activePane === 'book' ? 'Pieraksties uz remontu' :
+    '';
+
+  // Render pane by key
+  const renderPane = (key) => {
+    switch (key) {
+      case 'locator':
+        return (
+          <LocatorPanel
+            onSelectLocation={(locId) => openContactsFor(locId)}
+          />
+        );
+      case 'sazinaties':
+        return (
+          <SazinatiesPanel
+            initialLocId={selectedLocId}
+          />
+        );
+      case 'book':
+        return (
+          <PierakstiesPanel
+            onSubmit={(fd) => {
+              // wire later: console.log([...fd.entries()]);
+              setModalOpen(false);
+            }}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   const api = {
+    // compatibility flags for triggers
     locatorOpen, contactOpen, bookOpen, selectedLocId,
+    // actions
     openLocator, closeLocator,
     openContact, closeContact,
     openBook, closeBook,
@@ -103,33 +134,21 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
     <UiDialogsContext.Provider value={api}>
       {children}
 
-      {/* Render ONE set of panels for the whole app — only after hydration */}
+      {/* Keep aria-controls targets present for a11y (empty placeholders) */}
+      <div id="locator-panel" hidden aria-hidden="true" />
+      <div id="sazinaties-panel" hidden aria-hidden="true" />
+      <div id="pieraksties-panel" hidden aria-hidden="true" />
+
       {mounted && portalEl && createPortal(
-        <>
-          <div id="locator-panel" aria-hidden={!locatorOpen}>
-            <LocatorPanel
-              open={locatorOpen}
-              onClose={closeLocator}
-              onSelectLocation={(locId) => openContactsFor(locId)}
-            />
-          </div>
-
-          <div id="sazinaties-panel" aria-hidden={!contactOpen}>
-            <SazinatiesPanel
-              open={contactOpen}
-              onClose={closeContact}
-              initialLocId={selectedLocId}
-            />
-          </div>
-
-          <div id="pieraksties-panel" aria-hidden={!bookOpen}>
-            <PierakstiesPanel
-              open={bookOpen}
-              onClose={closeBook}
-              bookHref={bookHref}
-            />
-          </div>
-        </>,
+        activePane ? (
+          <FullscreenPanel
+            open={modalOpen}
+            onClose={onClose}
+            paneKey={activePane}
+            paneTitle={paneTitle}
+            renderPane={renderPane}
+          />
+        ) : null,
         portalEl
       )}
     </UiDialogsContext.Provider>

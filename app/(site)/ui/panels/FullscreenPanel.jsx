@@ -1,59 +1,93 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import s from './FullscreenPanel.module.scss';
 
-/**
- * FullscreenPanel
- * - Accessibility: role="dialog" aria-modal, Esc to close, focus trap, restore focus
- * - UX: glassy backdrop, safe-area padding, sticky header with title + Close
- * - Performance: unmounts when closed by default (mountWhenClosed=false to keep animations/state)
- */
 export default function FullscreenPanel({
   open,
-  title = '',
   onClose,
-  children,
-  mountWhenClosed = false,       // set true if you want to keep it in the tree when closed
-  closeOnBackdrop = true,        // click outside to close
-  labelledById,                  // optional id for the title element (else auto)
+  onExited,
+  paneKey,
+  paneTitle = '',
+  renderPane,
 }) {
   const overlayRef = useRef(null);
   const panelRef = useRef(null);
+  const stageRef = useRef(null);
   const returnFocusRef = useRef(null);
-  const titleId = labelledById || 'panel-title';
 
-  // Prevent body scroll while open
+  // ===== Open/Close phase =====
+  const EXIT_FALLBACK_MS = 360; // keep in sync with SCSS
+  const [phase, setPhase] = useState('closed'); // start closed to animate IN
+  const shouldRender = open || phase !== 'closed';
+
   useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
+    let t;
+    let done = false;
+
+    const finishClose = () => {
+      if (done) return;
+      done = true;
+      setPhase('closed');
+      onExited?.();
     };
+
+    if (open) {
+      setPhase('opening');
+      t = setTimeout(() => setPhase('open'), 20);
+    } else if (phase !== 'closed') {
+      setPhase('closing');
+
+      const node = panelRef.current;
+      if (node) {
+        const onEnd = (ev) => {
+          if (ev.target === node && ev.propertyName === 'transform') {
+            node.removeEventListener('transitionend', onEnd);
+            finishClose();
+          }
+        };
+        node.addEventListener('transitionend', onEnd);
+        t = setTimeout(() => {
+          node.removeEventListener('transitionend', onEnd);
+          finishClose();
+        }, EXIT_FALLBACK_MS + 60);
+      } else {
+        t = setTimeout(finishClose, EXIT_FALLBACK_MS);
+      }
+    }
+
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  // Manage focus: capture the element that opened the panel, send focus inside, restore on close
+  // Prevent body scroll while active
+  useEffect(() => {
+    if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [phase]);
+
+  // ===== Focus management (open/close) =====
   useEffect(() => {
     if (open) {
       returnFocusRef.current = document.activeElement;
-      // Focus the first focusable element (or the panel itself)
       const t = setTimeout(() => {
-        const first = panelRef.current?.querySelector(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        const container = panelRef.current;
+        const first = container?.querySelector(
+          '[data-pane-active="true"] button, [data-pane-active="true"] [href], [data-pane-active="true"] input, [data-pane-active="true"] select, [data-pane-active="true"] textarea, [data-pane-active="true"] [tabindex]:not([tabindex="-1"])'
         );
-        (first || panelRef.current)?.focus?.();
+        (first || container)?.focus?.();
       }, 0);
       return () => clearTimeout(t);
     } else {
-      // Restore focus to the trigger
       returnFocusRef.current?.focus?.();
     }
   }, [open]);
 
-  // Esc to close + focus trap
+  // Focus trap while active
   useEffect(() => {
-    if (!open) return;
+    if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
 
     const handleKey = (e) => {
       if (e.key === 'Escape') {
@@ -61,44 +95,114 @@ export default function FullscreenPanel({
         onClose?.();
         return;
       }
-      if (e.key === 'Tab' && panelRef.current) {
+      if (e.key === 'Tab') {
+        const root = panelRef.current;
+        if (!root) return;
         const nodes = Array.from(
-          panelRef.current.querySelectorAll(
+          root.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           )
         ).filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
-        if (nodes.length === 0) return;
-
-        const first = nodes[0];
-        const last = nodes[nodes.length - 1];
-        const active = document.activeElement;
-
-        if (!e.shiftKey && active === last) {
-          e.preventDefault();
-          first.focus();
-        } else if (e.shiftKey && active === first) {
-          e.preventDefault();
-          last.focus();
-        }
+        if (!nodes.length) return;
+        const first = nodes[0], last = nodes[nodes.length - 1], active = document.activeElement;
+        if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
       }
     };
 
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
-  }, [open, onClose]);
+  }, [phase, onClose]);
 
-  // Backdrop clicks
   const onBackdropClick = (e) => {
-    if (!closeOnBackdrop) return;
     if (e.target === overlayRef.current) onClose?.();
   };
 
-  if (!open && !mountWhenClosed) return null;
+  // ===== Pane swap (cross-slide) =====
+  const [activeKey, setActiveKey] = useState(paneKey || null);
+  const [exitKey, setExitKey] = useState(null);
+  const [enterKey, setEnterKey] = useState(null);
+  const [swapPhase, setSwapPhase] = useState('idle'); // 'idle' | 'prep' | 'run'
+  const isSwapping = swapPhase !== 'idle';
+
+  // Align active when opening
+  useEffect(() => {
+    if (open && paneKey && activeKey == null) {
+      setActiveKey(paneKey);
+    }
+  }, [open, paneKey, activeKey]);
+
+  // Run cross-slide on paneKey change while open
+  useEffect(() => {
+    if (!open) {
+      setActiveKey(paneKey || null);
+      setExitKey(null);
+      setEnterKey(null);
+      setSwapPhase('idle');
+      return;
+    }
+    if (!paneKey || paneKey === activeKey || swapPhase !== 'idle') return;
+
+    // Keep current pane in flow; new pane animates over it
+    setExitKey(activeKey);
+    setEnterKey(paneKey);
+    setSwapPhase('prep');
+
+    // Reset scroll to top to prevent “mid-scroll” layout jumps
+    if (panelRef.current) panelRef.current.scrollTo({ top: 0, behavior: 'auto' });
+
+    const tick = setTimeout(() => setSwapPhase('run'), 20);
+
+    const stage = stageRef.current;
+    let cleaned = false;
+
+    function cleanup() {
+      if (cleaned) return;
+      cleaned = true;
+      clearTimeout(fallback);
+      setActiveKey(paneKey);
+      setExitKey(null);
+      setEnterKey(null);
+      setSwapPhase('idle');
+
+      // Focus first focusable in the new pane
+      const first = panelRef.current?.querySelector(
+        '[data-pane-active="true"] button, [data-pane-active="true"] [href], [data-pane-active="true"] input, [data-pane-active="true"] select, [data-pane-active="true"] textarea, [data-pane-active="true"] [tabindex]:not([tabindex="-1"])'
+      );
+      first?.focus?.();
+    }
+
+    const onEnd = (ev) => {
+      const el = ev.target;
+      const isPane =
+        el instanceof Element &&
+        (el.classList.contains(s.paneEnter) || el.classList.contains(s.paneExit));
+      if (isPane && ev.propertyName === 'transform') {
+        stage?.removeEventListener('transitionend', onEnd);
+        cleanup();
+      }
+    };
+    stage?.addEventListener('transitionend', onEnd);
+
+    const fallback = setTimeout(() => {
+      stage?.removeEventListener('transitionend', onEnd);
+      cleanup();
+    }, EXIT_FALLBACK_MS + 80);
+
+    return () => {
+      clearTimeout(tick);
+      stage?.removeEventListener('transitionend', onEnd);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paneKey, open]);
+
+  if (!shouldRender) return null;
 
   return (
     <div
       ref={overlayRef}
-      className={`${s.overlay} ${open ? s.open : s.closed}`}
+      className={s.overlay}
+      data-state={phase}
       role="presentation"
       onMouseDown={onBackdropClick}
       aria-hidden={!open}
@@ -106,25 +210,51 @@ export default function FullscreenPanel({
       <div
         ref={panelRef}
         className={s.panel}
+        data-state={phase}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={titleId}
+        aria-labelledby="panel-title"
         tabIndex={-1}
       >
         <div className={s.topbar}>
-          <h2 id={titleId} className={s.title}>{title}</h2>
-          <button
-            type="button"
-            className={s.close}
-            aria-label="Aizvērt"
-            onClick={onClose}
-          >
-            ✕
-          </button>
+          <h2 id="panel-title" className={s.title}>{paneTitle}</h2>
+          <button type="button" className={s.close} aria-label="Aizvērt" onClick={onClose}>✕</button>
         </div>
 
-        <div className={s.content}>
-          {children}
+        {/* Pane stage: handles cross-slide swaps */}
+        <div
+          ref={stageRef}
+          className={s.stage}
+          data-swapping={isSwapping ? 'true' : 'false'}
+          data-swap-phase={swapPhase}
+        >
+          {/* Active (steady) */}
+          {activeKey && !isSwapping && (
+            <div className={s.pane} data-pane-active="true">
+              {renderPane(activeKey)}
+            </div>
+          )}
+
+          {/* Swap: exiting (in flow) + entering (absolute) */}
+          {isSwapping && (
+            <>
+              <div
+                className={`${s.pane} ${s.paneExit}`}
+                data-pane="exit"
+                aria-hidden="true"
+                inert
+              >
+                {exitKey && renderPane(exitKey)}
+              </div>
+              <div
+                className={`${s.pane} ${s.paneEnter}`}
+                data-pane="enter"
+                data-swap-phase={swapPhase}
+              >
+                {enterKey && renderPane(enterKey)}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

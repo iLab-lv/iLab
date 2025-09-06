@@ -40,12 +40,12 @@ export default function BottomBar() {
         </Button>
       </div>
 
-      {/* Always: Pieraksties (right-aligned on tablet/desktop, 50/50 on mobile) */}
+      {/* Always: Pieraksties */}
       <div className={s.bookSlot}>
         <Button
           variant="secondary"
           size="lg"
-          block
+          block   /* mobile: 100% width; CSS makes it hug content ≥768px */
           aria-haspopup="dialog"
           aria-controls="pieraksties-panel"
           aria-expanded={bookOpen}

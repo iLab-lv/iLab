@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
-import FullscreenPanel from './FullscreenPanel';
 import s from './LocatorPanel.module.scss';
 import { LOCATIONS } from '@/data/site.config';
 
-export default function LocatorPanel({ open, onClose, onSelectLocation }) {
+export default function LocatorPanel({ onSelectLocation }) {
   // % positions relative to intrinsic image
   const pinLayout = useMemo(
     () => ({
@@ -33,13 +32,6 @@ export default function LocatorPanel({ open, onClose, onSelectLocation }) {
     ro.observe(wrapRef.current);
     return () => ro.disconnect();
   }, []);
-
-  // also (re)measure on each open in case it was hidden before
-  useEffect(() => {
-    if (!open || !wrapRef.current) return;
-    const r = wrapRef.current.getBoundingClientRect();
-    if (r.width && r.height) setBox({ w: r.width, h: r.height });
-  }, [open]);
 
   // intrinsic image size (load once)
   useEffect(() => {
@@ -69,13 +61,12 @@ export default function LocatorPanel({ open, onClose, onSelectLocation }) {
     }
   }, []);
 
-  // update viewBox whenever sizes change, and when panel opens
   useEffect(() => {
     const next = computeCoverVB(nat.w, nat.h, box.w, box.h);
     if (next.w && next.h) setVb(next);
-  }, [nat.w, nat.h, box.w, box.h, open, computeCoverVB]);
+  }, [nat.w, nat.h, box.w, box.h, computeCoverVB]);
 
-  // ===== DRAG STATE (make reopen robust) =====
+  // ===== DRAG STATE =====
   const dragging = useRef(false);
   const moved    = useRef(false);
   const start    = useRef({ x: 0, y: 0 });
@@ -129,37 +120,13 @@ export default function LocatorPanel({ open, onClose, onSelectLocation }) {
     removeAllDocListeners();
   };
 
-  // reset drag flags & listeners whenever panel opens/closes or unmounts
-  useEffect(() => {
-    if (open) {
-      dragging.current = false;
-      moved.current = false;
-      vbStart.current = null;
-      removeAllDocListeners();
-      // also re-measure a tick later to catch any late layout
-      requestAnimationFrame(() => {
-        if (!wrapRef.current) return;
-        const r = wrapRef.current.getBoundingClientRect();
-        if (r.width && r.height) setBox({ w: r.width, h: r.height });
-      });
-    } else {
-      endDragAll();
-    }
-    return () => {
-      endDragAll();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  useEffect(() => () => endDragAll(), []); // cleanup on unmount
 
   // ====== Pointer / Mouse / Touch handlers ======
   const onPointerDown = (e) => {
-    // ALWAYS clear 'moved' on any new gesture (fixes suppressed pin clicks after reopen)
     moved.current = false;
-
-    // ignore when starting on a pin
     const isPin = e.target?.closest?.('[data-pin="1"]');
     if (isPin) return;
-
     if (e.cancelable) e.preventDefault();
     svgRef.current?.setPointerCapture?.(e.pointerId);
 
@@ -217,7 +184,7 @@ export default function LocatorPanel({ open, onClose, onSelectLocation }) {
   const onTouchMove = (e) => { if (e.cancelable) e.preventDefault(); const p = getPoint(e); onMove(p.x, p.y); };
   const onTouchEnd  = () => { endDragAll(); };
 
-  // inverse scale so pins don’t shrink; mobile size boost is in CSS
+  // inverse scale so pins don’t shrink; mobile size bump via CSS
   const pinInvScale = useMemo(() => {
     if (!box.w || !box.h || !vb.w || !vb.h) return 1;
     const scaleX = box.w / vb.w;
@@ -226,70 +193,67 @@ export default function LocatorPanel({ open, onClose, onSelectLocation }) {
   }, [box.w, box.h, vb.w, vb.h]);
 
   const handleActivate = useCallback((locId) => {
-    // if a drag occurred just before, ignore the click
     if (moved.current) return;
     onSelectLocation?.(locId);
   }, [onSelectLocation]);
 
   return (
-    <FullscreenPanel open={open} onClose={onClose} title="Atrast filiāli">
-      <div className={s.wrap}>
-        <div ref={wrapRef} className={s.map} role="application" tabIndex={0}>
-          <svg
-            ref={svgRef}
-            className={s.svg}
-            viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-            preserveAspectRatio="xMidYMid slice"
-            onPointerDown={onPointerDown}
-            onMouseDown={onMouseDown}
-            onTouchStart={onTouchStart}
-          >
-            <image
-              href="/images/map.png"
-              xlinkHref="/images/map.png"
-              x="0"
-              y="0"
-              width={nat.w}
-              height={nat.h}
-              draggable="false"
-              style={{ userSelect: 'none' }}
-            />
+    <div className={s.wrap}>
+      <div ref={wrapRef} className={s.map} role="application" tabIndex={0}>
+        <svg
+          ref={svgRef}
+          className={s.svg}
+          viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
+          preserveAspectRatio="xMidYMid slice"
+          onPointerDown={onPointerDown}
+          onMouseDown={onMouseDown}
+          onTouchStart={onTouchStart}
+        >
+          <image
+            href="/images/map.png"
+            xlinkHref="/images/map.png"
+            x="0"
+            y="0"
+            width={nat.w}
+            height={nat.h}
+            draggable="false"
+            style={{ userSelect: 'none' }}
+          />
 
-            {LOCATIONS.map((loc) => {
-              const p = pinLayout[loc.id] || { top: 50, left: 50 };
-              const x = (p.left / 100) * nat.w;
-              const y = (p.top / 100) * nat.h;
+          {LOCATIONS.map((loc) => {
+            const p = pinLayout[loc.id] || { top: 50, left: 50 };
+            const x = (p.left / 100) * nat.w;
+            const y = (p.top / 100) * nat.h;
 
-              return (
-                <g
-                  key={loc.id}
-                  data-pin="1"
-                  className={s.pin}
-                  transform={`translate(${x}, ${y}) scale(${pinInvScale})`}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`Atvērt kontaktus: ${loc.label}`}
-                  onClick={() => handleActivate(loc.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleActivate(loc.id);
-                    }
-                  }}
-                >
-                  <g className={s.pinSize}>
-                    <circle cx="0" cy="0" r="22" fill="transparent" />
-                    <circle className={s.pinHalo} cx="0" cy="0" r="16" />
-                    <circle className={s.pinDot}  cx="0" cy="0" r="7" />
-                  </g>
+            return (
+              <g
+                key={loc.id}
+                data-pin="1"
+                className={s.pin}
+                transform={`translate(${x}, ${y}) scale(${pinInvScale})`}
+                role="button"
+                tabIndex={0}
+                aria-label={`Atvērt kontaktus: ${loc.label}`}
+                onClick={() => handleActivate(loc.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleActivate(loc.id);
+                  }
+                }}
+              >
+                <g className={s.pinSize}>
+                  <circle cx="0" cy="0" r="22" fill="transparent" />
+                  <circle className={s.pinHalo} cx="0" cy="0" r="16" />
+                  <circle className={s.pinDot}  cx="0" cy="0" r="7" />
                 </g>
-              );
-            })}
-          </svg>
+              </g>
+            );
+          })}
+        </svg>
 
-          {!ready && <div className={s.loading} aria-live="polite">Ielādē karti…</div>}
-        </div>
+        {!ready && <div className={s.loading} aria-live="polite">Ielādē karti…</div>}
       </div>
-    </FullscreenPanel>
+    </div>
   );
 }

@@ -1,11 +1,8 @@
 @import '@/styles/_tokens.scss';
 
-/* ===== Layout: tabs + full-height card ===== */
+/* ===== Layout: tabs + card ===== */
 .wrap {
-  display: grid;
-  grid-template-rows: auto 1fr; /* tabs | card */
-  gap: $space-md;
-  min-height: 100%;
+  display: block; /* panel is the scroller */
 }
 
 /* ===== Tabs ===== */
@@ -31,15 +28,17 @@
 }
 .tabActive { color: #000; background: $color-accent; }
 
-/* ===== Card (fills remaining viewport) ===== */
+/* ===== Card (fills viewport remainder; lets actions pin to bottom) ===== */
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  height: 100%;
+
+  /* viewport minus header, provided by panel */
+  min-height: var(--panelContentMinH);
 
   padding: $space-lg;
+  padding-bottom: $space-lg; /* space under sticky actions on desktop */
   border: 1px solid $glass-border;
   border-radius: $radius-lg;
   background: $glass-bg-strong;
@@ -52,100 +51,62 @@
   }
 }
 
-/* ===== Two-column info area ===== */
+/* ===== Info grid ===== */
 .infoGrid {
-  min-height: 0;
-  overflow: auto;
-  padding-right: 2px;
-
+  margin-bottom: $space-lg;
   display: grid;
+  grid-template-areas:
+    "hours"
+    "left";
   grid-template-columns: 1fr;
   gap: $space-lg;
 
   @media (min-width: $bp-md) {
-    grid-template-columns: 1.2fr .8fr; /* left | right */
+    grid-template-areas: "left hours";
+    grid-template-columns: 1.2fr .8fr;
     align-items: start;
+    margin-bottom: $space-xl;
   }
 }
 
-/* ===== Left column ===== */
-.colLeft { min-width: 0; }
+.colLeft { grid-area: left; min-width: 0; }
 
-.title {
-  margin: -2px 0 2px;
-  font-size: $font-size-h4;
-  line-height: $line-height-heading;
+/* ===== Hours block ===== */
+.hoursBlock {
+  grid-area: hours;
+  min-width: 0;
+  text-align: right;
+  margin: 0 0 $space-md 0;
+
+  @media (min-width: $bp-md) {
+    margin: 0;
+  }
 }
 
-.address { color: $color-text-2; margin: 0 0 $space-2xs; }
-
-/* Accent links under address, with bigger spacing */
-.addrLinks { margin: $space-md 0 $space-xl; }
-.linkAccent {
-  color: $color-accent;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba($color-accent,.6);
-  transition: opacity $dur-base $ease-std, border-color $dur-base $ease-std;
-
-  &:hover,
-  &:focus-visible { outline: none; opacity:.85; border-color: rgba($color-accent,.9); }
-}
-.dot { margin: 0 8px; opacity:.7; }
-
-/* Shared small label style (use for Tel: and email:) */
-.metaLabel {
-  margin: $space-md 0 $space-2xs;
-  color: $color-text-2;
-  font-size: .95rem;
-}
-
-/* Phone: very large, H1-like, but shrinkable */
-.phoneWrap { margin: -6px 0 $space-sm; }
-.phoneText {
-  display: inline-block;
-  font-size: clamp($font-size-h4, 6vw, $font-size-h2);
-  font-weight: $font-weight-semibold;
-  line-height: 1.05;
-  letter-spacing: .01em;
-  color: $color-text;
-}
-
-/* Email: value on new line, large and linkable */
-.emailWrap { margin: -2px 0 $space-md 0; }
-.emailBig {
-  display: inline-block;
-  font-size: clamp($font-size-lg, 3vw, $font-size-h4);
-  font-weight: $font-weight-medium;
-  line-height: 1.08;
-  color: $color-text;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba($color-text,.5);
-
-  &:hover,
-  &:focus-visible { color: $color-accent; border-color: rgba($color-accent,.6); outline: none; }
-}
-
-/* ===== Right column (pinned to the right) ===== */
-.colRight { min-width: 0; justify-self: end; text-align: right; }
-
-/* Badge — tinted pill with accent text */
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 12px 16px;
   border-radius: 999px;
-  margin: 0 0 $space-md 0;
-  min-width: 240px;
+  margin: 0 0 $space-sm 0;
+  min-width: 200px;
   font-weight: $font-weight-medium;
   letter-spacing: .01em;
   border: 1px solid rgba($color-accent,.35);
   box-shadow: 0 6px 18px rgba($color-accent,.22), inset 0 0 0 1px rgba(#000,.08);
+  cursor: pointer;
+  user-select: none;
 }
 .badgeOpen   { background: rgba($color-accent,.20); color: $color-accent; }
 .badgeClosed { background: rgba(255,255,255,.06);   color: $color-text-2; }
 
-/* Hours — right-aligned values; today's row emphasized */
+.hoursBody {
+  display: none;
+  @media (min-width: $bp-md) { display: block !important; }
+}
+.card[data-hours-expanded="true"] .hoursBody { display: block; }
+
 .hoursList {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -160,31 +121,84 @@
 .hoursToday dt,
 .hoursToday dd { color: $color-text; font-weight: $font-weight-medium; }
 
-/* Special red notice */
 .specialNote { margin-top: $space-sm; color: #ff5a5a; font-weight: $font-weight-medium; }
+
+/* ===== Typography & misc ===== */
+.title {
+  margin: -2px 0 2px;
+  font-size: $font-size-h4;
+  line-height: $line-height-heading;
+}
+.address { color: $color-text-2; margin: 0 0 $space-2xs; }
+
+.addrLinks { margin: $space-md 0 $space-xl; }
+.linkAccent {
+  color: $color-accent;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba($color-accent,.6);
+  transition: opacity $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible { outline: none; opacity:.85; border-color: rgba($color-accent,.9); }
+}
+.dot { margin: 0 8px; opacity:.7; }
+
+.metaLabel { margin: $space-md 0 $space-2xs; color: $color-text-2; font-size: .95rem; }
+
+.phoneWrap { margin: -6px 0 $space-sm; }
+.phoneText {
+  display: inline-block;
+  font-size: clamp($font-size-h4, 6vw, $font-size-h2);
+  font-weight: $font-weight-semibold;
+  line-height: 1.05;
+  letter-spacing: .01em;
+  color: $color-text;
+}
+
+.emailWrap { margin: -2px 0 $space-md 0; }
+.emailBig {
+  display: inline-block;
+  font-size: clamp($font-size-lg, 3vw, $font-size-h4);
+  font-weight: $font-weight-medium;
+  line-height: 1.08;
+  color: $color-text;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba($color-text,.5);
+
+  &:hover,
+  &:focus-visible { color: $color-accent; border-color: rgba($color-accent,.6); outline: none; }
+}
 
 /* ===== Bottom actions ===== */
 .actions {
   margin-top: auto;
+
   display: grid;
-  grid-template-columns: 1fr; /* mobile: full-width stacked */
+  grid-template-columns: 1fr;
   gap: $space-sm;
 
-  :where(a, button) { width: 100%; } /* mobile: stretch */
+  :where(a, button) { width: 100%; }
 
-  /* DESKTOP/TABLET: switch to flex to avoid the 1fr grid track eating space */
+  /* Desktop: stick to viewport bottom */
   @media (min-width: $bp-md) {
+    position: sticky;
+    bottom: 0;
+    /* gradient to separate content from actions when they stick */
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, $glass-bg-strong 40%);
+    padding-top: $space-md;
+
+    /* align with card padding bottom */
+    margin-bottom: -$space-lg;   /* pull sticky block to the card’s bottom edge */
+    padding-bottom: $space-lg;   /* preserve inner bottom spacing */
+
     display: flex;
     justify-content: flex-end;
     gap: $space-sm;
 
-    /* wide, consistent buttons; shrink to 260px if space tight */
     :where(a, button) {
       width: auto;
-      max-width: none;
-      flex: 0 1 360px;   /* preferred ~360px */
-      min-width: 260px;  /* never smaller than 260px */
-      justify-self: auto;
+      flex: 0 1 360px;
+      min-width: 260px;
     }
   }
 }

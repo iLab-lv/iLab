@@ -1,5 +1,8 @@
-/* app/(site)/ui/panels/FullscreenPanel.module.scss */
 @import '@/styles/_tokens.scss';
+
+/* Keep SCSS + JS in sync */
+$panel-anim-duration: 360ms; /* open/close */
+$pane-swap-duration: 360ms;  /* cross-slide between panes */
 
 /* ===== Overlay ===== */
 .overlay {
@@ -13,17 +16,25 @@
 
   display: grid;
   place-items: stretch;
+
   opacity: 0;
   pointer-events: none;
-  transition: opacity $dur-base $ease-std;
+  transition: opacity $panel-anim-duration $ease-std;
 
-  &.open { opacity: 1; pointer-events: auto; }
+  &[data-state='opening'],
+  &[data-state='open'],
+  &[data-state='closing'] {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
   @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 
-/* ===== Panel (fullscreen, content scrolls) ===== */
+/* ===== Panel (host + scroll container) ===== */
 .panel {
+  --panelContentMinH: calc(100dvh - #{$header-desktop-height});
+
   background: linear-gradient(0deg, rgba(10,10,10,0.96), rgba(10,10,10,0.96));
   color: $color-text;
   border-left: 1px solid $glass-border;
@@ -31,43 +42,66 @@
 
   width: 100%;
   height: 100dvh;
-  outline: none;
-  overflow: hidden;
 
+  /* panel is the ONLY scroll container */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  /* spacing for safe areas */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 
-  display: grid;
-  grid-template-rows: auto 1fr; /* topbar + scrollable content */
+  will-change: transform;
+  backface-visibility: hidden;
+
+  /* Open/Close — mobile default: from bottom */
+  transform: translateY(100%);
+  transition: transform $panel-anim-duration $ease-std;
+
+  &[data-state='opening'],
+  &[data-state='open']   { transform: translateY(0%); }
+  &[data-state='closing']{ transform: translateY(100%); }
+
+  /* Desktop: from right */
+  @media (min-width: $bp-md) {
+    transform: translateX(100%);
+    &[data-state='opening'],
+    &[data-state='open']   { transform: translateX(0%); }
+    &[data-state='closing']{ transform: translateX(100%); }
+  }
+
+  /* Mobile header height affects the min height for content */
+  @media (max-width: $bp-md) {
+    --panelContentMinH: calc(100dvh - (#{$header-mobile-height} + env(safe-area-inset-top)));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+  }
 }
 
-/* ===== Top bar (same height as NavBar) ===== */
+/* ===== Top bar (sticky in the panel scroll container) ===== */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 1;
 
-  /* same glossy surface as header */
   background: $glass-bg-strong;
   border-bottom: 1px solid $glass-border;
   -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
   backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 
-  /* size matches header; center contents vertically */
   height: $header-desktop-height;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0 $space-md; /* side gutters like header */
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 $space-md;
 
   @media (max-width: $bp-md) {
     height: calc(#{$header-mobile-height} + env(safe-area-inset-top));
-    padding-top: env(safe-area-inset-top); /* keep vertical centering with notch */
+    padding-top: env(safe-area-inset-top);
   }
-
-  /* make sure absolutely positioned close sits relative to topbar */
-  position: sticky; /* stays at top while content scrolls */
 }
 
 .title {
@@ -78,45 +112,85 @@
   color: $color-text;
 }
 
-/* ===== Close button — primary, aligned to CtaDock top-right margins ===== */
 .close {
   position: absolute;
-
-  /* SAME offsets as CtaDock .topRight */
   top: calc(#{$space-sm + 4px} + env(safe-area-inset-top));
   right: $space-md;
 
-  min-width: 44px;
-  height: 44px;
-  padding: 0 $space-md;
+  min-width: 44px; height: 44px; padding: 0 $space-md;
+  display: inline-flex; align-items: center; justify-content: center;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: $radius-md;
-  background: $color-accent;
-  color: #000;
-  font-weight: $font-weight-medium;
-  cursor: pointer;
-  line-height: 1;
+  border: none; border-radius: $radius-md;
+  background: $color-accent; color: #000;
+  font-weight: $font-weight-medium; cursor: pointer; line-height: 1;
 
   box-shadow: $shadow-soft-lg;
   transition: background-color $dur-base $ease-std, transform 120ms ease;
 
-  &:hover   { background: $color-accent-hover; }
-  &:active  { background: $color-accent-active; transform: translateY(1px); }
+  &:hover { background: $color-accent-hover; }
+  &:active { background: $color-accent-active; transform: translateY(1px); }
   &:focus-visible { outline: 2px solid $color-accent; outline-offset: 2px; }
 }
 
-/* ===== Content (starts below topbar) ===== */
-.content {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+/* ===== Stage & Panes (cross-slide inside panel) ===== */
+.stage {
+  position: relative;
+  min-height: var(--panelContentMinH);
 
-  padding: $space-md;
-  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
-  min-height: 0; /* proper child sizing */
+  /* Block interaction while swapping */
+  &[data-swapping='true'] { pointer-events: none; }
+}
+
+.pane {
+  /* default (swap): absolute; steady pane overrides below */
+  position: absolute;
+  inset: 0;
+
+  /* NO inner scrollbars; panel is the scroll container */
+  overflow: visible;
+
+  transform: translate3d(0,0,0);
+}
+
+/* Keep exiting pane in flow during swap to avoid reflow jump */
+.stage[data-swap-phase='prep'] .paneExit,
+.stage[data-swap-phase='run']  .paneExit {
+  position: relative; /* participates in layout while sliding away */
+  z-index: 0;
+}
+.paneEnter { z-index: 1; } /* enters on top */
+
+/* --- Mobile/tablet swap: bottom --- */
+@media (max-width: $bp-md) {
+  .paneEnter {
+    transform: translateY(100%);
+    transition: transform $pane-swap-duration $ease-std;
+  }
+  .paneExit {
+    transform: translateY(0%);
+    transition: transform $pane-swap-duration $ease-std;
+  }
+
+  .stage[data-swap-phase='run'] .paneEnter { transform: translateY(0%); }
+  .stage[data-swap-phase='run'] .paneExit  { transform: translateY(100%); }
+}
+
+/* --- Desktop swap: right --- */
+@media (min-width: $bp-md) {
+  .paneEnter {
+    transform: translateX(100%);
+    transition: transform $pane-swap-duration $ease-std;
+  }
+  .paneExit {
+    transform: translateX(0%);
+    transition: transform $pane-swap-duration $ease-std;
+  }
+
+  .stage[data-swap-phase='run'] .paneEnter { transform: translateX(0%); }
+  .stage[data-swap-phase='run'] .paneExit  { transform: translateX(100%); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .paneEnter, .paneExit { transition: none; transform: none; }
 }

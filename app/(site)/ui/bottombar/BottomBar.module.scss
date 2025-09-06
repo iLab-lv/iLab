@@ -1,69 +1,94 @@
 @use '../../../styles/_tokens.scss' as *;
 
-/* Transparent, click-through bottom bar aligned to corners */
+/* Bottom overlay, click-through outside children */
 .bottomBar {
   position: fixed;
-  left: 0; right: 0; bottom: 0;
+  inset: auto 0 0 0;
 
-  display: flex;
-  align-items: center;
+  /* GRID ensures perfect vertical centering for both sides */
+  display: grid;
+  grid-template-columns: 1fr;         /* mobile default: 2 CTAs will define columns below */
+  align-items: center;                /* ⬅ center everything vertically */
   gap: $space-sm;
+
   padding: $space-sm $space-md;
   padding-bottom: calc(#{$space-sm} + env(safe-area-inset-bottom));
 
-  /* Transparent & click-through background */
+  /* keep bar height stable so different pill heights don't shift baselines */
+  min-height: calc(#{$btn-h-lg} + #{$space-sm} * 2);
+
   background: transparent;
   border: 0;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-
   z-index: $z-ctadock;
 
-  /* Let clicks pass through empty areas */
+  /* pass clicks through empty areas */
   pointer-events: none;
-
-  /* Buttons/controls capture clicks */
-  :where(a,button,div) { pointer-events: auto; }
-
-  width: 100%;
+  :where(a, button, div) { pointer-events: auto; }
 }
 
-/* === Slots === */
-
-/* Tablet-only (768–1359px): show Controls on the left */
-.controlsSlot {
-  display: none;
-
-  @media (min-width: 768px) and (max-width: 1359px) {
-    display: block;
-    flex: 0 1 auto;
+/* ===== Mobile (<768px): two equal columns (Sazināties | Pieraksties) ===== */
+@media (max-width: 767px) {
+  .bottomBar {
+    grid-template-columns: 1fr 1fr;
   }
-}
 
-/* Mobile-only (<768px): show Sazināties; hidden on tablet/desktop */
-.contactSlot {
-  display: none;
-
-  @media (max-width: 767px) {
+  .contactSlot,
+  .bookSlot {
     display: inline-flex;
-    flex: 1 1 0;
+    align-items: center;
   }
+
+  .controlsSlot { display: none; }
+
+  /* full-width buttons inside their cells */
+  .contactSlot :where(a,button),
+  .bookSlot :where(a,button) { width: 100%; }
 }
 
-/* Pieraksties: always visible
-   - On mobile: share row 50/50
-   - On tablet/desktop: hug the right edge
-*/
-.bookSlot {
-  margin-left: auto; /* pushes to right on tablet/desktop */
-
-  @media (max-width: 767px) {
-    margin-left: 0;
-    flex: 1 1 0;
+/* ===== Tablet (768–1359px): Controls left, Pieraksties right ===== */
+@media (min-width: 768px) and (max-width: 1359px) {
+  .bottomBar {
+    grid-template-columns: auto 1fr auto;  /* Controls | spacer | Pieraksties */
   }
+
+  .controlsSlot {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+  }
+
+  .contactSlot { display: none; }
+
+  .bookSlot {
+    display: inline-flex;
+    align-items: center;
+    justify-self: end;                    /* ⬅ flush to the right */
+  }
+
+  /* hug content (don’t stretch) on tablet */
+  .bookSlot :where(a,button) { width: auto !important; }
 }
 
-/* Hide entire BottomBar on wide desktop if you prefer:
-   @media (min-width: 1360px) { display: none; }
-   (But per your spec, we keep Pieraksties always visible at bottom-right)
-*/
+/* ===== Desktop (≥1360px): only Pieraksties on the right (if desired) ===== */
+/* If you still want Controls hidden on desktop, keep it `display: none` */
+@media (min-width: 1360px) {
+  .bottomBar {
+    grid-template-columns: 1fr auto;     /* spacer | Pieraksties */
+  }
+
+  .controlsSlot,
+  .contactSlot { display: none; }
+
+  .bookSlot {
+    display: inline-flex;
+    align-items: center;
+    justify-self: end;
+  }
+
+  .bookSlot :where(a,button) { width: auto !important; }
+}
+
+/* Optional: if Controls adds extra outer margins, neutralize them */
+.controlsSlot > * { margin: 0; }
