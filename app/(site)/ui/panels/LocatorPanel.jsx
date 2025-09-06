@@ -4,8 +4,14 @@ import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import s from './LocatorPanel.module.scss';
 import { LOCATIONS } from '@/data/site.config';
 
-export default function LocatorPanel({ onSelectLocation }) {
-  // % positions relative to intrinsic image
+/**
+ * Static map that always frames all pins (no panning/scrolling).
+ * - Computes a viewBox that encloses all pins + padding.
+ * - Adapts that box to the container aspect ratio (no letterboxing).
+ * - Panel remains the only scroll container; Locator itself never causes scroll.
+ */
+export default function LocatorPanel({ onSelectLocation /* (locId) => void */ }) {
+  // % positions relative to intrinsic image coordinates
   const pinLayout = useMemo(
     () => ({
       domina: { top: 40, left: 68 },
@@ -14,200 +20,144 @@ export default function LocatorPanel({ onSelectLocation }) {
     []
   );
 
-  const wrapRef = useRef(null);
-  const svgRef  = useRef(null);
+  const containerRef = useRef(null);
 
-  const [box, setBox] = useState({ w: 0, h: 0 });
-  const [nat, setNat] = useState({ w: 1000, h: 1000 });
+  // Natural image size (used as the SVG coordinate system)
+  const [nat, setNat] = useState({ w: 1920, h: 1280 });
   const [ready, setReady] = useState(false);
-  const [vb, setVb] = useState({ x: 0, y: 0, w: 1000, h: 1000 });
 
-  // --- sizes ---
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const ro = new ResizeObserver((ents) => {
-      const r = ents[0]?.contentRect;
-      if (r && (r.width || r.height)) setBox({ w: r.width, h: r.height });
-    });
-    ro.observe(wrapRef.current);
-    return () => ro.disconnect();
-  }, []);
+  // Container box (for aspect-ratio matching)
+  const [box, setBox] = useState({ w: 0, h: 0 });
 
-  // intrinsic image size (load once)
+  // Computed viewBox that frames all pins with padding and matches container AR
+  const [vb, setVb] = useState({ x: 0, y: 0, w: 1920, h: 1280 });
+
+  // Load natural image size once
   useEffect(() => {
+    let alive = true;
     const img = new Image();
     img.src = '/images/map.png';
     img.decoding = 'async';
     img.onload = () => {
-      setNat({ w: img.naturalWidth || 1000, h: img.naturalHeight || 1000 });
+      if (!alive) return;
+      const w = img.naturalWidth || 1920;
+      const h = img.naturalHeight || 1280;
+      setNat({ w, h });
+      setVb({ x: 0, y: 0, w, h }); // initial full frame
       setReady(true);
     };
-    img.onerror = () => setReady(true);
+    img.onerror = () => { if (alive) setReady(true); };
+    return () => { alive = false; };
   }, []);
 
-  // compute exact cover viewBox
-  const computeCoverVB = useCallback((natW, natH, boxW, boxH) => {
-    if (!natW || !natH || !boxW || !boxH) return { x: 0, y: 0, w: natW || 1000, h: natH || 1000 };
-    const boxAR = boxW / boxH;
-    const imgAR = natW / natH;
-    if (boxAR >= imgAR) {
-      const targetH = natW / boxAR;
-      const y = (natH - targetH) / 2;
-      return { x: 0, y, w: natW, h: targetH };
-    } else {
-      const targetW = natH * boxAR;
-      const x = (natW - targetW) / 2;
-      return { x, y: 0, w: targetW, h: natH };
-    }
-  }, []);
-
+  // Observe container size (so we can adapt the frame to its AR)
   useEffect(() => {
-    const next = computeCoverVB(nat.w, nat.h, box.w, box.h);
-    if (next.w && next.h) setVb(next);
-  }, [nat.w, nat.h, box.w, box.h, computeCoverVB]);
+    if (!containerRef.current) return;
+    const ro = new ResizeObserver((ents) => {
+      const r = ents[0]?.contentRect;
+      if (r && (r.width || r.height)) setBox({ w: r.width, h: r.height });
+    });
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
 
-  // ===== DRAG STATE =====
-  const dragging = useRef(false);
-  const moved    = useRef(false);
-  const start    = useRef({ x: 0, y: 0 });
-  const vbStart  = useRef(null);
+  // Compute pin coordinates in image space
+  const pinsXY = useMemo(() => {
+    const list = LOCATIONS.map((loc) => {
+      const p = pinLayout[loc.id];
+      if (!p) return null;
+      return {
+        x: (p.left / 100) * nat.w,
+        y: (p.top / 100) * nat.h,
+      };
+    }).filter(Boolean);
+    // Fallback to image center if none
+    return list.length ? list : [{ x: nat.w / 2, y: nat.h / 2 }];
+  }, [LOCATIONS, pinLayout, nat.w, nat.h]);
 
-  // convert px → viewBox units
-  const pxToVb = useCallback(
-    (dxPx, dyPx) => {
-      if (!box.w || !box.h || !vb.w || !vb.h) return { dx: 0, dy: 0 };
-      const sx = box.w / vb.w;
-      const sy = box.h / vb.h;
-      return { dx: dxPx / sx, dy: dyPx / sy };
+  // Helper: clamp
+  const clamp = (v, min, max) => Math.max(min, Math.min(v, max));
+
+  // Compute a viewBox that:
+  //  1) bounds all pins + padding
+  //  2) matches the container aspect ratio by expanding the smaller dimension
+  //  3) stays within the image bounds
+  const computeFramingVB = useCallback(
+    (natW, natH, pins, boxW, boxH) => {
+      if (!natW || !natH || !boxW || !boxH || !pins.length) {
+        return { x: 0, y: 0, w: natW || 1, h: natH || 1 };
+      }
+
+      // Bound pins
+      let minX = +Infinity, minY = +Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (const p of pins) {
+        if (p.x < minX) minX = p.x;
+        if (p.x > maxX) maxX = p.x;
+        if (p.y < minY) minY = p.y;
+        if (p.y > maxY) maxY = p.y;
+      }
+
+      // Padding around pins bbox (relative)
+      const pad = 0.18; // 18% padding around the pins bbox
+      const bboxW = Math.max(1, maxX - minX);
+      const bboxH = Math.max(1, maxY - minY);
+      const cx = (minX + maxX) / 2;
+      const cy = (minY + maxY) / 2;
+
+      let targetW = bboxW * (1 + pad * 2);
+      let targetH = bboxH * (1 + pad * 2);
+
+      // Ensure minimum sensible footprint (avoid ultra-zoom-in if pins are very close)
+      const minFrac = 0.30; // at least 30% of the map on each axis
+      targetW = Math.max(targetW, natW * minFrac);
+      targetH = Math.max(targetH, natH * minFrac);
+
+      // Match container aspect ratio by expanding the smaller dimension
+      const boxAR = boxW / boxH;
+      const targetAR = targetW / targetH;
+      if (targetAR > boxAR) {
+        // too wide → expand height
+        targetH = targetW / boxAR;
+      } else {
+        // too tall → expand width
+        targetW = targetH * boxAR;
+      }
+
+      // Center on pins center
+      let x = cx - targetW / 2;
+      let y = cy - targetH / 2;
+
+      // Clamp to image bounds; if target exceeds image, saturate
+      if (targetW >= natW) { x = 0; targetW = natW; }
+      else x = clamp(x, 0, natW - targetW);
+
+      if (targetH >= natH) { y = 0; targetH = natH; }
+      else y = clamp(y, 0, natH - targetH);
+
+      return { x, y, w: targetW, h: targetH };
     },
-    [box.w, box.h, vb.w, vb.h]
+    []
   );
 
-  const clampVb = useCallback((nvb) => {
-    const maxX = Math.max(0, nat.w - nvb.w);
-    const maxY = Math.max(0, nat.h - nvb.h);
-    return {
-      x: Math.max(0, Math.min(nvb.x, maxX)),
-      y: Math.max(0, Math.min(nvb.y, maxY)),
-      w: nvb.w,
-      h: nvb.h,
-    };
-  }, [nat.w, nat.h]);
+  // Recompute viewBox when image size or container size changes
+  useEffect(() => {
+    const next = computeFramingVB(nat.w, nat.h, pinsXY, box.w, box.h);
+    if (next.w && next.h) setVb(next);
+  }, [nat.w, nat.h, pinsXY, box.w, box.h, computeFramingVB]);
 
-  // unified move + end
-  const onMove = (clientX, clientY) => {
-    if (!dragging.current || !vbStart.current) return;
-    const dxPx = clientX - start.current.x;
-    const dyPx = clientY - start.current.y;
-    if (Math.abs(dxPx) + Math.abs(dyPx) > 3) moved.current = true;
-    const { dx, dy } = pxToVb(-dxPx, -dyPx);
-    setVb(clampVb({ ...vbStart.current, x: vbStart.current.x + dx, y: vbStart.current.y + dy }));
-  };
-
-  const removeAllDocListeners = () => {
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerup', onPointerUp);
-    window.removeEventListener('pointercancel', onPointerUp);
-    window.removeEventListener('mousemove', onMouseMove);
-    window.removeEventListener('mouseup', onMouseUp);
-    window.removeEventListener('touchmove', onTouchMove, { passive: false });
-    window.removeEventListener('touchend', onTouchEnd);
-    window.removeEventListener('touchcancel', onTouchEnd);
-  };
-
-  const endDragAll = () => {
-    dragging.current = false;
-    removeAllDocListeners();
-  };
-
-  useEffect(() => () => endDragAll(), []); // cleanup on unmount
-
-  // ====== Pointer / Mouse / Touch handlers ======
-  const onPointerDown = (e) => {
-    moved.current = false;
-    const isPin = e.target?.closest?.('[data-pin="1"]');
-    if (isPin) return;
-    if (e.cancelable) e.preventDefault();
-    svgRef.current?.setPointerCapture?.(e.pointerId);
-
-    dragging.current = true;
-    start.current = { x: e.clientX, y: e.clientY };
-    vbStart.current = { ...vb };
-
-    window.addEventListener('pointermove', onPointerMove, { passive: false });
-    window.addEventListener('pointerup', onPointerUp, { passive: true });
-    window.addEventListener('pointercancel', onPointerUp, { passive: true });
-  };
-  const onPointerMove = (e) => {
-    if (dragging.current && e.cancelable) e.preventDefault();
-    onMove(e.clientX, e.clientY);
-  };
-  const onPointerUp = () => { endDragAll(); };
-
-  const onMouseDown = (e) => {
-    moved.current = false;
-    if (e.button !== 0) return;
-    const isPin = e.target?.closest?.('[data-pin="1"]');
-    if (isPin) return;
-
-    e.preventDefault();
-    dragging.current = true;
-    start.current = { x: e.clientX, y: e.clientY };
-    vbStart.current = { ...vb };
-
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-  };
-  const onMouseMove = (e) => { e.preventDefault(); onMove(e.clientX, e.clientY); };
-  const onMouseUp   = () => { endDragAll(); };
-
-  const getPoint = (e) => (e.touches && e.touches[0])
-    ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
-    : { x: e.clientX, y: e.clientY };
-
-  const onTouchStart = (e) => {
-    moved.current = false;
-    const isPin = e.target?.closest?.('[data-pin="1"]');
-    if (isPin) return;
-
-    if (e.cancelable) e.preventDefault();
-    const p = getPoint(e);
-
-    dragging.current = true;
-    start.current = p;
-    vbStart.current = { ...vb };
-
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('touchend', onTouchEnd);
-    window.addEventListener('touchcancel', onTouchEnd);
-  };
-  const onTouchMove = (e) => { if (e.cancelable) e.preventDefault(); const p = getPoint(e); onMove(p.x, p.y); };
-  const onTouchEnd  = () => { endDragAll(); };
-
-  // inverse scale so pins don’t shrink; mobile size bump via CSS
-  const pinInvScale = useMemo(() => {
-    if (!box.w || !box.h || !vb.w || !vb.h) return 1;
-    const scaleX = box.w / vb.w;
-    const scaleY = box.h / vb.h;
-    return 1 / Math.min(scaleX, scaleY);
-  }, [box.w, box.h, vb.w, vb.h]);
-
-  const handleActivate = useCallback((locId) => {
-    if (moved.current) return;
-    onSelectLocation?.(locId);
-  }, [onSelectLocation]);
+  const handleActivate = useCallback(
+    (locId) => onSelectLocation?.(locId),
+    [onSelectLocation]
+  );
 
   return (
     <div className={s.wrap}>
-      <div ref={wrapRef} className={s.map} role="application" tabIndex={0}>
+      <div ref={containerRef} className={s.map} aria-label="Karte ar filiālēm">
         <svg
-          ref={svgRef}
           className={s.svg}
           viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-          preserveAspectRatio="xMidYMid slice"
-          onPointerDown={onPointerDown}
-          onMouseDown={onMouseDown}
-          onTouchStart={onTouchStart}
+          preserveAspectRatio="xMidYMid meet" /* show entire framed area */
+          aria-hidden={!ready}
         >
           <image
             href="/images/map.png"
@@ -221,16 +171,16 @@ export default function LocatorPanel({ onSelectLocation }) {
           />
 
           {LOCATIONS.map((loc) => {
-            const p = pinLayout[loc.id] || { top: 50, left: 50 };
+            const p = pinLayout[loc.id];
+            if (!p) return null;
             const x = (p.left / 100) * nat.w;
             const y = (p.top / 100) * nat.h;
 
             return (
               <g
                 key={loc.id}
-                data-pin="1"
                 className={s.pin}
-                transform={`translate(${x}, ${y}) scale(${pinInvScale})`}
+                transform={`translate(${x} ${y})`}
                 role="button"
                 tabIndex={0}
                 aria-label={`Atvērt kontaktus: ${loc.label}`}
@@ -252,7 +202,11 @@ export default function LocatorPanel({ onSelectLocation }) {
           })}
         </svg>
 
-        {!ready && <div className={s.loading} aria-live="polite">Ielādē karti…</div>}
+        {!ready && (
+          <div className={s.loading} aria-live="polite">
+            Ielādē karti…
+          </div>
+        )}
       </div>
     </div>
   );

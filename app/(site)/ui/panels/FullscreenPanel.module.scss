@@ -49,14 +49,13 @@ $pane-swap-duration: 360ms;  /* cross-slide between panes */
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
 
-  /* spacing for safe areas */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 
   will-change: transform;
   backface-visibility: hidden;
 
-  /* Open/Close — mobile default: from bottom */
+  /* Open/Close default from bottom (mobile) */
   transform: translateY(100%);
   transition: transform $panel-anim-duration $ease-std;
 
@@ -64,7 +63,7 @@ $pane-swap-duration: 360ms;  /* cross-slide between panes */
   &[data-state='open']   { transform: translateY(0%); }
   &[data-state='closing']{ transform: translateY(100%); }
 
-  /* Desktop: from right */
+  /* Desktop: slide from right */
   @media (min-width: $bp-md) {
     transform: translateX(100%);
     &[data-state='opening'],
@@ -72,7 +71,6 @@ $pane-swap-duration: 360ms;  /* cross-slide between panes */
     &[data-state='closing']{ transform: translateX(100%); }
   }
 
-  /* Mobile header height affects the min height for content */
   @media (max-width: $bp-md) {
     --panelContentMinH: calc(100dvh - (#{$header-mobile-height} + env(safe-area-inset-top)));
   }
@@ -83,7 +81,7 @@ $pane-swap-duration: 360ms;  /* cross-slide between panes */
   }
 }
 
-/* ===== Top bar (sticky in the panel scroll container) ===== */
+/* ===== Top bar ===== */
 .topbar {
   position: sticky;
   top: 0;
@@ -132,65 +130,55 @@ $pane-swap-duration: 360ms;  /* cross-slide between panes */
   &:focus-visible { outline: 2px solid $color-accent; outline-offset: 2px; }
 }
 
-/* ===== Stage & Panes (cross-slide inside panel) ===== */
+/* ===== Stage & Panes ===== */
 .stage {
   position: relative;
   min-height: var(--panelContentMinH);
 
-  /* Block interaction while swapping */
-  &[data-swapping='true'] { pointer-events: none; }
+  /* isolate paint during swaps, but DON'T block clicks globally */
+  &[data-swapping='true'] {
+    contain: paint;
+  }
 }
 
 .pane {
-  /* default (swap): absolute; steady pane overrides below */
-  position: absolute;
+  /* Active pane is relative; swap panes are absolute (see below) */
+  position: relative;
   inset: 0;
-
-  /* NO inner scrollbars; panel is the scroll container */
-  overflow: visible;
-
   transform: translate3d(0,0,0);
 }
 
-/* Keep exiting pane in flow during swap to avoid reflow jump */
-.stage[data-swap-phase='prep'] .paneExit,
-.stage[data-swap-phase='run']  .paneExit {
-  position: relative; /* participates in layout while sliding away */
-  z-index: 0;
-}
-.paneEnter { z-index: 1; } /* enters on top */
-
-/* --- Mobile/tablet swap: bottom --- */
-@media (max-width: $bp-md) {
-  .paneEnter {
-    transform: translateY(100%);
-    transition: transform $pane-swap-duration $ease-std;
-  }
-  .paneExit {
-    transform: translateY(0%);
-    transition: transform $pane-swap-duration $ease-std;
-  }
-
-  .stage[data-swap-phase='run'] .paneEnter { transform: translateY(0%); }
-  .stage[data-swap-phase='run'] .paneExit  { transform: translateY(100%); }
+/* Active (steady) pane participates in layout for panel scroll */
+.pane[data-pane-active='true'] {
+  min-height: var(--panelContentMinH);
 }
 
-/* --- Desktop swap: right --- */
-@media (min-width: $bp-md) {
-  .paneEnter {
-    transform: translateX(100%);
-    transition: transform $pane-swap-duration $ease-std;
-  }
-  .paneExit {
-    transform: translateX(0%);
-    transition: transform $pane-swap-duration $ease-std;
-  }
-
-  .stage[data-swap-phase='run'] .paneEnter { transform: translateX(0%); }
-  .stage[data-swap-phase='run'] .paneExit  { transform: translateX(100%); }
+/* During swaps both panes are absolute (no reflow) */
+.paneEnter,
+.paneExit {
+  position: absolute;
+  inset: 0;
+  will-change: transform; /* smoother on low-power devices */
+  transition: transform $pane-swap-duration $ease-std;
 }
+
+/* Make only the exiting pane non-interactive */
+.paneExit { pointer-events: none; }
+
+/* Enter starting offsets */
+.enter-right { transform: translateX(100%); }
+.enter-left  { transform: translateX(-100%); }
+.enter-up    { transform: translateY(100%); }
+.enter-down  { transform: translateY(-100%); }
+
+/* Exit target offsets (initial is 0) */
+.stage[data-swap-phase='run'] .paneEnter { transform: translate3d(0,0,0); }
+.stage[data-swap-phase='run'] .paneExit.exit-right { transform: translateX(100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-left  { transform: translateX(-100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-up    { transform: translateY(-100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-down  { transform: translateY(100%); }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .paneEnter, .paneExit { transition: none; transform: none; }
+  .paneEnter, .paneExit { transition: none; transform: none !important; }
 }

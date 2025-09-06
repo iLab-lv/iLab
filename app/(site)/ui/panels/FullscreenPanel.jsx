@@ -15,10 +15,11 @@ export default function FullscreenPanel({
   const panelRef = useRef(null);
   const stageRef = useRef(null);
   const returnFocusRef = useRef(null);
+  const swapRaf = useRef(null);
 
-  // ===== Open/Close phase =====
+  /* ===== Open/Close phase ===== */
   const EXIT_FALLBACK_MS = 360; // keep in sync with SCSS
-  const [phase, setPhase] = useState('closed'); // start closed to animate IN
+  const [phase, setPhase] = useState('closed');
   const shouldRender = open || phase !== 'closed';
 
   useEffect(() => {
@@ -55,12 +56,10 @@ export default function FullscreenPanel({
         t = setTimeout(finishClose, EXIT_FALLBACK_MS);
       }
     }
-
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, phase, onExited]);
 
-  // Prevent body scroll while active
+  /* Body scroll lock while active */
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
     const prev = document.body.style.overflow;
@@ -68,7 +67,7 @@ export default function FullscreenPanel({
     return () => { document.body.style.overflow = prev; };
   }, [phase]);
 
-  // ===== Focus management (open/close) =====
+  /* Focus mgmt (on open/close) */
   useEffect(() => {
     if (open) {
       returnFocusRef.current = document.activeElement;
@@ -85,7 +84,7 @@ export default function FullscreenPanel({
     }
   }, [open]);
 
-  // Focus trap while active
+  /* Focus trap */
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
 
@@ -118,59 +117,86 @@ export default function FullscreenPanel({
     if (e.target === overlayRef.current) onClose?.();
   };
 
-  // ===== Pane swap (cross-slide) =====
+  /* ===== Pane swap ===== */
   const [activeKey, setActiveKey] = useState(paneKey || null);
   const [exitKey, setExitKey] = useState(null);
   const [enterKey, setEnterKey] = useState(null);
   const [swapPhase, setSwapPhase] = useState('idle'); // 'idle' | 'prep' | 'run'
+  const [enterDir, setEnterDir] = useState('right');  // 'right' | 'left' | 'up' | 'down'
+  const [exitDir, setExitDir] = useState('right');
   const isSwapping = swapPhase !== 'idle';
 
-  // Align active when opening
+  // MQ for desktop (match your md breakpoint)
+  const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    if (open && paneKey && activeKey == null) {
-      setActiveKey(paneKey);
-    }
-  }, [open, paneKey, activeKey]);
+    const mq = window.matchMedia('(min-width: 768px)');
+    const apply = () => setIsDesktop(mq.matches);
+    apply();
+    mq.addEventListener?.('change', apply);
+    return () => mq.removeEventListener?.('change', apply);
+  }, []);
 
-  // Run cross-slide on paneKey change while open
+  /* PRIME correct pane on opening */
   useEffect(() => {
-    if (!open) {
+    if (open && (phase === 'closed' || phase === 'opening')) {
       setActiveKey(paneKey || null);
       setExitKey(null);
       setEnterKey(null);
       setSwapPhase('idle');
-      return;
     }
-    if (!paneKey || paneKey === activeKey || swapPhase !== 'idle') return;
+  }, [open, phase, paneKey]);
 
-    // Keep current pane in flow; new pane animates over it
+  // Direction resolver (shared-axis push for locator->sazinaties)
+  function resolveDirs(fromKey, toKey) {
+    let enter = isDesktop ? 'right' : 'up';
+    let exit  = isDesktop ? 'left'  : 'up';
+
+    if (fromKey === 'locator' && toKey === 'sazinaties') {
+      enter = isDesktop ? 'right' : 'up';
+      exit  = isDesktop ? 'left'  : 'up';
+    }
+    return { enter, exit };
+  }
+
+  /* Run swap when fully open */
+  useEffect(() => {
+    if (phase !== 'open') return;
+    if (!paneKey || paneKey === activeKey) return;
+    if (swapPhase !== 'idle') return;
+
+    const { enter, exit } = resolveDirs(activeKey, paneKey);
+    setEnterDir(enter);
+    setExitDir(exit);
+
     setExitKey(activeKey);
     setEnterKey(paneKey);
     setSwapPhase('prep');
 
-    // Reset scroll to top to prevent “mid-scroll” layout jumps
-    if (panelRef.current) panelRef.current.scrollTo({ top: 0, behavior: 'auto' });
-
-    const tick = setTimeout(() => setSwapPhase('run'), 20);
+    // Double rAF for initial transform commit before animation
+    const id1 = requestAnimationFrame(() => {
+      const id2 = requestAnimationFrame(() => setSwapPhase('run'));
+      (swapRaf.current = [id1, id2]);
+    });
 
     const stage = stageRef.current;
     let cleaned = false;
-
-    function cleanup() {
+    const cleanup = () => {
       if (cleaned) return;
       cleaned = true;
-      clearTimeout(fallback);
+
+      const pair = swapRaf.current;
+      if (pair) {
+        pair.forEach((id) => cancelAnimationFrame(id));
+        swapRaf.current = null;
+      }
+
       setActiveKey(paneKey);
       setExitKey(null);
       setEnterKey(null);
       setSwapPhase('idle');
 
-      // Focus first focusable in the new pane
-      const first = panelRef.current?.querySelector(
-        '[data-pane-active="true"] button, [data-pane-active="true"] [href], [data-pane-active="true"] input, [data-pane-active="true"] select, [data-pane-active="true"] textarea, [data-pane-active="true"] [tabindex]:not([tabindex="-1"])'
-      );
-      first?.focus?.();
-    }
+      panelRef.current?.focus?.();
+    };
 
     const onEnd = (ev) => {
       const el = ev.target;
@@ -187,14 +213,18 @@ export default function FullscreenPanel({
     const fallback = setTimeout(() => {
       stage?.removeEventListener('transitionend', onEnd);
       cleanup();
-    }, EXIT_FALLBACK_MS + 80);
+    }, EXIT_FALLBACK_MS + 120);
 
     return () => {
-      clearTimeout(tick);
+      const pair = swapRaf.current;
+      if (pair) {
+        pair.forEach((id) => cancelAnimationFrame(id));
+        swapRaf.current = null;
+      }
+      clearTimeout(fallback);
       stage?.removeEventListener('transitionend', onEnd);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paneKey, open]);
+  }, [paneKey, phase, activeKey, swapPhase, isDesktop]);
 
   if (!shouldRender) return null;
 
@@ -221,7 +251,6 @@ export default function FullscreenPanel({
           <button type="button" className={s.close} aria-label="Aizvērt" onClick={onClose}>✕</button>
         </div>
 
-        {/* Pane stage: handles cross-slide swaps */}
         <div
           ref={stageRef}
           className={s.stage}
@@ -235,21 +264,20 @@ export default function FullscreenPanel({
             </div>
           )}
 
-          {/* Swap: exiting (in flow) + entering (absolute) */}
+          {/* Swap: both panes absolute (no reflow) */}
           {isSwapping && (
             <>
               <div
-                className={`${s.pane} ${s.paneExit}`}
+                className={[s.pane, s.paneExit, s[`exit-${exitDir}`]].join(' ')}
                 data-pane="exit"
                 aria-hidden="true"
-                inert
               >
                 {exitKey && renderPane(exitKey)}
               </div>
+
               <div
-                className={`${s.pane} ${s.paneEnter}`}
+                className={[s.pane, s.paneEnter, s[`enter-${enterDir}`]].join(' ')}
                 data-pane="enter"
-                data-swap-phase={swapPhase}
               >
                 {enterKey && renderPane(enterKey)}
               </div>
