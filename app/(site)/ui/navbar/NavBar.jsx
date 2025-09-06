@@ -1,10 +1,11 @@
-// app/(site)/ui/navbar/NavBar.jsx
 'use client';
 
 import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import s from './NavBar.module.scss';
+
 import LanguageSwitcher from '../controls/LanguageSwitcher';
+import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 
@@ -32,7 +33,10 @@ export default function NavBar() {
   const navRef = useRef(null);
   const leaveT = useRef(null);
 
-  const { locatorOpen, openLocator } = useUiDialogs();
+  const {
+    locatorOpen, contactOpen,
+    openLocator, openContact,
+  } = useUiDialogs();
 
   useEffect(() => {
     const onKey = (e) => {
@@ -74,20 +78,18 @@ export default function NavBar() {
             </Link>
           </div>
 
-          {/* desktop nav */}
+          {/* desktop nav (≥1360px) */}
           <nav className={s.nav} aria-label="Galvenā navigācija" ref={navRef}>
             {NAV.map((item) => {
               const slug = item.href.replace(/^\//, '');
               if (!hasChildren(item)) {
                 return (
-                  <Link key={slug} href={item.href} className={s.navItem} aria-current={undefined}>
+                  <Link key={slug} href={item.href} className={s.navItem}>
                     {item.label}
                   </Link>
                 );
               }
-
               const panelId = `nav-dd-${slug}`;
-
               return (
                 <div
                   key={slug}
@@ -143,25 +145,37 @@ export default function NavBar() {
             })}
           </nav>
 
-          {/* right actions: hamburger + (mobile) locator + (mobile) language switcher */}
+          {/* right actions */}
           <div className={s.actions}>
             <div className={s.actionsCluster}>
-              {/* hamburger (mobile only) */}
-              <button
-                type="button"
-                className={s.hamburger}
-                aria-label={mobileOpen ? 'Aizvērt izvēlni' : 'Atvērt izvēlni'}
-                aria-expanded={mobileOpen}
-                aria-controls="mobile-drawer"
-                onClick={() => {
-                  setMobileOpen(v => !v);
-                  setOpenSlug(null);
-                }}
-              >
-                ☰
-              </button>
+              {/* TABLET & DESKTOP (≥768px): locator + sazinaties (full buttons) */}
+              <div className={s.ctasTabletDesktop}>
+                <Button
+                  variant="ghost"
+                  size="md"
+                  leadingIcon={LocationPin}
+                  aria-haspopup="dialog"
+                  aria-controls="locator-panel"
+                  aria-expanded={locatorOpen}
+                  onClick={(e) => openLocator(e.currentTarget)}
+                  title="Servisa centri"
+                >
+                  Servisa centri
+                </Button>
 
-              {/* mobile locator (NEW) */}
+                <Button
+                  variant="primary"
+                  size="md"
+                  aria-haspopup="dialog"
+                  aria-controls="sazinaties-panel"
+                  aria-expanded={contactOpen}
+                  onClick={(e) => openContact(e.currentTarget)}
+                >
+                  Sazināties
+                </Button>
+              </div>
+
+              {/* MOBILE (<768px): locator icon only (Sazināties moves to BottomBar) */}
               <button
                 type="button"
                 className={s.iconBtn}
@@ -178,16 +192,31 @@ export default function NavBar() {
                 <LocationPin aria-hidden focusable="false" />
               </button>
 
-              {/* mobile language switcher (hidden on desktop via CSS) */}
+              {/* Language switcher (visible <1360px) */}
               <div className={s.slotUtility}>
                 <LanguageSwitcher initial="lv" />
               </div>
+
+              {/* Hamburger (visible <1360px) */}
+              <button
+                type="button"
+                className={s.hamburger}
+                aria-label={mobileOpen ? 'Aizvērt izvēlni' : 'Atvērt izvēlni'}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-drawer"
+                onClick={() => {
+                  setMobileOpen((v) => !v);
+                  setOpenSlug(null);
+                }}
+              >
+                ☰
+              </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* mobile drawer */}
+      {/* mobile drawer (<1360px) */}
       <div
         id="mobile-drawer"
         className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`}

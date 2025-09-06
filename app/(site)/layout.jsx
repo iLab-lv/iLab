@@ -1,12 +1,10 @@
-// app/(site)/layout.jsx
 import Link from 'next/link';
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
-import CtaDock from './ui/cta/CtaDock';
+import BottomBar from './ui/bottombar/BottomBar';
 import { SOCIALS } from '@/data/site.config';
-
-// NEW: import the provider you created
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
+import l from './layout.module.scss';
 
 export default function SiteLayout({ children }) {
   const year = new Date().getFullYear();
@@ -31,13 +29,17 @@ export default function SiteLayout({ children }) {
 
         <NavBar />
 
-        <Controls
-          facebookUrl={SOCIALS.facebook}
-          instagramUrl={SOCIALS.instagram}
-          tiktokUrl={SOCIALS.tiktok}
-        />
+        {/* Desktop-only overlay Controls */}
+        <div className={l.controlsDesktopOnly}>
+          <Controls
+            facebookUrl={SOCIALS.facebook}
+            instagramUrl={SOCIALS.instagram}
+            tiktokUrl={SOCIALS.tiktok}
+          />
+        </div>
 
-        <CtaDock bookHref="/pieraksties" />
+        {/* Mobile/Tablet bottom actions */}
+        <BottomBar />
 
         <main id="main">{children}</main>
 

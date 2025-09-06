@@ -1,9 +1,9 @@
-/* app/(site)/ui/navbar/NavBar.module.scss
-   Fixed glossy header
-   - Desktop nav only from 1360px+
-   - Mobile (hamburger + mobile controls) under 1360px
+/* Fixed glossy header
+   Breakpoints:
+   - Desktop (≥1360px): full nav + Locator + Sazināties buttons
+   - Tablet (768–1359px): hamburger nav + Locator + Sazināties buttons
+   - Mobile (<768px): hamburger nav + Locator icon only (Sazināties in BottomBar)
 */
-
 @use '../../../styles/_tokens.scss' as *;
 
 /* ===== Header frame ===== */
@@ -31,57 +31,41 @@
 .container {
   height: 100%;
   margin: 0 auto;
-  padding: 0 $space-md; /* 16px */
+  padding: 0 $space-md;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: $space-md; /* 16px */
+  gap: $space-md;
 }
 
 /* ===== Brand ===== */
 .brandLink { display: inline-flex; align-items: center; }
+.logo { display: block; height: 28px; width: auto; @media (min-width: 1024px) { height: 32px; } }
 
-.logo {
-  display: block;
-  height: 28px;
-  width: auto;
-
-  @media (min-width: 1024px) { height: 32px; }
-}
-
-/* ===== Desktop nav (only from 1360px+) ===== */
+/* ===== Desktop nav (only ≥1360px) ===== */
 .nav {
   display: none;
   align-items: center;
   gap: $space-sm;
-
   @media (min-width: 1360px) { display: flex; }
 }
 
 .navItem {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 12px;
-  font-size: 15px;
-  color: $color-text;
-  text-decoration: none;
-  border-radius: $radius-md;
+  display: inline-flex; align-items: center;
+  padding: 10px 12px; font-size: 15px;
+  color: $color-text; text-decoration: none; border-radius: $radius-md;
   transition: color $dur-base $ease-std, background-color $dur-base $ease-std;
 
-  &:hover,
-  &:focus-visible { color: $color-accent; outline: none; }
+  &:hover, &:focus-visible { color: $color-accent; outline: none; }
 
   &::after {
-    content: '';
-    position: absolute;
-    left: 12px; right: 12px; bottom: 6px; height: 2px;
+    content: ''; position: absolute; left: 12px; right: 12px; bottom: 6px; height: 2px;
     background: transparent; border-radius: 1px;
     transition: background-color $dur-base $ease-std, transform $dur-base $ease-std, opacity $dur-base $ease-std;
     transform: scaleX(0.2); opacity: 0;
   }
-  &:hover::after,
-  &:focus-visible::after { background: $color-accent; transform: scaleX(1); opacity: 1; }
+  &:hover::after, &:focus-visible::after { background: $color-accent; transform: scaleX(1); opacity: 1; }
 }
 
 .navParent { padding-right: 8px; }
@@ -102,28 +86,20 @@
     background: $glass-fallback-strong;
   }
 }
-
 .open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
 .menuCol { list-style: none; margin: 0; padding: 0; > li { margin: 0; } }
-
 .menuLink {
-  display: block; padding: 10px 10px; border-radius: $radius-sm;
-  color: $color-text; text-decoration: none;
+  display: block; padding: 10px 10px; border-radius: $radius-sm; color: $color-text; text-decoration: none;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
-
-  &:hover,
-  &:focus-visible { outline: none; color: $color-accent; background: $glass-bg-weak-hover; }
+  &:hover, &:focus-visible { outline: none; color: $color-accent; background: $glass-bg-weak-hover; }
 }
 
-/* ===== Right actions & slots ===== */
+/* ===== Right actions ===== */
 .actions {
   display: flex; align-items: center; gap: $space-sm;
-  justify-self: end; /* hug right edge */
+  justify-self: end;
 }
-
-.actionItem { position: relative; }
-
 .actionsCluster {
   display: inline-flex; align-items: center; gap: $space-sm;
   padding: $space-xs; border-radius: $radius-lg;
@@ -132,14 +108,17 @@
   backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 }
 
-/* language switcher slot (hidden once desktop nav appears) */
-.slotUtility {
-  display: inline-flex; align-items: center; min-width: 0;
-  @media (min-width: 1360px) { display: none; }
+/* ===== CTA visibility by breakpoint ===== */
+/* Tablet & Desktop (≥768px): show full buttons (Locator + Sazināties) */
+.ctasTabletDesktop {
+  display: none;
+  @media (min-width: 768px) {
+    display: inline-flex;
+    gap: $space-sm;
+  }
 }
 
-/* ===== Buttons (mobile-only until 1360px) ===== */
-.hamburger,
+/* Mobile-only (<768px): locator icon (Sazināties moves to BottomBar) */
 .iconBtn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 42px; height: 42px; border-radius: $radius-md;
@@ -147,11 +126,35 @@
   cursor: pointer;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
 
-  &:hover,
-  &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: rgba(255,255,255,0.06); }
+  &:hover, &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: rgba(255,255,255,0.06); }
+
+  /* hide on tablet/desktop */
+  @media (min-width: 768px) { display: none; }
+}
+
+/* Language switcher ONLY on mobile (<768px) */
+.slotUtility {
+  display: inline-flex; align-items: center; min-width: 0;
+  @media (min-width: 768px) { display: none; }
+}
+
+/* Hamburger (visible <1360px) */
+.hamburger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: $radius-md;
+  border: 1px solid $glass-border; background: $glass-bg-weak; color: $color-text;
+  cursor: pointer;
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover, &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: rgba(255,255,255,0.06); }
 
   @media (min-width: 1360px) { display: none; }
 }
+
+/* Mobile ordering (<1360px): locator (left) → language → hamburger (right-most) */
+.iconBtn     { order: 1; }
+.slotUtility { order: 2; }
+.hamburger   { order: 3; }
 
 /* Locator SVG crispness */
 .iconBtn :where(svg) { display: block; width: 20px; height: 20px; vector-effect: non-scaling-stroke; }
@@ -159,7 +162,7 @@
 .iconBtn :where(svg [fill="none"]) { stroke: currentColor; }
 .iconBtn :where(svg [stroke-width]) { stroke-width: 1.75; }
 
-/* ===== Mobile drawer ===== */
+/* ===== Mobile drawer (hidden ≥1360px) ===== */
 .mobileMenu {
   position: fixed;
   inset: calc(#{$header-mobile-height} + env(safe-area-inset-top)) 0 0 0;
@@ -180,32 +183,22 @@
 .mobileMenu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
 .mobileInner { padding: $space-md; padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom)); }
-
 .drawerItem {
-  width: 100%; text-align: left; display: block;
-  padding: 12px 14px; margin: 6px 0; border-radius: $radius-md;
+  width: 100%; text-align: left; display: block; padding: 12px 14px; margin: 6px 0; border-radius: $radius-md;
   background: $glass-bg-weak; color: $color-text; text-decoration: none; border: 1px solid $glass-border;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
-
-  &:hover,
-  &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: $glass-bg-weak-hover; text-decoration: none; }
+  &:hover, &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: $glass-bg-weak-hover; }
 }
-
 .emph { font-weight: $font-weight-semibold; }
 .drawerGroup { margin-bottom: 6px; }
 .drawerSubmenu { margin: 4px 0 10px 8px; padding-left: 8px; border-left: 1px dashed $glass-border-2; }
 
-/* === Mobile tweaks (<1360px): no pill, set ordering, burger far-right === */
+/* Tablet/mobile: remove pill around actions for tighter right edge */
 @media (max-width: 1359px) {
   .actionsCluster { background: transparent; border: 0; padding: 0; gap: $space-xs; }
-
-  /* Order: locator (left) → language (middle) → hamburger (right-most) */
-  .iconBtn     { order: 1; }
-  .slotUtility { order: 2; }
-  .hamburger   { order: 3; margin-right: 0; }
 }
 
-/* ===== Reduced motion ===== */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .dropdown { transition: none; }
   .mobileMenu { transition: none; }

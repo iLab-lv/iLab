@@ -1,0 +1,8 @@
+@use '../styles/_tokens.scss' as *;
+
+/* Show standalone overlay Controls only on desktop (≥1360px) */
+.controlsDesktopOnly {
+  @media (max-width: 1359px) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,69 @@
+@use '../../../styles/_tokens.scss' as *;
+
+/* Transparent, click-through bottom bar aligned to corners */
+.bottomBar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  padding-bottom: calc(#{$space-sm} + env(safe-area-inset-bottom));
+
+  /* Transparent & click-through background */
+  background: transparent;
+  border: 0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+
+  z-index: $z-ctadock;
+
+  /* Let clicks pass through empty areas */
+  pointer-events: none;
+
+  /* Buttons/controls capture clicks */
+  :where(a,button,div) { pointer-events: auto; }
+
+  width: 100%;
+}
+
+/* === Slots === */
+
+/* Tablet-only (768–1359px): show Controls on the left */
+.controlsSlot {
+  display: none;
+
+  @media (min-width: 768px) and (max-width: 1359px) {
+    display: block;
+    flex: 0 1 auto;
+  }
+}
+
+/* Mobile-only (<768px): show Sazināties; hidden on tablet/desktop */
+.contactSlot {
+  display: none;
+
+  @media (max-width: 767px) {
+    display: inline-flex;
+    flex: 1 1 0;
+  }
+}
+
+/* Pieraksties: always visible
+   - On mobile: share row 50/50
+   - On tablet/desktop: hug the right edge
+*/
+.bookSlot {
+  margin-left: auto; /* pushes to right on tablet/desktop */
+
+  @media (max-width: 767px) {
+    margin-left: 0;
+    flex: 1 1 0;
+  }
+}
+
+/* Hide entire BottomBar on wide desktop if you prefer:
+   @media (min-width: 1360px) { display: none; }
+   (But per your spec, we keep Pieraksties always visible at bottom-right)
+*/

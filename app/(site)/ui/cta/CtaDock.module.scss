@@ -24,6 +24,7 @@
   display: none;
   gap: $space-sm;               /* 8px between buttons */
   pointer-events: none;         /* container ignores clicks */
+  display: none !important;
 
   @media (min-width: $bp-md) {
     display: inline-flex;
