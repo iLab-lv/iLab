@@ -6,9 +6,8 @@ import { LOCATIONS } from '@/data/site.config';
 
 /**
  * Static map that always frames all pins (no panning/scrolling).
- * - Computes a viewBox that encloses all pins + padding.
- * - Adapts that box to the container aspect ratio (no letterboxing).
- * - Panel remains the only scroll container; Locator itself never causes scroll.
+ * Pins are sized to a consistent on-screen size using a computed scale
+ * derived from the container pixels-per-SVG-unit.
  */
 export default function LocatorPanel({ onSelectLocation /* (locId) => void */ }) {
   // % positions relative to intrinsic image coordinates
@@ -26,7 +25,7 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
   const [nat, setNat] = useState({ w: 1920, h: 1280 });
   const [ready, setReady] = useState(false);
 
-  // Container box (for aspect-ratio matching)
+  // Container box (for aspect-ratio matching and pin scaling)
   const [box, setBox] = useState({ w: 0, h: 0 });
 
   // Computed viewBox that frames all pins with padding and matches container AR
@@ -50,7 +49,7 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
     return () => { alive = false; };
   }, []);
 
-  // Observe container size (so we can adapt the frame to its AR)
+  // Observe container size
   useEffect(() => {
     if (!containerRef.current) return;
     const ro = new ResizeObserver((ents) => {
@@ -71,11 +70,10 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
         y: (p.top / 100) * nat.h,
       };
     }).filter(Boolean);
-    // Fallback to image center if none
     return list.length ? list : [{ x: nat.w / 2, y: nat.h / 2 }];
   }, [LOCATIONS, pinLayout, nat.w, nat.h]);
 
-  // Helper: clamp
+  // Helpers
   const clamp = (v, min, max) => Math.max(min, Math.min(v, max));
 
   // Compute a viewBox that:
@@ -98,7 +96,7 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
       }
 
       // Padding around pins bbox (relative)
-      const pad = 0.18; // 18% padding around the pins bbox
+      const pad = 0.18; // 18%
       const bboxW = Math.max(1, maxX - minX);
       const bboxH = Math.max(1, maxY - minY);
       const cx = (minX + maxX) / 2;
@@ -107,27 +105,22 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
       let targetW = bboxW * (1 + pad * 2);
       let targetH = bboxH * (1 + pad * 2);
 
-      // Ensure minimum sensible footprint (avoid ultra-zoom-in if pins are very close)
-      const minFrac = 0.30; // at least 30% of the map on each axis
+      // Minimum footprint so we don't zoom too far in
+      const minFrac = 0.30;
       targetW = Math.max(targetW, natW * minFrac);
       targetH = Math.max(targetH, natH * minFrac);
 
-      // Match container aspect ratio by expanding the smaller dimension
+      // Match container AR by expanding the smaller dimension
       const boxAR = boxW / boxH;
       const targetAR = targetW / targetH;
-      if (targetAR > boxAR) {
-        // too wide → expand height
-        targetH = targetW / boxAR;
-      } else {
-        // too tall → expand width
-        targetW = targetH * boxAR;
-      }
+      if (targetAR > boxAR) targetH = targetW / boxAR;
+      else targetW = targetH * boxAR;
 
-      // Center on pins center
+      // Center on pins
       let x = cx - targetW / 2;
       let y = cy - targetH / 2;
 
-      // Clamp to image bounds; if target exceeds image, saturate
+      // Clamp to image bounds
       if (targetW >= natW) { x = 0; targetW = natW; }
       else x = clamp(x, 0, natW - targetW);
 
@@ -145,6 +138,25 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
     if (next.w && next.h) setVb(next);
   }, [nat.w, nat.h, pinsXY, box.w, box.h, computeFramingVB]);
 
+  // === Compute a constant on-screen pin scale ===
+  // screenScale = pixels per 1 SVG unit (at current framing)
+  const screenScale = useMemo(() => {
+    if (!box.w || !box.h || !vb.w || !vb.h) return 1;
+    const sx = box.w / vb.w;
+    const sy = box.h / vb.h;
+    return Math.min(sx, sy);
+  }, [box.w, box.h, vb.w, vb.h]);
+
+  // Desired dot radius in actual CSS pixels (bigger on small screens)
+  const desiredDotPx = box.w && box.w < 768 ? 14 : 12; // tweak if needed
+
+  // Base dot radius in SVG units (matches <circle r="7" />)
+  const baseDotUnits = 7;
+
+  // Scale so that baseDotUnits * screenScale * pinScale ≈ desiredDotPx
+  let pinScale = desiredDotPx / (baseDotUnits * (screenScale || 1));
+  pinScale = clamp(pinScale, 1.6, 4.5); // keep within sensible bounds
+
   const handleActivate = useCallback(
     (locId) => onSelectLocation?.(locId),
     [onSelectLocation]
@@ -156,8 +168,9 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
         <svg
           className={s.svg}
           viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-          preserveAspectRatio="xMidYMid meet" /* show entire framed area */
+          preserveAspectRatio="xMidYMid meet"
           aria-hidden={!ready}
+          style={{ ['--pinScale']: String(pinScale) }}
         >
           <image
             href="/images/map.png"
@@ -193,6 +206,7 @@ export default function LocatorPanel({ onSelectLocation /* (locId) => void */ })
                 }}
               >
                 <g className={s.pinSize}>
+                  {/* generous hit area (scales with pin) */}
                   <circle cx="0" cy="0" r="22" fill="transparent" />
                   <circle className={s.pinHalo} cx="0" cy="0" r="16" />
                   <circle className={s.pinDot}  cx="0" cy="0" r="7" />

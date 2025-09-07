@@ -1,15 +1,13 @@
 @import '@/styles/_tokens.scss';
 
 .wrap {
-  /* Panel is the only scroll container. No margins/padding that could overflow. */
-  display: block;
+  display: block; /* panel is the only scroller */
 }
 
-/* Map container — fixed height equals the visible panel content.
-   This prevents any page scroll within Locator and avoids scroll carryover. */
+/* Fixed-height container equals the visible panel content area */
 .map {
   position: relative;
-  height: var(--panelContentMinH); /* viewport minus panel header */
+  height: var(--panelContentMinH);
   border: 1px solid $color-border;
   border-radius: 14px;
   background: $color-surface-1;
@@ -36,16 +34,8 @@
 .pinSize {
   transform-box: fill-box;
   transform-origin: center;
-  --pinScale: 1;
-  transform: scale(var(--pinScale));
-}
-
-/* Bigger pins on smaller screens for tap comfort */
-@media (max-width: $bp-md) {
-  .pinSize { --pinScale: 1.2; }
-}
-@media (max-width: $bp-sm) {
-  .pinSize { --pinScale: 1.4; }
+  /* JS sets --pinScale on <svg>; fallback 2.0 if not yet set */
+  transform: scale(var(--pinScale, 2));
 }
 
 .pinDot {
