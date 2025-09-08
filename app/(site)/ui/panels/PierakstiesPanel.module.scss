@@ -1,37 +1,30 @@
-@use '../../../styles/tokens' as *;
-
-$color-surface-1: #0A0A0A !default;
-$color-surface-2: #141414 !default;
-$color-border: rgba(255,255,255,0.07) !default;
-$color-text: #F5F5F5 !default;
-$color-text-2: #B3B3B3 !default;
-$accent: #22D3EE !default;
+@use '@/styles/_tokens.scss' as *;
 
 .form {
   max-width: 900px;
   margin: 0 auto;
   display: grid;
-  gap: 16px;
+  gap: $space-md;
 }
 
 .row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: $space-md;
 
-  @media (min-width: 768px) {
+  @media (min-width: $bp-md) {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 .field, .fieldset {
   display: grid;
-  gap: 8px;
+  gap: $space-sm;
 
   label, legend {
     color: $color-text;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: $font-weight-semibold;
+    font-size: .95rem;
   }
 
   input[type="text"],
@@ -43,14 +36,14 @@ $accent: #22D3EE !default;
     background:
       linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
       $color-surface-2;
-    border: 1px solid $color-border;
-    border-radius: 12px;
+    border: 1px solid $glass-border;
+    border-radius: $radius-md;
     padding: 12px 14px;
     outline: none;
 
     &:focus-visible {
-      outline: 2px solid $accent;
-      outline-offset: 2px;
+      outline: $focus-ring-width solid $focus-ring-color;
+      outline-offset: $focus-ring-offset;
     }
   }
 
@@ -64,7 +57,7 @@ $accent: #22D3EE !default;
 .locGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: $space-sm;
 
   @media (min-width: 640px) {
     grid-template-columns: 1fr 1fr;
@@ -75,7 +68,7 @@ $accent: #22D3EE !default;
 .timeGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: $space-sm;
 
   @media (min-width: 640px) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -89,33 +82,28 @@ $accent: #22D3EE !default;
   background:
     linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
     $color-surface-1;
-  border: 1px solid $color-border;
-  border-radius: 12px;
+  border: 1px solid $glass-border;
+  border-radius: $radius-md;
   padding: 12px 14px;
   cursor: pointer;
 
-  input[type="radio"] {
-    transform: translateY(1px);
-  }
+  input[type="radio"] { transform: translateY(1px); }
 
   span {
     color: $color-text;
-    font-weight: 500;
+    font-weight: $font-weight-medium;
 
-    .muted {
-      color: $color-text-2;
-      font-weight: 400;
-    }
+    .muted { color: $color-text-2; font-weight: $font-weight-regular; }
   }
 
   &:focus-within {
-    outline: 2px solid $accent;
-    outline-offset: 2px;
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
   }
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: $space-sm;
   flex-wrap: wrap;
 }

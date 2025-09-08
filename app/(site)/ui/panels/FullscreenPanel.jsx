@@ -18,7 +18,7 @@ export default function FullscreenPanel({
   const swapRaf = useRef(null);
 
   /* ===== Open/Close phase ===== */
-  const EXIT_FALLBACK_MS = 360; // keep in sync with SCSS
+  const EXIT_FALLBACK_MS = 360; // keep in sync with tokens/SCSS
   const [phase, setPhase] = useState('closed');
   const shouldRender = open || phase !== 'closed';
 
@@ -59,12 +59,30 @@ export default function FullscreenPanel({
     return () => clearTimeout(t);
   }, [open, phase, onExited]);
 
-  /* Body scroll lock while active */
+  /* Root scroll lock (no body:fixed → prevents layout squeeze) */
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
+
+    const docEl = document.documentElement;
+    const body = document.body;
+
+    const prev = {
+      htmlOverflow: docEl.style.overflow,
+      bodyOverflow: body.style.overflow,
+      htmlPaddingRight: docEl.style.paddingRight,
+    };
+
+    const sbw = window.innerWidth - docEl.clientWidth; // scrollbar width
+
+    docEl.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    if (sbw > 0) docEl.style.paddingRight = `${sbw}px`;
+
+    return () => {
+      docEl.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      docEl.style.paddingRight = prev.htmlPaddingRight;
+    };
   }, [phase]);
 
   /* Focus mgmt (on open/close) */
@@ -126,7 +144,6 @@ export default function FullscreenPanel({
   const [exitDir, setExitDir] = useState('right');
   const isSwapping = swapPhase !== 'idle';
 
-  // MQ for desktop (match your md breakpoint)
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -136,7 +153,6 @@ export default function FullscreenPanel({
     return () => mq.removeEventListener?.('change', apply);
   }, []);
 
-  /* PRIME correct pane on opening */
   useEffect(() => {
     if (open && (phase === 'closed' || phase === 'opening')) {
       setActiveKey(paneKey || null);
@@ -146,11 +162,9 @@ export default function FullscreenPanel({
     }
   }, [open, phase, paneKey]);
 
-  // Direction resolver (shared-axis push for locator->sazinaties)
   function resolveDirs(fromKey, toKey) {
     let enter = isDesktop ? 'right' : 'up';
     let exit  = isDesktop ? 'left'  : 'up';
-
     if (fromKey === 'locator' && toKey === 'sazinaties') {
       enter = isDesktop ? 'right' : 'up';
       exit  = isDesktop ? 'left'  : 'up';
@@ -158,7 +172,6 @@ export default function FullscreenPanel({
     return { enter, exit };
   }
 
-  /* Run swap when fully open */
   useEffect(() => {
     if (phase !== 'open') return;
     if (!paneKey || paneKey === activeKey) return;
@@ -172,7 +185,6 @@ export default function FullscreenPanel({
     setEnterKey(paneKey);
     setSwapPhase('prep');
 
-    // Double rAF for initial transform commit before animation
     const id1 = requestAnimationFrame(() => {
       const id2 = requestAnimationFrame(() => setSwapPhase('run'));
       (swapRaf.current = [id1, id2]);
@@ -237,6 +249,11 @@ export default function FullscreenPanel({
       onMouseDown={onBackdropClick}
       aria-hidden={!open}
     >
+      {/* Close button anchored to overlay (outside scrollable content) */}
+      <div className={s.closeGlobal}>
+        <button type="button" className={s.close} aria-label="Aizvērt" onClick={onClose}>✕</button>
+      </div>
+
       <div
         ref={panelRef}
         className={s.panel}
@@ -246,10 +263,8 @@ export default function FullscreenPanel({
         aria-labelledby="panel-title"
         tabIndex={-1}
       >
-        <div className={s.topbar}>
-          <h2 id="panel-title" className={s.title}>{paneTitle}</h2>
-          <button type="button" className={s.close} aria-label="Aizvērt" onClick={onClose}>✕</button>
-        </div>
+        {/* Accessible name (visually hidden) */}
+        <h2 id="panel-title" className={s.srOnly}>{paneTitle}</h2>
 
         <div
           ref={stageRef}

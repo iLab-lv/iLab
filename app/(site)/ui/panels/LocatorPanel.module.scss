@@ -1,17 +1,30 @@
-@import '@/styles/_tokens.scss';
+@use '@/styles/_tokens.scss' as *;
 
+/* Fill the panel's visible content height and add safe padding on ALL sides. */
 .wrap {
-  display: block; /* panel is the only scroller */
+  height: var(--panelContentMinH);
+  box-sizing: border-box;
+
+  padding: max(#{$space-lg}, #{$safe-top})
+           max(#{$space-lg}, #{$safe-right})
+           max(#{$space-lg}, #{$safe-bottom})
+           max(#{$space-lg}, #{$safe-left});
+
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
-/* Fixed-height container equals the visible panel content area */
+/* Map fills remaining height exactly (no scroll) */
 .map {
   position: relative;
-  height: var(--panelContentMinH);
-  border: 1px solid $color-border;
-  border-radius: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+
+  border: 1px solid $glass-border;
+  border-radius: $radius-lg;
   background: $color-surface-1;
-  overflow: hidden; /* never allow internal scroll */
+  overflow: hidden;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
@@ -23,43 +36,24 @@
   user-select: none;
 }
 
-/* ===== Pins (responsive size, keyboardable) ===== */
+/* ===== Pins (interactive + shared active state) ===== */
 .pin {
   cursor: pointer;
   outline: none;
   transform-box: fill-box;
   transform-origin: center;
 }
+.pinSize { transform-box: fill-box; transform-origin: center; transform: scale(var(--pinScale, 2)); }
+.pinDot  { fill: $color-accent; filter: drop-shadow(0 6px 16px rgba(0,0,0,.35)); }
+.pinHalo { fill: rgba($color-accent, .22); opacity: .35; transition: transform 200ms $ease-std, opacity 200ms $ease-std; transform: scale(1.4); }
 
-.pinSize {
-  transform-box: fill-box;
-  transform-origin: center;
-  /* JS sets --pinScale on <svg>; fallback 2.0 if not yet set */
-  transform: scale(var(--pinScale, 2));
-}
+/* Native pin hover/focus */
+.pin:focus-visible .pinDot { stroke: $color-accent; stroke-width: 2px; }
+.pin:hover .pinHalo, .pin:focus-visible .pinHalo { opacity: .6; transform: scale(2.2); }
 
-.pinDot {
-  fill: $color-accent;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
-}
-
-.pinHalo {
-  fill: rgba(34, 211, 238, .22);
-  opacity: .35;
-  transition: transform 200ms $ease-std, opacity 200ms $ease-std;
-  transform: scale(1.4);
-}
-
-.pin:focus-visible .pinDot {
-  stroke: $color-accent;
-  stroke-width: 2px;
-}
-
-.pin:hover .pinHalo,
-.pin:focus-visible .pinHalo {
-  opacity: .6;
-  transform: scale(2.2);
-}
+/* Shared active state (from label hover/focus too) */
+.pinActive .pinHalo { opacity: .6; transform: scale(2.2); }
+.pinActive .pinDot  { stroke: $color-accent; stroke-width: 2px; }
 
 /* Loading overlay */
 .loading {
@@ -71,6 +65,67 @@
   letter-spacing: .04em;
 }
 
+/* ===== Labels layer ===== */
+.labels {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none; /* only the buttons themselves are interactive */
+}
+
+/* Clickable glass pill — ACCENT-TINT default + ACCENT text; full accent on hover/focus/active */
+.labelBtn {
+  position: absolute;
+  transform: translate(calc(-50% + var(--shiftX, 0px)), var(--offsetY, 0px));
+
+  padding: 6px 12px;
+  min-height: 32px;
+  border-radius: $radius-pill;
+
+  /* NEW: accent-tinted glass base so text doesn’t fade over the map */
+  background: $accent-tint-weak;
+  color: $color-accent;
+  border: 1px solid rgba($color-accent, .28);
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+
+  box-shadow: $shadow-soft;
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    transform 120ms ease;
+
+  /* Hover/focus/active → strong accent */
+  &:hover,
+  &:focus-visible,
+  &.active {
+    background: $color-accent;
+    color: #0b0f10; /* readable on bright accent */
+    border-color: transparent;
+    box-shadow: $shadow-accent;
+    outline: none;
+  }
+
+  &:active {
+    transform: translate(calc(-50% + var(--shiftX, 0px)), calc(var(--offsetY, 0px) + 1px));
+  }
+}
+
+/* Above/below markers (offset handled via custom property) */
+.top { /* --offsetY negative */ }
+.bottom { /* --offsetY positive */ }
+
 @media (prefers-reduced-motion: reduce) {
   .pinHalo { transition: none; }
+  .labelBtn { transition: none; }
 }

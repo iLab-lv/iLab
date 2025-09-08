@@ -3,8 +3,8 @@
    - Colors: dark palette + aqua accent
    - Typography: Inter, base 16px, Perfect Fourth scale
    - Spacing: 4-pt base
-   - Breakpoints: md = 768px
    - Z-index, layout, glass effects, motion
+   - Safe-area aliases (top/right/bottom/left)
 */
 
 /* ========== COLORS ========== */
@@ -54,13 +54,13 @@ $accent-tint-strong: rgba($color-accent, 0.10); // e.g., active on outlined/ghos
 /* ========== TYPOGRAPHY ========== */
 $font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
-$font-weight-thin:     100;
-$font-weight-light:    300;
-$font-weight-regular:  400;
-$font-weight-medium:   500;
-$font-weight-semibold: 600;
-$font-weight-bold:     700;
-$font-weight-extrabold:800;
+$font-weight-thin:      100;
+$font-weight-light:     300;
+$font-weight-regular:   400;
+$font-weight-medium:    500;
+$font-weight-semibold:  600;
+$font-weight-bold:      700;
+$font-weight-extrabold: 800;
 
 $font-size-base: 16px;
 $font-size-sm:   0.75rem;   // 12px
@@ -76,7 +76,7 @@ $font-size-h1:   5.61rem;   // 89.76px
 $line-height-body:    1.6;
 $line-height-heading: 1.2;
 
-/* ========== SPACING (4-pt scale) =========== */
+/* ========== SPACING (4-pt scale) ========== */
 $space-2xs: 2px;
 $space-xs:  4px;
 $space-sm:  8px;
@@ -98,6 +98,12 @@ $radius-md:   12px;
 $radius-lg:   14px;
 $radius-pill: 999px;
 
+/* ========== BORDERS & OPACITY ========== */
+$border-thin: 1px;
+$border-thick: 2px;
+
+$opacity-disabled: 0.5;
+
 /* ========== SHADOWS ========== */
 $shadow-soft:         0 8px 18px rgba(0, 0, 0, 0.25);
 $shadow-soft-lg:      0 10px 22px rgba(0, 0, 0, 0.28);
@@ -111,6 +117,10 @@ $dur-fast: 80ms;
 $dur-base: 160ms;
 $ease-std: ease;
 $ease-emph: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+/* Panels & pane-swap (kept in tokens so JS/SCSS can agree) */
+$panel-anim-duration: 360ms;
+$pane-swap-duration:  360ms;
 
 /* ========== FOCUS ========== */
 $focus-ring-color:  $color-accent;
@@ -133,3 +143,42 @@ $z-modal:   200;
 $sidebar-width:         240px;
 $header-mobile-height:  56px;
 $header-desktop-height: 72px;
+
+/* Bottom action rail height (for spacing math / sticky guards) */
+$bottombar-height: 56px;
+
+/* ========== SAFE-AREA ALIASES (for notches & side edges) ========== */
+/* Use these wherever you need to offset frames/controls
+   near screen edges or gesture areas. */
+$safe-top:    env(safe-area-inset-top);
+$safe-right:  env(safe-area-inset-right);
+$safe-bottom: env(safe-area-inset-bottom);
+$safe-left:   env(safe-area-inset-left);
+
+/* Common computed helpers */
+$drawer-offset-top: calc(#{$header-mobile-height} + #{$safe-top}); /* mobile drawers under header+notch */
+$edge-padding-inline: max(#{$space-md}, #{$safe-left});  /* good for left-edge rails */
+$edge-padding-inline-end: max(#{$space-md}, #{$safe-right}); /* good for right-edge rails */
+
+/* ========== SCRIMS / BACKDROPS ========== */
+/* Default overlay scrim (used by FullscreenPanel overlay, etc.) */
+$scrim-color: rgba(0, 0, 0, 0.55);
+
+/* Optional: stronger scrim for blocking interactions behind heavy modals */
+$scrim-color-strong: rgba(0, 0, 0, 0.65);
+
+/* ========== EXPORT-AS-CSS-VARS (optional) ========== */
+/* If you want a CSS-var bridge, uncomment and include once globally.
+:root {
+  --safe-top:    #{$safe-top};
+  --safe-right:  #{$safe-right};
+  --safe-bottom: #{$safe-bottom};
+  --safe-left:   #{$safe-left};
+
+  --panel-anim-duration: #{$panel-anim-duration};
+  --pane-swap-duration:  #{$pane-swap-duration};
+
+  --bottombar-height: #{$bottombar-height};
+  --scrim-color: #{$scrim-color};
+}
+*/

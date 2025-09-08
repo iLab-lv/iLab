@@ -1,8 +1,12 @@
-@import '@/styles/_tokens.scss';
+@use '@/styles/_tokens.scss' as *;
 
 /* ===== Layout: tabs + card ===== */
 .wrap {
-  display: block; /* panel is the scroller */
+  /* Fill the panel’s visible content area exactly */
+  height: var(--panelContentMinH);
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* allow children to shrink; prevents phantom scroll */
 }
 
 /* ===== Tabs ===== */
@@ -24,21 +28,34 @@
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
 
   &:hover,
-  &:focus-visible { outline: none; color: $color-text; background: $glass-bg-weak-hover; }
+  &:focus-visible {
+    outline: none;
+    color: $color-text;
+    background: $glass-bg-weak-hover;
+  }
 }
-.tabActive { color: #000; background: $color-accent; }
+.tabActive {
+  color: #000;
+  background: $color-accent;
 
-/* ===== Card (fills viewport remainder; lets actions pin to bottom) ===== */
+  &:hover,
+  &:focus-visible { color: #000; background: $color-accent; }
+}
+
+/* ===== Card (flex-fills remainder; no calc-based min-height) ===== */
 .card {
+  /* vertical padding var reused by actions */
+  --card-pad-v: #{$space-lg};
+  --card-pad-h: #{$space-lg};
+
   position: relative;
+  flex: 1 1 auto;   /* fill remaining space */
+  min-height: 0;    /* allow inner sticky area without forcing overflow */
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 
-  /* viewport minus header, provided by panel */
-  min-height: var(--panelContentMinH);
-
-  padding: $space-lg;
-  padding-bottom: $space-lg; /* space under sticky actions on desktop */
+  padding: var(--card-pad-v) var(--card-pad-h);
   border: 1px solid $glass-border;
   border-radius: $radius-lg;
   background: $glass-bg-strong;
@@ -78,9 +95,7 @@
   text-align: right;
   margin: 0 0 $space-md 0;
 
-  @media (min-width: $bp-md) {
-    margin: 0;
-  }
+  @media (min-width: $bp-md) { margin: 0; }
 }
 
 .badge {
@@ -179,17 +194,19 @@
 
   :where(a, button) { width: 100%; }
 
-  /* Desktop: stick to viewport bottom */
+  /* Desktop: stick to viewport bottom without extending layout */
   @media (min-width: $bp-md) {
     position: sticky;
     bottom: 0;
-    /* gradient to separate content from actions when they stick */
+
+    /* visual separation when it sticks */
     background: linear-gradient(180deg, rgba(0,0,0,0) 0%, $glass-bg-strong 40%);
+
     padding-top: $space-md;
 
-    /* align with card padding bottom */
-    margin-bottom: -$space-lg;   /* pull sticky block to the card’s bottom edge */
-    padding-bottom: $space-lg;   /* preserve inner bottom spacing */
+    /* pull to the card’s bottom edge while preserving inner spacing */
+    margin-bottom: calc(-1 * var(--card-pad-v));
+    padding-bottom: var(--card-pad-v);
 
     display: flex;
     justify-content: flex-end;

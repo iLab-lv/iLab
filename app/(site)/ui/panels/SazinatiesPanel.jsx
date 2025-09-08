@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import s from './SazinatiesPanel.module.scss';
 import Button from '../../components/button/Button';
 import { LOCATIONS, HOURS as DEFAULT_HOURS } from '@/data/site.config';
@@ -65,13 +65,29 @@ export default function SazinatiesPanel({ initialLocId }) {
   const mapsUrl = activeLoc?.maps || '#';
   const dirUrl = activeLoc?.destination || activeLoc?.maps || '#';
 
-  const SPECIAL_NOTICE = 'Līgo svētkos 10.09.25 strādājam 11:00–18:00';
+  const SPECIAL_NOTICE = activeLoc?.specialNotice || null;
   const hoursListId = `hours-${activeLoc.id}`;
+
+  /* ===== Roving tabs keyboard behavior ===== */
+  const locIndex = ids.indexOf(activeId);
+  const onTabsKeyDown = useCallback((e) => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+    e.preventDefault();
+
+    let nextIndex = locIndex;
+    if (e.key === 'ArrowRight') nextIndex = (locIndex + 1) % ids.length;
+    else if (e.key === 'ArrowLeft') nextIndex = (locIndex - 1 + ids.length) % ids.length;
+    else if (e.key === 'Home') nextIndex = 0;
+    else if (e.key === 'End') nextIndex = ids.length - 1;
+
+    const nextId = ids[nextIndex];
+    setActiveId(nextId);
+  }, [locIndex, ids]);
 
   return (
     <div className={s.wrap}>
-      {/* Tabs */}
-      <div role="tablist" aria-label="Filiāles" className={s.tabs}>
+      {/* Tabs (roving) */}
+      <div role="tablist" aria-label="Filiāles" className={s.tabs} onKeyDown={onTabsKeyDown}>
         {LOCATIONS.map((loc) => {
           const selected = loc.id === activeId;
           return (
@@ -83,6 +99,7 @@ export default function SazinatiesPanel({ initialLocId }) {
               id={`tab-${loc.id}`}
               className={`${s.tab} ${selected ? s.tabActive : ''}`}
               onClick={() => setActiveId(loc.id)}
+              tabIndex={selected ? 0 : -1}
             >
               {loc.label}
             </button>
@@ -135,7 +152,7 @@ export default function SazinatiesPanel({ initialLocId }) {
                 })}
               </dl>
 
-              <p className={s.specialNote} role="status">{SPECIAL_NOTICE}</p>
+              {SPECIAL_NOTICE ? <p className={s.specialNote} role="status">{SPECIAL_NOTICE}</p> : null}
             </div>
           </div>
 
