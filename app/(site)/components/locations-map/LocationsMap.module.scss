@@ -1,0 +1,115 @@
+@use '../../../styles/_tokens.scss' as *;
+
+/* Glass helper */
+@mixin glass-weak {
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+}
+
+.wrap { position: relative; }
+
+/* Taller, wide banner with subtle accent frame */
+.mapFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(360px, 50vh, 560px);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-soft;
+
+  /* accent edging */
+  border: 1px solid rgba($color-accent, 0.10);
+  background:
+    radial-gradient(700px 320px at 60% 30%, rgba(34,211,238,0.08), transparent 60%),
+    linear-gradient(180deg, $color-surface-2 0%, $color-surface-1 70%, $color-background 100%);
+
+  /* inner glow */
+  &::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba($color-accent, 0.06), inset 0 -80px 120px rgba(0,0,0,0.35);
+    border-radius: inherit;
+  }
+}
+
+.svg { display: block; width: 100%; height: 100%; }
+
+/* Pins */
+.pin { cursor: pointer; outline: none; }
+.pinHalo {
+  fill: none;
+  stroke: rgba($color-accent, 0.38);
+  stroke-width: 2;
+  animation: pinPulse 1.8s $ease-emph infinite;
+}
+.pinDot {
+  fill: $color-accent;
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 10px rgba($color-accent, 0.35));
+}
+
+@keyframes pinPulse {
+  0%   { transform: scale(0.6); opacity: 0.85; }
+  70%  { transform: scale(1.15); opacity: 0;   }
+  100% { transform: scale(1.15); opacity: 0;   }
+}
+
+/* Cards inset from map sides */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-lg;
+  margin-top: -28px;       /* overlap the map slightly */
+  padding-inline: $space-lg;
+  position: relative;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+    margin-top: $space-md;
+    padding-inline: 0;
+  }
+}
+
+/* Card styling with a little color in the border */
+.card {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  text-align: left;
+  border-color: rgba($color-accent, 0.12);      /* color hint */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25), 0 0 0 1px rgba($color-accent, 0.05) inset;
+}
+
+.cardTitle { font-size: $font-size-xl; line-height: $line-height-heading; margin: 0 0 $space-sm; }
+.cardMeta  { margin: 0 0 $space-sm; color: $color-text-2; }
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+  margin-top: $space-sm;
+}
+
+.cardBtn {
+  @include glass-weak;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  text-decoration: none;
+  color: $color-text;
+  transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph, box-shadow $dur-base $ease-std;
+
+  &:hover { border-color: $glass-border-2; transform: translateY(-1px); box-shadow: $shadow-accent; }
+}
+.cardBtnGhost {
+  border: $border-thin solid $glass-border;
+  background: transparent;
+  border-radius: $radius-pill;
+  padding: $space-sm $space-lg;
+  color: $color-text;
+  transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph;
+
+  &:hover { border-color: $glass-border-2; transform: translateY(-1px); }
+}

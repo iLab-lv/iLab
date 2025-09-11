@@ -1,69 +1,278 @@
 @use '../../styles/_tokens.scss' as *;
 @use '../../styles/_layout.scss' as layout;
 
-.hero {
-  background: var(--color-surface-2, #141414);
-  min-height: 100svh; /* full viewport height incl. mobile UI */
-  display: grid;
-  align-content: center;
-  position: relative;
-
-  /* account for fixed header so hero content isn't hidden */
-  padding-top: $header-desktop-height;
-  @media (max-width: $bp-md) {
-    padding-top: $header-mobile-height;
-  }
+/* ---------- Glass helper ---------- */
+@mixin glass-weak {
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
 }
 
-.container {
-  @include layout.container;
-  text-align: center;
+/* ---------- Base ---------- */
+.page { background: $color-background; color: $color-text; }
+.container { @include layout.container; text-align: center; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-top: $header-desktop-height;
+
+  @media (max-width: $bp-md) { padding-top: $header-mobile-height; }
+
+  background:
+    radial-gradient(1200px 600px at 50% 20%, rgba(255,255,255,0.06), transparent 60%),
+    linear-gradient(180deg, $color-surface-2 0%, $color-surface-1 60%, $color-background 100%);
 }
 
 .heading {
-  font-size: $font-size-h4;
+  font-size: $font-size-h3;
   line-height: $line-height-heading;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -0.01em;
   margin: 0 0 12px;
-  color: $color-text;
+
+  @media (min-width: $bp-lg) { font-size: $font-size-h2; }
 }
 
-.sub {
-  color: $color-text-2;
-  max-width: 62ch;
-  margin: 0 auto 24px;
-}
+.sub { color: $color-text-2; max-width: 62ch; margin: 0 auto 12px; }
 
-.cta {
-  margin-top: 8px;
-}
+/* Rating micro-badge */
+.rating { margin: 0 0 20px; }
+.ratingBadge {
+  @include glass-weak;
+  display: inline-flex; align-items: center; gap: $space-sm;
+  border-radius: $radius-pill; padding: 8px $space-md;
+  color: $color-text; text-decoration: none;
+  transition: background-color $dur-base $ease-std, border-color $dur-base $ease-std;
 
+  &:hover { background: $accent-tint-weak; border-color: $glass-border-2; }
+}
+.star { color: $color-accent; font-weight: $font-weight-bold; }
+.ratingText { color: $color-text; }
+
+/* Anchor-styled hero button */
+.linkButton {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: 0 $space-xl; height: $btn-h-md;
+  display: inline-flex; align-items: center; justify-content: center;
+  text-decoration: none; color: $color-text;
+  transition: transform $dur-base $ease-emph, border-color $dur-base $ease-std;
+
+  &:hover { border-color: $glass-border-2; transform: translateY(-1px); }
+}
+.ctaRow { margin-top: 12px; display: inline-flex; }
+
+/* ---------- Sections ---------- */
 .section {
-  &.services {
-    background: var(--color-surface-1, #0A0A0A);
-    @include layout.section-pad(48px);
-  }
-  &.why {
-    background: var(--color-surface-3, #1F1F1F);
-    @include layout.section-pad(48px);
-  }
+  padding-block: $space-3xl;
+  @media (max-width: $bp-md) { padding-block: $space-2xl; }
 }
 
 .sectionTitle {
   font-size: $font-size-h5;
   line-height: $line-height-heading;
-  color: $color-text;
   margin: 0 0 12px;
+  color: $color-text;
 }
 
-.list {
-  color: $color-text-2;
-  margin: 0;
-  padding-left: 18px;
-  li { margin: 6px 0; }
+/* ---------- Services (advanced layout) ---------- */
+.services { background: $color-surface-1; text-align: left; }
+
+.blockTitle {
+  margin: 0 0 $space-md;
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+  text-align: left;
 }
 
-.copy {
+.blockIntro {
   color: $color-text-2;
-  margin: 0;
   max-width: 70ch;
+  margin: 0 0 $space-md;
+  a { color: $color-accent; text-decoration: none; &:hover { color: $color-accent-hover; text-decoration: underline; } }
 }
+
+/* ---------- Apple full-width — two columns: text left, links right ---------- */
+.appleBlock {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  margin-top: $space-xl;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: start;
+  gap: $space-xl;
+
+  @media (max-width: $bp-lg) { grid-template-columns: 1fr; }
+}
+
+.appleContent { text-align: left; }
+
+.appleLinks {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: $space-sm;
+  justify-self: end; /* align right on wide screens */
+  min-width: 260px; max-width: 360px; width: 100%;
+
+  @media (max-width: $bp-lg) { justify-self: start; max-width: none; }
+}
+
+.appleLink {
+  @include glass-weak;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: $radius-lg;
+  padding: $space-sm $space-md;
+  text-decoration: none;
+  color: $color-text;
+
+  transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph;
+  &:hover { border-color: $glass-border-2; transform: translateY(-1px); }
+
+  /* arrow */
+  &::after {
+    content: "→";
+    color: $color-accent;
+    font-weight: $font-weight-semibold;
+    margin-left: $space-md;
+  }
+}
+
+/* ---------- Android full-width with 3 brand tiles ---------- */
+.androidBlock {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  margin-top: $space-xl;
+  text-align: left; /* consistency with Apple */
+}
+
+/* 3-up desktop, 2-up large, 1-up mobile */
+.brandGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+  list-style: none; padding: 0; margin: $space-md 0 0;
+
+  @media (max-width: $bp-lg) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $bp-md) { grid-template-columns: 1fr; }
+}
+
+.brandTile {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  display: grid;
+  align-content: start;
+  gap: $space-sm;
+}
+
+/* Logo placeholder (swap to <img> or inline SVG later) */
+.brandLogo {
+  width: 56px; height: 56px;
+  border-radius: $radius-md;
+  border: $border-thin dashed $glass-border;
+  display: inline-grid; place-items: center;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+  user-select: none;
+}
+
+.brandTitleLink {
+  display: inline-block;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  text-decoration: none;
+  margin: 0 0 $space-xs;
+  &:hover { text-decoration: underline; }
+}
+
+.brandLinks {
+  display: inline-flex; align-items: center; gap: $space-sm; flex-wrap: wrap;
+
+  a { color: $color-accent; text-decoration: none; &:hover { color: $color-accent-hover; text-decoration: underline; } }
+  span { color: $color-text-2; }
+}
+
+.androidMore { margin-top: $space-lg; }
+
+/* ---------- Two half-width blocks ---------- */
+.twoUp {
+  display: grid; gap: $space-lg; margin-top: $space-xl;
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: $bp-md) { grid-template-columns: 1fr; }
+}
+
+.halfCard {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  text-align: left;
+}
+
+/* Increase space between heading and copy */
+.cardTitle {
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  margin: 0 0 $space-sm; /* was $space-xs */
+}
+
+.cardText {
+  color: $color-text-2;
+  margin: 0 0 $space-md;
+}
+
+/* ---------- Why ---------- */
+.why { background: $color-surface-3; text-align: center; }
+.why .copy { color: $color-text-2; margin: 0 auto $space-xl; max-width: 70ch; }
+.uspRow { display: flex; flex-wrap: wrap; gap: $space-md; justify-content: center; }
+.uspChip { @include glass-weak; border-radius: $radius-pill; padding: $space-sm $space-lg; }
+
+/* ---------- Locations ---------- */
+.locations { background: $color-surface-1; } /* Map + cards live in LocationsMap component */
+
+/* ---------- Reviews ---------- */
+.reviews { background: $color-surface-2; }
+
+.reviewGrid {
+  margin-top: $space-xl;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+
+  @media (max-width: $bp-lg) { grid-template-columns: 1fr; }
+}
+
+.reviewCard { @include glass-weak; border-radius: $radius-lg; padding: $space-xl; text-align: left; }
+.reviewStars { color: $color-accent; margin-bottom: $space-sm; }
+.reviewText { color: $color-text; margin: 0 0 $space-sm; }
+.reviewMeta { color: $color-text-2; font-size: $font-size-sm; }
+.reviewsCta { margin-top: $space-lg; text-align: center; }
+.reviewsLink { color: $color-accent; text-decoration: none; &:hover { color: $color-accent-hover; text-decoration: underline; } }
+
+/* ---------- FAQ ---------- */
+.faq { background: $color-surface-2; }
+.faqList { margin-top: $space-lg; display: grid; gap: $space-sm; }
+.faqItem {
+  @include glass-weak;
+  border-radius: $radius-md; padding: 0 $space-lg; text-align: left;
+
+  summary {
+    cursor: pointer; list-style: none; padding: $space-lg 0; font-weight: $font-weight-semibold;
+    &::-webkit-details-marker { display: none; }
+  }
+  p { color: $color-text-2; margin: 0 0 $space-lg; }
+}
+
+/* ---------- Conversion band ---------- */
+.convert { background: $color-surface-3; }
+.convertTitle { text-align: center; margin: 0 0 $space-lg; font-size: $font-size-h5; }
+.ctaRow { display: inline-flex; gap: $space-md; }
