@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import s from './LocationsMap.module.scss';
+import LocationCard from './LocationCard';
 
 export default function LocationsMap({
   images = {
@@ -10,7 +11,6 @@ export default function LocationsMap({
     medium: '/images/map-1600.webp',
     large:  '/images/map-3000.webp',
   },
-  // pins in percent (xPct/yPct). x/y (percent) also accepted.
   pins = [
     { id: 'domina', label: 'Domina Shopping', xPct: 68, yPct: 40, gmaps: 'https://maps.google.com/?q=Ieriķu iela 3 Rīga', tel: 'tel:23370088' },
     { id: 'spice',  label: 'Spice Home',      xPct: 30, yPct: 60, gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga', tel: 'tel:20887787' },
@@ -22,6 +22,9 @@ export default function LocationsMap({
       address: 'Ieriķu iela 3, Rīga',
       tel: 'tel:23370088',
       gmaps: 'https://maps.google.com/?q=Ieriķu iela 3 Rīga',
+      // whatsapp: '37123370088',
+      // lat: 56.972, lng: 24.175,
+      // hours: ['P-Pk 10:00–21:00', 'Se 10:00–21:00', 'Sv 10:00–21:00'],
     },
     {
       id: 'spice',
@@ -29,11 +32,14 @@ export default function LocationsMap({
       address: 'Jaunmoku iela 13, Rīga',
       tel: 'tel:20887787',
       gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga',
+      // whatsapp: '37120887787',
+      // lat: 56.937, lng: 24.070,
+      // hours: { 'P-Pk': '10:00–21:00', 'Se': '10:00–21:00', 'Sv': '10:00–20:00' },
     },
   ],
-  onOpenFullMap, // optional
+  onOpenFullMap, // optional (pin click → panel; falls back to gmaps)
 }) {
-  // Normalize image keys (also supports {mobile,tablet,desktop})
+  // Normalize image keys
   const I = useMemo(() => ({
     alt: images.alt ?? 'Karte',
     small:  images.small  ?? images.mobile  ?? images.tablet  ?? images.desktop,
@@ -55,7 +61,7 @@ export default function LocationsMap({
     return () => ro.disconnect();
   }, []);
 
-  // Pick best source by DPR * width
+  // Pick source by DPR * width
   const [src, setSrc] = useState(I.large);
   useEffect(() => {
     const pick = () => {
@@ -89,7 +95,7 @@ export default function LocationsMap({
     return () => { alive = false; };
   }, [src]);
 
-  // Pins → image-space coords
+  // Pins → image space
   const pinsImg = useMemo(() => {
     const norm = (v) => (Number.isFinite(v) ? v : undefined);
     return pins.map(p => {
@@ -100,7 +106,7 @@ export default function LocationsMap({
     }).filter(Boolean);
   }, [pins, nat.w, nat.h]);
 
-  // viewBox framing (pad + match container AR)
+  // Framing viewBox
   const computeFramingVB = useCallback((natW, natH, pinList, boxW, boxH) => {
     if (!natW || !natH || !boxW || !boxH) return { x: 0, y: 0, w: natW || 1, h: natH || 1 };
     if (!pinList.length)          return { x: 0, y: 0, w: natW,       h: natH };
@@ -148,7 +154,7 @@ export default function LocationsMap({
     if (next.w && next.h) setVb(next);
   }, [nat.w, nat.h, pinsImg, box.w, box.h, computeFramingVB]);
 
-  // Constant on-screen pin size (use inline attribute transform to avoid CSS quirks)
+  // Constant on-screen pin size (inline scale)
   const screenScale = useMemo(() => {
     if (!box.w || !box.h || !vb.w || !vb.h) return 1;
     const sx = box.w / vb.w;
@@ -156,11 +162,12 @@ export default function LocationsMap({
     return Math.min(sx, sy);
   }, [box.w, box.h, vb.w, vb.h]);
 
-  const desiredDotPx = box.w && box.w < 768 ? 18 : 14; // visibly larger
+  const desiredDotPx = box.w && box.w < 768 ? 18 : 14;
   const baseDotUnits = 7;
   const calcScale = desiredDotPx / (baseDotUnits * (screenScale || 1));
   const pinScale = Number.isFinite(calcScale) ? Math.max(2.2, Math.min(calcScale, 5.5)) : 2.8;
 
+  // Pin click → panel or Google
   const openPin = (id, gmaps) => {
     if (typeof onOpenFullMap === 'function') onOpenFullMap(id);
     else if (gmaps) window.open(gmaps, '_blank', 'noopener,noreferrer');
@@ -172,7 +179,7 @@ export default function LocationsMap({
         <svg
           className={s.svg}
           viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-          preserveAspectRatio="xMidYMid slice" /* cover the frame */
+          preserveAspectRatio="xMidYMid slice"
           aria-hidden={!ready}
         >
           {src && (
@@ -201,7 +208,6 @@ export default function LocationsMap({
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPin(p.id, p.gmaps); }
               }}
             >
-              {/* scale INSIDE the translate to avoid CSS transform bugs */}
               <g transform={`scale(${pinScale})`}>
                 <circle cx="0" cy="0" r="16" className={s.pinHalo} />
                 <circle cx="0" cy="0" r="7"  className={s.pinDot} />
@@ -211,22 +217,10 @@ export default function LocationsMap({
         </svg>
       </div>
 
-      {/* Overlapping cards (hours removed) */}
+      {/* Cards grid */}
       <div className={s.cards} role="list">
         {locations.map((loc) => (
-          <article key={loc.id} className={s.card} role="listitem" aria-labelledby={`${loc.id}-title`}>
-            <h3 id={`${loc.id}-title`} className={s.cardTitle}>{loc.title}</h3>
-            <p className={s.cardMeta}>{loc.address}</p>
-            <div className={s.cardActions}>
-              <a className={s.cardBtn} href={loc.tel}>Zvanīt</a>
-              <a className={s.cardBtn} href={loc.gmaps} target="_blank" rel="noopener noreferrer">Atvērt kartē</a>
-              {typeof onOpenFullMap === 'function' && (
-                <button className={s.cardBtnGhost} onClick={() => onOpenFullMap(loc.id)}>
-                  Skatīt karti
-                </button>
-              )}
-            </div>
-          </article>
+          <LocationCard key={loc.id} {...loc} />
         ))}
       </div>
     </div>

@@ -1,0 +1,104 @@
+@use '../../../styles/_tokens.scss' as *;
+
+/* glass helper */
+@mixin glass-weak {
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+}
+
+/* Card shell */
+.card {
+  @include glass-weak;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  text-align: left;
+  border-color: rgba($color-accent, 0.12);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25), 0 0 0 1px rgba($color-accent, 0.05) inset;
+}
+
+/* Header: title left, link right */
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-md;
+  margin-bottom: $space-xs;
+}
+.title { margin: 0; font-size: $font-size-xl; line-height: $line-height-heading; }
+.directions {
+  margin-left: auto;
+  color: $color-text-2;
+  text-decoration: none;
+  white-space: nowrap;
+  &:hover { color: $color-accent; text-decoration: underline; }
+}
+
+/* Address (linkable) */
+.address {
+  display: inline-block;
+  color: $color-text-2;
+  text-decoration: none;
+  margin: 0 0 $space-md;
+  &:hover { color: $color-accent; text-decoration: underline; }
+}
+.addressText { margin: 0 0 $space-md; color: $color-text-2; }
+
+/* Actions row */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md;
+  margin-top: $space-xs;     /* was 0 */
+  margin-bottom: $space-md;  /* was $space-sm */
+}
+
+
+.btn {
+  @include glass-weak;
+  border-radius: $radius-pill;
+  padding: 10px $space-lg; /* compact height */
+  text-decoration: none;
+  color: $color-text;
+  transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph, box-shadow $dur-base $ease-std;
+  &:hover { border-color: $glass-border-2; transform: translateY(-1px); box-shadow: $shadow-accent; }
+}
+.primary {
+  border-color: rgba($color-accent, 0.28);
+  box-shadow: $shadow-press;
+}
+
+/* Hours — controlled disclosure */
+.hours { margin-top: $space-xs; }
+
+.hoursSummary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background: none;
+  border: 0;
+  padding: $space-2xs 0;
+  color: $color-text-2;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover { color: $color-accent; }
+  &[aria-expanded="true"] .chev { transform: rotate(180deg); }
+}
+
+/* chevron */
+.chev {
+  display: inline-block;
+  margin-left: $space-xs;
+  transition: transform $dur-base $ease-std;
+}
+
+/* list */
+.hoursList {
+  margin: 0;
+  padding-left: $space-md;
+  color: $color-text-2;
+
+  li { margin: $space-2xs 0; }
+}
