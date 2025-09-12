@@ -1,5 +1,5 @@
 // app/(site)/page.jsx
-import HomePage from './ui/HomePage';
+import HomeScreen from './screens/HomeScreen';
 
 export const metadata = {
   title: 'iLab — Ātrs mobilo ierīču servisa centrs',
@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <HomePage />;
+  return <HomeScreen />;
 }

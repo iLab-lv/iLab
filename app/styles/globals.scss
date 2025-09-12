@@ -13,6 +13,15 @@
 html {
   font-size: 100%; /* 16px base */
   color-scheme: dark; /* ensure form controls, scrollbars use dark styling */
+  -webkit-text-size-adjust: 100%;
+
+  /* Smooth in-page scrolling for #anchor links */
+  scroll-behavior: smooth;
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -23,6 +32,18 @@ body {
   background: $color-background;
   color: $color-text;
   margin: 0;
+  -webkit-tap-highlight-color: transparent; /* nicer tap on mobile */
+}
+
+/* Sticky-header anchor offset (so sections don't hide under the header) */
+:where(section[id], article[id], [data-anchor]) {
+  scroll-margin-top: calc(#{$header-mobile-height} + #{$safe-top});
+}
+
+@media (min-width: $bp-md) {
+  :where(section[id], article[id], [data-anchor]) {
+    scroll-margin-top: calc(#{$header-desktop-height} + #{$safe-top});
+  }
 }
 
 /* Links */
@@ -70,3 +91,29 @@ ul, ol {
 button {
   cursor: pointer;
 }
+
+/* Consistent focus ring (token-driven) */
+:focus-visible {
+  outline: $focus-ring-width solid $focus-ring-color;
+  outline-offset: $focus-ring-offset;
+}
+
+/* Nice text selection */
+::selection {
+  background: $accent-tint-strong;
+  color: $color-text;
+}
+
+/* Sensible defaults for media */
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Optional: make code blocks wrap nicely (if you use them) */
+/*
+pre, code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+*/

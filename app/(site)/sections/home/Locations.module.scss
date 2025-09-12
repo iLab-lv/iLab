@@ -1,0 +1,24 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+/* Section base */
+.section {
+  padding-block: $space-3xl;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-2xl;
+  }
+}
+
+.locations {
+  background: $color-surface-1; /* Map + cards styled inside LocationsMap */
+}
+
+.container { @include layout.container; }
+
+.sectionTitle {
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+  margin: 0 0 12px;
+  color: $color-text;
+}

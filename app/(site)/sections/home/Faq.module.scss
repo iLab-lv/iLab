@@ -1,0 +1,56 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+/* Glass helper */
+@mixin glass-weak {
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+}
+
+/* Section base */
+.section {
+  padding-block: $space-3xl;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-2xl;
+  }
+}
+
+.faq { background: $color-surface-2; }
+.container { @include layout.container; }
+
+.sectionTitle {
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+  margin: 0 0 12px;
+  color: $color-text;
+}
+
+.faqList {
+  margin-top: $space-lg;
+  display: grid;
+  gap: $space-sm;
+}
+
+.faqItem {
+  @include glass-weak;
+  border-radius: $radius-md;
+  padding: 0 $space-lg;
+  text-align: left;
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: $space-lg 0;
+    font-weight: $font-weight-semibold;
+
+    &::-webkit-details-marker { display: none; }
+  }
+
+  p {
+    color: $color-text-2;
+    margin: 0 0 $space-lg;
+  }
+}
