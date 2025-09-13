@@ -1,14 +1,13 @@
-import Link from 'next/link';
+// app/(site)/layout.jsx
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
 import { SOCIALS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
+import Footer from './ui/footer/Footer';
 import l from './Layout.module.scss';
 
 export default function SiteLayout({ children }) {
-  const year = new Date().getFullYear();
-
   return (
     <>
       <UiDialogsProvider>
@@ -43,54 +42,9 @@ export default function SiteLayout({ children }) {
 
         <main id="main">{children}</main>
 
-        <Footer year={year} />
+        {/* Fixed, reveal-on-scroll footer (4 columns, LV content) */}
+        <Footer />
       </UiDialogsProvider>
     </>
-  );
-}
-
-function Footer({ year }) {
-  return (
-    <footer
-      style={{
-        borderTop: '1px solid #eee',
-        marginTop: 40,
-      }}
-      aria-label="Lapas kājene"
-    >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '24px 16px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          gap: 8,
-          flexWrap: 'wrap',
-          color: '#666',
-        }}
-      >
-        <p>© {year} iLab — 90 dienu garantija · Tajā pašā dienā</p>
-
-        <p>
-          <Link href="/kontakti">Kontakti</Link> ·{' '}
-          <a
-            href="https://www.google.com/maps/place/Ieriķu+iela+3,+Rīga"
-            target="_blank"
-            rel="noopener"
-          >
-            Domina
-          </a>{' '}
-          ·{' '}
-          <a
-            href="https://www.google.com/maps/place/Jaunmoku+iela+13,+Rīga"
-            target="_blank"
-            rel="noopener"
-          >
-            Spice
-          </a>
-        </p>
-      </div>
-    </footer>
   );
 }

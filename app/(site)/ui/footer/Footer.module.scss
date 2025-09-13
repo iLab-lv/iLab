@@ -1,0 +1,156 @@
+@use '@/styles/_tokens.scss' as *;
+
+.footer {
+  position: relative;
+  color: $color-text;
+  background: $color-surface-2;
+  border-top: $border-thin solid $color-border;
+
+  /* FIX: avoid showing page bg stripe */
+  margin-top: 0;
+}
+
+/* Container controlling both tiers */
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+
+  /* Larger top padding inside footer (air without external gap) */
+  padding: $space-2xl $space-md 0 $space-md;
+
+  @media (min-width: $bp-md) {
+    padding: $space-3xl $space-md 0 $space-md;
+  }
+}
+
+/* ===== TIER 1: Brand bar (logo + SIA line) ===== */
+.brandBar {
+  /* Larger gap after brand block before columns */
+  margin-bottom: $space-2xl;
+
+  @media (min-width: $bp-md) {
+    margin-bottom: $space-3xl;
+  }
+}
+
+.brandInner {
+  display: flex;
+  flex-direction: column;   /* puts SIA line under the logo */
+  align-items: flex-start;  /* align to left edge of the logo */
+  gap: $space-xs;           /* space between logo and SIA line */
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  display: block;
+
+  @media (max-width: $bp-md) { width: 130px; }
+}
+
+.logoFallback {
+  width: 150px; height: 38px;
+  display: grid; place-items: center;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-sm;
+  background: $color-surface-3;
+  color: $color-text-2; font-weight: $font-weight-semibold;
+
+  @media (max-width: $bp-md) { width: 130px; height: 34px; }
+}
+
+.legalLine {
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  margin: 0;                /* no extra offset; gap handles spacing */
+}
+
+/* ===== TIER 2: Columns row ===== */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2xl; /* larger column gap on mobile */
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: $space-3xl;           /* larger desktop gap */
+  }
+}
+
+.col { min-width: 0; }
+
+/* Headings + hairline (unchanged visuals) */
+.heading {
+  font-size: $font-size-sm;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $color-text;
+  margin: 0;
+}
+.rule {
+  height: 1px;
+  margin: $space-xs 0 $space-lg 0; /* generous gap to content */
+  background: linear-gradient(to bottom, $glass-border, rgba($glass-border, 0));
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30);
+}
+
+/* Lists (UNCHANGED: no bullets, secondary color) */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li + li { margin-top: $space-sm; }
+
+  a {
+    font-size: $font-size-p;
+    color: $color-text-2;
+    text-decoration: none;
+    border-radius: $radius-sm;
+    padding: 2px 0;
+    &:hover { color: $color-accent; text-decoration: underline; }
+    &:active { color: $color-accent-active; }
+    &:focus-visible { outline: $focus-ring-width solid $focus-ring-color; outline-offset: $focus-ring-offset; }
+  }
+}
+
+/* Locations — spacing only */
+.brandLocations { display: grid; gap: $space-xl; } /* more space between locations */
+.locItem { color: $color-text-2; line-height: 1.45; position: relative; }
+
+/* REMOVE divider line between locations; keep only vertical space */
+.locItemDivided {
+  padding-top: $space-xl;  /* spacing-only; no ::before line */
+}
+
+.locLine { margin: 0; }
+.locLine a { color: $color-text-2; text-decoration: none; &:hover { color: $color-accent; text-decoration: underline; } &:focus-visible { outline: $focus-ring-width solid $focus-ring-color; outline-offset: $focus-ring-offset; } }
+.locName { color: $color-text; font-weight: $font-weight-semibold; display: inline-block; margin-bottom: $space-2xs; }
+.dot { color: $color-text-3; }
+
+/* ===== Copyright bar ===== */
+.bottomBar { position: relative; }
+.bottomInner {
+  max-width: $container-max;
+  margin: 0 auto;
+
+  /* Larger vertical gap above & below copyright */
+  padding: $space-3xl $space-md calc(#{$space-3xl} + #{$safe-bottom}) $space-md;
+
+  @media (min-width: $bp-md) {
+    padding: $space-3xl $space-md calc(#{$space-3xl} + #{$safe-bottom}) $space-md;
+  }
+}
+
+/* Hairline above copyright (unchanged look) */
+.ruleWide {
+  height: 1px;
+  margin: 0 auto $space-md auto;
+  background: linear-gradient(to bottom, $glass-border, rgba($glass-border, 0));
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+.copy {
+  text-align: center;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+}
