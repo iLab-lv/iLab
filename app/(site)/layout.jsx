@@ -9,7 +9,7 @@ import l from './Layout.module.scss';
 
 export default function SiteLayout({ children }) {
   return (
-    <>
+    <div className={l.siteRoot}>
       <UiDialogsProvider>
         {/* a11y: skip link */}
         <a
@@ -26,6 +26,7 @@ export default function SiteLayout({ children }) {
           Skip to content
         </a>
 
+        {/* Sticky, semi-transparent topbar */}
         <NavBar />
 
         {/* Desktop-only overlay Controls */}
@@ -40,11 +41,12 @@ export default function SiteLayout({ children }) {
         {/* Mobile/Tablet bottom actions */}
         <BottomBar />
 
+        {/* Main content */}
         <main id="main">{children}</main>
 
-        {/* Fixed, reveal-on-scroll footer (4 columns, LV content) */}
+        {/* Footer (fixed/reveal as implemented in your Footer component) */}
         <Footer />
       </UiDialogsProvider>
-    </>
+    </div>
   );
 }

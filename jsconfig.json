@@ -6,7 +6,8 @@
       "@screens/*": ["screens/*"],
       "@sections/*": ["sections/*"],
       "@ui/*": ["ui/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@components/*": ["components/*"]
     }
   }
 }

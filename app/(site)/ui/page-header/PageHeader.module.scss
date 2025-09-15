@@ -1,0 +1,151 @@
+@use '@/styles/_tokens.scss' as *;
+
+.header {
+    position: relative;
+    color: $color-text;
+    border-bottom: $border-thin solid $color-border;
+    background: transparent;
+
+    /* Clear the sticky topbar; header owns the top spacing */
+    padding-top: calc(var(--topbar-h, 0px) + #{$space-lg} + $safe-top);
+    padding-bottom: $space-lg;
+
+    /* Make the header visually taller (~1/3 of viewport) with sane bounds */
+    min-block-size: clamp(280px, 32vh, 520px);
+}
+
+/* Prefer "svh" on modern mobile browsers to avoid URL bar jumps */
+@supports (height: 1svh) {
+    .header {
+        min-block-size: clamp(280px, 32svh, 520px);
+    }
+}
+
+.container {
+    max-width: $container-max;
+    margin: 0 auto;
+    padding: 0 $space-md;
+}
+
+.breadcrumbs {
+    font-size: 0.875rem;
+    opacity: 0.9;
+
+    ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-xs;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 $space-xs 0;
+    }
+
+    .crumb {
+        display: inline-flex;
+        align-items: center;
+
+        &+.crumb::before {
+            content: '›';
+            margin: 0 $space-xs;
+            opacity: 0.6;
+        }
+
+        a {
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 120ms ease;
+
+            &:hover {
+                border-color: currentColor;
+            }
+        }
+    }
+}
+
+.headerRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: $space-md;
+}
+
+.textCol {
+    align-self: end;
+}
+
+.title {
+    margin: 0;
+    line-height: 1.2;
+    font-size: clamp(1.5rem, 0.9rem + 1.6vw, 2.25rem);
+    font-weight: 800;
+}
+
+.lead {
+    margin: $space-xs 0 0;
+    color: $color-text-2;
+    font-size: $font-size-lg;
+    /* 18px */
+    line-height: $line-height-body;
+    max-width: 60ch;
+}
+
+.scrollBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $btn-h-md;
+    padding: 0 $space-lg;
+    margin-top: $space-md;
+
+    border-radius: $radius-pill;
+    border: $border-thin solid $glass-border;
+    background: $glass-bg-weak;
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf;
+    -webkit-backdrop-filter: $__bf;
+    color: $color-text;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std, border-color $dur-base $ease-std;
+
+    &:hover {
+        background: $glass-bg-weak-hover;
+    }
+
+    &:active {
+        background: $glass-bg-weak-active;
+        box-shadow: $shadow-press;
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 $focus-ring-width $focus-ring-color;
+    }
+}
+
+.media {
+    inline-size: clamp(120px, 18vw, 240px);
+    block-size: auto;
+
+    img {
+        display: block;
+        max-inline-size: 100%;
+        height: auto;
+        border-radius: $radius-lg;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding-bottom: $space-md;
+    }
+
+    .headerRow {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .media {
+        margin-top: $space-sm;
+    }
+}

@@ -8,17 +8,17 @@ export default function Reviews({
     {
       starsText: '★★★★★',
       text: '“Ļoti ātra un profesionāla apkalpošana. Ekrāns nomainīts 40 minūtēs.”',
-      meta: '— Līga K., iPhone 13',
+      meta: '— Līga K.',
     },
     {
       starsText: '★★★★★',
       text: '“Nomainīja bateriju tajā pašā dienā. Cena tāda, kā solīja.”',
-      meta: '— Mārtiņš P., Samsung',
+      meta: '— Mārtiņš P.',
     },
     {
       starsText: '★★★★★',
       text: '“Forša attieksme un 90 dienu garantija iedod mieru. Iesaku!”',
-      meta: '— Kristīne S., iPad',
+      meta: '— Kristīne S.',
     },
   ],
   ctaHref = 'https://www.google.com/search?q=iLab+R%C4%ABga+atsauksmes',

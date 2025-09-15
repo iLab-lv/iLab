@@ -9,6 +9,7 @@ const nextConfig = {
       '@screens':  path.resolve(process.cwd(), 'app/(site)/screens'),
       '@ui':       path.resolve(process.cwd(), 'app/(site)/ui'),      // if you have this folder
       '@styles':   path.resolve(process.cwd(), 'app/styles'),         // keeps '@/styles/...'
+      '@components': path.resolve(process.cwd(), 'app/(site)/components'),
     };
     return config;
   },

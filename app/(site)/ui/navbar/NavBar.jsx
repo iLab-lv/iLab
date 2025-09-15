@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import s from './NavBar.module.scss';
 
 import LanguageSwitcher from '../controls/LanguageSwitcher';
@@ -9,6 +10,11 @@ import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 
+/**
+ * Static, inline navigation.
+ * - Brands are stable; only models change elsewhere.
+ * - You can extend children for other categories later.
+ */
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },
   {
@@ -26,6 +32,8 @@ const NAV = [
 ];
 
 export default function NavBar() {
+  const pathname = usePathname() || '/';
+
   const [openSlug, setOpenSlug] = useState(null);              // desktop dropdown slug
   const [mobileOpen, setMobileOpen] = useState(false);         // drawer open
   const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null); // which parent is expanded in drawer
@@ -37,6 +45,13 @@ export default function NavBar() {
     locatorOpen, contactOpen,
     openLocator, openContact,
   } = useUiDialogs();
+
+  // Helpers: active state
+  const isTopActive = (href) => {
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(href + '/');
+  };
+  const isSubActive = (href) => pathname === href || pathname.startsWith(href + '/');
 
   // Esc closes things
   useEffect(() => {
@@ -84,9 +99,17 @@ export default function NavBar() {
           <nav className={s.nav} aria-label="Galvenā navigācija" ref={navRef}>
             {NAV.map((item) => {
               const slug = item.href.replace(/^\//, '');
+              const topActive = isTopActive(item.href);
+
               if (!hasChildren(item)) {
                 return (
-                  <Link key={slug} href={item.href} className={s.navItem}>
+                  <Link
+                    key={slug}
+                    href={item.href}
+                    className={`${s.navItem} ${topActive ? s.active : ''}`}
+                    aria-current={topActive ? 'page' : undefined}
+                    onClick={() => setOpenSlug(null)}
+                  >
                     {item.label}
                   </Link>
                 );
@@ -109,14 +132,15 @@ export default function NavBar() {
                 >
                   <Link
                     href={item.href}
-                    className={`${s.navItem} ${s.navParent}`}
+                    className={`${s.navItem} ${s.navParent} ${topActive ? s.active : ''}`}
                     aria-haspopup="true"
                     aria-expanded={openSlug === slug}
                     aria-controls={panelId}
+                    aria-current={topActive ? 'page' : undefined}
                     onFocus={() => setOpenSlug(slug)}
                     onClick={(e) => {
                       if (openSlug !== slug) {
-                        e.preventDefault();
+                        e.preventDefault();       // first click opens dropdown instead of navigating
                         setOpenSlug(slug);
                       }
                     }}
@@ -131,17 +155,21 @@ export default function NavBar() {
                     aria-hidden={openSlug !== slug}
                   >
                     <ul className={s.menuCol}>
-                      {item.children.map((child) => (
-                        <li key={`${slug}__${child.href}`}>
-                          <Link
-                            href={child.href}
-                            className={s.menuLink}
-                            onClick={() => setOpenSlug(null)}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
+                      {item.children.map((child) => {
+                        const subActive = isSubActive(child.href);
+                        return (
+                          <li key={`${slug}__${child.href}`}>
+                            <Link
+                              href={child.href}
+                              className={`${s.menuLink} ${subActive ? s.active : ''}`}
+                              aria-current={subActive ? 'page' : undefined}
+                              onClick={() => setOpenSlug(null)}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -232,11 +260,13 @@ export default function NavBar() {
             const expanded = mobileExpandedSlug === slug;
 
             if (!hasChildren(item)) {
+              const topActive = isTopActive(item.href);
               return (
                 <Link
                   key={slug}
                   href={item.href}
-                  className={s.drawerItem}
+                  className={`${s.drawerItem} ${topActive ? s.active : ''}`}
+                  aria-current={topActive ? 'page' : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -251,7 +281,7 @@ export default function NavBar() {
                 {/* Parent row: first tap expands, second tap navigates */}
                 <Link
                   href={item.href}
-                  className={`${s.drawerItem} ${s.emph}`}
+                  className={`${s.drawerItem} ${s.emph} ${isTopActive(item.href) ? s.active : ''}`}
                   aria-expanded={expanded}
                   aria-controls={submenuId}
                   onClick={(e) => {
@@ -259,7 +289,7 @@ export default function NavBar() {
                       e.preventDefault();         // first tap → expand only
                       setMobileExpandedSlug(slug);
                     } else {
-                      setMobileOpen(false);       // second tap → navigate (no preventDefault)
+                      setMobileOpen(false);       // second tap → navigate
                     }
                   }}
                 >
@@ -268,16 +298,20 @@ export default function NavBar() {
 
                 {/* Submenu */}
                 <div id={submenuId} className={s.drawerSubmenu} hidden={!expanded}>
-                  {item.children.map((child) => (
-                    <Link
-                      key={`${slug}__${child.href}`}
-                      href={child.href}
-                      className={s.drawerItem}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                  {item.children.map((child) => {
+                    const subActive = isSubActive(child.href);
+                    return (
+                      <Link
+                        key={`${slug}__${child.href}`}
+                        href={child.href}
+                        className={`${s.drawerItem} ${subActive ? s.active : ''}`}
+                        aria-current={subActive ? 'page' : undefined}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             );

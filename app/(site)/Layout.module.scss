@@ -1,6 +1,17 @@
 @use '../styles/_tokens.scss' as *;
 
-/* Show standalone overlay Controls only on desktop (≥1360px) */
+/* Public site root: define topbar height, no global padding anymore */
+.siteRoot {
+  --topbar-h: #{$header-desktop-height}; /* 72px */
+  @media (max-width: $bp-md) {
+    --topbar-h: #{$header-mobile-height}; /* 56px */
+  }
+
+  /* no padding-top here — lets hero sit under the transparent topbar */
+  background: $color-surface-1; /* keep if you want a default site bg */
+}
+
+/* Desktop-only overlay Controls (≥1360px) stays the same */
 .controlsDesktopOnly {
   @media (max-width: 1359px) {
     display: none !important;

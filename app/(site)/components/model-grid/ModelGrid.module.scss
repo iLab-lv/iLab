@@ -1,0 +1,64 @@
+@use '@styles/_tokens.scss' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-md;
+}
+
+.card {
+  grid-column: span 3; /* 4 per row desktop */
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: $color-surface-2;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;            /* was $radius-xl */
+  overflow: hidden;
+  transition: transform $dur-base $ease-std, box-shadow $dur-base $ease-std;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-soft;           /* was $shadow-md */
+  }
+}
+
+.img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: $color-surface-1;
+}
+
+.meta {
+  padding: $space-sm $space-md $space-md;
+}
+
+.name {
+  margin: 0 0 $space-2xs 0;
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: $font-weight-bold;
+}
+
+.sub {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.empty {
+  padding: $space-lg 0;
+  opacity: 0.8;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .card { grid-column: span 4; } /* 3 per row */
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .card { grid-column: span 6; } /* 2 per row */
+  .img { height: 140px; }
+}
