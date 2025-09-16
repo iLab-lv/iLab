@@ -1,16 +1,27 @@
-const titleize = (s) => decodeURIComponent(s).replace(/-/g, ' ')
-  .replace(/\b\w/g, (c) => c.toUpperCase());
+import { notFound } from 'next/navigation';
+import devices from '@/data/devices';
 
 export async function generateMetadata({ params }) {
-  return { title: `${titleize(params.brand)} ${titleize(params.device)} remonts | iLab` };
+  const { brand, device } = await params;              // ← await here
+  const slug = decodeURIComponent(device);
+  const d = devices.find(x => x.slug === slug && x.brandSlug === brand);
+  return {
+    title: d?.metaTitle ?? `${brand} ${slug} remonts | iLab`,
+    description: d?.metaDescription ?? 'Remonts un diagnostika iLab.',
+  };
 }
 
-export default function Page({ params }) {
-  const { brand, device } = params;
+export default async function Page({ params }) {
+  const { brand, device } = await params;              // ← and here
+  const slug = decodeURIComponent(device);
+  const d = devices.find(x => x.slug === slug && x.brandSlug === brand);
+
+  if (!d) return notFound();
+
+  // render your device page using `d`
   return (
-    <main id="main">
-      <h1>{titleize(brand)} {titleize(device)} — remonts</h1>
-      <p>Šī ir konkrētā modeļa lapa. Aizstāj ar cenu/satura blokiem.</p>
+    <main>
+      {/* …device header, pricing, etc… */}
     </main>
   );
 }

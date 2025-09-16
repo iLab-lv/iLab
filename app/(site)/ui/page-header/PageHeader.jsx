@@ -27,15 +27,15 @@ function getBrand(cat, brandSlug) {
 
 /**
  * PageHeader
- * - Auto-builds breadcrumbs and title from path, but can be overridden via props.
+ * - Auto-builds breadcrumbs/title from URL but allows overrides via props.
  *
  * Props (all optional):
- * - title?: string — overrides computed title (use for correct casing like "iPhone remonts")
- * - lead?: string | ReactNode — short description line under the H1
- * - scrollCta?: { label: string; targetId: string } — renders a scroll-to-grid button
- * - image?: { src: string; alt?: string } — optional image (device pages only)
- * - imageSrc?, imageAlt? — legacy props kept for compatibility
- * - showBreadcrumbs?: boolean — default true
+ * - title?: string               // overrides computed title (e.g., "iPhone remonts")
+ * - lead?: string | ReactNode    // short description under H1
+ * - scrollCta?: { label: string; targetId: string } // scroll-to section button
+ * - image?: { src: string; alt?: string }           // optional image (device pages)
+ * - imageSrc?, imageAlt?         // legacy compatibility
+ * - showBreadcrumbs?: boolean    // default true
  */
 export default function PageHeader({
   title,
@@ -72,7 +72,7 @@ export default function PageHeader({
     if (brandLabel && !deviceLabel) t = `${brandLabel} ${catLabel.toLowerCase()}`;
     if (brandLabel && deviceLabel) t = `${brandLabel} ${deviceLabel} remonts`;
 
-    // Image (optional)
+    // Image (optional, rendered only if provided)
     const src = image?.src || imageSrc || null;
     const alt = image?.alt || imageAlt || t || '';
 
@@ -119,6 +119,25 @@ export default function PageHeader({
                 aria-label={`${scrollCta.label} – ritināt uz sadaļu`}
               >
                 {scrollCta.label}
+                <span className={s.scrollIcon} aria-hidden="true">
+                  {/* inline chevron-down (18x18), stroke inherits accent color */}
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    focusable="false"
+                  >
+                    <path
+                      d="M6 9l6 6 6-6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
               </a>
             ) : null}
           </div>

@@ -1,0 +1,128 @@
+@use '@/styles/_tokens.scss' as *;
+
+.section {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+/* More breathing room for the heading */
+.sectionTitle {
+  margin: 0 0 $space-lg 0;
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.faqList {
+  display: grid;
+  gap: $space-sm;
+}
+
+/* Accordion item */
+.faqItem {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;
+  background: $color-surface-2;
+  overflow: hidden;
+}
+
+/* Summary row */
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+
+  cursor: pointer;
+  padding: $space-md;
+  list-style: none;
+
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  border-radius: inherit;
+
+  /* remove default marker */
+  &::-webkit-details-marker { display: none; }
+
+  /* neutral hover */
+  &:hover { background: $glass-bg-weak; }
+
+  /* neutral (non-accent) focus ring for keyboard users */
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $border-thin $glass-border;
+  }
+}
+
+/* Plus/Minus indicator (aligned) */
+.chev {
+  position: relative;
+  inline-size: 14px;
+  block-size: 14px;
+  flex: 0 0 auto;
+}
+
+/* bars are centered and animate */
+.chev::before,
+.chev::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  transition: transform $dur-base $ease-std, opacity $dur-base $ease-std;
+  will-change: transform, opacity;
+}
+
+/* default: “+” → horizontal + vertical */
+.chev::before {
+  inline-size: 12px;
+  block-size: 2px;
+  transform: translate(-50%, -50%); /* horizontal */
+}
+.chev::after {
+  inline-size: 2px;
+  block-size: 12px;
+  transform: translate(-50%, -50%); /* vertical */
+}
+
+/* when open: become “–” (hide vertical stroke) */
+.faqItem[open] .chev::after {
+  transform: translate(-50%, -50%) scaleY(0);
+  opacity: 0;
+}
+
+/* Answer body */
+.answer {
+  padding: $space-md;
+  border-top: $border-thin solid $color-border;
+  color: $color-text-2;
+  line-height: $line-height-body;
+
+  p {
+    margin: 0;
+    a {
+      color: $color-accent;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color $dur-base $ease-std;
+      &:hover { border-color: currentColor; }
+    }
+  }
+}
+
+/* List variant (if used) */
+.q { font-weight: $font-weight-medium; }
+.a { margin-top: $space-xs; color: $color-text-2; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .chev::before, .chev::after { transition: none; }
+}
