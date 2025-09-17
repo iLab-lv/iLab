@@ -1,0 +1,117 @@
+@use '@/styles/_tokens.scss' as *;
+
+.section {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+/* Smaller, calmer heading */
+.sectionTitle {
+  margin: 0 0 $space-lg 0;
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  letter-spacing: 0.1px;
+  opacity: 0.95;
+}
+
+/* Grid: 1 → 2 → 3 → 5 columns (one row on xl) */
+.grid {
+  display: grid;
+  gap: $space-md;
+}
+.cards {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  @media (min-width: $bp-md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: $bp-lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (min-width: $bp-xl) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* Card: equal height, subtle glass, accent hairline on top */
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr; /* title tight, text fills */
+  align-content: start;
+  gap: $space-sm;
+
+  padding: $space-md;
+  border-radius: $radius-lg;
+  border: $border-thin solid $color-border;
+  background: $glass-bg-weak;
+
+  /* accent hairline */
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba($color-accent, .35), rgba($color-accent, 0));
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf;
+    -webkit-backdrop-filter: $__bf;
+    border-color: $glass-border;
+  }
+
+  transition:
+    transform $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $glass-bg-weak-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
+    border-color: $glass-border-2;
+  }
+}
+
+/* Compact circular number badge */
+.badge {
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  font-size: 0.75rem; /* small */
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+
+  border: $border-thin solid rgba($color-accent, .55);
+  background: rgba($color-accent, .08);
+}
+
+/* Typography inside cards */
+.stepTitle {
+  margin: 0;
+  font-size: 0.9375rem; /* smaller heading */
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.stepText {
+  margin: 0;
+  font-size: 0.85rem;
+  color: $color-text-3;
+  line-height: $line-height-body;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}

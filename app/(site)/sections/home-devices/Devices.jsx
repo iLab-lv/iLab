@@ -1,7 +1,7 @@
 // app/(site)/sections/home/Services.jsx
-import s from './Services.module.scss';
+import s from './Devices.module.scss';
 
-export default function Services({
+export default function Devices({
   id = 'services',
   apple = {
     title: 'Apple ierīču remonts',

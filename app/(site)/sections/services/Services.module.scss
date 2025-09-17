@@ -1,0 +1,98 @@
+@use '@/styles/_tokens.scss' as *;
+
+.section {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+/* Calm, consistent with other section headings */
+.sectionTitle {
+  margin: 0 0 $space-lg 0;
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+/* ===== List variant ===== */
+.list {
+  margin: 0;
+  padding-left: 1.1em;
+
+  li {
+    margin: 0 0 $space-xs 0;
+    color: $color-text-2;
+
+    strong {
+      color: $color-text;
+      font-weight: $font-weight-medium;
+    }
+
+    a {
+      color: $color-accent;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color $dur-base $ease-std;
+      &:hover { border-color: currentColor; }
+      &:active { border-color: transparent; }
+    }
+  }
+}
+
+/* ===== Cards variant (optional) ===== */
+.cards {
+  display: grid;
+  gap: $space-md;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  @media (min-width: $bp-md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: $bp-lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.card {
+  padding: $space-md;
+  border-radius: $radius-lg;
+  border: $border-thin solid $color-border;
+  background: $glass-bg-weak;
+
+  @supports (backdrop-filter: blur(1px)) {
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf;
+    -webkit-backdrop-filter: $__bf;
+    border-color: $glass-border;
+  }
+
+  transition: transform $dur-base $ease-std, box-shadow $dur-base $ease-std, background-color $dur-base $ease-std;
+  &:hover {
+    background: $glass-bg-weak-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-soft;
+  }
+}
+
+.itemTitle {
+  margin: 0 0 $space-xs 0;
+  font-size: 0.98rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color $dur-base $ease-std;
+    &:hover { border-color: $color-accent; }
+  }
+}
+
+.itemText {
+  margin: 0;
+  color: $color-text-2;
+  font-size: 0.92rem;
+  line-height: $line-height-body;
+}

@@ -3,9 +3,13 @@ import Script from 'next/script';
 import Link from 'next/link';
 import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
+import Services from '@sections/services/Services';
+import CommonIssues from '@sections/common-issues/CommonIssues';
+import iphoneIssues from '@/data/commonIssues';
 
 // sections/components
 import ModelGrid from '../../components/model-grid/ModelGrid';
+import Process from '../../sections/process/Process';  // ← NEW
 import Faq from '../../sections/faq/Faq';
 import Why from '../../sections/why/Why';
 import ConvertBand from '../../sections/home/ConvertBand';
@@ -49,6 +53,15 @@ const IPHONE_FAQ_ITEMS = [
   { q: 'Vai strādājat visā Latvijā?', a: 'Jā; tuvāko servisu atradīsi sadaļā “Servisa centri”.' },
 ];
 
+// Process steps (LV)
+const PROCESS_STEPS = [
+  { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+  { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
+  { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
+  { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
+  { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+];
+
 // Filter Apple phones; exclude iPads by category
 function getIphoneDevices(list) {
   const filtered = list.filter(
@@ -70,6 +83,19 @@ const faqLd = {
     '@type': 'Question',
     name: q,
     acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : '' },
+  })),
+};
+
+const howToLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Kā notiek iPhone remonts',
+  description: 'Process iLab servisa centros: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
+  step: PROCESS_STEPS.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.text,
   })),
 };
 
@@ -105,6 +131,9 @@ export default function IphoneRemontsPage() {
       <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqLd)}
       </Script>
+      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(howToLd)}
+      </Script>
       <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
@@ -124,27 +153,13 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* 2) POPULAR REPAIRS / SERVICES — BEFORE grid */}
-      <section className={s.section} aria-labelledby="popular-repairs-h2">
-        <div className={s.container}>
-          <h2 id="popular-repairs-h2" className={s.h2}>Populārākie iPhone remonti</h2>
-          <ul className={s.list}>
-            {POPULAR_REPAIRS.map((it) => (
-              <li key={it.title}>
-                {it.href ? (
-                  <>
-                    <strong><Link href={it.href}>{it.title}</Link></strong> — {it.text}
-                  </>
-                ) : (
-                  <>
-                    <strong>{it.title}</strong> — {it.text}
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <Services
+        id="iphone-services"
+        title="Populārākie iPhone remonti"
+        items={POPULAR_REPAIRS}
+        headingLevel={2}
+        variant="list"      // or 'cards' if you want the card layout
+      />
 
       {/* 3) MODEL GRID — scroll target for header CTA */}
       <section id="iphone-modeli" className={s.anchorTarget} aria-labelledby="iphone-modeli-h2">
@@ -177,10 +192,29 @@ export default function IphoneRemontsPage() {
         </section>
       )}
 
-      {/* 5) WHY (reused from home) */}
+      <CommonIssues
+        id="problem-fixed"
+        title="Ar kādiem jautājumiem visbiežāk pie mums vēršas"
+        items={iphoneIssues}
+        headingLevel={2}
+      />
+
+
+
+
+      {/* 5) PROCESS (reusable) */}
+      <Process
+        id="process"
+        title="Kā notiek remonts"
+        steps={PROCESS_STEPS}
+        headingLevel={2}
+        variant="cards"
+      />
+
+      {/* 6) WHY (reused from home) */}
       <Why />
 
-      {/* 6) FAQ (shared section) */}
+      {/* 7) FAQ (shared section) */}
       <Faq
         id="iphone-faq"
         title="Biežāk uzdotie jautājumi"
@@ -189,7 +223,7 @@ export default function IphoneRemontsPage() {
         variant="accordion"
       />
 
-      {/* 7) ConvertBand (same as home) */}
+      {/* 8) ConvertBand (same as home) */}
       <ConvertBand />
     </>
   );

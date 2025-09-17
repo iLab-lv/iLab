@@ -9,7 +9,7 @@ export default function Why({
     '90 dienu garantija',
     'Tajā pašā dienā',
     'Sertificēti meistari',
-    'Apple / Samsung / Huawei ekspertīze',
+    'Bezmaksas diagnostika',
   ],
 }) {
   return (

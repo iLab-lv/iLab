@@ -1,0 +1,43 @@
+@use '@/styles/_tokens.scss' as *;
+
+.section { padding-block: $space-lg; border-bottom: $border-thin solid $color-border; }
+.container { max-width: $container-max; margin: 0 auto; padding: 0 $space-md; }
+.title { margin: 0 0 $space-lg 0; font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem); line-height: $line-height-heading; font-weight: $font-weight-semibold; color: $color-text; }
+
+/* Table (desktop) */
+.table { display: none; @media (min-width: $bp-lg) { display: grid; } border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; }
+.tr { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr auto; align-items: center; gap: $space-md; padding: $space-md; border-top: $border-thin solid $color-border; }
+.tr:first-child { border-top: 0; }
+.head { background: $glass-bg-weak-active; }
+.th { font-size: 0.85rem; color: $color-text-3; }
+.td { color: $color-text; }
+
+.serviceCell { display: flex; align-items: center; gap: $space-sm; }
+.serviceTitle { font-weight: $font-weight-medium; a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color $dur-base $ease-std; &:hover { border-color: $color-accent; } } }
+.badge { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: $radius-pill; color: $color-accent; border: $border-thin solid rgba($color-accent, .55); background: rgba($color-accent, .08); }
+
+.chip { display: inline-flex; align-items: center; height: 28px; padding: 0 $space-sm; border-radius: $radius-pill; background: $glass-bg-weak; color: $color-text-2; border: $border-thin solid $color-border; font-size: 0.85rem; }
+.price { font-weight: $font-weight-semibold; }
+
+.bookBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: $btn-h-md; padding: 0 $space-lg; border-radius: $radius-pill;
+  border: $border-thin solid $color-accent; color: $color-accent; background: $glass-bg-weak;
+  @supports (backdrop-filter: blur(1px)) {
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf; -webkit-backdrop-filter: $__bf; border-color: $glass-border;
+  }
+  transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+  &:hover { background: $accent-tint-weak; }
+  &:active { background: $accent-tint-strong; box-shadow: $shadow-accent-press; }
+}
+
+/* Cards (mobile) */
+.cards { display: grid; gap: $space-md; @media (min-width: $bp-lg) { display: none; } }
+.card { border: $border-thin solid $color-border; border-radius: $radius-lg; padding: $space-md; background: $glass-bg-weak; }
+.cardHead { display: flex; align-items: center; justify-content: space-between; gap: $space-sm; }
+.metaRow { display: flex; gap: $space-sm; margin-top: $space-sm; }
+.ctaRow { margin-top: $space-sm; }
+
+/* Notes */
+.notes { margin: $space-md 0 0 0; padding-left: 1.1em; color: $color-text-3; font-size: 0.92rem; li { margin: 0 0 4px 0; } }
