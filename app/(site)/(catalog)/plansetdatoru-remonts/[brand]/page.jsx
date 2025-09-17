@@ -12,6 +12,7 @@ export default async function BrandPage({ params }) {
   const { brand } = await params;
   const brandSlug = decodeURIComponent(brand).toLowerCase();
 
+  
   const devices = devicesAll.filter(
     (d) => d.category === 'plansetdatoru-remonts' && d.brandSlug === brandSlug
   );
