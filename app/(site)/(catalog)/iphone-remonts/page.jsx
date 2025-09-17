@@ -8,11 +8,11 @@ import CommonIssues from '@sections/common-issues/CommonIssues';
 import iphoneIssues from '@/data/commonIssues';
 
 // sections/components
-import ModelGrid from '../../components/model-grid/ModelGrid';
-import Process from '../../sections/process/Process';  // ← NEW
-import Faq from '../../sections/faq/Faq';
-import Why from '../../sections/why/Why';
-import ConvertBand from '../../sections/home/ConvertBand';
+import ModelGrid from '@components/model-grid/ModelGrid';
+import Process from '@sections/process/Process';  // ← NEW
+import Faq from '@sections/faq/Faq';
+import Why from '@sections/why/Why';
+import ConvertBand from '@sections/home/ConvertBand';
 
 import s from './IphoneRemonts.module.scss';
 

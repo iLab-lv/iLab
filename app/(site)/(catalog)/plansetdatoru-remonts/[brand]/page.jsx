@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
 import devicesAll from '@/data/devices';
-import Services from '../../../sections/services/Services';
-import CommonIssues from '../../../sections/common-issues/CommonIssues';
+import Services from '@sections/services/Services';
+import CommonIssues from '@sections/common-issues/CommonIssues';
 import { tabletIssues } from '@/data/commonIssues';
-import ModelGrid from '../../../components/model-grid/ModelGrid';
-import s from '../../iphone-remonts/IphoneRemonts.module.scss';
+import ModelGrid from '@components/model-grid/ModelGrid';
+import s from '@/(site)/iphone-remonts/IphoneRemonts.module.scss';
 
 export const dynamicParams = true;
 
