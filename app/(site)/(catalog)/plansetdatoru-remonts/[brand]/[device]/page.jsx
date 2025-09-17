@@ -2,11 +2,12 @@ import { notFound } from 'next/navigation';
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
 
-import PriceList from '../../../../sections/pricing/PriceList';
-import Services from '../../../../sections/services/Services';
-import Why from '../../../../sections/home/Why';
-import Faq from '../../../../sections/faq/Faq';
-import ConvertBand from '../../../../sections/home/ConvertBand';
+import PriceList     from '@sections/pricing/PriceList';
+import Services      from '@sections/services/Services';
+import Why           from '@sections/why/Why';
+import Faq           from '@sections/faq/Faq';
+import ConvertBand   from '@sections/home/ConvertBand';
+
 
 import s from '../../../iphone-remonts/[device]/Device.module.scss';
 
