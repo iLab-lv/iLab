@@ -1,0 +1,54 @@
+@use '@/styles/_tokens.scss' as *;
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+.section {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+.h2 {
+  margin: 0 0 $space-sm 0;
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+.p {
+  margin: 0 0 $space-md 0;
+  color: $color-text-2;
+  line-height: $line-height-body;
+  max-width: 70ch;
+}
+.ctaRow {
+  display: flex;
+  gap: $space-sm;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.linkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $btn-h-md;
+  padding: 0 $space-lg;
+  border-radius: $radius-pill;
+  border: $border-thin solid $color-accent;
+  color: $color-accent;
+  text-decoration: none;
+  background: $glass-bg-weak;
+  $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+  backdrop-filter: $__bf;
+  -webkit-backdrop-filter: $__bf;
+  transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+  &:hover { background: $accent-tint-weak; }
+  &:active { background: $accent-tint-strong; box-shadow: $shadow-accent-press; }
+}
+.linkGhost {
+  color: $color-text-2;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  &:hover { border-color: currentColor; }
+}

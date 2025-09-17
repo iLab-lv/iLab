@@ -4,7 +4,7 @@ import Services from '@sections/services/Services';
 import CommonIssues from '@sections/common-issues/CommonIssues';
 import { tabletIssues } from '@/data/commonIssues';
 import ModelGrid from '@components/model-grid/ModelGrid';
-import s from '@/(site)/iphone-remonts/IphoneRemonts.module.scss';
+import s from './../PlansetRemonts.module.scss';
 
 export const dynamicParams = true;
 
@@ -12,7 +12,7 @@ export default async function BrandPage({ params }) {
   const { brand } = await params;
   const brandSlug = decodeURIComponent(brand).toLowerCase();
 
-  
+
   const devices = devicesAll.filter(
     (d) => d.category === 'plansetdatoru-remonts' && d.brandSlug === brandSlug
   );

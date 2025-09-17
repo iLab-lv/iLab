@@ -14,7 +14,7 @@ import ConvertBand   from '@sections/home/ConvertBand';
 
 
 // Reuse same look as iPhone category:
-import s from '../iphone-remonts/IphoneRemonts.module.scss';
+import s from './PlansetRemonts.module.scss';
 
 const ORIGIN = 'https://www.ilab.lv';
 const cat = categoryContent['plansetdatoru-remonts'];
