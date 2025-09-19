@@ -6,7 +6,7 @@ import PriceList     from '@sections/pricing/PriceList';
 import Services      from '@sections/services/Services';
 import Why           from '@sections/why/Why';
 import Faq           from '@sections/faq/Faq';
-import ConvertBand   from '@sections/home/ConvertBand';
+import ConvertBand   from '@sections/convert-band/ConvertBand';
 
 
 import s from '../../../iphone-remonts/[device]/Device.module.scss';
