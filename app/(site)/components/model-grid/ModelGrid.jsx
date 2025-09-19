@@ -1,8 +1,61 @@
+'use client';
+
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import s from './ModelGrid.module.scss';
 
+const PLACEHOLDER = '/images/placeholders/phone.webp';
+
+function resolveSrc(d) {
+  const url = (d?.image && String(d.image).trim()) ||
+              (d?.imagePath && `/images/${String(d.imagePath).trim().replace(/^\/+/, '')}`) ||
+              '';
+  return url;
+}
+
+function ImageWithFallback({ src, alt, className }) {
+  const PLACEHOLDER = '/images/placeholders/phone.webp';
+  const normalized = (src || '').trim();
+
+  const [current, setCurrent] = useState(PLACEHOLDER);
+  const [attemptedSrc, setAttemptedSrc] = useState(''); // remember what we tried
+
+  // Reset when the incoming src changes
+  useEffect(() => {
+    setCurrent(PLACEHOLDER);
+    setAttemptedSrc('');
+  }, [normalized]);
+
+  // After mount, attempt to load the real src ONCE per value
+  useEffect(() => {
+    if (!normalized) return;
+    if (attemptedSrc === normalized) return; // already tried this URL
+    setAttemptedSrc(normalized);
+    setCurrent(normalized);
+  }, [normalized, attemptedSrc]);
+
+  const handleError = useCallback(() => {
+    // If real image fails, stick to placeholder (no further retries for this src)
+    if (current !== PLACEHOLDER) setCurrent(PLACEHOLDER);
+  }, [current]);
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={current}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      className={className}
+      onError={handleError}
+      draggable={false}
+    />
+  );
+}
+
+
 export default function ModelGrid({ devices = [], baseHref }) {
-  // 1) Deduplicate by a composite key to avoid duplicates in the grid
+  // Deduplicate
   const seen = new Set();
   const list = [];
   for (const d of devices) {
@@ -20,10 +73,16 @@ export default function ModelGrid({ devices = [], baseHref }) {
     <div className={s.grid}>
       {list.map((d) => {
         const key = `${d.category || '-'}:${d.brandSlug || '-'}:${d.slug}`;
+        const href = `${baseHref}/${d.slug}`;
+        const alt =
+          (d?.name && `${d.name} remonts`) ||
+          (d?.brand && d?.slug && `${d.brand} ${d.slug} remonts`) ||
+          'Tālruņa attēls';
+        const src = resolveSrc(d);
+
         return (
-          <Link key={key} href={`${baseHref}/${d.slug}`} className={s.card}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            {d.image && <img src={d.image} alt={d.name} loading="lazy" className={s.img} />}
+          <Link key={key} href={href} className={s.card}>
+            <ImageWithFallback src={src} alt={alt} className={s.img} />
             <div className={s.meta}>
               <h3 className={s.name}>{d.name}</h3>
               {d.year && <div className={s.sub}>{d.year}</div>}

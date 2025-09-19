@@ -5,8 +5,8 @@ import Hero from '@sections/hero/Hero';
 
 import Devices from '@sections/home-devices/Devices';
 import Why from '@sections/why/Why';
-import Locations from '@sections/home/Locations';
-import Reviews from '@sections/home/Reviews';
+import Locations from '@sections/locations/Locations';
+import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';           // ← use shared FAQ
 import ConvertBand from '@sections/convert-band/ConvertBand';
 

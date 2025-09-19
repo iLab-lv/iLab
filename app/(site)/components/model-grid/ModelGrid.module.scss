@@ -14,21 +14,32 @@
   color: inherit;
   background: $color-surface-2;
   border: $border-thin solid $color-border;
-  border-radius: $radius-lg;            /* was $radius-xl */
+  border-radius: $radius-lg; /* was $radius-xl */
   overflow: hidden;
   transition: transform $dur-base $ease-std, box-shadow $dur-base $ease-std;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-soft;           /* was $shadow-md */
+    box-shadow: $shadow-soft; /* was $shadow-md */
   }
 }
 
+/* Show full image: maintain 3:4 ratio, no cropping */
 .img {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  aspect-ratio: 3 / 4;     /* 450x600 ratio */
+  height: auto;            /* let ratio compute height */
+  object-fit: contain;     /* show the whole phone */
   background: $color-surface-1;
+  display: block;          /* remove inline gap */
+}
+
+/* Fallback for older browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1) {
+  .img {
+    height: 160px;
+    object-fit: contain;
+  }
 }
 
 .meta {
@@ -60,5 +71,9 @@
 /* Mobile */
 @media (max-width: 640px) {
   .card { grid-column: span 6; } /* 2 per row */
-  .img { height: 140px; }
+
+  /* Old-browser fallback sizing for mobile */
+  @supports not (aspect-ratio: 1) {
+    .img { height: 140px; }
+  }
 }
