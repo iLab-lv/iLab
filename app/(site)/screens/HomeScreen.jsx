@@ -8,7 +8,7 @@ import Why from '@sections/why/Why';
 import Locations from '@sections/home/Locations';
 import Reviews from '@sections/home/Reviews';
 import Faq from '@sections/faq/Faq';           // ← use shared FAQ
-import ConvertBand from '@sections/home/ConvertBand';
+import ConvertBand from '@sections/convert-band/ConvertBand';
 
 const HOME_FAQ_ITEMS = [
   {

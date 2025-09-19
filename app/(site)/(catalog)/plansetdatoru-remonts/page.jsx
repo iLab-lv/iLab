@@ -10,7 +10,7 @@ import CommonIssues  from '@sections/common-issues/CommonIssues';
 import ModelGrid     from '@components/model-grid/ModelGrid';
 import Why           from '@sections/why/Why';
 import Faq           from '@sections/faq/Faq';
-import ConvertBand   from '@sections/home/ConvertBand';
+import ConvertBand   from '@sections/convert-band/ConvertBand';
 
 
 // Reuse same look as iPhone category:
