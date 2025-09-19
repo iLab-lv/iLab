@@ -1,0 +1,215 @@
+@use '@styles/_tokens.scss' as *;
+
+/* ===== Wrapper + Search toolbar ===== */
+
+.wrapper {
+  display: block;
+}
+
+.toolbar {
+  margin-bottom: $space-md;
+}
+
+.search {
+  width: 100%;
+  height: 44px;
+  padding: 0 $space-md;
+  color: $color-text;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color $dur-base $ease-std, background $dur-base $ease-std;
+
+  &::placeholder { color: $color-text-2; }
+
+  &:focus {
+    border-color: rgba(34, 211, 238, 0.6); /* $color-accent with alpha */
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
+  }
+}
+
+/* ===== Section header + toggles ===== */
+
+.section { margin-bottom: $space-xl; }
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+}
+
+.count {
+  color: $color-text-2;
+  font-size: 0.875rem;
+  margin-left: $space-xs;
+}
+
+.toggleBtn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $color-surface-3;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Per-section year filter (only visible when expanded) */
+.yearFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+  margin-bottom: $space-sm;
+}
+
+.yearChip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $color-surface-3;
+    border-color: rgba(255,255,255,0.12);
+  }
+}
+
+.active {
+  background: $color-accent;
+  color: #0b0b0b;
+  border-color: transparent;
+}
+
+/* ===== Grid layout ===== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-md;
+}
+
+/* ===== Card (link) =====
+   Neutralize global <a> styles and keep accessibility.
+*/
+
+.card {
+  grid-column: span 3; /* 4 per row desktop */
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: $color-text;
+  background: $color-surface-2;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: transform $dur-base $ease-std, box-shadow $dur-base $ease-std;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-soft;
+  }
+}
+
+/* Ensure global link rules never override card coloring/underline */
+.card:link,
+.card:visited,
+.card:hover,
+.card:active {
+  color: $color-text;
+  text-decoration: none;
+}
+
+/* Accessible focus ring (keyboard nav) */
+.card:focus-visible {
+  outline: 2px solid $color-accent;
+  outline-offset: 3px;
+}
+
+/* ===== Card content ===== */
+
+.img {
+  width: 100%;
+  aspect-ratio: 3 / 4;     /* 450x600 ratio */
+  height: auto;            /* let ratio compute height */
+  object-fit: contain;     /* show full device, no crop */
+  background: $color-surface-1;
+  display: block;          /* remove inline gap */
+}
+
+/* Fallback for very old browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1) {
+  .img { height: 160px; object-fit: contain; }
+}
+
+.meta {
+  padding: $space-sm $space-md $space-md;
+}
+
+.name {
+  margin: 0 0 $space-2xs 0;
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: $font-weight-bold;
+  color: inherit;
+  text-decoration: none;   /* never underline title */
+}
+
+/* “remonts” inline label (SEO-friendly anchor text, visually subtle) */
+.remontsInline {
+  font-weight: $font-weight-regular;
+  opacity: 0.7;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+  text-decoration: none;   /* never underline separately */
+}
+
+.sub {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.emptySection {
+  opacity: 0.8;
+  padding: $space-sm 0 $space-md;
+}
+
+.emptyAll {
+  opacity: 0.8;
+  padding: $space-md 0 $space-lg;
+}
+
+/* ===== Breakpoints ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .card { grid-column: span 4; } /* 3 per row */
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .card { grid-column: span 6; } /* 2 per row */
+
+  @supports not (aspect-ratio: 1) {
+    .img { height: 140px; }
+  }
+}

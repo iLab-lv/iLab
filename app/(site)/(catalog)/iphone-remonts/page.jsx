@@ -1,6 +1,5 @@
 // app/(site)/(catalog)/iphone-remonts/page.jsx
 import Script from 'next/script';
-import Link from 'next/link';
 import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
 import Services from '@sections/services/Services';
@@ -8,8 +7,8 @@ import CommonIssues from '@sections/common-issues/CommonIssues';
 import iphoneIssues from '@/data/commonIssues';
 
 // sections/components
-import ModelGrid from '@components/model-grid/ModelGrid';
-import Process from '@sections/process/Process';  // ← NEW
+import SeriesGrid from '@components/model-grid/SeriesGrid';
+import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -62,19 +61,6 @@ const PROCESS_STEPS = [
   { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
 ];
 
-// Filter Apple phones; exclude iPads by category
-function getIphoneDevices(list) {
-  const filtered = list.filter(
-    (d) => d.brandSlug === 'apple' && d.category === 'telefonu-remonts'
-  );
-  filtered.sort((a, b) => {
-    if (a.popular !== b.popular) return Number(b.popular) - Number(a.popular);
-    if (a.year && b.year && a.year !== b.year) return b.year - a.year;
-    return a.name.localeCompare(b.name, 'lv');
-  });
-  return filtered;
-}
-
 // JSON-LD (page-level)
 const faqLd = {
   '@context': 'https://schema.org',
@@ -122,7 +108,6 @@ const serviceLd = {
 };
 
 export default function IphoneRemontsPage() {
-  const devices = getIphoneDevices(devicesAll);
   const baseHref = '/iphone-remonts';
 
   return (
@@ -158,24 +143,31 @@ export default function IphoneRemontsPage() {
         title="Populārākie iPhone remonti"
         items={POPULAR_REPAIRS}
         headingLevel={2}
-        variant="list"      // or 'cards' if you want the card layout
+        variant="list"
       />
 
-      {/* 3) MODEL GRID — scroll target for header CTA */}
+      {/* 3) SERIES GRID */}
       <section id="iphone-modeli" className={s.anchorTarget} aria-labelledby="iphone-modeli-h2">
         <div className={s.container}>
           <h2 id="iphone-modeli-h2" className={s.h2}>
             {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli'}
           </h2>
           <p className={s.intro}>
-            {cat?.sections?.modelGrid?.intro ??
-              'Atrast modeli ir viegli — izvēlies no saraksta vai izmanto meklēšanu.'}
+            {cat?.sections?.modelGrid?.intro ?? 'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
           </p>
-          <ModelGrid devices={devices} baseHref={baseHref} />
+
+          <SeriesGrid
+            devices={devicesAll}              // pass all; component will filter
+            baseHref={baseHref}
+            brandSlug="apple"
+            categorySlug="telefonu-remonts"   // phones only
+            initialLimit={4}
+            autoExpandOnSearch={true}
+          />
         </div>
       </section>
 
-      {/* 4) GUIDE (from categoryContent; optional) */}
+      {/* 4) GUIDE */}
       {cat?.show?.guide !== false && cat?.sections?.guide && (
         <section className={s.section} aria-labelledby="guide-h2">
           <div className={s.container}>
@@ -198,9 +190,6 @@ export default function IphoneRemontsPage() {
         items={iphoneIssues}
         headingLevel={2}
       />
-
-
-
 
       {/* 5) PROCESS (reusable) */}
       <Process
