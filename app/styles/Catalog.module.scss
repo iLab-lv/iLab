@@ -1,0 +1,75 @@
+@use '@/styles/_tokens.scss' as *;
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+/* short SEO text just under header */
+.preface {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.anchorTarget {
+  /* so header scroll CTA lands with H2 visible */
+  scroll-margin-top: calc(var(--topbar-h, 0px) + #{$space-lg});
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.section {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.h2 {
+  margin: 0 0 $space-sm 0;
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.h3 {
+  margin: 0 0 $space-xs 0;
+  font-weight: $font-weight-semibold;
+}
+
+.intro, .paragraph {
+  margin: 0 0 $space-md 0;
+  color: $color-text-2;
+  line-height: $line-height-body;
+  max-width: 70ch;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.1em;
+
+  li {
+    margin-bottom: $space-xs;
+  }
+}
+
+/* Guide block */
+.guide {
+  display: grid;
+  gap: $space-md;
+}
+
+.guidePart {
+  padding: $space-md;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;
+  background: $glass-bg-weak;
+
+  @supports (backdrop-filter: blur(1px)) {
+    // use literal filter string to avoid Sass color-function collision
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf;
+    -webkit-backdrop-filter: $__bf;
+    border-color: $glass-border;
+  }
+}

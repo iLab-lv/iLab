@@ -73,7 +73,7 @@ export default function ModelCard({ device, baseHref }) {
         {/* Model + subtle "remonts" label inside the same link (improves anchor text) */}
         <h3 className={s.name}>
           {device.name}
-          <span className={s.remontsInline}> remonts</span>
+          <span className={s.remontsInline}> remonts un cenas</span>
         </h3>
         {device.year && <div className={s.sub}>{device.year}</div>}
       </div>

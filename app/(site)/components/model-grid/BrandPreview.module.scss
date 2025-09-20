@@ -1,0 +1,54 @@
+@use '@styles/_tokens.scss' as *;
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
+.count {
+  color: $color-text-2;
+  font-size: 0.875rem;
+  margin-left: $space-xs;
+}
+
+/* CTA as subtle button-link */
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $color-surface-3;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* 12-col grid preview (4 cards on desktop) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-md;
+}
+
+.gridItem { grid-column: span 3; } /* 4 per row desktop */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .gridItem { grid-column: span 4; } /* 3 per row */
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .gridItem { grid-column: span 6; } /* 2 per row */
+}

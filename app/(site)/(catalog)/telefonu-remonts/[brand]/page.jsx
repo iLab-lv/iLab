@@ -1,5 +1,6 @@
 // app/(site)/(catalog)/telefonu-remonts/[brand]/page.jsx
 import Script from 'next/script';
+import Link from 'next/link';
 import devicesAll from '@/data/devices';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
@@ -9,36 +10,31 @@ import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import phoneIssues from '@/data/commonIssues';
+import c from '@styles/Catalog.module.scss';
+
+import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
 
 const ORIGIN = 'https://www.ilab.lv';
 
-const titleize = (s) =>
-  decodeURIComponent(s)
-    .replace(/-/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-
 export async function generateMetadata({ params }) {
-  const brandName = titleize(params.brand || '');
+  const bc = getBrandContent(params.brand, BRAND_CATEGORY.PHONES);
   return {
-    title: `${brandName} telefonu remonts | iLab`,
-    description: `${brandName} telefonu remonts — displeji, baterijas, uzlādes ligzdas, kameras un citi remonti. Ātra diagnostika, godīgas cenas, garantija.`,
-    alternates: { canonical: `/telefonu-remonts/${params.brand}` },
+    title: bc.seo.title,
+    description: bc.seo.metaDescription,
+    alternates: { canonical: bc.canonicalPath },
   };
 }
 
-// Generic “popular services” list used for all brands
+// Generic services/faq/process (shared)
 const POPULAR_REPAIRS_GENERIC = [
   { title: 'Displeja (ekrāna) maiņa', text: 'plaisas, tumši plankumi, nereaģē skāriens.' },
   { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.' },
-  { title: 'Uzlādes ligzdas remonts', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
-  { title: 'Kameras remonts', text: 'miglaini attēli, fokusēšanās problēmas.' },
-  { title: 'Skaļruņi un mikrofons', text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.' },
+  { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
+  { title: 'Kamera', text: 'miglaini attēli, fokusēšanās problēmas.' },
+  { title: 'Skaļruņi/mikrofons', text: 'klusa skaņa, krakšķi, sarunās nedzird.' },
   { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
 ];
 
-// Generic process steps (shared for all brands)
 const PROCESS_STEPS = [
   { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
   { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
@@ -47,7 +43,6 @@ const PROCESS_STEPS = [
   { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
 ];
 
-// Generic FAQ (shared for all brands)
 const FAQ_ITEMS = [
   { q: 'Cik ilgi ilgst telefona displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
   { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
@@ -58,26 +53,25 @@ const FAQ_ITEMS = [
 
 export default function BrandPhonesPage({ params }) {
   const brandSlug = String(params.brand || '').toLowerCase();
-  const brandName = titleize(brandSlug);
-  const baseHref = `/telefonu-remonts/${brandSlug}`;
+  const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
+  const baseHref = bc.href;
 
-  // Pre-filter only to know if the brand has any phone models (for fallback copy)
   const brandPhoneList = devicesAll.filter(
     (d) => d.category === 'telefonu-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
-  // JSON-LD (Service + Breadcrumbs)
+  // JSON-LD
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${ORIGIN}/telefonu-remonts/${brandSlug}#service`,
-    serviceType: `${brandName} telefonu remonts`,
+    '@id': `${ORIGIN}${bc.href}#service`,
+    serviceType: `${bc.marketingName} telefonu remonts`,
     areaServed: { '@type': 'Country', name: 'Latvia' },
     provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}/telefonu-remonts/${brandSlug}/`,
-    name: `${brandName} telefonu remonts`,
+    url: `${ORIGIN}${bc.href}/`,
+    name: `${bc.marketingName} telefonu remonts`,
     description:
-      `${brandName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+      `${bc.marketingName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
   };
 
   const breadcrumbsLd = {
@@ -86,7 +80,7 @@ export default function BrandPhonesPage({ params }) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
       { '@type': 'ListItem', position: 2, name: 'Telefonu remonts', item: `${ORIGIN}/telefonu-remonts/` },
-      { '@type': 'ListItem', position: 3, name: `${brandName}`, item: `${ORIGIN}/telefonu-remonts/${brandSlug}/` },
+      { '@type': 'ListItem', position: 3, name: bc.marketingName, item: `${ORIGIN}${bc.href}/` },
     ],
   };
 
@@ -113,39 +107,33 @@ export default function BrandPhonesPage({ params }) {
         {JSON.stringify(faqLd)}
       </Script>
 
-      {/* Preface (simple, no module CSS to keep this route generic) */}
-      <section style={{ padding: '24px 0' }} aria-labelledby="brand-phones-h2">
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-          <h2 id="brand-phones-h2" style={{ margin: 0 }}>
-            {brandName} telefonu remonts
+      {/* INTRO (SEO copy under H2; Header owns the H1/lead/CTA) */}
+      <section className={c.section} aria-labelledby="brand-intro-h2">
+        <div className={c.container}>
+          <h2 id="brand-intro-h2" className={c.h2}>
+            {bc.marketingName} telefonu remonts — ko mēs darām
           </h2>
-          <p style={{ opacity: 0.9, marginTop: 8 }}>
-            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam tajā pašā dienā.
+          <p className={c.intro}>
+            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava
+            modeļa lapu, lai redzētu konkrētas <strong>remonta cenas</strong> un termiņus.
+          </p>
+          <p className={c.paragraph}>
+            Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens),{' '}
+            <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong>{' '}
+            (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās
+            kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī <strong>mitruma bojājumi</strong>.
+            Uzzini, kā notiek remonts sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
         </div>
       </section>
 
-      {/* Popular services (generic copy) */}
-      <section aria-labelledby="popular-services-h2" style={{ padding: '8px 0 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-          <Services
-            id="brand-services"
-            title="Populārākie remonti"
-            items={POPULAR_REPAIRS_GENERIC}
-            headingLevel={2}
-            variant="list"
-          />
-        </div>
-      </section>
-
-      {/* Series grid */}
-      <section id="brand-modeli" aria-labelledby="brand-modeli-h2" style={{ padding: '8px 0 8px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-          <h2 id="brand-modeli-h2" style={{ marginBottom: 8 }}>
-            Izvēlies modeli
-          </h2>
-          <p style={{ opacity: 0.8, marginTop: 0, marginBottom: 16 }}>
-            Meklē pēc nosaukuma vai pārlūko sērijas. Noklikšķini uz modeļa, lai skatītu konkrētus remonta pakalpojumus.
+      {/* SERIES GRID (Header CTA targets this) */}
+      <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
+        <div className={c.container}>
+          <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
+          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
+          <p className={c.paragraph} style={{ marginTop: 0 }}>
+            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
           </p>
 
           <SeriesGrid
@@ -165,9 +153,22 @@ export default function BrandPhonesPage({ params }) {
         </div>
       </section>
 
-      {/* Common issues (shared list) */}
-      <section aria-labelledby="issues-h2" style={{ padding: '8px 0 8px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
+      {/* Popular services */}
+      <section className={c.section} aria-labelledby="popular-services-h2">
+        <div className={c.container}>
+          <Services
+            id="brand-services"
+            title="Populārākie remonti"
+            items={POPULAR_REPAIRS_GENERIC}
+            headingLevel={2}
+            variant="list"
+          />
+        </div>
+      </section>
+
+      {/* Common issues */}
+      <section className={c.section} aria-labelledby="issues-h2">
+        <div className={c.container}>
           <CommonIssues
             id="brand-issues"
             title="Ar kādiem jautājumiem visbiežāk pie mums vēršas"
@@ -178,8 +179,9 @@ export default function BrandPhonesPage({ params }) {
       </section>
 
       {/* Process */}
-      <section aria-labelledby="process-h2" style={{ padding: '8px 0 8px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
+      <div id="process-h2" className={c.anchorTarget} />
+      <section className={c.section} aria-labelledby="process-h2">
+        <div className={c.container}>
           <Process
             id="process"
             title="Kā notiek remonts"
@@ -190,15 +192,14 @@ export default function BrandPhonesPage({ params }) {
         </div>
       </section>
 
-      {/* Why + FAQ + Convert band */}
-      <section style={{ padding: '8px 0 8px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-          <Why />
-        </div>
+      {/* Why — full width */}
+      <section className={c.section}>
+        <Why />
       </section>
 
-      <section aria-labelledby="faq-h2" style={{ padding: '8px 0 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
+      {/* FAQ */}
+      <section className={c.section} aria-labelledby="faq-h2">
+        <div className={c.container}>
           <Faq
             id="brand-faq"
             title="Biežāk uzdotie jautājumi"
@@ -209,10 +210,9 @@ export default function BrandPhonesPage({ params }) {
         </div>
       </section>
 
-      <section style={{ padding: '8px 0 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-          <ConvertBand />
-        </div>
+      {/* Convert band — full width */}
+      <section className={c.section}>
+        <ConvertBand />
       </section>
     </>
   );

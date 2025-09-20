@@ -1,132 +1,222 @@
+// app/(site)/(catalog)/plansetdatoru-remonts/page.jsx
 import Script from 'next/script';
 import Link from 'next/link';
 
-import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
-import { tabletIssues } from '@/data/commonIssues';
+import BrandPreview from '@components/model-grid/BrandPreview';
 
-import Services      from '@sections/services/Services';
-import CommonIssues  from '@sections/common-issues/CommonIssues';
-import ModelGrid     from '@components/model-grid/ModelGrid';
-import Why           from '@sections/why/Why';
-import Faq           from '@sections/faq/Faq';
-import ConvertBand   from '@sections/convert-band/ConvertBand';
+import Services from '@sections/services/Services';
+import Process from '@sections/process/Process';
+import Faq from '@sections/faq/Faq';
+import Why from '@sections/why/Why';
+import ConvertBand from '@sections/convert-band/ConvertBand';
+import phoneIssues from '@/data/commonIssues'; // generic list reused
 
-
-// Reuse same look as iPhone category:
-import s from './PlansetRemonts.module.scss';
+import s from '@styles/Catalog.module.scss';
+import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
 
 const ORIGIN = 'https://www.ilab.lv';
-const cat = categoryContent['plansetdatoru-remonts'];
 
 export const metadata = {
-  title: cat?.seo?.title ?? 'Planšetdatoru remonts | iLab',
-  description: cat?.seo?.metaDescription ?? '',
+  title: 'Planšetdatoru remonts Rīgā — cenas, ātri, garantija | iLab',
+  description:
+    'Planšetdatoru remonts: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
   alternates: { canonical: '/plansetdatoru-remonts' },
 };
 
-const TABLET_SERVICES = [
-  { title: 'Displeja (ekrāna) maiņa', text: 'plaisas, plankumi, nereaģē skāriens.' },
-  { title: 'Baterijas maiņa', text: 'strauji krīt uzlāde, negaidīti izslēdzas.' },
-  { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna uzlāde.' },
-  { title: 'Kameras remonts', text: 'miglaini attēli, autofokuss nestrādā.' },
-  { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja iespējams.' },
-];
+// Top 4 models per brand (for tablets)
+function topModelsForBrand(list, brandSlug) {
+  const filtered = list.filter(
+    (d) => d.category === 'plansetdatoru-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
+  );
 
-function getTabletDevices(list) {
-  const f = list.filter((d) => d.category === 'plansetdatoru-remonts');
-  f.sort((a, b) => {
-    if (a.popular !== b.popular) return Number(b.popular) - Number(a.popular);
+  const seen = new Set();
+  const uniq = [];
+  for (const d of filtered) {
+    const k = `${d.category}:${d.brandSlug}:${d.slug}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    uniq.push(d);
+  }
+
+  uniq.sort((a, b) => {
+    const ao = typeof a.order === 'number' ? a.order : 99999;
+    const bo = typeof b.order === 'number' ? b.order : 99999;
+    if (ao !== bo) return ao - bo;
     if (a.year && b.year && a.year !== b.year) return b.year - a.year;
-    return a.name.localeCompare(b.name, 'lv');
+    return (a.name || '').localeCompare(b.name || '', 'lv');
   });
-  return f;
+
+  return { items: uniq.slice(0, 4), total: uniq.length };
 }
 
-const faqItems = [
-  { q: 'Cik ilgi ilgst planšetdatora remonts?', a: 'Bieži tajā pašā dienā; atkarīgs no bojājuma un detaļu pieejamības.' },
-  { q: 'Vai nodrošināt garantiju?', a: 'Jā, 90 dienas uz remontu un detaļām.' },
-  { q: 'Vai diagnostika ir bez maksas?', a: 'Jā, sākotnējā diagnostika ir bez maksas.' },
-];
+export default function PlansetdatoruRemontsPage() {
+  // Brand registry (hub-aware names/hrefs)
+  const brands = listBrandsForCategory(BRAND_CATEGORY.TABLETS);
 
-const breadcrumbsLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'Planšetdatoru remonts', item: `${ORIGIN}/plansetdatoru-remonts/` },
-  ],
-};
+  // Build preview blocks
+  const brandBlocks = brands
+    .map(({ slug, name, href }) => {
+      const { items, total } = topModelsForBrand(devicesAll, slug);
+      return { slug, name, href, items, total };
+    })
+    .filter((b) => b.total > 0);
 
-const serviceLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${ORIGIN}/plansetdatoru-remonts#service`,
-  serviceType: 'Planšetdatoru remonts',
-  areaServed: { '@type': 'Country', name: 'Latvia' },
-  provider: { '@id': `${ORIGIN}#organization` },
-  url: `${ORIGIN}/plansetdatoru-remonts/`,
-  name: 'Planšetdatoru remonts',
-  description: 'iPad un citu planšetdatoru remonts: displejs, baterija, uzlāde, kamera, ūdens bojājumi.',
-};
+  // JSON-LD
+  const breadcrumbsLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Planšetdatoru remonts', item: `${ORIGIN}/plansetdatoru-remonts/` },
+    ],
+  };
 
-export default function TabletsPage() {
-  const devices = getTabletDevices(devicesAll);
+  const serviceLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${ORIGIN}/plansetdatoru-remonts#service`,
+    serviceType: 'Planšetdatoru remonts',
+    areaServed: { '@type': 'Country', name: 'Latvia' },
+    provider: { '@id': `${ORIGIN}#organization` },
+    url: `${ORIGIN}/plansetdatoru-remonts/`,
+    name: 'Planšetdatoru remonts',
+    description:
+      'Planšetdatoru remonts: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
+  };
+
+  const itemListLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: brandBlocks.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${ORIGIN}${b.href}/`,
+      name: `${b.name} remonts`,
+    })),
+  };
 
   return (
     <>
+      {/* JSON-LD */}
       <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}
       </Script>
+      <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(itemListLd)}
+      </Script>
 
-      {/* Preface (short SEO copy) */}
-      <section className={s.preface} aria-labelledby="preface-h2">
+      {/* INTRO (SEO copy under H2; Header owns H1/lead/CTA) */}
+      <section className={s.section} aria-labelledby="tablets-intro-h2">
         <div className={s.container}>
-          <h2 id="preface-h2" className={s.h2}>Planšetdatoru remonts — ātri un droši</h2>
-          <p className={s.paragraph}>
-            Remontējam iPad un citas planšetes — displejs, baterija, uzlādes ligzda, kamera un mitruma bojājumi.
-            Bezmaksas diagnostika, skaidras cenas un 90 dienu garantija.
-          </p>
-        </div>
-      </section>
+          <h2 id="tablets-intro-h2" className={s.h2}>Planšetdatoru remonts — ko mēs darām</h2>
 
-      {/* Services (popular repairs) */}
-      <Services
-        id="tablet-services"
-        title="Populārākie remonti"
-        items={TABLET_SERVICES}
-        headingLevel={2}
-        variant="list"
-      />
-
-      {/* Symptoms → fixes */}
-      <CommonIssues
-        id="tablet-issues"
-        title="Ar kādiem jautājumiem visbiežāk pie mums vēršas"
-        items={tabletIssues}
-        headingLevel={2}
-      />
-
-      {/* Model grid */}
-      <section id="plansetu-modeli" className={s.anchorTarget} aria-labelledby="tablet-models-h2">
-        <div className={s.container}>
-          <h2 id="tablet-models-h2" className={s.h2}>
-            {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu planšetdatoru'}
-          </h2>
           <p className={s.intro}>
-            {cat?.sections?.modelGrid?.intro ?? 'Ja neredzi savu modeli — uzraksti mums, palīdzēsim.'}
+            Ekrāni, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas,
+            biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.
           </p>
-          {/* For category page we’ll use /plansetdatoru-remonts/<device> */}
-          <ModelGrid devices={devices} baseHref="/plansetdatoru-remonts" />
+
+          <p className={s.paragraph}>
+            Strādājam ar <strong>iPad</strong>, <strong>Samsung Galaxy Tab</strong> un citiem populāriem planšetdatoriem. 
+            Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>baterijas nomaiņa</strong>,{' '}
+            <strong>uzlādes ligzda</strong>, <strong>kamera</strong>, <strong>skaļruņi/mikrofons</strong>, kā arī{' '}
+            <strong>ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā{' '}
+            <Link href="#process-h2">“Kā notiek remonts”</Link>.
+          </p>
+
+          <p className={s.paragraph}>
+            Skaties arī: <Link href="/iphone-remonts">iPhone remonts</Link> un{' '}
+            <Link href="/telefonu-remonts">telefonu remonts</Link> — ja meklē remontu citai ierīcei.
+          </p>
         </div>
       </section>
 
-      <Why />
-      <Faq id="tablet-faq" title="Biežāk uzdotie jautājumi" items={faqItems} headingLevel={2} variant="accordion" />
-      <ConvertBand />
+      {/* ===== ANCHOR for Header CTA (must be above the brand previews) ===== */}
+      <div id="brand-list" className={s.anchorTarget} />
+
+      {/* Brand previews */}
+      {brandBlocks.map((b) => (
+        <BrandPreview
+          key={b.slug}
+          brandSlug={b.slug}
+          brandName={b.name}
+          items={b.items}
+          total={b.total}
+          href={b.href}
+        />
+      ))}
+
+      {/* Popular services */}
+      <section className={s.section} aria-labelledby="popular-services-h2">
+        <div className={s.container}>
+          <Services
+            id="tablet-services"
+            title="Populārākie remonti"
+            items={[
+              { title: 'Ekrāna maiņa', text: 'plaisas, plankumi, skāriena problēmas.' },
+              { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, īss darbības laiks.' },
+              { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
+              { title: 'Kamera', text: 'miglains attēls, fokusēšanās kļūdas.' },
+              { title: 'Skaļruņi/mikrofons', text: 'klusa skaņa, krakšķi, sarunās nedzird.' },
+              { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
+            ]}
+            headingLevel={2}
+            variant="list"
+          />
+        </div>
+      </section>
+
+      {/* Process */}
+      <div id="process-h2" className={s.anchorTarget} />
+      <section className={s.section} aria-labelledby="process-h2">
+        <div className={s.container}>
+          <Process
+            id="process"
+            title="Kā notiek remonts"
+            steps={[
+              { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
+              { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
+              { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
+              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+            ]}
+            headingLevel={2}
+            variant="cards"
+          />
+        </div>
+      </section>
+
+      {/* Why — full width */}
+      <section className={s.section}>
+        <Why />
+      </section>
+
+      {/* FAQ */}
+      <section className={s.section} aria-labelledby="faq-h2">
+        <div className={s.container}>
+          <Faq
+            id="tablets-faq"
+            title="Biežāk uzdotie jautājumi"
+            items={[
+              { q: 'Cik ilgi ilgst ekrāna maiņa planšetei?', a: 'Bieži tajā pašā dienā — atkarīgs no modeļa un noslodzes.' },
+              { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
+              { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
+              { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
+              { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
+            ]}
+            headingLevel={2}
+            variant="accordion"
+          />
+        </div>
+      </section>
+
+      {/* Convert band — full width */}
+      <section className={s.section}>
+        <ConvertBand />
+      </section>
     </>
   );
 }
