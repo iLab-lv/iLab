@@ -7,7 +7,7 @@ import Devices from '@sections/home-devices/Devices';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
 import Reviews from '@sections/reviews/Reviews';
-import Faq from '@sections/faq/Faq';           // ← use shared FAQ
+import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 const HOME_FAQ_ITEMS = [
@@ -45,6 +45,17 @@ export default function HomeScreen() {
         cta={{ label: 'Apskatīt pakalpojumus', href: '#services' }}
         align="center"
         background="gradient"
+        imageSrc="/images/hero.png"
+
+        /* === Desktop framing & text lift === */
+        posDesktop="50% 20%"  // keep desktop focal point
+        offsetDesktop={-8}    // lift text on desktop (-8vh)
+
+        /* === Mobile layout controls (inline image mode) === */
+        imageInlineMobile     // use inline image on mobile (BG off on mobile)
+        offsetMobile={12}     // move text DOWN on mobile (+12vh)
+        imageLiftMobile={124}  // visually lift image UP from bottom (px or 'vh'); doesn't change hero height
+        // imageMaxWidthMobile={1100} // optional: cap inline image width on mobile
       />
 
       <div id="services" />
@@ -57,7 +68,6 @@ export default function HomeScreen() {
       <div id="reviews" />
       <Reviews />
 
-      {/* Shared FAQ section */}
       <Faq
         id="home-faq"
         title="Biežāk uzdotie jautājumi"

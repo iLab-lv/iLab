@@ -1,82 +1,148 @@
-/* sections/home/Hero.module.scss */
-@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_tokens.scss' as t;
 @use '@/styles/_layout.scss' as layout;
 
-/* ---------- Glass helper ---------- */
+/* glass helper for badges/buttons */
 @mixin glass-weak {
-  background: $glass-bg-weak;
-  border: $border-thin solid $glass-border;
-  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
-  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  background: t.$glass-bg-weak;
+  border: t.$border-thin solid t.$glass-border;
+  backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
+  -webkit-backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
 }
 
-/* ---------- Base ---------- */
+/* ===== Hero base ===== */
 .hero {
+  /* defaults (override via style={} on the section) */
+  --hero-image: url('/images/hero.png');
+  --hero-pos-x-d: 50%;
+  --hero-pos-y-d: 20%;
+  --hero-offset-d: -6vh;
+  --hero-offset-m: -2vh;
+
+  /* mobile inline image defaults */
+  --hero-media-lift-m: 0px;       /* ↑ translate image UP from bottom, does NOT change hero height */
+  --hero-media-maxw-m: 1100px;    /* inline image max-width on mobile */
+
+  /* resolved */
+  --hero-pos-x: var(--hero-pos-x-d);
+  --hero-pos-y: var(--hero-pos-y-d);
+  --hero-offset: var(--hero-offset-d);
+
   position: relative;
   min-height: 100svh;
   display: grid;
   align-content: center;
-  padding-top: $header-desktop-height;
+  gap: t.$space-md;
+  padding-top: t.$header-desktop-height;
 
-  @media (max-width: $bp-md) { padding-top: $header-mobile-height; }
+  color: t.$color-text;
+  background-color: t.$color-background;
 }
 
+@media (max-width: t.$bp-md) {
+  .hero {
+    padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
+    align-content: stretch;
+    --hero-offset: var(--hero-offset-m);
+  }
+}
+
+/* desktop/tablet background (cover) */
 .bgGradient {
-  background:
-    radial-gradient(1200px 600px at 50% 20%, rgba(255,255,255,0.06), transparent 60%),
-    linear-gradient(180deg, $color-surface-2 0%, $color-surface-1 60%, $color-background 100%);
+  background-image: var(--hero-image);
+  background-size: cover;
+  background-position: var(--hero-pos-x) var(--hero-pos-y);
+  background-repeat: no-repeat;
+  background-color: t.$color-background;
 }
 
+/* alignment helpers */
 .alignCenter .container { text-align: center; }
 .alignStart  .container { text-align: left; }
 
-.container { @include layout.container; }
+/* text container — physical vertical move */
+.container {
+  @include layout.container;
+  position: relative;
+  z-index: 1;
+  margin-top: var(--hero-offset); /* negative lifts, positive pushes down */
+}
 
+/* ===== Mobile inline image mode ===== */
+/* off by default */
+.mediaWrap { display: none; }
+
+@media (max-width: t.$bp-md) {
+  /* When .mobileInline is present:
+     - disable background image on mobile
+     - show inline image anchored to the bottom, then lift up via translateY */
+  .mobileInline.bgGradient { background-image: none; }
+
+  .mobileInline .mediaWrap {
+    @include layout.container;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    /* anchor block to bottom of hero without increasing overall height */
+    margin-top: auto;
+
+    /* lift image up from bottom WITHOUT changing layout height */
+    transform: translateY(calc(-1 * var(--hero-media-lift-m)));
+  }
+
+  .mobileInline .media {
+    display: block;
+    width: 100%;
+    max-width: var(--hero-media-maxw-m);
+    height: auto;
+  }
+}
+
+/* ===== Type & UI ===== */
 .heading {
-  font-size: $font-size-h3;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-extrabold;
+  font-size: t.$font-size-h3;
+  line-height: t.$line-height-heading;
+  font-weight: t.$font-weight-extrabold;
   letter-spacing: -0.01em;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 
-  @media (min-width: $bp-lg) { font-size: $font-size-h2; }
+  @media (min-width: t.$bp-lg) { font-size: t.$font-size-h2; }
 }
 
 .sub {
-  color: $color-text-2;
+  color: t.$color-text-2;
   max-width: 62ch;
-  margin: 0 auto 12px;
-
-  /* align-left variant: override auto-centering */
+  margin: 0 auto 10px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.35);
   .alignStart & { margin-left: 0; margin-right: 0; }
 }
 
-/* Rating micro-badge */
-.rating { margin: 0 0 20px; }
+.rating { margin: 0 0 10px; }
 
 .ratingBadge {
   @include glass-weak;
-  display: inline-flex; align-items: center; gap: $space-sm;
-  border-radius: $radius-pill; padding: 8px $space-md;
-  color: $color-text; text-decoration: none;
-  transition: background-color $dur-base $ease-std, border-color $dur-base $ease-std;
-
-  &:hover { background: $accent-tint-weak; border-color: $glass-border-2; }
+  display: inline-flex; align-items: center; gap: t.$space-sm;
+  border-radius: t.$radius-pill; padding: 6px t.$space-md;
+  color: t.$color-text; text-decoration: none; font-size: t.$font-size-p;
+  transition: background-color t.$dur-base t.$ease-std, border-color t.$dur-base t.$ease-std;
+  &:hover { background: t.$accent-tint-weak; border-color: t.$glass-border-2; }
 }
 
-.star { color: $color-accent; font-weight: $font-weight-bold; }
-.ratingText { color: $color-text; }
+.star { color: t.$color-accent; font-weight: t.$font-weight-bold; }
+.ratingText { color: t.$color-text; }
 
-/* Anchor-styled hero button */
 .linkButton {
   @include glass-weak;
-  border-radius: $radius-lg;
-  padding: 0 $space-xl; height: $btn-h-md;
+  border-radius: t.$radius-lg;
+  padding: 0 t.$space-xl; height: t.$btn-h-md;
   display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; color: $color-text;
-  transition: transform $dur-base $ease-emph, border-color $dur-base $ease-std;
-
-  &:hover { border-color: $glass-border-2; transform: translateY(-1px); }
+  text-decoration: none; color: t.$color-text;
+  transition: transform t.$dur-base t.$ease-emph, border-color t.$dur-base t.$ease-std;
+  &:hover { border-color: t.$glass-border-2; transform: translateY(-1px); }
 }
 
-.ctaRow { margin-top: 12px; display: inline-flex; }
+.ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
+
+@media (prefers-reduced-motion: reduce) {
+  .linkButton, .ratingBadge { transition: none; }
+}
