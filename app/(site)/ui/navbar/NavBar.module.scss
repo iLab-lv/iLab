@@ -57,7 +57,7 @@
   color: $color-text; text-decoration: none; border-radius: $radius-md;
   transition: color $dur-base $ease-std, background-color $dur-base $ease-std;
 
-  &:hover, &:focus-visible { color: $color-accent; outline: none; }
+  &:hover, &:focus-visible { color: $color-accent; outline: none; text-decoration: none;}
 
   &::after {
     content: ''; position: absolute; left: 12px; right: 12px; bottom: 6px; height: 2px;
@@ -120,7 +120,7 @@
 
 /* Mobile-only (<768px): locator icon (Sazināties moves to BottomBar) */
 .iconBtn {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center; 
   width: 42px; height: 42px; border-radius: $radius-md;
   border: 1px solid $glass-border; background: $glass-bg-weak; color: $color-text;
   cursor: pointer;
