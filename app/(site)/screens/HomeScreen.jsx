@@ -42,7 +42,7 @@ export default function HomeScreen() {
           href: '#reviews',
           ariaLabel: 'Google vērtējums 4.9 no 5, 230 atsauksmes',
         }}
-        cta={{ label: 'Izvēlies ierīci', href: '#services' }}
+        cta={{ label: 'Apskatīt pakalpojumus', href: '#services' }}
         align="center"
         background="gradient"
       />
