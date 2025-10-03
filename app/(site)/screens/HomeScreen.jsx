@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Hero from '@sections/hero/Hero';
 
+import Services from '@sections/home-devices/Services';
 import Devices from '@sections/home-devices/Devices';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
@@ -59,7 +60,10 @@ export default function HomeScreen() {
       />
 
       <div id="services" />
-      <Devices />
+
+      <Services />
+      
+      {/* <Devices /> */}
 
       <Why />
 
