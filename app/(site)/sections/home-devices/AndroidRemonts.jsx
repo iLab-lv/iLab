@@ -1,4 +1,3 @@
-// app/(site)/sections/home-devices/AndroidRemonts.jsx
 import s from './Services.module.scss';
 
 export default function AndroidRemonts({
@@ -11,11 +10,23 @@ export default function AndroidRemonts({
 }) {
   const bid = `${idBase}-android`;
 
-  // map brand name -> logo in /public/images/home
+  // map brand name -> logo in /public/images/home (override per brand with b.logoSrc if needed)
   const logoMap = {
     samsung: '/images/home/samsung-logo.svg',
     xiaomi: '/images/home/xiaomi-logo.svg',
     huawei: '/images/home/huawei-logo.svg',
+  };
+
+  // unique, concise blurbs (examples only — not exhaustive)
+  const seoBlurbMap = {
+    samsung:
+      'Servisējam Galaxy un citus Samsung — ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
+    xiaomi:
+      'Xiaomi, Redmi un POCO remonts — displeja remonts, baterijas/akumulatora maiņa u. c. Darbi tajā pašā dienā (atkarībā no modeļa).',
+    huawei:
+      'Huawei P un Mate sērijai — ekrāna maiņa, uzlādes porta salabošana u. c. Kvalitatīvas detaļas un 90 dienu garantija.',
+    default:
+      'Android ierīču remonts — ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
   };
 
   const normalizedBrands = brands.map((b) => {
@@ -23,6 +34,7 @@ export default function AndroidRemonts({
     return {
       ...b,
       logoSrc: b.logoSrc || logoMap[key] || '/images/home/android-badge.png',
+      seoText: seoBlurbMap[key] || seoBlurbMap.default,
     };
   });
 
@@ -56,6 +68,9 @@ export default function AndroidRemonts({
             <div className={s.brandMarkWrap} aria-hidden="true">
               <img className={s.brandMark} src={b.logoSrc} alt="" />
             </div>
+
+            {/* Short SEO blurb (small type, extra space after) */}
+            <p className={s.brandBlurb}>{b.seoText}</p>
 
             <div className={s.brandLinks}>
               <a href={b.phoneHref}>{b.phoneLabel}</a>
