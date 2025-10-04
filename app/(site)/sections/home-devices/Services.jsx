@@ -71,6 +71,13 @@ export default function Services({
     },
   ],
 }) {
+  // Ensure we don't spread `key` into JSX
+  const pcItem = twoUp.find((x) => x.key === 'pc') || {};
+  const { key: _pcKey, ...pcProps } = pcItem;
+
+  const dysonItem = twoUp.find((x) => x.key === 'dyson') || {};
+  const { key: _dysonKey, ...dysonProps } = dysonItem;
+
   return (
     <section id={id} className={`${s.section} ${s.services}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
@@ -80,8 +87,8 @@ export default function Services({
         <AndroidRemonts idBase={id} {...android} />
 
         <div className={s.twoUp}>
-          <LaptopRemonts idBase={id} {...twoUp.find(x => x.key === 'pc')} />
-          <DysonRemonts  idBase={id} {...twoUp.find(x => x.key === 'dyson')} />
+          <LaptopRemonts idBase={id} {...pcProps} />
+          <DysonRemonts  idBase={id} {...dysonProps} />
         </div>
       </div>
     </section>
