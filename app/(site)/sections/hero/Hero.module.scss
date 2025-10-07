@@ -1,7 +1,7 @@
 @use '@/styles/_tokens.scss' as t;
 @use '@/styles/_layout.scss' as layout;
 
-/* glass helper for badges/buttons */
+/* glass helper for badges */
 @mixin glass-weak {
   background: t.$glass-bg-weak;
   border: t.$border-thin solid t.$glass-border;
@@ -131,18 +131,5 @@
 .star { color: t.$color-accent; font-weight: t.$font-weight-bold; }
 .ratingText { color: t.$color-text; }
 
-.linkButton {
-  @include glass-weak;
-  border-radius: t.$radius-lg;
-  padding: 0 t.$space-xl; height: t.$btn-h-md;
-  display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; color: t.$color-text;
-  transition: transform t.$dur-base t.$ease-emph, border-color t.$dur-base t.$ease-std;
-  &:hover { border-color: t.$glass-border-2; transform: translateY(-1px); }
-}
-
+/* CTA row now uses shared <Button> (ctaChip); old .linkButton removed */
 .ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
-
-@media (prefers-reduced-motion: reduce) {
-  .linkButton, .ratingBadge { transition: none; }
-}

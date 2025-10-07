@@ -1,7 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
-/* Glass helper */
+/* Keep your existing glass helper if you have it; simplified here */
 @mixin glass-weak {
   background: $glass-bg-weak;
   border: $border-thin solid $glass-border;
@@ -9,8 +9,9 @@
   -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
 }
 
-/* Section base */
 .section {
+  position: relative;
+  isolation: isolate;
   padding-block: $space-3xl;
 
   @media (max-width: $bp-md) {
@@ -21,10 +22,31 @@
 .why {
   background: $color-surface-3;
   text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* very subtle ambient accent */
+    background:
+      radial-gradient(900px 500px at 20% 80%, rgba($color-accent, 0.05), transparent 55%),
+      radial-gradient(1000px 600px at 85% 15%, rgba($color-accent, 0.06), transparent 60%);
+    opacity: .35;
+    mix-blend-mode: screen;
+  }
 }
 
 .container {
   @include layout.container;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  margin: 0 auto $space-xl;
+  max-width: 70ch;
 }
 
 .sectionTitle {
@@ -36,19 +58,71 @@
 
 .copy {
   color: $color-text-2;
-  margin: 0 auto $space-xl;
+  margin: 0 auto;
   max-width: 70ch;
 }
 
-.uspRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-md;
-  justify-content: center;
+/* GRID: stacked cards */
+.uspGrid {
+  margin-top: $space-xl;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-lg;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr 1fr;
+    gap: $space-md;
+  }
 }
 
-.uspChip {
+.card {
   @include glass-weak;
-  border-radius: $radius-pill;
-  padding: $space-sm $space-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $space-md;
+  padding: $space-xl $space-lg;
+  border-radius: 16px; /* rectangular card with soft corners */
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 0 1px rgba($color-accent, .10) inset;
+  }
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;  /* square to prevent squeeze */
+  height: 64px; /* square to prevent squeeze */
+  border-radius: 999px;
+  background:
+    radial-gradient(40% 40% at 30% 25%, rgba($color-accent, .25), rgba($color-accent, .10)),
+    rgba($color-accent, .12);
+  box-shadow: inset 0 0 0 1px rgba($color-accent, .28);
+  color: $color-accent;
+}
+
+.icon {
+  /* explicit size for all icons; avoids odd viewBox scaling */
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+
+.cardText {
+  color: $color-text;
+  font-size: $font-size-lg;
+  line-height: 1.25;
+  text-align: center;
+  /* keep to one line on compact widths but allow wrap on small screens */
+  @media (max-width: $bp-sm) {
+    font-size: $font-size-p;
+  }
 }

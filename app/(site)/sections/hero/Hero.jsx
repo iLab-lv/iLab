@@ -1,3 +1,4 @@
+import Button from '@components/button/Button';
 import s from './Hero.module.scss';
 
 export default function Hero({
@@ -82,7 +83,15 @@ export default function Hero({
 
         {cta && (
           <div className={s.ctaRow}>
-            <a href={cta.href} className={s.linkButton} aria-label={cta.label}>{cta.label}</a>
+            <Button
+              variant="ctaChip"
+              chipDir="right"
+              size="lg"
+              href={cta.href}
+              aria-label={cta.label}
+            >
+              {cta.label}
+            </Button>
           </div>
         )}
       </div>
