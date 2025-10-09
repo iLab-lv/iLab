@@ -1,5 +1,8 @@
 @use '@/styles/_tokens.scss' as *;
 
+/* =========================
+   Section shell & container
+   ========================= */
 .section {
   padding-block: $space-lg;
   border-bottom: $border-thin solid $color-border;
@@ -11,10 +14,15 @@
   padding: 0 $space-md;
 }
 
-/* Smaller, calmer heading */
+/* =========================
+   Section heading
+   - centered, a bit larger,
+   - extra bottom spacing
+   ========================= */
 .sectionTitle {
-  margin: 0 0 $space-lg 0;
-  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  margin: 0 0 $space-2xl 0;
+  text-align: center;
+  font-size: clamp($font-size-lg, 0.9rem + 1.2vw, $font-size-h5);
   line-height: $line-height-heading;
   font-weight: $font-weight-semibold;
   color: $color-text;
@@ -22,19 +30,106 @@
   opacity: 0.95;
 }
 
-/* Grid: 1 → 2 → 3 → 5 columns (one row on xl) */
+/* Wrapper used by the section */
 .grid {
   display: grid;
   gap: $space-md;
 }
+
+/* =========================================================
+   CARDS → 2-column zigzag + center spine + connectors
+   - No vertical gaps between cards (row-gap: 0)
+   ========================================================= */
+
+/* Mobile: single column (no vertical gap) */
 .cards {
+  position: relative;                 /* center spine anchor */
+  --col-gap: #{$space-3xl};           /* gutter between columns */
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  @media (min-width: $bp-md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @media (min-width: $bp-lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  @media (min-width: $bp-xl) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  row-gap: 0;                         /* ← remove top/bottom gaps between cards */
 }
 
-/* Card: equal height, subtle glass, accent hairline on top */
+/* Desktop: exactly two columns with stepped flow (no row gap) */
+@media (min-width: $bp-md) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 0;                       /* ← remove vertical gaps on desktop too */
+  }
+
+  /* Center spine */
+  .cards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% - 0.5px);
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      rgba($color-accent, .35),
+      rgba($color-accent, .15)
+    );
+    border-radius: 1px;
+    pointer-events: none;
+  }
+
+  /* Lanes + keep cards hugging the spine */
+  .cards > .card:nth-child(odd)  { grid-column: 1; justify-self: end; }
+  .cards > .card:nth-child(even) { grid-column: 2; justify-self: start; }
+
+  /* Limit card width so they don't feel too wide */
+  .cards > .card { max-width: 480px; width: 100%; }
+
+  /* Stepped rows (increase if you need more steps) */
+  $max-steps: 16;
+  @for $i from 1 through $max-steps {
+    .cards > .card:nth-child(#{$i}) { grid-row: #{$i}; }
+  }
+
+  /* Connector geometry (align to badge center) */
+  $badge-center-y: $space-lg + 14px; /* padding-top (~24) + half of 28px badge */
+
+  .cards > .card {
+    position: relative;
+    overflow: visible; /* allow connector to extend into the gutter */
+  }
+
+  /* Horizontal connector from card edge → spine center */
+  .cards > .card::after {
+    content: '';
+    position: absolute;
+    top: $badge-center-y;
+    height: 1px;
+    background: rgba($color-accent, .28);
+    pointer-events: none;
+  }
+  .cards > .card:nth-child(odd)::after  { left: 100%;  width: calc(var(--col-gap) / 2); }
+  .cards > .card:nth-child(even)::after { right: 100%; width: calc(var(--col-gap) / 2); }
+
+  /* Dot at the spine */
+  .cards > .card::before {
+    content: '';
+    position: absolute;
+    top: calc(#{$badge-center-y} - 4px);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-accent;
+    box-shadow: 0 0 0 3px rgba($color-accent, .18);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .cards > .card:nth-child(odd)::before  { left:  calc(100% + var(--col-gap)/2 - 4px); }
+  .cards > .card:nth-child(even)::before { right: calc(100% + var(--col-gap)/2 - 4px); }
+}
+
+/* =========================================================
+   Card visuals
+   - Hairline via background image (keeps pseudos free)
+   - Calmer typography
+   ========================================================= */
+
 .card {
   position: relative;
   display: grid;
@@ -42,22 +137,14 @@
   align-content: start;
   gap: $space-sm;
 
-  padding: $space-md;
+  padding: $space-lg;
   border-radius: $radius-lg;
   border: $border-thin solid $color-border;
-  background: $glass-bg-weak;
 
-  /* accent hairline */
-  &::before {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    height: 2px;
-    background: linear-gradient(90deg, rgba($color-accent, .35), rgba($color-accent, 0));
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-  }
+  /* glass bg + top accent hairline as background */
+  background:
+    linear-gradient(90deg, rgba($color-accent, .35), rgba($color-accent, 0)) top / 100% 2px no-repeat,
+    $glass-bg-weak;
 
   @supports (backdrop-filter: blur(1px)) {
     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
@@ -73,22 +160,24 @@
     border-color $dur-base $ease-std;
 
   &:hover {
-    background: $glass-bg-weak-hover;
+    background:
+      linear-gradient(90deg, rgba($color-accent, .35), rgba($color-accent, 0)) top / 100% 2px no-repeat,
+      $glass-bg-weak-hover;
     transform: translateY(-1px);
     box-shadow: $shadow-soft;
     border-color: $glass-border-2;
   }
 }
 
-/* Compact circular number badge */
+/* Badge */
 .badge {
-  inline-size: 24px;
-  block-size: 24px;
+  inline-size: 28px;
+  block-size: 28px;
   border-radius: 999px;
   display: grid;
   place-items: center;
 
-  font-size: 0.75rem; /* small */
+  font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
   color: $color-accent;
 
@@ -96,19 +185,22 @@
   background: rgba($color-accent, .08);
 }
 
-/* Typography inside cards */
+/* Calmer type in cards */
 .stepTitle {
   margin: 0;
-  font-size: 0.9375rem; /* smaller heading */
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-semibold;
   color: $color-text;
+  line-height: $line-height-heading;
+  /* ~18 → 21.3 max */
+  font-size: clamp($font-size-lg, 0.95rem + 0.3vw, $font-size-xl);
 }
 
 .stepText {
   margin: 0;
-  font-size: 0.85rem;
   color: $color-text-3;
   line-height: $line-height-body;
+  /* ~15.5 → 16 max */
+  font-size: clamp(0.97rem, 0.95rem + 0.1vw, $font-size-p);
 }
 
 /* Reduced motion */
