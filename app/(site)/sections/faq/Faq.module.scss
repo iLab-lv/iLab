@@ -11,6 +11,18 @@
   padding: 0 $space-md;
 }
 
+.group {
+  margin-top: $space-xl;
+}
+
+.groupTitle {
+  margin-bottom: $space-md;
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
+  font-weight: $font-weight-medium;
+  color: $color-text-2;
+}
+
+
 /* More breathing room for the heading */
 .sectionTitle {
   margin: 0 0 $space-lg 0;
