@@ -1,104 +1,115 @@
+// app/(site)/sections/common-issues/CommonIssues.jsx
 'use client';
 
 import Link from 'next/link';
-import Script from 'next/script';
 import s from './CommonIssues.module.scss';
 
-function fmtTime(min, max) {
-  if (!min && !max) return 'Tajā pašā dienā';
-  if (min && max) return max >= 120 ? 'Tajā pašā dienā' : `${min}–${max} min`;
-  if (max) return max >= 120 ? 'Tajā pašā dienā' : `līdz ${max} min`;
-  return `${min} min`;
-}
+// React Icons are mapped CLIENT-SIDE from string keys
+import { MdOutlinePhoneIphone } from 'react-icons/md';
+import { TbBatteryCharging } from 'react-icons/tb';
+import { HiOutlineCamera } from 'react-icons/hi2';
+import { LuDroplet } from 'react-icons/lu';
+
+const ICONS = {
+  screen: MdOutlinePhoneIphone,
+  battery: TbBatteryCharging,
+  camera: HiOutlineCamera,
+  water: LuDroplet,
+};
 
 /**
- * CommonIssues – “Problēmas un risinājumi”
+ * CommonIssues — FAQ Preview (mini cards grid)
+ * Icons resolved on the client from string keys (no server → client function passing).
+ *
  * Props:
- *  - id: string (default "problems")
- *  - title: string (LV)
- *  - items: [{ id, title, causes[], actions[], timeMin?, timeMax?, href? }]
- *  - headingLevel: 2|3 (default 2)
+ * - id = 'issues-preview'
+ * - title = 'Biežāk sastopamās problēmas'
+ * - items: Array<{
+ *     q: string,       // card title (also FAQ question text)
+ *     text?: string,   // short supporting line (optional)
+ *     id?: string,     // stable slug (used for FAQ anchor)
+ *     icon?: string,   // 'screen' | 'battery' | 'camera' | 'water'
+ *     serviceHref?: string,
+ *   }>
+ * - faqId = 'iphone-faq'
+ * - maxItems = 4
+ * - headingLevel: 2 | 3 = 2
  */
 export default function CommonIssues({
-  id = 'problems',
-  title = 'Ar kādiem jautājumiem visbiežāk pie mums vēršas',
+  id = 'issues-preview',
+  title = 'Biežāk sastopamās problēmas',
   items = [],
+  faqId = 'iphone-faq',
+  maxItems = 4,
   headingLevel = 2,
-  showJsonLd = true,
 }) {
-  const Heading = headingLevel === 3 ? 'h3' : 'h2';
   if (!items?.length) return null;
 
-  // Build FAQPage JSON-LD from items (Q/A style)
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((it) => ({
-      '@type': 'Question',
-      name: it.title,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          [
-            it.causes?.length ? `Iespējamie cēloņi: ${it.causes.join(', ')}.` : null,
-            it.actions?.length ? `Ko darām iLab: ${it.actions.join(', ')}.` : null,
-            (it.timeMin || it.timeMax) ? `Aptuvenais remonta laiks: ${fmtTime(it.timeMin, it.timeMax)}.` : null,
-            `Bezmaksas diagnostika.`,
-          ].filter(Boolean).join(' '),
-      },
-    })),
-  };
+  const Heading = headingLevel === 3 ? 'h3' : 'h2';
+
+  const slugify = (str) =>
+    (str || '')
+      .toString()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .toLowerCase();
+
+  const trimmed = items.slice(0, Math.max(1, maxItems)).map((it, idx) => {
+    const slug = it.id || slugify(it.q || `q-${idx}`);
+    return { ...it, _slug: slug };
+  });
 
   return (
     <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
-      {showJsonLd && (
-        <Script id={`${id}-faq-jsonld`} type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(faqLd)}
-        </Script>
-      )}
-
       <div className={s.container}>
-        <Heading id={`${id}-title`} className={s.sectionTitle}>{title}</Heading>
+        <Heading id={`${id}-title`} className={s.sectionTitle}>
+          {title}
+        </Heading>
 
         <div className={s.grid}>
-          {items.map((it) => (
-            <article key={it.id || it.title} className={s.card}>
-              {/* optional icon placeholder spot */}
-              <div className={s.cardHead}>
-                <h3 className={s.cardTitle}>{it.title}</h3>
-                <span className={s.chipTime}>{fmtTime(it.timeMin, it.timeMax)}</span>
-                <span className={s.chipFree}>Bezmaksas diagnostika</span>
-              </div>
+          {trimmed.map((it) => {
+            const Icon = it.icon ? ICONS[it.icon] : undefined;
 
-              {it.causes?.length ? (
-                <div className={s.block}>
-                  <div className={s.blockLabel}>Iespējamie cēloņi</div>
-                  <ul className={s.ul}>
-                    {it.causes.map((c, i) => <li key={i}>{c}</li>)}
-                  </ul>
-                </div>
-              ) : null}
+            return (
+              <article key={it._slug} className={s.card}>
+                <Link
+                  href={`#${faqId}-${it._slug}`}
+                  className={s.cardLink}
+                  aria-label={`${it.q} — lasīt atbildi`}
+                >
+                  <div className={s.head}>
+                    {Icon ? <Icon className={s.icon} aria-hidden="true" /> : null}
+                    <h3 className={s.title}>{it.q}</h3>
+                  </div>
 
-              {it.actions?.length ? (
-                <div className={s.block}>
-                  <div className={s.blockLabel}>Ko darām iLab</div>
-                  <ul className={s.ul}>
-                    {it.actions.map((a, i) => <li key={i}>{a}</li>)}
-                  </ul>
-                </div>
-              ) : null}
+                  {it.text ? <p className={s.text}>{it.text}</p> : null}
 
-              <div className={s.ctaRow}>
-                {it.href ? (
-                  <Link href={it.href} className={s.linkMore} aria-label={`${it.title} — uzzināt vairāk`}>
-                    Uzzināt vairāk
-                  </Link>
-                ) : (
-                  <span className={s.linkMuted}>Sazinies ar meistaru</span>
-                )}
-              </div>
-            </article>
-          ))}
+                  <span className={s.primaryCta}>Lasīt atbildi</span>
+                </Link>
+
+                {it.serviceHref ? (
+                  <div className={s.serviceRow}>
+                    <Link
+                      href={it.serviceHref}
+                      className={s.serviceLink}
+                      aria-label="Saistītais pakalpojums"
+                    >
+                      Saistītais pakalpojums →
+                    </Link>
+                  </div>
+                ) : null}
+              </article>
+            );
+          })}
+        </div>
+
+        <div className={s.viewAll}>
+          <Link href={`#${faqId}`} className={s.viewAllLink}>
+            Skatīt visus jautājumus
+          </Link>
         </div>
       </div>
     </section>

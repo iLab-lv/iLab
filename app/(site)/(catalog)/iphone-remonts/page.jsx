@@ -5,17 +5,13 @@ import Link from 'next/link';
 import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
 
-import Services from '@sections/services/Services';
-import CommonIssues from '@sections/common-issues/CommonIssues';
-import iphoneIssues from '@/data/commonIssues';
-
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Process from '@sections/process/Process';
+import CommonIssues from '@sections/common-issues/CommonIssues';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
-// USE SHARED CATALOG STYLES
 import s from '@styles/Catalog.module.scss';
 
 const ORIGIN = 'https://www.ilab.lv';
@@ -27,28 +23,76 @@ export const metadata = {
   alternates: { canonical: '/iphone-remonts' },
 };
 
-// Popular services
-const POPULAR_REPAIRS = [
-  { title: 'Displeja (ekrāna) maiņa', href: '/iphone-remonts/displeja-maina', text: 'plaisas, tumši plankumi, nereaģē skāriens.' },
-  { title: 'Akumulatora maiņa', href: '/iphone-remonts/baterijas-maina', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.' },
-  { title: 'Uzlādes ligzdas remonts', text: 'nenoturas kabelis, lēna uzlāde, ātrā uzlāde nestrādā.' },
-  { title: 'Kameras remonts', text: 'miglaini attēli, fokusēšanās problēmas.' },
-  { title: 'Skaļruņi un mikrofons', text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.' },
-  { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
+// =============================
+// FAQ + CommonIssues content
+// =============================
+
+// Mini-cards preview (icon passed as a STRING key for client-side mapping)
+const ISSUES_PREVIEW = [
+  {
+    q: 'Saplīsis ekrāns / displeja problēmas',
+    text: 'iPhone ekrāns saplīsa, plaisas, nereaģē uz pieskārienu',
+    icon: 'screen',
+    serviceHref: '/iphone-remonts/displeja-maina',
+    id: 'displeja-problemas',
+  },
+  {
+    q: 'Barošanas un uzlādes problēmas',
+    text: 'Ātri izlādējas, neslēdzas, neuzlādējas',
+    icon: 'battery',
+    serviceHref: '/iphone-remonts/baterijas-maina', // or /iphone-remonts/uzlades-ligzda
+    id: 'barosanas-problemas',
+  },
+  {
+    q: 'Kameras problēmas',
+    text: 'Kamera nestrādā, miglains attēls',
+    icon: 'camera',
+    serviceHref: '/iphone-remonts/kamera',
+    id: 'kamera-problemas',
+  },
+  {
+    q: 'Mitruma / ūdens bojājumi',
+    text: 'Telefons iekritis ūdenī, pēc tam neieslēdzas',
+    icon: 'water',
+    serviceHref: '/iphone-remonts/udens-bojajumi',
+    id: 'udens-bojajumi',
+  },
 ];
 
-// JSON-LD
+// FAQ grouped
+const FAQ_GROUPS = [
+  {
+    label: 'Par remontu un garantiju',
+    items: [
+      { q: 'Cik ilgi ilgst iPhone displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
+      { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
+      { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
+      { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
+      { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
+      { q: 'Vai strādājat visā Latvijā?', a: 'Jā; tuvāko servisu atradīsi sadaļā “Servisa centri”.' },
+    ],
+  },
+  {
+    label: 'Par biežākajām problēmām',
+    items: [
+      { q: 'Saplīsis ekrāns / displeja problēmas', a: 'Iespējamie cēloņi: plaisas, “ghost touch”, nereaģē skāriens. Ko darām iLab: displeja vai stikla maiņa atkarībā no modeļa. Aptuvenais remonta laiks: Tajā pašā dienā. Bezmaksas diagnostika.', id: 'displeja-problemas' },
+      { q: 'Barošanas un uzlādes problēmas', a: 'Iespējamie cēloņi: akumulatora nolietojums, bojāta uzlādes ligzda vai kabelis. Ko darām iLab: diagnostika, akumulatora vai ligzdas maiņa. Aptuvenais remonta laiks: līdz 120 min. Bezmaksas diagnostika.', id: 'barosanas-problemas' },
+      { q: 'Kameras problēmas', a: 'Iespējamie cēloņi: netīrumi, mitruma bojājumi, moduļa kļūme. Ko darām iLab: moduļa tīrīšana vai maiņa, hermetizācijas pārbaude. Aptuvenais remonta laiks: līdz 120 min. Bezmaksas diagnostika.', id: 'kamera-problemas' },
+      { q: 'Mitruma / ūdens bojājumi', a: 'Iespējamie cēloņi: oksidācija uz kontaktiem vai īssavienojumi moduļos. Ko darām iLab: pilna diagnostika un tīrīšana, bojāto moduļu maiņa, ja iespējams. Aptuvenais remonta laiks: Tajā pašā dienā. Bezmaksas diagnostika.', id: 'udens-bojajumi' },
+    ],
+  },
+];
+
+const FLAT_FAQ = FAQ_GROUPS.flatMap((g) => g.items);
+
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: 'Cik ilgi ilgst iPhone displeja maiņa?', acceptedAnswer: { '@type': 'Answer', text: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' } },
-    { '@type': 'Question', name: 'Vai mani dati saglabāsies?', acceptedAnswer: { '@type': 'Answer', text: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' } },
-    { '@type': 'Question', name: 'Vai detaļām ir garantija?', acceptedAnswer: { '@type': 'Answer', text: 'Jā, gan detaļām, gan darbam.' } },
-    { '@type': 'Question', name: 'Vai pieejamas oriģinālas detaļas?', acceptedAnswer: { '@type': 'Answer', text: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' } },
-    { '@type': 'Question', name: 'Vai varu saņemt aptuveno cenu pirms remonta?', acceptedAnswer: { '@type': 'Answer', text: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' } },
-    { '@type': 'Question', name: 'Vai strādājat visā Latvijā?', acceptedAnswer: { '@type': 'Answer', text: 'Jā; tuvāko servisu atradīsi sadaļā “Servisa centri”.' } },
-  ],
+  mainEntity: FLAT_FAQ.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
 };
 
 const howToLd = {
@@ -106,7 +150,7 @@ export default function IphoneRemontsPage() {
         {JSON.stringify(serviceLd)}
       </Script>
 
-      {/* INTRO (H2 + paragraph — restored copy) */}
+      {/* INTRO */}
       <section className={s.section} aria-labelledby="iphone-intro-h2">
         <div className={s.container}>
           <h2 id="iphone-intro-h2" className={s.h2}>iPhone remonts — ātri un droši</h2>
@@ -118,7 +162,7 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* SERIES GRID (Header CTA targets this) */}
+      {/* SERIES GRID */}
       <section id="iphone-modeli" className={`${s.section} ${s.anchorTarget}`} aria-labelledby="iphone-modeli-h2">
         <div className={s.container}>
           <h2 id="iphone-modeli-h2" className={s.h2}>
@@ -139,7 +183,7 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* GUIDE (from categoryContent) */}
+      {/* GUIDE */}
       {cat?.show?.guide !== false && cat?.sections?.guide && (
         <section className={s.section} aria-labelledby="guide-h2">
           <div className={s.container}>
@@ -156,13 +200,15 @@ export default function IphoneRemontsPage() {
         </section>
       )}
 
-      {/* Common issues */}
-      <section className={s.section} aria-labelledby="issues-h2">
+      {/* CommonIssues — mini cards */}
+      <section className={s.section} aria-labelledby="issues-preview-h2">
         <div className={s.container}>
           <CommonIssues
-            id="problem-fixed"
-            title="Ar kādiem jautājumiem visbiežāk pie mums vēršas"
-            items={iphoneIssues}
+            id="issues-preview"
+            title="Biežāk sastopamās problēmas"
+            items={ISSUES_PREVIEW}
+            faqId="iphone-faq"
+            maxItems={4}
             headingLevel={2}
           />
         </div>
@@ -187,32 +233,25 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* Why — full width */}
+      {/* Why */}
       <section className={s.section}>
         <Why />
       </section>
 
-      {/* FAQ */}
+      {/* FAQ (grouped) */}
       <section className={s.section} aria-labelledby="iphone-faq-h2">
         <div className={s.container}>
           <Faq
             id="iphone-faq"
             title="Biežāk uzdotie jautājumi"
-            items={[
-              { q: 'Cik ilgi ilgst iPhone displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
-              { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
-              { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
-              { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-              { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
-              { q: 'Vai strādājat visā Latvijā?', a: 'Jā; tuvāko servisu atradīsi sadaļā “Servisa centri”.' },
-            ]}
+            groups={FAQ_GROUPS}
             headingLevel={2}
             variant="accordion"
           />
         </div>
       </section>
 
-      {/* ConvertBand — full width */}
+      {/* ConvertBand */}
       <section className={s.section}>
         <ConvertBand />
       </section>

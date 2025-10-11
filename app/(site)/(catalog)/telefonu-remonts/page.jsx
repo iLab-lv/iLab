@@ -153,22 +153,50 @@ export default function TelefonuRemontsPage() {
         />
       ))}
 
-      {/* Popular services */}
+      {/* Popular services — updated to icon cards with explicit hrefs */}
       <section className={s.section} aria-labelledby="popular-services-h2">
         <div className={s.container}>
           <Services
             id="brand-services"
             title="Populārākie remonti"
             items={[
-              { title: 'Displeja (ekrāna) maiņa', text: 'plaisas, tumši plankumi, nereaģē skāriens.' },
-              { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.' },
-              { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
-              { title: 'Kamera', text: 'miglaini attēli, fokusēšanās problēmas.' },
-              { title: 'Skaļruņi/mikrofons', text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.' },
-              { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
+              {
+                title: 'Displeja (ekrāna) maiņa',
+                text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+                icon: 'LuSmartphone',
+                href: '/telefonu-remonts/ekrana-mainja',
+              },
+              {
+                title: 'Akumulatora maiņa',
+                text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+                icon: 'LuBatteryCharging',
+                href: '/telefonu-remonts/akumulatora-mainja',
+              },
+              {
+                title: 'Uzlādes ligzda',
+                text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+                icon: 'LuPlugZap',
+                href: '/telefonu-remonts/uzlades-ligzda',
+              },
+              {
+                title: 'Kamera',
+                text: 'miglaini attēli, fokusēšanās problēmas.',
+                icon: 'LuCamera',
+                href: '/telefonu-remonts/kamera-remonts',
+              },
+              {
+                title: 'Skaļruņi/mikrofons',
+                text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+                icon: 'LuVolume2',
+                href: '/telefonu-remonts/skalruni-mikrofons',
+              },
+              {
+                title: 'Ūdens bojājumi',
+                text: 'diagnostika un atjaunošana, ja tas iespējams.',
+                icon: 'LuDroplets',
+                href: '/telefonu-remonts/udens-bojajumi',
+              },
             ]}
-            headingLevel={2}
-            variant="list"
           />
         </div>
       </section>

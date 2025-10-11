@@ -22,7 +22,6 @@
   color: $color-text-2;
 }
 
-
 /* More breathing room for the heading */
 .sectionTitle {
   margin: 0 0 $space-lg 0;
@@ -43,6 +42,13 @@
   border-radius: $radius-lg;
   background: $color-surface-2;
   overflow: hidden;
+
+  /* --- Added: scroll offset for fixed topbar --- */
+  scroll-margin-top: calc($header-desktop-height + $space-lg);
+
+  @media (max-width: $bp-md) {
+    scroll-margin-top: calc($header-mobile-height + $space-md);
+  }
 }
 
 /* Summary row */
@@ -120,11 +126,13 @@
 
   p {
     margin: 0;
+
     a {
       color: $color-accent;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color $dur-base $ease-std;
+
       &:hover { border-color: currentColor; }
     }
   }
@@ -136,5 +144,8 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .chev::before, .chev::after { transition: none; }
+  .chev::before,
+  .chev::after {
+    transition: none;
+  }
 }

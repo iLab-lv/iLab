@@ -2,63 +2,106 @@
 import Link from 'next/link';
 import s from './Services.module.scss';
 
+// Import only the icons we actually use (tree-shakes react-icons/lu)
+import {
+  LuSmartphone,
+  LuBatteryCharging,
+  LuPlugZap,
+  LuCamera,
+  LuVolume2,
+  LuMic2,
+  LuDroplets,
+} from 'react-icons/lu';
+
 /**
- * Reusable “Services” section for popular repairs.
+ * Cards-only Services section (presentational).
  *
  * Props:
- * - id: 'services' | string            (defaults to "services")
- * - title: string                      (LV; required for a11y/SEO)
- * - items: Array<{ title, text?, href? }>
- * - headingLevel: 2 | 3                (default 2)
- * - variant: 'list' | 'cards'          (default 'list')
+ * - id?: string
+ * - title: string
+ * - items: Array<{
+ *     title: string,
+ *     text?: string,
+ *     href?: string,           // full URL; provide it from the page
+ *     icon?: React.ComponentType | string  // e.g., 'LuSmartphone' or LuSmartphone
+ *   }>
+ * - headingLevel?: 2 | 3 (default 2)
+ * - className?: string
+ *
+ * Notes:
+ * - If `href` is missing, we render a non-clickable card.
+ * - `icon` can be a component OR one of the string keys in ICON_MAP.
+ * - `variant` is ignored (kept only for back-compat).
  */
+const ICON_MAP = {
+  LuSmartphone,
+  LuBatteryCharging,
+  LuPlugZap,
+  LuCamera,
+  LuVolume2,
+  LuMic2,
+  LuDroplets,
+};
+
 export default function Services({
   id = 'services',
   title = 'Populārākie remonti',
   items = [],
   headingLevel = 2,
-  variant = 'list',
   className,
+  // legacy prop kept for back-compat but ignored (always cards)
+  variant,
 }) {
+  if (!items || items.length === 0) return null;
+
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
 
-  if (!items || items.length === 0) return null;
+  function getIconComponent(iconProp) {
+    if (!iconProp) return null;
+    if (typeof iconProp === 'string' && ICON_MAP[iconProp]) return ICON_MAP[iconProp];
+    if (typeof iconProp === 'function') return iconProp;
+    return null;
+  }
 
   return (
     <section id={id} className={`${s.section} ${className || ''}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <Heading id={`${id}-title`} className={s.sectionTitle}>{title}</Heading>
 
-        {variant === 'cards' ? (
-          <div className={s.cards} role="list">
-            {items.map((it) => (
+        <div className={s.cards} role="list">
+          {items.map((it) => {
+            const Icon = getIconComponent(it.icon);
+
+            const CardInner = (
+              <>
+                {Icon ? (
+                  <span className={s.cardIcon} aria-hidden="true">
+                    <Icon size={28} />
+                  </span>
+                ) : null}
+
+                <span className={s.cardContent}>
+                  <span className={s.itemTitle}>{it.title}</span>
+                  {it.text ? <span className={s.itemText}>{it.text}</span> : null}
+                </span>
+              </>
+            );
+
+            return (
               <article key={it.title} className={s.card} role="listitem">
-                <h3 className={s.itemTitle}>
-                  {it.href ? <Link href={it.href}>{it.title}</Link> : it.title}
-                </h3>
-                {it.text && <p className={s.itemText}>{it.text}</p>}
-              </article>
-            ))}
-          </div>
-        ) : (
-          <ul className={s.list}>
-            {items.map((it) => (
-              <li key={it.title}>
                 {it.href ? (
-                  <>
-                    <strong><Link href={it.href}>{it.title}</Link></strong>
-                    {it.text ? <> — {it.text}</> : null}
-                  </>
+                  <Link href={it.href} className={s.cardLink}>
+                    {CardInner}
+                  </Link>
                 ) : (
-                  <>
-                    <strong>{it.title}</strong>
-                    {it.text ? <> — {it.text}</> : null}
-                  </>
+                  <div className={s.cardLink} role="group" aria-label={it.title}>
+                    {CardInner}
+                  </div>
                 )}
-              </li>
-            ))}
-          </ul>
-        )}
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
