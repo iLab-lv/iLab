@@ -5,6 +5,7 @@ import Link from 'next/link';
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
 
+import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
 import Why from '@sections/why/Why';
@@ -118,7 +119,18 @@ export default async function Page({ params }) {
         {JSON.stringify(serviceLd)}
       </Script>
 
-      {/* INTRO (kept concise; header H1 is handled by layout) */}
+      {/* === DEVICE HERO (overlaps header; now includes SEO copy) === */}
+      <DeviceHero
+        image={d.heroImage || d.image}
+        alt={d.heroAlt || d.name}
+        focal={d.heroFocal || 'right'}
+        overlapDesktop={d.heroOverlapDesktop ?? 96}
+        overlapMobile={d.heroOverlapMobile ?? 16}
+        maxHeight={d.heroMaxH ?? 520}
+        bodyHtml={d.bodyHtml || null}   // <— render copy here
+      />
+
+      {/* === INTRO (no bodyHtml here anymore) === */}
       <section className={s.intro} aria-labelledby="device-intro-title">
         <div className={s.container}>
           <div className={s.head}>
@@ -127,17 +139,13 @@ export default async function Page({ params }) {
           </div>
 
           <div className={s.leadRow}>
-            {d.image && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={d.image} alt={d.name} className={s.img} loading="lazy" decoding="async" />
-            )}
+            {/* Removed small device <img>. Keep intro clean, image is in hero */}
             <div className={s.leadCopy}>
-              {d.bodyHtml ? (
-                <div dangerouslySetInnerHTML={{ __html: d.bodyHtml }} />
-              ) : (
+              {/* Only show a fallback one-liner if there is no bodyHtml in hero */}
+              {!d.bodyHtml && (
                 <p>
-                  Nodrošinām {d.name} displeja, baterijas, kameras un uzlādes remontu tajā pašā dienā (ja detaļas ir uz vietas).
-                  Bezmaksas diagnostika, skaidras cenu norādes un 90 dienu garantija.
+                  Nodrošinām {d.name} displeja, baterijas, kameras un uzlādes remontu tajā pašā dienā
+                  (ja detaļas ir uz vietas). Bezmaksas diagnostika, skaidras cenu norādes un 90 dienu garantija.
                 </p>
               )}
               <div className={s.ctaRow}>
@@ -149,7 +157,7 @@ export default async function Page({ params }) {
         </div>
       </section>
 
-      {/* PRICING FIRST */}
+      {/* === PRICING === */}
       {pricing && (
         <PriceList
           id="cenas"
@@ -160,7 +168,7 @@ export default async function Page({ params }) {
         />
       )}
 
-      {/* Popular services for this model */}
+      {/* === SERVICES === */}
       <Services
         id="model-services"
         title="Populārākie remonti šim modelim"
@@ -170,7 +178,13 @@ export default async function Page({ params }) {
       />
 
       <Why />
-      <Faq id="model-faq" title="Biežāk uzdotie jautājumi" items={IPHONE_FAQ_ITEMS} headingLevel={2} variant="accordion" />
+      <Faq
+        id="model-faq"
+        title="Biežāk uzdotie jautājumi"
+        items={IPHONE_FAQ_ITEMS}
+        headingLevel={2}
+        variant="accordion"
+      />
       <ConvertBand />
     </>
   );

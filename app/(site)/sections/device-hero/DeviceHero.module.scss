@@ -1,0 +1,89 @@
+@use '@/styles/_tokens.scss' as *;
+
+/* ===== Band container ===== */
+.hero {
+  position: relative;
+  z-index: 1;
+
+  /* Reserve visual height so next section doesn't overlap.
+     Desktop/Tablet: up to 60vh but never more than maxH.
+     Mobile overrides further below for a slightly shorter band. */
+  min-block-size: min(60vh, var(--hero-max-h));
+
+  /* How far the hero climbs into the header */
+  margin-top: calc(-1 * var(--overlap-mobile));
+  @media (min-width: 960px) {
+    margin-top: calc(-1 * var(--overlap-desktop));
+  }
+
+  /* Bleed math to push image outside the container on desktop */
+  --container-w: #{$container-max};
+  --bleed: max(0px, (100vw - min(100vw, var(--container-w))) / 2);
+}
+
+/* ===== Grid layout for copy + image ===== */
+.inner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr; /* mobile */
+  gap: $space-lg;
+
+  max-width: $container-max;
+  margin: 0 auto;
+  padding-inline: $space-md;
+
+  @media (min-width: 960px) {
+    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
+  }
+}
+
+/* ===== Copy block ===== */
+.copy {
+  z-index: 2;
+  max-width: 680px;
+  color: $color-text-2;
+  font-size: $font-size-p;
+  line-height: $line-height-body;
+
+  p { margin-block: $space-sm; }
+  a { color: $color-accent; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+}
+
+/* ===== Image wrapper (absolute inside the band) ===== */
+.media {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(50vw + var(--bleed), 900px);
+  height: min(60vh, var(--hero-max-h));
+  pointer-events: none;
+  z-index: 1;
+
+  /* soft fade at bottom; remove if undesired */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.15) 90%, rgba(0,0,0,0));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.15) 90%, rgba(0,0,0,0));
+
+  :global(img) { object-fit: contain; }
+}
+
+/* ===== Focal alignment (desktop/tablet) ===== */
+.focalRight .media { right: calc(-1 * var(--bleed)); left: auto; }
+.focalLeft  .media { left: calc(-1 * var(--bleed)); right: auto; }
+.focalCenter .media { left: 50%; right: auto; transform: translateX(-50%); }
+
+/* ===== Mobile behavior ===== */
+@media (max-width: 959px) {
+  /* Center the image on small screens and keep it smaller */
+  .hero { min-block-size: min(48vh, var(--hero-max-h)); }
+
+  .media {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+
+    width: 80vw;                           /* tighter image width */
+    height: min(48vh, var(--hero-max-h));  /* shorter so the fold breathes */
+  }
+}

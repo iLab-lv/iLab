@@ -1,5 +1,6 @@
 // Device list (each device belongs to a category, brand, and optional series)
 const devices = [
+  // ===== Apple — iPhone 16 sērija (2024) =====
   {
     slug: "iphone-16-pro-max",
     category: "telefonu-remonts",
@@ -14,21 +15,13 @@ const devices = [
     order: 100,
     metaTitle: "iPhone 16 Pro Max remonts Rīgā",
     metaDescription: "iPhone 16 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 16 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 16 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 16 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-16-pro",
     category: "telefonu-remonts",
@@ -43,21 +36,13 @@ const devices = [
     order: 101,
     metaTitle: "iPhone 16 Pro remonts Rīgā",
     metaDescription: "iPhone 16 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 16 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 16 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 16 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-16-plus",
     category: "telefonu-remonts",
@@ -72,21 +57,13 @@ const devices = [
     order: 102,
     metaTitle: "iPhone 16 Plus remonts Rīgā",
     metaDescription: "iPhone 16 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 16 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 16 Plus remontu...</p>",
     heroImage: "/images/devices/iphone/iphone-16plus.png",
     heroAlt: "iPhone 16 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-16",
     category: "telefonu-remonts",
@@ -101,21 +78,15 @@ const devices = [
     order: 103,
     metaTitle: "iPhone 16 remonts Rīgā",
     metaDescription: "iPhone 16 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 16</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 16 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 16",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 15 sērija (2023) =====
   {
     slug: "iphone-15-pro-max",
     category: "telefonu-remonts",
@@ -130,21 +101,13 @@ const devices = [
     order: 110,
     metaTitle: "iPhone 15 Pro Max remonts Rīgā",
     metaDescription: "iPhone 15 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 15 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 15 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 15 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-15-pro",
     category: "telefonu-remonts",
@@ -159,21 +122,13 @@ const devices = [
     order: 111,
     metaTitle: "iPhone 15 Pro remonts Rīgā",
     metaDescription: "iPhone 15 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 15 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 15 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 15 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-15-plus",
     category: "telefonu-remonts",
@@ -188,21 +143,13 @@ const devices = [
     order: 112,
     metaTitle: "iPhone 15 Plus remonts Rīgā",
     metaDescription: "iPhone 15 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 15 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 15 Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 15 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-15",
     category: "telefonu-remonts",
@@ -217,21 +164,15 @@ const devices = [
     order: 113,
     metaTitle: "iPhone 15 remonts Rīgā",
     metaDescription: "iPhone 15 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 15</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 15 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 15",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 14 sērija (2022) =====
   {
     slug: "iphone-14-pro-max",
     category: "telefonu-remonts",
@@ -246,21 +187,13 @@ const devices = [
     order: 120,
     metaTitle: "iPhone 14 Pro Max remonts Rīgā",
     metaDescription: "iPhone 14 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 14 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 14 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 14 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-14-pro",
     category: "telefonu-remonts",
@@ -275,21 +208,13 @@ const devices = [
     order: 121,
     metaTitle: "iPhone 14 Pro remonts Rīgā",
     metaDescription: "iPhone 14 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 14 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 14 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 14 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-14-plus",
     category: "telefonu-remonts",
@@ -304,21 +229,13 @@ const devices = [
     order: 122,
     metaTitle: "iPhone 14 Plus remonts Rīgā",
     metaDescription: "iPhone 14 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 14 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 14 Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 14 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-14",
     category: "telefonu-remonts",
@@ -333,21 +250,15 @@ const devices = [
     order: 123,
     metaTitle: "iPhone 14 remonts Rīgā",
     metaDescription: "iPhone 14 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 14</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 14 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 14",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 13 sērija (2021) =====
   {
     slug: "iphone-13-pro-max",
     category: "telefonu-remonts",
@@ -362,21 +273,13 @@ const devices = [
     order: 130,
     metaTitle: "iPhone 13 Pro Max remonts Rīgā",
     metaDescription: "iPhone 13 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 13 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 13 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 13 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-13-pro",
     category: "telefonu-remonts",
@@ -391,21 +294,13 @@ const devices = [
     order: 131,
     metaTitle: "iPhone 13 Pro remonts Rīgā",
     metaDescription: "iPhone 13 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 13 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 13 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 13 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-13",
     category: "telefonu-remonts",
@@ -420,21 +315,13 @@ const devices = [
     order: 132,
     metaTitle: "iPhone 13 remonts Rīgā",
     metaDescription: "iPhone 13 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 13</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 13 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 13",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-13-mini",
     category: "telefonu-remonts",
@@ -449,21 +336,15 @@ const devices = [
     order: 133,
     metaTitle: "iPhone 13 mini remonts Rīgā",
     metaDescription: "iPhone 13 mini ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 13 mini</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 13 mini remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 13 mini",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 12 sērija (2020) =====
   {
     slug: "iphone-12-pro-max",
     category: "telefonu-remonts",
@@ -478,21 +359,13 @@ const devices = [
     order: 140,
     metaTitle: "iPhone 12 Pro Max remonts Rīgā",
     metaDescription: "iPhone 12 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 12 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 12 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 12 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-12-pro",
     category: "telefonu-remonts",
@@ -507,21 +380,13 @@ const devices = [
     order: 141,
     metaTitle: "iPhone 12 Pro remonts Rīgā",
     metaDescription: "iPhone 12 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 12 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 12 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 12 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-12",
     category: "telefonu-remonts",
@@ -536,21 +401,13 @@ const devices = [
     order: 142,
     metaTitle: "iPhone 12 remonts Rīgā",
     metaDescription: "iPhone 12 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 12</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 12 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 12",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-12-mini",
     category: "telefonu-remonts",
@@ -565,21 +422,15 @@ const devices = [
     order: 143,
     metaTitle: "iPhone 12 mini remonts Rīgā",
     metaDescription: "iPhone 12 mini ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 12 mini</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 12 mini remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 12 mini",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 11 sērija (2019) =====
   {
     slug: "iphone-11-pro-max",
     category: "telefonu-remonts",
@@ -594,21 +445,13 @@ const devices = [
     order: 150,
     metaTitle: "iPhone 11 Pro Max remonts Rīgā",
     metaDescription: "iPhone 11 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 11 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 11 Pro Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 11 Pro Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-11-pro",
     category: "telefonu-remonts",
@@ -623,21 +466,13 @@ const devices = [
     order: 151,
     metaTitle: "iPhone 11 Pro remonts Rīgā",
     metaDescription: "iPhone 11 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 11 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 11 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 11 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-11",
     category: "telefonu-remonts",
@@ -652,21 +487,15 @@ const devices = [
     order: 152,
     metaTitle: "iPhone 11 remonts Rīgā",
     metaDescription: "iPhone 11 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 11</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 11 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 11",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone X sērija (2017–2018) =====
   {
     slug: "iphone-xs-max",
     category: "telefonu-remonts",
@@ -681,21 +510,13 @@ const devices = [
     order: 160,
     metaTitle: "iPhone XS Max remonts Rīgā",
     metaDescription: "iPhone XS Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone XS Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone XS Max remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone XS Max",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-xs",
     category: "telefonu-remonts",
@@ -710,21 +531,13 @@ const devices = [
     order: 161,
     metaTitle: "iPhone XS remonts Rīgā",
     metaDescription: "iPhone XS ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone XS</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone XS remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone XS",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-xr",
     category: "telefonu-remonts",
@@ -739,21 +552,13 @@ const devices = [
     order: 162,
     metaTitle: "iPhone XR remonts Rīgā",
     metaDescription: "iPhone XR ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone XR</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone XR remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone XR",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-x",
     category: "telefonu-remonts",
@@ -768,21 +573,15 @@ const devices = [
     order: 163,
     metaTitle: "iPhone X remonts Rīgā",
     metaDescription: "iPhone X ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone X</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone X remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone X",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone SE (2016/2020/2022) =====
   {
     slug: "iphone-se-3",
     category: "telefonu-remonts",
@@ -797,21 +596,13 @@ const devices = [
     order: 170,
     metaTitle: "iPhone SE (3. paaudze) remonts Rīgā",
     metaDescription: "iPhone SE (2022) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone SE (3. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone SE (3. paaudze) remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone SE (3. paaudze)",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-se-2",
     category: "telefonu-remonts",
@@ -826,21 +617,13 @@ const devices = [
     order: 171,
     metaTitle: "iPhone SE (2. paaudze) remonts Rīgā",
     metaDescription: "iPhone SE (2020) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone SE (2. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone SE (2. paaudze) remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone SE (2. paaudze)",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-se-1",
     category: "telefonu-remonts",
@@ -855,21 +638,15 @@ const devices = [
     order: 172,
     metaTitle: "iPhone SE (1. paaudze) remonts Rīgā",
     metaDescription: "iPhone SE (2016) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone SE (1. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone SE (1. paaudze) remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone SE (1. paaudze)",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPhone 8 / 7 / 6s / 6 sērijas =====
   {
     slug: "iphone-8-plus",
     category: "telefonu-remonts",
@@ -884,21 +661,13 @@ const devices = [
     order: 180,
     metaTitle: "iPhone 8 Plus remonts Rīgā",
     metaDescription: "iPhone 8 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 8 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 8 Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 8 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-8",
     category: "telefonu-remonts",
@@ -913,21 +682,13 @@ const devices = [
     order: 181,
     metaTitle: "iPhone 8 remonts Rīgā",
     metaDescription: "iPhone 8 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 8</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 8 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 8",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-7-plus",
     category: "telefonu-remonts",
@@ -942,21 +703,13 @@ const devices = [
     order: 190,
     metaTitle: "iPhone 7 Plus remonts Rīgā",
     metaDescription: "iPhone 7 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 7 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 7 Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 7 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-7",
     category: "telefonu-remonts",
@@ -971,21 +724,13 @@ const devices = [
     order: 191,
     metaTitle: "iPhone 7 remonts Rīgā",
     metaDescription: "iPhone 7 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 7</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 7 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 7",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-6s-plus",
     category: "telefonu-remonts",
@@ -1000,21 +745,13 @@ const devices = [
     order: 195,
     metaTitle: "iPhone 6s Plus remonts Rīgā",
     metaDescription: "iPhone 6s Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 6s Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 6s Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 6s Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-6s",
     category: "telefonu-remonts",
@@ -1029,21 +766,13 @@ const devices = [
     order: 196,
     metaTitle: "iPhone 6s remonts Rīgā",
     metaDescription: "iPhone 6s ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 6s</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 6s remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 6s",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-6-plus",
     category: "telefonu-remonts",
@@ -1058,21 +787,13 @@ const devices = [
     order: 197,
     metaTitle: "iPhone 6 Plus remonts Rīgā",
     metaDescription: "iPhone 6 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 6 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 6 Plus remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 6 Plus",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "iphone-6",
     category: "telefonu-remonts",
@@ -1087,21 +808,16 @@ const devices = [
     order: 198,
     metaTitle: "iPhone 6 remonts Rīgā",
     metaDescription: "iPhone 6 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPhone 6</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPhone 6 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPhone 6",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Samsung — Galaxy S sērija (pilns diapazons) =====
+  // 2024 — S24
   {
     slug: "galaxy-s24-ultra",
     category: "telefonu-remonts",
@@ -1116,21 +832,13 @@ const devices = [
     order: 200,
     metaTitle: "Samsung Galaxy S24 Ultra remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S24 Ultra. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S24 Ultra</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S24 Ultra remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S24 Ultra",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s24-plus",
     category: "telefonu-remonts",
@@ -1145,21 +853,13 @@ const devices = [
     order: 201,
     metaTitle: "Samsung Galaxy S24+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S24+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S24+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S24+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S24+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s24",
     category: "telefonu-remonts",
@@ -1174,21 +874,15 @@ const devices = [
     order: 202,
     metaTitle: "Samsung Galaxy S24 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S24. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S24</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S24 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S24",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2023 — S23
   {
     slug: "galaxy-s23-ultra",
     category: "telefonu-remonts",
@@ -1203,21 +897,13 @@ const devices = [
     order: 203,
     metaTitle: "Samsung Galaxy S23 Ultra remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S23 Ultra. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S23 Ultra</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S23 Ultra remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S23 Ultra",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s23-plus",
     category: "telefonu-remonts",
@@ -1232,21 +918,13 @@ const devices = [
     order: 204,
     metaTitle: "Samsung Galaxy S23+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S23+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S23+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S23+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S23+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s23",
     category: "telefonu-remonts",
@@ -1261,21 +939,13 @@ const devices = [
     order: 205,
     metaTitle: "Samsung Galaxy S23 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S23. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S23</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S23 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S23",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s23-fe",
     category: "telefonu-remonts",
@@ -1290,21 +960,15 @@ const devices = [
     order: 206,
     metaTitle: "Samsung Galaxy S23 FE remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S23 FE. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S23 FE</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S23 FE remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S23 FE",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2022 — S22
   {
     slug: "galaxy-s22-ultra",
     category: "telefonu-remonts",
@@ -1319,21 +983,13 @@ const devices = [
     order: 207,
     metaTitle: "Samsung Galaxy S22 Ultra remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S22 Ultra. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S22 Ultra</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S22 Ultra remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S22 Ultra",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s22-plus",
     category: "telefonu-remonts",
@@ -1348,21 +1004,13 @@ const devices = [
     order: 208,
     metaTitle: "Samsung Galaxy S22+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S22+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S22+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S22+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S22+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s22",
     category: "telefonu-remonts",
@@ -1377,21 +1025,15 @@ const devices = [
     order: 209,
     metaTitle: "Samsung Galaxy S22 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S22. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S22</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S22 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S22",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2021 — S21
   {
     slug: "galaxy-s21-ultra",
     category: "telefonu-remonts",
@@ -1406,21 +1048,13 @@ const devices = [
     order: 210,
     metaTitle: "Samsung Galaxy S21 Ultra remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S21 Ultra. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S21 Ultra</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S21 Ultra remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S21 Ultra",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s21-plus",
     category: "telefonu-remonts",
@@ -1435,21 +1069,13 @@ const devices = [
     order: 211,
     metaTitle: "Samsung Galaxy S21+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S21+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S21+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S21+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S21+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s21",
     category: "telefonu-remonts",
@@ -1464,21 +1090,13 @@ const devices = [
     order: 212,
     metaTitle: "Samsung Galaxy S21 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S21. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S21</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S21 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S21",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s21-fe",
     category: "telefonu-remonts",
@@ -1493,21 +1111,15 @@ const devices = [
     order: 213,
     metaTitle: "Samsung Galaxy S21 FE remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S21 FE. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S21 FE</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S21 FE remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S21 FE",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2020 — S20
   {
     slug: "galaxy-s20-ultra",
     category: "telefonu-remonts",
@@ -1522,21 +1134,13 @@ const devices = [
     order: 214,
     metaTitle: "Samsung Galaxy S20 Ultra remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S20 Ultra. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S20 Ultra</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S20 Ultra remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S20 Ultra",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s20-plus",
     category: "telefonu-remonts",
@@ -1551,21 +1155,13 @@ const devices = [
     order: 215,
     metaTitle: "Samsung Galaxy S20+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S20+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S20+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S20+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S20+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s20",
     category: "telefonu-remonts",
@@ -1580,21 +1176,13 @@ const devices = [
     order: 216,
     metaTitle: "Samsung Galaxy S20 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S20. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S20</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S20 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S20",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s20-fe",
     category: "telefonu-remonts",
@@ -1609,21 +1197,15 @@ const devices = [
     order: 217,
     metaTitle: "Samsung Galaxy S20 FE remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S20 FE. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S20 FE</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S20 FE remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S20 FE",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2019 — S10
   {
     slug: "galaxy-s10-plus",
     category: "telefonu-remonts",
@@ -1638,21 +1220,13 @@ const devices = [
     order: 218,
     metaTitle: "Samsung Galaxy S10+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S10+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S10+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S10+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S10+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s10",
     category: "telefonu-remonts",
@@ -1667,21 +1241,13 @@ const devices = [
     order: 219,
     metaTitle: "Samsung Galaxy S10 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S10. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S10</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S10 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S10",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s10e",
     category: "telefonu-remonts",
@@ -1696,21 +1262,15 @@ const devices = [
     order: 220,
     metaTitle: "Samsung Galaxy S10e remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S10e. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S10e</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S10e remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S10e",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2018 — S9
   {
     slug: "galaxy-s9-plus",
     category: "telefonu-remonts",
@@ -1725,21 +1285,13 @@ const devices = [
     order: 221,
     metaTitle: "Samsung Galaxy S9+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S9+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S9+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S9+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S9+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s9",
     category: "telefonu-remonts",
@@ -1754,21 +1306,15 @@ const devices = [
     order: 222,
     metaTitle: "Samsung Galaxy S9 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S9. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S9</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S9 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S9",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2017 — S8
   {
     slug: "galaxy-s8-plus",
     category: "telefonu-remonts",
@@ -1783,21 +1329,13 @@ const devices = [
     order: 223,
     metaTitle: "Samsung Galaxy S8+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S8+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S8+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S8+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S8+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s8",
     category: "telefonu-remonts",
@@ -1812,21 +1350,15 @@ const devices = [
     order: 224,
     metaTitle: "Samsung Galaxy S8 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S8. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S8</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S8 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S8",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2016 — S7
   {
     slug: "galaxy-s7-edge",
     category: "telefonu-remonts",
@@ -1841,21 +1373,13 @@ const devices = [
     order: 225,
     metaTitle: "Samsung Galaxy S7 edge remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S7 edge. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S7 edge</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S7 edge remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S7 edge",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s7",
     category: "telefonu-remonts",
@@ -1870,21 +1394,15 @@ const devices = [
     order: 226,
     metaTitle: "Samsung Galaxy S7 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S7. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S7</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S7 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S7",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // 2015 — S6
   {
     slug: "galaxy-s6-edge-plus",
     category: "telefonu-remonts",
@@ -1899,21 +1417,13 @@ const devices = [
     order: 227,
     metaTitle: "Samsung Galaxy S6 edge+ remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S6 edge+. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S6 edge+</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S6 edge+ remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S6 edge+",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s6-edge",
     category: "telefonu-remonts",
@@ -1928,21 +1438,13 @@ const devices = [
     order: 228,
     metaTitle: "Samsung Galaxy S6 edge remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S6 edge. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S6 edge</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S6 edge remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S6 edge",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-s6",
     category: "telefonu-remonts",
@@ -1957,21 +1459,15 @@ const devices = [
     order: 229,
     metaTitle: "Samsung Galaxy S6 remonts Rīgā",
     metaDescription: "Ekrāna un baterijas maiņa Galaxy S6. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S6</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy S6 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy S6",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Samsung — citi (esošie) =====
   {
     slug: "galaxy-z-fold-5",
     category: "telefonu-remonts",
@@ -1986,21 +1482,13 @@ const devices = [
     order: 240,
     metaTitle: "Samsung Galaxy Z Fold5 remonts Rīgā",
     metaDescription: "Galaxy Z Fold5 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Fold5</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy Z Fold5 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy Z Fold5",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-z-flip-5",
     category: "telefonu-remonts",
@@ -2015,21 +1503,13 @@ const devices = [
     order: 241,
     metaTitle: "Samsung Galaxy Z Flip5 remonts Rīgā",
     metaDescription: "Galaxy Z Flip5 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip5</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy Z Flip5 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy Z Flip5",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-a54",
     category: "telefonu-remonts",
@@ -2044,21 +1524,13 @@ const devices = [
     order: 250,
     metaTitle: "Samsung Galaxy A54 remonts Rīgā",
     metaDescription: "Galaxy A54 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A54</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy A54 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy A54",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
   {
     slug: "galaxy-a34",
     category: "telefonu-remonts",
@@ -2073,21 +1545,14 @@ const devices = [
     order: 251,
     metaTitle: "Samsung Galaxy A34 remonts Rīgā",
     metaDescription: "Galaxy A34 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A34</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Galaxy A34 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Galaxy A34",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
-
+  // Legacy example kept (low priority)
   {
     slug: "samsung-z4",
     category: "telefonu-remonts",
@@ -2102,21 +1567,15 @@ const devices = [
     order: 299,
     metaTitle: "Samsung Z4 remonts Rīgā",
     metaDescription: "Samsung Z4 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Samsung Z4</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. 
-    Izmantojam kvalitatīvas Samsung detaļas un nodrošinām 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
-    Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
-  `,
+    bodyHtml: "<p>Ievads par Samsung Z4 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Samsung Z4",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Huawei =====
   {
     slug: "p30-pro",
     category: "telefonu-remonts",
@@ -2131,20 +1590,15 @@ const devices = [
     order: 300,
     metaTitle: "Huawei P30 Pro remonts Rīgā",
     metaDescription: "Ekrāna, baterijas un kameras remonts Huawei P30 Pro.",
-    bodyHtml: `
-<p><strong>Huawei P30 Pro</strong> remonts Rīgā ar ātru diagnostiku un augstas kvalitātes detaļām. 
-    Veicam ekrāna, baterijas un kameras maiņu tajā pašā dienā ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un skaidras cenas — iLab meistari atjaunos Tavu Huawei kā jaunu.</p>
-  `,
+    bodyHtml: "<p>Ievads par Huawei P30 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "Huawei P30 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== OnePlus =====
   {
     slug: "oneplus-9-pro",
     category: "telefonu-remonts",
@@ -2159,20 +1613,15 @@ const devices = [
     order: 400,
     metaTitle: "OnePlus 9 Pro remonts Rīgā",
     metaDescription: "Ekrāna maiņa un akumulatora nomaiņa OnePlus 9 Pro. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>OnePlus 9 Pro</strong> remonts Rīgā — ekrāna, baterijas un citu komponentu nomaiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OnePlus detaļas ar garantiju.</p>
-    <p>Bezmaksas diagnostika un ātra apkalpošana iLab servisā.</p>
-  `,
+    bodyHtml: "<p>Ievads par OnePlus 9 Pro remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "OnePlus 9 Pro",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   },
 
+  // ===== Apple — iPad (saglabāts) =====
   {
     slug: "ipad-pro-12-9",
     category: "plansetdatoru-remonts",
@@ -2187,18 +1636,11 @@ const devices = [
     order: 500,
     metaTitle: "iPad Pro 12.9 remonts Rīgā",
     metaDescription: "iPad Pro 12.9 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPad Pro 12.9</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
-    Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
-  `,
+    bodyHtml: "<p>Ievads par iPad Pro 12.9 remontu...</p>",
     heroImage: "/images/placeholders/phone.webp",
     heroAlt: "iPad Pro 12.9",
     heroFocal: "right",
     heroMaxH: 560,
-  heroOverlapDesktop: 96,
-  heroOverlapMobile: 16,
     heroHideBelow: 768
   }
 ];
