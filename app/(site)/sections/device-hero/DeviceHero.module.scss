@@ -1,45 +1,45 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* ===== Band container ===== */
+/*
+DeviceHero
+- Desktop: copy | image (image overlaps header via translateY)
+- Mobile:  image on top, copy below (no text overlapping image)
+*/
+
 .hero {
   position: relative;
   z-index: 1;
 
-  /* Reserve visual height so next section doesn't overlap.
-     Desktop/Tablet: up to 60vh but never more than maxH.
-     Mobile overrides further below for a slightly shorter band. */
+  /* Keep hero within flow; reserve visual height */
   min-block-size: min(60vh, var(--hero-max-h));
 
-  /* How far the hero climbs into the header */
-  margin-top: calc(-1 * var(--overlap-mobile));
-  @media (min-width: 960px) {
-    margin-top: calc(-1 * var(--overlap-desktop));
-  }
-
-  /* Bleed math to push image outside the container on desktop */
+  /* Bleed math for desktop image */
   --container-w: #{$container-max};
   --bleed: max(0px, (100vw - min(100vw, var(--container-w))) / 2);
 }
 
-/* ===== Grid layout for copy + image ===== */
 .inner {
   position: relative;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr; /* mobile */
+  grid-template-columns: 1fr; /* mobile default; overridden on desktop */
   gap: $space-lg;
 
   max-width: $container-max;
   margin: 0 auto;
   padding-inline: $space-md;
+  padding-top: $space-xl; /* space below header */
+  padding-bottom: clamp($space-xl, 6vh, $space-2xl);
 
-  @media (min-width: 960px) {
-    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
-  }
+  /* Mobile ordering: image first, copy second */
+  grid-template-areas:
+    "media"
+    "copy";
 }
 
-/* ===== Copy block ===== */
+/* --- Text block --- */
 .copy {
+  grid-area: copy;
   z-index: 2;
   max-width: 680px;
   color: $color-text-2;
@@ -51,39 +51,63 @@
   a:hover { text-decoration: underline; }
 }
 
-/* ===== Image wrapper (absolute inside the band) ===== */
+/* --- Image wrapper --- */
 .media {
-  position: absolute;
+  grid-area: media;
+  position: absolute;  /* desktop/tablet default; mobile overrides below */
   top: 0;
   bottom: 0;
   width: min(50vw + var(--bleed), 900px);
   height: min(60vh, var(--hero-max-h));
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 
-  /* soft fade at bottom; remove if undesired */
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.15) 90%, rgba(0,0,0,0));
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.15) 90%, rgba(0,0,0,0));
+  /* Overlap upward into the header visually (desktop/tablet) */
+  transform: translateY(calc(var(--overlap-desktop, 96px) * -1));
+
+  /* soft fade */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.15) 90%,
+    rgba(0, 0, 0, 0)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.15) 90%,
+    rgba(0, 0, 0, 0)
+  );
 
   :global(img) { object-fit: contain; }
 }
 
-/* ===== Focal alignment (desktop/tablet) ===== */
+/* --- Focal alignment (desktop/tablet) --- */
 .focalRight .media { right: calc(-1 * var(--bleed)); left: auto; }
-.focalLeft  .media { left: calc(-1 * var(--bleed)); right: auto; }
-.focalCenter .media { left: 50%; right: auto; transform: translateX(-50%); }
+.focalLeft  .media { left:  calc(-1 * var(--bleed)); right: auto; }
+.focalCenter .media { left: 50%; right: auto; transform: translate(-50%, calc(var(--overlap-desktop, 96px) * -1)); }
 
-/* ===== Mobile behavior ===== */
+/* --- Desktop layout --- */
+@media (min-width: 960px) {
+  .inner {
+    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
+    grid-template-areas: "copy media";
+    padding-top: $space-2xl; /* more space on desktop */
+  }
+}
+
+/* --- Mobile behaviour --- */
 @media (max-width: 959px) {
-  /* Center the image on small screens and keep it smaller */
   .hero { min-block-size: min(48vh, var(--hero-max-h)); }
 
+  /* Image participates in layout, sits ABOVE the copy */
   .media {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-
-    width: 80vw;                           /* tighter image width */
-    height: min(48vh, var(--hero-max-h));  /* shorter so the fold breathes */
+    position: relative;           /* <-- no absolute on mobile */
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, calc(var(--overlap-mobile, 16px) * -1));
+    width: 80vw;
+    height: min(48vh, var(--hero-max-h));
+    margin-bottom: $space-lg;     /* extra space before copy if needed */
   }
 }

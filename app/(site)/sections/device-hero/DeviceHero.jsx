@@ -1,23 +1,24 @@
-'use client';
+
 
 import Image from 'next/image';
 import s from './DeviceHero.module.scss';
 
 /**
  * DeviceHero
- * A responsive hero band that:
- * - overlaps the page header (small on mobile, larger on desktop)
- * - bleeds the device image to the viewport edge on desktop
- * - shows optional SEO copy on the left (mobile: copy above image)
+ * - Overlaps header via negative margin on the <section>
+ * - Image bleeds outside container on desktop via abs-pos .media
+ * - This version adds copy offsets (desktop/mobile) so text can be nudged down
  *
  * Props:
- *  image: string              // image src (required to show image)
- *  alt?: string               // image alt
- *  focal?: 'right'|'left'|'center'  (default 'right')
- *  overlapDesktop?: number    // px; negative top margin amount on ≥960px (default 96)
- *  overlapMobile?: number     // px; negative top margin amount on <960px (default 16)
+ *  image: string (required to show image)
+ *  alt?: string
+ *  focal?: 'right'|'left'|'center' (default 'right')
+ *  overlapDesktop?: number    // px; how far hero climbs into header on ≥960px (default 96)
+ *  overlapMobile?: number     // px; how far hero climbs into header on <960px (default 16)
  *  maxHeight?: number         // px; max visual height of the hero image (default 520)
  *  bodyHtml?: string|null     // optional HTML copy (SEO-oriented)
+ *  copyOffsetDesktop?: number // px; nudge copy downward on desktop (default 32)
+ *  copyOffsetMobile?: number  // px; nudge copy downward on mobile  (default 8)
  */
 export default function DeviceHero({
   image,
@@ -27,11 +28,11 @@ export default function DeviceHero({
   overlapMobile = 16,
   maxHeight = 520,
   bodyHtml = null,
+  copyOffsetDesktop = 32,
+  copyOffsetMobile = 8,
 }) {
   const hasImage = Boolean(image);
   const hasCopy = Boolean(bodyHtml);
-
-  // if there's truly nothing to show, render nothing
   if (!hasImage && !hasCopy) return null;
 
   const focalClass =
@@ -44,6 +45,9 @@ export default function DeviceHero({
         '--overlap-desktop': `${overlapDesktop}px`,
         '--overlap-mobile': `${overlapMobile}px`,
         '--hero-max-h': `${maxHeight}px`,
+        // NEW: copy offsets (can be tuned per-model or left as defaults)
+        '--copy-offset-desktop': `${copyOffsetDesktop}px`,
+        '--copy-offset-mobile': `${copyOffsetMobile}px`,
       }}
       aria-label="Ierīces vizuālais hero"
     >
@@ -51,7 +55,6 @@ export default function DeviceHero({
         {hasCopy && (
           <div
             className={s.copy}
-            // bodyHtml is controlled content from your data files
             dangerouslySetInnerHTML={{ __html: bodyHtml }}
           />
         )}
