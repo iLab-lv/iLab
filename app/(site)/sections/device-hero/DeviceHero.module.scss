@@ -1,28 +1,29 @@
 @use '@/styles/_tokens.scss' as *;
 
-/*
-DeviceHero
-- Desktop: copy | image (image overlaps header via translateY)
-- Mobile:  image on top, copy below (no text overlapping image)
-*/
+/* Tunables (fixed values; change here to adjust globally) */
+$hero-max-h:        520px;   /* image cap */
+$overlap-desktop:   220px;   /* how high the image floats into header on ≥960px */
+$overlap-mobile:     16px;   /* how high the image floats into header on <960px */
 
+/* Computed bleed so image can sit at the viewport edge on wide screens */
+@function bleed-calc() {
+  @return calc((100vw - min(100vw, #{$container-max})) / 2);
+}
+
+/* ===== Band container ===== */
 .hero {
   position: relative;
   z-index: 1;
 
-  /* Keep hero within flow; reserve visual height */
-  min-block-size: min(60vh, var(--hero-max-h));
-
-  /* Bleed math for desktop image */
-  --container-w: #{$container-max};
-  --bleed: max(0px, (100vw - min(100vw, var(--container-w))) / 2);
+  /* Keep hero within flow; reserve visual height so next section doesn't slide up */
+  min-block-size: min(50vh, #{$hero-max-h});
 }
 
+/* ===== Grid: mobile image → copy, desktop copy | image ===== */
 .inner {
   position: relative;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr; /* mobile default; overridden on desktop */
   gap: $space-lg;
 
   max-width: $container-max;
@@ -31,13 +32,19 @@ DeviceHero
   padding-top: $space-xl; /* space below header */
   padding-bottom: clamp($space-xl, 6vh, $space-2xl);
 
-  /* Mobile ordering: image first, copy second */
+  grid-template-columns: 1fr;
   grid-template-areas:
     "media"
     "copy";
+
+  @media (min-width: 960px) {
+    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
+    grid-template-areas: "copy media";
+    padding-top: $space-2xl;
+  }
 }
 
-/* --- Text block --- */
+/* ===== Copy block ===== */
 .copy {
   grid-area: copy;
   z-index: 2;
@@ -51,21 +58,26 @@ DeviceHero
   a:hover { text-decoration: underline; }
 }
 
-/* --- Image wrapper --- */
+/* ===== Image wrapper =====
+   Desktop/tablet: absolute so it can float + bleed horizontally.
+   Mobile: relative block with explicit height so <Image fill> renders.
+*/
 .media {
   grid-area: media;
-  position: absolute;  /* desktop/tablet default; mobile overrides below */
+
+  /* Desktop/tablet default */
+  position: absolute;
   top: 0;
   bottom: 0;
-  width: min(50vw + var(--bleed), 900px);
-  height: min(60vh, var(--hero-max-h));
+  width: min(calc(50vw + #{bleed-calc()}), 900px);
+  height: min(60vh, #{$hero-max-h});
   pointer-events: none;
   z-index: 0;
 
-  /* Overlap upward into the header visually (desktop/tablet) */
-  transform: translateY(calc(var(--overlap-desktop, 96px) * -1));
+  /* Float upward into header on desktop */
+  transform: translateY(-#{$overlap-desktop});
 
-  /* soft fade */
+  /* Soft fade at bottom (optional) */
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),
@@ -82,32 +94,35 @@ DeviceHero
   :global(img) { object-fit: contain; }
 }
 
-/* --- Focal alignment (desktop/tablet) --- */
-.focalRight .media { right: calc(-1 * var(--bleed)); left: auto; }
-.focalLeft  .media { left:  calc(-1 * var(--bleed)); right: auto; }
-.focalCenter .media { left: 50%; right: auto; transform: translate(-50%, calc(var(--overlap-desktop, 96px) * -1)); }
-
-/* --- Desktop layout --- */
-@media (min-width: 960px) {
-  .inner {
-    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
-    grid-template-areas: "copy media";
-    padding-top: $space-2xl; /* more space on desktop */
-  }
+/* ===== Focal alignment (desktop/tablet) ===== */
+.focalRight .media {
+  right: calc(#{bleed-calc()} * -1);
+  left: auto;
+  /* vertical float already applied by default transform */
+}
+.focalLeft .media {
+  left: calc(#{bleed-calc()} * -1);
+  right: auto;
+}
+.focalCenter .media {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -#{$overlap-desktop}); /* include X center + Y float */
 }
 
-/* --- Mobile behaviour --- */
+/* ===== Mobile behaviour ===== */
 @media (max-width: 959px) {
-  .hero { min-block-size: min(48vh, var(--hero-max-h)); }
+  .hero { min-block-size: min(48vh, #{$hero-max-h}); }
 
-  /* Image participates in layout, sits ABOVE the copy */
   .media {
-    position: relative;           /* <-- no absolute on mobile */
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, calc(var(--overlap-mobile, 16px) * -1));
+    position: relative;                       /* required for <Image fill> */
+    left: auto; right: auto;                  /* clear desktop positioning */
     width: 80vw;
-    height: min(48vh, var(--hero-max-h));
-    margin-bottom: $space-lg;     /* extra space before copy if needed */
+    height: min(48vh, #{$hero-max-h});        /* explicit height for <Image fill> */
+    margin-inline: auto;                      /* center horizontally */
+    margin-bottom: $space-lg;
+
+    /* Float upward slightly into header on mobile */
+    transform: translateY(-#{$overlap-mobile});
   }
 }
