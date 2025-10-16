@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import categories from '@/data/categories';
 import categoryContent from '@/data/categoryContent';
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
+import ScrollCta from '@components/button/ScrollCta';
 import s from './PageHeader.module.scss';
 
 // --- helpers -------------------------------------------------------------
@@ -30,16 +31,8 @@ function getBrand(cat, brandSlug) {
 
 /**
  * PageHeader
- * - Auto-builds breadcrumbs/title from URL but allows overrides via props.
- * - NEW: If lead/scrollCta are not provided, auto-resolve from brandContent/categoryContent based on the route.
- *
- * Props (all optional):
- * - title?: string               // overrides computed title (e.g., "iPhone remonts")
- * - lead?: string | ReactNode    // short description under H1
- * - scrollCta?: { label: string; targetId: string } // scroll-to section button
- * - image?: { src: string; alt?: string }           // optional image (device pages)
- * - imageSrc?, imageAlt?         // legacy compatibility
- * - showBreadcrumbs?: boolean    // default true
+ * - Builds breadcrumbs/title from URL; allows overrides via props.
+ * - If no lead/scrollCta are provided, tries to resolve from content registries.
  */
 export default function PageHeader({
   title,
@@ -57,82 +50,105 @@ export default function PageHeader({
     crumbs,
     computedTitle,
     computedImage,
-    resolvedHero,     // ← NEW: { h1?, lead?, scrollCta? }
+    resolvedHero,   // { h1?, lead?, scrollCta? }
+    autoScrollCta,  // default CTA when on a device page
   } = useMemo(() => {
-    const parts = pathname.split('/').filter(Boolean); // e.g. ['telefonu-remonts','samsung']
-    const [categorySlug, brandSlug, deviceSlug] = parts;
+    const parts = pathname.split('/').filter(Boolean); // e.g. ['iphone-remonts','iphone-14'] OR ['telefonu-remonts','apple','iphone-14']
+    const [p0, p1, p2] = parts;
+
+    // treat standard catalog slugs as category/brand[/device] when present
+    const categorySlug = p0;
+    const brandSlug = p1;
+    const deviceSlug = p2;
+
+    // device-page detection:
+    // - iPhone device: /iphone-remonts/[device] (2 segments)
+    // - generic device: /<category>/<brand>/<device> (3+ segments)
+    const isIphoneDevice = p0 === 'iphone-remonts' && parts.length === 2;
+    const isGenericDevice = parts.length >= 3;
+    const isDevicePage = isIphoneDevice || isGenericDevice;
 
     // --- base labels via categories (for breadcrumbs & fallback title)
     const cat = getCategory(categorySlug);
     const catLabel = cat?.label || titleize(categorySlug);
     const brand = getBrand(cat, brandSlug);
     const brandLabel = brand?.label || (brandSlug ? titleize(brandSlug) : null);
-    const deviceLabel = deviceSlug ? titleize(deviceSlug) : null;
+    const deviceLabel = isIphoneDevice ? titleize(p1) : (deviceSlug ? titleize(deviceSlug) : null);
 
     // Breadcrumbs
     const c = [{ label: 'Sākums', href: '/' }];
     if (categorySlug) c.push({ label: catLabel, href: `/${categorySlug}` });
-    if (brandSlug) c.push({ label: brandLabel, href: `/${categorySlug}/${brandSlug}` });
-    if (deviceSlug) c.push({ label: deviceLabel, href: `/${categorySlug}/${brandSlug}/${deviceSlug}` });
+    if (isGenericDevice && brandSlug) c.push({ label: brandLabel, href: `/${categorySlug}/${brandSlug}` });
+    if (isDevicePage && deviceLabel) {
+      const devicePath = isIphoneDevice
+        ? `/${p0}/${p1}`
+        : `/${categorySlug}/${brandSlug}/${deviceSlug}`;
+      c.push({ label: deviceLabel, href: devicePath });
+    }
 
     // Default title from URL
     let t = catLabel || '';
-    if (brandLabel && !deviceLabel) t = `${brandLabel} ${catLabel?.toLowerCase?.() || ''}`.trim();
-    if (brandLabel && deviceLabel) t = `${brandLabel} ${deviceLabel} remonts`;
+    if (!isDevicePage && brandLabel) t = `${brandLabel} ${catLabel?.toLowerCase?.() || ''}`.trim();
+    if (isDevicePage && deviceLabel) {
+      t = `${(brandLabel && !isIphoneDevice ? brandLabel + ' ' : '')}${deviceLabel} remonts`.trim();
+    }
 
-    // Image (optional, rendered only if provided)
+    // Image (optional)
     const src = image?.src || imageSrc || null;
     const alt = image?.alt || imageAlt || t || '';
 
-    // --- NEW: resolve hero defaults (lead, CTA, and sometimes H1) from content registries
+    // --- resolve hero defaults from content registries
     let heroFromContent = null;
 
     // iPhone hub at root
-    if (parts.length === 1 && parts[0] === 'iphone-remonts') {
+    if (parts.length === 1 && p0 === 'iphone-remonts') {
       const bc = getBrandContent('apple', BRAND_CATEGORY.PHONES);
       heroFromContent = bc?.hero || null;
-      // prefer exact H1 from brand content (e.g., "iPhone remonts")
       if (bc?.hero?.h1) t = bc.hero.h1;
     }
 
     // Telefonu remonts hub
-    if (parts.length === 1 && parts[0] === 'telefonu-remonts') {
+    if (parts.length === 1 && p0 === 'telefonu-remonts') {
       heroFromContent = categoryContent?.['telefonu-remonts']?.hero || null;
       if (heroFromContent?.h1) t = heroFromContent.h1;
     }
 
     // Planšetdatoru remonts hub
-    if (parts.length === 1 && parts[0] === 'plansetdatoru-remonts') {
+    if (parts.length === 1 && p0 === 'plansetdatoru-remonts') {
       heroFromContent = categoryContent?.['plansetdatoru-remonts']?.hero || null;
       if (heroFromContent?.h1) t = heroFromContent.h1;
     }
 
     // Brand pages (phones)
-    if (categorySlug === 'telefonu-remonts' && brandSlug && !deviceSlug) {
+    if (!isDevicePage && categorySlug === 'telefonu-remonts' && brandSlug) {
       const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
       heroFromContent = bc?.hero || heroFromContent;
       if (bc?.hero?.h1) t = bc.hero.h1;
     }
 
     // Brand pages (tablets)
-    if (categorySlug === 'plansetdatoru-remonts' && brandSlug && !deviceSlug) {
+    if (!isDevicePage && categorySlug === 'plansetdatoru-remonts' && brandSlug) {
       const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
       heroFromContent = bc?.hero || heroFromContent;
       if (bc?.hero?.h1) t = bc.hero.h1;
     }
+
+    // NEW: auto CTA for any device page
+    const autoCta = isDevicePage ? { label: 'Skatīt cenas', targetId: 'paglelist' } : null;
 
     return {
       crumbs: c,
       computedTitle: t,
       computedImage: src ? { src, alt } : null,
       resolvedHero: heroFromContent,
+      autoScrollCta: autoCta,
     };
   }, [pathname, image, imageAlt, imageSrc]);
 
   // Final render values:
   const finalTitle = title || resolvedHero?.h1 || computedTitle;
   const finalLead = lead ?? resolvedHero?.lead ?? null;
-  const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? null;
+  const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? autoScrollCta ?? null;
 
   return (
     <header className={s.header} role="region" aria-label="Lapas virsraksts">
@@ -158,19 +174,11 @@ export default function PageHeader({
             {finalLead ? <p className={s.lead}>{finalLead}</p> : null}
 
             {finalScrollCta?.targetId && finalScrollCta?.label ? (
-              <a
-                href={`#${finalScrollCta.targetId}`}
-                className={s.scrollBtn}
-                aria-label={`${finalScrollCta.label} – ritināt uz sadaļu`}
-              >
-                {finalScrollCta.label}
-                <span className={s.scrollIcon} aria-hidden="true">
-                  {/* inline chevron-down (18x18) */}
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
-                    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </a>
+              <ScrollCta
+                label={finalScrollCta.label}
+                targetId={finalScrollCta.targetId}
+                className={s.cta}   // spacing only; visuals are in ScrollCta.module.scss
+              />
             ) : null}
           </div>
 

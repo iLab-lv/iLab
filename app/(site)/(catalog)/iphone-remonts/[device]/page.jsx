@@ -157,6 +157,19 @@ export default async function Page({ params }) {
         </div>
       </section>
 
+      {/* === PRICING ANCHORS (for header scroll CTA) === */}
+      {/* Keep both ids to be compatible with different header configs */}
+      <div
+        id="paglelist"
+        style={{ height: 0, position: 'relative', scrollMarginTop: 'calc(var(--topbar-h, 0px) + 24px)' }}
+        aria-hidden="true"
+      />
+      <div
+        id="price-list"
+        style={{ height: 0, position: 'relative', scrollMarginTop: 'calc(var(--topbar-h, 0px) + 24px)' }}
+        aria-hidden="true"
+      />
+
       {/* === PRICING === */}
       {pricing && (
         <PriceList

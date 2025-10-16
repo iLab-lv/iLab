@@ -1,0 +1,54 @@
+@use '@/styles/_tokens.scss' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+
+  height: $btn-h-md;
+  padding: 0 $space-lg;
+  border-radius: $radius-pill;
+
+  border: $border-thin solid $color-accent;
+  color: $color-accent;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+
+  /* glassy base */
+  background: $glass-bg-weak;
+
+  /* Prevent Sass from interpreting CSS filter saturate() as a color fn */
+  $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+  backdrop-filter: $__bf;
+  -webkit-backdrop-filter: $__bf;
+
+  transition:
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    transform $dur-fast $ease-std;
+
+  &:hover {
+    background: $accent-tint-weak;
+    border-color: $color-accent;
+  }
+  &:active {
+    background: $accent-tint-strong;
+    box-shadow: $shadow-accent-press;
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $focus-ring-width $focus-ring-color;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  line-height: 0;
+  transform: translateY(0);
+  transition: transform $dur-fast $ease-std;
+
+  /* gentle nudge on hover */
+  .btn:hover & { transform: translateY(2px); }
+}
