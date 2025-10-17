@@ -20,7 +20,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 16 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -43,7 +49,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 16 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -66,7 +78,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/devices/iphone/iphone-16plus.png",
+    heroAlt: "iPhone 16 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -89,7 +107,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 16",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -112,7 +136,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 15 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -135,7 +165,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 15 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -158,7 +194,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 15 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -181,7 +223,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 15",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -204,7 +252,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 14 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -227,7 +281,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 14 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -250,7 +310,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 14 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -273,7 +339,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 14",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -296,7 +368,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 13 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -319,7 +397,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 13 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -342,7 +426,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 13",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -365,7 +455,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 13 mini",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -388,7 +484,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 12 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -411,7 +513,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 12 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -434,7 +542,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 12",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -457,7 +571,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 12 mini",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -480,7 +600,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 11 Pro Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -503,7 +629,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 11 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -526,7 +658,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 11",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -549,7 +687,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone XS Max",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -572,7 +716,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone XS",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -595,7 +745,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone XR",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -618,7 +774,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone X",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -641,7 +803,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone SE (3. paaudze)",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -664,7 +832,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone SE (2. paaudze)",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -687,7 +861,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone SE (1. paaudze)",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -710,7 +890,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 8 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -733,7 +919,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 8",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -756,7 +948,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 7 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -779,7 +977,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 7",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -802,7 +1006,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 6s Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -825,7 +1035,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 6s",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -848,7 +1064,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 6 Plus",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -871,7 +1093,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPhone 6",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -894,7 +1122,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S24 Ultra",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -917,7 +1151,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S24+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -940,7 +1180,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S24",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -963,7 +1209,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S23 Ultra",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -986,7 +1238,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S23+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1009,7 +1267,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S23",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1032,7 +1296,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S23 FE",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1055,7 +1325,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S22 Ultra",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1078,7 +1354,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S22+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1101,7 +1383,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S22",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1124,7 +1412,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S21 Ultra",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1147,7 +1441,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S21+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1170,7 +1470,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S21",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1193,7 +1499,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S21 FE",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1216,7 +1528,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S20 Ultra",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1239,7 +1557,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S20+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1262,7 +1586,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S20",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1285,7 +1615,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S20 FE",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1308,7 +1644,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S10+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1331,7 +1673,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S10",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1354,7 +1702,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S10e",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1377,7 +1731,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S9+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1400,7 +1760,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S9",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1423,7 +1789,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S8+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1446,7 +1818,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S8",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1469,7 +1847,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S7 edge",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1492,7 +1876,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S7",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1515,7 +1905,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S6 edge+",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1538,7 +1934,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S6 edge",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1561,7 +1963,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy S6",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1584,7 +1992,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy Z Fold5",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1607,7 +2021,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy Z Flip5",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1630,7 +2050,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy A54",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1653,7 +2079,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Galaxy A34",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1676,7 +2108,13 @@ const devices = [
     <p>Bezmaksas diagnostika, pārskatāmas cenas un remonta darbi tajā pašā dienā. 
     Pieraksties tiešsaistē vai apmeklē iLab servisu centrā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Samsung Z4",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1698,7 +2136,13 @@ const devices = [
     Veicam ekrāna, baterijas un kameras maiņu tajā pašā dienā ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un skaidras cenas — iLab meistari atjaunos Tavu Huawei kā jaunu.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "Huawei P30 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1720,7 +2164,13 @@ const devices = [
     Izmantojam oriģinālas vai augstas kvalitātes OnePlus detaļas ar garantiju.</p>
     <p>Bezmaksas diagnostika un ātra apkalpošana iLab servisā.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "OnePlus 9 Pro",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   },
 
   {
@@ -1743,7 +2193,13 @@ const devices = [
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta. 
     Pieraksties iLab servisā vai nosūti ierīci pa pastu no jebkuras Latvijas vietas.</p>
   `,
-
+    heroImage: "/images/placeholders/phone.webp",
+    heroAlt: "iPad Pro 12.9",
+    heroFocal: "right",
+    heroMaxH: 560,
+  heroOverlapDesktop: 96,
+  heroOverlapMobile: 16,
+    heroHideBelow: 768
   }
 ];
 

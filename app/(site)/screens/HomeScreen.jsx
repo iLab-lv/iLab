@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Hero from '@sections/hero/Hero';
 
 import Services from '@sections/home-devices/Services';
+import Process from '@sections/process/Process';
 import Devices from '@sections/home-devices/Devices';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
@@ -64,6 +65,20 @@ export default function HomeScreen() {
       <Services />
       
       {/* <Devices /> */}
+
+      <Process
+                  id="process"
+                  title="Kā notiek remonts"
+                  steps={[
+                    { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+                    { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
+                    { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
+                    { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
+                    { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+                  ]}
+                  headingLevel={2}
+                  variant="cards"
+                />
 
       <Why />
 

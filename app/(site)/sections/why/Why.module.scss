@@ -1,7 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
-/* Keep your existing glass helper if you have it; simplified here */
+/* subtle glass */
 @mixin glass-weak {
   background: $glass-bg-weak;
   border: $border-thin solid $glass-border;
@@ -29,7 +29,6 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    /* very subtle ambient accent */
     background:
       radial-gradient(900px 500px at 20% 80%, rgba($color-accent, 0.05), transparent 55%),
       radial-gradient(1000px 600px at 85% 15%, rgba($color-accent, 0.06), transparent 60%);
@@ -62,32 +61,40 @@
   max-width: 70ch;
 }
 
-/* GRID: stacked cards */
+/* FLEX: centered cards, guaranteed 4 / 2 / 1 columns */
 .uspGrid {
-  margin-top: $space-xl;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: $space-lg;
+  --card-gap: #{$space-lg};
 
-  @media (max-width: $bp-lg) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  @media (max-width: $bp-sm) {
-    grid-template-columns: 1fr 1fr;
-    gap: $space-md;
-  }
+  margin-top: $space-xl;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;     /* center partial rows */
+  align-content: flex-start;
+  gap: var(--card-gap);
+
+  /* reset <ul> */
+  padding: 0;
+  list-style: none;
 }
 
+/* Base card styles */
 .card {
   @include glass-weak;
+
+  box-sizing: border-box;      /* include padding in width calc */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: $space-md;
   padding: $space-xl $space-lg;
-  border-radius: 16px; /* rectangular card with soft corners */
+  border-radius: 16px;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+
+  /* Desktop (default): 4 columns
+     4 cards => 3 gaps, so (100% - 3*gap) / 4 */
+  flex: 0 1 calc((100% - 3 * var(--card-gap)) / 4);
+  max-width: calc((100% - 3 * var(--card-gap)) / 4);
 
   &:hover {
     transform: translateY(-2px);
@@ -95,12 +102,35 @@
   }
 }
 
+/* Medium: 2 columns */
+@media (max-width: $bp-lg) {
+  .uspGrid { --card-gap: #{$space-lg}; }
+
+  .card {
+    flex-basis: calc((100% - var(--card-gap)) / 2);
+    max-width: calc((100% - var(--card-gap)) / 2);
+    padding: $space-lg $space-md; /* tighter to help fit */
+  }
+}
+
+/* Small: 1 column, centered and not overly wide */
+@media (max-width: $bp-sm) {
+  .uspGrid { --card-gap: #{$space-md}; }
+
+  .card {
+    flex-basis: 100%;
+    max-width: 560px;          /* optional cap for nice measure */
+    margin-inline: auto;
+    padding: $space-lg;
+  }
+}
+
 .iconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;  /* square to prevent squeeze */
-  height: 64px; /* square to prevent squeeze */
+  width: 64px;
+  height: 64px;
   border-radius: 999px;
   background:
     radial-gradient(40% 40% at 30% 25%, rgba($color-accent, .25), rgba($color-accent, .10)),
@@ -110,7 +140,6 @@
 }
 
 .icon {
-  /* explicit size for all icons; avoids odd viewBox scaling */
   width: 36px;
   height: 36px;
   display: block;
@@ -121,7 +150,7 @@
   font-size: $font-size-lg;
   line-height: 1.25;
   text-align: center;
-  /* keep to one line on compact widths but allow wrap on small screens */
+
   @media (max-width: $bp-sm) {
     font-size: $font-size-p;
   }

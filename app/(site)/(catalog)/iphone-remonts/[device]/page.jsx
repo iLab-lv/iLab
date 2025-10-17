@@ -121,13 +121,13 @@ export default async function Page({ params }) {
 
       {/* === DEVICE HERO (overlaps header; now includes SEO copy) === */}
       <DeviceHero
-        image={d.heroImage || d.image}
-        alt={d.heroAlt || d.name}
+        image={d.image}
+        alt={`${d.name} remonts`}
         focal={d.heroFocal || 'right'}
         overlapDesktop={d.heroOverlapDesktop ?? 96}
         overlapMobile={d.heroOverlapMobile ?? 16}
         maxHeight={d.heroMaxH ?? 520}
-        bodyHtml={d.bodyHtml || null}   // <— render copy here
+        bodyHtml={d.bodyHtml || null}
       />
 
       {/* === INTRO (no bodyHtml here anymore) === */}

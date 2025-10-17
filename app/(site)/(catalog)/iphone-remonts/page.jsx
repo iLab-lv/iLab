@@ -1,11 +1,11 @@
 // app/(site)/(catalog)/iphone-remonts/page.jsx
 import Script from 'next/script';
-import Link from 'next/link';
 
 import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
 
 import SeriesGrid from '@components/model-grid/SeriesGrid';
+import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import CommonIssues from '@sections/common-issues/CommonIssues';
 import Faq from '@sections/faq/Faq';
@@ -183,6 +183,54 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
+      {/* Popular services — icon cards with explicit iPhone routes */}
+      <section className={s.section} aria-labelledby="iphone-services-h2">
+        <div className={s.container}>
+          <Services
+            id="iphone-services"
+            title="Populārākie iPhone remonti"
+            items={[
+              {
+                title: 'Displeja (ekrāna) maiņa',
+                text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+                icon: 'LuSmartphone',
+                href: '/iphone-remonts/displeja-maina',
+              },
+              {
+                title: 'Akumulatora maiņa',
+                text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+                icon: 'LuBatteryCharging',
+                href: '/iphone-remonts/baterijas-maina',
+              },
+              {
+                title: 'Uzlādes ligzda',
+                text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+                icon: 'LuPlugZap',
+                href: '/iphone-remonts/uzlades-ligzda',
+              },
+              {
+                title: 'Kamera',
+                text: 'miglaini attēli, fokusēšanās problēmas.',
+                icon: 'LuCamera',
+                href: '/iphone-remonts/kamera',
+              },
+              {
+                title: 'Skaļruņi/mikrofons',
+                text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+                icon: 'LuVolume2',
+                href: '/iphone-remonts/skalruni-mikrofons',
+              },
+              {
+                title: 'Ūdens bojājumi',
+                text: 'diagnostika un atjaunošana, ja tas iespējams.',
+                icon: 'LuDroplets',
+                href: '/iphone-remonts/udens-bojajumi',
+              },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* GUIDE */}
       {cat?.show?.guide !== false && cat?.sections?.guide && (
         <section className={s.section} aria-labelledby="guide-h2">
@@ -258,3 +306,4 @@ export default function IphoneRemontsPage() {
     </>
   );
 }
+ 
