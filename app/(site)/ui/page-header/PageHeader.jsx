@@ -4,9 +4,11 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import categories from '@/data/categories';
 import categoryContent from '@/data/categoryContent';
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
+
 import ScrollCta from '@components/button/ScrollCta';
 import s from './PageHeader.module.scss';
 
@@ -32,7 +34,8 @@ function getBrand(cat, brandSlug) {
 /**
  * PageHeader
  * - Builds breadcrumbs/title from URL; allows overrides via props.
- * - If no lead/scrollCta are provided, tries to resolve from content registries.
+ * - NO automatic scroll CTA on device pages anymore.
+ *   Pages must pass `scrollCta={{ label, targetId }}` or provide it via content registries.
  */
 export default function PageHeader({
   title,
@@ -50,8 +53,7 @@ export default function PageHeader({
     crumbs,
     computedTitle,
     computedImage,
-    resolvedHero,   // { h1?, lead?, scrollCta? }
-    autoScrollCta,  // default CTA when on a device page
+    resolvedHero, // { h1?, lead?, scrollCta? } from content registries (optional)
   } = useMemo(() => {
     const parts = pathname.split('/').filter(Boolean); // e.g. ['iphone-remonts','iphone-14'] OR ['telefonu-remonts','apple','iphone-14']
     const [p0, p1, p2] = parts;
@@ -97,7 +99,7 @@ export default function PageHeader({
     const src = image?.src || imageSrc || null;
     const alt = image?.alt || imageAlt || t || '';
 
-    // --- resolve hero defaults from content registries
+    // --- resolve hero defaults from content registries (optional)
     let heroFromContent = null;
 
     // iPhone hub at root
@@ -133,22 +135,18 @@ export default function PageHeader({
       if (bc?.hero?.h1) t = bc.hero.h1;
     }
 
-    // NEW: auto CTA for any device page
-    const autoCta = isDevicePage ? { label: 'Skatīt cenas', targetId: 'paglelist' } : null;
-
     return {
       crumbs: c,
       computedTitle: t,
       computedImage: src ? { src, alt } : null,
       resolvedHero: heroFromContent,
-      autoScrollCta: autoCta,
     };
   }, [pathname, image, imageAlt, imageSrc]);
 
-  // Final render values:
+  // Final render values (page wins → content registry → nothing)
   const finalTitle = title || resolvedHero?.h1 || computedTitle;
   const finalLead = lead ?? resolvedHero?.lead ?? null;
-  const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? autoScrollCta ?? null;
+  const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? null;
 
   return (
     <header className={s.header} role="region" aria-label="Lapas virsraksts">
@@ -160,7 +158,11 @@ export default function PageHeader({
                 const isLast = i === crumbs.length - 1;
                 return (
                   <li key={item.href || i} className={s.crumb}>
-                    {isLast ? <span aria-current="page">{item.label}</span> : <Link href={item.href}>{item.label}</Link>}
+                    {isLast ? (
+                      <span aria-current="page">{item.label}</span>
+                    ) : (
+                      <Link href={item.href}>{item.label}</Link>
+                    )}
                   </li>
                 );
               })}

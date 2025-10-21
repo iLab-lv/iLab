@@ -14,6 +14,16 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 import s from '@styles/Catalog.module.scss';
 import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
 
+// Icon components (no strings)
+import {
+  LuSmartphone,
+  LuBatteryCharging,
+  LuPlugZap,
+  LuCamera,
+  LuVolume2,
+  LuDroplets,
+} from 'react-icons/lu';
+
 const ORIGIN = 'https://www.ilab.lv';
 
 export const metadata = {
@@ -163,37 +173,37 @@ export default function TelefonuRemontsPage() {
               {
                 title: 'Displeja (ekrāna) maiņa',
                 text: 'plaisas, tumši plankumi, nereaģē skāriens.',
-                icon: 'LuSmartphone',
+                icon: LuSmartphone,
                 href: '/telefonu-remonts/ekrana-mainja',
               },
               {
                 title: 'Akumulatora maiņa',
                 text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
-                icon: 'LuBatteryCharging',
+                icon: LuBatteryCharging,
                 href: '/telefonu-remonts/akumulatora-mainja',
               },
               {
                 title: 'Uzlādes ligzda',
                 text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
-                icon: 'LuPlugZap',
+                icon: LuPlugZap,
                 href: '/telefonu-remonts/uzlades-ligzda',
               },
               {
                 title: 'Kamera',
                 text: 'miglaini attēli, fokusēšanās problēmas.',
-                icon: 'LuCamera',
+                icon: LuCamera,
                 href: '/telefonu-remonts/kamera-remonts',
               },
               {
                 title: 'Skaļruņi/mikrofons',
                 text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
-                icon: 'LuVolume2',
+                icon: LuVolume2,
                 href: '/telefonu-remonts/skalruni-mikrofons',
               },
               {
                 title: 'Ūdens bojājumi',
                 text: 'diagnostika un atjaunošana, ja tas iespējams.',
-                icon: 'LuDroplets',
+                icon: LuDroplets,
                 href: '/telefonu-remonts/udens-bojajumi',
               },
             ]}

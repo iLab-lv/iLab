@@ -2,17 +2,6 @@
 import Link from 'next/link';
 import s from './Services.module.scss';
 
-// Import only the icons we actually use (tree-shakes react-icons/lu)
-import {
-  LuSmartphone,
-  LuBatteryCharging,
-  LuPlugZap,
-  LuCamera,
-  LuVolume2,
-  LuMic2,
-  LuDroplets,
-} from 'react-icons/lu';
-
 /**
  * Cards-only Services section (presentational).
  *
@@ -22,45 +11,37 @@ import {
  * - items: Array<{
  *     title: string,
  *     text?: string,
- *     href?: string,           // full URL; provide it from the page
- *     icon?: React.ComponentType | string  // e.g., 'LuSmartphone' or LuSmartphone
+ *     href?: string,                   // full URL; provide it from the page
+ *     icon?: React.ElementType | JSX.Element  // e.g., LuBatteryCharging OR <LuBatteryCharging />
  *   }>
  * - headingLevel?: 2 | 3 (default 2)
  * - className?: string
  *
  * Notes:
+ * - This component is display-only; pages supply content & icons.
+ * - Icons must be passed as components/elements (no string keys).
  * - If `href` is missing, we render a non-clickable card.
- * - `icon` can be a component OR one of the string keys in ICON_MAP.
- * - `variant` is ignored (kept only for back-compat).
  */
-const ICON_MAP = {
-  LuSmartphone,
-  LuBatteryCharging,
-  LuPlugZap,
-  LuCamera,
-  LuVolume2,
-  LuMic2,
-  LuDroplets,
-};
-
 export default function Services({
   id = 'services',
   title = 'Populārākie remonti',
   items = [],
   headingLevel = 2,
   className,
-  // legacy prop kept for back-compat but ignored (always cards)
-  variant,
 }) {
   if (!items || items.length === 0) return null;
 
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
 
-  function getIconComponent(iconProp) {
+  function renderIcon(iconProp) {
     if (!iconProp) return null;
-    if (typeof iconProp === 'string' && ICON_MAP[iconProp]) return ICON_MAP[iconProp];
-    if (typeof iconProp === 'function') return iconProp;
-    return null;
+    // If a component type is provided (function), render it with a standard size.
+    if (typeof iconProp === 'function') {
+      const Icon = iconProp;
+      return <Icon size={28} aria-hidden="true" />;
+    }
+    // Otherwise assume a ready-made React element (<Icon />) was passed.
+    return iconProp;
   }
 
   return (
@@ -70,15 +51,10 @@ export default function Services({
 
         <div className={s.cards} role="list">
           {items.map((it) => {
-            const Icon = getIconComponent(it.icon);
-
+            const IconEl = renderIcon(it.icon);
             const CardInner = (
               <>
-                {Icon ? (
-                  <span className={s.cardIcon} aria-hidden="true">
-                    <Icon size={28} />
-                  </span>
-                ) : null}
+                {IconEl ? <span className={s.cardIcon}>{IconEl}</span> : null}
 
                 <span className={s.cardContent}>
                   <span className={s.itemTitle}>{it.title}</span>
