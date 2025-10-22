@@ -120,7 +120,12 @@ function buildPriceListItems(modelSlug) {
         base.defaultTimeText ||
         'Tajā pašā dienā';
 
-      const { priceFrom, priceTo } = toPriceRange(it.price);
+      // Normalize price to string; skip if null (N/A)
+      const raw = it?.price;
+      if (raw == null) return null; // hide N/A on page, still editable in admin
+      const priceText = typeof raw === 'number' ? String(raw) : String(raw).trim();
+
+      const { priceFrom, priceTo } = toPriceRange(priceText);
 
       return {
         id: it.id,
@@ -129,7 +134,7 @@ function buildPriceListItems(modelSlug) {
         order: base.order ?? 9999,
         timeText,
         warrantyDays: base.defaultWarrantyDays ?? null,
-        price: (it.price ?? '').trim(),
+        price: priceText,
         priceFrom,
         priceTo,
         popular: false,
@@ -236,8 +241,9 @@ export default async function Page({ params }) {
 
   // Offers with single numeric price only
   const offers = priceItems.map((it) => {
-    const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(it.price || '')
-      ? Number((it.price || '').replace(',', '.'))
+    const priceStr = it.price == null ? '' : String(it.price);
+    const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
+      ? Number(priceStr.replace(',', '.'))
       : undefined;
 
     return {

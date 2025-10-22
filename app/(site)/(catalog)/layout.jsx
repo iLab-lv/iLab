@@ -7,15 +7,15 @@ import categoryContent from '@/data/categoryContent';
 import servicesContent from '@/data/servicesContent';
 import devices from '@/data/devices';
 
-const norm = (s='') => decodeURIComponent(String(s)).trim().toLowerCase();
+const norm = (s = '') => decodeURIComponent(String(s)).trim().toLowerCase();
 
 export default function CatalogLayout({ children }) {
   const pathname = usePathname() || '/';
   const parts = pathname.split('/').filter(Boolean).map(norm);
   const categorySlug = parts[0] || '';
-  const subSlug = parts[1] || '';               // "iphone-14-pro" or "displeja-maina"
+  const subSlug = parts[1] || ''; // "iphone-14-pro" or "displeja-maina"
 
-  // 1) Default: category header (shows scroll CTA)
+  // 1) Default: category header (may include scroll CTA from registry)
   let headerProps = {};
   const cat = categoryContent[categorySlug];
   if (cat) {
@@ -28,16 +28,17 @@ export default function CatalogLayout({ children }) {
   if (svc) {
     headerProps = {
       title: svc.h1 || headerProps.title,
-      lead:  svc.lead || headerProps.lead,
+      lead: svc.lead || headerProps.lead,
       scrollCta: null,
     };
   }
-  // 3) Device page override for /iphone-remonts/[device] (no CTA)
+  // 3) Device page override for /iphone-remonts/[device] → SHOW CTA to #cenas
   else if (subSlug && categorySlug === 'iphone-remonts') {
     const d = devices.find(
-      x => x.slug.toLowerCase() === subSlug &&
-           x.brandSlug === 'apple' &&
-           x.category === 'telefonu-remonts'
+      (x) =>
+        x.slug.toLowerCase() === subSlug &&
+        x.brandSlug === 'apple' &&
+        x.category === 'telefonu-remonts'
     );
     if (d) {
       const lead =
@@ -46,7 +47,8 @@ export default function CatalogLayout({ children }) {
       headerProps = {
         title: `${d.name} remonts`,
         lead,
-        scrollCta: null,                       // no “Izvēlies modeli” on device pages
+        // ✅ pass CTA to match the device page's PriceList id
+        scrollCta: { label: 'Skatīt cenas', targetId: 'cenas' },
       };
     } else {
       // unknown sub-route: still hide CTA

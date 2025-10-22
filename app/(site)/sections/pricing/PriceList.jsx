@@ -32,9 +32,10 @@ function fmtPrice(from, to, currency = 'EUR') {
   return '—';
 }
 
-// NEW: prefer plain text price if provided
+// NEW: prefer plain text price if provided (now number-safe)
 function fmtPriceText(item, currency = 'EUR') {
-  const t = (item.price || '').trim();
+  const v = item?.price;
+  const t = v == null ? '' : (typeof v === 'string' ? v.trim() : String(v));
   if (t) {
     // Add € if looks numeric, a range, or "no <num>"
     const numericLike =

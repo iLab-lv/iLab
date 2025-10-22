@@ -187,7 +187,7 @@ export default function SeriesGrid({
                     aria-expanded={isExpanded}
                     aria-controls={`${sectionId}-grid`}
                   >
-                    {isExpanded ? 'Rādīt mazāk' : `Rādīt visu (${g.items.length})`}
+                    {isExpanded ? 'Rādīt mazāk' : `Vairāk šīs sērijas modeļu (${g.items.length})`}
                   </button>
                 )}
               </div>
