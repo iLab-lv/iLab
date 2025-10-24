@@ -9,15 +9,15 @@ const categoryContent = {
     slug: 'iphone-remonts',
 
     seo: {
-      title: 'iPhone remonts Rīgā un visā Latvijā | iLab',
+      title: 'iPhone remonts Rīgā | iLab',
       metaDescription:
-        'iPhone ekrāna un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, garantija. Piesaki remontu iLab!',
+        'iPhone remonts Rīgā — displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
     },
 
     // Header content (Header owns H1, lead, CTA)
-    h1: 'iPhone remonts',
+    h1: 'iPhone remonts Rīgā',
     lead:
-      'iLab sertificētie meistari salabo iPhone gan ar tipiskiem, gan sarežģītiem bojājumiem — no saplaisājuša ekrāna līdz mitruma radītām problēmām. Strādājam ātri, izmantojam kvalitatīvas detaļas un sniedzam garantiju visā Latvijā.',
+      'iLab sertificētie meistari salabo iPhone ar dažādiem bojājumiem — no saplaisājuša ekrāna līdz mitruma radītām problēmām. Strādājam ātri, izmantojam kvalitatīvas detaļas un sniedzam garantiju visiem remontiem Rīgā.',
     scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'iphone-modeli', show: true },
 
     sections: {
@@ -26,37 +26,74 @@ const categoryContent = {
         intro: 'Atrast modeli ir viegli — izvēlies no saraksta vai izmanto meklēšanu.',
       },
 
-      // ---- RESTORED GUIDE (exact copy) ----
+      // ---- GUIDE ----
       guide: {
         heading: 'iPhone remonta ceļvedis',
         parts: [
           {
             title: 'Simptomi un iespējamie risinājumi',
-            text:
-              'Saplīsis vai mirgo ekrāns, nereaģē skāriens, ātri krītas baterijas līmenis, uzlāde pārtrūkst vai telefons pārkarst — tie ir biežākie signāli, ka nepieciešama diagnostika. iLab komandā pārbaudām komponentes, lai precīzi noteiktu bojājumu un piedāvātu optimālo risinājumu.',
+            text: `
+<p>Ja iPhone sāk uzvesties neparasti, problēmas cēlonis ne vienmēr ir acīmredzams. Dažādi simptomi var norādīt uz vairākiem bojājumiem, tāpēc svarīga ir precīza diagnostika. iLab meistari palīdz noteikt īsto iemeslu un piedāvā drošu risinājumu.</p>
+
+<p><strong>Pārkaršana vai ātra izlādēšanās</strong><br>
+Ja telefons strauji sakarst vai akumulators izlādējas neparasti ātri, iemesls var būt gan nolietota baterija, gan programmatūras kļūda. Pēc pārbaudes meistars var piedāvāt <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņu</a> vai programmatūras atjaunošanu, lai novērstu lieku strāvas patēriņu.</p>
+
+<p><strong>Neuzlādējas vai uzlāde pārtrūkst</strong><br>
+Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai noteiktā leņķī, bieži vainīgs ir uzlādes ports vai kontakta korozija. Šādā gadījumā palīdz <a href="/iphone-remonts/uzlades-ligzda">uzlādes ligzdas remonts</a> vai tīrīšana, dažreiz arī baterijas nomaiņa.</p>
+
+<p><strong>Ūdens vai mitruma bojājumi</strong><br>
+Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpusē jau sākusies oksidācija. Jo ātrāk ierīce nonāk servisā, jo lielāka iespēja to atjaunot. Veicam <a href="/iphone-remonts/udens-bojajumi">mitruma bojājumu diagnostiku un tīrīšanu</a>, aizstājot bojātās detaļas, ja nepieciešams.</p>
+
+<p><strong>Ekrāna vai skāriena problēmas</strong><br>
+Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
+
+<p><strong>Kameras vai skaņas kļūmes</strong><br>
+Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas meistars piedāvās <a href="/iphone-remonts/kamera">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofons">skaļruņu un mikrofona</a> remontu.</p>
+
+<p><strong>Ko darīt, ja neesi pārliecināts?</strong><br>
+Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā. Pārbaudīsim ierīci un sniegsim precīzu remonta piedāvājumu ar cenu un termiņu pirms darba sākšanas.</p>
+      `,
           },
           {
             title: 'Cik tas ilgst un ko sagaidīt',
-            text:
-              'Standarta darbi, piemēram, ekrāna vai baterijas maiņa, bieži paveicami tajā pašā dienā. Sarežģītākiem bojājumiem vispirms veicam diagnostiku un saskaņojam termiņu. Par izmaksām vienojamies pirms darba uzsākšanas — bez slēptām pozīcijām.',
+            text: `
+<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
+
+<p>Ja bojājums ir sarežģītāks (piemēram, ūdens bojājums vai mātesplates defekts), serviss informē par nepieciešamo laiku un detaļu pieejamību. Cenu un termiņu vienmēr saskaņojam pirms darba uzsākšanas, tāpēc klients zina, ko sagaidīt.</p>
+
+<p>Remonta gaitā varat sekot līdzi statusam vai saņemt paziņojumu, kad ierīce ir gatava. Mērķis — nodrošināt ātru, caurspīdīgu un drošu iPhone remontu Rīgā.</p>
+      `,
           },
           {
             title: 'Detaļas: oriģinālas vai OEM',
-            text:
-              'Strādājam ar oriģinālām vai augstas kvalitātes OEM detaļām atkarībā no modeļa un pieejamības. Mērķis — atjaunot sākotnējo funkcionalitāti un saglabāt uzticamību. Izvēli un garantijas nosacījumus izskaidrojam pirms remonta.',
+            text: `
+<p>iLab serviss piedāvā gan oriģinālās Apple detaļas, gan augstas kvalitātes OEM rezerves daļas. Izvēle tiek veikta kopā ar klientu, balstoties uz konkrētā modeļa īpatnībām, cenu un garantijas nosacījumiem.</p>
+
+<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam 90 dienu garantiju gan detaļām, gan darbam.</p>
+
+<p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam — pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
+      `,
           },
           {
             title: 'Datu drošība un sagatavošanās remontam',
-            text:
-              'Iesakām veikt dublējumu un deaktivizēt “Find My iPhone”, ja nepieciešams. Mēs apstrādājam datus atbildīgi; piekļuve tiek ierobežota tikai remonta vajadzībām. Ja ir paroli vai Face ID, meistars informēs, kā rīkoties.',
+            text: `
+<p>Pirms ierīces nodošanas servisā iesakām izveidot datu rezerves kopiju iCloud vai iTunes vidē. iLab meistari ievēro stingrus datu drošības principus — mēs nepiekļūstam personīgajai informācijai un apstrādājam datus tikai remonta vajadzībām.</p>
+
+<p>Ja ierīce ir aizsargāta ar paroli, Face ID vai Touch ID, meistars ieteiks, kā rīkoties, lai pārbaude būtu iespējama. iLab serviss Rīgā nodrošina, ka katrs iPhone tiek apstrādāts droši, konfidenciāli un atbildīgi.</p>
+      `,
           },
           {
             title: 'Kur nodot iPhone remontam',
-            text:
-              'Mūs atradīsi T/C Domina Shopping un T/C Spice Home — ērti piebraukt un apvienot ar citām lietām. Ja neatrodi savu modeli, izmanto “Sazināties” un saņem konsultāciju no meistara.',
+            text: `
+<p>iLab servisa centri atrodas Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu — sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
+
+<p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/servisa-centri">Servisa centri</a>.</p>
+
+<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/displeja-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumi">ūdens bojājumu diagnostika</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
+      `,
           },
         ],
-      },
+      }
     },
 
     show: {

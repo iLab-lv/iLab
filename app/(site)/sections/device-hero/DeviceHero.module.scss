@@ -1,25 +1,31 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* Tunables (fixed values; change here to adjust globally) */
-$hero-max-h:        520px;   /* image cap */
-$overlap-desktop:   220px;   /* how high the image floats into header on ≥960px */
-$overlap-mobile:     16px;   /* how high the image floats into header on <960px */
+/* DeviceHero.module.scss — simplified, in-flow, with masked bottom fade */
 
-/* Computed bleed so image can sit at the viewport edge on wide screens */
+/* Tunables */
+$hero-max-h:        520px;   // max media height
+$overlap-desktop:   220px;   // image float into header on ≥960px
+$overlap-mobile:     0px;    // no overlap on mobile
+$fade-start-desktop: 50%;    // where the fade starts (from top) on desktop
+$fade-start-mobile:  60%;    // fade start on mobile
+
 @function bleed-calc() {
   @return calc((100vw - min(100vw, #{$container-max})) / 2);
 }
 
-/* ===== Band container ===== */
+/* Section */
 .hero {
   position: relative;
-  z-index: 1;
-
-  /* Keep hero within flow; reserve visual height so next section doesn't slide up */
   min-block-size: min(50vh, #{$hero-max-h});
+  overflow: visible;
+
+  @media (min-width: 960px) {
+    z-index: 9; /* above header separator; below CTAs (~70) */
+  }
 }
 
-/* ===== Grid: mobile image → copy, desktop copy | image ===== */
+
+/* Layout */
 .inner {
   position: relative;
   display: grid;
@@ -29,7 +35,7 @@ $overlap-mobile:     16px;   /* how high the image floats into header on <960px 
   max-width: $container-max;
   margin: 0 auto;
   padding-inline: $space-md;
-  padding-top: $space-xl; /* space below header */
+  padding-top: $space-xl;
   padding-bottom: clamp($space-xl, 6vh, $space-2xl);
 
   grid-template-columns: 1fr;
@@ -44,85 +50,101 @@ $overlap-mobile:     16px;   /* how high the image floats into header on <960px 
   }
 }
 
-/* ===== Copy block ===== */
+/* Copy */
 .copy {
-  grid-area: copy;
-  z-index: 2;
-  max-width: 680px;
-  color: $color-text-2;
-  font-size: $font-size-p;
-  line-height: $line-height-body;
-
-  p { margin-block: $space-sm; }
-  a { color: $color-accent; text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  color: $color-text;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
-/* ===== Image wrapper =====
-   Desktop/tablet: absolute so it can float + bleed horizontally.
-   Mobile: relative block with explicit height so <Image fill> renders.
-*/
+/* size the real paragraph so it wins over any global p rules */
+.copy :where(p) {
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.375rem); /* ~18–22px */
+}
+
+/* if you have multiple <p> lines and want equal emphasis */
+.copy :where(p + p) { margin-top: 0.5rem; }
+
+/* Media
+   - Desktop: absolute so it can float up + bleed horizontally
+   - Mobile: relative with explicit height for <Image fill>
+   - Mask fade applied to the image itself (no black boxes) */
 .media {
   grid-area: media;
 
-  /* Desktop/tablet default */
+  /* desktop/tablet */
   position: absolute;
   top: 0;
   bottom: 0;
   width: min(calc(50vw + #{bleed-calc()}), 900px);
   height: min(60vh, #{$hero-max-h});
   pointer-events: none;
-  z-index: 0;
-
-  /* Float upward into header on desktop */
   transform: translateY(-#{$overlap-desktop});
 
-  /* Soft fade at bottom (optional) */
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.15) 90%,
-    rgba(0, 0, 0, 0)
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.15) 90%,
-    rgba(0, 0, 0, 0)
-  );
+  :global(img) {
+    display: block;
+    position: relative;
+    object-fit: contain;
+    object-position: center;
+    z-index: 1;
 
-  :global(img) { object-fit: contain; }
+    /* simple bottom fade (transparent) */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) #{$fade-start-desktop},
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) #{$fade-start-desktop},
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
 }
 
-/* ===== Focal alignment (desktop/tablet) ===== */
-.focalRight .media {
-  right: calc(#{bleed-calc()} * -1);
-  left: auto;
-  /* vertical float already applied by default transform */
-}
-.focalLeft .media {
-  left: calc(#{bleed-calc()} * -1);
-  right: auto;
-}
+/* Focal alignment (desktop/tablet) */
+.focalRight .media { right: calc(#{bleed-calc()} * -1); left: auto; }
+.focalLeft  .media { left:  calc(#{bleed-calc()} * -1); right: auto; }
 .focalCenter .media {
   left: 50%;
   right: auto;
-  transform: translate(-50%, -#{$overlap-desktop}); /* include X center + Y float */
+  transform: translate(-50%, -#{$overlap-desktop});
 }
 
-/* ===== Mobile behaviour ===== */
+/* Optional: category variant */
+.hero.category {
+  .media {
+    width: min(calc(50vw + #{bleed-calc()}), 980px); /* slightly wider cap */
+    height: min(65vh, 600px);                        /* taller max */
+    transform: translateY(-180px);                   /* gentler overlap */
+  }
+}
+
+
+/* Mobile */
 @media (max-width: 959px) {
   .hero { min-block-size: min(48vh, #{$hero-max-h}); }
 
   .media {
-    position: relative;                       /* required for <Image fill> */
-    left: auto; right: auto;                  /* clear desktop positioning */
+    position: relative;
+    left: auto; right: auto;
     width: 80vw;
-    height: min(48vh, #{$hero-max-h});        /* explicit height for <Image fill> */
-    margin-inline: auto;                      /* center horizontally */
+    height: min(48vh, #{$hero-max-h});
+    margin-inline: auto;
     margin-bottom: $space-lg;
-
-    /* Float upward slightly into header on mobile */
     transform: translateY(-#{$overlap-mobile});
+
+    :global(img) {
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) #{$fade-start-mobile},
+        rgba(0, 0, 0, 0) 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) #{$fade-start-mobile},
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
   }
 }

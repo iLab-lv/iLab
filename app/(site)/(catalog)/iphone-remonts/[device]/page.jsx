@@ -284,29 +284,7 @@ export default async function Page({ params }) {
 
       <DeviceHero image={d.image} alt={`${d.name} remonts`} bodyHtml={d.bodyHtml || null} />
 
-      <section className={s.intro} aria-labelledby="device-intro-title">
-        <div className={s.container}>
-          <div className={s.head}>
-            <h2 id="device-intro-title" className={s.h2}>{d.name}</h2>
-            {d.year && <div className={s.meta}>Izlaists: {d.year}</div>}
-          </div>
 
-          <div className={s.leadRow}>
-            <div className={s.leadCopy}>
-              {!d.bodyHtml && (
-                <p>
-                  Nodrošinām {d.name} displeja, baterijas, kameras un uzlādes remontu tajā pašā dienā
-                  (ja detaļas ir uz vietas). Bezmaksas diagnostika, skaidras cenu norādes un 90 dienu garantija.
-                </p>
-              )}
-              <div className={s.ctaRow}>
-                <a href="#cenas" className={s.btnPrimary}>Skatīt cenas</a>
-                <Link href="/iphone-remonts" className={s.btnGhost}>← Atpakaļ uz iPhone remontu</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Popular services for this model */}
       <Services

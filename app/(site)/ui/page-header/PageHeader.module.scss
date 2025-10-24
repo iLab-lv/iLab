@@ -7,8 +7,8 @@
   background: transparent;
 
   /* Clear the sticky topbar; header owns the top spacing */
-  padding-top: calc(var(--topbar-h, 0px) + #{$space-lg} + $safe-top);
-  padding-bottom: $space-lg;
+  padding-top: calc(var(--topbar-h, 0px) + #{$space-xl} + $safe-top); /* ↑ from $space-lg */
+  padding-bottom: $space-xl; /* ↑ from $space-lg for better balance */
 
   /* Visually taller header (~1/3 of viewport) with sane bounds */
   min-block-size: clamp(280px, 32vh, 520px);
@@ -65,26 +65,30 @@
 .textCol { align-self: end; }
 
 .title {
-  margin: 0;
+  margin: 0 0 $space-xs 0; /* add gentle separation from lead */
   line-height: 1.2;
   font-size: clamp(1.5rem, 0.9rem + 1.6vw, 2.25rem);
   font-weight: 800;
 }
 
+/* shrink & soften the header lead, with better line spacing */
 .lead {
-  margin: $space-xs 0 0;
-  color: $color-text-2;
-  font-size: $font-size-lg; /* 18px */
-  line-height: $line-height-body;
-  max-width: 60ch;
+  margin-top: $space-sm;                 /* ↑ from $space-xs */
+  color: $color-text-3;
+  line-height: 1.7;                      /* ↑ from 1.55 for readability */
+  max-width: 58ch;
 }
 
-/* add near the bottom */
+/* ensure the actual paragraph takes the new size even if global p rules exist */
+.lead,
+.lead :where(p) {
+  font-size: clamp(0.95rem, 0.6rem + 0.4vw, 1.05rem); /* ~15–17px */
+}
+
+/* CTA spacing: give the button row more air under the lead */
 .cta {
-  margin-top: $space-md; /* adjust to $space-lg if you want more */
+  margin-top: $space-lg; /* ↑ from $space-md */
 }
-
-
 
 /* Optional media (device pages). Hidden if image fails to load. */
 .media {
@@ -108,5 +112,3 @@
   }
   .media { margin-top: $space-sm; }
 }
-
-

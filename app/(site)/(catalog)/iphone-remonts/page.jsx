@@ -11,10 +11,12 @@ import CommonIssues from '@sections/common-issues/CommonIssues';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+import DeviceHero from '@sections/device-hero/DeviceHero';
+import Guide from '@sections/guide/Guide';
+
 
 import s from '@styles/Catalog.module.scss';
 
-// Icon components (component-only usage)
 import {
   LuSmartphone,
   LuBatteryCharging,
@@ -28,8 +30,10 @@ const ORIGIN = 'https://www.ilab.lv';
 const cat = categoryContent['iphone-remonts'];
 
 export const metadata = {
-  title: cat?.seo?.title ?? 'iPhone remonts | iLab',
-  description: cat?.seo?.metaDescription ?? '',
+  title: cat?.seo?.title ?? 'iPhone remonts Rīgā | iLab',
+  description:
+    cat?.seo?.metaDescription ??
+    'iPhone remonts Rīgā — displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
   alternates: { canonical: '/iphone-remonts' },
 };
 
@@ -37,7 +41,6 @@ export const metadata = {
 // FAQ + CommonIssues content
 // =============================
 
-// Mini-cards preview (these are for CommonIssues; keep as-is if that component still maps strings)
 const ISSUES_PREVIEW = [
   {
     q: 'Saplīsis ekrāns / displeja problēmas',
@@ -50,7 +53,7 @@ const ISSUES_PREVIEW = [
     q: 'Barošanas un uzlādes problēmas',
     text: 'Ātri izlādējas, neslēdzas, neuzlādējas',
     icon: 'battery',
-    serviceHref: '/iphone-remonts/baterijas-maina', // or /iphone-remonts/uzlades-ligzda
+    serviceHref: '/iphone-remonts/baterijas-maina',
     id: 'barosanas-problemas',
   },
   {
@@ -69,7 +72,6 @@ const ISSUES_PREVIEW = [
   },
 ];
 
-// FAQ grouped
 const FAQ_GROUPS = [
   {
     label: 'Par remontu un garantiju',
@@ -78,8 +80,7 @@ const FAQ_GROUPS = [
       { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
       { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
       { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-      { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
-      { q: 'Vai strādājat visā Latvijā?', a: 'Jā; tuvāko servisu atradīsi sadaļā “Servisa centri”.' },
+      { q: 'Kur atrodas jūsu serviss?', a: 'iLab servisa centri atrodas Rīgā — T/C Domina Shopping un T/C Spice Home.' },
     ],
   },
   {
@@ -109,7 +110,7 @@ const howToLd = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: 'Kā notiek iPhone remonts',
-  description: 'Process iLab servisa centros: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
+  description: 'Process iLab servisa centros Rīgā: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
   step: [
     { '@type': 'HowToStep', position: 1, name: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
     { '@type': 'HowToStep', position: 2, name: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
@@ -124,7 +125,7 @@ const breadcrumbsLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
+    { '@type': 'ListItem', position: 2, name: 'iPhone remonts Rīgā', item: `${ORIGIN}/iphone-remonts/` },
   ],
 };
 
@@ -132,13 +133,13 @@ const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${ORIGIN}/iphone-remonts#service`,
-  serviceType: 'iPhone remonts',
-  areaServed: { '@type': 'Country', name: 'Latvia' },
+  serviceType: 'iPhone remonts Rīgā',
+  areaServed: { '@type': 'City', name: 'Riga' },
   provider: { '@id': `${ORIGIN}#organization` },
   url: `${ORIGIN}/iphone-remonts/`,
-  name: 'iPhone remonts',
+  name: 'iPhone remonts Rīgā',
   description:
-    'iPhone displeja un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, garantija.',
+    'iPhone remonts Rīgā: displeja un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, skaidras cenas un 90 dienu garantija.',
 };
 
 export default function IphoneRemontsPage() {
@@ -160,40 +161,27 @@ export default function IphoneRemontsPage() {
         {JSON.stringify(serviceLd)}
       </Script>
 
+      {/* HERO */}
+      <DeviceHero
+        image="/images/categories/iphone_remonts.png"
+        alt="iPhone remonts Rīgā"
+        focal="right"
+        className="category"
+        bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
+      />
+
       {/* INTRO */}
       <section className={s.section} aria-labelledby="iphone-intro-h2">
         <div className={s.container}>
-          <h2 id="iphone-intro-h2" className={s.h2}>iPhone remonts — ātri un droši</h2>
+          <h2 id="iphone-intro-h2" className={s.h2}>iPhone remonts Rīgā — ko mēs darām</h2>
           <p className={s.paragraph}>
-            Ātru un uzticamu iPhone remontu veicam ikdienā — displejs, baterija, uzlādes ligzda, kamera un citi bojājumi.
-            Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam tajā pašā dienā.
-            Ja nezini precīzu modeli, izvēlies no saraksta zemāk vai sazinies ar meistaru.
+            Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos remontdarbus paveicam tajā pašā dienā. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong> katram remontam.
           </p>
         </div>
       </section>
 
-      {/* SERIES GRID */}
-      <section id="iphone-modeli" className={`${s.section} ${s.anchorTarget}`} aria-labelledby="iphone-modeli-h2">
-        <div className={s.container}>
-          <h2 id="iphone-modeli-h2" className={s.h2}>
-            {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli'}
-          </h2>
-          <p className={s.intro}>
-            {cat?.sections?.modelGrid?.intro ?? 'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
-          </p>
 
-          <SeriesGrid
-            devices={devicesAll}
-            baseHref={baseHref}
-            brandSlug="apple"
-            categorySlug="telefonu-remonts"
-            initialLimit={4}
-            autoExpandOnSearch={true}
-          />
-        </div>
-      </section>
-
-      {/* Popular services — icon cards with explicit iPhone routes */}
+      {/* POPULAR SERVICES */}
       <section className={s.section} aria-labelledby="iphone-services-h2">
         <div className={s.container}>
           <Services
@@ -243,22 +231,37 @@ export default function IphoneRemontsPage() {
 
       {/* GUIDE */}
       {cat?.show?.guide !== false && cat?.sections?.guide && (
-        <section className={s.section} aria-labelledby="guide-h2">
-          <div className={s.container}>
-            <h2 id="guide-h2" className={s.h2}>{cat.sections.guide.heading}</h2>
-            <div className={s.guide}>
-              {cat.sections.guide.parts.map((p) => (
-                <article key={p.title} className={s.guidePart}>
-                  <h3 className={s.h3}>{p.title}</h3>
-                  <p className={s.paragraph}>{p.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Guide
+          id="guide"
+          title={cat.sections.guide.heading}
+          parts={cat.sections.guide.parts}
+          headingLevel={2}
+        />
       )}
 
-      {/* CommonIssues — mini cards */}
+      {/* MODEL GRID */}
+      <section id="iphone-modeli" className={`${s.section} ${s.anchorTarget}`} aria-labelledby="iphone-modeli-h2">
+        <div className={s.container}>
+          <h2 id="iphone-modeli-h2" className={s.h2}>
+            {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli'}
+          </h2>
+          <p id="iphone-modeli-intro" className={s.intro}>
+            {cat?.sections?.modelGrid?.intro ?? 'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
+          </p>
+
+          <SeriesGrid
+            devices={devicesAll}
+            baseHref={baseHref}
+            brandSlug="apple"
+            categorySlug="telefonu-remonts"
+            initialLimit={4}
+            autoExpandOnSearch={true}
+          />
+        </div>
+      </section>
+
+     
+      {/* ISSUES */}
       <section className={s.section} aria-labelledby="issues-preview-h2">
         <div className={s.container}>
           <CommonIssues
@@ -272,7 +275,7 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* Process */}
+      {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">
         <div className={s.container}>
           <Process
@@ -291,12 +294,12 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* Why */}
+      {/* WHY */}
       <section className={s.section}>
         <Why />
       </section>
 
-      {/* FAQ (grouped) */}
+      {/* FAQ */}
       <section className={s.section} aria-labelledby="iphone-faq-h2">
         <div className={s.container}>
           <Faq
@@ -309,7 +312,7 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* ConvertBand */}
+      {/* CONVERT BAND */}
       <section className={s.section}>
         <ConvertBand />
       </section>

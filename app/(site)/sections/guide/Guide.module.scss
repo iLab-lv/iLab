@@ -1,0 +1,56 @@
+@use '@/styles/_tokens.scss' as *;
+
+/* Section shell */
+.section {
+  padding-block: $space-xl;
+  border-top: $border-thin solid $color-border;
+}
+
+/* Page container (same width as the rest of the site) */
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+/* Section title */
+.h2 {
+  font-size: clamp(1.375rem, 1rem + 1.2vw, 2rem); /* larger */
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-lg 0;
+  line-height: $line-height-heading;
+}
+
+/* ---- One-column, full container width ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* single column */
+  gap: $space-lg;             /* spacing between cards */
+}
+
+/* Card / block spans the full container width */
+.item {
+  width: 100%;
+  max-width: none;                 /* remove previous 70ch cap */
+  margin: 0;                       /* align flush with container */
+  padding: clamp($space-lg, 2vw, $space-2xl);
+  background: $color-surface-1;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;
+}
+
+/* Card title */
+.h3 {
+  font-size: clamp(1.125rem, 0.95rem + 0.7vw, 1.375rem); /* larger */
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-sm 0;
+  line-height: $line-height-heading;
+}
+
+/* Long text */
+.text {
+  margin: 0;
+  color: $color-text-2;
+  font-size: clamp(1rem, 0.9rem + 0.6vw, 1.25rem); /* larger body */
+  line-height: 1.75;                                /* relaxed for long copy */
+}
