@@ -172,6 +172,10 @@
   font-weight: $font-weight-bold;
   color: inherit;
   text-decoration: none;   /* never underline title */
+
+  /* Help long names wrap gracefully on all screens */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* “remonts” inline label (SEO-friendly anchor text, visually subtle) */
@@ -179,7 +183,8 @@
   font-weight: $font-weight-regular;
   opacity: 0.7;
   margin-left: 0.25rem;
-  white-space: nowrap;
+  /* Allow wrapping so long titles don't overflow on mobile */
+  white-space: normal;
   text-decoration: none;   /* never underline separately */
 }
 
@@ -208,6 +213,31 @@
 /* Mobile */
 @media (max-width: 640px) {
   .card { grid-column: span 6; } /* 2 per row */
+
+  /* Keep titles tidy and prevent CTA push-down on very narrow screens */
+  .name {
+    font-size: 0.95rem;
+    line-height: 1.2;
+
+    /* Standard property first to appease linters */
+    line-clamp: 2;
+
+    /* Required combo for WebKit clamping */
+    display: -webkit-box;
+    overflow: hidden;
+
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-line-clamp: 2;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-box-orient: vertical;
+
+    overflow-wrap: anywhere;  /* nice breaks for long names */
+    word-break: break-word;   /* fallback */
+  }
+
+  .remontsInline {
+    white-space: normal; /* explicit override if something global applies */
+  }
 
   @supports not (aspect-ratio: 1) {
     .img { height: 140px; }
