@@ -7,7 +7,7 @@ export default function LaptopRemonts({
   bodyHTML,
   href,
   linkLabel = 'Apskatīt →',
-  imageSrc = '/images/home/laptop.png',
+  imageSrc = '/images/home/laptop.webp',
 }) {
   const bid = `${idBase}-pc`;
 

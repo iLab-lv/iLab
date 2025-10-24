@@ -7,7 +7,7 @@ export default function DysonRemonts({
   bodyHTML,
   href,
   linkLabel = 'Apskatīt →',
-  imageSrc = '/images/home/dyson.png',
+  imageSrc = '/images/home/dyson.webp',
 }) {
   const bid = `${idBase}-dyson`;
 

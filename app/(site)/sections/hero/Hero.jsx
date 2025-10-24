@@ -11,7 +11,7 @@ export default function Hero({
   background = 'gradient',
 
   // Desktop / tablet background image
-  imageSrc = '/images/hero.png',
+  imageSrc = '/images/hero.webp',
   posDesktop,                 // e.g. '50% 20%' (desktop BG framing)
   offsetDesktop,              // number (vh) or string ('-6vh')
 

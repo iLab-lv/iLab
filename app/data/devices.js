@@ -97,7 +97,7 @@ const devices = [
     seriesSlug: "iphone-16-serija",
     name: "iPhone 16 Pro Max",
     year: 2024,
-    image: "/images/devices/iphone-16-pro-max.jpg",
+    image: "/images/devices/iphone-16-pro-max.webp",
     popular: true,
     order: 100,
     metaTitle: "iPhone 16 Pro Max remonts Rīgā",

@@ -13,7 +13,7 @@ export default function IphoneRemonts({
   title = 'Apple ierīču remonts',
   introHTML,
   links = [],
-  imageSrc = '/images/home/apple.png',
+  imageSrc = '/images/home/apple.webp',
 }) {
   const bid = `${idBase}-apple`;
 

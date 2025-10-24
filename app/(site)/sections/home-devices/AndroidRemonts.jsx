@@ -6,7 +6,7 @@ export default function AndroidRemonts({
   introHTML,
   brands = [],
   allBrandsHref = '/telefonu-remonts',
-  imageSrc = '/images/home/android.png',
+  imageSrc = '/images/home/android.webp',
 }) {
   const bid = `${idBase}-android`;
 

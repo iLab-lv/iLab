@@ -15,7 +15,7 @@ export default function Services({
       { label: 'iPad remonts', href: '/plansetdatoru-remonts#ipad' },
       { label: 'MacBook remonts', href: '/datoru-remonts#macbook' },
     ],
-    imageSrc: '/images/home/apple.png',
+    imageSrc: '/images/home/apple.webp',
   },
   android = {
     title: 'Android — Telefonu un planšetdatoru remonts',
@@ -48,7 +48,7 @@ export default function Services({
       },
     ],
     allBrandsHref: '/telefonu-remonts',
-    imageSrc: '/images/home/android.png',
+    imageSrc: '/images/home/android.webp',
   },
   twoUp = [
     {
@@ -58,7 +58,7 @@ export default function Services({
         '<a href="/datoru-remonts">Datoru remonts Rīgā</a> — portatīvie un galda datori. Veicam klaviatūras un ekrāna maiņu, baterijas nomaiņu, dzesēšanas sistēmas tīrīšanu/termopastu, SSD uzstādīšanu un OS pārinstalāciju. Apkalpojam arī<a href="/datoru-remonts#macbook"> MacBook</a>. Tajā pašā dienā (atkarībā no modeļa) un ar 90&nbsp;dienu garantiju.',
       href: '/datoru-remonts',
       linkLabel: 'Apskatīt →',
-      imageSrc: '/images/home/laptop.png',
+      imageSrc: '/images/home/laptop.webp',
     },
     {
       key: 'dyson',
@@ -67,7 +67,7 @@ export default function Services({
         '<a href="/dyson-remonts">Dyson remonts Rīgā</a> — diagnostika, filtru un akumulatoru maiņa, motora un elektronikas remonts, uzlādes un sūkšanas defektu novēršana, pilna tīrīšana pēc garantijas beigām. Izmantojam kvalitatīvas detaļas un nodrošinām 90&nbsp;dienu garantiju.',
       href: '/dyson-remonts',
       linkLabel: 'Apskatīt →',
-      imageSrc: '/images/home/dyson.png',
+      imageSrc: '/images/home/dyson.webp',
     },
   ],
 }) {

@@ -47,7 +47,7 @@ export default function HomeScreen() {
         cta={{ label: 'Apskatīt pakalpojumus', href: '#services' }}
         align="center"
         background="gradient"
-        imageSrc="/images/hero.png"
+        imageSrc="/images/hero.webp"
 
         /* === Desktop framing & text lift === */
         posDesktop="50% 20%"  // keep desktop focal point

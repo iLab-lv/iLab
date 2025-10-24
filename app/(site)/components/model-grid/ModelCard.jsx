@@ -59,23 +59,32 @@ function ImgWithFallback({ src, alt, className }) {
 }
 
 export default function ModelCard({ device, baseHref }) {
+  const name = device?.name || '';
   const href = `${baseHref}/${device.slug}`;
-  const alt =
-    (device?.name && `${device.name} remonts`) ||
-    (device?.brand && device?.slug && `${device.brand} ${device.slug} remonts`) ||
-    'Tālruņa attēls';
   const src = resolveSrc(device);
 
+  // Full phrase for accessibility/SEO (no year to avoid ambiguity)
+  const fullLabel = `${name} remonts un cenas`.trim();
+
+  // Prefer “Brand Model remonts un cenas” if name missing
+  const alt =
+    (device?.name && `${device.name} remonts un cenas`) ||
+    (device?.brand && device?.slug && `${device.brand} ${device.slug} remonts un cenas`) ||
+    'Tālruņa attēls';
+
   return (
-    <Link href={href} className={s.card}>
+    <Link href={href} className={s.card} aria-label={fullLabel}>
       <ImgWithFallback src={src} alt={alt} className={s.img} />
+
       <div className={s.meta}>
-        {/* Model + subtle "remonts" label inside the same link (improves anchor text) */}
         <h3 className={s.name}>
-          {device.name}
-          <span className={s.remontsInline}> remonts un cenas</span>
+          {/* First line: model name + subtle suffix (this line clamps on mobile) */}
+          <span className={s.modelLine}>
+            {name}
+            <span className={s.remontsSuffix}> remonts un cenas</span>
+          </span>
+          {/* Year removed from UI to avoid “2024 prices” confusion */}
         </h3>
-        {device.year && <div className={s.sub}>{device.year}</div>}
       </div>
     </Link>
   );

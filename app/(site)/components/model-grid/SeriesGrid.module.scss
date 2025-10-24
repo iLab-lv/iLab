@@ -25,7 +25,7 @@
   &::placeholder { color: $color-text-2; }
 
   &:focus {
-    border-color: rgba(34, 211, 238, 0.6); /* $color-accent with alpha */
+    border-color: rgba(34, 211, 238, 0.6);
     box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
   }
 }
@@ -160,24 +160,39 @@
   padding: $space-sm $space-md $space-md;
 }
 
+/* ===== Title: model + subtle suffix (no visible year) ===== */
+
 .name {
-  margin: 0 0 $space-2xs 0;
+  margin: 0;
   font-size: 1rem;
   line-height: 1.25;
   font-weight: $font-weight-bold;
   color: inherit;
   text-decoration: none;
-
   overflow-wrap: anywhere;
   word-break: break-word;
 }
 
-/* Inline “remonts …” label */
+/* Line 1 — model + suffix; this line can clamp on mobile */
+.modelLine {
+  display: block;
+}
+
+/* Suffix “remonts un cenas” lighter and not bold */
+.remontsSuffix {
+  font-weight: $font-weight-regular;
+  opacity: 0.7;
+  margin-left: 0.25rem;
+  white-space: normal;
+  text-decoration: none;
+}
+
+/* Legacy inline hooks kept for compatibility */
 .remontsInline {
   font-weight: $font-weight-regular;
   opacity: 0.7;
   margin-left: 0.25rem;
-  white-space: normal;       /* allow wrapping on wide screens if needed */
+  white-space: normal;
   text-decoration: none;
 }
 
@@ -186,6 +201,7 @@
   opacity: 0.7;
 }
 
+/* Messages */
 .emptySection {
   opacity: 0.8;
   padding: $space-sm 0 $space-md;
@@ -207,12 +223,14 @@
 @media (max-width: 640px) {
   .card { grid-column: span 6; } /* 2 per row */
 
-  /* Clamp only the model name on tiny screens */
   .name {
     font-size: 0.95rem;
     line-height: 1.2;
+  }
 
-    /* Standard first */
+  /* Clamp only the first line (model + suffix) */
+  .modelLine {
+    /* Standard first for linters */
     line-clamp: 2;
 
     /* WebKit combo for clamping */
@@ -222,11 +240,6 @@
     -webkit-line-clamp: 2;
     /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-box-orient: vertical;
-  }
-
-  /* Hide the inline tail to avoid “remonts un…” truncation */
-  .remontsInline {
-    display: none;
   }
 
   @supports not (aspect-ratio: 1) {
