@@ -1,3 +1,6 @@
+'use client';
+
+import Image from 'next/image';
 import Button from '@components/button/Button';
 import s from './Hero.module.scss';
 
@@ -10,7 +13,7 @@ export default function Hero({
   align = 'center',
   background = 'gradient',
 
-  // Desktop / tablet background image
+  // Desktop / tablet background image (used via CSS var)
   imageSrc = '/images/hero.webp',
   posDesktop,                 // e.g. '50% 20%' (desktop BG framing)
   offsetDesktop,              // number (vh) or string ('-6vh')
@@ -22,6 +25,13 @@ export default function Hero({
   imageInlineMobile = true,   // keep mobile inline mode
   imageLiftMobile = 0,        // lift image UP from bottom (px or 'vh'), does NOT grow hero
   imageMaxWidthMobile = 1100, // px cap for inline image on mobile
+
+  // Optional intrinsic size for next/image (avoid layout shifts)
+  imageWidth = 1600,
+  imageHeight = 900,
+
+  // NEW: SEO-oriented alt for hero image
+  imageAlt, // string
 }) {
   const sectionClass = [
     s.hero,
@@ -59,6 +69,15 @@ export default function Hero({
           : String(imageMaxWidthMobile),
     }),
   };
+
+  // Default, SEO-oriented alt:
+  // - If title exists, use it + brand/location context.
+  // - Else, use a general, service-focused line.
+  const computedAlt =
+    imageAlt ||
+    (title
+      ? `${title} — iLab serviss Rīgā`
+      : 'iLab — mobilo telefonu, planšetdatoru un datoru remonts Rīgā');
 
   const ratingAria =
     rating?.ariaLabel ??
@@ -99,7 +118,16 @@ export default function Hero({
       {/* Inline image shows on mobile only; anchored to bottom then lifted up by imageLiftMobile */}
       {imageInlineMobile && (
         <div className={s.mediaWrap}>
-          <img src={imageSrc} alt="" className={s.media} />
+          <Image
+            src={imageSrc}
+            alt={computedAlt}
+            className={s.media}
+            width={imageWidth}
+            height={imageHeight}
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+          />
         </div>
       )}
     </section>

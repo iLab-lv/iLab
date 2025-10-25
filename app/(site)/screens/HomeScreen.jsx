@@ -32,6 +32,7 @@ export default function HomeScreen() {
     <main>
       <Hero
         title="Ātrs mobilo ierīču servisa centrs"
+        imageAlt="iLab serviss — mobilo ierīču remonts Rīgā (Domina un Spice Home)"
         subtitle={
           <>
             Remonts tajā pašā dienā. 90&nbsp;dienu garantija. Divas filiāles&nbsp;Rīgā: Domina un Spice Home.
