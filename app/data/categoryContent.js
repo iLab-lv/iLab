@@ -1,7 +1,7 @@
 // /data/categoryContent.js
 // Dev-time content source for category pages (hubs + iPhone).
 // iPhone hub keeps its long-form guide here.
-// Telefonu/Planšetdatoru hubs only provide hero for the Header.
+// Telefonu/Planšetdatoru/Datoru hubs only provide hero for the Header.
 
 const categoryContent = {
   // ---------------- iPhone hub (keeps the full guide) ----------------
@@ -123,6 +123,25 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
       scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
     },
+  },
+
+  // ---------------- Datoru remonts hub (Header hero only) ------------------
+  'datoru-remonts': {
+    hero: {
+      h1: 'Datoru remonts',
+      lead:
+        'Portatīvo un stacionāro datoru remonts — diagnostika, ekrāns, tastatūras, mātesplate, uzlāde, SSD/RAM uzlabošana, remonts pēc mitruma. Ātra diagnostika un 90 dienu garantija.',
+      scrollCta: { label: 'Skatīt zīmolus un pakalpojumus', targetId: 'brand-list' },
+    },
+  },
+
+  'dyson-remonts': {
+    slug: 'dyson-remonts',
+
+    // Header content (Header owns H1, lead; no scrollCta for this category)
+    h1: 'Dyson remonts Rīgā',
+    lead:
+      'iLab meistari salabo Dyson bezvadu putekļsūcējus — veicam motora un baterijas maiņu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku. Ātra pārbaude pirms darba, skaidras izmaksas un 90 dienu garantija.',
   },
 };
 

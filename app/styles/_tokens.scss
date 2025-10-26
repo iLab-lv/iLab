@@ -29,7 +29,7 @@ $glass-tint-strong: rgba(255, 255, 255, 0.08);
 
 /* Background surfaces */
 $glass-bg-weak:   rgba(255, 255, 255, 0.02); // subtle panel / outline button
-$glass-bg-strong: rgba(0, 0, 0, 0.78);       // mobile bottom bar / menus
+$glass-bg-strong: rgba(0, 0, 0, 0.88);       // mobile bottom bar / menus
 
 /* Borders derived from the same tints */
 $glass-border:   $glass-tint-weak;   // subtle border on dark glass

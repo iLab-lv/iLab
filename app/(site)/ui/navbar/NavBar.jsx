@@ -17,19 +17,49 @@ import { useUiDialogs } from '../providers/UiDialogsProvider';
  */
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },
+
   {
     label: 'Telefonu remonts',
     href: '/telefonu-remonts',
     children: [
       { label: 'Samsung', href: '/telefonu-remonts/samsung' },
+      { label: 'Xiaomi',  href: '/telefonu-remonts/xiaomi' },
       { label: 'Huawei',  href: '/telefonu-remonts/huawei' },
+      { label: 'Sony',    href: '/telefonu-remonts/sony' },
       { label: 'OnePlus', href: '/telefonu-remonts/oneplus' },
     ],
   },
-  { label: 'Planšetdatoru remonts', href: '/plansetdatoru-remonts' },
-  { label: 'Datoru remonts',        href: '/datoru-remonts' },
-  { label: 'Dyson remonts',         href: '/dyson-remonts' },
+
+  {
+    label: 'Planšetdatoru remonts',
+    href: '/plansetdatoru-remonts',
+    children: [
+      { label: 'iPad',    href: '/plansetdatoru-remonts/ipad' },
+      { label: 'Samsung', href: '/plansetdatoru-remonts/samsung' },
+      { label: 'Xiaomi',  href: '/plansetdatoru-remonts/xiaomi' },
+      { label: 'Huawei',  href: '/plansetdatoru-remonts/huawei' },
+    ],
+  },
+
+  {
+    label: 'Datoru remonts',
+    href: '/datoru-remonts',
+    children: [
+      { label: 'MacBook', href: '/datoru-remonts/macbook' },
+      { label: 'iMac',    href: '/datoru-remonts/imac' },
+      { label: 'Mac Pro', href: '/datoru-remonts/mac-pro' },
+      { label: 'Lenovo',  href: '/datoru-remonts/lenovo' },
+      { label: 'HP',      href: '/datoru-remonts/hp' },
+      { label: 'MSI',     href: '/datoru-remonts/msi' },
+      { label: 'Dell',    href: '/datoru-remonts/dell' },
+      { label: 'Asus',    href: '/datoru-remonts/asus' },
+      { label: 'Acer',    href: '/datoru-remonts/acer' },
+    ],
+  },
+
+  { label: 'Dyson remonts', href: '/dyson-remonts' },
 ];
+
 
 export default function NavBar() {
   const pathname = usePathname() || '/';
