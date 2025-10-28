@@ -261,19 +261,6 @@ export default function IphoneRemontsPage() {
       </section>
 
      
-      {/* ISSUES */}
-      <section className={s.section} aria-labelledby="issues-preview-h2">
-        <div className={s.container}>
-          <CommonIssues
-            id="issues-preview"
-            title="Biežāk sastopamās problēmas"
-            items={ISSUES_PREVIEW}
-            faqId="iphone-faq"
-            maxItems={4}
-            headingLevel={2}
-          />
-        </div>
-      </section>
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">
