@@ -4,9 +4,27 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 import s from './SeriesGrid.module.scss';
 import ModelCard from './ModelCard';
 
-// Helpers
+// ---------- Sorting helpers ----------
+const YEAR_FALLBACK = -Infinity;
+const normYear = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : YEAR_FALLBACK;
+};
+
+const byYearDescThenNameAsc = (a, b) => {
+  const ya = normYear(a.year);
+  const yb = normYear(b.year);
+  if (yb !== ya) return yb - ya; // newer first
+  const na = String(a.name || a.slug || '').toLowerCase();
+  const nb = String(b.name || b.slug || '').toLowerCase();
+  if (na < nb) return -1;
+  if (na > nb) return 1;
+  return 0;
+};
+
+// ---------- Data shaping ----------
 function dedupeAndSort(devices, brandSlug, categorySlug) {
-  // Normalize category filter to array | null
+  // normalize category filter to array | null
   const catList = Array.isArray(categorySlug)
     ? categorySlug.filter(Boolean)
     : categorySlug
@@ -15,30 +33,24 @@ function dedupeAndSort(devices, brandSlug, categorySlug) {
 
   const filtered = devices.filter((d) => {
     const brandOk = brandSlug
-      ? (d.brandSlug || '').toLowerCase() === brandSlug.toLowerCase()
+      ? String(d.brandSlug || '').toLowerCase() === brandSlug.toLowerCase()
       : true;
-
-    const catOk = catList
-      ? catList.includes(d.category)
-      : true;
-
+    const catOk = catList ? catList.includes(d.category) : true;
     return brandOk && catOk;
   });
 
+  // dedupe by stable key
   const seen = new Set();
   const list = [];
   for (const d of filtered) {
     const k = `${d.category || '-'}:${d.brandSlug || '-'}:${d.slug}`;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    list.push(d);
+    if (!seen.has(k)) {
+      seen.add(k);
+      list.push(d);
+    }
   }
-  // order: lower number = newer (your scheme)
-  list.sort((a, b) => {
-    const ao = typeof a.order === 'number' ? a.order : 99999;
-    const bo = typeof b.order === 'number' ? b.order : 99999;
-    return ao - bo;
-  });
+  // global sort (helps when we later group)
+  list.sort(byYearDescThenNameAsc);
   return list;
 }
 
@@ -50,12 +62,20 @@ function groupBySeries(list) {
     if (!bySeries.has(slug)) bySeries.set(slug, { slug, title, items: [] });
     bySeries.get(slug).items.push(d);
   }
-  // sort sections by newest item inside (min order)
-  const groups = Array.from(bySeries.values()).sort((g1, g2) => {
-    const o1 = Math.min(...g1.items.map((x) => (typeof x.order === 'number' ? x.order : 99999)));
-    const o2 = Math.min(...g2.items.map((x) => (typeof x.order === 'number' ? x.order : 99999)));
-    return o1 - o2;
+
+  // sort items inside each series now (baseline)
+  const groups = Array.from(bySeries.values()).map((g) => {
+    const items = [...g.items].sort(byYearDescThenNameAsc);
+    return { ...g, items };
   });
+
+  // order the series by their newest item (desc)
+  groups.sort((g1, g2) => {
+    const max1 = g1.items.reduce((m, x) => Math.max(m, normYear(x.year)), YEAR_FALLBACK);
+    const max2 = g2.items.reduce((m, x) => Math.max(m, normYear(x.year)), YEAR_FALLBACK);
+    return max2 - max1;
+  });
+
   return groups;
 }
 
@@ -66,28 +86,35 @@ function matchesQuery(d, q) {
     (d.name && d.name.toLowerCase().includes(t)) ||
     (d.slug && d.slug.toLowerCase().includes(t)) ||
     (d.series && d.series.toLowerCase().includes(t)) ||
-    (String(d.year || '').includes(t))
+    String(d.year || '').includes(t)
   );
 }
 
 export default function SeriesGrid({
   devices = [],
   baseHref,
-  brandSlug = 'apple',              // reuse for 'samsung' later
-  categorySlug = 'telefonu-remonts',// NEW: filter by category (string or string[])
+  brandSlug = 'apple',
+  categorySlug = 'telefonu-remonts',
   initialLimit = 4,
   autoExpandOnSearch = true,
 }) {
+  // 1) base list + grouping (sorted)
   const list = useMemo(
     () => dedupeAndSort(devices, brandSlug, categorySlug),
     [devices, brandSlug, categorySlug]
   );
   const groupsAll = useMemo(() => groupBySeries(list), [list]);
 
-  // Global search
+  // 2) search
   const [query, setQuery] = useState('');
+  const groupsSearched = useMemo(() => {
+    if (!query) return groupsAll;
+    return groupsAll
+      .map((g) => ({ ...g, items: g.items.filter((d) => matchesQuery(d, query)) }))
+      .filter((g) => g.items.length > 0);
+  }, [groupsAll, query]);
 
-  // Per-section expansion
+  // 3) expansion state
   const [expanded, setExpanded] = useState(() => new Set());
   const toggleExpand = useCallback((slug) => {
     setExpanded((prev) => {
@@ -98,7 +125,7 @@ export default function SeriesGrid({
     });
   }, []);
 
-  // Per-section year filter: Map(seriesSlug -> year|null)
+  // 4) per-series year filter
   const [yearBySection, setYearBySection] = useState(() => new Map());
   const setSectionYear = useCallback((slug, y) => {
     setYearBySection((prev) => {
@@ -108,36 +135,31 @@ export default function SeriesGrid({
     });
   }, []);
 
-  // Filter groups by query
-  const groups = useMemo(() => {
-    if (!query) return groupsAll;
-    return groupsAll
-      .map((g) => ({
-        ...g,
-        items: g.items.filter((d) => matchesQuery(d, query)),
-      }))
-      .filter((g) => g.items.length > 0);
-  }, [groupsAll, query]);
+  // IMPORTANT: compute available years from the FULL series (stable UI),
+  // not from the search-filtered copy.
+  const yearsBySeries = useMemo(() => {
+    const map = new Map();
+    for (const g of groupsAll) {
+      const ys = new Set(
+        g.items
+          .map((d) => (Number.isFinite(Number(d.year)) ? Number(d.year) : null))
+          .filter((y) => y !== null)
+      );
+      map.set(g.slug, Array.from(ys).sort((a, b) => b - a)); // newest first
+    }
+    return map;
+  }, [groupsAll]);
 
-  // Auto-expand series when searching (so matches are visible)
+  // auto-expand all sections when searching
   useEffect(() => {
     if (!autoExpandOnSearch) return;
     if (query) {
-      setExpanded(new Set(groups.map((g) => g.slug)));
-    } else {
-      // preserve user state when query clears
+      setExpanded(new Set(groupsSearched.map((g) => g.slug)));
     }
-  }, [query, groups, autoExpandOnSearch]);
+  }, [query, groupsSearched, autoExpandOnSearch]);
 
-  // Years present per section (computed from the currently visible group's full items set)
-  const yearsByGroup = useMemo(() => {
-    const map = new Map();
-    for (const g of groups) {
-      const ys = new Set(g.items.map((d) => d.year).filter(Boolean));
-      map.set(g.slug, Array.from(ys).sort((a, b) => b - a));
-    }
-    return map;
-  }, [groups]);
+  // 5) final groups to render
+  const groups = groupsSearched;
 
   return (
     <div className={s.wrapper}>
@@ -153,7 +175,6 @@ export default function SeriesGrid({
         />
       </div>
 
-      {/* Sections */}
       {groups.length === 0 ? (
         <p className={s.emptyAll}>Nekas netika atrasts.</p>
       ) : (
@@ -162,14 +183,17 @@ export default function SeriesGrid({
           const isExpanded = expanded.has(g.slug) || (query && autoExpandOnSearch);
           const selectedYear = yearBySection.get(g.slug) ?? null;
 
-          // Filter items by per-section year (only if expanded and a year is chosen)
-          const itemsFiltered = isExpanded && selectedYear
-            ? g.items.filter((d) => d.year === selectedYear)
-            : g.items;
+          // filter by chosen year for this section (if any)
+          const itemsByYear =
+            isExpanded && selectedYear ? g.items.filter((d) => Number(d.year) === Number(selectedYear)) : g.items;
 
-          const visible = isExpanded ? itemsFiltered : itemsFiltered.slice(0, initialLimit);
-          const canExpand = itemsFiltered.length > initialLimit;
-          const years = yearsByGroup.get(g.slug) || [];
+          // sort again right before render (defensive; ensures correct order after any filter)
+          const itemsSorted = [...itemsByYear].sort(byYearDescThenNameAsc);
+
+          const visible = isExpanded ? itemsSorted : itemsSorted.slice(0, initialLimit);
+          const canExpand = itemsSorted.length > initialLimit;
+
+          const years = yearsBySeries.get(g.slug) || [];
 
           return (
             <section key={g.slug} className={s.section} aria-labelledby={`${sectionId}-title`} id={sectionId}>
@@ -178,7 +202,6 @@ export default function SeriesGrid({
                   {g.title} <span className={s.count}>({g.items.length})</span>
                 </h2>
 
-                {/* Expand/Collapse */}
                 {canExpand && (
                   <button
                     type="button"
@@ -192,7 +215,6 @@ export default function SeriesGrid({
                 )}
               </div>
 
-              {/* Per-section year filter appears only when expanded */}
               {isExpanded && years.length > 0 && (
                 <div className={s.yearFilter} role="group" aria-label="Filtrs pēc gada">
                   <button
@@ -207,9 +229,9 @@ export default function SeriesGrid({
                     <button
                       key={y}
                       type="button"
-                      className={`${s.yearChip} ${selectedYear === y ? s.active : ''}`}
+                      className={`${s.yearChip} ${Number(selectedYear) === y ? s.active : ''}`}
                       onClick={() => setSectionYear(g.slug, y)}
-                      aria-pressed={selectedYear === y}
+                      aria-pressed={Number(selectedYear) === y}
                     >
                       {y}
                     </button>
@@ -217,8 +239,7 @@ export default function SeriesGrid({
                 </div>
               )}
 
-              {/* Grid */}
-              {itemsFiltered.length === 0 ? (
+              {itemsSorted.length === 0 ? (
                 <p className={s.emptySection}>Nav modeļu šim gadam.</p>
               ) : (
                 <div className={s.grid} id={`${sectionId}-grid`}>

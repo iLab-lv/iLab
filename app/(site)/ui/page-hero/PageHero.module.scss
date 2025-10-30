@@ -1,0 +1,109 @@
+/* PageHero.module.scss — vars scoped to the component (no :root) */
+
+/* A tiny utility for full-bleed alignment to container edge */
+@function _bleed() {
+  @return calc((100vw - min(100vw, var(--container-max))) / 2);
+}
+
+/* Section wrapper: define defaults here (component-scoped) */
+.hero {
+  /* Tunables (fallbacks; can be overridden via inline style vars from JSX) */
+  --container-max: 1200px;
+  --hero-overlap: min(18vh, 220px);
+  --hero-media-max: 900px;
+  --gap: 24px;
+  --gap-lg: 32px;
+  --pad-x: 20px;
+  --pad-y: clamp(28px, 4vh, 48px);
+  --copy-color: #0f172a;
+
+  position: relative;
+  overflow: visible;
+}
+
+/* Full-bleed helpers (apply on the section) */
+.bleedRight { --_bleed-inline: calc(_bleed() * -1); }
+.bleedLeft  { --_bleed-inline: calc(_bleed() * -1); }
+
+/* Grid container */
+.inner {
+  position: relative;
+  display: grid;
+  gap: var(--gap);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--pad-y) var(--pad-x);
+
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "media"
+    "copy";
+
+@media (min-width: 960px) {
+  .inner {
+    gap: var(--gap-lg);
+    grid-template-columns: 1fr minmax(420px, 1fr);
+    grid-template-areas: "copy media";
+    padding-top: var(--pad-y); // <-- let the image pull upward beyond the section
+  }
+}
+
+}
+
+/* Copy column */
+.copy {
+  grid-area: copy;
+  color: var(--copy-color);
+  line-height: 1.55;
+  font-weight: 500;
+
+  :where(p) { font-size: clamp(1.0625rem, 0.95rem + 0.6vw, 1.375rem); }
+  :where(p + p) { margin-top: 0.5rem; }
+}
+
+/* Media column */
+.media {
+  grid-area: media;
+
+  inline-size: min(80vw, var(--hero-media-max));
+  margin-inline: auto;
+  margin-block: 12px 0;
+
+  :global(img) {
+    display: block;
+  }
+}
+
+/* Desktop/tablet behavior */
+@media (min-width: 960px) {
+  .media {
+    margin-top: calc(var(--hero-overlap) * -1);
+    inline-size: min(calc(45vw + _bleed()), var(--hero-media-max));
+    margin-right: var(--_bleed-inline, 0); /* for bleedRight */
+  }
+
+  /* Focal alignment on desktop */
+  :global([data-focal='left'])  .media { margin-left: 0;   margin-right: auto; }
+  :global([data-focal='center']) .media { margin-left: auto; margin-right: auto; }
+  :global([data-focal='right']) .media { margin-left: auto; margin-right: 0; }
+}
+
+/* Mobile focal alignment */
+:global([data-focal='left'])  .media { margin-inline-start: 0;   margin-inline-end: auto; }
+:global([data-focal='center']) .media { margin-inline: auto; }
+:global([data-focal='right']) .media { margin-inline-start: auto; margin-inline-end: 0; }
+
+/* Modes */
+.modeIntrinsic {
+  :global(img) { height: auto; width: 100%; object-fit: contain; }
+}
+
+.modeFill {
+  position: relative;
+
+  :global(img) {
+    position: absolute;
+    inset: 0;
+    object-fit: contain;
+  }
+}
