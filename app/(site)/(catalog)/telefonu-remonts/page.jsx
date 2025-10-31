@@ -10,6 +10,7 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+import DeviceHero from '@sections/device-hero/DeviceHero';
 
 import s from '@styles/Catalog.module.scss';
 import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
@@ -109,6 +110,15 @@ export default function TelefonuRemontsPage() {
       <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(itemListLd)}
       </Script>
+
+      {/* HERO */}
+      <DeviceHero
+        image="/images/categories/iphone_remonts.png"
+        alt="iPhone remonts Rīgā"
+        focal="right"
+        className="category"
+        bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
+      />
 
       {/* INTRO (SEO copy under H2; Header owns the H1/lead/CTA) */}
       <section className={s.section} aria-labelledby="phones-intro-h2">
