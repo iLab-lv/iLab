@@ -1,7 +1,11 @@
 // app/(site)/(catalog)/telefonu-remonts/[brand]/page.jsx
 import Script from 'next/script';
 import Link from 'next/link';
+
 import devicesAll from '@/data/devices';
+import categories from '@/data/categories'; // ⬅️ use existing categories data
+
+import DeviceHero from '@sections/device-hero/DeviceHero'; // ⬅️ add hero
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
 import CommonIssues from '@sections/common-issues/CommonIssues';
@@ -9,12 +13,42 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+
 import phoneIssues from '@/data/commonIssues';
 import c from '@styles/Catalog.module.scss';
 
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
 
 const ORIGIN = 'https://www.ilab.lv';
+
+// ---------- Helpers ----------
+function getPhoneBrandConfig(brandSlug) {
+  // Find the phones category in your categories list
+  const phonesCat = categories.find((c) => c.slug === 'telefonu-remonts');
+  if (!phonesCat) {
+    return {
+      brandKey: brandSlug,
+      heroImage: '/brand/images/categories/telefonu_remonts.webp',
+      logo: null,
+      tint: 'rgba(0,200,180,0.20)',
+      heroAlt: 'Telefonu remonts',
+      name: brandSlug,
+    };
+  }
+
+  const brand =
+    phonesCat.brands?.find((b) => (b.brandSlug || '').toLowerCase() === brandSlug) || null;
+
+  // Fallbacks if brand entry is missing (still shows generic Android tint)
+  return {
+    brandKey: brand?.brandSlug || brandSlug,
+    heroImage: brand?.heroImage || '/brand/images/categories/telefonu_remonts.webp',
+    logo: brand?.logo || null,
+    tint: brand?.tint || 'rgba(0,200,180,0.20)',
+    heroAlt: brand?.heroAlt || 'Telefonu remonts',
+    name: brand?.name || brandSlug,
+  };
+}
 
 export async function generateMetadata({ params }) {
   const bc = getBrandContent(params.brand, BRAND_CATEGORY.PHONES);
@@ -25,7 +59,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Generic services/faq/process (shared)
+// ---------- Generic services/faq/process (shared) ----------
 const POPULAR_REPAIRS_GENERIC = [
   { title: 'Displeja (ekrāna) maiņa', text: 'plaisas, tumši plankumi, nereaģē skāriens.' },
   { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.' },
@@ -53,14 +87,17 @@ const FAQ_ITEMS = [
 
 export default function BrandPhonesPage({ params }) {
   const brandSlug = String(params.brand || '').toLowerCase();
+
   const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
   const baseHref = bc.href;
+
+  const hero = getPhoneBrandConfig(brandSlug);
 
   const brandPhoneList = devicesAll.filter(
     (d) => d.category === 'telefonu-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
-  // JSON-LD
+  // ---------- JSON-LD ----------
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -107,7 +144,17 @@ export default function BrandPhonesPage({ params }) {
         {JSON.stringify(faqLd)}
       </Script>
 
-      {/* INTRO (SEO copy under H2; Header owns the H1/lead/CTA) */}
+      {/* DEVICE HERO (image + optional logo tint) */}
+      <DeviceHero
+        image={hero.heroImage}               // e.g. /brand/images/categories/telefonu_remonts.webp
+        alt={hero.heroAlt}                   // e.g. "Samsung telefonu remonts"
+        brandLogo={hero.logo}                // e.g. /brand/logos/samsung-logo.svg (or null)
+        brandKey={hero.brandKey}             // sets data-brand for CSS tints
+        tint={hero.tint}                     // can override brand preset if needed
+        focal="right"
+      />
+
+      {/* INTRO (SEO copy under H2; Header owns H1/lead/CTA) */}
       <section className={c.section} aria-labelledby="brand-intro-h2">
         <div className={c.container}>
           <h2 id="brand-intro-h2" className={c.h2}>

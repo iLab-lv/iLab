@@ -1,6 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* DeviceHero.module.scss — simplified, in-flow, with masked bottom fade */
+/* DeviceHero.module.scss — simplified, in-flow, with masked bottom fade
+   + brand logo overlay + brand tint support */
 
 /* Tunables */
 $hero-max-h:        520px;   // max media height
@@ -13,19 +14,22 @@ $fade-start-mobile:  60%;    // fade start on mobile
   @return calc((100vw - min(100vw, #{$container-max})) / 2);
 }
 
-/* Section */
+/* ---------- Section ---------- */
 .hero {
   position: relative;
   min-block-size: min(50vh, #{$hero-max-h});
   overflow: visible;
+  isolation: isolate; // keep tint/overlays scoped to this section
+
+  /* default/fallback tint (transparent) */
+  --brand-tint: transparent;
 
   @media (min-width: 960px) {
     z-index: 9; /* above header separator; below CTAs (~70) */
   }
 }
 
-
-/* Layout */
+/* ---------- Layout ---------- */
 .inner {
   position: relative;
   display: grid;
@@ -50,7 +54,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
   }
 }
 
-/* Copy */
+/* ---------- Copy ---------- */
 .copy {
   color: $color-text;
   font-weight: 500;
@@ -65,7 +69,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
 /* if you have multiple <p> lines and want equal emphasis */
 .copy :where(p + p) { margin-top: 0.5rem; }
 
-/* Media
+/* ---------- Media ----------
    - Desktop: absolute so it can float up + bleed horizontally
    - Mobile: relative with explicit height for <Image fill>
    - Mask fade applied to the image itself (no black boxes) */
@@ -78,15 +82,52 @@ $fade-start-mobile:  60%;    // fade start on mobile
   bottom: 0;
   width: min(calc(50vw + #{bleed-calc()}), 900px);
   height: min(60vh, #{$hero-max-h});
-  pointer-events: none;
+  pointer-events: none; // decorative; don't block clicks
   transform: translateY(-#{$overlap-desktop});
+  border-radius: 16px;
+  overflow: hidden; // ensures tint/logo respect rounded corners
+
+  /* Subtle brand tint overlay (controlled via --brand-tint) */
+  .tint {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--brand-tint, transparent);
+    mix-blend-mode: overlay;
+    opacity: 0.24; /* keep subtle; adjust if needed */
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Brand logo overlay (decorative) */
+  .brandOverlay {
+    position: absolute;
+    right: min(4vw, 48px);
+    bottom: min(4vw, 48px);
+    z-index: 2;
+    opacity: 0.9;
+    pointer-events: none;
+
+    /* Optional glassy pill (enable when needed)
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 6px 12px;
+    */
+
+    :global(img) {
+      width: min(160px, 40vw);
+      height: auto;
+      display: block;
+    }
+  }
 
   :global(img) {
     display: block;
     position: relative;
     object-fit: contain;
     object-position: center;
-    z-index: 1;
+    z-index: 0; /* image below tint & logo */
 
     /* simple bottom fade (transparent) */
     -webkit-mask-image: linear-gradient(
@@ -102,7 +143,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
   }
 }
 
-/* Focal alignment (desktop/tablet) */
+/* ---------- Focal alignment (desktop/tablet) ---------- */
 .focalRight .media { right: calc(#{bleed-calc()} * -1); left: auto; }
 .focalLeft  .media { left:  calc(#{bleed-calc()} * -1); right: auto; }
 .focalCenter .media {
@@ -111,7 +152,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
   transform: translate(-50%, -#{$overlap-desktop});
 }
 
-/* Optional: category variant */
+/* ---------- Optional: category variant ---------- */
 .hero.category {
   .media {
     width: min(calc(50vw + #{bleed-calc()}), 980px); /* slightly wider cap */
@@ -120,8 +161,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
   }
 }
 
-
-/* Mobile */
+/* ---------- Mobile ---------- */
 @media (max-width: 959px) {
   .hero { min-block-size: min(48vh, #{$hero-max-h}); }
 
@@ -148,3 +188,10 @@ $fade-start-mobile:  60%;    // fade start on mobile
     }
   }
 }
+
+/* ---------- Brand presets (scoped to local .hero class) ----------
+   You can still override per-page with inline style: style={{ '--brand-tint': 'rgba(...)' }} */
+.hero[data-brand="samsung"] { --brand-tint: rgba(0, 120, 255, 0.25); }
+.hero[data-brand="xiaomi"]  { --brand-tint: rgba(255, 100,   0, 0.25); }
+.hero[data-brand="huawei"]  { --brand-tint: rgba(200,   0,  40, 0.25); }
+.hero[data-brand="android"] { --brand-tint: rgba(  0, 200, 180, 0.20); }
