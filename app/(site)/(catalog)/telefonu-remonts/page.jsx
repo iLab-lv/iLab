@@ -113,11 +113,12 @@ export default function TelefonuRemontsPage() {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/iphone_remonts.png"
-        alt="iPhone remonts Rīgā"
+        image="/images/categories/telefonu_remonts.webp"
+        alt="telefonu remonts Rīgā"
         focal="right"
         className="category"
-        bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
+        bodyHtml={`<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> — ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>
+`}
       />
 
       {/* INTRO (SEO copy under H2; Header owns the H1/lead/CTA) */}

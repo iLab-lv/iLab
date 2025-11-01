@@ -21,16 +21,16 @@ const GENERIC = {
       'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba; biežākos darbus paveicam tajā pašā dienā.',
     h1Label: (name) => `${name} telefonu remonts`,
     title: (name) => `${name} telefonu remonts Rīgā — cenas, ātri, garantija | iLab`,
-    meta:
-      (name) => `${name} remonts: displejs, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    meta: (name) =>
+      `${name} remonts: displejs, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
   },
   [CATEGORY.TABLETS]: {
     heroLead:
       'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
     h1Label: (name) => `${name} remonts`,
     title: (name) => `${name} remonts Rīgā — cenas, ātri, garantija | iLab`,
-    meta:
-      (name) => `${name} remonts: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    meta: (name) =>
+      `${name} remonts: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
   },
 };
 
@@ -46,12 +46,14 @@ const BRANDS = {
       [CATEGORY.PHONES]: {
         // iPhone is a dedicated hub at root
         marketingName: 'iPhone',
-        hubPath: '/iphone-remonts',          // where users should land for Apple phones
-        canonicalPath: '/iphone-remonts',    // canonical for SEO (if brand route exists)
+        hubPath: '/iphone-remonts', // where users should land for Apple phones
+        canonicalPath: '/iphone-remonts', // canonical for SEO (if brand route exists)
         hero: {
           h1: 'iPhone remonts',
           lead:
             'iLab sertificētie meistari salabo iPhone gan ar tipiskiem, gan sarežģītiem bojājumiem — no saplaisājuša ekrāna līdz mitruma radītām problēmām.',
+          bodyHtml:
+            '<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
           scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'iphone-modeli' },
         },
         seo: {
@@ -74,6 +76,8 @@ const BRANDS = {
           h1: 'iPad remonts',
           lead:
             'Ekrānu un bateriju maiņa, uzlādes ligzdas un citi iPad remonti. Pēc diagnostikas vienojamies par izmaksām un termiņu.',
+          bodyHtml:
+            '<p><strong>iPad remonts Rīgā</strong> — ekrāna, baterijas un uzlādes ligzdas maiņa. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong>.</p>',
           scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
         },
         seo: {
@@ -93,19 +97,31 @@ const BRANDS = {
     marketingName: 'Samsung',
     category: {
       [CATEGORY.PHONES]: {
-        hero: { h1: 'Samsung telefonu remonts', lead: GENERIC[CATEGORY.PHONES].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'Samsung telefonu remonts',
+          lead: GENERIC[CATEGORY.PHONES].heroLead,
+          bodyHtml:
+            '<p><strong>Samsung telefonu remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. <strong>Bezmaksas diagnostika</strong> un 90 dienu garantija.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'Samsung telefonu remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription:
             'Samsung remonts: displejs, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
         },
-        sections: { modelGrid: { heading: 'Izvēlies savu Samsung modeli', intro: 'Meklē pēc sērijas vai nosaukuma.' } },
+        sections: {
+          modelGrid: { heading: 'Izvēlies savu Samsung modeli', intro: 'Meklē pēc sērijas vai nosaukuma.' },
+        },
       },
       [CATEGORY.TABLETS]: {
         marketingName: 'Samsung Galaxy Tab',
-        hero: { h1: 'Samsung Galaxy Tab remonts', lead: GENERIC[CATEGORY.TABLETS].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'Samsung Galaxy Tab remonts',
+          lead: GENERIC[CATEGORY.TABLETS].heroLead,
+          bodyHtml:
+            '<p><strong>Samsung Galaxy Tab remonts Rīgā</strong> — ekrāna, baterijas un uzlādes ligzdas maiņa ar <strong>90 dienu garantiju</strong>. Ātra diagnostika.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'Samsung Galaxy Tab remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription:
@@ -121,8 +137,13 @@ const BRANDS = {
     marketingName: 'Huawei',
     category: {
       [CATEGORY.PHONES]: {
-        hero: { h1: 'Huawei telefonu remonts', lead: GENERIC[CATEGORY.PHONES].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'Huawei telefonu remonts',
+          lead: GENERIC[CATEGORY.PHONES].heroLead,
+          bodyHtml:
+            '<p><strong>Huawei telefonu remonts Rīgā</strong> — displeja, baterijas un kameras maiņa. <strong>Ātra diagnostika</strong>, skaidras cenas, 90 dienu garantija.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'Huawei telefonu remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription: GENERIC[CATEGORY.PHONES].meta('Huawei'),
@@ -130,8 +151,13 @@ const BRANDS = {
         sections: { modelGrid: { heading: 'Izvēlies savu Huawei modeli', intro: 'Pārlūko populāros modeļus.' } },
       },
       [CATEGORY.TABLETS]: {
-        hero: { h1: 'Huawei planšetdatoru remonts', lead: GENERIC[CATEGORY.TABLETS].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'Huawei planšetdatoru remonts',
+          lead: GENERIC[CATEGORY.TABLETS].heroLead,
+          bodyHtml:
+            '<p><strong>Huawei planšetdatoru remonts Rīgā</strong> — ekrāna un baterijas maiņa, diagnostika, <strong>90 dienu garantija</strong>.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'Huawei planšetdatoru remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription: GENERIC[CATEGORY.TABLETS].meta('Huawei'),
@@ -146,8 +172,13 @@ const BRANDS = {
     marketingName: 'OnePlus',
     category: {
       [CATEGORY.PHONES]: {
-        hero: { h1: 'OnePlus telefonu remonts', lead: GENERIC[CATEGORY.PHONES].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'OnePlus telefonu remonts',
+          lead: GENERIC[CATEGORY.PHONES].heroLead,
+          bodyHtml:
+            '<p><strong>OnePlus telefonu remonts Rīgā</strong> — ekrāna, baterijas un kameras maiņa. <strong>Bezmaksas diagnostika</strong> un 90 dienu garantija.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'OnePlus telefonu remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription: GENERIC[CATEGORY.PHONES].meta('OnePlus'),
@@ -155,8 +186,13 @@ const BRANDS = {
         sections: { modelGrid: { heading: 'Izvēlies savu OnePlus modeli', intro: 'Pārlūko populāros modeļus.' } },
       },
       [CATEGORY.TABLETS]: {
-        hero: { h1: 'OnePlus planšetdatoru remonts', lead: GENERIC[CATEGORY.TABLETS].heroLead,
-          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' } },
+        hero: {
+          h1: 'OnePlus planšetdatoru remonts',
+          lead: GENERIC[CATEGORY.TABLETS].heroLead,
+          bodyHtml:
+            '<p><strong>OnePlus planšetdatoru remonts</strong> — ekrāna un baterijas maiņa, ātra diagnostika, <strong>90 dienu garantija</strong>.</p>',
+          scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+        },
         seo: {
           title: 'OnePlus planšetdatoru remonts Rīgā — cenas, ātri, garantija | iLab',
           metaDescription: GENERIC[CATEGORY.TABLETS].meta('OnePlus'),
@@ -183,8 +219,7 @@ export function getBrandContent(brandSlug, categorySlug = CATEGORY.PHONES) {
   const catKey = categorySlug;
   const cat = (brand.category && brand.category[catKey]) || {};
 
-  const marketingName =
-    cat.marketingName || brand.marketingName || TITLE_CASE(brandSlug);
+  const marketingName = cat.marketingName || brand.marketingName || TITLE_CASE(brandSlug);
 
   const brandRoutePath = `/${catKey}/${brandSlug}`;
   const hubPath = cat.hubPath || null;
@@ -202,6 +237,7 @@ export function getBrandContent(brandSlug, categorySlug = CATEGORY.PHONES) {
   const hero = {
     h1: cat.hero?.h1 || GENERIC[catKey].h1Label(marketingName),
     lead: cat.hero?.lead || GENERIC[catKey].heroLead,
+    bodyHtml: cat.hero?.bodyHtml || null, // ← pass through optional rich body
     scrollCta: cat.hero?.scrollCta || { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
   };
 
@@ -214,9 +250,7 @@ export function getBrandContent(brandSlug, categorySlug = CATEGORY.PHONES) {
           : `Izvēlies savu ${marketingName} modeli`),
       intro:
         cat.sections?.modelGrid?.intro ||
-        (catKey === CATEGORY.PHONES
-          ? 'Meklē pēc nosaukuma vai pārlūko sērijas.'
-          : 'Pārlūko populāros modeļus.'),
+        (catKey === CATEGORY.PHONES ? 'Meklē pēc nosaukuma vai pārlūko sērijas.' : 'Pārlūko populāros modeļus.'),
     },
   };
 

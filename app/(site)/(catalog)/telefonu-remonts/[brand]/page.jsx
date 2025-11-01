@@ -5,7 +5,7 @@ import Link from 'next/link';
 import devicesAll from '@/data/devices';
 import categories from '@/data/categories'; // ⬅️ use existing categories data
 
-import DeviceHero from '@sections/device-hero/DeviceHero'; // ⬅️ add hero
+import DeviceHero from '@sections/device-hero/DeviceHero';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
 import CommonIssues from '@sections/common-issues/CommonIssues';
@@ -97,6 +97,9 @@ export default function BrandPhonesPage({ params }) {
     (d) => d.category === 'telefonu-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
+  // Build hero copy HTML: prefer rich bodyHtml; else wrap lead in <p>
+  const heroHtml = bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`;
+
   // ---------- JSON-LD ----------
   const serviceLd = {
     '@context': 'https://schema.org',
@@ -144,7 +147,7 @@ export default function BrandPhonesPage({ params }) {
         {JSON.stringify(faqLd)}
       </Script>
 
-      {/* DEVICE HERO (image + optional logo tint) */}
+      {/* DEVICE HERO (image + optional logo tint + copy) */}
       <DeviceHero
         image={hero.heroImage}               // e.g. /brand/images/categories/telefonu_remonts.webp
         alt={hero.heroAlt}                   // e.g. "Samsung telefonu remonts"
@@ -152,6 +155,7 @@ export default function BrandPhonesPage({ params }) {
         brandKey={hero.brandKey}             // sets data-brand for CSS tints
         tint={hero.tint}                     // can override brand preset if needed
         focal="right"
+        bodyHtml={heroHtml}                  // ← SEO-oriented hero copy
       />
 
       {/* INTRO (SEO copy under H2; Header owns H1/lead/CTA) */}
@@ -178,7 +182,7 @@ export default function BrandPhonesPage({ params }) {
       <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
         <div className={c.container}>
           <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
-          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
+        <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
           <p className={c.paragraph} style={{ marginTop: 0 }}>
             Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
           </p>
