@@ -163,7 +163,7 @@ export default function IphoneRemontsPage() {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/iphone_remonts.png"
+        image="/images/categories/iphone_remonts.webp"
         alt="iPhone remonts Rīgā"
         focal="right"
         className="category"
