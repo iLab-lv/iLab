@@ -1,16 +1,66 @@
+
+
 import Script from 'next/script';
 import Link from 'next/link';
-import servicesContent from '@/data/servicesContent';
-import s from '../Service.module.scss';
 
+import DeviceHero from '@sections/device-hero/DeviceHero';
+import Process from '@sections/process/Process';
+import Faq from '@sections/faq/Faq';
+import Why from '@sections/why/Why';
+import ConvertBand from '@sections/convert-band/ConvertBand';
+import ServicePricelist from '@components/service-pricelist/ServicePricelist';
+
+import devices from '@/data/devices';
+import devicePricing from '@/data/devicePricing';
+
+import s from '@styles/Catalog.module.scss';
+
+// -------------------------------------------------
+// META
+// -------------------------------------------------
 const ORIGIN = 'https://www.ilab.lv';
-const key = 'iphone-remonts/displeja-maina';
-const svc = servicesContent[key];
 
 export const metadata = {
-  title: svc?.seo?.title ?? 'iPhone displeja maiņa | iLab',
-  description: svc?.seo?.metaDescription ?? '',
+  title: 'iPhone displeja maiņa Rīgā | iLab',
+  description:
+    'Ātra un kvalitatīva iPhone displeja (ekrāna) maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģinālas vai OEM detaļas. Bieži tajā pašā dienā.',
   alternates: { canonical: '/iphone-remonts/displeja-maina' },
+};
+
+// -------------------------------------------------
+// FAQ
+// -------------------------------------------------
+const FAQ_ITEMS = [
+  {
+    q: 'Cik ilgi ilgst iPhone displeja maiņa?',
+    a: 'Atkarībā no modeļa 1–3 stundas. Noslodzes laikā var prasīt ilgāk, bet bieži pabeidzam tajā pašā dienā.',
+  },
+  {
+    q: 'Vai dati paliks neskarti?',
+    a: 'Jā, displeja maiņa neietekmē datus. Tomēr drošībai iesakām veikt dublējumu pirms remonta.',
+  },
+  {
+    q: 'Kāda ir atšķirība starp oriģinālu un OEM ekrānu?',
+    a: 'Oriģināls nodrošina maksimālu kvalitāti (krāsas, spilgtumu, True Tone). Augstas kvalitātes OEM ir budžeta alternatīva ar ļoti labu ikdienas pieredzi.',
+  },
+  {
+    q: 'Vai saglabājas True Tone un Face ID?',
+    a: 'Pēc nomaiņas veicam kalibrāciju un pārbaudi. True Tone tiek atjaunots, bet Face ID netiek skarts.',
+  },
+  {
+    q: 'Vai ir garantija?',
+    a: 'Jā — 90 dienas gan detaļai, gan paveiktajam darbam.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
 };
 
 const breadcrumbsLd = {
@@ -19,25 +69,34 @@ const breadcrumbsLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
     { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-    { '@type': 'ListItem', position: 3, name: 'iPhone displeja maiņa', item: `${ORIGIN}/iphone-remonts/displeja-maina/` },
+    { '@type': 'ListItem', position: 3, name: 'Displeja maiņa', item: `${ORIGIN}/iphone-remonts/displeja-maina` },
   ],
 };
 
 const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': `${ORIGIN}/iphone-remonts/displeja-maina#service`,
   serviceType: 'iPhone displeja maiņa',
-  areaServed: { '@type': 'Country', name: 'Latvia' },
-  provider: { '@id': `${ORIGIN}#organization` },
-  url: `${ORIGIN}/iphone-remonts/displeja-maina/`,
-  name: 'iPhone displeja maiņa',
-  description: svc?.seo?.metaDescription || 'iPhone displeja maiņa ar garantiju.',
+  areaServed: { '@type': 'City', name: 'Riga' },
+  provider: { '@type': 'LocalBusiness', name: 'iLab', '@id': `${ORIGIN}#organization` },
+  url: `${ORIGIN}/iphone-remonts/displeja-maina`,
+  name: 'iPhone displeja maiņa Rīgā',
+  description:
+    'iPhone displeja (ekrāna) maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM detaļas, 90 dienu garantija. Bieži tajā pašā dienā.',
 };
 
-export default function Page() {
+// -------------------------------------------------
+// PAGE COMPONENT
+// -------------------------------------------------
+export default function IphoneDisplejaMainaPage({ searchParams }) {
+  const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+
   return (
     <>
+      {/* JSON-LD */}
+      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqLd)}
+      </Script>
       <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
@@ -45,18 +104,95 @@ export default function Page() {
         {JSON.stringify(serviceLd)}
       </Script>
 
-      <section className={s.section}>
-        <div className={s.container}>
-          <h2 className={s.h2}>Par pakalpojumu</h2>
-          <p className={s.p}>
-            Nomainām bojātus iPhone displejus (plaisa, mirgošana, “ghost touch”, melni plankumi) tajā pašā dienā, ja detaļas ir uz vietas.
-            Pirms darba saskaņojam cenu un termiņu, nodrošinām garantiju.
-          </p>
+      {/* HERO */}
+      <DeviceHero
+        image="/images/services/iphone_displeja_maina.webp"
+        alt="iPhone displeja maiņa Rīgā"
+        focal="right"
+        className="service"
+        bodyHtml={`<p><strong>Ātra un kvalitatīva iPhone displeja maiņa Rīgā</strong> — saplīsuša ekrāna, plankumu vai skāriena problēmu novēršana tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>`}
+      />
 
-          <div className={s.ctaRow}>
-            <Link href="/iphone-remonts#iphone-modeli" className={s.linkBtn}>Izvēlies modeli</Link>
-            <Link href="/iphone-remonts" className={s.linkGhost}>← Atpakaļ uz iPhone remontu</Link>
-          </div>
+      {/* INTRO */}
+      <section id="parskats" className={s.section} aria-labelledby="intro-h2">
+        <div className={s.container}>
+          <h1 id="intro-h2" className={s.h1}>iPhone displeja maiņa Rīgā</h1>
+          <p className={s.paragraph}>
+            Ja iPhone ekrāns ir saplīsis, parādās plankumi vai nereaģē skāriens — visticamāk nepieciešama
+            <strong> displeja (ekrāna) maiņa</strong>. iLab meistari Rīgā veic ātru un drošu nomaiņu, izmantojot
+            <strong> oriģinālas vai OEM detaļas</strong>. Pirms darba uzsākšanas veicam
+            <strong> bezmaksas diagnostiku</strong>, lai pārliecinātos, ka vaina ir tieši displejā.
+          </p>
+          <p className={s.paragraph}>
+            Pēc nomaiņas pārbaudām skārienjutību, krāsu atbilstību, True Tone un Face ID darbību.
+            Populāros modeļus parasti salabojam <strong>1–3 stundu laikā</strong>.
+            Visam veicamajam darbam un detaļām ir <strong>90 dienu garantija</strong>.
+          </p>
+          {selectedModel && (
+            <p className={s.note}>
+              Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
+              <a href="#cenas"> cenām</a>.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* PRICE LIST (ServicePricelist) */}
+      <ServicePricelist
+        devices={devices}
+        pricing={devicePricing}
+        brandSlug="apple"
+        categorySlug="telefonu-remonts"
+        serviceIds={['display-original', 'display-oled', 'display-incell']}
+        title="Displeja maiņas cenas pēc modeļa"
+        intro="Izvēlies savu iPhone modeli, lai redzētu displeja maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
+        initialLimit={8}
+        allModelsHref="/iphone-remonts#iphone-modeli"
+        cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
+        className={s.section}
+      />
+
+      {/* PROCESS */}
+      <section className={s.section} aria-labelledby="process-h2">
+        <div className={s.container}>
+          <Process
+            id="process"
+            title="Kā notiek remonts"
+            steps={[
+              { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
+              { title: 'Remonts', text: 'Nomaiņu veic sertificēti meistari ar kvalitatīvām detaļām.' },
+              { title: 'Pārbaude', text: 'Pārbaudām skārienu, krāsas, True Tone un Face ID funkcijas.' },
+              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+            ]}
+            headingLevel={2}
+            variant="cards"
+          />
+        </div>
+      </section>
+
+      {/* WHY US */}
+      <section className={s.section}>
+        <Why />
+      </section>
+
+      {/* FAQ */}
+      <section className={s.section} aria-labelledby="faq-h2">
+        <div className={s.container}>
+          <Faq
+            id="faq"
+            title="Biežāk uzdotie jautājumi"
+            groups={[{ label: 'Displejs', items: FAQ_ITEMS }]}
+            headingLevel={2}
+            variant="accordion"
+          />
+        </div>
+      </section>
+
+      {/* BOOKING / CTA */}
+      <section id="pieteikties" className={s.section} aria-label="Pieteikties remontam">
+        <div className={s.container}>
+          <ConvertBand />
         </div>
       </section>
     </>

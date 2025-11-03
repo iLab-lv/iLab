@@ -1,0 +1,248 @@
+@use '@/styles/tokens' as *;
+
+.section {
+  padding-block: $space-2xl;
+}
+
+.container {
+  width: min(100%, $container-max);
+  margin-inline: auto;
+  padding-inline: $space-md;
+}
+
+.header {
+  margin-bottom: $space-xl;
+}
+
+.h2 {
+  font-size: $font-size-h4;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin: 0 0 $space-sm 0;
+}
+
+.intro {
+  color: $color-text-2;
+  margin: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-xl;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* LEFT */
+.left { position: relative; }
+
+.previewCard {
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-lg;
+  overflow: clip;
+  box-shadow: $shadow-soft;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: $color-surface-2;
+  border-bottom: $border-thin solid $glass-border;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.previewBody {
+  padding: $space-lg;
+  display: grid;
+  gap: $space-md;
+}
+
+.modelTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $space-sm;
+}
+
+.modelName {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.modelYear {
+  color: $color-text-3;
+  font-size: $font-size-sm;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: $space-md;
+  padding: $space-md;
+  border-radius: $radius-md;
+  background: $accent-tint-weak;
+  border: $border-thin solid $glass-border;
+}
+
+.priceLabel {
+  color: $color-text-2;
+}
+
+.priceValue {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.altList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: $space-sm;
+}
+
+.altItem,
+.altItemActive {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  padding: $space-sm $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $glass-border;
+  background: $glass-bg-weak;
+}
+
+.altItemActive {
+  background: $accent-tint-strong;
+}
+
+.altLabel { color: $color-text-2; }
+.altPrice { color: $color-text; font-weight: $font-weight-medium; }
+
+.ctaBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: $btn-h-lg;
+  padding: 0 $space-lg;
+  border-radius: $radius-pill;
+  background: $color-accent;
+  color: #000;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  box-shadow: $shadow-accent;
+
+  &:hover { background: $color-accent-hover; box-shadow: $shadow-accent-lg; }
+  &:active { background: $color-accent-active; box-shadow: $shadow-accent-press; }
+}
+
+/* RIGHT */
+.right {
+  display: grid;
+  align-content: start;
+  gap: $space-md;
+}
+
+.modelList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: $space-sm;
+}
+
+.modelBtn,
+.modelBtnActive {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: $space-md;
+  padding: $space-md $space-lg;
+  border-radius: $radius-md;
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  color: $color-text;
+  text-align: left;
+  cursor: pointer;
+  transition: background $dur-base $ease-std;
+
+  &:hover { background: $glass-bg-weak-hover; }
+  &:active { background: $glass-bg-weak-active; }
+}
+
+.modelBtnActive {
+  outline: $border-thick solid $accent-tint-strong;
+  background: $glass-bg-weak-hover;
+}
+
+.modelBtnName { color: $color-text; }
+.modelBtnPrice { color: $color-text-2; }
+
+.moreBtn,
+.allLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $btn-h-md;
+  padding: 0 $space-lg;
+  border-radius: $radius-pill;
+  border: $border-thin solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text;
+
+  &:hover { background: $glass-bg-weak-hover; }
+  &:active { background: $glass-bg-weak-active; }
+}
+
+.allLink {
+  text-decoration: none;
+  justify-self: start;
+}
+
+.seriesBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+}
+
+.chip,
+.chipActive {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-pill;
+  border: $border-thin solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text-2;
+  cursor: pointer;
+
+  &:hover { background: $glass-bg-weak-hover; color: $color-text; }
+  &:active { background: $glass-bg-weak-active; }
+}
+
+.chipActive {
+  background: $accent-tint-strong;
+  color: $color-text;
+  border-color: $glass-border-2;
+}
+
+.modelSeries {
+  margin-left: auto;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+  padding: 0 $space-sm;
+  border-radius: $radius-pill;
+  border: $border-thin solid $glass-border;
+}
