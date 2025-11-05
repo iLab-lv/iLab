@@ -218,16 +218,6 @@ export default function BrandPhonesPage({ params }) {
       </section>
 
       {/* Common issues */}
-      <section className={c.section} aria-labelledby="issues-h2">
-        <div className={c.container}>
-          <CommonIssues
-            id="brand-issues"
-            title="Ar kādiem jautājumiem visbiežāk pie mums vēršas"
-            items={phoneIssues}
-            headingLevel={2}
-          />
-        </div>
-      </section>
 
       {/* Process */}
       <div id="process-h2" className={c.anchorTarget} />

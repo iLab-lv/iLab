@@ -204,7 +204,7 @@ export default function IphoneRemontsPage() {
                 title: 'Uzlādes ligzda',
                 text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
                 icon: LuPlugZap,
-                href: '/iphone-remonts/uzlades-ligzda',
+                href: '/iphone-remonts/uzlades-ligzdas-maina',
               },
               {
                 title: 'Kamera',
@@ -229,15 +229,7 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-      {/* GUIDE */}
-      {cat?.show?.guide !== false && cat?.sections?.guide && (
-        <Guide
-          id="guide"
-          title={cat.sections.guide.heading}
-          parts={cat.sections.guide.parts}
-          headingLevel={2}
-        />
-      )}
+
 
       {/* MODEL GRID */}
       <section id="iphone-modeli" className={`${s.section} ${s.anchorTarget}`} aria-labelledby="iphone-modeli-h2">
@@ -260,7 +252,15 @@ export default function IphoneRemontsPage() {
         </div>
       </section>
 
-     
+           {/* GUIDE */}
+      {cat?.show?.guide !== false && cat?.sections?.guide && (
+        <Guide
+          id="guide"
+          title={cat.sections.guide.heading}
+          parts={cat.sections.guide.parts}
+          headingLevel={2}
+        />
+      )}
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">

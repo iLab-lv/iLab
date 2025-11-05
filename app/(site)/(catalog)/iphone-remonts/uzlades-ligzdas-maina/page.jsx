@@ -19,10 +19,10 @@ import s from '@styles/Catalog.module.scss';
 const ORIGIN = 'https://www.ilab.lv';
 
 export const metadata = {
-  title: 'iPhone baterijas maiņa Rīgā | iLab',
+  title: 'iPhone uzlādes ligzdas maiņa Rīgā | iLab',
   description:
-    'Ātra un kvalitatīva iPhone baterijas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģinālas vai OEM detaļas. Bieži tajā pašā dienā.',
-  alternates: { canonical: '/iphone-remonts/baterijas-maina' },
+    'Ātra un profesionāla iPhone uzlādes ligzdas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija. Risinām “nelādējas”, “jākustina vads”, “nereaģē uzlāde” u.c. problēmas, bieži tajā pašā dienā.',
+  alternates: { canonical: '/iphone-remonts/uzlades-ligzdas-maina' },
 };
 
 // -------------------------------------------------
@@ -30,28 +30,24 @@ export const metadata = {
 // -------------------------------------------------
 const FAQ_ITEMS = [
   {
-    q: 'Cik ilgi ilgst iPhone baterijas maiņa?',
-    a: 'Parasti 45–90 minūtes atkarībā no modeļa un noslodzes. Populāros modeļus bieži pabeidzam tajā pašā dienā.',
+    q: 'Cik ilgi ilgst uzlādes ligzdas maiņa?',
+    a: 'Parasti 60–120 minūtes atkarībā no modeļa un noslodzes. Dažos gadījumos pietiek ar tīrīšanu, kas ir ātrāka.',
+  },
+  {
+    q: 'Kā zināt, vai vajag maiņu vai pietiks ar tīrīšanu?',
+    a: 'Bezmaksas diagnostikas laikā pārbaudām pieslēgumu, kontaktus un uzlādes ķēdi. Bieži lienos savācās putekļi vai oksidācija — ja pietiek ar tīrīšanu, par maiņu nemaksāsiet.',
   },
   {
     q: 'Vai mani dati paliks neskarti?',
-    a: 'Jā — baterijas maiņa neskars jūsu foto, video un lietotnes. Drošībai vienmēr iesakām izveidot dublējumu.',
+    a: 'Jā — uzlādes ligzdas maiņa neskars datus. Drošībai iesakām izveidot dublējumu pirms remonta.',
   },
   {
-    q: 'Oriģināla vai OEM baterija — ar ko atšķiras?',
-    a: 'Oriģināla nodrošina maksimālu kalpošanas laiku un stabilitāti. Augstas kvalitātes OEM ir izdevīga alternatīva ikdienai, saglabājot labu autonomiju.',
-  },
-  {
-    q: 'Vai saglabāsies “Battery Health” rādītāji?',
-    a: 'Pēc maiņas veicam kalibrāciju. Dažiem modeļiem iOS var rādīt servisa paziņojumu par baterijas nomaiņu, taču tas neietekmē darbību.',
+    q: 'Ko darīt, ja telefons nelādējas arī pēc ligzdas nomaiņas?',
+    a: 'Diagnostikas laikā pārbaudām arī bateriju, uzlādes portu, kabeļus un barošanas ķēdi uz plates. Ja problēma ir citur, informēsim par risinājumu un izmaksām.',
   },
   {
     q: 'Vai ir garantija?',
-    a: 'Jā — 90 dienu garantija gan detaļai, gan paveiktajam darbam.',
-  },
-  {
-    q: 'Vai telefons saglabā ūdensizturību pēc atvēršanas?',
-    a: 'Montējot izmantojam jaunu blīvējumu, taču rūpnīcas ūdensizturības klase pēc remonta netiek garantēta.',
+    a: 'Jā — 90 dienas gan detaļai, gan veiktajam darbam.',
   },
 ];
 
@@ -71,26 +67,26 @@ const breadcrumbsLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
     { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-    { '@type': 'ListItem', position: 3, name: 'Baterijas maiņa', item: `${ORIGIN}/iphone-remonts/baterijas-maina` },
+    { '@type': 'ListItem', position: 3, name: 'Uzlādes ligzdas maiņa', item: `${ORIGIN}/iphone-remonts/uzlades-ligzdas-maina` },
   ],
 };
 
 const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'iPhone baterijas maiņa',
+  serviceType: 'iPhone uzlādes ligzdas maiņa',
   areaServed: { '@type': 'City', name: 'Riga' },
   provider: { '@type': 'LocalBusiness', name: 'iLab', '@id': `${ORIGIN}#organization` },
-  url: `${ORIGIN}/iphone-remonts/baterijas-maina`,
-  name: 'iPhone baterijas maiņa Rīgā',
+  url: `${ORIGIN}/iphone-remonts/uzlades-ligzdas-maina`,
+  name: 'iPhone uzlādes ligzdas maiņa Rīgā',
   description:
-    'iPhone baterijas maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM baterijas, 90 dienu garantija. Bieži tajā pašā dienā.',
+    'iPhone uzlādes ligzdas maiņa Rīgā: bezmaksas diagnostika, 90 dienu garantija, risinām nelādējas/oksidācijas/problēmas ar kabeli. Bieži tajā pašā dienā.',
 };
 
 // -------------------------------------------------
 // PAGE COMPONENT
 // -------------------------------------------------
-export default function IphoneBaterijasMainaPage({ searchParams }) {
+export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
 
   return (
@@ -108,28 +104,27 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/services/iphone_baterijas_maina.webp"
-        alt="iPhone baterijas maiņa Rīgā"
+        image="/images/services/iphone_uzlades_ligzdas_maina.webp" // pielāgo, ja ceļš atšķiras
+        alt="iPhone uzlādes ligzdas maiņa Rīgā"
         focal="right"
         className="service"
-        bodyHtml={`<p><strong>Ātra un droša iPhone baterijas maiņa Rīgā</strong> — ja telefons ātri izlādējas, izslēdzas pie 20% vai neuzlādējas, palīdzēsim. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>`}
+        bodyHtml={`<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā — profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`}
       />
 
       {/* INTRO */}
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h1 id="intro-h2" className={s.h1}>iPhone baterijas maiņa Rīgā</h1>
+          <h1 id="intro-h2" className={s.h1}>iPhone uzlādes ligzdas maiņa Rīgā</h1>
           <p className={s.paragraph}>
-            Ja jūsu iPhone ātri zaudē uzlādi, izslēdzas pie augsta procenta, lādējas ļoti lēni vai uzrāda zemu
-            <strong> Battery Health</strong> rādītāju, <strong>visticamāk nepieciešama baterijas maiņa</strong>.
-            iLab meistari veic ātru un kvalitatīvu nomaiņu, izmantojot
-            <strong> oriģinālas vai augstas kvalitātes OEM baterijas</strong>. Pirms darba uzsākšanas veicam
-            <strong> bezmaksas diagnostiku</strong>, lai pārliecinātos, ka problēma tiešām ir baterijā.
+            Ja iPhone nelādējas, pazūd savienojums, jāpieliec kabelis noteiktā leņķī vai ports izskatās netīrs,
+            <strong> visticamāk nepieciešama uzlādes ligzdas tīrīšana vai maiņa</strong>. iLab meistari veic
+            <strong> diagnostiku</strong>, novērš oksidāciju un mehāniskus bojājumus vai uzstāda jaunu ligzdu — atkarībā
+            no stāvokļa un modeļa.
           </p>
           <p className={s.paragraph}>
-            Pēc nomaiņas veicam <strong>kalibrāciju</strong> un pārbaudi — uzlādes ātrums, izlādes stabilitāte,
-            temperatūras kontrole. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>.
-            Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.
+            Pārbaudām arī <strong>kabeli, adapteri, uzlādes ķēdi un bateriju</strong>, lai izslēgtu citus cēloņus.
+            Populāros modeļus parasti salabojam <strong>60–120 minūtēs</strong>. Visam darbam un detaļām ir
+            <strong> 90 dienu garantija</strong>.
           </p>
           {selectedModel && (
             <p className={s.note}>
@@ -146,10 +141,9 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
         pricing={devicePricing}
         brandSlug="apple"
         categorySlug="telefonu-remonts"
-        // ⬇️ Adjust these IDs to match your pricing keys
-        serviceIds={['battery']}
-        title="Baterijas maiņas cenas pēc modeļa"
-        intro="Izvēlies savu iPhone modeli, lai redzētu baterijas maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
+        serviceIds={['charge-port']} // ← tikai uzlādes ligzda
+        title="Uzlādes ligzdas maiņas cenas pēc modeļa"
+        intro="Izvēlies savu iPhone modeli, lai redzētu uzlādes ligzdas remonta cenu. Daudzas ierīces salabojam tajā pašā dienā."
         initialLimit={8}
         allModelsHref="/iphone-remonts#iphone-modeli"
         cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
@@ -161,13 +155,13 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
         <div className={s.container}>
           <Process
             id="process"
-            title="Kā notiek baterijas nomaiņa"
+            title="Kā notiek remonts"
             steps={[
-              { title: 'Diagnostika', text: 'Pārbaudām baterijas nolietojumu, uzlādes ķēdi un portu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Nomaiņa', text: 'Uzstādam oriģinālu vai OEM bateriju ar jaunu blīvējumu.' },
-              { title: 'Kalibrācija', text: 'Veicam kalibrāciju un testējam autonomiju/uzlādi.' },
-              { title: 'Garantija', text: '90 dienu garantija un lietošanas ieteikumi.' },
+              { title: 'Diagnostika', text: 'Pārbaudām portu, kontaktus, kabeli, adapteri un uzlādes ķēdi.' },
+              { title: 'Tīrīšana vai maiņa', text: 'Noņemam netīrumus/oksidāciju vai uzstādam jaunu ligzdu.' },
+              { title: 'Testi', text: 'Pārbaudām uzlādi, datu pārsūtīšanu un mehānisku noturību.' },
+              { title: 'Drošība', text: 'Ja nepieciešams, atjaunojam blīvējumu un veicam galīgo pārbaudi.' },
+              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
             ]}
             headingLevel={2}
             variant="cards"
@@ -186,7 +180,7 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
           <Faq
             id="faq"
             title="Biežāk uzdotie jautājumi"
-            groups={[{ label: 'Baterija', items: FAQ_ITEMS }]}
+            groups={[{ label: 'Uzlāde', items: FAQ_ITEMS }]}
             headingLevel={2}
             variant="accordion"
           />

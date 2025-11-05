@@ -1,32 +1,30 @@
-@use '@/styles/tokens' as *;
+@use '@/styles/_tokens.scss' as *;
 
+/* =================== CONTAINER & HEADINGS =================== */
 .section {
-  padding-block: $space-2xl;
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
 }
 
 .container {
-  width: min(100%, $container-max);
-  margin-inline: auto;
-  padding-inline: $space-md;
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
 }
 
-.header {
-  margin-bottom: $space-xl;
-}
+.header { margin-bottom: $space-lg; }
 
-.h2 {
-  font-size: $font-size-h4;
+.sectionTitle {
+  margin: 0 0 $space-lg 0;
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
   line-height: $line-height-heading;
   font-weight: $font-weight-semibold;
   color: $color-text;
-  margin: 0 0 $space-sm 0;
 }
 
-.intro {
-  color: $color-text-2;
-  margin: 0;
-}
+.intro { color: $color-text-2; margin: 0; }
 
+/* =================== LAYOUT =================== */
 .layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -38,71 +36,74 @@
   }
 }
 
-/* LEFT */
+/* =================== LEFT PREVIEW =================== */
 .left { position: relative; }
 
 .previewCard {
-  background: $glass-bg-weak;
-  border: $border-thin solid $glass-border;
+  background: $color-surface-2;
+  border: $border-thin solid $color-border;
   border-radius: $radius-lg;
-  overflow: clip;
-  box-shadow: $shadow-soft;
+  overflow: hidden;
+  scroll-margin-top: calc($header-desktop-height + $space-lg);
+
+  @media (max-width: $bp-md) {
+    scroll-margin-top: calc($header-mobile-height + $space-md);
+  }
 }
 
+/* --- Header above image --- */
+.previewHeader {
+  display: flex;
+  align-items: baseline;
+  gap: $space-sm;
+  padding: $space-md;
+  border-bottom: $border-thin solid $color-border;
+  background: $color-surface-2;
+}
+
+.modelName  { font-weight: $font-weight-semibold; color: $color-text; }
+.modelYear  { color: $color-text-3; font-size: $font-size-sm; }
+
+.modelSeries {
+  margin-left: auto;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+  padding: 0 $space-sm;
+  border-radius: $radius-pill;
+  border: $border-thin solid $color-border;
+}
+
+/* --- Image --- */
 .imageWrap {
   position: relative;
   aspect-ratio: 4 / 3;
   background: $color-surface-2;
-  border-bottom: $border-thin solid $glass-border;
 }
+.image { object-fit: contain; }
 
-.image {
-  object-fit: contain;
-}
-
+/* --- Body --- */
 .previewBody {
-  padding: $space-lg;
+  padding: $space-md;
   display: grid;
   gap: $space-md;
 }
 
-.modelTitle {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: $space-sm;
-}
-
-.modelName {
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
-.modelYear {
-  color: $color-text-3;
-  font-size: $font-size-sm;
-}
-
+/* --- Main price row --- */
 .priceRow {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: $space-md;
   padding: $space-md;
-  border-radius: $radius-md;
-  background: $accent-tint-weak;
+  border-radius: $radius-lg;
+  background: $glass-bg-weak;
   border: $border-thin solid $glass-border;
 }
 
-.priceLabel {
-  color: $color-text-2;
-}
+.priceLabel { color: $color-text-2; }
+.priceValue { color: $color-text; font-weight: $font-weight-semibold; }
 
-.priceValue {
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
+/* --- Variant list (other options, no highlight) --- */
 .altList {
   list-style: none;
   margin: 0;
@@ -111,8 +112,7 @@
   gap: $space-sm;
 }
 
-.altItem,
-.altItemActive {
+.altItem {
   display: flex;
   justify-content: space-between;
   gap: $space-md;
@@ -122,13 +122,10 @@
   background: $glass-bg-weak;
 }
 
-.altItemActive {
-  background: $accent-tint-strong;
-}
-
 .altLabel { color: $color-text-2; }
 .altPrice { color: $color-text; font-weight: $font-weight-medium; }
 
+/* --- CTA button --- */
 .ctaBtn {
   display: inline-flex;
   justify-content: center;
@@ -147,11 +144,93 @@
   &:active { background: $color-accent-active; box-shadow: $shadow-accent-press; }
 }
 
-/* RIGHT */
+/* =================== RIGHT (FAQ-LIKE ACCORDION) =================== */
 .right {
   display: grid;
   align-content: start;
-  gap: $space-md;
+  gap: $space-sm;
+}
+
+.accordionList {
+  display: grid;
+  gap: $space-sm;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Accordion item --- */
+.accItem {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-lg;
+  background: $color-surface-2;
+  overflow: hidden;
+
+  scroll-margin-top: calc($header-desktop-height + $space-lg);
+
+  @media (max-width: $bp-md) {
+    scroll-margin-top: calc($header-mobile-height + $space-md);
+  }
+}
+
+/* --- Summary row (series header) --- */
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  cursor: pointer;
+  padding: $space-md;
+  list-style: none;
+  border-radius: inherit;
+  color: $color-text;
+
+  &::-webkit-details-marker { display: none; }
+  &:hover { background: $glass-bg-weak; }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $border-thin $glass-border;
+  }
+}
+
+.accTitle {
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+/* --- Plus/minus indicator --- */
+.chev {
+  position: relative;
+  inline-size: 14px;
+  block-size: 14px;
+  flex: 0 0 auto;
+}
+
+.chev::before,
+.chev::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  transition: transform $dur-base $ease-std, opacity $dur-base $ease-std;
+  will-change: transform, opacity;
+}
+
+.chev::before { inline-size: 12px; block-size: 2px; transform: translate(-50%, -50%); }
+.chev::after  { inline-size: 2px;  block-size: 12px; transform: translate(-50%, -50%); }
+
+.accItem[open] .chev::after {
+  transform: translate(-50%, -50%) scaleY(0);
+  opacity: 0;
+}
+
+/* --- Accordion panel (model list) --- */
+.panel {
+  padding: $space-md;
+  border-top: $border-thin solid $color-border;
+  color: $color-text-2;
 }
 
 .modelList {
@@ -159,90 +238,44 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: $space-sm;
+  gap: $space-xs;
 }
 
-.modelBtn,
-.modelBtnActive {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: $space-md;
-  padding: $space-md $space-lg;
-  border-radius: $radius-md;
-  background: $glass-bg-weak;
-  border: $border-thin solid $glass-border;
-  color: $color-text;
-  text-align: left;
+.modelItem { padding: $space-2xs 0; }
+
+/* --- Models are plain muted text links --- */
+.modelLink,
+.modelLinkActive {
+  color: $color-text-2;
+  text-decoration: none;
   cursor: pointer;
-  transition: background $dur-base $ease-std;
+  padding: $space-2xs 0;
 
-  &:hover { background: $glass-bg-weak-hover; }
-  &:active { background: $glass-bg-weak-active; }
+  &:hover { color: $color-text; }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 $border-thin $glass-border;
+    border-radius: $radius-sm;
+    color: $color-text;
+  }
 }
 
-.modelBtnActive {
-  outline: $border-thick solid $accent-tint-strong;
-  background: $glass-bg-weak-hover;
-}
+/* Active model: accent color, still no underline */
+.modelLinkActive { color: $color-accent; }
 
-.modelBtnName { color: $color-text; }
-.modelBtnPrice { color: $color-text-2; }
-
-.moreBtn,
+/* --- "View all" link below accordion --- */
 .allLink {
+  margin-top: $space-sm;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   height: $btn-h-md;
   padding: 0 $space-lg;
   border-radius: $radius-pill;
-  border: $border-thin solid $glass-border;
+  border: $border-thin solid $color-border;
   background: $glass-bg-weak;
   color: $color-text;
+  text-decoration: none;
 
   &:hover { background: $glass-bg-weak-hover; }
   &:active { background: $glass-bg-weak-active; }
-}
-
-.allLink {
-  text-decoration: none;
-  justify-self: start;
-}
-
-.seriesBar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-sm;
-  margin-bottom: $space-lg;
-}
-
-.chip,
-.chipActive {
-  height: $btn-h-md;
-  padding: 0 $space-md;
-  border-radius: $radius-pill;
-  border: $border-thin solid $glass-border;
-  background: $glass-bg-weak;
-  color: $color-text-2;
-  cursor: pointer;
-
-  &:hover { background: $glass-bg-weak-hover; color: $color-text; }
-  &:active { background: $glass-bg-weak-active; }
-}
-
-.chipActive {
-  background: $accent-tint-strong;
-  color: $color-text;
-  border-color: $glass-border-2;
-}
-
-.modelSeries {
-  margin-left: auto;
-  color: $color-text-3;
-  font-size: $font-size-sm;
-  padding: 0 $space-sm;
-  border-radius: $radius-pill;
-  border: $border-thin solid $glass-border;
 }
