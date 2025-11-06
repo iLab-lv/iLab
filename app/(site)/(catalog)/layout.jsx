@@ -3,8 +3,7 @@
 
 import { usePathname } from 'next/navigation';
 import PageHeader from '../ui/page-header/PageHeader';
-import categoryContent from '@/data/categoryContent';
-import servicesContent from '@/data/servicesContent';
+import contentRegistry from '@/data/contentRegistry';
 import devices from '@/data/devices';
 
 const norm = (s = '') => decodeURIComponent(String(s)).trim().toLowerCase();
@@ -13,18 +12,18 @@ export default function CatalogLayout({ children }) {
   const pathname = usePathname() || '/';
   const parts = pathname.split('/').filter(Boolean).map(norm);
   const categorySlug = parts[0] || '';
-  const subSlug = parts[1] || ''; // "iphone-14-pro" or "displeja-maina"
+  const subSlug = parts[1] || ''; // e.g. "iphone-14-pro" OR "displeja-maina"
 
   // 1) Default: category header (may include scroll CTA from registry)
   let headerProps = {};
-  const cat = categoryContent[categorySlug];
+  const cat = contentRegistry.categories?.[categorySlug];
   if (cat) {
     headerProps = { title: cat.h1, lead: cat.lead, scrollCta: cat.scrollCta };
   }
 
-  // 2) Service page override (no CTA)
+  // 2) Service page override (no CTA) — single source from contentRegistry
   const svcKey = subSlug ? `${categorySlug}/${subSlug}` : '';
-  const svc = servicesContent[svcKey];
+  const svc = contentRegistry.services?.[svcKey];
   if (svc) {
     headerProps = {
       title: svc.h1 || headerProps.title,
@@ -47,17 +46,23 @@ export default function CatalogLayout({ children }) {
       headerProps = {
         title: `${d.name} remonts`,
         lead,
-        // ✅ pass CTA to match the device page's PriceList id
+        // match the device page's pricelist anchor
         scrollCta: { label: 'Skatīt cenas', targetId: 'cenas' },
       };
     } else {
-      // unknown sub-route: still hide CTA
+      // unknown sub-route under /iphone-remonts: still hide CTA
       headerProps.scrollCta = null;
     }
   }
   // 4) Any other sub-route: hide CTA by default
   else if (subSlug) {
     headerProps.scrollCta = null;
+  }
+
+  // Dev aid to spot slug/key mismatches quickly (won't run in production)
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line no-console
+    console.log('[CatalogLayout]', { pathname, categorySlug, subSlug, svcKey, svcFound: !!svc });
   }
 
   return (
