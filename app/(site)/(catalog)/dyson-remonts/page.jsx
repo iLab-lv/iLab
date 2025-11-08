@@ -214,19 +214,6 @@ export default function DysonRemontsPage() {
         </div>
       </section>
 
-      {/* ISSUES */}
-      <section className={s.section} aria-labelledby="dyson-issues-h2">
-        <div className={s.container}>
-          <CommonIssues
-            id="dyson-issues"
-            title="Biežāk sastopamās problēmas"
-            items={ISSUES_PREVIEW}
-            faqId="dyson-faq"
-            maxItems={4}
-            headingLevel={2}
-          />
-        </div>
-      </section>
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="dyson-process-h2">

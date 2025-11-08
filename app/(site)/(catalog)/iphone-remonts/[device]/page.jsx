@@ -2,7 +2,6 @@
 
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
@@ -15,9 +14,10 @@ import Why from '@sections/why/Why';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
+import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
+
 import s from './Device.module.scss';
 
-// Icon components (page-level; Services is presentational only)
 import {
   LuSmartphone,
   LuBatteryCharging,
@@ -27,27 +27,20 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-export const revalidate = 0; // keep dynamic during integration
+export const revalidate = 0;
 
 const ORIGIN = 'https://www.ilab.lv';
 const DEFAULT_CURRENCY = 'EUR';
 
-/* ===========================
-   Header CTA for this page
-   =========================== */
-// Expose CTA to the layout so PageHeader can render it.
-// If your layout expects a different export name, adjust here.
+/* ===== Header CTA exposed to layout ===== */
 export const pageHeader = {
   scrollCta: { label: 'Skatīt cenas', targetId: 'cenas' },
 };
-// Common alias some setups use:
 export const headerProps = pageHeader;
 
-/* ===========================
-   Adapter helpers (page-level)
-   =========================== */
+/* ===== Helpers ===== */
 
-// Find the iPhone device by slug (page-level source of truth)
+// Find the iPhone device by slug
 function getIphoneDeviceBySlug(slug) {
   return (
     devices.find(
@@ -59,7 +52,7 @@ function getIphoneDeviceBySlug(slug) {
   );
 }
 
-// Normalize price string into from/to numbers for UI (no defaults in renderer)
+// Normalize price strings
 function toPriceRange(priceStr) {
   if (!priceStr) return { priceFrom: null, priceTo: null, priceText: '' };
   const raw = String(priceStr).trim();
@@ -67,38 +60,29 @@ function toPriceRange(priceStr) {
 
   const priceText = raw;
 
-  // "no 50" / "from 50"
   const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
   if (fromMatch) {
     const from = Number(fromMatch[1].replace(',', '.'));
     return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
   }
 
-  // "100-150" or "100–150"
   const rangeMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
   if (rangeMatch) {
     const a = Number(rangeMatch[1].replace(',', '.'));
     const b = Number(rangeMatch[2].replace(',', '.'));
-    return {
-      priceFrom: isNaN(a) ? null : a,
-      priceTo: isNaN(b) ? null : b,
-      priceText,
-    };
+    return { priceFrom: isNaN(a) ? null : a, priceTo: isNaN(b) ? null : b, priceText };
   }
 
-  // SINGLE exact number → set priceTo ONLY (avoid "no" prefix)
   const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
   if (singleMatch) {
     const v = Number(singleMatch[1].replace(',', '.'));
-    const val = isNaN(v) ? null : v;
-    return { priceFrom: null, priceTo: val, priceText };
+    return { priceFrom: null, priceTo: isNaN(v) ? null : v, priceText };
   }
 
-  // Any other free text → leave both null
   return { priceFrom: null, priceTo: null, priceText };
 }
 
-// Merge per-model pricing with service catalog metadata (adapter for PriceList)
+// Merge per-model pricing with catalog metadata
 function buildPriceListItems(modelSlug) {
   const pricing = devicePricing[modelSlug];
   if (!pricing || !Array.isArray(pricing.items)) {
@@ -114,15 +98,13 @@ function buildPriceListItems(modelSlug) {
       const base = catalogById.get(it.id);
       if (!base) return null;
 
-      // TEXT comes from device override → catalog default → fallback text
       const timeText =
         (typeof perDeviceTimeText[it.id] === 'string' && perDeviceTimeText[it.id].trim()) ||
         base.defaultTimeText ||
         'Tajā pašā dienā';
 
-      // Normalize price to string; skip if null (N/A)
       const raw = it?.price;
-      if (raw == null) return null; // hide N/A on page, still editable in admin
+      if (raw == null) return null;
       const priceText = typeof raw === 'number' ? String(raw) : String(raw).trim();
 
       const { priceFrom, priceTo } = toPriceRange(priceText);
@@ -152,52 +134,19 @@ function buildPriceListItems(modelSlug) {
   return { items: merged, currency: DEFAULT_CURRENCY };
 }
 
-// Build the mini “popular services for this model” cards (adapter for Services)
+// Popular services grid (canonical routes)
 function buildModelServices() {
   return [
-    {
-      title: 'Displeja (ekrāna) maiņa',
-      href: '/iphone-remonts/displeja-maina',
-      text: 'plaisas, tumši plankumi, nereaģē skāriens.',
-      icon: LuSmartphone,
-    },
-    {
-      title: 'Akumulatora maiņa',
-      href: '/iphone-remonts/baterijas-maina',
-      text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
-      icon: LuBatteryCharging,
-    },
-    {
-      title: 'Uzlādes ligzdas remonts',
-      href: '/iphone-remonts/uzlades-ligzda',
-      text: 'nenoturas kabelis, lēna uzlāde, ātrā uzlāde nestrādā.',
-      icon: LuPlugZap,
-    },
-    {
-      title: 'Kameras remonts',
-      href: '/iphone-remonts/kamera',
-      text: 'miglaini attēli, fokusēšanās problēmas.',
-      icon: LuCamera,
-    },
+    { title: 'Displeja (ekrāna) maiņa', href: '/iphone-remonts/displeja-maina', text: 'plaisas, tumši plankumi, nereaģē skāriens.', icon: LuSmartphone },
+    { title: 'Akumulatora maiņa', href: '/iphone-remonts/baterijas-maina', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.', icon: LuBatteryCharging },
+    { title: 'Uzlādes ligzdas maiņa', href: '/iphone-remonts/uzlades-ligzdas-maina', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.', icon: LuPlugZap },
+    { title: 'Kameras remonts', href: '/iphone-remonts/kameras-remonts', text: 'miglaini attēli, fokusēšanās problēmas.', icon: LuCamera },
+    { title: 'Skaļruņi/mikrofons', href: '/iphone-remonts/skalruni-mikrofona-remonts', text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.', icon: LuVolume2 },
+    { title: 'Ūdens bojājumi', href: '/iphone-remonts/udens-bojajumu-remonts', text: 'diagnostika un atjaunošana, ja tas iespējams.', icon: LuDroplets },
   ];
 }
 
-/* ===========================
-   Static/shared content
-   =========================== */
-
-const IPHONE_FAQ_ITEMS = [
-  { q: 'Cik ilgi ilgst iPhone displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
-  { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
-  { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
-  { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-  { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
-];
-
-/* ===========================
-   Metadata
-   =========================== */
-
+/* ===== Metadata ===== */
 export async function generateMetadata({ params }) {
   const { device } = await params;
   const slug = decodeURIComponent(device);
@@ -215,10 +164,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-/* ===========================
-   Page
-   =========================== */
-
+/* ===== Page ===== */
 export default async function Page({ params }) {
   const { device } = await params;
   const slug = decodeURIComponent(device);
@@ -228,7 +174,22 @@ export default async function Page({ params }) {
   const { items: priceItems, currency } = buildPriceListItems(slug);
   const modelServices = buildModelServices();
 
-  // JSON-LD
+  // Pull iPhone FAQ; if empty, fall back to PHONE → HOME to avoid blank blocks
+  const iphoneFaq = getFaqItems(FAQ_CONTEXT.IPHONE)?.items ?? [];
+  const phoneFaq = !iphoneFaq.length ? (getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? []) : [];
+  const homeFaq = !iphoneFaq.length && !phoneFaq.length ? (getFaqItems(FAQ_CONTEXT.HOME)?.items ?? []) : [];
+
+  const FINAL_FAQ_ITEMS = iphoneFaq.length ? iphoneFaq : (phoneFaq.length ? phoneFaq : homeFaq);
+
+  // JSON-LD should match what we show
+  const FAQ_LD =
+    iphoneFaq.length
+      ? getFaqLd(FAQ_CONTEXT.IPHONE)
+      : phoneFaq.length
+      ? getFaqLd(FAQ_CONTEXT.PHONE)
+      : getFaqLd(FAQ_CONTEXT.HOME);
+
+  // JSON-LD: breadcrumbs + offers + service
   const breadcrumbsLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -239,7 +200,6 @@ export default async function Page({ params }) {
     ],
   };
 
-  // Offers with single numeric price only
   const offers = priceItems.map((it) => {
     const priceStr = it.price == null ? '' : String(it.price);
     const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
@@ -275,59 +235,25 @@ export default async function Page({ params }) {
 
   return (
     <>
+      {/* JSON-LD */}
       <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}
       </Script>
+      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(FAQ_LD)}
+      </Script>
 
+      {/* HERO */}
       <DeviceHero image={d.image} alt={`${d.name} remonts`} bodyHtml={d.bodyHtml || null} />
-
-
 
       {/* Popular services for this model */}
       <Services
         id="iphone-services"
         title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
-        items={[
-          {
-            title: 'Displeja (ekrāna) maiņa',
-            text: 'plaisas, tumši plankumi, nereaģē skāriens.',
-            icon: LuSmartphone,
-            href: '/iphone-remonts/displeja-maina',
-          },
-          {
-            title: 'Akumulatora maiņa',
-            text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
-            icon: LuBatteryCharging,
-            href: '/iphone-remonts/baterijas-maina',
-          },
-          {
-            title: 'Uzlādes ligzda',
-            text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
-            icon: LuPlugZap,
-            href: '/iphone-remonts/uzlades-ligzda',
-          },
-          {
-            title: 'Kamera',
-            text: 'miglaini attēli, fokusēšanās problēmas.',
-            icon: LuCamera,
-            href: '/iphone-remonts/kamera',
-          },
-          {
-            title: 'Skaļruņi/mikrofons',
-            text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
-            icon: LuVolume2,
-            href: '/iphone-remonts/skalruni-mikrofons',
-          },
-          {
-            title: 'Ūdens bojājumi',
-            text: 'diagnostika un atjaunošana, ja tas iespējams.',
-            icon: LuDroplets,
-            href: '/iphone-remonts/udens-bojajumi',
-          },
-        ]}
+        items={modelServices}
       />
 
       {/* Pricing */}
@@ -343,12 +269,11 @@ export default async function Page({ params }) {
 
       <Why />
 
+      {/* FAQ (centralized; with safe fallbacks) */}
       <Faq
         id="model-faq"
         title="Biežāk uzdotie jautājumi"
-        items={IPHONE_FAQ_ITEMS}
-        variant="accordion"
-        headingLevel={2}
+        items={FINAL_FAQ_ITEMS}
       />
 
       <ConvertBand />

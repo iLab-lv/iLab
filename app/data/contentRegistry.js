@@ -268,6 +268,33 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     brandServices: {
         // e.g., 'telefonu-remonts/samsung/displeja-maina': { h1, lead, seo }
     },
+
+    // =====================================================================
+    // INFO PAGES 
+    // =====================================================================
+
+
+    info: {
+    buj: {
+      h1: 'Biežāk uzdotie jautājumi',
+      lead: 'Atbildes par iLab pakalpojumiem un biežāk sastopamajiem remonta jautājumiem.',
+      // scrollCta: { label: 'Atrast atbildi', targetId: 'duk-faq' }, // optional
+    },
+    kontakti: {
+      h1: 'Kontakti',
+      lead: 'Atradīsiet mūs T/C Domina Shopping un T/C Spice Home. Zvaniet vai rakstiet — atbildēsim ātri.',
+    },
+    noteikumi: {
+      h1: 'Lietošanas noteikumi un privātuma politika',
+      lead:
+        'Noteikumi par iLab pakalpojumu izmantošanu, garantiju, klientu datu apstrādi un sīkdatņu (cookies) politiku.',
+    },
+      'par-ilab': {
+      h1: 'Par iLab',
+      lead: 'Mūsdienīgs remonta serviss Rīgā — tālruņi, planšetdatori, portatīvie datori un Dyson. Sertificēti meistari, ātra diagnostika un 90 dienu garantija.',
+    },
+    // ...add more info pages as needed
+  },
 };
 
 export default contentRegistry;

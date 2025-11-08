@@ -1,5 +1,15 @@
 @use '@/styles/_tokens.scss' as *;
 
+/* ===== Local fallbacks for missing tokens (safe defaults) ===== */
+$container-max: 1200px !default;
+$border-thin: 1px !default;
+$radius-lg: 12px !default;
+$glass-bg-weak: rgba(255, 255, 255, 0.03) !default;
+$glass-border: rgba(255, 255, 255, 0.08) !default;
+$dur-base: 0.2s !default;
+$ease-std: ease !default;
+
+/* ===== Section ===== */
 .section {
   padding-block: $space-lg;
   border-bottom: $border-thin solid $color-border;
@@ -8,21 +18,10 @@
 .container {
   max-width: $container-max;
   margin: 0 auto;
-  padding: 0 $space-md;
+  padding-inline: $space-md;
 }
 
-.group {
-  margin-top: $space-xl;
-}
-
-.groupTitle {
-  margin-bottom: $space-md;
-  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
-  font-weight: $font-weight-medium;
-  color: $color-text-2;
-}
-
-/* More breathing room for the heading */
+/* Heading */
 .sectionTitle {
   margin: 0 0 $space-lg 0;
   font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
@@ -31,19 +30,19 @@
   color: $color-text;
 }
 
+/* ===== FAQ (accordion) ===== */
 .faqList {
   display: grid;
   gap: $space-sm;
 }
 
-/* Accordion item */
 .faqItem {
   border: $border-thin solid $color-border;
   border-radius: $radius-lg;
   background: $color-surface-2;
   overflow: hidden;
 
-  /* --- Added: scroll offset for fixed topbar --- */
+  /* Offset for fixed header when deep-linking to an item */
   scroll-margin-top: calc($header-desktop-height + $space-lg);
 
   @media (max-width: $bp-md) {
@@ -66,20 +65,20 @@
   color: $color-text;
   border-radius: inherit;
 
-  /* remove default marker */
+  /* Remove default marker */
   &::-webkit-details-marker { display: none; }
 
-  /* neutral hover */
+  /* Neutral hover */
   &:hover { background: $glass-bg-weak; }
 
-  /* neutral (non-accent) focus ring for keyboard users */
+  /* Keyboard focus ring */
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 $border-thin $glass-border;
   }
 }
 
-/* Plus/Minus indicator (aligned) */
+/* Plus/Minus indicator */
 .chev {
   position: relative;
   inline-size: 14px;
@@ -87,7 +86,6 @@
   flex: 0 0 auto;
 }
 
-/* bars are centered and animate */
 .chev::before,
 .chev::after {
   content: '';
@@ -99,19 +97,19 @@
   will-change: transform, opacity;
 }
 
-/* default: “+” → horizontal + vertical */
+/* "+" default (horizontal + vertical) */
 .chev::before {
   inline-size: 12px;
   block-size: 2px;
-  transform: translate(-50%, -50%); /* horizontal */
+  transform: translate(-50%, -50%);
 }
 .chev::after {
   inline-size: 2px;
   block-size: 12px;
-  transform: translate(-50%, -50%); /* vertical */
+  transform: translate(-50%, -50%);
 }
 
-/* when open: become “–” (hide vertical stroke) */
+/* When open → "-" (hide vertical stroke) */
 .faqItem[open] .chev::after {
   transform: translate(-50%, -50%) scaleY(0);
   opacity: 0;
@@ -137,10 +135,6 @@
     }
   }
 }
-
-/* List variant (if used) */
-.q { font-weight: $font-weight-medium; }
-.a { margin-top: $space-xs; color: $color-text-2; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
