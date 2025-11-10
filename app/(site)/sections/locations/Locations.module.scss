@@ -1,7 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
-/* Section base */
+/* Section base — keep same rhythm as your old layout */
 .section {
   padding-block: $space-3xl;
 
@@ -11,14 +11,55 @@
 }
 
 .locations {
-  background: $color-surface-1; /* Map + cards styled inside LocationsMap */
+  background: $color-surface-1;
 }
 
 .container { @include layout.container; }
 
+/* Keep the same visual scale as the old section title */
 .sectionTitle {
   font-size: $font-size-h5;
   line-height: $line-height-heading;
   margin: 0 0 12px;
   color: $color-text;
+}
+
+/* ===== Map ===== */
+.mapArea {
+  position: relative;
+  z-index: 1;
+
+  > div {
+    aspect-ratio: 4 / 3;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    /* Fallback radii — replace with your tokens if you have them */
+    border-radius: 16px;
+
+    @media (max-width: $bp-md) {
+      aspect-ratio: unset;
+      height: 100dvh;
+      max-height: 70dvh;
+      border-radius: 12px;
+    }
+  }
+}
+
+/* ===== Cards rail ===== */
+.cardsArea {
+  position: relative;
+  z-index: 2; /* above the map */
+  margin-top: $space-lg;
+
+  @media (min-width: $bp-lg) {
+    margin-top: -$space-2xl; /* increase to -$space-3xl for more overlap */
+  }
+}
+
+/* Centered “rail” so cards don’t go edge-to-edge */
+.cardsInner {
+  max-width: min(980px, 100%);
+  margin-inline: auto;
+  padding-inline: $space-lg;
 }

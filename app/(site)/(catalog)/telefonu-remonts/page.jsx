@@ -159,21 +159,6 @@ export default function TelefonuRemontsPage() {
         </div>
       </section>
 
-      {/* ===== ANCHOR for Header CTA (must be above the brand previews) ===== */}
-      <div id="brand-list" className={s.anchorTarget} />
-
-      {/* Brand previews */}
-      {brandBlocks.map((b) => (
-        <BrandPreview
-          key={b.slug}
-          brandSlug={b.slug}
-          brandName={b.name}
-          items={b.items}
-          total={b.total}
-          href={b.href}
-        />
-      ))}
-
       {/* Popular services — updated to icon cards with explicit hrefs */}
       <section className={s.section} aria-labelledby="popular-services-h2">
         <div className={s.container}>
@@ -221,6 +206,23 @@ export default function TelefonuRemontsPage() {
           />
         </div>
       </section>
+
+      {/* ===== ANCHOR for Header CTA (must be above the brand previews) ===== */}
+      <div id="brand-list" className={s.anchorTarget} />
+
+      {/* Brand previews */}
+      {brandBlocks.map((b) => (
+        <BrandPreview
+          key={b.slug}
+          brandSlug={b.slug}
+          brandName={b.name}
+          items={b.items}
+          total={b.total}
+          href={b.href}
+        />
+      ))}
+
+      
 
       {/* Process */}
       <section className={s.section} aria-labelledby="process-h2">

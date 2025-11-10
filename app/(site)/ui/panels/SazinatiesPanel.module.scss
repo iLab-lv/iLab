@@ -2,7 +2,6 @@
 
 /* ===== Layout: tabs + card ===== */
 .wrap {
-  /* Fill the panel’s visible content area exactly */
   height: var(--panelContentMinH);
   display: flex;
   flex-direction: column;
@@ -42,9 +41,8 @@
   &:focus-visible { color: #000; background: $color-accent; }
 }
 
-/* ===== Card (flex-fills remainder; no calc-based min-height) ===== */
+/* ===== Card (glass shell remains full width) ===== */
 .card {
-  /* vertical padding var reused by actions */
   --card-pad-v: #{$space-lg};
   --card-pad-h: #{$space-lg};
 
@@ -66,6 +64,18 @@
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $glass-fallback-strong;
   }
+
+  /* EXTRA top space on desktop only (keeps bottom spacing unchanged) */
+  @media (min-width: $bp-md) {
+    padding-top: calc(var(--card-pad-v) + #{$space-xl}); /* +32px */
+  }
+}
+
+/* Clamp only the highlighted content inside the card */
+.cardInner {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px; /* requested cap */
 }
 
 /* ===== Info grid ===== */
@@ -88,24 +98,27 @@
 
 .colLeft { grid-area: left; min-width: 0; }
 
-/* ===== Hours block ===== */
+/* ===== Hours block (tightened) ===== */
 .hoursBlock {
   grid-area: hours;
   min-width: 0;
   text-align: right;
   margin: 0 0 $space-md 0;
 
-  @media (min-width: $bp-md) { margin: 0; }
+  @media (min-width: $bp-md) {
+    margin: 0;
+    padding-right: $space-xl; /* right inset on desktop */
+  }
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 16px;
+  padding: 10px 14px;             /* slightly tighter */
   border-radius: 999px;
   margin: 0 0 $space-sm 0;
-  min-width: 200px;
+  min-width: 180px;               /* down from 200 */
   font-weight: $font-weight-medium;
   letter-spacing: .01em;
   border: 1px solid rgba($color-accent,.35);
@@ -122,19 +135,31 @@
 }
 .card[data-hours-expanded="true"] .hoursBody { display: block; }
 
+/* Closer day ↔ time, right-aligned block, tabular numerals */
 .hoursList {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: $space-lg;
-  row-gap: 6px;
+  grid-template-columns: max-content max-content; /* shrink to content */
+  justify-content: end;                            /* keep near right edge */
+  column-gap: $space-sm;                           /* 8px gap (tighter) */
+  row-gap: 4px;                                    /* tighter rows */
   margin: 0;
   padding: 0;
+  font-variant-numeric: tabular-nums;
 }
 .hoursRow { display: contents; }
-.hoursRow dt { color: $color-text-2; }
-.hoursRow dd { margin: 0; text-align: right; }
+.hoursRow dt {
+  color: $color-text-3;
+  font-size: $font-size-sm;      /* smaller day label */
+  line-height: 1.2;
+  text-align: right;
+}
+.hoursRow dd {
+  margin: 0;
+  text-align: left;              /* sits close to day label */
+  font-weight: $font-weight-medium;
+}
 .hoursToday dt,
-.hoursToday dd { color: $color-text; font-weight: $font-weight-medium; }
+.hoursToday dd { color: $color-text; font-weight: $font-weight-semibold; }
 
 .specialNote { margin-top: $space-sm; color: #ff5a5a; font-weight: $font-weight-medium; }
 

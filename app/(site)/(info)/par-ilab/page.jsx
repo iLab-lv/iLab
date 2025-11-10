@@ -14,7 +14,7 @@ const ORIGIN = 'https://www.ilab.lv';
 export const metadata = {
   title: 'Par iLab | iLab',
   description:
-    'iLab — mūsdienīgs remonta serviss Rīgā: telefonu, planšetdatoru, portatīvo datoru un Dyson remonts. Sertificēti meistari, bezmaksas diagnostika un 90 dienu garantija.',
+    'SIA iLab — profesionāls telefona un datoru serviss Rīgā ar 10+ gadu pieredzi. Remonts privātpersonām un B2B: viedtālruņi, planšetes, datori, Dyson. Bezmaksas diagnostika un 90 dienu garantija.',
   alternates: { canonical: '/par-ilab' },
 };
 
@@ -68,41 +68,61 @@ export default function AboutPage() {
         {JSON.stringify(orgLd)}
       </Script>
 
-      {/* Single, multi-paragraph section (header/lead provided by (info)/layout) */}
+      {/* Content */}
       <section className={s.section} aria-labelledby="about-content-h2">
         <div className={s.container}>
-          <h2 id="about-content-h2" className={s.h2}>Par iLab</h2>
+          <h2 id="about-content-h2" className={s.h2}>Par mums</h2>
 
           <p className={s.paragraph}>
-            iLab ir mūsdienīgs ierīču remonta serviss Rīgā, kas specializējas
-            <strong> tālruņu</strong>, <strong>planšetdatoru</strong>, <strong>portatīvo datoru</strong> un
-            <strong> Dyson</strong> ierīču remontā. Mūsu sertificētie meistari strādā ātri un precīzi —
-            veic diagnostiku, detaļu nomaiņu un pilnu atjaunošanu tajā pašā dienā, kad tas ir iespējams.
+            <strong>SIA iLab</strong> — profesionāls telefona un datoru serviss Rīgā ar vairāk nekā
+            <strong> 10 gadu pieredzi</strong> tehnoloģiju apkalpošanas un remonta jomā. Mēs sniedzam ātru un
+            kvalitatīvu tehnikas remontu gan privātpersonām, gan uzņēmumiem (B2B), nodrošinot pilnu servisa
+            pakalpojumu klāstu.
           </p>
 
+          <h3 className={s.h3}>iLab atradīsi: T/C Domina Shopping un TC Spice Home</h3>
           <p className={s.paragraph}>
-            iLab dibināts ar vienkāršu mērķi — padarīt profesionālu remontu pieejamu un saprotamu ikvienam.
-            Mēs apvienojam tehniskās zināšanas ar atklātu komunikāciju, lai klienti vienmēr zinātu,
-            kas tiek darīts un kāpēc.
+            Mūsu servisa centri atrodas <strong>TC Domina Shopping</strong> un <strong>TC Spice Home</strong>,
+            lai klientiem būtu ērti nogādāt un saņemt ierīces jebkurā dienas laikā. Abās filiālēs pieejami
+            viedtālruņu, planšetdatoru, datoru un viedpulksteņu remonts, putekļusūcēju apkope, programmatūras
+            uzstādīšana un citi tehniskie pakalpojumi.
           </p>
 
+          <h3 className={s.h3}>Mūsu misija</h3>
           <p className={s.paragraph}>
-            Katram remontam mēs nodrošinām <strong>bezmaksas diagnostiku</strong> un
-            <strong> 90 dienu garantiju</strong> detaļām un darbam. Tiek izmantotas tikai pārbaudītas
-            rezerves daļas un kvalitatīvi instrumenti, lai rezultāts būtu uzticams un ilglaicīgs.
+            Jūsu ierīces, mūsu pieredze — uzticams serviss katru dienu, gan privātpersonām, gan uzņēmumiem.
+            Mūsu uzdevums ir nodrošināt, lai telefons, dators, planšetdators vai citas ierīces atkal
+            strādātu kā jaunas. Tehnoloģijām ir jāatvieglo dzīve, nevis jārada problēmas — un tieši to mēs
+            nodrošinām katru dienu.
           </p>
 
+          <h3 className={s.h3}>iLab komanda</h3>
           <p className={s.paragraph}>
-            Mums ir divas ērtas filiāles — <strong>Domina Shopping</strong> un <strong>Spice Home</strong> —
-            kur pieņemam klientus katru dienu. Neatkarīgi no tā, vai nepieciešama ekrāna nomaiņa,
-            baterijas maiņa vai sarežģītāks remonts, iLab komanda palīdzēs ātri un droši.
+            iLab tehniķi ir apmācīti speciālisti, kas nepārtraukti pilnveido zināšanas, sekojot līdzi
+            jaunākajām tehnoloģiju tendencēm. Tas ļauj mums nodrošināt augstāko kvalitāti
+            <strong> Apple, Samsung, Huawei, Xiaomi, Lenovo, Dyson</strong> un citu zīmolu ierīču remontā.
+            Sniedzam pakalpojumu visā Latvijā privātpersonām un B2B.
           </p>
 
-          <p className={s.paragraph}>
-            Mūsu redzējums ir kļūt par vadošo remonta servisu Latvijā, kas piedāvā ātru, caurspīdīgu
-            un ilgtspējīgu pieeju tehnikas remontam. Pagarinot ierīču kalpošanas laiku, mēs palīdzam
-            samazināt elektronisko atkritumu daudzumu un veicinām atbildīgu tehnoloģiju lietošanu.
-          </p>
+          <h3 className={s.h3}>Kāpēc izvēlēties iLab</h3>
+          <ul className={s.list}>
+            <li>10+ gadu pieredze ierīču remontā;</li>
+            <li>Telefona un datoru remonts Rīgā — divās ērtās lokācijās: TC Domina Shopping un TC Spice Home;</li>
+            <li>Darbojamies katru dienu, arī brīvdienās;</li>
+            <li>Apkalpojam privātpersonas un B2B klientus visā Latvijā;</li>
+            <li>Kvalitatīvas rezerves daļas un profesionāla diagnostika;</li>
+            <li>Defektācijas aktu sagatavošana klienta apdrošināšanas uzņēmumam;</li>
+            <li>Godīga cenu politika un skaidra saziņa ar klientu;</li>
+            <li>90 dienu garantija veiktajam remontam.</li>
+          </ul>
+
+          <h3 className={s.h3}>iLab vērtības</h3>
+          <ul className={s.list}>
+            <li><strong>Precizitāte un ātrums</strong> — ierīce tiek salabota pēc iespējas īsākā laikā;</li>
+            <li><strong>Attīstība un kvalitāte</strong> — mūsu tehniķi nepārtraukti pilnveido zināšanas;</li>
+            <li><strong>Atbildība un godīgums</strong> — nekādu slēptu izmaksu vai neskaidru solījumu;</li>
+            <li><strong>Uzticamība</strong> — mēs atbildam par katru paveikto remontu.</li>
+          </ul>
         </div>
       </section>
 

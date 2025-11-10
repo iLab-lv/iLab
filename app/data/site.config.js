@@ -16,32 +16,50 @@ export const SOCIALS = {
   tiktok: 'https://www.tiktok.com/@ilab.lv',
 };
 
-// Store hours if you want them later in footer/schema
+// Default store hours (7-day format for hours table)
 export const HOURS = [
-  { day: 'Mon-Fri', opens: '10:00', closes: '21:00' },
-  { day: 'Sat-Sun', opens: '10:00', closes: '21:00' },
+  { day: 'P', opens: '10:00', closes: '21:00' },
+  { day: 'O', opens: '10:00', closes: '21:00' },
+  { day: 'T', opens: '10:00', closes: '21:00' },
+  { day: 'C', opens: '10:00', closes: '21:00' },
+  { day: 'Pk', opens: '10:00', closes: '21:00' },
+  { day: 'S', opens: '10:00', closes: '21:00' },
+  { day: 'Sv', opens: '10:00', closes: '21:00' },
 ];
 
-// Locations used by CtaDock (WhatsApp/maps) + footer links
+// Map pin positions (% of image natural dimensions)
+export const PIN_POSITIONS = {
+  domina: { xPct: 68, yPct: 40 },
+  spice: { xPct: 30, yPct: 60 },
+};
+
+// Locations used by panels, homepage, footer, etc.
 export const LOCATIONS = [
   {
     id: 'domina',
     label: 'Domina Shopping',
-    tel: '+37123370088',
+    address: 'Ieriķu iela 3, Rīga, LV-1084',
+    tel: '+371 23370088',
+    telLink: 'tel:+37123370088',
     email: 'info@ilab.lv',
     wa: 'https://wa.me/37123370088',
-    maps: 'https://www.google.com/maps/search/?api=1&query=iLab Domina&query_place_id=PLACE_ID_DOMINA',
-    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab Domina&destination_place_id=PLACE_ID_DOMINA',
-    address: 'Ieriķu iela 3, Rīga, LV-1084',
+    maps: 'https://www.google.com/maps/search/?api=1&query=iLab+Domina&query_place_id=PLACE_ID_DOMINA',
+    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab+Domina&destination_place_id=PLACE_ID_DOMINA',
+    hours: HOURS,
+    // Optional: override hours for specific date
+    // hoursOverride: { date: '2025-12-25', opens: '12:00', closes: '18:00' },
+    // specialNotice: 'Ziemsvētku darba laiks', // Optional notice
   },
   {
     id: 'spice',
     label: 'Spice Home',
-    tel: '+37120887787',
+    address: 'Jaunmoku iela 13, Rīga, LV-1046',
+    tel: '+371 20887787',
+    telLink: 'tel:+37120887787',
     email: 'info@ilab.lv',
     wa: 'https://wa.me/37120887787',
-    maps: 'https://www.google.com/maps/search/?api=1&query=iLab Spice&query_place_id=PLACE_ID_SPICE',
-    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab Spice&destination_place_id=PLACE_ID_SPICE',
-    address: 'Jaunmoku iela 13, Rīga, LV-1046',
+    maps: 'https://www.google.com/maps/search/?api=1&query=iLab+Spice&query_place_id=PLACE_ID_SPICE',
+    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab+Spice&destination_place_id=PLACE_ID_SPICE',
+    hours: HOURS,
   },
 ];

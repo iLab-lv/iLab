@@ -1,0 +1,265 @@
+@use '@/styles/_tokens.scss' as *;
+
+/* Card base */
+.card {
+  /* softer, more transparent glass vs. previous strong */
+  background: rgba($color-surface-1, 0.42);
+  border: $border-thin solid rgba($glass-border, 0.8);
+  border-radius: $radius-lg;
+  padding: $space-lg;
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  box-shadow: inset 0 0 0 1px $glass-tint-weak;
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 200ms ease;
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    /* fallback stays lighter as well */
+    background: rgba(#0b0f10, 0.5);
+  }
+}
+
+/* Simplified variant (homepage) */
+.card.simplified {
+  &:hover {
+    border-color: rgba($color-accent, 0.4);
+    transform: translateY(-2px);
+  }
+
+  &.highlighted {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 2px rgba($color-accent, 0.3), 0 8px 24px rgba($color-accent, 0.15);
+  }
+
+  .phone {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin: $space-sm 0;
+  }
+
+  .linkAccent {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: $space-sm;
+  }
+}
+
+/* Full variant (panel) */
+.card.full {
+  min-height: 0;
+}
+
+/* ===== Typography ===== */
+.title {
+  margin: -2px 0 2px;
+  font-size: $font-size-h4;
+  line-height: $line-height-heading;
+  color: $color-text;
+}
+
+.address {
+  color: $color-text-2;
+  margin: 0 0 $space-2xs;
+  font-size: $font-size-base;
+}
+
+.addrLinks {
+  margin: $space-md 0 $space-xl;
+  font-size: $font-size-sm;
+}
+
+/* Remove dashed underline */
+.linkAccent {
+  color: $color-accent;
+  text-decoration: none;            /* no underline */
+  border-bottom: none;              /* remove dashed rule */
+  transition: opacity $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    opacity: 0.85;
+  }
+}
+
+.dot {
+  margin: 0 8px;
+  opacity: 0.7;
+}
+
+.metaLabel {
+  margin: $space-md 0 $space-2xs;
+  color: $color-text-2;
+  font-size: 0.95rem;
+}
+
+.phoneWrap {
+  margin: -6px 0 $space-sm;
+}
+
+.phoneText {
+  display: inline-block;
+  font-size: clamp($font-size-h4, 6vw, $font-size-h2);
+  font-weight: $font-weight-semibold;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: $color-text;
+}
+
+.emailWrap {
+  margin: -2px 0 $space-md 0;
+}
+
+/* Remove dashed underline */
+.emailBig {
+  display: inline-block;
+  font-size: clamp($font-size-lg, 3vw, $font-size-h4);
+  font-weight: $font-weight-medium;
+  line-height: 1.08;
+  color: $color-text;
+  text-decoration: none;           /* no underline */
+  border-bottom: none;             /* remove dashed rule */
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    outline: none;
+  }
+}
+
+/* ===== Info Grid (full variant) ===== */
+.infoGrid {
+  display: grid;
+  grid-template-areas:
+    'hours'
+    'left';
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+
+  @media (min-width: $bp-md) {
+    grid-template-areas: 'left hours';
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+  }
+}
+
+.colLeft {
+  grid-area: left;
+  min-width: 0;
+}
+
+/* ===== Hours Block ===== */
+.hoursBlock {
+  grid-area: hours;
+  min-width: 0;
+  text-align: right;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: $radius-pill;
+  margin: 0 0 $space-sm 0;
+  min-width: 200px;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba($color-accent, 0.35);
+  box-shadow: 0 6px 18px rgba($color-accent, 0.22), inset 0 0 0 1px rgba(#000, 0.08);
+}
+
+.badgeOpen {
+  background: rgba($color-accent, 0.2);
+  color: $color-accent;
+}
+
+.badgeClosed {
+  background: rgba(255, 255, 255, 0.06);
+  color: $color-text-2;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+.hoursList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: $space-lg;
+  row-gap: 6px;
+  margin: 0;
+  padding: 0;
+  font-size: $font-size-sm;
+}
+
+.hoursRow {
+  display: contents;
+
+  dt {
+    color: $color-text-2;
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+    color: $color-text-2;
+  }
+}
+
+.hoursToday {
+  color: $color-text !important;
+  font-weight: $font-weight-medium !important;
+}
+
+.specialNote {
+  margin-top: $space-sm;
+  color: #ff5a5a;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+}
+
+/* ===== Bottom Actions (Always Sticky) ===== */
+.actions {
+  margin-top: auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-sm;
+
+  position: sticky;
+  bottom: 0;
+
+  /* keep visual separation but match the lighter glass tone */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba($color-surface-1, 0.42) 40%);
+
+  padding-top: $space-md;
+
+  margin-bottom: calc(-1 * $space-lg);
+  padding-bottom: $space-lg;
+
+  :where(a, button) {
+    width: 100%;
+  }
+
+  @media (min-width: $bp-md) {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-sm;
+
+    :where(a, button) {
+      width: auto;
+      flex: 0 1 360px;
+      min-width: 260px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}

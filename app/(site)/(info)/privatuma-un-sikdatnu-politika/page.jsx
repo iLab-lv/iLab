@@ -44,9 +44,6 @@ export default function TermsPage() {
       {/* One large multi-paragraph content section (header & lead come from layout) */}
       <section className={s.section} aria-labelledby="terms-h2">
         <div className={s.container}>
-          <h2 id="terms-h2" className={s.h2}>
-            iLab — Lietošanas noteikumi un privātuma politika
-          </h2>
 
           <p className={s.paragraph}>
             <strong>Pēdējo reizi atjaunināts:</strong> 2025-11-05<br />

@@ -1,0 +1,73 @@
+@use '@/styles/_tokens.scss' as *;
+
+/* ===== Tabbed Mode (Panel) ===== */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  min-height: 0;
+}
+
+.tabs {
+  display: inline-flex;
+  gap: $space-sm;
+  background: $glass-bg-weak;
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-lg;
+  padding: 4px;
+  align-self: flex-start;
+}
+
+.tab {
+  background: transparent;
+  color: $color-text-2;
+  border: 0;
+  border-radius: $radius-md;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-text;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.tabActive {
+  color: #000;
+  background: $color-accent;
+
+  &:hover,
+  &:focus-visible {
+    color: #000;
+    background: $color-accent;
+  }
+}
+
+.cardContainer {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Grid Mode (Homepage) ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}

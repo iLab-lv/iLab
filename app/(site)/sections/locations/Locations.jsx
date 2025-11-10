@@ -1,45 +1,59 @@
-// app/(site)/sections/home/Locations.jsx
-import s from './Locations.module.scss';
-import LocationsMap from '@/(site)/components/locations-map/LocationsMap';
+'use client';
 
+import { useState } from 'react';
+import s from './Locations.module.scss';
+import LocationsMap from './LocationsMap';
+import LocationList from './LocationList';
+import { LOCATIONS, PIN_POSITIONS } from '@/data/site.config';
+
+/**
+ * Locations section
+ * Desktop: cards sit below the map with a slight overlap (Option A).
+ * Mobile: normal stacked flow, no overlap.
+ * Map height + card rail width mirror your older layout.
+ */
 export default function Locations({
   id = 'locations',
   title = 'Servisa centri Rīgā',
-  images = {
-    alt: 'Rīga — iLab lokācijas',
-    small: '/images/map-1024.webp',
-    medium: '/images/map-1600.webp',
-    large: '/images/map-3000.webp',
-  },
-  pins = [
-    { id: 'domina', label: 'Domina Shopping', xPct: 68, yPct: 40, gmaps: 'https://maps.google.com/?q=Ieriķu iela 3 Rīga', tel: 'tel:23370088' },
-    { id: 'spice',  label: 'Spice Home',       xPct: 30, yPct: 60, gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga', tel: 'tel:20887787' },
-  ],
-  locations = [
-    {
-      id: 'domina',
-      title: 'Domina Shopping',
-      address: 'Ieriķu iela 3, Rīga',
-      hours: 'Mon–Sun 10:00–21:00',
-      tel: 'tel:23370088',
-      gmaps: 'https://maps.google.com/?q=Ieriķu iela 3 Rīga',
-    },
-    {
-      id: 'spice',
-      title: 'Spice Home',
-      address: 'Jaunmoku iela 13, Rīga',
-      hours: 'Mon–Sat 10:00–21:00, Sun 10:00–20:00',
-      tel: 'tel:20887787',
-      gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga',
-    },
-  ],
 }) {
+  const [selectedLocationId, setSelectedLocationId] = useState(null);
+
+  const handlePinClick = (locationId) => {
+    setSelectedLocationId(locationId);
+
+    // Smooth scroll to corresponding card
+    const cardEl = document.getElementById(`loc-card-${locationId}`);
+    if (cardEl) {
+      cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
+
   return (
     <section id={id} className={`${s.section} ${s.locations}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <h2 id={`${id}-title`} className={s.sectionTitle}>{title}</h2>
 
-        <LocationsMap images={images} pins={pins} locations={locations} />
+        {/* Map first, in normal flow */}
+        <div className={s.mapArea}>
+          <LocationsMap
+            imageUrl="/images/map.png"
+            locations={LOCATIONS}
+            pinPositions={PIN_POSITIONS}
+            onPinClick={handlePinClick}
+          />
+        </div>
+
+        {/* Cards rail — slightly overlaps map on desktop */}
+        <div className={s.cardsArea}>
+          <div className={s.cardsInner}>
+            <LocationList
+              locations={LOCATIONS}
+              selectedLocationId={selectedLocationId}
+              showAllCards={true}
+              showActions={false}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

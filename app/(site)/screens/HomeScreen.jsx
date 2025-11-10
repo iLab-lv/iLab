@@ -76,7 +76,8 @@ export default function HomeScreen() {
 
       <Why />
 
-      <Locations />
+      <Locations openPanelOnPin />
+
 
       <div id="reviews" />
       <Reviews />

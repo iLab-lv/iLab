@@ -1,6 +1,6 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* Fill the panel's visible content height and add safe padding on ALL sides. */
+/* Fill the panel’s content area with safe paddings */
 .wrap {
   height: var(--panelContentMinH);
   box-sizing: border-box;
@@ -13,119 +13,29 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+
+  /* subtle panel background (optional) */
+  background: $color-surface-1;
 }
 
-/* Map fills remaining height exactly (no scroll) */
-.map {
-  position: relative;
+/* Let the embedded LocationsMap expand perfectly */
+.mapBox {
   flex: 1 1 auto;
   min-height: 0;
 
-  border: 1px solid $glass-border;
-  border-radius: $radius-lg;
-  background: $color-surface-1;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
-}
-
-/* SVG fills container; image viewBox is computed to frame pins. */
-.svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  user-select: none;
-}
-
-/* ===== Pins (interactive + shared active state) ===== */
-.pin {
-  cursor: pointer;
-  outline: none;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.pinSize { transform-box: fill-box; transform-origin: center; transform: scale(var(--pinScale, 2)); }
-.pinDot  { fill: $color-accent; filter: drop-shadow(0 6px 16px rgba(0,0,0,.35)); }
-.pinHalo { fill: rgba($color-accent, .22); opacity: .35; transition: transform 200ms $ease-std, opacity 200ms $ease-std; transform: scale(1.4); }
-
-/* Native pin hover/focus */
-.pin:focus-visible .pinDot { stroke: $color-accent; stroke-width: 2px; }
-.pin:hover .pinHalo, .pin:focus-visible .pinHalo { opacity: .6; transform: scale(2.2); }
-
-/* Shared active state (from label hover/focus too) */
-.pinActive .pinHalo { opacity: .6; transform: scale(2.2); }
-.pinActive .pinDot  { stroke: $color-accent; stroke-width: 2px; }
-
-/* Loading overlay */
-.loading {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: $color-text-3;
-  letter-spacing: .04em;
-}
-
-/* ===== Labels layer ===== */
-.labels {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none; /* only the buttons themselves are interactive */
-}
-
-/* Clickable glass pill — ACCENT-TINT default + ACCENT text; full accent on hover/focus/active */
-.labelBtn {
-  position: absolute;
-  transform: translate(calc(-50% + var(--shiftX, 0px)), var(--offsetY, 0px));
-
-  padding: 6px 12px;
-  min-height: 32px;
-  border-radius: $radius-pill;
-
-  /* NEW: accent-tinted glass base so text doesn’t fade over the map */
-  background: $accent-tint-weak;
-  color: $color-accent;
-  border: 1px solid rgba($color-accent, .28);
-
-  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  white-space: nowrap;
-
-  box-shadow: $shadow-soft;
-  cursor: pointer;
-  pointer-events: auto;
-
-  transition:
-    background-color $dur-base $ease-std,
-    color $dur-base $ease-std,
-    border-color $dur-base $ease-std,
-    box-shadow $dur-base $ease-std,
-    transform 120ms ease;
-
-  /* Hover/focus/active → strong accent */
-  &:hover,
-  &:focus-visible,
-  &.active {
-    background: $color-accent;
-    color: #0b0f10; /* readable on bright accent */
-    border-color: transparent;
-    box-shadow: $shadow-accent;
-    outline: none;
-  }
-
-  &:active {
-    transform: translate(calc(-50% + var(--shiftX, 0px)), calc(var(--offsetY, 0px) + 1px));
+  /* Optional: soften edges to match panel visuals */
+  :global(.map) {
+    border-radius: $radius-lg;
+    border: $border-thin solid $glass-border;
+    box-shadow: inset 0 0 0 1px $glass-tint-weak;
+    overflow: hidden;
   }
 }
 
-/* Above/below markers (offset handled via custom property) */
-.top { /* --offsetY negative */ }
-.bottom { /* --offsetY positive */ }
-
-@media (prefers-reduced-motion: reduce) {
-  .pinHalo { transition: none; }
-  .labelBtn { transition: none; }
+/* If you later add any footer/CTA below the map, keep spacing tidy */
+.footer {
+  margin-top: $space-lg;
+  display: flex;
+  gap: $space-sm;
+  justify-content: flex-end;
 }

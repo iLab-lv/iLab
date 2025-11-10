@@ -1,9 +1,9 @@
-// app/(site)/(catalog)/telefonu-remonts/[brand]/page.jsx
 import Script from 'next/script';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import devicesAll from '@/data/devices';
-import categories from '@/data/categories'; // ⬅️ use existing categories data
+import categories from '@/data/categories'; // ⬅️ used by getPhoneBrandConfig
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
@@ -17,13 +17,35 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 import phoneIssues from '@/data/commonIssues';
 import c from '@styles/Catalog.module.scss';
 
-import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
+import {
+  getBrandContent,
+  listBrandsForCategory,
+  BRAND_CATEGORY,
+} from '@/data/brandContent';
+
+import {
+  LuSmartphone,
+  LuBatteryCharging,
+  LuPlugZap,
+  LuCamera,
+  LuVolume2,
+  LuDroplets,
+} from 'react-icons/lu';
 
 const ORIGIN = 'https://www.ilab.lv';
 
+/* ---------------------------------------------
+   Lock this dynamic route to ONLY known brands
+---------------------------------------------- */
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const brands = listBrandsForCategory(BRAND_CATEGORY.PHONES) || [];
+  return brands.map((b) => ({ brand: String(b.slug).toLowerCase() }));
+}
+
 // ---------- Helpers ----------
 function getPhoneBrandConfig(brandSlug) {
-  // Find the phones category in your categories list
   const phonesCat = categories.find((c) => c.slug === 'telefonu-remonts');
   if (!phonesCat) {
     return {
@@ -39,7 +61,6 @@ function getPhoneBrandConfig(brandSlug) {
   const brand =
     phonesCat.brands?.find((b) => (b.brandSlug || '').toLowerCase() === brandSlug) || null;
 
-  // Fallbacks if brand entry is missing (still shows generic Android tint)
   return {
     brandKey: brand?.brandSlug || brandSlug,
     heroImage: brand?.heroImage || '/brand/images/categories/telefonu_remonts.webp',
@@ -60,13 +81,43 @@ export async function generateMetadata({ params }) {
 }
 
 // ---------- Generic services/faq/process (shared) ----------
-const POPULAR_REPAIRS_GENERIC = [
-  { title: 'Displeja (ekrāna) maiņa', text: 'plaisas, tumši plankumi, nereaģē skāriens.' },
-  { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.' },
-  { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
-  { title: 'Kamera', text: 'miglaini attēli, fokusēšanās problēmas.' },
-  { title: 'Skaļruņi/mikrofons', text: 'klusa skaņa, krakšķi, sarunās nedzird.' },
-  { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
+const POPULAR_REPAIRS = [
+  {
+    title: 'Displeja (ekrāna) maiņa',
+    text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+    icon: LuSmartphone,
+    href: '/telefonu-remonts/ekrana-mainja',
+  },
+  {
+    title: 'Akumulatora maiņa',
+    text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+    icon: LuBatteryCharging,
+    href: '/telefonu-remonts/akumulatora-mainja',
+  },
+  {
+    title: 'Uzlādes ligzda',
+    text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+    icon: LuPlugZap,
+    href: '/telefonu-remonts/uzlades-ligzda',
+  },
+  {
+    title: 'Kamera',
+    text: 'miglaini attēli, fokusēšanās problēmas.',
+    icon: LuCamera,
+    href: '/telefonu-remonts/kamera-remonts',
+  },
+  {
+    title: 'Skaļruņi/mikrofons',
+    text: 'klusa skaņa, krakšķi, sarunās nedzird.',
+    icon: LuVolume2,
+    href: '/telefonu-remonts/skalruni-mikrofons',
+  },
+  {
+    title: 'Ūdens bojājumi',
+    text: 'diagnostika un atjaunošana, ja tas iespējams.',
+    icon: LuDroplets,
+    href: '/telefonu-remonts/udens-bojajumi',
+  },
 ];
 
 const PROCESS_STEPS = [
@@ -88,6 +139,12 @@ const FAQ_ITEMS = [
 export default function BrandPhonesPage({ params }) {
   const brandSlug = String(params.brand || '').toLowerCase();
 
+  // Runtime guard in case someone navigates here with a non-generated slug
+  const allowed = (listBrandsForCategory(BRAND_CATEGORY.PHONES) || []).map((b) =>
+    String(b.slug).toLowerCase()
+  );
+  if (!allowed.includes(brandSlug)) return notFound();
+
   const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
   const baseHref = bc.href;
 
@@ -97,7 +154,6 @@ export default function BrandPhonesPage({ params }) {
     (d) => d.category === 'telefonu-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
-  // Build hero copy HTML: prefer rich bodyHtml; else wrap lead in <p>
   const heroHtml = bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`;
 
   // ---------- JSON-LD ----------
@@ -147,18 +203,18 @@ export default function BrandPhonesPage({ params }) {
         {JSON.stringify(faqLd)}
       </Script>
 
-      {/* DEVICE HERO (image + optional logo tint + copy) */}
+      {/* DEVICE HERO */}
       <DeviceHero
-        image={hero.heroImage}               // e.g. /brand/images/categories/telefonu_remonts.webp
-        alt={hero.heroAlt}                   // e.g. "Samsung telefonu remonts"
-        brandLogo={hero.logo}                // e.g. /brand/logos/samsung-logo.svg (or null)
-        brandKey={hero.brandKey}             // sets data-brand for CSS tints
-        tint={hero.tint}                     // can override brand preset if needed
+        image={hero.heroImage}
+        alt={hero.heroAlt}
+        brandLogo={hero.logo}
+        brandKey={hero.brandKey}
+        tint={hero.tint}
         focal="right"
-        bodyHtml={heroHtml}                  // ← SEO-oriented hero copy
+        bodyHtml={heroHtml}
       />
 
-      {/* INTRO (SEO copy under H2; Header owns H1/lead/CTA) */}
+      {/* INTRO */}
       <section className={c.section} aria-labelledby="brand-intro-h2">
         <div className={c.container}>
           <h2 id="brand-intro-h2" className={c.h2}>
@@ -178,11 +234,11 @@ export default function BrandPhonesPage({ params }) {
         </div>
       </section>
 
-      {/* SERIES GRID (Header CTA targets this) */}
+      {/* SERIES GRID */}
       <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
         <div className={c.container}>
           <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
-        <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
+          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
           <p className={c.paragraph} style={{ marginTop: 0 }}>
             Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
           </p>
@@ -210,14 +266,12 @@ export default function BrandPhonesPage({ params }) {
           <Services
             id="brand-services"
             title="Populārākie remonti"
-            items={POPULAR_REPAIRS_GENERIC}
+            items={POPULAR_REPAIRS}
             headingLevel={2}
             variant="list"
           />
         </div>
       </section>
-
-      {/* Common issues */}
 
       {/* Process */}
       <div id="process-h2" className={c.anchorTarget} />

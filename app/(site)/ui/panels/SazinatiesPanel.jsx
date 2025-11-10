@@ -45,12 +45,10 @@ export default function SazinatiesPanel({ initialLocId }) {
   const defaultId = initialLocId && ids.includes(initialLocId) ? initialLocId : ids[0];
   const [activeId, setActiveId] = useState(defaultId);
 
-  // When initialLocId changes (e.g., via Locator handoff), select it
   useEffect(() => {
     if (initialLocId && ids.includes(initialLocId)) setActiveId(initialLocId);
   }, [initialLocId, ids]);
 
-  // Mobile hours toggle
   const [showHoursMobile, setShowHoursMobile] = useState(false);
   useEffect(() => { setShowHoursMobile(false); }, [activeId]);
 
@@ -116,84 +114,87 @@ export default function SazinatiesPanel({ initialLocId }) {
         data-branch-card={activeLoc.id}
         data-hours-expanded={showHoursMobile ? 'true' : 'false'}
       >
-        <div className={s.infoGrid}>
-          {/* HOURS */}
-          <div className={s.hoursBlock}>
-            <div
-              className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}
-              role="button"
-              tabIndex={0}
-              aria-controls={hoursListId}
-              aria-expanded={showHoursMobile}
-              onClick={() => setShowHoursMobile(v => !v)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setShowHoursMobile(v => !v);
-                }
-              }}
-              title="Skatīt darba laiku"
-            >
-              {state.badgeText}
+        {/* Only the info area is width-clamped */}
+        <div className={s.cardInner}>
+          <div className={s.infoGrid}>
+            {/* HOURS */}
+            <div className={s.hoursBlock}>
+              <div
+                className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}
+                role="button"
+                tabIndex={0}
+                aria-controls={hoursListId}
+                aria-expanded={showHoursMobile}
+                onClick={() => setShowHoursMobile(v => !v)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setShowHoursMobile(v => !v);
+                  }
+                }}
+                title="Skatīt darba laiku"
+              >
+                {state.badgeText}
+              </div>
+
+              <div className={s.hoursBody}>
+                <dl id={hoursListId} className={s.hoursList} aria-label="Darba laiks">
+                  {baseHours.map((h, i) => {
+                    const isToday = state.today && h.day === state.today.day;
+                    const rowOpens = (isToday && todayOverride?.opens) ? todayOverride.opens : h.opens;
+                    const rowCloses = (isToday && todayOverride?.closes) ? todayOverride.closes : h.closes;
+                    return (
+                      <div key={i} className={s.hoursRow}>
+                        <dt className={isToday ? s.hoursToday : ''}>{h.day}</dt>
+                        <dd className={isToday ? s.hoursToday : ''}>{rowOpens} – {rowCloses}</dd>
+                      </div>
+                    );
+                  })}
+                </dl>
+
+                {SPECIAL_NOTICE ? <p className={s.specialNote} role="status">{SPECIAL_NOTICE}</p> : null}
+              </div>
             </div>
 
-            <div className={s.hoursBody}>
-              <dl id={hoursListId} className={s.hoursList} aria-label="Darba laiks">
-                {baseHours.map((h, i) => {
-                  const isToday = state.today && h.day === state.today.day;
-                  const rowOpens = (isToday && todayOverride?.opens) ? todayOverride.opens : h.opens;
-                  const rowCloses = (isToday && todayOverride?.closes) ? todayOverride.closes : h.closes;
-                  return (
-                    <div key={i} className={s.hoursRow}>
-                      <dt className={isToday ? s.hoursToday : ''}>{h.day}</dt>
-                      <dd className={isToday ? s.hoursToday : ''}>{rowOpens} – {rowCloses}</dd>
-                    </div>
-                  );
-                })}
-              </dl>
+            {/* LEFT CONTENT */}
+            <div className={s.colLeft}>
+              <h3 className={s.title}>{activeLoc.label}</h3>
 
-              {SPECIAL_NOTICE ? <p className={s.specialNote} role="status">{SPECIAL_NOTICE}</p> : null}
+              {activeLoc.address && (
+                <>
+                  <p className={s.address}>{activeLoc.address}</p>
+                  <p className={s.addrLinks}>
+                    <a className={s.linkAccent} href={mapsUrl} target="_blank" rel="noopener">Skatīt Google Maps</a>
+                    <span className={s.dot} aria-hidden>•</span>
+                    <a className={s.linkAccent} href={dirUrl} target="_blank" rel="noopener">Maršruti</a>
+                  </p>
+                </>
+              )}
+
+              {activeLoc.tel && (
+                <>
+                  <p className={s.metaLabel}>Tel:</p>
+                  <p className={s.phoneWrap}>
+                    <span className={s.phoneText}>{activeLoc.tel}</span>
+                  </p>
+                </>
+              )}
+
+              {activeLoc.email && (
+                <>
+                  <p className={s.metaLabel}>email:</p>
+                  <p className={s.emailWrap}>
+                    <a className={s.emailBig} href={`mailto:${activeLoc.email}`}>
+                      {activeLoc.email}
+                    </a>
+                  </p>
+                </>
+              )}
             </div>
-          </div>
-
-          {/* LEFT CONTENT */}
-          <div className={s.colLeft}>
-            <h3 className={s.title}>{activeLoc.label}</h3>
-
-            {activeLoc.address && (
-              <>
-                <p className={s.address}>{activeLoc.address}</p>
-                <p className={s.addrLinks}>
-                  <a className={s.linkAccent} href={mapsUrl} target="_blank" rel="noopener">Skatīt Google Maps</a>
-                  <span className={s.dot} aria-hidden>•</span>
-                  <a className={s.linkAccent} href={dirUrl} target="_blank" rel="noopener">Maršruti</a>
-                </p>
-              </>
-            )}
-
-            {activeLoc.tel && (
-              <>
-                <p className={s.metaLabel}>Tel:</p>
-                <p className={s.phoneWrap}>
-                  <span className={s.phoneText}>{activeLoc.tel}</span>
-                </p>
-              </>
-            )}
-
-            {activeLoc.email && (
-              <>
-                <p className={s.metaLabel}>email:</p>
-                <p className={s.emailWrap}>
-                  <a className={s.emailBig} href={`mailto:${activeLoc.email}`}>
-                    {activeLoc.email}
-                  </a>
-                </p>
-              </>
-            )}
           </div>
         </div>
 
-        {/* Bottom actions */}
+        {/* Bottom actions: OUTSIDE the width wrapper, sticky to bottom */}
         <div className={s.actions}>
           {activeLoc.tel && (
             <Button
