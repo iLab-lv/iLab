@@ -170,13 +170,13 @@ export default function TelefonuRemontsPage() {
                 title: 'Displeja (ekrāna) maiņa',
                 text: 'plaisas, tumši plankumi, nereaģē skāriens.',
                 icon: LuSmartphone,
-                href: '/telefonu-remonts/ekrana-mainja',
+                href: '/telefonu-remonts/ekrana-maina',
               },
               {
                 title: 'Akumulatora maiņa',
                 text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
                 icon: LuBatteryCharging,
-                href: '/telefonu-remonts/akumulatora-mainja',
+                href: '/telefonu-remonts/baterijas-maina',
               },
               {
                 title: 'Uzlādes ligzda',

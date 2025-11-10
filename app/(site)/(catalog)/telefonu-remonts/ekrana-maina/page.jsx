@@ -104,7 +104,7 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp" // swap to a dedicated service image if you have one
+        image="/images/categories/displeja_maina.webp" // swap to a dedicated service image if you have one
         alt="Telefonu ekrāna (displeja) maiņa Rīgā"
         focal="right"
         className="service"

@@ -108,7 +108,7 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/services/iphone_baterijas_maina.webp"
+        image="/images/categories/baterijas_maina.webp"
         alt="iPhone baterijas maiņa Rīgā"
         focal="right"
         className="service"

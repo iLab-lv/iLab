@@ -106,7 +106,7 @@ export default function IphoneDisplejaMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/services/iphone_displeja_maina.webp"
+        image="/images/categories/displeja_maina.webp"
         alt="iPhone displeja maiņa Rīgā"
         focal="right"
         className="service"

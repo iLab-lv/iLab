@@ -259,7 +259,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     },
 
     // ---- Telefonu remonts (NEW) ----
-    'telefonu-remonts/ekrana-mainja': {
+    'telefonu-remonts/ekrana-maina': {
       seo: {
         title: 'Telefonu ekrāna (displeja) maiņa Rīgā | iLab',
         metaDescription:
@@ -270,7 +270,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Novēršam plaisas, tumšus plankumus un skāriena problēmas. Strādājam ātri un droši, izmantojot kvalitatīvas detaļas un sniedzot 90 dienu garantiju.',
     },
 
-    'telefonu-remonts/akumulatora-mainja': {
+    'telefonu-remonts/baterijas-maina': {
       seo: {
         title: 'Telefonu akumulatora maiņa Rīgā | iLab',
         metaDescription:

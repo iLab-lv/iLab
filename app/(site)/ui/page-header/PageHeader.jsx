@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import categories from '@/data/categories';
-import categoryContent from '@/data/categoryContent';
+import contentRegistry from '@/data/contentRegistry';
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
 
 import ScrollCta from '@components/button/ScrollCta';
@@ -28,14 +28,16 @@ function getCategory(slug) {
 }
 function getBrand(cat, brandSlug) {
   if (!cat || !brandSlug || !Array.isArray(cat.brands)) return null;
-  return cat.brands.find((b) => b.slug === brandSlug) || null;
+  // your brand objects use "brandSlug"
+  return cat.brands.find((b) => (b.brandSlug || b.slug) === brandSlug) || null;
 }
 
 /**
  * PageHeader
- * - Builds breadcrumbs/title from URL; allows overrides via props.
- * - NO automatic scroll CTA on device pages anymore.
- *   Pages must pass `scrollCta={{ label, targetId }}` or provide it via content registries.
+ * - Single source of truth for service pages:
+ *   - If route is "/<category>/<service>" AND that key exists in contentRegistry.services,
+ *     we use its h1/lead and add a 3rd breadcrumb.
+ * - Hubs, brand pages, and device pages keep your existing behavior.
  */
 export default function PageHeader({
   title,
@@ -53,87 +55,107 @@ export default function PageHeader({
     crumbs,
     computedTitle,
     computedImage,
-    resolvedHero, // { h1?, lead?, scrollCta? } from content registries (optional)
+    resolvedHero, // { h1?, lead?, scrollCta? }
   } = useMemo(() => {
-    const parts = pathname.split('/').filter(Boolean); // e.g. ['iphone-remonts','iphone-14'] OR ['telefonu-remonts','apple','iphone-14']
+    const parts = pathname.split('/').filter(Boolean); // e.g. ['telefonu-remonts','ekrana-mainja'] or ['telefonu-remonts','samsung','galaxy-s21']
     const [p0, p1, p2] = parts;
 
-    // treat standard catalog slugs as category/brand[/device] when present
-    const categorySlug = p0;
-    const brandSlug = p1;
-    const deviceSlug = p2;
+    const categorySlug = p0 || null;
+    const secondSeg = p1 || null;
+    const thirdSeg = p2 || null;
 
-    // device-page detection:
-    // - iPhone device: /iphone-remonts/[device] (2 segments)
-    // - generic device: /<category>/<brand>/<device> (3+ segments)
-    const isIphoneDevice = p0 === 'iphone-remonts' && parts.length === 2;
+    // --- unified service detection: only treat as service if registry contains it
+    const serviceKey = categorySlug && secondSeg && parts.length === 2 ? `${categorySlug}/${secondSeg}` : null;
+    const serviceEntry = serviceKey ? contentRegistry?.services?.[serviceKey] : null;
+    const isServicePage = Boolean(serviceEntry);
+
+    // device-page detection (iPhone 2-seg device pages remain devices unless a service exists)
+    const isIphoneDevice = p0 === 'iphone-remonts' && parts.length === 2 && !isServicePage;
     const isGenericDevice = parts.length >= 3;
     const isDevicePage = isIphoneDevice || isGenericDevice;
 
-    // --- base labels via categories (for breadcrumbs & fallback title)
+    // --- base labels via categories (breadcrumbs & fallbacks)
     const cat = getCategory(categorySlug);
-    const catLabel = cat?.label || titleize(categorySlug);
-    const brand = getBrand(cat, brandSlug);
-    const brandLabel = brand?.label || (brandSlug ? titleize(brandSlug) : null);
-    const deviceLabel = isIphoneDevice ? titleize(p1) : (deviceSlug ? titleize(deviceSlug) : null);
+    const catLabel =
+      categorySlug
+        ? (cat?.name || cat?.label || titleize(categorySlug))
+        : '';
 
-    // Breadcrumbs
+    const brand = getBrand(cat, secondSeg);
+    const brandLabel = brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
+    const deviceLabel = thirdSeg ? titleize(thirdSeg) : (isIphoneDevice ? titleize(secondSeg) : null);
+
+    // ---------------- Breadcrumbs ----------------
     const c = [{ label: 'Sākums', href: '/' }];
+
     if (categorySlug) c.push({ label: catLabel, href: `/${categorySlug}` });
-    if (isGenericDevice && brandSlug) c.push({ label: brandLabel, href: `/${categorySlug}/${brandSlug}` });
-    if (isDevicePage && deviceLabel) {
+
+    if (isDevicePage && secondSeg) {
+      // brand level for generic devices
+      if (isGenericDevice) c.push({ label: brandLabel, href: `/${categorySlug}/${secondSeg}` });
+      // device itself
       const devicePath = isIphoneDevice
-        ? `/${p0}/${p1}`
-        : `/${categorySlug}/${brandSlug}/${deviceSlug}`;
-      c.push({ label: deviceLabel, href: devicePath });
+        ? `/${categorySlug}/${secondSeg}`
+        : `/${categorySlug}/${secondSeg}/${thirdSeg}`;
+      if (deviceLabel) c.push({ label: deviceLabel, href: devicePath });
+    } else if (isServicePage) {
+      // service breadcrumb
+      c.push({
+        label: serviceEntry.crumb || serviceEntry.h1 || titleize(secondSeg),
+        href: `/${serviceKey}`,
+      });
     }
 
-    // Default title from URL
+    // ---------------- Title ----------------
     let t = catLabel || '';
-    if (!isDevicePage && brandLabel) t = `${brandLabel} ${catLabel?.toLowerCase?.() || ''}`.trim();
+
     if (isDevicePage && deviceLabel) {
-      t = `${(brandLabel && !isIphoneDevice ? brandLabel + ' ' : '')}${deviceLabel} remonts`.trim();
+      t = `${brandLabel ? brandLabel + ' ' : ''}${deviceLabel} remonts`.trim();
+    } else if (isServicePage && serviceEntry?.h1) {
+      t = serviceEntry.h1;
+    } else if (!isDevicePage && brandLabel && !isServicePage) {
+      t = `${brandLabel} ${catLabel?.toLowerCase?.() || ''}`.trim();
     }
 
-    // Image (optional)
-    const src = image?.src || imageSrc || null;
-    const alt = image?.alt || imageAlt || t || '';
-
-    // --- resolve hero defaults from content registries (optional)
+    // ---------------- Hero defaults ----------------
     let heroFromContent = null;
 
-    // iPhone hub at root
-    if (parts.length === 1 && p0 === 'iphone-remonts') {
-      const bc = getBrandContent('apple', BRAND_CATEGORY.PHONES);
-      heroFromContent = bc?.hero || null;
-      if (bc?.hero?.h1) t = bc.hero.h1;
+    // Hubs (category root)
+    if (!secondSeg && categorySlug) {
+      const hub = contentRegistry?.categories?.[categorySlug]?.hero || null;
+      heroFromContent = hub;
+      if (hub?.h1) t = hub.h1;
     }
 
-    // Telefonu remonts hub
-    if (parts.length === 1 && p0 === 'telefonu-remonts') {
-      heroFromContent = categoryContent?.['telefonu-remonts']?.hero || null;
-      if (heroFromContent?.h1) t = heroFromContent.h1;
+    // Brand pages (phones/tablets) — keep existing behavior
+    if (!isDevicePage && secondSeg && !isServicePage) {
+      if (categorySlug === 'telefonu-remonts') {
+        const bc = getBrandContent(secondSeg, BRAND_CATEGORY.PHONES);
+        heroFromContent = bc?.hero || heroFromContent;
+        if (bc?.hero?.h1) t = bc.hero.h1;
+      } else if (categorySlug === 'plansetdatoru-remonts') {
+        const bc = getBrandContent(secondSeg, BRAND_CATEGORY.TABLETS);
+        heroFromContent = bc?.hero || heroFromContent;
+        if (bc?.hero?.h1) t = bc.hero.h1;
+      }
     }
 
-    // Planšetdatoru remonts hub
-    if (parts.length === 1 && p0 === 'plansetdatoru-remonts') {
-      heroFromContent = categoryContent?.['plansetdatoru-remonts']?.hero || null;
-      if (heroFromContent?.h1) t = heroFromContent.h1;
+    // Services (unified for iPhone + Phones + future categories)
+    if (isServicePage && serviceEntry) {
+      heroFromContent = {
+        h1: serviceEntry.h1 || heroFromContent?.h1,
+        lead: serviceEntry.lead ?? heroFromContent?.lead ?? null,
+        // keep category scroll CTA to stay consistent with hubs
+        scrollCta:
+          contentRegistry?.categories?.[categorySlug]?.hero?.scrollCta ??
+          heroFromContent?.scrollCta ??
+          null,
+      };
     }
 
-    // Brand pages (phones)
-    if (!isDevicePage && categorySlug === 'telefonu-remonts' && brandSlug) {
-      const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
-      heroFromContent = bc?.hero || heroFromContent;
-      if (bc?.hero?.h1) t = bc.hero.h1;
-    }
-
-    // Brand pages (tablets)
-    if (!isDevicePage && categorySlug === 'plansetdatoru-remonts' && brandSlug) {
-      const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
-      heroFromContent = bc?.hero || heroFromContent;
-      if (bc?.hero?.h1) t = bc.hero.h1;
-    }
+    // Image (optional) – controlled by page props (DeviceHero handles visuals)
+    const src = image?.src || imageSrc || null;
+    const alt = image?.alt || imageAlt || t || '';
 
     return {
       crumbs: c,
@@ -143,7 +165,7 @@ export default function PageHeader({
     };
   }, [pathname, image, imageAlt, imageSrc]);
 
-  // Final render values (page wins → content registry → nothing)
+  // Final render values (page props win → registry hero → computed)
   const finalTitle = title || resolvedHero?.h1 || computedTitle;
   const finalLead = lead ?? resolvedHero?.lead ?? null;
   const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? null;

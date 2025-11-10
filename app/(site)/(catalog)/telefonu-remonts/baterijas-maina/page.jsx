@@ -6,16 +6,15 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 
+import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPricelist';
+
+import categories from '@/data/categories';
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
 
 import s from '@styles/Catalog.module.scss';
 
-// -------------------------------------------------
-// META
-// -------------------------------------------------
 const ORIGIN = 'https://www.ilab.lv';
 
 export const metadata = {
@@ -25,44 +24,19 @@ export const metadata = {
   alternates: { canonical: '/telefonu-remonts/akumulatora-mainja' },
 };
 
-// -------------------------------------------------
-// FAQ
-// -------------------------------------------------
 const FAQ_ITEMS = [
-  {
-    q: 'Cik ilgi ilgst akumulatora maiņa?',
-    a: 'Parasti 45–90 minūtes atkarībā no modeļa un noslodzes. Populāros modeļus bieži pabeidzam tajā pašā dienā.',
-  },
-  {
-    q: 'Vai mani dati paliks neskarti?',
-    a: 'Jā — akumulatora maiņa neskars jūsu foto, video un lietotnes. Drošībai vienmēr iesakām izveidot dublējumu.',
-  },
-  {
-    q: 'Oriģināls vai OEM akumulators — ar ko atšķiras?',
-    a: 'Oriģināls nodrošina maksimālu stabilitāti un kalpošanas laiku. Augstas kvalitātes OEM ir ekonomiska alternatīva ar ļoti labu ikdienas pieredzi.',
-  },
-  {
-    q: 'Vai pēc maiņas būs nepieciešama kalibrācija?',
-    a: 'Jā — pēc maiņas veicam kalibrāciju un testus (uzlādes/izlādes stabilitāte, temperatūra), lai viss darbotos korekti.',
-  },
-  {
-    q: 'Vai ir garantija?',
-    a: 'Jā — 90 dienu garantija gan detaļai, gan paveiktajam darbam.',
-  },
-  {
-    q: 'Vai telefons saglabā ūdensizturību pēc atvēršanas?',
-    a: 'Montējot izmantojam jaunu blīvējumu, tomēr rūpnīcas ūdensizturības klase pēc remonta netiek garantēta.',
-  },
+  { q: 'Cik ilgi ilgst akumulatora maiņa?', a: 'Parasti 45–90 minūtes atkarībā no modeļa un noslodzes. Populāros modeļus bieži pabeidzam tajā pašā dienā.' },
+  { q: 'Vai mani dati paliks neskarti?', a: 'Jā — akumulatora maiņa neskars jūsu foto, video un lietotnes. Drošībai vienmēr iesakām izveidot dublējumu.' },
+  { q: 'Oriģināls vai OEM akumulators — ar ko atšķiras?', a: 'Oriģināls nodrošina maksimālu stabilitāti un kalpošanas laiku. Augstas kvalitātes OEM ir ekonomiska alternatīva ar ļoti labu ikdienas pieredzi.' },
+  { q: 'Vai pēc maiņas būs nepieciešama kalibrācija?', a: 'Jā — pēc maiņas veicam kalibrāciju un testus (uzlādes/izlādes stabilitāte, temperatūra), lai viss darbotos korekti.' },
+  { q: 'Vai ir garantija?', a: 'Jā — 90 dienu garantija gan detaļai, gan paveiktajam darbam.' },
+  { q: 'Vai telefons saglabā ūdensizturību pēc atvēršanas?', a: 'Montējot izmantojam jaunu blīvējumu, tomēr rūpnīcas ūdensizturības klase pēc remonta netiek garantēta.' },
 ];
 
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
+  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 };
 
 const breadcrumbsLd = {
@@ -87,11 +61,39 @@ const serviceLd = {
     'Telefonu akumulatora maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM baterijas, 90 dienu garantija. Bieži tajā pašā dienā.',
 };
 
+function getPhoneBrandOptions() {
+  const phonesCat = Array.isArray(categories)
+    ? categories.find((c) => c.slug === 'telefonu-remonts')
+    : null;
+
+  const listed = phonesCat?.brands || [];
+  const withDevices = listed.filter((b) =>
+    devices.some(
+      (d) =>
+        (d.category || '').toLowerCase() === 'telefonu-remonts' &&
+        (d.brandSlug || '').toLowerCase() === String(b.brandSlug || b.slug).toLowerCase()
+    )
+  );
+
+  const hasSamsung = withDevices.find((b) => (b.brandSlug || b.slug) === 'samsung');
+  const defaultBrand = hasSamsung
+    ? 'samsung'
+    : (withDevices[0]?.brandSlug || withDevices[0]?.slug || 'samsung');
+
+  const brandOptions = withDevices.map((b) => ({
+    slug: (b.brandSlug || b.slug),
+    name: b.name,
+  }));
+
+  return { brandOptions, defaultBrand };
+}
+
 // -------------------------------------------------
-// PAGE COMPONENT
+// PAGE (server component)
 // -------------------------------------------------
 export default function TelefonuAkumulatoraMainaPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+  const { brandOptions, defaultBrand } = getPhoneBrandOptions();
 
   return (
     <>
@@ -108,7 +110,7 @@ export default function TelefonuAkumulatoraMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp" // swap to a dedicated battery service image if you have one
+        image="/images/categories/baterijas_maina.webp"
         alt="Telefonu akumulatora maiņa Rīgā"
         focal="right"
         className="service"
@@ -139,20 +141,26 @@ export default function TelefonuAkumulatoraMainaPage({ searchParams }) {
         </div>
       </section>
 
-      {/* PRICE LIST (ServicePricelist) */}
-      <ServicePricelist
-        devices={devices}
-        pricing={devicePricing}
-        // brandSlug intentionally omitted for generic phones
-        categorySlug="telefonu-remonts"
-        serviceIds={['battery']} // adjust if your pricing keys differ
-        title="Akumulatora maiņas cenas pēc modeļa"
-        intro="Izvēlies sava tālruņa modeli, lai redzētu akumulatora maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
-        initialLimit={8}
-        allModelsHref="/telefonu-remonts#brand-list"
-        cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-        className={s.section}
-      />
+      {/* BRAND PICKER + PRICELIST (client wrapper) */}
+      <section className={s.section} aria-labelledby="brand-picker-h2">
+        <div className={s.container}>
+          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>Izvēlies zīmolu</h2>
+
+          <BrandPickerPricelist
+            devices={devices}
+            pricing={devicePricing}
+            brandOptions={brandOptions}
+            defaultBrand={defaultBrand}
+            categorySlug="telefonu-remonts"
+            serviceIds={['battery']}
+            title="Akumulatora maiņas cenas pēc modeļa"
+            intro="Izvēlies zīmolu un modeli, lai redzētu akumulatora maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
+            allModelsHref="/telefonu-remonts#brand-list"
+            cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
+            className={s.section}
+          />
+        </div>
+      </section>
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">
