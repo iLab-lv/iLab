@@ -281,7 +281,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Atjaunojam darba laiku un stabilitāti ar kvalitatīvu akumulatoru nomaiņu. Pirms darba veicam bezmaksas diagnostiku un saskaņojam izmaksas.',
     },
 
-    'telefonu-remonts/uzlades-ligzda': {
+    'telefonu-remonts/uzlades-ligzdas-maina': {
       seo: {
         title: 'Telefonu uzlādes ligzdas remonts/maina | iLab',
         metaDescription:
@@ -292,7 +292,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Sakārtojam uzlādi: tīrīšana, oksidācijas novēršana vai ligzdas nomaiņa. Darbu pabeidzam ātri, ar testiem un garantiju.',
     },
 
-    'telefonu-remonts/kamera-remonts': {
+    'telefonu-remonts/kameras-remonts': {
       seo: {
         title: 'Telefonu kameras remonts Rīgā | iLab',
         metaDescription:
@@ -303,7 +303,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Atjaunojam foto un video kvalitāti — sakārtojam fokusēšanos, aizvietojam bojātus moduļus, notīrām netīrumus un veicam pilnu pārbaudi.',
     },
 
-    'telefonu-remonts/skalruni-mikrofons': {
+    'telefonu-remonts/skalruni-mikrofona-remonts': {
       seo: {
         title: 'Telefonu skaļruņu un mikrofona remonts | iLab',
         metaDescription:
@@ -314,7 +314,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         'Salabojam skaņu: tīrīšana vai moduļu nomaiņa, lai sarunas un multimediji atkal skanētu skaidri.',
     },
 
-    'telefonu-remonts/udens-bojajumi': {
+    'telefonu-remonts/udens-bojajumu-remonts': {
       seo: {
         title: 'Telefonu ūdens bojājumi — diagnostika un remonts | iLab',
         metaDescription:

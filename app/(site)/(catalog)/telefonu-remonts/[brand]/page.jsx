@@ -264,12 +264,47 @@ export default function BrandPhonesPage({ params }) {
       <section className={c.section} aria-labelledby="popular-services-h2">
         <div className={c.container}>
           <Services
-            id="brand-services"
-            title="Populārākie remonti"
-            items={POPULAR_REPAIRS}
-            headingLevel={2}
-            variant="list"
-          />
+                      id="brand-services"
+                      title="Populārākie remonti"
+                      items={[
+                        {
+                          title: 'Displeja (ekrāna) maiņa',
+                          text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+                          icon: LuSmartphone,
+                          href: '/telefonu-remonts/ekrana-maina',
+                        },
+                        {
+                          title: 'Akumulatora maiņa',
+                          text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+                          icon: LuBatteryCharging,
+                          href: '/telefonu-remonts/baterijas-maina',
+                        },
+                        {
+                          title: 'Uzlādes ligzda',
+                          text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+                          icon: LuPlugZap,
+                          href: '/telefonu-remonts/uzlades-ligzdas-maina',
+                        },
+                        {
+                          title: 'Kamera',
+                          text: 'miglaini attēli, fokusēšanās problēmas.',
+                          icon: LuCamera,
+                          href: '/telefonu-remonts/kameras-remonts',
+                        },
+                        {
+                          title: 'Skaļruņi/mikrofons',
+                          text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+                          icon: LuVolume2,
+                          href: '/telefonu-remonts/skalruni-mikrofona-remonts',
+                        },
+                        {
+                          title: 'Ūdens bojājumi',
+                          text: 'diagnostika un atjaunošana, ja tas iespējams.',
+                          icon: LuDroplets,
+                          href: '/telefonu-remonts/udens-bojajumu-remonts',
+                        },
+                      ]}
+                    />
         </div>
       </section>
 

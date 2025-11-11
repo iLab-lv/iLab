@@ -182,25 +182,25 @@ export default function TelefonuRemontsPage() {
                 title: 'Uzlādes ligzda',
                 text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
                 icon: LuPlugZap,
-                href: '/telefonu-remonts/uzlades-ligzda',
+                href: '/telefonu-remonts/uzlades-ligzdas-maina',
               },
               {
                 title: 'Kamera',
                 text: 'miglaini attēli, fokusēšanās problēmas.',
                 icon: LuCamera,
-                href: '/telefonu-remonts/kamera-remonts',
+                href: '/telefonu-remonts/kameras-remonts',
               },
               {
                 title: 'Skaļruņi/mikrofons',
                 text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
                 icon: LuVolume2,
-                href: '/telefonu-remonts/skalruni-mikrofons',
+                href: '/telefonu-remonts/skalruni-mikrofona-remonts',
               },
               {
                 title: 'Ūdens bojājumi',
                 text: 'diagnostika un atjaunošana, ja tas iespējams.',
                 icon: LuDroplets,
-                href: '/telefonu-remonts/udens-bojajumi',
+                href: '/telefonu-remonts/udens-bojajumu-remonts',
               },
             ]}
           />

@@ -104,7 +104,7 @@ export default function IphoneKamerasRemontsPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/services/iphone_kameras_remonts.webp" // adjust if your asset path differs
+        image="/images/categories/kameras_remonts.webp" // adjust if your asset path differs
         alt="iPhone kameras remonts Rīgā"
         focal="right"
         className="service"

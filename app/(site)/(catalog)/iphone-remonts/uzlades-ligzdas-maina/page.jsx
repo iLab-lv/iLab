@@ -104,7 +104,7 @@ export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/services/iphone_uzlades_ligzdas_maina.webp" // pielāgo, ja ceļš atšķiras
+        image="/images/categories/uzlades_ligzda_remonts.webp" // pielāgo, ja ceļš atšķiras
         alt="iPhone uzlādes ligzdas maiņa Rīgā"
         focal="right"
         className="service"
