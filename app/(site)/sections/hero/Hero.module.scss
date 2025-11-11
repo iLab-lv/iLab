@@ -11,7 +11,7 @@
 
 /* ===== Hero base ===== */
 .hero {
-  /* defaults (override via style={} on the section) */
+  /* defaults (override via style={} on the section if needed) */
   --hero-image: url('/images/hero.webp');
   --hero-pos-x-d: 50%;
   --hero-pos-y-d: 20%;
@@ -22,9 +22,8 @@
   --hero-media-lift-m: 0px;       /* ↑ translate image UP from bottom, does NOT change hero height */
   --hero-media-maxw-m: 1100px;    /* inline image max-width on mobile */
 
-  /* NEW: sticky bottom UI + buffer (safe defaults; override if needed) */
-  --bottom-ui-h: 48px;            /* height of your sticky bottom bar on mobile */
-  --extra-pad: 12px;              /* small buffer so nothing sits under the bar */
+  /* NEW: sticky bottom UI default height (override per page if different) */
+  --bottom-ui-h: 48px;
 
   /* resolved */
   --hero-pos-x: var(--hero-pos-x-d);
@@ -44,16 +43,18 @@
 
 @media (max-width: t.$bp-md) {
   .hero {
-    /* Use the *small* viewport height and reserve space for sticky bottom UI */
-    min-height: calc(100svh - var(--bottom-ui-h) - var(--extra-pad));
+    /* Shorter hero on mobile: use visible viewport and reserve space for sticky bottom UI */
+    min-height: calc(100svh - var(--bottom-ui-h) - 12px);
+
+    /* keep content clear of fixed mobile header + top safe area */
     padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
+
+    /* keep content clear of sticky bottom UI + bottom safe area */
     padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
+
     align-content: stretch;
 
-    /* tighten vertical rhythm on mobile */
-    gap: t.$space-sm;
-
-    /* ensure offset doesn't push content too far down */
+    /* switch to mobile offset for the text container */
     --hero-offset: var(--hero-offset-m);
   }
 }
@@ -76,13 +77,7 @@
   @include layout.container;
   position: relative;
   z-index: 1;
-
-  /* negative lifts, positive pushes down; clamp on mobile to avoid overflow */
-  margin-top: var(--hero-offset);
-
-  @media (max-width: t.$bp-md) {
-    margin-top: clamp(-12vh, var(--hero-offset), 0vh);
-  }
+  margin-top: var(--hero-offset); /* negative lifts, positive pushes down */
 }
 
 /* ===== Mobile inline image mode ===== */
@@ -92,8 +87,7 @@
 @media (max-width: t.$bp-md) {
   /* When .mobileInline is present:
      - disable background image on mobile
-     - show inline image anchored to the bottom, then lift up via translateY
-     - reserved bottom padding prevents overlap with sticky UI */
+     - show inline image anchored to the bottom, then lift up via translateY */
   .mobileInline.bgGradient { background-image: none; }
 
   .mobileInline .mediaWrap {
@@ -105,11 +99,8 @@
     /* anchor block to bottom of hero without increasing overall height */
     margin-top: auto;
 
-    /* lift image up from bottom WITHOUT changing layout height;
-       clamp the lift so it can't eat the bottom padding area */
-    transform: translateY(
-      max(calc(-1 * var(--hero-media-lift-m)), -20svh)
-    );
+    /* lift image up from bottom WITHOUT changing layout height */
+    transform: translateY(calc(-1 * var(--hero-media-lift-m)));
   }
 
   .mobileInline .media {
@@ -129,13 +120,6 @@
   margin: 0 0 8px;
 
   @media (min-width: t.$bp-lg) { font-size: t.$font-size-h2; }
-
-  /* tighten and scale down on mobile so content fits comfortably */
-  @media (max-width: t.$bp-md) {
-    font-size: clamp(22px, 6vw, t.$font-size-h3);
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
 }
 
 .sub {
@@ -143,15 +127,7 @@
   max-width: 62ch;
   margin: 0 auto 10px;
   text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.35);
-
   .alignStart & { margin-left: 0; margin-right: 0; }
-
-  @media (max-width: t.$bp-md) {
-    max-width: 50ch;
-    margin-bottom: 8px;
-    font-size: clamp(14px, 3.8vw, 16px);
-    line-height: 1.35;
-  }
 }
 
 .rating { margin: 0 0 10px; }
@@ -162,28 +138,11 @@
   border-radius: t.$radius-pill; padding: 6px t.$space-md;
   color: t.$color-text; text-decoration: none; font-size: t.$font-size-p;
   transition: background-color t.$dur-base t.$ease-std, border-color t.$dur-base t.$ease-std;
-
   &:hover { background: t.$accent-tint-weak; border-color: t.$glass-border-2; }
-
-  /* allow wrapping on very narrow screens so it doesn't overflow vertically */
-  @media (max-width: t.$bp-md) {
-    flex-wrap: wrap;
-    row-gap: 2px;
-    font-size: clamp(12px, 3.4vw, 15px);
-    padding: 5px t.$space-sm;
-  }
 }
 
 .star { color: t.$color-accent; font-weight: t.$font-weight-bold; }
 .ratingText { color: t.$color-text; }
 
-@media (max-width: t.$bp-md) {
-  .ratingText { line-height: 1.2; }
-}
-
 /* CTA row now uses shared <Button> (ctaChip); old .linkButton removed */
-.ctaRow {
-  margin-top: 12px; display: inline-flex; gap: t.$space-sm;
-
-  @media (max-width: t.$bp-md) { margin-top: 8px; }
-}
+.ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
