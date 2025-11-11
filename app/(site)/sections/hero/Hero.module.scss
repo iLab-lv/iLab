@@ -43,24 +43,19 @@
 
 @media (max-width: t.$bp-md) {
   .hero {
-    /* Use 100dvh (dynamic viewport) to account for browser address bar changes */
-    /* Subtract header height, bottom UI, and additional spacing */
-    max-height: calc(
-      100dvh 
-      - var(--bottom-ui-h) 
-      - env(safe-area-inset-bottom)
-    );
-    min-height: auto;
+    /* Shorter hero on mobile: use visible viewport and reserve space for sticky bottom UI */
+    min-height: calc(100svh - var(--bottom-ui-h) - 12px);
 
-    /* Reduced padding to fit content better */
-    padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top) + 8px);
-    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom) + 8px);
+    /* keep content clear of fixed mobile header + top safe area */
+    padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
 
-    align-content: center;
-    gap: t.$space-sm;
+    /* keep content clear of sticky bottom UI + bottom safe area */
+    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
+
+    align-content: stretch;
 
     /* switch to mobile offset for the text container */
-    --hero-offset: 0;
+    --hero-offset: var(--hero-offset-m);
   }
 }
 
@@ -125,12 +120,6 @@
   margin: 0 0 8px;
 
   @media (min-width: t.$bp-lg) { font-size: t.$font-size-h2; }
-  
-  @media (max-width: t.$bp-md) { 
-    font-size: t.$font-size-h4;
-    margin: 0 0 4px;
-    line-height: 1.2;
-  }
 }
 
 .sub {
@@ -139,20 +128,9 @@
   margin: 0 auto 10px;
   text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.35);
   .alignStart & { margin-left: 0; margin-right: 0; }
-  
-  @media (max-width: t.$bp-md) { 
-    margin: 0 auto 6px;
-    font-size: t.$font-size-sm;
-  }
 }
 
-.rating { 
-  margin: 0 0 10px; 
-  
-  @media (max-width: t.$bp-md) { 
-    margin: 0 0 6px;
-  }
-}
+.rating { margin: 0 0 10px; }
 
 .ratingBadge {
   @include glass-weak;
@@ -167,12 +145,4 @@
 .ratingText { color: t.$color-text; }
 
 /* CTA row now uses shared <Button> (ctaChip); old .linkButton removed */
-.ctaRow { 
-  margin-top: 12px; 
-  display: inline-flex; 
-  gap: t.$space-sm; 
-  
-  @media (max-width: t.$bp-md) { 
-    margin-top: 8px;
-  }
-}
+.ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
