@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { db } from '@lib/firebaseAdmin';
+import { getDb } from '@lib/firebaseAdmin';
 import { PLACES } from '@data/places';
 
-export const dynamic = 'force-dynamic'; // always read fresh from Firestore
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
+  const db = getDb();                 // <-- lazy init here
   const out = {};
 
   await Promise.all(
@@ -13,13 +14,9 @@ export async function GET() {
         const snap = await db.collection('places').doc(placeId).get();
         const data = snap.data();
         out[key] = data?.latest
-          ? {
-              rating: data.latest.rating,
-              count: data.latest.count,
-              fetchedAt: data.latest.fetchedAt,
-            }
+          ? { rating: data.latest.rating, count: data.latest.count, fetchedAt: data.latest.fetchedAt }
           : null;
-      } catch (e) {
+      } catch {
         out[key] = null;
       }
     })

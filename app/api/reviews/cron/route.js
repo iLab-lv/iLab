@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@lib/firebaseAdmin';
+import { getDb } from '@lib/firebaseAdmin';
 import { PLACES } from '@data/places';
 import { getPlaceBasics } from '@lib/googlePlaces';
 
@@ -14,6 +14,7 @@ export async function GET(req) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const db = getDb();                 // <-- lazy init here
   const nowIso = new Date().toISOString();
   const ops = [];
 
@@ -21,17 +22,8 @@ export async function GET(req) {
     const { name, placeId } = PLACES[key];
     try {
       const { rating, count } = await getPlaceBasics(placeId);
-
       const ref = db.collection('places').doc(placeId);
-      ops.push(
-        ref.set(
-          {
-            name,
-            latest: { rating, count, fetchedAt: nowIso },
-          },
-          { merge: true }
-        )
-      );
+      ops.push(ref.set({ name, latest: { rating, count, fetchedAt: nowIso } }, { merge: true }));
     } catch (err) {
       console.error(`[reviews/cron] Failed for ${name}:`, err?.message || err);
     }
