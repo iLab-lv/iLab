@@ -43,14 +43,22 @@
 
 @media (max-width: t.$bp-md) {
   .hero {
-    /* Shorter hero on mobile: use visible viewport and reserve space for sticky bottom UI */
-    min-height: calc(100svh - var(--bottom-ui-h) - 12px);
+    /* Use 100dvh (dynamic viewport) to account for browser address bar changes */
+    /* Subtract header height, bottom UI, and additional spacing */
+    min-height: calc(
+      100dvh 
+      - #{t.$header-mobile-height}
+      - var(--bottom-ui-h) 
+      - env(safe-area-inset-top) 
+      - env(safe-area-inset-bottom)
+      - 24px /* additional breathing room */
+    );
 
     /* keep content clear of fixed mobile header + top safe area */
     padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
 
-    /* keep content clear of sticky bottom UI + bottom safe area */
-    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
+    /* keep content clear of sticky bottom UI + bottom safe area + extra spacing */
+    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom) + 12px);
 
     align-content: stretch;
 
