@@ -22,6 +22,10 @@
   --hero-media-lift-m: 0px;       /* ↑ translate image UP from bottom, does NOT change hero height */
   --hero-media-maxw-m: 1100px;    /* inline image max-width on mobile */
 
+  /* NEW: sticky bottom UI + buffer (safe defaults; override if needed) */
+  --bottom-ui-h: 48px;            /* height of your sticky bottom bar on mobile */
+  --extra-pad: 12px;              /* small buffer so nothing sits under the bar */
+
   /* resolved */
   --hero-pos-x: var(--hero-pos-x-d);
   --hero-pos-y: var(--hero-pos-y-d);
@@ -40,7 +44,13 @@
 
 @media (max-width: t.$bp-md) {
   .hero {
+    /* Use the *small* viewport height (svh) and reserve space for sticky bottom UI */
+    min-height: calc(100svh - var(--bottom-ui-h) - var(--extra-pad));
     padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
+
+    /* ensure content never hides under the sticky buttons / safe area */
+    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
+
     align-content: stretch;
     --hero-offset: var(--hero-offset-m);
   }
@@ -74,7 +84,8 @@
 @media (max-width: t.$bp-md) {
   /* When .mobileInline is present:
      - disable background image on mobile
-     - show inline image anchored to the bottom, then lift up via translateY */
+     - show inline image anchored to the bottom, then lift up via translateY
+     - reserved bottom padding (above) prevents overlap with sticky UI */
   .mobileInline.bgGradient { background-image: none; }
 
   .mobileInline .mediaWrap {
