@@ -44,14 +44,16 @@
 
 @media (max-width: t.$bp-md) {
   .hero {
-    /* Use the *small* viewport height (svh) and reserve space for sticky bottom UI */
+    /* Use the *small* viewport height and reserve space for sticky bottom UI */
     min-height: calc(100svh - var(--bottom-ui-h) - var(--extra-pad));
     padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
-
-    /* ensure content never hides under the sticky buttons / safe area */
     padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
-
     align-content: stretch;
+
+    /* tighten vertical rhythm on mobile */
+    gap: t.$space-sm;
+
+    /* ensure offset doesn't push content too far down */
     --hero-offset: var(--hero-offset-m);
   }
 }
@@ -74,7 +76,13 @@
   @include layout.container;
   position: relative;
   z-index: 1;
-  margin-top: var(--hero-offset); /* negative lifts, positive pushes down */
+
+  /* negative lifts, positive pushes down; clamp on mobile to avoid overflow */
+  margin-top: var(--hero-offset);
+
+  @media (max-width: t.$bp-md) {
+    margin-top: clamp(-12vh, var(--hero-offset), 0vh);
+  }
 }
 
 /* ===== Mobile inline image mode ===== */
@@ -85,7 +93,7 @@
   /* When .mobileInline is present:
      - disable background image on mobile
      - show inline image anchored to the bottom, then lift up via translateY
-     - reserved bottom padding (above) prevents overlap with sticky UI */
+     - reserved bottom padding prevents overlap with sticky UI */
   .mobileInline.bgGradient { background-image: none; }
 
   .mobileInline .mediaWrap {
@@ -97,8 +105,11 @@
     /* anchor block to bottom of hero without increasing overall height */
     margin-top: auto;
 
-    /* lift image up from bottom WITHOUT changing layout height */
-    transform: translateY(calc(-1 * var(--hero-media-lift-m)));
+    /* lift image up from bottom WITHOUT changing layout height;
+       clamp the lift so it can't eat the bottom padding area */
+    transform: translateY(
+      max(calc(-1 * var(--hero-media-lift-m)), -20svh)
+    );
   }
 
   .mobileInline .media {
@@ -118,6 +129,13 @@
   margin: 0 0 8px;
 
   @media (min-width: t.$bp-lg) { font-size: t.$font-size-h2; }
+
+  /* tighten and scale down on mobile so content fits comfortably */
+  @media (max-width: t.$bp-md) {
+    font-size: clamp(22px, 6vw, t.$font-size-h3);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
 }
 
 .sub {
@@ -125,7 +143,15 @@
   max-width: 62ch;
   margin: 0 auto 10px;
   text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.35);
+
   .alignStart & { margin-left: 0; margin-right: 0; }
+
+  @media (max-width: t.$bp-md) {
+    max-width: 50ch;
+    margin-bottom: 8px;
+    font-size: clamp(14px, 3.8vw, 16px);
+    line-height: 1.35;
+  }
 }
 
 .rating { margin: 0 0 10px; }
@@ -136,11 +162,28 @@
   border-radius: t.$radius-pill; padding: 6px t.$space-md;
   color: t.$color-text; text-decoration: none; font-size: t.$font-size-p;
   transition: background-color t.$dur-base t.$ease-std, border-color t.$dur-base t.$ease-std;
+
   &:hover { background: t.$accent-tint-weak; border-color: t.$glass-border-2; }
+
+  /* allow wrapping on very narrow screens so it doesn't overflow vertically */
+  @media (max-width: t.$bp-md) {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    font-size: clamp(12px, 3.4vw, 15px);
+    padding: 5px t.$space-sm;
+  }
 }
 
 .star { color: t.$color-accent; font-weight: t.$font-weight-bold; }
 .ratingText { color: t.$color-text; }
 
+@media (max-width: t.$bp-md) {
+  .ratingText { line-height: 1.2; }
+}
+
 /* CTA row now uses shared <Button> (ctaChip); old .linkButton removed */
-.ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
+.ctaRow {
+  margin-top: 12px; display: inline-flex; gap: t.$space-sm;
+
+  @media (max-width: t.$bp-md) { margin-top: 8px; }
+}
