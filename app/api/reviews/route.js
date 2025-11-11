@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/firebaseAdmin';
-import { PLACES } from '@/app/data/places';
+import { db } from '@lib/firebaseAdmin';
+import { PLACES } from '@data/places';
 
 export const dynamic = 'force-dynamic'; // always read fresh from Firestore
 

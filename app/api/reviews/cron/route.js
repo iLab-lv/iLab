@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/firebaseAdmin';
-import { PLACES } from '@/app/data/places';
-import { getPlaceBasics } from '@/lib/googlePlaces';
+import { db } from '@lib/firebaseAdmin';
+import { PLACES } from '@data/places';
+import { getPlaceBasics } from '@lib/googlePlaces';
 
 function isAuthorized(headers) {
   const header = headers.get('x-cron-secret');
