@@ -67,7 +67,7 @@ export default function IphoneUdensBojajumuRemontsPage({ searchParams }) {
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">{JSON.stringify(serviceLd)}</Script>
 
       <DeviceHero
-        image="/images/services/iphone_udens_bojajumu_remonts.webp"
+        image="/images/categories/udens_bojajumi.webp"
         alt="iPhone ūdens bojājumu remonts Rīgā"
         focal="right"
         className="service"
@@ -77,10 +77,33 @@ export default function IphoneUdensBojajumuRemontsPage({ searchParams }) {
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
           <h1 id="intro-h2" className={s.h1}>iPhone ūdens bojājumu remonts Rīgā</h1>
+
           <p className={s.paragraph}>
-            Mitrums var izraisīt <strong>oksidāciju un īssavienojumus</strong>, kas laika gaitā pastiprinās.
-            Jo ātrāk ierīce nonāk servisā, jo <strong>lielākas ir atjaunošanas iespējas</strong>.
+            <strong>Samirka iPhone — kafija, jūra, baseins vai vanna?</strong> Mūsu sertificētie meistari ar
+            ļoti augstu izdošanās procentu atjauno ūdens bojātus iPhone. Ja ierīci atnes tajā pašā dienā,
+            <strong> vairāk nekā 90% gadījumu</strong> to iespējams salabot.
           </p>
+
+          <p className={s.paragraph}>
+            Kāpēc šķidrums ir bīstams? Uz sistēmplates veidojas <strong>korozija un oksidācija</strong> —
+            pazeminās pretestība, rodas īssavienojumi un bojājas lodējumi. <strong>Sāls un hlors</strong> šo
+            procesu strauji paātrina (jūras ūdens, baseins), savukārt saldūdens parasti ir saudzīgāks.
+            Jo ātrāk ierīci izslēdz un nogādā servisā, jo <strong>lielāka iespēja saglabāt detaļas</strong>.
+          </p>
+
+          <p className={s.paragraph}>
+            Ja ierīce samirka, rīkojieties nekavējoties — tas tieši ietekmē remonta izmaksas un gala rezultātu.
+          </p>
+
+          <ul>
+            <li><strong>Neieslēdziet</strong> un <strong>neuzlādējiet</strong> ierīci.</li>
+            <li>Noslaukiet sausu; <em>rīsus neizmantojiet</em> — tie neaptur oksidāciju.</li>
+            <li>
+              Atnesiet pēc iespējas ātrāk:
+              <a href="#cenas"> skatīt cenas</a> vai <a href="/pieraksties">pieteikt remontu</a>.
+            </li>
+          </ul>
+
           {selectedModel && (
             <p className={s.note}>
               Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
@@ -90,20 +113,22 @@ export default function IphoneUdensBojajumuRemontsPage({ searchParams }) {
         </div>
       </section>
 
-      {/* PRICE LIST (uses exact pricing id from devicePricing) */}
-      <ServicePricelist
-        devices={devices}
-        pricing={devicePricing}
-        brandSlug="apple"
-        categorySlug="telefonu-remonts"
-        serviceIds={['water-damage-clean']} // ← matches your devicePricing
-        title="Ūdens bojājumu remonta cenas pēc modeļa"
-        intro="Izvēlies savu iPhone modeli, lai redzētu ūdens bojājumu remonta izmaksas. Remonts atkarīgs no bojājuma apmēra un nepieciešamajām detaļām."
-        initialLimit={8}
-        allModelsHref="/iphone-remonts#iphone-modeli"
-        cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-        className={s.section}
-      />
+      {/* PRICE LIST */}
+      <section id="cenas" className={s.section} aria-labelledby="prices-h2">
+        <ServicePricelist
+          devices={devices}
+          pricing={devicePricing}
+          brandSlug="apple"
+          categorySlug="telefonu-remonts"
+          serviceIds={['water-damage-clean']}
+          title="Ūdens bojājumu remonta cenas pēc modeļa"
+          intro="Izvēlies savu iPhone modeli, lai redzētu ūdens bojājumu remonta izmaksas. Remonts atkarīgs no bojājuma apmēra un nepieciešamajām detaļām."
+          initialLimit={8}
+          allModelsHref="/iphone-remonts#iphone-modeli"
+          cta={{ label: 'Pieteikties remontam', href: '/pieraksties' }}
+          className={s.section}
+        />
+      </section>
 
       <section className={s.section} aria-labelledby="process-h2">
         <div className={s.container}>

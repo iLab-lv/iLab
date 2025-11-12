@@ -358,6 +358,17 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       lead:
         'Mūsdienīgs remonta serviss Rīgā — tālruņi, planšetdatori, portatīvie datori un Dyson. Sertificēti meistari, ātra diagnostika un 90 dienu garantija.',
     },
+
+    pieraksties: {
+      seo: {
+        title: 'Pieraksties remontam | iLab',
+        metaDescription:
+          'Aizpildi pieteikumu telefonam, planšetdatoram, datoram vai Dyson. Sazināsimies, saskaņosim izmaksas un laiku. Ātra diagnostika un 90 dienu garantija.',
+      },
+      h1: 'Pieraksties remontam',
+      lead:
+        'Aizpildi formu ar savu ierīci un problēmu — mūsu meistars sazināsies, saskaņos izmaksas un remonta laiku.',
+    },
     // ...add more info pages as needed
   },
 };

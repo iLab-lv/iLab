@@ -72,7 +72,7 @@ export default function IphoneAudioRemontsPage({ searchParams }) {
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">{JSON.stringify(serviceLd)}</Script>
 
       <DeviceHero
-        image="/images/services/iphone_skalruni_mikrofona_remonts.webp"
+        image="/images/categories/mikrofona_remonts.webp"
         alt="iPhone skaļruņu un mikrofona remonts Rīgā"
         focal="right"
         className="service"

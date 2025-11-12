@@ -17,24 +17,26 @@
   }
 }
 
-.field, .fieldset {
+.field,
+.fieldset {
   display: grid;
   gap: $space-sm;
 
-  label, legend {
+  label,
+  legend {
     color: $color-text;
     font-weight: $font-weight-semibold;
     font-size: .95rem;
   }
 
-  input[type="text"],
-  input[type="tel"],
-  input[type="date"],
+  input[type='text'],
+  input[type='tel'],
+  input[type='date'],
   textarea {
     width: 100%;
     color: $color-text;
     background:
-      linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)),
       $color-surface-2;
     border: 1px solid $glass-border;
     border-radius: $radius-md;
@@ -80,26 +82,26 @@
   align-items: center;
   gap: 10px;
   background:
-    linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)),
     $color-surface-1;
   border: 1px solid $glass-border;
   border-radius: $radius-md;
   padding: 12px 14px;
   cursor: pointer;
 
-  input[type="radio"] { transform: translateY(1px); }
+  input[type='radio'] {
+    transform: translateY(1px);
+  }
 
   span {
     color: $color-text;
     font-weight: $font-weight-medium;
-
-    .muted { color: $color-text-2; font-weight: $font-weight-regular; }
   }
+}
 
-  &:focus-within {
-    outline: $focus-ring-width solid $focus-ring-color;
-    outline-offset: $focus-ring-offset;
-  }
+.muted {
+  color: $color-text-2;
+  font-weight: $font-weight-regular;
 }
 
 .actions {
