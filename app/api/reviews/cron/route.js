@@ -1,7 +1,7 @@
 // app/api/reviews/cron/route.js
 import { NextResponse } from 'next/server';
 import { db } from 'lib/firebaseAdmin';
-import { PLACES } from '@app/data/places';
+import { PLACES } from '@data/places';
 import { getPlaceBasics } from 'lib/googlePlaces';
 
 function getCronSecretFromRequest(req) {
