@@ -19,23 +19,44 @@ export async function POST(req) {
       : Object.fromEntries((await req.formData()).entries());
 
     const {
-      name, phone, device, date, fault, location, time,
+      name,
+      phone,
+      device,
+      date,
+      fault,
+      location,
+      time,
       website, // honeypot
     } = body;
 
-    // Honeypot → silently accept to confuse bots
+    // Honeypot → silently “success” (no email)
     if (website) return new Response(null, { status: 204 });
 
-    const required = ['name','phone','device','date','fault','location','time'];
+    const required = ['name', 'phone', 'device', 'date', 'fault', 'location', 'time'];
     const missing = required.filter((k) => !body[k]);
     if (missing.length) {
-      return NextResponse.json({ ok: false, error: `Missing: ${missing.join(', ')}` }, { status: 400 });
+      return NextResponse.json(
+        { ok: false, error: `Missing: ${missing.join(', ')}` },
+        { status: 400 }
+      );
     }
 
     const from = process.env.BOOKING_FROM;
     const to = toForLocation(location);
-    if (!from) return NextResponse.json({ ok: false, error: 'BOOKING_FROM is not set' }, { status: 500 });
-    if (!to)   return NextResponse.json({ ok: false, error: 'Recipient is not configured' }, { status: 500 });
+    if (!from) {
+      console.error('BOOKING_FROM env var is missing');
+      return NextResponse.json(
+        { ok: false, error: 'BOOKING_FROM is not set' },
+        { status: 500 }
+      );
+    }
+    if (!to) {
+      console.error('Recipient email not configured for location:', location);
+      return NextResponse.json(
+        { ok: false, error: 'Recipient is not configured' },
+        { status: 500 }
+      );
+    }
 
     const subject = `Jauns pieraksts (${location}) — ${device}`;
     const text = [
@@ -67,7 +88,9 @@ export async function POST(req) {
     `;
 
     const replyTo = process.env.BOOKING_REPLY_TO;
-    await resend.emails.send({
+
+    // IMPORTANT: check for errors from Resend
+    const { data, error } = await resend.emails.send({
       from,
       to,
       ...(replyTo ? { replyTo } : {}),
@@ -76,10 +99,24 @@ export async function POST(req) {
       html,
     });
 
+    if (error) {
+      console.error('Resend error:', error);
+      return NextResponse.json(
+        { ok: false, error: 'Email send failed (Resend)' },
+        { status: 500 }
+      );
+    }
+
+    // Optionally log id
+    console.log('Booking email sent, id:', data?.id);
+
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ ok: false, error: 'Email send failed' }, { status: 500 });
+    console.error('Booking API unexpected error:', err);
+    return NextResponse.json(
+      { ok: false, error: 'Email send failed (server)' },
+      { status: 500 }
+    );
   }
 }
 
