@@ -110,6 +110,8 @@ export async function POST(req) {
     // Optionally log id
     console.log('Booking email sent, id:', data?.id);
 
+    console.log('Sending booking email to:', to);
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('Booking API unexpected error:', err);
