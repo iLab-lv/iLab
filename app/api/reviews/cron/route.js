@@ -1,34 +1,60 @@
+// app/api/reviews/cron/route.js
 import { NextResponse } from 'next/server';
-import { getDb } from '@lib/firebaseAdmin';
-import { PLACES } from '@data/places';
-import { getPlaceBasics } from '@lib/googlePlaces';
+import { db } from 'lib/firebaseAdmin';
+import { PLACES } from '@app/data/places';
+import { getPlaceBasics } from 'lib/googlePlaces';
 
-function isAuthorized(headers) {
-  const header = headers.get('x-cron-secret');
-  const expected = process.env.CRON_SECRET;
-  return Boolean(expected && header && header === expected);
+function getCronSecretFromRequest(req) {
+  // 1) Custom header we used for manual curl calls
+  const xHeader = req.headers.get('x-cron-secret');
+
+  // 2) Vercel Cron header: Authorization: Bearer <secret>
+  const auth = req.headers.get('authorization');
+  let bearer = null;
+  if (auth && auth.toLowerCase().startsWith('bearer ')) {
+    bearer = auth.slice(7).trim();
+  }
+
+  return xHeader || bearer || null;
 }
 
 export async function GET(req) {
-  if (!isAuthorized(req.headers)) {
+  const provided = getCronSecretFromRequest(req);
+
+  if (!process.env.CRON_SECRET || provided !== process.env.CRON_SECRET) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const db = getDb();                 // <-- lazy init here
-  const nowIso = new Date().toISOString();
-  const ops = [];
+  try {
+    const nowIso = new Date().toISOString();
 
-  for (const key of Object.keys(PLACES)) {
-    const { name, placeId } = PLACES[key];
-    try {
-      const { rating, count } = await getPlaceBasics(placeId);
-      const ref = db.collection('places').doc(placeId);
-      ops.push(ref.set({ name, latest: { rating, count, fetchedAt: nowIso } }, { merge: true }));
-    } catch (err) {
-      console.error(`[reviews/cron] Failed for ${name}:`, err?.message || err);
-    }
+    await Promise.all(
+      Object.values(PLACES).map(async ({ name, placeId }) => {
+        const { rating, count } = await getPlaceBasics(placeId);
+
+        await db
+          .collection('places')
+          .doc(placeId)
+          .set(
+            {
+              name,
+              latest: {
+                rating,
+                count,
+                fetchedAt: nowIso,
+              },
+            },
+            { merge: true }
+          );
+      })
+    );
+
+    return NextResponse.json({ ok: true, at: nowIso });
+  } catch (err) {
+    console.error('reviews cron error', err);
+    return NextResponse.json(
+      { error: 'Internal error', message: String(err) },
+      { status: 500 }
+    );
   }
-
-  await Promise.all(ops);
-  return NextResponse.json({ ok: true, at: nowIso });
 }
