@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Button from '@components/button/Button';
+import GoogleReviewsBadge from '../reviews/GoogleReviewsBadge';
 import s from './Hero.module.scss';
 
 export default function Hero({
   id = 'hero',
   title,
   subtitle,
-  rating,
+  // rating,  // no longer used; badge handles its own data
   cta,
   align = 'center',
   background = 'gradient',
@@ -38,7 +39,9 @@ export default function Hero({
     align === 'start' ? s.alignStart : s.alignCenter,
     background === 'gradient' ? s.bgGradient : null,
     imageInlineMobile ? s.mobileInline : null,
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const styleVars = {
     '--hero-image': `url('${imageSrc}')`,
@@ -50,17 +53,23 @@ export default function Hero({
 
     ...(offsetDesktop != null && {
       '--hero-offset-d':
-        typeof offsetDesktop === 'number' ? `${offsetDesktop}vh` : String(offsetDesktop),
+        typeof offsetDesktop === 'number'
+          ? `${offsetDesktop}vh`
+          : String(offsetDesktop),
     }),
     ...(offsetMobile != null && {
       '--hero-offset-m':
-        typeof offsetMobile === 'number' ? `${offsetMobile}vh` : String(offsetMobile),
+        typeof offsetMobile === 'number'
+          ? `${offsetMobile}vh`
+          : String(offsetMobile),
     }),
 
     // mobile inline image tuning
     ...(imageLiftMobile != null && {
       '--hero-media-lift-m':
-        typeof imageLiftMobile === 'number' ? `${imageLiftMobile}px` : String(imageLiftMobile),
+        typeof imageLiftMobile === 'number'
+          ? `${imageLiftMobile}px`
+          : String(imageLiftMobile),
     }),
     ...(imageMaxWidthMobile && {
       '--hero-media-maxw-m':
@@ -71,33 +80,29 @@ export default function Hero({
   };
 
   // Default, SEO-oriented alt:
-  // - If title exists, use it + brand/location context.
-  // - Else, use a general, service-focused line.
   const computedAlt =
     imageAlt ||
     (title
       ? `${title} — iLab serviss Rīgā`
       : 'iLab — mobilo telefonu, planšetdatoru un datoru remonts Rīgā');
 
-  const ratingAria =
-    rating?.ariaLabel ??
-    (rating ? `${rating.sourceLabel} vērtējums ${rating.value} no 5, ${rating.count} atsauksmes` : undefined);
-
   return (
-    <section id={id} className={sectionClass} aria-labelledby={`${id}-title`} style={styleVars}>
+    <section
+      id={id}
+      className={sectionClass}
+      aria-labelledby={`${id}-title`}
+      style={styleVars}
+    >
       <div className={s.container}>
-        {rating && (
-          <div className={s.rating}>
-            <a href={rating.href} className={s.ratingBadge} aria-label={ratingAria}>
-              <span className={s.star} aria-hidden>★</span>
-              <span className={s.ratingText}>
-                {rating.value}/5 · {rating.count} atsauksmes · {rating.sourceLabel}
-              </span>
-            </a>
-          </div>
-        )}
+        <div className={s.rating}>
+          <GoogleReviewsBadge />
+        </div>
 
-        {title && <h1 id={`${id}-title`} className={s.heading}>{title}</h1>}
+        {title && (
+          <h1 id={`${id}-title`} className={s.heading}>
+            {title}
+          </h1>
+        )}
         {subtitle && <p className={s.sub}>{subtitle}</p>}
 
         {cta && (

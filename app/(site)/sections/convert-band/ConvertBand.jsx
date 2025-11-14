@@ -5,7 +5,7 @@ import Button from '@components/button/Button';
 export default function ConvertBand({
   id = 'convert',
   title = 'Vajadzīga palīdzība?',
-  primary = { label: 'Sazināties ar meistaru', href: '/contact', variant: 'secondary' },
+  primary = { label: 'Sazināties ar meistaru', href: '/kontakti', variant: 'secondary' },
   secondary = { label: 'Pieraksties uz remontu', href: '/pieraksties', variant: 'primary' },
 }) {
   return (

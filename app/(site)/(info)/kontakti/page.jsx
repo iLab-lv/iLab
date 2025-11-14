@@ -3,7 +3,6 @@ import React from 'react';
 import Script from 'next/script';
 
 import Locations from '@sections/locations/Locations';
-import ConvertBand from '@sections/convert-band/ConvertBand';
 import s from '@styles/Catalog.module.scss';
 
 const ORIGIN = 'https://www.ilab.lv';
@@ -121,10 +120,6 @@ export default function ContactsPage() {
         <Locations />
       </section>
 
-      {/* Optional CTA */}
-      <section className={s.section}>
-        <ConvertBand />
-      </section>
     </>
   );
 }

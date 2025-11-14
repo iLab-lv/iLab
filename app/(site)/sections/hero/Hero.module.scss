@@ -1,14 +1,6 @@
 @use '@/styles/_tokens.scss' as t;
 @use '@/styles/_layout.scss' as layout;
 
-/* glass helper for badges */
-@mixin glass-weak {
-  background: t.$glass-bg-weak;
-  border: t.$border-thin solid t.$glass-border;
-  backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
-  -webkit-backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
-}
-
 /* ===== Hero base ===== */
 .hero {
   /* defaults (override via style={} on the section if needed) */
@@ -69,8 +61,12 @@
 }
 
 /* alignment helpers */
-.alignCenter .container { text-align: center; }
-.alignStart  .container { text-align: left; }
+.alignCenter .container {
+  text-align: center;
+}
+.alignStart .container {
+  text-align: left;
+}
 
 /* text container — physical vertical move */
 .container {
@@ -82,13 +78,17 @@
 
 /* ===== Mobile inline image mode ===== */
 /* off by default */
-.mediaWrap { display: none; }
+.mediaWrap {
+  display: none;
+}
 
 @media (max-width: t.$bp-md) {
   /* When .mobileInline is present:
      - disable background image on mobile
      - show inline image anchored to the bottom, then lift up via translateY */
-  .mobileInline.bgGradient { background-image: none; }
+  .mobileInline.bgGradient {
+    background-image: none;
+  }
 
   .mobileInline .mediaWrap {
     @include layout.container;
@@ -119,30 +119,31 @@
   letter-spacing: -0.01em;
   margin: 0 0 8px;
 
-  @media (min-width: t.$bp-lg) { font-size: t.$font-size-h2; }
+  @media (min-width: t.$bp-lg) {
+    font-size: t.$font-size-h2;
+  }
 }
 
 .sub {
   color: t.$color-text-2;
   max-width: 62ch;
   margin: 0 auto 10px;
-  text-shadow: 0 1px 1px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.35);
-  .alignStart & { margin-left: 0; margin-right: 0; }
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+
+  .alignStart & {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
-.rating { margin: 0 0 10px; }
-
-.ratingBadge {
-  @include glass-weak;
-  display: inline-flex; align-items: center; gap: t.$space-sm;
-  border-radius: t.$radius-pill; padding: 6px t.$space-md;
-  color: t.$color-text; text-decoration: none; font-size: t.$font-size-p;
-  transition: background-color t.$dur-base t.$ease-std, border-color t.$dur-base t.$ease-std;
-  &:hover { background: t.$accent-tint-weak; border-color: t.$glass-border-2; }
+/* container for the badge */
+.rating {
+  margin: 0 0 10px;
 }
 
-.star { color: t.$color-accent; font-weight: t.$font-weight-bold; }
-.ratingText { color: t.$color-text; }
-
-/* CTA row now uses shared <Button> (ctaChip); old .linkButton removed */
-.ctaRow { margin-top: 12px; display: inline-flex; gap: t.$space-sm; }
+/* CTA row now uses shared <Button> (ctaChip) */
+.ctaRow {
+  margin-top: 12px;
+  display: inline-flex;
+  gap: t.$space-sm;
+}

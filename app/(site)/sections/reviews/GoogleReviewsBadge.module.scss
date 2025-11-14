@@ -1,0 +1,42 @@
+@use '@/styles/_tokens.scss' as t;
+
+/* glass helper for badges */
+@mixin glass-weak {
+  background: t.$glass-bg-weak;
+  border: t.$border-thin solid t.$glass-border;
+  backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
+  -webkit-backdrop-filter: blur(t.$glass-blur) saturate(t.$glass-saturate);
+}
+
+.badge {
+  @include glass-weak;
+
+  display: inline-flex;
+  align-items: center;
+  gap: t.$space-sm;
+
+  border-radius: t.$radius-pill;
+  padding: 6px t.$space-md;
+
+  color: t.$color-text;
+  text-decoration: none;
+  font-size: t.$font-size-p;
+
+  transition:
+    background-color t.$dur-base t.$ease-std,
+    border-color t.$dur-base t.$ease-std;
+
+  &:hover {
+    background: t.$accent-tint-weak;
+    border-color: t.$glass-border-2;
+  }
+}
+
+.star {
+  color: t.$color-accent;
+  font-weight: t.$font-weight-bold;
+}
+
+.text {
+  color: t.$color-text;
+}
