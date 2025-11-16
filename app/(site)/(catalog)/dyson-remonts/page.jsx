@@ -11,12 +11,7 @@ import DeviceHero from '@sections/device-hero/DeviceHero';
 
 import s from '@styles/Catalog.module.scss';
 
-import {
-  LuCog,
-  LuFilter,
-  LuSparkles,
-  LuWrench,
-} from 'react-icons/lu';
+import { LuCog, LuFilter, LuSparkles, LuWrench } from 'react-icons/lu';
 
 const ORIGIN = 'https://www.ilab.lv';
 
@@ -108,11 +103,36 @@ const howToLd = {
   description:
     'Process iLab servisa centros Rīgā: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
   step: [
-    { '@type': 'HowToStep', position: 1, name: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-    { '@type': 'HowToStep', position: 2, name: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-    { '@type': 'HowToStep', position: 3, name: 'Remonts', text: 'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši ražotāja prasībām.' },
-    { '@type': 'HowToStep', position: 4, name: 'Pārbaude', text: 'Pēc remonta testējam sūkšanas jaudu, temperatūru un darbības stabilitāti.' },
-    { '@type': 'HowToStep', position: 5, name: 'Garantija', text: '90 dienu garantija un uzturēšanas ieteikumi.' },
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Diagnostika',
+      text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Cena un termiņš',
+      text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Remonts',
+      text: 'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši ražotāja prasībām.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Pārbaude',
+      text: 'Pēc remonta testējam sūkšanas jaudu, temperatūru un darbības stabilitāti.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 5,
+      name: 'Garantija',
+      text: '90 dienu garantija un uzturēšanas ieteikumi.',
+    },
   ],
 };
 
@@ -121,7 +141,12 @@ const breadcrumbsLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'Dyson remonts', item: `${ORIGIN}/dyson-remonts/` },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Dyson remonts',
+      item: `${ORIGIN}/dyson-remonts/`,
+    },
   ],
 };
 
@@ -142,16 +167,32 @@ export default function DysonRemontsPage() {
   return (
     <>
       {/* JSON-LD */}
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(faqLd)}
       </Script>
-      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="howto-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(howToLd)}
       </Script>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="service-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(serviceLd)}
       </Script>
 
@@ -167,18 +208,25 @@ export default function DysonRemontsPage() {
       {/* INTRO */}
       <section className={s.section} aria-labelledby="dyson-intro-h2">
         <div className={s.container}>
-          <h2 id="dyson-intro-h2" className={s.h2}>Dyson remonts Rīgā — ko mēs darām</h2>
+          <h2 id="dyson-intro-h2" className={s.h2}>
+            Dyson remonts Rīgā — ko mēs darām
+          </h2>
           <p className={s.paragraph}>
-            Veicam pilna spektra <strong>Dyson remontu</strong> — no <strong>dziļās tīrīšanas un diagnostikas</strong> līdz
-            <strong> motora un baterijas maiņai</strong>, kā arī <strong>filtru un blīvējumu nomaiņai</strong> un
-            <strong> mehānisku bojājumu labojumiem</strong>. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un
-            precīzu izmaksu/termiņa saskaņošanu. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam
+            Veicam pilna spektra <strong>Dyson remontu</strong> — no{' '}
+            <strong>dziļās tīrīšanas un diagnostikas</strong> līdz
+            <strong> motora un baterijas maiņai</strong>, kā arī{' '}
+            <strong>filtru un blīvējumu nomaiņai</strong> un
+            <strong> mehānisku bojājumu labojumiem</strong>. Pirms darba
+            uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un
+            precīzu izmaksu/termiņa saskaņošanu. Izmantojam{' '}
+            <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un
+            sniedzam
             <strong> 90 dienu garantiju</strong>.
           </p>
         </div>
       </section>
 
-      {/* POPULAR SERVICES */}
+      {/* POPULAR SERVICES – NON-CLICKABLE CARDS */}
       <section className={s.section} aria-labelledby="dyson-services-h2">
         <div className={s.container}>
           <Services
@@ -189,31 +237,27 @@ export default function DysonRemontsPage() {
                 title: 'Motora un baterijas maiņa',
                 text: 'jaudas kritums, pārkaršana, īss darbalaiks.',
                 icon: LuCog,
-                href: '#dyson-services',
+                // no href → not clickable
               },
               {
                 title: 'Filtru un blīvējumu nomaiņa',
                 text: 'vāja sūkšana, gaisa noplūdes, aizsērējumi.',
                 icon: LuFilter,
-                href: '#dyson-services',
               },
               {
                 title: 'Tīrīšana un diagnostika',
                 text: 'dziļā tīrīšana, kanālu atbrīvošana, pārbaudes.',
                 icon: LuSparkles,
-                href: '#dyson-services',
               },
               {
                 title: 'Mehānisku bojājumu labošana',
                 text: 'korpusa, savienojumu un kustīgo daļu remonts.',
                 icon: LuWrench,
-                href: '#dyson-services',
               },
             ]}
           />
         </div>
       </section>
-
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="dyson-process-h2">
@@ -222,11 +266,29 @@ export default function DysonRemontsPage() {
             id="dyson-process"
             title="Kā notiek remonts"
             steps={[
-              { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Remonts', text: 'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši prasībām.' },
-              { title: 'Pārbaude', text: 'Pārbaudām sūkšanas jaudu, temperatūru un darbības stabilitāti.' },
-              { title: 'Garantija', text: '90 dienu garantija un uzturēšanas ieteikumi.' },
+              {
+                title: 'Diagnostika',
+                text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+              },
+              {
+                title: 'Cena un termiņš',
+                text:
+                  'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+              },
+              {
+                title: 'Remonts',
+                text:
+                  'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši prasībām.',
+              },
+              {
+                title: 'Pārbaude',
+                text:
+                  'Pārbaudām sūkšanas jaudu, temperatūru un darbības stabilitāti.',
+              },
+              {
+                title: 'Garantija',
+                text: '90 dienu garantija un uzturēšanas ieteikumi.',
+              },
             ]}
             headingLevel={2}
             variant="cards"

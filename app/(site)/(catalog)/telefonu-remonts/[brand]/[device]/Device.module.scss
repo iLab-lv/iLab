@@ -1,0 +1,103 @@
+@use '@/styles/_tokens.scss' as *;
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $space-md;
+}
+
+.intro {
+  padding-block: $space-lg;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: $space-sm;
+  margin-bottom: $space-md;
+}
+
+.h2 {
+  margin: 0;
+  font-size: clamp(1.125rem, 0.9rem + 1vw, 1.75rem);
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+}
+.meta {
+  color: $color-text-3;
+  font-size: 0.875rem;
+}
+
+.leadRow {
+  display: grid;
+  gap: $space-md;
+  grid-template-columns: 1fr;
+  @media (min-width: $bp-lg) {
+    grid-template-columns: minmax(0, 360px) 1fr;
+    align-items: start;
+  }
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: $radius-lg;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+}
+
+.leadCopy {
+  color: $color-text-2;
+  line-height: $line-height-body;
+
+  p { margin: 0 0 $space-md 0; }
+
+  a {
+    color: $color-accent;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color $dur-base $ease-std;
+    &:hover { border-color: currentColor; }
+  }
+}
+
+.ctaRow {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.btnPrimary, .btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $btn-h-md;
+  padding: 0 $space-lg;
+  border-radius: $radius-pill;
+  text-decoration: none;
+}
+
+.btnPrimary {
+  border: $border-thin solid $color-accent;
+  color: $color-accent;
+  background: $glass-bg-weak;
+  @supports (backdrop-filter: blur(1px)) {
+    $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+    backdrop-filter: $__bf;
+    -webkit-backdrop-filter: $__bf;
+    border-color: $glass-border;
+  }
+  transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+  &:hover { background: $accent-tint-weak; }
+  &:active { background: $accent-tint-strong; box-shadow: $shadow-accent-press; }
+}
+
+.btnGhost {
+  color: $color-text-2;
+  border: $border-thin solid $color-border;
+  background: $glass-bg-weak;
+  &:hover { background: $glass-bg-weak-hover; }
+  &:active { background: $glass-bg-weak-active; }
+}

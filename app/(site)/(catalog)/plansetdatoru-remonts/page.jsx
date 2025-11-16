@@ -10,10 +10,20 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import phoneIssues from '@/data/commonIssues'; // generic list reused
+import DeviceHero from '@sections/device-hero/DeviceHero';
 
 import s from '@styles/Catalog.module.scss';
 import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
+import contentRegistry from '@/data/contentRegistry';
+
+import {
+  LuTabletSmartphone,
+  LuBatteryCharging,
+  LuPlugZap,
+  LuCamera,
+  LuVolume2,
+  LuDroplets,
+} from 'react-icons/lu';
 
 const ORIGIN = 'https://www.ilab.lv';
 
@@ -27,7 +37,9 @@ export const metadata = {
 // Top 4 models per brand (for tablets)
 function topModelsForBrand(list, brandSlug) {
   const filtered = list.filter(
-    (d) => d.category === 'plansetdatoru-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
+    (d) =>
+      d.category === 'plansetdatoru-remonts' &&
+      (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
   const seen = new Set();
@@ -68,7 +80,12 @@ export default function PlansetdatoruRemontsPage() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Planšetdatoru remonts', item: `${ORIGIN}/plansetdatoru-remonts/` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Planšetdatoru remonts',
+        item: `${ORIGIN}/plansetdatoru-remonts/`,
+      },
     ],
   };
 
@@ -96,40 +113,72 @@ export default function PlansetdatoruRemontsPage() {
     })),
   };
 
+  // Hero text for DeviceHero from contentRegistry
+  const tabletsHero =
+    contentRegistry.categories['plansetdatoru-remonts']?.hero || {};
+  const heroHtml =
+    tabletsHero.bodyHtml ||
+    (tabletsHero.lead ? `<p>${tabletsHero.lead}</p>` : null);
+
   return (
     <>
       {/* JSON-LD */}
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="service-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="itemlist-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(itemListLd)}
       </Script>
+
+      {/* VISUAL HERO (DeviceHero) */}
+      <DeviceHero
+        image="/images/categories/plansetdatoru_remonts.webp"
+        alt="Planšetdatoru remonts"
+        bodyHtml={heroHtml}
+      />
 
       {/* INTRO (SEO copy under H2; Header owns H1/lead/CTA) */}
       <section className={s.section} aria-labelledby="tablets-intro-h2">
         <div className={s.container}>
-          <h2 id="tablets-intro-h2" className={s.h2}>Planšetdatoru remonts — ko mēs darām</h2>
+          <h2 id="tablets-intro-h2" className={s.h2}>
+            Planšetdatoru remonts — ko mēs darām
+          </h2>
 
           <p className={s.intro}>
-            Ekrāni, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas,
-            biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.
+            Ekrāni, baterijas, uzlādes ligzdas, kameras un citi remontdarbi.
+            Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam
+            tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.
           </p>
 
           <p className={s.paragraph}>
-            Strādājam ar <strong>iPad</strong>, <strong>Samsung Galaxy Tab</strong> un citiem populāriem planšetdatoriem. 
-            Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>baterijas nomaiņa</strong>,{' '}
-            <strong>uzlādes ligzda</strong>, <strong>kamera</strong>, <strong>skaļruņi/mikrofons</strong>, kā arī{' '}
-            <strong>ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā{' '}
-            <Link href="#process-h2">“Kā notiek remonts”</Link>.
+            Strādājam ar <strong>iPad</strong>,{' '}
+            <strong>Samsung Galaxy Tab</strong> un citiem populāriem
+            planšetdatoriem. Biežākie darbi: <strong>ekrāna maiņa</strong>,{' '}
+            <strong>baterijas nomaiņa</strong>, <strong>uzlādes ligzda</strong>,{' '}
+            <strong>kamera</strong>, <strong>skaļruņi/mikrofons</strong>, kā
+            arī <strong>ūdens bojājumi</strong>. Uzzini, kā notiek remonts
+            sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
 
           <p className={s.paragraph}>
             Skaties arī: <Link href="/iphone-remonts">iPhone remonts</Link> un{' '}
-            <Link href="/telefonu-remonts">telefonu remonts</Link> — ja meklē remontu citai ierīcei.
+            <Link href="/telefonu-remonts">telefonu remonts</Link> — ja meklē
+            remontu citai ierīcei.
           </p>
         </div>
       </section>
@@ -149,19 +198,43 @@ export default function PlansetdatoruRemontsPage() {
         />
       ))}
 
-      {/* Popular services */}
+      {/* Popular services – non-clickable, with icons */}
       <section className={s.section} aria-labelledby="popular-services-h2">
         <div className={s.container}>
           <Services
             id="tablet-services"
             title="Populārākie remonti"
             items={[
-              { title: 'Ekrāna maiņa', text: 'plaisas, plankumi, skāriena problēmas.' },
-              { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, īss darbības laiks.' },
-              { title: 'Uzlādes ligzda', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.' },
-              { title: 'Kamera', text: 'miglains attēls, fokusēšanās kļūdas.' },
-              { title: 'Skaļruņi/mikrofons', text: 'klusa skaņa, krakšķi, sarunās nedzird.' },
-              { title: 'Ūdens bojājumi', text: 'diagnostika un atjaunošana, ja tas iespējams.' },
+              {
+                title: 'Ekrāna maiņa',
+                text: 'plaisas, plankumi, skāriena problēmas.',
+                icon: LuTabletSmartphone,
+              },
+              {
+                title: 'Akumulatora maiņa',
+                text: 'strauji krīt uzlāde, īss darbības laiks.',
+                icon: LuBatteryCharging,
+              },
+              {
+                title: 'Uzlādes ligzda',
+                text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+                icon: LuPlugZap,
+              },
+              {
+                title: 'Kamera',
+                text: 'miglains attēls, fokusēšanās kļūdas.',
+                icon: LuCamera,
+              },
+              {
+                title: 'Skaļruņi/mikrofons',
+                text: 'klusa skaņa, krakšķi, sarunās nedzird.',
+                icon: LuVolume2,
+              },
+              {
+                title: 'Ūdens bojājumi',
+                text: 'diagnostika un atjaunošana, ja tas iespējams.',
+                icon: LuDroplets,
+              },
             ]}
             headingLevel={2}
             variant="list"
@@ -177,11 +250,30 @@ export default function PlansetdatoruRemontsPage() {
             id="process"
             title="Kā notiek remonts"
             steps={[
-              { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-              { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+              {
+                title: 'Diagnostika',
+                text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+              },
+              {
+                title: 'Cena un termiņš',
+                text:
+                  'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+              },
+              {
+                title: 'Remonts',
+                text:
+                  'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
+              },
+              {
+                title: 'Pārbaude',
+                text:
+                  'Pēc remonta testējam visu funkcionalitāti un drošību.',
+              },
+              {
+                title: 'Garantija',
+                text:
+                  '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+              },
             ]}
             headingLevel={2}
             variant="cards"
@@ -201,11 +293,30 @@ export default function PlansetdatoruRemontsPage() {
             id="tablets-faq"
             title="Biežāk uzdotie jautājumi"
             items={[
-              { q: 'Cik ilgi ilgst ekrāna maiņa planšetei?', a: 'Bieži tajā pašā dienā — atkarīgs no modeļa un noslodzes.' },
-              { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
-              { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
-              { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-              { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
+              {
+                q: 'Cik ilgi ilgst ekrāna maiņa planšetei?',
+                a:
+                  'Bieži tajā pašā dienā — atkarīgs no modeļa un noslodzes.',
+              },
+              {
+                q: 'Vai mani dati saglabāsies?',
+                a:
+                  'Darām visu iespējamo; pirms remonta iesakām dublējumu.',
+              },
+              {
+                q: 'Vai detaļām ir garantija?',
+                a: 'Jā, gan detaļām, gan darbam.',
+              },
+              {
+                q: 'Vai pieejamas oriģinālas detaļas?',
+                a:
+                  'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
+              },
+              {
+                q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
+                a:
+                  'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.',
+              },
             ]}
             headingLevel={2}
             variant="accordion"

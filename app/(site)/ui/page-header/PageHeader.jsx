@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 
 import categories from '@/data/categories';
 import contentRegistry from '@/data/contentRegistry';
+import categoryContent from '@/data/categoryContent'; // 👈 NEW: fallback source
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
 
 import ScrollCta from '@components/button/ScrollCta';
@@ -37,7 +38,7 @@ function getBrand(cat, brandSlug) {
  * - Single source of truth for service pages:
  *   - If route is "/<category>/<service>" AND that key exists in contentRegistry.services,
  *     we use its h1/lead and add a 3rd breadcrumb.
- * - Hubs, brand pages, and device pages keep your existing behavior.
+ * - Hubs, brand pages, and device pages keep your existing behavior (with a tiny fix).
  */
 export default function PageHeader({
   title,
@@ -65,7 +66,8 @@ export default function PageHeader({
     const thirdSeg = p2 || null;
 
     // --- unified service detection: only treat as service if registry contains it
-    const serviceKey = categorySlug && secondSeg && parts.length === 2 ? `${categorySlug}/${secondSeg}` : null;
+    const serviceKey =
+      categorySlug && secondSeg && parts.length === 2 ? `${categorySlug}/${secondSeg}` : null;
     const serviceEntry = serviceKey ? contentRegistry?.services?.[serviceKey] : null;
     const isServicePage = Boolean(serviceEntry);
 
@@ -76,28 +78,47 @@ export default function PageHeader({
 
     // --- base labels via categories (breadcrumbs & fallbacks)
     const cat = getCategory(categorySlug);
-    const catLabel =
-      categorySlug
-        ? (cat?.name || cat?.label || titleize(categorySlug))
-        : '';
+    const catLabel = categorySlug
+      ? cat?.name || cat?.label || titleize(categorySlug)
+      : '';
 
     const brand = getBrand(cat, secondSeg);
-    const brandLabel = brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
-    const deviceLabel = thirdSeg ? titleize(thirdSeg) : (isIphoneDevice ? titleize(secondSeg) : null);
+    const brandLabel =
+      brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
+    const deviceLabel = thirdSeg
+      ? titleize(thirdSeg)
+      : isIphoneDevice
+      ? titleize(secondSeg)
+      : null;
 
     // ---------------- Breadcrumbs ----------------
     const c = [{ label: 'Sākums', href: '/' }];
 
-    if (categorySlug) c.push({ label: catLabel, href: `/${categorySlug}` });
+    if (categorySlug) {
+      c.push({ label: catLabel, href: `/${categorySlug}` });
+    }
+
+    // Brand-only pages like /telefonu-remonts/samsung or /plansetdatoru-remonts/ipad
+    // are NOT device pages and NOT service pages, so we add the brand crumb here.
+    if (!isDevicePage && !isServicePage && secondSeg && brandLabel) {
+      c.push({
+        label: brandLabel,
+        href: `/${categorySlug}/${secondSeg}`,
+      });
+    }
 
     if (isDevicePage && secondSeg) {
       // brand level for generic devices
-      if (isGenericDevice) c.push({ label: brandLabel, href: `/${categorySlug}/${secondSeg}` });
+      if (isGenericDevice) {
+        c.push({ label: brandLabel, href: `/${categorySlug}/${secondSeg}` });
+      }
       // device itself
       const devicePath = isIphoneDevice
         ? `/${categorySlug}/${secondSeg}`
         : `/${categorySlug}/${secondSeg}/${thirdSeg}`;
-      if (deviceLabel) c.push({ label: deviceLabel, href: devicePath });
+      if (deviceLabel) {
+        c.push({ label: deviceLabel, href: devicePath });
+      }
     } else if (isServicePage) {
       // service breadcrumb
       c.push({
@@ -122,7 +143,21 @@ export default function PageHeader({
 
     // Hubs (category root)
     if (!secondSeg && categorySlug) {
-      const hub = contentRegistry?.categories?.[categorySlug]?.hero || null;
+      // 1) Try contentRegistry (new system)
+      let hub = contentRegistry?.categories?.[categorySlug]?.hero || null;
+
+      // 2) Fallback to categoryContent (legacy/simple config)
+      if (!hub) {
+        const catCfg = categoryContent?.[categorySlug];
+        if (catCfg) {
+          hub = {
+            h1: catCfg.h1 || catCfg.hero?.h1,
+            lead: catCfg.lead || catCfg.hero?.lead,
+            scrollCta: catCfg.scrollCta || catCfg.hero?.scrollCta || null,
+          };
+        }
+      }
+
       heroFromContent = hub;
       if (hub?.h1) t = hub.h1;
     }
@@ -201,7 +236,7 @@ export default function PageHeader({
               <ScrollCta
                 label={finalScrollCta.label}
                 targetId={finalScrollCta.targetId}
-                className={s.cta}   // spacing only; visuals are in ScrollCta.module.scss
+                className={s.cta}
               />
             ) : null}
           </div>

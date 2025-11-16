@@ -123,14 +123,18 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     },
 
     // ------------- Planšetdatoru remonts hub (Header hero only) -------------
-    'plansetdatoru-remonts': {
-      hero: {
-        h1: 'Planšetdatoru remonts',
-        lead:
-          'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
-        scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
-      },
-    },
+// ------------- Planšetdatoru remonts hub (Header hero only) -------------
+'plansetdatoru-remonts': {
+  hero: {
+    h1: 'Planšetdatoru remonts',
+    lead:
+      'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
+    bodyHtml:
+      '<p><strong>Planšetdatoru remonts Rīgā</strong> — ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts un citi darbi. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong>.</p>',
+    scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
+  },
+},
+
 
     // ---------------- Datoru remonts hub (Header hero only) ------------------
     'datoru-remonts': {

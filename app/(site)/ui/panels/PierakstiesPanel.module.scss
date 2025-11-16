@@ -1,0 +1,10 @@
+/* ui/panels/PierakstiesPanel.module.scss */
+@use '@/styles/_tokens.scss' as *;
+
+.root {
+  margin-top: $space-xl;
+
+  @media (min-width: $bp-md) {
+    margin-top: $space-2xl;
+  }
+}
