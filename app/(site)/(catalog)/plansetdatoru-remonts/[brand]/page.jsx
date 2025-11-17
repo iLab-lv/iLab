@@ -1,3 +1,4 @@
+// app/(site)/(catalog)/plansetdatoru-remonts/[brand]/page.jsx
 import Script from 'next/script';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -38,20 +39,19 @@ const ORIGIN = 'https://www.ilab.lv';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  // IMPORTANT: ensure BRAND_CATEGORY.TABLETS (or whatever key you use) exists in brandContent.js
   const brands = listBrandsForCategory(BRAND_CATEGORY.TABLETS) || [];
   return brands.map((b) => ({ brand: String(b.slug).toLowerCase() }));
 }
 
 // ---------- Helpers ----------
 
+// Use one base hero image (same as category) + per-brand logo/tint from categories
 function getTabletBrandConfig(brandSlug) {
   const tabletsCat = categories.find((c) => c.slug === 'plansetdatoru-remonts');
+
   if (!tabletsCat) {
-    // Fallback if category not found in config
     return {
       brandKey: brandSlug,
-      heroImage: '/brand/images/categories/plansetdatoru_remonts.webp',
       logo: null,
       tint: 'rgba(0,200,180,0.20)',
       heroAlt: 'Planšetdatoru remonts',
@@ -66,8 +66,6 @@ function getTabletBrandConfig(brandSlug) {
 
   return {
     brandKey: brand?.brandSlug || brandSlug,
-    heroImage:
-      brand?.heroImage || '/brand/images/categories/plansetdatoru_remonts.webp',
     logo: brand?.logo || null,
     tint: brand?.tint || 'rgba(0,200,180,0.20)',
     heroAlt: brand?.heroAlt || 'Planšetdatoru remonts',
@@ -118,7 +116,8 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Vai mani dati saglabāsies?',
-    a: 'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta iesakām izveidot dublējumu.',
+    a:
+      'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta iesakām izveidot dublējumu.',
   },
   {
     q: 'Vai detaļām ir garantija?',
@@ -126,7 +125,8 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
-    a: 'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli saskaņojam ar klientu.',
+    a:
+      'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli saskaņojam ar klientu.',
   },
   {
     q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
@@ -146,7 +146,7 @@ export default function BrandTabletsPage({ params }) {
   const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
   const baseHref = bc.href;
 
-  const hero = getTabletBrandConfig(brandSlug);
+  const heroCfg = getTabletBrandConfig(brandSlug);
 
   const brandTabletList = devicesAll.filter(
     (d) =>
@@ -166,7 +166,8 @@ export default function BrandTabletsPage({ params }) {
     provider: { '@id': `${ORIGIN}#organization` },
     url: `${ORIGIN}${bc.href}/`,
     name: `${bc.marketingName} planšetdatoru remonts`,
-    description: `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    description:
+      `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
   };
 
   const breadcrumbsLd = {
@@ -232,13 +233,13 @@ export default function BrandTabletsPage({ params }) {
         {JSON.stringify(faqLd)}
       </Script>
 
-      {/* HERO */}
+      {/* HERO – EXACT same base image as category + logo/tint */}
       <DeviceHero
-        image={hero.heroImage}
-        alt={hero.heroAlt}
-        brandLogo={hero.logo}
-        brandKey={hero.brandKey}
-        tint={hero.tint}
+        image="/images/categories/plansetdatoru_remonts.webp"  // ← underscore, same as category page
+        alt={heroCfg.heroAlt}
+        brandLogo={heroCfg.logo}
+        brandKey={heroCfg.brandKey}
+        tint={heroCfg.tint}
         focal="right"
         bodyHtml={heroHtml}
       />
@@ -300,7 +301,7 @@ export default function BrandTabletsPage({ params }) {
         </div>
       </section>
 
-      {/* Popular services – icons, but NO href → non-clickable cards */}
+      {/* Popular services – non-clickable */}
       <section className={c.section} aria-labelledby="tablet-popular-services-h2">
         <div className={c.container}>
           <h2 id="tablet-popular-services-h2" className={c.h2}>
@@ -332,7 +333,7 @@ export default function BrandTabletsPage({ params }) {
               },
               {
                 title: 'Skaļruņi/mikrofons',
-                text: 'klusa skaņa, krakšķi, sarunās nedzird.',
+                text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
                 icon: LuVolume2,
               },
               {

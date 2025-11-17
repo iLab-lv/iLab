@@ -1,11 +1,15 @@
 import BookingForm from '@components/booking/BookingForm';
+import s from './PierakstiesPanel.module.scss';
 
 export default function PierakstiesPanel({ onClose }) {
   return (
-    <BookingForm
-      submitMode="fetch"
-      onSuccess={onClose}
-      onError={(msg) => console.error(msg)} // replace with your toast if you want
-    />
+    <div className={s.root}>
+      <BookingForm
+        submitMode="fetch"
+        successRedirect="/pieraksties/paldies"
+        onSuccess={onClose}
+        onError={(msg) => console.error(msg)}
+      />
+    </div>
   );
 }

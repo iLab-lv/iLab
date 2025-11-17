@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import s from './DeviceHero.module.scss';
 
@@ -27,14 +27,31 @@ export default function DeviceHero({
   logoShift = '220px',            // desktop horizontal shift from center (+ → right)
   logoShiftMobile = '0px',        // mobile horizontal shift from center
 }) {
-  const srcInitial = (image || '').trim() || (placeholderSrc || '').trim();
-  const [currentSrc, setCurrentSrc] = useState(srcInitial);
-  const triedPlaceholderRef = useRef(srcInitial === placeholderSrc);
+  const triedPlaceholderRef = useRef(false);
+  const [currentSrc, setCurrentSrc] = useState('');
+
+  // 🔧 NEW: keep src in sync with props
+  useEffect(() => {
+    const trimmedImage = (image || '').trim();
+    const trimmedPlaceholder = (placeholderSrc || '').trim();
+
+    if (trimmedImage) {
+      setCurrentSrc(trimmedImage);
+      triedPlaceholderRef.current = false;
+    } else if (trimmedPlaceholder) {
+      setCurrentSrc(trimmedPlaceholder);
+      triedPlaceholderRef.current = true;
+    } else {
+      setCurrentSrc('');
+      triedPlaceholderRef.current = false;
+    }
+  }, [image, placeholderSrc]);
 
   const onError = () => {
-    if (!triedPlaceholderRef.current && placeholderSrc) {
+    const trimmedPlaceholder = (placeholderSrc || '').trim();
+    if (!triedPlaceholderRef.current && trimmedPlaceholder) {
       triedPlaceholderRef.current = true;
-      setCurrentSrc(placeholderSrc);
+      setCurrentSrc(trimmedPlaceholder);
     }
   };
 
