@@ -113,7 +113,7 @@ export default function TelefonuUzladesLigzdasMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp"  // swap to a charge-port specific hero when available
+        image="/images/categories/uzlades_ligzda_remonts.webp"  // swap to a charge-port specific hero when available
         alt="Telefonu uzlādes ligzdas maiņa Rīgā"
         focal="right"
         className="service"

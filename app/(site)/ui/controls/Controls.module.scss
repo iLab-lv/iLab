@@ -10,19 +10,16 @@ $color-accent:#22D3EE;
   left: 16px;
   bottom: 16px;
   z-index: 60; /* above content, below modals */
-  display: none;
 
-  @media (min-width: $bp-md) {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 10px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid $color-border;
-    -webkit-backdrop-filter: saturate(140%) blur(8px);
-    backdrop-filter: saturate(140%) blur(8px);
-  }
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid $color-border;
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  backdrop-filter: saturate(140%) blur(8px);
 }
 
 .slot {

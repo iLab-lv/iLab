@@ -113,7 +113,7 @@ export default function TelefonuKamerasRemontsPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp"  // replace with a camera-specific hero when available
+        image="/images/categories/kameras_remonts.webp"  // replace with a camera-specific hero when available
         alt="Telefonu kameras remonts Rīgā"
         focal="right"
         className="service"

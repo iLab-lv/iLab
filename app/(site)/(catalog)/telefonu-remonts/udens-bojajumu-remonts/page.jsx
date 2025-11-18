@@ -114,7 +114,7 @@ export default function TelefonuUdensBojajumuRemontsPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp"  // swap to water-damage hero when available
+        image="/images/categories/udens_bojajumi.webp"  // swap to water-damage hero when available
         alt="Telefonu ūdens bojājumu remonts Rīgā"
         focal="right"
         className="service"

@@ -166,32 +166,111 @@ const categories = [
     ],
   },
 
-  // Computers
-  {
-    slug: 'datoru-remonts',
-    name: 'Datoru remonts',
-    order: 4,
-    heroImage: '/brand/images/categories/laptops.webp',
-    showInHeader: true,
-    showInFooter: true,
-    showInDropdown: false,
-    brands: [
-      {
-        name: 'Apple Mac',
-        brandSlug: 'apple',
-        order: 1,
-        showInDropdown: false,
-        logo: '/images/logos/apple-logo.svg',
-      },
-      {
-        name: 'Lenovo',
-        brandSlug: 'lenovo',
-        order: 2,
-        showInDropdown: false,
-        logo: '/images/logos/lenovo-logo.svg',
-      },
-    ],
-  },
+ // Computers
+{
+  slug: 'datoru-remonts',
+  name: 'Datoru remonts',
+  order: 4,
+  heroImage: '/images/categories/datoru_remonts.webp',
+  showInHeader: true,
+  showInFooter: true,
+  showInDropdown: false,
+  brands: [
+    {
+      name: 'MacBook',
+      brandSlug: 'macbook',
+      order: 1,
+      showInDropdown: false,
+      logo: '/images/logos/apple-logo.svg',
+      tint: 'rgba(120,120,120,0.25)', // Apple – neutral metallic
+      deviceType: 'laptop',
+      hasModels: true,
+    },
+    {
+      name: 'iMac',
+      brandSlug: 'imac',
+      order: 2,
+      showInDropdown: false,
+      logo: '/images/logos/apple-logo.svg',
+      tint: 'rgba(120,120,120,0.25)',
+      deviceType: 'aio',
+      heroImage: '/images/categories/imac_remonts.webp',
+      hasModels: false,
+    },
+    {
+      name: 'Mac Pro',
+      brandSlug: 'mac-pro',
+      order: 3,
+      showInDropdown: false,
+      logo: '/images/logos/apple-logo.svg',
+      tint: 'rgba(120,120,120,0.25)',
+      deviceType: 'desktop',
+      heroImage: '/images/categories/macpro_remonts.webp',
+      hasModels: false,
+    },
+    {
+      name: 'Lenovo',
+      brandSlug: 'lenovo',
+      order: 4,
+      showInDropdown: false,
+      logo: '/images/logos/lenovo-logo.svg',
+      tint: 'rgba(0,90,180,0.25)', // Lenovo blue (same as tablets)
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+    {
+      name: 'HP',
+      brandSlug: 'hp',
+      order: 5,
+      showInDropdown: false,
+      logo: '/images/logos/hp-logo.svg',
+      tint: 'rgba(0,120,180,0.25)', // HP blue
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+    {
+      name: 'MSI',
+      brandSlug: 'msi',
+      order: 6,
+      showInDropdown: false,
+      logo: '/images/logos/msi-logo.svg',
+      tint: 'rgba(200,0,40,0.25)', // MSI red/gaming accent
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+    {
+      name: 'Dell',
+      brandSlug: 'dell',
+      order: 7,
+      showInDropdown: false,
+      logo: '/images/logos/dell-logo.svg',
+      tint: 'rgba(0,130,190,0.25)', // Dell blue
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+    {
+      name: 'Asus',
+      brandSlug: 'asus',
+      order: 8,
+      showInDropdown: false,
+      logo: '/images/logos/asus-logo.svg',
+      tint: 'rgba(0,60,150,0.25)', // Deep Asus blue
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+    {
+      name: 'Acer',
+      brandSlug: 'acer',
+      order: 9,
+      showInDropdown: false,
+      logo: '/images/logos/acer-logo.svg',
+      tint: 'rgba(0,140,80,0.25)', // Acer green
+      deviceType: 'laptop',
+      hasModels: false,
+    },
+  ],
+},
+
 
   // Dyson
   {

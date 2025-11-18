@@ -182,16 +182,77 @@
 }
 .mobileMenu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
-.mobileInner { padding: $space-md; padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom)); }
+/* Drawer inner layout: menu + footer controls */
+.mobileInner {
+  padding: $space-md;
+  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Menu section (takes available vertical space) */
+.mobileMenuList {
+  flex: 1 1 auto;
+}
+
+/* Controls pinned to bottom area */
+.mobileDrawerControls {
+  padding-top: $space-md;
+  border-top: 1px solid $glass-border;
+}
+
+/* Drawer items */
 .drawerItem {
   width: 100%; text-align: left; display: block; padding: 12px 14px; margin: 6px 0; border-radius: $radius-md;
   background: $glass-bg-weak; color: $color-text; text-decoration: none; border: 1px solid $glass-border;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
   &:hover, &:focus-visible { outline: none; color: $color-accent; border-color: rgba($color-accent, 0.35); background: $glass-bg-weak-hover; }
 }
+
 .emph { font-weight: $font-weight-semibold; }
 .drawerGroup { margin-bottom: 6px; }
 .drawerSubmenu { margin: 4px 0 10px 8px; padding-left: 8px; border-left: 1px dashed $glass-border-2; }
+
+/* Parent row in mobile drawer with toggle on the right */
+.drawerParent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawerParentLabel {
+  flex: 1 1 auto;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* + / − button */
+.drawerToggle {
+  flex: 0 0 auto;
+  margin-left: $space-xs;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid $glass-border-2;
+  background: transparent;
+  color: $color-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color $dur-base $ease-std, color $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: $color-accent;
+    border-color: rgba($color-accent, 0.35);
+    background: $glass-bg-weak-hover;
+  }
+}
 
 /* Tablet/mobile: remove pill around actions for tighter right edge */
 @media (max-width: 1359px) {

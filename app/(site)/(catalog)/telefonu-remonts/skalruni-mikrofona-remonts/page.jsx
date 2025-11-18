@@ -113,7 +113,7 @@ export default function TelefonuSkalruniMikrofonaRemontsPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp"  // replace when you have a sound-related hero
+        image="/images/categories/mikrofona_remonts.webp"  // replace when you have a sound-related hero
         alt="Telefonu skaļruņu un mikrofona remonts Rīgā"
         focal="right"
         className="service"

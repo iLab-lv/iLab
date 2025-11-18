@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import s from './NavBar.module.scss';
 
 import LanguageSwitcher from '../controls/LanguageSwitcher';
+import Controls from '../controls/Controls';
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
@@ -38,6 +39,7 @@ const NAV = [
       { label: 'Samsung', href: '/plansetdatoru-remonts/samsung' },
       { label: 'Xiaomi',  href: '/plansetdatoru-remonts/xiaomi' },
       { label: 'Huawei',  href: '/plansetdatoru-remonts/huawei' },
+      { label: 'Lenovo',  href: '/plansetdatoru-remonts/lenovo' },
     ],
   },
 
@@ -45,27 +47,29 @@ const NAV = [
     label: 'Datoru remonts',
     href: '/datoru-remonts',
     children: [
+      // 3x Apple
       { label: 'MacBook', href: '/datoru-remonts/macbook' },
       { label: 'iMac',    href: '/datoru-remonts/imac' },
       { label: 'Mac Pro', href: '/datoru-remonts/mac-pro' },
+
+      // 3x most popular PC brands
       { label: 'Lenovo',  href: '/datoru-remonts/lenovo' },
-      { label: 'HP',      href: '/datoru-remonts/hp' },
-      { label: 'MSI',     href: '/datoru-remonts/msi' },
-      { label: 'Dell',    href: '/datoru-remonts/dell' },
       { label: 'Asus',    href: '/datoru-remonts/asus' },
-      { label: 'Acer',    href: '/datoru-remonts/acer' },
+      { label: 'HP',      href: '/datoru-remonts/hp' },
+
+      // Catch-all
+      { label: 'Visi zīmoli', href: '/datoru-remonts' },
     ],
   },
 
   { label: 'Dyson remonts', href: '/dyson-remonts' },
 ];
 
-
 export default function NavBar() {
   const pathname = usePathname() || '/';
 
-  const [openSlug, setOpenSlug] = useState(null);              // desktop dropdown slug
-  const [mobileOpen, setMobileOpen] = useState(false);         // drawer open
+  const [openSlug, setOpenSlug] = useState(null);                     // desktop dropdown slug
+  const [mobileOpen, setMobileOpen] = useState(false);                // drawer open
   const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null); // which parent is expanded in drawer
 
   const navRef = useRef(null);
@@ -285,67 +289,88 @@ export default function NavBar() {
         aria-hidden={!mobileOpen}
       >
         <nav className={s.mobileInner} aria-label="Mobilā navigācija">
-          {NAV.map((item) => {
-            const slug = item.href.replace(/^\//, '');
-            const expanded = mobileExpandedSlug === slug;
+          {/* Menu list */}
+          <div className={s.mobileMenuList}>
+            {NAV.map((item) => {
+              const slug = item.href.replace(/^\//, '');
+              const expanded = mobileExpandedSlug === slug;
 
-            if (!hasChildren(item)) {
-              const topActive = isTopActive(item.href);
+              if (!hasChildren(item)) {
+                const topActive = isTopActive(item.href);
+                return (
+                  <Link
+                    key={slug}
+                    href={item.href}
+                    className={`${s.drawerItem} ${topActive ? s.active : ''}`}
+                    aria-current={topActive ? 'page' : undefined}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
+              const submenuId = `drawer-sub-${slug}`;
+
               return (
-                <Link
-                  key={slug}
-                  href={item.href}
-                  className={`${s.drawerItem} ${topActive ? s.active : ''}`}
-                  aria-current={topActive ? 'page' : undefined}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              );
-            }
+                <div key={slug} className={s.drawerGroup}>
+                  {/* Parent row with separate expand/collapse toggle */}
+                  <div
+                    className={`${s.drawerItem} ${s.drawerParent} ${
+                      isTopActive(item.href) ? s.active : ''
+                    }`}
+                  >
+                    <Link
+                      href={item.href}
+                      className={s.drawerParentLabel}
+                      aria-current={isTopActive(item.href) ? 'page' : undefined}
+                      onClick={() => {
+                        setMobileOpen(false); // navigate to category
+                      }}
+                    >
+                      {item.label}
+                    </Link>
 
-            const submenuId = `drawer-sub-${slug}`;
+                    <button
+                      type="button"
+                      className={s.drawerToggle}
+                      aria-label={expanded ? 'Sakļaut sadaļu' : 'Izvērst sadaļu'}
+                      aria-expanded={expanded}
+                      aria-controls={submenuId}
+                      onClick={() => {
+                        setMobileExpandedSlug(expanded ? null : slug);
+                      }}
+                    >
+                      <span aria-hidden>{expanded ? '−' : '+'}</span>
+                    </button>
+                  </div>
 
-            return (
-              <div key={slug} className={s.drawerGroup}>
-                {/* Parent row: first tap expands, second tap navigates */}
-                <Link
-                  href={item.href}
-                  className={`${s.drawerItem} ${s.emph} ${isTopActive(item.href) ? s.active : ''}`}
-                  aria-expanded={expanded}
-                  aria-controls={submenuId}
-                  onClick={(e) => {
-                    if (!expanded) {
-                      e.preventDefault();         // first tap → expand only
-                      setMobileExpandedSlug(slug);
-                    } else {
-                      setMobileOpen(false);       // second tap → navigate
-                    }
-                  }}
-                >
-                  {item.label}
-                </Link>
-
-                {/* Submenu */}
-                <div id={submenuId} className={s.drawerSubmenu} hidden={!expanded}>
-                  {item.children.map((child) => {
-                    const subActive = isSubActive(child.href);
-                    return (
-                      <Link
-                        key={`${slug}__${child.href}`}
-                        href={child.href}
-                        className={`${s.drawerItem} ${subActive ? s.active : ''}`}
-                        aria-current={subActive ? 'page' : undefined}
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.label}
-                      </Link>
-                    );
-                  })}
+                  {/* Submenu */}
+                  <div id={submenuId} className={s.drawerSubmenu} hidden={!expanded}>
+                    {item.children.map((child) => {
+                      const subActive = isSubActive(child.href);
+                      return (
+                        <Link
+                          key={`${slug}__${child.href}`}
+                          href={child.href}
+                          className={`${s.drawerItem} ${subActive ? s.active : ''}`}
+                          aria-current={subActive ? 'page' : undefined}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {child.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Controls at bottom of drawer */}
+          <div className={s.mobileDrawerControls}>
+            <Controls />
+          </div>
         </nav>
       </div>
     </Fragment>
