@@ -1,29 +1,34 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import Button from '@components/button/Button';
 import { LOCATIONS } from '@/data/site.config';
 import s from './BookingForm.module.scss';
 
 /**
  * BookingForm — shared form for panel + page (identical UI).
+ *
  * Props:
  * - submitMode: 'fetch' | 'native'  (default 'fetch')
  * - onSuccess: () => void
  * - onError: (msg: string) => void
- * - successRedirect: string (optional)
  * - initialValues: { name, phone, device, date, fault, location, time }
  * - enableHoneypot: boolean (default true)
+ *
+ * Behaviour:
+ * - In fetch mode, on successful submit, the form is replaced
+ *   with an inline success message. No redirects.
  */
 export default function BookingForm({
   submitMode = 'fetch',
   onSuccess,
   onError,
-  successRedirect,
   initialValues = {},
   enableHoneypot = true,
 }) {
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   // Default date = tomorrow (also enforce min=tomorrow)
   const { defaultDate, minDate } = useMemo(() => {
@@ -36,16 +41,16 @@ export default function BookingForm({
   async function handleSubmit(e) {
     if (submitMode !== 'fetch') return;
     e.preventDefault();
-    if (submitting) return;
+    if (submitting || success) return;
 
     try {
       setSubmitting(true);
       const fd = new FormData(e.currentTarget);
       const res = await fetch('/api/booking', { method: 'POST', body: fd });
+
       if (res.ok) {
-        if (successRedirect) window.location.assign(successRedirect);
+        setSuccess(true);
         onSuccess?.();
-        e.currentTarget.reset();
       } else {
         const data = await res.json().catch(() => null);
         onError?.(data?.error || 'Neizdevās nosūtīt');
@@ -60,6 +65,27 @@ export default function BookingForm({
       ? { action: '/api/booking', method: 'post', noValidate: true }
       : { noValidate: true, onSubmit: handleSubmit };
 
+  // ✅ Success state: replace form with confirmation block
+  if (success) {
+    return (
+      <div className={s.success} role="status" aria-live="polite">
+        <h2 className={s.successTitle}>Paldies, pieraksts saņemts!</h2>
+        <p className={s.successText}>
+          Paldies, ka pieteicāt vizīti! Mūsu tehniķi pārbaudīs detaļu pieejamību
+          un darba grafiku un tuvākajā laikā sazināsies ar jums, lai apstiprinātu
+          pierakstu un precizētu detaļas.
+        </p>
+
+        <div className={s.successActions}>
+          <Link href="/" className={s.homeLink}>
+            Uz sākumlapu
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Default: show form
   return (
     <form className={s.form} {...formProps}>
       {/* Honeypot (spam trap) */}
@@ -151,13 +177,17 @@ export default function BookingForm({
                 name="location"
                 value={loc.id}
                 defaultChecked={
-                  initialValues.location ? initialValues.location === loc.id : i === 0
+                  initialValues.location
+                    ? initialValues.location === loc.id
+                    : i === 0
                 }
                 required={i === 0}
               />
               <span>
                 {loc.label}
-                {loc.address ? <small className={s.muted}> — {loc.address}</small> : null}
+                {loc.address ? (
+                  <small className={s.muted}> — {loc.address}</small>
+                ) : null}
               </span>
             </label>
           ))}
@@ -175,7 +205,9 @@ export default function BookingForm({
                 value={slot}
                 required={slot === '8:00-12:00'}
                 defaultChecked={
-                  initialValues.time ? initialValues.time === slot : slot === '8:00-12:00'
+                  initialValues.time
+                    ? initialValues.time === slot
+                    : slot === '8:00-12:00'
                 }
               />
               <span>{slot.replace('-', ' – ')}</span>
