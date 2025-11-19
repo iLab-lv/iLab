@@ -13,17 +13,19 @@ import s from './BookingForm.module.scss';
  * - submitMode: 'fetch' | 'native'  (default 'fetch')
  * - onSuccess: () => void
  * - onError: (msg: string) => void
+ * - onHomeClick: () => void        (optional, used in success state on "Uz sākumlapu")
  * - initialValues: { name, phone, device, date, fault, location, time }
  * - enableHoneypot: boolean (default true)
  *
  * Behaviour:
  * - In fetch mode, on successful submit, the form is replaced
- *   with an inline success message. No redirects.
+ *   with an inline success message (unless the parent redirects away).
  */
 export default function BookingForm({
   submitMode = 'fetch',
   onSuccess,
   onError,
+  onHomeClick,
   initialValues = {},
   enableHoneypot = true,
 }) {
@@ -50,7 +52,7 @@ export default function BookingForm({
 
       if (res.ok) {
         setSuccess(true);
-        onSuccess?.();
+        onSuccess?.(); // page can redirect here
       } else {
         const data = await res.json().catch(() => null);
         onError?.(data?.error || 'Neizdevās nosūtīt');
@@ -67,6 +69,15 @@ export default function BookingForm({
 
   // ✅ Success state: replace form with confirmation block
   if (success) {
+    const handleHomeClick = (e) => {
+      if (onHomeClick) {
+        // Prevent default navigation if parent wants to handle it
+        e.preventDefault();
+        onHomeClick();
+      }
+      // if no onHomeClick, normal Link navigation to "/"
+    };
+
     return (
       <div className={s.success} role="status" aria-live="polite">
         <h2 className={s.successTitle}>Paldies, pieraksts saņemts!</h2>
@@ -77,7 +88,7 @@ export default function BookingForm({
         </p>
 
         <div className={s.successActions}>
-          <Link href="/" className={s.homeLink}>
+          <Link href="/" className={s.homeLink} onClick={handleHomeClick}>
             Uz sākumlapu
           </Link>
         </div>
