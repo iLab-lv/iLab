@@ -11,15 +11,15 @@ import s from './BookingForm.module.scss';
  *
  * Props:
  * - submitMode: 'fetch' | 'native'  (default 'fetch')
- * - onSuccess: () => void
- * - onError: (msg: string) => void
- * - onHomeClick: () => void        (optional, used in success state on "Uz sākumlapu")
+ * - onSuccess: () => void          (optional, called after successful submit)
+ * - onError: (msg: string) => void (optional)
+ * - onHomeClick: () => void        (optional, called when "Uz sākumlapu" is clicked in success state)
  * - initialValues: { name, phone, device, date, fault, location, time }
  * - enableHoneypot: boolean (default true)
  *
  * Behaviour:
  * - In fetch mode, on successful submit, the form is replaced
- *   with an inline success message (unless the parent redirects away).
+ *   with an inline success message. No redirects here.
  */
 export default function BookingForm({
   submitMode = 'fetch',
@@ -52,7 +52,7 @@ export default function BookingForm({
 
       if (res.ok) {
         setSuccess(true);
-        onSuccess?.(); // page can redirect here
+        onSuccess?.();
       } else {
         const data = await res.json().catch(() => null);
         onError?.(data?.error || 'Neizdevās nosūtīt');
@@ -71,11 +71,11 @@ export default function BookingForm({
   if (success) {
     const handleHomeClick = (e) => {
       if (onHomeClick) {
-        // Prevent default navigation if parent wants to handle it
+        // Panel case: parent handles navigation + closing
         e.preventDefault();
         onHomeClick();
       }
-      // if no onHomeClick, normal Link navigation to "/"
+      // Page case: no onHomeClick → normal Next.js Link navigation to "/"
     };
 
     return (
