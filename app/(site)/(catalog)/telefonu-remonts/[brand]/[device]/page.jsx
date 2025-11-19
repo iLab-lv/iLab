@@ -150,7 +150,7 @@ function buildModelServices(brandSlug) {
   return [
     {
       title: 'Displeja (ekrāna) maiņa',
-      href: '/telefonu-remonts/displeja-maina',
+      href: '/telefonu-remonts/ekrana-maina',
       text: 'plaisas, tumši plankumi, nereaģē skāriens.',
       icon: LuSmartphone,
     },
