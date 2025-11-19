@@ -110,54 +110,82 @@
   flex-wrap: wrap;
 }
 
-.success {
-  padding: 24px 20px;
-  border-radius: 16px;
-  background: rgba(15, 23, 42, 0.9); // adjust to match your UI
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  text-align: left;
+/* ===================== */
+/* Success state styling */
+/* ===================== */
 
-  @media (min-width: 768px) {
-    padding: 28px 24px;
+.success {
+  max-width: 900px;
+  margin: $space-xl auto 0; // top spacing + center align like form
+  padding: $space-lg;
+  border-radius: $radius-lg;
+  background:
+    linear-gradient(0deg, $glass-tint-weak, $glass-tint-weak),
+    $color-surface-2;
+  border: 1px solid $glass-border-2;
+  box-shadow: $shadow-soft;
+  text-align: left;
+  color: $color-text;
+
+  @media (min-width: $bp-md) {
+    padding: $space-xl;
+    margin-top: $space-2xl;
   }
 }
 
 .successTitle {
-  font-size: 1.4rem;
-  line-height: 1.3;
-  font-weight: 600;
-  margin: 0 0 8px;
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-sm;
 }
 
 .successText {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(226, 232, 240, 0.9);
-  margin: 0 0 20px;
+  font-size: $font-size-p;
+  line-height: $line-height-body;
+  color: $color-text-2;
+  margin: 0 0 $space-lg;
 }
 
 .successActions {
-  margin-top: 4px;
+  margin-top: $space-sm;
 }
 
 .homeLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  border-radius: 999px;
+  min-height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-pill;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: $font-weight-medium;
   text-decoration: none;
 
-  border: 1px solid rgba(148, 163, 184, 0.8);
-  background: transparent;
-  color: #e5e7eb;
+  border: 1px solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text;
 
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    color $dur-base $ease-std;
 
   &:hover {
-    background: rgba(148, 163, 184, 0.12);
-    border-color: rgba(148, 163, 184, 1);
+    background-color: $glass-bg-weak-hover;
+    border-color: $glass-border-2;
+    box-shadow: $shadow-soft;
+  }
+
+  &:active {
+    background-color: $glass-bg-weak-active;
+    border-color: $glass-border-2;
+    box-shadow: $shadow-press;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
   }
 }

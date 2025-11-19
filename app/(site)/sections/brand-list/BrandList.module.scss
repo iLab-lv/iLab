@@ -1,0 +1,112 @@
+// @sections/brand-list/BrandList.module.scss
+@use '@/styles/_tokens.scss' as *;
+
+.section {
+  padding-block: $space-3xl;
+}
+
+.container {
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $space-md;
+  display: grid;
+  gap: $space-3xl;
+}
+
+.block {
+  display: grid;
+  gap: $space-md;
+}
+
+.h2 {
+  font-size: 1.35rem;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.leadText {
+  color: $color-text-2; // was $color-text-muted (doesn't exist)
+  line-height: $line-height-body;
+  max-width: 52rem;
+}
+
+/* Apple buttons row */
+
+.appleButtons {
+  margin-top: $space-sm;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+}
+
+.appleButton {
+  // Let Button handle visuals; this keeps layout flexible
+  min-width: 0;
+}
+
+/* Other brands grid */
+
+.brandGrid {
+  margin-top: $space-md;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-md;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.brandItem {
+  display: block;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+  border-radius: $radius-lg;
+  text-decoration: none;
+  background:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),
+    $color-surface-2;
+  border: $border-thin solid $glass-border;
+  box-shadow: $shadow-soft-lg;
+  transition:
+    transform $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    background-color $dur-base $ease-std;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: $shadow-accent-lg;
+    border-color: $color-accent;
+    outline: none;
+    background-color: $accent-tint-weak;
+  }
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+}
+
+.logo {
+  max-width: 80%;
+  max-height: 60%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.brandNameFallback {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}

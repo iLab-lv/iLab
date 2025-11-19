@@ -8,6 +8,9 @@ import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
+import BrandList from '@sections/brand-list/BrandList';
+
+import categories from '@/data/categories';
 
 import {
   LuBug,
@@ -23,18 +26,7 @@ import s from './DatoruCategory.module.scss';
 
 const ORIGIN = 'https://www.ilab.lv';
 
-// Simple brand list for cards + JSON-LD
-const BRANDS = [
-  { label: 'MacBook', slug: 'macbook' },
-  { label: 'iMac', slug: 'imac' },
-  { label: 'Mac Pro', slug: 'mac-pro' },
-  { label: 'Lenovo', slug: 'lenovo' },
-  { label: 'HP', slug: 'hp' },
-  { label: 'MSI', slug: 'msi' },
-  { label: 'Dell', slug: 'dell' },
-  { label: 'Asus', slug: 'asus' },
-  { label: 'Acer', slug: 'acer' },
-];
+const computerCategory = categories.find((c) => c.slug === 'datoru-remonts');
 
 export const metadata = {
   title: 'Datoru remonts Rīgā — portatīvie un galda datori | iLab',
@@ -72,16 +64,19 @@ export default function DatoruRemontsPage() {
       'Datoru remonts — portatīvo un galda datoru diagnostika un remonts: ekrāns, tastatūra, dzesēšana, diski, operētājsistēma un citi bojājumi. Ātra diagnostika, godīgas cenas, garantija.',
   };
 
-  const itemListLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: BRANDS.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      url: `${ORIGIN}/datoru-remonts/${b.slug}/`,
-      name: `${b.label} datoru remonts`,
-    })),
-  };
+  const itemListLd =
+    computerCategory && computerCategory.brands
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          itemListElement: computerCategory.brands.map((b, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            url: `${ORIGIN}/datoru-remonts/${b.brandSlug}/`,
+            name: `${b.name} datoru remonts`,
+          })),
+        }
+      : null;
 
   return (
     <>
@@ -92,9 +87,11 @@ export default function DatoruRemontsPage() {
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(itemListLd)}
-      </Script>
+      {itemListLd && (
+        <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify(itemListLd)}
+        </Script>
+      )}
 
       <main className={s.main}>
         {/* HERO */}
@@ -183,27 +180,18 @@ export default function DatoruRemontsPage() {
           </div>
         </section>
 
-        {/* Brand selection (simple cards, anchor for header CTA) */}
-        <section id="brand-list" className={s.section} aria-labelledby="brand-list-h2">
-          <div className={s.container}>
-            <h2 id="brand-list-h2" className={s.h2}>
-              Zīmoli, ko remontējam
-            </h2>
-            <p className={s.leadText}>
-              Izvēlies datora zīmolu, lai apskatītu pakalpojumus un cenas (ja pieejamas) vai atstātu pieteikumu remontam.
-            </p>
-
-            <ul className={s.brandGrid} aria-label="Datoru zīmolu saraksts">
-              {BRANDS.map((b) => (
-                <li key={b.slug} className={s.brandItem}>
-                  <Link href={`/datoru-remonts/${b.slug}`} className={s.brandLink}>
-                    {b.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        {/* Brand selection — refactored to BrandList */}
+        {computerCategory && computerCategory.brands && (
+          <BrandList
+            id="brand-list"
+            basePath="/datoru-remonts"
+            appleTitle="Apple datoru remonts"
+            appleIntro="Remontējam visus Apple datorus — no MacBook portatīvajiem un iMac līdz Mac Pro darba stacijām. Diagnoze, detaļu maiņa, veiktspējas uzlabošana un pilns serviss vienuviet."
+            otherTitle="Citi zīmoli, ko remontējam"
+            otherIntro="Remontējam arī populārākos Windows un citu ražotāju datorus: Lenovo, HP, Dell, Asus, Acer, MSI u.c. Izvēlies zīmolu, lai apskatītu pakalpojumus un atstātu pieteikumu remontam."
+            brands={computerCategory.brands}
+          />
+        )}
 
         {/* Process */}
         <section className={s.section} aria-labelledby="process-h2">

@@ -26,8 +26,8 @@ const NAV = [
       { label: 'Samsung', href: '/telefonu-remonts/samsung' },
       { label: 'Xiaomi',  href: '/telefonu-remonts/xiaomi' },
       { label: 'Huawei',  href: '/telefonu-remonts/huawei' },
-      { label: 'Sony',    href: '/telefonu-remonts/sony' },
       { label: 'OnePlus', href: '/telefonu-remonts/oneplus' },
+      { label: 'Visi zīmoli', href: '/telefonu-remonts' },
     ],
   },
 
@@ -109,6 +109,22 @@ export default function NavBar() {
     document.addEventListener('mousedown', onClick);
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const body = document.body;
+    const previousOverflow = body.style.overflow;
+
+    if (mobileOpen) {
+      body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
 
   const hasChildren = (item) => Array.isArray(item.children) && item.children.length > 0;
 

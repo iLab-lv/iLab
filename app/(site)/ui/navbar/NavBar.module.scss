@@ -169,10 +169,17 @@
   background: $glass-bg-strong;
   -webkit-backdrop-filter: saturate($glass-saturate) blur(12px);
   backdrop-filter: saturate($glass-saturate) blur(12px);
-  border-top: 1px solid $glass-border; z-index: $z-overlay;
+  border-top: 1px solid $glass-border; 
+  z-index: $z-overlay;
 
-  transform: translateY(-8px); opacity: 0; pointer-events: none;
+  transform: translateY(-8px); 
+  opacity: 0; 
+  pointer-events: none;
   transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
+
+  /* New: flex column so footer can sit at viewport bottom */
+  display: flex;
+  flex-direction: column;
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $glass-fallback-strong;
@@ -182,22 +189,30 @@
 }
 .mobileMenu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
-/* Drawer inner layout: menu + footer controls */
+/* Drawer inner layout: menu (scrollable) + footer controls (fixed at bottom) */
 .mobileInner {
-  padding: $space-md;
-  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 0; /* allow child flex scroller */
+  padding: $space-md;
+  padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
 }
 
-/* Menu section (takes available vertical space) */
+/* Menu section: scrollable area */
 .mobileMenuList {
   flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  /* Extra bottom space so last item scrolls fully above controls */
+  padding-bottom: $space-lg;
 }
 
-/* Controls pinned to bottom area */
+/* Controls pinned to bottom area (non-scrolling) */
 .mobileDrawerControls {
+  flex: 0 0 auto;
   padding-top: $space-md;
   border-top: 1px solid $glass-border;
 }
