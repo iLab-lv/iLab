@@ -55,7 +55,7 @@ export default function Services({
       key: 'pc',
       title: 'Datoru remonts',
       bodyHTML:
-        '<a href="/datoru-remonts">Datoru remonts Rīgā</a> — portatīvie un galda datori. Veicam klaviatūras un ekrāna maiņu, baterijas nomaiņu, dzesēšanas sistēmas tīrīšanu/termopastu, SSD uzstādīšanu un OS pārinstalāciju. Apkalpojam arī<a href="/datoru-remonts#macbook"> MacBook</a>. Tajā pašā dienā (atkarībā no modeļa) un ar 90&nbsp;dienu garantiju.',
+        '<a href="/datoru-remonts">Datoru remonts Rīgā</a> — portatīvie un galda datori. Veicam klaviatūras un ekrāna maiņu, baterijas nomaiņu, dzesēšanas sistēmas tīrīšanu/termopastu, SSD uzstādīšanu un OS pārinstalāciju. Apkalpojam arī<a href="/datoru-remonts/macbook"> MacBook</a>, <a href="/datoru-remonts/imac"> iMac</a> un <a href="/datoru-remonts/mac-pro"> Mac Pro</a>. Tajā pašā dienā (atkarībā no modeļa) un ar 90&nbsp;dienu garantiju.',
       href: '/datoru-remonts',
       linkLabel: 'Apskatīt →',
       imageSrc: '/images/home/laptop.webp',
