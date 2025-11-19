@@ -108,10 +108,7 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
       case 'book':
         return (
           <PierakstiesPanel
-            onSubmit={(fd) => {
-              // wire later: console.log([...fd.entries()]);
-              setModalOpen(false);
-            }}
+            onClose={onClose}  // ✅ pass close handler so "Uz sākumlapu" can close panel
           />
         );
       default:
