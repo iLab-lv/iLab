@@ -194,35 +194,7 @@ export default function DatoruRemontsPage() {
         )}
 
         {/* Process */}
-        <section className={s.section} aria-labelledby="process-h2">
-          <div className={s.container}>
-            <Process
-              id="process"
-              title="Kā notiek remonts"
-              steps={[
-                { title: 'Diagnostika', text: 'Pārbaudām datoru, nosakām bojājumu un iespējamos risinājumus.' },
-                {
-                  title: 'Cena un termiņš',
-                  text: 'Pirms darba saskaņojam izmaksas un izpildes termiņu, bez slēptām izmaksām.',
-                },
-                {
-                  title: 'Remonts',
-                  text: 'Veicam remontu, izmantojot kvalitatīvas detaļas un piemērotas remonta metodes.',
-                },
-                {
-                  title: 'Testēšana',
-                  text: 'Pārbaudām dzesēšanu, veiktspēju un visas galvenās funkcijas pēc remonta.',
-                },
-                {
-                  title: 'Garantija',
-                  text: '90 dienu garantija darbam un detaļām, kā arī ieteikumi turpmākai lietošanai.',
-                },
-              ]}
-              headingLevel={2}
-              variant="cards"
-            />
-          </div>
-        </section>
+        <Process />
 
         {/* Why — full width */}
         <section className={s.section}>

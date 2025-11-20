@@ -60,19 +60,8 @@ export default function HomeScreen() {
 
       {/* <Devices /> */}
 
-      <Process
-        id="process"
-        title="Kā notiek remonts"
-        steps={[
-          { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-          { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-          { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-          { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-          { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
-        ]}
-        headingLevel={2}
-        variant="cards"
-      />
+      <Process />
+
 
       <Why />
 

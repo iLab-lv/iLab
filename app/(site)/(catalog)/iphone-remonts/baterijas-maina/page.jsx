@@ -157,23 +157,7 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
       />
 
       {/* PROCESS */}
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process"
-            title="Kā notiek baterijas nomaiņa"
-            steps={[
-              { title: 'Diagnostika', text: 'Pārbaudām baterijas nolietojumu, uzlādes ķēdi un portu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Nomaiņa', text: 'Uzstādam oriģinālu vai OEM bateriju ar jaunu blīvējumu.' },
-              { title: 'Kalibrācija', text: 'Veicam kalibrāciju un testējam autonomiju/uzlādi.' },
-              { title: 'Garantija', text: '90 dienu garantija un lietošanas ieteikumi.' },
-            ]}
-            headingLevel={2}
-            variant="cards"
-          />
-        </div>
-      </section>
+      <Process />
 
       {/* WHY US */}
       <section className={s.section}>

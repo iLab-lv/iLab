@@ -437,18 +437,7 @@ export default function BrandComputersPage({ params }) {
       </section>
 
       {/* Process */}
-      <div id="process-h2" className={c.anchorTarget} />
-      <section className={c.section} aria-labelledby="process-h2">
-        <div className={c.container}>
-          <Process
-            id="process"
-            title="Kā notiek remonts"
-            steps={PROCESS_STEPS}
-            headingLevel={2}
-            variant="cards"
-          />
-        </div>
-      </section>
+      <Process />
 
       {/* Why — full width */}
       <section className={c.section}>

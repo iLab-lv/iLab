@@ -236,23 +236,7 @@ export default function IphoneRemontsPage() {
       )}
 
       {/* PROCESS */}
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process"
-            title="Kā notiek remonts"
-            steps={[
-              { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-              { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
-            ]}
-            headingLevel={2}
-            variant="cards"
-          />
-        </div>
-      </section>
+      <Process />
 
       {/* WHY */}
       <section className={s.section}>

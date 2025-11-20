@@ -260,41 +260,7 @@ export default function DysonRemontsPage() {
       </section>
 
       {/* PROCESS */}
-      <section className={s.section} aria-labelledby="dyson-process-h2">
-        <div className={s.container}>
-          <Process
-            id="dyson-process"
-            title="Kā notiek remonts"
-            steps={[
-              {
-                title: 'Diagnostika',
-                text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
-              },
-              {
-                title: 'Cena un termiņš',
-                text:
-                  'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
-              },
-              {
-                title: 'Remonts',
-                text:
-                  'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši prasībām.',
-              },
-              {
-                title: 'Pārbaude',
-                text:
-                  'Pārbaudām sūkšanas jaudu, temperatūru un darbības stabilitāti.',
-              },
-              {
-                title: 'Garantija',
-                text: '90 dienu garantija un uzturēšanas ieteikumi.',
-              },
-            ]}
-            headingLevel={2}
-            variant="cards"
-          />
-        </div>
-      </section>
+      <Process />
 
       {/* WHY */}
       <section className={s.section}>
