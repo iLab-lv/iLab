@@ -13,6 +13,7 @@ export const devicePricing = {
       { id: 'back-cover',         price: 'pēc pieprasījuma' },
       { id: 'battery',            price: 'pēc pieprasījuma', popular: true },
       { id: 'camera-glass',       price: 'pēc pieprasījuma' },
+      { id: 'camera',       price: '30' },
       { id: 'water-damage-clean', price: 'no 50' },
     ],
   },

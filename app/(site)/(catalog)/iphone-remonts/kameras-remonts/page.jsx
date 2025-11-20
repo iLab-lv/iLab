@@ -139,7 +139,7 @@ export default function IphoneKamerasRemontsPage({ searchParams }) {
         pricing={devicePricing}
         brandSlug="apple"
         categorySlug="telefonu-remonts"
-        serviceIds={['camera-glass']}   // ← from your devicePricing
+        serviceIds={['camera-glass' , 'camera']}   // ← from your devicePricing
         title="Kameras stikliņa maiņas cenas pēc modeļa"
         intro="Redzami skrāpējumi vai plaisas kameras stikliņā? Skaties stikliņa maiņas izmaksas pēc modeļa. Ja nepieciešama moduļa maiņa — to saskaņosim pēc diagnostikas."
         initialLimit={8}

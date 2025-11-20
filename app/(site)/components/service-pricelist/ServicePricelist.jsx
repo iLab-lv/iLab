@@ -1,10 +1,13 @@
 // app/(site)/components/service-pricelist/ServicePricelist.jsx
 'use client';
 
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import s from './ServicePricelist.module.scss';
+
+// 🔸 adjust this path if needed
+import repairServices from '@/data/repairServices';
 
 const PLACEHOLDER = '/images/placeholders/phone.webp';
 
@@ -24,6 +27,23 @@ const byYearDescThenNameAsc = (a, b) => {
   if (na > nb) return 1;
   return 0;
 };
+
+// ----- repairServices lookup -----
+const serviceMap = Object.fromEntries(
+  (repairServices || []).map((s) => [s.id, s])
+);
+
+function getServiceLabel(id) {
+  const meta = serviceMap[id];
+  if (meta?.title) return meta.title;
+  // Fallback: humanize the id
+  return String(id || '').replace(/-/g, ' ') || 'Remonta cena';
+}
+
+function getFallbackLabelFromIds(ids) {
+  if (!ids?.length) return 'Remonta cena';
+  return getServiceLabel(ids[0]);
+}
 
 export default function ServicePricelist({
   devices = [],
@@ -101,15 +121,15 @@ export default function ServicePricelist({
     if (!p) return { line: null, sid: null };
     const items = Array.isArray(p.items) ? p.items : [];
 
-    // priority by serviceIds
+    // 1) priority by serviceIds (in given order)
     for (const sid of serviceIds) {
       const found = items.find((it) => it.id === sid && it.price != null);
       if (found) return { line: found, sid };
     }
-    // popular
+    // 2) then popular
     const pop = items.find((it) => it.popular && it.price != null);
     if (pop) return { line: pop, sid: pop.id || null };
-    // any priced
+    // 3) any priced
     const any = items.find((it) => it.price != null) || null;
     return { line: any, sid: any?.id || null };
   }
@@ -124,6 +144,7 @@ export default function ServicePricelist({
   useEffect(() => {
     setImgSrc(resolveImageSrc(activeDevice));
   }, [activeDevice]);
+
   function resolveImageSrc(d) {
     const raw = (d?.image && String(d.image).trim()) || '';
     if (!raw) return PLACEHOLDER;
@@ -143,16 +164,18 @@ export default function ServicePricelist({
     }
   };
 
-  // compute variant list EXCLUDING primary
+  // compute variant list EXCLUDING primary, preserving serviceIds order when provided
   const variantLines = useMemo(() => {
     const p = activeDevice ? pricing[activeDevice.slug] : null;
     if (!p) return [];
     const items = Array.isArray(p.items) ? p.items : [];
+
     const ordered = serviceIds.length
       ? serviceIds
           .map((sid) => items.find((it) => it.id === sid && it.price != null))
           .filter(Boolean)
       : items.filter((it) => it.price != null);
+
     return ordered.filter((it) => it.id !== primarySid);
   }, [pricing, activeDevice, serviceIds, primarySid]);
 
@@ -162,7 +185,9 @@ export default function ServicePricelist({
       <section className={`${s.section} ${className || ''}`} aria-labelledby="sp-title">
         <div className={s.container}>
           <header className={s.header}>
-            <h2 id="sp-title" className={s.sectionTitle}>{title}</h2>
+            <h2 id="sp-title" className={s.sectionTitle}>
+              {title}
+            </h2>
             {intro && <p className={s.intro}>{intro}</p>}
           </header>
           <p className={s.emptyAll}>Šim zīmolam pašlaik nav pievienotu modeļu.</p>
@@ -175,7 +200,9 @@ export default function ServicePricelist({
     <section className={`${s.section} ${className || ''}`} aria-labelledby="sp-title">
       <div className={s.container}>
         <header className={s.header}>
-          <h2 id="sp-title" className={s.sectionTitle}>{title}</h2>
+          <h2 id="sp-title" className={s.sectionTitle}>
+            {title}
+          </h2>
           {intro && <p className={s.intro}>{intro}</p>}
         </header>
 
@@ -185,8 +212,12 @@ export default function ServicePricelist({
             <div className={s.previewCard}>
               <div className={s.previewHeader}>
                 <span className={s.modelName}>{activeDevice?.name}</span>
-                {activeDevice?.year && <span className={s.modelYear}>{activeDevice.year}</span>}
-                <span className={s.modelSeries}>{activeDevice?.series || 'Citi modeļi'}</span>
+                {activeDevice?.year && (
+                  <span className={s.modelYear}>{activeDevice.year}</span>
+                )}
+                <span className={s.modelSeries}>
+                  {activeDevice?.series || 'Citi modeļi'}
+                </span>
               </div>
 
               <div className={s.imageWrap}>
@@ -204,17 +235,25 @@ export default function ServicePricelist({
               <div className={s.previewBody}>
                 <div className={s.priceRow}>
                   <span className={s.priceLabel}>
-                    {primarySid ? prettyServiceId(primarySid) : labelForService(serviceIds)}
+                    {primarySid
+                      ? getServiceLabel(primarySid)
+                      : getFallbackLabelFromIds(serviceIds)}
                   </span>
-                  <span className={s.priceValue}>{formatPrice(primaryLine?.price)}</span>
+                  <span className={s.priceValue}>
+                    {formatPrice(primaryLine?.price)}
+                  </span>
                 </div>
 
                 {variantLines.length > 0 && (
                   <ul className={s.altList}>
                     {variantLines.map((line) => (
                       <li key={line.id} className={s.altItem}>
-                        <span className={s.altLabel}>{prettyServiceId(line.id)}</span>
-                        <span className={s.altPrice}>{formatPrice(line.price)}</span>
+                        <span className={s.altLabel}>
+                          {getServiceLabel(line.id)}
+                        </span>
+                        <span className={s.altPrice}>
+                          {formatPrice(line.price)}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -265,9 +304,14 @@ export default function ServicePricelist({
                                 <span
                                   role="button"
                                   tabIndex={0}
-                                  className={isActive ? s.modelLinkActive : s.modelLink}
+                                  className={
+                                    isActive ? s.modelLinkActive : s.modelLink
+                                  }
                                   onClick={() => onPick(d.slug)}
-                                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onPick(d.slug)}
+                                  onKeyDown={(e) =>
+                                    (e.key === 'Enter' || e.key === ' ') &&
+                                    onPick(d.slug)
+                                  }
                                   aria-current={isActive ? 'true' : undefined}
                                 >
                                   {d.name}
@@ -293,20 +337,4 @@ export default function ServicePricelist({
       </div>
     </section>
   );
-}
-
-// ----- Helpers -----
-function labelForService(ids) {
-  if (!ids?.length) return 'Remonta cena';
-  return prettyServiceId(ids[0]);
-}
-function prettyServiceId(id) {
-  switch (id) {
-    case 'display-original': return 'Displeja maiņa (oriģināls)';
-    case 'display-oled': return 'Displeja maiņa (OLED)';
-    case 'display-incell': return 'Displeja maiņa (InCell)';
-    case 'battery': return 'Akumulatora maiņa';
-    case 'charge-port': return 'Uzlādes ligzda';
-    default: return id.replace(/-/g, ' ');
-  }
 }

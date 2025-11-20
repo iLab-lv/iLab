@@ -71,6 +71,16 @@ const repairServices = [
     family: 'Kamera',
     defaultTimeText: '30–60 min',
     defaultWarrantyDays: 90,
+    order: 51,
+  },
+   {
+    id: 'camera',
+    title: 'Kameras maiņa',
+    slug: 'kameras-maina',
+    categories: ['telefonu-remonts'],
+    family: 'Kamera',
+    defaultTimeText: '30–60 min',
+    defaultWarrantyDays: 90,
     order: 50,
   },
   {
