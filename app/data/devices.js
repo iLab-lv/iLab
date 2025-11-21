@@ -161,6 +161,28 @@ const devices = [
     year: 2024,
     image: "/images/devices/iphone/iphone-16.webp",
     popular: true,
+    order: 104,
+    metaTitle: "iPhone 16e remonts Rīgā",
+    metaDescription: "iPhone 16e ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+    bodyHtml: `
+<p><strong>iPhone 16e</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
+  `,
+
+  },
+
+   {
+    slug: "iphone-16e",
+    category: "telefonu-remonts",
+    brand: "Apple",
+    brandSlug: "apple",
+    series: "iPhone 16 sērija",
+    seriesSlug: "iphone-16-serija",
+    name: "iPhone 16e",
+    year: 2024,
+    image: "/images/devices/iphone/iphone-16e.webp",
+    popular: true,
     order: 103,
     metaTitle: "iPhone 16 remonts Rīgā",
     metaDescription: "iPhone 16 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
@@ -2565,21 +2587,43 @@ const devices = [
   
 
   {
-    slug: "ipad-pro-12-9",
+    slug: "ipad-pro-12-9-6th",
     category: "plansetdatoru-remonts",
     brand: "Apple",
     brandSlug: "ipad",
     series: "iPad Pro sērija",
     seriesSlug: "ipad-pro-serija",
-    name: "iPad Pro 12.9",
+    name: 'iPad Pro 12.9" (6th gen. M2) 2022',
     year: 2022,
-    image: "/images/devices/tablet/ipad/ipad-pro-12.webp",
+    image: "/images/devices/tablet/ipad/ipad-pro-12-6th.webp",
     popular: true,
     order: 500,
     metaTitle: "iPad Pro 12.9 remonts Rīgā",
     metaDescription: "iPad Pro 12.9 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
     bodyHtml: `
 <p><strong>iPad Pro 12.9</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
+  `,
+
+  },
+
+  {
+    slug: "ipad-pro-11-7th",
+    category: "plansetdatoru-remonts",
+    brand: "Apple",
+    brandSlug: "ipad",
+    series: "iPad Pro sērija",
+    seriesSlug: "ipad-pro-serija",
+    name: 'iPad Pro 11" (7th gen. M4) 2024',
+    year: 2022,
+    image: "/images/devices/tablet/ipad/ipad-pro-11-7th.webp",
+    popular: true,
+    order: 500,
+    metaTitle: "iPad Pro 11 M4 remonts Rīgā",
+    metaDescription: "iPad Pro 11 M4 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+    bodyHtml: `
+<p><strong>iPad Pro 11 M4</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
