@@ -2584,51 +2584,690 @@ const devices = [
 
   },
 
-  
 
-  {
-    slug: "ipad-pro-12-9-6th",
-    category: "plansetdatoru-remonts",
-    brand: "Apple",
-    brandSlug: "ipad",
-    series: "iPad Pro sērija",
-    seriesSlug: "ipad-pro-serija",
-    name: 'iPad Pro 12.9" (6th gen. M2) 2022',
-    year: 2022,
-    image: "/images/devices/tablet/ipad/ipad-pro-12-6th.webp",
-    popular: true,
-    order: 500,
-    metaTitle: "iPad Pro 12.9 remonts Rīgā",
-    metaDescription: "iPad Pro 12.9 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPad Pro 12.9</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
+  // ------------------------
+// iPad family
+// ------------------------
+
+// ------------------------
+// iPad (base line)
+// ------------------------
+
+
+
+{
+  slug: 'ipad-9-7-5th-gen-2017',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 9.7" (5 gen. 2017) (A1822, A1823)',
+  year: 2017,
+  image: '/images/devices/tablet/ipad/ipad-9-7-5th-gen-2017.webp',
+  popular: false,
+  order: 130,
+  metaTitle: 'iPad 9.7" (5 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 9.7" (5 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 9.7" (5 gen. 2017) (A1822, A1823)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
+},
 
-  },
-
-  {
-    slug: "ipad-pro-11-7th",
-    category: "plansetdatoru-remonts",
-    brand: "Apple",
-    brandSlug: "ipad",
-    series: "iPad Pro sērija",
-    seriesSlug: "ipad-pro-serija",
-    name: 'iPad Pro 11" (7th gen. M4) 2024',
-    year: 2022,
-    image: "/images/devices/tablet/ipad/ipad-pro-11-7th.webp",
-    popular: true,
-    order: 500,
-    metaTitle: "iPad Pro 11 M4 remonts Rīgā",
-    metaDescription: "iPad Pro 11 M4 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>iPad Pro 11 M4</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
-    <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
+{
+  slug: 'ipad-9-7-6th-gen-2018',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 9.7" (6 gen. 2018) (A1893, A1954)',
+  year: 2018,
+  image: '/images/devices/tablet/ipad/ipad-9-7-6th-gen-2018.webp',
+  popular: false,
+  order: 140,
+  metaTitle: 'iPad 9.7" (6 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 9.7" (6 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 9.7" (6 gen. 2018) (A1893, A1954)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
+},
 
-  }
+{
+  slug: 'ipad-10-2-7th-gen-2019',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 10.2" (7 gen. 2019) (A2198, A2197)',
+  year: 2019,
+  image: '/images/devices/tablet/ipad/ipad-10-2-7th-gen-2019.webp',
+  popular: false,
+  order: 150,
+  metaTitle: 'iPad 10.2" (7 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 10.2" (7 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 10.2" (7 gen. 2019) (A2198, A2197)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-10-2-8th-gen-2020',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 10.2" (8 gen. 2020) (A2270, A2429)',
+  year: 2020,
+  image: '/images/devices/tablet/ipad/ipad-10-2-8th-gen-2020.webp',
+  popular: false,
+  order: 160,
+  metaTitle: 'iPad 10.2" (8 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 10.2" (8 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 10.2" (8 gen. 2020) (A2270, A2429)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-10-2-9th-gen-2021',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 10.2" (9 gen. 2021) (A2602, A2604)',
+  year: 2021,
+  image: '/images/devices/tablet/ipad/ipad-10-2-9th-gen-2021.webp',
+  popular: false,
+  order: 170,
+  metaTitle: 'iPad 10.2" (9 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 10.2" (9 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 10.2" (9 gen. 2021) (A2602, A2604)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-10-9-10th-gen-2022',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad sērija',
+  seriesSlug: 'ipad-serija',
+  name: 'iPad 10.9" (10 gen. 2022) (A2696, A2757)',
+  year: 2022,
+  image: '/images/devices/tablet/ipad/ipad-10-9-10th-gen-2022.webp',
+  popular: false,
+  order: 180,
+  metaTitle: 'iPad 10.9" (10 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad 10.9" (10 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad 10.9" (10 gen. 2022) (A2696, A2757)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+// ------------------------
+// iPad mini
+// ------------------------
+
+{
+  slug: 'ipad-mini-4th-gen-2015',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad mini sērija',
+  seriesSlug: 'ipad-mini-serija',
+  name: 'iPad mini 4 (2015) (A1550)',
+  year: 2015,
+  image: '/images/devices/tablet/ipad/ipad-mini-4th-gen-2015.webp',
+  popular: false,
+  order: 230,
+  metaTitle: 'iPad mini 4 remonts Rīgā | iLab',
+  metaDescription:
+    'iPad mini 4 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad mini 4 (2015) (A1550)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-mini-5th-gen-2019',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad mini sērija',
+  seriesSlug: 'ipad-mini-serija',
+  name: 'iPad mini 5 (2019) (A2124, A2133)',
+  year: 2019,
+  image: '/images/devices/tablet/ipad/ipad-mini-5th-gen-2019.webp',
+  popular: false,
+  order: 240,
+  metaTitle: 'iPad mini 5 remonts Rīgā | iLab',
+  metaDescription:
+    'iPad mini 5 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad mini 5 (2019) (A2124, A2133)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-mini-6th-gen-2021',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad mini sērija',
+  seriesSlug: 'ipad-mini-serija',
+  name: 'iPad mini 6 (2021) (A2567, A2568)',
+  year: 2021,
+  image: '/images/devices/tablet/ipad/ipad-mini-6th-gen-2021.webp',
+  popular: false,
+  order: 250,
+  metaTitle: 'iPad mini 6 remonts Rīgā | iLab',
+  metaDescription:
+    'iPad mini 6 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad mini 6 (2021) (A2567, A2568)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-mini-7th-gen-2024',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad mini sērija',
+  seriesSlug: 'ipad-mini-serija',
+  name: 'iPad mini 7 (2024)',
+  year: 2024,
+  image: '/images/devices/tablet/ipad/ipad-mini-7th-gen-2024.webp',
+  popular: true,
+  order: 260,
+  metaTitle: 'iPad mini 7 remonts Rīgā | iLab',
+  metaDescription:
+    'iPad mini 7 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad mini 7 (2024)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+// ------------------------
+// iPad Air
+// ------------------------
+
+{
+  slug: 'ipad-air-1st-gen-2013',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air (1 gen. 2013) (A1474, A1475)',
+  year: 2013,
+  image: '/images/devices/tablet/ipad/ipad-air-1st-gen-2013.webp',
+  popular: false,
+  order: 300,
+  metaTitle: 'iPad Air (1 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air (1 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air (1 gen. 2013) (A1474, A1475)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-2nd-gen-2014',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 2 (2014) (A1566, A1567)',
+  year: 2014,
+  image: '/images/devices/tablet/ipad/ipad-air-2nd-gen-2014.webp',
+  popular: false,
+  order: 310,
+  metaTitle: 'iPad Air 2 remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 2 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 2 (2014) (A1566, A1567)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-10-5-3rd-gen-2019',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 10.5" (3 gen. 2019) (A2152)',
+  year: 2019,
+  image: '/images/devices/tablet/ipad/ipad-air-10-5-3rd-gen-2019.webp',
+  popular: false,
+  order: 320,
+  metaTitle: 'iPad Air 10.5" (3 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 10.5" (3 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 10.5" (3 gen. 2019) (A2152)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-10-9-4th-gen-2020',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 10.9" (4 gen. 2020) (A2072, A2316)',
+  year: 2020,
+  image: '/images/devices/tablet/ipad/ipad-air-10-9-4th-gen-2020.webp',
+  popular: false,
+  order: 330,
+  metaTitle: 'iPad Air 10.9" (4 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 10.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 10.9" (4 gen. 2020) (A2072, A2316)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-10-9-5th-gen-m1-2022',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 10.9" (5 gen. M1, 2022) (A2588)',
+  year: 2022,
+  image: '/images/devices/tablet/ipad/ipad-air-10-9-5th-gen-m1-2022.webp',
+  popular: false,
+  order: 340,
+  metaTitle: 'iPad Air 10.9" (5 gen. M1) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 10.9" (5 gen. M1) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 10.9" (5 gen. M1, 2022) (A2588)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-11-6th-gen-m2-2024',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 11" (6 gen. M2, 2024)',
+  year: 2024,
+  image: '/images/devices/tablet/ipad/ipad-air-11-6th-gen-m2-2024.webp',
+  popular: true,
+  order: 350,
+  metaTitle: 'iPad Air 11" (6 gen. M2) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 11" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 11" (6 gen. M2, 2024)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-air-13-6th-gen-m2-2024',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Air sērija',
+  seriesSlug: 'ipad-air-serija',
+  name: 'iPad Air 13" (6 gen. M2, 2024)',
+  year: 2024,
+  image: '/images/devices/tablet/ipad/ipad-air-13-6th-gen-m2-2024.webp',
+  popular: true,
+  order: 360,
+  metaTitle: 'iPad Air 13" (6 gen. M2) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Air 13" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Air 13" (6 gen. M2, 2024)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+// ------------------------
+// iPad Pro 9.7" / 10.5"
+// ------------------------
+
+{
+  slug: 'ipad-pro-9-7-2016',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 9.7" (2016)',
+  year: 2016,
+  image: '/images/devices/tablet/ipad/ipad-pro-9-7-2016.webp',
+  popular: false,
+  order: 400,
+  metaTitle: 'iPad Pro 9.7" remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 9.7" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 9.7" (2016)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-10-5-2017',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 10.5" (2017)',
+  year: 2017,
+  image: '/images/devices/tablet/ipad/ipad-pro-10-5-2017.webp',
+  popular: false,
+  order: 410,
+  metaTitle: 'iPad Pro 10.5" remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 10.5" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 10.5" (2017)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+// ------------------------
+// iPad Pro 11"
+// ------------------------
+
+{
+  slug: 'ipad-pro-11-2018',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 11" (1 gen. 2018) (A1934, A1980)',
+  year: 2018,
+  image: '/images/devices/tablet/ipad/ipad-pro-11-2018.webp',
+  popular: false,
+  order: 500,
+  metaTitle: 'iPad Pro 11" (2018) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 11" (2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 11" (1 gen. 2018) (A1934, A1980)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-11-2020',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 11" (2 gen. 2020) (A2230)',
+  year: 2020,
+  image: '/images/devices/tablet/ipad/ipad-pro-11-2020.webp',
+  popular: false,
+  order: 510,
+  metaTitle: 'iPad Pro 11" (2 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 11" (2 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 11" (2 gen. 2020) (A2230)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-11-m1-2021',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 11" (3 gen. M1, 2021) (A2377, A2459)',
+  year: 2021,
+  image: '/images/devices/tablet/ipad/ipad-pro-11-m1-2021.webp',
+  popular: false,
+  order: 520,
+  metaTitle: 'iPad Pro 11" (M1, 2021) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 11" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 11" (3 gen. M1, 2021) (A2377, A2459)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-11-m2-2022',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 11" (4 gen. M2, 2022) (A2759)',
+  year: 2022,
+  image: '/images/devices/tablet/ipad/ipad-pro-11-m2-2022.webp',
+  popular: false,
+  order: 530,
+  metaTitle: 'iPad Pro 11" (M2, 2022) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 11" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 11" (4 gen. M2, 2022) (A2759)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-11-m4-2024',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 11" (7 gen. M4, 2024)',
+  year: 2024,
+  image: '/images/devices/tablet/ipad/ipad-pro-11-m4-2024.webp',
+  popular: true,
+  order: 540,
+  metaTitle: 'iPad Pro 11" (M4, 2024) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 11" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 11" (7 gen. M4, 2024)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+// ------------------------
+// iPad Pro 12.9" / 13"
+// ------------------------
+
+{
+  slug: 'ipad-pro-12-9-2015',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (1 gen. 2015) (A1584)',
+  year: 2015,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-2015.webp',
+  popular: false,
+  order: 600,
+  metaTitle: 'iPad Pro 12.9" (2015) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (2015) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (1 gen. 2015) (A1584)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-12-9-2017',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (2 gen. 2017)',
+  year: 2017,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-2017.webp',
+  popular: false,
+  order: 610,
+  metaTitle: 'iPad Pro 12.9" (2 gen. 2017) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (2 gen. 2017) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (2 gen. 2017)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-12-9-2018',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (3 gen. 2018)',
+  year: 2018,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-2018.webp',
+  popular: false,
+  order: 620,
+  metaTitle: 'iPad Pro 12.9" (3 gen. 2018) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (3 gen. 2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (3 gen. 2018)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-12-9-2020',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (4 gen. 2020) (A2232)',
+  year: 2020,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-2020.webp',
+  popular: false,
+  order: 630,
+  metaTitle: 'iPad Pro 12.9" (4 gen.) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (4 gen. 2020) (A2232)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-12-9-m1-2021',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (5 gen. M1, 2021)',
+  year: 2021,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-m1-2021.webp',
+  popular: false,
+  order: 640,
+  metaTitle: 'iPad Pro 12.9" (M1, 2021) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (5 gen. M1, 2021)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-12-9-m2-2022',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 12.9" (6 gen. M2, 2022)',
+  year: 2022,
+  image: '/images/devices/tablet/ipad/ipad-pro-12-9-m2-2022.webp',
+  popular: true,
+  order: 650,
+  metaTitle: 'iPad Pro 12.9" (M2, 2022) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 12.9" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 12.9" (6 gen. M2, 2022)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+{
+  slug: 'ipad-pro-13-m4-2024',
+  category: 'plansetdatoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'ipad',
+  series: 'iPad Pro sērija',
+  seriesSlug: 'ipad-pro-serija',
+  name: 'iPad Pro 13" (M4, 2024)',
+  year: 2024,
+  image: '/images/devices/tablet/ipad/ipad-pro-13-m4-2024.webp',
+  popular: true,
+  order: 660,
+  metaTitle: 'iPad Pro 13" (M4, 2024) remonts Rīgā | iLab',
+  metaDescription:
+    'iPad Pro 13" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  bodyHtml: `
+<p><strong>iPad Pro 13" (M4, 2024)</strong> remonts Rīgā — ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
+  `,
+},
+
+
+
 ];
 
 export default devices;

@@ -628,6 +628,314 @@ export const devicePricing = {
       { id: 'camera', price: 270 },
     ],
   },
+
+  // --------------------------------------
+// iPad PRICING
+// --------------------------------------
+
+  // iPad 9.7"
+  'ipad-9-7-5th-gen-2017': {
+    items: [
+      { id: 'touchscreen', price: 80 },
+      { id: 'display',     price: 120 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-9-7-6th-gen-2018': {
+    items: [
+      { id: 'touchscreen', price: 90 },
+      { id: 'display',     price: 120 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  // iPad 10.2"
+  'ipad-10-2-7th-gen-2019': {
+    items: [
+      { id: 'touchscreen', price: 90 },
+      { id: 'display',     price: 140 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-10-2-8th-gen-2020': {
+    items: [
+      { id: 'touchscreen', price: 90 },
+      { id: 'display',     price: 140 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-10-2-9th-gen-2021': {
+    items: [
+      { id: 'touchscreen', price: 90 },
+      { id: 'display',     price: 140 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  // iPad 10.9"
+  'ipad-10-9-10th-gen-2022': {
+    items: [
+      { id: 'touchscreen', price: 110 },
+      { id: 'display',     price: 180 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  // --------------------------------------
+  // iPad mini
+  // --------------------------------------
+
+  'ipad-mini-4th-gen-2015': {
+    items: [
+      { id: 'touchscreen', price: null },    // laminated → not applicable
+      { id: 'display',     price: 140 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-mini-5th-gen-2019': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 160 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-mini-6th-gen-2021': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 300 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-mini-7th-gen-2024': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 360 },
+      { id: 'charge-port', price: 120 },
+      { id: 'battery',     price: 150 },
+    ],
+  },
+
+  // --------------------------------------
+  // iPad Air
+  // --------------------------------------
+
+  'ipad-air-1st-gen-2013': {
+    items: [
+      { id: 'touchscreen', price: 80 },
+      { id: 'display',     price: 120 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-air-2nd-gen-2014': {
+    items: [
+      { id: 'touchscreen', price: null },   // laminated
+      { id: 'display',     price: 120 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 80 },
+    ],
+  },
+
+  'ipad-air-10-5-3rd-gen-2019': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 150 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-air-10-9-4th-gen-2020': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 280 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-air-10-9-5th-gen-m1-2022': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 280 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-air-11-6th-gen-m2-2024': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 350 },
+      { id: 'charge-port', price: 150 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-air-13-6th-gen-m2-2024': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 400 },
+      { id: 'charge-port', price: 150 },
+      { id: 'battery',     price: 150 },
+    ],
+  },
+
+  // --------------------------------------
+  // iPad Pro 9.7" / 10.5"
+  // --------------------------------------
+
+  'ipad-pro-9-7-2016': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 160 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 90 },
+    ],
+  },
+
+  'ipad-pro-10-5-2017': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 190 },
+      { id: 'charge-port', price: 80 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  // --------------------------------------
+  // iPad Pro 11"
+  // --------------------------------------
+
+  'ipad-pro-11-2018': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 280 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-pro-11-2020': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 280 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-pro-11-m1-2021': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 300 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-pro-11-m2-2022': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 300 },
+      { id: 'charge-port', price: 120 },
+      { id: 'battery',     price: 100 },
+    ],
+  },
+
+  'ipad-pro-11-m4-2024': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: '' },        // pēc pieprasījuma
+      { id: 'charge-port', price: '' },        // pēc pieprasījuma
+      { id: 'battery',     price: '' },        // pēc pieprasījuma
+    ],
+  },
+
+  // --------------------------------------
+  // iPad Pro 12.9"
+  // --------------------------------------
+
+  'ipad-pro-12-9-2015': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 350 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-pro-12-9-2017': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 380 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-pro-12-9-2018': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 300 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-pro-12-9-2020': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 320 },
+      { id: 'charge-port', price: 100 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-pro-12-9-m1-2021': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 350 },
+      { id: 'charge-port', price: 120 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  'ipad-pro-12-9-m2-2022': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: 350 },
+      { id: 'charge-port', price: 120 },
+      { id: 'battery',     price: 120 },
+    ],
+  },
+
+  // iPad Pro 13" M4
+  'ipad-pro-13-m4-2024': {
+    items: [
+      { id: 'touchscreen', price: null },
+      { id: 'display',     price: '' },       // pēc pieprasījuma
+      { id: 'charge-port', price: '' },       // pēc pieprasījuma
+      { id: 'battery',     price: '' },       // pēc pieprasījuma
+    ],
+  },
+
 };
 
 export default devicePricing;

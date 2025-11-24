@@ -33,18 +33,37 @@ function fmtPrice(from, to, currency = 'EUR') {
 }
 
 // NEW: prefer plain text price if provided (now number-safe)
+// Rules:
+// - price: number -> "123 €"
+// - price: "no 50" -> "no 50 €"
+// - price: "pēc pieprasījuma" -> "pēc pieprasījuma"
+// - price: "" (empty string) AND no priceFrom/priceTo -> "pēc pieprasījuma"
+// - legacy priceFrom/priceTo -> fmtPrice(...)
 function fmtPriceText(item, currency = 'EUR') {
   const v = item?.price;
   const t = v == null ? '' : (typeof v === 'string' ? v.trim() : String(v));
+
   if (t) {
     // Add € if looks numeric, a range, or "no <num>"
     const numericLike =
       /^[0-9]+([.,][0-9]+)?(\s*[–-]\s*[0-9]+([.,][0-9]+)?)?$/.test(t) ||
       /^no\s*[0-9]/i.test(t);
+
     return numericLike ? `${t.replace(/\s+/g, ' ')} €` : t;
   }
-  // Fallback to legacy from/to
-  return fmtPrice(item.priceFrom, item.priceTo, currency);
+
+  // t is empty string or price is null/undefined here
+
+  // If legacy from/to prices exist -> keep old behavior
+  if (
+    typeof item?.priceFrom === 'number' ||
+    typeof item?.priceTo === 'number'
+  ) {
+    return fmtPrice(item.priceFrom, item.priceTo, currency);
+  }
+
+  // No text price and no numeric from/to -> on request
+  return 'pēc pieprasījuma';
 }
 
 export default function PriceList({
@@ -57,7 +76,7 @@ export default function PriceList({
   showNotes = true,
 }) {
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
-  const { openContact } = useUiDialogs();
+  const { openBook } = useUiDialogs();
 
   if (!items || items.length === 0) return null;
 
@@ -67,7 +86,9 @@ export default function PriceList({
   return (
     <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
-        <Heading id={`${id}-title`} className={s.title}>{title}</Heading>
+        <Heading id={`${id}-title`} className={s.title}>
+          {title}
+        </Heading>
 
         {/* Desktop table */}
         <div className={s.table} role="table" aria-label={title}>
@@ -89,7 +110,9 @@ export default function PriceList({
                 </div>
               </div>
               <div className={s.td} role="cell">
-                <span className={s.chip}>{fmtTimeText(it.timeText, it.timeMin, it.timeMax)}</span>
+                <span className={s.chip}>
+                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
+                </span>
               </div>
               <div className={s.td} role="cell">
                 <span className={s.price}>{fmtPriceText(it, currency)}</span>
@@ -98,9 +121,9 @@ export default function PriceList({
                 <button
                   type="button"
                   className={s.bookBtn}
-                  onClick={(e) => openContact?.(e.currentTarget)}
+                  onClick={(e) => openBook?.(e.currentTarget)}
                   aria-haspopup="dialog"
-                  aria-controls="sazinaties-panel"
+                  aria-controls="pieraksties-panel"
                 >
                   {bookLabel}
                 </button>
@@ -120,16 +143,18 @@ export default function PriceList({
                 {/* Popular badge removed */}
               </header>
               <div className={s.metaRow}>
-                <span className={s.chip}>{fmtTimeText(it.timeText, it.timeMin, it.timeMax)}</span>
+                <span className={s.chip}>
+                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
+                </span>
                 <span className={s.price}>{fmtPriceText(it, currency)}</span>
               </div>
               <div className={s.ctaRow}>
                 <button
                   type="button"
                   className={s.bookBtn}
-                  onClick={(e) => openContact?.(e.currentTarget)}
+                  onClick={(e) => openBook?.(e.currentTarget)}
                   aria-haspopup="dialog"
-                  aria-controls="sazinaties-panel"
+                  aria-controls="pieraksties-panel"
                 >
                   {bookLabel}
                 </button>

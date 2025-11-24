@@ -34,10 +34,32 @@ const repairServices = [
     order: 12,
   },
   {
+    id: 'display',
+    title: 'Displeja maiņa',
+    slug: 'displeja-maina',
+    categories: ['plansetdatoru-remonts'],
+    family: 'Ekrāns',
+    defaultTimeText: '60–120 min',
+    defaultWarrantyDays: 90,
+    order: 13,
+  },
+  {
+    id: 'touchscreen',
+    title: 'Skārienekrāna maiņa',
+    slug: 'skarienekrana-maina',
+    categories: ['plansetdatoru-remonts'],
+    family: 'Ekrāns',
+    defaultTimeText: '60–120 min',
+    defaultWarrantyDays: 90,
+    order: 14,
+  },
+
+
+  {
     id: 'charge-port',
     title: 'Lādēšanas konektora maiņa',
     slug: 'ladesanas-konektora-maina',
-    categories: ['telefonu-remonts'],
+    categories: ['telefonu-remonts', 'plansetdatoru-remonts'],
     family: 'Barošana un uzlāde',
     defaultTimeText: '60–180 min',
     defaultWarrantyDays: 90,
@@ -57,7 +79,7 @@ const repairServices = [
     id: 'battery',
     title: 'Baterijas maiņa',
     slug: 'baterijas-maina',
-    categories: ['telefonu-remonts'],
+    categories: ['telefonu-remonts', 'plansetdatoru-remonts'],
     family: 'Barošana un uzlāde',
     defaultTimeText: '30–120 min',
     defaultWarrantyDays: 90,
@@ -73,7 +95,7 @@ const repairServices = [
     defaultWarrantyDays: 90,
     order: 51,
   },
-   {
+  {
     id: 'camera',
     title: 'Kameras maiņa',
     slug: 'kameras-maina',
