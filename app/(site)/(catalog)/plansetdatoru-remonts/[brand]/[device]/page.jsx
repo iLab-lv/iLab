@@ -125,7 +125,9 @@ function buildPriceListItems(modelSlug) {
         priceFrom,
         priceTo,
         popular: false,
-        // if base.slug already includes full path, this stays fine
+        // If base.slug already includes full path, this stays fine.
+        // Price list rows are usually non-clickable; if PriceList uses href,
+        // this is still here, but Services section below is non-clickable.
         href: base.slug ? `/${base.slug}` : base.href,
       };
     })
@@ -140,36 +142,33 @@ function buildPriceListItems(modelSlug) {
   return { items: merged, currency: DEFAULT_CURRENCY };
 }
 
-// Popular services grid for tablets
+// Popular services grid for this model
+// NOTE: to match the brand page behavior, these cards are intentionally
+// NON-CLICKABLE, so we do NOT include `href` here.
 function buildModelServices() {
   return [
     {
       title: 'Displeja (ekrāna) maiņa',
-      href: '/plansetdatoru-remonts/displeja-maina',
       text: 'plaisas, plankumi, nereaģē skāriens.',
       icon: LuTabletSmartphone,
     },
     {
       title: 'Akumulatora maiņa',
-      href: '/plansetdatoru-remonts/baterijas-maina',
       text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
       icon: LuBatteryCharging,
     },
     {
       title: 'Uzlādes ligzdas remonts',
-      href: '/plansetdatoru-remonts/uzlades-ligzdas-maina',
       text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
       icon: LuPlugZap,
     },
     {
       title: 'Kameras remonts',
-      href: '/plansetdatoru-remonts/kameras-remonts',
       text: 'miglaini attēli, fokusēšanās problēmas.',
       icon: LuCamera,
     },
     {
       title: 'Ūdens bojājumi',
-      href: '/plansetdatoru-remonts/udens-bojajumu-remonts',
       text: 'diagnostika un atjaunošana, ja tas iespējams.',
       icon: LuDroplets,
     },
@@ -317,7 +316,7 @@ export default async function Page({ params }) {
         bodyHtml={d.bodyHtml || null}
       />
 
-      {/* Popular services for this model */}
+      {/* Popular services for this model – non-clickable, same behavior as brand page */}
       <Services
         id="tablet-services"
         title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
