@@ -630,11 +630,11 @@ export const devicePricing = {
   },
 
   // --------------------------------------
-// iPad PRICING
-// --------------------------------------
+  // iPad PRICING
+  // --------------------------------------
 
   // iPad 9.7"
-  'ipad-9-7-5th-gen-2017': {
+  '9-7-5th-gen-2017': {
     items: [
       { id: 'touchscreen', price: 80 },
       { id: 'display',     price: 120 },
@@ -643,7 +643,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-9-7-6th-gen-2018': {
+  '9-7-6th-gen-2018': {
     items: [
       { id: 'touchscreen', price: 90 },
       { id: 'display',     price: 120 },
@@ -653,7 +653,7 @@ export const devicePricing = {
   },
 
   // iPad 10.2"
-  'ipad-10-2-7th-gen-2019': {
+  '10-2-7th-gen-2019': {
     items: [
       { id: 'touchscreen', price: 90 },
       { id: 'display',     price: 140 },
@@ -662,7 +662,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-10-2-8th-gen-2020': {
+  '10-2-8th-gen-2020': {
     items: [
       { id: 'touchscreen', price: 90 },
       { id: 'display',     price: 140 },
@@ -671,7 +671,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-10-2-9th-gen-2021': {
+  '10-2-9th-gen-2021': {
     items: [
       { id: 'touchscreen', price: 90 },
       { id: 'display',     price: 140 },
@@ -681,7 +681,7 @@ export const devicePricing = {
   },
 
   // iPad 10.9"
-  'ipad-10-9-10th-gen-2022': {
+  '10-9-10th-gen-2022': {
     items: [
       { id: 'touchscreen', price: 110 },
       { id: 'display',     price: 180 },
@@ -694,7 +694,7 @@ export const devicePricing = {
   // iPad mini
   // --------------------------------------
 
-  'ipad-mini-4th-gen-2015': {
+  'mini-4th-gen-2015': {
     items: [
       { id: 'touchscreen', price: null },    // laminated → not applicable
       { id: 'display',     price: 140 },
@@ -703,7 +703,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-mini-5th-gen-2019': {
+  'mini-5th-gen-2019': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 160 },
@@ -712,7 +712,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-mini-6th-gen-2021': {
+  'mini-6th-gen-2021': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 300 },
@@ -721,7 +721,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-mini-7th-gen-2024': {
+  'mini-7th-gen-2024': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 360 },
@@ -734,7 +734,7 @@ export const devicePricing = {
   // iPad Air
   // --------------------------------------
 
-  'ipad-air-1st-gen-2013': {
+  'air-1st-gen-2013': {
     items: [
       { id: 'touchscreen', price: 80 },
       { id: 'display',     price: 120 },
@@ -743,7 +743,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-2nd-gen-2014': {
+  'air-2nd-gen-2014': {
     items: [
       { id: 'touchscreen', price: null },   // laminated
       { id: 'display',     price: 120 },
@@ -752,7 +752,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-10-5-3rd-gen-2019': {
+  'air-10-5-3rd-gen-2019': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 150 },
@@ -761,7 +761,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-10-9-4th-gen-2020': {
+  'air-10-9-4th-gen-2020': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 280 },
@@ -770,7 +770,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-10-9-5th-gen-m1-2022': {
+  'air-10-9-5th-gen-m1-2022': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 280 },
@@ -779,7 +779,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-11-6th-gen-m2-2024': {
+  'air-11-6th-gen-m2-2024': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 350 },
@@ -788,7 +788,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-air-13-6th-gen-m2-2024': {
+  'air-13-6th-gen-m2-2024': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 400 },
@@ -801,7 +801,7 @@ export const devicePricing = {
   // iPad Pro 9.7" / 10.5"
   // --------------------------------------
 
-  'ipad-pro-9-7-2016': {
+  'pro-9-7-2016': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 160 },
@@ -810,7 +810,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-10-5-2017': {
+  'pro-10-5-2017': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 190 },
@@ -823,7 +823,7 @@ export const devicePricing = {
   // iPad Pro 11"
   // --------------------------------------
 
-  'ipad-pro-11-2018': {
+  'pro-11-2018': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 280 },
@@ -832,7 +832,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-11-2020': {
+  'pro-11-2020': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 280 },
@@ -841,7 +841,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-11-m1-2021': {
+  'pro-11-m1-2021': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 300 },
@@ -850,7 +850,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-11-m2-2022': {
+  'pro-11-m2-2022': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 300 },
@@ -859,7 +859,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-11-m4-2024': {
+  'pro-11-m4-2024': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: '' },        // pēc pieprasījuma
@@ -872,7 +872,7 @@ export const devicePricing = {
   // iPad Pro 12.9"
   // --------------------------------------
 
-  'ipad-pro-12-9-2015': {
+  'pro-12-9-2015': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 350 },
@@ -881,7 +881,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-12-9-2017': {
+  'pro-12-9-2017': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 380 },
@@ -890,7 +890,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-12-9-2018': {
+  'pro-12-9-2018': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 300 },
@@ -899,7 +899,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-12-9-2020': {
+  'pro-12-9-2020': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 320 },
@@ -908,7 +908,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-12-9-m1-2021': {
+  'pro-12-9-m1-2021': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 350 },
@@ -917,7 +917,7 @@ export const devicePricing = {
     ],
   },
 
-  'ipad-pro-12-9-m2-2022': {
+  'pro-12-9-m2-2022': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: 350 },
@@ -927,7 +927,7 @@ export const devicePricing = {
   },
 
   // iPad Pro 13" M4
-  'ipad-pro-13-m4-2024': {
+  'pro-13-m4-2024': {
     items: [
       { id: 'touchscreen', price: null },
       { id: 'display',     price: '' },       // pēc pieprasījuma
@@ -935,6 +935,7 @@ export const devicePricing = {
       { id: 'battery',     price: '' },       // pēc pieprasījuma
     ],
   },
+
 
 };
 

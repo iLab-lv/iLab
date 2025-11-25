@@ -7,8 +7,9 @@ import { usePathname } from 'next/navigation';
 
 import categories from '@/data/categories';
 import contentRegistry from '@/data/contentRegistry';
-import categoryContent from '@/data/categoryContent'; // 👈 NEW: fallback source
+import categoryContent from '@/data/categoryContent'; // 👈 fallback source
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
+import devices from '@/data/devices'; // 👈 use device.name for titles/crumbs
 
 import ScrollCta from '@components/button/ScrollCta';
 import s from './PageHeader.module.scss';
@@ -38,7 +39,9 @@ function getBrand(cat, brandSlug) {
  * - Single source of truth for service pages:
  *   - If route is "/<category>/<service>" AND that key exists in contentRegistry.services,
  *     we use its h1/lead and add a 3rd breadcrumb.
- * - Hubs, brand pages, and device pages keep your existing behavior (with a tiny fix).
+ * - Hubs, brand pages, and device pages keep your existing behavior,
+ *   with a key improvement: device pages now use device.name (from devices)
+ *   instead of slug-derived labels for titles/breadcrumbs when possible.
  */
 export default function PageHeader({
   title,
@@ -76,20 +79,45 @@ export default function PageHeader({
     const isGenericDevice = parts.length >= 3;
     const isDevicePage = isIphoneDevice || isGenericDevice;
 
+    // --- try to resolve a concrete device from data for device pages
+    let device = null;
+    if (isDevicePage) {
+      if (isIphoneDevice && secondSeg) {
+        // iPhone devices: /iphone-remonts/<device-slug>
+        device =
+          devices.find(
+            (d) =>
+              d.slug === secondSeg &&
+              d.category === 'telefonu-remonts' &&
+              (d.brandSlug === 'apple' || d.brand === 'Apple')
+          ) || null;
+      } else if (isGenericDevice && thirdSeg && categorySlug) {
+        // Generic 3+ segment devices, e.g. /plansetdatoru-remonts/ipad/<device-slug>
+        device =
+          devices.find(
+            (d) =>
+              d.slug === thirdSeg &&
+              d.category === categorySlug &&
+              (!secondSeg || d.brandSlug === secondSeg)
+          ) || null;
+      }
+    }
+
     // --- base labels via categories (breadcrumbs & fallbacks)
     const cat = getCategory(categorySlug);
-    const catLabel = categorySlug
-      ? cat?.name || cat?.label || titleize(categorySlug)
-      : '';
+    const catLabel = categorySlug ? cat?.name || cat?.label || titleize(categorySlug) : '';
 
     const brand = getBrand(cat, secondSeg);
     const brandLabel =
       brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
-    const deviceLabel = thirdSeg
+
+    // Device label: prefer device.name from data, fallback to slug-based
+    const fallbackDeviceLabel = thirdSeg
       ? titleize(thirdSeg)
       : isIphoneDevice
       ? titleize(secondSeg)
       : null;
+    const deviceLabel = device?.name || fallbackDeviceLabel;
 
     // ---------------- Breadcrumbs ----------------
     const c = [{ label: 'Sākums', href: '/' }];
@@ -108,8 +136,8 @@ export default function PageHeader({
     }
 
     if (isDevicePage && secondSeg) {
-      // brand level for generic devices
-      if (isGenericDevice) {
+      // brand level for generic devices (e.g. /telefonu-remonts/samsung/galaxy-s21)
+      if (isGenericDevice && brandLabel) {
         c.push({ label: brandLabel, href: `/${categorySlug}/${secondSeg}` });
       }
       // device itself
@@ -131,7 +159,13 @@ export default function PageHeader({
     let t = catLabel || '';
 
     if (isDevicePage && deviceLabel) {
-      t = `${brandLabel ? brandLabel + ' ' : ''}${deviceLabel} remonts`.trim();
+      // Prefer authoritative device.name from data, never guess from slug if we have it
+      if (device?.name) {
+        t = `${device.name} remonts`;
+      } else {
+        // Fallback to old behavior: brand + slug-based label
+        t = `${brandLabel ? brandLabel + ' ' : ''}${deviceLabel} remonts`.trim();
+      }
     } else if (isServicePage && serviceEntry?.h1) {
       t = serviceEntry.h1;
     } else if (!isDevicePage && brandLabel && !isServicePage) {
@@ -205,24 +239,22 @@ export default function PageHeader({
   const finalLead = lead ?? resolvedHero?.lead ?? null;
   const finalScrollCta = scrollCta ?? resolvedHero?.scrollCta ?? null;
 
+  // VISUAL breadcrumbs: drop the last item (current page),
+  // because the current location is already expressed by the H1.
+  const displayCrumbs =
+    crumbs && crumbs.length > 1 ? crumbs.slice(0, -1) : crumbs || [];
+
   return (
     <header className={s.header} role="region" aria-label="Lapas virsraksts">
       <div className={s.container}>
-        {showBreadcrumbs && (
+        {showBreadcrumbs && displayCrumbs.length > 0 && (
           <nav className={s.breadcrumbs} aria-label="Breadcrumb">
             <ol>
-              {crumbs.map((item, i) => {
-                const isLast = i === crumbs.length - 1;
-                return (
-                  <li key={item.href || i} className={s.crumb}>
-                    {isLast ? (
-                      <span aria-current="page">{item.label}</span>
-                    ) : (
-                      <Link href={item.href}>{item.label}</Link>
-                    )}
-                  </li>
-                );
-              })}
+              {displayCrumbs.map((item, i) => (
+                <li key={item.href || i} className={s.crumb}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
             </ol>
           </nav>
         )}

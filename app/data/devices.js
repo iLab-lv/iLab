@@ -2585,7 +2585,7 @@ const devices = [
   },
 
 
-  // ------------------------
+// ------------------------
 // iPad family
 // ------------------------
 
@@ -2593,10 +2593,8 @@ const devices = [
 // iPad (base line)
 // ------------------------
 
-
-
 {
-  slug: 'ipad-9-7-5th-gen-2017',
+  slug: '9-7-5th-gen-2017',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2617,7 +2615,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-9-7-6th-gen-2018',
+  slug: '9-7-6th-gen-2018',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2638,7 +2636,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-10-2-7th-gen-2019',
+  slug: '10-2-7th-gen-2019',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2659,7 +2657,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-10-2-8th-gen-2020',
+  slug: '10-2-8th-gen-2020',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2680,7 +2678,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-10-2-9th-gen-2021',
+  slug: '10-2-9th-gen-2021',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2701,7 +2699,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-10-9-10th-gen-2022',
+  slug: '10-9-10th-gen-2022',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2726,7 +2724,7 @@ const devices = [
 // ------------------------
 
 {
-  slug: 'ipad-mini-4th-gen-2015',
+  slug: 'mini-4th-gen-2015',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2747,7 +2745,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-mini-5th-gen-2019',
+  slug: 'mini-5th-gen-2019',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2768,7 +2766,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-mini-6th-gen-2021',
+  slug: 'mini-6th-gen-2021',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2789,7 +2787,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-mini-7th-gen-2024',
+  slug: 'mini-7th-gen-2024',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2814,7 +2812,7 @@ const devices = [
 // ------------------------
 
 {
-  slug: 'ipad-air-1st-gen-2013',
+  slug: 'air-1st-gen-2013',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2835,7 +2833,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-2nd-gen-2014',
+  slug: 'air-2nd-gen-2014',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2856,7 +2854,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-10-5-3rd-gen-2019',
+  slug: 'air-10-5-3rd-gen-2019',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2877,7 +2875,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-10-9-4th-gen-2020',
+  slug: 'air-10-9-4th-gen-2020',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2898,7 +2896,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-10-9-5th-gen-m1-2022',
+  slug: 'air-10-9-5th-gen-m1-2022',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2919,7 +2917,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-11-6th-gen-m2-2024',
+  slug: 'air-11-6th-gen-m2-2024',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2940,7 +2938,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-air-13-6th-gen-m2-2024',
+  slug: 'air-13-6th-gen-m2-2024',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2965,7 +2963,7 @@ const devices = [
 // ------------------------
 
 {
-  slug: 'ipad-pro-9-7-2016',
+  slug: 'pro-9-7-2016',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -2986,7 +2984,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-10-5-2017',
+  slug: 'pro-10-5-2017',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3011,7 +3009,7 @@ const devices = [
 // ------------------------
 
 {
-  slug: 'ipad-pro-11-2018',
+  slug: 'pro-11-2018',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3032,7 +3030,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-11-2020',
+  slug: 'pro-11-2020',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3053,7 +3051,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-11-m1-2021',
+  slug: 'pro-11-m1-2021',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3074,7 +3072,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-11-m2-2022',
+  slug: 'pro-11-m2-2022',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3095,7 +3093,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-11-m4-2024',
+  slug: 'pro-11-m4-2024',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3120,7 +3118,7 @@ const devices = [
 // ------------------------
 
 {
-  slug: 'ipad-pro-12-9-2015',
+  slug: 'pro-12-9-2015',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3141,7 +3139,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-12-9-2017',
+  slug: 'pro-12-9-2017',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3162,7 +3160,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-12-9-2018',
+  slug: 'pro-12-9-2018',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3183,7 +3181,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-12-9-2020',
+  slug: 'pro-12-9-2020',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3204,7 +3202,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-12-9-m1-2021',
+  slug: 'pro-12-9-m1-2021',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3225,7 +3223,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-12-9-m2-2022',
+  slug: 'pro-12-9-m2-2022',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
@@ -3246,7 +3244,7 @@ const devices = [
 },
 
 {
-  slug: 'ipad-pro-13-m4-2024',
+  slug: 'pro-13-m4-2024',
   category: 'plansetdatoru-remonts',
   brand: 'Apple',
   brandSlug: 'ipad',
