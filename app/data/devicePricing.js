@@ -943,6 +943,9 @@ export const devicePricing = {
 // Samsung telefoni
 // --------------------------------------
 
+
+// S SERIES
+
     'galaxy-s1': {
     items: [
       { id: 'display-original', price: '' },
