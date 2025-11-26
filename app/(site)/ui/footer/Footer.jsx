@@ -73,7 +73,7 @@ export default function Footer() {
             <h3 className={styles.heading}>Noderīgas saites</h3>
             <div className={styles.rule} aria-hidden="true" />
             <ul className={styles.list}>
-              <li><a href="/par-ilab">Par mums</a></li>
+              <li><a href="/par-mums">Par mums</a></li>
               <li><a href="/kontakti">Kontakti</a></li>
               <li><a href="/buj">BUJ</a></li>
               <li><a href="/privatuma-un-sikdatnu-politika">Privātuma un sīkdatņu politika</a></li>

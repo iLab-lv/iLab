@@ -6,8 +6,10 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 
+import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPricelist';
+
+import categories from '@/data/categories';
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
 
@@ -80,14 +82,45 @@ const serviceLd = {
   url: `${ORIGIN}/telefonu-remonts/ekrana-mainja`,
   name: 'Telefonu ekrāna (displeja) maiņa Rīgā',
   description:
-    'Telefonu displeja (ekrāna) maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM detaļas, 90 dienu garantija. Bieži tajā pašā dienā.',
+    'Telefonu displeja maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM detaļas, 90 dienu garantija. Bieži tajā pašā dienā.',
 };
+
+// -------------------------------------------------
+// BRAND OPTIONS (same reusable logic as battery page)
+// -------------------------------------------------
+function getPhoneBrandOptions() {
+  const phonesCat = Array.isArray(categories)
+    ? categories.find((c) => c.slug === 'telefonu-remonts')
+    : null;
+
+  const listed = phonesCat?.brands || [];
+  const withDevices = listed.filter((b) =>
+    devices.some(
+      (d) =>
+        (d.category || '').toLowerCase() === 'telefonu-remonts' &&
+        (d.brandSlug || '').toLowerCase() === String(b.brandSlug || b.slug).toLowerCase()
+    )
+  );
+
+  const hasSamsung = withDevices.find((b) => (b.brandSlug || b.slug) === 'samsung');
+  const defaultBrand = hasSamsung
+    ? 'samsung'
+    : (withDevices[0]?.brandSlug || withDevices[0]?.slug || 'samsung');
+
+  const brandOptions = withDevices.map((b) => ({
+    slug: (b.brandSlug || b.slug),
+    name: b.name,
+  }));
+
+  return { brandOptions, defaultBrand };
+}
 
 // -------------------------------------------------
 // PAGE COMPONENT
 // -------------------------------------------------
 export default function TelefonuEkranaMainaPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+  const { brandOptions, defaultBrand } = getPhoneBrandOptions();
 
   return (
     <>
@@ -104,7 +137,7 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/displeja_maina.webp" // swap to a dedicated service image if you have one
+        image="/images/categories/displeja_maina.webp"
         alt="Telefonu ekrāna (displeja) maiņa Rīgā"
         focal="right"
         className="service"
@@ -135,20 +168,28 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
         </div>
       </section>
 
-      {/* PRICE LIST (ServicePricelist) */}
-      <ServicePricelist
-        devices={devices}
-        pricing={devicePricing}
-        // brandSlug intentionally omitted for a generic phones page.
-        categorySlug="telefonu-remonts"
-        serviceIds={['display-original', 'display-oled', 'display-incell']}
-        title="Ekrāna (displeja) maiņas cenas pēc modeļa"
-        intro="Izvēlies sava tālruņa modeli, lai redzētu ekrāna maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
-        initialLimit={8}
-        allModelsHref="/telefonu-remonts#brand-list"
-        cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-        className={s.section}
-      />
+      {/* BRAND PICKER + PRICELIST (multi-brand) */}
+      <section className={s.section} aria-labelledby="brand-picker-h2">
+        <div className={s.container}>
+          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
+            Izvēlies zīmolu
+          </h2>
+
+          <BrandPickerPricelist
+            devices={devices}
+            pricing={devicePricing}
+            brandOptions={brandOptions}
+            defaultBrand={defaultBrand}
+            categorySlug="telefonu-remonts"
+            serviceIds={['display-original', 'display-oled', 'display-incell']}
+            title="Ekrāna (displeja) maiņas cenas pēc modeļa"
+            intro="Izvēlies zīmolu un modeli, lai redzētu ekrāna maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."
+            allModelsHref="/telefonu-remonts#brand-list"
+            cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
+            className={s.section}
+          />
+        </div>
+      </section>
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">
@@ -187,7 +228,7 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
         </div>
       </section>
 
-      {/* BOOKING / CTA */}
+      {/* CTA */}
       <section id="pieteikties" className={s.section} aria-label="Pieteikties remontam">
         <div className={s.container}>
           <ConvertBand />

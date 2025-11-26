@@ -143,26 +143,7 @@ export default function TelefonuSkalruniMikrofonaRemontsPage({ searchParams }) {
         </div>
       </section>
 
-      {/* BRAND PICKER + PRICELIST */}
-      <section className={s.section} aria-labelledby="brand-picker-h2">
-        <div className={s.container}>
-          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>Izvēlies zīmolu</h2>
-
-          <BrandPickerPricelist
-            devices={devices}
-            pricing={devicePricing}
-            brandOptions={brandOptions}
-            defaultBrand={defaultBrand}
-            categorySlug="telefonu-remonts"
-            serviceIds={['speaker', 'microphone']}  // <- adjust to your pricing keys if different
-            title="Skaļruņu un mikrofona remonta cenas pēc modeļa"
-            intro="Izvēlies zīmolu un modeli, lai redzētu skaļruņu un/vai mikrofona remonta cenu."
-            allModelsHref="/telefonu-remonts#brand-list"
-            cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-            className={s.section}
-          />
-        </div>
-      </section>
+     
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">

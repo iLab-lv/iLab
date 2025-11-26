@@ -154,7 +154,7 @@ export default function TelefonuKamerasRemontsPage({ searchParams }) {
             brandOptions={brandOptions}
             defaultBrand={defaultBrand}
             categorySlug="telefonu-remonts"
-            serviceIds={['camera-rear', 'camera-front']}   // adjust to your pricing IDs
+            serviceIds={['camera', 'camera-glass']}   // adjust to your pricing IDs
             title="Kameras remonta cenas pēc modeļa"
             intro="Izvēlies zīmolu un modeli, lai redzētu kameras remonta vai nomaiņas cenu."
             allModelsHref="/telefonu-remonts#brand-list"

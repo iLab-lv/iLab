@@ -154,7 +154,7 @@ export default function TelefonuUdensBojajumuRemontsPage({ searchParams }) {
             brandOptions={brandOptions}
             defaultBrand={defaultBrand}
             categorySlug="telefonu-remonts"
-            serviceIds={['liquid-diagnosis', 'water-damage']}  // ← match your pricing IDs
+            serviceIds={['water-damage-clean']}  // ← match your pricing IDs
             title="Ūdens bojājumu remonta cenas pēc modeļa"
             intro="Izvēlies zīmolu un modeli, lai redzētu diagnostikas/atjaunošanas cenu. Dažiem bojājumiem cena tiek precizēta pēc diagnostikas."
             allModelsHref="/telefonu-remonts#brand-list"

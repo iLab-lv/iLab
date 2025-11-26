@@ -234,32 +234,6 @@ export default function BrandPhonesPage({ params }) {
         </div>
       </section>
 
-      {/* SERIES GRID */}
-      <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
-        <div className={c.container}>
-          <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
-          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
-          <p className={c.paragraph} style={{ marginTop: 0 }}>
-            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
-          </p>
-
-          <SeriesGrid
-            devices={devicesAll}
-            baseHref={baseHref}
-            brandSlug={brandSlug}
-            categorySlug="telefonu-remonts"
-            initialLimit={4}
-            autoExpandOnSearch={true}
-          />
-
-          {brandPhoneList.length === 0 && (
-            <p style={{ opacity: 0.8, marginTop: 16 }}>
-              Pagaidām šim zīmolam nav pievienotu modeļu.
-            </p>
-          )}
-        </div>
-      </section>
-
       {/* Popular services */}
       <section className={c.section} aria-labelledby="popular-services-h2">
         <div className={c.container}>
@@ -307,6 +281,34 @@ export default function BrandPhonesPage({ params }) {
                     />
         </div>
       </section>
+
+      {/* SERIES GRID */}
+      <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
+        <div className={c.container}>
+          <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
+          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
+          <p className={c.paragraph} style={{ marginTop: 0 }}>
+            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
+          </p>
+
+          <SeriesGrid
+            devices={devicesAll}
+            baseHref={baseHref}
+            brandSlug={brandSlug}
+            categorySlug="telefonu-remonts"
+            initialLimit={4}
+            autoExpandOnSearch={true}
+          />
+
+          {brandPhoneList.length === 0 && (
+            <p style={{ opacity: 0.8, marginTop: 16 }}>
+              Pagaidām šim zīmolam nav pievienotu modeļu.
+            </p>
+          )}
+        </div>
+      </section>
+
+      
 
       {/* Process */}
       <div id="process-h2" className={c.anchorTarget} />

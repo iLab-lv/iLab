@@ -1045,6 +1045,89 @@ const devices = [
  // ================================
   // Galaxy S sērija (phones)
   // ================================
+   // ================================
+  // Galaxy S sērija (phones)
+  // ================================
+  {
+    slug: "galaxy-s25-edge",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S25 Edge (SM-S937B) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-s25-edge.webp",
+    popular: false,
+    order: 260,
+    metaTitle: "Samsung Galaxy S25 Edge remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S25 Edge remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S25 Edge (SM-S937B) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s25-ultra",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S25 Ultra (SM-S938B) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-s25-ultra.webp",
+    popular: false,
+    order: 261,
+    metaTitle: "Samsung Galaxy S25 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S25 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S25 Ultra (SM-S938B) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s25-plus",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S25+ (SM-S936B) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-s25-plus.webp",
+    popular: false,
+    order: 262,
+    metaTitle: "Samsung Galaxy S25+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S25+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S25+ (SM-S936B) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s25",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S25 (SM-S931B) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-s25.webp",
+    popular: false,
+    order: 263,
+    metaTitle: "Samsung Galaxy S25 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S25 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S25 (SM-S931B) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
   {
     slug: "galaxy-s24-ultra",
     category: "telefonu-remonts",
@@ -1052,18 +1135,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S24 Ultra (SM-S928) 2024",
+    name: "Galaxy S24 Ultra (SM-S928B) 2024",
     year: 2024,
     image: "/images/devices/samsung/samsung-galaxy-s24-ultra.webp",
     popular: false,
-    order: 260,
-    metaTitle: "Samsung Galaxy S24 Ultra (SM-S928) 2024 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S24 Ultra (SM-S928). 90 dienu garantija.",
+    order: 264,
+    metaTitle: "Samsung Galaxy S24 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S24 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24 Ultra (SM-S928) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24 Ultra (SM-S928B) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s24-plus",
     category: "telefonu-remonts",
@@ -1071,18 +1155,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S24+ (SM-S926) 2024",
+    name: "Galaxy S24+ (SM-S926B) 2024",
     year: 2024,
     image: "/images/devices/samsung/samsung-galaxy-s24-plus.webp",
     popular: false,
-    order: 261,
-    metaTitle: "Samsung Galaxy S24+ (SM-S926) 2024 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S24+ (SM-S926). 90 dienu garantija.",
+    order: 265,
+    metaTitle: "Samsung Galaxy S24+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S24+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24+ (SM-S926) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24+ (SM-S926B) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s24",
     category: "telefonu-remonts",
@@ -1090,15 +1175,35 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S24 (SM-S921) 2024",
+    name: "Galaxy S24 (SM-S921B) 2024",
     year: 2024,
     image: "/images/devices/samsung/samsung-galaxy-s24.webp",
     popular: false,
-    order: 262,
-    metaTitle: "Samsung Galaxy S24 (SM-S921) 2024 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S24 (SM-S921). 90 dienu garantija.",
+    order: 266,
+    metaTitle: "Samsung Galaxy S24 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S24 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24 (SM-S921) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24 (SM-S921B) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s24-fe",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S24 FE (SM-S721B) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-s24-fe.webp",
+    popular: false,
+    order: 267,
+    metaTitle: "Samsung Galaxy S24 FE remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S24 FE remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S24 FE (SM-S721B) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1110,18 +1215,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S23 Ultra (SM-S918) 2023",
+    name: "Galaxy S23 Ultra (SM-S918B) 2023",
     year: 2023,
     image: "/images/devices/samsung/samsung-galaxy-s23-ultra.webp",
     popular: false,
-    order: 263,
-    metaTitle: "Samsung Galaxy S23 Ultra (SM-S918) 2023 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S23 Ultra (SM-S918). 90 dienu garantija.",
+    order: 268,
+    metaTitle: "Samsung Galaxy S23 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S23 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23 Ultra (SM-S918) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23 Ultra (SM-S918B) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s23-plus",
     category: "telefonu-remonts",
@@ -1129,18 +1235,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S23+ (SM-S916) 2023",
+    name: "Galaxy S23+ (SM-S916B) 2023",
     year: 2023,
     image: "/images/devices/samsung/samsung-galaxy-s23-plus.webp",
     popular: false,
-    order: 264,
-    metaTitle: "Samsung Galaxy S23+ (SM-S916) 2023 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S23+ (SM-S916). 90 dienu garantija.",
+    order: 269,
+    metaTitle: "Samsung Galaxy S23+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S23+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23+ (SM-S916) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23+ (SM-S916B) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s23",
     category: "telefonu-remonts",
@@ -1148,15 +1255,35 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S23 (SM-S911) 2023",
+    name: "Galaxy S23 (SM-S918) 2023",
     year: 2023,
     image: "/images/devices/samsung/samsung-galaxy-s23.webp",
     popular: false,
-    order: 265,
-    metaTitle: "Samsung Galaxy S23 (SM-S911) 2023 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S23 (SM-S911). 90 dienu garantija.",
+    order: 270,
+    metaTitle: "Samsung Galaxy S23 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S23 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23 (SM-S911) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23 (SM-S918) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s23-fe",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S23 FE (SM-S718) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-s23-fe.webp",
+    popular: false,
+    order: 271,
+    metaTitle: "Samsung Galaxy S23 FE remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S23 FE remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S23 FE (SM-S718) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1172,14 +1299,15 @@ const devices = [
     year: 2022,
     image: "/images/devices/samsung/samsung-galaxy-s22-ultra.webp",
     popular: false,
-    order: 266,
-    metaTitle: "Samsung Galaxy S22 Ultra (SM-S908) 2022 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S22 Ultra (SM-S908). 90 dienu garantija.",
+    order: 272,
+    metaTitle: "Samsung Galaxy S22 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S22 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S22 Ultra (SM-S908) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s22-plus",
     category: "telefonu-remonts",
@@ -1191,14 +1319,15 @@ const devices = [
     year: 2022,
     image: "/images/devices/samsung/samsung-galaxy-s22-plus.webp",
     popular: false,
-    order: 267,
-    metaTitle: "Samsung Galaxy S22+ (SM-S906) 2022 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S22+ (SM-S906). 90 dienu garantija.",
+    order: 273,
+    metaTitle: "Samsung Galaxy S22+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S22+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S22+ (SM-S906) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s22",
     category: "telefonu-remonts",
@@ -1210,9 +1339,9 @@ const devices = [
     year: 2022,
     image: "/images/devices/samsung/samsung-galaxy-s22.webp",
     popular: false,
-    order: 268,
-    metaTitle: "Samsung Galaxy S22 (SM-S901) 2022 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S22 (SM-S901). 90 dienu garantija.",
+    order: 274,
+    metaTitle: "Samsung Galaxy S22 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S22 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S22 (SM-S901) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
@@ -1230,14 +1359,15 @@ const devices = [
     year: 2021,
     image: "/images/devices/samsung/samsung-galaxy-s21-ultra.webp",
     popular: false,
-    order: 269,
-    metaTitle: "Samsung Galaxy S21 Ultra (SM-G998) 2021 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S21 Ultra (SM-G998). 90 dienu garantija.",
+    order: 275,
+    metaTitle: "Samsung Galaxy S21 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S21 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S21 Ultra (SM-G998) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s21-plus",
     category: "telefonu-remonts",
@@ -1249,14 +1379,15 @@ const devices = [
     year: 2021,
     image: "/images/devices/samsung/samsung-galaxy-s21-plus.webp",
     popular: false,
-    order: 270,
-    metaTitle: "Samsung Galaxy S21+ (SM-G996) 2021 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S21+ (SM-G996). 90 dienu garantija.",
+    order: 276,
+    metaTitle: "Samsung Galaxy S21+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S21+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S21+ (SM-G996) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s21",
     category: "telefonu-remonts",
@@ -1268,11 +1399,31 @@ const devices = [
     year: 2021,
     image: "/images/devices/samsung/samsung-galaxy-s21.webp",
     popular: false,
-    order: 271,
-    metaTitle: "Samsung Galaxy S21 (SM-G991) 2021 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S21 (SM-G991). 90 dienu garantija.",
+    order: 277,
+    metaTitle: "Samsung Galaxy S21 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S21 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S21 (SM-G991) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s21-fe",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S21 FE (SM-G990) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-s21-fe.webp",
+    popular: false,
+    order: 278,
+    metaTitle: "Samsung Galaxy S21 FE remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S21 FE remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S21 FE (SM-G990) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1288,14 +1439,15 @@ const devices = [
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-s20-ultra.webp",
     popular: false,
-    order: 272,
-    metaTitle: "Samsung Galaxy S20 Ultra (SM-G988) 2020 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S20 Ultra (SM-G988). 90 dienu garantija.",
+    order: 279,
+    metaTitle: "Samsung Galaxy S20 Ultra remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S20 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S20 Ultra (SM-G988) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s20-plus",
     category: "telefonu-remonts",
@@ -1303,18 +1455,39 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S20+ (SM-G985) 2020",
+    name: "Galaxy S20+ (SM-G986) 2020",
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-s20-plus.webp",
     popular: false,
-    order: 273,
-    metaTitle: "Samsung Galaxy S20+ (SM-G985) 2020 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S20+ (SM-G985). 90 dienu garantija.",
+    order: 280,
+    metaTitle: "Samsung Galaxy S20+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S20+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S20+ (SM-G985) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S20+ (SM-G986) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
+  {
+    slug: "galaxy-s20-fe",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S20 FE (SM-G780) 2020",
+    year: 2020,
+    image: "/images/devices/samsung/samsung-galaxy-s20-fe.webp",
+    popular: false,
+    order: 281,
+    metaTitle: "Samsung Galaxy S20 FE remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S20 FE remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S20 FE (SM-G780) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
   {
     slug: "galaxy-s20",
     category: "telefonu-remonts",
@@ -1326,11 +1499,31 @@ const devices = [
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-s20.webp",
     popular: false,
-    order: 274,
-    metaTitle: "Samsung Galaxy S20 (SM-G980) 2020 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S20 (SM-G980). 90 dienu garantija.",
+    order: 282,
+    metaTitle: "Samsung Galaxy S20 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S20 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S20 (SM-G980) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s10e",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S10e (SM-G970) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-s10e.webp",
+    popular: false,
+    order: 283,
+    metaTitle: "Samsung Galaxy S10e remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S10e remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S10e (SM-G970) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1346,14 +1539,15 @@ const devices = [
     year: 2019,
     image: "/images/devices/samsung/samsung-galaxy-s10-plus.webp",
     popular: false,
-    order: 275,
-    metaTitle: "Samsung Galaxy S10+ (SM-G975) 2019 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S10+ (SM-G975). 90 dienu garantija.",
+    order: 284,
+    metaTitle: "Samsung Galaxy S10+ remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S10+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S10+ (SM-G975) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s10",
     category: "telefonu-remonts",
@@ -1365,30 +1559,11 @@ const devices = [
     year: 2019,
     image: "/images/devices/samsung/samsung-galaxy-s10.webp",
     popular: false,
-    order: 276,
-    metaTitle: "Samsung Galaxy S10 (SM-G973) 2019 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S10 (SM-G973). 90 dienu garantija.",
+    order: 285,
+    metaTitle: "Samsung Galaxy S10 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S10 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S10 (SM-G973) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
-<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-s10e",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy S sērija",
-    seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S10e (SM-G970) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-s10e.webp",
-    popular: false,
-    order: 277,
-    metaTitle: "Samsung Galaxy S10e (SM-G970) 2019 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S10e (SM-G970). 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy S10e (SM-G970) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1400,18 +1575,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S9+ (SM-G965) 2018",
+    name: "Galaxy S9 Plus (SM-G965) 2018",
     year: 2018,
     image: "/images/devices/samsung/samsung-galaxy-s9-plus.webp",
     popular: false,
-    order: 278,
-    metaTitle: "Samsung Galaxy S9+ (SM-G965) 2018 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S9+ (SM-G965). 90 dienu garantija.",
+    order: 286,
+    metaTitle: "Samsung Galaxy S9 Plus remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S9 Plus remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S9+ (SM-G965) 2018</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S9 Plus (SM-G965) 2018</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s9",
     category: "telefonu-remonts",
@@ -1423,9 +1599,9 @@ const devices = [
     year: 2018,
     image: "/images/devices/samsung/samsung-galaxy-s9.webp",
     popular: false,
-    order: 279,
-    metaTitle: "Samsung Galaxy S9 (SM-G960) 2018 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S9 (SM-G960). 90 dienu garantija.",
+    order: 287,
+    metaTitle: "Samsung Galaxy S9 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S9 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S9 (SM-G960) 2018</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
@@ -1439,18 +1615,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S8+ (SM-G955) 2017",
+    name: "Galaxy S8 Plus (SM-G955) 2017",
     year: 2017,
     image: "/images/devices/samsung/samsung-galaxy-s8-plus.webp",
     popular: false,
-    order: 280,
-    metaTitle: "Samsung Galaxy S8+ (SM-G955) 2017 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S8+ (SM-G955). 90 dienu garantija.",
+    order: 288,
+    metaTitle: "Samsung Galaxy S8 Plus remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S8 Plus remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S8+ (SM-G955) 2017</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S8 Plus (SM-G955) 2017</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s8",
     category: "telefonu-remonts",
@@ -1462,9 +1639,9 @@ const devices = [
     year: 2017,
     image: "/images/devices/samsung/samsung-galaxy-s8.webp",
     popular: false,
-    order: 281,
-    metaTitle: "Samsung Galaxy S8 (SM-G950) 2017 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S8 (SM-G950). 90 dienu garantija.",
+    order: 289,
+    metaTitle: "Samsung Galaxy S8 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S8 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
 <p><strong>Galaxy S8 (SM-G950) 2017</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
@@ -1478,18 +1655,19 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S7 Edge (SM-G935) 2016",
+    name: "Galaxy S7 Edge (SM-G935F) 2016",
     year: 2016,
     image: "/images/devices/samsung/samsung-galaxy-s7-edge.webp",
     popular: false,
-    order: 282,
-    metaTitle: "Samsung Galaxy S7 Edge (SM-G935) 2016 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S7 Edge (SM-G935). 90 dienu garantija.",
+    order: 290,
+    metaTitle: "Samsung Galaxy S7 Edge remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S7 Edge remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S7 Edge (SM-G935) 2016</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S7 Edge (SM-G935F) 2016</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-s7",
     category: "telefonu-remonts",
@@ -1497,24 +1675,334 @@ const devices = [
     brandSlug: "samsung",
     series: "Galaxy S sērija",
     seriesSlug: "galaxy-s-serija",
-    name: "Galaxy S7 (SM-G930) 2016",
+    name: "Galaxy S7 (SM-G935) 2016",
     year: 2016,
     image: "/images/devices/samsung/samsung-galaxy-s7.webp",
     popular: false,
-    order: 283,
-    metaTitle: "Samsung Galaxy S7 (SM-G930) 2016 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy S7 (SM-G930). 90 dienu garantija.",
+    order: 291,
+    metaTitle: "Samsung Galaxy S7 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S7 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S7 (SM-G930) 2016</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S7 (SM-G935) 2016</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
-  
+  {
+    slug: "galaxy-s6-edge",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S6 Edge (SM-G925) 2015",
+    year: 2015,
+    image: "/images/devices/samsung/samsung-galaxy-s6-edge.webp",
+    popular: false,
+    order: 292,
+    metaTitle: "Samsung Galaxy S6 Edge remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S6 Edge remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S6 Edge (SM-G925) 2015</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s6",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S6 (SM-G920) 2015",
+    year: 2015,
+    image: "/images/devices/samsung/samsung-galaxy-s6.webp",
+    popular: false,
+    order: 293,
+    metaTitle: "Samsung Galaxy S6 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S6 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S6 (SM-G920) 2015</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s5",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S5 (SM-G900H) 2014",
+    year: 2014,
+    image: "/images/devices/samsung/samsung-galaxy-s5.webp",
+    popular: false,
+    order: 294,
+    metaTitle: "Samsung Galaxy S5 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S5 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S5 (SM-G900H) 2014</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s4",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S4 (I9500) 2013",
+    year: 2013,
+    image: "/images/devices/samsung/samsung-galaxy-s4.webp",
+    popular: false,
+    order: 295,
+    metaTitle: "Samsung Galaxy S4 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S4 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S4 (I9500) 2013</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s3",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S3 (I9300) 2012",
+    year: 2012,
+    image: "/images/devices/samsung/samsung-galaxy-s3.webp",
+    popular: false,
+    order: 296,
+    metaTitle: "Samsung Galaxy S3 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S3 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S3 (I9300) 2012</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s2",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S2 (I9100P) 2011",
+    year: 2011,
+    image: "/images/devices/samsung/samsung-galaxy-s2.webp",
+    popular: false,
+    order: 297,
+    metaTitle: "Samsung Galaxy S2 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S2 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S2 (I9100P) 2011</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-s1",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy S sērija",
+    seriesSlug: "galaxy-s-serija",
+    name: "Galaxy S1 (I9000) 2010",
+    year: 2010,
+    image: "/images/devices/samsung/samsung-galaxy-s1.webp",
+    popular: false,
+    order: 298,
+    metaTitle: "Samsung Galaxy S1 remonts Rīgā | iLab",
+    metaDescription: "Samsung Galaxy S1 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy S1 (I9000) 2010</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
 
   // ================================
   // Galaxy Z sērija (foldable phones)
   // ================================
+    // ================================
+  // Galaxy Z sērija (foldable phones)
+  // ================================
+  {
+    slug: "galaxy-z-flip7",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip7 (SM-F761) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip7.webp",
+    popular: false,
+    order: 299,
+    metaTitle: "Samsung Galaxy Z Flip7 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip7 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip7 (SM-F761) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-flip6",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip6 (SM-F751) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip6.webp",
+    popular: false,
+    order: 300,
+    metaTitle: "Samsung Galaxy Z Flip6 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip6 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip6 (SM-F751) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-flip5",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip5 (SM-F741) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip5.webp",
+    popular: false,
+    order: 301,
+    metaTitle: "Samsung Galaxy Z Flip5 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip5 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip5 (SM-F741) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-flip4",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip4 (SM-F731) 2022",
+    year: 2022,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip4.webp",
+    popular: false,
+    order: 302,
+    metaTitle: "Samsung Galaxy Z Flip4 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip4 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip4 (SM-F731) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-flip3",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip3 (SM-F721) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip3.webp",
+    popular: false,
+    order: 303,
+    metaTitle: "Samsung Galaxy Z Flip3 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip3 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip3 (SM-F721) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-flip",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Flip (SM-F700X) 2020",
+    year: 2020,
+    image: "/images/devices/samsung/samsung-galaxy-z-flip.webp",
+    popular: false,
+    order: 304,
+    metaTitle: "Samsung Galaxy Z Flip remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Flip remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Flip (SM-F700X) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-fold7",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Fold7 (SM-F966) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-z-fold7.webp",
+    popular: false,
+    order: 305,
+    metaTitle: "Samsung Galaxy Z Fold7 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold7 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Fold7 (SM-F966) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-z-fold6",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy Z sērija",
+    seriesSlug: "galaxy-z-serija",
+    name: "Galaxy Z Fold6 (SM-F956) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-z-fold6.webp",
+    popular: false,
+    order: 306,
+    metaTitle: "Samsung Galaxy Z Fold6 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold6 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy Z Fold6 (SM-F956) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
   {
     slug: "galaxy-z-fold5",
     category: "telefonu-remonts",
@@ -1526,29 +2014,13 @@ const devices = [
     year: 2023,
     image: "/images/devices/samsung/samsung-galaxy-z-fold5.webp",
     popular: false,
-    order: 289,
-    metaTitle: "Samsung Galaxy Z Fold5 (SM-F946) 2023 remonts Rīgā",
-    metaDescription: "Galaxy Z Fold5 (SM-F946) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 307,
+    metaTitle: "Samsung Galaxy Z Fold5 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold5 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold5 (SM-F946) 2023</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
-  `,
-  },
-  {
-    slug: "galaxy-z-flip5",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy Z sērija",
-    seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Z Flip5 (SM-F731) 2023",
-    year: 2023,
-    image: "/images/devices/samsung/samsung-galaxy-z-flip5.webp",
-    popular: false,
-    order: 290,
-    metaTitle: "Samsung Galaxy Z Flip5 (SM-F731) 2023 remonts Rīgā",
-    metaDescription: "Galaxy Z Flip5 (SM-F731) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip5 (SM-F731) 2023</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold5 (SM-F946) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
@@ -1563,29 +2035,13 @@ const devices = [
     year: 2022,
     image: "/images/devices/samsung/samsung-galaxy-z-fold4.webp",
     popular: false,
-    order: 291,
-    metaTitle: "Samsung Galaxy Z Fold4 (SM-F936) 2022 remonts Rīgā",
-    metaDescription: "Galaxy Z Fold4 (SM-F936) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 308,
+    metaTitle: "Samsung Galaxy Z Fold4 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold4 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold4 (SM-F936) 2022</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
-  `,
-  },
-  {
-    slug: "galaxy-z-flip4",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy Z sērija",
-    seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Z Flip4 (SM-F721) 2022",
-    year: 2022,
-    image: "/images/devices/samsung/samsung-galaxy-z-flip4.webp",
-    popular: false,
-    order: 292,
-    metaTitle: "Samsung Galaxy Z Flip4 (SM-F721) 2022 remonts Rīgā",
-    metaDescription: "Galaxy Z Flip4 (SM-F721) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip4 (SM-F721) 2022</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold4 (SM-F936) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
@@ -1600,29 +2056,13 @@ const devices = [
     year: 2021,
     image: "/images/devices/samsung/samsung-galaxy-z-fold3.webp",
     popular: false,
-    order: 293,
-    metaTitle: "Samsung Galaxy Z Fold3 (SM-F926) 2021 remonts Rīgā",
-    metaDescription: "Galaxy Z Fold3 (SM-F926) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 309,
+    metaTitle: "Samsung Galaxy Z Fold3 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold3 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold3 (SM-F926) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
-  `,
-  },
-  {
-    slug: "galaxy-z-flip3",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy Z sērija",
-    seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Z Flip3 (SM-F711) 2021",
-    year: 2021,
-    image: "/images/devices/samsung/samsung-galaxy-z-flip3.webp",
-    popular: false,
-    order: 294,
-    metaTitle: "Samsung Galaxy Z Flip3 (SM-F711) 2021 remonts Rīgā",
-    metaDescription: "Galaxy Z Flip3 (SM-F711) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip3 (SM-F711) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold3 (SM-F926) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
@@ -1637,71 +2077,43 @@ const devices = [
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-z-fold2.webp",
     popular: false,
-    order: 295,
-    metaTitle: "Samsung Galaxy Z Fold2 (SM-F916) 2020 remonts Rīgā",
-    metaDescription: "Galaxy Z Fold2 (SM-F916) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 310,
+    metaTitle: "Samsung Galaxy Z Fold2 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold2 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold2 (SM-F916) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold2 (SM-F916) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-z-flip-5g",
+    // F900 from Excel: original Fold, normalized to Z Fold and included in Z sērija
+    slug: "galaxy-z-fold",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy Z sērija",
     seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Z Flip 5G (SM-F707) 2020",
-    year: 2020,
-    image: "/images/devices/samsung/samsung-galaxy-z-flip-5g.webp",
-    popular: false,
-    order: 296,
-    metaTitle: "Samsung Galaxy Z Flip 5G (SM-F707) 2020 remonts Rīgā",
-    metaDescription: "Galaxy Z Flip 5G (SM-F707) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip 5G (SM-F707) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
-  `,
-  },
-  {
-    slug: "galaxy-z-flip",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy Z sērija",
-    seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Z Flip (SM-F700) 2020",
-    year: 2020,
-    image: "/images/devices/samsung/samsung-galaxy-z-flip.webp",
-    popular: false,
-    order: 297,
-    metaTitle: "Samsung Galaxy Z Flip (SM-F700) 2020 remonts Rīgā",
-    metaDescription: "Galaxy Z Flip (SM-F700) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Z Flip (SM-F700) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
-  `,
-  },
-  {
-    slug: "galaxy-fold",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy Z sērija",
-    seriesSlug: "galaxy-z-serija",
-    name: "Galaxy Fold (SM-F900) 2019",
+    name: "Galaxy Z Fold (SM-F900) 2019",
     year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-fold.webp",
+    image: "/images/devices/samsung/samsung-galaxy-z-fold.webp",
     popular: false,
-    order: 298,
-    metaTitle: "Samsung Galaxy Fold (SM-F900) 2019 remonts Rīgā",
-    metaDescription: "Galaxy Fold (SM-F900) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 311,
+    metaTitle: "Samsung Galaxy Z Fold remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Z Fold remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Fold (SM-F900) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold (SM-F900) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
 
   // ================================
   // Note sērija
   // ================================
+
   {
     slug: "galaxy-note20-ultra",
     category: "telefonu-remonts",
@@ -1709,17 +2121,20 @@ const devices = [
     brandSlug: "samsung",
     series: "Note sērija",
     seriesSlug: "note-serija",
-    name: "Galaxy Note20 Ultra (SM-N985) 2020",
+    name: "Galaxy Note20 Ultra (SM-N986B) 2020",
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-note20-ultra.webp",
     popular: false,
-    order: 302,
-    metaTitle: "Samsung Galaxy Note20 Ultra (SM-N985) 2020 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note20 Ultra (SM-N985). 90 dienu garantija.",
+    order: 312,
+    metaTitle: "Samsung Galaxy Note20 Ultra remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Note20 Ultra remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note20 Ultra (SM-N985) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy Note20 Ultra (SM-N986B) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-note20",
     category: "telefonu-remonts",
@@ -1731,13 +2146,16 @@ const devices = [
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-note20.webp",
     popular: false,
-    order: 303,
-    metaTitle: "Samsung Galaxy Note20 (SM-N980) 2020 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note20 (SM-N980). 90 dienu garantija.",
+    order: 313,
+    metaTitle: "Samsung Galaxy Note20 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Note20 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note20 (SM-N980) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy Note20 (SM-N980) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-note10-plus",
     category: "telefonu-remonts",
@@ -1749,13 +2167,16 @@ const devices = [
     year: 2019,
     image: "/images/devices/samsung/samsung-galaxy-note10-plus.webp",
     popular: false,
-    order: 304,
-    metaTitle: "Samsung Galaxy Note10+ (SM-N975) 2019 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note10+ (SM-N975). 90 dienu garantija.",
+    order: 314,
+    metaTitle: "Samsung Galaxy Note10+ remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Note10+ remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note10+ (SM-N975) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy Note10+ (SM-N975) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-note10",
     category: "telefonu-remonts",
@@ -1767,55 +2188,130 @@ const devices = [
     year: 2019,
     image: "/images/devices/samsung/samsung-galaxy-note10.webp",
     popular: false,
-    order: 305,
-    metaTitle: "Samsung Galaxy Note10 (SM-N970) 2019 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note10 (SM-N970). 90 dienu garantija.",
+    order: 315,
+    metaTitle: "Samsung Galaxy Note10 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Note10 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note10 (SM-N970) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy Note10 (SM-N970) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-note9",
+    slug: "galaxy-note10-lite",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Note sērija",
     seriesSlug: "note-serija",
-    name: "Galaxy Note9 (SM-N960) 2018",
-    year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-note9.webp",
+    name: "Galaxy Note10 Lite (SM-N770) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-note10-lite.webp",
     popular: false,
-    order: 306,
-    metaTitle: "Samsung Galaxy Note9 (SM-N960) 2018 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note9 (SM-N960). 90 dienu garantija.",
+    order: 316,
+    metaTitle: "Samsung Galaxy Note10 Lite remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy Note10 Lite remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note9 (SM-N960) 2018</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy Note10 Lite (SM-N770) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
-  {
-    slug: "galaxy-note8",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Note sērija",
-    seriesSlug: "note-serija",
-    name: "Galaxy Note8 (SM-N950) 2017",
-    year: 2017,
-    image: "/images/devices/samsung/samsung-galaxy-note8.webp",
-    popular: false,
-    order: 307,
-    metaTitle: "Samsung Galaxy Note8 (SM-N950) 2017 remonts Rīgā",
-    metaDescription: "Ekrāna un baterijas maiņa Galaxy Note8 (SM-N950). 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy Note8 (SM-N950) 2017</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
+
 
   // ================================
   // Galaxy A sērija
   // ================================
+    // ================================
+  // Galaxy A sērija
+  // ================================
   {
-    slug: "galaxy-a55-5g",
+    slug: "galaxy-a72",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A72 (SM-A725) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a72.webp",
+    popular: false,
+    order: 317,
+    metaTitle: "Samsung Galaxy A72 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A72 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A72 (SM-A725) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a71",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A71 (SM-A715) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-a71.webp",
+    popular: false,
+    order: 318,
+    metaTitle: "Samsung Galaxy A71 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A71 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A71 (SM-A715) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a70",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A70 (SM-A705) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-a70.webp",
+    popular: false,
+    order: 319,
+    metaTitle: "Samsung Galaxy A70 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A70 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A70 (SM-A705) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a56",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A56 (SM-A566) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-a56.webp",
+    popular: false,
+    order: 320,
+    metaTitle: "Samsung Galaxy A56 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A56 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A56 (SM-A566) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a55",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -1823,104 +2319,36 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A55 (SM-A556) 2024",
     year: 2024,
-    image: "/images/devices/samsung/samsung-galaxy-a55-5g.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a55.webp",
     popular: false,
-    order: 308,
-    metaTitle: "Samsung Galaxy A55 (SM-A556) 2024 remonts Rīgā",
-    metaDescription: "Galaxy A55 (SM-A556) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 321,
+    metaTitle: "Samsung Galaxy A55 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A55 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A55 (SM-A556) 2024</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a35-5g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A35 (SM-A356) 2024",
-    year: 2024,
-    image: "/images/devices/samsung/samsung-galaxy-a35-5g.webp",
-    popular: false,
-    order: 309,
-    metaTitle: "Samsung Galaxy A35 (SM-A356) 2024 remonts Rīgā",
-    metaDescription: "Galaxy A35 (SM-A356) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A35 (SM-A356) 2024</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a25-5g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A25 (SM-A256) 2024",
-    year: 2024,
-    image: "/images/devices/samsung/samsung-galaxy-a25-5g.webp",
-    popular: false,
-    order: 310,
-    metaTitle: "Samsung Galaxy A25 (SM-A256) 2024 remonts Rīgā",
-    metaDescription: "Galaxy A25 (SM-A256) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A25 (SM-A256) 2024</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a15-5g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A15 (SM-A155) 2024",
-    year: 2024,
-    image: "/images/devices/samsung/samsung-galaxy-a15-5g.webp",
-    popular: false,
-    order: 311,
-    metaTitle: "Samsung Galaxy A15 (SM-A155) 2024 remonts Rīgā",
-    metaDescription: "Galaxy A15 (SM-A155) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A15 (SM-A155) 2024</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A55 (SM-A556) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
   {
-    slug: "galaxy-a54-5g",
+    slug: "galaxy-a54",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A54 5G (SM-A546) 2023",
+    name: "Galaxy A54 (SM-A546) 2023",
     year: 2023,
-    image: "/images/devices/samsung/samsung-galaxy-a54-5g.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a54.webp",
     popular: false,
-    order: 312,
-    metaTitle: "Samsung Galaxy A54 5G (SM-A546) 2023 remonts Rīgā",
-    metaDescription: "Galaxy A54 5G (SM-A546) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 322,
+    metaTitle: "Samsung Galaxy A54 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A54 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A54 5G (SM-A546) 2023</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a14",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A14 (SM-A145) 2023",
-    year: 2023,
-    image: "/images/devices/samsung/samsung-galaxy-a14.webp",
-    popular: false,
-    order: 313,
-    metaTitle: "Samsung Galaxy A14 (SM-A145) 2023 remonts Rīgā",
-    metaDescription: "Galaxy A14 (SM-A145) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A14 (SM-A145) 2023</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A54 (SM-A546) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
@@ -1935,52 +2363,18 @@ const devices = [
     year: 2022,
     image: "/images/devices/samsung/samsung-galaxy-a53-5g.webp",
     popular: false,
-    order: 314,
-    metaTitle: "Samsung Galaxy A53 5G (SM-A536) 2022 remonts Rīgā",
-    metaDescription: "Galaxy A53 5G (SM-A536) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 323,
+    metaTitle: "Samsung Galaxy A53 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A53 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A53 5G (SM-A536) 2022</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a33-5g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A33 5G (SM-A336) 2022",
-    year: 2022,
-    image: "/images/devices/samsung/samsung-galaxy-a33-5g.webp",
-    popular: false,
-    order: 315,
-    metaTitle: "Samsung Galaxy A33 5G (SM-A336) 2022 remonts Rīgā",
-    metaDescription: "Galaxy A33 5G (SM-A336) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A33 5G (SM-A336) 2022</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A53 5G (SM-A536) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
   {
-    slug: "galaxy-a72",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A72 (SM-A725) 2021",
-    year: 2021,
-    image: "/images/devices/samsung/samsung-galaxy-a72.webp",
-    popular: false,
-    order: 316,
-    metaTitle: "Samsung Galaxy A72 (SM-A725) 2021 remonts Rīgā",
-    metaDescription: "Galaxy A72 (SM-A725) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A72 (SM-A725) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a52s-5g",
+    slug: "galaxy-a52s",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -1988,15 +2382,18 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A52s (SM-A528) 2021",
     year: 2021,
-    image: "/images/devices/samsung/samsung-galaxy-a52s-5g.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a52s.webp",
     popular: false,
-    order: 317,
-    metaTitle: "Samsung Galaxy A52s (SM-A528) 2021 remonts Rīgā",
-    metaDescription: "Galaxy A52s (SM-A528) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 324,
+    metaTitle: "Samsung Galaxy A52s remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A52s remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A52s (SM-A528) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A52s (SM-A528) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-a52",
     category: "telefonu-remonts",
@@ -2008,49 +2405,58 @@ const devices = [
     year: 2021,
     image: "/images/devices/samsung/samsung-galaxy-a52.webp",
     popular: false,
-    order: 318,
-    metaTitle: "Samsung Galaxy A52 (SM-A525) 2021 remonts Rīgā",
-    metaDescription: "Galaxy A52 (SM-A525) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 325,
+    metaTitle: "Samsung Galaxy A52 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A52 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A52 (SM-A525) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A52 (SM-A525) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a42-5g",
+    slug: "galaxy-a51",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A42 5G (SM-A426) 2020",
-    year: 2020,
-    image: "/images/devices/samsung/samsung-galaxy-a42-5g.webp",
+    name: "Galaxy A51 (SM-A515) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-a51.webp",
     popular: false,
-    order: 319,
-    metaTitle: "Samsung Galaxy A42 5G (SM-A426) 2020 remonts Rīgā",
-    metaDescription: "Galaxy A42 5G (SM-A426) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 326,
+    metaTitle: "Samsung Galaxy A51 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A51 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A42 5G (SM-A426) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A51 (SM-A515) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a32-4g",
+    slug: "galaxy-a50",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A32 (SM-A325) 2021",
-    year: 2021,
-    image: "/images/devices/samsung/samsung-galaxy-a32.webp",
+    name: "Galaxy A50 (SM-A505) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-a50.webp",
     popular: false,
-    order: 320,
-    metaTitle: "Samsung Galaxy A32 (SM-A325) 2021 remonts Rīgā",
-    metaDescription: "Galaxy A32 (SM-A325) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 327,
+    metaTitle: "Samsung Galaxy A50 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A50 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A32 (SM-A325) 2021</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A50 (SM-A505) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
     slug: "galaxy-a41",
     category: "telefonu-remonts",
@@ -2062,106 +2468,18 @@ const devices = [
     year: 2020,
     image: "/images/devices/samsung/samsung-galaxy-a41.webp",
     popular: false,
-    order: 321,
-    metaTitle: "Samsung Galaxy A41 (SM-A415) 2020 remonts Rīgā",
-    metaDescription: "Galaxy A41 (SM-A415) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 328,
+    metaTitle: "Samsung Galaxy A41 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A41 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A41 (SM-A415) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a31",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A31 (SM-A315) 2020",
-    year: 2020,
-    image: "/images/devices/samsung/samsung-galaxy-a31.webp",
-    popular: false,
-    order: 322,
-    metaTitle: "Samsung Galaxy A31 (SM-A315) 2020 remonts Rīgā",
-    metaDescription: "Galaxy A31 (SM-A315) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A31 (SM-A315) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a71-4g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A71 (SM-A715) 2020",
-    year: 2020,
-    image: "/images/devices/samsung/samsung-galaxy-a71.webp",
-    popular: false,
-    order: 323,
-    metaTitle: "Samsung Galaxy A71 (SM-A715) 2020 remonts Rīgā",
-    metaDescription: "Galaxy A71 (SM-A715) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A71 (SM-A715) 2020</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a51-4g",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A51 (SM-A515) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a51.webp",
-    popular: false,
-    order: 324,
-    metaTitle: "Samsung Galaxy A51 (SM-A515) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A51 (SM-A515) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A51 (SM-A515) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A41 (SM-A415) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
   {
-    slug: "galaxy-a50s-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A50s (SM-A507) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a50s-2019.webp",
-    popular: false,
-    order: 325,
-    metaTitle: "Samsung Galaxy A50s (SM-A507) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A50s (SM-A507) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A50s (SM-A507) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a50-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A50 (SM-A505) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a50-2019.webp",
-    popular: false,
-    order: 326,
-    metaTitle: "Samsung Galaxy A50 (SM-A505) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A50 (SM-A505) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A50 (SM-A505) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a40-2019",
+    slug: "galaxy-a40",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -2169,89 +2487,461 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A40 (SM-A405) 2019",
     year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a40-2019.webp",
-    popular: false,
-    order: 327,
-    metaTitle: "Samsung Galaxy A40 (SM-A405) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A40 (SM-A405) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A40 (SM-A405) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a30s-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A30s (SM-A307) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a30s-2019.webp",
-    popular: false,
-    order: 328,
-    metaTitle: "Samsung Galaxy A30s (SM-A307) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A30s (SM-A307) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A30s (SM-A307) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a30-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A30 (SM-A305) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a30-2019.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a40.webp",
     popular: false,
     order: 329,
-    metaTitle: "Samsung Galaxy A30 (SM-A305) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A30 (SM-A305) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    metaTitle: "Samsung Galaxy A40 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A40 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A30 (SM-A305) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A40 (SM-A405) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a20s-2019",
+    slug: "galaxy-a36",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A20s (SM-A207) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a20s-2019.webp",
+    name: "Galaxy A36 (SM-A366) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-a36.webp",
     popular: false,
     order: 330,
-    metaTitle: "Samsung Galaxy A20s (SM-A207) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A20s (SM-A207) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    metaTitle: "Samsung Galaxy A36 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A36 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A20s (SM-A207) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A36 (SM-A366) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a20-2019",
+    slug: "galaxy-a35",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A20 (SM-A205) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a20-2019.webp",
+    name: "Galaxy A35 (SM-A356) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-a35.webp",
     popular: false,
     order: 331,
-    metaTitle: "Samsung Galaxy A20 (SM-A205) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A20 (SM-A205) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    metaTitle: "Samsung Galaxy A35 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A35 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A20 (SM-A205) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A35 (SM-A356) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a10s-2019",
+    slug: "galaxy-a34",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A34 (SM-A346) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a34.webp",
+    popular: false,
+    order: 332,
+    metaTitle: "Samsung Galaxy A34 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A34 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A34 (SM-A346) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a33",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A33 (SM-A336) 2022",
+    year: 2022,
+    image: "/images/devices/samsung/samsung-galaxy-a33.webp",
+    popular: false,
+    order: 333,
+    metaTitle: "Samsung Galaxy A33 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A33 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A33 (SM-A336) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a32-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A32 5G (SM-A326) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a32-5g.webp",
+    popular: false,
+    order: 334,
+    metaTitle: "Samsung Galaxy A32 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A32 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A32 5G (SM-A326) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a32-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A32 4G (SM-A325) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a32-4g.webp",
+    popular: false,
+    order: 335,
+    metaTitle: "Samsung Galaxy A32 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A32 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A32 4G (SM-A325) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a25-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A25 5G (SM-A256) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a25-5g.webp",
+    popular: false,
+    order: 336,
+    metaTitle: "Samsung Galaxy A25 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A25 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A25 5G (SM-A256) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a24-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A24 4G (SM-A245) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a24-4g.webp",
+    popular: false,
+    order: 337,
+    metaTitle: "Samsung Galaxy A24 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A24 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A24 4G (SM-A245) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a23-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A23 5G (SM-A236) 2022",
+    year: 2022,
+    image: "/images/devices/samsung/samsung-galaxy-a23-5g.webp",
+    popular: false,
+    order: 338,
+    metaTitle: "Samsung Galaxy A23 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A23 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A23 5G (SM-A236) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a22-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A22 4G (SM-A225) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a22-4g.webp",
+    popular: false,
+    order: 339,
+    metaTitle: "Samsung Galaxy A22 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A22 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A22 4G (SM-A225) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a22-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A22 5G (SM-A226) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a22-5g.webp",
+    popular: false,
+    order: 340,
+    metaTitle: "Samsung Galaxy A22 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A22 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A22 5G (SM-A226) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a21s",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A21s (SM-A217) 2020",
+    year: 2020,
+    image: "/images/devices/samsung/samsung-galaxy-a21s.webp",
+    popular: false,
+    order: 341,
+    metaTitle: "Samsung Galaxy A21s remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A21s remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A21s (SM-A217) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a20e",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A20e (SM-A202) 2019",
+    year: 2019,
+    image: "/images/devices/samsung/samsung-galaxy-a20e.webp",
+    popular: false,
+    order: 342,
+    metaTitle: "Samsung Galaxy A20e remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A20e remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A20e (SM-A202) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a16-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A16 5G (SM-A166) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-a16-5g.webp",
+    popular: false,
+    order: 343,
+    metaTitle: "Samsung Galaxy A16 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A16 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A16 5G (SM-A166) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a16-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A16 4G (SM-A165) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-a16-4g.webp",
+    popular: false,
+    order: 344,
+    metaTitle: "Samsung Galaxy A16 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A16 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A16 4G (SM-A165) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a15-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A15 5G (SM-A156) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-a15-5g.webp",
+    popular: false,
+    order: 345,
+    metaTitle: "Samsung Galaxy A15 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A15 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A15 5G (SM-A156) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a15-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A15 4G (SM-A155) 2024",
+    year: 2024,
+    image: "/images/devices/samsung/samsung-galaxy-a15-4g.webp",
+    popular: false,
+    order: 346,
+    metaTitle: "Samsung Galaxy A15 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A15 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A15 4G (SM-A155) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a14-5g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A14 5G (SM-A146) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a14-5g.webp",
+    popular: false,
+    order: 347,
+    metaTitle: "Samsung Galaxy A14 5G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A14 5G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A14 5G (SM-A146) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a14-4g",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A14 4G (SM-A145) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a14-4g.webp",
+    popular: false,
+    order: 348,
+    metaTitle: "Samsung Galaxy A14 4G remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A14 4G remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A14 4G (SM-A145) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a13",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A13 (SM-A136, A137) 2022",
+    year: 2022,
+    image: "/images/devices/samsung/samsung-galaxy-a13.webp",
+    popular: false,
+    order: 349,
+    metaTitle: "Samsung Galaxy A13 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A13 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A13 (SM-A136) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a12",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A12 (SM-A125. A-127) 2020",
+    year: 2020,
+    image: "/images/devices/samsung/samsung-galaxy-a12.webp",
+    popular: false,
+    order: 350,
+    metaTitle: "Samsung Galaxy A12 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A12 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A12 (SM-A125) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a10s",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -2259,17 +2949,20 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A10s (SM-A107) 2019",
     year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a10s-2019.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a10s.webp",
     popular: false,
-    order: 332,
-    metaTitle: "Samsung Galaxy A10s (SM-A107) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A10s (SM-A107) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 351,
+    metaTitle: "Samsung Galaxy A10s remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A10s remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A10s (SM-A107) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A10s (SM-A107) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a10-2019",
+    slug: "galaxy-a10",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -2277,128 +2970,20 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A10 (SM-A105) 2019",
     year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a10-2019.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a10.webp",
     popular: false,
-    order: 333,
-    metaTitle: "Samsung Galaxy A10 (SM-A105) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A10 (SM-A105) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 352,
+    metaTitle: "Samsung Galaxy A10 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A10 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A10 (SM-A105) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A10 (SM-A105) 2019</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
   {
-    slug: "galaxy-a80-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A80 (SM-A805) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a80-2019.webp",
-    popular: false,
-    order: 334,
-    metaTitle: "Samsung Galaxy A80 (SM-A805) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A80 (SM-A805) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A80 (SM-A805) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a70-2019",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A70 (SM-A705) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a70-2019.webp",
-    popular: false,
-    order: 335,
-    metaTitle: "Samsung Galaxy A70 (SM-A705) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A70 (SM-A705) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A70 (SM-A705) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a50-2019-s",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A50s (SM-A507) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a50s-2019.webp",
-    popular: false,
-    order: 336,
-    metaTitle: "Samsung Galaxy A50s (SM-A507) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A50s (SM-A507) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A50s (SM-A507) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a30-2019-s",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A30s (SM-A307) 2019",
-    year: 2019,
-    image: "/images/devices/samsung/samsung-galaxy-a30s-2019.webp",
-    popular: false,
-    order: 337,
-    metaTitle: "Samsung Galaxy A30s (SM-A307) 2019 remonts Rīgā",
-    metaDescription: "Galaxy A30s (SM-A307) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A30s (SM-A307) 2019</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-
-  // ---- Older A (2018 and earlier with year in name) ----
-  {
-    slug: "galaxy-a8-plus-2018",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A8+ (SM-A730) 2018",
-    year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-a8-plus-2018.webp",
-    popular: false,
-    order: 338,
-    metaTitle: "Samsung Galaxy A8+ (SM-A730) 2018 remonts Rīgā",
-    metaDescription: "Galaxy A8+ (SM-A730) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A8+ (SM-A730) 2018</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a8-2018",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A8 (SM-A530) 2018",
-    year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-a8-2018.webp",
-    popular: false,
-    order: 339,
-    metaTitle: "Samsung Galaxy A8 (SM-A530) 2018 remonts Rīgā",
-    metaDescription: "Galaxy A8 (SM-A530) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A8 (SM-A530) 2018</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a7-2018",
+    slug: "galaxy-a7",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
@@ -2406,158 +2991,120 @@ const devices = [
     seriesSlug: "galaxy-a-serija",
     name: "Galaxy A7 (SM-A750) 2018",
     year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-a7-2018.webp",
+    image: "/images/devices/samsung/samsung-galaxy-a7.webp",
     popular: false,
-    order: 340,
-    metaTitle: "Samsung Galaxy A7 (SM-A750) 2018 remonts Rīgā",
-    metaDescription: "Galaxy A7 (SM-A750) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 353,
+    metaTitle: "Samsung Galaxy A7 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A7 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A7 (SM-A750) 2018</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a6-plus-2018",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A6+ (SM-A605) 2018",
-    year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-a6-plus-2018.webp",
-    popular: false,
-    order: 341,
-    metaTitle: "Samsung Galaxy A6+ (SM-A605) 2018 remonts Rīgā",
-    metaDescription: "Galaxy A6+ (SM-A605) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A6+ (SM-A605) 2018</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a6-2018",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A6 (SM-A600) 2018",
-    year: 2018,
-    image: "/images/devices/samsung/samsung-galaxy-a6-2018.webp",
-    popular: false,
-    order: 342,
-    metaTitle: "Samsung Galaxy A6 (SM-A600) 2018 remonts Rīgā",
-    metaDescription: "Galaxy A6 (SM-A600) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A6 (SM-A600) 2018</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a5-2017",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A5 (SM-A520) 2017",
-    year: 2017,
-    image: "/images/devices/samsung/samsung-galaxy-a5-2017.webp",
-    popular: false,
-    order: 343,
-    metaTitle: "Samsung Galaxy A5 (SM-A520) 2017 remonts Rīgā",
-    metaDescription: "Galaxy A5 (SM-A520) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A5 (SM-A520) 2017</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a3-2017",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A3 (SM-A320) 2017",
-    year: 2017,
-    image: "/images/devices/samsung/samsung-galaxy-a3-2017.webp",
-    popular: false,
-    order: 344,
-    metaTitle: "Samsung Galaxy A3 (SM-A320) 2017 remonts Rīgā",
-    metaDescription: "Galaxy A3 (SM-A320) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A3 (SM-A320) 2017</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
-  `,
-  },
-  {
-    slug: "galaxy-a7-2017",
-    category: "telefonu-remonts",
-    brand: "Samsung",
-    brandSlug: "samsung",
-    series: "Galaxy A sērija",
-    seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A7 (SM-A720) 2017",
-    year: 2017,
-    image: "/images/devices/samsung/samsung-galaxy-a7-2017.webp",
-    popular: false,
-    order: 345,
-    metaTitle: "Samsung Galaxy A7 (SM-A720) 2017 remonts Rīgā",
-    metaDescription: "Galaxy A7 (SM-A720) ekrāna un baterijas maiņa. 90 dienu garantija.",
-    bodyHtml: `
-<p><strong>Galaxy A7 (SM-A720) 2017</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A7 (SM-A750) 2018</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
   {
-    slug: "galaxy-a5-2016",
+    slug: "galaxy-a06",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A5 (SM-A510) 2016",
-    year: 2016,
-    image: "/images/devices/samsung/samsung-galaxy-a5-2016.webp",
+    name: "Galaxy A06 (SM-A065) 2025",
+    year: 2025,
+    image: "/images/devices/samsung/samsung-galaxy-a06.webp",
     popular: false,
-    order: 346,
-    metaTitle: "Samsung Galaxy A5 (SM-A510) 2016 remonts Rīgā",
-    metaDescription: "Galaxy A5 (SM-A510) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 354,
+    metaTitle: "Samsung Galaxy A06 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A06 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A5 (SM-A510) 2016</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A06 (SM-A065) 2025</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a3-2016",
+    slug: "galaxy-a05s",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A3 (SM-A310) 2016",
-    year: 2016,
-    image: "/images/devices/samsung/samsung-galaxy-a3-2016.webp",
+    name: "Galaxy A05s (SM-A057) 2023",
+    year: 2023,
+    image: "/images/devices/samsung/samsung-galaxy-a05s.webp",
     popular: false,
-    order: 347,
-    metaTitle: "Samsung Galaxy A3 (SM-A310) 2016 remonts Rīgā",
-    metaDescription: "Galaxy A3 (SM-A310) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 355,
+    metaTitle: "Samsung Galaxy A05s remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A05s remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A3 (SM-A310) 2016</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A05s (SM-A057) 2023</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
+
   {
-    slug: "galaxy-a7-2016",
+    slug: "galaxy-a04s",
     category: "telefonu-remonts",
     brand: "Samsung",
     brandSlug: "samsung",
     series: "Galaxy A sērija",
     seriesSlug: "galaxy-a-serija",
-    name: "Galaxy A7 (SM-A710) 2016",
-    year: 2016,
-    image: "/images/devices/samsung/samsung-galaxy-a7-2016.webp",
+    name: "Galaxy A04s (SM-A047) 2022",
+    year: 2022,
+    image: "/images/devices/samsung/samsung-galaxy-a04s.webp",
     popular: false,
-    order: 348,
-    metaTitle: "Samsung Galaxy A7 (SM-A710) 2016 remonts Rīgā",
-    metaDescription: "Galaxy A7 (SM-A710) ekrāna un baterijas maiņa. 90 dienu garantija.",
+    order: 356,
+    metaTitle: "Samsung Galaxy A04s remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A04s remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A7 (SM-A710) 2016</strong> remonts Rīgā — profesionāla ekrāna un baterijas nomaiņa ar ātru apkalpošanu.</p>
+<p><strong>Galaxy A04s (SM-A047) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a03",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A03 (SM-A035) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a03.webp",
+    popular: false,
+    order: 357,
+    metaTitle: "Samsung Galaxy A03 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A03 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A03 (SM-A035) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
+  {
+    slug: "galaxy-a02",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy A sērija",
+    seriesSlug: "galaxy-a-serija",
+    name: "Galaxy A02 (SM-A025) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-a02.webp",
+    popular: false,
+    order: 358,
+    metaTitle: "Samsung Galaxy A02 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy A02 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy A02 (SM-A025) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
 
@@ -2583,6 +3130,115 @@ const devices = [
   `,
 
   },
+
+    // ================================
+// Galaxy XCover sērija
+// ================================
+{
+  slug: "galaxy-xcover-pro",
+  category: "telefonu-remonts",
+  brand: "Samsung",
+  brandSlug: "samsung",
+  series: "Galaxy XCover sērija",
+  seriesSlug: "galaxy-xcover-serija",
+  name: "Galaxy XCover Pro (SM-G715) 2020",
+  year: 2020,
+  image: "/images/devices/samsung/samsung-galaxy-xcover-pro.webp",
+  popular: false,
+  order: 360,
+  metaTitle: "Samsung Galaxy XCover Pro remonts Rīgā | iLab",
+  metaDescription:
+    "Samsung Galaxy XCover Pro remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+  bodyHtml: `
+<p><strong>Galaxy XCover Pro (SM-G715) 2020</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+},
+
+{
+  slug: "galaxy-xcover-6",
+  category: "telefonu-remonts",
+  brand: "Samsung",
+  brandSlug: "samsung",
+  series: "Galaxy XCover sērija",
+  seriesSlug: "galaxy-xcover-serija",
+  name: "Galaxy XCover 6 (SM-G736) 2022",
+  year: 2022,
+  image: "/images/devices/samsung/samsung-galaxy-xcover-6.webp",
+  popular: false,
+  order: 361,
+  metaTitle: "Samsung Galaxy XCover 6 remonts Rīgā | iLab",
+  metaDescription:
+    "Samsung Galaxy XCover 6 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+  bodyHtml: `
+<p><strong>Galaxy XCover 6 (SM-G736) 2022</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+},
+
+{
+  slug: "galaxy-xcover-7",
+  category: "telefonu-remonts",
+  brand: "Samsung",
+  brandSlug: "samsung",
+  series: "Galaxy XCover sērija",
+  seriesSlug: "galaxy-xcover-serija",
+  name: "Galaxy XCover 7 (SM-G556) 2024",
+  year: 2024,
+  image: "/images/devices/samsung/samsung-galaxy-xcover-7.webp",
+  popular: false,
+  order: 362,
+  metaTitle: "Samsung Galaxy XCover 7 remonts Rīgā | iLab",
+  metaDescription:
+    "Samsung Galaxy XCover 7 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+  bodyHtml: `
+<p><strong>Galaxy XCover 7 (SM-G556) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+},
+
+{
+  slug: "galaxy-xcover-7-pro",
+  category: "telefonu-remonts",
+  brand: "Samsung",
+  brandSlug: "samsung",
+  series: "Galaxy XCover sērija",
+  seriesSlug: "galaxy-xcover-serija",
+  name: "Galaxy XCover 7 Pro (SM-G766) 2024",
+  year: 2024,
+  image: "/images/devices/samsung/samsung-galaxy-xcover-7-pro.webp",
+  popular: false,
+  order: 363,
+  metaTitle: "Samsung Galaxy XCover 7 Pro remonts Rīgā | iLab",
+  metaDescription:
+    "Samsung Galaxy XCover 7 Pro remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+  bodyHtml: `
+<p><strong>Galaxy XCover 7 Pro (SM-G766) 2024</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+},
+
+  {
+    slug: "galaxy-xcover-5",
+    category: "telefonu-remonts",
+    brand: "Samsung",
+    brandSlug: "samsung",
+    series: "Galaxy XCover sērija",
+    seriesSlug: "galaxy-xcover-serija",
+    name: "Galaxy XCover 5 (SM-G525) 2021",
+    year: 2021,
+    image: "/images/devices/samsung/samsung-galaxy-xcover-5.webp",
+    popular: false,
+    order: 359, // continue from previous order
+    metaTitle: "Samsung Galaxy XCover 5 remonts Rīgā | iLab",
+    metaDescription:
+      "Samsung Galaxy XCover 5 remonts Rīgā — ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    bodyHtml: `
+<p><strong>Galaxy XCover 5 (SM-G525) 2021</strong> remonts Rīgā — profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
+  `,
+  },
+
 
 
 // ------------------------
