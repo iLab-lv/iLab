@@ -1040,13 +1040,14 @@ const devices = [
   `,
 },
 
-  // --- Samsung devices (paste these objects into your existing devices array) ---
 
- // ================================
-  // Galaxy S sērija (phones)
+
+// =======================================================
+  //////////////////// SAMSUNG PHONES /////////////////////
+// =======================================================
+
   // ================================
-   // ================================
-  // Galaxy S sērija (phones)
+  // Galaxy S sērija 
   // ================================
   {
     slug: "galaxy-s25-edge",
@@ -1510,11 +1511,9 @@ const devices = [
 
 
   // ================================
-  // Galaxy Z sērija (foldable phones)
+  // Galaxy Z sērija 
   // ================================
-    // ================================
-  // Galaxy Z sērija (foldable phones)
-  // ================================
+
   {
     slug: "galaxy-z-flip7",
     category: "telefonu-remonts",
@@ -1770,7 +1769,6 @@ const devices = [
   },
 
   {
-    // F900 from Excel: original Fold, normalized to Z Fold and included in Z sērija
     slug: "galaxy-z-fold",
     category: "telefonu-remonts",
     brand: "Samsung",
@@ -1905,9 +1903,7 @@ const devices = [
   // ================================
   // Galaxy A sērija
   // ================================
-    // ================================
-  // Galaxy A sērija
-  // ================================
+
   {
     slug: "galaxy-a72",
     category: "telefonu-remonts",
@@ -2790,7 +2786,8 @@ const devices = [
   `,
   },
 
-    // ================================
+  
+// ================================
 // Galaxy XCover sērija
 // ================================
 {
