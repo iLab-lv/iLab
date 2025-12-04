@@ -2790,6 +2790,7 @@ const devices = [
 // ================================
 // Galaxy XCover sērija
 // ================================
+
 {
   slug: "galaxy-xcover-pro",
   category: "telefonu-remonts",
