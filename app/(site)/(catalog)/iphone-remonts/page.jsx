@@ -27,7 +27,14 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-const ORIGIN = 'https://www.ilab.lv';
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildStandardRepairHowToLd,
+} from '@/lib/seo/jsonldHelpers';
+
 const cat = categoryContent['iphone-remonts'];
 
 export const metadata = {
@@ -80,43 +87,21 @@ export default function IphoneRemontsPage() {
   const { items: IPHONE_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE);
   const IPHONE_FAQ_LD = getFaqLd(FAQ_CONTEXT.IPHONE);
 
-  // JSON-LD blocks
-  const howToLd = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'Kā notiek iPhone remonts',
-    description:
-      'Process iLab servisa centros Rīgā: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
-    step: [
-      { '@type': 'HowToStep', position: 1, name: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-      { '@type': 'HowToStep', position: 2, name: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-      { '@type': 'HowToStep', position: 3, name: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-      { '@type': 'HowToStep', position: 4, name: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-      { '@type': 'HowToStep', position: 5, name: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
-    ],
-  };
+  // JSON-LD blocks via helpers
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'iPhone remonts Rīgā', url: abs('/iphone-remonts') },
+  ]);
 
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'iPhone remonts Rīgā', item: `${ORIGIN}/iphone-remonts/` },
-    ],
-  };
-
-  const serviceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${ORIGIN}/iphone-remonts#service`,
-    serviceType: 'iPhone remonts Rīgā',
-    areaServed: { '@type': 'City', name: 'Riga' },
-    provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}/iphone-remonts/`,
+  const serviceLd = buildServiceLdForCity({
+    path: '/iphone-remonts',
     name: 'iPhone remonts Rīgā',
     description:
       'iPhone remonts Rīgā: displeja un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, skaidras cenas un 90 dienu garantija.',
-  };
+    // serviceType, city, locationIds use defaults (Rīga + all locations)
+  });
+
+  const howToLd = buildStandardRepairHowToLd('iPhone remonts');
 
   return (
     <>
@@ -146,12 +131,18 @@ export default function IphoneRemontsPage() {
       {/* INTRO */}
       <section className={s.section} aria-labelledby="iphone-intro-h2">
         <div className={s.container}>
-          <h2 id="iphone-intro-h2" className={s.h2}>iPhone remonts Rīgā — ko mēs darām</h2>
+          <h2 id="iphone-intro-h2" className={s.h2}>
+            iPhone remonts Rīgā — ko mēs darām
+          </h2>
           <p className={s.paragraph}>
-            Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>,
-            līdz <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī <strong>ūdens bojājumu</strong> novēršanai. Pirms darba
-            uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos remontdarbus paveicam
-            tajā pašā dienā. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong> katram remontam.
+            Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar{' '}
+            <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz{' '}
+            <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī{' '}
+            <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām{' '}
+            <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos
+            remontdarbus paveicam tajā pašā dienā. Izmantojam{' '}
+            <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam{' '}
+            <strong>90 dienu garantiju</strong> katram remontam.
           </p>
         </div>
       </section>
@@ -205,13 +196,18 @@ export default function IphoneRemontsPage() {
       </section>
 
       {/* MODEL GRID */}
-      <section id="iphone-modeli" className={`${s.section} ${s.anchorTarget}`} aria-labelledby="iphone-modeli-h2">
+      <section
+        id="iphone-modeli"
+        className={`${s.section} ${s.anchorTarget}`}
+        aria-labelledby="iphone-modeli-h2"
+      >
         <div className={s.container}>
           <h2 id="iphone-modeli-h2" className={s.h2}>
             {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli'}
           </h2>
           <p id="iphone-modeli-intro" className={s.intro}>
-            {cat?.sections?.modelGrid?.intro ?? 'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
+            {cat?.sections?.modelGrid?.intro ??
+              'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
           </p>
 
           <SeriesGrid
@@ -246,11 +242,7 @@ export default function IphoneRemontsPage() {
       {/* FAQ */}
       <section className={s.section} aria-labelledby="iphone-faq-h2">
         <div className={s.container}>
-          <Faq
-            id="iphone-faq"
-            title="Biežāk uzdotie jautājumi"
-            items={IPHONE_FAQ_ITEMS}
-          />
+          <Faq id="iphone-faq" title="Biežāk uzdotie jautājumi" items={IPHONE_FAQ_ITEMS} />
         </div>
       </section>
 

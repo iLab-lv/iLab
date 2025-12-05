@@ -1,9 +1,10 @@
+// app/(site)/(catalog)/telefonu-remonts/[brand]/page.jsx
 import Script from 'next/script';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import devicesAll from '@/data/devices';
-import categories from '@/data/categories'; // ⬅️ used by getPhoneBrandConfig
+import categories from '@/data/categories'; // used by getPhoneBrandConfig
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
@@ -32,7 +33,14 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-const ORIGIN = 'https://www.ilab.lv';
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildStandardRepairHowToLd,
+  buildFaqLdFromPairs,
+} from '@/lib/seo/jsonldHelpers';
 
 /* ---------------------------------------------
    Lock this dynamic route to ONLY known brands
@@ -86,54 +94,69 @@ const POPULAR_REPAIRS = [
     title: 'Displeja (ekrāna) maiņa',
     text: 'plaisas, tumši plankumi, nereaģē skāriens.',
     icon: LuSmartphone,
-    href: '/telefonu-remonts/ekrana-mainja',
+    href: '/telefonu-remonts/ekrana-maina',
   },
   {
     title: 'Akumulatora maiņa',
     text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
     icon: LuBatteryCharging,
-    href: '/telefonu-remonts/akumulatora-mainja',
+    href: '/telefonu-remonts/baterijas-maina',
   },
   {
     title: 'Uzlādes ligzda',
     text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
     icon: LuPlugZap,
-    href: '/telefonu-remonts/uzlades-ligzda',
+    href: '/telefonu-remonts/uzlades-ligzdas-maina',
   },
   {
     title: 'Kamera',
     text: 'miglaini attēli, fokusēšanās problēmas.',
     icon: LuCamera,
-    href: '/telefonu-remonts/kamera-remonts',
+    href: '/telefonu-remonts/kameras-remonts',
   },
   {
     title: 'Skaļruņi/mikrofons',
-    text: 'klusa skaņa, krakšķi, sarunās nedzird.',
+    text: 'klusa skaņa, krakšķi, sarunās laikā nedzird.',
     icon: LuVolume2,
-    href: '/telefonu-remonts/skalruni-mikrofons',
+    href: '/telefonu-remonts/skalruni-mikrofona-remonts',
   },
   {
     title: 'Ūdens bojājumi',
     text: 'diagnostika un atjaunošana, ja tas iespējams.',
     icon: LuDroplets,
-    href: '/telefonu-remonts/udens-bojajumi',
+    href: '/telefonu-remonts/udens-bojajumu-remonts',
   },
 ];
 
 const PROCESS_STEPS = [
   { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-  { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
+  {
+    title: 'Cena un termiņš',
+    text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+  },
   { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
   { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
   { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
 ];
 
 const FAQ_ITEMS = [
-  { q: 'Cik ilgi ilgst telefona displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
-  { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
+  {
+    q: 'Cik ilgi ilgst telefona displeja maiņa?',
+    a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.',
+  },
+  {
+    q: 'Vai mani dati saglabāsies?',
+    a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.',
+  },
   { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
-  { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-  { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
+  {
+    q: 'Vai pieejamas oriģinālas detaļas?',
+    a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
+  },
+  {
+    q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
+    a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.',
+  },
 ];
 
 export default function BrandPhonesPage({ params }) {
@@ -156,39 +179,24 @@ export default function BrandPhonesPage({ params }) {
 
   const heroHtml = bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`;
 
-  // ---------- JSON-LD ----------
-  const serviceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${ORIGIN}${bc.href}#service`,
-    serviceType: `${bc.marketingName} telefonu remonts`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}${bc.href}/`,
+  // ---------- JSON-LD via helpers ----------
+
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'Telefonu remonts', url: abs('/telefonu-remonts') },
+    { name: bc.marketingName, url: abs(bc.href) },
+  ]);
+
+  const serviceLd = buildServiceLdForCity({
+    path: bc.href, // e.g. '/telefonu-remonts/samsung'
     name: `${bc.marketingName} telefonu remonts`,
-    description:
-      `${bc.marketingName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
-  };
+    description: `${bc.marketingName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    // city + provider locations use defaults (Rīga + all LOCATIONS)
+  });
 
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Telefonu remonts', item: `${ORIGIN}/telefonu-remonts/` },
-      { '@type': 'ListItem', position: 3, name: bc.marketingName, item: `${ORIGIN}${bc.href}/` },
-    ],
-  };
+  const howToLd = buildStandardRepairHowToLd(`${bc.marketingName} telefonu remonts`);
 
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : '' },
-    })),
-  };
+  const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
 
   return (
     <>
@@ -198,6 +206,9 @@ export default function BrandPhonesPage({ params }) {
       </Script>
       <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(breadcrumbsLd)}
+      </Script>
+      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(howToLd)}
       </Script>
       <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqLd)}
@@ -237,55 +248,20 @@ export default function BrandPhonesPage({ params }) {
       {/* Popular services */}
       <section className={c.section} aria-labelledby="popular-services-h2">
         <div className={c.container}>
-          <Services
-                      id="brand-services"
-                      title="Populārākie remonti"
-                      items={[
-                        {
-                          title: 'Displeja (ekrāna) maiņa',
-                          text: 'plaisas, tumši plankumi, nereaģē skāriens.',
-                          icon: LuSmartphone,
-                          href: '/telefonu-remonts/ekrana-maina',
-                        },
-                        {
-                          title: 'Akumulatora maiņa',
-                          text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
-                          icon: LuBatteryCharging,
-                          href: '/telefonu-remonts/baterijas-maina',
-                        },
-                        {
-                          title: 'Uzlādes ligzda',
-                          text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
-                          icon: LuPlugZap,
-                          href: '/telefonu-remonts/uzlades-ligzdas-maina',
-                        },
-                        {
-                          title: 'Kamera',
-                          text: 'miglaini attēli, fokusēšanās problēmas.',
-                          icon: LuCamera,
-                          href: '/telefonu-remonts/kameras-remonts',
-                        },
-                        {
-                          title: 'Skaļruņi/mikrofons',
-                          text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
-                          icon: LuVolume2,
-                          href: '/telefonu-remonts/skalruni-mikrofona-remonts',
-                        },
-                        {
-                          title: 'Ūdens bojājumi',
-                          text: 'diagnostika un atjaunošana, ja tas iespējams.',
-                          icon: LuDroplets,
-                          href: '/telefonu-remonts/udens-bojajumu-remonts',
-                        },
-                      ]}
-                    />
+          <Services id="brand-services" title="Populārākie remonti" items={POPULAR_REPAIRS} />
         </div>
       </section>
 
       {/* SERIES GRID */}
-      <section id="brand-modeli" className={`${c.section} ${c.anchorTarget}`} aria-labelledby="brand-modeli-h2">
+      <section
+        id="brand-modeli"
+        className={`${c.section} ${c.anchorTarget}`}
+        aria-labelledby="brand-modeli-h2"
+      >
         <div className={c.container}>
-          <h2 id="brand-modeli-h2" className={c.h2}>{bc.sections.modelGrid.heading}</h2>
+          <h2 id="brand-modeli-h2" className={c.h2}>
+            {bc.sections.modelGrid.heading}
+          </h2>
           <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
           <p className={c.paragraph} style={{ marginTop: 0 }}>
             Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
@@ -307,8 +283,6 @@ export default function BrandPhonesPage({ params }) {
           )}
         </div>
       </section>
-
-      
 
       {/* Process */}
       <div id="process-h2" className={c.anchorTarget} />

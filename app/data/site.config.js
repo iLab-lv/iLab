@@ -16,24 +16,27 @@ export const SOCIALS = {
   tiktok: 'https://www.tiktok.com/@ilab.lv',
 };
 
-// Default store hours (7-day format for hours table)
+// Generic / legacy default store hours (7-day format for hours table)
+// NOTE: actual locations below now have their own hours arrays.
+// If nothing else imports HOURS directly, you can remove this later.
 export const HOURS = [
-  { day: 'P', opens: '10:00', closes: '21:00' },
-  { day: 'O', opens: '10:00', closes: '21:00' },
-  { day: 'T', opens: '10:00', closes: '21:00' },
-  { day: 'C', opens: '10:00', closes: '21:00' },
+  { day: 'P',  opens: '10:00', closes: '21:00' },
+  { day: 'O',  opens: '10:00', closes: '21:00' },
+  { day: 'T',  opens: '10:00', closes: '21:00' },
+  { day: 'C',  opens: '10:00', closes: '21:00' },
   { day: 'Pk', opens: '10:00', closes: '21:00' },
-  { day: 'S', opens: '10:00', closes: '21:00' },
+  { day: 'S',  opens: '10:00', closes: '21:00' },
   { day: 'Sv', opens: '10:00', closes: '21:00' },
 ];
 
 // Map pin positions (% of image natural dimensions)
 export const PIN_POSITIONS = {
   domina: { xPct: 68, yPct: 40 },
-  spice: { xPct: 30, yPct: 60 },
+  spice:  { xPct: 30, yPct: 60 },
 };
 
-// Locations used by panels, homepage, footer, etc.
+// Locations used by panels, homepage, footer, reviews, etc.
+// Each location now has its OWN hours array and Google Place ID.
 export const LOCATIONS = [
   {
     id: 'domina',
@@ -43,12 +46,29 @@ export const LOCATIONS = [
     telLink: 'tel:+37123370088',
     email: 'info@ilab.lv',
     wa: 'https://wa.me/37123370088',
-    maps: 'https://www.google.com/maps/search/?api=1&query=iLab+Domina&query_place_id=PLACE_ID_DOMINA',
-    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab+Domina&destination_place_id=PLACE_ID_DOMINA',
-    hours: HOURS,
-    // Optional: override hours for specific date
+
+    // Google Place data (from old PLACES.domina)
+    placeId: 'ChIJPdbptEPP7kYRsN9Te_ffHcg',
+    maps:
+      'https://www.google.com/maps/search/?api=1&query=iLab+Domina&query_place_id=ChIJPdbptEPP7kYRsN9Te_ffHcg',
+    destination:
+      'https://www.google.com/maps/dir/?api=1&destination=iLab+Domina&destination_place_id=ChIJPdbptEPP7kYRsN9Te_ffHcg',
+
+    // Working hours — UNIQUE for this location
+    // TODO: adjust to real Domina schedule if it differs.
+    hours: [
+      { day: 'P',  opens: '10:00', closes: '21:00' },
+      { day: 'O',  opens: '10:00', closes: '21:00' },
+      { day: 'T',  opens: '10:00', closes: '21:00' },
+      { day: 'C',  opens: '10:00', closes: '21:00' },
+      { day: 'Pk', opens: '10:00', closes: '21:00' },
+      { day: 'S',  opens: '10:00', closes: '21:00' },
+      { day: 'Sv', opens: '10:00', closes: '21:00' },
+    ],
+
+    // Optional: per-date overrides & notices
     // hoursOverride: { date: '2025-12-25', opens: '12:00', closes: '18:00' },
-    // specialNotice: 'Ziemsvētku darba laiks', // Optional notice
+    // specialNotice: 'Ziemsvētku darba laiks',
   },
   {
     id: 'spice',
@@ -58,8 +78,24 @@ export const LOCATIONS = [
     telLink: 'tel:+37120887787',
     email: 'info@ilab.lv',
     wa: 'https://wa.me/37120887787',
-    maps: 'https://www.google.com/maps/search/?api=1&query=iLab+Spice&query_place_id=PLACE_ID_SPICE',
-    destination: 'https://www.google.com/maps/dir/?api=1&destination=iLab+Spice&destination_place_id=PLACE_ID_SPICE',
-    hours: HOURS,
+
+    // Google Place data (from old PLACES.spice)
+    placeId: 'ChIJ-44HHgDR7kYRDtqN_4qtGn0',
+    maps:
+      'https://www.google.com/maps/search/?api=1&query=iLab+Spice&query_place_id=ChIJ-44HHgDR7kYRDtqN_4qtGn0',
+    destination:
+      'https://www.google.com/maps/dir/?api=1&destination=iLab+Spice&destination_place_id=ChIJ-44HHgDR7kYRDtqN_4qtGn0',
+
+    // Working hours — UNIQUE for this location
+    // TODO: adjust to real Spice Home schedule if it differs.
+    hours: [
+      { day: 'P',  opens: '10:00', closes: '21:00' },
+      { day: 'O',  opens: '10:00', closes: '21:00' },
+      { day: 'T',  opens: '10:00', closes: '21:00' },
+      { day: 'C',  opens: '10:00', closes: '21:00' },
+      { day: 'Pk', opens: '10:00', closes: '21:00' },
+      { day: 'S',  opens: '10:00', closes: '21:00' },
+      { day: 'Sv', opens: '10:00', closes: '20:00' },
+    ],
   },
 ];

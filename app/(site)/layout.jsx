@@ -2,23 +2,40 @@
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
-import { SOCIALS } from '@/data/site.config';
+import { COMPANY, SOCIALS, LOCATIONS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Footer from './ui/footer/Footer';
-import Script from 'next/script'; // ← ADD THIS
+import Script from 'next/script';
 import l from './Layout.module.scss';
 
-const ORIGIN = 'https://www.ilab.lv'; // adjust if you use a different canonical
+// Derive origin from config, with a safe fallback
+const ORIGIN = COMPANY?.url || 'https://www.ilab.lv';
+
+// Map your internal day codes to Schema.org day names
+const DAY_MAP = {
+  P: 'Monday',
+  O: 'Tuesday',
+  T: 'Wednesday',
+  C: 'Thursday',
+  Pk: 'Friday',
+  S: 'Saturday',
+  Sv: 'Sunday',
+};
 
 export default function SiteLayout({ children }) {
-  // Site-wide JSON-LD payloads (kept simple and accurate)
+  // ------------------------------
+  // Site-wide JSON-LD payloads
+  // ------------------------------
+
   const orgLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${ORIGIN}#organization`,
-    name: 'iLab',
-    url: ORIGIN,
-    logo: `${ORIGIN}/brand/logo.svg`, // placeholder path (you said logos as placeholders are OK)
+    name: COMPANY.name,
+    url: COMPANY.url,
+    email: COMPANY.email,
+    telephone: COMPANY.phoneMain,
+    logo: `${ORIGIN}${COMPANY.logo}`, // e.g. /brand/logo.svg
     sameAs: [SOCIALS.facebook, SOCIALS.instagram, SOCIALS.tiktok].filter(Boolean),
   };
 
@@ -26,8 +43,8 @@ export default function SiteLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${ORIGIN}#website`,
-    url: ORIGIN,
-    name: 'iLab',
+    url: COMPANY.url,
+    name: COMPANY.name,
     publisher: { '@id': `${ORIGIN}#organization` },
     potentialAction: {
       '@type': 'SearchAction',
@@ -36,14 +53,69 @@ export default function SiteLayout({ children }) {
     },
   };
 
+  // Build LocalBusiness entities for each physical location (Domina, Spice)
+  const localBusinessLd = LOCATIONS.map((loc) => {
+    const openingHoursSpecification = (loc.hours || [])
+      .map((h) => {
+        const dayOfWeek = DAY_MAP[h.day];
+        if (!dayOfWeek) return null;
+        return {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek,
+          opens: h.opens,
+          closes: h.closes,
+        };
+      })
+      .filter(Boolean);
+
+    const base = {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': `${ORIGIN}#${loc.id}`, // e.g. https://www.ilab.lv#domina
+      name: `${COMPANY.name} ${loc.label}`, // "iLab Domina Shopping"
+      url: COMPANY.url, // if you later have per-location URLs, update this
+      telephone: loc.tel,
+      email: loc.email || COMPANY.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: loc.address, // full string; simple but safe
+        addressLocality: 'Rīga',
+        addressCountry: 'LV',
+      },
+      openingHoursSpecification,
+      // Connect branch to the main organization
+      branchOf: {
+        '@id': `${ORIGIN}#organization`,
+      },
+    };
+
+    // Optional geo support: if you later add loc.geo = { lat, lng } in site.config
+    if (loc.geo && typeof loc.geo.lat === 'number' && typeof loc.geo.lng === 'number') {
+      base.geo = {
+        '@type': 'GeoCoordinates',
+        latitude: loc.geo.lat,
+        longitude: loc.geo.lng,
+      };
+    }
+
+    return base;
+  });
+
   return (
     <div className={l.siteRoot}>
-      {/* Site-wide JSON-LD */}
+      {/* Site-wide JSON-LD: Organization */}
       <Script id="org-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(orgLd)}
       </Script>
+
+      {/* Site-wide JSON-LD: WebSite */}
       <Script id="website-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(webSiteLd)}
+      </Script>
+
+      {/* Site-wide JSON-LD: LocalBusiness branches (Domina, Spice) */}
+      <Script id="localbusiness-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(localBusinessLd)}
       </Script>
 
       <UiDialogsProvider>

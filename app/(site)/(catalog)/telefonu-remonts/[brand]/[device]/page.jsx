@@ -16,9 +16,6 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
 
-// If you have a Device.module.scss for telefonu pages, you can import it the same way:
-// import s from './Device.module.scss';
-
 import {
   LuSmartphone,
   LuBatteryCharging,
@@ -28,9 +25,15 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-export const revalidate = 0;
+// JSON-LD helpers
+import {
+  ORIGIN,
+  abs,
+  buildBreadcrumbsLd,
+  buildProvidersFromLocations,
+} from '@/lib/seo/jsonldHelpers';
 
-const ORIGIN = 'https://www.ilab.lv';
+export const revalidate = 0;
 const DEFAULT_CURRENCY = 'EUR';
 
 /* ===== Header CTA exposed to layout ===== */
@@ -189,7 +192,6 @@ function buildModelServices(brandSlug) {
 
 /* ===== Metadata ===== */
 export async function generateMetadata({ params }) {
-  // params is plain, no await
   const { brand, device } = params;
   const slug = decodeURIComponent(device);
   const brandSlug = decodeURIComponent(brand);
@@ -200,9 +202,7 @@ export async function generateMetadata({ params }) {
 
   const title =
     d?.metaTitle ||
-    (d
-      ? `${d.name} remonts | iLab`
-      : `${brandLabel} telefonu remonts | iLab`);
+    (d ? `${d.name} remonts | iLab` : `${brandLabel} telefonu remonts | iLab`);
 
   const description =
     d?.metaDescription ||
@@ -217,7 +217,7 @@ export async function generateMetadata({ params }) {
 
 /* ===== Page ===== */
 export default async function Page({ params }) {
-  const { brand, device } = params; // no await
+  const { brand, device } = params;
   const slug = decodeURIComponent(device);
   const brandSlug = decodeURIComponent(brand);
 
@@ -239,40 +239,24 @@ export default async function Page({ params }) {
     ? getFaqLd(FAQ_CONTEXT.PHONE)
     : getFaqLd(FAQ_CONTEXT.HOME);
 
-  // JSON-LD: breadcrumbs
-  const brandLabel = d.brandName || d.brandSlug.toUpperCase();
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Sākums',
-        item: `${ORIGIN}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Telefonu remonts',
-        item: `${ORIGIN}/telefonu-remonts/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: `${brandLabel} telefonu remonts`,
-        item: `${ORIGIN}/telefonu-remonts/${brandSlug}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: `${d.name} remonts`,
-        item: `${ORIGIN}/telefonu-remonts/${brandSlug}/${d.slug}/`,
-      },
-    ],
-  };
+  // ---------- JSON-LD ----------
 
-  // JSON-LD: offers & service
+  const brandLabel = d.brandName || d.brandSlug.toUpperCase();
+  const modelPath = `/telefonu-remonts/${brandSlug}/${d.slug}`;
+  const provider = buildProvidersFromLocations(); // domina + spice by default
+
+  // Breadcrumbs
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'Telefonu remonts', url: abs('/telefonu-remonts') },
+    {
+      name: `${brandLabel} telefonu remonts`,
+      url: abs(`/telefonu-remonts/${brandSlug}`),
+    },
+    { name: `${d.name} remonts`, url: abs(modelPath) },
+  ]);
+
+  // Offers
   const offers = priceItems.map((it) => {
     const priceStr = it.price == null ? '' : String(it.price);
     const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
@@ -288,12 +272,12 @@ export default async function Page({ params }) {
             priceCurrency: currency,
           }
         : {}),
-      url: `${ORIGIN}/telefonu-remonts/${brandSlug}/${slug}#cenas`,
+      url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
         name: `${d.name} — ${it.title}`,
         serviceType: it.title,
-        provider: { '@id': `${ORIGIN}#organization` },
+        provider,
       },
       availability: 'https://schema.org/InStock',
     };
@@ -302,12 +286,12 @@ export default async function Page({ params }) {
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${ORIGIN}/telefonu-remonts/${brandSlug}/${slug}#service`,
+    '@id': `${ORIGIN}${modelPath}#service`,
     serviceType: `${d.name} remonts`,
     name: `${d.name} remonts`,
-    url: `${ORIGIN}/telefonu-remonts/${brandSlug}/${d.slug}/`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
+    url: abs(modelPath),
+    areaServed: { '@type': 'City', name: 'Rīga' },
+    provider,
     ...(offers.length ? { offers } : {}),
   };
 

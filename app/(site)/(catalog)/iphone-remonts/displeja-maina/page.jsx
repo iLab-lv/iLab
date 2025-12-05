@@ -1,4 +1,4 @@
-
+// app/(site)/(catalog)/iphone-remonts/displeja-maina/page.jsx
 
 import Script from 'next/script';
 import Link from 'next/link';
@@ -15,10 +15,17 @@ import devicePricing from '@/data/devicePricing';
 
 import s from '@styles/Catalog.module.scss';
 
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildFaqLdFromPairs,
+} from '@/lib/seo/jsonldHelpers';
+
 // -------------------------------------------------
 // META
 // -------------------------------------------------
-const ORIGIN = 'https://www.ilab.lv';
 
 export const metadata = {
   title: 'iPhone displeja maiņa Rīgā | iLab',
@@ -53,37 +60,23 @@ const FAQ_ITEMS = [
   },
 ];
 
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
+// JSON-LD via helpers
+const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
 
-const breadcrumbsLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-    { '@type': 'ListItem', position: 3, name: 'Displeja maiņa', item: `${ORIGIN}/iphone-remonts/displeja-maina` },
-  ],
-};
+const breadcrumbsLd = buildBreadcrumbsLd([
+  { name: 'Sākums', url: abs('/') },
+  { name: 'iPhone remonts', url: abs('/iphone-remonts') },
+  { name: 'Displeja maiņa', url: abs('/iphone-remonts/displeja-maina') },
+]);
 
-const serviceLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'iPhone displeja maiņa',
-  areaServed: { '@type': 'City', name: 'Riga' },
-  provider: { '@type': 'LocalBusiness', name: 'iLab', '@id': `${ORIGIN}#organization` },
-  url: `${ORIGIN}/iphone-remonts/displeja-maina`,
+const serviceLd = buildServiceLdForCity({
+  path: '/iphone-remonts/displeja-maina',
   name: 'iPhone displeja maiņa Rīgā',
+  serviceType: 'iPhone displeja maiņa',
   description:
     'iPhone displeja (ekrāna) maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM detaļas, 90 dienu garantija. Bieži tajā pašā dienā.',
-};
+  // city + provider locations use defaults (Rīga + all LOCATIONS)
+});
 
 // -------------------------------------------------
 // PAGE COMPONENT
@@ -116,7 +109,9 @@ export default function IphoneDisplejaMainaPage({ searchParams }) {
       {/* INTRO */}
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h1 id="intro-h2" className={s.h1}>iPhone displeja maiņa Rīgā</h1>
+          <h1 id="intro-h2" className={s.h1}>
+            iPhone displeja maiņa Rīgā
+          </h1>
           <p className={s.paragraph}>
             Ja iPhone ekrāns ir saplīsis, parādās plankumi vai nereaģē skāriens — visticamāk nepieciešama
             <strong> displeja (ekrāna) maiņa</strong>. iLab meistari Rīgā veic ātru un drošu nomaiņu, izmantojot

@@ -27,9 +27,16 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
+// JSON-LD helpers
+import {
+  ORIGIN,
+  abs,
+  buildBreadcrumbsLd,
+  buildProvidersFromLocations,
+} from '@/lib/seo/jsonldHelpers';
+
 export const revalidate = 0;
 
-const ORIGIN = 'https://www.ilab.lv';
 const DEFAULT_CURRENCY = 'EUR';
 
 /* ===== Header CTA exposed to layout ===== */
@@ -66,11 +73,17 @@ function toPriceRange(priceStr) {
     return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
   }
 
-  const rangeMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
+  const rangeMatch = p.match(
+    /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
+  );
   if (rangeMatch) {
     const a = Number(rangeMatch[1].replace(',', '.'));
     const b = Number(rangeMatch[2].replace(',', '.'));
-    return { priceFrom: isNaN(a) ? null : a, priceTo: isNaN(b) ? null : b, priceText };
+    return {
+      priceFrom: isNaN(a) ? null : a,
+      priceTo: isNaN(b) ? null : b,
+      priceText,
+    };
   }
 
   const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
@@ -99,13 +112,15 @@ function buildPriceListItems(modelSlug) {
       if (!base) return null;
 
       const timeText =
-        (typeof perDeviceTimeText[it.id] === 'string' && perDeviceTimeText[it.id].trim()) ||
+        (typeof perDeviceTimeText[it.id] === 'string' &&
+          perDeviceTimeText[it.id].trim()) ||
         base.defaultTimeText ||
         'Tajā pašā dienā';
 
       const raw = it?.price;
       if (raw == null) return null;
-      const priceText = typeof raw === 'number' ? String(raw) : String(raw).trim();
+      const priceText =
+        typeof raw === 'number' ? String(raw) : String(raw).trim();
 
       const { priceFrom, priceTo } = toPriceRange(priceText);
 
@@ -137,22 +152,53 @@ function buildPriceListItems(modelSlug) {
 // Popular services grid (canonical routes)
 function buildModelServices() {
   return [
-    { title: 'Displeja (ekrāna) maiņa', href: '/iphone-remonts/displeja-maina', text: 'plaisas, tumši plankumi, nereaģē skāriens.', icon: LuSmartphone },
-    { title: 'Akumulatora maiņa', href: '/iphone-remonts/baterijas-maina', text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.', icon: LuBatteryCharging },
-    { title: 'Uzlādes ligzdas maiņa', href: '/iphone-remonts/uzlades-ligzdas-maina', text: 'nenoturas kabelis, lēna vai nestabila uzlāde.', icon: LuPlugZap },
-    { title: 'Kameras remonts', href: '/iphone-remonts/kameras-remonts', text: 'miglaini attēli, fokusēšanās problēmas.', icon: LuCamera },
-    { title: 'Skaļruņi/mikrofons', href: '/iphone-remonts/skalruni-mikrofona-remonts', text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.', icon: LuVolume2 },
-    { title: 'Ūdens bojājumi', href: '/iphone-remonts/udens-bojajumu-remonts', text: 'diagnostika un atjaunošana, ja tas iespējams.', icon: LuDroplets },
+    {
+      title: 'Displeja (ekrāna) maiņa',
+      href: '/iphone-remonts/displeja-maina',
+      text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+      icon: LuSmartphone,
+    },
+    {
+      title: 'Akumulatora maiņa',
+      href: '/iphone-remonts/baterijas-maina',
+      text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+      icon: LuBatteryCharging,
+    },
+    {
+      title: 'Uzlādes ligzdas maiņa',
+      href: '/iphone-remonts/uzlades-ligzdas-maina',
+      text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+      icon: LuPlugZap,
+    },
+    {
+      title: 'Kameras remonts',
+      href: '/iphone-remonts/kameras-remonts',
+      text: 'miglaini attēli, fokusēšanās problēmas.',
+      icon: LuCamera,
+    },
+    {
+      title: 'Skaļruņi/mikrofons',
+      href: '/iphone-remonts/skalruni-mikrofona-remonts',
+      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+      icon: LuVolume2,
+    },
+    {
+      title: 'Ūdens bojājumi',
+      href: '/iphone-remonts/udens-bojajumu-remonts',
+      text: 'diagnostika un atjaunošana, ja tas iespējams.',
+      icon: LuDroplets,
+    },
   ];
 }
 
 /* ===== Metadata ===== */
 export async function generateMetadata({ params }) {
-  const { device } = await params;
+  const { device } = params;
   const slug = decodeURIComponent(device);
   const d = getIphoneDeviceBySlug(slug);
 
-  const title = d?.metaTitle || (d ? `${d.name} remonts | iLab` : 'iPhone remonts | iLab');
+  const title =
+    d?.metaTitle || (d ? `${d.name} remonts | iLab` : 'iPhone remonts | iLab');
   const description =
     d?.metaDescription ||
     'iPhone remonts: displejs, baterija, uzlāde, kamera. Ātra diagnostika un garantija.';
@@ -166,7 +212,7 @@ export async function generateMetadata({ params }) {
 
 /* ===== Page ===== */
 export default async function Page({ params }) {
-  const { device } = await params;
+  const { device } = params;
   const slug = decodeURIComponent(device);
   const d = getIphoneDeviceBySlug(slug);
   if (!d) return notFound();
@@ -176,30 +222,40 @@ export default async function Page({ params }) {
 
   // Pull iPhone FAQ; if empty, fall back to PHONE → HOME to avoid blank blocks
   const iphoneFaq = getFaqItems(FAQ_CONTEXT.IPHONE)?.items ?? [];
-  const phoneFaq = !iphoneFaq.length ? (getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? []) : [];
-  const homeFaq = !iphoneFaq.length && !phoneFaq.length ? (getFaqItems(FAQ_CONTEXT.HOME)?.items ?? []) : [];
+  const phoneFaq = !iphoneFaq.length
+    ? getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? []
+    : [];
+  const homeFaq =
+    !iphoneFaq.length && !phoneFaq.length
+      ? getFaqItems(FAQ_CONTEXT.HOME)?.items ?? []
+      : [];
 
-  const FINAL_FAQ_ITEMS = iphoneFaq.length ? iphoneFaq : (phoneFaq.length ? phoneFaq : homeFaq);
+  const FINAL_FAQ_ITEMS = iphoneFaq.length
+    ? iphoneFaq
+    : phoneFaq.length
+    ? phoneFaq
+    : homeFaq;
 
   // JSON-LD should match what we show
-  const FAQ_LD =
-    iphoneFaq.length
-      ? getFaqLd(FAQ_CONTEXT.IPHONE)
-      : phoneFaq.length
-      ? getFaqLd(FAQ_CONTEXT.PHONE)
-      : getFaqLd(FAQ_CONTEXT.HOME);
+  const FAQ_LD = iphoneFaq.length
+    ? getFaqLd(FAQ_CONTEXT.IPHONE)
+    : phoneFaq.length
+    ? getFaqLd(FAQ_CONTEXT.PHONE)
+    : getFaqLd(FAQ_CONTEXT.HOME);
 
-  // JSON-LD: breadcrumbs + offers + service
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-      { '@type': 'ListItem', position: 3, name: `${d.name} remonts`, item: `${ORIGIN}/iphone-remonts/${d.slug}/` },
-    ],
-  };
+  // ---------- JSON-LD ----------
 
+  const modelPath = `/iphone-remonts/${d.slug}`;
+  const provider = buildProvidersFromLocations(); // domina + spice by default
+
+  // Breadcrumbs
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'iPhone remonts', url: abs('/iphone-remonts') },
+    { name: `${d.name} remonts`, url: abs(modelPath) },
+  ]);
+
+  // Offers
   const offers = priceItems.map((it) => {
     const priceStr = it.price == null ? '' : String(it.price);
     const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
@@ -209,13 +265,18 @@ export default async function Page({ params }) {
     return {
       '@type': 'Offer',
       name: it.title,
-      ...(singleNumeric ? { price: singleNumeric, priceCurrency: currency } : {}),
-      url: `${ORIGIN}/iphone-remonts/${slug}#cenas`,
+      ...(singleNumeric
+        ? {
+            price: singleNumeric,
+            priceCurrency: currency,
+          }
+        : {}),
+      url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
         name: `${d.name} — ${it.title}`,
         serviceType: it.title,
-        provider: { '@id': `${ORIGIN}#organization` },
+        provider,
       },
       availability: 'https://schema.org/InStock',
     };
@@ -224,59 +285,85 @@ export default async function Page({ params }) {
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${ORIGIN}/iphone-remonts/${slug}#service`,
+    '@id': `${ORIGIN}${modelPath}#service`,
     serviceType: `${d.name} remonts`,
     name: `${d.name} remonts`,
-    url: `${ORIGIN}/iphone-remonts/${d.slug}/`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
+    url: abs(modelPath),
+    areaServed: { '@type': 'City', name: 'Rīga' },
+    provider,
     ...(offers.length ? { offers } : {}),
   };
 
   return (
     <>
       {/* JSON-LD */}
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld-iphone"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="service-jsonld-iphone"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="faq-jsonld-iphone"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(FAQ_LD)}
       </Script>
 
       {/* HERO */}
-      <DeviceHero image={d.image} alt={`${d.name} remonts`} bodyHtml={d.bodyHtml || null} />
+      <DeviceHero
+        image={d.image}
+        alt={`${d.name} remonts`}
+        bodyHtml={d.bodyHtml || null}
+      />
 
       {/* Popular services for this model */}
-      <Services
-        id="iphone-services"
-        title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
-        items={modelServices}
-      />
+      <section className={s.section}>
+        <Services
+          id="iphone-services"
+          title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
+          items={modelServices()}
+        />
+      </section>
 
       {/* Pricing */}
       {priceItems.length > 0 && (
-        <PriceList
-          id="cenas"
-          title="Cenas un remonta laiks"
-          items={priceItems}
-          currency={DEFAULT_CURRENCY}
-          headingLevel={2}
-        />
+        <section className={s.section}>
+          <PriceList
+            id="cenas"
+            title="Cenas un remonta laiks"
+            items={priceItems}
+            currency={DEFAULT_CURRENCY}
+            headingLevel={2}
+          />
+        </section>
       )}
 
-      <Why />
+      <section className={s.section}>
+        <Why />
+      </section>
 
-      {/* FAQ (centralized; with safe fallbacks) */}
-      <Faq
-        id="model-faq"
-        title="Biežāk uzdotie jautājumi"
-        items={FINAL_FAQ_ITEMS}
-      />
+      {/* FAQ */}
+      <section className={s.section}>
+        <Faq
+          id="model-faq"
+          title="Biežāk uzdotie jautājumi"
+          items={FINAL_FAQ_ITEMS}
+        />
+      </section>
 
-      <ConvertBand />
+      <section className={s.section}>
+        <ConvertBand />
+      </section>
     </>
   );
 }

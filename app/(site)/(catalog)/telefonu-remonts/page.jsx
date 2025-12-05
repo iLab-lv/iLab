@@ -15,7 +15,7 @@ import DeviceHero from '@sections/device-hero/DeviceHero';
 import s from '@styles/Catalog.module.scss';
 import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
 
-// Icon components (no strings)
+// Icon components
 import {
   LuSmartphone,
   LuBatteryCharging,
@@ -25,7 +25,15 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-const ORIGIN = 'https://www.ilab.lv';
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildItemListLd,
+  buildStandardRepairHowToLd,
+  buildFaqLdFromPairs,
+} from '@/lib/seo/jsonldHelpers';
 
 export const metadata = {
   title: 'Telefonu remonts Rīgā — cenas, ātri, garantija | iLab',
@@ -57,6 +65,30 @@ function topModelsForBrand(list, brandSlug) {
   return { items: uniq.slice(0, 4), total: uniq.length };
 }
 
+// FAQ data reused for UI + JSON-LD
+const PHONE_FAQ = [
+  {
+    q: 'Cik ilgi ilgst telefona displeja maiņa?',
+    a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.',
+  },
+  {
+    q: 'Vai mani dati saglabāsies?',
+    a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.',
+  },
+  {
+    q: 'Vai detaļām ir garantija?',
+    a: 'Jā, gan detaļām, gan darbam.',
+  },
+  {
+    q: 'Vai pieejamas oriģinālās detaļas?',
+    a: 'Izmantojam oriģinālās vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
+  },
+  {
+    q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
+    a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.',
+  },
+];
+
 export default function TelefonuRemontsPage() {
   const brands = listBrandsForCategory(BRAND_CATEGORY.PHONES);
   const brandBlocks = brands
@@ -66,37 +98,33 @@ export default function TelefonuRemontsPage() {
     })
     .filter((b) => b.total > 0);
 
-  // JSON-LD
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Telefonu remonts', item: `${ORIGIN}/telefonu-remonts/` },
-    ],
-  };
-  const serviceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${ORIGIN}/telefonu-remonts#service`,
-    serviceType: 'Telefonu remonts',
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}/telefonu-remonts/`,
+  // JSON-LD: Breadcrumbs
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'Telefonu remonts', url: abs('/telefonu-remonts') },
+  ]);
+
+  // JSON-LD: Service (category-level phone repair)
+  const serviceLd = buildServiceLdForCity({
+    path: '/telefonu-remonts',
     name: 'Telefonu remonts',
     description:
       'Telefonu remonts — displeji, baterijas, uzlādes ligzdas, kameras un citi darbi. Ātra diagnostika, godīgas cenas, garantija.',
-  };
-  const itemListLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: brandBlocks.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      url: `${ORIGIN}${b.href}/`,
+  });
+
+  // JSON-LD: ItemList of brand-level phone repair pages
+  const itemListLd = buildItemListLd(
+    brandBlocks.map((b) => ({
       name: `${b.name} telefonu remonts`,
-    })),
-  };
+      url: abs(b.href),
+    }))
+  );
+
+  // JSON-LD: HowTo (matching Process section)
+  const howToLd = buildStandardRepairHowToLd('telefonu remonts');
+
+  // JSON-LD: FAQPage (matching PHONE_FAQ)
+  const faqLd = buildFaqLdFromPairs(PHONE_FAQ);
 
   return (
     <>
@@ -110,6 +138,12 @@ export default function TelefonuRemontsPage() {
       <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(itemListLd)}
       </Script>
+      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(howToLd)}
+      </Script>
+      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqLd)}
+      </Script>
 
       {/* HERO */}
       <DeviceHero
@@ -117,26 +151,28 @@ export default function TelefonuRemontsPage() {
         alt="telefonu remonts Rīgā"
         focal="right"
         className="category"
-        bodyHtml={`<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> — ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>
-`}
+        bodyHtml={`<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> — ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`}
       />
 
       {/* INTRO (SEO copy under H2; Header owns the H1/lead/CTA) */}
       <section className={s.section} aria-labelledby="phones-intro-h2">
         <div className={s.container}>
-          <h2 id="phones-intro-h2" className={s.h2}>Telefonu remonts — ko mēs darām</h2>
+          <h2 id="phones-intro-h2" className={s.h2}>
+            Telefonu remonts — ko mēs darām
+          </h2>
 
           <p className={s.intro}>
-            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas,
-            biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.
+            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba
+            uzsākšanas, biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta
+            modeļa lapu.
           </p>
 
           <p className={s.paragraph}>
             Ikdienā veicam <strong>telefonu remontu</strong> — sākot ar <strong>ekrāna maiņu</strong> un{' '}
             <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas remontam</strong>,{' '}
-            <strong>kameras problēmām</strong> un <strong>ūdens bojājumu</strong> novēršanai. Pirms darba saskaņojam{' '}
-            <strong>cenu un termiņu</strong>, biežākos darbus paveicam tajā pašā dienā. Uzzini, kā notiek remonts sadaļā{' '}
-            <Link href="#process-h2">“Kā notiek remonts”</Link>.
+            <strong>kameras problēmām</strong> un <strong>ūdens bojājumu</strong> novēršanai. Pirms darba
+            saskaņojam <strong>cenu un termiņu</strong>, biežākos darbus paveicam tajā pašā dienā. Uzzini, kā
+            notiek remonts sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
 
           <p className={s.paragraph}>
@@ -144,17 +180,18 @@ export default function TelefonuRemontsPage() {
             <Link href="/iphone-remonts">iPhone remonts</Link>,{' '}
             <Link href="/telefonu-remonts/samsung">Samsung telefonu remonts</Link>,{' '}
             <Link href="/telefonu-remonts/huawei">Huawei remonts</Link>,{' '}
-            <Link href="/telefonu-remonts/oneplus">OnePlus remonts</Link> u.c. Katram zīmolam ir pieejamas atsevišķas{' '}
-            <strong>modeļu lapas</strong> ar biežākajiem bojājumiem un risinājumiem.
+            <Link href="/telefonu-remonts/oneplus">OnePlus remonts</Link> u.c. Katram zīmolam ir pieejamas
+            atsevišķas <strong>modeļu lapas</strong> ar biežākajiem bojājumiem un risinājumiem.
           </p>
 
           <p className={s.paragraph}>
             Biežākie darbi: <strong>displeja remonts</strong> (plaisas, tumši plankumi, nereaģē skāriens),{' '}
-            <strong>baterijas maiņa</strong> (strauji krīt uzlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong>{' '}
-            (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās
-            kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi, sarunās nedzird), kā arī{' '}
-            <strong>mitruma bojājumi</strong>. Ja neesi pārliecināts par modeļa nosaukumu, izvēlies zīmolu zemāk un
-            atrod modeli sarakstā.
+            <strong>baterijas maiņa</strong> (strauji krīt uzlāde, izslēdzas pie 10–20%),{' '}
+            <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde),{' '}
+            <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas),{' '}
+            <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi, sarunās nedzird), kā arī{' '}
+            <strong>mitruma bojājumi</strong>. Ja neesi pārliecināts par modeļa nosaukumu, izvēlies zīmolu zemāk
+            un atrod modeli sarakstā.
           </p>
         </div>
       </section>
@@ -222,8 +259,6 @@ export default function TelefonuRemontsPage() {
         />
       ))}
 
-      
-
       {/* Process */}
       <section className={s.section} aria-labelledby="process-h2">
         <div className={s.container}>
@@ -232,10 +267,22 @@ export default function TelefonuRemontsPage() {
             title="Kā notiek remonts"
             steps={[
               { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
-              { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.' },
-              { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-              { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-              { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+              {
+                title: 'Cena un termiņš',
+                text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+              },
+              {
+                title: 'Remonts',
+                text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
+              },
+              {
+                title: 'Pārbaude',
+                text: 'Pēc remonta testējam visu funkcionalitāti un drošību.',
+              },
+              {
+                title: 'Garantija',
+                text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+              },
             ]}
             headingLevel={2}
             variant="cards"
@@ -254,13 +301,7 @@ export default function TelefonuRemontsPage() {
           <Faq
             id="phones-faq"
             title="Biežāk uzdotie jautājumi"
-            items={[
-              { q: 'Cik ilgi ilgst telefona displeja maiņa?', a: 'Bieži 1–3 stundas atkarībā no modeļa un noslodzes.' },
-              { q: 'Vai mani dati saglabāsies?', a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.' },
-              { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
-              { q: 'Vai pieejamas oriģinālas detaļas?', a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.' },
-              { q: 'Vai varu saņemt aptuveno cenu pirms remonta?', a: 'Jā, pēc ātras diagnostikas sniegsim izmaksu diapazonu un termiņu.' },
-            ]}
+            items={PHONE_FAQ}
             headingLevel={2}
             variant="accordion"
           />

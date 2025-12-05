@@ -1,3 +1,5 @@
+// app/(site)/(catalog)/iphone-remonts/baterijas-maina/page.jsx
+
 import Script from 'next/script';
 import Link from 'next/link';
 
@@ -13,10 +15,17 @@ import devicePricing from '@/data/devicePricing';
 
 import s from '@styles/Catalog.module.scss';
 
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildFaqLdFromPairs,
+} from '@/lib/seo/jsonldHelpers';
+
 // -------------------------------------------------
 // META
 // -------------------------------------------------
-const ORIGIN = 'https://www.ilab.lv';
 
 export const metadata = {
   title: 'iPhone baterijas maiņa Rīgā | iLab',
@@ -55,37 +64,23 @@ const FAQ_ITEMS = [
   },
 ];
 
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
+// JSON-LD objects via helpers
+const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
 
-const breadcrumbsLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-    { '@type': 'ListItem', position: 3, name: 'Baterijas maiņa', item: `${ORIGIN}/iphone-remonts/baterijas-maina` },
-  ],
-};
+const breadcrumbsLd = buildBreadcrumbsLd([
+  { name: 'Sākums', url: abs('/') },
+  { name: 'iPhone remonts', url: abs('/iphone-remonts') },
+  { name: 'Baterijas maiņa', url: abs('/iphone-remonts/baterijas-maina') },
+]);
 
-const serviceLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'iPhone baterijas maiņa',
-  areaServed: { '@type': 'City', name: 'Riga' },
-  provider: { '@type': 'LocalBusiness', name: 'iLab', '@id': `${ORIGIN}#organization` },
-  url: `${ORIGIN}/iphone-remonts/baterijas-maina`,
+const serviceLd = buildServiceLdForCity({
+  path: '/iphone-remonts/baterijas-maina',
   name: 'iPhone baterijas maiņa Rīgā',
+  serviceType: 'iPhone baterijas maiņa',
   description:
     'iPhone baterijas maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM baterijas, 90 dienu garantija. Bieži tajā pašā dienā.',
-};
+  // city + provider locations use defaults (Rīga + all LOCATIONS)
+});
 
 // -------------------------------------------------
 // PAGE COMPONENT
@@ -118,7 +113,9 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
       {/* INTRO */}
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h1 id="intro-h2" className={s.h1}>iPhone baterijas maiņa Rīgā</h1>
+          <h1 id="intro-h2" className={s.h1}>
+            iPhone baterijas maiņa Rīgā
+          </h1>
           <p className={s.paragraph}>
             Ja jūsu iPhone ātri zaudē uzlādi, izslēdzas pie augsta procenta, lādējas ļoti lēni vai uzrāda zemu
             <strong> Battery Health</strong> rādītāju, <strong>visticamāk nepieciešama baterijas maiņa</strong>.
@@ -142,11 +139,11 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
 
       {/* PRICE LIST (ServicePricelist) */}
       <ServicePricelist
+        // if component supports it, you can also add id="cenas" here
         devices={devices}
         pricing={devicePricing}
         brandSlug="apple"
         categorySlug="telefonu-remonts"
-        // ⬇️ Adjust these IDs to match your pricing keys
         serviceIds={['battery']}
         title="Baterijas maiņas cenas pēc modeļa"
         intro="Izvēlies savu iPhone modeli, lai redzētu baterijas maiņas cenu. Lielāko daļu remontu paveicam tajā pašā dienā."

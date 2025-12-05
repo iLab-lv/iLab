@@ -1,8 +1,8 @@
 // app/api/reviews/cron/route.js
 import { NextResponse } from 'next/server';
 import { db } from 'lib/firebaseAdmin';
-import { PLACES } from '@data/places';
 import { getPlaceBasics } from 'lib/googlePlaces';
+import { LOCATIONS } from '@data/site.config';
 
 function getCronSecretFromRequest(req) {
   // 1) Custom header we used for manual curl calls
@@ -28,8 +28,14 @@ export async function GET(req) {
   try {
     const nowIso = new Date().toISOString();
 
+    // Take all locations that have a placeId configured
+    const places = LOCATIONS.filter((loc) => Boolean(loc.placeId));
+
     await Promise.all(
-      Object.values(PLACES).map(async ({ name, placeId }) => {
+      places.map(async (loc) => {
+        const placeId = loc.placeId;
+        const name = loc.label; // or add a dedicated "placeName" in LOCATIONS if you prefer
+
         const { rating, count } = await getPlaceBasics(placeId);
 
         await db

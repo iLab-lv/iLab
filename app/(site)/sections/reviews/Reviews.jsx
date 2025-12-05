@@ -4,28 +4,22 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from './Reviews.module.scss';
-import { PLACES } from '@data/places';
+import { LOCATIONS } from '@data/site.config';
 
-// Hardcoded meta for the two locations (labels only)
-const PLACE_META = [
-  {
-    key: 'domina',
-    label: 'Domina Shopping',
-  },
-  {
-    key: 'spice',
-    label: 'Spice Home',
-  },
-];
+// List of locations we want to show reviews for (by id in LOCATIONS)
+const PLACE_KEYS = ['domina', 'spice'];
+
+function getLocationById(id) {
+  return LOCATIONS.find((loc) => loc.id === id) || null;
+}
 
 function buildGoogleReviewsUrl(placeKey) {
-  const cfg = PLACES[placeKey];
-  if (!cfg || !cfg.placeId) return null;
+  const loc = getLocationById(placeKey);
+  if (!loc || !loc.placeId) return null;
 
-  const placeId = cfg.placeId;
-  // Same pattern you used on WP site
+  // Same pattern you used on the WP site
   return `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${encodeURIComponent(
-    placeId
+    loc.placeId
   )}`;
 }
 
@@ -92,14 +86,16 @@ export default function Reviews({ id = 'reviews' }) {
 
   const places =
     data &&
-    PLACE_META.map((meta) => {
-      const value = data[meta.key];
+    PLACE_KEYS.map((key) => {
+      const value = data[key];
       if (!value) return null;
 
-      const href = buildGoogleReviewsUrl(meta.key);
+      const loc = getLocationById(key);
+      const href = buildGoogleReviewsUrl(key);
 
       return {
-        ...meta,
+        key,
+        label: loc?.label || key,
         href,
         rating: value.rating ?? null,
         count: value.count ?? null,

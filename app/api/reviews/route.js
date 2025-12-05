@@ -1,14 +1,24 @@
+// app/(site)/api/reviews/route.js (or .ts)
+
 import { NextResponse } from 'next/server';
-import { db } from 'lib/firebaseAdmin';   // ⬅ same as your cron route
-import { PLACES } from '@data/places';
+import { db } from 'lib/firebaseAdmin'; // ⬅ same as your cron route
+import { LOCATIONS } from '@data/site.config';
 
 export const dynamic = 'force-dynamic';
+
+// Build a simple map of { [locationId]: placeId } from LOCATIONS
+const PLACE_IDS = LOCATIONS.reduce((acc, loc) => {
+  if (loc.id && loc.placeId) {
+    acc[loc.id] = loc.placeId;
+  }
+  return acc;
+}, {});
 
 export async function GET() {
   const out = {};
 
   await Promise.all(
-    Object.entries(PLACES).map(async ([key, { placeId }]) => {
+    Object.entries(PLACE_IDS).map(async ([key, placeId]) => {
       try {
         const snap = await db.collection('places').doc(placeId).get();
         const data = snap.data();
@@ -36,6 +46,9 @@ export async function GET() {
   );
 
   const res = NextResponse.json(out);
-  res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=1800');
+  res.headers.set(
+    'Cache-Control',
+    's-maxage=300, stale-while-revalidate=1800'
+  );
   return res;
 }
