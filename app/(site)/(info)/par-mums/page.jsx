@@ -1,4 +1,4 @@
-// app/(site)/(info)/par-ilab/page.jsx
+// app/(site)/(info)/par-mums/page.jsx
 import React from 'react';
 import Script from 'next/script';
 
@@ -15,57 +15,70 @@ export const metadata = {
   title: 'Par iLab | iLab',
   description:
     'SIA iLab — profesionāls telefona un datoru serviss Rīgā ar 10+ gadu pieredzi. Remonts privātpersonām un B2B: viedtālruņi, planšetes, datori, Dyson. Bezmaksas diagnostika un 90 dienu garantija.',
-  alternates: { canonical: '/par-ilab' },
+  alternates: { canonical: '/par-mums' },
+};
+
+// ── JSON-LD: Breadcrumbs (static) -----------------------------------
+
+const BREADCRUMBS_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
+    { '@type': 'ListItem', position: 2, name: 'Par iLab', item: `${ORIGIN}/par-mums/` },
+  ],
+};
+
+// ── JSON-LD: Organization (static) ----------------------------------
+
+const ORG_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${ORIGIN}#organization`,
+  name: 'iLab',
+  legalName: 'SIA “iLab”',
+  vatID: 'Reģ. nr. 40203288307',
+  url: ORIGIN,
+  sameAs: [],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rīga',
+    addressCountry: 'LV',
+  },
+  department: [
+    {
+      '@type': 'LocalBusiness',
+      name: 'iLab — Domina Shopping',
+      url: `${ORIGIN}/kontakti`,
+      areaServed: { '@type': 'City', name: 'Rīga' },
+    },
+    {
+      '@type': 'LocalBusiness',
+      name: 'iLab — Spice Home',
+      url: `${ORIGIN}/kontakti`,
+      areaServed: { '@type': 'City', name: 'Rīga' },
+    },
+  ],
 };
 
 export default function AboutPage() {
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Par iLab', item: `${ORIGIN}/par-ilab/` },
-    ],
-  };
-
-  const orgLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${ORIGIN}#organization`,
-    name: 'iLab',
-    legalName: 'SIA “iLab”',
-    vatID: 'Reģ. nr. 40203288307',
-    url: ORIGIN,
-    sameAs: [],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Rīga',
-      addressCountry: 'LV',
-    },
-    department: [
-      {
-        '@type': 'LocalBusiness',
-        name: 'iLab — Domina Shopping',
-        url: `${ORIGIN}/kontakti`,
-        areaServed: { '@type': 'City', name: 'Rīga' },
-      },
-      {
-        '@type': 'LocalBusiness',
-        name: 'iLab — Spice Home',
-        url: `${ORIGIN}/kontakti`,
-        areaServed: { '@type': 'City', name: 'Rīga' },
-      },
-    ],
-  };
-
   return (
     <>
       {/* JSON-LD */}
-      <Script id="about-breadcrumbs" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbsLd)}
+      <Script
+        id="about-breadcrumbs"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(BREADCRUMBS_LD)}
       </Script>
-      <Script id="about-organization" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(orgLd)}
+
+      <Script
+        id="about-organization"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(ORG_LD)}
       </Script>
 
       {/* Content */}

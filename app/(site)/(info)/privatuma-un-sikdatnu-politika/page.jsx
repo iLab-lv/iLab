@@ -1,3 +1,4 @@
+// app/(site)/(info)/noteikumi/page.jsx
 import React from 'react';
 import Script from 'next/script';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -12,39 +13,59 @@ export const metadata = {
   alternates: { canonical: '/noteikumi' },
 };
 
+// ── JSON-LD: Breadcrumbs (static) -----------------------------------
+
+const BREADCRUMBS_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Lietošanas noteikumi un privātuma politika',
+      item: `${ORIGIN}/noteikumi/`,
+    },
+  ],
+};
+
+// ── JSON-LD: Terms of Service (static) ------------------------------
+
+const TOS_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'TermsOfService',
+  name: 'iLab — Lietošanas noteikumi un privātuma politika',
+  url: `${ORIGIN}/noteikumi/`,
+  provider: { '@id': `${ORIGIN}#organization` },
+  inLanguage: 'lv',
+  description:
+    'iLab lietošanas noteikumi, garantijas, klientu datu apstrāde un sīkdatņu politika.',
+  dateModified: '2025-11-05',
+};
+
 export default function TermsPage() {
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Lietošanas noteikumi un privātuma politika', item: `${ORIGIN}/noteikumi/` },
-    ],
-  };
-
-  const tosLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TermsOfService',
-    name: 'iLab — Lietošanas noteikumi un privātuma politika',
-    url: `${ORIGIN}/noteikumi/`,
-    provider: { '@id': `${ORIGIN}#organization` },
-    inLanguage: 'lv',
-  };
-
   return (
     <>
       {/* JSON-LD */}
-      <Script id="terms-breadcrumbs" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbsLd)}
+      <Script
+        id="terms-breadcrumbs"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(BREADCRUMBS_LD)}
       </Script>
-      <Script id="terms-tos" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(tosLd)}
+
+      <Script
+        id="terms-tos"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(TOS_LD)}
       </Script>
 
       {/* One large multi-paragraph content section (header & lead come from layout) */}
       <section className={s.section} aria-labelledby="terms-h2">
         <div className={s.container}>
-
           <p className={s.paragraph}>
             <strong>Pēdējo reizi atjaunināts:</strong> 2025-11-05<br />
             <strong>Pakalpojuma sniedzējs:</strong> SIA “iLab” · Reģ. nr. 40203288307<br />
