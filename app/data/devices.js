@@ -1,6 +1,6 @@
 // Device list (each device belongs to a category, brand, and optional series)
 const devices = [
-   {
+{
   slug: "iphone-17-pro-max",
   category: "telefonu-remonts",
   brand: "Apple",
@@ -12,8 +12,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-17-pro-max.webp",
   popular: true,
   order: 90,
-  metaTitle: "iPhone 17 Pro Max remonts Rīgā",
-  metaDescription: "iPhone 17 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 17 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 17 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -33,8 +33,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-17-pro.webp",
   popular: true,
   order: 91,
-  metaTitle: "iPhone 17 Pro remonts Rīgā",
-  metaDescription: "iPhone 17 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 17 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 17 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -54,8 +54,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-air.webp",
   popular: true,
   order: 92,
-  metaTitle: "iPhone Air remonts Rīgā",
-  metaDescription: "iPhone Air ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone Air remonts Rīgā | iLab",
+  metaDescription: "iPhone Air remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone Air</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -75,8 +75,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-17.webp",
   popular: true,
   order: 93,
-  metaTitle: "iPhone 17 remonts Rīgā",
-  metaDescription: "iPhone 17 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 17 remonts Rīgā | iLab",
+  metaDescription: "iPhone 17 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -84,689 +84,689 @@ const devices = [
   `,
 },
   
-  {
-    slug: "iphone-16-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 16 sērija",
-    seriesSlug: "iphone-16-serija",
-    name: "iPhone 16 Pro Max",
-    year: 2024,
-    image: "/images/devices/iphone/iphone-16-pro-max.webp",
-    popular: true,
-    order: 100,
-    metaTitle: "iPhone 16 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 16 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-16-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 16 sērija",
+  seriesSlug: "iphone-16-serija",
+  name: "iPhone 16 Pro Max",
+  year: 2024,
+  image: "/images/devices/iphone/iphone-16-pro-max.webp",
+  popular: true,
+  order: 100,
+  metaTitle: "iPhone 16 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 16 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 16 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-16-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 16 sērija",
-    seriesSlug: "iphone-16-serija",
-    name: "iPhone 16 Pro",
-    year: 2024,
-    image: "/images/devices/iphone/iphone-16-pro.webp",
-    popular: true,
-    order: 101,
-    metaTitle: "iPhone 16 Pro remonts Rīgā",
-    metaDescription: "iPhone 16 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-16-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 16 sērija",
+  seriesSlug: "iphone-16-serija",
+  name: "iPhone 16 Pro",
+  year: 2024,
+  image: "/images/devices/iphone/iphone-16-pro.webp",
+  popular: true,
+  order: 101,
+  metaTitle: "iPhone 16 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 16 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 16 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-16-plus",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 16 sērija",
-    seriesSlug: "iphone-16-serija",
-    name: "iPhone 16 Plus",
-    year: 2024,
-    image: "/images/devices/iphone/iphone-16-plus.webp",
-    popular: true,
-    order: 102,
-    metaTitle: "iPhone 16 Plus remonts Rīgā",
-    metaDescription: "iPhone 16 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-16-plus",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 16 sērija",
+  seriesSlug: "iphone-16-serija",
+  name: "iPhone 16 Plus",
+  year: 2024,
+  image: "/images/devices/iphone/iphone-16-plus.webp",
+  popular: true,
+  order: 102,
+  metaTitle: "iPhone 16 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 16 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 16 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-16",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 16 sērija",
-    seriesSlug: "iphone-16-serija",
-    name: "iPhone 16",
-    year: 2024,
-    image: "/images/devices/iphone/iphone-16.webp",
-    popular: true,
-    order: 104,
-    metaTitle: "iPhone 16e remonts Rīgā",
-    metaDescription: "iPhone 16e ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-16",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 16 sērija",
+  seriesSlug: "iphone-16-serija",
+  name: "iPhone 16",
+  year: 2024,
+  image: "/images/devices/iphone/iphone-16.webp",
+  popular: true,
+  order: 104,
+  metaTitle: "iPhone 16 remonts Rīgā | iLab",
+  metaDescription: "iPhone 16 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 16e</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-   {
-    slug: "iphone-16e",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 16 sērija",
-    seriesSlug: "iphone-16-serija",
-    name: "iPhone 16e",
-    year: 2024,
-    image: "/images/devices/iphone/iphone-16e.webp",
-    popular: true,
-    order: 103,
-    metaTitle: "iPhone 16 remonts Rīgā",
-    metaDescription: "iPhone 16 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-16e",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 16 sērija",
+  seriesSlug: "iphone-16-serija",
+  name: "iPhone 16e",
+  year: 2024,
+  image: "/images/devices/iphone/iphone-16e.webp",
+  popular: true,
+  order: 103,
+  metaTitle: "iPhone 16e remonts Rīgā | iLab",
+  metaDescription: "iPhone 16e remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 16</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-15-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 15 sērija",
-    seriesSlug: "iphone-15-serija",
-    name: "iPhone 15 Pro Max",
-    year: 2023,
-    image: "/images/devices/iphone/iPhone-15-Pro-Max.webp",
-    popular: true,
-    order: 110,
-    metaTitle: "iPhone 15 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 15 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-15-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 15 sērija",
+  seriesSlug: "iphone-15-serija",
+  name: "iPhone 15 Pro Max",
+  year: 2023,
+  image: "/images/devices/iphone/iPhone-15-Pro-Max.webp",
+  popular: true,
+  order: 110,
+  metaTitle: "iPhone 15 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 15 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 15 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-15-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 15 sērija",
-    seriesSlug: "iphone-15-serija",
-    name: "iPhone 15 Pro",
-    year: 2023,
-    image: "/images/devices/iphone/iPhone-15-Pro.webp",
-    popular: true,
-    order: 111,
-    metaTitle: "iPhone 15 Pro remonts Rīgā",
-    metaDescription: "iPhone 15 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-15-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 15 sērija",
+  seriesSlug: "iphone-15-serija",
+  name: "iPhone 15 Pro",
+  year: 2023,
+  image: "/images/devices/iphone/iPhone-15-Pro.webp",
+  popular: true,
+  order: 111,
+  metaTitle: "iPhone 15 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 15 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 15 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-15-plus",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 15 sērija",
-    seriesSlug: "iphone-15-serija",
-    name: "iPhone 15 Plus",
-    year: 2023,
-    image: "/images/devices/iphone/iPhone-15-Plus.webp",
-    popular: true,
-    order: 112,
-    metaTitle: "iPhone 15 Plus remonts Rīgā",
-    metaDescription: "iPhone 15 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-15-plus",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 15 sērija",
+  seriesSlug: "iphone-15-serija",
+  name: "iPhone 15 Plus",
+  year: 2023,
+  image: "/images/devices/iphone/iPhone-15-Plus.webp",
+  popular: true,
+  order: 112,
+  metaTitle: "iPhone 15 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 15 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostика un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 15 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-15",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 15 sērija",
-    seriesSlug: "iphone-15-serija",
-    name: "iPhone 15",
-    year: 2023,
-    image: "/images/devices/iphone/iPhone-15.webp",
-    popular: true,
-    order: 113,
-    metaTitle: "iPhone 15 remonts Rīgā",
-    metaDescription: "iPhone 15 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-15",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 15 sērija",
+  seriesSlug: "iphone-15-serija",
+  name: "iPhone 15",
+  year: 2023,
+  image: "/images/devices/iphone/iPhone-15.webp",
+  popular: true,
+  order: 113,
+  metaTitle: "iPhone 15 remonts Rīgā | iLab",
+  metaDescription: "iPhone 15 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 15</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-14-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 14 sērija",
-    seriesSlug: "iphone-14-serija",
-    name: "iPhone 14 Pro Max",
-    year: 2022,
-    image: "/images/devices/iphone/iPhone-14-Pro-Max.webp",
-    popular: true,
-    order: 120,
-    metaTitle: "iPhone 14 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 14 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-14-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 14 sērija",
+  seriesSlug: "iphone-14-serija",
+  name: "iPhone 14 Pro Max",
+  year: 2022,
+  image: "/images/devices/iphone/iPhone-14-Pro-Max.webp",
+  popular: true,
+  order: 120,
+  metaTitle: "iPhone 14 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 14 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 14 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-14-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 14 sērija",
-    seriesSlug: "iphone-14-serija",
-    name: "iPhone 14 Pro",
-    year: 2022,
-    image: "/images/devices/iphone/iPhone-14-Pro.webp",
-    popular: true,
-    order: 121,
-    metaTitle: "iPhone 14 Pro remonts Rīgā",
-    metaDescription: "iPhone 14 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-14-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 14 sērija",
+  seriesSlug: "iphone-14-serija",
+  name: "iPhone 14 Pro",
+  year: 2022,
+  image: "/images/devices/iphone/iPhone-14-Pro.webp",
+  popular: true,
+  order: 121,
+  metaTitle: "iPhone 14 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 14 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 14 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-14-plus",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 14 sērija",
-    seriesSlug: "iphone-14-serija",
-    name: "iPhone 14 Plus",
-    year: 2022,
-    image: "/images/devices/iphone/iPhone-14-Plus.webp",
-    popular: true,
-    order: 122,
-    metaTitle: "iPhone 14 Plus remonts Rīgā",
-    metaDescription: "iPhone 14 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-14-plus",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 14 sērija",
+  seriesSlug: "iphone-14-serija",
+  name: "iPhone 14 Plus",
+  year: 2022,
+  image: "/images/devices/iphone/iPhone-14-Plus.webp",
+  popular: true,
+  order: 122,
+  metaTitle: "iPhone 14 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 14 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 14 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-14",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 14 sērija",
-    seriesSlug: "iphone-14-serija",
-    name: "iPhone 14",
-    year: 2022,
-    image: "/images/devices/iphone/iPhone-14.webp",
-    popular: true,
-    order: 123,
-    metaTitle: "iPhone 14 remonts Rīgā",
-    metaDescription: "iPhone 14 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-14",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 14 sērija",
+  seriesSlug: "iphone-14-serija",
+  name: "iPhone 14",
+  year: 2022,
+  image: "/images/devices/iphone/iPhone-14.webp",
+  popular: true,
+  order: 123,
+  metaTitle: "iPhone 14 remonts Rīgā | iLab",
+  metaDescription: "iPhone 14 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 14</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-13-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 13 sērija",
-    seriesSlug: "iphone-13-serija",
-    name: "iPhone 13 Pro Max",
-    year: 2021,
-    image: "/images/devices/iphone/iPhone-13-Pro-Max.webp",
-    popular: true,
-    order: 130,
-    metaTitle: "iPhone 13 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 13 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-13-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 13 sērija",
+  seriesSlug: "iphone-13-serija",
+  name: "iPhone 13 Pro Max",
+  year: 2021,
+  image: "/images/devices/iphone/iPhone-13-Pro-Max.webp",
+  popular: true,
+  order: 130,
+  metaTitle: "iPhone 13 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 13 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 13 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-13-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 13 sērija",
-    seriesSlug: "iphone-13-serija",
-    name: "iPhone 13 Pro",
-    year: 2021,
-    image: "/images/devices/iphone/iPhone-13-Pro.webp",
-    popular: true,
-    order: 131,
-    metaTitle: "iPhone 13 Pro remonts Rīgā",
-    metaDescription: "iPhone 13 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-13-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 13 sērija",
+  seriesSlug: "iphone-13-serija",
+  name: "iPhone 13 Pro",
+  year: 2021,
+  image: "/images/devices/iphone/iPhone-13-Pro.webp",
+  popular: true,
+  order: 131,
+  metaTitle: "iPhone 13 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 13 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 13 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-13",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 13 sērija",
-    seriesSlug: "iphone-13-serija",
-    name: "iPhone 13",
-    year: 2021,
-    image: "/images/devices/iphone/iphone-13.webp",
-    popular: true,
-    order: 132,
-    metaTitle: "iPhone 13 remonts Rīgā",
-    metaDescription: "iPhone 13 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-13",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 13 sērija",
+  seriesSlug: "iphone-13-serija",
+  name: "iPhone 13",
+  year: 2021,
+  image: "/images/devices/iphone/iphone-13.webp",
+  popular: true,
+  order: 132,
+  metaTitle: "iPhone 13 remonts Rīgā | iLab",
+  metaDescription: "iPhone 13 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 13</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-13-mini",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 13 sērija",
-    seriesSlug: "iphone-13-serija",
-    name: "iPhone 13 mini",
-    year: 2021,
-    image: "/images/devices/iphone/iPhone-13-mini.webp",
-    popular: false,
-    order: 133,
-    metaTitle: "iPhone 13 mini remonts Rīgā",
-    metaDescription: "iPhone 13 mini ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-13-mini",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 13 sērija",
+  seriesSlug: "iphone-13-serija",
+  name: "iPhone 13 mini",
+  year: 2021,
+  image: "/images/devices/iphone/iPhone-13-mini.webp",
+  popular: false,
+  order: 133,
+  metaTitle: "iPhone 13 mini remonts Rīgā | iLab",
+  metaDescription: "iPhone 13 mini remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 13 mini</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-12-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 12 sērija",
-    seriesSlug: "iphone-12-serija",
-    name: "iPhone 12 Pro Max",
-    year: 2020,
-    image: "/images/devices/iphone/iPhone-12-Pro-Max.webp",
-    popular: true,
-    order: 140,
-    metaTitle: "iPhone 12 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 12 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-12-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 12 sērija",
+  seriesSlug: "iphone-12-serija",
+  name: "iPhone 12 Pro Max",
+  year: 2020,
+  image: "/images/devices/iphone/iPhone-12-Pro-Max.webp",
+  popular: true,
+  order: 140,
+  metaTitle: "iPhone 12 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 12 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 12 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-12-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 12 sērija",
-    seriesSlug: "iphone-12-serija",
-    name: "iPhone 12 Pro",
-    year: 2020,
-    image: "/images/devices/iphone/iPhone-12-Pro.webp",
-    popular: true,
-    order: 141,
-    metaTitle: "iPhone 12 Pro remonts Rīgā",
-    metaDescription: "iPhone 12 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-12-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 12 sērija",
+  seriesSlug: "iphone-12-serija",
+  name: "iPhone 12 Pro",
+  year: 2020,
+  image: "/images/devices/iphone/iPhone-12-Pro.webp",
+  popular: true,
+  order: 141,
+  metaTitle: "iPhone 12 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 12 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 12 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-12",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 12 sērija",
-    seriesSlug: "iphone-12-serija",
-    name: "iPhone 12",
-    year: 2020,
-    image: "/images/devices/iphone/iphone-12.webp",
-    popular: true,
-    order: 142,
-    metaTitle: "iPhone 12 remonts Rīgā",
-    metaDescription: "iPhone 12 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-12",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 12 sērija",
+  seriesSlug: "iphone-12-serija",
+  name: "iPhone 12",
+  year: 2020,
+  image: "/images/devices/iphone/iphone-12.webp",
+  popular: true,
+  order: 142,
+  metaTitle: "iPhone 12 remonts Rīgā | iLab",
+  metaDescription: "iPhone 12 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 12</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-12-mini",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 12 sērija",
-    seriesSlug: "iphone-12-serija",
-    name: "iPhone 12 mini",
-    year: 2020,
-    image: "/images/devices/iphone/iphone-12-mini.webp",
-    popular: false,
-    order: 143,
-    metaTitle: "iPhone 12 mini remonts Rīgā",
-    metaDescription: "iPhone 12 mini ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-12-mini",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 12 sērija",
+  seriesSlug: "iphone-12-serija",
+  name: "iPhone 12 mini",
+  year: 2020,
+  image: "/images/devices/iphone/iphone-12-mini.webp",
+  popular: false,
+  order: 143,
+  metaTitle: "iPhone 12 mini remonts Rīgā | iLab",
+  metaDescription: "iPhone 12 mini remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 12 mini</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-11-pro-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 11 sērija",
-    seriesSlug: "iphone-11-serija",
-    name: "iPhone 11 Pro Max",
-    year: 2019,
-    image: "/images/devices/iphone/iphone-11-pro-max.webp",
-    popular: true,
-    order: 150,
-    metaTitle: "iPhone 11 Pro Max remonts Rīgā",
-    metaDescription: "iPhone 11 Pro Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-11-pro-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 11 sērija",
+  seriesSlug: "iphone-11-serija",
+  name: "iPhone 11 Pro Max",
+  year: 2019,
+  image: "/images/devices/iphone/iphone-11-pro-max.webp",
+  popular: true,
+  order: 150,
+  metaTitle: "iPhone 11 Pro Max remonts Rīgā | iLab",
+  metaDescription: "iPhone 11 Pro Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 11 Pro Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-11-pro",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 11 sērija",
-    seriesSlug: "iphone-11-serija",
-    name: "iPhone 11 Pro",
-    year: 2019,
-    image: "/images/devices/iphone/iphone-11-pro.webp",
-    popular: true,
-    order: 151,
-    metaTitle: "iPhone 11 Pro remonts Rīgā",
-    metaDescription: "iPhone 11 Pro ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-11-pro",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 11 sērija",
+  seriesSlug: "iphone-11-serija",
+  name: "iPhone 11 Pro",
+  year: 2019,
+  image: "/images/devices/iphone/iphone-11-pro.webp",
+  popular: true,
+  order: 151,
+  metaTitle: "iPhone 11 Pro remonts Rīgā | iLab",
+  metaDescription: "iPhone 11 Pro remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 11 Pro</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-11",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone 11 sērija",
-    seriesSlug: "iphone-11-serija",
-    name: "iPhone 11",
-    year: 2019,
-    image: "/images/devices/iphone/iphone-11.webp",
-    popular: true,
-    order: 152,
-    metaTitle: "iPhone 11 remonts Rīgā",
-    metaDescription: "iPhone 11 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-11",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone 11 sērija",
+  seriesSlug: "iphone-11-serija",
+  name: "iPhone 11",
+  year: 2019,
+  image: "/images/devices/iphone/iphone-11.webp",
+  popular: true,
+  order: 152,
+  metaTitle: "iPhone 11 remonts Rīgā | iLab",
+  metaDescription: "iPhone 11 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone 11</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-xs-max",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone X sērija",
-    seriesSlug: "iphone-x-serija",
-    name: "iPhone XS Max",
-    year: 2018,
-    image: "/images/devices/iphone/iphone-xs-max.webp",
-    popular: false,
-    order: 160,
-    metaTitle: "iPhone XS Max remonts Rīgā",
-    metaDescription: "iPhone XS Max ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-xs-max",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone X sērija",
+  seriesSlug: "iphone-x-serija",
+  name: "iPhone XS Max",
+  year: 2018,
+  image: "/images/devices/iphone/iphone-xs-max.webp",
+  popular: false,
+  order: 160,
+  metaTitle: "iPhone XS Max remonts Rīgā | iLab",
+  metaDescription: "iPhone XS Max remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone XS Max</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-xs",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone X sērija",
-    seriesSlug: "iphone-x-serija",
-    name: "iPhone XS",
-    year: 2018,
-    image: "/images/devices/iphone/iphone-xs.webp",
-    popular: false,
-    order: 161,
-    metaTitle: "iPhone XS remonts Rīgā",
-    metaDescription: "iPhone XS ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-xs",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone X sērija",
+  seriesSlug: "iphone-x-serija",
+  name: "iPhone XS",
+  year: 2018,
+  image: "/images/devices/iphone/iphone-xs.webp",
+  popular: false,
+  order: 161,
+  metaTitle: "iPhone XS remonts Rīgā | iLab",
+  metaDescription: "iPhone XS remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone XS</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-xr",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone X sērija",
-    seriesSlug: "iphone-x-serija",
-    name: "iPhone XR",
-    year: 2018,
-    image: "/images/devices/iphone/iphone-xr.webp",
-    popular: true,
-    order: 162,
-    metaTitle: "iPhone XR remonts Rīgā",
-    metaDescription: "iPhone XR ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-xr",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone X sērija",
+  seriesSlug: "iphone-x-serija",
+  name: "iPhone XR",
+  year: 2018,
+  image: "/images/devices/iphone/iphone-xr.webp",
+  popular: true,
+  order: 162,
+  metaTitle: "iPhone XR remonts Rīgā | iLab",
+  metaDescription: "iPhone XR remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone XR</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-x",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone X sērija",
-    seriesSlug: "iphone-x-serija",
-    name: "iPhone X",
-    year: 2017,
-    image: "/images/devices/iphone/iphone-x.webp",
-    popular: true,
-    order: 163,
-    metaTitle: "iPhone X remonts Rīgā",
-    metaDescription: "iPhone X ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-x",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone X sērija",
+  seriesSlug: "iphone-x-serija",
+  name: "iPhone X",
+  year: 2017,
+  image: "/images/devices/iphone/iphone-x.webp",
+  popular: true,
+  order: 163,
+  metaTitle: "iPhone X remonts Rīgā | iLab",
+  metaDescription: "iPhone X remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone X</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-se-3",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone SE sērija",
-    seriesSlug: "iphone-se-serija",
-    name: "iPhone SE (3. paaudze)",
-    year: 2022,
-    image: "/images/devices/iphone/iphone-se-2022.webp",
-    popular: true,
-    order: 170,
-    metaTitle: "iPhone SE (3. paaudze) remonts Rīgā",
-    metaDescription: "iPhone SE (2022) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-se-3",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone SE sērija",
+  seriesSlug: "iphone-se-serija",
+  name: "iPhone SE (3. paaudze)",
+  year: 2022,
+  image: "/images/devices/iphone/iphone-se-2022.webp",
+  popular: true,
+  order: 170,
+  metaTitle: "iPhone SE (3. paaudze) remonts Rīgā | iLab",
+  metaDescription: "iPhone SE (3. paaudze) remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone SE (3. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-se-2",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone SE sērija",
-    seriesSlug: "iphone-se-serija",
-    name: "iPhone SE (2. paaudze)",
-    year: 2020,
-    image: "/images/devices/iphone/iphone-se-2020.webp",
-    popular: true,
-    order: 171,
-    metaTitle: "iPhone SE (2. paaudze) remonts Rīgā",
-    metaDescription: "iPhone SE (2020) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-se-2",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone SE sērija",
+  seriesSlug: "iphone-se-serija",
+  name: "iPhone SE (2. paaudze)",
+  year: 2020,
+  image: "/images/devices/iphone/iphone-se-2020.webp",
+  popular: true,
+  order: 171,
+  metaTitle: "iPhone SE (2. paaudze) remonts Rīgā | iLab",
+  metaDescription: "iPhone SE (2. paaudze) remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone SE (2. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
-    slug: "iphone-se-1",
-    category: "telefonu-remonts",
-    brand: "Apple",
-    brandSlug: "apple",
-    series: "iPhone SE sērija",
-    seriesSlug: "iphone-se-serija",
-    name: "iPhone SE (1. paaudze)",
-    year: 2016,
-    image: "/images/devices/iphone/iphone-se-2016.webp",
-    popular: false,
-    order: 172,
-    metaTitle: "iPhone SE (1. paaudze) remonts Rīgā",
-    metaDescription: "iPhone SE (2016) ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
-    bodyHtml: `
+{
+  slug: "iphone-se-1",
+  category: "telefonu-remonts",
+  brand: "Apple",
+  brandSlug: "apple",
+  series: "iPhone SE sērija",
+  seriesSlug: "iphone-se-serija",
+  name: "iPhone SE (1. paaudze)",
+  year: 2016,
+  image: "/images/devices/iphone/iphone-se-2016.webp",
+  popular: false,
+  order: 172,
+  metaTitle: "iPhone SE (1. paaudze) remonts Rīgā | iLab",
+  metaDescription: "iPhone SE (1. paaudze) remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  bodyHtml: `
 <p><strong>iPhone SE (1. paaudze)</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
-  },
+},
 
-  {
+{
   slug: "iphone-8-plus",
   category: "telefonu-remonts",
   brand: "Apple",
@@ -778,8 +778,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-8-plus.webp",
   popular: false,
   order: 180,
-  metaTitle: "iPhone 8 Plus remonts Rīgā",
-  metaDescription: "iPhone 8 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 8 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 8 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 8 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -799,8 +799,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-8.webp",
   popular: false,
   order: 181,
-  metaTitle: "iPhone 8 remonts Rīgā",
-  metaDescription: "iPhone 8 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 8 remonts Rīgā | iLab",
+  metaDescription: "iPhone 8 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 8</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -820,8 +820,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-7-plus.webp",
   popular: false,
   order: 190,
-  metaTitle: "iPhone 7 Plus remonts Rīgā",
-  metaDescription: "iPhone 7 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 7 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 7 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 7 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -841,8 +841,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-7.webp",
   popular: false,
   order: 191,
-  metaTitle: "iPhone 7 remonts Rīgā",
-  metaDescription: "iPhone 7 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 7 remonts Rīgā | iLab",
+  metaDescription: "iPhone 7 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 7</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -862,8 +862,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-6s-plus.webp",
   popular: false,
   order: 195,
-  metaTitle: "iPhone 6s Plus remonts Rīgā",
-  metaDescription: "iPhone 6s Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 6s Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 6s Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6s Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -883,8 +883,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-6s.webp",
   popular: false,
   order: 196,
-  metaTitle: "iPhone 6s remonts Rīgā",
-  metaDescription: "iPhone 6s ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 6s remonts Rīgā | iLab",
+  metaDescription: "iPhone 6s remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6s</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -904,8 +904,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-6-plus.webp",
   popular: false,
   order: 197,
-  metaTitle: "iPhone 6 Plus remonts Rīgā",
-  metaDescription: "iPhone 6 Plus ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 6 Plus remonts Rīgā | iLab",
+  metaDescription: "iPhone 6 Plus remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6 Plus</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -925,8 +925,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-6.webp",
   popular: false,
   order: 198,
-  metaTitle: "iPhone 6 remonts Rīgā",
-  metaDescription: "iPhone 6 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 6 remonts Rīgā | iLab",
+  metaDescription: "iPhone 6 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -947,8 +947,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-5s.webp",
   popular: false,
   order: 200,
-  metaTitle: "iPhone 5s remonts Rīgā",
-  metaDescription: "iPhone 5s ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 5s remonts Rīgā | iLab",
+  metaDescription: "iPhone 5s remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5s</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -968,8 +968,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-5c.webp",
   popular: false,
   order: 201,
-  metaTitle: "iPhone 5c remonts Rīgā",
-  metaDescription: "iPhone 5c ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 5c remonts Rīgā | iLab",
+  metaDescription: "iPhone 5c remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5c</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -989,8 +989,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-5.webp",
   popular: false,
   order: 202,
-  metaTitle: "iPhone 5 remonts Rīgā",
-  metaDescription: "iPhone 5 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 5 remonts Rīgā | iLab",
+  metaDescription: "iPhone 5 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -1010,8 +1010,8 @@ const devices = [
   image: "/images/devices/iphone/iphone-4s.webp",
   popular: false,
   order: 203,
-  metaTitle: "iPhone 4s remonts Rīgā",
-  metaDescription: "iPhone 4s ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 4s remonts Rīgā | iLab",
+  metaDescription: "iPhone 4s remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 4s</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
@@ -1031,14 +1031,15 @@ const devices = [
   image: "/images/devices/iphone/iphone-4.webp",
   popular: false,
   order: 204,
-  metaTitle: "iPhone 4 remonts Rīgā",
-  metaDescription: "iPhone 4 ekrāna un baterijas maiņa tajā pašā dienā. 90 dienu garantija.",
+  metaTitle: "iPhone 4 remonts Rīgā | iLab",
+  metaDescription: "iPhone 4 remonts Rīgā — ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 4</strong> remonts Rīgā — ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
     Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
+
 
 
 
