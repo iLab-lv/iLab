@@ -42,7 +42,7 @@ const QUESTIONS = [
         aHtml: (
           <>
             Daudzas <strong>iPhone</strong> procedūras izdarām <strong>tajā pašā dienā</strong>, piemēram:{' '}
-            <Link href="/iphone-remonts/displeja-maina">ekrāna maiņa</Link>,{' '}
+            <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link>,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
             <Link href="/iphone-remonts/uzlades-ligzdas-maina">uzlādes ligzdas maiņa</Link>. Termiņš atkarīgs no modeļa un detaļām.
           </>
@@ -71,7 +71,7 @@ const QUESTIONS = [
         aHtml: (
           <>
             <strong>iPhone</strong> cenu sadaļas atradīsi pie konkrētā pakalpojuma:{' '}
-            <Link href="/iphone-remonts/displeja-maina">displeja maiņa</Link>,{' '}
+            <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link>,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
             <Link href="/iphone-remonts/kameras-remonts">kameras remonts</Link>,{' '}
             <Link href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu/mikrofona remonts</Link>,{' '}
@@ -147,7 +147,7 @@ const QUESTIONS = [
       <>
         Jā — strādājam uzmanīgi, bet pirms remonta iesakām izveidot <em>rezerves kopiju</em> (backup).
         Biežākajās situācijās (piem.,{' '}
-        <Link href="/iphone-remonts/displeja-maina">ekrāna maiņa</Link> vai{' '}
+        <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> vai{' '}
         <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>) dati parasti netiek skarti.
       </>
     ),
@@ -158,7 +158,7 @@ const QUESTIONS = [
         aHtml: (
           <>
             <strong>iPhone</strong> datu integritāte ir prioritāte. Tipiskos darbos —{' '}
-            <Link href="/iphone-remonts/displeja-maina">ekrāna maiņa</Link> un{' '}
+            <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> un{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link> — lietotāja dati parasti netiek skarti, tomēr rekomendējam <em>backup</em>.
           </>
         ),
@@ -204,7 +204,7 @@ const QUESTIONS = [
         aHtml: (
           <>
             <strong>iPhone remonts</strong>:{' '}
-            <Link href="/iphone-remonts/displeja-maina">displeja (ekrāna) maiņa</Link>,{' '}
+            <Link href="/iphone-remonts/ekrana-maina">displeja (ekrāna) maiņa</Link>,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
             <Link href="/iphone-remonts/kameras-remonts">kameras remonts</Link>,{' '}
             <Link href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu/mikrofona remonts</Link>,{' '}
@@ -227,7 +227,7 @@ const QUESTIONS = [
     aHtml: (
       <>
         Jā — izmantojam oriģinālās vai augstas kvalitātes OEM detaļas (vienojamies pirms darba).
-        Skati: <Link href="/iphone-remonts/displeja-maina">displeja maiņa</Link> un{' '}
+        Skati: <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link> un{' '}
         <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>.
       </>
     ),

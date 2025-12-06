@@ -10,6 +10,7 @@ import repairServices from '@/data/repairServices';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
+import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -67,12 +68,14 @@ function toPriceRange(priceStr) {
 
   const priceText = raw;
 
+  // "no 50", "from 50"
   const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
   if (fromMatch) {
     const from = Number(fromMatch[1].replace(',', '.'));
     return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
   }
 
+  // "50-80"
   const rangeMatch = p.match(
     /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
   );
@@ -86,6 +89,7 @@ function toPriceRange(priceStr) {
     };
   }
 
+  // "50"
   const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
   if (singleMatch) {
     const v = Number(singleMatch[1].replace(',', '.'));
@@ -153,15 +157,15 @@ function buildPriceListItems(modelSlug) {
 function buildModelServices() {
   return [
     {
-      title: 'Displeja (ekrāna) maiņa',
-      href: '/iphone-remonts/displeja-maina',
-      text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+      title: 'Ekrāna maiņa',
+      href: '/iphone-remonts/ekrana-maina',
+      text: 'plaisas, līnijas, tumši plankumi, nereaģē skārienjūtīgais ekrāns.',
       icon: LuSmartphone,
     },
     {
-      title: 'Akumulatora maiņa',
+      title: 'Baterijas maiņa',
       href: '/iphone-remonts/baterijas-maina',
-      text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+      text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10–20%.',
       icon: LuBatteryCharging,
     },
     {
@@ -173,22 +177,86 @@ function buildModelServices() {
     {
       title: 'Kameras remonts',
       href: '/iphone-remonts/kameras-remonts',
-      text: 'miglaini attēli, fokusēšanās problēmas.',
+      text: 'miglaini attēli, melni plankumi, fokusēšanās problēmas.',
       icon: LuCamera,
     },
     {
-      title: 'Skaļruņi/mikrofons',
+      title: 'Skaļruņu un mikrofona remonts',
       href: '/iphone-remonts/skalruni-mikrofona-remonts',
-      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird vai neviens nedzird jūs.',
       icon: LuVolume2,
     },
     {
-      title: 'Ūdens bojājumi',
+      title: 'Ūdens bojājumu remonts',
       href: '/iphone-remonts/udens-bojajumu-remonts',
-      text: 'diagnostika un atjaunošana, ja tas iespējams.',
+      text: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
       icon: LuDroplets,
     },
   ];
+}
+
+// Build FAQ items + LD for iPhone models: IPHONE → PHONE → HOME
+function buildFaqForIphoneModel() {
+  const iphoneFaq = getFaqItems(FAQ_CONTEXT.IPHONE)?.items ?? [];
+  if (iphoneFaq.length) {
+    return {
+      faqItems: iphoneFaq,
+      faqLd: getFaqLd(FAQ_CONTEXT.IPHONE),
+    };
+  }
+
+  const phoneFaq = getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? [];
+  if (phoneFaq.length) {
+    return {
+      faqItems: phoneFaq,
+      faqLd: getFaqLd(FAQ_CONTEXT.PHONE),
+    };
+  }
+
+  const homeFaq = getFaqItems(FAQ_CONTEXT.HOME)?.items ?? [];
+  return {
+    faqItems: homeFaq,
+    faqLd: getFaqLd(FAQ_CONTEXT.HOME),
+  };
+}
+
+// Build HowTo JSON-LD for the repair process
+function buildProcessHowToLd(modelPath, deviceName) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `${ORIGIN}${modelPath}#howto`,
+    name: `${deviceName} remonta process iLab`,
+    description:
+      'Kā soli pa solim notiek iPhone remonta process iLab servisā Rīgā.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: '1. Atved iPhone uz iLab',
+        text: 'Atnes savu iPhone uz iLab Domina vai Spice filiāli bez iepriekšēja pieraksta.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '2. Bezmaksas diagnostika',
+        text: 'Veicam sākotnējo diagnostiku un nosakām bojājumu cēloni un remonta iespējas.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '3. Cenu un termiņa saskaņošana',
+        text: 'Pirms remonta sākšanas saskaņojam ar tevi cenu, detaļu tipu un remonta laiku.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '4. Remonts un testēšana',
+        text: 'Veicam remonta darbus, nomainām bojātās detaļas un rūpīgi pārbaudām iPhone darbību.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '5. Saņem iPhone ar garantiju',
+        text: 'Saņem salabotu iPhone ar iLab garantiju un čeku, kā arī ieteikumiem turpmākai lietošanai.',
+      },
+    ],
+  };
 }
 
 /* ===== Metadata ===== */
@@ -198,10 +266,14 @@ export async function generateMetadata({ params }) {
   const d = getIphoneDeviceBySlug(slug);
 
   const title =
-    d?.metaTitle || (d ? `${d.name} remonts | iLab` : 'iPhone remonts | iLab');
+    d?.metaTitle ||
+    (d ? `${d.name} remonts Rīgā | iLab` : 'iPhone remonts Rīgā | iLab');
+
   const description =
     d?.metaDescription ||
-    'iPhone remonts: displejs, baterija, uzlāde, kamera. Ātra diagnostika un garantija.';
+    (d
+      ? `${d.name} remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzdas remonts, kameras un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija.`
+      : 'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.');
 
   return {
     title,
@@ -220,33 +292,12 @@ export default async function Page({ params }) {
   const { items: priceItems, currency } = buildPriceListItems(slug);
   const modelServices = buildModelServices();
 
-  // Pull iPhone FAQ; if empty, fall back to PHONE → HOME to avoid blank blocks
-  const iphoneFaq = getFaqItems(FAQ_CONTEXT.IPHONE)?.items ?? [];
-  const phoneFaq = !iphoneFaq.length
-    ? getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? []
-    : [];
-  const homeFaq =
-    !iphoneFaq.length && !phoneFaq.length
-      ? getFaqItems(FAQ_CONTEXT.HOME)?.items ?? []
-      : [];
-
-  const FINAL_FAQ_ITEMS = iphoneFaq.length
-    ? iphoneFaq
-    : phoneFaq.length
-    ? phoneFaq
-    : homeFaq;
-
-  // JSON-LD should match what we show
-  const FAQ_LD = iphoneFaq.length
-    ? getFaqLd(FAQ_CONTEXT.IPHONE)
-    : phoneFaq.length
-    ? getFaqLd(FAQ_CONTEXT.PHONE)
-    : getFaqLd(FAQ_CONTEXT.HOME);
+  const { faqItems: FINAL_FAQ_ITEMS, faqLd: FAQ_LD } = buildFaqForIphoneModel();
 
   // ---------- JSON-LD ----------
 
   const modelPath = `/iphone-remonts/${d.slug}`;
-  const provider = buildProvidersFromLocations(); // domina + spice by default
+  const provider = buildProvidersFromLocations(); // Domina + Spice by default
 
   // Breadcrumbs
   const breadcrumbsLd = buildBreadcrumbsLd([
@@ -265,7 +316,7 @@ export default async function Page({ params }) {
     return {
       '@type': 'Offer',
       name: it.title,
-      ...(singleNumeric
+      ...(singleNumeric !== undefined
         ? {
             price: singleNumeric,
             priceCurrency: currency,
@@ -294,6 +345,8 @@ export default async function Page({ params }) {
     ...(offers.length ? { offers } : {}),
   };
 
+  const processHowToLd = buildProcessHowToLd(modelPath, d.name);
+
   return (
     <>
       {/* JSON-LD */}
@@ -311,18 +364,27 @@ export default async function Page({ params }) {
       >
         {JSON.stringify(serviceLd)}
       </Script>
+      {FAQ_LD && (
+        <Script
+          id="faq-jsonld-iphone"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(FAQ_LD)}
+        </Script>
+      )}
       <Script
-        id="faq-jsonld-iphone"
+        id="process-jsonld-iphone"
         type="application/ld+json"
         strategy="afterInteractive"
       >
-        {JSON.stringify(FAQ_LD)}
+        {JSON.stringify(processHowToLd)}
       </Script>
 
       {/* HERO */}
       <DeviceHero
         image={d.image}
-        alt={`${d.name} remonts`}
+        alt={`${d.name} remonts Rīgā`}
         bodyHtml={d.bodyHtml || null}
       />
 
@@ -331,7 +393,7 @@ export default async function Page({ params }) {
         <Services
           id="iphone-services"
           title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
-          items={modelServices()}
+          items={modelServices}
         />
       </section>
 
@@ -352,14 +414,21 @@ export default async function Page({ params }) {
         <Why />
       </section>
 
-      {/* FAQ */}
+      {/* Process (added before FAQ) */}
       <section className={s.section}>
-        <Faq
-          id="model-faq"
-          title="Biežāk uzdotie jautājumi"
-          items={FINAL_FAQ_ITEMS}
-        />
+        <Process />
       </section>
+
+      {/* FAQ */}
+      {!!FINAL_FAQ_ITEMS.length && (
+        <section className={s.section}>
+          <Faq
+            id="model-faq"
+            title="Biežāk uzdotie jautājumi"
+            items={FINAL_FAQ_ITEMS}
+          />
+        </section>
+      )}
 
       <section className={s.section}>
         <ConvertBand />

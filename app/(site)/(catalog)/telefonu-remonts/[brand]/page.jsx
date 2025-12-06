@@ -9,13 +9,11 @@ import categories from '@/data/categories'; // used by getPhoneBrandConfig
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
-import CommonIssues from '@sections/common-issues/CommonIssues';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
-import phoneIssues from '@/data/commonIssues';
 import c from '@styles/Catalog.module.scss';
 
 import {
@@ -67,7 +65,9 @@ function getPhoneBrandConfig(brandSlug) {
   }
 
   const brand =
-    phonesCat.brands?.find((b) => (b.brandSlug || '').toLowerCase() === brandSlug) || null;
+    phonesCat.brands?.find(
+      (b) => (b.brandSlug || '').toLowerCase() === brandSlug
+    ) || null;
 
   return {
     brandKey: brand?.brandSlug || brandSlug,
@@ -134,9 +134,18 @@ const PROCESS_STEPS = [
     title: 'Cena un termiņš',
     text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
   },
-  { title: 'Remonts', text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.' },
-  { title: 'Pārbaude', text: 'Pēc remonta testējam visu funkcionalitāti un drošību.' },
-  { title: 'Garantija', text: '90 dienu garantija un ieteikumi turpmākai lietošanai.' },
+  {
+    title: 'Remonts',
+    text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
+  },
+  {
+    title: 'Pārbaude',
+    text: 'Pēc remonta testējam visu funkcionalitāti un drošību.',
+  },
+  {
+    title: 'Garantija',
+    text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+  },
 ];
 
 const FAQ_ITEMS = [
@@ -159,6 +168,9 @@ const FAQ_ITEMS = [
   },
 ];
 
+// JSON-LD for brand FAQ (matches FAQ_ITEMS)
+const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
+
 export default function BrandPhonesPage({ params }) {
   const brandSlug = String(params.brand || '').toLowerCase();
 
@@ -174,7 +186,9 @@ export default function BrandPhonesPage({ params }) {
   const hero = getPhoneBrandConfig(brandSlug);
 
   const brandPhoneList = devicesAll.filter(
-    (d) => d.category === 'telefonu-remonts' && (d.brandSlug || '').toLowerCase() === brandSlug
+    (d) =>
+      d.category === 'telefonu-remonts' &&
+      (d.brandSlug || '').toLowerCase() === brandSlug
   );
 
   const heroHtml = bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`;
@@ -194,23 +208,39 @@ export default function BrandPhonesPage({ params }) {
     // city + provider locations use defaults (Rīga + all LOCATIONS)
   });
 
-  const howToLd = buildStandardRepairHowToLd(`${bc.marketingName} telefonu remonts`);
-
-  const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
+  const howToLd = buildStandardRepairHowToLd(
+    `${bc.marketingName} telefonu remonts`
+  );
 
   return (
     <>
       {/* JSON-LD */}
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="service-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="howto-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(howToLd)}
       </Script>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(faqLd)}
       </Script>
 
@@ -232,15 +262,18 @@ export default function BrandPhonesPage({ params }) {
             {bc.marketingName} telefonu remonts — ko mēs darām
           </h2>
           <p className={c.intro}>
-            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava
-            modeļa lapu, lai redzētu konkrētas <strong>remonta cenas</strong> un termiņus.
+            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas
+            atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas{' '}
+            <strong>remonta cenas</strong> un termiņus.
           </p>
           <p className={c.paragraph}>
-            Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens),{' '}
-            <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong>{' '}
-            (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās
-            kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī <strong>mitruma bojājumi</strong>.
-            Uzzini, kā notiek remonts sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
+            Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi,
+            nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde,
+            izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis,
+            lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli,
+            fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa,
+            krakšķi), kā arī <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts
+            sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
         </div>
       </section>
@@ -248,7 +281,11 @@ export default function BrandPhonesPage({ params }) {
       {/* Popular services */}
       <section className={c.section} aria-labelledby="popular-services-h2">
         <div className={c.container}>
-          <Services id="brand-services" title="Populārākie remonti" items={POPULAR_REPAIRS} />
+          <Services
+            id="brand-services"
+            title="Populārākie remonti"
+            items={POPULAR_REPAIRS}
+          />
         </div>
       </section>
 

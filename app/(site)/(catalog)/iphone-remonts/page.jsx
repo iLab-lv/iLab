@@ -54,7 +54,7 @@ const ISSUES_PREVIEW = [
     q: 'Saplīsis ekrāns / displeja problēmas',
     text: 'iPhone ekrāns saplīsa, plaisas, nereaģē uz pieskārienu',
     icon: 'screen',
-    serviceHref: '/iphone-remonts/displeja-maina',
+    serviceHref: '/iphone-remonts/ekrana-maina',
     id: 'displeja-problemas',
   },
   {
@@ -75,7 +75,7 @@ const ISSUES_PREVIEW = [
     q: 'Mitruma / ūdens bojājumi',
     text: 'Telefons iekritis ūdenī, pēc tam neieslēdzas',
     icon: 'water',
-    serviceHref: '/iphone-remonts/udens-bojajumi',
+    serviceHref: '/iphone-remonts/udens-bojajumu-remonts',
     id: 'udens-bojajumi',
   },
 ];
@@ -155,10 +155,10 @@ export default function IphoneRemontsPage() {
             title="Populārākie iPhone remonti"
             items={[
               {
-                title: 'Displeja (ekrāna) maiņa',
+                title: 'Ekrāna (displeja) maiņa',
                 text: 'plaisas, tumši plankumi, nereaģē skāriens.',
                 icon: LuSmartphone,
-                href: '/iphone-remonts/displeja-maina',
+                href: '/iphone-remonts/ekrana-maina',
               },
               {
                 title: 'Akumulatora maiņa',
@@ -188,7 +188,7 @@ export default function IphoneRemontsPage() {
                 title: 'Ūdens bojājumi',
                 text: 'diagnostika un atjaunošana, ja tas iespējams.',
                 icon: LuDroplets,
-                href: '/iphone-remonts/udens-bojajumi',
+                href: '/iphone-remonts/udens-bojajumu-remonts',
               },
             ]}
           />

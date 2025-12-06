@@ -52,7 +52,7 @@ Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai 
 Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpusē jau sākusies oksidācija. Jo ātrāk ierīce nonāk servisā, jo lielāka iespēja to atjaunot. Veicam <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostiku un remontu</a>, aizstājot bojātās detaļas, ja nepieciešams.</p>
 
 <p><strong>Ekrāna vai skāriena problēmas</strong><br>
-Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
+Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
 
 <p><strong>Kameras vai skaņas kļūmes</strong><br>
 Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas meistars piedāvās <a href="/iphone-remonts/kameras-remonts">kameras remontu</a> vai <a href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu un mikrofona remontu</a>.</p>
@@ -64,7 +64,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
             {
               title: 'Cik tas ilgst un ko sagaidīt',
               text: `
-<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
+<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
 
 <p>Ja bojājums ir sarežģītāks (piemēram, ūdens bojājums vai mātesplates defekts), serviss informē par nepieciešamo laiku un detaļu pieejamību. Cenu un termiņu vienmēr saskaņojam pirms darba uzsākšanas, tāpēc klients zina, ko sagaidīt.</p>
 
@@ -96,7 +96,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 
 <p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a>.</p>
 
-<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/displeja-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu remonts</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
+<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu remonts</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
       `,
             },
           ],
@@ -123,17 +123,17 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     },
 
     // ------------- Planšetdatoru remonts hub (Header hero only) -------------
-// ------------- Planšetdatoru remonts hub (Header hero only) -------------
-'plansetdatoru-remonts': {
-  hero: {
-    h1: 'Planšetdatoru remonts',
-    lead:
-      'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
-    bodyHtml:
-      '<p><strong>Planšetdatoru remonts Rīgā</strong> — ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts un citi darbi. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong>.</p>',
-    scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
-  },
-},
+    // ------------- Planšetdatoru remonts hub (Header hero only) -------------
+    'plansetdatoru-remonts': {
+      hero: {
+        h1: 'Planšetdatoru remonts',
+        lead:
+          'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
+        bodyHtml:
+          '<p><strong>Planšetdatoru remonts Rīgā</strong> — ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts un citi darbi. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong>.</p>',
+        scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
+      },
+    },
 
 
     // ---------------- Datoru remonts hub (Header hero only) ------------------
@@ -160,7 +160,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
   // =====================================================================
   services: {
     // ---- iPhone (existing, unchanged) ----
-    'iphone-remonts/displeja-maina': {
+    'iphone-remonts/ekrana-maina': {
       seo: {
         title: 'iPhone ekrāna maiņa Rīgā | iLab',
         metaDescription:
@@ -168,8 +168,10 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       },
       h1: 'iPhone ekrāna maiņa',
       lead:
-        'Nomainīsim saplaisājušu vai nereaģējošu ekrānu tajā pašā dienā, izmantojot kvalitatīvas detaļas un sniedzot garantiju.',
+        'Nomainīsim saplaisājušu vai nereaģējošu ekrānu (displeju) tajā pašā dienā, izmantojot kvalitatīvas detaļas un sniedzot 90 dienu garantiju.',
+      scrollCta: { label: 'Skatīt ekrāna maiņas cenas', targetId: 'cenas', show: true },
     },
+
 
     'iphone-remonts/baterijas-maina': {
       seo: {
@@ -240,27 +242,18 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     },
 
     // Water damage (canonical)
+    // Water damage (canonical)
     'iphone-remonts/udens-bojajumu-remonts': {
       seo: {
-        title: 'iPhone ūdens bojājumu remonts Rīgā | iLab',
+        title: 'iPhone ūdens bojājumi — diagnostika un remonts Rīgā | iLab',
         metaDescription:
-          'Diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar šķidrumu. Bojāto detaļu nomaiņa ar garantiju.',
-      },
-      h1: 'iPhone ūdens bojājumu remonts',
-      lead:
-        'Pēc saskares ar šķidrumu — jo ātrāk ierīce nonāk servisā, jo lielākas izredzes. Veicam tīrīšanu, oksidācijas novēršanu un detaļu maiņu.',
-    },
-    // Alias (older slug)
-    'iphone-remonts/udens-bojajumi': {
-      seo: {
-        title: 'iPhone ūdens bojājumi | iLab',
-        metaDescription:
-          'Pēc saskares ar šķidrumu veicam diagnostiku, tīrīšanu un bojāto detaļu nomaiņu. Jo ātrāk atnesīsi, jo lielākas izredzes.',
+          'iPhone iekrita ūdenī? Veicam ūdens bojājumu diagnostiku, tīrīšanu un oksidācijas novēršanu, bojāto detaļu nomaiņu un testus. Jo ātrāk atnesīsi, jo lielākas izredzes.',
       },
       h1: 'iPhone ūdens bojājumi',
       lead:
-        'Pēc saskares ar šķidrumu veicam diagnostiku, tīrīšanu un bojāto detaļu nomaiņu. Jo ātrāk atnesīsi, jo lielākas izredzes.',
+        'iPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas? Veicam diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto detaļu maiņu ar 90 dienu garantiju.',
     },
+
 
     // ---- Telefonu remonts (NEW) ----
     'telefonu-remonts/ekrana-maina': {

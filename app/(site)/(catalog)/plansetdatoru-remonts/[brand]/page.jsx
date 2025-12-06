@@ -14,8 +14,6 @@ import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
-import c from '@styles/Catalog.module.scss';
-
 import {
   getBrandContent,
   listBrandsForCategory,
@@ -31,7 +29,14 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-const ORIGIN = 'https://www.ilab.lv';
+import {
+  ORIGIN,
+  abs,
+  buildBreadcrumbsLd,
+  buildProvidersFromLocations,
+} from '@/lib/seo/jsonldHelpers';
+
+import c from '@styles/Catalog.module.scss';
 
 /* ---------------------------------------------
    Lock this dynamic route to ONLY known brands
@@ -112,25 +117,25 @@ const PROCESS_STEPS = [
 const FAQ_ITEMS = [
   {
     q: 'Cik ilgi ilgst planšetdatora displeja maiņa?',
-    a: 'Bieži 1–3 stundas atkarībā no modeļa un meistaru noslodzes.',
+    a: 'Bieži 1–3 stundas atkarībā no modeļa, detaļu pieejamības un meistaru noslodzes.',
   },
   {
     q: 'Vai mani dati saglabāsies?',
     a:
-      'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta iesakām izveidot dublējumu.',
+      'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta vienmēr iesakām izveidot dublējumu.',
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā, gan detaļām, gan meistaru darbam ir garantija.',
+    a: 'Jā — gan detaļām, gan meistaru darbam ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
     a:
-      'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli saskaņojam ar klientu.',
+      'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli un cenu saskaņojam ar klientu pirms remonta.',
   },
   {
     q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
-    a: 'Jā, pēc īsas diagnostikas sniegsim izmaksu diapazonu un termiņu.',
+    a: 'Jā, pēc īsas diagnostikas sniegsim izmaksu diapazonu un termiņu konkrētajam planšetdatora modelim.',
   },
 ];
 
@@ -157,55 +162,84 @@ export default function BrandTabletsPage({ params }) {
   const heroHtml = bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`;
 
   // ---------- JSON-LD ----------
+  const provider = buildProvidersFromLocations();
+  const pageUrl = abs(bc.href);
+
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${ORIGIN}${bc.href}#service`,
     serviceType: `${bc.marketingName} planšetdatoru remonts`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}${bc.href}/`,
-    name: `${bc.marketingName} planšetdatoru remonts`,
-    description:
-      `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    areaServed: { '@type': 'City', name: 'Rīga' },
+    provider,
+    url: pageUrl,
+    name: `${bc.marketingName} planšetdatoru remonts Rīgā`,
+    description: `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
   };
 
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Sākums',
-        item: `${ORIGIN}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Planšetdatoru remonts',
-        item: `${ORIGIN}/plansetdatoru-remonts/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: bc.marketingName,
-        item: `${ORIGIN}${bc.href}/`,
-      },
-    ],
-  };
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    {
+      name: 'Sākums',
+      url: abs('/'),
+    },
+    {
+      name: 'Planšetdatoru remonts',
+      url: abs('/plansetdatoru-remonts'),
+    },
+    {
+      name: `${bc.marketingName} planšetdatoru remonts`,
+      url: pageUrl,
+    },
+  ]);
 
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
+    mainEntity: FAQ_ITEMS.map(({ q, a }, index) => ({
       '@type': 'Question',
+      '@id': `${ORIGIN}${bc.href}#faq-q${index + 1}`,
       name: q,
       acceptedAnswer: {
         '@type': 'Answer',
         text: typeof a === 'string' ? a : '',
       },
     })),
+  };
+
+  const processHowToLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `${ORIGIN}${bc.href}#howto`,
+    name: `${bc.marketingName} planšetdatoru remonta process iLab`,
+    description:
+      'Kā soli pa solim notiek planšetdatoru diagnostika, remonts un testēšana iLab servisā Rīgā.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: '1. Diagnostika',
+        text: 'Ātri pārbaudām planšetdatoru, apstiprinām problēmu (displejs, baterija, uzlāde, skaņa, kamera u.c.) un izvērtējam bojājuma apmēru.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '2. Cena un termiņš',
+        text: 'Pirms remonta sākšanas saskaņojam izmaksas, detaļu veidu (oriģināls vai OEM) un izpildes termiņu.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '3. Remonts',
+        text: 'Meistari veic ekrāna, baterijas, uzlādes ligzdas, kameras vai citu komponentu remontu, izmantojot kvalitatīvas detaļas.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '4. Pārbaude',
+        text: 'Pēc remonta testējam ekrānu, skārienu, skaņu, uzlādi, tīklu un citas ikdienas funkcijas, lai pārliecinātos par stabilu darbību.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '5. Garantija un izsniegšana',
+        text: 'Izsniedzam planšetdatoru ar 90 dienu garantiju uz detaļu un darbu, sniedzam ieteikumus turpmākai lietošanai.',
+      },
+    ],
   };
 
   return (
@@ -232,10 +266,17 @@ export default function BrandTabletsPage({ params }) {
       >
         {JSON.stringify(faqLd)}
       </Script>
+      <Script
+        id="process-jsonld-tablet-brand"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(processHowToLd)}
+      </Script>
 
-      {/* HERO – EXACT same base image as category + logo/tint */}
+      {/* HERO – same base image as category + logo/tint */}
       <DeviceHero
-        image="/images/categories/plansetdatoru_remonts.webp"  // ← underscore, same as category page
+        image="/images/categories/plansetdatoru_remonts.webp"
         alt={heroCfg.heroAlt}
         brandLogo={heroCfg.logo}
         brandKey={heroCfg.brandKey}
@@ -259,10 +300,11 @@ export default function BrandTabletsPage({ params }) {
             Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši
             plankumi, nereaģē skāriens),{' '}
             <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie
-            10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis,
-            lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini
-            attēli, fokusēšanās kļūdas), kā arī{' '}
-            <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts sadaļā{' '}
+            10–20%), <strong>uzlādes ligzdas remonts</strong> (nenoturas
+            kabelis, lēna vai nestabila uzlāde),{' '}
+            <strong>kameras remonts</strong> (miglaini attēli, fokusēšanās
+            kļūdas), kā arī <strong>mitruma/ūdens bojājumi</strong>. Uzzini, kā
+            notiek remonts sadaļā{' '}
             <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
         </div>

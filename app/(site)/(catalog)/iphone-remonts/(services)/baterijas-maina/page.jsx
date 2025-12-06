@@ -113,9 +113,9 @@ export default function IphoneBaterijasMainaPage({ searchParams }) {
       {/* INTRO */}
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h1 id="intro-h2" className={s.h1}>
+          <h2 id="intro-h2" className={s.h1}>
             iPhone baterijas maiņa Rīgā
-          </h1>
+          </h2>
           <p className={s.paragraph}>
             Ja jūsu iPhone ātri zaudē uzlādi, izslēdzas pie augsta procenta, lādējas ļoti lēni vai uzrāda zemu
             <strong> Battery Health</strong> rādītāju, <strong>visticamāk nepieciešama baterijas maiņa</strong>.

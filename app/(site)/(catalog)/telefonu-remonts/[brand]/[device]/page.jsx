@@ -10,6 +10,7 @@ import repairServices from '@/data/repairServices';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
+import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -64,12 +65,14 @@ function toPriceRange(priceStr) {
 
   const priceText = raw;
 
+  // "no 50", "from 50"
   const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
   if (fromMatch) {
     const from = Number(fromMatch[1].replace(',', '.'));
     return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
   }
 
+  // "50-80"
   const rangeMatch = p.match(
     /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
   );
@@ -83,6 +86,7 @@ function toPriceRange(priceStr) {
     };
   }
 
+  // "50"
   const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
   if (singleMatch) {
     const v = Number(singleMatch[1].replace(',', '.'));
@@ -116,6 +120,7 @@ function buildPriceListItems(modelSlug) {
 
       const raw = it?.price;
       if (raw == null) return null;
+
       const priceText =
         typeof raw === 'number' ? String(raw) : String(raw).trim();
 
@@ -132,7 +137,7 @@ function buildPriceListItems(modelSlug) {
         priceFrom,
         priceTo,
         popular: false,
-        // IMPORTANT: adjust these slugs if your telefoni service URLs differ
+        // IMPORTANT: make sure these match your telefoni service URLs
         href: base.slug ? `/${base.slug}` : base.href,
       };
     })
@@ -149,18 +154,18 @@ function buildPriceListItems(modelSlug) {
 
 // Popular services grid (telefonu canonical routes)
 function buildModelServices(brandSlug) {
-  // You can customize wording per brand later if needed.
+  // Currently same for all brands; can customize per brand later using brandSlug.
   return [
     {
-      title: 'Displeja (ekrāna) maiņa',
+      title: 'Ekrāna maiņa',
       href: '/telefonu-remonts/ekrana-maina',
-      text: 'plaisas, tumši plankumi, nereaģē skāriens.',
+      text: 'plaisas, līnijas, tumši plankumi, nereaģē skārienjūtīgais ekrāns.',
       icon: LuSmartphone,
     },
     {
-      title: 'Akumulatora maiņa',
+      title: 'Baterijas maiņa',
       href: '/telefonu-remonts/baterijas-maina',
-      text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
+      text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10–20%.',
       icon: LuBatteryCharging,
     },
     {
@@ -172,22 +177,78 @@ function buildModelServices(brandSlug) {
     {
       title: 'Kameras remonts',
       href: '/telefonu-remonts/kameras-remonts',
-      text: 'miglaini attēli, fokusēšanās problēmas.',
+      text: 'miglaini attēli, melni plankumi, fokusēšanās problēmas.',
       icon: LuCamera,
     },
     {
-      title: 'Skaļruņi/mikrofons',
+      title: 'Skaļruņu un mikrofona remonts',
       href: '/telefonu-remonts/skalruni-mikrofona-remonts',
-      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
+      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird vai neviens nedzird jūs.',
       icon: LuVolume2,
     },
     {
-      title: 'Ūdens bojājumi',
+      title: 'Ūdens bojājumu remonts',
       href: '/telefonu-remonts/udens-bojajumu-remonts',
-      text: 'diagnostika un atjaunošana, ja tas iespējams.',
+      text: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
       icon: LuDroplets,
     },
   ];
+}
+
+// Build FAQ items + LD, preferring PHONE context
+function buildFaqForModel() {
+  const phoneFaq = getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? [];
+  if (phoneFaq.length) {
+    return {
+      faqItems: phoneFaq,
+      faqLd: getFaqLd(FAQ_CONTEXT.PHONE),
+    };
+  }
+
+  const homeFaq = getFaqItems(FAQ_CONTEXT.HOME)?.items ?? [];
+  return {
+    faqItems: homeFaq,
+    faqLd: getFaqLd(FAQ_CONTEXT.HOME),
+  };
+}
+
+// Build HowTo JSON-LD for the repair process
+function buildProcessHowToLd(modelPath, deviceName) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `${ORIGIN}${modelPath}#howto`,
+    name: `${deviceName} remonta process iLab`,
+    description:
+      'Kā soli pa solim notiek telefona remonta process iLab servisā Rīgā.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: '1. Atved telefonu uz iLab',
+        text: 'Atnes savu telefonu uz iLab Domina vai Spice filiāli bez iepriekšēja pieraksta.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '2. Bezmaksas diagnostika',
+        text: 'Veicam sākotnējo diagnostiku un nosakām bojājumu cēloni un remonta iespējas.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '3. Cenu un termiņa saskaņošana',
+        text: 'Pirms remonta sākšanas saskaņojam ar tevi cenu, detaļu tipu un remonta laiku.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '4. Remonts un testēšana',
+        text: 'Veicam remonta darbus, nomainām bojātās detaļas un pārbaudām tālruņa darbību.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '5. Saņem telefonu ar garantiju',
+        text: 'Saņem salabotu telefonu ar iLab garantiju un čeku, kā arī ieteikumiem turpmākai lietošanai.',
+      },
+    ],
+  };
 }
 
 /* ===== Metadata ===== */
@@ -202,11 +263,15 @@ export async function generateMetadata({ params }) {
 
   const title =
     d?.metaTitle ||
-    (d ? `${d.name} remonts | iLab` : `${brandLabel} telefonu remonts | iLab`);
+    (d
+      ? `${d.name} remonts Rīgā | iLab`
+      : `${brandLabel} telefonu remonts | iLab`);
 
   const description =
     d?.metaDescription ||
-    'Telefonu remonts: displeja maiņa, baterija, uzlāde, kamera un citi bojājumi. Ātra diagnostika un garantija.';
+    (d
+      ? `${d.name} remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzdas remonts, kameras un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija.`
+      : 'Telefonu remonts: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā Rīgā.');
 
   return {
     title,
@@ -227,23 +292,13 @@ export default async function Page({ params }) {
   const { items: priceItems, currency } = buildPriceListItems(slug);
   const modelServices = buildModelServices(brandSlug);
 
-  // FAQ: prefer PHONE context, then generic HOME
-  const phoneFaq = getFaqItems(FAQ_CONTEXT.PHONE)?.items ?? [];
-  const homeFaq = !phoneFaq.length
-    ? getFaqItems(FAQ_CONTEXT.HOME)?.items ?? []
-    : [];
-
-  const FINAL_FAQ_ITEMS = phoneFaq.length ? phoneFaq : homeFaq;
-
-  const FAQ_LD = phoneFaq.length
-    ? getFaqLd(FAQ_CONTEXT.PHONE)
-    : getFaqLd(FAQ_CONTEXT.HOME);
+  const { faqItems: FINAL_FAQ_ITEMS, faqLd: FAQ_LD } = buildFaqForModel();
 
   // ---------- JSON-LD ----------
 
   const brandLabel = d.brandName || d.brandSlug.toUpperCase();
   const modelPath = `/telefonu-remonts/${brandSlug}/${d.slug}`;
-  const provider = buildProvidersFromLocations(); // domina + spice by default
+  const provider = buildProvidersFromLocations(); // Domina + Spice by default
 
   // Breadcrumbs
   const breadcrumbsLd = buildBreadcrumbsLd([
@@ -266,7 +321,7 @@ export default async function Page({ params }) {
     return {
       '@type': 'Offer',
       name: it.title,
-      ...(singleNumeric
+      ...(singleNumeric !== undefined
         ? {
             price: singleNumeric,
             priceCurrency: currency,
@@ -295,6 +350,8 @@ export default async function Page({ params }) {
     ...(offers.length ? { offers } : {}),
   };
 
+  const processHowToLd = buildProcessHowToLd(modelPath, d.name);
+
   return (
     <>
       {/* JSON-LD */}
@@ -312,12 +369,21 @@ export default async function Page({ params }) {
       >
         {JSON.stringify(serviceLd)}
       </Script>
+      {FAQ_LD && (
+        <Script
+          id="faq-jsonld-telefonu"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(FAQ_LD)}
+        </Script>
+      )}
       <Script
-        id="faq-jsonld-telefonu"
+        id="process-jsonld-telefonu"
         type="application/ld+json"
         strategy="afterInteractive"
       >
-        {JSON.stringify(FAQ_LD)}
+        {JSON.stringify(processHowToLd)}
       </Script>
 
       {/* HERO */}
@@ -347,12 +413,17 @@ export default async function Page({ params }) {
 
       <Why />
 
+      {/* Process (added before FAQ) */}
+      <Process />
+
       {/* FAQ */}
-      <Faq
-        id="model-faq"
-        title="Biežāk uzdotie jautājumi"
-        items={FINAL_FAQ_ITEMS}
-      />
+      {!!FINAL_FAQ_ITEMS.length && (
+        <Faq
+          id="model-faq"
+          title="Biežāk uzdotie jautājumi"
+          items={FINAL_FAQ_ITEMS}
+        />
+      )}
 
       <ConvertBand />
     </>

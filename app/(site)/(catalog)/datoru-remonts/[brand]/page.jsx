@@ -27,7 +27,14 @@ import {
 
 import c from '@styles/Catalog.module.scss';
 
-const ORIGIN = 'https://www.ilab.lv';
+// JSON-LD helpers
+import {
+  abs,
+  buildBreadcrumbsLd,
+  buildServiceLdForCity,
+  buildStandardRepairHowToLd,
+  buildFaqLdFromPairs,
+} from '@/lib/seo/jsonldHelpers';
 
 /* ---------------------------------------------
    Helpers
@@ -291,59 +298,56 @@ export default function BrandComputersPage({ params }) {
 
   const heroHtml = `<p><strong>${cfg.name} datoru remonts Rīgā</strong> — portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`;
 
-  // ---------- JSON-LD ----------
-  const serviceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${ORIGIN}/datoru-remonts/${cfg.brandSlug}#service`,
-    serviceType: `${cfg.name} datoru remonts`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
-    url: `${ORIGIN}/datoru-remonts/${cfg.brandSlug}/`,
+  // ---------- JSON-LD via helpers ----------
+
+  const path = `/datoru-remonts/${cfg.brandSlug}`;
+
+  const serviceLd = buildServiceLdForCity({
+    path,
     name: `${cfg.name} datoru remonts`,
     description: `${cfg.name} datoru remonts: ekrāns, dzesēšana, diski, programmatūra un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
-  };
+    // city + provider locations use defaults (Rīga + all LOCATIONS)
+  });
 
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Datoru remonts',
-        item: `${ORIGIN}/datoru-remonts/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: cfg.name,
-        item: `${ORIGIN}/datoru-remonts/${cfg.brandSlug}/`,
-      },
-    ],
-  };
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: 'Sākums', url: abs('/') },
+    { name: 'Datoru remonts', url: abs('/datoru-remonts') },
+    { name: `${cfg.name} datoru remonts`, url: abs(path) },
+  ]);
 
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : '' },
-    })),
-  };
+  const howToLd = buildStandardRepairHowToLd(`${cfg.name} datoru remonts`);
+
+  const faqLd = buildFaqLdFromPairs(FAQ_ITEMS);
 
   return (
     <>
       {/* JSON-LD */}
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="service-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="howto-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(howToLd)}
+      </Script>
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(faqLd)}
       </Script>
 
@@ -437,7 +441,7 @@ export default function BrandComputersPage({ params }) {
       </section>
 
       {/* Process */}
-      <Process />
+      <Process steps={PROCESS_STEPS} headingLevel={2} variant="cards" />
 
       {/* Why — full width */}
       <section className={c.section}>

@@ -1,3 +1,4 @@
+// app/(site)/(catalog)/plansetdatoru-remonts/[brand]/[device]/page.jsx
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
@@ -8,6 +9,7 @@ import repairServices from '@/data/repairServices';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
+import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -22,12 +24,15 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-// If you still want to reuse the iPhone device styles, keep this import:
-// import s from '../../../iphone-remonts/[device]/Device.module.scss';
+import {
+  ORIGIN,
+  abs,
+  buildBreadcrumbsLd,
+  buildProvidersFromLocations,
+} from '@/lib/seo/jsonldHelpers';
 
 export const revalidate = 0;
 
-const ORIGIN = 'https://www.ilab.lv';
 const DEFAULT_CURRENCY = 'EUR';
 
 /* ===== Header CTA exposed to layout ===== */
@@ -125,9 +130,6 @@ function buildPriceListItems(modelSlug) {
         priceFrom,
         priceTo,
         popular: false,
-        // If base.slug already includes full path, this stays fine.
-        // Price list rows are usually non-clickable; if PriceList uses href,
-        // this is still here, but Services section below is non-clickable.
         href: base.slug ? `/${base.slug}` : base.href,
       };
     })
@@ -142,9 +144,7 @@ function buildPriceListItems(modelSlug) {
   return { items: merged, currency: DEFAULT_CURRENCY };
 }
 
-// Popular services grid for this model
-// NOTE: to match the brand page behavior, these cards are intentionally
-// NON-CLICKABLE, so we do NOT include `href` here.
+// Popular services grid for this model (non-clickable)
 function buildModelServices() {
   return [
     {
@@ -175,10 +175,35 @@ function buildModelServices() {
   ];
 }
 
+// Shared process steps for tablets
+const PROCESS_STEPS = [
+  {
+    title: 'Diagnostika',
+    text: 'Ātri pārbaudām planšetdatoru un apstiprinām problēmu (ekrāns, baterija, uzlāde, skaņa u.c.).',
+  },
+  {
+    title: 'Cena un termiņš',
+    text: 'Pirms remonta sākšanas saskaņojam izmaksas un izpildes laiku.',
+  },
+  {
+    title: 'Remonts',
+    text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
+  },
+  {
+    title: 'Pārbaude',
+    text: 'Pēc remonta testējam ekrānu, skārienu, uzlādi, skaņu un citas funkcijas.',
+  },
+  {
+    title: 'Garantija',
+    text: '90 dienu garantija uz detaļu un darbu, plus ieteikumi turpmākai lietošanai.',
+  },
+];
+
 /* ===== Metadata ===== */
 export async function generateMetadata({ params }) {
-  const { device } = params; // no await
+  const { brand, device } = params;
   const slug = decodeURIComponent(device);
+  const brandSlug = decodeURIComponent(brand);
   const d = getTabletDeviceBySlug(slug);
 
   const title = d
@@ -189,19 +214,22 @@ export async function generateMetadata({ params }) {
     d?.metaDescription ||
     'Planšetdatoru remonts: displejs, baterija, uzlāde, kamera. Bezmaksas diagnostika un 90 dienu garantija.';
 
+  const canonicalPath = `/plansetdatoru-remonts/${brandSlug}/${slug}`;
+
   return {
     title,
     description,
     alternates: {
-      canonical: `/plansetdatoru-remonts/${slug}`,
+      canonical: canonicalPath,
     },
   };
 }
 
 /* ===== Page ===== */
 export default async function Page({ params }) {
-  const { device } = params; // no await
+  const { brand, device } = params;
   const slug = decodeURIComponent(device);
+  const brandSlug = decodeURIComponent(brand);
   const d = getTabletDeviceBySlug(slug);
   if (!d) return notFound();
 
@@ -219,31 +247,29 @@ export default async function Page({ params }) {
     ? getFaqLd(FAQ_CONTEXT.PHONE)
     : getFaqLd(FAQ_CONTEXT.HOME);
 
+  const provider = buildProvidersFromLocations();
+  const brandLabel = d.brandName || d.brandSlug?.toUpperCase() || brandSlug;
+  const modelPath = `/plansetdatoru-remonts/${brandSlug}/${d.slug}`;
+
   // JSON-LD: breadcrumbs
-  const breadcrumbsLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Sākums',
-        item: `${ORIGIN}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Planšetdatoru remonts',
-        item: `${ORIGIN}/plansetdatoru-remonts/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: `${d.name} remonts`,
-        item: `${ORIGIN}/plansetdatoru-remonts/${d.slug}/`,
-      },
-    ],
-  };
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    {
+      name: 'Sākums',
+      url: abs('/'),
+    },
+    {
+      name: 'Planšetdatoru remonts',
+      url: abs('/plansetdatoru-remonts'),
+    },
+    {
+      name: `${brandLabel} planšetdatoru remonts`,
+      url: abs(`/plansetdatoru-remonts/${brandSlug}`),
+    },
+    {
+      name: `${d.name} remonts`,
+      url: abs(modelPath),
+    },
+  ]);
 
   // JSON-LD: offers & service
   const offers = priceItems.map((it) => {
@@ -261,12 +287,12 @@ export default async function Page({ params }) {
             priceCurrency: currency,
           }
         : {}),
-      url: `${ORIGIN}/plansetdatoru-remonts/${slug}#cenas`,
+      url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
         name: `${d.name} — ${it.title}`,
         serviceType: it.title,
-        provider: { '@id': `${ORIGIN}#organization` },
+        provider,
       },
       availability: 'https://schema.org/InStock',
     };
@@ -275,13 +301,49 @@ export default async function Page({ params }) {
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `${ORIGIN}/plansetdatoru-remonts/${slug}#service`,
+    '@id': `${ORIGIN}${modelPath}#service`,
     serviceType: `${d.name} remonts`,
     name: `${d.name} remonts`,
-    url: `${ORIGIN}/plansetdatoru-remonts/${d.slug}/`,
-    areaServed: { '@type': 'Country', name: 'Latvia' },
-    provider: { '@id': `${ORIGIN}#organization` },
+    url: abs(modelPath),
+    areaServed: { '@type': 'City', name: 'Rīga' },
+    provider,
     ...(offers.length ? { offers } : {}),
+  };
+
+  const processHowToLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `${ORIGIN}${modelPath}#howto`,
+    name: `${d.name} remonta process iLab`,
+    description:
+      'Kā soli pa solim notiek planšetdatora diagnostika, remonts un testēšana iLab servisā Rīgā.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: '1. Diagnostika',
+        text: 'Ātri pārbaudām planšetdatoru, apstiprinām problēmu (displejs, baterija, uzlāde, skaņa u.c.) un izvērtējam bojājuma apmēru.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '2. Cena un termiņš',
+        text: 'Pirms remonta sākšanas saskaņojam izmaksas, detaļu veidu (oriģināls vai OEM) un izpildes termiņu.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '3. Remonts',
+        text: 'Sertificēti meistari veic ekrāna, baterijas, uzlādes ligzdas, kameras vai citu komponentu remontu, izmantojot kvalitatīvas detaļas.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '4. Pārbaude',
+        text: 'Pēc remonta testējam ekrānu, skārienu, skaņu, uzlādi, tīklu un citas ikdienai svarīgas funkcijas, lai pārliecinātos par stabilu darbību.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: '5. Garantija un izsniegšana',
+        text: 'Izsniedzam planšetdatoru ar 90 dienu garantiju uz detaļu un darbu, sniedzam ieteikumus turpmākai lietošanai.',
+      },
+    ],
   };
 
   return (
@@ -308,6 +370,13 @@ export default async function Page({ params }) {
       >
         {JSON.stringify(FAQ_LD)}
       </Script>
+      <Script
+        id="process-jsonld-tablet"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(processHowToLd)}
+      </Script>
 
       {/* HERO */}
       <DeviceHero
@@ -316,11 +385,13 @@ export default async function Page({ params }) {
         bodyHtml={d.bodyHtml || null}
       />
 
-      {/* Popular services for this model – non-clickable, same behavior as brand page */}
+      {/* Popular services for this model – non-clickable */}
       <Services
         id="tablet-services"
         title={`Populārākie ${d?.name ?? 'šī modeļa'} remonti`}
         items={modelServices}
+        headingLevel={2}
+        variant="list"
       />
 
       {/* Pricing */}
@@ -336,11 +407,22 @@ export default async function Page({ params }) {
 
       <Why />
 
+      {/* Process */}
+      <Process
+        id="process"
+        title="Kā notiek remonts"
+        steps={PROCESS_STEPS}
+        headingLevel={2}
+        variant="cards"
+      />
+
       {/* FAQ */}
       <Faq
         id="tablet-model-faq"
         title="Biežāk uzdotie jautājumi"
         items={FINAL_FAQ_ITEMS}
+        headingLevel={2}
+        variant="accordion"
       />
 
       <ConvertBand />

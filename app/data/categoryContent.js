@@ -42,10 +42,10 @@ Ja telefons strauji sakarst vai akumulators izlādējas neparasti ātri, iemesls
 Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai noteiktā leņķī, bieži vainīgs ir uzlādes ports vai kontakta korozija. Šādā gadījumā palīdz <a href="/iphone-remonts/uzlades-ligzda">uzlādes ligzdas remonts</a> vai tīrīšana, dažreiz arī baterijas nomaiņa.</p>
 
 <p><strong>Ūdens vai mitruma bojājumi</strong><br>
-Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpusē jau sākusies oksidācija. Jo ātrāk ierīce nonāk servisā, jo lielāka iespēja to atjaunot. Veicam <a href="/iphone-remonts/udens-bojajumi">mitruma bojājumu diagnostiku un tīrīšanu</a>, aizstājot bojātās detaļas, ja nepieciešams.</p>
+Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpusē jau sākusies oksidācija. Jo ātrāk ierīce nonāk servisā, jo lielāka iespēja to atjaunot. Veicam <a href="/iphone-remonts/udens-bojajumu-remonts">mitruma bojājumu diagnostiku un tīrīšanu</a>, aizstājot bojātās detaļas, ja nepieciešams.</p>
 
 <p><strong>Ekrāna vai skāriena problēmas</strong><br>
-Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
+Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
 
 <p><strong>Kameras vai skaņas kļūmes</strong><br>
 Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas meistars piedāvās <a href="/iphone-remonts/kamera">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofons">skaļruņu un mikrofona</a> remontu.</p>
@@ -57,7 +57,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
           {
             title: 'Cik tas ilgst un ko sagaidīt',
             text: `
-<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/displeja-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
+<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
 
 <p>Ja bojājums ir sarežģītāks (piemēram, ūdens bojājums vai mātesplates defekts), serviss informē par nepieciešamo laiku un detaļu pieejamību. Cenu un termiņu vienmēr saskaņojam pirms darba uzsākšanas, tāpēc klients zina, ko sagaidīt.</p>
 
@@ -89,7 +89,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 
 <p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/servisa-centri">Servisa centri</a>.</p>
 
-<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/displeja-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumi">ūdens bojājumu diagnostika</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
+<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostika</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
       `,
           },
         ],

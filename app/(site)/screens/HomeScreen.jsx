@@ -60,6 +60,9 @@ export default function HomeScreen() {
 
       {/* <Devices /> */}
 
+      <div id="reviews" />
+      <Reviews />
+
       <Process />
 
 
@@ -67,9 +70,6 @@ export default function HomeScreen() {
 
       <Locations openPanelOnPin />
 
-
-      <div id="reviews" />
-      <Reviews />
 
       <Faq
         id="home-faq"
