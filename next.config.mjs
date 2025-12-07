@@ -246,6 +246,69 @@ return [
   { source: '/samsung-galaxy-s10e-remonts-3/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
   { source: '/samsung-galaxy-s23-fe-remonts-copy/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
   { source: '/samsung-galaxy-note-10-remonts-3/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
+
+  // ADD these after your existing redirects
+{ source: '/paldies/:path*', destination: '/pieraksties', permanent: true },
+{ source: '/products/:path*', destination: '/', permanent: true },
+{ source: '/nosutit-telefonu/:path*', destination: '/kontakti', permanent: true },
+
+// MacBook model pages → MacBook hub
+{ source: '/macbook-air-remonts-a1466/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-air-remonts-a1932/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-air-remonts-a2179/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-air-remonts-a2337/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a1502/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a1707/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a1708/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a1989/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2141/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2159/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2251/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2289/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2338/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2442/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a2485/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-retina-remonts-a1534/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/macbook-pro-remonts-a1706/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+
+// Old iPad models & hubs
+{ source: '/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
+
+{ source: '/apple-ipad-air-5-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-10-5-3rd-gen-2019', permanent: true },
+{ source: '/apple-ipad-mini-2-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
+{ source: '/apple-ipad-mini-3-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-13-m4-2024', permanent: true },
+{ source: '/apple-ipad-mini-1-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
+{ source: '/apple-ipad-mini-6-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-6th-gen-2021', permanent: true },
+{ source: '/apple-ipad-air-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-1st-gen-2013', permanent: true },
+
+{ source: '/apple-ipad-5-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-10-5-2017', permanent: true },
+{ source: '/apple-ipad-6-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-9-7-2016', permanent: true },
+{ source: '/apple-ipad-7-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-9-7-2016', permanent: true },
+{ source: '/apple-ipad-8-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-11-2018', permanent: true },
+{ source: '/apple-ipad-9-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-9-7-2016', permanent: true },
+
+// You already have /apple-ipad-pro-*/ and /apple-ipad-air-2-remonts-2/
+// but these two were missing:
+{ source: '/apple-ipad-air-3-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-1st-gen-2013', permanent: true },
+{ source: '/apple-ipad-air-4-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-2nd-gen-2014', permanent: true },
+
+{ source: '/apple-ipad-mini-5-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
+{ source: '/apple-ipad-mini-4-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
+
+// Laptop brand hubs (very important)
+{ source: '/acer-datoru-remonts/:path*', destination: '/datoru-remonts/acer', permanent: true },
+{ source: '/asus-datoru-remonts/:path*', destination: '/datoru-remonts/asus', permanent: true },
+{ source: '/dell-datoru-remonts/:path*', destination: '/datoru-remonts/dell', permanent: true },
+{ source: '/hp-datoru-remonts/:path*', destination: '/datoru-remonts/hp', permanent: true },
+{ source: '/lenovo-datoru-remonts/:path*', destination: '/datoru-remonts/lenovo', permanent: true },
+{ source: '/samsung-datoru-remonts/:path*', destination: '/datoru-remonts/samsung', permanent: true },
+
+// Phone brand hubs (some you already have; these two were missing)
+{ source: '/xiaomi-telefonu-remonts/:path*', destination: '/telefonu-remonts/xiaomi', permanent: true },
+{ source: '/samsung-telefonu-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
+
+
+
 ];
 
   },
