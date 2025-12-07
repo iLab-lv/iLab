@@ -133,6 +133,7 @@ export default function sitemap() {
       priority = 0.5;
     }
 
+    
     return {
       url: `${ORIGIN}${path}`,
       lastModified,
