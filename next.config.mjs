@@ -8,8 +8,7 @@ const nextConfig = {
   async redirects() {
     // inside redirects()
 return [
-  { source: '/par-mums/:path*', destination: '/par-mums', permanent: true },
-  { source: '/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
+
 
   { source: '/samsung-galaxy-note-7-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
   { source: '/samsung-galaxy-tab-s5e-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
