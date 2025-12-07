@@ -47,7 +47,15 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const brands = listBrandsForCategory(BRAND_CATEGORY.PHONES) || [];
-  return brands.map((b) => ({ brand: String(b.slug).toLowerCase() }));
+
+  // Exclude Apple because it has its own dedicated hub at /iphone-remonts.
+  // We still keep Apple in brandContent/brand lists, but we don't generate
+  // a separate brand page under /telefonu-remonts/apple.
+  const filtered = brands.filter(
+    (b) => String(b.slug).toLowerCase() !== 'apple'
+  );
+
+  return filtered.map((b) => ({ brand: String(b.slug).toLowerCase() }));
 }
 
 // ---------- Helpers ----------
@@ -71,7 +79,8 @@ function getPhoneBrandConfig(brandSlug) {
 
   return {
     brandKey: brand?.brandSlug || brandSlug,
-    heroImage: brand?.heroImage || '/brand/images/categories/telefonu_remonts.webp',
+    heroImage:
+      brand?.heroImage || '/brand/images/categories/telefonu_remonts.webp',
     logo: brand?.logo || null,
     tint: brand?.tint || 'rgba(0,200,180,0.20)',
     heroAlt: brand?.heroAlt || 'Telefonu remonts',
@@ -262,18 +271,20 @@ export default function BrandPhonesPage({ params }) {
             {bc.marketingName} telefonu remonts — ko mēs darām
           </h2>
           <p className={c.intro}>
-            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas
-            atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas{' '}
-            <strong>remonta cenas</strong> un termiņus.
+            Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi.
+            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu
+            konkrētas <strong>remonta cenas</strong> un termiņus.
           </p>
           <p className={c.paragraph}>
-            Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi,
-            nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde,
-            izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis,
-            lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli,
-            fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa,
-            krakšķi), kā arī <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts
-            sadaļā <Link href="#process-h2">“Kā notiek remonts”</Link>.
+            Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši
+            plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong>{' '}
+            (strauja izlāde, izslēdzas pie 10–20%),{' '}
+            <strong>uzlādes ligzda</strong> (nenoturas kabelis,
+            lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini
+            attēli, fokusēšanās kļūdas),{' '}
+            <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī{' '}
+            <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts sadaļā{' '}
+            <Link href="#process-h2">“Kā notiek remonts”</Link>.
           </p>
         </div>
       </section>
@@ -301,7 +312,8 @@ export default function BrandPhonesPage({ params }) {
           </h2>
           <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
           <p className={c.paragraph} style={{ marginTop: 0 }}>
-            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.
+            Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu
+            remonta cenas.
           </p>
 
           <SeriesGrid

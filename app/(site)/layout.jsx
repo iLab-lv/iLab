@@ -11,6 +11,9 @@ import l from './Layout.module.scss';
 // Derive origin from config, with a safe fallback
 const ORIGIN = COMPANY?.url || 'https://www.ilab.lv';
 
+// GA4 measurement ID (ilab-v2 property)
+const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
+
 // Map your internal day codes to Schema.org day names
 const DAY_MAP = {
   P: 'Monday',
@@ -103,6 +106,22 @@ export default function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
+      {/* GA4 global tag */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="ga4-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}', {
+            page_path: window.location.pathname,
+          });
+        `}
+      </Script>
+
       {/* Site-wide JSON-LD: Organization */}
       <Script id="org-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(orgLd)}

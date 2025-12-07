@@ -48,6 +48,9 @@ function buildBrandHubPages() {
     if (!category || !brandSlug) continue;
     if (!BRAND_HUB_CATEGORIES.includes(category)) continue;
 
+    // Skip Apple as a phone brand: iPhone has its own hub at /iphone-remonts
+    if (category === 'telefonu-remonts' && brandSlug === 'apple') continue;
+
     // /telefonu-remonts/samsung
     // /plansetdatoru-remonts/ipad
     // /datoru-remonts/asus
