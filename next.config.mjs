@@ -302,13 +302,13 @@ const nextConfig = {
       { source: '/:lang(ru)?/dell-datoru-remonts/:path*', destination: '/datoru-remonts/dell', permanent: true },
       { source: '/:lang(ru)?/hp-datoru-remonts/:path*', destination: '/datoru-remonts/hp', permanent: true },
       { source: '/:lang(ru)?/lenovo-datoru-remonts/:path*', destination: '/datoru-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/samsung-datoru-remonts/:path*', destination: '/datoru-remonts/samsung', permanent: true },
+      { source: '/:lang(ru)?/samsung-datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
 
       // Phone brand hubs (some you already have; these two were missing)
       { source: '/:lang(ru)?/xiaomi-telefonu-remonts/:path*', destination: '/telefonu-remonts/xiaomi', permanent: true },
       { source: '/:lang(ru)?/samsung-telefonu-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
-            // Old "apple-iphone-*" slugs → new iPhone model pages
+      // Old "apple-iphone-*" slugs → new iPhone model pages
       { source: '/:lang(ru)?/apple-iphone-5s-remonts/:path*', destination: '/iphone-remonts/iphone-5s', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-6-plus-remonts/:path*', destination: '/iphone-remonts/iphone-6-plus', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-6s-remonts/:path*', destination: '/iphone-remonts/iphone-6s', permanent: true },
@@ -355,7 +355,7 @@ const nextConfig = {
       { source: '/:lang(ru)?/apple-iphone-16pro-remonts/:path*', destination: '/iphone-remonts', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-16-promax-remonts/:path*', destination: '/iphone-remonts', permanent: true },
 
-            // Extra Sony Xperia models → Sony phone hub
+      // Extra Sony Xperia models → Sony phone hub
       { source: '/:lang(ru)?/sony-xperia-e5-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-l1-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-l2-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
@@ -363,10 +363,86 @@ const nextConfig = {
       { source: '/:lang(ru)?/sony-xperia-xz-premium-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-xzs-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
 
-            // Old brand hubs → new phone brand categories
+      // Old brand hubs → new phone brand categories
       { source: '/:lang(ru)?/huawei-telefonu-remonts/:path*', destination: '/telefonu-remonts/huawei', permanent: true },
       { source: '/:lang(ru)?/oneplus-telefonu-remonts/:path*', destination: '/telefonu-remonts/oneplus', permanent: true },
       { source: '/:lang(ru)?/sony-telefonu-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
+
+      // Samsung A-series (non-Galaxy slugs)
+      { source: '/:lang(ru)?/samsung-a04s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a04s', permanent: true },
+      { source: '/:lang(ru)?/samsung-a05s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a05s', permanent: true },
+      { source: '/:lang(ru)?/samsung-a06s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a06', permanent: true },
+      { source: '/:lang(ru)?/samsung-a14-4g-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a14-4g', permanent: true },
+      { source: '/:lang(ru)?/samsung-a15-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a15-5g', permanent: true },
+      { source: '/:lang(ru)?/samsung-a24-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a24-4g', permanent: true },
+      { source: '/:lang(ru)?/samsung-a25-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a25-5g', permanent: true },
+      { source: '/:lang(ru)?/samsung-a34-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a34', permanent: true },
+      { source: '/:lang(ru)?/samsung-a35-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a35', permanent: true },
+      { source: '/:lang(ru)?/samsung-a54-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a54', permanent: true },
+      { source: '/:lang(ru)?/samsung-a55-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a55', permanent: true },
+
+      // Samsung Galaxy A-series (old “samsung-galaxy-*” URLs)
+      { source: '/:lang(ru)?/samsung-galaxy-a02s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a02', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a03s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a03', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a12-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a12', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a20e-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a20e', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a22-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a22-4g', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a31-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no A31 page in sitemap
+      { source: '/:lang(ru)?/samsung-galaxy-a32-5g-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a32-5g', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a32-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a32-4g', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a41-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a41', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a51-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a51', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a52-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a52', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a52s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a52s', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a53-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a53-5g', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a6-2018-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no A6 page
+      { source: '/:lang(ru)?/samsung-galaxy-a6s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },     // no A6s page
+      { source: '/:lang(ru)?/samsung-galaxy-a71-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a71', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a72-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a72', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a80-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },      // no A80 page
+      { source: '/:lang(ru)?/samsung-galaxy-a8s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },      // no A8s page
+
+      // Note series
+      { source: '/:lang(ru)?/samsung-galaxy-note-10-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-note10-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-note-20-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-note20', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-note-20-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-note20-ultra', permanent: true },
+
+      // S-series
+      { source: '/:lang(ru)?/samsung-galaxy-s10e-remonts-2/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no S10e page
+      { source: '/:lang(ru)?/samsung-galaxy-s20-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s20-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s20-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20-ultra', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s21-fe-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s21-fe', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s21-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s21-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s21-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s21', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s21-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s21-ultra', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s22-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s22-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s22-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s22', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s22-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s22-ultra', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s23-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s23-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s23-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s23', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s23-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s23-ultra', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s24-fe-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s24-fe', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s24-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s24-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s24-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s24', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s24-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s24-ultra', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s25-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s25-plus', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s25-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s25', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-s25-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s25-ultra', permanent: true },
+
+      // Z Flip
+      { source: '/:lang(ru)?/samsung-galaxy-zflip-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-flip', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-flip-3-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-flip3', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-flip-4-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-flip4', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-flip-5-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-flip5', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-flip-6-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-flip6', permanent: true },
+
+      // Z Fold
+      { source: '/:lang(ru)?/samsung-z-fold-3-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold3', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-fold-4-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold4', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-fold-5-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold5', permanent: true },
+      { source: '/:lang(ru)?/samsung-z-fold-6-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold6', permanent: true },
+
 
 
 
