@@ -8,7 +8,7 @@ const nextConfig = {
   async redirects() {
     // inside redirects()
     return [
-      https://www.ilab.lv/ru/
+
       { source: '/:lang(ru)', destination: '/', permanent: true },
       { source: '/:lang(ru)/', destination: '/', permanent: true },
 
