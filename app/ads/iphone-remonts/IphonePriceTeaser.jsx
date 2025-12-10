@@ -148,9 +148,7 @@ export default function IphonePriceTeaser() {
                   )}
                 </div>
 
-                <p className={s.note}>
-                  Cenā iekļauta detaļa un darbs. Precīzu apstiprinām pirms remonta.
-                </p>
+
               </article>
             );
           })}
