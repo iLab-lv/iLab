@@ -14,21 +14,30 @@ export const FAQ_CONTEXT = {
   TABLET: 'plansetdatoru-remonts',
   LAPTOP: 'datoru-remonts',
   DYSON: 'dyson-remonts',
+  IPHONE_ADS: 'iphone-remonts-ads', // NEW: iPhone ads landing page
 };
 
 // ---- Master question pool ----
 // `weight` controls ordering (lower first).
-// Optional `variants[contextKey]` lets us override text per context (used for iPhone).
+// Optional `variants[contextKey]` lets us override text per context (used for iPhone / iPhone Ads).
 const QUESTIONS = [
   // ===== Generic, used across many contexts (with iPhone variants) =====
   {
     id: 'speed',
     q: 'Cik ātri varat salabot ierīci?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP, FAQ_CONTEXT.DYSON],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.DYSON,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
+    ],
     aHtml: (
       <>
-        Biežākos remontus paveicam tajā pašā dienā (atkarīgs no modeļa un detaļu pieejamības).
-        Pārlūko kategorijas:{' '}
+        Biežākos remontus paveicam tajā pašā dienā (atkarīgs no modeļa un detaļu
+        pieejamības). Pārlūko kategorijas:{' '}
         <Link href="/iphone-remonts">iPhone remonts</Link>,{' '}
         <Link href="/telefonu-remonts">telefonu remonts</Link>,{' '}
         <Link href="/plansetdatoru-remonts">planšetdatoru remonts</Link>,{' '}
@@ -36,19 +45,36 @@ const QUESTIONS = [
         <Link href="/dyson-remonts">Dyson remonts</Link>.
       </>
     ),
-    aText: 'Biežākos remontus paveicam tajā pašā dienā, atkarībā no modeļa un detaļu pieejamības.',
+    aText:
+      'Biežākos remontus paveicam tajā pašā dienā, atkarībā no modeļa un detaļu pieejamības.',
     variants: {
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
           <>
-            Daudzas <strong>iPhone</strong> procedūras izdarām <strong>tajā pašā dienā</strong>, piemēram:{' '}
+            Daudzas <strong>iPhone</strong> procedūras izdarām{' '}
+            <strong>tajā pašā dienā</strong>, piemēram:{' '}
             <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link>,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
-            <Link href="/iphone-remonts/uzlades-ligzdas-maina">uzlādes ligzdas maiņa</Link>. Termiņš atkarīgs no modeļa un detaļām.
+            <Link href="/iphone-remonts/uzlades-ligzdas-maina">
+              uzlādes ligzdas maiņa
+            </Link>
+            . Termiņš atkarīgs no modeļa un detaļām.
           </>
         ),
         aText:
           'Daudzas iPhone procedūras paveicam tajā pašā dienā (ekrāna, baterijas, uzlādes ligzdas maiņa), atkarīgs no modeļa un detaļu pieejamības.',
+      },
+      // Shorter, ad-optimised variant
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            <strong>iPhone ekrāna</strong> un <strong>baterijas maiņa</strong> bieži ir
+            gatava tajā pašā dienā. Precīzu termiņu pateiksim pēc īsas diagnostikas uz
+            vietas.
+          </>
+        ),
+        aText:
+          'Daudzus iPhone remontus (ekrāna un baterijas maiņa) paveicam tajā pašā dienā; precīzu termiņu nosakām pēc diagnostikas.',
       },
     },
     weight: 10,
@@ -56,16 +82,25 @@ const QUESTIONS = [
   {
     id: 'price',
     q: 'Kāda ir remonta cena?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP, FAQ_CONTEXT.DYSON],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.DYSON,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
+    ],
     aHtml: (
       <>
         Cena atkarīga no modeļa un bojājuma. Skati cenas attiecīgajā kategorijā — piemēram,{' '}
         <Link href="/iphone-remonts">iPhone remonts</Link> vai{' '}
-        <Link href="/telefonu-remonts">telefonu remonts</Link>. Pirms darba uzsākšanas vienmēr
-        saskaņojam izmaksas un termiņu.
+        <Link href="/telefonu-remonts">telefonu remonts</Link>. Pirms darba uzsākšanas
+        vienmēr saskaņojam izmaksas un termiņu.
       </>
     ),
-    aText: 'Cena atkarīga no modeļa un bojājuma; pirms darba vienmēr saskaņojam izmaksas un termiņu.',
+    aText:
+      'Cena atkarīga no modeļa un bojājuma; pirms darba vienmēr saskaņojam izmaksas un termiņu.',
     variants: {
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
@@ -74,13 +109,33 @@ const QUESTIONS = [
             <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link>,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
             <Link href="/iphone-remonts/kameras-remonts">kameras remonts</Link>,{' '}
-            <Link href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu/mikrofona remonts</Link>,{' '}
-            <Link href="/iphone-remonts/uzlades-ligzdas-maina">uzlādes ligzdas maiņa</Link>,{' '}
-            <Link href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu remonts</Link>.
+            <Link href="/iphone-remonts/skalruni-mikrofona-remonts">
+              skaļruņu/mikrofona remonts
+            </Link>
+            ,{' '}
+            <Link href="/iphone-remonts/uzlades-ligzdas-maina">
+              uzlādes ligzdas maiņa
+            </Link>
+            ,{' '}
+            <Link href="/iphone-remonts/udens-bojajumu-remonts">
+              ūdens bojājumu remonts
+            </Link>
+            .
           </>
         ),
         aText:
           'iPhone cenas skatāmas pie konkrētā pakalpojuma: displeja, baterijas, kameras, skaļruņu/mikrofona, uzlādes ligzdas un ūdens bojājumu remonts.',
+      },
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            Cena atkarīga no <strong>iPhone modeļa</strong> un bojājuma. Aptuveno cenu
+            pateiksim uz vietas vai pa tālruni, pirms darba vienmēr saskaņojam izmaksas un
+            termiņu.
+          </>
+        ),
+        aText:
+          'iPhone remonta cena atkarīga no modeļa un bojājuma; aptuveno cenu nosakām pēc diagnostikas un pirms darba vienmēr saskaņojam izmaksas.',
       },
     },
     weight: 20,
@@ -88,11 +143,20 @@ const QUESTIONS = [
   {
     id: 'warranty',
     q: 'Vai ir garantija uz remontu un detaļām?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP, FAQ_CONTEXT.DYSON],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.DYSON,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
+    ],
     aHtml: (
       <>
-        Jā — visiem remontiem nodrošinām <strong>90 dienu garantiju</strong>. Izmantojam oriģinālas
-        vai augstas kvalitātes OEM detaļas (vienojamies ar klientu pirms darba).
+        Jā — visiem remontiem nodrošinām <strong>90 dienu garantiju</strong>. Izmantojam
+        oriģinālas vai augstas kvalitātes OEM detaļas (vienojamies ar klientu pirms
+        darba).
       </>
     ),
     aText:
@@ -101,7 +165,20 @@ const QUESTIONS = [
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
           <>
-            <strong>iPhone remontiem</strong> — <strong>90 dienu garantija</strong> gan darbam, gan detaļām. Pēc vienošanās izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.
+            <strong>iPhone remontiem</strong> — <strong>90 dienu garantija</strong> gan
+            darbam, gan detaļām. Pēc vienošanās izmantojam oriģinālās vai augstas
+            kvalitātes OEM komponentes.
+          </>
+        ),
+        aText:
+          'iPhone remontiem ir 90 dienu garantija darbam un detaļām; izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.',
+      },
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            <strong>iPhone remontam</strong> piešķiram{' '}
+            <strong>90 dienu garantiju</strong> gan darbam, gan detaļām. Izmantojam
+            oriģinālās vai augstas kvalitātes OEM komponentes.
           </>
         ),
         aText:
@@ -113,12 +190,20 @@ const QUESTIONS = [
   {
     id: 'walkin',
     q: 'Vai nepieciešams pieraksts, vai var atnest uzreiz?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP, FAQ_CONTEXT.DYSON],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.DYSON,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
+    ],
     aHtml: (
       <>
-        Vari droši atnest uz vietas — <strong>bez pieraksta</strong>. Ja vēlies, vari arī pieteikt
-        laiku vai uzdot jautājumu pa tālruni: kontakti un darba laiks ir sadaļā{' '}
-        <Link href="/kontakti">Kontakti</Link>.
+        Vari droši atnest uz vietas — <strong>bez pieraksta</strong>. Ja vēlies, vari
+        arī pieteikt laiku vai uzdot jautājumu pa tālruni: kontakti un darba laiks ir
+        sadaļā <Link href="/kontakti">Kontakti</Link>.
       </>
     ),
     aText:
@@ -128,11 +213,19 @@ const QUESTIONS = [
   {
     id: 'locations',
     q: 'Kur jūs atrodaties?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP, FAQ_CONTEXT.DYSON],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.DYSON,
+    ],
     aHtml: (
       <>
-        Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Adreses,
-        tālruņi un darba laiki: <Link href="/kontakti">Kontakti</Link>.
+        Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+        Adreses, tālruņi un darba laiki:{' '}
+        <Link href="/kontakti">Kontakti</Link>.
       </>
     ),
     aText:
@@ -142,13 +235,21 @@ const QUESTIONS = [
   {
     id: 'data-safety',
     q: 'Vai dati paliks droši remonta laikā?',
-    scopes: [FAQ_CONTEXT.HOME, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.PHONE, FAQ_CONTEXT.TABLET, FAQ_CONTEXT.LAPTOP],
+    scopes: [
+      FAQ_CONTEXT.HOME,
+      FAQ_CONTEXT.IPHONE,
+      FAQ_CONTEXT.PHONE,
+      FAQ_CONTEXT.TABLET,
+      FAQ_CONTEXT.LAPTOP,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
+    ],
     aHtml: (
       <>
-        Jā — strādājam uzmanīgi, bet pirms remonta iesakām izveidot <em>rezerves kopiju</em> (backup).
-        Biežākajās situācijās (piem.,{' '}
+        Jā — strādājam uzmanīgi, bet pirms remonta iesakām izveidot{' '}
+        <em>rezerves kopiju</em> (backup). Biežākajās situācijās (piem.,{' '}
         <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> vai{' '}
-        <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>) dati parasti netiek skarti.
+        <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>) dati parasti
+        netiek skarti.
       </>
     ),
     aText:
@@ -159,11 +260,24 @@ const QUESTIONS = [
           <>
             <strong>iPhone</strong> datu integritāte ir prioritāte. Tipiskos darbos —{' '}
             <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> un{' '}
-            <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link> — lietotāja dati parasti netiek skarti, tomēr rekomendējam <em>backup</em>.
+            <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link> —
+            lietotāja dati parasti netiek skarti, tomēr rekomendējam <em>backup</em>.
           </>
         ),
         aText:
           'iPhone ekrāna un baterijas maiņa parasti neietekmē datus; tomēr iesakām izveidot rezerves kopiju.',
+      },
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            Ikdienas darbos — piemēram,{' '}
+            <strong>iPhone ekrāna</strong> vai <strong>baterijas maiņā</strong> — dati
+            parasti netiek skarti, tomēr drošībai iesakām pirms remonta izveidot
+            <em> rezerves kopiju</em>.
+          </>
+        ),
+        aText:
+          'iPhone ekrāna un baterijas maiņa parasti neietekmē datus, tomēr drošībai pirms remonta iesakām izveidot datu rezerves kopiju.',
       },
     },
     weight: 60,
@@ -176,9 +290,10 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.HOME],
     aHtml: (
       <>
-        Jā — droši <Link href="/kontakti">sazinies ar mums</Link>. Papildus populārākajām
-        kategorijām varam palīdzēt arī ar <strong>skeneriem/skaļruņiem</strong>,{' '}
-        <strong>fotoaparātiem</strong> un citiem portatīvajiem gadžetiem (pēc pieprasījuma).
+        Jā — droši <Link href="/kontakti">sazinies ar mums</Link>. Papildus
+        populārākajām kategorijām varam palīdzēt arī ar{' '}
+        <strong>skeneriem/skaļruņiem</strong>, <strong>fotoaparātiem</strong> un citiem
+        portatīvajiem gadžetiem (pēc pieprasījuma).
       </>
     ),
     aText:
@@ -186,15 +301,16 @@ const QUESTIONS = [
     weight: 65,
   },
 
-  // ===== Phone-specific (with iPhone variant) =====
+  // ===== Phone-specific (with iPhone variants) =====
   {
     id: 'phone-what-we-fix',
     q: 'Ko tieši remontējat telefonos?',
-    scopes: [FAQ_CONTEXT.PHONE, FAQ_CONTEXT.IPHONE],
+    scopes: [FAQ_CONTEXT.PHONE, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.IPHONE_ADS],
     aHtml: (
       <>
-        Displejus, baterijas, uzlādes ligzdas, kameras, skaļruņus/mikrofonus, ūdens bojājumus u.c.
-        Skati <Link href="/telefonu-remonts">telefonu remonts</Link>.
+        Displejus, baterijas, uzlādes ligzdas, kameras, skaļruņus/mikrofonus, ūdens
+        bojājumus u.c. Skati{' '}
+        <Link href="/telefonu-remonts">telefonu remonts</Link>.
       </>
     ),
     aText:
@@ -204,16 +320,39 @@ const QUESTIONS = [
         aHtml: (
           <>
             <strong>iPhone remonts</strong>:{' '}
-            <Link href="/iphone-remonts/ekrana-maina">displeja (ekrāna) maiņa</Link>,{' '}
+            <Link href="/iphone-remonts/ekrana-maina">
+              displeja (ekrāna) maiņa
+            </Link>
+            ,{' '}
             <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>,{' '}
             <Link href="/iphone-remonts/kameras-remonts">kameras remonts</Link>,{' '}
-            <Link href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu/mikrofona remonts</Link>,{' '}
-            <Link href="/iphone-remonts/uzlades-ligzdas-maina">uzlādes ligzdas maiņa</Link>,{' '}
-            <Link href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu remonts</Link>.
+            <Link href="/iphone-remonts/skalruni-mikrofona-remonts">
+              skaļruņu/mikrofona remonts
+            </Link>
+            ,{' '}
+            <Link href="/iphone-remonts/uzlades-ligzdas-maina">
+              uzlādes ligzdas maiņa
+            </Link>
+            ,{' '}
+            <Link href="/iphone-remonts/udens-bojajumu-remonts">
+              ūdens bojājumu remonts
+            </Link>
+            .
           </>
         ),
         aText:
           'iPhone remonts: displeja, baterijas, kameras, skaļruņu/mikrofona, uzlādes ligzdas un ūdens bojājumu remonts.',
+      },
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            <strong>iPhone remonts</strong>: displeja (ekrāna) un baterijas maiņa,
+            uzlādes ligzdas remonts, kameras, skaļruņu un mikrofona problēmu novēršana,
+            kā arī ūdens bojājumi.
+          </>
+        ),
+        aText:
+          'iPhone remonts ietver displeja, baterijas, uzlādes ligzdas, kameras, skaļruņu/mikrofona un ūdens bojājumu remontu.',
       },
     },
     weight: 70,
@@ -226,8 +365,9 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.IPHONE],
     aHtml: (
       <>
-        Jā — izmantojam oriģinālās vai augstas kvalitātes OEM detaļas (vienojamies pirms darba).
-        Skati: <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link> un{' '}
+        Jā — izmantojam oriģinālās vai augstas kvalitātes OEM detaļas (vienojamies pirms
+        darba). Skati:{' '}
+        <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link> un{' '}
         <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>.
       </>
     ),
@@ -243,8 +383,9 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.TABLET],
     aHtml: (
       <>
-        Ekrānus/stiklu, baterijas, uzlādes ligzdas, kameras, skaņu, programmatūras kļūmes u.c.
-        Skati <Link href="/plansetdatoru-remonts">planšetdatoru remonts</Link>.
+        Ekrānus/stiklu, baterijas, uzlādes ligzdas, kameras, skaņu, programmatūras kļūmes
+        u.c. Skati{' '}
+        <Link href="/plansetdatoru-remonts">planšetdatoru remonts</Link>.
       </>
     ),
     aText:
@@ -257,8 +398,9 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.LAPTOP],
     aHtml: (
       <>
-        Ekrānus, tastatūras, baterijas, SSD/RAM, dzesēšanu, barošanas ligzdas, OS problēmas u.c.
-        Skati <Link href="/datoru-remonts">datoru remonts</Link>.
+        Ekrānus, tastatūras, baterijas, SSD/RAM, dzesēšanu, barošanas ligzdas, OS
+        problēmas u.c. Skati{' '}
+        <Link href="/datoru-remonts">datoru remonts</Link>.
       </>
     ),
     aText:
@@ -271,8 +413,9 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.DYSON],
     aHtml: (
       <>
-        Akumulatorus, lādētājus, galvas/mehāniskos mezglus, filtrus, elektrodzinējus, vadus/ligzdas u.c.
-        Skati <Link href="/dyson-remonts">Dyson remonts</Link>.
+        Akumulatorus, lādētājus, galvas/mehāniskos mezglus, filtrus, elektrodzinējus,
+        vadus/ligzdas u.c. Skati{' '}
+        <Link href="/dyson-remonts">Dyson remonts</Link>.
       </>
     ),
     aText:
@@ -294,7 +437,9 @@ function withVariant(q, contextKey) {
 
 // Select questions by single context key (exact match in `scopes`)
 function selectByScope(contextKey) {
-  return QUESTIONS.filter((q) => q.scopes?.includes(contextKey)).map((q) => withVariant(q, contextKey));
+  return QUESTIONS.filter((q) => q.scopes?.includes(contextKey)).map((q) =>
+    withVariant(q, contextKey),
+  );
 }
 
 // Combine multiple context keys while keeping order by `weight` and uniqueness by `id`
@@ -343,7 +488,12 @@ export function makeFaqLdFromIds(ids = []) {
     .map((q) => ({
       '@type': 'Question',
       name: q.q,
-      acceptedAnswer: { '@type': 'Answer', text: (q.variants?.[FAQ_CONTEXT.IPHONE]?.aText ?? q.aText) },
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          q.variants?.[FAQ_CONTEXT.IPHONE]?.aText ??
+          q.aText,
+      },
     }));
   return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity };
 }

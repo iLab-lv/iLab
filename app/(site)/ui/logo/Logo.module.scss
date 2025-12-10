@@ -1,0 +1,17 @@
+/* Logo wrapper + image sizing */
+@use '../../../styles/_tokens.scss' as *;
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  height: 28px;
+  width: auto;
+
+  @media (min-width: 1024px) {
+    height: 32px;
+  }
+}

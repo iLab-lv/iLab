@@ -1,3 +1,5 @@
+// app/(site)/sections/hero/Hero.jsx
+
 'use client';
 
 import Image from 'next/image';
@@ -9,30 +11,21 @@ export default function Hero({
   id = 'hero',
   title,
   subtitle,
-  // rating,  // no longer used; badge handles its own data
-  cta,
+  cta,            // { label, href, variant? }
+  secondaryCta,   // { label, href, variant? }
   align = 'center',
   background = 'gradient',
 
-  // Desktop / tablet background image (used via CSS var)
   imageSrc = '/images/hero.webp',
-  posDesktop,                 // e.g. '50% 20%' (desktop BG framing)
-  offsetDesktop,              // number (vh) or string ('-6vh')
-
-  // Mobile text offset (vh or 'px')
+  posDesktop,
+  offsetDesktop,
   offsetMobile,
-
-  // MOBILE INLINE IMAGE (since BG is off in mobileInline mode)
-  imageInlineMobile = true,   // keep mobile inline mode
-  imageLiftMobile = 0,        // lift image UP from bottom (px or 'vh'), does NOT grow hero
-  imageMaxWidthMobile = 1100, // px cap for inline image on mobile
-
-  // Optional intrinsic size for next/image (avoid layout shifts)
+  imageInlineMobile = true,
+  imageLiftMobile = 0,
+  imageMaxWidthMobile = 1100,
   imageWidth = 1600,
   imageHeight = 900,
-
-  // NEW: SEO-oriented alt for hero image
-  imageAlt, // string
+  imageAlt,
 }) {
   const sectionClass = [
     s.hero,
@@ -45,12 +38,10 @@ export default function Hero({
 
   const styleVars = {
     '--hero-image': `url('${imageSrc}')`,
-
     ...(posDesktop && {
       '--hero-pos-x-d': posDesktop.split(' ')[0],
       '--hero-pos-y-d': posDesktop.split(' ')[1] || '50%',
     }),
-
     ...(offsetDesktop != null && {
       '--hero-offset-d':
         typeof offsetDesktop === 'number'
@@ -63,8 +54,6 @@ export default function Hero({
           ? `${offsetMobile}vh`
           : String(offsetMobile),
     }),
-
-    // mobile inline image tuning
     ...(imageLiftMobile != null && {
       '--hero-media-lift-m':
         typeof imageLiftMobile === 'number'
@@ -79,7 +68,6 @@ export default function Hero({
     }),
   };
 
-  // Default, SEO-oriented alt:
   const computedAlt =
     imageAlt ||
     (title
@@ -103,24 +91,36 @@ export default function Hero({
             {title}
           </h1>
         )}
+
         {subtitle && <p className={s.sub}>{subtitle}</p>}
 
-        {cta && (
+        {(cta || secondaryCta) && (
           <div className={s.ctaRow}>
-            <Button
-              variant="ctaChip"
-              chipDir="right"
-              size="lg"
-              href={cta.href}
-              aria-label={cta.label}
-            >
-              {cta.label}
-            </Button>
+            {cta && (
+              <Button
+                variant={cta.variant || 'secondary'}  // outlined by default
+                size="lg"
+                href={cta.href}
+                aria-label={cta.label}
+              >
+                {cta.label}
+              </Button>
+            )}
+
+            {secondaryCta && (
+              <Button
+                variant={secondaryCta.variant || 'primary'} // solid by default
+                size="lg"
+                href={secondaryCta.href}
+                aria-label={secondaryCta.label}
+              >
+                {secondaryCta.label}
+              </Button>
+            )}
           </div>
         )}
       </div>
 
-      {/* Inline image shows on mobile only; anchored to bottom then lifted up by imageLiftMobile */}
       {imageInlineMobile && (
         <div className={s.mediaWrap}>
           <Image

@@ -45,18 +45,26 @@
   height: auto;
   display: block;
 
-  @media (max-width: $bp-md) { width: 130px; }
+  @media (max-width: $bp-md) {
+    width: 130px;
+  }
 }
 
 .logoFallback {
-  width: 150px; height: 38px;
-  display: grid; place-items: center;
+  width: 150px;
+  height: 38px;
+  display: grid;
+  place-items: center;
   border: $border-thin solid $color-border;
   border-radius: $radius-sm;
   background: $color-surface-3;
-  color: $color-text-2; font-weight: $font-weight-semibold;
+  color: $color-text-2;
+  font-weight: $font-weight-semibold;
 
-  @media (max-width: $bp-md) { width: 130px; height: 34px; }
+  @media (max-width: $bp-md) {
+    width: 130px;
+    height: 34px;
+  }
 }
 
 .legalLine {
@@ -65,7 +73,7 @@
   margin: 0;                /* no extra offset; gap handles spacing */
 }
 
-/* ===== TIER 2: Columns row ===== */
+/* ===== TIER 2: Columns row (default) ===== */
 .columns {
   display: grid;
   grid-template-columns: 1fr;
@@ -77,7 +85,31 @@
   }
 }
 
-.col { min-width: 0; }
+/* ===== TIER 2: Columns row (ads variant) ===== */
+.columnsAds {
+  @extend .columns;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1.3fr 1fr 1fr;
+    align-items: flex-start;
+  }
+
+  /* Smaller logo only in ads variant */
+  .logo {
+    width: 110px;
+
+    @media (max-width: $bp-md) {
+      width: 100px;
+    }
+  }
+}
+
+/* Optional: specific tweaks for the brand column in ads variant */
+
+
+.col {
+  min-width: 0;
+}
 
 /* Headings + hairline (unchanged visuals) */
 .heading {
@@ -87,6 +119,7 @@
   color: $color-text;
   margin: 0;
 }
+
 .rule {
   height: 1px;
   margin: $space-xs 0 $space-lg 0; /* generous gap to content */
@@ -99,7 +132,10 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  li + li { margin-top: $space-sm; }
+
+  li + li {
+    margin-top: $space-sm;
+  }
 
   a {
     font-size: $font-size-p;
@@ -107,28 +143,75 @@
     text-decoration: none;
     border-radius: $radius-sm;
     padding: 2px 0;
-    &:hover { color: $color-accent; text-decoration: underline; }
-    &:active { color: $color-accent-active; }
-    &:focus-visible { outline: $focus-ring-width solid $focus-ring-color; outline-offset: $focus-ring-offset; }
+
+    &:hover {
+      color: $color-accent;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $color-accent-active;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-ring-color;
+      outline-offset: $focus-ring-offset;
+    }
   }
 }
 
 /* Locations — spacing only */
-.brandLocations { display: grid; gap: $space-xl; } /* more space between locations */
-.locItem { color: $color-text-2; line-height: 1.45; position: relative; }
+.brandLocations {
+  display: grid;
+  gap: $space-xl; /* more space between locations */
+}
+
+.locItem {
+  color: $color-text-2;
+  line-height: 1.45;
+  position: relative;
+}
 
 /* REMOVE divider line between locations; keep only vertical space */
 .locItemDivided {
   padding-top: $space-xl;  /* spacing-only; no ::before line */
 }
 
-.locLine { margin: 0; }
-.locLine a { color: $color-text-2; text-decoration: none; &:hover { color: $color-accent; text-decoration: underline; } &:focus-visible { outline: $focus-ring-width solid $focus-ring-color; outline-offset: $focus-ring-offset; } }
-.locName { color: $color-text; font-weight: $font-weight-semibold; display: inline-block; margin-bottom: $space-2xs; }
-.dot { color: $color-text-3; }
+.locLine {
+  margin: 0;
+}
+
+.locLine a {
+  color: $color-text-2;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-accent;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.locName {
+  color: $color-text;
+  font-weight: $font-weight-semibold;
+  display: inline-block;
+  margin-bottom: $space-2xs;
+}
+
+.dot {
+  color: $color-text-3;
+}
 
 /* ===== Copyright bar ===== */
-.bottomBar { position: relative; }
+.bottomBar {
+  position: relative;
+}
+
 .bottomInner {
   max-width: $container-max;
   margin: 0 auto;
