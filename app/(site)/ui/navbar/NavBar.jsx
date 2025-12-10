@@ -274,9 +274,9 @@ export default function NavBar({ showNavigation = true }) {
               </button>
 
               {/* Mobile-only language switcher */}
-              <div className={s.slotUtility}>
+              {/* <div className={s.slotUtility}>
                 <LanguageSwitcher initial="lv" />
-              </div>
+              </div> */}
 
               {/* Hamburger (<1360px) – only if navigation is enabled */}
               {showNavigation && (
