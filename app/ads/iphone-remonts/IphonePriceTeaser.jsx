@@ -14,17 +14,17 @@ const FEATURED_MODELS = [
   {
     slug: 'iphone-16-pro-max',
     name: 'iPhone 16 Pro Max',
-    image: '/images/devices/iphone/iphone-16-Pro-Max.webp',
+    image: '/images/devices/iphone/iphone-16-pro-max.webp',
   },
   {
     slug: 'iphone-16-pro',
     name: 'iPhone 16 Pro',
-    image: '/images/devices/iphone/iphone-16-Pro.webp',
+    image: '/images/devices/iphone/iphone-16-pro.webp',
   },
   {
     slug: 'iphone-16-plus',
     name: 'iPhone 16 Plus',
-    image: '/images/devices/iphone/iphone-16-Plus.webp',
+    image: '/images/devices/iphone/iphone-16-plus.webp',
   },
   {
     slug: 'iphone-16',
