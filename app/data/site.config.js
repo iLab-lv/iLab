@@ -76,7 +76,7 @@ export const LOCATIONS = [
     address: 'Jaunmoku iela 13, Rīga, LV-1046',
     tel: '+371 20887787',
     telLink: 'tel:+37120887787',
-    email: 'info@ilab.lv',
+    email: 'ilab.spice@gmail.com',
     wa: 'https://wa.me/37120887787',
 
     // Google Place data (from old PLACES.spice)

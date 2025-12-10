@@ -1,6 +1,5 @@
 // app/ads/iphone-remonts/page.jsx
 
-import Hero from '@sections/hero/Hero';
 import Services from '@sections/services/Services';
 import Reviews from '@sections/reviews/Reviews';
 import Process from '@sections/process/Process';
@@ -21,32 +20,15 @@ import {
 } from 'react-icons/lu';
 
 import IphonePriceTeaser from './IphonePriceTeaser';
+import IphoneAdsHero from './IphoneAdsHero';
 
 const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);
 
 export default function IphoneAdsLandingPage() {
   return (
     <>
-      <Hero
-        title="iPhone remonts tajā pašā dienā"
-        imageAlt="iPhone remonts iLab servisa centros Rīgā"
-        subtitle={
-          <>
-            Displeja un baterijas maiņa, uzlādes un citu bojājumu remonts. 90&nbsp;dienu
-            garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Home.
-          </>
-        }
-        cta={{ label: 'Skatīt iPhone remontus', href: '#services' }}
-        secondaryCta={{ label: 'Skatīt remontu cenas', href: '#price-teaser' }}
-        align="center"
-        background="gradient"
-        imageSrc="/images/hero-iphone.webp"
-        posDesktop="50% 20%"
-        offsetDesktop={-8}
-        imageInlineMobile
-        offsetMobile={12}
-        imageLiftMobile={124}
-      />
+      {/* New split-layout hero */}
+      <IphoneAdsHero />
 
       {/* Services */}
       <section id="services" className={s.section} aria-labelledby="iphone-services-h2">
@@ -99,12 +81,14 @@ export default function IphoneAdsLandingPage() {
       <div id="reviews" />
       <Reviews />
 
+      {/* Locations with map pins opening the panel */}
       <Locations openPanelOnPin />
 
+      {/* Process & Why sections reused from main site */}
       <Process />
       <Why />
 
-
+      {/* FAQ */}
       <section className={s.section} aria-labelledby="iphone-ads-faq-h2">
         <div className={s.container}>
           <Faq
@@ -112,7 +96,6 @@ export default function IphoneAdsLandingPage() {
             title="Biežāk uzdotie jautājumi par iPhone remontiem"
             items={IPHONE_ADS_FAQ_ITEMS}
           />
-
         </div>
       </section>
     </>

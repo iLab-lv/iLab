@@ -1,0 +1,112 @@
+// app/ads/iphone-remonts/IphoneAdsHero.module.scss
+
+@use '@/styles/_tokens.scss' as t;
+@use '@/styles/_layout.scss' as layout;
+
+/* ===== Hero wrapper ===== */
+
+.hero {
+  /* Black base + very subtle dark gray radial, so it still matches the header */
+  background:
+    radial-gradient(circle at 75% 40%, rgba(255, 255, 255, 0.10), transparent 60%),
+    #020617;
+  color: t.$color-text;
+
+  padding-top: t.$header-desktop-height;
+  padding-bottom: t.$space-3xl;
+}
+
+/* Layout: stacked on mobile by default */
+.inner {
+  @include layout.container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: t.$space-2xl;
+  min-height: 90vh;
+}
+
+/* Desktop: text left, image right, vertically centered */
+@media (min-width: t.$bp-md) {
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Mobile spacing & centered text */
+@media (max-width: t.$bp-md) {
+  .hero {
+    padding-top: calc(#{t.$header-mobile-height} + t.$space-lg);
+    padding-bottom: t.$space-2xl;
+    text-align: center;
+  }
+}
+
+/* ===== Columns ===== */
+
+.textCol {
+  flex: 1 1 0;
+  max-width: 560px;
+}
+
+.imageCol {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Just a simple wrapper now – NO extra background */
+.imageFrame {
+  max-width: 520px;
+  width: 100%;
+}
+
+/* Phone image itself (transparent background, shows hero gradient) */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+}
+
+/* ===== Text & CTAs ===== */
+
+.rating {
+  margin-bottom: t.$space-sm;
+}
+
+.heading {
+  font-size: t.$font-size-h3;
+  line-height: t.$line-height-heading;
+  font-weight: t.$font-weight-extrabold;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+
+  @media (min-width: t.$bp-lg) {
+    font-size: t.$font-size-h2;
+  }
+}
+
+.sub {
+  margin: 0 0 12px;
+  max-width: 52ch;
+  color: t.$color-text-2;
+
+  @media (max-width: t.$bp-md) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.ctaRow {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.$space-sm;
+
+  @media (max-width: t.$bp-md) {
+    justify-content: center;
+  }
+}
