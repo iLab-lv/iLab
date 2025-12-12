@@ -208,7 +208,7 @@ export default function BookingForm({
       <fieldset className={s.fieldset} aria-labelledby="timegroup">
         <legend id="timegroup">Vēlamais laiks</legend>
         <div className={s.timeGrid}>
-          {['8:00-12:00', '12:00-16:00', '16:00-21:00'].map((slot) => (
+          {['10:00-13:00', '13:00-17:00', '17:00-21:00'].map((slot) => (
             <label key={slot} className={s.radio}>
               <input
                 type="radio"

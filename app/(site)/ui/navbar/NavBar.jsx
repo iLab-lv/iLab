@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import s from './NavBar.module.scss';
+import { SOCIALS } from '@/data/site.config';
 
 import LanguageSwitcher from '../controls/LanguageSwitcher';
 import Controls from '../controls/Controls';
@@ -387,7 +388,11 @@ export default function NavBar({ showNavigation = true }) {
 
             {/* Controls at bottom of drawer */}
             <div className={s.mobileDrawerControls}>
-              <Controls />
+                      <Controls
+                        facebookUrl={SOCIALS.facebook}
+                        instagramUrl={SOCIALS.instagram}
+                        tiktokUrl={SOCIALS.tiktok}
+                      />
             </div>
           </nav>
         </div>
