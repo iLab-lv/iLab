@@ -143,37 +143,31 @@ export default function DatoruRemontsPage() {
                   title: 'Ekrāna maiņa',
                   text: 'plaisas, mirušās zonas, tumši plankumi.',
                   icon: LuMonitor,
-                  href: '/datoru-remonts/ekrana-maina',
                 },
                 {
                   title: 'Tastatūras maiņa',
                   text: 'nereaģē taustiņi, izlijis šķidrums, ielipuši taustiņi.',
                   icon: LuKeyboard,
-                  href: '/datoru-remonts/tastaturas-maina',
                 },
                 {
                   title: 'Dzesēšanas sistēma',
                   text: 'troksnis, pārkaršana, termopastas maiņa, putekļu tīrīšana.',
                   icon: LuCpu,
-                  href: '/datoru-remonts/dzesesanas-sistema',
                 },
                 {
                   title: 'Cietais disks / SSD',
                   text: 'lēns darbs, neielādējas sistēma, datu pārvietošana.',
                   icon: LuHardDrive,
-                  href: '/datoru-remonts/cietais-disks-ssd',
                 },
                 {
                   title: 'Programmatūra un vīrusi',
                   text: 'OS pārinstalēšana, vīrusu tīrīšana, draiveru problēmas.',
                   icon: LuBug,
-                  href: '/datoru-remonts/programmaturas-remonts',
                 },
                 {
                   title: 'Uzlāde un strāvas pieslēgums',
                   text: 'lādētāja pieslēgums, barošanas ligzda, strāvas problēmas.',
                   icon: LuPlugZap,
-                  href: '/datoru-remonts/barosanas-ligzda',
                 },
               ]}
             />

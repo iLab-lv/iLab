@@ -160,37 +160,31 @@ const POPULAR_LAPTOP_REPAIRS = [
     title: 'Ekrāna maiņa',
     text: 'plaisas, mirušās zonas, tumši plankumi.',
     icon: LuMonitor,
-    href: '/datoru-remonts/ekrana-maina',
   },
   {
     title: 'Tastatūras maiņa',
     text: 'nereaģē taustiņi, izlijis šķidrums, ielipuši taustiņi.',
     icon: LuKeyboard,
-    href: '/datoru-remonts/tastaturas-maina',
   },
   {
     title: 'Akumulatora maiņa',
     text: 'strauji krīt uzlāde, dators izslēdzas pie zemāka procenta.',
     icon: LuBatteryCharging,
-    href: '/datoru-remonts/akumulatora-maina',
   },
   {
     title: 'Dzesēšanas sistēma',
     text: 'troksnis, pārkaršana, termopastas maiņa, putekļu tīrīšana.',
     icon: LuCpu,
-    href: '/datoru-remonts/dzesesanas-sistema',
   },
   {
     title: 'Cietais disks / SSD',
     text: 'lēns darbs, neielādējas sistēma, datu pārvietošana.',
     icon: LuHardDrive,
-    href: '/datoru-remonts/cietais-disks-ssd',
   },
   {
     title: 'Programmatūra un vīrusi',
     text: 'OS pārinstalēšana, vīrusu tīrīšana, draiveru problēmas.',
     icon: LuBug,
-    href: '/datoru-remonts/programmaturas-remonts',
   },
 ];
 
@@ -199,31 +193,26 @@ const POPULAR_AIO_REPAIRS = [
     title: 'Ekrāna maiņa',
     text: 'plaisas, mirušās zonas, krāsu defekti.',
     icon: LuMonitor,
-    href: '/datoru-remonts/ekrana-maina',
   },
   {
     title: 'Dzesēšanas sistēma',
     text: 'troksnis, pārkaršana, ventilatoru un radiatoru tīrīšana.',
     icon: LuCpu,
-    href: '/datoru-remonts/dzesesanas-sistema',
   },
   {
     title: 'Cietais disks / SSD',
     text: 'lēna darbība, sistēma neielādējas, datu migrācija.',
     icon: LuHardDrive,
-    href: '/datoru-remonts/cietais-disks-ssd',
   },
   {
     title: 'Programmatūra un vīrusi',
     text: 'OS pārinstalēšana, vīrusu un reklāmprogrammu noņemšana.',
     icon: LuBug,
-    href: '/datoru-remonts/programmaturas-remonts',
   },
   {
     title: 'Barošana',
     text: 'ieslēgšanās problēmas, barošanas bloka diagnostika.',
     icon: LuPlugZap,
-    href: '/datoru-remonts/barosanas-ligzda',
   },
 ];
 
@@ -232,31 +221,26 @@ const POPULAR_DESKTOP_REPAIRS = [
     title: 'Barošanas bloks',
     text: 'dators neieslēdzas, izslēdzas zem slodzes.',
     icon: LuPlugZap,
-    href: '/datoru-remonts/barosanas-ligzda',
   },
   {
     title: 'Dzesēšanas sistēma',
     text: 'skaļi ventilatori, pārkaršana, termopastas maiņa.',
     icon: LuCpu,
-    href: '/datoru-remonts/dzesesanas-sistema',
   },
   {
     title: 'Cietais disks / SSD',
     text: 'lēna darbība, klikšķi no diska, datu atgūšana un migrācija.',
     icon: LuHardDrive,
-    href: '/datoru-remonts/cietais-disks-ssd',
   },
   {
     title: 'Programmatūra un vīrusi',
     text: 'OS pārinstalēšana, vīrusu un ļaunatūras noņemšana.',
     icon: LuBug,
-    href: '/datoru-remonts/programmaturas-remonts',
   },
   {
     title: 'Komponentu maiņa',
     text: 'atmiņa, videokarte, paplašināšana un uzlabojumi.',
     icon: LuCpu,
-    href: '/datoru-remonts/komponentu-majasana',
   },
 ];
 
