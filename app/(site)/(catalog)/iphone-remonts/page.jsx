@@ -68,7 +68,7 @@ const ISSUES_PREVIEW = [
     q: 'Kameras problēmas',
     text: 'Kamera nestrādā, miglains attēls',
     icon: 'camera',
-    serviceHref: '/iphone-remonts/kamera',
+    serviceHref: '/iphone-remonts/kameras-remonts',
     id: 'kamera-problemas',
   },
   {
@@ -176,13 +176,13 @@ export default function IphoneRemontsPage() {
                 title: 'Kamera',
                 text: 'miglaini attēli, fokusēšanās problēmas.',
                 icon: LuCamera,
-                href: '/iphone-remonts/kamera',
+                href: '/iphone-remonts/kameras-remonts',
               },
               {
                 title: 'Skaļruņi/mikrofons',
                 text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
                 icon: LuVolume2,
-                href: '/iphone-remonts/skalruni-mikrofons',
+                href: '/iphone-remonts/skalruni-mikrofona-remonts',
               },
               {
                 title: 'Ūdens bojājumi',
