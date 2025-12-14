@@ -1,5 +1,4 @@
 // app/(site)/sections/hero/Hero.jsx
-
 'use client';
 
 import Image from 'next/image';
@@ -13,6 +12,7 @@ export default function Hero({
   subtitle,
   cta,            // { label, href, variant? }
   secondaryCta,   // { label, href, variant? }
+  tertiaryCta,    // { label, href, variant? }   ✅ NEW
   align = 'center',
   background = 'gradient',
 
@@ -94,11 +94,11 @@ export default function Hero({
 
         {subtitle && <p className={s.sub}>{subtitle}</p>}
 
-        {(cta || secondaryCta) && (
+        {(cta || secondaryCta || tertiaryCta) && (
           <div className={s.ctaRow}>
             {cta && (
               <Button
-                variant={cta.variant || 'secondary'}  // outlined by default
+                variant={cta.variant || 'secondary'} // outlined by default
                 size="lg"
                 href={cta.href}
                 aria-label={cta.label}
@@ -115,6 +115,17 @@ export default function Hero({
                 aria-label={secondaryCta.label}
               >
                 {secondaryCta.label}
+              </Button>
+            )}
+
+            {tertiaryCta && (
+              <Button
+                variant={tertiaryCta.variant || 'ghost'} // ✅ pick whatever your Button supports
+                size="lg"
+                href={tertiaryCta.href}
+                aria-label={tertiaryCta.label}
+              >
+                {tertiaryCta.label}
               </Button>
             )}
           </div>

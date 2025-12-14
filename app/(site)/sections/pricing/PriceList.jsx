@@ -1,6 +1,7 @@
+// app/(site)/components/price-list/PriceList.jsx  (path example)
+// (use your actual path; only content changed)
 'use client';
 
-import Link from 'next/link';
 import s from './PriceList.module.scss';
 import { useUiDialogs } from '../../ui/providers/UiDialogsProvider';
 
@@ -41,7 +42,7 @@ function fmtPrice(from, to, currency = 'EUR') {
 // - legacy priceFrom/priceTo -> fmtPrice(...)
 function fmtPriceText(item, currency = 'EUR') {
   const v = item?.price;
-  const t = v == null ? '' : (typeof v === 'string' ? v.trim() : String(v));
+  const t = v == null ? '' : typeof v === 'string' ? v.trim() : String(v);
 
   if (t) {
     // Add € if looks numeric, a range, or "no <num>"
@@ -52,13 +53,8 @@ function fmtPriceText(item, currency = 'EUR') {
     return numericLike ? `${t.replace(/\s+/g, ' ')} €` : t;
   }
 
-  // t is empty string or price is null/undefined here
-
   // If legacy from/to prices exist -> keep old behavior
-  if (
-    typeof item?.priceFrom === 'number' ||
-    typeof item?.priceTo === 'number'
-  ) {
+  if (typeof item?.priceFrom === 'number' || typeof item?.priceTo === 'number') {
     return fmtPrice(item.priceFrom, item.priceTo, currency);
   }
 
@@ -93,10 +89,18 @@ export default function PriceList({
         {/* Desktop table */}
         <div className={s.table} role="table" aria-label={title}>
           <div className={`${s.tr} ${s.head}`} role="row">
-            <div className={s.th} role="columnheader">Pakalpojums</div>
-            <div className={s.th} role="columnheader">Laiks</div>
-            <div className={s.th} role="columnheader">Cena</div>
-            <div className={s.th} role="columnheader"> </div>
+            <div className={s.th} role="columnheader">
+              Pakalpojums
+            </div>
+            <div className={s.th} role="columnheader">
+              Laiks
+            </div>
+            <div className={s.th} role="columnheader">
+              Cena
+            </div>
+            <div className={s.th} role="columnheader">
+              {' '}
+            </div>
           </div>
 
           {rows.map((it) => (
@@ -105,18 +109,21 @@ export default function PriceList({
                 <div className={s.serviceCell}>
                   {/* Popular badge removed */}
                   <div className={s.serviceTitle}>
-                    {it.href ? <Link href={it.href}>{it.title}</Link> : it.title}
+                    {it.title}
                   </div>
                 </div>
               </div>
+
               <div className={s.td} role="cell">
                 <span className={s.chip}>
                   {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
                 </span>
               </div>
+
               <div className={s.td} role="cell">
                 <span className={s.price}>{fmtPriceText(it, currency)}</span>
               </div>
+
               <div className={s.td} role="cell">
                 <button
                   type="button"
@@ -138,16 +145,18 @@ export default function PriceList({
             <article key={`m-${it.id || it.title}`} className={s.card}>
               <header className={s.cardHead}>
                 <div className={s.serviceTitle}>
-                  {it.href ? <Link href={it.href}>{it.title}</Link> : it.title}
+                  {it.title}
                 </div>
                 {/* Popular badge removed */}
               </header>
+
               <div className={s.metaRow}>
                 <span className={s.chip}>
                   {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
                 </span>
                 <span className={s.price}>{fmtPriceText(it, currency)}</span>
               </div>
+
               <div className={s.ctaRow}>
                 <button
                   type="button"

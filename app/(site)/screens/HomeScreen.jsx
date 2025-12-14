@@ -41,6 +41,7 @@ export default function HomeScreen() {
           ariaLabel: 'Google vērtējums 4.9 no 5, 230 atsauksmes',
         }}
         cta={{ label: 'Apskatīt pakalpojumus', href: '#services' }}
+        secondaryCta={{ label: 'Pakalpojumu cenas', href: '/cenas' }}
         align="center"
         background="gradient"
         imageSrc="/images/hero.webp"

@@ -29,20 +29,13 @@ const byYearDescThenNameAsc = (a, b) => {
 };
 
 // ----- repairServices lookup -----
-const serviceMap = Object.fromEntries(
-  (repairServices || []).map((s) => [s.id, s])
-);
+const serviceMap = Object.fromEntries((repairServices || []).map((svc) => [svc.id, svc]));
 
 function getServiceLabel(id) {
   const meta = serviceMap[id];
   if (meta?.title) return meta.title;
   // Fallback: humanize the id
   return String(id || '').replace(/-/g, ' ') || 'Remonta cena';
-}
-
-function getFallbackLabelFromIds(ids) {
-  if (!ids?.length) return 'Remonta cena';
-  return getServiceLabel(ids[0]);
 }
 
 export default function ServicePricelist({
@@ -60,13 +53,21 @@ export default function ServicePricelist({
 }) {
   const anchorRef = useRef(null);
 
+  // Normalize serviceIds so it never crashes if null/undefined is passed
+  const normalizedServiceIds = useMemo(
+    () => (Array.isArray(serviceIds) ? serviceIds : []),
+    [serviceIds]
+  );
+  const hasPriority = normalizedServiceIds.length > 0;
+
   // Group devices by series, using proper sorting
   const groups = useMemo(() => {
     // 1) filter (❗️DO NOT require pricing here)
     const filtered = devices.filter(
       (d) =>
         (d.brandSlug || '').toLowerCase() === (brandSlug || '').toLowerCase() &&
-        (!categorySlug || (d.category || '').toLowerCase() === categorySlug.toLowerCase())
+        (!categorySlug ||
+          (d.category || '').toLowerCase() === String(categorySlug).toLowerCase())
     );
 
     // 2) sort devices globally
@@ -76,9 +77,8 @@ export default function ServicePricelist({
     const map = new Map();
     for (const d of filtered) {
       const label =
-        (typeof seriesExtractor === 'function'
-          ? seriesExtractor(d)
-          : d.series || 'Citi modeļi') || 'Citi modeļi';
+        (typeof seriesExtractor === 'function' ? seriesExtractor(d) : d.series || 'Citi modeļi') ||
+        'Citi modeļi';
       if (!map.has(label)) map.set(label, []);
       map.get(label).push(d);
     }
@@ -116,27 +116,47 @@ export default function ServicePricelist({
   );
 
   // ----- pricing helpers -----
+  function isRequestPrice(v) {
+    // Treat empty string as "pēc pieprasījuma"
+    return v == null || (typeof v === 'string' && v.trim() === '');
+  }
+
+  const formatPrice = (v) => {
+    if (isRequestPrice(v)) return 'pēc pieprasījuma';
+    if (typeof v === 'number') return `€ ${v}`;
+    return String(v);
+  };
+
   function pickPrimaryInfo(slug) {
-    const p = pricing[slug];
+    const p = pricing?.[slug];
     if (!p) return { line: null, sid: null };
     const items = Array.isArray(p.items) ? p.items : [];
 
-    // 1) priority by serviceIds (in given order)
-    for (const sid of serviceIds) {
-      const found = items.find((it) => it.id === sid && it.price != null);
-      if (found) return { line: found, sid };
+    // 1) priority by serviceIds (in given order) — only when provided
+    if (hasPriority) {
+      for (const sid of normalizedServiceIds) {
+        const found = items.find((it) => it.id === sid && !isRequestPrice(it.price));
+        if (found) return { line: found, sid };
+      }
     }
+
     // 2) then popular
-    const pop = items.find((it) => it.popular && it.price != null);
+    const pop = items.find((it) => it.popular && !isRequestPrice(it.price));
     if (pop) return { line: pop, sid: pop.id || null };
-    // 3) any priced
-    const any = items.find((it) => it.price != null) || null;
+
+    // 3) any priced (including "pēc pieprasījuma" allowed as fallback? no — keep real price first)
+    const anyPriced = items.find((it) => !isRequestPrice(it.price)) || null;
+    if (anyPriced) return { line: anyPriced, sid: anyPriced?.id || null };
+
+    // 4) if everything is "pēc pieprasījuma", still show the first item
+    const any = items[0] || null;
     return { line: any, sid: any?.id || null };
   }
 
   const { line: primaryLine, sid: primarySid } = useMemo(
     () => (activeDevice ? pickPrimaryInfo(activeDevice.slug) : { line: null, sid: null }),
-    [activeDevice, pricing, serviceIds]
+    // include normalizedServiceIds to react to changes safely
+    [activeDevice, pricing, hasPriority, normalizedServiceIds]
   );
 
   // image fallback
@@ -153,9 +173,6 @@ export default function ServicePricelist({
     return raw || PLACEHOLDER;
   }
 
-  const formatPrice = (v) =>
-    v == null ? 'pēc pieprasījuma' : typeof v === 'number' ? `€ ${v}` : String(v);
-
   const onPick = (slug) => {
     setActiveSlug(slug);
     if (anchorRef.current) {
@@ -164,20 +181,22 @@ export default function ServicePricelist({
     }
   };
 
-  // compute variant list EXCLUDING primary, preserving serviceIds order when provided
+  // compute variant list EXCLUDING primary
+  // - if serviceIds provided => preserve order, include only those
+  // - else => show all items (including "pēc pieprasījuma") so /cenas can display everything
   const variantLines = useMemo(() => {
-    const p = activeDevice ? pricing[activeDevice.slug] : null;
+    const p = activeDevice ? pricing?.[activeDevice.slug] : null;
     if (!p) return [];
     const items = Array.isArray(p.items) ? p.items : [];
 
-    const ordered = serviceIds.length
-      ? serviceIds
-          .map((sid) => items.find((it) => it.id === sid && it.price != null))
+    const ordered = hasPriority
+      ? normalizedServiceIds
+          .map((sid) => items.find((it) => it.id === sid))
           .filter(Boolean)
-      : items.filter((it) => it.price != null);
+      : items;
 
-    return ordered.filter((it) => it.id !== primarySid);
-  }, [pricing, activeDevice, serviceIds, primarySid]);
+    return ordered.filter((it) => it?.id && it.id !== primarySid);
+  }, [pricing, activeDevice, hasPriority, normalizedServiceIds, primarySid]);
 
   // ----- render -----
   if (!groups.length) {
@@ -212,12 +231,8 @@ export default function ServicePricelist({
             <div className={s.previewCard}>
               <div className={s.previewHeader}>
                 <span className={s.modelName}>{activeDevice?.name}</span>
-                {activeDevice?.year && (
-                  <span className={s.modelYear}>{activeDevice.year}</span>
-                )}
-                <span className={s.modelSeries}>
-                  {activeDevice?.series || 'Citi modeļi'}
-                </span>
+                {activeDevice?.year && <span className={s.modelYear}>{activeDevice.year}</span>}
+                <span className={s.modelSeries}>{activeDevice?.series || 'Citi modeļi'}</span>
               </div>
 
               <div className={s.imageWrap}>
@@ -235,25 +250,17 @@ export default function ServicePricelist({
               <div className={s.previewBody}>
                 <div className={s.priceRow}>
                   <span className={s.priceLabel}>
-                    {primarySid
-                      ? getServiceLabel(primarySid)
-                      : getFallbackLabelFromIds(serviceIds)}
+                    {primarySid ? getServiceLabel(primarySid) : 'Remonta cena'}
                   </span>
-                  <span className={s.priceValue}>
-                    {formatPrice(primaryLine?.price)}
-                  </span>
+                  <span className={s.priceValue}>{formatPrice(primaryLine?.price)}</span>
                 </div>
 
                 {variantLines.length > 0 && (
                   <ul className={s.altList}>
                     {variantLines.map((line) => (
                       <li key={line.id} className={s.altItem}>
-                        <span className={s.altLabel}>
-                          {getServiceLabel(line.id)}
-                        </span>
-                        <span className={s.altPrice}>
-                          {formatPrice(line.price)}
-                        </span>
+                        <span className={s.altLabel}>{getServiceLabel(line.id)}</span>
+                        <span className={s.altPrice}>{formatPrice(line.price)}</span>
                       </li>
                     ))}
                   </ul>
@@ -304,13 +311,10 @@ export default function ServicePricelist({
                                 <span
                                   role="button"
                                   tabIndex={0}
-                                  className={
-                                    isActive ? s.modelLinkActive : s.modelLink
-                                  }
+                                  className={isActive ? s.modelLinkActive : s.modelLink}
                                   onClick={() => onPick(d.slug)}
                                   onKeyDown={(e) =>
-                                    (e.key === 'Enter' || e.key === ' ') &&
-                                    onPick(d.slug)
+                                    (e.key === 'Enter' || e.key === ' ') && onPick(d.slug)
                                   }
                                   aria-current={isActive ? 'true' : undefined}
                                 >

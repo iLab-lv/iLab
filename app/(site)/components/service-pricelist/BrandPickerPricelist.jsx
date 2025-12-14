@@ -1,14 +1,16 @@
+// app/(site)/components/service-pricelist/BrandPickerPricelist.jsx
 'use client';
 
 import { useMemo, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
+import styles from './BrandPickerPricelist.module.scss';
 
 export default function BrandPickerPricelist({
   devices,
   pricing,
-  brandOptions,     // [{ slug, name }]
-  defaultBrand,     // 'samsung' (or first available)
+  brandOptions, // [{ slug, name }]
+  defaultBrand,
   categorySlug = 'telefonu-remonts',
   serviceIds = [],
   title,
@@ -20,10 +22,16 @@ export default function BrandPickerPricelist({
   const router = useRouter();
   const sp = useSearchParams();
 
-  const initialBrand = (sp.get('brand') || defaultBrand || brandOptions?.[0]?.slug || '').toLowerCase();
+  const initialBrand = (
+    sp.get('brand') ||
+    defaultBrand ||
+    brandOptions?.[0]?.slug ||
+    ''
+  ).toLowerCase();
+
   const [brand, setBrand] = useState(initialBrand);
 
-  // keep URL in sync (shareable ?brand=…)
+  // keep URL in sync (?brand=…)
   useEffect(() => {
     const cur = sp.get('brand');
     if (brand && cur !== brand) {
@@ -34,40 +42,43 @@ export default function BrandPickerPricelist({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand]);
 
-  const selectEl = useMemo(() => (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
-      <label htmlFor="brandSelect" className="sr-only">Zīmols</label>
-      <select
-        id="brandSelect"
-        value={brand}
-        onChange={(e) => setBrand(e.target.value)}
-        style={{
-          padding: '10px 12px',
-          borderRadius: 12,
-          border: '1px solid rgba(0,0,0,.1)',
-          fontSize: 16,
-        }}
-      >
-        {brandOptions.map((b) => (
-          <option key={b.slug} value={b.slug}>{b.name}</option>
-        ))}
-      </select>
-    </div>
-  ), [brand, brandOptions]);
+  const brandList = useMemo(() => {
+    if (!brandOptions?.length) return null;
+
+    return (
+      <div className={styles.brandTabs} role="tablist" aria-label="Zīmola izvēle">
+        {brandOptions.map((b) => {
+          const active = brand === b.slug;
+          return (
+            <button
+              key={b.slug}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              className={`${styles.tab} ${active ? styles.active : ''}`}
+              onClick={() => setBrand(b.slug)}
+            >
+              {b.name}
+            </button>
+          );
+        })}
+      </div>
+    );
+  }, [brand, brandOptions]);
 
   return (
     <>
-      {selectEl}
+      {brandList}
 
       <ServicePricelist
         devices={devices}
         pricing={pricing}
-        brandSlug={brand}             // ← crucial
+        brandSlug={brand}
         categorySlug={categorySlug}
         serviceIds={serviceIds}
         title={title}
         intro={intro}
-        allModelsHref={allModelsHref}
+        viewAllHref={allModelsHref}
         cta={cta}
         className={className}
       />

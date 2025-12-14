@@ -366,6 +366,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       lead:
         'Aizpildi formu ar savu ierīci un problēmu — mūsu meistars sazināsies, saskaņos izmaksas un remonta laiku.',
     },
+
+    cenas: {
+      h1: 'Pakalpojumu cenas',
+
+    },
     // ...add more info pages as needed
   },
 };
