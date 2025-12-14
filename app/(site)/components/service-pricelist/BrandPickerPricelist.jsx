@@ -6,6 +6,19 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 import styles from './BrandPickerPricelist.module.scss';
 
+function normalizeBrandName(slug, name) {
+  const s = String(slug || '').toLowerCase();
+  const n = String(name || '').trim();
+
+  // Special casing for Apple product lines / common brand stylings
+  if (s === 'ipad' || n.toLowerCase() === 'ipad') return 'iPad';
+  if (s === 'iphone' || n.toLowerCase() === 'iphone') return 'iPhone';
+  if (s === 'macbook' || n.toLowerCase() === 'macbook') return 'MacBook';
+
+  // Keep original for everything else
+  return n || name || '';
+}
+
 export default function BrandPickerPricelist({
   devices,
   pricing,
@@ -49,6 +62,8 @@ export default function BrandPickerPricelist({
       <div className={styles.brandTabs} role="tablist" aria-label="Zīmola izvēle">
         {brandOptions.map((b) => {
           const active = brand === b.slug;
+          const label = normalizeBrandName(b.slug, b.name);
+
           return (
             <button
               key={b.slug}
@@ -58,7 +73,7 @@ export default function BrandPickerPricelist({
               className={`${styles.tab} ${active ? styles.active : ''}`}
               onClick={() => setBrand(b.slug)}
             >
-              {b.name}
+              {label}
             </button>
           );
         })}
