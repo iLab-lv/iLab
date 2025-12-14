@@ -446,14 +446,15 @@ const nextConfig = {
 
 // important ru fixes
 
-{ source: '/:lang(ru)?/par-mums/:path*', destination: '/par-mums', permanent: true },
-{ source: '/:lang(ru)?/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
-{ source: '/:lang(ru)?/kontakti/:path*', destination: '/kontakti', permanent: true },
+{ source: '/:lang(ru)/par-mums/:path*', destination: '/par-mums', permanent: true },
+{ source: '/:lang(ru)/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
+{ source: '/:lang(ru)/kontakti/:path*', destination: '/kontakti', permanent: true },
 
-{ source: '/:lang(ru)?/iphone-remonts/:path*', destination: '/iphone-remonts', permanent: true },
-{ source: '/:lang(ru)?/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
-{ source: '/:lang(ru)?/macbook-remonts/:path*', destination: '/datoru-remonts/macbook', permanent: true },
-{ source: '/:lang(ru)?/datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
+{ source: '/:lang(ru)/iphone-remonts/:path*', destination: '/iphone-remonts', permanent: true },
+{ source: '/:lang(ru)/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
+{ source: '/:lang(ru)/macbook-remonts/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+{ source: '/:lang(ru)/datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
+
 
 
 
