@@ -539,7 +539,7 @@ export const devicePricing = {
   },
   'iphone-16-pro': {
     items: [
-      { id: 'display-original', price: 360 },
+      { id: 'display-original', price: 420 },
       { id: 'display-incell', price: 180 },
       { id: 'display-oled', price: 280 },
       { id: 'charge-port', price: 130 },

@@ -457,6 +457,47 @@ const nextConfig = {
 
 
 
+// LAST MISSING REDIRECTS
+// ilab.lv legacy
+      { source: "/vakances/", destination: "/", permanent: true },
+
+      // www.ilab.lv legacy (LV)
+      { source: "/apple-iphone-remonts/", destination: "/iphone-remonts", permanent: true },
+
+      { source: "/huawei-ascend-mate-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-honor-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-honor-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-honor-8-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-mate-10-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-mate-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-mate-9-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-p9-eva-l19-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-p9-lite-mini-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-p9-lite-pra-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/huawei-p9-lite-vns-l21-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+
+      { source: "/macbook-portativo-datoru-remonts/", destination: "/datoru-remonts/macbook", permanent: true },
+
+      // www.ilab.lv legacy (RU)
+      { source: "/ru/apple-iphone-5-remonts/", destination: "/iphone-remonts/iphone-5", permanent: true },
+
+      { source: "/ru/huawei-ascend-mate-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-honor-10-2018-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-honor-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-honor-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-honor-7x-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-honor-9-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-mate-10-lite-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-mate-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-mate-8-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-mate-9-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-mate-s-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-p10-lite-was-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-p10-plus-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-p10-vtr-l29-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-p9-lite-mini-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: "/ru/huawei-p9-lite-pra-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+
 
     ];
 
