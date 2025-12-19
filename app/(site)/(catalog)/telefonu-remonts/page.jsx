@@ -6,6 +6,7 @@ import devicesAll from '@/data/devices';
 import BrandPreview from '@components/model-grid/BrandPreview';
 
 import Services from '@sections/services/Services';
+import Reviews from '@sections/reviews/Reviews';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
@@ -258,6 +259,8 @@ export default function TelefonuRemontsPage() {
           href={b.href}
         />
       ))}
+
+      <Reviews />
 
       {/* Process */}
       <section className={s.section} aria-labelledby="process-h2">

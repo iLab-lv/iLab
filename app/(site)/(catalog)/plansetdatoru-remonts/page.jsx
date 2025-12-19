@@ -11,6 +11,7 @@ import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
+import Reviews from '@sections/reviews/Reviews';
 
 import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
 import contentRegistry from '@/data/contentRegistry';
@@ -330,6 +331,8 @@ export default function PlansetdatoruRemontsPage() {
           />
         </div>
       </section>
+
+      <Reviews />
 
       {/* Process */}
       <div id="process-h2" className={s.anchorTarget} />

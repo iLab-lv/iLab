@@ -7,7 +7,7 @@ import devicesAll from '@/data/devices';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
-import CommonIssues from '@sections/common-issues/CommonIssues';
+import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -220,6 +220,8 @@ export default function IphoneRemontsPage() {
           />
         </div>
       </section>
+
+      <Reviews />
 
       {/* GUIDE */}
       {cat?.show?.guide !== false && cat?.sections?.guide && (

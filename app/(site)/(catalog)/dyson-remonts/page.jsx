@@ -8,6 +8,7 @@ import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
+import Reviews from '@sections/reviews/Reviews';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -258,6 +259,8 @@ export default function DysonRemontsPage() {
           />
         </div>
       </section>
+
+      <Reviews />
 
       {/* PROCESS */}
       <Process />

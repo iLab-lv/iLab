@@ -9,6 +9,7 @@ import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import BrandList from '@sections/brand-list/BrandList';
+import Reviews from '@sections/reviews/Reviews';
 
 import categories from '@/data/categories';
 
@@ -186,6 +187,8 @@ export default function DatoruRemontsPage() {
             brands={computerCategory.brands}
           />
         )}
+
+        <Reviews />
 
         {/* Process */}
         <Process />
