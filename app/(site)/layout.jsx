@@ -8,8 +8,13 @@ import Footer from './ui/footer/Footer';
 import Script from 'next/script';
 import l from './Layout.module.scss';
 
-// Derive origin from config, with a safe fallback
-const ORIGIN = COMPANY?.url || 'https://www.ilab.lv';
+// ✅ Canonical origin (force non-www)
+const ORIGIN = 'https://ilab.lv';
+
+// ✅ Next.js metadata base for absolute canonicals/OG URLs
+export const metadata = {
+  metadataBase: new URL(ORIGIN),
+};
 
 // GA4 measurement ID (ilab-v2 property)
 const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
@@ -35,7 +40,7 @@ export default function SiteLayout({ children }) {
     '@type': 'Organization',
     '@id': `${ORIGIN}#organization`,
     name: COMPANY.name,
-    url: COMPANY.url,
+    url: ORIGIN,
     email: COMPANY.email,
     telephone: COMPANY.phoneMain,
     logo: `${ORIGIN}${COMPANY.logo}`, // e.g. /brand/logo.svg
@@ -46,7 +51,7 @@ export default function SiteLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${ORIGIN}#website`,
-    url: COMPANY.url,
+    url: ORIGIN,
     name: COMPANY.name,
     publisher: { '@id': `${ORIGIN}#organization` },
     potentialAction: {
@@ -74,9 +79,9 @@ export default function SiteLayout({ children }) {
     const base = {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
-      '@id': `${ORIGIN}#${loc.id}`, // e.g. https://www.ilab.lv#domina
+      '@id': `${ORIGIN}#${loc.id}`, // e.g. https://ilab.lv#domina
       name: `${COMPANY.name} ${loc.label}`, // "iLab Domina Shopping"
-      url: COMPANY.url, // if you later have per-location URLs, update this
+      url: ORIGIN, // if you later have per-location URLs, update this
       telephone: loc.tel,
       email: loc.email || COMPANY.email,
       address: {

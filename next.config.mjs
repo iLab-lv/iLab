@@ -498,6 +498,13 @@ const nextConfig = {
       { source: "/ru/huawei-p9-lite-mini-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
       { source: "/ru/huawei-p9-lite-pra-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
 
+      // Redirect any legacy /LV/... URLs to homepage
+{
+  source: "/LV/:path*",
+  destination: "/",
+  permanent: true,
+},
+
 
     ];
 
