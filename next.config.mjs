@@ -505,6 +505,20 @@ const nextConfig = {
   permanent: true,
 },
 
+// serviss.ilab.lv → ilab.lv (everything to homepage)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "serviss.ilab.lv" }],
+        destination: "https://ilab.lv",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.serviss.ilab.lv" }],
+        destination: "https://ilab.lv",
+        permanent: true,
+      },
+
 
     ];
 
