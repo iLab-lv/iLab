@@ -359,7 +359,7 @@ export const devicePricing = {
     items: [
       { id: 'display-original', price: 170 },
       { id: 'display-incell', price: 110 },
-      { id: 'display-oled', price: 180 },
+      { id: 'display-oled', price: 150 },
       { id: 'charge-port', price: 80 },
       { id: 'back-cover', price: 110 },
       { id: 'battery', price: 70 },
