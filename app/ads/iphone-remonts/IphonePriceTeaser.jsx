@@ -7,61 +7,37 @@ import s from './IphonePriceTeaser.module.scss';
 
 import Button from '@components/button/Button';
 import devicePricing from '@/data/devicePricing';
-import { useUiDialogs } from '@ui/providers/UiDialogsProvider'; // adjust path if needed
+import { useUiDialogs } from '@ui/providers/UiDialogsProvider';
 
-// Models shown in the teaser
-const FEATURED_MODELS = [
+// Default featured models (8 items)
+// Removed: iPhone 16 Pro Max, iPhone 15
+const DEFAULT_FEATURED_MODELS = [
+  { slug: 'iphone-16-pro', name: 'iPhone 16 Pro', image: '/images/devices/iphone/iphone-16-pro.webp' },
+  { slug: 'iphone-16-plus', name: 'iPhone 16 Plus', image: '/images/devices/iphone/iphone-16-plus.webp' },
+  { slug: 'iphone-16', name: 'iPhone 16', image: '/images/devices/iphone/iphone-16.webp' },
+  { slug: 'iphone-15-pro-max', name: 'iPhone 15 Pro Max', image: '/images/devices/iphone/iPhone-15-Pro-Max.webp' },
+  { slug: 'iphone-15-pro', name: 'iPhone 15 Pro', image: '/images/devices/iphone/iPhone-15-Pro.webp' },
+  { slug: 'iphone-14-pro', name: 'iPhone 14 Pro', image: '/images/devices/iphone/iPhone-14-Pro.webp' },
+  { slug: 'iphone-13-pro', name: 'iPhone 13 Pro', image: '/images/devices/iphone/iPhone-13-Pro.webp' },
+  { slug: 'iphone-11', name: 'iPhone 11', image: '/images/devices/iphone/iphone-11.webp' },
+];
+
+// Default for generic /ads/iphone-remonts: show minimum "from" price across screen options
+const DEFAULT_PRICE_ITEMS = [
   {
-    slug: 'iphone-16-pro-max',
-    name: 'iPhone 16 Pro Max',
-    image: '/images/devices/iphone/iphone-16-pro-max.webp',
+    label: 'Ekrāna maiņa',
+    ids: ['display-incell', 'display-oled', 'display-original'],
+    mode: 'min',
+    from: true,
   },
   {
-    slug: 'iphone-16-pro',
-    name: 'iPhone 16 Pro',
-    image: '/images/devices/iphone/iphone-16-pro.webp',
-  },
-  {
-    slug: 'iphone-16-plus',
-    name: 'iPhone 16 Plus',
-    image: '/images/devices/iphone/iphone-16-plus.webp',
-  },
-  {
-    slug: 'iphone-16',
-    name: 'iPhone 16',
-    image: '/images/devices/iphone/iphone-16.webp',
-  },
-  {
-    slug: 'iphone-15-pro-max',
-    name: 'iPhone 15 Pro Max',
-    image: '/images/devices/iphone/iPhone-15-Pro-Max.webp',
-  },
-  {
-    slug: 'iphone-15-pro',
-    name: 'iPhone 15 Pro',
-    image: '/images/devices/iphone/iPhone-15-Pro.webp',
-  },
-  {
-    slug: 'iphone-15',
-    name: 'iPhone 15',
-    image: '/images/devices/iphone/iPhone-15.webp',
-  },
-  {
-    slug: 'iphone-14-pro',
-    name: 'iPhone 14 Pro',
-    image: '/images/devices/iphone/iPhone-14-Pro.webp',
-  },
-  {
-    slug: 'iphone-13-pro',
-    name: 'iPhone 13 Pro',
-    image: '/images/devices/iphone/iPhone-13-Pro.webp',
-  },
-  {
-    slug: 'iphone-11',
-    name: 'iPhone 11',
-    image: '/images/devices/iphone/iphone-11.webp',
+    label: 'Baterijas maiņa',
+    ids: ['battery'],
+    mode: 'first',
+    from: false,
   },
 ];
+
 
 function getItemPrice(slug, id) {
   const cfg = devicePricing?.[slug];
@@ -70,47 +46,116 @@ function getItemPrice(slug, id) {
   return line?.price ?? null;
 }
 
-function formatPrice(value) {
+function formatPrice(value, { from = false } = {}) {
   if (value === null || value === undefined || value === '') return null;
-  if (typeof value === 'number') return `${value} €`;
-  return value; // strings like "no 60", "pēc pieprasījuma"
+  if (typeof value === 'number') return from ? `no ${value} €` : `${value} €`;
+  return value; // assume already formatted string
 }
 
-export default function IphonePriceTeaser() {
+function minNumber(values) {
+  const nums = values.filter((v) => typeof v === 'number' && !Number.isNaN(v));
+  if (!nums.length) return null;
+  return Math.min(...nums);
+}
+
+/**
+ * priceItems supports:
+ *
+ * A) Single-row item (ids):
+ *    { label, ids: string[], mode?: 'min'|'first', from?: boolean }
+ *
+ * B) Multi-line item (lines):
+ *    { label, lines: [{ id: string, label?: string, from?: boolean }, ...] }
+ *
+ * Output rows:
+ *    { key, label, value }
+ */
+function buildRowsForModel(modelSlug, priceItems) {
+  const rows = [];
+
+  for (const item of priceItems || []) {
+    // B) Multi-line explicit lines: show ALL available options
+    if (Array.isArray(item.lines) && item.lines.length) {
+      for (const line of item.lines) {
+        const raw = getItemPrice(modelSlug, line.id);
+        const val = formatPrice(raw, { from: !!line.from });
+        if (!val) continue;
+
+        rows.push({
+          key: `${modelSlug}:${item.label}:${line.id}`,
+          // Important: keep label short (no "Ekrāna maiņa: In-Cell")
+          label: line.label || item.label,
+          value: val,
+        });
+      }
+      continue;
+    }
+
+    // A) Single-row from ids
+    const ids = Array.isArray(item.ids) ? item.ids : [];
+    if (!ids.length) continue;
+
+    const rawValues = ids.map((id) => getItemPrice(modelSlug, id));
+    let chosen = null;
+
+    if (item.mode === 'min') {
+      chosen = minNumber(rawValues);
+    } else {
+      // default: first non-empty
+      chosen = rawValues.find((v) => v !== null && v !== undefined && v !== '');
+    }
+
+    const val = formatPrice(chosen, { from: !!item.from });
+    if (!val) continue;
+
+    rows.push({
+      key: `${modelSlug}:${item.label}:${ids.join(',')}`,
+      label: item.label,
+      value: val,
+    });
+  }
+
+  return rows;
+}
+
+export default function IphonePriceTeaser({
+  // Content
+  title = 'Precīzas cenas populārākajiem iPhone',
+  intro = (
+    <>
+      Ekrāna maiņas cenas populārākajiem iPhone modeļiem. Pārējiem modeļiem — droši jautā,
+      atbildēsim ar konkrētu piedāvājumu.
+    </>
+  ),
+
+  // Data/config
+  featuredModels = DEFAULT_FEATURED_MODELS,
+  priceItems = DEFAULT_PRICE_ITEMS,
+
+  // Footer actions
+  allModelsHref = '/iphone-remonts',
+  allModelsLabel = 'Skatīt visus iPhone modeļus un cenas',
+  contactLabel = 'Sazināties par savu modeli',
+}) {
   const { openContact } = useUiDialogs();
 
   const handleContactClick = (event) => {
-    // open full-screen "Sazināties" panel
     openContact(event?.currentTarget || null);
   };
 
   return (
-    <section
-      className={`${sCatalog.section} ${s.section}`}
-      aria-labelledby="iphone-price-teaser-h2"
-    >
+    <section className={`${sCatalog.section} ${s.section}`} aria-labelledby="iphone-price-teaser-h2">
       <div className={sCatalog.container}>
         <header className={s.header}>
           <h2 id="iphone-price-teaser-h2" className={sCatalog.h2}>
-            Precīzas cenas populārākajiem iPhone
+            {title}
           </h2>
-          <p className={sCatalog.intro}>
-            Ekrāna un baterijas maiņas cenas jaunākajiem iPhone modeļiem. Pārējiem
-            modeļiem — droši jautā, atbildēsim ar konkrētu piedāvājumu.
-          </p>
+          <p className={sCatalog.intro}>{intro}</p>
         </header>
 
         <div className={s.grid}>
-          {FEATURED_MODELS.map((model) => {
-            const displayPrice = formatPrice(
-              getItemPrice(model.slug, 'display-original'),
-            );
-            const batteryPrice = formatPrice(
-              getItemPrice(model.slug, 'battery'),
-            );
-
-            const hasDisplay = !!displayPrice;
-            const hasBattery = !!batteryPrice;
+          {featuredModels.map((model) => {
+            const rows = buildRowsForModel(model.slug, priceItems);
 
             return (
               <article key={model.slug} className={s.card}>
@@ -127,45 +172,29 @@ export default function IphonePriceTeaser() {
                 <h3 className={s.model}>{model.name}</h3>
 
                 <div className={s.priceTable}>
-                  {hasDisplay && (
-                    <div className={s.priceRow}>
-                      <span className={s.priceLabel}>Ekrāna maiņa</span>
-                      <span className={s.priceValue}>{displayPrice}</span>
-                    </div>
-                  )}
-
-                  {hasBattery && (
-                    <div className={s.priceRow}>
-                      <span className={s.priceLabel}>Baterijas maiņa</span>
-                      <span className={s.priceValue}>{batteryPrice}</span>
-                    </div>
-                  )}
-
-                  {!hasDisplay && !hasBattery && (
-                    <div className={s.priceRowMuted}>
-                      Cena pēc pieprasījuma
-                    </div>
+                  {rows.length > 0 ? (
+                    rows.map((row) => (
+                      <div key={row.key} className={s.priceRow}>
+                        <span className={s.priceLabel}>{row.label}</span>
+                        <span className={s.priceValue}>{row.value}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className={s.priceRowMuted}>Cena pēc pieprasījuma</div>
                   )}
                 </div>
-
-
               </article>
             );
           })}
         </div>
 
         <div className={s.actionsRow}>
-          {/* Link on the left, button on the right, both aligned as a group to the right */}
-          <Link href="/iphone-remonts" className={s.allLink}>
-            Skatīt visus iPhone modeļus un cenas
+          <Link href={allModelsHref} className={s.allLink}>
+            {allModelsLabel}
           </Link>
 
-          <Button
-            variant="primary"
-            size="md"
-            onClick={handleContactClick}
-          >
-            Sazināties par savu modeli
+          <Button variant="primary" size="md" onClick={handleContactClick}>
+            {contactLabel}
           </Button>
         </div>
       </div>

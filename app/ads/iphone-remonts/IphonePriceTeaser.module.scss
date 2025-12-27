@@ -14,9 +14,21 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: $space-md;
+
+  // mobile default: 1 column
+  grid-template-columns: 1fr;
+
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  @media (min-width: $bp-lg) {
+    // cap at 4 columns on desktop
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+  }
 }
+
 
 .card {
   display: flex;

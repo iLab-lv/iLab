@@ -8,9 +8,40 @@ import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 
 import s from './IphoneAdsHero.module.scss';
 
-export default function IphoneAdsHero() {
+export default function IphoneAdsHero({
+  title = 'iPhone remonts tajā pašā dienā',
+  subtitle = (
+    <>
+      Displeja un baterijas maiņa, uzlādes un citu bojājumu remonts.
+      90&nbsp;dienu garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Home.
+    </>
+  ),
+
+  // Image
+  imageSrc = '/images/categories/iphone_remonts.webp',
+  imageAlt = 'iPhone remonts iLab servisa centros Rīgā',
+  imageWidth = 900,
+  imageHeight = 900,
+
+  // Primary/Secondary in-hero buttons (anchors)
+  primaryCta = {
+    label: 'Skatīt iPhone remontu cenas',
+    href: '#price-teaser',
+    variant: 'primary',
+    ariaLabel: 'Skatīt remontu cenas',
+  },
+  secondaryCta = {
+    label: 'Skatīt iPhone remontus',
+    href: '#services',
+    variant: 'secondary',
+    ariaLabel: 'Skatīt iPhone remontus',
+  },
+
+  // a11y
+  headingId = 'iphone-ads-hero-title',
+}) {
   return (
-    <section className={s.hero} aria-labelledby="iphone-ads-hero-title">
+    <section className={s.hero} aria-labelledby={headingId}>
       <div className={s.inner}>
         {/* Text column (shown on the right on desktop via flex reverse) */}
         <div className={s.textCol}>
@@ -18,33 +49,34 @@ export default function IphoneAdsHero() {
             <GoogleReviewsBadge />
           </div>
 
-          <h1 id="iphone-ads-hero-title" className={s.heading}>
-            iPhone remonts tajā pašā dienā
+          <h1 id={headingId} className={s.heading}>
+            {title}
           </h1>
 
-          <p className={s.sub}>
-            Displeja un baterijas maiņa, uzlādes un citu bojājumu remonts.
-            90&nbsp;dienu garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Home.
-          </p>
+          <p className={s.sub}>{subtitle}</p>
 
           <div className={s.ctaRow}>
-            <Button
-              variant="secondary"
-              size="lg"
-              href="#services"
-              aria-label="Skatīt iPhone remontus"
-            >
-              Skatīt iPhone remontus
-            </Button>
+            {secondaryCta?.label && secondaryCta?.href && (
+              <Button
+                variant={secondaryCta.variant || 'secondary'}
+                size="lg"
+                href={secondaryCta.href}
+                aria-label={secondaryCta.ariaLabel || secondaryCta.label}
+              >
+                {secondaryCta.label}
+              </Button>
+            )}
 
-            <Button
-              variant="primary"
-              size="lg"
-              href="#price-teaser"
-              aria-label="Skatīt remontu cenas"
-            >
-              Skatīt remontu cenas
-            </Button>
+            {primaryCta?.label && primaryCta?.href && (
+              <Button
+                variant={primaryCta.variant || 'primary'}
+                size="lg"
+                href={primaryCta.href}
+                aria-label={primaryCta.ariaLabel || primaryCta.label}
+              >
+                {primaryCta.label}
+              </Button>
+            )}
           </div>
         </div>
 
@@ -52,10 +84,10 @@ export default function IphoneAdsHero() {
         <div className={s.imageCol}>
           <div className={s.imageFrame}>
             <Image
-              src="/images/categories/iphone_remonts.webp"
-              alt="iPhone remonts iLab servisa centros Rīgā"
-              width={900}
-              height={900}
+              src={imageSrc}
+              alt={imageAlt}
+              width={imageWidth}
+              height={imageHeight}
               priority
               fetchPriority="high"
               className={s.image}
