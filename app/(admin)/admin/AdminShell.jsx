@@ -2,13 +2,51 @@
 
 // app/(admin)/AdminShell.jsx
 // Adds mobile topbar (expandable) + desktop sidebar shell around admin pages.
+// Includes Firebase Auth guard:
+// - Unauthed users are redirected to /admin/login
+// - Authed users visiting /admin/login are redirected to /admin
 
 import { useEffect, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { onAuthStateChanged } from 'firebase/auth';
+
 import styles from './AdminShell.module.scss';
+import { auth } from '@lib/firebaseClient';
 
 export default function AdminShell({ children }) {
   const [open, setOpen] = useState(false);
   const firstLinkRef = useRef(null);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [authReady, setAuthReady] = useState(false);
+  const [user, setUser] = useState(null);
+
+  // Auth state subscription
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u || null);
+      setAuthReady(true);
+    });
+    return () => unsub();
+  }, []);
+
+  // Route guard logic
+  useEffect(() => {
+    if (!authReady) return;
+
+    const isLogin = pathname === '/admin/login';
+
+    if (!user && !isLogin) {
+      router.replace('/admin/login');
+      return;
+    }
+
+    if (user && isLogin) {
+      router.replace('/admin');
+    }
+  }, [authReady, user, pathname, router]);
 
   // Close on Escape
   useEffect(() => {
@@ -23,6 +61,17 @@ export default function AdminShell({ children }) {
     if (open && firstLinkRef.current) firstLinkRef.current.focus();
   }, [open]);
 
+  // While checking auth, avoid flashing UI
+  if (!authReady) return null;
+
+  const isLogin = pathname === '/admin/login';
+
+  // If not authed and not on login page, we already redirected
+  if (!user && !isLogin) return null;
+
+  // For login page, do not wrap with the admin sidebar shell
+  if (isLogin) return children;
+
   return (
     <div className={styles.layout}>
       {/* Sidebar (desktop fixed, mobile slide-in) */}
@@ -35,7 +84,9 @@ export default function AdminShell({ children }) {
         <div className={styles.brand}>iLab Admin</div>
 
         <nav className={styles.menu}>
-          <a ref={firstLinkRef} href="/admin">Dashboard</a>
+          <a ref={firstLinkRef} href="/admin">
+            Dashboard
+          </a>
           <a href="/admin/devices">Devices</a>
           <a href="/admin/models">Models</a>
           <a href="/admin/services">Services</a>
