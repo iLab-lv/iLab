@@ -8,7 +8,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 import styles from './AdminShell.module.scss';
 import { auth } from '@lib/firebaseClient';
@@ -61,6 +61,16 @@ export default function AdminShell({ children }) {
     if (open && firstLinkRef.current) firstLinkRef.current.focus();
   }, [open]);
 
+  async function handleLogout() {
+    try {
+      setOpen(false);
+      await signOut(auth);
+      router.replace('/admin/login');
+    } catch {
+      // optional: add UI feedback later
+    }
+  }
+
   // While checking auth, avoid flashing UI
   if (!authReady) return null;
 
@@ -84,14 +94,37 @@ export default function AdminShell({ children }) {
         <div className={styles.brand}>iLab Admin</div>
 
         <nav className={styles.menu}>
-          <a ref={firstLinkRef} href="/admin">
+          <a
+            ref={firstLinkRef}
+            href="/admin"
+            onClick={() => setOpen(false)}
+          >
             Dashboard
           </a>
-          <a href="/admin/catalog">Catalog</a>
-          <a href="/admin/pricelist">Pricelist</a>
-          <a href="/admin/components">Components</a>
-          <a href="/admin/settings">Settings</a>
+          <a href="/admin/catalog" onClick={() => setOpen(false)}>
+            Catalog
+          </a>
+          <a href="/admin/pricelist" onClick={() => setOpen(false)}>
+            Pricelist
+          </a>
+          <a href="/admin/components" onClick={() => setOpen(false)}>
+            Components
+          </a>
+          <a href="/admin/settings" onClick={() => setOpen(false)}>
+            Settings
+          </a>
         </nav>
+
+        {/* ✅ Bottom logout */}
+        <div className={styles.sidebarFooter}>
+          <button
+            type="button"
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Main column */}
@@ -101,10 +134,10 @@ export default function AdminShell({ children }) {
           <button
             type="button"
             className={styles.menuBtn}
-            aria-label="Open menu"
+            aria-label="Toggle menu"
             aria-controls="admin-sidebar"
             aria-expanded={open ? 'true' : 'false'}
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen((v) => !v)}
           >
             ☰
           </button>

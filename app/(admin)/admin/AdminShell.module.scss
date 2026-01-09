@@ -19,6 +19,11 @@
   border-right: 1px solid $color-border;
   padding: $space-md;
   overflow-y: auto;
+
+  /* ✅ allow footer to stick to bottom */
+  display: flex;
+  flex-direction: column;
+
   z-index: $z-nav;
 
   /* Mobile: off-canvas */
@@ -107,7 +112,7 @@
   }
 }
 
-/* Optional: simple brand + menu styles inside sidebar */
+/* Brand + menu styles inside sidebar */
 .brand {
   font-weight: $font-weight-bold;
   margin-bottom: $space-lg;
@@ -132,5 +137,35 @@
       outline: 2px solid $color-accent;
       outline-offset: 2px;
     }
+  }
+}
+
+/* ✅ footer pinned to bottom */
+.sidebarFooter {
+  margin-top: auto;
+  padding-top: $space-md;
+  border-top: 1px solid $color-border;
+}
+
+.logoutBtn {
+  width: 100%;
+  height: $btn-h-md;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $glass-bg-weak;
+  color: $color-text;
+  cursor: pointer;
+
+  &:hover {
+    background: $glass-bg-weak-hover;
+  }
+
+  &:active {
+    background: $glass-bg-weak-active;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
   }
 }
