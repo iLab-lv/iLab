@@ -19,11 +19,16 @@
  *   IMPORT_MODE=skip       (skip if doc exists)
  */
 
+require('dotenv').config({ path: '.env.local' });
+
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
 const admin = require('firebase-admin');
+
+
+
 
 const IMPORT_MODE = process.env.IMPORT_MODE || 'overwrite'; // 'overwrite' | 'skip'
 const PRICING_FILE = path.join(process.cwd(), 'app', 'data', 'devicePricing.js');

@@ -11,7 +11,6 @@ import BrandPickerPricelist from "@components/service-pricelist/BrandPickerPrice
 
 import categories from "@/data/categories";
 import devices from "@/data/devices";
-import devicePricing from "@/data/devicePricing";
 
 import { ORIGIN, abs, buildBreadcrumbsLd } from "@/lib/seo/jsonldHelpers";
 
@@ -105,7 +104,6 @@ const FAQ_ITEMS = [
   },
 ];
 
-// Optional FAQ schema for /cenas (utility page)
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -127,22 +125,26 @@ export default function CenasPage({ searchParams }) {
   return (
     <>
       {/* JSON-LD */}
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="webpage-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="webpage-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(webPageLd)}
       </Script>
       <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqLd)}
       </Script>
 
- 
-
-      
-
       {/* BRAND PICKER + PRICELIST */}
-      <section id="cenas" className={s.section} aria-labelledby="brand-picker-h2">
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
         <div className={s.container}>
           <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
             Izvēlies zīmolu
@@ -150,17 +152,15 @@ export default function CenasPage({ searchParams }) {
 
           <BrandPickerPricelist
             devices={devices}
-            pricing={devicePricing}
+            pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand="apple"
             categorySlug={null}
             // IMPORTANT:
             // /cenas should show ALL services at once.
-            // For that, BrandPickerPricelist must treat missing/empty serviceIds as "all services".
-            // If your component currently requires serviceIds, set it up to default to "all".
+            // Our updated BrandPickerPricelist treats serviceIds=[] as "all services"
             serviceIds={[]}
             title="Cenas pēc modeļa"
-            // Optional: where to send users for full catalog hubs
             allModelsHref="/"
             cta={{ label: "Pieteikties remontam", href: "#pieteikties" }}
             className={s.section}

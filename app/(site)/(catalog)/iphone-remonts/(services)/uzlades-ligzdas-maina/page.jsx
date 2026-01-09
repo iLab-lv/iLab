@@ -9,9 +9,10 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import s from '@styles/Catalog.module.scss';
+
+import { db } from '@/lib/firebaseAdmin';
 
 // -------------------------------------------------
 // META
@@ -66,8 +67,18 @@ const breadcrumbsLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Sākums', item: `${ORIGIN}/` },
-    { '@type': 'ListItem', position: 2, name: 'iPhone remonts', item: `${ORIGIN}/iphone-remonts/` },
-    { '@type': 'ListItem', position: 3, name: 'Uzlādes ligzdas maiņa', item: `${ORIGIN}/iphone-remonts/uzlades-ligzdas-maina` },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'iPhone remonts',
+      item: `${ORIGIN}/iphone-remonts/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Uzlādes ligzdas maiņa',
+      item: `${ORIGIN}/iphone-remonts/uzlades-ligzdas-maina`,
+    },
   ],
 };
 
@@ -76,7 +87,11 @@ const serviceLd = {
   '@type': 'Service',
   serviceType: 'iPhone uzlādes ligzdas maiņa',
   areaServed: { '@type': 'City', name: 'Riga' },
-  provider: { '@type': 'LocalBusiness', name: 'iLab', '@id': `${ORIGIN}#organization` },
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'iLab',
+    '@id': `${ORIGIN}#organization`,
+  },
   url: `${ORIGIN}/iphone-remonts/uzlades-ligzdas-maina`,
   name: 'iPhone uzlādes ligzdas maiņa Rīgā',
   description:
@@ -84,10 +99,45 @@ const serviceLd = {
 };
 
 // -------------------------------------------------
+// Firestore → legacy pricing shape for ServicePricelist
+// -------------------------------------------------
+async function buildPricingForChargePort() {
+  const pricing = {};
+
+  // initialize all Apple phone models in this category
+  devices
+    .filter((d) => d.brandSlug === 'apple' && d.category === 'telefonu-remonts')
+    .forEach((d) => {
+      pricing[d.slug] = { items: [] };
+    });
+
+  // fetch all charge-port rows (we'll ignore non-apple models)
+  const snap = await db
+    .collection('modelServices')
+    .where('serviceId', '==', 'charge-port')
+    .get();
+
+  snap.forEach((doc) => {
+    const data = doc.data() || {};
+    const modelId = data.modelId;
+    if (!modelId || !pricing[modelId]) return;
+
+    pricing[modelId].items.push({
+      id: 'charge-port',
+      price: Object.prototype.hasOwnProperty.call(data, 'price') ? data.price : '',
+    });
+  });
+
+  return pricing;
+}
+
+// -------------------------------------------------
 // PAGE COMPONENT
 // -------------------------------------------------
-export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
+export default async function IphoneUzladesLigzdasMainaPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+
+  const pricing = await buildPricingForChargePort();
 
   return (
     <>
@@ -104,7 +154,7 @@ export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/uzlades_ligzda_remonts.webp" // pielāgo, ja ceļš atšķiras
+        image="/images/categories/uzlades_ligzda_remonts.webp"
         alt="iPhone uzlādes ligzdas maiņa Rīgā"
         focal="right"
         className="service"
@@ -114,7 +164,9 @@ export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
       {/* INTRO */}
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h1 id="intro-h2" className={s.h1}>iPhone uzlādes ligzdas maiņa Rīgā</h1>
+          <h1 id="intro-h2" className={s.h1}>
+            iPhone uzlādes ligzdas maiņa Rīgā
+          </h1>
           <p className={s.paragraph}>
             Ja iPhone nelādējas, pazūd savienojums, jāpieliec kabelis noteiktā leņķī vai ports izskatās netīrs,
             <strong> visticamāk nepieciešama uzlādes ligzdas tīrīšana vai maiņa</strong>. iLab meistari veic
@@ -129,26 +181,34 @@ export default function IphoneUzladesLigzdasMainaPage({ searchParams }) {
           {selectedModel && (
             <p className={s.note}>
               Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
-              <a href="#cenas"> cenām</a>.
+              <a href="#brand-list"> cenām</a>.
             </p>
           )}
         </div>
       </section>
 
       {/* PRICE LIST (ServicePricelist) */}
-      <ServicePricelist
-        devices={devices}
-        pricing={devicePricing}
-        brandSlug="apple"
-        categorySlug="telefonu-remonts"
-        serviceIds={['charge-port']} // ← tikai uzlādes ligzda
-        title="Uzlādes ligzdas maiņas cenas pēc modeļa"
-        intro="Izvēlies savu iPhone modeli, lai redzētu uzlādes ligzdas remonta cenu. Daudzas ierīces salabojam tajā pašā dienā."
-        initialLimit={8}
-        allModelsHref="/iphone-remonts#iphone-modeli"
-        cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-        className={s.section}
-      />
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
+        <div className={s.container}>
+          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
+            Izvēlies iPhone modeli
+          </h2>
+
+          <ServicePricelist
+            devices={devices}
+            pricing={pricing}
+            brandSlug="apple"
+            categorySlug="telefonu-remonts"
+            serviceIds={['charge-port']}
+            title="Uzlādes ligzdas maiņas cenas pēc modeļa"
+            intro="Izvēlies savu iPhone modeli, lai redzētu uzlādes ligzdas remonta cenu. Daudzas ierīces salabojam tajā pašā dienā."
+            initialLimit={8}
+            allModelsHref="/iphone-remonts#iphone-modeli"
+            cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
+            className={s.section}
+          />
+        </div>
+      </section>
 
       {/* PROCESS */}
       <section className={s.section} aria-labelledby="process-h2">

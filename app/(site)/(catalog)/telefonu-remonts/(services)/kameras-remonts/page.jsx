@@ -10,7 +10,6 @@ import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPrice
 
 import categories from '@/data/categories';
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import {
   ORIGIN,
@@ -136,7 +135,9 @@ function getPhoneBrandOptions() {
     )
   );
 
-  const hasSamsung = withDevices.find((b) => (b.brandSlug || b.slug) === 'samsung');
+  const hasSamsung = withDevices.find(
+    (b) => (b.brandSlug || b.slug) === 'samsung'
+  );
   const defaultBrand = hasSamsung
     ? 'samsung'
     : withDevices[0]?.brandSlug || withDevices[0]?.slug || 'samsung';
@@ -157,7 +158,11 @@ export default function TelefonuKamerasRemontsPage({ searchParams }) {
   return (
     <>
       {/* JSON-LD */}
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(faqLd)}
       </Script>
       <Script
@@ -200,29 +205,31 @@ export default function TelefonuKamerasRemontsPage({ searchParams }) {
           <p className={s.paragraph}>
             Simptomi, kas norāda uz <strong>kameras bojājumu</strong>:{' '}
             <strong>miglains vai graudains attēls</strong>,{' '}
-            <strong>nepareizas krāsas</strong>, <strong>švīkas vai putekļi kadrā</strong>,{' '}
-            <strong>autofokuss “sūc”</strong>, melns ekrāns kamerā vai kameras lietotne{' '}
-            <strong>aizveras ar kļūdu</strong>. Ja bojāts ir tikai{' '}
-            <strong>stikliņš</strong>, parasti pietiek ar stikliņa maiņu; ja bojāts ir pats
-            kameras modulis, nepieciešama <strong>kameras nomaiņa</strong>.
+            <strong>nepareizas krāsas</strong>,{' '}
+            <strong>švīkas vai putekļi kadrā</strong>,{' '}
+            <strong>autofokuss “sūc”</strong>, melns ekrāns kamerā vai kameras
+            lietotne <strong>aizveras ar kļūdu</strong>. Ja bojāts ir tikai{' '}
+            <strong>stikliņš</strong>, parasti pietiek ar stikliņa maiņu; ja
+            bojāts ir pats kameras modulis, nepieciešama{' '}
+            <strong>kameras nomaiņa</strong>.
           </p>
           <p className={s.paragraph}>
-            Pēc remonta pārbaudām fokusēšanos, stabilizāciju, foto un video kvalitāti, kā arī
-            kameras lietotnes darbību. Populāros modeļus parasti salabojam{' '}
-            <strong>1–3 stundu</strong> laikā. Visam veicamajam darbam un detaļām ir{' '}
-            <strong>90 dienu garantija</strong>.
+            Pēc remonta pārbaudām fokusēšanos, stabilizāciju, foto un video
+            kvalitāti, kā arī kameras lietotnes darbību. Populāros modeļus
+            parasti salabojam <strong>1–3 stundu</strong> laikā. Visam
+            veicamajam darbam un detaļām ir <strong>90 dienu garantija</strong>.
           </p>
           {selectedModel && (
             <p className={s.note}>
               Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
-              <a href="#cenas"> cenām</a>.
+              <a href="#brand-list"> cenām</a>.
             </p>
           )}
         </div>
       </section>
 
       {/* BRAND PICKER + PRICELIST */}
-      <section id="cenas" className={s.section} aria-labelledby="brand-picker-h2">
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
         <div className={s.container}>
           <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
             Izvēlies zīmolu
@@ -230,7 +237,7 @@ export default function TelefonuKamerasRemontsPage({ searchParams }) {
 
           <BrandPickerPricelist
             devices={devices}
-            pricing={devicePricing}
+            pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand={defaultBrand}
             categorySlug="telefonu-remonts"

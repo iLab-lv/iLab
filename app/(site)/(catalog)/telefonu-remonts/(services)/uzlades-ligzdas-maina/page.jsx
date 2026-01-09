@@ -11,7 +11,6 @@ import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPrice
 
 import categories from '@/data/categories';
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import {
   ORIGIN,
@@ -215,15 +214,14 @@ export default function TelefonuUzladesLigzdasMainaPage({ searchParams }) {
       </section>
 
       {/* BRAND PICKER + PRICELIST */}
-      <section id="cenas" className={s.section} aria-labelledby="brand-picker-h2">
-        <div className={s.container}>
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2"> <div className={s.container}>
           <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
             Izvēlies zīmolu
           </h2>
 
           <BrandPickerPricelist
             devices={devices}
-            pricing={devicePricing}
+            pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand={defaultBrand}
             categorySlug="telefonu-remonts"

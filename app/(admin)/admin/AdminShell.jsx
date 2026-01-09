@@ -87,11 +87,9 @@ export default function AdminShell({ children }) {
           <a ref={firstLinkRef} href="/admin">
             Dashboard
           </a>
-          <a href="/admin/devices">Devices</a>
-          <a href="/admin/models">Models</a>
-          <a href="/admin/services">Services</a>
-          <a href="/admin/model-services">Model Services</a>
-          <a href="/admin/media">Media</a>
+          <a href="/admin/catalog">Catalog</a>
+          <a href="/admin/pricelist">Pricelist</a>
+          <a href="/admin/components">Components</a>
           <a href="/admin/settings">Settings</a>
         </nav>
       </aside>

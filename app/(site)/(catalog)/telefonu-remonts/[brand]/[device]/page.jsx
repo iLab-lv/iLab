@@ -4,7 +4,6 @@ import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 import repairServices from '@/data/repairServices';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
@@ -33,6 +32,9 @@ import {
   buildBreadcrumbsLd,
   buildProvidersFromLocations,
 } from '@/lib/seo/jsonldHelpers';
+
+// Firestore (Admin SDK, server-side)
+import { db } from '@/lib/firebaseAdmin';
 
 export const revalidate = 0;
 const DEFAULT_CURRENCY = 'EUR';
@@ -96,38 +98,52 @@ function toPriceRange(priceStr) {
   return { priceFrom: null, priceTo: null, priceText };
 }
 
-// Merge per-model pricing with catalog metadata
-function buildPriceListItems(modelSlug) {
-  const pricing = devicePricing[modelSlug];
-  if (!pricing || !Array.isArray(pricing.items)) {
-    return { items: [], currency: DEFAULT_CURRENCY };
-  }
-
+// Merge per-model pricing with catalog metadata (Firestore modelServices)
+async function buildPriceListItems(modelSlug) {
   const device = devices.find((d) => d.slug === modelSlug) || null;
   const perDeviceTimeText = device?.serviceTimeTextOverrides || {};
   const catalogById = new Map(repairServices.map((srv) => [srv.id, srv]));
 
-  const merged = pricing.items
-    .map((it) => {
-      const base = catalogById.get(it.id);
+  const snap = await db
+    .collection('modelServices')
+    .where('modelId', '==', modelSlug)
+    .get();
+
+  if (snap.empty) {
+    return { items: [], currency: DEFAULT_CURRENCY };
+  }
+
+  const merged = snap.docs
+    .map((doc) => {
+      const data = doc.data() || {};
+      const serviceId = data.serviceId;
+      if (!serviceId) return null;
+
+      const base = catalogById.get(serviceId);
       if (!base) return null;
 
       const timeText =
-        (typeof perDeviceTimeText[it.id] === 'string' &&
-          perDeviceTimeText[it.id].trim()) ||
+        (typeof perDeviceTimeText[serviceId] === 'string' &&
+          perDeviceTimeText[serviceId].trim()) ||
         base.defaultTimeText ||
         'Tajā pašā dienā';
 
-      const raw = it?.price;
-      if (raw == null) return null;
+      const raw = data.price;
 
+      // Keep existing rule: hide any line where price === null (unapplicable)
+      if (raw === null) return null;
+
+      // Keep PriceList behavior:
+      // - number -> "123"
+      // - "" -> renders "pēc pieprasījuma"
+      // - "no 50" / other text -> as text
       const priceText =
-        typeof raw === 'number' ? String(raw) : String(raw).trim();
+        typeof raw === 'number' ? String(raw) : String(raw ?? '').trim();
 
       const { priceFrom, priceTo } = toPriceRange(priceText);
 
       return {
-        id: it.id,
+        id: serviceId,
         title: base.title,
         family: base.family,
         order: base.order ?? 9999,
@@ -289,7 +305,7 @@ export default async function Page({ params }) {
   const d = getPhoneDeviceBySlug(brandSlug, slug);
   if (!d) return notFound();
 
-  const { items: priceItems, currency } = buildPriceListItems(slug);
+  const { items: priceItems, currency } = await buildPriceListItems(slug);
   const modelServices = buildModelServices(brandSlug);
 
   const { faqItems: FINAL_FAQ_ITEMS, faqLd: FAQ_LD } = buildFaqForModel();
@@ -387,11 +403,7 @@ export default async function Page({ params }) {
       </Script>
 
       {/* HERO */}
-      <DeviceHero
-        image={d.image}
-        alt={`${d.name} remonts`}
-        bodyHtml={d.bodyHtml || null}
-      />
+      <DeviceHero image={d.image} alt={`${d.name} remonts`} bodyHtml={d.bodyHtml || null} />
 
       {/* Popular services for this model */}
       <Services

@@ -11,7 +11,6 @@ import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPrice
 
 import categories from '@/data/categories';
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import {
   ORIGIN,
@@ -224,14 +223,14 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
           {selectedModel && (
             <p className={s.note}>
               Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
-              <a href="#cenas"> cenām</a>.
+              <a href="#brand-list"> cenām</a>.
             </p>
           )}
         </div>
       </section>
 
       {/* BRAND PICKER + PRICELIST (multi-brand) */}
-      <section id="cenas" className={s.section} aria-labelledby="brand-picker-h2">
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
         <div className={s.container}>
           <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
             Izvēlies zīmolu
@@ -239,7 +238,7 @@ export default function TelefonuEkranaMainaPage({ searchParams }) {
 
           <BrandPickerPricelist
             devices={devices}
-            pricing={devicePricing}
+            pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand={defaultBrand}
             categorySlug="telefonu-remonts"

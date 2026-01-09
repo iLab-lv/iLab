@@ -11,7 +11,6 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 
 import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -22,6 +21,9 @@ import {
   buildServiceLdForCity,
   buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
+
+// Firestore (Admin SDK, server-side)
+import { db } from '@/lib/firebaseAdmin';
 
 // -------------------------------------------------
 // META
@@ -81,11 +83,87 @@ const serviceLd = buildServiceLdForCity({
 });
 
 // -------------------------------------------------
+// Firestore -> devicePricing shape for ServicePricelist
+// -------------------------------------------------
+function chunkArray(arr, size) {
+  const out = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+
+async function buildPricingForBrandModels({
+  brandSlug,
+  categorySlug,
+  serviceIds,
+}) {
+  const brand = String(brandSlug || '').toLowerCase();
+  const cat = String(categorySlug || '').toLowerCase();
+
+  const modelSlugs = (devices || [])
+    .filter((d) => String(d?.category || '').toLowerCase() === cat)
+    .filter((d) => String(d?.brandSlug || '').toLowerCase() === brand)
+    .map((d) => String(d.slug))
+    .filter(Boolean);
+
+  // pricingObj[modelSlug] = { items: [{id, price}, ...] }
+  const pricingObj = {};
+  for (const slug of modelSlugs) pricingObj[slug] = { items: [] };
+
+  if (!modelSlugs.length) return pricingObj;
+
+  const CHUNK = 30;
+  const chunks = chunkArray(modelSlugs, CHUNK);
+
+  // temp map: modelId -> Map(serviceId -> price)
+  const temp = new Map();
+
+  for (const group of chunks) {
+    const snap = await db
+      .collection('modelServices')
+      .where('modelId', 'in', group)
+      .get();
+
+    snap.forEach((doc) => {
+      const data = doc.data() || {};
+      const modelId = data.modelId;
+      const serviceId = data.serviceId;
+      if (!modelId || !serviceId) return;
+
+      if (Array.isArray(serviceIds) && serviceIds.length) {
+        if (!serviceIds.includes(serviceId)) return;
+      }
+
+      if (!temp.has(modelId)) temp.set(modelId, new Map());
+      temp
+        .get(modelId)
+        .set(serviceId, Object.prototype.hasOwnProperty.call(data, 'price') ? data.price : '');
+    });
+  }
+
+  for (const [modelId, byService] of temp.entries()) {
+    pricingObj[modelId] = {
+      items: (serviceIds || [])
+        .filter((sid) => byService.has(sid))
+        .map((sid) => ({ id: sid, price: byService.get(sid) })),
+    };
+  }
+
+  return pricingObj;
+}
+
+// -------------------------------------------------
 // PAGE COMPONENT
 // -------------------------------------------------
 
-export default function IphoneKamerasRemontsPage({ searchParams }) {
+export default async function IphoneKamerasRemontsPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+
+  // Build pricing for all Apple phone models, only for the services this page needs
+  const pricing = await buildPricingForBrandModels({
+    brandSlug: 'apple',
+    categorySlug: 'telefonu-remonts',
+    serviceIds: ['camera-glass', 'camera'],
+  });
 
   return (
     <>
@@ -133,26 +211,32 @@ export default function IphoneKamerasRemontsPage({ searchParams }) {
           {selectedModel && (
             <p className={s.note}>
               Atlasīts modelis: <strong>{decodeURIComponent(selectedModel)}</strong>. Ritiniet uz
-              <a href="#cenas"> cenām</a>.
+              <a href="#brand-list"> cenām</a>.
             </p>
           )}
         </div>
       </section>
 
       {/* PRICE LIST */}
-      <section id="cenas" className={s.section}>
-        <ServicePricelist
-          devices={devices}
-          pricing={devicePricing}
-          brandSlug="apple"
-          categorySlug="telefonu-remonts"
-          serviceIds={['camera-glass', 'camera']} // from your pricing schema
-          title="Kameras stikliņa un moduļa maiņas cenas pēc modeļa"
-          intro="Apskati iPhone kameras stikliņa un moduļa maiņas izmaksas pēc modeļa. Sākumā veicam diagnostiku, lai noteiktu, kurš variants nepieciešams."
-          initialLimit={8}
-          allModelsHref="/iphone-remonts#iphone-modeli"
-          cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
-        />
+      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
+        <div className={s.container}>
+          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
+            Izvēlies iPhone modeli
+          </h2>
+
+          <ServicePricelist
+            devices={devices}
+            pricing={pricing}
+            brandSlug="apple"
+            categorySlug="telefonu-remonts"
+            serviceIds={['camera-glass', 'camera']}
+            title="Kameras stikliņa un moduļa maiņas cenas pēc modeļa"
+            intro="Apskati iPhone kameras stikliņa un moduļa maiņas izmaksas pēc modeļa. Sākumā veicam diagnostiku, lai noteiktu, kurš variants nepieciešams."
+            initialLimit={8}
+            allModelsHref="/iphone-remonts#iphone-modeli"
+            cta={{ label: 'Pieteikties remontam', href: '#pieteikties' }}
+          />
+        </div>
       </section>
 
       {/* PROCESS */}

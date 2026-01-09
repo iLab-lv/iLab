@@ -1,0 +1,223 @@
+@use "@styles/tokens" as *; // adjust if your tokens path differs
+
+.wrap {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-lg $space-md;
+  color: $color-text;
+}
+
+.h1 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-md;
+}
+
+.toolbar {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.brandField {
+  display: flex;
+  gap: $space-sm;
+  align-items: center;
+}
+
+.brandLabel {
+  min-width: 60px;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+}
+
+.select {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+}
+
+.error {
+  margin-top: $space-md;
+  color: #ff4d6d;
+}
+
+.status {
+  margin-top: $space-md;
+  color: #22c55e;
+}
+
+.groups {
+  margin-top: $space-lg;
+  display: grid;
+  gap: $space-md;
+}
+
+.group {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-1;
+}
+
+/* readable series header */
+.groupHead {
+  padding: $space-sm $space-md;
+  background: $color-surface-3;
+  color: $color-text;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.groupTitle {
+  font-weight: $font-weight-semibold;
+}
+
+.model {
+  border-top: $border-thin solid rgba(255, 255, 255, 0.04);
+}
+
+.modelToggle {
+  width: 100%;
+  text-align: left;
+  padding: $space-sm $space-md;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.modelName {
+  display: inline-flex;
+  align-items: baseline;
+  gap: $space-xs;
+}
+
+.modelYear {
+  color: $color-text-2;
+  font-weight: $font-weight-regular;
+}
+
+.modelChevron {
+  color: $color-text-2;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.panel {
+  padding: $space-md;
+  background: $color-surface-2;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.05);
+}
+
+.empty {
+  color: $color-text-2;
+  padding: $space-sm 0;
+}
+
+.rows {
+  display: grid;
+  gap: $space-sm;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 280px 1fr 180px;
+  gap: $space-sm;
+  align-items: center;
+
+  @media (max-width: $bp-md) {
+    /* ✅ one line: service | price | hide */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+    grid-template-areas: "service price hide";
+    align-items: center;
+    column-gap: $space-sm;
+    row-gap: 0;
+  }
+}
+
+/* map children into the areas on mobile */
+.row > :nth-child(1) {
+  @media (max-width: $bp-md) {
+    grid-area: service;
+    min-width: 0;
+  }
+}
+
+.row > :nth-child(2) {
+  @media (max-width: $bp-md) {
+    grid-area: price;
+    min-width: 0;
+  }
+}
+
+.row > :nth-child(3) {
+  @media (max-width: $bp-md) {
+    grid-area: hide;
+    min-width: 0;
+  }
+}
+
+.input {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-1;
+  color: $color-text;
+
+  min-width: 0;
+  width: 100%;
+
+  &:disabled {
+    opacity: $opacity-disabled;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.hideToggle {
+  display: inline-flex;
+  gap: $space-xs;
+  align-items: center;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  white-space: nowrap;
+
+  /* make it compact so it doesn't steal width */
+  input {
+    margin: 0;
+  }
+
+  @media (max-width: $bp-md) {
+    justify-self: end;
+  }
+}
+
+.panelFooter {
+  margin-top: $space-md;
+  display: flex;
+  justify-content: flex-end;
+}
