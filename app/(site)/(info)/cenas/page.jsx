@@ -38,6 +38,7 @@ function titleCaseSlug(slug = "") {
 }
 
 function getAllBrandOptions() {
+  // Build a slug -> name map from categories brands (best source for human names)
   const nameBySlug = new Map();
 
   if (Array.isArray(categories)) {
@@ -53,6 +54,7 @@ function getAllBrandOptions() {
     }
   }
 
+  // Keep only brands that actually have devices
   const slugsWithDevices = new Set(
     (Array.isArray(devices) ? devices : [])
       .map((d) => String(d?.brandSlug || "").toLowerCase().trim())
@@ -74,10 +76,9 @@ function getAllBrandOptions() {
       };
     });
 
-  const hasSamsung = brandOptions.some((b) => b.slug === "samsung");
-  const defaultBrand = hasSamsung
-    ? "samsung"
-    : brandOptions[0]?.slug || "samsung";
+  // ✅ default should be apple
+  const hasApple = brandOptions.some((b) => b.slug === "apple");
+  const defaultBrand = hasApple ? "apple" : brandOptions[0]?.slug || "apple";
 
   return { brandOptions, defaultBrand };
 }
@@ -133,7 +134,7 @@ export default function CenasPage({ searchParams }) {
 
   const { brandOptions, defaultBrand } = getAllBrandOptions();
 
-  // ✅ Stabilize BrandPicker: if URL has ?brand=... and it's valid, use it.
+  // Stabilize BrandPicker: if URL has ?brand=... and it's valid, use it.
   const brandFromUrl =
     typeof searchParams?.brand === "string" ? searchParams.brand.toLowerCase().trim() : "";
 
@@ -180,7 +181,7 @@ export default function CenasPage({ searchParams }) {
             pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand={stableDefaultBrand}
-            // ✅ for /cenas: no category/service filtering props here
+            // /cenas: show ALL services; don't pass category/service filters
             title="Cenas pēc modeļa"
             allModelsHref="/"
             cta={{ label: "Pieteikties remontam", href: "#pieteikties" }}
