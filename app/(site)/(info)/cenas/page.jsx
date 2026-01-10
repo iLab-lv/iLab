@@ -38,36 +38,46 @@ function titleCaseSlug(slug = "") {
 }
 
 function getAllBrandOptions() {
-  // Build a slug -> name map from categories brands (best source for human names)
   const nameBySlug = new Map();
 
   if (Array.isArray(categories)) {
     for (const c of categories) {
       const list = Array.isArray(c?.brands) ? c.brands : [];
       for (const b of list) {
-        const slug = String(b?.brandSlug || b?.slug || "").toLowerCase();
+        const slug = String(b?.brandSlug || b?.slug || "")
+          .toLowerCase()
+          .trim();
         const name = String(b?.name || "").trim();
         if (slug && name && !nameBySlug.has(slug)) nameBySlug.set(slug, name);
       }
     }
   }
 
-  // Keep only brands that actually have devices
   const slugsWithDevices = new Set(
     (Array.isArray(devices) ? devices : [])
-      .map((d) => String(d?.brandSlug || "").toLowerCase())
+      .map((d) => String(d?.brandSlug || "").toLowerCase().trim())
       .filter(Boolean)
   );
 
+  // Provide BOTH shapes:
+  // - BrandPickerPricelist currently uses {slug, name} and key={slug}
+  // - Other places may use {brandSlug, label}
   const brandOptions = Array.from(slugsWithDevices)
     .sort((a, b) => a.localeCompare(b))
-    .map((slug) => ({
-      slug,
-      name: nameBySlug.get(slug) || titleCaseSlug(slug),
-    }));
+    .map((slug) => {
+      const name = nameBySlug.get(slug) || titleCaseSlug(slug);
+      return {
+        slug,
+        name,
+        brandSlug: slug,
+        label: name,
+      };
+    });
 
   const hasSamsung = brandOptions.some((b) => b.slug === "samsung");
-  const defaultBrand = hasSamsung ? "samsung" : brandOptions[0]?.slug || "samsung";
+  const defaultBrand = hasSamsung
+    ? "samsung"
+    : brandOptions[0]?.slug || "samsung";
 
   return { brandOptions, defaultBrand };
 }
@@ -120,7 +130,18 @@ const faqLd = {
 // -------------------------------------------------
 export default function CenasPage({ searchParams }) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
+
   const { brandOptions, defaultBrand } = getAllBrandOptions();
+
+  // ✅ Stabilize BrandPicker: if URL has ?brand=... and it's valid, use it.
+  const brandFromUrl =
+    typeof searchParams?.brand === "string" ? searchParams.brand.toLowerCase().trim() : "";
+
+  const isValidBrand = brandFromUrl
+    ? brandOptions.some((b) => b.slug === brandFromUrl || b.brandSlug === brandFromUrl)
+    : false;
+
+  const stableDefaultBrand = isValidBrand ? brandFromUrl : defaultBrand;
 
   return (
     <>
@@ -139,7 +160,11 @@ export default function CenasPage({ searchParams }) {
       >
         {JSON.stringify(webPageLd)}
       </Script>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script
+        id="faq-jsonld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
         {JSON.stringify(faqLd)}
       </Script>
 
@@ -154,12 +179,8 @@ export default function CenasPage({ searchParams }) {
             devices={devices}
             pricingSource="firestore"
             brandOptions={brandOptions}
-            defaultBrand="apple"
-            categorySlug={null}
-            // IMPORTANT:
-            // /cenas should show ALL services at once.
-            // Our updated BrandPickerPricelist treats serviceIds=[] as "all services"
-            serviceIds={[]}
+            defaultBrand={stableDefaultBrand}
+            // ✅ for /cenas: no category/service filtering props here
             title="Cenas pēc modeļa"
             allModelsHref="/"
             cta={{ label: "Pieteikties remontam", href: "#pieteikties" }}

@@ -34,7 +34,7 @@ export default function BrandPickerPricelist({
   brandOptions, // [{ slug, name }]
   defaultBrand,
   categorySlug = 'telefonu-remonts',
-  serviceIds = [],
+  serviceIds, // ✅ IMPORTANT: no default [] here (prevents infinite effect loops)
   title,
   intro,
   allModelsHref,
@@ -49,7 +49,9 @@ export default function BrandPickerPricelist({
     defaultBrand ||
     brandOptions?.[0]?.slug ||
     ''
-  ).toLowerCase();
+  )
+    .toLowerCase()
+    .trim();
 
   const [brand, setBrand] = useState(initialBrand);
 
@@ -58,14 +60,34 @@ export default function BrandPickerPricelist({
   const [fsLoading, setFsLoading] = useState(false);
   const [fsError, setFsError] = useState('');
 
-  // keep URL in sync (?brand=…)
+  // ✅ Normalize/lock serviceIds to a stable array + stable key
+  const serviceIdsArr = useMemo(
+    () => (Array.isArray(serviceIds) ? serviceIds : []),
+    [serviceIds]
+  );
+
+  const serviceIdsKey = useMemo(() => {
+    // stable string to use in dependencies
+    return serviceIdsArr.length ? serviceIdsArr.join('|') : '';
+  }, [serviceIdsArr]);
+
+  // ✅ Keep state in sync when URL changes (back/forward, external replace)
+  // Depend on the brand string, not the searchParams object identity.
+  const urlBrand = (sp.get('brand') || '').toLowerCase().trim();
   useEffect(() => {
-    const cur = sp.get('brand');
-    if (brand && cur !== brand) {
-      const params = new URLSearchParams(sp.toString());
-      params.set('brand', brand);
-      router.replace(`?${params.toString()}`, { scroll: false });
-    }
+    if (urlBrand && urlBrand !== brand) setBrand(urlBrand);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlBrand]);
+
+  // ✅ Keep URL in sync when state changes (clicking brand tabs)
+  // Guarded to avoid replace loops.
+  useEffect(() => {
+    const cur = (sp.get('brand') || '').toLowerCase().trim();
+    if (!brand || cur === brand) return;
+
+    const params = new URLSearchParams(sp.toString());
+    params.set('brand', brand);
+    router.replace(`?${params.toString()}`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand]);
 
@@ -75,7 +97,7 @@ export default function BrandPickerPricelist({
     return (
       <div className={styles.brandTabs} role="tablist" aria-label="Zīmola izvēle">
         {brandOptions.map((b) => {
-          const slug = String(b.slug || '').toLowerCase();
+          const slug = String(b.slug || '').toLowerCase().trim();
           const active = brand === slug;
           const label = normalizeBrandName(slug, b.name);
 
@@ -98,12 +120,12 @@ export default function BrandPickerPricelist({
 
   // Build the list of model slugs we need to load pricing for (for selected brand + category)
   const modelSlugsForBrand = useMemo(() => {
-    const b = String(brand || '').toLowerCase();
-    const cat = String(categorySlug || '').toLowerCase();
+    const b = String(brand || '').toLowerCase().trim();
+    const cat = String(categorySlug || '').toLowerCase().trim();
 
     return (devices || [])
-      .filter((d) => String(d?.category || '').toLowerCase() === cat)
-      .filter((d) => String(d?.brandSlug || '').toLowerCase() === b)
+      .filter((d) => String(d?.category || '').toLowerCase().trim() === cat)
+      .filter((d) => String(d?.brandSlug || '').toLowerCase().trim() === b)
       .map((d) => String(d.slug))
       .filter(Boolean);
   }, [devices, brand, categorySlug]);
@@ -136,7 +158,7 @@ export default function BrandPickerPricelist({
         const CHUNK = 30;
         const chunks = chunkArray(modelSlugsForBrand, CHUNK);
 
-        // We'll build devicePricing-like object:
+        // devicePricing-like object:
         // { [modelSlug]: { items: [ { id: serviceId, price }, ... ] } }
         const pricingObj = {};
 
@@ -146,43 +168,42 @@ export default function BrandPickerPricelist({
         }
 
         for (const group of chunks) {
-          const q = query(
-            collection(db, 'modelServices'),
-            where('modelId', 'in', group)
-          );
-
+          const q = query(collection(db, 'modelServices'), where('modelId', 'in', group));
           const snap = await getDocs(q);
 
-          // Collect per model -> per service
-          // We keep prices as-is (number|string|""|null)
           const temp = new Map(); // modelId -> Map(serviceId -> price)
 
-          snap.forEach((doc) => {
-            const data = doc.data() || {};
+          snap.forEach((docSnap) => {
+            const data = docSnap.data() || {};
             const modelId = data.modelId;
             const serviceId = data.serviceId;
             if (!modelId || !serviceId) return;
 
             // Filter to serviceIds if provided
-            if (Array.isArray(serviceIds) && serviceIds.length) {
-              if (!serviceIds.includes(serviceId)) return;
+            if (serviceIdsArr.length) {
+              if (!serviceIdsArr.includes(serviceId)) return;
             }
 
             if (!temp.has(modelId)) temp.set(modelId, new Map());
-            temp.get(modelId).set(serviceId, Object.prototype.hasOwnProperty.call(data, 'price') ? data.price : '');
+            temp
+              .get(modelId)
+              .set(
+                serviceId,
+                Object.prototype.hasOwnProperty.call(data, 'price') ? data.price : ''
+              );
           });
 
           // Convert into the expected "items" arrays
           for (const [modelId, byService] of temp.entries()) {
-            // Preserve serviceIds order if serviceIds provided
-            if (Array.isArray(serviceIds) && serviceIds.length) {
+            if (serviceIdsArr.length) {
+              // preserve provided serviceIds order
               pricingObj[modelId] = {
-                items: serviceIds
+                items: serviceIdsArr
                   .filter((sid) => byService.has(sid))
                   .map((sid) => ({ id: sid, price: byService.get(sid) })),
               };
             } else {
-              // Otherwise just dump in alphabetical serviceId order
+              // alphabetical serviceId order
               const items = Array.from(byService.entries())
                 .sort(([a], [b]) => String(a).localeCompare(String(b)))
                 .map(([sid, price]) => ({ id: sid, price }));
@@ -206,8 +227,8 @@ export default function BrandPickerPricelist({
     return () => {
       cancelled = true;
     };
-    // IMPORTANT: serviceIds affects filtering
-  }, [pricingSource, modelSlugsForBrand, serviceIds]);
+    // ✅ use serviceIdsKey instead of serviceIds array identity
+  }, [pricingSource, modelSlugsForBrand, serviceIdsKey, serviceIdsArr]);
 
   const effectivePricing = pricingSource === 'firestore' ? fsPricing : pricing;
 
@@ -215,7 +236,6 @@ export default function BrandPickerPricelist({
     <>
       {brandList}
 
-      {/* Optional tiny status line; remove if you don't want it */}
       {pricingSource === 'firestore' && (
         <div style={{ marginTop: 8, marginBottom: 8 }}>
           {fsLoading && <div style={{ opacity: 0.7 }}>Ielādē cenas…</div>}
@@ -228,7 +248,7 @@ export default function BrandPickerPricelist({
         pricing={effectivePricing}
         brandSlug={brand}
         categorySlug={categorySlug}
-        serviceIds={serviceIds}
+        serviceIds={serviceIdsArr}
         title={title}
         intro={intro}
         viewAllHref={allModelsHref}
