@@ -9,7 +9,7 @@ import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 import s from './IphoneAdsHero.module.scss';
 
 export default function IphoneAdsHero({
-  title = 'iPhone remonts tajā pašā dienā',
+  title = 'Mobilo ierīču serviss Rīgā',
   subtitle = (
     <>
       Displeja un baterijas maiņa, uzlādes un citu bojājumu remonts.
@@ -31,7 +31,7 @@ export default function IphoneAdsHero({
     ariaLabel: 'Skatīt remontu cenas',
   },
   secondaryCta = {
-    label: 'Skatīt iPhone remontus',
+    label: 'Skatīt servisa darbus',
     href: '#services',
     variant: 'secondary',
     ariaLabel: 'Skatīt iPhone remontus',

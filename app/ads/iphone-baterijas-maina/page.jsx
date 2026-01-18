@@ -19,8 +19,8 @@ import {
   LuThermometer,
 } from 'react-icons/lu';
 
-import IphoneAdsHero from '../iphone-remonts/IphoneAdsHero';
-import IphonePriceTeaser from '../iphone-remonts/IphonePriceTeaser';
+import IphoneAdsHero from '../iericu-serviss/IphoneAdsHero';
+import IphonePriceTeaser from '../iericu-serviss/IphonePriceTeaser';
 
 // If you don’t have a dedicated FAQ yet, reuse ads FAQ for now
 const { items: IPHONE_BATTERY_ADS_FAQ_ITEMS } = getFaqItems(
