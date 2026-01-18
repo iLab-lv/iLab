@@ -6,6 +6,7 @@ import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
 import Faq from '@sections/faq/Faq';
+import AdsContactStrip from '../_components/AdsContactStrip';
 
 import { FAQ_CONTEXT, getFaqItems } from '@/data/faq';
 import s from '@styles/Catalog.module.scss';
@@ -29,6 +30,7 @@ export default function IphoneAdsLandingPage() {
     <>
       {/* New split-layout hero */}
       <IphoneAdsHero />
+      <AdsContactStrip />
 
       {/* Services */}
       <section id="services" className={s.section} aria-labelledby="iphone-services-h2">
