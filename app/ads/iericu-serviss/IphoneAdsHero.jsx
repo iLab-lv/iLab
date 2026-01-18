@@ -12,8 +12,8 @@ export default function IphoneAdsHero({
   title = 'Mobilo ierīču serviss Rīgā',
   subtitle = (
     <>
-      Displeja un baterijas maiņa, uzlādes un citu bojājumu remonts.
-      90&nbsp;dienu garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Home.
+      iLab ir neatkarīgs ierīču serviss. Mēs neesam Apple vai citu ražotāju autorizēts servisa centrs.
+
     </>
   ),
 
