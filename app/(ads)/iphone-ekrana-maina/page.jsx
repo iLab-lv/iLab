@@ -19,8 +19,8 @@ import {
   LuTriangleAlert,
 } from 'react-icons/lu';
 
-import IphonePriceTeaser from '../iericu-serviss/IphonePriceTeaser';
-import IphoneAdsHero from '../iericu-serviss/IphoneAdsHero';
+import IphonePriceTeaser from '../iphone-labosana/IphonePriceTeaser';
+import IphoneAdsHero from '../iphone-labosana/IphoneAdsHero';
 
 // NOTE: Best practice is to have a dedicated FAQ context for screen replacement,
 // but for now we reuse the existing ads FAQ items and only adjust the title.
