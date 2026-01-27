@@ -1,4 +1,3 @@
-// middleware.js (TEMP DEBUG VERSION)
 import { NextResponse } from "next/server";
 
 export function middleware(req) {
@@ -7,33 +6,38 @@ export function middleware(req) {
   const pathname = req.nextUrl.pathname;
 
   const isAdsHost = host === "serviss.ilab.lv";
-  const isInternalAdsPath = pathname === "/ads" || pathname.startsWith("/ads/");
+  const isInternalAdsPath =
+    pathname === "/ads" || pathname.startsWith("/ads/");
 
-  // If on serviss subdomain: rewrite clean URL -> /ads/*
-  if (isAdsHost) {
-    // If already /ads/*, don't rewrite again
-    if (!isInternalAdsPath) {
-      const url = req.nextUrl.clone();
-      url.pathname = `/ads${pathname}`;
-      const res = NextResponse.rewrite(url);
-      res.headers.set("x-ilab-mw-host", host);
-      res.headers.set("x-ilab-mw-rewrite", `/ads${pathname}`);
-      return res;
-    }
-
-    const res = NextResponse.next();
-    res.headers.set("x-ilab-mw-host", host);
-    res.headers.set("x-ilab-mw-rewrite", "none");
-    return res;
+  // 🚫 Do NOT rewrite static assets
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/brand") ||
+    pathname.startsWith("/images") ||
+    pathname.startsWith("/fonts") ||
+    pathname.startsWith("/icons") ||
+    pathname.includes(".")
+  ) {
+    return NextResponse.next();
   }
 
-  // MAIN DOMAIN: do NOT block /ads/* (so you can test ilab.lv/ads/...)
-  const res = NextResponse.next();
-  res.headers.set("x-ilab-mw-host", host);
-  res.headers.set("x-ilab-mw-rewrite", "none");
-  return res;
+  // ✅ On ads subdomain: rewrite clean URLs → /ads/*
+  if (isAdsHost) {
+    if (isInternalAdsPath) return NextResponse.next();
+
+    const url = req.nextUrl.clone();
+    url.pathname = `/ads${pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  // 🚫 Block /ads/* on main domain
+  if (isInternalAdsPath) {
+    return new NextResponse(null, { status: 404 });
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico|robots.txt|sitemap.xml).*)"],
+  matcher: ["/((?!api|robots.txt|sitemap.xml|favicon.ico).*)"],
 };
