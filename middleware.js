@@ -9,7 +9,7 @@ export function middleware(req) {
   const isInternalAdsPath =
     pathname === "/ads" || pathname.startsWith("/ads/");
 
-  // 🚫 Do NOT rewrite static assets
+  // 🚫 Never touch static assets
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/brand") ||
@@ -21,7 +21,12 @@ export function middleware(req) {
     return NextResponse.next();
   }
 
-  // ✅ On ads subdomain: rewrite clean URLs → /ads/*
+  // 🔁 Redirect ROOT of ads subdomain to main site
+  if (isAdsHost && pathname === "/") {
+    return NextResponse.redirect("https://ilab.lv", 301);
+  }
+
+  // ✅ Ads subdomain: rewrite clean URLs → /ads/*
   if (isAdsHost) {
     if (isInternalAdsPath) return NextResponse.next();
 
