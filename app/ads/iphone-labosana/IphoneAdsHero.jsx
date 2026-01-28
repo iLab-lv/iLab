@@ -1,5 +1,3 @@
-// app/ads/iphone-remonts/IphoneAdsHero.jsx
-
 'use client';
 
 import Image from 'next/image';
@@ -9,17 +7,15 @@ import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 import s from './IphoneAdsHero.module.scss';
 
 export default function IphoneAdsHero({
-  title = 'Mobilo ierīču serviss Rīgā',
-  subtitle = (
-    <>
-      iLab ir neatkarīgs ierīču serviss. Mēs neesam Apple vai citu ražotāju autorizēts servisa centrs.
-
-    </>
-  ),
+  // Copy
+  title = 'iPhone ierīču remontdarbnīca Rīgā',
+  brandLine = 'iLab — neatkarīga ierīču remonta darbnīca Rīgā.',
+  subtitle = 'Remonts tiek veikts tikai klātienē mūsu darbnīcās Rīgā.',
+  disclaimer = 'Mēs nesniedzam attālinātu tehnisko atbalstu, tiešsaistes konsultācijas vai palīdzību pa telefonu.',
 
   // Image
   imageSrc = '/images/categories/iphone_remonts.webp',
-  imageAlt = 'iPhone remonts iLab servisa centros Rīgā',
+  imageAlt = 'iPhone remonts iLab remonta darbnīcās Rīgā',
   imageWidth = 900,
   imageHeight = 900,
 
@@ -28,13 +24,13 @@ export default function IphoneAdsHero({
     label: 'Skatīt iPhone remontu cenas',
     href: '#price-teaser',
     variant: 'primary',
-    ariaLabel: 'Skatīt remontu cenas',
+    ariaLabel: 'Skatīt iPhone remontu cenas',
   },
   secondaryCta = {
-    label: 'Skatīt servisa darbus',
+    label: 'Skatīt remonta pakalpojumus',
     href: '#services',
     variant: 'secondary',
-    ariaLabel: 'Skatīt iPhone remontus',
+    ariaLabel: 'Skatīt remonta pakalpojumus',
   },
 
   // a11y
@@ -43,7 +39,7 @@ export default function IphoneAdsHero({
   return (
     <section className={s.hero} aria-labelledby={headingId}>
       <div className={s.inner}>
-        {/* Text column (shown on the right on desktop via flex reverse) */}
+        {/* Text column */}
         <div className={s.textCol}>
           <div className={s.rating}>
             <GoogleReviewsBadge />
@@ -53,20 +49,18 @@ export default function IphoneAdsHero({
             {title}
           </h1>
 
-          <p className={s.sub}>{subtitle}</p>
+          {brandLine ? <p className={s.brandLine}>{brandLine}</p> : null}
+
+          {subtitle ? <p className={s.sub}>{subtitle}</p> : null}
+
+          {disclaimer ? (
+            <div className={s.disclaimer} role="note" aria-label="Svarīga informācija">
+              {disclaimer}
+            </div>
+          ) : null}
 
           <div className={s.ctaRow}>
-            {secondaryCta?.label && secondaryCta?.href && (
-              <Button
-                variant={secondaryCta.variant || 'secondary'}
-                size="lg"
-                href={secondaryCta.href}
-                aria-label={secondaryCta.ariaLabel || secondaryCta.label}
-              >
-                {secondaryCta.label}
-              </Button>
-            )}
-
+            {/* Primary first: informational/price → lower “support” vibe */}
             {primaryCta?.label && primaryCta?.href && (
               <Button
                 variant={primaryCta.variant || 'primary'}
@@ -77,10 +71,21 @@ export default function IphoneAdsHero({
                 {primaryCta.label}
               </Button>
             )}
+
+            {secondaryCta?.label && secondaryCta?.href && (
+              <Button
+                variant={secondaryCta.variant || 'secondary'}
+                size="lg"
+                href={secondaryCta.href}
+                aria-label={secondaryCta.ariaLabel || secondaryCta.label}
+              >
+                {secondaryCta.label}
+              </Button>
+            )}
           </div>
         </div>
 
-        {/* Image column (appears left on desktop) */}
+        {/* Image column */}
         <div className={s.imageCol}>
           <div className={s.imageFrame}>
             <Image

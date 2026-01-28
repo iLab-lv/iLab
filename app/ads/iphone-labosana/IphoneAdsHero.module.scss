@@ -1,12 +1,9 @@
-// app/ads/iphone-remonts/IphoneAdsHero.module.scss
-
 @use '@/styles/_tokens.scss' as t;
 @use '@/styles/_layout.scss' as layout;
 
 /* ===== Hero wrapper ===== */
 
 .hero {
-  /* Black base + very subtle dark gray radial, so it still matches the header */
   background:
     radial-gradient(circle at 75% 40%, rgba(255, 255, 255, 0.10), transparent 60%),
     #010E10;
@@ -23,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   gap: t.$space-2xl;
-  min-height: 90vh;
+  min-height: 80vh; /* slightly less “funnel-like” than 90vh */
 }
 
 /* Desktop: text left, image right, vertically centered */
@@ -48,7 +45,7 @@
 
 .textCol {
   flex: 1 1 0;
-  max-width: 560px;
+  max-width: 580px;
 }
 
 .imageCol {
@@ -57,13 +54,11 @@
   justify-content: center;
 }
 
-/* Just a simple wrapper now – NO extra background */
 .imageFrame {
   max-width: 520px;
   width: 100%;
 }
 
-/* Phone image itself (transparent background, shows hero gradient) */
 .image {
   display: block;
   width: 100%;
@@ -89,9 +84,21 @@
   }
 }
 
+.brandLine {
+  margin: 0 0 10px;
+  color: t.$color-text;
+  font-weight: t.$font-weight-semibold;
+  max-width: 60ch;
+
+  @media (max-width: t.$bp-md) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .sub {
   margin: 0 0 12px;
-  max-width: 52ch;
+  max-width: 60ch;
   color: t.$color-text-2;
 
   @media (max-width: t.$bp-md) {
@@ -100,8 +107,25 @@
   }
 }
 
+/* “Policy clarity” block: small, readable, not salesy */
+.disclaimer {
+  margin-top: 8px;
+  max-width: 64ch;
+  color: t.$color-text-3;
+  font-size: t.$font-size-sm;
+  line-height: 1.5;
+  border-left: 2px solid rgba(34, 211, 238, 0.35);
+  padding-left: t.$space-sm;
+
+  @media (max-width: t.$bp-md) {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+}
+
 .ctaRow {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   flex-wrap: wrap;
   gap: t.$space-sm;

@@ -36,9 +36,9 @@ export function middleware(req) {
   }
 
   // 🚫 Block /ads/* on main domain
-  if (isInternalAdsPath) {
-    return new NextResponse(null, { status: 404 });
-  }
+  // if (isInternalAdsPath) {
+  //   return new NextResponse(null, { status: 404 });
+  // }
 
   return NextResponse.next();
 }
