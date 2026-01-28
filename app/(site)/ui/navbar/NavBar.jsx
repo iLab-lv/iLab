@@ -6,21 +6,14 @@ import { usePathname } from 'next/navigation';
 import s from './NavBar.module.scss';
 import { SOCIALS } from '@/data/site.config';
 
-import LanguageSwitcher from '../controls/LanguageSwitcher';
 import Controls from '../controls/Controls';
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 import Logo from '../logo/Logo';
 
-/**
- * Static, inline navigation.
- * - Brands are stable; only models change elsewhere.
- * - You can extend children for other categories later.
- */
 const NAV = [
   { label: 'iPhone remonts', href: '/iphone-remonts' },
-
   {
     label: 'Telefonu remonts',
     href: '/telefonu-remonts',
@@ -32,7 +25,6 @@ const NAV = [
       { label: 'Visi zīmoli', href: '/telefonu-remonts' },
     ],
   },
-
   {
     label: 'Planšetdatoru remonts',
     href: '/plansetdatoru-remonts',
@@ -44,54 +36,43 @@ const NAV = [
       { label: 'Lenovo', href: '/plansetdatoru-remonts/lenovo' },
     ],
   },
-
   {
     label: 'Datoru remonts',
     href: '/datoru-remonts',
     children: [
-      // 3x Apple
       { label: 'MacBook', href: '/datoru-remonts/macbook' },
       { label: 'iMac', href: '/datoru-remonts/imac' },
       { label: 'Mac Pro', href: '/datoru-remonts/mac-pro' },
-
-      // 3x most popular PC brands
       { label: 'Lenovo', href: '/datoru-remonts/lenovo' },
       { label: 'Asus', href: '/datoru-remonts/asus' },
       { label: 'HP', href: '/datoru-remonts/hp' },
-
-      // Catch-all
       { label: 'Visi zīmoli', href: '/datoru-remonts' },
     ],
   },
-
   { label: 'Dyson remonts', href: '/dyson-remonts' },
 ];
 
-export default function NavBar({ showNavigation = true }) {
+export default function NavBar({
+  showNavigation = true,
+  showHeaderCtas = true, // ✅ NEW: hide header CTAs on ads landings
+}) {
   const pathname = usePathname() || '/';
 
-  const [openSlug, setOpenSlug] = useState(null); // desktop dropdown slug
-  const [mobileOpen, setMobileOpen] = useState(false); // drawer open
-  const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null); // which parent is expanded in drawer
+  const [openSlug, setOpenSlug] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null);
 
   const navRef = useRef(null);
   const leaveT = useRef(null);
 
-  const {
-    locatorOpen,
-    contactOpen,
-    openLocator,
-    openContact,
-  } = useUiDialogs();
+  const { locatorOpen, contactOpen, openLocator, openContact } = useUiDialogs();
 
-  // Helpers: active state
   const isTopActive = (href) => {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(href + '/');
   };
   const isSubActive = (href) => pathname === href || pathname.startsWith(href + '/');
 
-  // Esc closes things
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') {
@@ -104,7 +85,6 @@ export default function NavBar({ showNavigation = true }) {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Click outside closes desktop dropdown
   useEffect(() => {
     const onClick = (e) => {
       const inNav = navRef.current && navRef.current.contains(e.target);
@@ -114,16 +94,13 @@ export default function NavBar({ showNavigation = true }) {
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
 
-  // Lock body scroll when mobile drawer is open
   useEffect(() => {
     if (typeof document === 'undefined') return;
 
     const body = document.body;
     const previousOverflow = body.style.overflow;
 
-    if (mobileOpen) {
-      body.style.overflow = 'hidden';
-    }
+    if (mobileOpen) body.style.overflow = 'hidden';
 
     return () => {
       body.style.overflow = previousOverflow;
@@ -141,7 +118,7 @@ export default function NavBar({ showNavigation = true }) {
             <Logo />
           </div>
 
-          {/* Desktop nav (CSS shows only ≥1360px) */}
+          {/* Desktop nav */}
           {showNavigation && (
             <nav className={s.nav} aria-label="Galvenā navigācija" ref={navRef}>
               {NAV.map((item) => {
@@ -187,7 +164,7 @@ export default function NavBar({ showNavigation = true }) {
                       onFocus={() => setOpenSlug(slug)}
                       onClick={(e) => {
                         if (openSlug !== slug) {
-                          e.preventDefault(); // first click opens dropdown instead of navigating
+                          e.preventDefault();
                           setOpenSlug(slug);
                         }
                       }}
@@ -230,54 +207,54 @@ export default function NavBar({ showNavigation = true }) {
           {/* Right actions */}
           <div className={s.actions}>
             <div className={s.actionsCluster}>
-              {/* Tablet & Desktop (≥768px): full buttons (Locator + Sazināties) */}
-              <div className={s.ctasTabletDesktop}>
-                <Button
-                  variant="ghost"
-                  size="md"
-                  leadingIcon={LocationPin}
-                  aria-haspopup="dialog"
-                  aria-controls="locator-panel"
-                  aria-expanded={locatorOpen}
-                  onClick={(e) => openLocator(e.currentTarget)}
-                  title="Servisa centri"
-                >
-                  Servisa centri
-                </Button>
+              {/* ✅ NEW: All header CTAs are gated */}
+              {showHeaderCtas && (
+                <>
+                  {/* Tablet & Desktop (≥768px): Locator + Contact */}
+                  <div className={s.ctasTabletDesktop}>
+                    <Button
+                      variant="ghost"
+                      size="md"
+                      leadingIcon={LocationPin}
+                      aria-haspopup="dialog"
+                      aria-controls="locator-panel"
+                      aria-expanded={locatorOpen}
+                      onClick={(e) => openLocator(e.currentTarget)}
+                      title="Servisa centri"
+                    >
+                      Servisa centri
+                    </Button>
 
-                <Button
-                  variant="primary"
-                  size="md"
-                  aria-haspopup="dialog"
-                  aria-controls="sazinaties-panel"
-                  aria-expanded={contactOpen}
-                  onClick={(e) => openContact(e.currentTarget)}
-                >
-                  Sazināties
-                </Button>
-              </div>
+                    <Button
+                      variant="primary"
+                      size="md"
+                      aria-haspopup="dialog"
+                      aria-controls="sazinaties-panel"
+                      aria-expanded={contactOpen}
+                      onClick={(e) => openContact(e.currentTarget)}
+                    >
+                      Sazināties
+                    </Button>
+                  </div>
 
-              {/* Mobile (<768px): locator icon (Sazināties moves to BottomBar) */}
-              <button
-                type="button"
-                className={s.iconBtn}
-                aria-haspopup="dialog"
-                aria-controls="locator-panel"
-                aria-expanded={locatorOpen}
-                onClick={(e) => {
-                  if (mobileOpen) setMobileOpen(false);
-                  if (openSlug) setOpenSlug(null);
-                  openLocator(e.currentTarget);
-                }}
-                aria-label="Servisa centri"
-              >
-                <LocationPin aria-hidden focusable="false" />
-              </button>
-
-              {/* Mobile-only language switcher */}
-              {/* <div className={s.slotUtility}>
-                <LanguageSwitcher initial="lv" />
-              </div> */}
+                  {/* Mobile (<768px): locator icon */}
+                  <button
+                    type="button"
+                    className={s.iconBtn}
+                    aria-haspopup="dialog"
+                    aria-controls="locator-panel"
+                    aria-expanded={locatorOpen}
+                    onClick={(e) => {
+                      if (mobileOpen) setMobileOpen(false);
+                      if (openSlug) setOpenSlug(null);
+                      openLocator(e.currentTarget);
+                    }}
+                    aria-label="Servisa centri"
+                  >
+                    <LocationPin aria-hidden focusable="false" />
+                  </button>
+                </>
+              )}
 
               {/* Hamburger (<1360px) – only if navigation is enabled */}
               {showNavigation && (
@@ -308,7 +285,6 @@ export default function NavBar({ showNavigation = true }) {
           aria-hidden={!mobileOpen}
         >
           <nav className={s.mobileInner} aria-label="Mobilā navigācija">
-            {/* Menu list */}
             <div className={s.mobileMenuList}>
               {NAV.map((item) => {
                 const slug = item.href.replace(/^\//, '');
@@ -333,7 +309,6 @@ export default function NavBar({ showNavigation = true }) {
 
                 return (
                   <div key={slug} className={s.drawerGroup}>
-                    {/* Parent row with separate expand/collapse toggle */}
                     <div
                       className={`${s.drawerItem} ${s.drawerParent} ${
                         isTopActive(item.href) ? s.active : ''
@@ -343,9 +318,7 @@ export default function NavBar({ showNavigation = true }) {
                         href={item.href}
                         className={s.drawerParentLabel}
                         aria-current={isTopActive(item.href) ? 'page' : undefined}
-                        onClick={() => {
-                          setMobileOpen(false); // navigate to category
-                        }}
+                        onClick={() => setMobileOpen(false)}
                       >
                         {item.label}
                       </Link>
@@ -356,15 +329,12 @@ export default function NavBar({ showNavigation = true }) {
                         aria-label={expanded ? 'Sakļaut sadaļu' : 'Izvērst sadaļu'}
                         aria-expanded={expanded}
                         aria-controls={submenuId}
-                        onClick={() => {
-                          setMobileExpandedSlug(expanded ? null : slug);
-                        }}
+                        onClick={() => setMobileExpandedSlug(expanded ? null : slug)}
                       >
                         <span aria-hidden>{expanded ? '−' : '+'}</span>
                       </button>
                     </div>
 
-                    {/* Submenu */}
                     <div id={submenuId} className={s.drawerSubmenu} hidden={!expanded}>
                       {item.children.map((child) => {
                         const subActive = isSubActive(child.href);
@@ -386,13 +356,12 @@ export default function NavBar({ showNavigation = true }) {
               })}
             </div>
 
-            {/* Controls at bottom of drawer */}
             <div className={s.mobileDrawerControls}>
-                      <Controls
-                        facebookUrl={SOCIALS.facebook}
-                        instagramUrl={SOCIALS.instagram}
-                        tiktokUrl={SOCIALS.tiktok}
-                      />
+              <Controls
+                facebookUrl={SOCIALS.facebook}
+                instagramUrl={SOCIALS.instagram}
+                tiktokUrl={SOCIALS.tiktok}
+              />
             </div>
           </nav>
         </div>

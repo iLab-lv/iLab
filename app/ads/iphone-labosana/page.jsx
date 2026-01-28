@@ -37,7 +37,7 @@ export default function IphoneAdsLandingPage() {
         <div className={s.container}>
           <Services
             id="iphone-services"
-            title="Populārākie iPhone remonti un bojājumi"
+            title="Populārākie iPhone bojājumi"
             items={[
               {
                 title: 'Ekrāna (displeja) maiņa',
@@ -74,14 +74,16 @@ export default function IphoneAdsLandingPage() {
         </div>
       </section>
 
+      {/* Reviews */}
+      <div id="reviews" />
+      <Reviews />
+
       {/* Price teaser (anchor for secondary CTA) */}
       <div id="price-teaser">
         <IphonePriceTeaser />
       </div>
 
-      {/* Reviews */}
-      <div id="reviews" />
-      <Reviews />
+
 
       {/* Locations with map pins opening the panel */}
       <Locations openPanelOnPin />
