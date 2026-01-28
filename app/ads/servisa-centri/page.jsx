@@ -21,7 +21,7 @@ import {
 } from 'react-icons/lu';
 
 import IphonePriceTeaser from './IphonePriceTeaser';
-import IphoneAdsHero from './IphoneAdsHero';
+import AdsHero from '../_components/AdsHero';
 
 const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);
 
@@ -29,44 +29,51 @@ export default function IphoneAdsLandingPage() {
   return (
     <>
       {/* New split-layout hero */}
-      <IphoneAdsHero />
+      <AdsHero />
       <AdsContactStrip />
 
+      {/* Reviews */}
+      <div id="reviews" />
+      <Reviews />
+
+      <Process />
+
       {/* Services */}
-      <section id="services" className={s.section} aria-labelledby="iphone-services-h2">
+            {/* Issues / symptoms (policy-safe wording) */}
+      <section id="issues" className={s.section} aria-labelledby="ads-issues-h2">
         <div className={s.container}>
           <Services
-            id="iphone-services"
-            title="Populārākie bojājumi"
+            id="ads-issues"
+            title="Ar ko varam palīdzēt"
             items={[
               {
-                title: 'Ekrāna (displeja) maiņa',
-                text: 'plaisas, tumši plankumi, nereaģē skārienekrāns.',
+                title: 'Attēla vai skāriena traucējumi',
+                text: 'pazūd attēls, mirgo, nereaģē skāriens vai parādās plankumi.',
                 icon: LuSmartphone,
               },
               {
-                title: 'Akumulatora maiņa',
-                text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10–20%.',
+                title: 'Uzlādes un enerģijas traucējumi',
+                text: 'ātri izlādējas, uzlāde ir nestabila vai ierīce izslēdzas pie maza %.',
                 icon: LuBatteryCharging,
               },
               {
-                title: 'Uzlādes ligzda',
-                text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
+                title: 'Uzlādes darbības traucējumi',
+                text: 'ierīce neuzlādējas, uzlāde ir lēna vai tiek pārtraukta.',
                 icon: LuPlugZap,
               },
               {
-                title: 'Kamera',
-                text: 'miglaini attēli, problēmas ar fokusēšanos.',
+                title: 'Kameras darbības traucējumi',
+                text: 'miglains attēls, problēmas ar fokusēšanos vai kamera neatveras.',
                 icon: LuCamera,
               },
               {
-                title: 'Skaļruņi/mikrofons',
-                text: 'klusa vai kropļota skaņa, sarunas laikā slikti dzird.',
+                title: 'Skaņas traucējumi',
+                text: 'klusa, kropļota skaņa vai sarunas laikā slikti dzird.',
                 icon: LuVolume2,
               },
               {
-                title: 'Ūdens bojājumi',
-                text: 'diagnostika un remonts pēc saskares ar šķidrumu (ja ierīci iespējams atjaunot).',
+                title: 'Pēc mitruma iedarbības',
+                text: 'veicam diagnostiku un izvērtējam iespējamos risinājumus uz vietas.',
                 icon: LuDroplets,
               },
             ]}
@@ -74,9 +81,8 @@ export default function IphoneAdsLandingPage() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <div id="reviews" />
-      <Reviews />
+
+      
 
       {/* Price teaser (anchor for secondary CTA) */}
       {/* <div id="price-teaser">
@@ -89,7 +95,7 @@ export default function IphoneAdsLandingPage() {
       <Locations openPanelOnPin />
 
       {/* Process & Why sections reused from main site */}
-      <Process />
+      
       <Why />
 
       {/* FAQ */}

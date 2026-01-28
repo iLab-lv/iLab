@@ -2,10 +2,13 @@
 import Link from 'next/link';
 import s from './Logo.module.scss';
 
-export default function Logo({ className = '' }) {
+export default function Logo({
+  href = '/',
+  className = '',
+}) {
   return (
     <Link
-      href="/"
+      href={href}
       className={`${s.brandLink} ${className}`.trim()}
       aria-label="iLab sākumlapa"
     >

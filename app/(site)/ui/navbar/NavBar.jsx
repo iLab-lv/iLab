@@ -54,7 +54,8 @@ const NAV = [
 
 export default function NavBar({
   showNavigation = true,
-  showHeaderCtas = true, // ✅ NEW: hide header CTAs on ads landings
+  showHeaderCtas = true, // hide header CTAs on ads landings
+  logoHref = '/',        // ✅ NEW: override where logo links
 }) {
   const pathname = usePathname() || '/';
 
@@ -115,7 +116,7 @@ export default function NavBar({
         <div className={s.container}>
           {/* Brand */}
           <div className={s.brand}>
-            <Logo />
+            <Logo href={logoHref} />
           </div>
 
           {/* Desktop nav */}
@@ -207,7 +208,6 @@ export default function NavBar({
           {/* Right actions */}
           <div className={s.actions}>
             <div className={s.actionsCluster}>
-              {/* ✅ NEW: All header CTAs are gated */}
               {showHeaderCtas && (
                 <>
                   {/* Tablet & Desktop (≥768px): Locator + Contact */}

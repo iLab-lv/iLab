@@ -64,17 +64,16 @@ const QUESTIONS = [
         aText:
           'Daudzas iPhone procedūras paveicam tajā pašā dienā (ekrāna, baterijas, uzlādes ligzdas maiņa), atkarīgs no modeļa un detaļu pieejamības.',
       },
-      // Shorter, ad-optimised variant
+      // Ad-optimised + policy-safe variant (no "maiņa"/parts)
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            <strong>iPhone ekrāna</strong> un <strong>baterijas maiņa</strong> bieži ir
-            gatava tajā pašā dienā. Precīzu termiņu pateiksim pēc īsas diagnostikas uz
-            vietas.
+            Termiņš ir atkarīgs no ierīces stāvokļa un nepieciešamajiem darbiem.
+            Precīzāk pateiksim pēc īsas diagnostikas uz vietas.
           </>
         ),
         aText:
-          'Daudzus iPhone remontus (ekrāna un baterijas maiņa) paveicam tajā pašā dienā; precīzu termiņu nosakām pēc diagnostikas.',
+          'Termiņš ir atkarīgs no ierīces stāvokļa un nepieciešamajiem darbiem; precīzi nosakām pēc diagnostikas uz vietas.',
       },
     },
     weight: 10,
@@ -126,23 +125,23 @@ const QUESTIONS = [
         aText:
           'iPhone cenas skatāmas pie konkrētā pakalpojuma: displeja, baterijas, kameras, skaļruņu/mikrofona, uzlādes ligzdas un ūdens bojājumu remonts.',
       },
+      // Ad-optimised + policy-safe variant (no "iPhone remonta cena", no links, no phone-quote)
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Cena atkarīga no <strong>iPhone modeļa</strong> un bojājuma. Aptuveno cenu
-            pateiksim uz vietas vai pa tālruni, pirms darba vienmēr saskaņojam izmaksas un
-            termiņu.
+            Izmaksas ir atkarīgas no ierīces veida un tās tehniskā stāvokļa.
+            Pirms darbu uzsākšanas vienmēr saskaņojam izmaksas un termiņu pēc diagnostikas uz vietas.
           </>
         ),
         aText:
-          'iPhone remonta cena atkarīga no modeļa un bojājuma; aptuveno cenu nosakām pēc diagnostikas un pirms darba vienmēr saskaņojam izmaksas.',
+          'Izmaksas ir atkarīgas no ierīces stāvokļa; pirms darbu uzsākšanas tās saskaņojam pēc diagnostikas uz vietas.',
       },
     },
     weight: 20,
   },
   {
     id: 'warranty',
-    q: 'Vai ir garantija uz remontu un detaļām?',
+    q: 'Vai ir garantija uz veiktajiem darbiem?',
     scopes: [
       FAQ_CONTEXT.HOME,
       FAQ_CONTEXT.IPHONE,
@@ -173,16 +172,16 @@ const QUESTIONS = [
         aText:
           'iPhone remontiem ir 90 dienu garantija darbam un detaļām; izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.',
       },
+      // Ad-optimised + policy-safe variant (no parts/OEM claims)
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            <strong>iPhone remontam</strong> piešķiram{' '}
-            <strong>90 dienu garantiju</strong> gan darbam, gan detaļām. Izmantojam
-            oriģinālās vai augstas kvalitātes OEM komponentes.
+            Jā — veiktajiem darbiem nodrošinām <strong>90 dienu garantiju</strong>.
+            Garantijas nosacījumi tiek izskaidroti uz vietas.
           </>
         ),
         aText:
-          'iPhone remontiem ir 90 dienu garantija darbam un detaļām; izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.',
+          'Jā — veiktajiem darbiem nodrošinām 90 dienu garantiju; nosacījumus izskaidrojam uz vietas.',
       },
     },
     weight: 30,
@@ -208,6 +207,19 @@ const QUESTIONS = [
     ),
     aText:
       'Ierīci var atnest bez pieraksta; kontaktus un darba laiku atradīsiet sadaļā Kontakti.',
+    variants: {
+      // Ad-optimised + policy-safe variant (no appointment CTA, no /kontakti link)
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            Vari droši atnest ierīci uz vietas — <strong>bez pieraksta</strong>.
+            Darba laiks un atrašanās vietas ir norādītas šajā lapā zemāk.
+          </>
+        ),
+        aText:
+          'Ierīci var atnest bez pieraksta; darba laiks un atrašanās vietas ir norādītas lapā.',
+      },
+    },
     weight: 40,
   },
   {
@@ -220,6 +232,7 @@ const QUESTIONS = [
       FAQ_CONTEXT.TABLET,
       FAQ_CONTEXT.LAPTOP,
       FAQ_CONTEXT.DYSON,
+      FAQ_CONTEXT.IPHONE_ADS, // include in iPhone Ads FAQ
     ],
     aHtml: (
       <>
@@ -230,11 +243,23 @@ const QUESTIONS = [
     ),
     aText:
       'Rīgā — T/C Domina Shopping un T/C Spice Home; adreses un darba laiki pieejami sadaļā Kontakti.',
+    variants: {
+      [FAQ_CONTEXT.IPHONE_ADS]: {
+        aHtml: (
+          <>
+            Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+            Precīzas adreses un darba laiks ir norādīti šajā lapā zemāk.
+          </>
+        ),
+        aText:
+          'Rīgā — T/C Domina Shopping un T/C Spice Home; adreses un darba laiks ir norādīti lapā.',
+      },
+    },
     weight: 50,
   },
   {
     id: 'data-safety',
-    q: 'Vai dati paliks droši remonta laikā?',
+    q: 'Vai dati paliks droši apkalpošanas laikā?',
     scopes: [
       FAQ_CONTEXT.HOME,
       FAQ_CONTEXT.IPHONE,
@@ -267,17 +292,16 @@ const QUESTIONS = [
         aText:
           'iPhone ekrāna un baterijas maiņa parasti neietekmē datus; tomēr iesakām izveidot rezerves kopiju.',
       },
+      // Ad-optimised + policy-safe variant (no links, no "maiņa", diagnostics framing)
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Ikdienas darbos — piemēram,{' '}
-            <strong>iPhone ekrāna</strong> vai <strong>baterijas maiņā</strong> — dati
-            parasti netiek skarti, tomēr drošībai iesakām pirms remonta izveidot
-            <em> rezerves kopiju</em>.
+            Strādājam uzmanīgi, taču drošībai iesakām pirms vizītes izveidot <em>rezerves kopiju</em>.
+            Diagnostikas laikā dati parasti netiek skarti.
           </>
         ),
         aText:
-          'iPhone ekrāna un baterijas maiņa parasti neietekmē datus, tomēr drošībai pirms remonta iesakām izveidot datu rezerves kopiju.',
+          'Iesakām pirms vizītes izveidot rezerves kopiju; diagnostikas laikā dati parasti netiek skarti.',
       },
     },
     weight: 60,
@@ -305,7 +329,8 @@ const QUESTIONS = [
   {
     id: 'phone-what-we-fix',
     q: 'Ko tieši remontējat telefonos?',
-    scopes: [FAQ_CONTEXT.PHONE, FAQ_CONTEXT.IPHONE, FAQ_CONTEXT.IPHONE_ADS],
+    // IMPORTANT: removed IPHONE_ADS from scopes (too trigger-heavy for safe ads landing)
+    scopes: [FAQ_CONTEXT.PHONE, FAQ_CONTEXT.IPHONE],
     aHtml: (
       <>
         Displejus, baterijas, uzlādes ligzdas, kameras, skaļruņus/mikrofonus, ūdens
@@ -342,17 +367,6 @@ const QUESTIONS = [
         ),
         aText:
           'iPhone remonts: displeja, baterijas, kameras, skaļruņu/mikrofona, uzlādes ligzdas un ūdens bojājumu remonts.',
-      },
-      [FAQ_CONTEXT.IPHONE_ADS]: {
-        aHtml: (
-          <>
-            <strong>iPhone remonts</strong>: displeja (ekrāna) un baterijas maiņa,
-            uzlādes ligzdas remonts, kameras, skaļruņu un mikrofona problēmu novēršana,
-            kā arī ūdens bojājumi.
-          </>
-        ),
-        aText:
-          'iPhone remonts ietver displeja, baterijas, uzlādes ligzdas, kameras, skaļruņu/mikrofona un ūdens bojājumu remontu.',
       },
     },
     weight: 70,
