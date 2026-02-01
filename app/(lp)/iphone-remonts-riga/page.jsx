@@ -20,7 +20,7 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-import IphonePriceTeaser from './IphonePriceTeaser';
+import IphonePriceTeaser from '../_components/IphonePriceTeaser';
 import IphoneAdsHero from './IphoneAdsHero';
 
 const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);

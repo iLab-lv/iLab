@@ -20,7 +20,7 @@ import {
 } from 'react-icons/lu';
 
 import IphoneAdsHero from '../iphone-labosana/IphoneAdsHero';
-import IphonePriceTeaser from '../iphone-labosana/IphonePriceTeaser';
+import IphonePriceTeaser from '../_components/IphonePriceTeaser';
 
 // If you don’t have a dedicated FAQ yet, reuse ads FAQ for now
 const { items: IPHONE_BATTERY_ADS_FAQ_ITEMS } = getFaqItems(

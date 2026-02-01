@@ -19,7 +19,7 @@ import {
   LuTriangleAlert,
 } from 'react-icons/lu';
 
-import IphonePriceTeaser from '../iphone-labosana/IphonePriceTeaser';
+import IphonePriceTeaser from '../_components/IphonePriceTeaser';
 import IphoneAdsHero from '../iphone-labosana/IphoneAdsHero';
 
 // NOTE: Best practice is to have a dedicated FAQ context for screen replacement,
