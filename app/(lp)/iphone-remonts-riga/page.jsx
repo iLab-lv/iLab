@@ -21,7 +21,7 @@ import {
 } from 'react-icons/lu';
 
 import IphonePriceTeaser from '../_components/IphonePriceTeaser';
-import IphoneAdsHero from './IphoneAdsHero';
+import IphoneAdsHero from '../_components/IphoneAdsHero';
 
 const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);
 

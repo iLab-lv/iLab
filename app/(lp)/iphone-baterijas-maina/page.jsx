@@ -19,7 +19,7 @@ import {
   LuThermometer,
 } from 'react-icons/lu';
 
-import IphoneAdsHero from '../iphone-labosana/IphoneAdsHero';
+import IphoneAdsHero from '../_components/IphoneAdsHero';
 import IphonePriceTeaser from '../_components/IphonePriceTeaser';
 
 // If you don’t have a dedicated FAQ yet, reuse ads FAQ for now

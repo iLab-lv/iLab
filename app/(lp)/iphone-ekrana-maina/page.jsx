@@ -20,7 +20,7 @@ import {
 } from 'react-icons/lu';
 
 import IphonePriceTeaser from '../_components/IphonePriceTeaser';
-import IphoneAdsHero from '../iphone-labosana/IphoneAdsHero';
+import IphoneAdsHero from '../_components/IphoneAdsHero';
 
 // NOTE: Best practice is to have a dedicated FAQ context for screen replacement,
 // but for now we reuse the existing ads FAQ items and only adjust the title.
