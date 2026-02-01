@@ -1,0 +1,82 @@
+/* app/ads/Layout.module.scss */
+@use '../styles/_tokens.scss' as *;
+
+/* Ads root: mirror main site background + topbar height var */
+.adsRoot {
+  --topbar-h: #{$header-desktop-height};
+  @media (max-width: $bp-md) {
+    --topbar-h: #{$header-mobile-height};
+  }
+
+  background: $color-surface-1;
+  min-height: 100vh;
+  color: $color-text;
+  display: flex;
+  flex-direction: column;
+}
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+
+  &:focus-visible {
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    border-radius: $radius-md;
+    background: $color-surface-2;
+    color: $color-text;
+    z-index: $z-overlay;
+  }
+}
+
+/* Main content; hero will sit under NavBar just like on main site */
+.main {
+  flex: 1 1 auto;
+}
+
+/* Minimal footer (NAP only) */
+.footer {
+  border-top: 1px solid $glass-border;
+  background: $color-surface-1;
+}
+
+.footerInner {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-md $space-md $space-lg $space-md;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  font-size: 14px;
+  color: $color-text-3;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footerTitle {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.footerSmall {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: $space-sm;
+}
