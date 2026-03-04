@@ -1,7 +1,6 @@
 // app/cenas/page.jsx
 import Script from "next/script";
 
-import DeviceHero from "@sections/device-hero/DeviceHero";
 import Process from "@sections/process/Process";
 import Faq from "@sections/faq/Faq";
 import Why from "@sections/why/Why";
@@ -64,9 +63,30 @@ function getAllBrandOptions() {
   // Provide BOTH shapes:
   // - BrandPickerPricelist currently uses {slug, name} and key={slug}
   // - Other places may use {brandSlug, label}
-  const brandOptions = Array.from(slugsWithDevices)
-    .sort((a, b) => a.localeCompare(b))
-    .map((slug) => {
+  const BRAND_ORDER = [
+  'apple',     // iPhone
+  'ipad',
+  'macbook',
+  'samsung',
+  'huawei',
+];
+
+const brandOptions = Array.from(slugsWithDevices)
+  .sort((a, b) => {
+    const ai = BRAND_ORDER.indexOf(a);
+    const bi = BRAND_ORDER.indexOf(b);
+
+    // Both in predefined order
+    if (ai !== -1 && bi !== -1) return ai - bi;
+
+    // One in order, one not
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+
+    // Fallback alphabetical
+    return a.localeCompare(b);
+  })
+  .map((slug) => {
       const name = nameBySlug.get(slug) || titleCaseSlug(slug);
       return {
         slug,
@@ -130,13 +150,13 @@ const faqLd = {
 // PAGE (server component)
 // -------------------------------------------------
 export default function CenasPage({ searchParams }) {
-  const selectedModel = searchParams?.model ? String(searchParams.model) : null;
-
   const { brandOptions, defaultBrand } = getAllBrandOptions();
 
   // Stabilize BrandPicker: if URL has ?brand=... and it's valid, use it.
   const brandFromUrl =
-    typeof searchParams?.brand === "string" ? searchParams.brand.toLowerCase().trim() : "";
+    typeof searchParams?.brand === "string"
+      ? searchParams.brand.toLowerCase().trim()
+      : "";
 
   const isValidBrand = brandFromUrl
     ? brandOptions.some((b) => b.slug === brandFromUrl || b.brandSlug === brandFromUrl)
@@ -161,18 +181,22 @@ export default function CenasPage({ searchParams }) {
       >
         {JSON.stringify(webPageLd)}
       </Script>
-      <Script
-        id="faq-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqLd)}
       </Script>
 
       {/* BRAND PICKER + PRICELIST */}
-      <section id="brand-list" className={s.section} aria-labelledby="brand-picker-h2">
+      <section
+        id="brand-list"
+        className={s.section}
+        aria-labelledby="brand-picker-h2"
+      >
         <div className={s.container}>
-          <h2 id="brand-picker-h2" className={s.h2} style={{ marginBottom: 12 }}>
+          <h2
+            id="brand-picker-h2"
+            className={s.h2}
+            style={{ marginBottom: 12 }}
+          >
             Izvēlies zīmolu
           </h2>
 
@@ -181,6 +205,8 @@ export default function CenasPage({ searchParams }) {
             pricingSource="firestore"
             brandOptions={brandOptions}
             defaultBrand={stableDefaultBrand}
+            // ✅ /cenas should show ALL categories (iphone/ipad/macbook/etc)
+            categorySlug="all"
             // /cenas: show ALL services; don't pass category/service filters
             title="Cenas pēc modeļa"
             allModelsHref="/"
@@ -239,7 +265,11 @@ export default function CenasPage({ searchParams }) {
       </section>
 
       {/* BOOKING / CTA */}
-      <section id="pieteikties" className={s.section} aria-label="Pieteikties remontam">
+      <section
+        id="pieteikties"
+        className={s.section}
+        aria-label="Pieteikties remontam"
+      >
         <div className={s.container}>
           <ConvertBand />
         </div>

@@ -27,14 +27,20 @@ function chunkArray(arr, size) {
   return out;
 }
 
+function norm(v) {
+  return String(v ?? '').toLowerCase().trim();
+}
+
 export default function BrandPickerPricelist({
   devices,
   pricing, // legacy object (devicePricing)
   pricingSource = 'static', // 'static' | 'firestore'
   brandOptions, // [{ slug, name }]
   defaultBrand,
+  // default remains telefonu-remonts for existing category pages
+  // /cenas should pass categorySlug="all"
   categorySlug = 'telefonu-remonts',
-  serviceIds, // ✅ IMPORTANT: no default [] here (prevents infinite effect loops)
+  serviceIds, // IMPORTANT: no default [] here
   title,
   intro,
   allModelsHref,
@@ -44,15 +50,7 @@ export default function BrandPickerPricelist({
   const router = useRouter();
   const sp = useSearchParams();
 
-  const initialBrand = (
-    sp.get('brand') ||
-    defaultBrand ||
-    brandOptions?.[0]?.slug ||
-    ''
-  )
-    .toLowerCase()
-    .trim();
-
+  const initialBrand = norm(sp.get('brand')) || norm(defaultBrand) || norm(brandOptions?.[0]?.slug) || '';
   const [brand, setBrand] = useState(initialBrand);
 
   // Firestore-loaded pricing (same shape as devicePricing)
@@ -60,29 +58,27 @@ export default function BrandPickerPricelist({
   const [fsLoading, setFsLoading] = useState(false);
   const [fsError, setFsError] = useState('');
 
-  // ✅ Normalize/lock serviceIds to a stable array + stable key
+  // Normalize/lock serviceIds to a stable array + stable key
   const serviceIdsArr = useMemo(
     () => (Array.isArray(serviceIds) ? serviceIds : []),
     [serviceIds]
   );
 
-  const serviceIdsKey = useMemo(() => {
-    // stable string to use in dependencies
-    return serviceIdsArr.length ? serviceIdsArr.join('|') : '';
-  }, [serviceIdsArr]);
+  const serviceIdsKey = useMemo(
+    () => (serviceIdsArr.length ? serviceIdsArr.join('|') : ''),
+    [serviceIdsArr]
+  );
 
-  // ✅ Keep state in sync when URL changes (back/forward, external replace)
-  // Depend on the brand string, not the searchParams object identity.
-  const urlBrand = (sp.get('brand') || '').toLowerCase().trim();
+  // Keep state in sync when URL changes (back/forward, external replace)
+  const urlBrand = norm(sp.get('brand'));
   useEffect(() => {
     if (urlBrand && urlBrand !== brand) setBrand(urlBrand);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlBrand]);
 
-  // ✅ Keep URL in sync when state changes (clicking brand tabs)
-  // Guarded to avoid replace loops.
+  // Keep URL in sync when state changes (clicking brand tabs)
   useEffect(() => {
-    const cur = (sp.get('brand') || '').toLowerCase().trim();
+    const cur = norm(sp.get('brand'));
     if (!brand || cur === brand) return;
 
     const params = new URLSearchParams(sp.toString());
@@ -97,7 +93,7 @@ export default function BrandPickerPricelist({
     return (
       <div className={styles.brandTabs} role="tablist" aria-label="Zīmola izvēle">
         {brandOptions.map((b) => {
-          const slug = String(b.slug || '').toLowerCase().trim();
+          const slug = norm(b.slug);
           const active = brand === slug;
           const label = normalizeBrandName(slug, b.name);
 
@@ -118,17 +114,23 @@ export default function BrandPickerPricelist({
     );
   }, [brand, brandOptions]);
 
-  // Build the list of model slugs we need to load pricing for (for selected brand + category)
+  // ✅ Internal category normalization:
+  // - For loading pricing we want "all" to mean "no category filter"
+  const catKey = norm(categorySlug);
+
+  // Build the list of model slugs we need to load pricing for (selected brand + optional category)
   const modelSlugsForBrand = useMemo(() => {
-    const b = String(brand || '').toLowerCase().trim();
-    const cat = String(categorySlug || '').toLowerCase().trim();
+    const b = norm(brand);
 
     return (devices || [])
-      .filter((d) => String(d?.category || '').toLowerCase().trim() === cat)
-      .filter((d) => String(d?.brandSlug || '').toLowerCase().trim() === b)
-      .map((d) => String(d.slug))
+      .filter((d) => {
+        if (!catKey || catKey === 'all') return true;
+        return norm(d?.category) === catKey;
+      })
+      .filter((d) => norm(d?.brandSlug) === b)
+      .map((d) => String(d?.slug || '').trim())
       .filter(Boolean);
-  }, [devices, brand, categorySlug]);
+  }, [devices, brand, catKey]);
 
   // Load pricing from Firestore when requested
   useEffect(() => {
@@ -154,7 +156,6 @@ export default function BrandPickerPricelist({
       setFsError('');
 
       try {
-        // Firestore "in" supports limited list size; use safe chunk size
         const CHUNK = 30;
         const chunks = chunkArray(modelSlugsForBrand, CHUNK);
 
@@ -168,7 +169,10 @@ export default function BrandPickerPricelist({
         }
 
         for (const group of chunks) {
-          const q = query(collection(db, 'modelServices'), where('modelId', 'in', group));
+          const q = query(
+            collection(db, 'modelServices'),
+            where('modelId', 'in', group)
+          );
           const snap = await getDocs(q);
 
           const temp = new Map(); // modelId -> Map(serviceId -> price)
@@ -180,9 +184,7 @@ export default function BrandPickerPricelist({
             if (!modelId || !serviceId) return;
 
             // Filter to serviceIds if provided
-            if (serviceIdsArr.length) {
-              if (!serviceIdsArr.includes(serviceId)) return;
-            }
+            if (serviceIdsArr.length && !serviceIdsArr.includes(serviceId)) return;
 
             if (!temp.has(modelId)) temp.set(modelId, new Map());
             temp
@@ -196,14 +198,12 @@ export default function BrandPickerPricelist({
           // Convert into the expected "items" arrays
           for (const [modelId, byService] of temp.entries()) {
             if (serviceIdsArr.length) {
-              // preserve provided serviceIds order
               pricingObj[modelId] = {
                 items: serviceIdsArr
                   .filter((sid) => byService.has(sid))
                   .map((sid) => ({ id: sid, price: byService.get(sid) })),
               };
             } else {
-              // alphabetical serviceId order
               const items = Array.from(byService.entries())
                 .sort(([a], [b]) => String(a).localeCompare(String(b)))
                 .map(([sid, price]) => ({ id: sid, price }));
@@ -214,7 +214,7 @@ export default function BrandPickerPricelist({
 
         if (cancelled) return;
         setFsPricing(pricingObj);
-      } catch (e) {
+      } catch {
         if (cancelled) return;
         setFsError('Neizdevās ielādēt cenas no Firebase.');
         setFsPricing({});
@@ -227,10 +227,15 @@ export default function BrandPickerPricelist({
     return () => {
       cancelled = true;
     };
-    // ✅ use serviceIdsKey instead of serviceIds array identity
   }, [pricingSource, modelSlugsForBrand, serviceIdsKey, serviceIdsArr]);
 
   const effectivePricing = pricingSource === 'firestore' ? fsPricing : pricing;
+
+  // ✅ IMPORTANT:
+  // ServicePricelist may not understand categorySlug="all".
+  // Pass '' to indicate "no category filter" for /cenas,
+  // while preserving the original behavior for category pages.
+  const servicePricelistCategorySlug = catKey === 'all' ? '' : categorySlug;
 
   return (
     <>
@@ -247,7 +252,7 @@ export default function BrandPickerPricelist({
         devices={devices}
         pricing={effectivePricing}
         brandSlug={brand}
-        categorySlug={categorySlug}
+        categorySlug={servicePricelistCategorySlug}
         serviceIds={serviceIdsArr}
         title={title}
         intro={intro}

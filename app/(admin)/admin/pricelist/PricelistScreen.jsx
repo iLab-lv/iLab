@@ -2,8 +2,16 @@
 
 import { useMemo, useState } from 'react';
 import devices from '@/data/devices';
+import repairServices from '@/data/repairServices';
 
-import { collection, doc, getDocs, query, where, writeBatch } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  where,
+  writeBatch,
+} from 'firebase/firestore';
 import { db } from '@/lib/firebaseClient';
 
 // ✅ custom button (adjust import path if needed)
@@ -16,8 +24,8 @@ const DEFAULT_CURRENCY = 'EUR';
 // ✅ Manual brand list + order
 const BRAND_MENU = [
   { brandSlug: 'apple', label: 'iPhone' },
-    { brandSlug: 'ipad', label: 'iPad' },
-    { brandSlug: 'macbook', label: 'MacBook' },
+  { brandSlug: 'ipad', label: 'iPad' },
+  { brandSlug: 'macbook', label: 'MacBook' },
   { brandSlug: 'samsung', label: 'Samsung' },
   { brandSlug: 'xiaomi', label: 'Xiaomi' },
 ];
@@ -33,7 +41,10 @@ function normalizePriceInput(v) {
 }
 
 async function fetchModelServiceRows(modelId) {
-  const q = query(collection(db, 'modelServices'), where('modelId', '==', modelId));
+  const q = query(
+    collection(db, 'modelServices'),
+    where('modelId', '==', modelId)
+  );
   const snap = await getDocs(q);
 
   return snap.docs
@@ -42,10 +53,30 @@ async function fetchModelServiceRows(modelId) {
       return {
         docId: d.id,
         serviceId: data.serviceId || '',
-        price: Object.prototype.hasOwnProperty.call(data, 'price') ? data.price : '',
+        price: Object.prototype.hasOwnProperty.call(data, 'price')
+          ? data.price
+          : '',
       };
     })
     .sort((a, b) => a.serviceId.localeCompare(b.serviceId));
+}
+
+// ✅ Build default pricing rows from repairServices catalog (by device.category)
+function buildDefaultRowsForModel(modelSlug) {
+  const model = (devices || []).find((d) => d?.slug === modelSlug) || null;
+  const category = model?.category || null;
+  if (!category) return [];
+
+  return (repairServices || [])
+    .filter(
+      (s) => Array.isArray(s.categories) && s.categories.includes(category)
+    )
+    .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
+    .map((s) => ({
+      docId: '', // not yet saved
+      serviceId: s.id, // IMPORTANT: catalog service id (e.g. laptop-battery)
+      price: '', // empty => "pēc pieprasījuma"
+    }));
 }
 
 export default function PricelistScreen({
@@ -78,7 +109,8 @@ export default function PricelistScreen({
       const ay = a.year ?? -1;
       const by = b.year ?? -1;
       if (by !== ay) return by - ay;
-      if ((a.order ?? 9999) !== (b.order ?? 9999)) return (a.order ?? 9999) - (b.order ?? 9999);
+      if ((a.order ?? 9999) !== (b.order ?? 9999))
+        return (a.order ?? 9999) - (b.order ?? 9999);
       return a.name.localeCompare(b.name);
     });
 
@@ -89,7 +121,8 @@ export default function PricelistScreen({
     const map = new Map(); // seriesSlug -> { series, seriesSlug, items[] }
     for (const d of filteredDevices) {
       const key = d.seriesSlug || d.series || 'other';
-      if (!map.has(key)) map.set(key, { series: d.series || 'Other', seriesSlug: key, items: [] });
+      if (!map.has(key))
+        map.set(key, { series: d.series || 'Other', seriesSlug: key, items: [] });
       map.get(key).items.push(d);
     }
 
@@ -129,7 +162,11 @@ export default function PricelistScreen({
       setLoading((p) => ({ ...p, [modelSlug]: true }));
       try {
         const rows = await fetchModelServiceRows(modelSlug);
-        setRowsByModel((p) => ({ ...p, [modelSlug]: rows }));
+
+        // ✅ If no rows in Firestore -> seed defaults from repairServices
+        const seeded = rows.length ? rows : buildDefaultRowsForModel(modelSlug);
+
+        setRowsByModel((p) => ({ ...p, [modelSlug]: seeded }));
       } catch {
         setError('Failed to load model pricing from Firestore.');
       } finally {
@@ -186,7 +223,11 @@ export default function PricelistScreen({
       }
 
       const fresh = await fetchModelServiceRows(modelSlug);
-      setRowsByModel((p) => ({ ...p, [modelSlug]: fresh }));
+      // If still empty (e.g. rules blocked) keep seeded rows
+      setRowsByModel((p) => ({
+        ...p,
+        [modelSlug]: fresh.length ? fresh : p[modelSlug] || [],
+      }));
       setStatus(`Saved: ${modelSlug}`);
     } catch {
       setError('Failed to save pricing (permissions?).');
@@ -195,7 +236,8 @@ export default function PricelistScreen({
     }
   }
 
-  const brandLabel = BRAND_MENU.find((b) => b.brandSlug === brandSlug)?.label || brandSlug;
+  const brandLabel =
+    BRAND_MENU.find((b) => b.brandSlug === brandSlug)?.label || brandSlug;
 
   return (
     <div className={s.wrap}>
@@ -249,7 +291,9 @@ export default function PricelistScreen({
                   >
                     <span className={s.modelName}>
                       {d.name}
-                      {d.year ? <span className={s.modelYear}> · {d.year}</span> : null}
+                      {d.year ? (
+                        <span className={s.modelYear}> · {d.year}</span>
+                      ) : null}
                     </span>
 
                     <span className={s.modelChevron}>
@@ -260,19 +304,26 @@ export default function PricelistScreen({
                   {isOpen && (
                     <div className={s.panel}>
                       {rows.length === 0 ? (
-                        <div className={s.empty}>No pricing rows yet.</div>
+                        <div className={s.empty}>
+                          No services found for this category.
+                        </div>
                       ) : (
                         <div className={s.rows}>
                           {rows.map((r, idx) => {
                             const notApplicable = r.price === null;
 
                             return (
-                              <div key={`${r.docId || 'row'}-${idx}`} className={s.row}>
+                              <div
+                                key={`${r.docId || r.serviceId || 'row'}-${idx}`}
+                                className={s.row}
+                              >
                                 <input
                                   className={s.input}
                                   value={r.serviceId}
                                   onChange={(e) =>
-                                    updateRow(d.slug, idx, { serviceId: e.target.value })
+                                    updateRow(d.slug, idx, {
+                                      serviceId: e.target.value,
+                                    })
                                   }
                                   placeholder="serviceId"
                                 />
@@ -294,7 +345,8 @@ export default function PricelistScreen({
                                     type="checkbox"
                                     checked={notApplicable}
                                     onChange={(e) => {
-                                      if (e.target.checked) updateRow(d.slug, idx, { price: null });
+                                      if (e.target.checked)
+                                        updateRow(d.slug, idx, { price: null });
                                       else updateRow(d.slug, idx, { price: '' });
                                     }}
                                   />

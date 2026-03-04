@@ -115,6 +115,70 @@ const repairServices = [
     defaultWarrantyDays: 0,
     order: 60,
   },
+
+// LAPTOP
+    {
+    id: 'laptop-battery',
+    title: 'Akumulatora nomaiņa',
+    slug: 'akumulatora-nomaina',
+    categories: ['datoru-remonts'],
+    family: 'Barošana un uzlāde',
+    defaultTimeText: '1–3 st',
+    defaultWarrantyDays: 90,
+    order: 70,
+  },
+  {
+    id: 'laptop-display',
+    title: 'Displeja nomaiņa',
+    slug: 'displeja-nomaina',
+    categories: ['datoru-remonts'],
+    family: 'Ekrāns',
+    defaultTimeText: 'pēc pieprasījuma',
+    defaultWarrantyDays: 90,
+    order: 71,
+  },
+  {
+    id: 'laptop-liquid-damage',
+    title: 'Atjaunošana pēc šķidruma bojājumiem',
+    slug: 'atjaunosana-pec-skidruma-bojajumiem',
+    categories: ['datoru-remonts'],
+    family: 'Diagnostika',
+    defaultTimeText: 'no 1 dienas',
+    defaultWarrantyDays: 0,
+    order: 72,
+  },
+  {
+    id: 'laptop-maintenance',
+    title: 'Profilakse un tehniskā apkalpošana',
+    slug: 'profilakse-un-tehniska-apkalposana',
+    categories: ['datoru-remonts'],
+    family: 'Apkope',
+    defaultTimeText: '1–2 st',
+    defaultWarrantyDays: 90,
+    order: 73,
+  },
+  {
+    id: 'laptop-keyboard',
+    title: 'Tastatūras nomaiņa',
+    slug: 'tastaturas-nomaina',
+    categories: ['datoru-remonts'],
+    family: 'Korpuss un ievade',
+    defaultTimeText: 'pēc pieprasījuma',
+    defaultWarrantyDays: 90,
+    order: 74,
+  },
+  {
+    id: 'laptop-touchpad',
+    title: 'Touchpad nomaiņa',
+    slug: 'touchpad-nomaina',
+    categories: ['datoru-remonts'],
+    family: 'Korpuss un ievade',
+    defaultTimeText: 'pēc pieprasījuma',
+    defaultWarrantyDays: 90,
+    order: 75,
+  },
+
+
 ];
 
 export default repairServices;

@@ -3604,6 +3604,689 @@ const devices = [
 
 
 
+
+
+// ------------------------
+// MacBook Pro (MacBook brand)
+// ------------------------
+
+{
+  slug: 'macbook-pro-13-2015-a1502',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" (2015) (A1502)',
+  year: 2015,
+  image: '/images/devices/macbook/macbook-pro-13-2015-(a1502).webp',
+  popular: false,
+  order: 700,
+  metaTitle: 'MacBook Pro 13" (2015) (A1502) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" (2015) (A1502) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" (2015) (A1502)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-15-2015-a1398',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 15" (2015) (A1398)',
+  year: 2015,
+  image: '/images/devices/macbook/macbook-pro-15-2015-(a1398).webp',
+  popular: false,
+  order: 710,
+  metaTitle: 'MacBook Pro 15" (2015) (A1398) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 15" (2015) (A1398) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 15" (2015) (A1398)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-2016-a1708-a1706',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" (2016) (A1708, A1706)',
+  year: 2016,
+  image: '/images/devices/macbook/macbook-pro-13-2016-(a1708+a1706).webp',
+  popular: false,
+  order: 720,
+  metaTitle: 'MacBook Pro 13" (2016) (A1708, A1706) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" (2016) (A1708, A1706) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" (2016) (A1708, A1706)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-15-2016-a1707',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 15" (2016) (A1707)',
+  year: 2016,
+  image: '/images/devices/macbook/macbook-pro-15-2016-(a1707).webp',
+  popular: false,
+  order: 730,
+  metaTitle: 'MacBook Pro 15" (2016) (A1707) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 15" (2016) (A1707) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 15" (2016) (A1707)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-2018-a1989',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" (2018) (A1989)',
+  year: 2018,
+  image: '/images/devices/macbook/macbook-pro-13-2018-(a1989).webp',
+  popular: false,
+  order: 740,
+  metaTitle: 'MacBook Pro 13" (2018) (A1989) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" (2018) (A1989) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" (2018) (A1989)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-15-2018-a1990',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 15" (2018) (A1990)',
+  year: 2018,
+  image: '/images/devices/macbook/macbook-pro-15-2018-(a1990).webp',
+  popular: false,
+  order: 750,
+  metaTitle: 'MacBook Pro 15" (2018) (A1990) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 15" (2018) (A1990) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 15" (2018) (A1990)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-2019-a1989-a2159',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" (2019) (A1989, A2159)',
+  year: 2019,
+  image: '/images/devices/macbook/macbook-pro-13-2019-(a1989+a2159).webp',
+  popular: false,
+  order: 760,
+  metaTitle: 'MacBook Pro 13" (2019) (A1989, A2159) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" (2019) (A1989, A2159) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" (2019) (A1989, A2159)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-15-2019-a1990',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 15" (2019) (A1990)',
+  year: 2019,
+  image: '/images/devices/macbook/macbook-pro-15-2019-(a1990).webp',
+  popular: false,
+  order: 770,
+  metaTitle: 'MacBook Pro 15" (2019) (A1990) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 15" (2019) (A1990) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 15" (2019) (A1990)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-16-2019-a2141',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 16" (2019) (A2141)',
+  year: 2019,
+  image: '/images/devices/macbook/macbook-pro-16-2019-(a2141).webp',
+  popular: false,
+  order: 780,
+  metaTitle: 'MacBook Pro 16" (2019) (A2141) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 16" (2019) (A2141) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 16" (2019) (A2141)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-intel-2020-a2251-a2289',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" Intel (2020) (A2251, A2289)',
+  year: 2020,
+  image: '/images/devices/macbook/macbook-pro-13-intel-2020-(a2251+a2289).webp',
+  popular: false,
+  order: 790,
+  metaTitle: 'MacBook Pro 13" Intel (2020) (A2251, A2289) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" Intel (2020) (A2251, A2289) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" Intel (2020) (A2251, A2289)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-m1-2020-a2338',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" M1 (2020) (A2338)',
+  year: 2020,
+  image: '/images/devices/macbook/macbook-pro-13-m1-2020-(a2338).webp',
+  popular: false,
+  order: 800,
+  metaTitle: 'MacBook Pro 13" M1 (2020) (A2338) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" M1 (2020) (A2338) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" M1 (2020) (A2338)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-14-m1-pro-max-2021-a2442',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 14" M1 Pro/Max (2021) (A2442)',
+  year: 2021,
+  image: '/images/devices/macbook/macbook-pro-14-m1-pro-max-2021-(a2442).webp',
+  popular: false,
+  order: 810,
+  metaTitle: 'MacBook Pro 14" M1 Pro/Max (2021) (A2442) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 14" M1 Pro/Max (2021) (A2442) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 14" M1 Pro/Max (2021) (A2442)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-16-m1-pro-max-2021-a2485',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 16" M1 Pro/Max (2021) (A2485)',
+  year: 2021,
+  image: '/images/devices/macbook/macbook-pro-16-m1-pro-max-2021-(a2485).webp',
+  popular: false,
+  order: 820,
+  metaTitle: 'MacBook Pro 16" M1 Pro/Max (2021) (A2485) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 16" M1 Pro/Max (2021) (A2485) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 16" M1 Pro/Max (2021) (A2485)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-13-m2-2022-a2338',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 13" M2 (2022) (A2338)',
+  year: 2022,
+  image: '/images/devices/macbook/macbook-pro-13-m2-2022-(a2338).webp',
+  popular: false,
+  order: 830,
+  metaTitle: 'MacBook Pro 13" M2 (2022) (A2338) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 13" M2 (2022) (A2338) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 13" M2 (2022) (A2338)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-14-m2-pro-max-2023-a2779',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 14" M2 Pro/Max (2023) (A2779)',
+  year: 2023,
+  image: '/images/devices/macbook/macbook-pro-14-m2-pro-max-2023-(a2779).webp',
+  popular: false,
+  order: 840,
+  metaTitle: 'MacBook Pro 14" M2 Pro/Max (2023) (A2779) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 14" M2 Pro/Max (2023) (A2779) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 14" M2 Pro/Max (2023) (A2779)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-16-m2-pro-max-2023-a2780',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 16" M2 Pro/Max (2023) (A2780)',
+  year: 2023,
+  image: '/images/devices/macbook/macbook-pro-16-m2-pro-max-2023-(a2780).webp',
+  popular: false,
+  order: 850,
+  metaTitle: 'MacBook Pro 16" M2 Pro/Max (2023) (A2780) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 16" M2 Pro/Max (2023) (A2780) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 16" M2 Pro/Max (2023) (A2780)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-14-m3-pro-max-2024-a2992',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 14" M3/Pro/Max (2024) (A2992)',
+  year: 2024,
+  image: '/images/devices/macbook/macbook-pro-14-m3-pro-max-2024-(a2992).webp',
+  popular: true,
+  order: 860,
+  metaTitle: 'MacBook Pro 14" M3/Pro/Max (2024) (A2992) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 14" M3/Pro/Max (2024) (A2992) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 14" M3/Pro/Max (2024) (A2992)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-16-m3-pro-max-2024-a2991',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 16" M3 Pro/Max (2024) (A2991)',
+  year: 2024,
+  image: '/images/devices/macbook/macbook-pro-16-m3-pro-max-2024-(a2991).webp',
+  popular: true,
+  order: 870,
+  metaTitle: 'MacBook Pro 16" M3 Pro/Max (2024) (A2991) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 16" M3 Pro/Max (2024) (A2991) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 16" M3 Pro/Max (2024) (A2991)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-14-m4-pro-max-2025-a3185',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 14" M4/Pro/Max (2025) (A3185)',
+  year: 2025,
+  image: '/images/devices/macbook/macbook-pro-14-m4-pro-max-2025-(a3185).webp',
+  popular: true,
+  order: 880,
+  metaTitle: 'MacBook Pro 14" M4/Pro/Max (2025) (A3185) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 14" M4/Pro/Max (2025) (A3185) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 14" M4/Pro/Max (2025) (A3185)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+{
+  slug: 'macbook-pro-16-m4-pro-max-2025-a3186',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Pro',
+  seriesSlug: 'macbook-pro',
+  name: 'MacBook Pro 16" M4/Pro/Max (2025) (A3186)',
+  year: 2025,
+  image: '/images/devices/macbook/macbook-pro-16-m4-pro-max-2025-(a3186).webp',
+  popular: true,
+  order: 890,
+  metaTitle: 'MacBook Pro 16" M4/Pro/Max (2025) (A3186) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Pro 16" M4/Pro/Max (2025) (A3186) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Pro 16" M4/Pro/Max (2025) (A3186)</strong> remonts Rīgā — diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+/* ===========================
+   MACBOOK AIR
+=========================== */
+
+{
+  slug: 'macbook-air-11-2015-a1465',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 11" (2015) (A1465)',
+  year: 2015,
+  image: '/images/devices/macbook/macbook-air-11-2015-(a1465).webp',
+  popular: false,
+  order: 800,
+  metaTitle: 'MacBook Air 11" (2015) (A1465) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 11" (2015) (A1465) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 11" (2015) (A1465)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-2015-a1466',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" (2015) (A1466)',
+  year: 2015,
+  image: '/images/devices/macbook/macbook-air-13-2015-(a1466).webp',
+  popular: false,
+  order: 801,
+  metaTitle: 'MacBook Air 13" (2015) (A1466) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" (2015) (A1466) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" (2015) (A1466)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-2017-a1466',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" (2017) (A1466)',
+  year: 2017,
+  image: '/images/devices/macbook/macbook-air-13-2017-(a1466).webp',
+  popular: false,
+  order: 802,
+  metaTitle: 'MacBook Air 13" (2017) (A1466) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" (2017) (A1466) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" (2017) (A1466)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-2018-a1932',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" (2018) (A1932)',
+  year: 2018,
+  image: '/images/devices/macbook/macbook-air-13-2018-(a1932).webp',
+  popular: false,
+  order: 803,
+  metaTitle: 'MacBook Air 13" (2018) (A1932) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" (2018) (A1932) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" (2018) (A1932)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-2019-a1932',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" (2019) (A1932)',
+  year: 2019,
+  image: '/images/devices/macbook/macbook-air-13-2019-(a1932).webp',
+  popular: false,
+  order: 804,
+  metaTitle: 'MacBook Air 13" (2019) (A1932) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" (2019) (A1932) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" (2019) (A1932)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-intel-2020-a2179',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" Intel (2020) (A2179)',
+  year: 2020,
+  image: '/images/devices/macbook/macbook-air-13-intel-2020-(a2179).webp',
+  popular: false,
+  order: 805,
+  metaTitle: 'MacBook Air 13" Intel (2020) (A2179) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" Intel (2020) (A2179) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" Intel (2020) (A2179)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-m1-2020-a2337',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" M1 (2020) (A2337)',
+  year: 2020,
+  image: '/images/devices/macbook/macbook-air-13-m1-2020-(a2337).webp',
+  popular: false,
+  order: 806,
+  metaTitle: 'MacBook Air 13" M1 (2020) (A2337) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" M1 (2020) (A2337) remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" M1 (2020) (A2337)</strong> remonts Rīgā — diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-m2-2022-a2681',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" M2 (2022) (A2681)',
+  year: 2022,
+  image: '/images/devices/macbook/macbook-air-13-m2-2022-(a2681).webp',
+  popular: false,
+  order: 807,
+  metaTitle: 'MacBook Air 13" M2 (2022) (A2681) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" M2 (2022) (A2681) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" M2 (2022) (A2681)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-15-m2-2023-a2941',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 15" M2 (2023) (A2941)',
+  year: 2023,
+  image: '/images/devices/macbook/macbook-air-15-m2-2023-(a2941).webp',
+  popular: false,
+  order: 808,
+  metaTitle: 'MacBook Air 15" M2 (2023) (A2941) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 15" M2 (2023) (A2941) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 15" M2 (2023) (A2941)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-m3-2024-a3113',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" M3 (2024) (A3113)',
+  year: 2024,
+  image: '/images/devices/macbook/macbook-air-13-m3-2024-(a3113).webp',
+  popular: true,
+  order: 809,
+  metaTitle: 'MacBook Air 13" M3 (2024) (A3113) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" M3 (2024) (A3113) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" M3 (2024) (A3113)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-15-m3-2024-a3114',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 15" M3 (2024) (A3114)',
+  year: 2024,
+  image: '/images/devices/macbook/macbook-air-15-m3-2024-(a3114).webp',
+  popular: true,
+  order: 810,
+  metaTitle: 'MacBook Air 15" M3 (2024) (A3114) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 15" M3 (2024) (A3114) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 15" M3 (2024) (A3114)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-13-m4-2025-a3240',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 13" M4 (2025) (A3240)',
+  year: 2025,
+  image: '/images/devices/macbook/macbook-air-13-m4-2025-(a3240).webp',
+  popular: true,
+  order: 811,
+  metaTitle: 'MacBook Air 13" M4 (2025) (A3240) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 13" M4 (2025) (A3240) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 13" M4 (2025) (A3240)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
+
+{
+  slug: 'macbook-air-15-m4-2025-a3241',
+  category: 'datoru-remonts',
+  brand: 'Apple',
+  brandSlug: 'macbook',
+  series: 'MacBook Air',
+  seriesSlug: 'macbook-air',
+  name: 'MacBook Air 15" M4 (2025) (A3241)',
+  year: 2025,
+  image: '/images/devices/macbook/macbook-air-15-m4-2025-(a3241).webp',
+  popular: true,
+  order: 812,
+  metaTitle: 'MacBook Air 15" M4 (2025) (A3241) remonts Rīgā | iLab',
+  metaDescription:
+    'MacBook Air 15" M4 (2025) (A3241) remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+  bodyHtml: `
+<p><strong>MacBook Air 15" M4 (2025) (A3241)</strong> remonts Rīgā — diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+  `,
+},
 ];
 
 export default devices;
