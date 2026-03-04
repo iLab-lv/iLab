@@ -50,6 +50,7 @@ export default function AdsLayout({ children }) {
         {/* Mobile/Tablet bottom CTAs (unchanged) */}
         <BottomBar />
         
+        
 
         {/* Ads page content */}
         <main id="main" className={l.main}>
