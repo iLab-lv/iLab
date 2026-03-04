@@ -1,14 +1,13 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* DeviceHero.module.scss — simplified, in-flow, with masked bottom fade
-   + brand logo overlay + brand tint support */
+/* DeviceHero.module.scss — in-flow on mobile, floating/bleeding on desktop */
 
 /* Tunables */
-$hero-max-h:        520px;   // max media height
-$overlap-desktop:   220px;   // image float into header on ≥960px
-$overlap-mobile:     0px;    // no overlap on mobile
-$fade-start-desktop: 50%;    // where the fade starts (from top) on desktop
-$fade-start-mobile:  60%;    // fade start on mobile
+$hero-max-h:        520px;
+$overlap-desktop:   220px;
+$overlap-mobile:      0px;
+$fade-start-desktop: 50%;
+$fade-start-mobile:  60%;
 
 @function bleed-calc() {
   @return calc((100vw - min(100vw, #{$container-max})) / 2);
@@ -19,13 +18,13 @@ $fade-start-mobile:  60%;    // fade start on mobile
   position: relative;
   min-block-size: min(50vh, #{$hero-max-h});
   overflow: visible;
-  isolation: isolate; // keep tint/overlays scoped to this section
+  isolation: isolate;
 
-  /* default/fallback tint (transparent) */
+  /* default tint */
   --brand-tint: transparent;
 
   @media (min-width: 960px) {
-    z-index: 9; /* above header separator; below CTAs (~70) */
+    z-index: 9;
   }
 }
 
@@ -48,7 +47,7 @@ $fade-start-mobile:  60%;    // fade start on mobile
     "copy";
 
   @media (min-width: 960px) {
-    grid-template-columns: 1fr minmax(420px, 600px); /* copy | image */
+    grid-template-columns: 1fr minmax(420px, 600px);
     grid-template-areas: "copy media";
     padding-top: $space-2xl;
   }
@@ -56,108 +55,111 @@ $fade-start-mobile:  60%;    // fade start on mobile
 
 /* ---------- Copy ---------- */
 .copy {
+  grid-area: copy;
   color: $color-text;
   font-weight: 500;
   line-height: 1.55;
 }
 
-/* size the real paragraph so it wins over any global p rules */
 .copy :where(p) {
-  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.375rem); /* ~18–22px */
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.375rem);
 }
 
-/* if you have multiple <p> lines and want equal emphasis */
-.copy :where(p + p) { margin-top: 0.5rem; }
+.copy :where(p + p) {
+  margin-top: 0.5rem;
+}
 
-/* ---------- Media ----------
-   - Desktop: absolute so it can float up + bleed horizontally
-   - Mobile: relative with explicit height for <Image fill>
-   - Mask fade applied to the image itself (no black boxes) */
+/* ---------- Media ---------- */
 .media {
   grid-area: media;
 
-  /* desktop/tablet */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: min(calc(50vw + #{bleed-calc()}), 900px);
-  height: min(60vh, #{$hero-max-h});
-  pointer-events: none; // decorative; don't block clicks
-  transform: translateY(-#{$overlap-desktop});
+  /* IMPORTANT for next/image fill */
+  position: relative;
+
   border-radius: 16px;
-  overflow: hidden; // ensures tint/logo respect rounded corners
+  overflow: hidden;
+  pointer-events: none; /* decorative */
 
-  /* Subtle brand tint overlay (controlled via --brand-tint) */
-  .tint {
-    content: '';
+  /* desktop/tablet: float up + bleed */
+  @media (min-width: 960px) {
     position: absolute;
-    inset: 0;
-    background: var(--brand-tint, transparent);
-    mix-blend-mode: overlay;
-    opacity: 0.24; /* keep subtle; adjust if needed */
-    pointer-events: none;
-    z-index: 1;
+    top: 0;
+    bottom: 0;
+
+    width: min(calc(50vw + #{bleed-calc()}), 900px);
+    height: min(60vh, #{$hero-max-h});
+
+    transform: translateY(-#{$overlap-desktop});
   }
+}
 
-  /* Brand logo overlay (decorative) */
-  .brandOverlay {
-    position: absolute;
-    right: min(4vw, 48px);
-    bottom: min(4vw, 48px);
-    z-index: 2;
-    opacity: 0.9;
-    pointer-events: none;
+/* Tint overlay */
+.tint {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-tint, transparent);
+  mix-blend-mode: overlay;
+  opacity: 0.24;
+  pointer-events: none;
+  z-index: 1;
+}
 
-    /* Optional glassy pill (enable when needed)
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(6px);
-    border-radius: 12px;
-    padding: 6px 12px;
-    */
-
-    :global(img) {
-      width: min(160px, 40vw);
-      height: auto;
-      display: block;
-    }
-  }
+/* Brand logo overlay */
+.brandOverlay {
+  position: absolute;
+  right: min(4vw, 48px);
+  bottom: min(4vw, 48px);
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
 
   :global(img) {
+    width: min(160px, 40vw);
+    height: auto;
     display: block;
-    position: relative;
-    object-fit: contain;
-    object-position: center;
-    z-index: 0; /* image below tint & logo */
-
-    /* simple bottom fade (transparent) */
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 1) #{$fade-start-desktop},
-      rgba(0, 0, 0, 0) 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 1) #{$fade-start-desktop},
-      rgba(0, 0, 0, 0) 100%
-    );
   }
+}
+
+/* Image element produced by next/image */
+.media :global(img) {
+  display: block;
+  position: relative;
+  object-fit: contain;
+  object-position: center;
+  z-index: 0;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) #{$fade-start-desktop},
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) #{$fade-start-desktop},
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 /* ---------- Focal alignment (desktop/tablet) ---------- */
-.focalRight .media { right: calc(#{bleed-calc()} * -1); left: auto; }
-.focalLeft  .media { left:  calc(#{bleed-calc()} * -1); right: auto; }
-.focalCenter .media {
-  left: 50%;
-  right: auto;
-  transform: translate(-50%, -#{$overlap-desktop});
+@media (min-width: 960px) {
+  .focalRight .media { right: calc(#{bleed-calc()} * -1); left: auto; }
+  .focalLeft  .media { left:  calc(#{bleed-calc()} * -1); right: auto; }
+
+  .focalCenter .media {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -#{$overlap-desktop});
+  }
 }
 
-/* ---------- Optional: category variant ---------- */
+/* ---------- Category variant ---------- */
 .hero.category {
-  .media {
-    width: min(calc(50vw + #{bleed-calc()}), 980px); /* slightly wider cap */
-    height: min(65vh, 600px);                        /* taller max */
-    transform: translateY(-180px);                   /* gentler overlap */
+  @media (min-width: 960px) {
+    .media {
+      width: min(calc(50vw + #{bleed-calc()}), 980px);
+      height: min(65vh, 600px);
+      transform: translateY(-180px);
+    }
   }
 }
 
@@ -166,31 +168,28 @@ $fade-start-mobile:  60%;    // fade start on mobile
   .hero { min-block-size: min(48vh, #{$hero-max-h}); }
 
   .media {
-    position: relative;
-    left: auto; right: auto;
     width: 80vw;
     height: min(48vh, #{$hero-max-h});
     margin-inline: auto;
     margin-bottom: $space-lg;
     transform: translateY(-#{$overlap-mobile});
+  }
 
-    :global(img) {
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1) #{$fade-start-mobile},
-        rgba(0, 0, 0, 0) 100%
-      );
-      mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1) #{$fade-start-mobile},
-        rgba(0, 0, 0, 0) 100%
-      );
-    }
+  .media :global(img) {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) #{$fade-start-mobile},
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) #{$fade-start-mobile},
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 }
 
-/* ---------- Brand presets (scoped to local .hero class) ----------
-   You can still override per-page with inline style: style={{ '--brand-tint': 'rgba(...)' }} */
+/* ---------- Brand presets ---------- */
 .hero[data-brand="samsung"] { --brand-tint: rgba(0, 120, 255, 0.25); }
 .hero[data-brand="xiaomi"]  { --brand-tint: rgba(255, 100,   0, 0.25); }
 .hero[data-brand="huawei"]  { --brand-tint: rgba(200,   0,  40, 0.25); }

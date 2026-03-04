@@ -121,12 +121,13 @@ export default function IphoneRemontsPage() {
 
       {/* HERO */}
       <DeviceHero
-        image="/images/categories/iphone_remonts.webp"
-        alt="iPhone remonts Rīgā"
-        focal="right"
-        className="category"
-        bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
-      />
+  image="/images/categories/iphone_remonts.webp"
+  alt="iPhone remonts Rīgā"
+  focal="right"
+  className="category"
+  priority
+  bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
+/>
 
       {/* INTRO */}
       <section className={s.section} aria-labelledby="iphone-intro-h2">
