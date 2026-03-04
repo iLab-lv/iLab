@@ -86,18 +86,16 @@ export default function SiteLayout({ children }) {
       email: loc.email || COMPANY.email,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: loc.address, // full string; simple but safe
+        streetAddress: loc.address,
         addressLocality: 'Rīga',
         addressCountry: 'LV',
       },
       openingHoursSpecification,
-      // Connect branch to the main organization
       branchOf: {
         '@id': `${ORIGIN}#organization`,
       },
     };
 
-    // Optional geo support: if you later add loc.geo = { lat, lng } in site.config
     if (loc.geo && typeof loc.geo.lat === 'number' && typeof loc.geo.lng === 'number') {
       base.geo = {
         '@type': 'GeoCoordinates',
@@ -111,12 +109,14 @@ export default function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
-      {/* GA4 global tag */}
+      {/* -------------------------------------------------
+          GA4 — defer loading to reduce TBT/Lighthouse impact
+          ------------------------------------------------- */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -127,20 +127,21 @@ export default function SiteLayout({ children }) {
         `}
       </Script>
 
-      {/* Site-wide JSON-LD: Organization */}
-      <Script id="org-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(orgLd)}
-      </Script>
-
-      {/* Site-wide JSON-LD: WebSite */}
-      <Script id="website-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(webSiteLd)}
-      </Script>
-
-      {/* Site-wide JSON-LD: LocalBusiness branches (Domina, Spice) */}
-      <Script id="localbusiness-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(localBusinessLd)}
-      </Script>
+      {/* -------------------------------------------------
+          JSON-LD — render in HTML (no runtime script scheduling)
+          ------------------------------------------------- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
+      />
 
       <UiDialogsProvider>
         {/* a11y: skip link */}
