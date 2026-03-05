@@ -31,8 +31,8 @@
 /* Card / block spans the full container width */
 .item {
   width: 100%;
-  max-width: none;                 /* remove previous 70ch cap */
-  margin: 0;                       /* align flush with container */
+  max-width: none; /* remove previous 70ch cap */
+  margin: 0;       /* align flush with container */
   padding: clamp($space-lg, 2vw, $space-2xl);
   background: $color-surface-1;
   border: $border-thin solid $color-border;
@@ -52,5 +52,53 @@
   margin: 0;
   color: $color-text-2;
   font-size: clamp(1rem, 0.9rem + 0.6vw, 1.25rem); /* larger body */
-  line-height: 1.75;                                /* relaxed for long copy */
+  line-height: 1.75; /* relaxed for long copy */
+
+  /* Ensure injected HTML has good typography defaults */
+  :where(p) {
+    margin: 0;
+  }
+  :where(p + p) {
+    margin-top: $space-md;
+  }
+
+  :where(strong) {
+    color: $color-text;
+    font-weight: $font-weight-semibold;
+  }
+
+  :where(ul, ol) {
+    margin: $space-md 0;
+    padding-left: 1.25em;
+  }
+
+  :where(li + li) {
+    margin-top: 0.35em;
+  }
+
+  /* ✅ A11y: links must not rely on color only */
+  :where(a) {
+    color: $color-accent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-thickness $dur-base $ease-std;
+  }
+
+  :where(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  :where(a:focus-visible) {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .text :where(a) {
+    transition: none;
+  }
 }
