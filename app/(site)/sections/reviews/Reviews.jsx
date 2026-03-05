@@ -155,7 +155,7 @@ export default function Reviews({ id = 'reviews' }) {
                 </header>
 
                 {place.featuredReviews?.length ? (
-                  <ul className={s.reviewList} role="list">
+                  <ul className={s.reviewList}>
                     {place.featuredReviews.map((r, idx) => (
                       <ReviewItem
                         key={idx}

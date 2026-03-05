@@ -1,3 +1,4 @@
+// app/(site)/ui/navbar/NavBar.jsx
 'use client';
 
 import { useState, useRef, useEffect, Fragment } from 'react';
@@ -54,8 +55,8 @@ const NAV = [
 
 export default function NavBar({
   showNavigation = true,
-  showHeaderCtas = true, // hide header CTAs on ads landings
-  logoHref = '/',        // ✅ NEW: override where logo links
+  showHeaderCtas = true,
+  logoHref = '/',
 }) {
   const pathname = usePathname() || '/';
 
@@ -68,12 +69,15 @@ export default function NavBar({
 
   const { locatorOpen, contactOpen, openLocator, openContact } = useUiDialogs();
 
+  const hasChildren = (item) => Array.isArray(item.children) && item.children.length > 0;
+
   const isTopActive = (href) => {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(href + '/');
   };
   const isSubActive = (href) => pathname === href || pathname.startsWith(href + '/');
 
+  // Close menus on Escape
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') {
@@ -86,6 +90,7 @@ export default function NavBar({
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
+  // Close desktop dropdown when clicking outside nav
   useEffect(() => {
     const onClick = (e) => {
       const inNav = navRef.current && navRef.current.contains(e.target);
@@ -95,6 +100,7 @@ export default function NavBar({
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
 
+  // Lock body scroll when mobile drawer is open
   useEffect(() => {
     if (typeof document === 'undefined') return;
 
@@ -107,8 +113,6 @@ export default function NavBar({
       body.style.overflow = previousOverflow;
     };
   }, [mobileOpen]);
-
-  const hasChildren = (item) => Array.isArray(item.children) && item.children.length > 0;
 
   return (
     <Fragment>
@@ -141,6 +145,7 @@ export default function NavBar({
                 }
 
                 const panelId = `nav-dd-${slug}`;
+                const panelOpen = openSlug === slug;
 
                 return (
                   <div
@@ -159,12 +164,12 @@ export default function NavBar({
                       href={item.href}
                       className={`${s.navItem} ${s.navParent} ${topActive ? s.active : ''}`}
                       aria-haspopup="true"
-                      aria-expanded={openSlug === slug}
+                      aria-expanded={panelOpen}
                       aria-controls={panelId}
                       aria-current={topActive ? 'page' : undefined}
                       onFocus={() => setOpenSlug(slug)}
                       onClick={(e) => {
-                        if (openSlug !== slug) {
+                        if (!panelOpen) {
                           e.preventDefault();
                           setOpenSlug(slug);
                         }
@@ -176,10 +181,14 @@ export default function NavBar({
                       </span>
                     </Link>
 
+                    {/* IMPORTANT a11y:
+                        Keep animation (opacity/pointer-events), but prevent focus when closed:
+                        aria-hidden + inert */}
                     <div
                       id={panelId}
-                      className={`${s.dropdown} ${openSlug === slug ? s.open : ''}`}
-                      aria-hidden={openSlug !== slug}
+                      className={`${s.dropdown} ${panelOpen ? s.open : ''}`}
+                      aria-hidden={!panelOpen}
+                      inert={!panelOpen}
                     >
                       <ul className={s.menuCol}>
                         {item.children.map((child) => {
@@ -283,6 +292,7 @@ export default function NavBar({
           id="mobile-drawer"
           className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`}
           aria-hidden={!mobileOpen}
+          inert={!mobileOpen}
         >
           <nav className={s.mobileInner} aria-label="Mobilā navigācija">
             <div className={s.mobileMenuList}>
