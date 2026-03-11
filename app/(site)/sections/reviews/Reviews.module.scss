@@ -2,6 +2,7 @@
 @use '@/styles/_layout.scss' as layout;
 
 /* Section base */
+
 .section {
   padding-block: $space-3xl;
 
@@ -19,6 +20,7 @@
 }
 
 /* Google logo row */
+
 .logoRow {
   margin-top: $space-lg;
   display: flex;
@@ -32,6 +34,7 @@
 }
 
 /* Status texts */
+
 .statusText,
 .statusTextError {
   margin-top: $space-xl;
@@ -48,6 +51,7 @@
 }
 
 /* Places grid */
+
 .placesGrid {
   margin-top: $space-xl;
   display: grid;
@@ -60,6 +64,7 @@
 }
 
 /* Glass card */
+
 @mixin glass-weak {
   background: $glass-bg-weak;
   border: $border-thin solid $glass-border;
@@ -77,13 +82,14 @@
 }
 
 /* Header / rating */
+
 .placeHeader {
   margin-bottom: $space-sm;
 }
 
 .placeName {
   margin: 0 0 $space-xs;
-  font-size: $font-size-p; // smaller title
+  font-size: $font-size-p;
   line-height: $line-height-heading;
   color: $color-text;
 }
@@ -103,7 +109,7 @@
 
 .ratingValue {
   font-weight: $font-weight-bold;
-  font-size: $font-size-h5; // larger rating
+  font-size: $font-size-h5;
   line-height: $line-height-heading;
   color: $color-text;
 }
@@ -113,18 +119,21 @@
   color: $color-text-2;
 }
 
-/* Reviews inside a place */
+/* Reviews list */
+
 .reviewList {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-md; // more space between comments
 }
 
+/* Individual review */
+
 .reviewItem {
-  padding-top: $space-xs;
+  padding-top: $space-md;
+  padding-bottom: $space-md;
   border-top: 1px solid $glass-border;
 }
 
@@ -133,23 +142,69 @@
   padding-top: 0;
 }
 
+/* Author */
+
 .reviewAuthor {
   font-weight: $font-weight-semibold;
-  color: $color-text; // unchanged, stays strong
-  margin-bottom: 2px;
+  color: $color-text;
+  margin-bottom: $space-xs;
+  line-height: 1.3;
 }
+
+/* Meta row (stars + date) */
+
+.reviewMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+  min-height: 1.25rem;
+}
+
+.reviewRating {
+  display: inline-flex;
+  align-items: center;
+  font-size: $font-size-sm;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.reviewStarsFilled {
+  color: $color-accent;
+}
+
+.reviewStarsEmpty {
+  color: rgba(255, 255, 255, 0.24);
+}
+
+/* Relative date */
+
+.reviewDate {
+  font-size: 0.78rem;
+  line-height: 1.2;
+  color: $color-text-2;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Review text */
 
 .reviewText {
   margin: 0;
-  color: $color-text-2; // slightly faded comment text
+  color: $color-text-2;
   font-size: $font-size-p;
+  line-height: 1.55;
 }
+
+/* Expand button */
 
 .reviewMore {
   border: none;
   background: none;
   padding: 0;
-  margin-left: 4px;
+  margin-left: 6px;
   font: inherit;
   font-size: $font-size-sm;
   color: $color-accent;
@@ -161,13 +216,16 @@
   }
 }
 
+/* Empty text */
+
 .emptyText {
   margin: 0;
   font-size: $font-size-sm;
   color: $color-text-2;
 }
 
-/* CTA per place */
+/* CTA */
+
 .placeCta {
   margin-top: auto;
   padding-top: $space-sm;
@@ -182,4 +240,19 @@
     color: $color-accent-hover;
     text-decoration: underline;
   }
+}
+
+/* Mobile adjustments */
+
+@media (max-width: $bp-md) {
+
+  .reviewMeta {
+    align-items: flex-start;
+    margin-bottom: $space-xs;
+  }
+
+  .reviewDate {
+    font-size: 0.74rem;
+  }
+
 }

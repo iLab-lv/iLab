@@ -1,4 +1,3 @@
-// screens/HomeScreen.jsx
 import React from 'react';
 import Script from 'next/script';
 
@@ -14,12 +13,12 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
 
-export default function HomeScreen() {
+export default function HomeScreen({ locale = 'lv' }) {
   const { items: HOME_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.HOME);
   const HOME_FAQ_LD = getFaqLd(FAQ_CONTEXT.HOME);
 
   return (
-    <main>
+    <>
       {/* Homepage FAQ JSON-LD (from centralized data) */}
       <Script id="home-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(HOME_FAQ_LD)}
@@ -45,14 +44,11 @@ export default function HomeScreen() {
         align="center"
         background="gradient"
         imageSrc="/images/hero.webp"
-        /* === Desktop framing & text lift === */
-        posDesktop="50% 20%"  // keep desktop focal point
-        offsetDesktop={-8}    // lift text on desktop (-8vh)
-        /* === Mobile layout controls (inline image mode) === */
-        imageInlineMobile     // use inline image on mobile (BG off on mobile)
-        offsetMobile={12}     // move text DOWN on mobile (+12vh)
-        imageLiftMobile={124}  // visually lift image UP from bottom (px or 'vh'); doesn't change hero height
-        // imageMaxWidthMobile={1100} // optional: cap inline image width on mobile
+        posDesktop="50% 20%"
+        offsetDesktop={-8}
+        imageInlineMobile
+        offsetMobile={12}
+        imageLiftMobile={124}
       />
 
       <div id="services" />
@@ -62,15 +58,13 @@ export default function HomeScreen() {
       {/* <Devices /> */}
 
       <div id="reviews" />
-      <Reviews />
+      <Reviews locale={locale} />
 
       <Process />
-
 
       <Why />
 
       <Locations openPanelOnPin />
-
 
       <Faq
         id="home-faq"
@@ -79,6 +73,6 @@ export default function HomeScreen() {
       />
 
       <ConvertBand />
-    </main>
+    </>
   );
 }
