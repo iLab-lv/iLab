@@ -1,14 +1,14 @@
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 export const metadata = {
   title: 'iLab — Ātrs mobilo ierīču servisa centrs',
   description:
     'Remonts tajā pašā dienā. 90 dienu garantija. Divas filiāles Rīgā: Domina un Spice Home.',
   alternates: {
-    canonical: '/',
+    canonical: '/ru',
   },
 };
 
 export default function Page() {
-  return <HomeScreen locale="lv" />;
+  return <HomeScreen locale="ru" />;
 }

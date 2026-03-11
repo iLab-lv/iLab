@@ -1,0 +1,270 @@
+@use "@styles/tokens" as *;
+
+.wrap {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-lg $space-md;
+  color: $color-text;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  flex-wrap: wrap;
+  margin-bottom: $space-md;
+}
+
+.h1 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+}
+
+.localeSwitch {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.localeBtn {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.localeBtnActive {
+  background: $color-surface-3;
+  border-color: $color-border;
+}
+
+.error {
+  margin-top: $space-md;
+  color: #ff4d6d;
+}
+
+.status {
+  margin-top: $space-md;
+  color: #22c55e;
+}
+
+.groups {
+  margin-top: $space-lg;
+  display: grid;
+  gap: $space-md;
+}
+
+.group {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-1;
+}
+
+.modelToggle {
+  width: 100%;
+  text-align: left;
+  padding: $space-sm $space-md;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.modelName {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: $font-size-lg;
+}
+
+.modelChevron {
+  color: $color-text-2;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.panel {
+  padding: $space-md;
+  background: $color-surface-2;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.05);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-sm;
+  margin-bottom: $space-md;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metaItem {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface-1;
+  padding: $space-sm $space-md;
+}
+
+.metaLabel {
+  display: block;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  margin-bottom: $space-xs;
+}
+
+.metaValue {
+  display: block;
+  color: $color-text;
+  font-weight: $font-weight-semibold;
+}
+
+.empty {
+  color: $color-text-2;
+  padding: $space-sm 0;
+}
+
+.rows {
+  display: grid;
+  gap: $space-sm;
+}
+
+.reviewCard {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface-1;
+  padding: $space-sm;
+}
+
+.rowTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+
+  @media (max-width: $bp-md) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.rowTitle {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.rowActions {
+  display: flex;
+  gap: $space-xs;
+  flex-wrap: wrap;
+}
+
+.smallBtn,
+.smallBtnDanger {
+  height: $btn-h-md;
+  padding: 0 $space-sm;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+
+  &:disabled {
+    opacity: $opacity-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.smallBtnDanger {
+  color: #ff8da1;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 180px 140px;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input,
+.textarea {
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-1;
+  color: $color-text;
+  width: 100%;
+  min-width: 0;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.input {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+
+  &:disabled {
+    opacity: $opacity-disabled;
+  }
+}
+
+.textarea {
+  padding: $space-sm $space-md;
+  resize: vertical;
+  min-height: 120px;
+  font: inherit;
+}
+
+.panelFooter {
+  margin-top: $space-md;
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
