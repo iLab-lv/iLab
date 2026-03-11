@@ -107,6 +107,9 @@ export default function AdminShell({ children }) {
           <a href="/admin/pricelist" onClick={() => setOpen(false)}>
             Pricelist
           </a>
+          <a href="/admin/reviews" onClick={() => setOpen(false)}>
+            Reviews
+          </a>
           <a href="/admin/components" onClick={() => setOpen(false)}>
             Components
           </a>
