@@ -1,0 +1,255 @@
+@use '@/styles/_tokens.scss' as *;
+
+.button {
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  border-radius: $radius-pill;
+  border: 1px solid $glass-border;
+  background: $glass-bg-weak;
+  color: $color-text;
+  text-decoration: none;
+
+  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+
+  box-shadow: $shadow-soft;
+  transition:
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    transform $dur-fast $ease-std;
+
+  &:hover {
+    border-color: $glass-border-2;
+    box-shadow: $shadow-accent;
+    text-decoration: none;
+
+    .arrowWrap {
+      transform: scale(1.05);
+      box-shadow: $shadow-accent;
+    }
+
+    .arrow {
+      transform: translateX(1px);
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+
+    .arrowWrap {
+      transform: scale(1.02);
+    }
+
+    .arrow {
+      transform: translateX(1px);
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover .arrowWrap,
+    &:hover .arrow,
+    &:active .arrowWrap,
+    &:active .arrow {
+      transform: none;
+    }
+
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+/* ===== Sizes ===== */
+
+.lg {
+  min-height: 64px;
+  gap: 14px;
+  padding: 11px 14px 11px 18px;
+
+  .iconWrap {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .label {
+    font-size: 1.05rem;
+    line-height: 1.15;
+  }
+
+  .arrowWrap {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .arrow {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.sm {
+  min-height: 56px;
+  gap: 11px;
+  padding: 9px 10px 9px 14px;
+
+  .iconWrap {
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .label {
+    font-size: 0.96rem;
+    line-height: 1.15;
+  }
+
+  .arrowWrap {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .arrow {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* ===== Shared inner parts ===== */
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.icon {
+  color: rgba($color-accent, 0.9);
+  display: block;
+}
+
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: $color-text;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrowWrap {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-accent;
+  color: #00161a;
+  box-shadow: $shadow-accent;
+  transition:
+    transform $dur-base $ease-emph,
+    box-shadow $dur-base $ease-std;
+}
+
+.arrow {
+  display: block;
+  transition: transform $dur-base $ease-emph;
+}
+
+.disabled,
+:global(button[disabled]).button {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+@media (max-width: $bp-md) {
+  .lg {
+    min-height: 58px;
+    gap: 12px;
+    padding: 9px 10px 9px 14px;
+
+    .iconWrap {
+      flex-basis: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .label {
+      font-size: 1rem;
+    }
+
+    .arrowWrap {
+      flex-basis: 36px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .arrow {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .sm {
+    min-height: 52px;
+    gap: 10px;
+    padding: 8px 9px 8px 12px;
+
+    .iconWrap {
+      flex-basis: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .label {
+      font-size: 0.92rem;
+    }
+
+    .arrowWrap {
+      flex-basis: 32px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .arrow {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

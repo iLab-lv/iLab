@@ -1,12 +1,5 @@
-import { RiSmartphoneLine, RiTabletLine, RiMacbookLine } from 'react-icons/ri';
+import DeviceButton from '@components/button/DeviceButton';
 import s from './Services.module.scss';
-
-function iconFor(label = '', href = '') {
-  const key = `${label} ${href}`.toLowerCase();
-  if (key.includes('ipad')) return RiTabletLine;
-  if (key.includes('macbook')) return RiMacbookLine;
-  return RiSmartphoneLine; // default -> iPhone
-}
 
 export default function IphoneRemonts({
   idBase = 'services',
@@ -17,6 +10,9 @@ export default function IphoneRemonts({
 }) {
   const bid = `${idBase}-apple`;
 
+  const topLinks = links.filter((link) => link.group === 'mobile');
+  const bottomLinks = links.filter((link) => link.group === 'computer');
+
   return (
     <article className={s.appleBlock} aria-labelledby={`${bid}-title`}>
       <div className={s.appleTop}>
@@ -24,7 +20,11 @@ export default function IphoneRemonts({
           <h3 id={`${bid}-title`} className={s.blockTitle}>
             {title}
           </h3>
-          <p className={s.blockIntro} dangerouslySetInnerHTML={{ __html: introHTML }} />
+
+          <p
+            className={s.blockIntro}
+            dangerouslySetInnerHTML={{ __html: introHTML }}
+          />
         </div>
 
         <div className={s.appleVisual} aria-hidden="true">
@@ -35,22 +35,33 @@ export default function IphoneRemonts({
         </div>
       </div>
 
-      {/* Full-width CTA row (3 columns desktop) */}
-      <ul className={s.appleLinks} role="list" aria-label="Apple saīsnes">
-        {links.map((l) => {
-          const IconComp = iconFor(l.label, l.href) || RiSmartphoneLine; // safe fallback
-          return (
-            <li key={l.href}>
-              <a className={s.appleLink} href={l.href}>
-                <span className={s.linkIcon} aria-hidden="true">
-                  <IconComp size={36} />
-                </span>
-                <span className={s.linkLabel}>{l.label}</span>
-              </a>
+      {!!topLinks.length && (
+        <ul className={s.appleLinksTop} role="list" aria-label="Apple mobilo ierīču saīsnes">
+          {topLinks.map((link) => (
+            <li key={link.href}>
+              <DeviceButton
+                href={link.href}
+                label={link.label}
+                device={link.device || 'phone'}
+              />
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      )}
+
+      {!!bottomLinks.length && (
+        <ul className={s.appleLinksBottom} role="list" aria-label="Apple datoru saīsnes">
+          {bottomLinks.map((link) => (
+            <li key={link.href}>
+              <DeviceButton
+                href={link.href}
+                label={link.label}
+                device={link.device || 'laptop'}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </article>
   );
 }

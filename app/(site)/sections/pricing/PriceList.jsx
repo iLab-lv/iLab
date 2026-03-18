@@ -174,9 +174,11 @@ export default function PriceList({
 
         {showNotes && (
           <ul className={s.notes} role="note">
+            
             <li>Bezmaksas diagnostika. Precīzu cenu apstiprinām pēc pārbaudes.</li>
             <li>90 dienu garantija visiem remontdarbiem.</li>
             <li>Cenas norādītas ar detaļu un darba izmaksām.</li>
+            <li>norādītā cena ir spēkā, ja detaļa ir pieejama noliktavā.</li>
           </ul>
         )}
       </div>

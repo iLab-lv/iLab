@@ -4,7 +4,6 @@ import Script from 'next/script';
 import Hero from '@sections/hero/Hero';
 import Services from '@sections/home-devices/Services';
 import Process from '@sections/process/Process';
-import Devices from '@sections/home-devices/Devices';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
 import Reviews from '@sections/reviews/Reviews';
