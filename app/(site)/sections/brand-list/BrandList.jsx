@@ -1,9 +1,14 @@
-// @sections/brand-list/BrandList.jsx
 import Link from 'next/link';
-import Button from '@components/button/Button';
+import DeviceButton from '@components/button/DeviceButton';
 import s from './BrandList.module.scss';
 
 const APPLE_SLUGS = ['macbook', 'imac', 'mac-pro'];
+
+const APPLE_DEVICE_MAP = {
+  macbook: 'laptop',
+  imac: 'imac',
+  'mac-pro': 'station',
+};
 
 export default function BrandList({
   id = 'brand-list',
@@ -23,32 +28,34 @@ export default function BrandList({
   return (
     <section id={id} className={s.section} aria-labelledby={appleHeadingId}>
       <div className={s.container}>
-        {/* Apple block */}
-        <div className={s.block}>
-          <h2 id={appleHeadingId} className={s.h2}>
-            {appleTitle}
-          </h2>
-          <p className={s.leadText}>{appleIntro}</p>
+        <div className={s.appleBlock}>
+          <div className={s.appleText}>
+            <h2 id={appleHeadingId} className={s.h2}>
+              {appleTitle}
+            </h2>
 
-          <div className={s.appleButtons}>
-            {appleBrands.map((brand) => (
-              <Button
-                key={brand.brandSlug}
-                href={`${basePath}/${brand.brandSlug}`}
-                className={s.appleButton}
-              >
-                {brand.name}
-              </Button>
-            ))}
+            <p className={s.leadText}>{appleIntro}</p>
           </div>
+
+          <ul className={s.appleButtons} role="list" aria-label="Apple datoru zīmoli">
+            {appleBrands.map((brand) => (
+              <li key={brand.brandSlug}>
+                <DeviceButton
+                  href={`${basePath}/${brand.brandSlug}`}
+                  label={brand.name}
+                  device={APPLE_DEVICE_MAP[brand.brandSlug] || 'laptop'}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Other brands block */}
         {otherBrands.length > 0 && (
           <div className={s.block}>
             <h2 id={otherHeadingId} className={s.h2}>
               {otherTitle}
             </h2>
+
             <p className={s.leadText}>{otherIntro}</p>
 
             <ul className={s.brandGrid} aria-label="Citu datoru zīmolu saraksts">

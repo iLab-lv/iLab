@@ -1,4 +1,3 @@
-// @sections/brand-list/BrandList.module.scss
 @use '@/styles/_tokens.scss' as *;
 
 .section {
@@ -22,26 +21,51 @@
   font-size: 1.35rem;
   font-weight: $font-weight-semibold;
   color: $color-text;
+  margin: 0;
 }
 
 .leadText {
-  color: $color-text-2; // was $color-text-muted (doesn't exist)
+  color: $color-text-2;
   line-height: $line-height-body;
   max-width: 52rem;
+  margin: 0;
 }
 
-/* Apple buttons row */
+/* Apple block */
+
+.appleBlock {
+  display: grid;
+  gap: $space-lg;
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 420px);
+    align-items: start;
+    column-gap: $space-xl;
+  }
+}
+
+.appleText {
+  display: grid;
+  gap: $space-md;
+  align-content: start;
+}
 
 .appleButtons {
-  margin-top: $space-sm;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: $space-sm;
 }
 
-.appleButton {
-  // Let Button handle visuals; this keeps layout flexible
-  min-width: 0;
+.appleButtons > li {
+  display: flex;
+}
+
+.appleButtons > li > * {
+  flex: 1 1 auto;
 }
 
 /* Other brands grid */

@@ -181,7 +181,7 @@ export default function DatoruRemontsPage() {
             id="brand-list"
             basePath="/datoru-remonts"
             appleTitle="Apple datoru remonts"
-            appleIntro="Remontējam visus Apple datorus — no MacBook portatīvajiem un iMac līdz Mac Pro darba stacijām. Diagnoze, detaļu maiņa, veiktspējas uzlabošana un pilns serviss vienuviet."
+            appleIntro="Remontējam visus Apple datorus — no MacBook portatīvajiem un iMac līdz Mac Pro darba stacijām. Veicam profesionālu diagnostiku, bojāto detaļu maiņu, dzesēšanas sistēmas tīrīšanu un veiktspējas uzlabošanu. Palīdzam arī ar SSD uzstādīšanu, macOS pārinstalāciju un citu problēmu novēršanu — pilns Apple datoru serviss vienuviet."
             otherTitle="Citi zīmoli, ko remontējam"
             otherIntro="Remontējam arī populārākos Windows un citu ražotāju datorus: Lenovo, HP, Dell, Asus, Acer, MSI u.c. Izvēlies zīmolu, lai apskatītu pakalpojumus un atstātu pieteikumu remontam."
             brands={computerCategory.brands}

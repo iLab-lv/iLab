@@ -21,15 +21,16 @@
   outline-offset: $focus-ring-offset;
 }
 
-/* soft aqua halo, used behind visuals */
 .withHalo::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -10%;
-  background: radial-gradient(60% 60% at 60% 40%,
+  background: radial-gradient(
+    60% 60% at 60% 40%,
     rgba($color-accent, 0.12) 0%,
     rgba($color-accent, 0.06) 38%,
-    transparent 70%);
+    transparent 70%
+  );
   filter: blur(18px);
   pointer-events: none;
 }
@@ -44,14 +45,20 @@
     padding-block: $space-2xl;
   }
 }
-.services { background: $color-surface-1; text-align: left; }
-.container { @include layout.container; }
+
+.services {
+  background: $color-surface-1;
+  text-align: left;
+}
+
+.container {
+  @include layout.container;
+}
 
 /* =========================================
    Typography
 ========================================= */
 .sectionTitle {
-  /* More breathing room for section heading */
   margin: $space-2xl 0 $space-xl;
   font-size: $font-size-h5;
   line-height: $line-height-heading;
@@ -74,14 +81,19 @@
     color: $color-accent;
     text-decoration: none;
 
-    &:hover { color: $color-accent-hover; text-decoration: underline; }
+    &:hover {
+      color: $color-accent-hover;
+      text-decoration: underline;
+    }
   }
-  strong { color: $color-text; }
+
+  strong {
+    color: $color-text;
+  }
 }
 
 /* =========================================
-   Shared visual stage (Apple / Android)
-   – device image slightly bleeds out of pad
+   Shared visual stage
 ========================================= */
 .visualStage {
   position: relative;
@@ -98,8 +110,12 @@
   inset: 0;
   border-radius: $radius-lg;
   background:
-    radial-gradient(120% 120% at 70% 20%, rgba(255,255,255,.06), rgba(255,255,255,.02) 60%),
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.02));
+    radial-gradient(
+      120% 120% at 70% 20%,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02) 60%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.02));
   box-shadow: $shadow-soft;
 }
 
@@ -109,14 +125,12 @@
   width: 110%;
   height: 110%;
   object-fit: contain;
-  transform: translate(2%, -1%) scale(1.06); /* tiny overlap/float */
+  transform: translate(2%, -1%) scale(1.06);
   pointer-events: none;
 }
 
 /* =========================================
-   APPLE — 2 rows
-   1) appleTop: content + visual (grid)
-   2) appleLinks: full-width CTA grid (with big icons)
+   APPLE
 ========================================= */
 .appleBlock {
   @include glass-weak;
@@ -125,16 +139,15 @@
   margin-top: $space-xl;
 }
 
-/* Row 1: content + visual (mobile-first stacked) */
 .appleTop {
   display: grid;
-  grid-template-columns: 1fr;     /* mobile: stack */
+  grid-template-columns: 1fr;
   row-gap: $space-xl;
   column-gap: $space-xl;
   align-items: start;
 
   @media (min-width: $bp-lg) {
-    grid-template-columns: 1.2fr 1fr;   /* desktop: text | visual */
+    grid-template-columns: 1.2fr 1fr;
   }
 }
 
@@ -154,28 +167,24 @@
 
   @media (min-width: $bp-lg) {
     justify-self: end;
-    grid-column: 2;                 /* force right on desktop */
+    grid-column: 2;
     grid-row: 1;
   }
 }
 
-/* Row 2: CTAs — full-width 3-col grid */
-/* Row 2: CTAs — full-width 3-col grid (match Android brand grid exactly) */
-.appleLinks {
-  margin: 0;                          /* remove UA margins */
-  margin-top: $space-2xl;             /* keep a comfortable gap above (tweak if needed) */
+.appleLinksTop,
+.appleLinksBottom {
   list-style: none;
   padding: 0;
-
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $space-lg;                     /* EXACTLY the same as .brandGrid */
+  align-items: stretch;
+}
 
-  align-items: stretch;               /* stretch items to full cell height */
+.appleLinksTop {
+  margin: $space-2xl 0 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-lg;
 
-  @media (max-width: $bp-lg) {
-    grid-template-columns: repeat(2, 1fr);
-  }
   @media (max-width: $bp-md) {
     grid-template-columns: 1fr;
     margin-top: $space-xl;
@@ -183,132 +192,34 @@
   }
 }
 
-/* Ensure each grid item can shrink and doesn't add its own spacing */
-.appleLinks > li {
-  min-width: 0;                       /* allow grid to control width */
-}
+.appleLinksBottom {
+  margin: $space-lg 0 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-lg;
 
-/* Make the link fill its grid cell so all CTAs have identical width */
-.appleLink {
-  width: 100%;                        /* <— the key change */
-  box-sizing: border-box;
-  justify-content: flex-start;        /* icon + label on the left */
-  /* rest of your .appleLink styles stay as-is */
-}
-
-
-/* --- CTA with icon + accent chip arrow (refined) --- */
-$chip-md: 36px;          /* larger chip */
-$chip-lg: 40px;
-$chip-offset: $space-md; /* more space from right edge */
-
-.appleLink {
-  @include glass-weak;
-  position: relative;
-
-  display: inline-flex;
-  align-items: center;
-  gap: $space-md;
-
-  border-radius: $radius-pill;
-
-  /* Taller buttons */
-  min-height: 60px;
-  padding: $space-md $space-xl;
-  /* extra space for arrow chip on the right */
-  padding-right: calc(#{$space-xl} + #{$chip-md} + #{$chip-offset});
-
-  color: $color-text;
-  text-decoration: none;
-  font-weight: $font-weight-medium;
-
-  transition:
-    border-color $dur-base $ease-std,
-    transform $dur-base $ease-emph,
-    box-shadow $dur-base $ease-std;
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   @media (max-width: $bp-md) {
-    min-height: 60px;
-    padding-right: calc(#{$space-xl} + #{$chip-lg} + #{$chip-offset});
+    grid-template-columns: 1fr;
+    gap: $space-md;
   }
-
-  /* CHIP (arrow background) */
-  &::before {
-    content: "";
-    position: absolute;
-    right: $chip-offset; /* moved in from the edge */
-    top: 50%;
-    width: $chip-md;
-    height: $chip-md;
-    border-radius: 50%;
-    background: $color-accent;
-    box-shadow: $shadow-accent;
-    transform: translateY(-50%) scale(1);
-    transition: transform $dur-base $ease-emph, box-shadow $dur-base $ease-std;
-
-    @media (max-width: $bp-md) {
-      width: $chip-lg;
-      height: $chip-lg;
-    }
-  }
-
-  /* Arrow inside the chip */
-  &::after {
-    content: "→";
-    position: absolute;
-    right: $chip-offset;
-    top: 50%;
-    width: $chip-md;
-    height: $chip-md;
-    display: grid;
-    place-items: center;
-    color: $color-background;
-    font-weight: $font-weight-semibold;
-    transform: translateY(-50%);
-    transition: transform $dur-base $ease-emph;
-
-    @media (max-width: $bp-md) {
-      width: $chip-lg;
-      height: $chip-lg;
-    }
-  }
-
-  &:hover {
-    border-color: $glass-border-2;
-    transform: translateY(-1px);
-    box-shadow: $shadow-accent;
-
-    &::before { transform: translateY(-50%) scale(1.14); }
-    &::after  { transform: translateY(-50%) translateX(2px); }
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: $shadow-press;
-
-    &::before { transform: translateY(-50%) scale(1.05); }
-    &::after  { transform: translateY(-50%) translateX(1px); }
-  }
-
-  &:focus-visible { @include focus-ring; }
 }
 
-/* icon (no frame/bubble now) */
-.linkIcon {
-  display: grid;
-  place-items: center;
-  width: auto;
-  height: auto;
-  background: transparent; /* remove bubble */
-  box-shadow: none;        /* remove outline */
-  color: $color-accent;    /* vivid aqua */
-  font-size: 28px;         /* fallback size if icon doesn't pass size prop */
-  line-height: 1;
+.appleLinksTop > li,
+.appleLinksBottom > li {
+  min-width: 0;
+  display: flex;
 }
-.linkLabel { white-space: nowrap; }
+
+.appleLinksTop > li > *,
+.appleLinksBottom > li > * {
+  flex: 1 1 auto;
+}
 
 /* =========================================
-   ANDROID — mirrors Apple top row + brand grid
+   ANDROID
 ========================================= */
 .androidBlock {
   @include glass-weak;
@@ -319,13 +230,13 @@ $chip-offset: $space-md; /* more space from right edge */
 
 .androidGrid {
   display: grid;
-  grid-template-columns: 1fr;          /* mobile: stack */
+  grid-template-columns: 1fr;
   row-gap: $space-xl;
   column-gap: $space-xl;
   align-items: start;
 
   @media (min-width: $bp-lg) {
-    grid-template-columns: 1.2fr 1fr;  /* desktop: text | visual */
+    grid-template-columns: 1.2fr 1fr;
   }
 }
 
@@ -335,10 +246,11 @@ $chip-offset: $space-md; /* more space from right edge */
   justify-self: start;
   position: relative;
 
-  @media (min-width: $bp-lg) { justify-self: end; }
+  @media (min-width: $bp-lg) {
+    justify-self: end;
+  }
 }
 
-/* Brand grid aligned to Apple CTA rhythm */
 .brandGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -347,8 +259,14 @@ $chip-offset: $space-md; /* more space from right edge */
   padding: 0;
   margin: $space-2xl 0 0;
 
-  @media (max-width: $bp-lg) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: $bp-md) { grid-template-columns: 1fr; margin-top: $space-xl; }
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+    margin-top: $space-xl;
+  }
 }
 
 .brandTile {
@@ -359,14 +277,16 @@ $chip-offset: $space-md; /* more space from right edge */
   align-content: start;
   gap: $space-sm;
   text-align: left;
-
   transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph;
 
   &:hover {
     border-color: $glass-border-2;
     transform: translateY(-1px);
 
-    .brandMark { transform: translateY(-2px) scale(1.02); opacity: 1; }
+    .brandMark {
+      transform: translateY(-2px) scale(1.02);
+      opacity: 1;
+    }
   }
 }
 
@@ -377,22 +297,24 @@ $chip-offset: $space-md; /* more space from right edge */
   text-decoration: none;
   margin: 0 0 $space-xs;
 
-  &:hover { text-decoration: underline; }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-/* Logo BELOW the title; full-width inside tile */
 .brandMarkWrap {
   display: grid;
   place-items: center;
-  padding: $space-md 0 $space-sm;  /* extra space for larger logos */
+  padding: $space-md 0 $space-sm;
 }
+
 .brandMark {
   display: block;
   width: 100%;
   max-width: 320px;
   height: auto;
-  opacity: .98;
-  filter: drop-shadow(0 2px 10px rgba(0,0,0,.35));
+  opacity: 0.98;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
   transition: transform $dur-base $ease-emph, opacity $dur-base $ease-std;
 
   @media (max-width: $bp-md) {
@@ -400,7 +322,6 @@ $chip-offset: $space-md; /* more space from right edge */
   }
 }
 
-/* Small blurb under the logo with ample space after */
 .brandBlurb {
   font-size: $font-size-sm;
   line-height: $line-height-body;
@@ -421,16 +342,24 @@ $chip-offset: $space-md; /* more space from right edge */
   a {
     color: $color-accent;
     text-decoration: none;
-    &:hover { color: $color-accent-hover; text-decoration: underline; }
+
+    &:hover {
+      color: $color-accent-hover;
+      text-decoration: underline;
+    }
   }
-  span { color: $color-text-2; }
+
+  span {
+    color: $color-text-2;
+  }
 }
 
-.androidMore { margin-top: $space-lg; }
+.androidMore {
+  margin-top: $space-lg;
+}
 
 /* =========================================
-   Two-up (Laptop & Dyson) — stacked
-   Title → full-width band → text → CTA
+   Two-up
 ========================================= */
 .twoUp {
   display: grid;
@@ -448,15 +377,21 @@ $chip-offset: $space-md; /* more space from right edge */
   border-radius: $radius-lg;
   padding: $space-xl;
   transition: border-color $dur-base $ease-std, transform $dur-base $ease-emph;
-  &:hover { border-color: $glass-border-2; transform: translateY(-1px); }
+
+  &:hover {
+    border-color: $glass-border-2;
+    transform: translateY(-1px);
+  }
 }
 
-/* unified rhythm around the band */
 $gap-title-to-band: $space-lg;
-$gap-band-to-text:  $space-lg;
-$gap-text-to-cta:   $space-md;
+$gap-band-to-text: $space-lg;
+$gap-text-to-cta: $space-md;
 
-.halfStack { display: grid; row-gap: $gap-band-to-text; }
+.halfStack {
+  display: grid;
+  row-gap: $gap-band-to-text;
+}
 
 .cardTitle {
   font-size: $font-size-xl;
@@ -465,7 +400,6 @@ $gap-text-to-cta:   $space-md;
   margin: 0 0 $gap-title-to-band;
 }
 
-/* full-width band */
 .stackVisual {
   position: relative;
   z-index: 0;
@@ -475,8 +409,13 @@ $gap-text-to-cta:   $space-md;
   overflow: visible;
   @extend .withHalo;
 
-  @media (max-width: $bp-lg) { height: 150px; }
-  @media (max-width: $bp-md) { height: 140px; }
+  @media (max-width: $bp-lg) {
+    height: 150px;
+  }
+
+  @media (max-width: $bp-md) {
+    height: 140px;
+  }
 }
 
 .stackVisual > .visualPad {
@@ -484,12 +423,15 @@ $gap-text-to-cta:   $space-md;
   inset: 0;
   border-radius: $radius-lg;
   background:
-    radial-gradient(120% 120% at 70% 20%, rgba(255,255,255,.06), rgba(255,255,255,.02) 60%),
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.02));
+    radial-gradient(
+      120% 120% at 70% 20%,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02) 60%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.02));
   box-shadow: $shadow-soft;
 }
 
-/* centered artwork; mild upward bleed only */
 .stackVisual .deviceImg {
   position: absolute;
   left: 50%;
@@ -501,8 +443,12 @@ $gap-text-to-cta:   $space-md;
   pointer-events: none;
 }
 
-/* text & CTA always above visual if needed */
-.cardText, .cardLink { position: relative; z-index: 1; }
+.cardText,
+.cardLink {
+  position: relative;
+  z-index: 1;
+}
+
 .cardText {
   color: $color-text-2;
   margin: 0;
@@ -511,15 +457,26 @@ $gap-text-to-cta:   $space-md;
   a {
     color: $color-accent;
     text-decoration: none;
-    &:hover { color: $color-accent-hover; text-decoration: underline; }
+
+    &:hover {
+      color: $color-accent-hover;
+      text-decoration: underline;
+    }
   }
 }
+
 .cardLink {
   margin-top: $gap-text-to-cta;
   color: $color-accent;
   text-decoration: none;
   font-weight: $font-weight-medium;
 
-  &:hover { color: $color-accent-hover; text-decoration: underline; }
-  &:focus-visible { @include focus-ring; }
+  &:hover {
+    color: $color-accent-hover;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
 }
