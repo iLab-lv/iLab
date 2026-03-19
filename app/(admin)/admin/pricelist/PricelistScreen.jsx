@@ -30,14 +30,35 @@ const BRAND_MENU = [
   { brandSlug: 'xiaomi', label: 'Xiaomi' },
 ];
 
+/**
+ * Keep raw input value while user is typing.
+ * This prevents issues like spaces being removed from strings such as "no 50".
+ */
 function normalizePriceInput(v) {
-  const t = String(v ?? '').trim();
-  if (t === '') return ''; // empty => "pēc pieprasījuma"
-  if (/^[0-9]+([.,][0-9]+)?$/.test(t)) {
-    const n = Number(t.replace(',', '.'));
-    return Number.isFinite(n) ? n : t;
+  return String(v ?? '');
+}
+
+/**
+ * Convert UI value to Firestore value on save:
+ * - "" or whitespace only => ""
+ * - numeric string => number
+ * - anything else => trimmed string
+ * - null stays null
+ */
+function serializePriceForSave(v) {
+  if (v === null) return null;
+
+  const raw = String(v ?? '');
+  const trimmed = raw.trim();
+
+  if (trimmed === '') return '';
+
+  if (/^[0-9]+([.,][0-9]+)?$/.test(trimmed)) {
+    const n = Number(trimmed.replace(',', '.'));
+    return Number.isFinite(n) ? n : trimmed;
   }
-  return t; // "no 50", "pēc pieprasījuma", etc.
+
+  return trimmed;
 }
 
 async function fetchModelServiceRows(modelId) {
@@ -50,12 +71,14 @@ async function fetchModelServiceRows(modelId) {
   return snap.docs
     .map((d) => {
       const data = d.data() || {};
+      const rawPrice = Object.prototype.hasOwnProperty.call(data, 'price')
+        ? data.price
+        : '';
+
       return {
         docId: d.id,
         serviceId: data.serviceId || '',
-        price: Object.prototype.hasOwnProperty.call(data, 'price')
-          ? data.price
-          : '',
+        price: rawPrice === null ? null : String(rawPrice ?? ''),
       };
     })
     .sort((a, b) => a.serviceId.localeCompare(b.serviceId));
@@ -121,8 +144,13 @@ export default function PricelistScreen({
     const map = new Map(); // seriesSlug -> { series, seriesSlug, items[] }
     for (const d of filteredDevices) {
       const key = d.seriesSlug || d.series || 'other';
-      if (!map.has(key))
-        map.set(key, { series: d.series || 'Other', seriesSlug: key, items: [] });
+      if (!map.has(key)) {
+        map.set(key, {
+          series: d.series || 'Other',
+          seriesSlug: key,
+          items: [],
+        });
+      }
       map.get(key).items.push(d);
     }
 
@@ -198,6 +226,7 @@ export default function PricelistScreen({
     setLoading((p) => ({ ...p, [modelSlug]: true }));
     try {
       const CHUNK = 450;
+
       for (let i = 0; i < rows.length; i += CHUNK) {
         const chunk = rows.slice(i, i + CHUNK);
         const batch = writeBatch(db);
@@ -211,7 +240,7 @@ export default function PricelistScreen({
             {
               modelId: modelSlug,
               serviceId,
-              price: r.price, // number | string | "" | null
+              price: serializePriceForSave(r.price), // number | string | "" | null
               currency: DEFAULT_CURRENCY,
               updatedAt: new Date(),
             },
@@ -223,11 +252,13 @@ export default function PricelistScreen({
       }
 
       const fresh = await fetchModelServiceRows(modelSlug);
-      // If still empty (e.g. rules blocked) keep seeded rows
+
+      // If still empty (e.g. rules blocked) keep current rows
       setRowsByModel((p) => ({
         ...p,
         [modelSlug]: fresh.length ? fresh : p[modelSlug] || [],
       }));
+
       setStatus(`Saved: ${modelSlug}`);
     } catch {
       setError('Failed to save pricing (permissions?).');
@@ -272,7 +303,6 @@ export default function PricelistScreen({
       <div className={s.groups}>
         {grouped.map((g) => (
           <section key={g.seriesSlug} className={s.group}>
-            {/* ✅ series header (no count) */}
             <div className={s.groupHead}>
               <span className={s.groupTitle}>{g.series}</span>
             </div>
@@ -345,9 +375,11 @@ export default function PricelistScreen({
                                     type="checkbox"
                                     checked={notApplicable}
                                     onChange={(e) => {
-                                      if (e.target.checked)
+                                      if (e.target.checked) {
                                         updateRow(d.slug, idx, { price: null });
-                                      else updateRow(d.slug, idx, { price: '' });
+                                      } else {
+                                        updateRow(d.slug, idx, { price: '' });
+                                      }
                                     }}
                                   />
                                   hide
@@ -359,7 +391,10 @@ export default function PricelistScreen({
                       )}
 
                       <div className={s.panelFooter}>
-                        <Button onClick={() => saveModel(d.slug)} disabled={isLoading}>
+                        <Button
+                          onClick={() => saveModel(d.slug)}
+                          disabled={isLoading}
+                        >
                           Save
                         </Button>
                       </div>
