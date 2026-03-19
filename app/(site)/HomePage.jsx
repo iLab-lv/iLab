@@ -61,7 +61,7 @@ export default function HomeScreen({ locale = 'lv' }) {
 
       <Process />
 
-      <Why />
+      <Why locale={locale} />
 
       <Locations openPanelOnPin />
 

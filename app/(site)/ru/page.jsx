@@ -1,4 +1,4 @@
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '@site/HomePage';
 
 export const metadata = {
   title: 'iLab — Ātrs mobilo ierīču servisa centrs',
