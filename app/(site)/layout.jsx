@@ -5,6 +5,7 @@ import BottomBar from './ui/bottombar/BottomBar';
 import { COMPANY, SOCIALS, LOCATIONS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Footer from './ui/footer/Footer';
+import ResolvedPageHeader from './ui/page-header/ResolvedPageHeader';
 import Script from 'next/script';
 import l from './Layout.module.scss';
 
@@ -43,7 +44,7 @@ export default function SiteLayout({ children }) {
     url: ORIGIN,
     email: COMPANY.email,
     telephone: COMPANY.phoneMain,
-    logo: `${ORIGIN}${COMPANY.logo}`, // e.g. /brand/logo.svg
+    logo: `${ORIGIN}${COMPANY.logo}`,
     sameAs: [SOCIALS.facebook, SOCIALS.instagram, SOCIALS.tiktok].filter(Boolean),
   };
 
@@ -61,7 +62,6 @@ export default function SiteLayout({ children }) {
     },
   };
 
-  // Build LocalBusiness entities for each physical location (Domina, Spice)
   const localBusinessLd = LOCATIONS.map((loc) => {
     const openingHoursSpecification = (loc.hours || [])
       .map((h) => {
@@ -79,9 +79,9 @@ export default function SiteLayout({ children }) {
     const base = {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
-      '@id': `${ORIGIN}#${loc.id}`, // e.g. https://ilab.lv#domina
-      name: `${COMPANY.name} ${loc.label}`, // "iLab Domina Shopping"
-      url: ORIGIN, // if you later have per-location URLs, update this
+      '@id': `${ORIGIN}#${loc.id}`,
+      name: `${COMPANY.name} ${loc.label}`,
+      url: ORIGIN,
       telephone: loc.tel,
       email: loc.email || COMPANY.email,
       address: {
@@ -109,9 +109,6 @@ export default function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
-      {/* -------------------------------------------------
-          GA4 — defer loading to reduce TBT/Lighthouse impact
-          ------------------------------------------------- */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         strategy="lazyOnload"
@@ -127,9 +124,6 @@ export default function SiteLayout({ children }) {
         `}
       </Script>
 
-      {/* -------------------------------------------------
-          JSON-LD — render in HTML (no runtime script scheduling)
-          ------------------------------------------------- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
@@ -144,7 +138,6 @@ export default function SiteLayout({ children }) {
       />
 
       <UiDialogsProvider>
-        {/* a11y: skip link */}
         <a
           href="#main"
           style={{
@@ -159,10 +152,8 @@ export default function SiteLayout({ children }) {
           Skip to content
         </a>
 
-        {/* Sticky, semi-transparent topbar */}
         <NavBar />
 
-        {/* Desktop-only overlay Controls */}
         <div className={l.controlsDesktopOnly}>
           <Controls
             facebookUrl={SOCIALS.facebook}
@@ -171,13 +162,12 @@ export default function SiteLayout({ children }) {
           />
         </div>
 
-        {/* Mobile/Tablet bottom actions */}
         <BottomBar />
 
-        {/* Main content */}
+        <ResolvedPageHeader />
+
         <main id="main">{children}</main>
 
-        {/* Footer */}
         <Footer />
       </UiDialogsProvider>
     </div>
