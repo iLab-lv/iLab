@@ -1,31 +1,43 @@
-// app/(site)/sections/home/Why.jsx
+// app/(site)/sections/Why/Why.jsx
 'use client';
 
 import s from './Why.module.scss';
+import whyContent from './why.content';
 
-// Use a consistent icon set (Tabler) to avoid mixed stroke weights
-import { TbShieldCheck, TbBolt, TbCertificate, TbSearch } from 'react-icons/tb';
+// fallback icon for simple string items
+import { TbCertificate } from 'react-icons/tb';
 
 export default function Why({
   id = 'why',
-  title = 'Kāpēc iLab?',
-  copy = 'Uzticami remonti, caurspīdīgas cenas un ātrs apgrozījums no sertificētiem tehniķiem.',
-  items = [
-    { text: '90 dienu garantija', Icon: TbShieldCheck },
-    { text: 'Ātrs remonts', Icon: TbBolt }, // rephrased
-    { text: 'Sertificēti meistari', Icon: TbCertificate },
-    { text: 'Bezmaksas diagnostika', Icon: TbSearch },
-  ],
+  locale = 'lv',
+  title,
+  copy,
+  items,
 }) {
-  // Normalize simple strings if ever passed
-  const list = items.map((it) => (typeof it === 'string' ? { text: it, Icon: TbCertificate } : it));
+  const content = whyContent[locale] || whyContent.lv;
+
+  const resolvedTitle = title ?? content.title;
+  const resolvedCopy = copy ?? content.copy;
+  const resolvedItems = items ?? content.items;
+
+  const list = resolvedItems.map((it) =>
+    typeof it === 'string'
+      ? { text: it, Icon: TbCertificate }
+      : { ...it, Icon: it.Icon || TbCertificate }
+  );
 
   return (
-    <section id={id} className={`${s.section} ${s.why}`} aria-labelledby={`${id}-title`}>
+    <section
+      id={id}
+      className={`${s.section} ${s.why}`}
+      aria-labelledby={`${id}-title`}
+    >
       <div className={s.container}>
         <header className={s.header}>
-          <h2 id={`${id}-title`} className={s.sectionTitle}>{title}</h2>
-          <p className={s.copy}>{copy}</p>
+          <h2 id={`${id}-title`} className={s.sectionTitle}>
+            {resolvedTitle}
+          </h2>
+          <p className={s.copy}>{resolvedCopy}</p>
         </header>
 
         <ul className={s.uspGrid} role="list">

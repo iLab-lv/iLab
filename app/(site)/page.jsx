@@ -1,4 +1,4 @@
-import HomeScreen from './screens/HomeScreen';
+import HomePage from './HomePage';
 
 export const metadata = {
   title: 'iLab — Ātrs mobilo ierīču servisa centrs',
@@ -10,5 +10,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <HomeScreen locale="lv" />;
+  return <HomePage locale="lv" />;
 }

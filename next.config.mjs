@@ -529,6 +529,8 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(process.cwd()),           // root alias
+      '@app': path.resolve(process.cwd(), 'app'),
+      '@site': path.resolve(process.cwd(), 'app/(site)'),
       '@lib': path.resolve(process.cwd(), 'lib'),
       '@data': path.resolve(process.cwd(), 'app/data'),
       '@sections': path.resolve(process.cwd(), 'app/(site)/sections'),
