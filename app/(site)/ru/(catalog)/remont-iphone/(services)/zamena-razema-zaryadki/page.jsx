@@ -1,6 +1,6 @@
 import IphoneChargePortServicePage, {
   getIphoneChargePortServiceMetadata,
-} from '@site/(catalog)/iphone-remonts/uzlades-ligzdas-maina/IphoneChargePortServicePage';
+} from '@site/(catalog)/iphone-remonts/(services)/uzlades-ligzdas-maina/IphoneChargePortServicePage';
 
 export const metadata = getIphoneChargePortServiceMetadata('ru');
 

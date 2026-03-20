@@ -13,6 +13,10 @@ import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+import {
+  buildIphonePopularServices,
+  getIphonePopularServicesTitle,
+} from '@sections/services/services.i18n';
 
 import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
 
@@ -22,20 +26,10 @@ import {
   buildBreadcrumbsLd,
   buildProvidersFromLocations,
 } from '@/lib/seo/jsonldHelpers';
-import { buildServiceHref } from '@/lib/routes/routeI18n';
 
 import { db } from '@/lib/firebaseAdmin';
 
 import s from '@/app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss';
-
-import {
-  LuSmartphone,
-  LuBatteryCharging,
-  LuPlugZap,
-  LuCamera,
-  LuVolume2,
-  LuDroplets,
-} from 'react-icons/lu';
 
 const DEFAULT_CURRENCY = 'EUR';
 
@@ -160,47 +154,6 @@ async function buildPriceListItems(modelSlug) {
   return { items: merged, currency: DEFAULT_CURRENCY };
 }
 
-function buildModelServices(locale = 'lv') {
-  return [
-    {
-      title: 'Ekrāna maiņa',
-      href: buildServiceHref(locale, 'iphone-remonts', 'ekrana-maina'),
-      text: 'plaisas, līnijas, tumši plankumi, nereaģē skārienjūtīgais ekrāns.',
-      icon: LuSmartphone,
-    },
-    {
-      title: 'Baterijas maiņa',
-      href: buildServiceHref(locale, 'iphone-remonts', 'baterijas-maina'),
-      text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10–20%.',
-      icon: LuBatteryCharging,
-    },
-    {
-      title: 'Uzlādes ligzdas maiņa',
-      href: buildServiceHref(locale, 'iphone-remonts', 'uzlades-ligzdas-maina'),
-      text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
-      icon: LuPlugZap,
-    },
-    {
-      title: 'Kameras remonts',
-      href: buildServiceHref(locale, 'iphone-remonts', 'kameras-remonts'),
-      text: 'miglaini attēli, melni plankumi, fokusēšanās problēmas.',
-      icon: LuCamera,
-    },
-    {
-      title: 'Skaļruņu un mikrofona remonts',
-      href: buildServiceHref(locale, 'iphone-remonts', 'skalruni-mikrofona-remonts'),
-      text: 'klusa skaņa, krakšķi, sarunas laikā nedzird vai neviens nedzird jūs.',
-      icon: LuVolume2,
-    },
-    {
-      title: 'Ūdens bojājumu remonts',
-      href: buildServiceHref(locale, 'iphone-remonts', 'udens-bojajumu-remonts'),
-      text: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
-      icon: LuDroplets,
-    },
-  ];
-}
-
 function buildFaqForIphoneModel() {
   const iphoneFaq = getFaqItems(FAQ_CONTEXT.IPHONE)?.items ?? [];
   if (iphoneFaq.length) {
@@ -263,6 +216,22 @@ function buildProcessHowToLd(modelPath, deviceName) {
   };
 }
 
+function getPageStrings(locale = 'lv') {
+  if (locale === 'ru') {
+    return {
+      heroAlt: 'ремонт iPhone в Риге',
+      pricesTitle: 'Цены и сроки ремонта',
+      faqTitle: 'Часто задаваемые вопросы',
+    };
+  }
+
+  return {
+    heroAlt: 'remonts Rīgā',
+    pricesTitle: 'Cenas un remonta laiks',
+    faqTitle: 'Biežāk uzdotie jautājumi',
+  };
+}
+
 export function getIphoneDeviceMetadata(slug, { locale = 'lv' } = {}) {
   const deviceSlug = norm(slug);
   const device = getIphoneDeviceBySlug(deviceSlug);
@@ -296,8 +265,10 @@ export default async function IphoneDevicePage({
 
   if (!device) return notFound();
 
+  const strings = getPageStrings(locale);
   const { items: priceItems, currency } = await buildPriceListItems(slug);
-  const modelServices = buildModelServices(locale);
+  const modelServices = buildIphonePopularServices(locale);
+  const modelServicesTitle = getIphonePopularServicesTitle(device.name, locale);
   const { faqItems, faqLd } = buildFaqForIphoneModel();
 
   const modelPath =
@@ -394,14 +365,14 @@ export default async function IphoneDevicePage({
 
       <DeviceHero
         image={device.image}
-        alt={`${device.name} remonts Rīgā`}
+        alt={`${device.name} ${strings.heroAlt}`}
         bodyHtml={device.bodyHtml || null}
       />
 
       <section className={s.section}>
         <Services
           id="iphone-services"
-          title={`Populārākie ${device.name} remonti`}
+          title={modelServicesTitle}
           items={modelServices}
         />
       </section>
@@ -410,7 +381,7 @@ export default async function IphoneDevicePage({
         <section className={s.section}>
           <PriceList
             id="cenas"
-            title="Cenas un remonta laiks"
+            title={strings.pricesTitle}
             items={priceItems}
             currency={DEFAULT_CURRENCY}
             headingLevel={2}
@@ -430,7 +401,7 @@ export default async function IphoneDevicePage({
         <section className={s.section}>
           <Faq
             id="model-faq"
-            title="Biežāk uzdotie jautājumi"
+            title={strings.faqTitle}
             items={faqItems}
             locale={locale}
           />

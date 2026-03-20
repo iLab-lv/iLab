@@ -1,7 +1,7 @@
 import PhoneBrandPage, {
   generatePhoneBrandStaticParams,
   getPhoneBrandMetadata,
-} from './PhoneBrandPage';
+} from '@site/(catalog)/telefonu-remonts/[brand]/PhoneBrandPage';
 
 export const dynamicParams = false;
 
@@ -10,9 +10,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  return getPhoneBrandMetadata(params.brand, 'lv');
+  return getPhoneBrandMetadata(params.brand, 'ru');
 }
 
 export default function Page({ params }) {
-  return <PhoneBrandPage brand={params.brand} locale="lv" />;
+  return <PhoneBrandPage brand={params.brand} locale="ru" />;
 }
