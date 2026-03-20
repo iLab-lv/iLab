@@ -6,6 +6,10 @@ import devicesAll from '@/data/devices';
 
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
+import {
+  buildIphonePopularServices,
+  getIphonePopularServicesTitle,
+} from '@sections/services/services.i18n';
 import Process from '@sections/process/Process';
 import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
@@ -19,70 +23,73 @@ import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
 import s from '@styles/Catalog.module.scss';
 
 import {
-  LuSmartphone,
-  LuBatteryCharging,
-  LuPlugZap,
-  LuCamera,
-  LuVolume2,
-  LuDroplets,
-} from 'react-icons/lu';
-
-import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
   buildStandardRepairHowToLd,
 } from '@/lib/seo/jsonldHelpers';
+import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 const cat = categoryContent['iphone-remonts'];
 
-const ISSUES_PREVIEW = [
-  {
-    q: 'Saplīsis ekrāns / displeja problēmas',
-    text: 'iPhone ekrāns saplīsa, plaisas, nereaģē uz pieskārienu',
-    icon: 'screen',
-    serviceHref: '/iphone-remonts/ekrana-maina',
-    id: 'displeja-problemas',
-  },
-  {
-    q: 'Barošanas un uzlādes problēmas',
-    text: 'Ātri izlādējas, neslēdzas, neuzlādējas',
-    icon: 'battery',
-    serviceHref: '/iphone-remonts/baterijas-maina',
-    id: 'barosanas-problemas',
-  },
-  {
-    q: 'Kameras problēmas',
-    text: 'Kamera nestrādā, miglains attēls',
-    icon: 'camera',
-    serviceHref: '/iphone-remonts/kameras-remonts',
-    id: 'kamera-problemas',
-  },
-  {
-    q: 'Mitruma / ūdens bojājumi',
-    text: 'Telefons iekritis ūdenī, pēc tam neieslēdzas',
-    icon: 'water',
-    serviceHref: '/iphone-remonts/udens-bojajumu-remonts',
-    id: 'udens-bojajumi',
-  },
-];
+function getPageStrings(locale = 'lv') {
+  if (locale === 'ru') {
+    return {
+      heroAlt: 'ремонт iPhone в Риге',
+      heroBodyHtml:
+        '<p><strong>Быстрый и безопасный ремонт iPhone в Риге</strong> — замена дисплея, батареи и камеры в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт.</p>',
+      introTitle: 'Ремонт iPhone в Риге — что мы делаем',
+      introBody:
+        'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> — от <strong>замены экрана</strong> и <strong>батареи</strong> до <strong>ремонта разъёма зарядки</strong>, <strong>камеры</strong> и устранения <strong>повреждений после попадания влаги</strong>. Перед началом работ проводим <strong>бесплатную диагностику</strong> и согласовываем точную цену и срок выполнения. Самые частые ремонты выполняем в тот же день. Используем <strong>оригинальные или качественные OEM детали</strong> и даём <strong>гарантию 90 дней</strong> на каждый ремонт.',
+      faqTitle: 'Часто задаваемые вопросы',
+      serviceName: 'Ремонт iPhone в Риге',
+      serviceDescription:
+        'Ремонт iPhone в Риге: замена дисплея и батареи, разъёма зарядки, камеры, ремонт после попадания влаги. Быстрая диагностика, прозрачные цены и гарантия 90 дней.',
+      breadcrumbName: 'Ремонт iPhone в Риге',
+      modelGridHeading: cat?.sections?.modelGrid?.heading ?? 'Выберите модель iPhone',
+      modelGridIntro:
+        cat?.sections?.modelGrid?.intro ??
+        'Найти модель легко — ищите по названию или просматривайте серии.',
+    };
+  }
+
+  return {
+    heroAlt: 'iPhone remonts Rīgā',
+    heroBodyHtml:
+      '<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>',
+    introTitle: 'iPhone remonts Rīgā — ko mēs darām',
+    introBody:
+      'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos remontdarbus paveicam tajā pašā dienā. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong> katram remontam.',
+    faqTitle: 'Biežāk uzdotie jautājumi',
+    serviceName: 'iPhone remonts Rīgā',
+    serviceDescription:
+      'iPhone remonts Rīgā: displeja un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, skaidras cenas un 90 dienu garantija.',
+    breadcrumbName: 'iPhone remonts Rīgā',
+    modelGridHeading: cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli',
+    modelGridIntro:
+      cat?.sections?.modelGrid?.intro ??
+      'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.',
+  };
+}
 
 export default function IphoneRepairPage({ locale = 'lv' }) {
-  const baseHref = '/iphone-remonts';
+  const strings = getPageStrings(locale);
+  const baseHref = buildCategoryHref(locale, 'iphone-remonts');
+  const popularServices = buildIphonePopularServices(locale);
+  const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
 
   const { items: IPHONE_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE);
   const IPHONE_FAQ_LD = getFaqLd(FAQ_CONTEXT.IPHONE);
 
   const breadcrumbsLd = buildBreadcrumbsLd([
     { name: 'Sākums', url: abs('/') },
-    { name: 'iPhone remonts Rīgā', url: abs('/iphone-remonts') },
+    { name: strings.breadcrumbName, url: abs(baseHref) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
-    path: '/iphone-remonts',
-    name: 'iPhone remonts Rīgā',
-    description:
-      'iPhone remonts Rīgā: displeja un baterijas maiņa, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, skaidras cenas un 90 dienu garantija.',
+    path: baseHref,
+    name: strings.serviceName,
+    description: strings.serviceDescription,
   });
 
   const howToLd = buildStandardRepairHowToLd('iPhone remonts');
@@ -104,28 +111,22 @@ export default function IphoneRepairPage({ locale = 'lv' }) {
 
       <DeviceHero
         image="/images/categories/iphone_remonts.webp"
-        alt="iPhone remonts Rīgā"
+        alt={strings.heroAlt}
         focal="right"
         className="category"
         priority
-        bodyHtml={`<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>`}
+        bodyHtml={strings.heroBodyHtml}
       />
 
       <section className={s.section} aria-labelledby="iphone-intro-h2">
         <div className={s.container}>
           <h2 id="iphone-intro-h2" className={s.h2}>
-            iPhone remonts Rīgā — ko mēs darām
+            {strings.introTitle}
           </h2>
-          <p className={s.paragraph}>
-            Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar{' '}
-            <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz{' '}
-            <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī{' '}
-            <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām{' '}
-            <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku.
-            Biežākos remontdarbus paveicam tajā pašā dienā. Izmantojam{' '}
-            <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam{' '}
-            <strong>90 dienu garantiju</strong> katram remontam.
-          </p>
+          <p
+            className={s.paragraph}
+            dangerouslySetInnerHTML={{ __html: strings.introBody }}
+          />
         </div>
       </section>
 
@@ -133,45 +134,8 @@ export default function IphoneRepairPage({ locale = 'lv' }) {
         <div className={s.container}>
           <Services
             id="iphone-services"
-            title="Populārākie iPhone remonti"
-            items={[
-              {
-                title: 'Ekrāna (displeja) maiņa',
-                text: 'plaisas, tumši plankumi, nereaģē skāriens.',
-                icon: LuSmartphone,
-                href: '/iphone-remonts/ekrana-maina',
-              },
-              {
-                title: 'Akumulatora maiņa',
-                text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
-                icon: LuBatteryCharging,
-                href: '/iphone-remonts/baterijas-maina',
-              },
-              {
-                title: 'Uzlādes ligzda',
-                text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
-                icon: LuPlugZap,
-                href: '/iphone-remonts/uzlades-ligzdas-maina',
-              },
-              {
-                title: 'Kamera',
-                text: 'miglaini attēli, fokusēšanās problēmas.',
-                icon: LuCamera,
-                href: '/iphone-remonts/kameras-remonts',
-              },
-              {
-                title: 'Skaļruņi/mikrofons',
-                text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
-                icon: LuVolume2,
-                href: '/iphone-remonts/skalruni-mikrofona-remonts',
-              },
-              {
-                title: 'Ūdens bojājumi',
-                text: 'diagnostika un atjaunošana, ja tas iespējams.',
-                icon: LuDroplets,
-                href: '/iphone-remonts/udens-bojajumu-remonts',
-              },
-            ]}
+            title={popularServicesTitle}
+            items={popularServices}
           />
         </div>
       </section>
@@ -183,11 +147,10 @@ export default function IphoneRepairPage({ locale = 'lv' }) {
       >
         <div className={s.container}>
           <h2 id="iphone-modeli-h2" className={s.h2}>
-            {cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli'}
+            {strings.modelGridHeading}
           </h2>
           <p id="iphone-modeli-intro" className={s.intro}>
-            {cat?.sections?.modelGrid?.intro ??
-              'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.'}
+            {strings.modelGridIntro}
           </p>
 
           <SeriesGrid
@@ -220,7 +183,12 @@ export default function IphoneRepairPage({ locale = 'lv' }) {
 
       <section className={s.section} aria-labelledby="iphone-faq-h2">
         <div className={s.container}>
-          <Faq id="iphone-faq" title="Biežāk uzdotie jautājumi" items={IPHONE_FAQ_ITEMS} />
+          <Faq
+            id="iphone-faq"
+            title={strings.faqTitle}
+            items={IPHONE_FAQ_ITEMS}
+            locale={locale}
+          />
         </div>
       </section>
 

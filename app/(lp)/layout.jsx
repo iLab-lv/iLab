@@ -45,10 +45,10 @@ export default function AdsLayout({ children }) {
         </a>
 
         {/* Same topbar as main site, but without navigation links */}
-        <NavBar showNavigation={false} showHeaderCtas={false} logoHref="https://ilab.lv"/>
+        <NavBar showNavigation={false} showHeaderCtas={true} logoHref="https://ilab.lv"/>
 
         {/* Mobile/Tablet bottom CTAs (unchanged) */}
-        {/* <BottomBar /> */}
+        <BottomBar />
 
         {/* Ads page content */}
         <main id="main" className={l.main}>
