@@ -9,8 +9,7 @@ const nextConfig = {
     // inside redirects()
     return [
 
-      // { source: '/:lang(ru)', destination: '/', permanent: true },
-      // { source: '/:lang(ru)/', destination: '/', permanent: true },
+
 
       { source: '/:lang(ru)?/samsung-galaxy-note-7-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-tab-s5e-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },

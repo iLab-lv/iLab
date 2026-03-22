@@ -3,18 +3,16 @@
 import s from './Faq.module.scss';
 
 /**
- * Minimal FAQ (accordion-only)
- *
  * Props:
  * - id?: string
  * - title?: string
- * - items: Array<{ q: string, a: React.ReactNode }>
+ * - items: Array<{ q: string, a: React.ReactNode | string }>
  * - openAll?: boolean
  * - className?: string
  */
 export default function Faq({
   id = 'faq',
-  title = 'Biežāk uzdotie jautājumi',
+  title,
   items = [],
   openAll = false,
   className = '',
@@ -32,7 +30,6 @@ export default function Faq({
           </h2>
         ) : null}
 
-        {/* ✅ No role="list" here — <details> accordion is already accessible */}
         <div className={s.faqList}>
           {items.map(({ q, a }, i) => (
             <details
