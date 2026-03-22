@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import devicesAll from '@/data/devices';
@@ -80,46 +79,6 @@ export async function generateComputerBrandStaticParams() {
 /* ---------------------------------------------
    Shared content
 ---------------------------------------------- */
-
-const PROCESS_STEPS_LV = [
-  { title: 'Diagnostika', text: 'Pārbaudām datoru, nosakām bojājumu un iespējamos risinājumus.' },
-  {
-    title: 'Cena un termiņš',
-    text: 'Pirms darba saskaņojam izmaksas un izpildes termiņu, bez slēptām izmaksām.',
-  },
-  {
-    title: 'Remonts',
-    text: 'Veicam remontu, izmantojot kvalitatīvas detaļas un piemērotas remonta metodes.',
-  },
-  {
-    title: 'Testēšana',
-    text: 'Pārbaudām dzesēšanu, veiktspēju un galvenās funkcijas pēc remonta.',
-  },
-  {
-    title: 'Garantija',
-    text: '90 dienu garantija darbam un detaļām, kā arī ieteikumi turpmākai lietošanai.',
-  },
-];
-
-const PROCESS_STEPS_RU = [
-  { title: 'Диагностика', text: 'Проверяем компьютер, определяем неисправность и возможные решения.' },
-  {
-    title: 'Цена и срок',
-    text: 'До начала работ согласовываем стоимость и срок выполнения без скрытых расходов.',
-  },
-  {
-    title: 'Ремонт',
-    text: 'Выполняем ремонт с использованием качественных деталей и подходящих методов ремонта.',
-  },
-  {
-    title: 'Тестирование',
-    text: 'После ремонта проверяем охлаждение, производительность и основные функции.',
-  },
-  {
-    title: 'Гарантия',
-    text: 'Гарантия 90 дней на работу и детали, а также рекомендации по дальнейшему использованию.',
-  },
-];
 
 const FAQ_ITEMS_LV = [
   {
@@ -238,7 +197,7 @@ function getPageStrings(cfg, locale = 'lv') {
       intro:
         `Ремонтируем ноутбуки и настольные компьютеры ${cfg.name} — экран, охлаждение, диски и программное обеспечение. Стоимость зависит от модели и сложности неисправности, поэтому точное предложение готовим после диагностики.`,
       paragraph:
-        `Самые частые работы: <strong>замена экрана</strong>, <strong>чистка системы охлаждения и замена термопасты</strong>, <strong>замена жёсткого диска/SSD</strong>, <strong>переустановка операционной системы</strong> и <strong>удаление вирусов</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.`,
+        `Самые частые работы: <strong>замена экрана</strong>, <strong>чистка системы охлаждения и замена термопасты</strong>, <strong>замена жёсткого диска/SSD</strong>, <strong>переустановка операционной системы</strong> и <strong>удаление вирусов</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process">«Как проходит ремонт»</a>.`,
       modelsTitle: `${cfg.name} модели, которые мы ремонтируем`,
       modelsIntro:
         `Ниже показаны популярные модели ${cfg.name}. Выберите свою модель, чтобы посмотреть типовые ремонты и цены, если они доступны.`,
@@ -248,7 +207,6 @@ function getPageStrings(cfg, locale = 'lv') {
         `Пока для этого бренда не добавлены модели. Свяжитесь с нами, чтобы уточнить ремонт ${cfg.name}.`,
       servicesTitle: 'Популярный ремонт',
       faqTitle: 'Часто задаваемые вопросы',
-      processTitle: 'Как проходит ремонт',
       heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> — ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>`,
     };
   }
@@ -258,7 +216,7 @@ function getPageStrings(cfg, locale = 'lv') {
     intro:
       `Remontējam ${cfg.name} portatīvos un galda datorus — ekrāns, dzesēšana, diski un programmatūra. Cenas atšķiras pēc modeļa un bojājuma sarežģītības, tāpēc precīzu piedāvājumu sagatavojam pēc diagnostikas.`,
     paragraph:
-      'Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>dzesēšanas sistēmas tīrīšana un termopastas maiņa</strong>, <strong>cietā diska/SSD nomaiņa</strong>, <strong>operētājsistēmas pārinstalēšana</strong> un <strong>vīrusu noņemšana</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
+      'Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>dzesēšanas sistēmas tīrīšana un termopastas maiņa</strong>, <strong>cietā diska/SSD nomaiņa</strong>, <strong>operētājsistēmas pārinstalēšana</strong> un <strong>vīrusu noņemšana</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process">“Kā notiek remonts”</a>.',
     modelsTitle: `${cfg.name} modeļi, ko remontējam`,
     modelsIntro:
       `Zemāk redzami populārākie ${cfg.name} modeļi. Izvēlies savu modeli, lai apskatītu biežākos remontus un cenas (ja pieejamas).`,
@@ -268,7 +226,6 @@ function getPageStrings(cfg, locale = 'lv') {
       `Pagaidām šim zīmolam nav pievienotu modeļu. Sazinies ar mums, lai precizētu ${cfg.name} remontu.`,
     servicesTitle: 'Populārākie remonti',
     faqTitle: 'Biežāk uzdotie jautājumi',
-    processTitle: 'Kā notiek remonts',
     heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> — portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`,
   };
 }
@@ -324,7 +281,6 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
   const strings = getPageStrings(cfg, locale);
   const popularRepairs = getPopularRepairsForType(cfg.deviceType, locale);
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
-  const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
 
   const baseCategoryPath = buildCategoryHref(locale, 'datoru-remonts');
   const path = `${baseCategoryPath}/${cfg.brandSlug}`;
@@ -345,7 +301,7 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
   });
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
+    { name: locale === 'ru' ? 'Главная' : 'Sākums', url: abs(locale === 'ru' ? '/ru' : '/') },
     { name: locale === 'ru' ? 'Ремонт компьютеров' : 'Datoru remonts', url: abs(baseCategoryPath) },
     { name: locale === 'ru' ? `${cfg.name} ремонт компьютеров` : `${cfg.name} datoru remonts`, url: abs(path) },
   ]);
@@ -458,13 +414,7 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
         </div>
       </section>
 
-      <Process
-        steps={processSteps}
-        title={strings.processTitle}
-        headingLevel={2}
-        variant="cards"
-        locale={locale}
-      />
+      <Process locale={locale} variant="computer" headingLevel={2} />
 
       <section className={c.section}>
         <Why locale={locale} />

@@ -129,7 +129,7 @@ export const NAVIGATION_CONFIG = [
     key: 'computer-repair',
     label: {
       lv: 'Datoru remonts',
-      ru: 'Ремонт компьютеров',
+      ru: 'Ремонт ноутбуков',
     },
     route: {
       type: 'category',
