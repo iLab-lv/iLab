@@ -22,6 +22,13 @@
   margin: 0;
 }
 
+.actions {
+  display: flex;
+  gap: $space-sm;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .localeSwitch {
   display: flex;
   gap: $space-sm;
@@ -37,9 +44,18 @@
   color: $color-text;
   cursor: pointer;
   font-weight: $font-weight-medium;
+  transition:
+    background-color $dur-fast $ease-std,
+    border-color $dur-fast $ease-std,
+    color $dur-fast $ease-std,
+    transform $dur-fast $ease-std;
 
   &:hover {
     background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 
   &:focus-visible {
@@ -94,6 +110,7 @@
   gap: $space-md;
   font-weight: $font-weight-semibold;
   color: $color-text;
+  transition: background-color $dur-fast $ease-std;
 
   &:hover {
     background: rgba(255, 255, 255, 0.03);
@@ -122,37 +139,6 @@
   padding: $space-md;
   background: $color-surface-2;
   border-top: $border-thin solid rgba(255, 255, 255, 0.05);
-}
-
-.meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: $space-sm;
-  margin-bottom: $space-md;
-
-  @media (max-width: $bp-md) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.metaItem {
-  border: $border-thin solid $color-border;
-  border-radius: $radius-md;
-  background: $color-surface-1;
-  padding: $space-sm $space-md;
-}
-
-.metaLabel {
-  display: block;
-  color: $color-text-2;
-  font-size: $font-size-sm;
-  margin-bottom: $space-xs;
-}
-
-.metaValue {
-  display: block;
-  color: $color-text;
-  font-weight: $font-weight-semibold;
 }
 
 .empty {
@@ -205,6 +191,10 @@
   background: $color-surface-2;
   color: $color-text;
   cursor: pointer;
+  transition:
+    background-color $dur-fast $ease-std,
+    border-color $dur-fast $ease-std,
+    color $dur-fast $ease-std;
 
   &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.03);
@@ -227,7 +217,7 @@
 
 .formGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) 180px 140px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: $space-sm;
   margin-bottom: $space-sm;
 
@@ -236,7 +226,15 @@
   }
 }
 
+.formGridSingle {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
 .input,
+.inputWide,
 .textarea {
   border-radius: $radius-md;
   border: $border-thin solid $color-border;
@@ -251,7 +249,8 @@
   }
 }
 
-.input {
+.input,
+.inputWide {
   height: $btn-h-md;
   padding: 0 $space-md;
 
@@ -260,11 +259,27 @@
   }
 }
 
+.inputWide {
+  grid-column: span 2;
+
+  @media (max-width: $bp-md) {
+    grid-column: span 1;
+  }
+}
+
 .textarea {
   padding: $space-sm $space-md;
   resize: vertical;
-  min-height: 120px;
+  min-height: 180px;
   font: inherit;
+}
+
+.checkboxRow {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  min-height: $btn-h-md;
+  color: $color-text;
 }
 
 .panelFooter {

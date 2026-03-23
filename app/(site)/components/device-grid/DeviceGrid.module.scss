@@ -1,0 +1,36 @@
+@use '@styles/_tokens.scss' as *;
+
+.wrapper {
+  display: block;
+}
+
+.toolbar {
+  margin-bottom: $space-md;
+}
+
+.search {
+  width: 100%;
+  height: 44px;
+  padding: 0 $space-md;
+  color: $color-text;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color $dur-base $ease-std, background $dur-base $ease-std;
+
+  &::placeholder {
+    color: $color-text-2;
+  }
+
+  &:focus {
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
+  }
+}
+
+.emptyAll {
+  opacity: 0.8;
+  padding: $space-md 0 $space-lg;
+}

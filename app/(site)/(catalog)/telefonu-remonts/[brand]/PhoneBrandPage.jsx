@@ -1,12 +1,11 @@
 import Script from 'next/script';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import devicesAll from '@/data/devices';
 import categories from '@/data/categories';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import SeriesGrid from '@components/model-grid/SeriesGrid';
+import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
@@ -54,7 +53,7 @@ export async function generatePhoneBrandStaticParams() {
    Helpers
 ---------------------------------------------- */
 function getPhoneBrandConfig(brandSlug) {
-  const phonesCat = categories.find((c) => c.slug === 'telefonu-remonts');
+  const phonesCat = categories.find((cat) => cat.slug === 'telefonu-remonts');
 
   if (!phonesCat) {
     return {
@@ -69,7 +68,7 @@ function getPhoneBrandConfig(brandSlug) {
 
   const brand =
     phonesCat.brands?.find(
-      (b) => (b.brandSlug || '').toLowerCase() === brandSlug
+      (item) => (item.brandSlug || '').toLowerCase() === brandSlug
     ) || null;
 
   return {
@@ -84,7 +83,10 @@ function getPhoneBrandConfig(brandSlug) {
 }
 
 const PROCESS_STEPS_LV = [
-  { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+  {
+    title: 'Diagnostika',
+    text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+  },
   {
     title: 'Cena un termiņš',
     text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
@@ -104,7 +106,10 @@ const PROCESS_STEPS_LV = [
 ];
 
 const PROCESS_STEPS_RU = [
-  { title: 'Диагностика', text: 'Быстро проверяем устройство и подтверждаем проблему.' },
+  {
+    title: 'Диагностика',
+    text: 'Быстро проверяем устройство и подтверждаем проблему.',
+  },
   {
     title: 'Цена и срок',
     text: 'Согласовываем стоимость и срок выполнения до начала работ.',
@@ -132,7 +137,10 @@ const FAQ_ITEMS_LV = [
     q: 'Vai mani dati saglabāsies?',
     a: 'Darām visu iespējamo; pirms remonta iesakām dublējumu.',
   },
-  { q: 'Vai detaļām ir garantija?', a: 'Jā, gan detaļām, gan darbam.' },
+  {
+    q: 'Vai detaļām ir garantija?',
+    a: 'Jā, gan detaļām, gan darbam.',
+  },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
     a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
@@ -152,7 +160,10 @@ const FAQ_ITEMS_RU = [
     q: 'Сохранятся ли мои данные?',
     a: 'Мы делаем всё возможное; перед ремонтом рекомендуем резервную копию.',
   },
-  { q: 'Есть ли гарантия на детали?', a: 'Да, и на детали, и на работу.' },
+  {
+    q: 'Есть ли гарантия на детали?',
+    a: 'Да, и на детали, и на работу.',
+  },
   {
     q: 'Доступны ли оригинальные детали?',
     a: 'Используем оригинальные или качественные OEM детали — выбор согласовываем с клиентом.',
@@ -194,7 +205,11 @@ function getPopularRepairs(locale = 'lv') {
         title: 'Динамики/микрофон',
         text: 'тихий звук, хрипы, во время разговора плохо слышно.',
         icon: LuVolume2,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'skalruni-mikrofona-remonts'),
+        href: buildServiceHref(
+          locale,
+          'telefonu-remonts',
+          'skalruni-mikrofona-remonts'
+        ),
       },
       {
         title: 'Повреждения от влаги',
@@ -234,7 +249,11 @@ function getPopularRepairs(locale = 'lv') {
       title: 'Skaļruņi/mikrofons',
       text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
       icon: LuVolume2,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'skalruni-mikrofona-remonts'),
+      href: buildServiceHref(
+        locale,
+        'telefonu-remonts',
+        'skalruni-mikrofona-remonts'
+      ),
     },
     {
       title: 'Ūdens bojājumi',
@@ -254,6 +273,9 @@ function getPageStrings(bc, locale = 'lv') {
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>разъём зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>камера</strong> (мутные фото, ошибки фокусировки), <strong>динамики/микрофон</strong> (тихий звук, хрипы), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       servicesTitle: 'Популярный ремонт',
+      modelGridHeading: `Выберите модель ${bc.marketingName}`,
+      modelGridIntro:
+        'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.',
       modelsNote:
         'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели.',
@@ -265,6 +287,7 @@ function getPageStrings(bc, locale = 'lv') {
       brandName: bc.marketingName,
       serviceName: `${bc.marketingName} ремонт телефонов`,
       serviceDescription: `${bc.marketingName} ремонт телефонов: дисплей, батарея, разъём зарядки, камера и другие работы. Быстрая диагностика, честные цены, гарантия.`,
+      homeCrumb: 'Главная',
     };
   }
 
@@ -275,6 +298,11 @@ function getPageStrings(bc, locale = 'lv') {
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     servicesTitle: 'Populārākie remonti',
+    modelGridHeading:
+      bc.sections?.modelGrid?.heading ?? `Izvēlies savu ${bc.marketingName} modeli`,
+    modelGridIntro:
+      bc.sections?.modelGrid?.intro ??
+      'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.',
     modelsNote:
       'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu modeļu.',
@@ -286,6 +314,7 @@ function getPageStrings(bc, locale = 'lv') {
     brandName: bc.marketingName,
     serviceName: `${bc.marketingName} telefonu remonts`,
     serviceDescription: `${bc.marketingName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    homeCrumb: 'Sākums',
   };
 }
 
@@ -294,7 +323,8 @@ export function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
 
   if (!bc) {
     return {
-      title: locale === 'ru' ? 'Ремонт телефонов | iLab' : 'Telefonu remonts | iLab',
+      title:
+        locale === 'ru' ? 'Ремонт телефонов | iLab' : 'Telefonu remonts | iLab',
       description:
         locale === 'ru'
           ? 'Ремонт телефонов в Риге — быстрая диагностика, честные цены, гарантия.'
@@ -327,7 +357,7 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
 
   const allowed = (listBrandsForCategory(BRAND_CATEGORY.PHONES) || [])
-    .map((b) => String(b.slug).toLowerCase())
+    .map((item) => String(item.slug).toLowerCase())
     .filter((slug) => slug !== 'apple');
 
   if (!allowed.includes(brandSlug)) return notFound();
@@ -345,13 +375,13 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
   const baseHref = `${baseCategoryPath}/${bc.slug}`;
 
   const brandPhoneList = devicesAll.filter(
-    (d) =>
-      d.category === 'telefonu-remonts' &&
-      (d.brandSlug || '').toLowerCase() === brandSlug
+    (device) =>
+      device.category === 'telefonu-remonts' &&
+      (device.brandSlug || '').toLowerCase() === brandSlug
   );
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
     { name: strings.categoryName, url: abs(baseCategoryPath) },
     { name: strings.brandName, url: abs(baseHref) },
   ]);
@@ -374,6 +404,7 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(serviceLd)}
       </Script>
+
       <Script
         id="breadcrumbs-jsonld"
         type="application/ld+json"
@@ -381,6 +412,7 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
+
       <Script
         id="howto-jsonld"
         type="application/ld+json"
@@ -388,6 +420,7 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(howToLd)}
       </Script>
+
       <Script
         id="faq-jsonld"
         type="application/ld+json"
@@ -411,10 +444,12 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
           <h2 id="brand-intro-h2" className={c.h2}>
             {strings.introTitle}
           </h2>
+
           <p
             className={c.intro}
             dangerouslySetInnerHTML={{ __html: strings.introLead }}
           />
+
           <p
             className={c.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
@@ -432,38 +467,33 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
         </div>
       </section>
 
-      <section
+      <DeviceSelector
         id="brand-modeli"
-        className={`${c.section} ${c.anchorTarget}`}
-        aria-labelledby="brand-modeli-h2"
-      >
+        locale={locale}
+        title={strings.modelGridHeading}
+        intro={strings.modelGridIntro}
+        devices={devicesAll}
+        baseHref={baseHref}
+        brandSlug={brandSlug}
+        categorySlug="telefonu-remonts"
+        initialLimit={4}
+        autoExpandOnSearch={true}
+      />
+
+      <section className={c.section}>
         <div className={c.container}>
-          <h2 id="brand-modeli-h2" className={c.h2}>
-            {bc.sections.modelGrid.heading}
-          </h2>
-          <p className={c.intro}>{bc.sections.modelGrid.intro}</p>
           <p className={c.paragraph} style={{ marginTop: 0 }}>
             {strings.modelsNote}
           </p>
 
-          <SeriesGrid
-            devices={devicesAll}
-            baseHref={baseHref}
-            brandSlug={brandSlug}
-            categorySlug="telefonu-remonts"
-            initialLimit={4}
-            autoExpandOnSearch={true}
-          />
-
           {brandPhoneList.length === 0 && (
-            <p style={{ opacity: 0.8, marginTop: 16 }}>
-              {strings.noModels}
-            </p>
+            <p style={{ opacity: 0.8, marginTop: 16 }}>{strings.noModels}</p>
           )}
         </div>
       </section>
 
       <div id="process-h2" className={c.anchorTarget} />
+
       <section className={c.section} aria-labelledby="process-h2">
         <div className={c.container}>
           <Process

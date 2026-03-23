@@ -4,7 +4,7 @@ import Script from 'next/script';
 import categoryContent from '@/data/categoryContent';
 import devicesAll from '@/data/devices';
 
-import SeriesGrid from '@components/model-grid/SeriesGrid';
+import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import {
   buildIphonePopularServices,
@@ -13,7 +13,7 @@ import {
 import Process from '@sections/process/Process';
 import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
-import { getCategoryFaq } from '@sections/faq/faq.i18n';
+import { getCategoryFaqGroup } from '@sections/faq/faq.data';
 import { toFaqLd, toFaqRenderItems } from '@sections/faq/faq.helpers';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
@@ -47,18 +47,16 @@ function getPageStrings(locale = 'lv') {
       breadcrumbName: 'Ремонт iPhone в Риге',
       homeCrumb: 'Главная',
       howToName: 'Ремонт iPhone',
-      modelGridHeading:
-        cat?.sections?.modelGrid?.heading ?? 'Выберите модель iPhone',
+      modelGridHeading: 'Выберите модель iPhone',
       modelGridIntro:
-        cat?.sections?.modelGrid?.intro ??
-        'Найти модель легко — ищите по названию или просматривайте серии.',
+        'Быстро найдите нужный iPhone по названию или откройте нужную серию и выберите свою модель.',
     };
   }
 
   return {
     heroAlt: 'iPhone remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>',
+      '<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantiju</strong> katram remontam.</p>',
     introTitle: 'iPhone remonts Rīgā — ko mēs darām',
     introBody:
       'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos remontdarbus paveicam tajā pašā dienā. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong> katram remontam.',
@@ -72,17 +70,17 @@ function getPageStrings(locale = 'lv') {
       cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli',
     modelGridIntro:
       cat?.sections?.modelGrid?.intro ??
-      'Atrast modeli ir viegli — meklē pēc nosaukuma vai pārlūko sērijas.',
+      'Atrodi vajadzīgo iPhone pēc nosaukuma vai atver sēriju un izvēlies savu modeli.',
   };
 }
 
-export default function IphoneRepairPage({ locale = 'lv' }) {
+export default async function IphoneRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
   const baseHref = buildCategoryHref(locale, 'iphone-remonts');
   const popularServices = buildIphonePopularServices(locale);
   const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
 
-  const faq = getCategoryFaq('iphone-remonts', locale);
+  const faq = await getCategoryFaqGroup('iphone-remonts', locale);
   const faqItems = toFaqRenderItems(faq.items);
   const faqLd = toFaqLd(faq.items);
 
@@ -145,29 +143,18 @@ export default function IphoneRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      <section
+      <DeviceSelector
         id="iphone-modeli"
-        className={`${s.section} ${s.anchorTarget}`}
-        aria-labelledby="iphone-modeli-h2"
-      >
-        <div className={s.container}>
-          <h2 id="iphone-modeli-h2" className={s.h2}>
-            {strings.modelGridHeading}
-          </h2>
-          <p id="iphone-modeli-intro" className={s.intro}>
-            {strings.modelGridIntro}
-          </p>
-
-          <SeriesGrid
-            devices={devicesAll}
-            baseHref={baseHref}
-            brandSlug="apple"
-            categorySlug="telefonu-remonts"
-            initialLimit={4}
-            autoExpandOnSearch={true}
-          />
-        </div>
-      </section>
+        locale={locale}
+        title={strings.modelGridHeading}
+        intro={strings.modelGridIntro}
+        devices={devicesAll}
+        baseHref={baseHref}
+        brandSlug="apple"
+        categorySlug="telefonu-remonts"
+        initialLimit={4}
+        autoExpandOnSearch={true}
+      />
 
       <Reviews locale={locale} />
 

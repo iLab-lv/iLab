@@ -16,6 +16,13 @@ export function getDefaultFaqTitle(locale = 'lv') {
 
 export function normalizeText(text = '') {
   return String(text)
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
     .replace(/\s+/g, ' ')
     .replace(/\s([.,!?;:])/g, '$1')
     .trim();
@@ -39,6 +46,10 @@ export function nodeToText(node) {
   return '';
 }
 
+export function htmlToPlainText(html = '') {
+  return normalizeText(html);
+}
+
 export function mergeFaqGroups(...groups) {
   const validGroups = groups.filter(Boolean);
 
@@ -58,9 +69,12 @@ export function mergeFaqGroups(...groups) {
 }
 
 export function toFaqRenderItems(items = []) {
-  return items.map(({ q, a }) => ({
+  return items.map(({ q, a, aHtml }) => ({
     q,
-    a,
+    a:
+      typeof aHtml === 'string' && aHtml.trim()
+        ? aHtml
+        : a,
   }));
 }
 
@@ -68,12 +82,15 @@ export function toFaqLd(items = []) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: items.map(({ q, a }) => ({
+    mainEntity: items.map(({ q, a, aHtml }) => ({
       '@type': 'Question',
       name: q,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: nodeToText(a),
+        text:
+          typeof aHtml === 'string' && aHtml.trim()
+            ? htmlToPlainText(aHtml)
+            : nodeToText(a),
       },
     })),
   };

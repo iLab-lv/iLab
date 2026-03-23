@@ -1,0 +1,81 @@
+@use '@styles/_tokens.scss' as *;
+
+.section {
+  margin-bottom: $space-xl;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: $font-size-h5;
+  line-height: $line-height-heading;
+}
+
+.count {
+  color: $color-text-2;
+  font-size: 0.875rem;
+  margin-left: $space-xs;
+}
+
+.toggleBtn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $color-surface-3;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.yearFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+  margin-bottom: $space-sm;
+}
+
+.yearChip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background $dur-base $ease-std, border-color $dur-base $ease-std;
+
+  &:hover {
+    background: $color-surface-3;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.active {
+  background: $color-accent;
+  color: #0b0b0b;
+  border-color: transparent;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-md;
+}
+
+.emptySection {
+  opacity: 0.8;
+  padding: $space-sm 0 $space-md;
+}
