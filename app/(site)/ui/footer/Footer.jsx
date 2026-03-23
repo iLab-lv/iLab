@@ -146,7 +146,7 @@ export default function Footer({ variant = 'default' }) {
                     <a href="/buj">BUJ</a>
                   </li>
                   <li>
-                    <a href="/privatuma-un-sikdatnu-politika">
+                    <a href="/noteikumi">
                       Privātuma un sīkdatņu politika
                     </a>
                   </li>

@@ -1,12 +1,11 @@
 import Script from 'next/script';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import devicesAll from '@/data/devices';
 import categories from '@/data/categories';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import SeriesGrid from '@components/model-grid/SeriesGrid';
+import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
@@ -50,7 +49,7 @@ export async function generateTabletBrandStaticParams() {
    Helpers
 ---------------------------------------------- */
 function getTabletBrandConfig(brandSlug) {
-  const tabletsCat = categories.find((c) => c.slug === 'plansetdatoru-remonts');
+  const tabletsCat = categories.find((cat) => cat.slug === 'plansetdatoru-remonts');
 
   if (!tabletsCat) {
     return {
@@ -64,7 +63,7 @@ function getTabletBrandConfig(brandSlug) {
 
   const brand =
     tabletsCat.brands?.find(
-      (b) => (b.brandSlug || '').toLowerCase() === brandSlug
+      (item) => (item.brandSlug || '').toLowerCase() === brandSlug
     ) || null;
 
   return {
@@ -129,8 +128,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai mani dati saglabāsies?',
-    a:
-      'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta vienmēr iesakām izveidot dublējumu.',
+    a: 'Darām visu iespējamo, lai saglabātu datus, taču pirms remonta vienmēr iesakām izveidot dublējumu.',
   },
   {
     q: 'Vai detaļām ir garantija?',
@@ -138,8 +136,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
-    a:
-      'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli un cenu saskaņojam ar klientu pirms remonta.',
+    a: 'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli un cenu saskaņojam ar klientu pirms remonta.',
   },
   {
     q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
@@ -154,8 +151,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Сохранятся ли мои данные?',
-    a:
-      'Мы делаем всё возможное, чтобы сохранить данные, но перед ремонтом всегда рекомендуем сделать резервную копию.',
+    a: 'Мы делаем всё возможное, чтобы сохранить данные, но перед ремонтом всегда рекомендуем сделать резервную копию.',
   },
   {
     q: 'Есть ли гарантия на детали?',
@@ -163,8 +159,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Доступны ли оригинальные детали?',
-    a:
-      'В зависимости от модели предлагаем оригинальные или качественные OEM детали — выбор и цену согласовываем с клиентом до начала ремонта.',
+    a: 'В зависимости от модели предлагаем оригинальные или качественные OEM детали — выбор и цену согласовываем с клиентом до начала ремонта.',
   },
   {
     q: 'Можно ли узнать примерную цену до ремонта?',
@@ -246,8 +241,9 @@ function getTabletBrandStrings(bc, locale = 'lv') {
         'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели — откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>ремонт разъёма зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>ремонт камеры</strong> (мутные фото, ошибки фокусировки), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
-      modelsTitle: bc.sections.modelGrid.heading,
-      modelsIntro: bc.sections.modelGrid.intro,
+      modelGridHeading: `Выберите модель ${bc.marketingName}`,
+      modelGridIntro:
+        'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.',
       modelsNote:
         'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели планшетов.',
@@ -260,6 +256,7 @@ function getTabletBrandStrings(bc, locale = 'lv') {
       brandName: `${bc.marketingName} ремонт планшетов`,
       serviceName: `${bc.marketingName} ремонт планшетов в Риге`,
       serviceDescription: `${bc.marketingName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      homeCrumb: 'Главная',
     };
   }
 
@@ -269,8 +266,11 @@ function getTabletBrandStrings(bc, locale = 'lv') {
       'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas remonta cenas un termiņus.',
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzdas remonts</strong> (nenoturas kabelis, lēna vai nestabila uzlāde), <strong>kameras remonts</strong> (miglaini attēli, fokusēšanās kļūdas), kā arī <strong>mitruma/ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
-    modelsTitle: bc.sections.modelGrid.heading,
-    modelsIntro: bc.sections.modelGrid.intro,
+    modelGridHeading:
+      bc.sections?.modelGrid?.heading ?? `Izvēlies savu ${bc.marketingName} modeli`,
+    modelGridIntro:
+      bc.sections?.modelGrid?.intro ??
+      'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.',
     modelsNote:
       'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu planšetdatoru modeļu.',
@@ -283,6 +283,7 @@ function getTabletBrandStrings(bc, locale = 'lv') {
     brandName: `${bc.marketingName} planšetdatoru remonts`,
     serviceName: `${bc.marketingName} planšetdatoru remonts Rīgā`,
     serviceDescription: `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    homeCrumb: 'Sākums',
   };
 }
 
@@ -291,7 +292,8 @@ export function getTabletBrandMetadata(brandSlug, locale = 'lv') {
 
   if (!bc) {
     return {
-      title: locale === 'ru' ? 'Ремонт планшетов | iLab' : 'Planšetdatoru remonts | iLab',
+      title:
+        locale === 'ru' ? 'Ремонт планшетов | iLab' : 'Planšetdatoru remonts | iLab',
       description:
         locale === 'ru'
           ? 'Ремонт планшетов в Риге — быстрая диагностика, честные цены, гарантия.'
@@ -320,7 +322,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
 
   const allowed = (listBrandsForCategory(BRAND_CATEGORY.TABLETS) || []).map(
-    (b) => String(b.slug).toLowerCase()
+    (item) => String(item.slug).toLowerCase()
   );
   if (!allowed.includes(brandSlug)) return notFound();
 
@@ -331,15 +333,16 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
   const strings = getTabletBrandStrings(bc, locale);
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
   const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
-  const popularServices = locale === 'ru' ? POPULAR_SERVICES_RU : POPULAR_SERVICES_LV;
+  const popularServices =
+    locale === 'ru' ? POPULAR_SERVICES_RU : POPULAR_SERVICES_LV;
 
   const baseCategoryPath = buildCategoryHref(locale, 'plansetdatoru-remonts');
   const baseHref = `${baseCategoryPath}/${bc.slug}`;
 
   const brandTabletList = devicesAll.filter(
-    (d) =>
-      d.category === 'plansetdatoru-remonts' &&
-      (d.brandSlug || '').toLowerCase() === brandSlug
+    (device) =>
+      device.category === 'plansetdatoru-remonts' &&
+      (device.brandSlug || '').toLowerCase() === brandSlug
   );
 
   const provider = buildProvidersFromLocations();
@@ -358,7 +361,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
   };
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
     { name: strings.categoryName, url: abs(baseCategoryPath) },
     { name: strings.brandName, url: pageUrl },
   ]);
@@ -456,6 +459,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(serviceLd)}
       </Script>
+
       <Script
         id="breadcrumbs-jsonld-tablet-brand"
         type="application/ld+json"
@@ -463,6 +467,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
+
       <Script
         id="faq-jsonld-tablet-brand"
         type="application/ld+json"
@@ -470,6 +475,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
       >
         {JSON.stringify(faqLd)}
       </Script>
+
       <Script
         id="process-jsonld-tablet-brand"
         type="application/ld+json"
@@ -480,7 +486,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
 
       <DeviceHero
         image="/images/categories/plansetdatoru_remonts.webp"
-        alt={heroCfg.heroAlt}
+        alt={strings.heroAlt}
         brandLogo={heroCfg.logo}
         brandKey={heroCfg.brandKey}
         tint={heroCfg.tint}
@@ -493,7 +499,9 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
           <h2 id="tablet-brand-intro-h2" className={c.h2}>
             {strings.introTitle}
           </h2>
+
           <p className={c.intro}>{strings.introLead}</p>
+
           <p
             className={c.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
@@ -501,42 +509,34 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
         </div>
       </section>
 
-      <section
+      <DeviceSelector
         id="brand-modeli"
-        className={`${c.section} ${c.anchorTarget}`}
-        aria-labelledby="tablet-brand-modeli-h2"
-      >
-        <div className={c.container}>
-          <h2 id="tablet-brand-modeli-h2" className={c.h2}>
-            {strings.modelsTitle}
-          </h2>
-          <p className={c.intro}>{strings.modelsIntro}</p>
-          <p className={c.paragraph} style={{ marginTop: 0 }}>
-            {strings.modelsNote}
-          </p>
+        locale={locale}
+        title={strings.modelGridHeading}
+        intro={strings.modelGridIntro}
+        note={strings.modelsNote}
+        devices={devicesAll}
+        baseHref={baseHref}
+        brandSlug={brandSlug}
+        categorySlug="plansetdatoru-remonts"
+        initialLimit={4}
+        autoExpandOnSearch={true}
+      />
 
-          <SeriesGrid
-            devices={devicesAll}
-            baseHref={baseHref}
-            brandSlug={brandSlug}
-            categorySlug="plansetdatoru-remonts"
-            initialLimit={4}
-            autoExpandOnSearch={true}
-          />
-
-          {brandTabletList.length === 0 && (
-            <p style={{ opacity: 0.8, marginTop: 16 }}>
-              {strings.noModels}
-            </p>
-          )}
-        </div>
-      </section>
+      {brandTabletList.length === 0 && (
+        <section className={c.section}>
+          <div className={c.container}>
+            <p style={{ opacity: 0.8, marginTop: 0 }}>{strings.noModels}</p>
+          </div>
+        </section>
+      )}
 
       <section className={c.section} aria-labelledby="tablet-popular-services-h2">
         <div className={c.container}>
           <h2 id="tablet-popular-services-h2" className={c.h2}>
             {strings.servicesHeading}
           </h2>
+
           <Services
             id="tablet-brand-services"
             title=""
@@ -546,11 +546,12 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
       </section>
 
       <div id="process-h2" className={c.anchorTarget} />
+
       <section className={c.section} aria-labelledby="process-h2">
         <div className={c.container}>
           <Process
             id="process"
-            title={locale === 'ru' ? 'Как проходит ремонт' : 'Kā notiek remonts'}
+            title={strings.processTitle}
             steps={processSteps}
             headingLevel={2}
             variant="cards"
@@ -567,7 +568,7 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
         <div className={c.container}>
           <Faq
             id="tablet-brand-faq"
-            title={locale === 'ru' ? 'Часто задаваемые вопросы' : 'Biežāk uzdotie jautājumi'}
+            title={strings.faqTitle}
             items={faqItems}
             headingLevel={2}
             variant="accordion"

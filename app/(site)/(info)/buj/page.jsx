@@ -1,99 +1,14 @@
-// app/(site)/(info)/duk/page.jsx
-import React from 'react';
-import Script from 'next/script';
+import DukPage from './BujPage';
 
-import Faq from '@sections/faq/Faq';
-import ConvertBand from '@sections/convert-band/ConvertBand';
-
-import { FAQ_CONTEXT, getFaqItemsMulti, getFaqLd } from '@/data/faq';
-import s from '@styles/Catalog.module.scss';
+const CANONICAL_PATH = '/buj';
 
 export const metadata = {
   title: 'Biežāk uzdotie jautājumi | iLab',
   description:
-    'iLab — biežāk uzdotie jautājumi par telefonu, iPhone, planšetdatoru, planšetdatoru, portatīvo datoru un Dyson remontu, kā arī ekrāna, baterijas, uzlādes un ūdens bojājumiem.',
-  alternates: { canonical: '/duk' },
+    'iLab — biežāk uzdotie jautājumi par telefonu, iPhone, planšetdatoru, datoru un Dyson remontu, kā arī diagnostiku, termiņiem, garantiju un populārākajiem remonta darbiem.',
+  alternates: { canonical: CANONICAL_PATH },
 };
 
-// --- Helpers --------------------------------------------------------
-
-function buildMergedFaqLd(contexts) {
-  const seen = new Set();
-  const mainEntity = [];
-
-  for (const ctx of contexts) {
-    const ld = getFaqLd(ctx);
-    if (!ld?.mainEntity) continue;
-
-    for (const q of ld.mainEntity) {
-      const key = (q?.name || '').trim().toLowerCase();
-      if (!key || seen.has(key)) continue;
-      seen.add(key);
-      mainEntity.push(q);
-    }
-  }
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity,
-  };
-}
-
-// --- Static data for this page -------------------------------------
-
-const FAQ_CONTEXTS = [
-  FAQ_CONTEXT.HOME,
-  FAQ_CONTEXT.PHONE,
-  FAQ_CONTEXT.IPHONE,
-  FAQ_CONTEXT.TABLET,
-  FAQ_CONTEXT.LAPTOP,
-  FAQ_CONTEXT.DYSON,
-  FAQ_CONTEXT.SERVICE_DISPLAY,
-  FAQ_CONTEXT.SERVICE_BATTERY,
-  FAQ_CONTEXT.SERVICE_CAMERA,
-  FAQ_CONTEXT.SERVICE_AUDIO,
-  FAQ_CONTEXT.SERVICE_CHARGING,
-  FAQ_CONTEXT.SERVICE_WATER,
-];
-
-// Compute once at build time
-const FAQ_ITEMS = getFaqItemsMulti(FAQ_CONTEXTS);
-const FAQ_LD = buildMergedFaqLd(FAQ_CONTEXTS);
-
-// --- Page component -------------------------------------------------
-
-export default function DukPage() {
-  return (
-    <>
-      <Script
-        id="duk-faq-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(FAQ_LD)}
-      </Script>
-
-      {/* Header comes from (info)/layout via PageHeader */}
-
-      <section className={s.section} aria-labelledby="duk-faq-h2">
-        <div className={s.container}>
-          <h2 id="duk-faq-h2" className={s.h2}>
-            Biežāk uzdotie jautājumi
-          </h2>
-          <p className={s.intro}>
-            Apkopojām atbildes par populārākajiem remonta jautājumiem — telefoniem,
-            iPhone, planšetdatoriem, portatīvajiem datoriem un Dyson, kā arī ekrāna
-            un baterijas maiņu, uzlādes ligzdām, kamerām, audio un ūdens bojājumiem.
-          </p>
-
-          <Faq id="duk-faq" title="Visi jautājumi" items={FAQ_ITEMS} />
-        </div>
-      </section>
-
-      <section className={s.section}>
-        <ConvertBand />
-      </section>
-    </>
-  );
+export default function Page() {
+  return <DukPage locale="lv" />;
 }
