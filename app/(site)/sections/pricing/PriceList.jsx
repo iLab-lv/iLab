@@ -1,65 +1,81 @@
-// app/(site)/components/price-list/PriceList.jsx  (path example)
-// (use your actual path; only content changed)
 'use client';
 
 import s from './PriceList.module.scss';
 import { useUiDialogs } from '../../ui/providers/UiDialogsProvider';
 
-// legacy fallback (kept for safety)
-function fmtTime(min, max) {
-  if (!min && !max) return 'Tajā pašā dienā';
+function getStrings(locale = 'lv') {
+  if (locale === 'ru') {
+    return {
+      service: 'Услуга',
+      time: 'Срок',
+      price: 'Цена',
+      bookLabel: 'Записаться',
+      onRequest: 'по запросу',
+      sameDay: 'В тот же день',
+      untilPrefix: 'до',
+      notes: [
+        'Бесплатная диагностика. Точную цену подтверждаем после проверки.',
+        'Гарантия 90 дней на все ремонтные работы.',
+        'Цены указаны с учётом стоимости детали и работы.',
+        'Указанная цена действительна, если деталь есть в наличии на складе.',
+      ],
+      fromPrefix: 'от',
+    };
+  }
+
+  return {
+    service: 'Pakalpojums',
+    time: 'Laiks',
+    price: 'Cena',
+    bookLabel: 'Pieraksties',
+    onRequest: 'pēc pieprasījuma',
+    sameDay: 'Tajā pašā dienā',
+    untilPrefix: 'līdz',
+    notes: [
+      'Bezmaksas diagnostika. Precīzu cenu apstiprinām pēc pārbaudes.',
+      '90 dienu garantija visiem remontdarbiem.',
+      'Cenas norādītas ar detaļu un darba izmaksām.',
+      'Norādītā cena ir spēkā, ja detaļa ir pieejama noliktavā.',
+    ],
+    fromPrefix: 'no',
+  };
+}
+
+function fmtTime(min, max, locale = 'lv') {
+  const strings = getStrings(locale);
+
+  if (!min && !max) return strings.sameDay;
   if (min && max) {
-    if (max >= 120) return 'Tajā pašā dienā';
+    if (max >= 120) return strings.sameDay;
     return `${min}–${max} min`;
   }
-  if (max) return max >= 120 ? 'Tajā pašā dienā' : `līdz ${max} min`;
+  if (max) return max >= 120 ? strings.sameDay : `${strings.untilPrefix} ${max} min`;
   return `${min} min`;
 }
 
-// NEW: prefer textual time if provided
-function fmtTimeText(timeText, min, max) {
+function fmtTimeText(timeText, min, max, locale = 'lv') {
   if (typeof timeText === 'string' && timeText.trim()) {
     return timeText.trim();
   }
-  return fmtTime(min, max);
+  return fmtTime(min, max, locale);
 }
 
-// legacy fallback (kept for safety)
-function fmtPrice(from, to, currency = 'EUR') {
-  const euro = (n) => `${n.toFixed(0)} €`;
-  if (from && to && to !== from) return `${euro(from)}–${euro(to)}`;
-  if (from) return `no ${euro(from)}`;
-  if (to) return euro(to);
-  return '—';
-}
+function fmtPriceText(item, currency = 'EUR', locale = 'lv') {
+  const strings = getStrings(locale);
+  const hasNumericPrice =
+    typeof item?.price === 'number' && Number.isFinite(item.price);
 
-// NEW: prefer plain text price if provided (now number-safe)
-// Rules:
-// - price: number -> "123 €"
-// - price: "no 50" -> "no 50 €"
-// - price: "pēc pieprasījuma" -> "pēc pieprasījuma"
-// - price: "" (empty string) AND no priceFrom/priceTo -> "pēc pieprasījuma"
-// - legacy priceFrom/priceTo -> fmtPrice(...)
-function fmtPriceText(item, currency = 'EUR') {
-  const v = item?.price;
-  const t = v == null ? '' : typeof v === 'string' ? v.trim() : String(v);
-
-  if (t) {
-    // Add € if looks numeric, a range, or "no <num>"
-    const numericLike =
-      /^[0-9]+([.,][0-9]+)?(\s*[–-]\s*[0-9]+([.,][0-9]+)?)?$/.test(t) ||
-      /^no\s*[0-9]/i.test(t);
-
-    return numericLike ? `${t.replace(/\s+/g, ' ')} €` : t;
+  if (!hasNumericPrice) {
+    return strings.onRequest;
   }
 
-  // If legacy from/to prices exist -> keep old behavior
-  if (typeof item?.priceFrom === 'number' || typeof item?.priceTo === 'number') {
-    return fmtPrice(item.priceFrom, item.priceTo, currency);
+  const value = `${item.price.toFixed(0)} €`;
+
+  if (item?.isStartingFrom) {
+    return `${strings.fromPrefix} ${value}`;
   }
 
-  // No text price and no numeric from/to -> on request
-  return 'pēc pieprasījuma';
+  return value;
 }
 
 export default function PriceList({
@@ -68,15 +84,17 @@ export default function PriceList({
   items = [],
   currency = 'EUR',
   headingLevel = 2,
-  bookLabel = 'Pieraksties',
+  bookLabel,
   showNotes = true,
+  locale = 'lv',
 }) {
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
   const { openBook } = useUiDialogs();
+  const strings = getStrings(locale);
+  const resolvedBookLabel = bookLabel || strings.bookLabel;
 
   if (!items || items.length === 0) return null;
 
-  // Keep incoming order; do NOT sort by popularity anymore
   const rows = items;
 
   return (
@@ -86,17 +104,16 @@ export default function PriceList({
           {title}
         </Heading>
 
-        {/* Desktop table */}
         <div className={s.table} role="table" aria-label={title}>
           <div className={`${s.tr} ${s.head}`} role="row">
             <div className={s.th} role="columnheader">
-              Pakalpojums
+              {strings.service}
             </div>
             <div className={s.th} role="columnheader">
-              Laiks
+              {strings.time}
             </div>
             <div className={s.th} role="columnheader">
-              Cena
+              {strings.price}
             </div>
             <div className={s.th} role="columnheader">
               {' '}
@@ -107,21 +124,20 @@ export default function PriceList({
             <div key={it.id || it.title} className={s.tr} role="row">
               <div className={s.td} role="cell">
                 <div className={s.serviceCell}>
-                  {/* Popular badge removed */}
-                  <div className={s.serviceTitle}>
-                    {it.title}
-                  </div>
+                  <div className={s.serviceTitle}>{it.title}</div>
                 </div>
               </div>
 
               <div className={s.td} role="cell">
                 <span className={s.chip}>
-                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
+                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax, locale)}
                 </span>
               </div>
 
               <div className={s.td} role="cell">
-                <span className={s.price}>{fmtPriceText(it, currency)}</span>
+                <span className={s.price}>
+                  {fmtPriceText(it, currency, locale)}
+                </span>
               </div>
 
               <div className={s.td} role="cell">
@@ -132,29 +148,27 @@ export default function PriceList({
                   aria-haspopup="dialog"
                   aria-controls="pieraksties-panel"
                 >
-                  {bookLabel}
+                  {resolvedBookLabel}
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Mobile cards */}
         <div className={s.cards} aria-label={title}>
           {rows.map((it) => (
             <article key={`m-${it.id || it.title}`} className={s.card}>
               <header className={s.cardHead}>
-                <div className={s.serviceTitle}>
-                  {it.title}
-                </div>
-                {/* Popular badge removed */}
+                <div className={s.serviceTitle}>{it.title}</div>
               </header>
 
               <div className={s.metaRow}>
                 <span className={s.chip}>
-                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax)}
+                  {fmtTimeText(it.timeText, it.timeMin, it.timeMax, locale)}
                 </span>
-                <span className={s.price}>{fmtPriceText(it, currency)}</span>
+                <span className={s.price}>
+                  {fmtPriceText(it, currency, locale)}
+                </span>
               </div>
 
               <div className={s.ctaRow}>
@@ -165,7 +179,7 @@ export default function PriceList({
                   aria-haspopup="dialog"
                   aria-controls="pieraksties-panel"
                 >
-                  {bookLabel}
+                  {resolvedBookLabel}
                 </button>
               </div>
             </article>
@@ -174,11 +188,9 @@ export default function PriceList({
 
         {showNotes && (
           <ul className={s.notes} role="note">
-            
-            <li>Bezmaksas diagnostika. Precīzu cenu apstiprinām pēc pārbaudes.</li>
-            <li>90 dienu garantija visiem remontdarbiem.</li>
-            <li>Cenas norādītas ar detaļu un darba izmaksām.</li>
-            <li>norādītā cena ir spēkā, ja detaļa ir pieejama noliktavā.</li>
+            {strings.notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
           </ul>
         )}
       </div>

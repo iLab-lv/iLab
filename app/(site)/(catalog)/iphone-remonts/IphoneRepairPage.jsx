@@ -2,7 +2,8 @@
 import Script from 'next/script';
 
 import categoryContent from '@/data/categoryContent';
-import devicesAll from '@/data/devices';
+import { getDevices } from '@/lib/content/devices';
+import { getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
 
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
@@ -76,6 +77,14 @@ function getPageStrings(locale = 'lv') {
 
 export default async function IphoneRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
+
+  const devicesAll = await getDevices();
+  const seriesMeta = await getSeriesMetaByCategoryBrand(
+    'telefonu-remonts',
+    'apple',
+    locale
+  );
+
   const baseHref = buildCategoryHref(locale, 'iphone-remonts');
   const popularServices = buildIphonePopularServices(locale);
   const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
@@ -150,8 +159,9 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         intro={strings.modelGridIntro}
         devices={devicesAll}
         baseHref={baseHref}
-        brandSlug="apple"
-        categorySlug="telefonu-remonts"
+        brandKey="apple"
+        categoryKey="telefonu-remonts"
+        seriesMeta={seriesMeta}
         initialLimit={4}
         autoExpandOnSearch={true}
       />

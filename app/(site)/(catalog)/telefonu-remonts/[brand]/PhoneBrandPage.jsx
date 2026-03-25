@@ -1,8 +1,11 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devicesAll from '@/data/devices';
-import categories from '@/data/categories';
+import { getDevices } from '@/lib/content/devices';
+import {
+  getBrandByCategory,
+  getSeriesMetaByCategoryBrand,
+} from '@/lib/content/categories';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
@@ -52,33 +55,18 @@ export async function generatePhoneBrandStaticParams() {
 /* ---------------------------------------------
    Helpers
 ---------------------------------------------- */
-function getPhoneBrandConfig(brandSlug) {
-  const phonesCat = categories.find((cat) => cat.slug === 'telefonu-remonts');
-
-  if (!phonesCat) {
-    return {
-      brandKey: brandSlug,
-      heroImage: '/brand/images/categories/telefonu_remonts.webp',
-      logo: null,
-      tint: 'rgba(0,200,180,0.20)',
-      heroAlt: 'Telefonu remonts',
-      name: brandSlug,
-    };
-  }
-
-  const brand =
-    phonesCat.brands?.find(
-      (item) => (item.brandSlug || '').toLowerCase() === brandSlug
-    ) || null;
+async function getPhoneBrandConfig(brandSlug) {
+  const brand = await getBrandByCategory('telefonu-remonts', brandSlug);
 
   return {
-    brandKey: brand?.brandSlug || brandSlug,
-    heroImage:
-      brand?.heroImage || '/brand/images/categories/telefonu_remonts.webp',
+    brandKey: brand?.key || brandSlug,
+    heroImage: brand?.image || '/images/categories/telefonu_remonts.webp',
     logo: brand?.logo || null,
-    tint: brand?.tint || 'rgba(0,200,180,0.20)',
-    heroAlt: brand?.heroAlt || 'Telefonu remonts',
-    name: brand?.name || brandSlug,
+    tint: 'rgba(0,200,180,0.20)',
+    heroAlt:
+      brand?.labels?.lv ||
+      brand?.name ||
+      'Telefonu remonts',
   };
 }
 
@@ -353,7 +341,7 @@ export function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
    Page component
 ---------------------------------------------- */
 
-export default function PhoneBrandPage({ brand, locale = 'lv' }) {
+export default async function PhoneBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
 
   const allowed = (listBrandsForCategory(BRAND_CATEGORY.PHONES) || [])
@@ -365,7 +353,12 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
   const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
   if (!bc) return notFound();
 
-  const hero = getPhoneBrandConfig(brandSlug);
+  const [devicesAll, hero, seriesMeta] = await Promise.all([
+    getDevices(),
+    getPhoneBrandConfig(brandSlug),
+    getSeriesMetaByCategoryBrand('telefonu-remonts', brandSlug, locale),
+  ]);
+
   const strings = getPageStrings(bc, locale);
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
   const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
@@ -376,8 +369,8 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
 
   const brandPhoneList = devicesAll.filter(
     (device) =>
-      device.category === 'telefonu-remonts' &&
-      (device.brandSlug || '').toLowerCase() === brandSlug
+      device.categoryKey === 'telefonu-remonts' &&
+      device.brandKey === brandSlug
   );
 
   const breadcrumbsLd = buildBreadcrumbsLd([
@@ -394,6 +387,9 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
 
   const howToLd = buildStandardRepairHowToLd(strings.serviceName);
   const faqLd = buildFaqLdFromPairs(faqItems);
+
+  console.log('[SAMSUNG SERIES META]', seriesMeta);
+console.log('[XCOVER META]', seriesMeta['galaxy-xcover']);
 
   return (
     <>
@@ -474,8 +470,9 @@ export default function PhoneBrandPage({ brand, locale = 'lv' }) {
         intro={strings.modelGridIntro}
         devices={devicesAll}
         baseHref={baseHref}
-        brandSlug={brandSlug}
-        categorySlug="telefonu-remonts"
+        brandKey={brandSlug}
+        categoryKey="telefonu-remonts"
+        seriesMeta={seriesMeta}
         initialLimit={4}
         autoExpandOnSearch={true}
       />

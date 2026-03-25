@@ -1,8 +1,11 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devicesAll from '@/data/devices';
-import categories from '@/data/categories';
+import { getDevices } from '@/lib/content/devices';
+import {
+  getBrandByCategory,
+  getSeriesMetaByCategoryBrand,
+} from '@/lib/content/categories';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
@@ -48,30 +51,17 @@ export async function generateTabletBrandStaticParams() {
 /* ---------------------------------------------
    Helpers
 ---------------------------------------------- */
-function getTabletBrandConfig(brandSlug) {
-  const tabletsCat = categories.find((cat) => cat.slug === 'plansetdatoru-remonts');
-
-  if (!tabletsCat) {
-    return {
-      brandKey: brandSlug,
-      logo: null,
-      tint: 'rgba(0,200,180,0.20)',
-      heroAlt: 'Planšetdatoru remonts',
-      name: brandSlug,
-    };
-  }
-
-  const brand =
-    tabletsCat.brands?.find(
-      (item) => (item.brandSlug || '').toLowerCase() === brandSlug
-    ) || null;
+async function getTabletBrandConfig(brandSlug) {
+  const brand = await getBrandByCategory('plansetdatoru-remonts', brandSlug);
 
   return {
-    brandKey: brand?.brandSlug || brandSlug,
+    brandKey: brand?.key || brandSlug,
     logo: brand?.logo || null,
-    tint: brand?.tint || 'rgba(0,200,180,0.20)',
-    heroAlt: brand?.heroAlt || 'Planšetdatoru remonts',
-    name: brand?.name || brandSlug,
+    tint: 'rgba(0,200,180,0.20)',
+    heroAlt:
+      brand?.labels?.lv ||
+      brand?.name ||
+      'Planšetdatoru remonts',
   };
 }
 
@@ -318,7 +308,7 @@ export function getTabletBrandMetadata(brandSlug, locale = 'lv') {
   };
 }
 
-export default function TabletBrandPage({ brand, locale = 'lv' }) {
+export default async function TabletBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
 
   const allowed = (listBrandsForCategory(BRAND_CATEGORY.TABLETS) || []).map(
@@ -329,7 +319,12 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
   const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
   if (!bc) return notFound();
 
-  const heroCfg = getTabletBrandConfig(brandSlug);
+  const [devicesAll, heroCfg, seriesMeta] = await Promise.all([
+    getDevices(),
+    getTabletBrandConfig(brandSlug),
+    getSeriesMetaByCategoryBrand('plansetdatoru-remonts', brandSlug, locale),
+  ]);
+
   const strings = getTabletBrandStrings(bc, locale);
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
   const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
@@ -341,8 +336,8 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
 
   const brandTabletList = devicesAll.filter(
     (device) =>
-      device.category === 'plansetdatoru-remonts' &&
-      (device.brandSlug || '').toLowerCase() === brandSlug
+      device.categoryKey === 'plansetdatoru-remonts' &&
+      device.brandKey === brandSlug
   );
 
   const provider = buildProvidersFromLocations();
@@ -517,8 +512,9 @@ export default function TabletBrandPage({ brand, locale = 'lv' }) {
         note={strings.modelsNote}
         devices={devicesAll}
         baseHref={baseHref}
-        brandSlug={brandSlug}
-        categorySlug="plansetdatoru-remonts"
+        brandKey={brandSlug}
+        categoryKey="plansetdatoru-remonts"
+        seriesMeta={seriesMeta}
         initialLimit={4}
         autoExpandOnSearch={true}
       />

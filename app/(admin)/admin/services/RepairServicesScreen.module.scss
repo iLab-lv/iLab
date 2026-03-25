@@ -1,0 +1,153 @@
+@use "@styles/tokens" as *;
+
+.wrap {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-lg $space-md;
+  color: $color-text;
+}
+
+.h1 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-md;
+}
+
+.toolbar {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.categoryField {
+  display: flex;
+  gap: $space-sm;
+  align-items: center;
+}
+
+.categoryLabel {
+  min-width: 70px;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+}
+
+.select,
+.input {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  width: 100%;
+  min-width: 0;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.error {
+  margin-top: $space-md;
+  color: #ff4d6d;
+}
+
+.status {
+  margin-top: $space-md;
+  color: #22c55e;
+}
+
+.loading,
+.empty {
+  margin-top: $space-lg;
+  color: $color-text-2;
+}
+
+.groups {
+  margin-top: $space-lg;
+  display: grid;
+  gap: $space-md;
+}
+
+.group {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-1;
+}
+
+.groupHead {
+  padding: $space-sm $space-md;
+  background: $color-surface-3;
+  color: $color-text;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: $border-thin solid $color-border;
+}
+
+.groupTitle {
+  font-weight: $font-weight-semibold;
+}
+
+.rows {
+  display: grid;
+  gap: $space-md;
+  padding: $space-md;
+}
+
+.card {
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-md;
+  background: $color-surface-2;
+  padding: $space-md;
+  display: grid;
+  gap: $space-md;
+}
+
+.cardTop {
+  display: flex;
+  gap: $space-md;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.toggle {
+  display: inline-flex;
+  gap: $space-xs;
+  align-items: center;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+
+  input {
+    margin: 0;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-sm $space-md;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: $space-xs;
+}
+
+.label {
+  color: $color-text-2;
+  font-size: $font-size-sm;
+}

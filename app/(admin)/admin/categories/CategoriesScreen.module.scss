@@ -1,0 +1,312 @@
+@use "@styles/tokens" as *;
+
+.wrap {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-lg $space-md;
+  color: $color-text;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  flex-wrap: wrap;
+  margin-bottom: $space-md;
+}
+
+.h1 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+}
+
+.localeSwitch {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.localeBtn {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.localeBtnActive {
+  background: $color-surface-3;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.toolbar {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $space-md;
+}
+
+.search {
+  height: $btn-h-md;
+  min-width: 280px;
+  width: 100%;
+  max-width: 520px;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-1;
+  color: $color-text;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.error {
+  margin-top: $space-md;
+  color: #ff4d6d;
+}
+
+.status {
+  margin-top: $space-md;
+  color: #22c55e;
+}
+
+.groups {
+  margin-top: $space-lg;
+  display: grid;
+  gap: $space-md;
+}
+
+.group {
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-1;
+}
+
+.modelToggle {
+  width: 100%;
+  text-align: left;
+  padding: $space-sm $space-md;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.modelName {
+  display: inline-flex;
+  align-items: baseline;
+  gap: $space-xs;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.modelChevron {
+  color: $color-text-2;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.panel {
+  padding: $space-md;
+  background: $color-surface-2;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.05);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-sm;
+  margin-bottom: $space-md;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  padding: $space-sm;
+  border: $border-thin solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.metaLabel {
+  color: $color-text-2;
+  font-size: $font-size-sm;
+}
+
+.metaValue {
+  color: $color-text;
+  font-weight: $font-weight-medium;
+}
+
+.empty {
+  color: $color-text-2;
+  padding: $space-sm 0;
+}
+
+.rows {
+  display: grid;
+  gap: $space-sm;
+}
+
+.reviewCard {
+  display: grid;
+  gap: $space-sm;
+  padding: $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  background: $color-surface-1;
+}
+
+.rowTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  flex-wrap: wrap;
+}
+
+.rowTitle {
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.rowActions {
+  display: flex;
+  gap: $space-xs;
+  flex-wrap: wrap;
+}
+
+.smallBtn,
+.smallBtnDanger {
+  height: 32px;
+  padding: 0 $space-sm;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  cursor: pointer;
+  font-size: $font-size-sm;
+
+  &:disabled {
+    opacity: $opacity-disabled;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.smallBtnDanger {
+  color: #ff808f;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-sm;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-1;
+  color: $color-text;
+  min-width: 0;
+  width: 100%;
+
+  &:disabled {
+    opacity: $opacity-disabled;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.textarea {
+  width: 100%;
+  min-width: 0;
+  padding: $space-sm $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-1;
+  color: $color-text;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.45;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.subsectionTitle {
+  margin-top: $space-sm;
+  margin-bottom: $space-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  min-height: $btn-h-md;
+}
+
+.panelFooter {
+  margin-top: $space-md;
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
