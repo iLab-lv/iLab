@@ -234,7 +234,7 @@ export default async function IphonePriceTeaser({
   featuredModels = DEFAULT_FEATURED_MODELS,
   priceItems = DEFAULT_PRICE_ITEMS,
 
-  allModelsHref = '/iphone-remonts',
+  allModelsHref = '/iphone-remonts#iphone-modeli',
   allModelsLabel = 'Skatīt visus iPhone modeļus un cenas',
   contactLabel = 'Sazināties par savu modeli',
 
