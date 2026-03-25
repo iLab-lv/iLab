@@ -1,0 +1,43 @@
+@use "@styles/tokens" as *;
+
+.brandTabs {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $space-md;
+}
+
+.tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 6px 2px;
+  cursor: pointer;
+
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: 1.2;
+
+  color: $color-text-2;               // inactive text
+  border-bottom: $border-thick solid transparent;
+
+  transition: color $dur-base $ease-std, border-color $dur-base $ease-std,
+    opacity $dur-base $ease-std;
+
+  &:hover {
+    color: $color-text;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+    border-radius: $radius-sm;
+  }
+}
+
+.active {
+  color: $color-accent;                // ✅ accent active
+  border-bottom-color: $color-accent;  // ✅ underline accent
+  font-weight: $font-weight-semibold;
+}

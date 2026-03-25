@@ -11,8 +11,9 @@ export default function DeviceSelector({
   note,
   devices = [],
   baseHref,
-  brandSlug,
-  categorySlug,
+  brandKey,
+  categoryKey,
+  seriesMeta = {},
   initialLimit = 4,
   autoExpandOnSearch = true,
 }) {
@@ -48,8 +49,9 @@ export default function DeviceSelector({
           locale={locale}
           devices={devices}
           baseHref={baseHref}
-          brandSlug={brandSlug}
-          categorySlug={categorySlug}
+          brandKey={brandKey}
+          categoryKey={categoryKey}
+          seriesMeta={seriesMeta}
           initialLimit={initialLimit}
           autoExpandOnSearch={autoExpandOnSearch}
         />

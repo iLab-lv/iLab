@@ -4,11 +4,11 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-
-import BrandPickerPricelist from '@components/service-pricelist/BrandPickerPricelist';
+import BrandPickerPricelist from '@sections/service-pricelist/BrandPickerPricelist';
 
 import categories from '@/data/categories';
 import devices from '@/data/devices';
+import { db } from '@/lib/firebaseAdmin';
 
 import { ORIGIN, abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
 
@@ -122,6 +122,22 @@ function titleCaseSlug(slug = '') {
     .join(' ');
 }
 
+function getPickerBrandSlug(device) {
+  const raw =
+    device?.originalBrandSlug ||
+    device?.brandSlug ||
+    device?.brandKey ||
+    '';
+
+  const slug = String(raw).toLowerCase().trim();
+
+  if (slug === 'apple' && String(device?.category || '').toLowerCase().trim() === 'telefonu-remonts') {
+    return 'iphone';
+  }
+
+  return slug;
+}
+
 function getAllBrandOptions() {
   const nameBySlug = new Map();
 
@@ -141,13 +157,17 @@ function getAllBrandOptions() {
     }
   }
 
+  nameBySlug.set('iphone', 'iPhone');
+  nameBySlug.set('ipad', 'iPad');
+  nameBySlug.set('macbook', 'MacBook');
+
   const slugsWithDevices = new Set(
     (Array.isArray(devices) ? devices : [])
-      .map((d) => String(d?.brandSlug || '').toLowerCase().trim())
+      .map((d) => getPickerBrandSlug(d))
       .filter(Boolean)
   );
 
-  const BRAND_ORDER = ['apple', 'ipad', 'macbook', 'samsung', 'huawei'];
+  const BRAND_ORDER = ['iphone', 'ipad', 'macbook', 'samsung', 'huawei'];
 
   const brandOptions = Array.from(slugsWithDevices)
     .sort((a, b) => {
@@ -171,10 +191,71 @@ function getAllBrandOptions() {
       };
     });
 
-  const hasApple = brandOptions.some((b) => b.slug === 'apple');
-  const defaultBrand = hasApple ? 'apple' : brandOptions[0]?.slug || 'apple';
+  const hasIphone = brandOptions.some((b) => b.slug === 'iphone');
+  const defaultBrand = hasIphone ? 'iphone' : brandOptions[0]?.slug || 'iphone';
 
   return { brandOptions, defaultBrand };
+}
+
+async function getServiceMetaMap() {
+  const snap = await db
+    .collection('services')
+    .where('isActive', '==', true)
+    .get();
+
+  const map = {};
+
+  snap.forEach((doc) => {
+    const data = doc.data() || {};
+
+    map[doc.id] = {
+      id: doc.id,
+      labels: {
+        lv: data.labels?.lv || '',
+        ru: data.labels?.ru || '',
+      },
+      order: typeof data.order === 'number' ? data.order : 9999,
+      categoryId: data.categoryId || '',
+    };
+  });
+
+  return map;
+}
+
+async function getAllPricing() {
+  const pricing = {};
+
+  for (const d of Array.isArray(devices) ? devices : []) {
+    const slug = String(d?.slug || '').trim();
+    if (slug) {
+      pricing[slug] = { items: [] };
+    }
+  }
+
+  const snap = await db.collection('servicePricing').get();
+
+  snap.forEach((doc) => {
+    const data = doc.data() || {};
+    const modelId = data.modelId;
+    const serviceId = data.serviceId;
+
+    if (!modelId || !serviceId) return;
+    if (!pricing[modelId]) {
+      pricing[modelId] = { items: [] };
+    }
+
+    pricing[modelId].items.push({
+      id: serviceId,
+      price:
+        typeof data.price === 'number' && Number.isFinite(data.price)
+          ? data.price
+          : null,
+      isStartingFrom: data.isStartingFrom === true,
+      categoryId: data.categoryId || '',
+    });
+  });
+
+  return pricing;
 }
 
 function buildWebPageLd(strings) {
@@ -204,9 +285,18 @@ function buildFaqLd(strings) {
   };
 }
 
-export default function CenasPage({ locale = 'lv', searchParams }) {
+export default async function CenasPage({ locale = 'lv', searchParams }) {
   const strings = getPageStrings(locale);
   const { brandOptions, defaultBrand } = getAllBrandOptions();
+  const [serviceMeta, pricing] = await Promise.all([
+    getServiceMetaMap(),
+    getAllPricing(),
+  ]);
+
+  const normalizedDevices = (Array.isArray(devices) ? devices : []).map((d) => ({
+    ...d,
+    pickerBrandSlug: getPickerBrandSlug(d),
+  }));
 
   const brandFromUrl =
     typeof searchParams?.brand === 'string'
@@ -266,8 +356,9 @@ export default function CenasPage({ locale = 'lv', searchParams }) {
           </h2>
 
           <BrandPickerPricelist
-            devices={devices}
-            pricingSource="firestore"
+            devices={normalizedDevices}
+            pricing={pricing}
+            serviceMeta={serviceMeta}
             brandOptions={brandOptions}
             defaultBrand={stableDefaultBrand}
             categorySlug="all"
@@ -275,6 +366,7 @@ export default function CenasPage({ locale = 'lv', searchParams }) {
             allModelsHref={locale === 'ru' ? '/ru' : '/'}
             cta={{ label: strings.ctaLabel, href: '#pieteikties' }}
             className={s.section}
+            locale={locale}
           />
         </div>
       </section>

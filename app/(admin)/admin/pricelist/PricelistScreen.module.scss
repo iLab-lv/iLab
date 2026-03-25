@@ -1,4 +1,4 @@
-@use "@styles/tokens" as *; // adjust if your tokens path differs
+@use "@styles/tokens" as *;
 
 .wrap {
   max-width: $container-max;
@@ -64,7 +64,6 @@
   background: $color-surface-1;
 }
 
-/* readable series header */
 .groupHead {
   padding: $space-sm $space-md;
   background: $color-surface-3;
@@ -141,39 +140,13 @@
 
 .row {
   display: grid;
-  grid-template-columns: 280px 1fr 180px;
+  grid-template-columns: minmax(220px, 280px) minmax(180px, 1fr) auto auto;
   gap: $space-sm;
   align-items: center;
 
   @media (max-width: $bp-md) {
-    /* ✅ one line: service | price | hide */
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
-    grid-template-areas: "service price hide";
-    align-items: center;
-    column-gap: $space-sm;
-    row-gap: 0;
-  }
-}
-
-/* map children into the areas on mobile */
-.row > :nth-child(1) {
-  @media (max-width: $bp-md) {
-    grid-area: service;
-    min-width: 0;
-  }
-}
-
-.row > :nth-child(2) {
-  @media (max-width: $bp-md) {
-    grid-area: price;
-    min-width: 0;
-  }
-}
-
-.row > :nth-child(3) {
-  @media (max-width: $bp-md) {
-    grid-area: hide;
-    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 160px) auto auto;
+    gap: $space-xs;
   }
 }
 
@@ -184,7 +157,6 @@
   border: $border-thin solid $color-border;
   background: $color-surface-1;
   color: $color-text;
-
   min-width: 0;
   width: 100%;
 
@@ -202,17 +174,17 @@
   display: inline-flex;
   gap: $space-xs;
   align-items: center;
+  justify-self: end;
   color: $color-text-2;
   font-size: $font-size-sm;
   white-space: nowrap;
+  line-height: 1;
 
-  /* make it compact so it doesn't steal width */
   input {
     margin: 0;
-  }
-
-  @media (max-width: $bp-md) {
-    justify-self: end;
+    inline-size: 16px;
+    block-size: 16px;
+    flex: 0 0 auto;
   }
 }
 
