@@ -1,125 +1,228 @@
-'use client';
-
 import Link from 'next/link';
 
 import sCatalog from '@styles/Catalog.module.scss';
 import s from './IphonePriceTeaser.module.scss';
 
-import Button from '@components/button/Button';
-import devicePricing from '@/data/devicePricing';
-import { useUiDialogs } from '@ui/providers/UiDialogsProvider';
+import { db } from '@/lib/firebaseAdmin';
+import IphonePriceTeaserContactButton from './IphonePriceTeaserContactButton';
 
-// Default featured models (8 items)
-// Removed: iPhone 16 Pro Max, iPhone 15
+const IPHONE_CATEGORY_KEY = 'telefonu-remonts';
+const IPHONE_BRAND_KEY = 'apple';
+
 const DEFAULT_FEATURED_MODELS = [
-  { slug: 'iphone-16-pro', name: 'iPhone 16 Pro', image: '/images/devices/iphone/iphone-16-pro.webp' },
-  { slug: 'iphone-16-plus', name: 'iPhone 16 Plus', image: '/images/devices/iphone/iphone-16-plus.webp' },
-  { slug: 'iphone-16', name: 'iPhone 16', image: '/images/devices/iphone/iphone-16.webp' },
-  { slug: 'iphone-15-pro-max', name: 'iPhone 15 Pro Max', image: '/images/devices/iphone/iPhone-15-Pro-Max.webp' },
-  { slug: 'iphone-15-pro', name: 'iPhone 15 Pro', image: '/images/devices/iphone/iPhone-15-Pro.webp' },
-  { slug: 'iphone-14-pro', name: 'iPhone 14 Pro', image: '/images/devices/iphone/iPhone-14-Pro.webp' },
-  { slug: 'iphone-13-pro', name: 'iPhone 13 Pro', image: '/images/devices/iphone/iPhone-13-Pro.webp' },
-  { slug: 'iphone-11', name: 'iPhone 11', image: '/images/devices/iphone/iphone-11.webp' },
+  {
+    slug: 'iphone-16-pro',
+    fallbackName: 'iPhone 16 Pro',
+    fallbackImage: '/images/devices/iphone/iphone-16-pro.webp',
+  },
+  {
+    slug: 'iphone-16-plus',
+    fallbackName: 'iPhone 16 Plus',
+    fallbackImage: '/images/devices/iphone/iphone-16-plus.webp',
+  },
+  {
+    slug: 'iphone-16',
+    fallbackName: 'iPhone 16',
+    fallbackImage: '/images/devices/iphone/iphone-16.webp',
+  },
+  {
+    slug: 'iphone-15-pro-max',
+    fallbackName: 'iPhone 15 Pro Max',
+    fallbackImage: '/images/devices/iphone/iPhone-15-Pro-Max.webp',
+  },
+  {
+    slug: 'iphone-15-pro',
+    fallbackName: 'iPhone 15 Pro',
+    fallbackImage: '/images/devices/iphone/iPhone-15-Pro.webp',
+  },
+  {
+    slug: 'iphone-14-pro',
+    fallbackName: 'iPhone 14 Pro',
+    fallbackImage: '/images/devices/iphone/iPhone-14-Pro.webp',
+  },
+  {
+    slug: 'iphone-13-pro',
+    fallbackName: 'iPhone 13 Pro',
+    fallbackImage: '/images/devices/iphone/iPhone-13-Pro.webp',
+  },
+  {
+    slug: 'iphone-11',
+    fallbackName: 'iPhone 11',
+    fallbackImage: '/images/devices/iphone/iphone-11.webp',
+  },
 ];
 
-// Default for generic /ads/iphone-remonts: show minimum "from" price across screen options
 const DEFAULT_PRICE_ITEMS = [
   {
     label: 'Ekrāna maiņa',
-    ids: ['display-incell', 'display-oled', 'display-original'],
+    serviceIds: ['phone-display-incell', 'phone-display-oled', 'phone-display-original'],
     mode: 'min',
     from: true,
   },
   {
     label: 'Baterijas maiņa',
-    ids: ['battery'],
+    serviceIds: ['phone-battery'],
     mode: 'first',
     from: false,
   },
 ];
 
+function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
+  if (!value) return '';
 
-function getItemPrice(slug, id) {
-  const cfg = devicePricing?.[slug];
-  if (!cfg?.items) return null;
-  const line = cfg.items.find((item) => item.id === id);
-  return line?.price ?? null;
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+
+  if (typeof value === 'object') {
+    if (typeof value[locale] === 'string' && value[locale].trim()) {
+      return value[locale].trim();
+    }
+    if (typeof value[fallback] === 'string' && value[fallback].trim()) {
+      return value[fallback].trim();
+    }
+  }
+
+  return '';
 }
 
 function formatPrice(value, { from = false } = {}) {
   if (value === null || value === undefined || value === '') return null;
   if (typeof value === 'number') return from ? `no ${value} €` : `${value} €`;
-  return value; // assume already formatted string
+  return value;
 }
 
 function minNumber(values) {
-  const nums = values.filter((v) => typeof v === 'number' && !Number.isNaN(v));
+  const nums = values.filter((v) => typeof v === 'number' && Number.isFinite(v));
   if (!nums.length) return null;
   return Math.min(...nums);
 }
 
-/**
- * priceItems supports:
- *
- * A) Single-row item (ids):
- *    { label, ids: string[], mode?: 'min'|'first', from?: boolean }
- *
- * B) Multi-line item (lines):
- *    { label, lines: [{ id: string, label?: string, from?: boolean }, ...] }
- *
- * Output rows:
- *    { key, label, value }
- */
-function buildRowsForModel(modelSlug, priceItems) {
+async function getFeaturedDevicesBySlugs(slugs) {
+  const snap = await db
+    .collection('devices')
+    .where('categoryKey', '==', IPHONE_CATEGORY_KEY)
+    .where('brandKey', '==', IPHONE_BRAND_KEY)
+    .get();
+
+  const bySlug = new Map(
+    snap.docs.map((doc) => {
+      const data = doc.data();
+      return [
+        data.slug,
+        {
+          id: doc.id,
+          ...data,
+        },
+      ];
+    })
+  );
+
+  return slugs.map((slug) => bySlug.get(slug)).filter(Boolean);
+}
+
+async function getServicesMap() {
+  const snap = await db
+    .collection('services')
+    .where('categoryId', '==', IPHONE_CATEGORY_KEY)
+    .get();
+
+  const services = snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((service) => service?.isActive !== false);
+
+  return new Map(services.map((service) => [service.id, service]));
+}
+
+async function getPricingRowsForModels(modelIds) {
+  const results = await Promise.all(
+    modelIds.map((modelId) =>
+      db.collection('servicePricing').where('modelId', '==', modelId).get()
+    )
+  );
+
+  return results
+    .flatMap((snap) =>
+      snap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+    )
+    .filter((row) => row?.isActive !== false);
+}
+
+function buildRowsForModel({
+  modelSlug,
+  priceItems,
+  pricingByServiceId,
+  servicesMap,
+  locale = 'lv',
+}) {
   const rows = [];
 
   for (const item of priceItems || []) {
-    // B) Multi-line explicit lines: show ALL available options
     if (Array.isArray(item.lines) && item.lines.length) {
       for (const line of item.lines) {
-        const raw = getItemPrice(modelSlug, line.id);
-        const val = formatPrice(raw, { from: !!line.from });
-        if (!val) continue;
+        const pricing = pricingByServiceId.get(line.serviceId);
+        const price =
+          typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
+            ? pricing.price
+            : null;
+
+        if (price === null) continue;
+
+        const service = servicesMap.get(line.serviceId);
 
         rows.push({
-          key: `${modelSlug}:${item.label}:${line.id}`,
-          // Important: keep label short (no "Ekrāna maiņa: In-Cell")
-          label: line.label || item.label,
-          value: val,
+          key: `${modelSlug}:${item.label}:${line.serviceId}`,
+          label:
+            line.label ||
+            pickLocalizedField(service?.labels, locale) ||
+            service?.id ||
+            item.label,
+          value: price,
+          from: line.from ?? pricing?.isStartingFrom === true,
         });
       }
+
       continue;
     }
 
-    // A) Single-row from ids
-    const ids = Array.isArray(item.ids) ? item.ids : [];
-    if (!ids.length) continue;
+    const serviceIds = Array.isArray(item.serviceIds) ? item.serviceIds : [];
+    if (!serviceIds.length) continue;
 
-    const rawValues = ids.map((id) => getItemPrice(modelSlug, id));
+    const values = serviceIds.map((serviceId) => {
+      const pricing = pricingByServiceId.get(serviceId);
+      return typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
+        ? pricing.price
+        : null;
+    });
+
     let chosen = null;
 
     if (item.mode === 'min') {
-      chosen = minNumber(rawValues);
+      chosen = minNumber(values);
     } else {
-      // default: first non-empty
-      chosen = rawValues.find((v) => v !== null && v !== undefined && v !== '');
+      chosen = values.find((v) => v !== null) ?? null;
     }
 
-    const val = formatPrice(chosen, { from: !!item.from });
-    if (!val) continue;
+    if (chosen === null) continue;
 
     rows.push({
-      key: `${modelSlug}:${item.label}:${ids.join(',')}`,
+      key: `${modelSlug}:${item.label}:${serviceIds.join(',')}`,
       label: item.label,
-      value: val,
+      value: chosen,
+      from: !!item.from,
     });
   }
 
   return rows;
 }
 
-export default function IphonePriceTeaser({
-  // Content
+export default async function IphonePriceTeaser({
   title = 'Precīzas cenas populārākajiem iPhone',
   intro = (
     <>
@@ -128,20 +231,56 @@ export default function IphonePriceTeaser({
     </>
   ),
 
-  // Data/config
   featuredModels = DEFAULT_FEATURED_MODELS,
   priceItems = DEFAULT_PRICE_ITEMS,
 
-  // Footer actions
   allModelsHref = '/iphone-remonts',
   allModelsLabel = 'Skatīt visus iPhone modeļus un cenas',
   contactLabel = 'Sazināties par savu modeli',
-}) {
-  const { openContact } = useUiDialogs();
 
-  const handleContactClick = (event) => {
-    openContact(event?.currentTarget || null);
-  };
+  locale = 'lv',
+}) {
+  const featuredSlugs = featuredModels.map((item) => item.slug);
+
+  const [devices, servicesMap] = await Promise.all([
+    getFeaturedDevicesBySlugs(featuredSlugs),
+    getServicesMap(),
+  ]);
+
+  const pricingRows = await getPricingRowsForModels(devices.map((device) => device.slug));
+
+  const pricingByModelId = new Map();
+
+  for (const row of pricingRows) {
+    if (!row?.modelId || !row?.serviceId) continue;
+
+    if (!pricingByModelId.has(row.modelId)) {
+      pricingByModelId.set(row.modelId, new Map());
+    }
+
+    pricingByModelId.get(row.modelId).set(row.serviceId, row);
+  }
+
+  const featuredFallbackMap = new Map(featuredModels.map((item) => [item.slug, item]));
+
+  const cards = featuredSlugs.map((slug) => {
+    const device = devices.find((item) => item.slug === slug);
+    const fallback = featuredFallbackMap.get(slug);
+    const pricingByServiceId = pricingByModelId.get(slug) || new Map();
+
+    return {
+      slug,
+      name: device?.name || fallback?.fallbackName || slug,
+      image: device?.image || fallback?.fallbackImage || '',
+      rows: buildRowsForModel({
+        modelSlug: slug,
+        priceItems,
+        pricingByServiceId,
+        servicesMap,
+        locale,
+      }),
+    };
+  });
 
   return (
     <section className={`${sCatalog.section} ${s.section}`} aria-labelledby="iphone-price-teaser-h2">
@@ -154,38 +293,36 @@ export default function IphonePriceTeaser({
         </header>
 
         <div className={s.grid}>
-          {featuredModels.map((model) => {
-            const rows = buildRowsForModel(model.slug, priceItems);
+          {cards.map((model) => (
+            <article key={model.slug} className={s.card}>
+              <div className={s.thumbWrap}>
+                <img
+                  src={model.image}
+                  alt={model.name}
+                  className={s.thumb}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
 
-            return (
-              <article key={model.slug} className={s.card}>
-                <div className={s.thumbWrap}>
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className={s.thumb}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+              <h3 className={s.model}>{model.name}</h3>
 
-                <h3 className={s.model}>{model.name}</h3>
-
-                <div className={s.priceTable}>
-                  {rows.length > 0 ? (
-                    rows.map((row) => (
-                      <div key={row.key} className={s.priceRow}>
-                        <span className={s.priceLabel}>{row.label}</span>
-                        <span className={s.priceValue}>{row.value}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <div className={s.priceRowMuted}>Cena pēc pieprasījuma</div>
-                  )}
-                </div>
-              </article>
-            );
-          })}
+              <div className={s.priceTable}>
+                {Array.isArray(model.rows) && model.rows.length > 0 ? (
+                  model.rows.map((row) => (
+                    <div key={row.key} className={s.priceRow}>
+                      <span className={s.priceLabel}>{row.label}</span>
+                      <span className={s.priceValue}>
+                        {formatPrice(row.value, { from: !!row.from })}
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div className={s.priceRowMuted}>Cena pēc pieprasījuma</div>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
 
         <div className={s.actionsRow}>
@@ -193,9 +330,7 @@ export default function IphonePriceTeaser({
             {allModelsLabel}
           </Link>
 
-          <Button variant="primary" size="md" onClick={handleContactClick}>
-            {contactLabel}
-          </Button>
+          <IphonePriceTeaserContactButton label={contactLabel} />
         </div>
       </div>
     </section>

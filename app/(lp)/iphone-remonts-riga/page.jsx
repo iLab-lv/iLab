@@ -1,5 +1,3 @@
-// app/ads/iphone-remonts/page.jsx
-
 import Services from '@sections/services/Services';
 import Reviews from '@sections/reviews/Reviews';
 import Process from '@sections/process/Process';
@@ -28,11 +26,16 @@ const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);
 export default function IphoneAdsLandingPage() {
   return (
     <>
-      {/* New split-layout hero */}
-      <IphoneAdsHero />
+      <IphoneAdsHero
+        primaryCta={{
+          label: 'Pakalpojumu cenas',
+          href: '#price-teaser',
+          variant: 'primary',
+          ariaLabel: 'Skatīt pakalpojumu cenas',
+        }}
+      />
       <AdsContactStrip />
 
-      {/* Services */}
       <section id="services" className={s.section} aria-labelledby="iphone-services-h2">
         <div className={s.container}>
           <Services
@@ -74,25 +77,18 @@ export default function IphoneAdsLandingPage() {
         </div>
       </section>
 
-      {/* Reviews */}
       <div id="reviews" />
       <Reviews />
 
-      {/* Price teaser (anchor for secondary CTA) */}
-      {/* <div id="price-teaser">
+      <div id="price-teaser">
         <IphonePriceTeaser />
-      </div> */}
+      </div>
 
-
-
-      {/* Locations with map pins opening the panel */}
       <Locations openPanelOnPin />
 
-      {/* Process & Why sections reused from main site */}
       <Process />
       <Why />
 
-      {/* FAQ */}
       <section className={s.section} aria-labelledby="iphone-ads-faq-h2">
         <div className={s.container}>
           <Faq
