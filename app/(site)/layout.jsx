@@ -1,4 +1,3 @@
-// app/(site)/layout.jsx
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
@@ -6,7 +5,6 @@ import { COMPANY, SOCIALS, LOCATIONS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Footer from './ui/footer/Footer';
 import ResolvedPageHeader from './ui/page-header/ResolvedPageHeader';
-import Script from 'next/script';
 import l from './Layout.module.scss';
 
 // ✅ Canonical origin (force non-www)
@@ -16,9 +14,6 @@ const ORIGIN = 'https://ilab.lv';
 export const metadata = {
   metadataBase: new URL(ORIGIN),
 };
-
-// GA4 measurement ID (ilab-v2 property)
-const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
 // Map your internal day codes to Schema.org day names
 const DAY_MAP = {
@@ -109,21 +104,6 @@ export default function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="lazyOnload"
-      />
-      <Script id="ga4-init" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', {
-            page_path: window.location.pathname,
-          });
-        `}
-      </Script>
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
