@@ -1,9 +1,6 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devices from '@/data/devices';
-import repairServices from '@/data/repairServices';
-
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -28,18 +25,123 @@ import {
   abs,
   buildBreadcrumbsLd,
   buildProvidersFromLocations,
+  buildStandardRepairHowToLd,
 } from '@/lib/seo/jsonldHelpers';
 
-// Firestore (Admin SDK, server-side)
 import { db } from '@/lib/firebaseAdmin';
 
 export const revalidate = 0;
+
 const DEFAULT_CURRENCY = 'EUR';
+const PHONE_CATEGORY_KEY = 'telefonu-remonts';
+
+function norm(value = '') {
+  return decodeURIComponent(String(value)).trim();
+}
+
+function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
+  if (!value) return '';
+
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+
+  if (typeof value === 'object') {
+    if (typeof value[locale] === 'string' && value[locale].trim()) {
+      return value[locale].trim();
+    }
+    if (typeof value[fallback] === 'string' && value[fallback].trim()) {
+      return value[fallback].trim();
+    }
+  }
+
+  return '';
+}
+
+function slugifyBrandKey(value = '') {
+  return String(value).trim().toLowerCase();
+}
+
+async function getPhoneDeviceBySlug(brandSlug, slug) {
+  const normalizedBrand = norm(brandSlug);
+  const normalizedSlug = norm(slug);
+
+  const directSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', PHONE_CATEGORY_KEY)
+    .where('brandKey', '==', normalizedBrand)
+    .limit(1)
+    .get();
+
+  if (!directSnap.empty) {
+    const doc = directSnap.docs[0];
+    return { id: doc.id, ...doc.data() };
+  }
+
+  const fallbackSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', PHONE_CATEGORY_KEY)
+    .limit(10)
+    .get();
+
+  if (fallbackSnap.empty) return null;
+
+  const match =
+    fallbackSnap.docs.find((doc) => {
+      const data = doc.data() || {};
+      const candidates = [
+        data.brandKey,
+        data.brandSlug,
+        data.brandId,
+        data.brand,
+      ]
+        .filter(Boolean)
+        .map((v) => slugifyBrandKey(v));
+
+      return candidates.includes(slugifyBrandKey(normalizedBrand));
+    }) || null;
+
+  if (!match) return null;
+
+  return {
+    id: match.id,
+    ...match.data(),
+  };
+}
+
+async function getServicesByCategory(categoryId) {
+  const snap = await db
+    .collection('services')
+    .where('categoryId', '==', categoryId)
+    .get();
+
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((service) => service?.isActive !== false);
+}
+
+async function getServicePricingByModel(modelId) {
+  const snap = await db
+    .collection('servicePricing')
+    .where('modelId', '==', modelId)
+    .get();
+
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((row) => row?.isActive !== false);
+}
 
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      categoryKey: 'telefonu-remonts',
       canonicalCategoryPath: '/ru/remont-telefonov',
       homeCrumb: 'Главная',
       categoryCrumb: 'Ремонт телефонов',
@@ -55,65 +157,8 @@ function getPageStrings(locale = 'lv') {
         `Ремонт ${name} в Риге: замена экрана, батареи, ремонт разъёма зарядки, камеры и другие неисправности. Быстрая диагностика, понятные цены и гарантия.`,
       metaFallbackDescriptionCategory:
         'Ремонт телефонов: замена экрана, батареи, разъёма зарядки, камеры и устранение других неисправностей. Быстрая диагностика и гарантия в сервисе iLab в Риге.',
-      processTitle: 'Как проходит ремонт',
-      processProps: {
-        id: 'process',
-        title: 'Как проходит ремонт',
-        steps: [
-          {
-            title: 'Приносите телефон в iLab',
-            text: 'Принесите телефон в филиал iLab в Domina или Spice без предварительной записи.',
-          },
-          {
-            title: 'Бесплатная диагностика',
-            text: 'Проводим первичную диагностику, определяем причину неисправности и варианты ремонта.',
-          },
-          {
-            title: 'Согласование цены и срока',
-            text: 'До начала ремонта согласовываем с вами цену, тип детали и срок выполнения.',
-          },
-          {
-            title: 'Ремонт и тестирование',
-            text: 'Выполняем ремонт, заменяем повреждённые детали и проверяем работу телефона.',
-          },
-          {
-            title: 'Получаете телефон с гарантией',
-            text: 'Вы получаете отремонтированный телефон с гарантией iLab, чеком и рекомендациями по дальнейшему использованию.',
-          },
-        ],
-        headingLevel: 2,
-        variant: 'cards',
-      },
-      howToName: (deviceName) => `Процесс ремонта ${deviceName} в iLab`,
-      howToDescription:
-        'Как шаг за шагом проходит процесс ремонта телефона в сервисе iLab в Риге.',
-      howToStepsLd: [
-        {
-          '@type': 'HowToStep',
-          name: '1. Приносите телефон в iLab',
-          text: 'Принесите телефон в филиал iLab в Domina или Spice без предварительной записи.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: '2. Бесплатная диагностика',
-          text: 'Проводим первичную диагностику, определяем причину неисправности и варианты ремонта.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: '3. Согласование цены и срока',
-          text: 'До начала ремонта согласовываем с вами цену, тип детали и срок выполнения.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: '4. Ремонт и тестирование',
-          text: 'Выполняем ремонт, заменяем повреждённые детали и проверяем работу телефона.',
-        },
-        {
-          '@type': 'HowToStep',
-          name: '5. Получаете телефон с гарантией',
-          text: 'Вы получаете отремонтированный телефон с гарантией iLab, чеком и рекомендациями по дальнейшему использованию.',
-        },
-      ],
+      serviceTypeSuffix: 'ремонт',
+      howToName: 'Ремонт телефона',
       services: (categoryPath) => [
         {
           title: 'Замена экрана',
@@ -152,12 +197,10 @@ function getPageStrings(locale = 'lv') {
           icon: LuDroplets,
         },
       ],
-      sameDayText: 'В тот же день',
     };
   }
 
   return {
-    categoryKey: 'telefonu-remonts',
     canonicalCategoryPath: '/telefonu-remonts',
     homeCrumb: 'Sākums',
     categoryCrumb: 'Telefonu remonts',
@@ -173,65 +216,8 @@ function getPageStrings(locale = 'lv') {
       `${name} remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzdas remonts, kameras un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija.`,
     metaFallbackDescriptionCategory:
       'Telefonu remonts: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā Rīgā.',
-    processTitle: 'Kā notiek remonts',
-    processProps: {
-      id: 'process',
-      title: 'Kā notiek remonts',
-      steps: [
-        {
-          title: 'Atved telefonu uz iLab',
-          text: 'Atnes savu telefonu uz iLab Domina vai Spice filiāli bez iepriekšēja pieraksta.',
-        },
-        {
-          title: 'Bezmaksas diagnostika',
-          text: 'Veicam sākotnējo diagnostiku un nosakām bojājumu cēloni un remonta iespējas.',
-        },
-        {
-          title: 'Cenu un termiņa saskaņošana',
-          text: 'Pirms remonta sākšanas saskaņojam ar tevi cenu, detaļu tipu un remonta laiku.',
-        },
-        {
-          title: 'Remonts un testēšana',
-          text: 'Veicam remonta darbus, nomainām bojātās detaļas un pārbaudām tālruņa darbību.',
-        },
-        {
-          title: 'Saņem telefonu ar garantiju',
-          text: 'Saņem salabotu telefonu ar iLab garantiju un čeku, kā arī ieteikumiem turpmākai lietošanai.',
-        },
-      ],
-      headingLevel: 2,
-      variant: 'cards',
-    },
-    howToName: (deviceName) => `${deviceName} remonta process iLab`,
-    howToDescription:
-      'Kā soli pa solim notiek telefona remonta process iLab servisā Rīgā.',
-    howToStepsLd: [
-      {
-        '@type': 'HowToStep',
-        name: '1. Atved telefonu uz iLab',
-        text: 'Atnes savu telefonu uz iLab Domina vai Spice filiāli bez iepriekšēja pieraksta.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: '2. Bezmaksas diagnostika',
-        text: 'Veicam sākotnējo diagnostiku un nosakām bojājumu cēloni un remonta iespējas.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: '3. Cenu un termiņa saskaņošana',
-        text: 'Pirms remonta sākšanas saskaņojam ar tevi cenu, detaļu tipu un remonta laiku.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: '4. Remonts un testēšana',
-        text: 'Veicam remonta darbus, nomainām bojātās detaļas un pārbaudām tālruņa darbību.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: '5. Saņem telefonu ar garantiju',
-        text: 'Saņem salabotu telefonu ar iLab garantiju un čeku, kā arī ieteikumiem turpmākai lietošanai.',
-      },
-    ],
+    serviceTypeSuffix: 'remonts',
+    howToName: 'Telefonu remonts',
     services: (categoryPath) => [
       {
         title: 'Ekrāna maiņa',
@@ -270,109 +256,75 @@ function getPageStrings(locale = 'lv') {
         icon: LuDroplets,
       },
     ],
-    sameDayText: 'Tajā pašā dienā',
   };
 }
 
-function getPhoneDeviceBySlug(brandSlug, slug) {
-  return (
-    devices.find(
-      (d) =>
-        d.slug === slug &&
-        d.brandSlug === brandSlug &&
-        d.category === 'telefonu-remonts'
-    ) || null
-  );
-}
-
-function toPriceRange(priceStr) {
-  if (!priceStr) return { priceFrom: null, priceTo: null, priceText: '' };
-  const raw = String(priceStr).trim();
-  const p = raw.toLowerCase();
-
-  const priceText = raw;
-
-  const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
-  if (fromMatch) {
-    const from = Number(fromMatch[1].replace(',', '.'));
-    return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
-  }
-
-  const rangeMatch = p.match(
-    /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
-  );
-  if (rangeMatch) {
-    const a = Number(rangeMatch[1].replace(',', '.'));
-    const b = Number(rangeMatch[2].replace(',', '.'));
-    return {
-      priceFrom: isNaN(a) ? null : a,
-      priceTo: isNaN(b) ? null : b,
-      priceText,
-    };
-  }
-
-  const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
-  if (singleMatch) {
-    const v = Number(singleMatch[1].replace(',', '.'));
-    return { priceFrom: null, priceTo: isNaN(v) ? null : v, priceText };
-  }
-
-  return { priceFrom: null, priceTo: null, priceText };
-}
-
 async function buildPriceListItems(modelSlug, locale = 'lv') {
-  const device = devices.find((d) => d.slug === modelSlug) || null;
-  const perDeviceTimeText = device?.serviceTimeTextOverrides || {};
-  const catalogById = new Map(repairServices.map((srv) => [srv.id, srv]));
-  const strings = getPageStrings(locale);
+  const [services, pricingRows] = await Promise.all([
+    getServicesByCategory(PHONE_CATEGORY_KEY),
+    getServicePricingByModel(modelSlug),
+  ]);
 
-  const snap = await db
-    .collection('modelServices')
-    .where('modelId', '==', modelSlug)
-    .get();
+  const pricingByServiceId = new Map(
+    pricingRows
+      .filter((row) => row?.serviceId)
+      .map((row) => [row.serviceId, row])
+  );
 
-  if (snap.empty) {
-    return { items: [], currency: DEFAULT_CURRENCY };
-  }
+  const items = services
+    .map((service) => {
+      const pricing = pricingByServiceId.get(service.id) || null;
 
-  const merged = snap.docs
-    .map((doc) => {
-      const data = doc.data() || {};
-      const serviceId = data.serviceId;
-      if (!serviceId) return null;
+      const title =
+        pickLocalizedField(service.labels, locale) ||
+        (typeof service.title === 'string' ? service.title.trim() : '') ||
+        service.id;
 
-      const base = catalogById.get(serviceId);
-      if (!base) return null;
+      const family =
+        pickLocalizedField(service.familyLabels, locale) ||
+        (typeof service.family === 'string' ? service.family.trim() : '');
 
-      const timeText =
-        (typeof perDeviceTimeText[serviceId] === 'string' &&
-          perDeviceTimeText[serviceId].trim()) ||
-        base.defaultTimeText ||
-        strings.sameDayText;
+      const defaultTimeText =
+        pickLocalizedField(service.defaultTimeText, locale) ||
+        (locale === 'ru' ? 'В тот же день' : 'Tajā pašā dienā');
 
-      const raw = data.price;
-      if (raw === null) return null;
+      const overrideTimeText =
+        pickLocalizedField(pricing?.timeTextOverride, locale) ||
+        pickLocalizedField(pricing?.timeText, locale) ||
+        (typeof pricing?.timeTextOverride === 'string'
+          ? pricing.timeTextOverride.trim()
+          : '') ||
+        (typeof pricing?.timeText === 'string' ? pricing.timeText.trim() : '');
 
-      const priceText =
-        typeof raw === 'number' ? String(raw) : String(raw ?? '').trim();
+      const timeText = overrideTimeText || defaultTimeText;
 
-      const { priceFrom, priceTo } = toPriceRange(priceText);
+      const warrantyDays =
+        typeof pricing?.warrantyDaysOverride === 'number'
+          ? pricing.warrantyDaysOverride
+          : typeof service.defaultWarrantyDays === 'number'
+          ? service.defaultWarrantyDays
+          : null;
+
+      const price =
+        typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
+          ? pricing.price
+          : null;
+
+      const isStartingFrom = pricing?.isStartingFrom === true;
 
       return {
-        id: serviceId,
-        title: base.title,
-        family: base.family,
-        order: base.order ?? 9999,
+        id: service.id,
+        title,
+        family,
+        order: typeof service.order === 'number' ? service.order : 9999,
         timeText,
-        warrantyDays: base.defaultWarrantyDays ?? null,
-        price: priceText,
-        priceFrom,
-        priceTo,
+        warrantyDays,
+        price,
+        isStartingFrom,
         popular: false,
-        href: base.slug ? `/${base.slug}` : base.href,
+        href: service.slug ? `/${service.slug}` : undefined,
       };
     })
-    .filter(Boolean)
     .sort((a, b) => {
       if ((a.order ?? 9999) !== (b.order ?? 9999)) {
         return (a.order ?? 9999) - (b.order ?? 9999);
@@ -380,7 +332,7 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
       return (a.title || '').localeCompare(b.title || '');
     });
 
-  return { items: merged, currency: DEFAULT_CURRENCY };
+  return { items, currency: DEFAULT_CURRENCY };
 }
 
 function buildFaqForModel() {
@@ -399,27 +351,19 @@ function buildFaqForModel() {
   };
 }
 
-function buildProcessHowToLd(modelPath, deviceName, locale = 'lv') {
-  const strings = getPageStrings(locale);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    '@id': `${ORIGIN}${modelPath}#howto`,
-    name: strings.howToName(deviceName),
-    description: strings.howToDescription,
-    step: strings.howToStepsLd,
-  };
-}
-
-async function generateMetadataImpl({ params, locale = 'lv' }) {
+export async function generateMetadataImpl({ params, locale = 'lv' }) {
   const { brand, device } = await params;
-  const slug = decodeURIComponent(device);
-  const brandSlug = decodeURIComponent(brand);
-  const d = getPhoneDeviceBySlug(brandSlug, slug);
+  const slug = norm(device);
+  const brandSlug = norm(brand);
+
+  const d = await getPhoneDeviceBySlug(brandSlug, slug);
   const strings = getPageStrings(locale);
 
-  const brandLabel = d?.brandName || brandSlug.toUpperCase();
+  const brandLabel =
+    d?.brandName ||
+    pickLocalizedField(d?.brandLabel, locale) ||
+    d?.brandKey ||
+    brandSlug.toUpperCase();
 
   const title =
     d?.metaTitle ||
@@ -435,30 +379,34 @@ async function generateMetadataImpl({ params, locale = 'lv' }) {
       ? strings.metaFallbackDescriptionModel(d.name)
       : strings.metaFallbackDescriptionCategory);
 
-  const canonicalBase =
-    locale === 'ru' ? '/ru/remont-telefonov' : '/telefonu-remonts';
-
   return {
     title,
     description,
-    alternates: { canonical: `${canonicalBase}/${brandSlug}/${slug}` },
+    alternates: {
+      canonical: `${strings.canonicalCategoryPath}/${brandSlug}/${slug}`,
+    },
   };
 }
 
 async function PhoneDevicePage({ params, locale = 'lv' }) {
   const { brand, device } = await params;
-  const slug = decodeURIComponent(device);
-  const brandSlug = decodeURIComponent(brand);
+  const slug = norm(device);
+  const brandSlug = norm(brand);
 
-  const d = getPhoneDeviceBySlug(brandSlug, slug);
+  const d = await getPhoneDeviceBySlug(brandSlug, slug);
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
-  const { items: priceItems, currency } = await buildPriceListItems(slug, locale);
+  const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
   const modelServices = strings.services(strings.canonicalCategoryPath);
   const { faqItems: finalFaqItems, faqLd } = buildFaqForModel();
 
-  const brandLabel = d.brandName || d.brandSlug.toUpperCase();
+  const brandLabel =
+    d.brandName ||
+    pickLocalizedField(d.brandLabel, locale) ||
+    d.brandKey ||
+    brandSlug.toUpperCase();
+
   const modelPath = `${strings.canonicalCategoryPath}/${brandSlug}/${d.slug}`;
   const provider = buildProvidersFromLocations();
 
@@ -475,26 +423,26 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
     },
   ]);
 
-  const offers = priceItems.map((it) => {
-    const priceStr = it.price == null ? '' : String(it.price);
-    const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
-      ? Number(priceStr.replace(',', '.'))
-      : undefined;
+  const offers = priceItems.map((item) => {
+    const numericPrice =
+      typeof item.price === 'number' && Number.isFinite(item.price)
+        ? item.price
+        : undefined;
 
     return {
       '@type': 'Offer',
-      name: it.title,
-      ...(singleNumeric !== undefined
+      name: item.title,
+      ...(numericPrice !== undefined
         ? {
-            price: singleNumeric,
+            price: numericPrice,
             priceCurrency: currency,
           }
         : {}),
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${d.name} — ${it.title}`,
-        serviceType: it.title,
+        name: `${d.name} — ${item.title}`,
+        serviceType: item.title,
         provider,
       },
       availability: 'https://schema.org/InStock',
@@ -513,12 +461,12 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
     ...(offers.length ? { offers } : {}),
   };
 
-  const processHowToLd = buildProcessHowToLd(modelPath, d.name, locale);
+  const processHowToLd = buildStandardRepairHowToLd(strings.howToName);
 
   return (
     <>
       <Script
-        id="breadcrumbs-jsonld-telefonu"
+        id={`breadcrumbs-jsonld-phone-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -526,7 +474,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
       </Script>
 
       <Script
-        id="service-jsonld-telefonu"
+        id={`service-jsonld-phone-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -535,7 +483,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
 
       {faqLd && (
         <Script
-          id="faq-jsonld-telefonu"
+          id={`faq-jsonld-phone-${d.slug}`}
           type="application/ld+json"
           strategy="afterInteractive"
         >
@@ -544,7 +492,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
       )}
 
       <Script
-        id="process-jsonld-telefonu"
+        id={`process-jsonld-phone-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -559,29 +507,31 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
 
       <Services
         id="telefonu-services"
-        title={strings.servicesTitle(d?.name)}
+        title={strings.servicesTitle(d.name)}
         items={modelServices}
       />
 
-      {priceItems.length > 0 && (
+      {!!priceItems.length && (
         <PriceList
           id="cenas"
           title={strings.priceTitle}
           items={priceItems}
-          currency={DEFAULT_CURRENCY}
+          currency={currency}
           headingLevel={2}
+          locale={locale}
         />
       )}
 
       <Why locale={locale} />
 
-      <Process {...strings.processProps} />
+      <Process locale={locale} />
 
       {!!finalFaqItems.length && (
         <Faq
           id="model-faq"
           title={strings.faqTitle}
           items={finalFaqItems}
+          locale={locale}
         />
       )}
 
