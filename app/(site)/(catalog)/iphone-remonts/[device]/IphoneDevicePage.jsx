@@ -140,6 +140,7 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         serviceId: row.serviceId ?? null,
         price: row.price ?? null,
         isStartingFrom: row.isStartingFrom ?? null,
+        isHidden: row.isHidden ?? null,
       }))
     );
   }
@@ -147,6 +148,9 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
   const items = services
     .map((service) => {
       const pricing = pricingByServiceId.get(service.id) || null;
+
+      if (!pricing) return null;
+      if (pricing.isHidden === true) return null;
 
       const title =
         pickLocalizedField(service.labels, locale) ||
@@ -175,8 +179,8 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         typeof pricing?.warrantyDaysOverride === 'number'
           ? pricing.warrantyDaysOverride
           : typeof service.defaultWarrantyDays === 'number'
-          ? service.defaultWarrantyDays
-          : null;
+            ? service.defaultWarrantyDays
+            : null;
 
       const price =
         typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
@@ -194,10 +198,12 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         warrantyDays,
         price,
         isStartingFrom,
+        isHidden: pricing?.isHidden === true,
         popular: false,
         href: service.slug ? `/${service.slug}` : undefined,
       };
     })
+    .filter(Boolean)
     .sort((a, b) => {
       if ((a.order ?? 9999) !== (b.order ?? 9999)) {
         return (a.order ?? 9999) - (b.order ?? 9999);
@@ -213,6 +219,7 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         title: item.title,
         price: item.price,
         isStartingFrom: item.isStartingFrom,
+        isHidden: item.isHidden,
         timeText: item.timeText,
       }))
     );
@@ -256,6 +263,9 @@ function getPageStrings(locale = 'lv') {
       hubCrumb: 'Ремонт iPhone',
       serviceTypeSuffix: 'ремонт',
       howToName: 'Ремонт iPhone',
+      defaultMetaTitle: 'Ремонт iPhone в Риге | iLab',
+      defaultMetaDescription:
+        'Ремонт iPhone в Риге: замена экрана, аккумулятора, разъёма зарядки, камеры и устранение других неисправностей. Быстрая диагностика и гарантия в сервисе iLab.',
     };
   }
 
@@ -267,25 +277,41 @@ function getPageStrings(locale = 'lv') {
     hubCrumb: 'iPhone remonts',
     serviceTypeSuffix: 'remonts',
     howToName: 'iPhone remonts',
+    defaultMetaTitle: 'iPhone remonts Rīgā | iLab',
+    defaultMetaDescription:
+      'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.',
   };
 }
 
 export async function getIphoneDeviceMetadata(slug, { locale = 'lv' } = {}) {
   const deviceSlug = norm(slug);
   const device = await getIphoneDeviceBySlug(deviceSlug);
+  const strings = getPageStrings(locale);
+
+  const deviceName =
+    pickLocalizedField(device?.h1, locale) ||
+    pickLocalizedField(device?.name, locale) ||
+    device?.name ||
+    'iPhone';
 
   const title =
-    device?.metaTitle ||
-    (device ? `${device.name} remonts Rīgā | iLab` : 'iPhone remonts Rīgā | iLab');
+    pickLocalizedField(device?.metaTitle, locale) ||
+    (device
+      ? `${deviceName} | iLab`
+      : strings.defaultMetaTitle);
 
   const description =
-    device?.metaDescription ||
+    pickLocalizedField(device?.metaDescription, locale) ||
     (device
-      ? `${device.name} remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzdas remonts, kameras un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija.`
-      : 'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.');
+      ? locale === 'ru'
+        ? `${deviceName} в Риге: замена экрана, аккумулятора, разъёма зарядки, камеры и другие ремонты. Быстрая диагностика, честные цены и гарантия.`
+        : `${deviceName} Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzdas remonts, kameras un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija.`
+      : strings.defaultMetaDescription);
 
   const canonicalBase =
-    locale === 'ru' ? `/ru/remont-iphone/${deviceSlug}` : `/iphone-remonts/${deviceSlug}`;
+    locale === 'ru'
+      ? `/ru/remont-iphone/${deviceSlug}`
+      : `/iphone-remonts/${deviceSlug}`;
 
   return {
     title,
@@ -315,6 +341,8 @@ export default async function IphoneDevicePage({
             name: device.name,
             categoryKey: device.categoryKey,
             brandKey: device.brandKey,
+            bodyHtmlLv: device.bodyHtml?.lv ?? null,
+            bodyHtmlRu: device.bodyHtml?.ru ?? null,
           }
         : null
     );
@@ -323,9 +351,13 @@ export default async function IphoneDevicePage({
   if (!device) return notFound();
 
   const strings = getPageStrings(locale);
+  const localizedBodyHtml = pickLocalizedField(device.bodyHtml, locale) || null;
+  const deviceName =
+    pickLocalizedField(device.name, locale) || device.name || '';
+
   const { items: priceItems, currency } = await buildPriceListItems(slug, locale);
   const modelServices = buildIphonePopularServices(locale);
-  const modelServicesTitle = getIphonePopularServicesTitle(device.name, locale);
+  const modelServicesTitle = getIphonePopularServicesTitle(deviceName, locale);
   const { faqItems, faqLd } = buildFaqForIphoneModel();
 
   const modelPath =
@@ -341,7 +373,7 @@ export default async function IphoneDevicePage({
       name: strings.hubCrumb,
       url: abs(locale === 'ru' ? '/ru/remont-iphone' : '/iphone-remonts'),
     },
-    { name: `${device.name} ${strings.serviceTypeSuffix}`, url: abs(modelPath) },
+    { name: `${deviceName} ${strings.serviceTypeSuffix}`, url: abs(modelPath) },
   ]);
 
   const offers = priceItems.map((item) => {
@@ -362,7 +394,7 @@ export default async function IphoneDevicePage({
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${device.name} — ${item.title}`,
+        name: `${deviceName} — ${item.title}`,
         serviceType: item.title,
         provider,
       },
@@ -374,8 +406,8 @@ export default async function IphoneDevicePage({
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${ORIGIN}${modelPath}#service`,
-    serviceType: `${device.name} ${strings.serviceTypeSuffix}`,
-    name: `${device.name} ${strings.serviceTypeSuffix}`,
+    serviceType: `${deviceName} ${strings.serviceTypeSuffix}`,
+    name: `${deviceName} ${strings.serviceTypeSuffix}`,
     url: abs(modelPath),
     areaServed: { '@type': 'City', name: 'Rīga' },
     provider,
@@ -422,8 +454,8 @@ export default async function IphoneDevicePage({
 
       <DeviceHero
         image={device.image}
-        alt={`${device.name} ${strings.heroAlt}`}
-        bodyHtml={device.bodyHtml || null}
+        alt={`${deviceName} ${strings.heroAlt}`}
+        bodyHtml={localizedBodyHtml}
       />
 
       <section className={s.section}>

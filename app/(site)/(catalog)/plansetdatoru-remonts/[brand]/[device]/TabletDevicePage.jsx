@@ -1,10 +1,6 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
-import repairServices from '@/data/repairServices';
-
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -30,14 +26,44 @@ import {
   buildProvidersFromLocations,
 } from '@/lib/seo/jsonldHelpers';
 import { buildDeviceHref, buildCategoryHref } from '@/lib/routes/routeI18n';
+import { db } from '@/lib/firebaseAdmin';
 
 const DEFAULT_CURRENCY = 'EUR';
+const TABLET_CATEGORY_KEY = 'plansetdatoru-remonts';
+
+function norm(value = '') {
+  return decodeURIComponent(String(value)).trim();
+}
+
+function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
+  if (!value) return '';
+
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+
+  if (typeof value === 'object') {
+    if (typeof value[locale] === 'string' && value[locale].trim()) {
+      return value[locale].trim();
+    }
+    if (typeof value[fallback] === 'string' && value[fallback].trim()) {
+      return value[fallback].trim();
+    }
+  }
+
+  return '';
+}
+
+function slugifyBrandKey(value = '') {
+  return String(value).trim().toLowerCase();
+}
 
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       categoryName: 'Ремонт планшетов',
-      modelMetaFallback: 'Ремонт планшетов: экран, батарея, зарядка, камера. Бесплатная диагностика и гарантия 90 дней.',
+      modelMetaFallback:
+        'Ремонт планшетов: экран, батарея, зарядка, камера. Бесплатная диагностика и гарантия 90 дней.',
       heroAltSuffix: 'ремонт',
       servicesTitle: (name) => `Популярные ремонты ${name ?? 'этой модели'}`,
       priceTitle: 'Цены и сроки ремонта',
@@ -222,91 +248,154 @@ function getPageStrings(locale = 'lv') {
   };
 }
 
-function getTabletDeviceBySlug(slug) {
-  return (
-    devices.find(
-      (d) => d.slug === slug && d.category === 'plansetdatoru-remonts'
-    ) || null
-  );
+async function getTabletDeviceBySlug(brandSlug, slug) {
+  const normalizedBrand = norm(brandSlug);
+  const normalizedSlug = norm(slug);
+
+  const directSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', TABLET_CATEGORY_KEY)
+    .where('brandKey', '==', normalizedBrand)
+    .limit(1)
+    .get();
+
+  if (!directSnap.empty) {
+    const doc = directSnap.docs[0];
+    return { id: doc.id, ...doc.data() };
+  }
+
+  const fallbackSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', TABLET_CATEGORY_KEY)
+    .limit(10)
+    .get();
+
+  if (fallbackSnap.empty) return null;
+
+  const match =
+    fallbackSnap.docs.find((doc) => {
+      const data = doc.data() || {};
+      const candidates = [
+        data.brandKey,
+        data.brandSlug,
+        data.brandId,
+        data.brand,
+      ]
+        .filter(Boolean)
+        .map((v) => slugifyBrandKey(v));
+
+      return candidates.includes(slugifyBrandKey(normalizedBrand));
+    }) || null;
+
+  if (!match) return null;
+
+  return {
+    id: match.id,
+    ...match.data(),
+  };
 }
 
-function toPriceRange(priceStr) {
-  if (!priceStr) return { priceFrom: null, priceTo: null, priceText: '' };
-  const raw = String(priceStr).trim();
-  const p = raw.toLowerCase();
+async function getServicesByCategory(categoryId) {
+  const snap = await db
+    .collection('services')
+    .where('categoryId', '==', categoryId)
+    .get();
 
-  const priceText = raw;
-
-  const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
-  if (fromMatch) {
-    const from = Number(fromMatch[1].replace(',', '.'));
-    return { priceFrom: isNaN(from) ? null : from, priceTo: null, priceText };
-  }
-
-  const rangeMatch = p.match(
-    /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
-  );
-  if (rangeMatch) {
-    const a = Number(rangeMatch[1].replace(',', '.'));
-    const b = Number(rangeMatch[2].replace(',', '.'));
-    return {
-      priceFrom: isNaN(a) ? null : a,
-      priceTo: isNaN(b) ? null : b,
-      priceText,
-    };
-  }
-
-  const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
-  if (singleMatch) {
-    const v = Number(singleMatch[1].replace(',', '.'));
-    return { priceFrom: null, priceTo: isNaN(v) ? null : v, priceText };
-  }
-
-  return { priceFrom: null, priceTo: null, priceText };
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((service) => service?.isActive !== false);
 }
 
-function buildPriceListItems(modelSlug, locale = 'lv') {
-  const pricing = devicePricing[modelSlug];
-  if (!pricing || !Array.isArray(pricing.items)) {
-    return { items: [], currency: DEFAULT_CURRENCY };
-  }
+async function getServicePricingByModel(modelId) {
+  const snap = await db
+    .collection('servicePricing')
+    .where('modelId', '==', modelId)
+    .get();
 
-  const device = getTabletDeviceBySlug(modelSlug);
-  const perDeviceTimeText = device?.serviceTimeTextOverrides || {};
-  const catalogById = new Map(repairServices.map((srv) => [srv.id, srv]));
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((row) => row?.isActive !== false);
+}
+
+async function buildPriceListItems(modelSlug, locale = 'lv') {
+  const [services, pricingRows] = await Promise.all([
+    getServicesByCategory(TABLET_CATEGORY_KEY),
+    getServicePricingByModel(modelSlug),
+  ]);
+
+  const pricingByServiceId = new Map(
+    pricingRows
+      .filter((row) => row?.serviceId)
+      .map((row) => [row.serviceId, row])
+  );
 
   const fallbackTimeText =
     locale === 'ru' ? 'В тот же день' : 'Tajā pašā dienā';
 
-  const merged = pricing.items
-    .map((it) => {
-      const base = catalogById.get(it.id);
-      if (!base) return null;
+  const items = services
+    .map((service) => {
+      const pricing = pricingByServiceId.get(service.id) || null;
 
-      const timeText =
-        (typeof perDeviceTimeText[it.id] === 'string' &&
-          perDeviceTimeText[it.id].trim()) ||
-        base.defaultTimeText ||
+      if (!pricing) return null;
+      if (pricing.isHidden === true) return null;
+
+      const title =
+        pickLocalizedField(service.labels, locale) ||
+        (typeof service.title === 'string' ? service.title.trim() : '') ||
+        service.id;
+
+      const family =
+        pickLocalizedField(service.familyLabels, locale) ||
+        (typeof service.family === 'string' ? service.family.trim() : '');
+
+      const defaultTimeText =
+        pickLocalizedField(service.defaultTimeText, locale) ||
         fallbackTimeText;
 
-      const raw = it?.price;
-      if (raw == null) return null;
-      const priceText = typeof raw === 'number' ? String(raw) : String(raw).trim();
+      const overrideTimeText =
+        pickLocalizedField(pricing?.timeTextOverride, locale) ||
+        pickLocalizedField(pricing?.timeText, locale) ||
+        (typeof pricing?.timeTextOverride === 'string'
+          ? pricing.timeTextOverride.trim()
+          : '') ||
+        (typeof pricing?.timeText === 'string' ? pricing.timeText.trim() : '');
 
-      const { priceFrom, priceTo } = toPriceRange(priceText);
+      const timeText = overrideTimeText || defaultTimeText;
+
+      const warrantyDays =
+        typeof pricing?.warrantyDaysOverride === 'number'
+          ? pricing.warrantyDaysOverride
+          : typeof service.defaultWarrantyDays === 'number'
+            ? service.defaultWarrantyDays
+            : null;
+
+      const price =
+        typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
+          ? pricing.price
+          : null;
+
+      const isStartingFrom = pricing?.isStartingFrom === true;
 
       return {
-        id: it.id,
-        title: base.title,
-        family: base.family,
-        order: base.order ?? 9999,
+        id: service.id,
+        title,
+        family,
+        order: typeof service.order === 'number' ? service.order : 9999,
         timeText,
-        warrantyDays: base.defaultWarrantyDays ?? null,
-        price: priceText,
-        priceFrom,
-        priceTo,
+        warrantyDays,
+        price,
+        isStartingFrom,
+        isHidden: pricing?.isHidden === true,
         popular: false,
-        href: base.slug ? `/${base.slug}` : base.href,
+        href: service.slug ? `/${service.slug}` : undefined,
       };
     })
     .filter(Boolean)
@@ -317,7 +406,7 @@ function buildPriceListItems(modelSlug, locale = 'lv') {
       return (a.title || '').localeCompare(b.title || '');
     });
 
-  return { items: merged, currency: DEFAULT_CURRENCY };
+  return { items, currency: DEFAULT_CURRENCY };
 }
 
 function getFaqData(locale = 'lv') {
@@ -331,16 +420,38 @@ function getFaqData(locale = 'lv') {
 
 async function generateMetadataImpl({ params, locale = 'lv' }) {
   const { brand, device } = await params;
-  const slug = decodeURIComponent(device);
-  const d = getTabletDeviceBySlug(slug);
+  const slug = norm(device);
+  const brandSlug = norm(brand);
+
+  const d = await getTabletDeviceBySlug(brandSlug, slug);
   const strings = getPageStrings(locale);
 
-  const title = d ? `${d.name} ${strings.heroAltSuffix} | iLab` : `${strings.categoryName} | iLab`;
+  const brandLabel =
+    pickLocalizedField(d?.brandName, locale) ||
+    pickLocalizedField(d?.brandLabel, locale) ||
+    d?.brandKey ||
+    brandSlug.toUpperCase();
 
-  const description = d?.metaDescription || strings.modelMetaFallback;
+  const modelName =
+    pickLocalizedField(d?.name, locale) ||
+    d?.name ||
+    slug;
+
+  const title =
+    pickLocalizedField(d?.metaTitle, locale) ||
+    (d
+      ? locale === 'ru'
+        ? `Ремонт ${modelName} в Риге | iLab`
+        : `${modelName} remonts Rīgā | iLab`
+      : `${strings.categoryName} | iLab`);
+
+  const description =
+    pickLocalizedField(d?.metaDescription, locale) ||
+    strings.modelMetaFallback;
+
   const canonicalPath = d
-    ? buildDeviceHref(locale, 'plansetdatoru-remonts', decodeURIComponent(brand), slug)
-    : buildCategoryHref(locale, 'plansetdatoru-remonts');
+    ? buildDeviceHref(locale, TABLET_CATEGORY_KEY, brandSlug, slug)
+    : buildCategoryHref(locale, TABLET_CATEGORY_KEY);
 
   return {
     title,
@@ -353,24 +464,37 @@ async function generateMetadataImpl({ params, locale = 'lv' }) {
 
 async function TabletDevicePage({ params, locale = 'lv' }) {
   const { brand, device } = await params;
-  const slug = decodeURIComponent(device);
-  const brandSlug = decodeURIComponent(brand);
+  const slug = norm(device);
+  const brandSlug = norm(brand);
 
-  const d = getTabletDeviceBySlug(slug);
+  const d = await getTabletDeviceBySlug(brandSlug, slug);
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
-  const { items: priceItems, currency } = buildPriceListItems(slug, locale);
+  const modelName =
+    pickLocalizedField(d.name, locale) ||
+    d.name ||
+    slug;
+
+  const brandLabel =
+    pickLocalizedField(d.brandName, locale) ||
+    pickLocalizedField(d.brandLabel, locale) ||
+    d.brandKey ||
+    brandSlug.toUpperCase();
+
+  const localizedBodyHtml =
+    pickLocalizedField(d.bodyHtml, locale) || null;
+
+  const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
   const { items: faqItems, ld: faqLd } = getFaqData(locale);
 
   const provider = buildProvidersFromLocations();
-  const brandLabel = d.brandName || d.brandSlug?.toUpperCase() || brandSlug;
 
-  const categoryPath = buildCategoryHref(locale, 'plansetdatoru-remonts');
+  const categoryPath = buildCategoryHref(locale, TABLET_CATEGORY_KEY);
   const brandPath = `${categoryPath}/${brandSlug}`;
   const modelPath = buildDeviceHref(
     locale,
-    'plansetdatoru-remonts',
+    TABLET_CATEGORY_KEY,
     brandSlug,
     d.slug
   );
@@ -389,30 +513,30 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
       url: abs(brandPath),
     },
     {
-      name: strings.modelRepairName(d.name),
+      name: strings.modelRepairName(modelName),
       url: abs(modelPath),
     },
   ]);
 
   const offers = priceItems.map((it) => {
-    const priceStr = it.price == null ? '' : String(it.price);
-    const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
-      ? Number(priceStr.replace(',', '.'))
-      : undefined;
+    const numericPrice =
+      typeof it.price === 'number' && Number.isFinite(it.price)
+        ? it.price
+        : undefined;
 
     return {
       '@type': 'Offer',
       name: it.title,
-      ...(singleNumeric
+      ...(numericPrice !== undefined
         ? {
-            price: singleNumeric,
+            price: numericPrice,
             priceCurrency: currency,
           }
         : {}),
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${d.name} — ${it.title}`,
+        name: `${modelName} — ${it.title}`,
         serviceType: it.title,
         provider,
       },
@@ -424,8 +548,8 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${ORIGIN}${modelPath}#service`,
-    serviceType: strings.modelRepairName(d.name),
-    name: strings.modelRepairName(d.name),
+    serviceType: strings.modelRepairName(modelName),
+    name: strings.modelRepairName(modelName),
     url: abs(modelPath),
     areaServed: { '@type': 'City', name: 'Rīga' },
     provider,
@@ -436,7 +560,7 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     '@id': `${ORIGIN}${modelPath}#howto`,
-    name: strings.howToName(d.name),
+    name: strings.howToName(modelName),
     description: strings.howToDescription,
     step: strings.howToStepsLd,
   };
@@ -474,25 +598,26 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
 
       <DeviceHero
         image={d.image}
-        alt={`${d.name} ${strings.heroAltSuffix}`}
-        bodyHtml={d.bodyHtml || null}
+        alt={`${modelName} ${strings.heroAltSuffix}`}
+        bodyHtml={localizedBodyHtml}
       />
 
       <Services
         id="tablet-services"
-        title={strings.servicesTitle(d?.name)}
+        title={strings.servicesTitle(modelName)}
         items={strings.modelServices}
         headingLevel={2}
         variant="list"
       />
 
-      {priceItems.length > 0 && (
+      {!!priceItems.length && (
         <PriceList
           id="cenas"
           title={strings.priceTitle}
           items={priceItems}
-          currency={DEFAULT_CURRENCY}
+          currency={currency}
           headingLevel={2}
+          locale={locale}
         />
       )}
 
@@ -506,11 +631,14 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
         variant="cards"
       />
 
-      <Faq
-        id="tablet-model-faq"
-        title={strings.faqTitle}
-        items={faqItems}
-      />
+      {!!faqItems.length && (
+        <Faq
+          id="tablet-model-faq"
+          title={strings.faqTitle}
+          items={faqItems}
+          locale={locale}
+        />
+      )}
 
       <ConvertBand locale={locale} />
     </>

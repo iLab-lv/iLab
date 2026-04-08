@@ -1,9 +1,6 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devices from '@/data/devices';
-import repairServices from '@/data/repairServices';
-
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -36,6 +33,7 @@ import { db } from '@/lib/firebaseAdmin';
 export const revalidate = 0;
 
 const DEFAULT_CURRENCY = 'EUR';
+const COMPUTER_CATEGORY_KEY = 'datoru-remonts';
 
 export function getComputerDevicePageHeader(locale = 'lv') {
   if (locale === 'ru') {
@@ -51,142 +49,184 @@ export function getComputerDevicePageHeader(locale = 'lv') {
 
 /* ===== Helpers ===== */
 
-function getLaptopDeviceBySlug(brandSlug, slug) {
-  return (
-    devices.find(
-      (d) =>
-        d.slug === slug &&
-        d.brandSlug === brandSlug &&
-        d.category === 'datoru-remonts'
-    ) || null
-  );
+function norm(value = '') {
+  return decodeURIComponent(String(value)).trim();
 }
 
-function toPriceRange(priceStr) {
-  if (!priceStr) return { priceFrom: null, priceTo: null, priceText: '' };
+function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
+  if (!value) return '';
 
-  const raw = String(priceStr).trim();
-  const p = raw.toLowerCase();
-  const priceText = raw;
-
-  const fromMatch = p.match(/(?:^|\s)(?:no|from)\s*([0-9]+(?:[.,][0-9]+)?)/i);
-  if (fromMatch) {
-    const from = Number(fromMatch[1].replace(',', '.'));
-    return { priceFrom: Number.isNaN(from) ? null : from, priceTo: null, priceText };
+  if (typeof value === 'string') {
+    return value.trim();
   }
 
-  const rangeMatch = p.match(
-    /^\s*([0-9]+(?:[.,][0-9]+)?)\s*[-–]\s*([0-9]+(?:[.,][0-9]+)?)\s*$/
-  );
-  if (rangeMatch) {
-    const a = Number(rangeMatch[1].replace(',', '.'));
-    const b = Number(rangeMatch[2].replace(',', '.'));
-    return {
-      priceFrom: Number.isNaN(a) ? null : a,
-      priceTo: Number.isNaN(b) ? null : b,
-      priceText,
-    };
+  if (typeof value === 'object') {
+    if (typeof value[locale] === 'string' && value[locale].trim()) {
+      return value[locale].trim();
+    }
+    if (typeof value[fallback] === 'string' && value[fallback].trim()) {
+      return value[fallback].trim();
+    }
   }
 
-  const singleMatch = p.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*$/);
-  if (singleMatch) {
-    const v = Number(singleMatch[1].replace(',', '.'));
-    return { priceFrom: null, priceTo: Number.isNaN(v) ? null : v, priceText };
+  return '';
+}
+
+function slugifyBrandKey(value = '') {
+  return String(value).trim().toLowerCase();
+}
+
+async function getLaptopDeviceBySlug(brandSlug, slug) {
+  const normalizedBrand = norm(brandSlug);
+  const normalizedSlug = norm(slug);
+
+  const directSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', COMPUTER_CATEGORY_KEY)
+    .where('brandKey', '==', normalizedBrand)
+    .limit(1)
+    .get();
+
+  if (!directSnap.empty) {
+    const doc = directSnap.docs[0];
+    return { id: doc.id, ...doc.data() };
   }
 
-  return { priceFrom: null, priceTo: null, priceText };
+  const fallbackSnap = await db
+    .collection('devices')
+    .where('slug', '==', normalizedSlug)
+    .where('categoryKey', '==', COMPUTER_CATEGORY_KEY)
+    .limit(10)
+    .get();
+
+  if (fallbackSnap.empty) return null;
+
+  const match =
+    fallbackSnap.docs.find((doc) => {
+      const data = doc.data() || {};
+      const candidates = [
+        data.brandKey,
+        data.brandSlug,
+        data.brandId,
+        data.brand,
+      ]
+        .filter(Boolean)
+        .map((v) => slugifyBrandKey(v));
+
+      return candidates.includes(slugifyBrandKey(normalizedBrand));
+    }) || null;
+
+  if (!match) return null;
+
+  return {
+    id: match.id,
+    ...match.data(),
+  };
+}
+
+async function getServicesByCategory(categoryId) {
+  const snap = await db
+    .collection('services')
+    .where('categoryId', '==', categoryId)
+    .get();
+
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((service) => service?.isActive !== false);
+}
+
+async function getServicePricingByModel(modelId) {
+  const snap = await db
+    .collection('servicePricing')
+    .where('modelId', '==', modelId)
+    .get();
+
+  return snap.docs
+    .map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    .filter((row) => row?.isActive !== false);
 }
 
 async function buildPriceListItems(modelSlug, locale = 'lv') {
-  const device = devices.find((d) => d.slug === modelSlug) || null;
+  const [services, pricingRows] = await Promise.all([
+    getServicesByCategory(COMPUTER_CATEGORY_KEY),
+    getServicePricingByModel(modelSlug),
+  ]);
 
-  const perDeviceTimeText =
-    locale === 'ru'
-      ? device?.serviceTimeTextOverridesRu || device?.serviceTimeTextOverrides || {}
-      : device?.serviceTimeTextOverrides || {};
+  const pricingByServiceId = new Map(
+    pricingRows
+      .filter((row) => row?.serviceId)
+      .map((row) => [row.serviceId, row])
+  );
 
-  const catalogById = new Map(repairServices.map((srv) => [srv.id, srv]));
+  const fallbackTimeText =
+    locale === 'ru' ? 'В тот же день' : 'Tajā pašā dienā';
 
-  const snap = await db
-    .collection('modelServices')
-    .where('modelId', '==', modelSlug)
-    .get();
+  const items = services
+    .map((service) => {
+      const pricing = pricingByServiceId.get(service.id) || null;
 
-  const fallbackOnRequest = locale === 'ru' ? 'по запросу' : 'pēc pieprasījuma';
-  const defaultSameDay = locale === 'ru' ? 'В тот же день' : 'Tajā pašā dienā';
+      if (!pricing) return null;
+      if (pricing.isHidden === true) return null;
 
-  const toRow = (base, data = null) => {
-    const serviceId = base.id;
+      const title =
+        pickLocalizedField(service.labels, locale) ||
+        (typeof service.title === 'string' ? service.title.trim() : '') ||
+        service.id;
 
-    const localizedTitle =
-      locale === 'ru'
-        ? base.titleRu || base.title
-        : base.title;
+      const family =
+        pickLocalizedField(service.familyLabels, locale) ||
+        (typeof service.family === 'string' ? service.family.trim() : '');
 
-    const timeText =
-      (typeof perDeviceTimeText[serviceId] === 'string' &&
-        perDeviceTimeText[serviceId].trim()) ||
-      (locale === 'ru'
-        ? base.defaultTimeTextRu || base.defaultTimeText
-        : base.defaultTimeText) ||
-      defaultSameDay;
+      const defaultTimeText =
+        pickLocalizedField(service.defaultTimeText, locale) ||
+        fallbackTimeText;
 
-    const raw = data?.price;
+      const overrideTimeText =
+        pickLocalizedField(pricing?.timeTextOverride, locale) ||
+        pickLocalizedField(pricing?.timeText, locale) ||
+        (typeof pricing?.timeTextOverride === 'string'
+          ? pricing.timeTextOverride.trim()
+          : '') ||
+        (typeof pricing?.timeText === 'string' ? pricing.timeText.trim() : '');
 
-    if (raw === null) return null;
+      const timeText = overrideTimeText || defaultTimeText;
 
-    const priceText =
-      data == null
-        ? ''
-        : typeof raw === 'number'
-          ? String(raw)
-          : String(raw ?? '').trim();
+      const warrantyDays =
+        typeof pricing?.warrantyDaysOverride === 'number'
+          ? pricing.warrantyDaysOverride
+          : typeof service.defaultWarrantyDays === 'number'
+            ? service.defaultWarrantyDays
+            : null;
 
-    const { priceFrom, priceTo } = toPriceRange(priceText);
+      const price =
+        typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
+          ? pricing.price
+          : null;
 
-    return {
-      id: serviceId,
-      title: localizedTitle,
-      family: base.family,
-      order: base.order ?? 9999,
-      timeText,
-      warrantyDays: base.defaultWarrantyDays ?? null,
-      price: priceText,
-      priceFrom,
-      priceTo,
-      popular: false,
-      emptyPriceLabel: fallbackOnRequest,
-      href: base.slug
-        ? buildServiceHref(locale, 'datoru-remonts', base.slug)
-        : base.href,
-    };
-  };
+      const isStartingFrom = pricing?.isStartingFrom === true;
 
-  if (snap.empty) {
-    const fallback = repairServices
-      .filter((s) => s.categories?.includes('datoru-remonts'))
-      .map((base) => toRow(base, null))
-      .filter(Boolean)
-      .sort((a, b) => {
-        if ((a.order ?? 9999) !== (b.order ?? 9999)) {
-          return (a.order ?? 9999) - (b.order ?? 9999);
-        }
-        return (a.title || '').localeCompare(b.title || '');
-      });
-
-    return { items: fallback, currency: DEFAULT_CURRENCY };
-  }
-
-  const merged = snap.docs
-    .map((doc) => {
-      const data = doc.data() || {};
-      const serviceId = data.serviceId;
-      if (!serviceId) return null;
-
-      const base = catalogById.get(serviceId);
-      if (!base) return null;
-
-      return toRow(base, data);
+      return {
+        id: service.id,
+        title,
+        family,
+        order: typeof service.order === 'number' ? service.order : 9999,
+        timeText,
+        warrantyDays,
+        price,
+        isStartingFrom,
+        isHidden: pricing?.isHidden === true,
+        popular: false,
+        href: service.slug
+          ? buildServiceHref(locale, COMPUTER_CATEGORY_KEY, service.slug)
+          : undefined,
+      };
     })
     .filter(Boolean)
     .sort((a, b) => {
@@ -196,7 +236,7 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
       return (a.title || '').localeCompare(b.title || '');
     });
 
-  return { items: merged, currency: DEFAULT_CURRENCY };
+  return { items, currency: DEFAULT_CURRENCY };
 }
 
 function buildModelServices(locale = 'lv') {
@@ -204,13 +244,13 @@ function buildModelServices(locale = 'lv') {
     return [
       {
         title: 'Замена аккумулятора',
-        href: buildServiceHref(locale, 'datoru-remonts', 'akumulatora-nomaina'),
+        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'akumulatora-nomaina'),
         text: 'если заряд быстро падает, компьютер выключается или не работает без зарядного устройства.',
         icon: LuBatteryCharging,
       },
       {
         title: 'Замена дисплея',
-        href: buildServiceHref(locale, 'datoru-remonts', 'displeja-nomaina'),
+        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'displeja-nomaina'),
         text: 'трещины, полосы, тёмные пятна, мерцание или отсутствие изображения.',
         icon: LuMonitor,
       },
@@ -218,7 +258,7 @@ function buildModelServices(locale = 'lv') {
         title: 'Восстановление после попадания жидкости',
         href: buildServiceHref(
           locale,
-          'datoru-remonts',
+          COMPUTER_CATEGORY_KEY,
           'atjaunosana-pec-skidruma-bojajumiem'
         ),
         text: 'диагностика и восстановление после попадания жидкости, если ремонт возможен.',
@@ -228,7 +268,7 @@ function buildModelServices(locale = 'lv') {
         title: 'Профилактика и техническое обслуживание',
         href: buildServiceHref(
           locale,
-          'datoru-remonts',
+          COMPUTER_CATEGORY_KEY,
           'profilakse-un-tehniska-apkalposana'
         ),
         text: 'чистка, замена термопасты, проверка и стабильная работа.',
@@ -236,13 +276,13 @@ function buildModelServices(locale = 'lv') {
       },
       {
         title: 'Замена клавиатуры',
-        href: buildServiceHref(locale, 'datoru-remonts', 'tastaturas-nomaina'),
+        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'tastaturas-nomaina'),
         text: 'не работают клавиши, залипание, следы жидкости или физические повреждения.',
         icon: LuKeyboard,
       },
       {
         title: 'Замена touchpad',
-        href: buildServiceHref(locale, 'datoru-remonts', 'touchpad-nomaina'),
+        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'touchpad-nomaina'),
         text: 'не реагирует, курсор двигается сам, не работает клик или есть физические повреждения.',
         icon: LuMouse,
       },
@@ -252,13 +292,13 @@ function buildModelServices(locale = 'lv') {
   return [
     {
       title: 'Akumulatora nomaiņa',
-      href: buildServiceHref(locale, 'datoru-remonts', 'akumulatora-nomaina'),
+      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'akumulatora-nomaina'),
       text: 'ja strauji krīt uzlāde, dators izslēdzas vai nedarbojas bez lādētāja.',
       icon: LuBatteryCharging,
     },
     {
       title: 'Displeja nomaiņa',
-      href: buildServiceHref(locale, 'datoru-remonts', 'displeja-nomaina'),
+      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'displeja-nomaina'),
       text: 'plaisas, līnijas, tumši plankumi, mirgošana vai nav attēla.',
       icon: LuMonitor,
     },
@@ -266,7 +306,7 @@ function buildModelServices(locale = 'lv') {
       title: 'Atjaunošana pēc šķidruma bojājumiem',
       href: buildServiceHref(
         locale,
-        'datoru-remonts',
+        COMPUTER_CATEGORY_KEY,
         'atjaunosana-pec-skidruma-bojajumiem'
       ),
       text: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
@@ -276,7 +316,7 @@ function buildModelServices(locale = 'lv') {
       title: 'Profilakse un tehniskā apkalpošana',
       href: buildServiceHref(
         locale,
-        'datoru-remonts',
+        COMPUTER_CATEGORY_KEY,
         'profilakse-un-tehniska-apkalposana'
       ),
       text: 'tīrīšana, termopastas nomaiņa, pārbaude un stabila darbība.',
@@ -284,13 +324,13 @@ function buildModelServices(locale = 'lv') {
     },
     {
       title: 'Tastatūras nomaiņa',
-      href: buildServiceHref(locale, 'datoru-remonts', 'tastaturas-nomaina'),
+      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'tastaturas-nomaina'),
       text: 'nedarbojas taustiņi, pielipšana, šķidruma bojājumi vai fiziski defekti.',
       icon: LuKeyboard,
     },
     {
       title: 'Touchpad nomaiņa',
-      href: buildServiceHref(locale, 'datoru-remonts', 'touchpad-nomaina'),
+      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'touchpad-nomaina'),
       text: 'nereaģē, “lec” kursors, klikšķis nestrādā vai ir fiziski bojājumi.',
       icon: LuMouse,
     },
@@ -517,28 +557,32 @@ function getPageStrings(locale = 'lv') {
 /* ===== Metadata ===== */
 
 export async function getComputerDeviceMetadata(params, locale = 'lv') {
-  const brandSlug = decodeURIComponent(params.brand);
-  const slug = decodeURIComponent(params.device);
+  const brandSlug = norm(params.brand);
+  const slug = norm(params.device);
 
-  const d = getLaptopDeviceBySlug(brandSlug, slug);
+  const d = await getLaptopDeviceBySlug(brandSlug, slug);
   const strings = getPageStrings(locale);
 
   const brandLabel =
-    (locale === 'ru' ? d?.brandNameRu : d?.brandName) ||
-    d?.brandName ||
+    pickLocalizedField(d?.brandName, locale) ||
+    pickLocalizedField(d?.brandLabel, locale) ||
+    d?.brandKey ||
     brandSlug.toUpperCase();
 
+  const deviceName =
+    pickLocalizedField(d?.name, locale) ||
+    d?.name ||
+    slug;
+
   const title =
-    (locale === 'ru' ? d?.metaTitleRu : d?.metaTitle) ||
-    d?.metaTitle ||
-    strings.defaultMetaTitle(d?.name, brandLabel);
+    pickLocalizedField(d?.metaTitle, locale) ||
+    strings.defaultMetaTitle(d ? deviceName : '', brandLabel);
 
   const description =
-    (locale === 'ru' ? d?.metaDescriptionRu : d?.metaDescription) ||
-    d?.metaDescription ||
-    strings.defaultMetaDescription(d?.name);
+    pickLocalizedField(d?.metaDescription, locale) ||
+    strings.defaultMetaDescription(d ? deviceName : '');
 
-  const basePath = buildCategoryHref(locale, 'datoru-remonts');
+  const basePath = buildCategoryHref(locale, COMPUTER_CATEGORY_KEY);
 
   return {
     title,
@@ -556,23 +600,32 @@ export default async function ComputerDevicePage({
   device,
   locale = 'lv',
 }) {
-  const slug = decodeURIComponent(device);
-  const brandSlug = decodeURIComponent(brand);
+  const slug = norm(device);
+  const brandSlug = norm(brand);
 
-  const d = getLaptopDeviceBySlug(brandSlug, slug);
+  const d = await getLaptopDeviceBySlug(brandSlug, slug);
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
-  const basePath = buildCategoryHref(locale, 'datoru-remonts');
+  const basePath = buildCategoryHref(locale, COMPUTER_CATEGORY_KEY);
 
-  const { items: priceItems, currency } = await buildPriceListItems(slug, locale);
-  const modelServices = buildModelServices(locale);
-  const { faqItems: finalFaqItems, faqLd } = buildFaqForModel(locale);
+  const deviceName =
+    pickLocalizedField(d.name, locale) ||
+    d.name ||
+    slug;
 
   const brandLabel =
-    (locale === 'ru' ? d?.brandNameRu : d?.brandName) ||
-    d?.brandName ||
-    d.brandSlug.toUpperCase();
+    pickLocalizedField(d.brandName, locale) ||
+    pickLocalizedField(d.brandLabel, locale) ||
+    d.brandKey ||
+    brandSlug.toUpperCase();
+
+  const heroBodyHtml =
+    pickLocalizedField(d.bodyHtml, locale) || null;
+
+  const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
+  const modelServices = buildModelServices(locale);
+  const { faqItems: finalFaqItems, faqLd } = buildFaqForModel(locale);
 
   const modelPath = `${basePath}/${brandSlug}/${d.slug}`;
   const brandPath = `${basePath}/${brandSlug}`;
@@ -587,30 +640,30 @@ export default async function ComputerDevicePage({
       url: abs(brandPath),
     },
     {
-      name: `${d.name} ${strings.deviceRepairSuffix}`,
+      name: `${deviceName} ${strings.deviceRepairSuffix}`,
       url: abs(modelPath),
     },
   ]);
 
   const offers = priceItems.map((it) => {
-    const priceStr = it.price == null ? '' : String(it.price);
-    const singleNumeric = /^\s*[0-9]+([.,][0-9]+)?\s*$/.test(priceStr)
-      ? Number(priceStr.replace(',', '.'))
-      : undefined;
+    const numericPrice =
+      typeof it.price === 'number' && Number.isFinite(it.price)
+        ? it.price
+        : undefined;
 
     return {
       '@type': 'Offer',
       name: it.title,
-      ...(singleNumeric !== undefined
+      ...(numericPrice !== undefined
         ? {
-            price: singleNumeric,
+            price: numericPrice,
             priceCurrency: currency,
           }
         : {}),
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${d.name} — ${it.title}`,
+        name: `${deviceName} — ${it.title}`,
         serviceType: it.title,
         provider,
       },
@@ -622,25 +675,17 @@ export default async function ComputerDevicePage({
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${ORIGIN}${modelPath}#service`,
-    serviceType: strings.serviceType(d.name),
-    name: strings.serviceName(d.name),
+    serviceType: strings.serviceType(deviceName),
+    name: strings.serviceName(deviceName),
     url: abs(modelPath),
     areaServed: { '@type': 'City', name: strings.cityName },
     provider,
     ...(offers.length ? { offers } : {}),
   };
 
-  const processHowToLd = buildProcessHowToLd(modelPath, d.name, locale);
+  const processHowToLd = buildProcessHowToLd(modelPath, deviceName, locale);
 
-  const heroAlt =
-    locale === 'ru'
-      ? `${d.name} ${strings.heroAltSuffix}`
-      : `${d.name} ${strings.heroAltSuffix}`;
-
-  const heroBodyHtml =
-    locale === 'ru'
-      ? d.bodyHtmlRu || d.bodyHtml || null
-      : d.bodyHtml || d.bodyHtmlRu || null;
+  const heroAlt = `${deviceName} ${strings.heroAltSuffix}`;
 
   return (
     <>
@@ -682,17 +727,18 @@ export default async function ComputerDevicePage({
 
       <Services
         id="datoru-services"
-        title={strings.servicesTitle(d?.name)}
+        title={strings.servicesTitle(deviceName)}
         items={modelServices}
       />
 
-      {priceItems.length > 0 && (
+      {!!priceItems.length && (
         <PriceList
           id="cenas"
           title={strings.pricesTitle}
           items={priceItems}
-          currency={DEFAULT_CURRENCY}
+          currency={currency}
           headingLevel={2}
+          locale={locale}
         />
       )}
 

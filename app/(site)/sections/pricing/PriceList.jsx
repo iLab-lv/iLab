@@ -41,6 +41,20 @@ function getStrings(locale = 'lv') {
   };
 }
 
+function isHiddenItem(item) {
+  if (!item) return true;
+
+  return (
+    item.hidden === true ||
+    item.hidden === 'true' ||
+    item.isHidden === true ||
+    item.isHidden === 'true' ||
+    item.visible === false ||
+    item.visible === 'false' ||
+    item.status === 'hidden'
+  );
+}
+
 function fmtTime(min, max, locale = 'lv') {
   const strings = getStrings(locale);
 
@@ -57,11 +71,13 @@ function fmtTimeText(timeText, min, max, locale = 'lv') {
   if (typeof timeText === 'string' && timeText.trim()) {
     return timeText.trim();
   }
+
   return fmtTime(min, max, locale);
 }
 
 function fmtPriceText(item, currency = 'EUR', locale = 'lv') {
   const strings = getStrings(locale);
+
   const hasNumericPrice =
     typeof item?.price === 'number' && Number.isFinite(item.price);
 
@@ -69,7 +85,8 @@ function fmtPriceText(item, currency = 'EUR', locale = 'lv') {
     return strings.onRequest;
   }
 
-  const value = `${item.price.toFixed(0)} €`;
+  const symbol = currency === 'EUR' ? '€' : currency;
+  const value = `${item.price.toFixed(0)} ${symbol}`;
 
   if (item?.isStartingFrom) {
     return `${strings.fromPrefix} ${value}`;
@@ -93,9 +110,9 @@ export default function PriceList({
   const strings = getStrings(locale);
   const resolvedBookLabel = bookLabel || strings.bookLabel;
 
-  if (!items || items.length === 0) return null;
+  const rows = Array.isArray(items) ? items.filter((item) => !isHiddenItem(item)) : [];
 
-  const rows = items;
+  if (rows.length === 0) return null;
 
   return (
     <section id={id} className={s.section} aria-labelledby={`${id}-title`}>

@@ -251,6 +251,7 @@ async function getAllPricing() {
           ? data.price
           : null,
       isStartingFrom: data.isStartingFrom === true,
+      isHidden: data.isHidden === true,
       categoryId: data.categoryId || '',
     });
   });

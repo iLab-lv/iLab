@@ -88,10 +88,20 @@
   color: #22c55e;
 }
 
+.empty {
+  color: $color-text-2;
+  padding: $space-sm 0;
+}
+
 .groups {
   margin-top: $space-lg;
   display: grid;
   gap: $space-md;
+}
+
+.groupsNested {
+  display: grid;
+  gap: $space-sm;
 }
 
 .group {
@@ -110,6 +120,7 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: $space-md;
   font-weight: $font-weight-semibold;
   color: $color-text;
@@ -136,53 +147,13 @@
   color: $color-text-2;
   font-weight: $font-weight-medium;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .panel {
   padding: $space-md;
   background: $color-surface-2;
   border-top: $border-thin solid rgba(255, 255, 255, 0.05);
-}
-
-.meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: $space-sm;
-  margin-bottom: $space-md;
-
-  @media (max-width: $bp-md) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.metaItem {
-  display: flex;
-  flex-direction: column;
-  gap: $space-xs;
-  padding: $space-sm;
-  border: $border-thin solid rgba(255, 255, 255, 0.06);
-  border-radius: $radius-md;
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.metaLabel {
-  color: $color-text-2;
-  font-size: $font-size-sm;
-}
-
-.metaValue {
-  color: $color-text;
-  font-weight: $font-weight-medium;
-}
-
-.empty {
-  color: $color-text-2;
-  padding: $space-sm 0;
-}
-
-.rows {
-  display: grid;
-  gap: $space-sm;
 }
 
 .reviewCard {
@@ -194,51 +165,6 @@
   background: $color-surface-1;
 }
 
-.rowTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: $space-md;
-  flex-wrap: wrap;
-}
-
-.rowTitle {
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
-.rowActions {
-  display: flex;
-  gap: $space-xs;
-  flex-wrap: wrap;
-}
-
-.smallBtn,
-.smallBtnDanger {
-  height: 32px;
-  padding: 0 $space-sm;
-  border-radius: $radius-md;
-  border: $border-thin solid $color-border;
-  background: $color-surface-2;
-  color: $color-text;
-  cursor: pointer;
-  font-size: $font-size-sm;
-
-  &:disabled {
-    opacity: $opacity-disabled;
-    cursor: default;
-  }
-
-  &:focus-visible {
-    outline: $focus-ring-width solid $focus-ring-color;
-    outline-offset: $focus-ring-offset;
-  }
-}
-
-.smallBtnDanger {
-  color: #ff808f;
-}
-
 .formGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -247,6 +173,19 @@
   @media (max-width: $bp-md) {
     grid-template-columns: 1fr;
   }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: $font-size-sm;
+  line-height: 1.2;
+  color: $color-text-2;
 }
 
 .input {
@@ -287,26 +226,96 @@
   }
 }
 
-.subsectionTitle {
-  margin-top: $space-sm;
-  margin-bottom: $space-xs;
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
-.check {
-  display: inline-flex;
-  align-items: center;
-  gap: $space-xs;
-  color: $color-text-2;
-  font-size: $font-size-sm;
-  min-height: $btn-h-md;
-}
-
 .panelFooter {
   margin-top: $space-md;
   display: flex;
   justify-content: flex-end;
   gap: $space-sm;
   flex-wrap: wrap;
+}
+
+.smallBtnDanger {
+  height: 32px;
+  padding: 0 $space-sm;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: #ff808f;
+  cursor: pointer;
+  font-size: $font-size-sm;
+
+  &:disabled {
+    opacity: $opacity-disabled;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.inlineToggleRow {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  width: 100%;
+  min-width: 0;
+}
+
+.inlineToggleBtn {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  text-align: left;
+  padding: $space-sm $space-md;
+  border: 0;
+  border-radius: $radius-md;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.dragHandle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface-2;
+  color: $color-text-2;
+  cursor: grab;
+  user-select: none;
+  align-self: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
 }

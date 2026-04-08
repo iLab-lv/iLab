@@ -2,11 +2,30 @@ import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 import { db } from '@/lib/firebaseAdmin';
 
+function emptyLocalized() {
+  return { lv: '', ru: '' };
+}
+
 function normalizeLocalized(value = {}) {
   return {
-    lv: typeof value.lv === 'string' ? value.lv : '',
-    ru: typeof value.ru === 'string' ? value.ru : '',
+    lv: typeof value?.lv === 'string' ? value.lv : '',
+    ru: typeof value?.ru === 'string' ? value.ru : '',
   };
+}
+
+function pickLocalized(...sources) {
+  for (const source of sources) {
+    if (
+      source &&
+      typeof source === 'object' &&
+      !Array.isArray(source) &&
+      (typeof source.lv === 'string' || typeof source.ru === 'string')
+    ) {
+      return normalizeLocalized(source);
+    }
+  }
+
+  return emptyLocalized();
 }
 
 function normalizeSeries(item = {}) {
@@ -21,6 +40,32 @@ function normalizeSeries(item = {}) {
 }
 
 function normalizeBrand(item = {}) {
+  const pageSource =
+    item?.page && typeof item.page === 'object' && !Array.isArray(item.page)
+      ? item.page
+      : {};
+
+  const routeSource =
+    item?.route && typeof item.route === 'object' && !Array.isArray(item.route)
+      ? item.route
+      : pageSource?.route && typeof pageSource.route === 'object' && !Array.isArray(pageSource.route)
+        ? pageSource.route
+        : {};
+
+  const modelGridSource =
+    pageSource?.modelGrid &&
+    typeof pageSource.modelGrid === 'object' &&
+    !Array.isArray(pageSource.modelGrid)
+      ? pageSource.modelGrid
+      : {};
+
+  const sectionsSource =
+    pageSource?.sections &&
+    typeof pageSource.sections === 'object' &&
+    !Array.isArray(pageSource.sections)
+      ? pageSource.sections
+      : {};
+
   return {
     key: typeof item.key === 'string' ? item.key.trim() : '',
     labels: normalizeLocalized(item.labels),
@@ -32,16 +77,35 @@ function normalizeBrand(item = {}) {
         : 999,
     route: {
       brandPath:
-        typeof item?.route?.brandPath === 'string' ? item.route.brandPath : '',
+        typeof routeSource?.brandPath === 'string' ? routeSource.brandPath : '',
       dedicatedHubPath:
-        typeof item?.route?.dedicatedHubPath === 'string'
-          ? item.route.dedicatedHubPath
+        typeof routeSource?.dedicatedHubPath === 'string'
+          ? routeSource.dedicatedHubPath
           : '',
-      preferDedicatedHub: item?.route?.preferDedicatedHub === true,
+      preferDedicatedHub: routeSource?.preferDedicatedHub === true,
     },
     page: {
       variant:
-        typeof item?.page?.variant === 'string' ? item.page.variant : 'brand',
+        typeof pageSource?.variant === 'string' ? pageSource.variant : 'brand',
+      h1: pickLocalized(pageSource?.h1, item?.h1),
+      lead: pickLocalized(pageSource?.lead, item?.lead),
+      bodyHtml: pickLocalized(pageSource?.bodyHtml, item?.bodyHtml),
+      metaTitle: pickLocalized(pageSource?.metaTitle, item?.metaTitle),
+      metaDescription: pickLocalized(
+        pageSource?.metaDescription,
+        item?.metaDescription
+      ),
+      modelGrid: {
+        heading: pickLocalized(modelGridSource?.heading),
+        intro: pickLocalized(modelGridSource?.intro),
+      },
+      sections: {
+        hasCustomGuide: sectionsSource?.hasCustomGuide === true,
+        hasFaq: sectionsSource?.hasFaq === true,
+        hasProcess: sectionsSource?.hasProcess === true,
+        hasReviews: sectionsSource?.hasReviews === true,
+        hasWhy: sectionsSource?.hasWhy === true,
+      },
     },
     series: Array.isArray(item.series)
       ? item.series.map(normalizeSeries).filter((series) => series.key)

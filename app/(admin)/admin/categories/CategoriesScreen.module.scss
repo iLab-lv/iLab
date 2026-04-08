@@ -110,6 +110,7 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: $space-md;
   font-weight: $font-weight-semibold;
   color: $color-text;
@@ -136,6 +137,7 @@
   color: $color-text-2;
   font-weight: $font-weight-medium;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .panel {
@@ -249,6 +251,19 @@
   }
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: $font-size-sm;
+  line-height: 1.2;
+  color: $color-text-2;
+}
+
 .input {
   height: $btn-h-md;
   padding: 0 $space-md;
@@ -309,4 +324,69 @@
   justify-content: flex-end;
   gap: $space-sm;
   flex-wrap: wrap;
+}
+
+.inlineToggleRow {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  width: 100%;
+  min-width: 0;
+}
+
+.inlineToggleBtn {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  text-align: left;
+  padding: $space-sm $space-md;
+  border: 0;
+  border-radius: $radius-md;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.dragHandle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: $border-thin solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface-2;
+  color: $color-text-2;
+  cursor: grab;
+  user-select: none;
+  align-self: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
 }

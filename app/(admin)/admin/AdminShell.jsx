@@ -101,14 +101,23 @@ export default function AdminShell({ children }) {
           >
             Dashboard
           </a>
-          <a href="/admin/catalog" onClick={() => setOpen(false)}>
+          <a href="/admin/categories" onClick={() => setOpen(false)}>
             Catalog
+          </a>
+          <a href="/admin/devices" onClick={() => setOpen(false)}>
+            Devices
+          </a>
+          <a href="/admin/services" onClick={() => setOpen(false)}>
+            Services
           </a>
           <a href="/admin/pricelist" onClick={() => setOpen(false)}>
             Pricelist
           </a>
           <a href="/admin/reviews" onClick={() => setOpen(false)}>
             Reviews
+          </a>
+          <a href="/admin/faq" onClick={() => setOpen(false)}>
+            faq
           </a>
           <a href="/admin/components" onClick={() => setOpen(false)}>
             Components

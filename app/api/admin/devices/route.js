@@ -2,9 +2,26 @@ import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 import { db } from '@/lib/firebaseAdmin';
 
+function normalizeLocalized(value) {
+  if (typeof value === 'string') {
+    return {
+      lv: value,
+      ru: '',
+    };
+  }
+
+  return {
+    lv: typeof value?.lv === 'string' ? value.lv : '',
+    ru: typeof value?.ru === 'string' ? value.ru : '',
+  };
+}
+
 function normalizeDevice(id, data = {}) {
   return {
-    slug: typeof data.slug === 'string' && data.slug.trim() ? data.slug.trim() : id,
+    slug:
+      typeof data.slug === 'string' && data.slug.trim()
+        ? data.slug.trim()
+        : id,
     type: typeof data.type === 'string' ? data.type : 'device',
     categoryKey:
       typeof data.categoryKey === 'string' ? data.categoryKey.trim() : '',
@@ -22,11 +39,10 @@ function normalizeDevice(id, data = {}) {
       typeof data.order === 'number' && Number.isFinite(data.order)
         ? data.order
         : 999,
-    h1: typeof data.h1 === 'string' ? data.h1 : '',
-    metaTitle: typeof data.metaTitle === 'string' ? data.metaTitle : '',
-    metaDescription:
-      typeof data.metaDescription === 'string' ? data.metaDescription : '',
-    bodyHtml: typeof data.bodyHtml === 'string' ? data.bodyHtml : '',
+    h1: normalizeLocalized(data.h1),
+    metaTitle: normalizeLocalized(data.metaTitle),
+    metaDescription: normalizeLocalized(data.metaDescription),
+    bodyHtml: normalizeLocalized(data.bodyHtml),
   };
 }
 
@@ -61,6 +77,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const raw = body?.item || {};
+    const originalSlug = String(body?.originalSlug || '').trim();
 
     const slug = String(raw?.slug || '').trim();
     if (!slug) {
@@ -71,11 +88,59 @@ export async function POST(req) {
     }
 
     const item = normalizeDevice(slug, raw);
+    const targetRef = db.collection('devices').doc(slug);
 
-    const ref = db.collection('devices').doc(slug);
-    const existing = await ref.get();
+    if (originalSlug && originalSlug !== slug) {
+      const oldRef = db.collection('devices').doc(originalSlug);
+      const oldSnap = await oldRef.get();
 
-    await ref.set(
+      if (!oldSnap.exists) {
+        return NextResponse.json(
+          { error: `Original device not found: ${originalSlug}` },
+          { status: 404 }
+        );
+      }
+
+      const newSnap = await targetRef.get();
+
+      if (newSnap.exists) {
+        return NextResponse.json(
+          { error: `Target slug already exists: ${slug}` },
+          { status: 409 }
+        );
+      }
+
+      const oldData = oldSnap.data() || {};
+      const createdAt =
+        oldData.createdAt || admin.firestore.FieldValue.serverTimestamp();
+
+      const batch = db.batch();
+
+      batch.set(
+        targetRef,
+        {
+          ...oldData,
+          ...item,
+          createdAt,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+
+      batch.delete(oldRef);
+
+      await batch.commit();
+
+      return NextResponse.json({
+        ok: true,
+        id: slug,
+        renamedFrom: originalSlug,
+      });
+    }
+
+    const existing = await targetRef.get();
+
+    await targetRef.set(
       {
         ...item,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -91,6 +156,40 @@ export async function POST(req) {
     console.error('Devices POST failed:', error);
     return NextResponse.json(
       { error: 'Failed to save device' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const slug = String(searchParams.get('slug') || '').trim();
+
+    if (!slug) {
+      return NextResponse.json(
+        { error: 'Device slug is required' },
+        { status: 400 }
+      );
+    }
+
+    const ref = db.collection('devices').doc(slug);
+    const snap = await ref.get();
+
+    if (!snap.exists) {
+      return NextResponse.json(
+        { error: `Device not found: ${slug}` },
+        { status: 404 }
+      );
+    }
+
+    await ref.delete();
+
+    return NextResponse.json({ ok: true, id: slug });
+  } catch (error) {
+    console.error('Devices DELETE failed:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete device' },
       { status: 500 }
     );
   }

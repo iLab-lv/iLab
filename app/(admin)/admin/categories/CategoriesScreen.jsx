@@ -1,23 +1,45 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 import Button from '@components/button/Button';
 import s from './CategoriesScreen.module.scss';
 
 const LOCALES = ['lv', 'ru'];
 
+function makeLocalId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return `tmp-${crypto.randomUUID()}`;
+  }
+
+  return `tmp-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function emptyLocalized() {
+  return { lv: '', ru: '' };
+}
+
 function emptySeries() {
   return {
     key: '',
-    labels: { lv: '', ru: '' },
+    labels: emptyLocalized(),
     order: 999,
+    __localId: makeLocalId(),
   };
 }
 
 function emptyBrand() {
   return {
     key: '',
-    labels: { lv: '', ru: '' },
+    labels: emptyLocalized(),
     logo: '',
     image: '',
     order: 999,
@@ -28,8 +50,25 @@ function emptyBrand() {
     },
     page: {
       variant: 'brand',
+      h1: emptyLocalized(),
+      lead: emptyLocalized(),
+      bodyHtml: emptyLocalized(),
+      metaTitle: emptyLocalized(),
+      metaDescription: emptyLocalized(),
+      modelGrid: {
+        heading: emptyLocalized(),
+        intro: emptyLocalized(),
+      },
+      sections: {
+        hasCustomGuide: false,
+        hasFaq: false,
+        hasProcess: false,
+        hasReviews: false,
+        hasWhy: false,
+      },
     },
     series: [],
+    __localId: makeLocalId(),
   };
 }
 
@@ -38,14 +77,15 @@ function emptyCategory() {
     slug: '',
     type: 'category',
     order: 999,
-    labels: { lv: '', ru: '' },
+    labels: emptyLocalized(),
     image: '',
-    h1: { lv: '', ru: '' },
-    lead: { lv: '', ru: '' },
-    bodyHtml: { lv: '', ru: '' },
-    metaTitle: { lv: '', ru: '' },
-    metaDescription: { lv: '', ru: '' },
+    h1: emptyLocalized(),
+    lead: emptyLocalized(),
+    bodyHtml: emptyLocalized(),
+    metaTitle: emptyLocalized(),
+    metaDescription: emptyLocalized(),
     brands: [],
+    __localId: makeLocalId(),
   };
 }
 
@@ -64,6 +104,10 @@ function normalizeSeries(series = {}) {
       typeof series.order === 'number' && Number.isFinite(series.order)
         ? series.order
         : 999,
+    __localId:
+      typeof series.__localId === 'string' && series.__localId
+        ? series.__localId
+        : makeLocalId(),
   };
 }
 
@@ -78,7 +122,8 @@ function normalizeBrand(brand = {}) {
         ? brand.order
         : 999,
     route: {
-      brandPath: typeof brand?.route?.brandPath === 'string' ? brand.route.brandPath : '',
+      brandPath:
+        typeof brand?.route?.brandPath === 'string' ? brand.route.brandPath : '',
       dedicatedHubPath:
         typeof brand?.route?.dedicatedHubPath === 'string'
           ? brand.route.dedicatedHubPath
@@ -88,8 +133,28 @@ function normalizeBrand(brand = {}) {
     page: {
       variant:
         typeof brand?.page?.variant === 'string' ? brand.page.variant : 'brand',
+      h1: normalizeLocalized(brand?.page?.h1),
+      lead: normalizeLocalized(brand?.page?.lead),
+      bodyHtml: normalizeLocalized(brand?.page?.bodyHtml),
+      metaTitle: normalizeLocalized(brand?.page?.metaTitle),
+      metaDescription: normalizeLocalized(brand?.page?.metaDescription),
+      modelGrid: {
+        heading: normalizeLocalized(brand?.page?.modelGrid?.heading),
+        intro: normalizeLocalized(brand?.page?.modelGrid?.intro),
+      },
+      sections: {
+        hasCustomGuide: Boolean(brand?.page?.sections?.hasCustomGuide),
+        hasFaq: Boolean(brand?.page?.sections?.hasFaq),
+        hasProcess: Boolean(brand?.page?.sections?.hasProcess),
+        hasReviews: Boolean(brand?.page?.sections?.hasReviews),
+        hasWhy: Boolean(brand?.page?.sections?.hasWhy),
+      },
     },
     series: Array.isArray(brand.series) ? brand.series.map(normalizeSeries) : [],
+    __localId:
+      typeof brand.__localId === 'string' && brand.__localId
+        ? brand.__localId
+        : makeLocalId(),
   };
 }
 
@@ -109,7 +174,98 @@ function normalizeCategory(category = {}) {
     metaTitle: normalizeLocalized(category.metaTitle),
     metaDescription: normalizeLocalized(category.metaDescription),
     brands: Array.isArray(category.brands) ? category.brands.map(normalizeBrand) : [],
+    __localId:
+      typeof category.__localId === 'string' && category.__localId
+        ? category.__localId
+        : makeLocalId(),
   };
+}
+
+function stripLocalIdsFromSeries(series = {}) {
+  return {
+    key: series.key,
+    labels: series.labels,
+    order: series.order,
+  };
+}
+
+function stripLocalIdsFromBrand(brand = {}) {
+  return {
+    key: brand.key,
+    labels: brand.labels,
+    logo: brand.logo,
+    image: brand.image,
+    order: brand.order,
+    route: {
+      brandPath: brand.route?.brandPath || '',
+      dedicatedHubPath: brand.route?.dedicatedHubPath || '',
+      preferDedicatedHub: Boolean(brand.route?.preferDedicatedHub),
+    },
+    page: {
+      variant: brand.page?.variant || 'brand',
+      h1: brand.page?.h1 || emptyLocalized(),
+      lead: brand.page?.lead || emptyLocalized(),
+      bodyHtml: brand.page?.bodyHtml || emptyLocalized(),
+      metaTitle: brand.page?.metaTitle || emptyLocalized(),
+      metaDescription: brand.page?.metaDescription || emptyLocalized(),
+      modelGrid: {
+        heading: brand.page?.modelGrid?.heading || emptyLocalized(),
+        intro: brand.page?.modelGrid?.intro || emptyLocalized(),
+      },
+      sections: {
+        hasCustomGuide: Boolean(brand.page?.sections?.hasCustomGuide),
+        hasFaq: Boolean(brand.page?.sections?.hasFaq),
+        hasProcess: Boolean(brand.page?.sections?.hasProcess),
+        hasReviews: Boolean(brand.page?.sections?.hasReviews),
+        hasWhy: Boolean(brand.page?.sections?.hasWhy),
+      },
+    },
+    series: Array.isArray(brand.series)
+      ? brand.series.map(stripLocalIdsFromSeries)
+      : [],
+  };
+}
+
+function stripLocalIdsFromCategory(category = {}) {
+  return {
+    slug: category.slug,
+    type: category.type || 'category',
+    order: category.order,
+    labels: category.labels,
+    image: category.image,
+    h1: category.h1,
+    lead: category.lead,
+    bodyHtml: category.bodyHtml,
+    metaTitle: category.metaTitle,
+    metaDescription: category.metaDescription,
+    brands: Array.isArray(category.brands)
+      ? category.brands.map(stripLocalIdsFromBrand)
+      : [],
+  };
+}
+
+function Field({ label, children }) {
+  return (
+    <label className={s.field}>
+      <span className={s.fieldLabel}>{label}</span>
+      {children}
+    </label>
+  );
+}
+
+function SortableItem({ id, children }) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      {children({ attributes, listeners })}
+    </div>
+  );
 }
 
 export default function CategoriesScreen() {
@@ -120,6 +276,10 @@ export default function CategoriesScreen() {
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
   const [openCategory, setOpenCategory] = useState(null);
+  const [openBrands, setOpenBrands] = useState({});
+  const [openSeries, setOpenSeries] = useState({});
+  const [openCategoryContents, setOpenCategoryContents] = useState({});
+  const [openBrandContents, setOpenBrandContents] = useState({});
 
   useEffect(() => {
     let cancelled = false;
@@ -152,7 +312,9 @@ export default function CategoriesScreen() {
   }, []);
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a, b) => a.order - b.order);
+    return items
+      .map((item, originalIdx) => ({ item, originalIdx }))
+      .sort((a, b) => a.item.order - b.item.order);
   }, [items]);
 
   function updateCategory(idx, patch) {
@@ -178,30 +340,28 @@ export default function CategoriesScreen() {
   }
 
   function addCategory() {
-    setItems((prev) => [...prev, emptyCategory()]);
-  }
+    const nextCategory = {
+      ...emptyCategory(),
+      order: items.length * 10,
+    };
 
-  function deleteCategory(idx) {
-    setItems((prev) => prev.filter((_, i) => i !== idx));
-  }
-
-  function moveCategory(idx, dir) {
-    setItems((prev) => {
-      const next = [...prev];
-      const target = idx + dir;
-      if (target < 0 || target >= next.length) return prev;
-      [next[idx], next[target]] = [next[target], next[idx]];
-      return next;
-    });
+    setItems((prev) => [...prev, nextCategory]);
+    setOpenCategory(nextCategory.__localId);
   }
 
   function addBrand(categoryIdx) {
     setItems((prev) => {
       const next = [...prev];
+      const newBrand = {
+        ...emptyBrand(),
+        order: next[categoryIdx].brands.length * 10,
+      };
+
       next[categoryIdx] = {
         ...next[categoryIdx],
-        brands: [...next[categoryIdx].brands, emptyBrand()],
+        brands: [...next[categoryIdx].brands, newBrand],
       };
+
       return next;
     });
   }
@@ -232,13 +392,79 @@ export default function CategoriesScreen() {
     });
   }
 
+  function updateBrandPageLocaleField(categoryIdx, brandIdx, field, locale, value) {
+    setItems((prev) => {
+      const next = [...prev];
+      const brands = [...next[categoryIdx].brands];
+      brands[brandIdx] = {
+        ...brands[brandIdx],
+        page: {
+          ...brands[brandIdx].page,
+          [field]: {
+            ...brands[brandIdx].page?.[field],
+            [locale]: value,
+          },
+        },
+      };
+      next[categoryIdx] = { ...next[categoryIdx], brands };
+      return next;
+    });
+  }
+
+  function updateBrandPageModelGridLocaleField(categoryIdx, brandIdx, field, locale, value) {
+    setItems((prev) => {
+      const next = [...prev];
+      const brands = [...next[categoryIdx].brands];
+      brands[brandIdx] = {
+        ...brands[brandIdx],
+        page: {
+          ...brands[brandIdx].page,
+          modelGrid: {
+            ...brands[brandIdx].page?.modelGrid,
+            [field]: {
+              ...brands[brandIdx].page?.modelGrid?.[field],
+              [locale]: value,
+            },
+          },
+        },
+      };
+      next[categoryIdx] = { ...next[categoryIdx], brands };
+      return next;
+    });
+  }
+
+  function updateBrandPageSectionFlag(categoryIdx, brandIdx, field, checked) {
+    setItems((prev) => {
+      const next = [...prev];
+      const brands = [...next[categoryIdx].brands];
+      brands[brandIdx] = {
+        ...brands[brandIdx],
+        page: {
+          ...brands[brandIdx].page,
+          sections: {
+            ...brands[brandIdx].page?.sections,
+            [field]: checked,
+          },
+        },
+      };
+      next[categoryIdx] = { ...next[categoryIdx], brands };
+      return next;
+    });
+  }
+
   function deleteBrand(categoryIdx, brandIdx) {
     setItems((prev) => {
       const next = [...prev];
+      const remainingBrands = next[categoryIdx].brands.filter((_, i) => i !== brandIdx);
+
       next[categoryIdx] = {
         ...next[categoryIdx],
-        brands: next[categoryIdx].brands.filter((_, i) => i !== brandIdx),
+        brands: remainingBrands.map((brand, i) => ({
+          ...brand,
+          order: i * 10,
+        })),
       };
+
       return next;
     });
   }
@@ -247,10 +473,16 @@ export default function CategoriesScreen() {
     setItems((prev) => {
       const next = [...prev];
       const brands = [...next[categoryIdx].brands];
+      const newSeries = {
+        ...emptySeries(),
+        order: brands[brandIdx].series.length * 10,
+      };
+
       brands[brandIdx] = {
         ...brands[brandIdx],
-        series: [...brands[brandIdx].series, emptySeries()],
+        series: [...brands[brandIdx].series, newSeries],
       };
+
       next[categoryIdx] = { ...next[categoryIdx], brands };
       return next;
     });
@@ -273,6 +505,7 @@ export default function CategoriesScreen() {
       const next = [...prev];
       const brands = [...next[categoryIdx].brands];
       const series = [...brands[brandIdx].series];
+
       series[seriesIdx] = {
         ...series[seriesIdx],
         labels: {
@@ -280,6 +513,7 @@ export default function CategoriesScreen() {
           [locale]: value,
         },
       };
+
       brands[brandIdx] = { ...brands[brandIdx], series };
       next[categoryIdx] = { ...next[categoryIdx], brands };
       return next;
@@ -290,11 +524,143 @@ export default function CategoriesScreen() {
     setItems((prev) => {
       const next = [...prev];
       const brands = [...next[categoryIdx].brands];
+      const remainingSeries = brands[brandIdx].series.filter((_, i) => i !== seriesIdx);
+
       brands[brandIdx] = {
         ...brands[brandIdx],
-        series: brands[brandIdx].series.filter((_, i) => i !== seriesIdx),
+        series: remainingSeries.map((series, i) => ({
+          ...series,
+          order: i * 10,
+        })),
       };
+
       next[categoryIdx] = { ...next[categoryIdx], brands };
+      return next;
+    });
+  }
+
+  function getCategoryToggleKey(item) {
+    return item.__localId;
+  }
+
+  function getBrandToggleKey(categoryItem, brand) {
+    return `${getCategoryToggleKey(categoryItem)}::brand::${brand.__localId}`;
+  }
+
+  function getSeriesToggleKey(categoryItem, brand, series) {
+    return `${getBrandToggleKey(categoryItem, brand)}::series::${series.__localId}`;
+  }
+
+  function getCategoryContentsKey(item) {
+    return `${getCategoryToggleKey(item)}::contents`;
+  }
+
+  function getBrandContentsKey(categoryItem, brand) {
+    return `${getBrandToggleKey(categoryItem, brand)}::contents`;
+  }
+
+  function getBrandDndId(categoryIdx, brand) {
+    return `cat-${categoryIdx}-brand-${brand.__localId}`;
+  }
+
+  function getSeriesDndId(categoryIdx, brandIdx, series) {
+    return `cat-${categoryIdx}-brand-${brandIdx}-series-${series.__localId}`;
+  }
+
+  function toggleBrand(key) {
+    setOpenBrands((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }
+
+  function toggleSeries(key) {
+    setOpenSeries((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }
+
+  function toggleCategoryContents(key) {
+    setOpenCategoryContents((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }
+
+  function toggleBrandContents(key) {
+    setOpenBrandContents((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }
+
+  function handleBrandDragEnd(categoryIdx, event) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    setItems((prev) => {
+      const next = [...prev];
+      const brands = [...next[categoryIdx].brands];
+
+      const oldIndex = brands.findIndex((brand) => {
+        return getBrandDndId(categoryIdx, brand) === active.id;
+      });
+
+      const newIndex = brands.findIndex((brand) => {
+        return getBrandDndId(categoryIdx, brand) === over.id;
+      });
+
+      if (oldIndex < 0 || newIndex < 0) return prev;
+
+      const reordered = arrayMove(brands, oldIndex, newIndex).map((brand, index) => ({
+        ...brand,
+        order: index * 10,
+      }));
+
+      next[categoryIdx] = {
+        ...next[categoryIdx],
+        brands: reordered,
+      };
+
+      return next;
+    });
+  }
+
+  function handleSeriesDragEnd(categoryIdx, brandIdx, event) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    setItems((prev) => {
+      const next = [...prev];
+      const brands = [...next[categoryIdx].brands];
+      const series = [...brands[brandIdx].series];
+
+      const oldIndex = series.findIndex((item) => {
+        return getSeriesDndId(categoryIdx, brandIdx, item) === active.id;
+      });
+
+      const newIndex = series.findIndex((item) => {
+        return getSeriesDndId(categoryIdx, brandIdx, item) === over.id;
+      });
+
+      if (oldIndex < 0 || newIndex < 0) return prev;
+
+      const reordered = arrayMove(series, oldIndex, newIndex).map((item, index) => ({
+        ...item,
+        order: index * 10,
+      }));
+
+      brands[brandIdx] = {
+        ...brands[brandIdx],
+        series: reordered,
+      };
+
+      next[categoryIdx] = {
+        ...next[categoryIdx],
+        brands,
+      };
+
       return next;
     });
   }
@@ -310,10 +676,12 @@ export default function CategoriesScreen() {
     setSaving((prev) => ({ ...prev, [item.slug || idx]: true }));
 
     try {
+      const payload = stripLocalIdsFromCategory(item);
+
       const res = await fetch('/api/admin/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ item }),
+        body: JSON.stringify({ item: payload }),
       });
 
       const json = await res.json().catch(() => null);
@@ -365,15 +733,21 @@ export default function CategoriesScreen() {
         <div className={s.empty}>Loading…</div>
       ) : (
         <div className={s.groups}>
-          {sortedItems.map((item, idx) => {
-            const isOpen = openCategory === item.slug || openCategory === idx;
-            const saveKey = item.slug || idx;
+          {sortedItems.map(({ item, originalIdx }) => {
+            const categoryToggleKey = getCategoryToggleKey(item);
+            const categoryContentsKey = getCategoryContentsKey(item);
+            const isOpen = openCategory === categoryToggleKey;
+            const isCategoryContentsOpen = Boolean(openCategoryContents[categoryContentsKey]);
+            const saveKey = item.slug || originalIdx;
+            const brandItems = item.brands.map((brand) =>
+              getBrandDndId(originalIdx, brand)
+            );
 
             return (
-              <section key={item.slug || idx} className={s.group}>
+              <section key={categoryToggleKey} className={s.group}>
                 <button
                   type="button"
-                  onClick={() => setOpenCategory(isOpen ? null : item.slug || idx)}
+                  onClick={() => setOpenCategory(isOpen ? null : categoryToggleKey)}
                   className={s.modelToggle}
                 >
                   <span className={s.modelName}>
@@ -384,303 +758,672 @@ export default function CategoriesScreen() {
 
                 {isOpen && (
                   <div className={s.panel}>
-                    <div className={s.formGrid}>
-                      <input
-                        className={s.input}
-                        value={item.slug}
-                        onChange={(e) => updateCategory(idx, { slug: e.target.value })}
-                        placeholder="slug"
-                      />
-                      <input
-                        className={s.input}
-                        type="number"
-                        value={item.order}
-                        onChange={(e) =>
-                          updateCategory(idx, { order: Number(e.target.value || 999) })
-                        }
-                        placeholder="order"
-                      />
-                      <input
-                        className={s.input}
-                        value={item.image}
-                        onChange={(e) => updateCategory(idx, { image: e.target.value })}
-                        placeholder="image"
-                      />
-                    </div>
+                    <div className={s.reviewCard}>
+                      <button
+                        type="button"
+                        className={s.modelToggle}
+                        onClick={() => toggleCategoryContents(categoryContentsKey)}
+                      >
+                        <span className={s.modelName}>Contents</span>
+                        <span className={s.modelChevron}>
+                          {isCategoryContentsOpen ? '▾' : '▸'}
+                        </span>
+                      </button>
 
-                    <div className={s.formGrid}>
-                      <input
-                        className={s.input}
-                        value={item.labels[activeLocale]}
-                        onChange={(e) =>
-                          updateCategoryLocaleField(idx, 'labels', activeLocale, e.target.value)
-                        }
-                        placeholder={`label (${activeLocale})`}
-                      />
-                      <input
-                        className={s.input}
-                        value={item.h1[activeLocale]}
-                        onChange={(e) =>
-                          updateCategoryLocaleField(idx, 'h1', activeLocale, e.target.value)
-                        }
-                        placeholder={`h1 (${activeLocale})`}
-                      />
-                      <input
-                        className={s.input}
-                        value={item.lead[activeLocale]}
-                        onChange={(e) =>
-                          updateCategoryLocaleField(idx, 'lead', activeLocale, e.target.value)
-                        }
-                        placeholder={`lead (${activeLocale})`}
-                      />
-                    </div>
+                      {isCategoryContentsOpen && (
+                        <div className={s.panel}>
+                          <div className={s.formGrid}>
+                            <Field label="Slug">
+                              <input
+                                className={s.input}
+                                value={item.slug}
+                                onChange={(e) =>
+                                  updateCategory(originalIdx, { slug: e.target.value })
+                                }
+                                placeholder="slug"
+                              />
+                            </Field>
 
-                    <textarea
-                      className={s.textarea}
-                      rows={4}
-                      value={item.metaTitle[activeLocale]}
-                      onChange={(e) =>
-                        updateCategoryLocaleField(idx, 'metaTitle', activeLocale, e.target.value)
-                      }
-                      placeholder={`metaTitle (${activeLocale})`}
-                    />
-
-                    <textarea
-                      className={s.textarea}
-                      rows={4}
-                      value={item.metaDescription[activeLocale]}
-                      onChange={(e) =>
-                        updateCategoryLocaleField(
-                          idx,
-                          'metaDescription',
-                          activeLocale,
-                          e.target.value
-                        )
-                      }
-                      placeholder={`metaDescription (${activeLocale})`}
-                    />
-
-                    <textarea
-                      className={s.textarea}
-                      rows={6}
-                      value={item.bodyHtml[activeLocale]}
-                      onChange={(e) =>
-                        updateCategoryLocaleField(idx, 'bodyHtml', activeLocale, e.target.value)
-                      }
-                      placeholder={`bodyHtml (${activeLocale})`}
-                    />
-
-                    <div className={s.subsectionTitle}>Brands</div>
-
-                    {item.brands.map((brand, brandIdx) => (
-                      <div key={`${brand.key || brandIdx}`} className={s.reviewCard}>
-                        <div className={s.rowTop}>
-                          <div className={s.rowTitle}>
-                            {brand.key || 'New brand'}
+                            <Field label="Image">
+                              <input
+                                className={s.input}
+                                value={item.image}
+                                onChange={(e) =>
+                                  updateCategory(originalIdx, { image: e.target.value })
+                                }
+                                placeholder="image"
+                              />
+                            </Field>
                           </div>
 
-                          <div className={s.rowActions}>
-                            <button
-                              type="button"
-                              className={s.smallBtnDanger}
-                              onClick={() => deleteBrand(idx, brandIdx)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className={s.formGrid}>
-                          <input
-                            className={s.input}
-                            value={brand.key}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, { key: e.target.value })
-                            }
-                            placeholder="brand key"
-                          />
-                          <input
-                            className={s.input}
-                            type="number"
-                            value={brand.order}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, {
-                                order: Number(e.target.value || 999),
-                              })
-                            }
-                            placeholder="brand order"
-                          />
-                          <input
-                            className={s.input}
-                            value={brand.logo}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, { logo: e.target.value })
-                            }
-                            placeholder="logo"
-                          />
-                        </div>
-
-                        <div className={s.formGrid}>
-                          <input
-                            className={s.input}
-                            value={brand.image}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, { image: e.target.value })
-                            }
-                            placeholder="image"
-                          />
-                          <input
-                            className={s.input}
-                            value={brand.route.brandPath}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, {
-                                route: { ...brand.route, brandPath: e.target.value },
-                              })
-                            }
-                            placeholder="brandPath"
-                          />
-                          <input
-                            className={s.input}
-                            value={brand.route.dedicatedHubPath}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, {
-                                route: {
-                                  ...brand.route,
-                                  dedicatedHubPath: e.target.value,
-                                },
-                              })
-                            }
-                            placeholder="dedicatedHubPath"
-                          />
-                        </div>
-
-                        <div className={s.formGrid}>
-                          <input
-                            className={s.input}
-                            value={brand.labels[activeLocale]}
-                            onChange={(e) =>
-                              updateBrandLocaleField(
-                                idx,
-                                brandIdx,
-                                'labels',
-                                activeLocale,
-                                e.target.value
-                              )
-                            }
-                            placeholder={`brand label (${activeLocale})`}
-                          />
-                          <input
-                            className={s.input}
-                            value={brand.page.variant}
-                            onChange={(e) =>
-                              updateBrand(idx, brandIdx, {
-                                page: { ...brand.page, variant: e.target.value },
-                              })
-                            }
-                            placeholder="page.variant"
-                          />
-                          <label className={s.check}>
-                            <input
-                              type="checkbox"
-                              checked={brand.route.preferDedicatedHub}
-                              onChange={(e) =>
-                                updateBrand(idx, brandIdx, {
-                                  route: {
-                                    ...brand.route,
-                                    preferDedicatedHub: e.target.checked,
-                                  },
-                                })
-                              }
-                            />
-                            preferDedicatedHub
-                          </label>
-                        </div>
-
-                        <div className={s.subsectionTitle}>Series</div>
-
-                        {brand.series.map((series, seriesIdx) => (
-                          <div key={`${series.key || seriesIdx}`} className={s.reviewCard}>
-                            <div className={s.rowTop}>
-                              <div className={s.rowTitle}>
-                                {series.key || 'New series'}
-                              </div>
-                              <div className={s.rowActions}>
-                                <button
-                                  type="button"
-                                  className={s.smallBtnDanger}
-                                  onClick={() => deleteSeries(idx, brandIdx, seriesIdx)}
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </div>
-
-                            <div className={s.formGrid}>
+                          <div className={s.formGrid}>
+                            <Field label={`Label (${activeLocale.toUpperCase()})`}>
                               <input
                                 className={s.input}
-                                value={series.key}
+                                value={item.labels[activeLocale]}
                                 onChange={(e) =>
-                                  updateSeries(idx, brandIdx, seriesIdx, {
-                                    key: e.target.value,
-                                  })
-                                }
-                                placeholder="series key"
-                              />
-                              <input
-                                className={s.input}
-                                type="number"
-                                value={series.order}
-                                onChange={(e) =>
-                                  updateSeries(idx, brandIdx, seriesIdx, {
-                                    order: Number(e.target.value || 999),
-                                  })
-                                }
-                                placeholder="series order"
-                              />
-                              <input
-                                className={s.input}
-                                value={series.labels[activeLocale]}
-                                onChange={(e) =>
-                                  updateSeriesLocaleField(
-                                    idx,
-                                    brandIdx,
-                                    seriesIdx,
+                                  updateCategoryLocaleField(
+                                    originalIdx,
+                                    'labels',
                                     activeLocale,
                                     e.target.value
                                   )
                                 }
-                                placeholder={`series label (${activeLocale})`}
+                                placeholder={`label (${activeLocale})`}
                               />
-                            </div>
-                          </div>
-                        ))}
+                            </Field>
 
-                        <div className={s.panelFooter}>
-                          <Button onClick={() => addSeries(idx, brandIdx)}>
-                            Add series
-                          </Button>
+                            <Field label={`H1 (${activeLocale.toUpperCase()})`}>
+                              <input
+                                className={s.input}
+                                value={item.h1[activeLocale]}
+                                onChange={(e) =>
+                                  updateCategoryLocaleField(
+                                    originalIdx,
+                                    'h1',
+                                    activeLocale,
+                                    e.target.value
+                                  )
+                                }
+                                placeholder={`h1 (${activeLocale})`}
+                              />
+                            </Field>
+
+                            <Field label={`Lead (${activeLocale.toUpperCase()})`}>
+                              <input
+                                className={s.input}
+                                value={item.lead[activeLocale]}
+                                onChange={(e) =>
+                                  updateCategoryLocaleField(
+                                    originalIdx,
+                                    'lead',
+                                    activeLocale,
+                                    e.target.value
+                                  )
+                                }
+                                placeholder={`lead (${activeLocale})`}
+                              />
+                            </Field>
+                          </div>
+
+                          <Field label={`Meta title (${activeLocale.toUpperCase()})`}>
+                            <textarea
+                              className={s.textarea}
+                              rows={4}
+                              value={item.metaTitle[activeLocale]}
+                              onChange={(e) =>
+                                updateCategoryLocaleField(
+                                  originalIdx,
+                                  'metaTitle',
+                                  activeLocale,
+                                  e.target.value
+                                )
+                              }
+                              placeholder={`metaTitle (${activeLocale})`}
+                            />
+                          </Field>
+
+                          <Field label={`Meta description (${activeLocale.toUpperCase()})`}>
+                            <textarea
+                              className={s.textarea}
+                              rows={4}
+                              value={item.metaDescription[activeLocale]}
+                              onChange={(e) =>
+                                updateCategoryLocaleField(
+                                  originalIdx,
+                                  'metaDescription',
+                                  activeLocale,
+                                  e.target.value
+                                )
+                              }
+                              placeholder={`metaDescription (${activeLocale})`}
+                            />
+                          </Field>
+
+                          <Field label={`Body HTML (${activeLocale.toUpperCase()})`}>
+                            <textarea
+                              className={s.textarea}
+                              rows={6}
+                              value={item.bodyHtml[activeLocale]}
+                              onChange={(e) =>
+                                updateCategoryLocaleField(
+                                  originalIdx,
+                                  'bodyHtml',
+                                  activeLocale,
+                                  e.target.value
+                                )
+                              }
+                              placeholder={`bodyHtml (${activeLocale})`}
+                            />
+                          </Field>
                         </div>
-                      </div>
-                    ))}
+                      )}
+                    </div>
+
+                    <div className={s.subsectionTitle}>Brands</div>
+
+                    <DndContext
+                      collisionDetection={closestCenter}
+                      onDragEnd={(event) => handleBrandDragEnd(originalIdx, event)}
+                    >
+                      <SortableContext items={brandItems} strategy={verticalListSortingStrategy}>
+                        {item.brands.map((brand, brandIdx) => {
+                          const brandToggleKey = getBrandToggleKey(item, brand);
+                          const brandContentsKey = getBrandContentsKey(item, brand);
+                          const brandDndId = getBrandDndId(originalIdx, brand);
+                          const isBrandOpen = Boolean(openBrands[brandToggleKey]);
+                          const isBrandContentsOpen = Boolean(openBrandContents[brandContentsKey]);
+
+                          return (
+                            <SortableItem key={brandDndId} id={brandDndId}>
+                              {({ attributes, listeners }) => (
+                                <div className={s.reviewCard}>
+                                  <div className={s.inlineToggleRow}>
+                                    <button
+                                      type="button"
+                                      className={s.inlineToggleBtn}
+                                      onClick={() => toggleBrand(brandToggleKey)}
+                                    >
+                                      <span className={s.modelName}>
+                                        {brand.key || 'New brand'} ({brand.labels[activeLocale] || '—'})
+                                      </span>
+                                      <span className={s.modelChevron}>
+                                        {isBrandOpen ? '▾' : '▸'}
+                                      </span>
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      className={s.dragHandle}
+                                      {...attributes}
+                                      {...listeners}
+                                      aria-label={`Drag brand ${brand.key || brandIdx + 1}`}
+                                      title="Drag to reorder"
+                                    >
+                                      ⋮⋮
+                                    </button>
+                                  </div>
+
+                                  {isBrandOpen && (
+                                    <div className={s.panel}>
+                                      <div className={s.reviewCard}>
+                                        <button
+                                          type="button"
+                                          className={s.modelToggle}
+                                          onClick={() => toggleBrandContents(brandContentsKey)}
+                                        >
+                                          <span className={s.modelName}>Contents</span>
+                                          <span className={s.modelChevron}>
+                                            {isBrandContentsOpen ? '▾' : '▸'}
+                                          </span>
+                                        </button>
+
+                                        {isBrandContentsOpen && (
+                                          <div className={s.panel}>
+                                            <div className={s.rowTop}>
+                                              <div className={s.rowTitle}>Brand contents</div>
+
+                                              <div className={s.rowActions}>
+                                                <button
+                                                  type="button"
+                                                  className={s.smallBtnDanger}
+                                                  onClick={() => deleteBrand(originalIdx, brandIdx)}
+                                                >
+                                                  Delete
+                                                </button>
+                                              </div>
+                                            </div>
+
+                                            <div className={s.formGrid}>
+                                              <Field label="Brand key">
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.key}
+                                                  onChange={(e) =>
+                                                    updateBrand(originalIdx, brandIdx, {
+                                                      key: e.target.value,
+                                                    })
+                                                  }
+                                                  placeholder="brand key"
+                                                />
+                                              </Field>
+
+                                              <Field label="Logo">
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.logo}
+                                                  onChange={(e) =>
+                                                    updateBrand(originalIdx, brandIdx, {
+                                                      logo: e.target.value,
+                                                    })
+                                                  }
+                                                  placeholder="logo"
+                                                />
+                                              </Field>
+
+                                              <Field label="Image">
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.image}
+                                                  onChange={(e) =>
+                                                    updateBrand(originalIdx, brandIdx, {
+                                                      image: e.target.value,
+                                                    })
+                                                  }
+                                                  placeholder="image"
+                                                />
+                                              </Field>
+                                            </div>
+
+                                            <div className={s.formGrid}>
+                                              <Field label={`Brand label (${activeLocale.toUpperCase()})`}>
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.labels[activeLocale]}
+                                                  onChange={(e) =>
+                                                    updateBrandLocaleField(
+                                                      originalIdx,
+                                                      brandIdx,
+                                                      'labels',
+                                                      activeLocale,
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  placeholder={`brand label (${activeLocale})`}
+                                                />
+                                              </Field>
+
+                                              <Field label="brandPath">
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.route.brandPath}
+                                                  onChange={(e) =>
+                                                    updateBrand(originalIdx, brandIdx, {
+                                                      route: {
+                                                        ...brand.route,
+                                                        brandPath: e.target.value,
+                                                      },
+                                                    })
+                                                  }
+                                                  placeholder="brandPath"
+                                                />
+                                              </Field>
+                                            </div>
+
+                                            <div className={s.formGrid}>
+                                              <Field label={`Page H1 (${activeLocale.toUpperCase()})`}>
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.page.h1[activeLocale]}
+                                                  onChange={(e) =>
+                                                    updateBrandPageLocaleField(
+                                                      originalIdx,
+                                                      brandIdx,
+                                                      'h1',
+                                                      activeLocale,
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  placeholder={`page.h1 (${activeLocale})`}
+                                                />
+                                              </Field>
+
+                                              <Field label={`Page lead (${activeLocale.toUpperCase()})`}>
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.page.lead[activeLocale]}
+                                                  onChange={(e) =>
+                                                    updateBrandPageLocaleField(
+                                                      originalIdx,
+                                                      brandIdx,
+                                                      'lead',
+                                                      activeLocale,
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  placeholder={`page.lead (${activeLocale})`}
+                                                />
+                                              </Field>
+                                            </div>
+
+                                            <Field label={`Page meta title (${activeLocale.toUpperCase()})`}>
+                                              <textarea
+                                                className={s.textarea}
+                                                rows={4}
+                                                value={brand.page.metaTitle[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandPageLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'metaTitle',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`page.metaTitle (${activeLocale})`}
+                                              />
+                                            </Field>
+
+                                            <Field label={`Page meta description (${activeLocale.toUpperCase()})`}>
+                                              <textarea
+                                                className={s.textarea}
+                                                rows={4}
+                                                value={brand.page.metaDescription[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandPageLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'metaDescription',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`page.metaDescription (${activeLocale})`}
+                                              />
+                                            </Field>
+
+                                            <Field label={`Page body HTML (${activeLocale.toUpperCase()})`}>
+                                              <textarea
+                                                className={s.textarea}
+                                                rows={6}
+                                                value={brand.page.bodyHtml[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandPageLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'bodyHtml',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`page.bodyHtml (${activeLocale})`}
+                                              />
+                                            </Field>
+
+                                            <div className={s.formGrid}>
+                                              <Field label={`Model grid heading (${activeLocale.toUpperCase()})`}>
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.page.modelGrid.heading[activeLocale]}
+                                                  onChange={(e) =>
+                                                    updateBrandPageModelGridLocaleField(
+                                                      originalIdx,
+                                                      brandIdx,
+                                                      'heading',
+                                                      activeLocale,
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  placeholder={`modelGrid.heading (${activeLocale})`}
+                                                />
+                                              </Field>
+
+                                              <Field label={`Model grid intro (${activeLocale.toUpperCase()})`}>
+                                                <input
+                                                  className={s.input}
+                                                  value={brand.page.modelGrid.intro[activeLocale]}
+                                                  onChange={(e) =>
+                                                    updateBrandPageModelGridLocaleField(
+                                                      originalIdx,
+                                                      brandIdx,
+                                                      'intro',
+                                                      activeLocale,
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  placeholder={`modelGrid.intro (${activeLocale})`}
+                                                />
+                                              </Field>
+                                            </div>
+
+                                            <div className={s.formGrid}>
+                                              <Field label="Sections">
+                                                <label className={s.check}>
+                                                  <input
+                                                    type="checkbox"
+                                                    checked={brand.page.sections.hasCustomGuide}
+                                                    onChange={(e) =>
+                                                      updateBrandPageSectionFlag(
+                                                        originalIdx,
+                                                        brandIdx,
+                                                        'hasCustomGuide',
+                                                        e.target.checked
+                                                      )
+                                                    }
+                                                  />
+                                                  hasCustomGuide
+                                                </label>
+                                              </Field>
+
+                                              <Field label=" ">
+                                                <label className={s.check}>
+                                                  <input
+                                                    type="checkbox"
+                                                    checked={brand.page.sections.hasFaq}
+                                                    onChange={(e) =>
+                                                      updateBrandPageSectionFlag(
+                                                        originalIdx,
+                                                        brandIdx,
+                                                        'hasFaq',
+                                                        e.target.checked
+                                                      )
+                                                    }
+                                                  />
+                                                  hasFaq
+                                                </label>
+                                              </Field>
+
+                                              <Field label=" ">
+                                                <label className={s.check}>
+                                                  <input
+                                                    type="checkbox"
+                                                    checked={brand.page.sections.hasProcess}
+                                                    onChange={(e) =>
+                                                      updateBrandPageSectionFlag(
+                                                        originalIdx,
+                                                        brandIdx,
+                                                        'hasProcess',
+                                                        e.target.checked
+                                                      )
+                                                    }
+                                                  />
+                                                  hasProcess
+                                                </label>
+                                              </Field>
+
+                                              <Field label=" ">
+                                                <label className={s.check}>
+                                                  <input
+                                                    type="checkbox"
+                                                    checked={brand.page.sections.hasReviews}
+                                                    onChange={(e) =>
+                                                      updateBrandPageSectionFlag(
+                                                        originalIdx,
+                                                        brandIdx,
+                                                        'hasReviews',
+                                                        e.target.checked
+                                                      )
+                                                    }
+                                                  />
+                                                  hasReviews
+                                                </label>
+                                              </Field>
+
+                                              <Field label=" ">
+                                                <label className={s.check}>
+                                                  <input
+                                                    type="checkbox"
+                                                    checked={brand.page.sections.hasWhy}
+                                                    onChange={(e) =>
+                                                      updateBrandPageSectionFlag(
+                                                        originalIdx,
+                                                        brandIdx,
+                                                        'hasWhy',
+                                                        e.target.checked
+                                                      )
+                                                    }
+                                                  />
+                                                  hasWhy
+                                                </label>
+                                              </Field>
+                                            </div>
+                                          </div>
+                                        )}
+                                      </div>
+
+                                      <div className={s.subsectionTitle}>Series</div>
+
+                                      <DndContext
+                                        collisionDetection={closestCenter}
+                                        onDragEnd={(event) =>
+                                          handleSeriesDragEnd(originalIdx, brandIdx, event)
+                                        }
+                                      >
+                                        <SortableContext
+                                          items={brand.series.map((series) =>
+                                            getSeriesDndId(
+                                              originalIdx,
+                                              brandIdx,
+                                              series
+                                            )
+                                          )}
+                                          strategy={verticalListSortingStrategy}
+                                        >
+                                          {brand.series.map((series, seriesIdx) => {
+                                            const seriesToggleKey = getSeriesToggleKey(
+                                              item,
+                                              brand,
+                                              series
+                                            );
+                                            const seriesDndId = getSeriesDndId(
+                                              originalIdx,
+                                              brandIdx,
+                                              series
+                                            );
+                                            const isSeriesOpen = Boolean(openSeries[seriesToggleKey]);
+
+                                            return (
+                                              <SortableItem key={seriesDndId} id={seriesDndId}>
+                                                {({ attributes, listeners }) => (
+                                                  <div className={s.reviewCard}>
+                                                    <div className={s.inlineToggleRow}>
+                                                      <button
+                                                        type="button"
+                                                        className={s.inlineToggleBtn}
+                                                        onClick={() =>
+                                                          toggleSeries(seriesToggleKey)
+                                                        }
+                                                      >
+                                                        <span className={s.modelName}>
+                                                          {series.key || 'New series'} (
+                                                          {series.labels[activeLocale] || '—'})
+                                                        </span>
+                                                        <span className={s.modelChevron}>
+                                                          {isSeriesOpen ? '▾' : '▸'}
+                                                        </span>
+                                                      </button>
+
+                                                      <button
+                                                        type="button"
+                                                        className={s.dragHandle}
+                                                        {...attributes}
+                                                        {...listeners}
+                                                        aria-label={`Drag series ${series.key || seriesIdx + 1}`}
+                                                        title="Drag to reorder"
+                                                      >
+                                                        ⋮⋮
+                                                      </button>
+                                                    </div>
+
+                                                    {isSeriesOpen && (
+                                                      <div className={s.panel}>
+                                                        <div className={s.rowTop}>
+                                                          <div className={s.rowTitle}>
+                                                            Series details
+                                                          </div>
+                                                          <div className={s.rowActions}>
+                                                            <button
+                                                              type="button"
+                                                              className={s.smallBtnDanger}
+                                                              onClick={() =>
+                                                                deleteSeries(
+                                                                  originalIdx,
+                                                                  brandIdx,
+                                                                  seriesIdx
+                                                                )
+                                                              }
+                                                            >
+                                                              Delete
+                                                            </button>
+                                                          </div>
+                                                        </div>
+
+                                                        <div className={s.formGrid}>
+                                                          <Field label="Series key">
+                                                            <input
+                                                              className={s.input}
+                                                              value={series.key}
+                                                              onChange={(e) =>
+                                                                updateSeries(
+                                                                  originalIdx,
+                                                                  brandIdx,
+                                                                  seriesIdx,
+                                                                  { key: e.target.value }
+                                                                )
+                                                              }
+                                                              placeholder="series key"
+                                                            />
+                                                          </Field>
+
+                                                          <Field
+                                                            label={`Series label (${activeLocale.toUpperCase()})`}
+                                                          >
+                                                            <input
+                                                              className={s.input}
+                                                              value={series.labels[activeLocale]}
+                                                              onChange={(e) =>
+                                                                updateSeriesLocaleField(
+                                                                  originalIdx,
+                                                                  brandIdx,
+                                                                  seriesIdx,
+                                                                  activeLocale,
+                                                                  e.target.value
+                                                                )
+                                                              }
+                                                              placeholder={`series label (${activeLocale})`}
+                                                            />
+                                                          </Field>
+                                                        </div>
+                                                      </div>
+                                                    )}
+                                                  </div>
+                                                )}
+                                              </SortableItem>
+                                            );
+                                          })}
+                                        </SortableContext>
+                                      </DndContext>
+
+                                      <div className={s.panelFooter}>
+                                        <Button onClick={() => addSeries(originalIdx, brandIdx)}>
+                                          Add series
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </SortableItem>
+                          );
+                        })}
+                      </SortableContext>
+                    </DndContext>
 
                     <div className={s.panelFooter}>
-                      <Button onClick={() => addBrand(idx)}>Add brand</Button>
-                      <Button
-                        onClick={() => moveCategory(idx, -1)}
-                        disabled={idx === 0}
-                      >
-                        Up
-                      </Button>
-                      <Button
-                        onClick={() => moveCategory(idx, 1)}
-                        disabled={idx === items.length - 1}
-                      >
-                        Down
-                      </Button>
-                      <Button onClick={() => saveCategory(item, idx)}>
+                      <Button onClick={() => addBrand(originalIdx)}>Add brand</Button>
+                      <Button onClick={() => saveCategory(item, originalIdx)}>
                         {saving[saveKey] ? 'Saving…' : 'Save category'}
                       </Button>
-                      <Button onClick={() => deleteCategory(idx)}>Delete category</Button>
                     </div>
                   </div>
                 )}
