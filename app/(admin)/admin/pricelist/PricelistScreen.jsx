@@ -18,6 +18,8 @@ import Button from '@components/button/Button';
 
 import s from './PricelistScreen.module.scss';
 
+console.log('PRICELIST MODULE LOADED 2026-03-31 v3');
+
 const DEFAULT_CURRENCY = 'EUR';
 
 const BRAND_MENU = [
@@ -56,7 +58,7 @@ async function fetchServicePricingRows(modelId) {
     );
     const snap = await getDocs(q);
 
-    return snap.docs.map((d) => {
+    const rows = snap.docs.map((d) => {
       const data = d.data() || {};
       const hasNumericPrice =
         typeof data.price === 'number' && Number.isFinite(data.price);
@@ -68,9 +70,38 @@ async function fetchServicePricingRows(modelId) {
         order: 9999,
         priceInput: hasNumericPrice ? String(data.price) : '',
         isStartingFrom: hasNumericPrice && data.isStartingFrom === true,
-        hidden: !hasNumericPrice,
+        hidden: data.isHidden === true,
+        _debug: {
+          rawPrice: Object.prototype.hasOwnProperty.call(data, 'price')
+            ? data.price
+            : '__missing__',
+          rawIsHidden: Object.prototype.hasOwnProperty.call(data, 'isHidden')
+            ? data.isHidden
+            : '__missing__',
+          rawIsStartingFrom: Object.prototype.hasOwnProperty.call(
+            data,
+            'isStartingFrom'
+          )
+            ? data.isStartingFrom
+            : '__missing__',
+        },
       };
     });
+
+    console.log('[PricelistScreen] fetchServicePricingRows()', {
+      modelId,
+      count: rows.length,
+      rows: rows.map((r) => ({
+        docId: r.docId,
+        serviceId: r.serviceId,
+        hidden: r.hidden,
+        priceInput: r.priceInput,
+        isStartingFrom: r.isStartingFrom,
+        debug: r._debug,
+      })),
+    });
+
+    return rows;
   } catch (err) {
     console.error('fetchServicePricingRows failed:', err);
     throw err;
@@ -79,8 +110,6 @@ async function fetchServicePricingRows(modelId) {
 
 async function fetchServicesForCategory(categoryId) {
   try {
-    console.log('fetchServicesForCategory categoryId =', categoryId);
-
     const q = query(
       collection(db, 'services'),
       where('categoryId', '==', categoryId),
@@ -89,7 +118,7 @@ async function fetchServicesForCategory(categoryId) {
 
     const snap = await getDocs(q);
 
-    return snap.docs
+    const rows = snap.docs
       .map((d) => {
         const data = d.data() || {};
         return {
@@ -104,6 +133,14 @@ async function fetchServicesForCategory(categoryId) {
         }
         return String(a.label || a.id).localeCompare(String(b.label || b.id));
       });
+
+    console.log('[PricelistScreen] fetchServicesForCategory()', {
+      categoryId,
+      count: rows.length,
+      rows,
+    });
+
+    return rows;
   } catch (err) {
     console.error('fetchServicesForCategory failed:', err);
     throw err;
@@ -114,7 +151,7 @@ async function buildRowsForModel(modelSlug) {
   const model = getModelMeta(modelSlug);
   const categoryId = model?.category || model?.categoryKey || null;
 
-  console.log('buildRowsForModel', {
+  console.log('[PricelistScreen] buildRowsForModel() start', {
     modelSlug,
     model,
     categoryId,
@@ -126,6 +163,28 @@ async function buildRowsForModel(modelSlug) {
     fetchServicesForCategory(categoryId),
     fetchServicePricingRows(modelSlug),
   ]);
+
+  const duplicates = existingRows.reduce((acc, row) => {
+    acc[row.serviceId] = acc[row.serviceId] || [];
+    acc[row.serviceId].push({
+      docId: row.docId,
+      hidden: row.hidden,
+      priceInput: row.priceInput,
+      debug: row._debug,
+    });
+    return acc;
+  }, {});
+
+  const duplicateOnly = Object.fromEntries(
+    Object.entries(duplicates).filter(([, rows]) => rows.length > 1)
+  );
+
+  if (Object.keys(duplicateOnly).length > 0) {
+    console.warn('[PricelistScreen] duplicate servicePricing rows detected', {
+      modelSlug,
+      duplicates: duplicateOnly,
+    });
+  }
 
   const existingById = new Map(existingRows.map((r) => [r.serviceId, r]));
   const knownServiceIds = new Set(serviceDefs.map((s) => s.id));
@@ -140,7 +199,8 @@ async function buildRowsForModel(modelSlug) {
       order: svc.order,
       priceInput: existing?.priceInput ?? '',
       isStartingFrom: existing?.isStartingFrom === true,
-      hidden: existing ? existing.hidden === true : true,
+      hidden: existing?.hidden === true,
+      _debug: existing?._debug || null,
     };
   });
 
@@ -153,12 +213,37 @@ async function buildRowsForModel(modelSlug) {
     }))
     .sort((a, b) => String(a.serviceId).localeCompare(String(b.serviceId)));
 
-  return [...merged, ...extras];
+  const finalRows = [...merged, ...extras];
+
+  console.log('[PricelistScreen] buildRowsForModel() result', {
+    modelSlug,
+    merged: merged.map((r) => ({
+      docId: r.docId,
+      serviceId: r.serviceId,
+      hidden: r.hidden,
+      priceInput: r.priceInput,
+      isStartingFrom: r.isStartingFrom,
+      debug: r._debug,
+    })),
+    extras: extras.map((r) => ({
+      docId: r.docId,
+      serviceId: r.serviceId,
+      hidden: r.hidden,
+      priceInput: r.priceInput,
+      isStartingFrom: r.isStartingFrom,
+      debug: r._debug,
+    })),
+    finalCount: finalRows.length,
+  });
+
+  return finalRows;
 }
 
 export default function PricelistScreen({
   initialBrand = BRAND_MENU[0]?.brandSlug || 'apple',
 }) {
+  console.log('PRICELIST COMPONENT RENDERED 2026-03-31 v3');
+
   const [brandSlug, setBrandSlug] = useState(initialBrand);
   const [openSlug, setOpenSlug] = useState(null);
   const [loading, setLoading] = useState({});
@@ -186,6 +271,12 @@ export default function PricelistScreen({
         return (a.order ?? 9999) - (b.order ?? 9999);
       }
       return a.name.localeCompare(b.name);
+    });
+
+    console.log('[PricelistScreen] filteredDevices', {
+      brandSlug,
+      count: list.length,
+      list,
     });
 
     return list;
@@ -219,14 +310,26 @@ export default function PricelistScreen({
       return String(a.series).localeCompare(String(b.series));
     });
 
+    console.log('[PricelistScreen] grouped', {
+      brandSlug,
+      count: groups.length,
+      groups,
+    });
+
     return groups;
-  }, [filteredDevices]);
+  }, [filteredDevices, brandSlug]);
 
   async function toggleDevice(modelSlug) {
     setError('');
     setStatus('');
 
     const willOpen = openSlug !== modelSlug;
+
+    console.log('[PricelistScreen] toggleDevice()', {
+      modelSlug,
+      willOpen,
+      alreadyLoaded: !!rowsByModel[modelSlug],
+    });
 
     if (!willOpen) {
       setOpenSlug(null);
@@ -253,6 +356,14 @@ export default function PricelistScreen({
     setRowsByModel((prev) => {
       const list = prev[modelSlug] ? [...prev[modelSlug]] : [];
       list[idx] = { ...list[idx], ...patch };
+
+      console.log('[PricelistScreen] updateRow()', {
+        modelSlug,
+        idx,
+        patch,
+        nextRow: list[idx],
+      });
+
       return { ...prev, [modelSlug]: list };
     });
   }
@@ -265,6 +376,18 @@ export default function PricelistScreen({
     const model = getModelMeta(modelSlug);
     const categoryId = model?.category || model?.categoryKey || '';
 
+    console.log('[PricelistScreen] saveModel() start', {
+      modelSlug,
+      categoryId,
+      rows: rows.map((r) => ({
+        docId: r.docId,
+        serviceId: r.serviceId,
+        hidden: r.hidden,
+        priceInput: r.priceInput,
+        isStartingFrom: r.isStartingFrom,
+      })),
+    });
+
     if (!categoryId) {
       setError(`"${modelSlug}": missing category.`);
       return;
@@ -276,9 +399,9 @@ export default function PricelistScreen({
         return;
       }
 
-      if (!r.hidden) {
-        const parsed = parseNumericPrice(r.priceInput);
-        if (parsed === null) {
+      if (r.hidden !== true) {
+        const raw = String(r.priceInput ?? '').trim();
+        if (raw && parseNumericPrice(raw) === null) {
           setError(
             `"${modelSlug}" / "${r.serviceId}": price must be numeric, for example 89 or 89.99`
           );
@@ -296,16 +419,27 @@ export default function PricelistScreen({
         const chunk = rows.slice(i, i + CHUNK);
         const batch = writeBatch(db);
 
+        console.log('[PricelistScreen] saveModel() chunk', {
+          modelSlug,
+          chunkIndex: i / CHUNK + 1,
+          chunkRows: chunk.map((r) => ({
+            docId: r.docId,
+            serviceId: r.serviceId,
+            hidden: r.hidden,
+            priceInput: r.priceInput,
+            isStartingFrom: r.isStartingFrom,
+          })),
+        });
+
         for (const r of chunk) {
           const serviceId = r.serviceId.trim();
           const nextDocId = `${modelSlug}__${serviceId}`;
           const prevDocId = r.docId?.trim() || '';
+          const numericPrice = parseNumericPrice(r.priceInput);
 
           if (prevDocId && prevDocId !== nextDocId) {
             batch.delete(doc(db, 'servicePricing', prevDocId));
           }
-
-          const numericPrice = r.hidden ? null : parseNumericPrice(r.priceInput);
 
           batch.set(
             doc(db, 'servicePricing', nextDocId),
@@ -314,7 +448,11 @@ export default function PricelistScreen({
               serviceId,
               categoryId,
               price: numericPrice,
-              isStartingFrom: numericPrice !== null && r.isStartingFrom === true,
+              isHidden: r.hidden === true,
+              isStartingFrom:
+                r.hidden === true
+                  ? false
+                  : numericPrice !== null && r.isStartingFrom === true,
               currency: DEFAULT_CURRENCY,
               isActive: true,
               updatedAt: serverTimestamp(),
@@ -428,8 +566,8 @@ export default function PricelistScreen({
 
                               <input
                                 className={s.input}
-                                value={r.hidden ? '' : String(r.priceInput ?? '')}
-                                disabled={r.hidden}
+                                value={String(r.priceInput ?? '')}
+                                disabled={r.hidden === true}
                                 onChange={(e) =>
                                   updateRow(d.slug, idx, {
                                     priceInput: normalizePriceInput(e.target.value),
@@ -443,7 +581,7 @@ export default function PricelistScreen({
                                 <input
                                   type="checkbox"
                                   checked={r.hidden ? false : r.isStartingFrom === true}
-                                  disabled={r.hidden}
+                                  disabled={r.hidden === true}
                                   onChange={(e) =>
                                     updateRow(d.slug, idx, {
                                       isStartingFrom: e.target.checked,
@@ -457,25 +595,17 @@ export default function PricelistScreen({
                                 <input
                                   type="checkbox"
                                   checked={r.hidden === true}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      updateRow(d.slug, idx, {
-                                        hidden: true,
-                                        priceInput: '',
-                                        isStartingFrom: false,
-                                      });
-                                    } else {
-                                      updateRow(d.slug, idx, {
-                                        hidden: false,
-                                        priceInput: '',
-                                      });
-                                    }
-                                  }}
+                                  onChange={(e) =>
+                                    updateRow(d.slug, idx, {
+                                      hidden: e.target.checked,
+                                      ...(e.target.checked
+                                        ? { isStartingFrom: false }
+                                        : {}),
+                                    })
+                                  }
                                 />
                                 hide
                               </label>
-
-                              
                             </div>
                           ))}
                         </div>

@@ -275,6 +275,9 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
     .map((service) => {
       const pricing = pricingByServiceId.get(service.id) || null;
 
+      if (!pricing) return null;
+      if (pricing.isHidden === true) return null;
+
       const title =
         pickLocalizedField(service.labels, locale) ||
         (typeof service.title === 'string' ? service.title.trim() : '') ||
@@ -302,8 +305,8 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         typeof pricing?.warrantyDaysOverride === 'number'
           ? pricing.warrantyDaysOverride
           : typeof service.defaultWarrantyDays === 'number'
-          ? service.defaultWarrantyDays
-          : null;
+            ? service.defaultWarrantyDays
+            : null;
 
       const price =
         typeof pricing?.price === 'number' && Number.isFinite(pricing.price)
@@ -321,10 +324,12 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
         warrantyDays,
         price,
         isStartingFrom,
+        isHidden: pricing?.isHidden === true,
         popular: false,
         href: service.slug ? `/${service.slug}` : undefined,
       };
     })
+    .filter(Boolean)
     .sort((a, b) => {
       if ((a.order ?? 9999) !== (b.order ?? 9999)) {
         return (a.order ?? 9999) - (b.order ?? 9999);
@@ -360,23 +365,28 @@ export async function generateMetadataImpl({ params, locale = 'lv' }) {
   const strings = getPageStrings(locale);
 
   const brandLabel =
-    d?.brandName ||
+    pickLocalizedField(d?.brandName, locale) ||
     pickLocalizedField(d?.brandLabel, locale) ||
     d?.brandKey ||
     brandSlug.toUpperCase();
 
+  const modelName =
+    pickLocalizedField(d?.name, locale) ||
+    d?.name ||
+    slug;
+
   const title =
-    d?.metaTitle ||
+    pickLocalizedField(d?.metaTitle, locale) ||
     (d
       ? locale === 'ru'
-        ? `Ремонт ${d.name} в Риге | iLab`
-        : `${d.name} remonts Rīgā | iLab`
+        ? `Ремонт ${modelName} в Риге | iLab`
+        : `${modelName} remonts Rīgā | iLab`
       : strings.metaFallbackTitle(brandLabel));
 
   const description =
-    d?.metaDescription ||
+    pickLocalizedField(d?.metaDescription, locale) ||
     (d
-      ? strings.metaFallbackDescriptionModel(d.name)
+      ? strings.metaFallbackDescriptionModel(modelName)
       : strings.metaFallbackDescriptionCategory);
 
   return {
@@ -397,12 +407,20 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
+  const modelName =
+    pickLocalizedField(d.name, locale) ||
+    d.name ||
+    slug;
+
+  const localizedBodyHtml =
+    pickLocalizedField(d.bodyHtml, locale) || null;
+
   const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
   const modelServices = strings.services(strings.canonicalCategoryPath);
   const { faqItems: finalFaqItems, faqLd } = buildFaqForModel();
 
   const brandLabel =
-    d.brandName ||
+    pickLocalizedField(d.brandName, locale) ||
     pickLocalizedField(d.brandLabel, locale) ||
     d.brandKey ||
     brandSlug.toUpperCase();
@@ -418,7 +436,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
       url: abs(`${strings.canonicalCategoryPath}/${brandSlug}`),
     },
     {
-      name: strings.modelCrumb(d.name),
+      name: strings.modelCrumb(modelName),
       url: abs(modelPath),
     },
   ]);
@@ -441,7 +459,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${d.name} — ${item.title}`,
+        name: `${modelName} — ${item.title}`,
         serviceType: item.title,
         provider,
       },
@@ -453,8 +471,8 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${ORIGIN}${modelPath}#service`,
-    serviceType: strings.serviceLdName(d.name),
-    name: strings.serviceLdName(d.name),
+    serviceType: strings.serviceLdName(modelName),
+    name: strings.serviceLdName(modelName),
     url: abs(modelPath),
     areaServed: { '@type': 'City', name: 'Rīga' },
     provider,
@@ -501,13 +519,13 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
 
       <DeviceHero
         image={d.image}
-        alt={`${d.name} ${strings.heroAltSuffix}`}
-        bodyHtml={d.bodyHtml || null}
+        alt={`${modelName} ${strings.heroAltSuffix}`}
+        bodyHtml={localizedBodyHtml}
       />
 
       <Services
         id="telefonu-services"
-        title={strings.servicesTitle(d.name)}
+        title={strings.servicesTitle(modelName)}
         items={modelServices}
       />
 

@@ -99,6 +99,7 @@ export default function BrandPickerPricelist({
       const items = Array.isArray(entry?.items) ? entry.items : [];
 
       const nextItems = items
+        .filter((item) => item?.isHidden !== true)
         .filter((item) => {
           if (!serviceIdsArr.length) return true;
           return serviceIdsArr.includes(item.id);
@@ -117,6 +118,7 @@ export default function BrandPickerPricelist({
               ? item.price
               : null,
           isStartingFrom: item.isStartingFrom === true,
+          isHidden: item.isHidden === true,
         }));
 
       out[modelId] = { items: nextItems };
