@@ -27,10 +27,6 @@ const DAY_MAP = {
 };
 
 export default function SiteLayout({ children }) {
-  // ------------------------------
-  // Site-wide JSON-LD payloads
-  // ------------------------------
-
   const orgLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',

@@ -3,8 +3,6 @@ import categories from '@/data/categories';
 import contentRegistry from '@/data/contentRegistry';
 import categoryContent from '@/data/categoryContent';
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
-import devices from '@/data/devices';
-import devicePricing from '@/data/devicePricing';
 
 import {
   normalizeRouteIdentity,
@@ -15,6 +13,8 @@ import {
   buildDeviceHref,
 } from '@/lib/routes/routeI18n';
 
+import { db } from '@/lib/firebaseAdmin';
+
 const norm = (s = '') => decodeURIComponent(String(s)).trim().toLowerCase();
 
 const titleize = (str) =>
@@ -24,6 +24,25 @@ const titleize = (str) =>
     .replace(/\s+/g, ' ')
     .trim()
     .replace(/\b\p{L}/gu, (c) => c.toUpperCase());
+
+function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
+  if (!value) return '';
+
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+
+  if (typeof value === 'object') {
+    if (typeof value[locale] === 'string' && value[locale].trim()) {
+      return value[locale].trim();
+    }
+    if (typeof value[fallback] === 'string' && value[fallback].trim()) {
+      return value[fallback].trim();
+    }
+  }
+
+  return '';
+}
 
 function getCategory(slug) {
   if (!slug || !categories) return null;
@@ -125,45 +144,108 @@ function getBrandHero(categorySlug, brandSlug) {
   return null;
 }
 
-function resolveDevice(categorySlug, secondSeg, thirdSeg, segmentsLength) {
+async function getDeviceByRoute({
+  categorySlug,
+  secondSeg,
+  thirdSeg,
+  segmentsLength,
+}) {
   // iPhone special route: /iphone-remonts/<device-slug>
   if (categorySlug === 'iphone-remonts' && secondSeg && segmentsLength === 2) {
-    return (
-      devices.find(
-        (device) =>
-          norm(device.slug) === secondSeg &&
-          device.category === 'telefonu-remonts' &&
-          (device.brandSlug === 'apple' || device.brand === 'Apple')
-      ) || null
-    );
+    const snap = await db
+      .collection('devices')
+      .where('slug', '==', secondSeg)
+      .where('categoryKey', '==', 'telefonu-remonts')
+      .where('brandKey', '==', 'apple')
+      .limit(1)
+      .get();
+
+    if (snap.empty) return null;
+
+    const doc = snap.docs[0];
+    return { id: doc.id, ...doc.data() };
   }
 
   // generic route: /<category>/<brand>/<device>
   if (categorySlug && secondSeg && thirdSeg && segmentsLength >= 3) {
-    return (
-      devices.find(
-        (device) =>
-          norm(device.slug) === thirdSeg &&
-          device.category === categorySlug &&
-          norm(device.brandSlug || '') === secondSeg
-      ) || null
-    );
+    const snap = await db
+      .collection('devices')
+      .where('slug', '==', thirdSeg)
+      .where('categoryKey', '==', categorySlug)
+      .where('brandKey', '==', secondSeg)
+      .limit(1)
+      .get();
+
+    if (!snap.empty) {
+      const doc = snap.docs[0];
+      return { id: doc.id, ...doc.data() };
+    }
+
+    const fallbackSnap = await db
+      .collection('devices')
+      .where('slug', '==', thirdSeg)
+      .where('categoryKey', '==', categorySlug)
+      .limit(10)
+      .get();
+
+    if (fallbackSnap.empty) return null;
+
+    const match =
+      fallbackSnap.docs.find((doc) => {
+        const data = doc.data() || {};
+        const candidates = [
+          data.brandKey,
+          data.brandSlug,
+          data.brandId,
+          data.brand,
+        ]
+          .filter(Boolean)
+          .map((v) => norm(v));
+
+        return candidates.includes(norm(secondSeg));
+      }) || null;
+
+    if (!match) return null;
+
+    return {
+      id: match.id,
+      ...match.data(),
+    };
   }
 
   return null;
 }
 
-function getDeviceHero(device) {
+async function getDeviceHero(device, locale = 'lv') {
   if (!device) return null;
 
-  const pricing = devicePricing?.[device.slug];
-  const hasPrices = pricing && Array.isArray(pricing.items) && pricing.items.length > 0;
+  const deviceName =
+    pickLocalizedField(device.name, locale) ||
+    device.name ||
+    '';
+
+  const h1 =
+    pickLocalizedField(device.h1, locale) ||
+    `${deviceName} remonts`;
+
+  const lead =
+    pickLocalizedField(device.lead, locale) ||
+    pickLocalizedField(device.metaDescription, locale) ||
+    (locale === 'ru'
+      ? `Ремонт ${deviceName}: экран, аккумулятор, зарядка, камера. Быстрая диагностика и гарантия.`
+      : `Remontējam ${deviceName}: displejs, baterija, uzlāde, kamera. Ātra diagnostika un garantija.`);
+
+  const pricingSnap = await db
+    .collection('servicePricing')
+    .where('modelId', '==', device.slug)
+    .limit(1)
+    .get();
+
+  const hasPrices = !pricingSnap.empty;
 
   return {
-    h1: `${device.name} remonts`,
-    lead:
-      device.metaDescription ||
-      `Remontējam ${device.name}: displejs, baterija, uzlāde, kamera. Ātra diagnostika un garantija.`,
+    h1,
+    lead,
     scrollCta: hasPrices ? { label: 'Skatīt cenas', targetId: 'cenas' } : null,
     image: device.image || null,
   };
@@ -188,7 +270,7 @@ function makeResult({
   };
 }
 
-function getBaseMeta(categorySlug, secondSeg, device = null) {
+function getBaseMeta(categorySlug, secondSeg, device = null, locale = 'lv') {
   const category = getCategory(categorySlug);
   const categoryLabel = categorySlug
     ? category?.name || category?.label || titleize(categorySlug)
@@ -198,7 +280,8 @@ function getBaseMeta(categorySlug, secondSeg, device = null) {
   const brandLabel =
     brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
 
-  const deviceLabel = device?.name || null;
+  const deviceLabel =
+    pickLocalizedField(device?.name, locale) || device?.name || null;
 
   return {
     category,
@@ -209,7 +292,7 @@ function getBaseMeta(categorySlug, secondSeg, device = null) {
   };
 }
 
-export function resolvePageHeader(pathname = '/') {
+export async function resolvePageHeader(pathname = '/') {
   const { locale, publicSegments, canonicalSegments, firstInfoCanonical } =
     normalizeRouteIdentity(pathname);
 
@@ -252,7 +335,12 @@ export function resolvePageHeader(pathname = '/') {
     }
   }
 
-  const { categoryLabel, brandLabel } = getBaseMeta(categorySlug, secondSeg);
+  const { categoryLabel, brandLabel } = getBaseMeta(
+    categorySlug,
+    secondSeg,
+    null,
+    locale
+  );
 
   // category page
   if (segmentsLength === 1) {
@@ -306,10 +394,20 @@ export function resolvePageHeader(pathname = '/') {
   }
 
   // device page
-  const device = resolveDevice(categorySlug, secondSeg, thirdSeg, segmentsLength);
+  const device = await getDeviceByRoute({
+    categorySlug,
+    secondSeg,
+    thirdSeg,
+    segmentsLength,
+  });
 
   if (device) {
-    const hero = getDeviceHero(device);
+    const hero = await getDeviceHero(device, locale);
+    const deviceName =
+      pickLocalizedField(device.name, locale) ||
+      device.name ||
+      '';
+
     const crumbs = [
       { label: 'Sākums', href: '/' },
       {
@@ -320,7 +418,7 @@ export function resolvePageHeader(pathname = '/') {
 
     if (categorySlug === 'iphone-remonts' && segmentsLength === 2) {
       crumbs.push({
-        label: device.name,
+        label: deviceName,
         href: buildDeviceHref(locale, categorySlug, secondSeg),
       });
     } else {
@@ -332,7 +430,7 @@ export function resolvePageHeader(pathname = '/') {
       }
 
       crumbs.push({
-        label: device.name,
+        label: deviceName,
         href: buildDeviceHref(locale, categorySlug, secondSeg, thirdSeg),
       });
     }
