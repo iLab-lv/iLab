@@ -1,9 +1,9 @@
 import PhoneScreenServicePage, {
   getPhoneScreenServiceMetadata,
-} from './PhoneScreenServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/ekrana-maina/PhoneScreenServicePage';
 
-export const metadata = getPhoneScreenServiceMetadata('lv');
+export const metadata = getPhoneScreenServiceMetadata('ru');
 
 export default function Page({ searchParams }) {
-  return <PhoneScreenServicePage locale="lv" searchParams={searchParams} />;
+  return <PhoneScreenServicePage locale="ru" searchParams={searchParams} />;
 }
