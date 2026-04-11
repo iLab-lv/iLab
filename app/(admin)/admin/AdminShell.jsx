@@ -119,9 +119,6 @@ export default function AdminShell({ children }) {
           <a href="/admin/faq" onClick={() => setOpen(false)}>
             faq
           </a>
-          <a href="/admin/components" onClick={() => setOpen(false)}>
-            Components
-          </a>
           <a href="/admin/settings" onClick={() => setOpen(false)}>
             Settings
           </a>
