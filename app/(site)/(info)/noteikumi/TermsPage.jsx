@@ -1,5 +1,6 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import s from '@styles/Catalog.module.scss';
 
@@ -10,6 +11,10 @@ function getPageStrings(locale = 'lv') {
     return {
       breadcrumbHome: 'Главная',
       breadcrumbPage: 'Условия использования и политика конфиденциальности',
+
+      headerTitle: 'Условия использования и политика конфиденциальности',
+      headerLead:
+        'На этой странице собраны условия использования сайта iLab, правила гарантии, обработка данных клиентов и политика cookies.',
 
       tosName: 'iLab — Условия использования и политика конфиденциальности',
       tosDescription:
@@ -70,6 +75,10 @@ function getPageStrings(locale = 'lv') {
   return {
     breadcrumbHome: 'Sākums',
     breadcrumbPage: 'Lietošanas noteikumi un privātuma politika',
+
+    headerTitle: 'Lietošanas noteikumi un privātuma politika',
+    headerLead:
+      'Šajā lapā apkopoti iLab vietnes lietošanas noteikumi, garantijas nosacījumi, klientu datu apstrāde un sīkdatņu politika.',
 
     tosName: 'iLab — Lietošanas noteikumi un privātuma politika',
     tosDescription:
@@ -171,6 +180,17 @@ export default function TermsPage({ locale = 'lv' }) {
   const breadcrumbsLd = buildBreadcrumbsLd(locale);
   const tosLd = buildTosLd(locale);
 
+  const headerCrumbs = [
+    {
+      label: strings.breadcrumbHome,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.breadcrumbPage,
+      href: strings.canonicalPath,
+    },
+  ];
+
   return (
     <>
       <Script
@@ -189,6 +209,12 @@ export default function TermsPage({ locale = 'lv' }) {
         {JSON.stringify(tosLd)}
       </Script>
 
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        crumbs={headerCrumbs}
+      />
+
       <section className={s.section} aria-labelledby="terms-h2">
         <div className={s.container}>
           <p className={s.paragraph}>
@@ -203,6 +229,10 @@ export default function TermsPage({ locale = 'lv' }) {
             <strong>{strings.emailLabel}</strong> info@ilab.lv | 
             <strong>{strings.phoneLabel}</strong> 23370088
           </p>
+
+          <h2 id="terms-h2" className={s.h2}>
+            {strings.breadcrumbPage}
+          </h2>
 
           <h3 className={s.h3}>{strings.section1}</h3>
           <p

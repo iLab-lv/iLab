@@ -1,7 +1,9 @@
 import Script from 'next/script';
-import Link from 'next/link';
 
-import devicesAll from '@/data/devices';
+import { getDevices } from '@/lib/content/devices';
+import { resolveCategoryPage } from '@/lib/content/resolvers/catalogPages';
+
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import BrandPreview from '@components/model-grid/BrandPreview';
 
 import Services from '@sections/services/Services';
@@ -11,9 +13,6 @@ import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Reviews from '@sections/reviews/Reviews';
-
-import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
-import contentRegistry from '@/data/contentRegistry';
 
 import {
   LuTabletSmartphone,
@@ -36,31 +35,95 @@ import s from '@styles/Catalog.module.scss';
 
 const CATEGORY_KEY = 'plansetdatoru-remonts';
 
-function topModelsForBrand(list, brandSlug) {
-  const filtered = list.filter(
-    (d) =>
-      d.category === CATEGORY_KEY &&
-      (d.brandSlug || '').toLowerCase() === brandSlug
-  );
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
 
-  const seen = new Set();
-  const uniq = [];
-  for (const d of filtered) {
-    const k = `${d.category}:${d.brandSlug}:${d.slug}`;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    uniq.push(d);
+  if (typeof value === 'string') return value || fallback;
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
   }
 
-  uniq.sort((a, b) => {
+  return fallback;
+}
+
+function normalizeRoutePath(path = '', locale = 'lv') {
+  if (!path) return '';
+
+  const clean = String(path).trim();
+
+  if (locale === 'lv') return clean;
+
+  if (clean === '/') return '/ru';
+  if (clean === '/ru' || clean.startsWith('/ru/')) return clean;
+
+  return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
+}
+
+function sortDevices(list = []) {
+  return [...list].sort((a, b) => {
+    const ay = typeof a.year === 'number' ? a.year : -Infinity;
+    const by = typeof b.year === 'number' ? b.year : -Infinity;
+    if (ay !== by) return by - ay;
+
     const ao = typeof a.order === 'number' ? a.order : 99999;
     const bo = typeof b.order === 'number' ? b.order : 99999;
     if (ao !== bo) return ao - bo;
-    if (a.year && b.year && a.year !== b.year) return b.year - a.year;
+
     return (a.name || '').localeCompare(b.name || '', 'lv');
   });
+}
 
-  return { items: uniq.slice(0, 4), total: uniq.length };
+function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
+  const categoryBrands = Array.isArray(category?.brands) ? category.brands : [];
+
+  const devicesByBrand = new Map();
+
+  for (const d of devices) {
+    if (!d) continue;
+    if (d.type !== 'device') continue;
+    if (d.categoryKey !== CATEGORY_KEY) continue;
+    if (!d.brandKey || !d.slug || !d.name) continue;
+    if (d.isHidden === true) continue;
+
+    const brandKey = String(d.brandKey).trim().toLowerCase();
+    if (!brandKey) continue;
+
+    if (!devicesByBrand.has(brandKey)) {
+      devicesByBrand.set(brandKey, []);
+    }
+
+    devicesByBrand.get(brandKey).push(d);
+  }
+
+  return categoryBrands
+    .map((brand) => {
+      const brandKey = String(brand?.key || '').trim().toLowerCase();
+      if (!brandKey) return null;
+
+      const brandDevices = sortDevices(devicesByBrand.get(brandKey) || []);
+      if (!brandDevices.length) return null;
+
+      const href =
+        normalizeRoutePath(brand?.route?.brandPath || '', locale) ||
+        `${basePath}/${brandKey}`;
+
+      return {
+        slug: brandKey,
+        name: pickLocalized(brand?.labels, locale, brandKey),
+        href,
+        items: brandDevices.slice(0, 4),
+        total: brandDevices.length,
+        order: Number.isFinite(Number(brand?.order)) ? Number(brand.order) : 9999,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.order - b.order);
 }
 
 function getFaqItems(locale = 'lv') {
@@ -162,9 +225,31 @@ function getPageStrings(locale = 'lv') {
         },
       ],
       faqTitle: 'Часто задаваемые вопросы',
-      modelGridHeading: 'Выберите бренд планшета',
-      modelGridIntro:
-        'Откройте популярные бренды, чтобы перейти к странице конкретной модели.',
+      processTitle: 'Как проходит ремонт',
+      processSteps: [
+        {
+          title: 'Диагностика',
+          text: 'Быстро проверяем планшет и подтверждаем проблему.',
+        },
+        {
+          title: 'Цена и срок',
+          text: 'Согласовываем стоимость и срок выполнения до начала ремонта.',
+        },
+        {
+          title: 'Ремонт',
+          text: 'Сертифицированные мастера выполняют ремонт с использованием качественных деталей.',
+        },
+        {
+          title: 'Проверка',
+          text: 'После ремонта тестируем все важные функции и безопасность.',
+        },
+        {
+          title: 'Гарантия',
+          text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
+        },
+      ],
+      scrollCta: { label: 'Смотреть бренды', targetId: 'brand-list' },
+      fallbackTitle: 'Ремонт планшетов в Риге',
     };
   }
 
@@ -215,9 +300,31 @@ function getPageStrings(locale = 'lv') {
       },
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
-    modelGridHeading: 'Izvēlies planšetdatora zīmolu',
-    modelGridIntro:
-      'Atver populārākos zīmolus, lai pārietu uz konkrēta modeļa lapu.',
+    processTitle: 'Kā notiek remonts',
+    processSteps: [
+      {
+        title: 'Diagnostika',
+        text: 'Ātri pārbaudām planšetdatoru un apstiprinām problēmu.',
+      },
+      {
+        title: 'Cena un termiņš',
+        text: 'Saskaņojam izmaksas un izpildes laiku pirms jebkura remonta.',
+      },
+      {
+        title: 'Remonts',
+        text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
+      },
+      {
+        title: 'Pārbaude',
+        text: 'Pēc remonta testējam visu funkcionalitāti un drošību.',
+      },
+      {
+        title: 'Garantija',
+        text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+      },
+    ],
+    scrollCta: { label: 'Skatīt zīmolus', targetId: 'brand-list' },
+    fallbackTitle: 'Planšetdatoru remonts Rīgā',
   };
 }
 
@@ -328,7 +435,7 @@ function buildProcessHowToLd(locale = 'lv', basePath = '/plansetdatoru-remonts')
   };
 }
 
-function buildItemListLd(brandBlocks) {
+function buildItemListLd(brandBlocks, locale = 'lv') {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -336,40 +443,64 @@ function buildItemListLd(brandBlocks) {
       '@type': 'ListItem',
       position: i + 1,
       url: abs(b.href),
-      name: `${b.name} planšetdatoru remonts`,
+      name:
+        locale === 'ru'
+          ? `${b.name} ремонт планшетов`
+          : `${b.name} planšetdatoru remonts`,
     })),
   };
 }
 
-export default function TabletRepairPage({ locale = 'lv' }) {
+export default async function TabletRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
-  const basePath = buildCategoryHref(locale, CATEGORY_KEY);
   const faqItems = getFaqItems(locale);
 
-  const brands = listBrandsForCategory(BRAND_CATEGORY.TABLETS);
+  const [page, devices] = await Promise.all([
+    resolveCategoryPage(CATEGORY_KEY, locale),
+    getDevices(),
+  ]);
 
-  const brandBlocks = brands
-    .map(({ slug, name }) => {
-      const { items, total } = topModelsForBrand(devicesAll, slug);
-      return {
-        slug,
-        name,
-        href: `${basePath}/${slug}`,
-        items,
-        total,
-      };
-    })
-    .filter((b) => b.total > 0);
+  if (!page) return null;
 
-  const itemListLd = buildItemListLd(brandBlocks);
+  const basePath = page.route?.publicPath || buildCategoryHref(locale, CATEGORY_KEY);
 
-  const hero = contentRegistry.categories[CATEGORY_KEY]?.hero || {};
+  const brandBlocks = buildBrandBlocks({
+    category: page.source?.category,
+    devices,
+    locale,
+    basePath,
+  });
+
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || (locale === 'ru' ? 'Главная' : 'Sākums'),
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: basePath,
+    },
+  ];
+
   const heroHtml =
-    hero.bodyHtml || (hero.lead ? `<p>${hero.lead}</p>` : null);
+    page.source?.category?.bodyHtml
+      ? pickLocalized(page.source.category.bodyHtml, locale, '')
+      : null;
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: strings.breadcrumbName, url: abs(basePath) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(basePath) },
   ]);
 
   const serviceLd = {
@@ -384,46 +515,34 @@ export default function TabletRepairPage({ locale = 'lv' }) {
     description: strings.serviceDescription,
   };
 
+  const itemListLd = buildItemListLd(brandBlocks, locale);
   const faqLd = buildFaqLd(faqItems, basePath);
   const processHowToLd = buildProcessHowToLd(locale, basePath);
 
   return (
     <>
-      <Script
-        id="breadcrumbs-jsonld-tablets"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="breadcrumbs-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script
-        id="service-jsonld-tablets"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="service-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script
-        id="itemlist-jsonld-tablets"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="itemlist-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(itemListLd)}
       </Script>
-      <Script
-        id="faq-jsonld-tablets"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="faq-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
-      <Script
-        id="process-jsonld-tablets"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="process-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(processHowToLd)}
       </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={strings.scrollCta}
+        crumbs={breadcrumbs}
+      />
 
       <DeviceHero
         image="/images/categories/plansetdatoru_remonts.webp"
@@ -476,88 +595,50 @@ export default function TabletRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      <Reviews locale={locale} />
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       <div id="process-h2" className={s.anchorTarget} />
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process"
-            title={locale === 'ru' ? 'Как проходит ремонт' : 'Kā notiek remonts'}
-            steps={
-              locale === 'ru'
-                ? [
-                    {
-                      title: 'Диагностика',
-                      text: 'Быстро проверяем планшет и подтверждаем проблему.',
-                    },
-                    {
-                      title: 'Цена и срок',
-                      text: 'Согласовываем стоимость и срок выполнения до начала ремонта.',
-                    },
-                    {
-                      title: 'Ремонт',
-                      text: 'Сертифицированные мастера выполняют ремонт с использованием качественных деталей.',
-                    },
-                    {
-                      title: 'Проверка',
-                      text: 'После ремонта тестируем все важные функции и безопасность.',
-                    },
-                    {
-                      title: 'Гарантия',
-                      text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
-                    },
-                  ]
-                : [
-                    {
-                      title: 'Diagnostika',
-                      text: 'Ātri pārbaudām planšetdatoru un apstiprinām problēmu.',
-                    },
-                    {
-                      title: 'Cena un termiņš',
-                      text: 'Saskaņojam izmaksas un izpildes laiku pirms jebkura remonta.',
-                    },
-                    {
-                      title: 'Remonts',
-                      text: 'Sertificēti meistari veic remontu, izmantojot kvalitatīvas detaļas.',
-                    },
-                    {
-                      title: 'Pārbaude',
-                      text: 'Pēc remonta testējam visu funkcionalitāti un drošību.',
-                    },
-                    {
-                      title: 'Garantija',
-                      text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
-                    },
-                  ]
-            }
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasProcess && (
+        <section className={s.section} aria-labelledby="process-h2">
+          <div className={s.container}>
+            <Process
+              id="process"
+              title={strings.processTitle}
+              steps={strings.processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={s.section}>
-        <Why locale={locale} />
-      </section>
+      {page.sections?.hasWhy && (
+        <section className={s.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={s.section} aria-labelledby="faq-h2">
-        <div className={s.container}>
-          <Faq
-            id="tablets-faq"
-            title={strings.faqTitle}
-            items={faqItems}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasFaq && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <Faq
+              id="tablets-faq"
+              title={strings.faqTitle}
+              items={faqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={s.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {page.sections?.hasConvertBand && (
+        <section className={s.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }

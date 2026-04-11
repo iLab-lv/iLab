@@ -1,6 +1,7 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -29,6 +30,8 @@ import {
 } from '@/lib/seo/jsonldHelpers';
 
 import { db } from '@/lib/firebaseAdmin';
+
+import s from '@/app/(site)/(catalog)/telefonu-remonts/[brand]/[device]/Device.module.scss';
 
 export const revalidate = 0;
 
@@ -159,6 +162,10 @@ function getPageStrings(locale = 'lv') {
         'Ремонт телефонов: замена экрана, батареи, разъёма зарядки, камеры и устранение других неисправностей. Быстрая диагностика и гарантия в сервисе iLab в Риге.',
       serviceTypeSuffix: 'ремонт',
       howToName: 'Ремонт телефона',
+      defaultHeaderTitle: 'Ремонт телефона',
+      defaultHeaderLead:
+        'Ремонт телефонов в Риге — замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+      pricesCtaLabel: 'Смотреть цены',
       services: (categoryPath) => [
         {
           title: 'Замена экрана',
@@ -218,6 +225,10 @@ function getPageStrings(locale = 'lv') {
       'Telefonu remonts: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā Rīgā.',
     serviceTypeSuffix: 'remonts',
     howToName: 'Telefonu remonts',
+    defaultHeaderTitle: 'Telefonu remonts',
+    defaultHeaderLead:
+      'Telefonu remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    pricesCtaLabel: 'Skatīt cenas',
     services: (categoryPath) => [
       {
         title: 'Ekrāna maiņa',
@@ -407,17 +418,11 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
+
   const modelName =
     pickLocalizedField(d.name, locale) ||
     d.name ||
     slug;
-
-  const localizedBodyHtml =
-    pickLocalizedField(d.bodyHtml, locale) || null;
-
-  const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
-  const modelServices = strings.services(strings.canonicalCategoryPath);
-  const { faqItems: finalFaqItems, faqLd } = buildFaqForModel();
 
   const brandLabel =
     pickLocalizedField(d.brandName, locale) ||
@@ -425,18 +430,56 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
     d.brandKey ||
     brandSlug.toUpperCase();
 
+  const localizedBodyHtml =
+    pickLocalizedField(d.bodyHtml, locale) || null;
+
+  const headerTitle =
+    pickLocalizedField(d.h1, locale) ||
+    (modelName
+      ? `${modelName} ${strings.serviceTypeSuffix}`
+      : strings.defaultHeaderTitle);
+
+  const headerLead =
+    pickLocalizedField(d.lead, locale) ||
+    pickLocalizedField(d.metaDescription, locale) ||
+    strings.defaultHeaderLead;
+
+  const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
+  const modelServices = strings.services(strings.canonicalCategoryPath);
+  const { faqItems: finalFaqItems, faqLd } = buildFaqForModel();
+
   const modelPath = `${strings.canonicalCategoryPath}/${brandSlug}/${d.slug}`;
+  const brandPath = `${strings.canonicalCategoryPath}/${brandSlug}`;
   const provider = buildProvidersFromLocations();
+
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryCrumb,
+      href: strings.canonicalCategoryPath,
+    },
+    {
+      label: strings.brandCrumb(brandLabel),
+      href: brandPath,
+    },
+    {
+      label: headerTitle,
+      href: modelPath,
+    },
+  ];
 
   const breadcrumbsLd = buildBreadcrumbsLd([
     { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
     { name: strings.categoryCrumb, url: abs(strings.canonicalCategoryPath) },
     {
       name: strings.brandCrumb(brandLabel),
-      url: abs(`${strings.canonicalCategoryPath}/${brandSlug}`),
+      url: abs(brandPath),
     },
     {
-      name: strings.modelCrumb(modelName),
+      name: headerTitle,
       url: abs(modelPath),
     },
   ]);
@@ -481,6 +524,10 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
 
   const processHowToLd = buildStandardRepairHowToLd(strings.howToName);
 
+  const headerScrollCta = priceItems.length
+    ? { label: strings.pricesCtaLabel, targetId: 'cenas' }
+    : null;
+
   return (
     <>
       <Script
@@ -517,43 +564,62 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
         {JSON.stringify(processHowToLd)}
       </Script>
 
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={headerScrollCta}
+        crumbs={headerCrumbs}
+      />
+
       <DeviceHero
         image={d.image}
         alt={`${modelName} ${strings.heroAltSuffix}`}
         bodyHtml={localizedBodyHtml}
       />
 
-      <Services
-        id="telefonu-services"
-        title={strings.servicesTitle(modelName)}
-        items={modelServices}
-      />
+      <section className={s.section}>
+        <Services
+          id="telefonu-services"
+          title={strings.servicesTitle(modelName)}
+          items={modelServices}
+        />
+      </section>
 
       {!!priceItems.length && (
-        <PriceList
-          id="cenas"
-          title={strings.priceTitle}
-          items={priceItems}
-          currency={currency}
-          headingLevel={2}
-          locale={locale}
-        />
+        <section className={s.section}>
+          <PriceList
+            id="cenas"
+            title={strings.priceTitle}
+            items={priceItems}
+            currency={currency}
+            headingLevel={2}
+            locale={locale}
+          />
+        </section>
       )}
 
-      <Why locale={locale} />
+      <section className={s.section}>
+        <Why locale={locale} />
+      </section>
 
-      <Process locale={locale} />
+      <section className={s.section}>
+        <Process locale={locale} />
+      </section>
 
       {!!finalFaqItems.length && (
-        <Faq
-          id="model-faq"
-          title={strings.faqTitle}
-          items={finalFaqItems}
-          locale={locale}
-        />
+        <section className={s.section}>
+          <Faq
+            id="model-faq"
+            title={strings.faqTitle}
+            items={finalFaqItems}
+            locale={locale}
+          />
+        </section>
       )}
 
-      <ConvertBand locale={locale} />
+      <section className={s.section}>
+        <ConvertBand locale={locale} />
+      </section>
     </>
   );
 }

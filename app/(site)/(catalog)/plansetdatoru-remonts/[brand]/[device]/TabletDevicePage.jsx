@@ -1,6 +1,7 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -27,6 +28,8 @@ import {
 } from '@/lib/seo/jsonldHelpers';
 import { buildDeviceHref, buildCategoryHref } from '@/lib/routes/routeI18n';
 import { db } from '@/lib/firebaseAdmin';
+
+import s from '@/app/(site)/(catalog)/plansetdatoru-remonts/[brand]/[device]/Device.module.scss';
 
 const DEFAULT_CURRENCY = 'EUR';
 const TABLET_CATEGORY_KEY = 'plansetdatoru-remonts';
@@ -151,6 +154,10 @@ function getPageStrings(locale = 'lv') {
           text: 'Выдаём планшет с гарантией 90 дней на детали и работу, а также даём рекомендации по дальнейшему использованию.',
         },
       ],
+      defaultHeaderTitle: 'Ремонт планшета',
+      defaultHeaderLead:
+        'Ремонт планшетов в Риге — замена экрана, батареи, разъёма зарядки и других компонентов с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+      pricesCtaLabel: 'Смотреть цены',
     };
   }
 
@@ -245,6 +252,10 @@ function getPageStrings(locale = 'lv') {
         text: 'Izsniedzam planšetdatoru ar 90 dienu garantiju uz detaļu un darbu, sniedzam ieteikumus turpmākai lietošanai.',
       },
     ],
+    defaultHeaderTitle: 'Planšetdatoru remonts',
+    defaultHeaderLead:
+      'Planšetdatoru remonts Rīgā — ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    pricesCtaLabel: 'Skatīt cenas',
   };
 }
 
@@ -471,6 +482,7 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
+
   const modelName =
     pickLocalizedField(d.name, locale) ||
     d.name ||
@@ -484,6 +496,16 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
 
   const localizedBodyHtml =
     pickLocalizedField(d.bodyHtml, locale) || null;
+
+  const headerTitle =
+    pickLocalizedField(d.h1, locale) ||
+    strings.modelRepairName(modelName) ||
+    strings.defaultHeaderTitle;
+
+  const headerLead =
+    pickLocalizedField(d.lead, locale) ||
+    pickLocalizedField(d.metaDescription, locale) ||
+    strings.defaultHeaderLead;
 
   const { items: priceItems, currency } = await buildPriceListItems(d.slug, locale);
   const { items: faqItems, ld: faqLd } = getFaqData(locale);
@@ -499,6 +521,25 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
     d.slug
   );
 
+  const headerCrumbs = [
+    {
+      label: strings.breadcrumbsHome,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryName,
+      href: categoryPath,
+    },
+    {
+      label: strings.brandCategoryName(brandLabel),
+      href: brandPath,
+    },
+    {
+      label: headerTitle,
+      href: modelPath,
+    },
+  ];
+
   const breadcrumbsLd = buildBreadcrumbsLd([
     {
       name: strings.breadcrumbsHome,
@@ -513,7 +554,7 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
       url: abs(brandPath),
     },
     {
-      name: strings.modelRepairName(modelName),
+      name: headerTitle,
       url: abs(modelPath),
     },
   ]);
@@ -565,36 +606,52 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
     step: strings.howToStepsLd,
   };
 
+  const headerScrollCta = priceItems.length
+    ? { label: strings.pricesCtaLabel, targetId: 'cenas' }
+    : null;
+
   return (
     <>
       <Script
-        id="breadcrumbs-jsonld-tablet"
+        id={`breadcrumbs-jsonld-tablet-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
         {JSON.stringify(breadcrumbsLd)}
       </Script>
+
       <Script
-        id="service-jsonld-tablet"
+        id={`service-jsonld-tablet-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
         {JSON.stringify(serviceLd)}
       </Script>
+
+      {faqLd && (
+        <Script
+          id={`faq-jsonld-tablet-${d.slug}`}
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(faqLd)}
+        </Script>
+      )}
+
       <Script
-        id="faq-jsonld-tablet"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(faqLd)}
-      </Script>
-      <Script
-        id="process-jsonld-tablet"
+        id={`process-jsonld-tablet-${d.slug}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
         {JSON.stringify(processHowToLd)}
       </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={headerScrollCta}
+        crumbs={headerCrumbs}
+      />
 
       <DeviceHero
         image={d.image}
@@ -602,45 +659,57 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
         bodyHtml={localizedBodyHtml}
       />
 
-      <Services
-        id="tablet-services"
-        title={strings.servicesTitle(modelName)}
-        items={strings.modelServices}
-        headingLevel={2}
-        variant="list"
-      />
+      <section className={s.section}>
+        <Services
+          id="tablet-services"
+          title={strings.servicesTitle(modelName)}
+          items={strings.modelServices}
+          headingLevel={2}
+          variant="list"
+        />
+      </section>
 
       {!!priceItems.length && (
-        <PriceList
-          id="cenas"
-          title={strings.priceTitle}
-          items={priceItems}
-          currency={currency}
-          headingLevel={2}
-          locale={locale}
-        />
+        <section className={s.section}>
+          <PriceList
+            id="cenas"
+            title={strings.priceTitle}
+            items={priceItems}
+            currency={currency}
+            headingLevel={2}
+            locale={locale}
+          />
+        </section>
       )}
 
-      <Why locale={locale} />
+      <section className={s.section}>
+        <Why locale={locale} />
+      </section>
 
-      <Process
-        id="process"
-        title={strings.processTitle}
-        steps={strings.processSteps}
-        headingLevel={2}
-        variant="cards"
-      />
+      <section className={s.section}>
+        <Process
+          id="process"
+          title={strings.processTitle}
+          steps={strings.processSteps}
+          headingLevel={2}
+          variant="cards"
+        />
+      </section>
 
       {!!faqItems.length && (
-        <Faq
-          id="tablet-model-faq"
-          title={strings.faqTitle}
-          items={faqItems}
-          locale={locale}
-        />
+        <section className={s.section}>
+          <Faq
+            id="tablet-model-faq"
+            title={strings.faqTitle}
+            items={faqItems}
+            locale={locale}
+          />
+        </section>
       )}
 
-      <ConvertBand locale={locale} />
+      <section className={s.section}>
+        <ConvertBand locale={locale} />
+      </section>
     </>
   );
 }

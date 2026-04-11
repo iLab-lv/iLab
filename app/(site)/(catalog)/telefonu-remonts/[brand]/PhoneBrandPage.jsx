@@ -1,12 +1,11 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import { getCategoryBySlug, getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
 import { getDevices } from '@/lib/content/devices';
-import {
-  getBrandByCategory,
-  getSeriesMetaByCategoryBrand,
-} from '@/lib/content/categories';
+import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
@@ -14,14 +13,9 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+import Reviews from '@sections/reviews/Reviews';
 
 import c from '@styles/Catalog.module.scss';
-
-import {
-  getBrandContent,
-  listBrandsForCategory,
-  BRAND_CATEGORY,
-} from '@/data/brandContent';
 
 import {
   LuSmartphone,
@@ -41,33 +35,41 @@ import {
 } from '@/lib/seo/jsonldHelpers';
 import { buildCategoryHref, buildServiceHref } from '@/lib/routes/routeI18n';
 
+const CATEGORY_KEY = 'telefonu-remonts';
+
 /* ---------------------------------------------
    Static params
 ---------------------------------------------- */
 export async function generatePhoneBrandStaticParams() {
-  const brands = listBrandsForCategory(BRAND_CATEGORY.PHONES) || [];
+  const category = await getCategoryBySlug(CATEGORY_KEY);
+  if (!category || !Array.isArray(category.brands)) return [];
 
-  return brands
-    .filter((b) => String(b.slug).toLowerCase() !== 'apple')
-    .map((b) => ({ brand: String(b.slug).toLowerCase() }));
+  return category.brands
+    .map((brand) => String(brand?.key || '').toLowerCase())
+    .filter((slug) => slug && slug !== 'apple')
+    .map((brand) => ({ brand }));
 }
 
 /* ---------------------------------------------
    Helpers
 ---------------------------------------------- */
-async function getPhoneBrandConfig(brandSlug) {
-  const brand = await getBrandByCategory('telefonu-remonts', brandSlug);
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
 
-  return {
-    brandKey: brand?.key || brandSlug,
-    heroImage: brand?.image || '/images/categories/telefonu_remonts.webp',
-    logo: brand?.logo || null,
-    tint: 'rgba(0,200,180,0.20)',
-    heroAlt:
-      brand?.labels?.lv ||
-      brand?.name ||
-      'Telefonu remonts',
-  };
+  if (typeof value === 'string') {
+    return value || fallback;
+  }
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
 }
 
 const PROCESS_STEPS_LV = [
@@ -169,41 +171,37 @@ function getPopularRepairs(locale = 'lv') {
         title: 'Замена дисплея (экрана)',
         text: 'трещины, тёмные пятна, сенсор не реагирует.',
         icon: LuSmartphone,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'ekrana-maina'),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'ekrana-maina'),
       },
       {
         title: 'Замена батареи',
         text: 'заряд быстро падает, выключается при 10–20%.',
         icon: LuBatteryCharging,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'baterijas-maina'),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'baterijas-maina'),
       },
       {
         title: 'Разъём зарядки',
         text: 'кабель не держится, зарядка медленная или нестабильная.',
         icon: LuPlugZap,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'uzlades-ligzdas-maina'),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'uzlades-ligzdas-maina'),
       },
       {
         title: 'Камера',
         text: 'мутные фото, проблемы с фокусировкой.',
         icon: LuCamera,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'kameras-remonts'),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'kameras-remonts'),
       },
       {
         title: 'Динамики/микрофон',
         text: 'тихий звук, хрипы, во время разговора плохо слышно.',
         icon: LuVolume2,
-        href: buildServiceHref(
-          locale,
-          'telefonu-remonts',
-          'skalruni-mikrofona-remonts'
-        ),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'skalruni-mikrofona-remonts'),
       },
       {
         title: 'Повреждения от влаги',
         text: 'диагностика и восстановление, если это возможно.',
         icon: LuDroplets,
-        href: buildServiceHref(locale, 'telefonu-remonts', 'udens-bojajumu-remonts'),
+        href: buildServiceHref(locale, CATEGORY_KEY, 'udens-bojajumu-remonts'),
       },
     ];
   }
@@ -213,103 +211,117 @@ function getPopularRepairs(locale = 'lv') {
       title: 'Displeja (ekrāna) maiņa',
       text: 'plaisas, tumši plankumi, nereaģē skāriens.',
       icon: LuSmartphone,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'ekrana-maina'),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'ekrana-maina'),
     },
     {
       title: 'Akumulatora maiņa',
       text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
       icon: LuBatteryCharging,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'baterijas-maina'),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'baterijas-maina'),
     },
     {
       title: 'Uzlādes ligzda',
       text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
       icon: LuPlugZap,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'uzlades-ligzdas-maina'),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'uzlades-ligzdas-maina'),
     },
     {
       title: 'Kamera',
       text: 'miglaini attēli, fokusēšanās problēmas.',
       icon: LuCamera,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'kameras-remonts'),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'kameras-remonts'),
     },
     {
       title: 'Skaļruņi/mikrofons',
       text: 'klusa skaņa, krakšķi, sarunas laikā nedzird.',
       icon: LuVolume2,
-      href: buildServiceHref(
-        locale,
-        'telefonu-remonts',
-        'skalruni-mikrofona-remonts'
-      ),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'skalruni-mikrofona-remonts'),
     },
     {
       title: 'Ūdens bojājumi',
       text: 'diagnostika un atjaunošana, ja tas iespējams.',
       icon: LuDroplets,
-      href: buildServiceHref(locale, 'telefonu-remonts', 'udens-bojajumu-remonts'),
+      href: buildServiceHref(locale, CATEGORY_KEY, 'udens-bojajumu-remonts'),
     },
   ];
 }
 
-function getPageStrings(bc, locale = 'lv') {
+function getPageStrings({ brandName, page, locale = 'lv' }) {
+  const selectorHeading =
+    page?.selector?.heading ||
+    (locale === 'ru'
+      ? `Выберите модель ${brandName}`
+      : `Izvēlies savu ${brandName} modeli`);
+
+  const selectorIntro =
+    page?.selector?.intro ||
+    (locale === 'ru'
+      ? 'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.'
+      : 'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.');
+
+  const heroHtml =
+    pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
+    (locale === 'ru'
+      ? `<p><strong>${brandName} ремонт телефонов в Риге</strong> — замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
+      : `<p><strong>${brandName} telefonu remonts Rīgā</strong> — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
+
   if (locale === 'ru') {
     return {
-      introTitle: `${bc.marketingName} ремонт телефонов — что мы делаем`,
+      introTitle: `${brandName} ремонт телефонов — что мы делаем`,
       introLead:
         'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели — откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>разъём зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>камера</strong> (мутные фото, ошибки фокусировки), <strong>динамики/микрофон</strong> (тихий звук, хрипы), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       servicesTitle: 'Популярный ремонт',
-      modelGridHeading: `Выберите модель ${bc.marketingName}`,
-      modelGridIntro:
-        'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.',
+      modelGridHeading: selectorHeading,
+      modelGridIntro: selectorIntro,
       modelsNote:
         'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели.',
       processTitle: 'Как проходит ремонт',
       faqTitle: 'Часто задаваемые вопросы',
-      heroHtml: bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`,
-      heroAlt: `${bc.marketingName} ремонт телефонов`,
+      heroHtml,
+      heroAlt: `${brandName} ремонт телефонов`,
       categoryName: 'Ремонт телефонов',
-      brandName: bc.marketingName,
-      serviceName: `${bc.marketingName} ремонт телефонов`,
-      serviceDescription: `${bc.marketingName} ремонт телефонов: дисплей, батарея, разъём зарядки, камера и другие работы. Быстрая диагностика, честные цены, гарантия.`,
+      brandName,
+      serviceName: `${brandName} ремонт телефонов`,
+      serviceDescription: `${brandName} ремонт телефонов: дисплей, батарея, разъём зарядки, камера и другие работы. Быстрая диагностика, честные цены, гарантия.`,
       homeCrumb: 'Главная',
+      scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
+      fallbackTitle: `${brandName} ремонт телефонов`,
     };
   }
 
   return {
-    introTitle: `${bc.marketingName} telefonu remonts — ko mēs darām`,
+    introTitle: `${brandName} telefonu remonts — ko mēs darām`,
     introLead:
       'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas <strong>remonta cenas</strong> un termiņus.',
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     servicesTitle: 'Populārākie remonti',
-    modelGridHeading:
-      bc.sections?.modelGrid?.heading ?? `Izvēlies savu ${bc.marketingName} modeli`,
-    modelGridIntro:
-      bc.sections?.modelGrid?.intro ??
-      'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.',
+    modelGridHeading: selectorHeading,
+    modelGridIntro: selectorIntro,
     modelsNote:
       'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu modeļu.',
     processTitle: 'Kā notiek remonts',
     faqTitle: 'Biežāk uzdotie jautājumi',
-    heroHtml: bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`,
-    heroAlt: `${bc.marketingName} telefonu remonts`,
+    heroHtml,
+    heroAlt: `${brandName} telefonu remonts`,
     categoryName: 'Telefonu remonts',
-    brandName: bc.marketingName,
-    serviceName: `${bc.marketingName} telefonu remonts`,
-    serviceDescription: `${bc.marketingName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    brandName,
+    serviceName: `${brandName} telefonu remonts`,
+    serviceDescription: `${brandName} tālruņu remonts: displejs, baterija, uzlādes ligzda, kamera un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
     homeCrumb: 'Sākums',
+    scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
+    fallbackTitle: `${brandName} telefonu remonts`,
   };
 }
 
-export function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
-  const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
+export async function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
+  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
 
-  if (!bc) {
+  if (!page) {
     return {
       title:
         locale === 'ru' ? 'Ремонт телефонов | iLab' : 'Telefonu remonts | iLab',
@@ -320,20 +332,27 @@ export function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
     };
   }
 
-  if (locale === 'ru') {
-    return {
-      title: `${bc.marketingName} ремонт телефонов в Риге | iLab`,
-      description: `${bc.marketingName} ремонт телефонов в Риге: экран, батарея, разъём зарядки, камера и другие работы. Быстрая диагностика, честные цены, гарантия.`,
-      alternates: {
-        canonical: `${buildCategoryHref(locale, 'telefonu-remonts')}/${bc.slug}`,
-      },
-    };
-  }
+  const brandName = pickLocalized(
+    page?.source?.brand?.labels,
+    locale,
+    page?.source?.brand?.name || brandSlug
+  );
+
+  const strings = getPageStrings({ brandName, page, locale });
 
   return {
-    title: bc.seo.title,
-    description: bc.seo.metaDescription,
-    alternates: { canonical: bc.canonicalPath },
+    title:
+      page.seo?.metaTitle ||
+      (locale === 'ru'
+        ? `${brandName} ремонт телефонов в Риге | iLab`
+        : `${brandName} telefonu remonts Rīgā | iLab`),
+    description:
+      page.seo?.metaDescription || strings.serviceDescription,
+    alternates: {
+      canonical:
+        page.route?.canonicalPath ||
+        `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`,
+    },
   };
 }
 
@@ -344,94 +363,112 @@ export function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
 export default async function PhoneBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
 
-  const allowed = (listBrandsForCategory(BRAND_CATEGORY.PHONES) || [])
-    .map((item) => String(item.slug).toLowerCase())
-    .filter((slug) => slug !== 'apple');
+  if (!brandSlug || brandSlug === 'apple') return notFound();
 
-  if (!allowed.includes(brandSlug)) return notFound();
-
-  const bc = getBrandContent(brandSlug, BRAND_CATEGORY.PHONES);
-  if (!bc) return notFound();
-
-  const [devicesAll, hero, seriesMeta] = await Promise.all([
+  const [page, devicesAll, seriesMeta] = await Promise.all([
+    resolveBrandPage(CATEGORY_KEY, brandSlug, locale),
     getDevices(),
-    getPhoneBrandConfig(brandSlug),
-    getSeriesMetaByCategoryBrand('telefonu-remonts', brandSlug, locale),
+    getSeriesMetaByCategoryBrand(CATEGORY_KEY, brandSlug, locale),
   ]);
 
-  const strings = getPageStrings(bc, locale);
+  if (!page) return notFound();
+
+  const brandName = pickLocalized(
+    page?.source?.brand?.labels,
+    locale,
+    page?.source?.brand?.name || brandSlug
+  );
+
+  const strings = getPageStrings({ brandName, page, locale });
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
   const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
   const popularRepairs = getPopularRepairs(locale);
 
-  const baseCategoryPath = buildCategoryHref(locale, 'telefonu-remonts');
-  const baseHref = `${baseCategoryPath}/${bc.slug}`;
+  const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
+  const baseHref = page.route?.publicPath || `${baseCategoryPath}/${brandSlug}`;
 
   const brandPhoneList = devicesAll.filter(
     (device) =>
-      device.categoryKey === 'telefonu-remonts' &&
-      device.brandKey === brandSlug
+      device?.type === 'device' &&
+      device.categoryKey === CATEGORY_KEY &&
+      device.brandKey === brandSlug &&
+      device.isHidden !== true
   );
 
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryName,
+      href: baseCategoryPath,
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: baseHref,
+    },
+  ];
+
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
-    { name: strings.categoryName, url: abs(baseCategoryPath) },
-    { name: strings.brandName, url: abs(baseHref) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
+    { name: breadcrumbs[2].label, url: abs(breadcrumbs[2].href) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
     path: baseHref,
-    name: strings.serviceName,
-    description: strings.serviceDescription,
+    name: page.seo?.schemaName || strings.serviceName,
+    description: page.seo?.schemaDescription || strings.serviceDescription,
   });
 
   const howToLd = buildStandardRepairHowToLd(strings.serviceName);
   const faqLd = buildFaqLdFromPairs(faqItems);
 
-  console.log('[SAMSUNG SERIES META]', seriesMeta);
-console.log('[XCOVER META]', seriesMeta['galaxy-xcover']);
-
   return (
     <>
-      <Script
-        id="service-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="service-jsonld" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
 
-      <Script
-        id="breadcrumbs-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="breadcrumbs-jsonld" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
 
-      <Script
-        id="howto-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="howto-jsonld" type="application/ld+json">
         {JSON.stringify(howToLd)}
       </Script>
 
-      <Script
-        id="faq-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="faq-jsonld" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
 
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        crumbs={breadcrumbs}
+        scrollCta={strings.scrollCta}
+      />
+
       <DeviceHero
-        image={hero.heroImage}
+        image={page.hero?.image || '/images/categories/telefonu_remonts.webp'}
         alt={strings.heroAlt}
-        brandLogo={hero.logo}
-        brandKey={hero.brandKey}
-        tint={hero.tint}
+        brandLogo={page.source?.brand?.logo || null}
+        brandKey={page.source?.brand?.key || brandSlug}
+        tint="rgba(0,200,180,0.20)"
         focal="right"
+        priority
         bodyHtml={strings.heroHtml}
       />
 
@@ -471,10 +508,10 @@ console.log('[XCOVER META]', seriesMeta['galaxy-xcover']);
         devices={devicesAll}
         baseHref={baseHref}
         brandKey={brandSlug}
-        categoryKey="telefonu-remonts"
+        categoryKey={CATEGORY_KEY}
         seriesMeta={seriesMeta}
         initialLimit={4}
-        autoExpandOnSearch={true}
+        autoExpandOnSearch
       />
 
       <section className={c.section}>
@@ -489,41 +526,51 @@ console.log('[XCOVER META]', seriesMeta['galaxy-xcover']);
         </div>
       </section>
 
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
+
       <div id="process-h2" className={c.anchorTarget} />
 
-      <section className={c.section} aria-labelledby="process-h2">
-        <div className={c.container}>
-          <Process
-            id="process"
-            title={strings.processTitle}
-            steps={processSteps}
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasProcess && (
+        <section className={c.section} aria-labelledby="process-h2">
+          <div className={c.container}>
+            <Process
+              id="process"
+              title={strings.processTitle}
+              steps={processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={c.section}>
-        <Why locale={locale} />
-      </section>
+      {page.sections?.hasWhy && (
+        <section className={c.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={c.section} aria-labelledby="faq-h2">
-        <div className={c.container}>
-          <Faq
-            id="brand-faq"
-            title={strings.faqTitle}
-            items={faqItems}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasFaq && (
+        <section className={c.section} aria-labelledby="faq-h2">
+          <div className={c.container}>
+            <Faq
+              id="brand-faq"
+              title={strings.faqTitle}
+              items={faqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={c.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {page.sections?.hasConvertBand && (
+        <section className={c.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }

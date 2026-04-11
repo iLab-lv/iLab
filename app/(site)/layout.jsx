@@ -4,7 +4,6 @@ import BottomBar from './ui/bottombar/BottomBar';
 import { COMPANY, SOCIALS, LOCATIONS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Footer from './ui/footer/Footer';
-import ResolvedPageHeader from './ui/page-header/ResolvedPageHeader';
 import l from './Layout.module.scss';
 
 // ✅ Canonical origin (force non-www)
@@ -139,8 +138,6 @@ export default function SiteLayout({ children }) {
         </div>
 
         <BottomBar />
-
-        <ResolvedPageHeader />
 
         <main id="main">{children}</main>
 

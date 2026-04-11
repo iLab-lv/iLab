@@ -1,9 +1,10 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
-import devicesAll from '@/data/devices';
-import categories from '@/data/categories';
+import { getDevices } from '@/lib/content/devices';
+import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import SeriesGrid from '@components/model-grid/SeriesGrid';
 import Services from '@sections/services/Services';
@@ -33,47 +34,122 @@ import {
 } from '@/lib/seo/jsonldHelpers';
 import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
+const CATEGORY_KEY = 'datoru-remonts';
+
 /* ---------------------------------------------
    Helpers
 ---------------------------------------------- */
-function getComputersCategory() {
-  return categories.find((cat) => cat.slug === 'datoru-remonts') || null;
+
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
+
+  if (typeof value === 'string') return value || fallback;
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
 }
 
-function getComputerBrandConfig(brandSlug) {
-  const cat = getComputersCategory();
-  if (!cat) return null;
+function normalizeComputerBrand(brand, locale = 'lv') {
+  const key = String(brand?.key || '').toLowerCase();
+  const name = pickLocalized(brand?.labels, locale, key);
 
-  const brand =
-    cat.brands?.find((b) => (b.brandSlug || '').toLowerCase() === brandSlug) || null;
+  const deviceType =
+    brand?.deviceType ||
+    (key === 'imac' ? 'aio' : key === 'mac-pro' ? 'desktop' : 'laptop');
 
-  if (!brand) return null;
-
-  const name = brand.name || brandSlug;
-  const deviceType = brand.deviceType || 'laptop';
-  const hasModels = Boolean(brand.hasModels);
+  const hasModels =
+    typeof brand?.hasModels === 'boolean' ? brand.hasModels : true;
 
   return {
+    key,
     name,
-    brandSlug: brand.brandSlug || brandSlug,
     deviceType,
     hasModels,
-    heroImage: brand.heroImage || cat.heroImage || '/images/categories/datoru_remonts.webp',
-    logo: brand.logo || null,
-    tint: brand.tint || 'rgba(0,200,180,0.20)',
-    heroAlt: brand.heroAlt || `${name} datoru remonts`,
+    heroImage: brand?.image || '/images/categories/datoru_remonts.webp',
+    logo: brand?.logo || null,
+    tint: 'rgba(0,200,180,0.20)',
+    heroAlt:
+      locale === 'ru'
+        ? `${name} ремонт компьютеров`
+        : `${name} datoru remonts`,
   };
 }
+
+function buildSeriesMetaMap(brand, locale = 'lv') {
+  const map = new Map();
+
+  if (!Array.isArray(brand?.series)) return map;
+
+  for (const item of brand.series) {
+    const key = String(item?.key || '').trim().toLowerCase();
+    if (!key) continue;
+
+    const label = pickLocalized(item?.labels, locale, key);
+    map.set(key, label);
+  }
+
+  return map;
+}
+
+function shapeDevicesForSeriesGrid(devices, brand, locale = 'lv') {
+  const seriesMetaMap = buildSeriesMetaMap(brand, locale);
+
+  return devices.map((d) => {
+    const normalizedCategory = d.category || d.categoryKey || '';
+    const normalizedBrandSlug = String(
+      d.brandSlug || d.brandKey || ''
+    ).toLowerCase();
+    const normalizedSeriesSlug = String(
+      d.seriesSlug || d.seriesKey || d.legacy?.originalSeriesSlug || ''
+    ).toLowerCase();
+
+    const seriesTitle =
+      d.series ||
+      seriesMetaMap.get(normalizedSeriesSlug) ||
+      d.legacy?.originalSeriesLabel ||
+      '';
+
+    return {
+      ...d,
+      category: normalizedCategory,
+      brandSlug: normalizedBrandSlug,
+      seriesSlug: normalizedSeriesSlug || undefined,
+      series: seriesTitle,
+    };
+  });
+}
+
+/* ---------------------------------------------
+   Static params
+---------------------------------------------- */
 
 export const dynamicParams = false;
 
 export async function generateComputerBrandStaticParams() {
-  const cat = getComputersCategory();
-  if (!cat || !Array.isArray(cat.brands)) return [];
+  const devices = await getDevices();
 
-  return cat.brands.map((b) => ({
-    brand: String(b.brandSlug || '').toLowerCase(),
-  }));
+  const keys = Array.from(
+    new Set(
+      devices
+        .filter(
+          (d) =>
+            d?.type === 'device' &&
+            d.categoryKey === CATEGORY_KEY &&
+            d.brandKey
+        )
+        .map((d) => String(d.brandKey).toLowerCase())
+    )
+  );
+
+  return keys.map((brand) => ({ brand }));
 }
 
 /* ---------------------------------------------
@@ -91,7 +167,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju (parasti 90 dienas).',
+    a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju, parasti 90 dienas.',
   },
   {
     q: 'Ko darīt, ja dators pārkarst vai ir ļoti skaļš?',
@@ -127,53 +203,181 @@ const FAQ_ITEMS_RU = [
 ];
 
 const POPULAR_LAPTOP_REPAIRS_LV = [
-  { title: 'Ekrāna maiņa', text: 'plaisas, mirušās zonas, tumši plankumi.', icon: LuMonitor },
-  { title: 'Tastatūras maiņa', text: 'nereaģē taustiņi, izlijis šķidrums, ielipuši taustiņi.', icon: LuKeyboard },
-  { title: 'Akumulatora maiņa', text: 'strauji krīt uzlāde, dators izslēdzas pie zemāka procenta.', icon: LuBatteryCharging },
-  { title: 'Dzesēšanas sistēma', text: 'troksnis, pārkaršana, termopastas maiņa, putekļu tīrīšana.', icon: LuCpu },
-  { title: 'Cietais disks / SSD', text: 'lēns darbs, neielādējas sistēma, datu pārvietošana.', icon: LuHardDrive },
-  { title: 'Programmatūra un vīrusi', text: 'OS pārinstalēšana, vīrusu tīrīšana, draiveru problēmas.', icon: LuBug },
+  {
+    title: 'Ekrāna maiņa',
+    text: 'plaisas, mirušās zonas, tumši plankumi.',
+    icon: LuMonitor,
+  },
+  {
+    title: 'Tastatūras maiņa',
+    text: 'nereaģē taustiņi, izlijis šķidrums, ielipuši taustiņi.',
+    icon: LuKeyboard,
+  },
+  {
+    title: 'Akumulatora maiņa',
+    text: 'strauji krīt uzlāde, dators izslēdzas pie zemāka procenta.',
+    icon: LuBatteryCharging,
+  },
+  {
+    title: 'Dzesēšanas sistēma',
+    text: 'troksnis, pārkaršana, termopastas maiņa, putekļu tīrīšana.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Cietais disks / SSD',
+    text: 'lēns darbs, neielādējas sistēma, datu pārvietošana.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Programmatūra un vīrusi',
+    text: 'OS pārinstalēšana, vīrusu tīrīšana, draiveru problēmas.',
+    icon: LuBug,
+  },
 ];
 
 const POPULAR_LAPTOP_REPAIRS_RU = [
-  { title: 'Замена экрана', text: 'трещины, битые зоны, тёмные пятна.', icon: LuMonitor },
-  { title: 'Замена клавиатуры', text: 'клавиши не реагируют, была залита жидкость, кнопки залипают.', icon: LuKeyboard },
-  { title: 'Замена батареи', text: 'заряд быстро падает, компьютер выключается при низком уровне заряда.', icon: LuBatteryCharging },
-  { title: 'Система охлаждения', text: 'шум, перегрев, замена термопасты, чистка от пыли.', icon: LuCpu },
-  { title: 'Жёсткий диск / SSD', text: 'медленная работа, система не загружается, перенос данных.', icon: LuHardDrive },
-  { title: 'Программное обеспечение и вирусы', text: 'переустановка ОС, удаление вирусов, проблемы с драйверами.', icon: LuBug },
+  {
+    title: 'Замена экрана',
+    text: 'трещины, битые зоны, тёмные пятна.',
+    icon: LuMonitor,
+  },
+  {
+    title: 'Замена клавиатуры',
+    text: 'клавиши не реагируют, была залита жидкость, кнопки залипают.',
+    icon: LuKeyboard,
+  },
+  {
+    title: 'Замена батареи',
+    text: 'заряд быстро падает, компьютер выключается при низком уровне заряда.',
+    icon: LuBatteryCharging,
+  },
+  {
+    title: 'Система охлаждения',
+    text: 'шум, перегрев, замена термопасты, чистка от пыли.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Жёсткий диск / SSD',
+    text: 'медленная работа, система не загружается, перенос данных.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Программное обеспечение и вирусы',
+    text: 'переустановка ОС, удаление вирусов, проблемы с драйверами.',
+    icon: LuBug,
+  },
 ];
 
 const POPULAR_AIO_REPAIRS_LV = [
-  { title: 'Ekrāna maiņa', text: 'plaisas, mirušās zonas, krāsu defekti.', icon: LuMonitor },
-  { title: 'Dzesēšanas sistēma', text: 'troksnis, pārkaršana, ventilatoru un radiatoru tīrīšana.', icon: LuCpu },
-  { title: 'Cietais disks / SSD', text: 'lēna darbība, sistēma neielādējas, datu migrācija.', icon: LuHardDrive },
-  { title: 'Programmatūra un vīrusi', text: 'OS pārinstalēšana, vīrusu un reklāmprogrammu noņemšana.', icon: LuBug },
-  { title: 'Barošana', text: 'ieslēgšanās problēmas, barošanas bloka diagnostika.', icon: LuPlugZap },
+  {
+    title: 'Ekrāna maiņa',
+    text: 'plaisas, mirušās zonas, krāsu defekti.',
+    icon: LuMonitor,
+  },
+  {
+    title: 'Dzesēšanas sistēma',
+    text: 'troksnis, pārkaršana, ventilatoru un radiatoru tīrīšana.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Cietais disks / SSD',
+    text: 'lēna darbība, sistēma neielādējas, datu migrācija.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Programmatūra un vīrusi',
+    text: 'OS pārinstalēšana, vīrusu un reklāmprogrammu noņemšana.',
+    icon: LuBug,
+  },
+  {
+    title: 'Barošana',
+    text: 'ieslēgšanās problēmas, barošanas bloka diagnostika.',
+    icon: LuPlugZap,
+  },
 ];
 
 const POPULAR_AIO_REPAIRS_RU = [
-  { title: 'Замена экрана', text: 'трещины, битые зоны, дефекты цвета.', icon: LuMonitor },
-  { title: 'Система охлаждения', text: 'шум, перегрев, чистка вентиляторов и радиаторов.', icon: LuCpu },
-  { title: 'Жёсткий диск / SSD', text: 'медленная работа, система не загружается, миграция данных.', icon: LuHardDrive },
-  { title: 'Программное обеспечение и вирусы', text: 'переустановка ОС, удаление вирусов и рекламного ПО.', icon: LuBug },
-  { title: 'Питание', text: 'проблемы с включением, диагностика блока питания.', icon: LuPlugZap },
+  {
+    title: 'Замена экрана',
+    text: 'трещины, битые зоны, дефекты цвета.',
+    icon: LuMonitor,
+  },
+  {
+    title: 'Система охлаждения',
+    text: 'шум, перегрев, чистка вентиляторов и радиаторов.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Жёсткий диск / SSD',
+    text: 'медленная работа, система не загружается, миграция данных.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Программное обеспечение и вирусы',
+    text: 'переустановка ОС, удаление вирусов и рекламного ПО.',
+    icon: LuBug,
+  },
+  {
+    title: 'Питание',
+    text: 'проблемы с включением, диагностика блока питания.',
+    icon: LuPlugZap,
+  },
 ];
 
 const POPULAR_DESKTOP_REPAIRS_LV = [
-  { title: 'Barošanas bloks', text: 'dators neieslēdzas, izslēdzas zem slodzes.', icon: LuPlugZap },
-  { title: 'Dzesēšanas sistēma', text: 'skaļi ventilatori, pārkaršana, termopastas maiņa.', icon: LuCpu },
-  { title: 'Cietais disks / SSD', text: 'lēna darbība, klikšķi no diska, datu atgūšana un migrācija.', icon: LuHardDrive },
-  { title: 'Programmatūra un vīrusi', text: 'OS pārinstalēšana, vīrusu un ļaunatūras noņemšana.', icon: LuBug },
-  { title: 'Komponentu maiņa', text: 'atmiņa, videokarte, paplašināšana un uzlabojumi.', icon: LuCpu },
+  {
+    title: 'Barošanas bloks',
+    text: 'dators neieslēdzas, izslēdzas zem slodzes.',
+    icon: LuPlugZap,
+  },
+  {
+    title: 'Dzesēšanas sistēma',
+    text: 'skaļi ventilatori, pārkaršana, termopastas maiņa.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Cietais disks / SSD',
+    text: 'lēna darbība, klikšķi no diska, datu atgūšana un migrācija.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Programmatūra un vīrusi',
+    text: 'OS pārinstalēšana, vīrusu un ļaunatūras noņemšana.',
+    icon: LuBug,
+  },
+  {
+    title: 'Komponentu maiņa',
+    text: 'atmiņa, videokarte, paplašināšana un uzlabojumi.',
+    icon: LuCpu,
+  },
 ];
 
 const POPULAR_DESKTOP_REPAIRS_RU = [
-  { title: 'Блок питания', text: 'компьютер не включается, выключается под нагрузкой.', icon: LuPlugZap },
-  { title: 'Система охлаждения', text: 'шумные вентиляторы, перегрев, замена термопасты.', icon: LuCpu },
-  { title: 'Жёсткий диск / SSD', text: 'медленная работа, щелчки диска, восстановление и перенос данных.', icon: LuHardDrive },
-  { title: 'Программное обеспечение и вирусы', text: 'переустановка ОС, удаление вирусов и вредоносного ПО.', icon: LuBug },
-  { title: 'Замена компонентов', text: 'память, видеокарта, расширение и апгрейд.', icon: LuCpu },
+  {
+    title: 'Блок питания',
+    text: 'компьютер не включается, выключается под нагрузкой.',
+    icon: LuPlugZap,
+  },
+  {
+    title: 'Система охлаждения',
+    text: 'шумные вентиляторы, перегрев, замена термопасты.',
+    icon: LuCpu,
+  },
+  {
+    title: 'Жёсткий диск / SSD',
+    text: 'медленная работа, щелчки диска, восстановление и перенос данных.',
+    icon: LuHardDrive,
+  },
+  {
+    title: 'Программное обеспечение и вирусы',
+    text: 'переустановка ОС, удаление вирусов и вредоносного ПО.',
+    icon: LuBug,
+  },
+  {
+    title: 'Замена компонентов',
+    text: 'память, видеокарта, расширение и апгрейд.',
+    icon: LuCpu,
+  },
 ];
 
 function getPopularRepairsForType(deviceType, locale = 'lv') {
@@ -194,48 +398,59 @@ function getPageStrings(cfg, locale = 'lv') {
   if (locale === 'ru') {
     return {
       title: `${cfg.name} ремонт компьютеров — что мы делаем`,
-      intro:
-        `Ремонтируем ноутбуки и настольные компьютеры ${cfg.name} — экран, охлаждение, диски и программное обеспечение. Стоимость зависит от модели и сложности неисправности, поэтому точное предложение готовим после диагностики.`,
+      intro: `Ремонтируем ноутбуки и настольные компьютеры ${cfg.name} — экран, охлаждение, диски и программное обеспечение. Стоимость зависит от модели и сложности неисправности, поэтому точное предложение готовим после диагностики.`,
       paragraph:
-        `Самые частые работы: <strong>замена экрана</strong>, <strong>чистка системы охлаждения и замена термопасты</strong>, <strong>замена жёсткого диска/SSD</strong>, <strong>переустановка операционной системы</strong> и <strong>удаление вирусов</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process">«Как проходит ремонт»</a>.`,
+        'Самые частые работы: <strong>замена экрана</strong>, <strong>чистка системы охлаждения и замена термопасты</strong>, <strong>замена жёсткого диска/SSD</strong>, <strong>переустановка операционной системы</strong> и <strong>удаление вирусов</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process">«Как проходит ремонт»</a>.',
       modelsTitle: `${cfg.name} модели, которые мы ремонтируем`,
-      modelsIntro:
-        `Ниже показаны популярные модели ${cfg.name}. Выберите свою модель, чтобы посмотреть типовые ремонты и цены, если они доступны.`,
+      modelsIntro: `Ниже показаны популярные модели ${cfg.name}. Выберите свою модель, чтобы посмотреть типовые ремонты и цены, если они доступны.`,
       modelsNote:
         'Стоимость зависит от модели — откройте страницу своей модели, чтобы увидеть цену ремонта.',
-      noModels:
-        `Пока для этого бренда не добавлены модели. Свяжитесь с нами, чтобы уточнить ремонт ${cfg.name}.`,
+      noModels: `Пока для этого бренда не добавлены модели. Свяжитесь с нами, чтобы уточнить ремонт ${cfg.name}.`,
       servicesTitle: 'Популярный ремонт',
       faqTitle: 'Часто задаваемые вопросы',
       heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> — ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>`,
+      categoryName: 'Ремонт компьютеров',
+      homeCrumb: 'Главная',
+      processTitle: 'Как проходит ремонт',
+      scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
+      fallbackTitle: `${cfg.name} ремонт компьютеров`,
     };
   }
 
   return {
     title: `${cfg.name} datoru remonts — ko mēs darām`,
-    intro:
-      `Remontējam ${cfg.name} portatīvos un galda datorus — ekrāns, dzesēšana, diski un programmatūra. Cenas atšķiras pēc modeļa un bojājuma sarežģītības, tāpēc precīzu piedāvājumu sagatavojam pēc diagnostikas.`,
+    intro: `Remontējam ${cfg.name} portatīvos un galda datorus — ekrāns, dzesēšana, diski un programmatūra. Cenas atšķiras pēc modeļa un bojājuma sarežģītības, tāpēc precīzu piedāvājumu sagatavojam pēc diagnostikas.`,
     paragraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>dzesēšanas sistēmas tīrīšana un termopastas maiņa</strong>, <strong>cietā diska/SSD nomaiņa</strong>, <strong>operētājsistēmas pārinstalēšana</strong> un <strong>vīrusu noņemšana</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process">“Kā notiek remonts”</a>.',
     modelsTitle: `${cfg.name} modeļi, ko remontējam`,
-    modelsIntro:
-      `Zemāk redzami populārākie ${cfg.name} modeļi. Izvēlies savu modeli, lai apskatītu biežākos remontus un cenas (ja pieejamas).`,
+    modelsIntro: `Zemāk redzami populārākie ${cfg.name} modeļi. Izvēlies savu modeli, lai apskatītu biežākos remontus un cenas, ja tie pieejami.`,
     modelsNote:
       'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
-    noModels:
-      `Pagaidām šim zīmolam nav pievienotu modeļu. Sazinies ar mums, lai precizētu ${cfg.name} remontu.`,
+    noModels: `Pagaidām šim zīmolam nav pievienotu modeļu. Sazinies ar mums, lai precizētu ${cfg.name} remontu.`,
     servicesTitle: 'Populārākie remonti',
     faqTitle: 'Biežāk uzdotie jautājumi',
     heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> — portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`,
+    categoryName: 'Datoru remonts',
+    homeCrumb: 'Sākums',
+    processTitle: 'Kā notiek remonts',
+    scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
+    fallbackTitle: `${cfg.name} datoru remonts`,
   };
 }
 
-export function getComputerBrandMetadata(brandSlug, locale = 'lv') {
-  const cfg = getComputerBrandConfig(brandSlug);
+/* ---------------------------------------------
+   Metadata export
+---------------------------------------------- */
 
-  if (!cfg) {
+export async function getComputerBrandMetadata(brandSlug, locale = 'lv') {
+  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
+
+  if (!page) {
     return {
-      title: locale === 'ru' ? 'Ремонт компьютеров | iLab' : 'Datoru remonts | iLab',
+      title:
+        locale === 'ru'
+          ? 'Ремонт компьютеров | iLab'
+          : 'Datoru remonts | iLab',
       description:
         locale === 'ru'
           ? 'Ремонт компьютеров в Риге — ноутбуки и настольные ПК. Быстрая диагностика, честные цены, гарантия.'
@@ -243,22 +458,28 @@ export function getComputerBrandMetadata(brandSlug, locale = 'lv') {
     };
   }
 
+  const brand = normalizeComputerBrand(page.source?.brand, locale);
+
   const title =
-    locale === 'ru'
-      ? `${cfg.name} ремонт компьютеров в Риге | iLab`
-      : `${cfg.name} datoru remonts Rīgā | iLab`;
+    page.seo?.metaTitle ||
+    (locale === 'ru'
+      ? `${brand.name} ремонт компьютеров в Риге | iLab`
+      : `${brand.name} datoru remonts Rīgā | iLab`);
 
   const description =
-    locale === 'ru'
-      ? `Профессиональный ремонт компьютеров ${cfg.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия 90 дней.`
-      : `Profesionāls ${cfg.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`;
-
-  const basePath = buildCategoryHref(locale, 'datoru-remonts');
+    page.seo?.metaDescription ||
+    (locale === 'ru'
+      ? `Профессиональный ремонт компьютеров ${brand.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия 90 дней.`
+      : `Profesionāls ${brand.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`);
 
   return {
     title,
     description,
-    alternates: { canonical: `${basePath}/${cfg.brandSlug}` },
+    alternates: {
+      canonical:
+        page.route?.canonicalPath ||
+        `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`,
+    },
   };
 }
 
@@ -266,34 +487,72 @@ export function getComputerBrandMetadata(brandSlug, locale = 'lv') {
    Page component
 ---------------------------------------------- */
 
-export default function ComputerBrandPage({ brand, locale = 'lv' }) {
+export default async function ComputerBrandPage({
+  brand,
+  locale = 'lv',
+}) {
   const brandSlug = String(brand || '').toLowerCase();
+  if (!brandSlug) return notFound();
 
-  const cat = getComputersCategory();
-  const allowed =
-    (cat?.brands || []).map((b) => String(b.brandSlug || '').toLowerCase());
+  const [page, devicesFromDb] = await Promise.all([
+    resolveBrandPage(CATEGORY_KEY, brandSlug, locale),
+    getDevices(),
+  ]);
 
-  if (!allowed.includes(brandSlug)) return notFound();
+  if (!page) return notFound();
 
-  const cfg = getComputerBrandConfig(brandSlug);
-  if (!cfg) return notFound();
-
+  const cfg = normalizeComputerBrand(page.source?.brand, locale);
   const strings = getPageStrings(cfg, locale);
   const popularRepairs = getPopularRepairsForType(cfg.deviceType, locale);
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
 
-  const baseCategoryPath = buildCategoryHref(locale, 'datoru-remonts');
-  const path = `${baseCategoryPath}/${cfg.brandSlug}`;
+  const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
+  const path = page.route?.publicPath || `${baseCategoryPath}/${cfg.key}`;
 
-  const brandDevices = devicesAll.filter(
+  const brandDevices = devicesFromDb.filter(
     (d) =>
-      d.category === 'datoru-remonts' &&
-      (d.brandSlug || '').toLowerCase() === brandSlug
+      d?.type === 'device' &&
+      d.categoryKey === CATEGORY_KEY &&
+      String(d.brandKey || '').toLowerCase() === cfg.key &&
+      d.isHidden !== true
   );
+
+  const seriesGridDevices = shapeDevicesForSeriesGrid(
+    devicesFromDb,
+    page.source?.brand,
+    locale
+  );
+
+  const headerTitle =
+    page.seo?.h1 || page.seo?.breadcrumbName || strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryName,
+      href: baseCategoryPath,
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: path,
+    },
+  ];
 
   const serviceLd = buildServiceLdForCity({
     path,
-    name: locale === 'ru' ? `${cfg.name} ремонт компьютеров` : `${cfg.name} datoru remonts`,
+    name:
+      locale === 'ru'
+        ? `${cfg.name} ремонт компьютеров`
+        : `${cfg.name} datoru remonts`,
     description:
       locale === 'ru'
         ? `${cfg.name} ремонт компьютеров: экран, охлаждение, диски, программное обеспечение и другие работы. Быстрая диагностика, честные цены, гарантия.`
@@ -301,55 +560,52 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
   });
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: locale === 'ru' ? 'Главная' : 'Sākums', url: abs(locale === 'ru' ? '/ru' : '/') },
-    { name: locale === 'ru' ? 'Ремонт компьютеров' : 'Datoru remonts', url: abs(baseCategoryPath) },
-    { name: locale === 'ru' ? `${cfg.name} ремонт компьютеров` : `${cfg.name} datoru remonts`, url: abs(path) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
+    { name: breadcrumbs[2].label, url: abs(breadcrumbs[2].href) },
   ]);
 
   const howToLd = buildStandardRepairHowToLd(
-    locale === 'ru' ? `${cfg.name} ремонт компьютеров` : `${cfg.name} datoru remonts`
+    locale === 'ru'
+      ? `${cfg.name} ремонт компьютеров`
+      : `${cfg.name} datoru remonts`
   );
 
   const faqLd = buildFaqLdFromPairs(faqItems);
 
   return (
     <>
-      <Script
-        id="service-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="service-jsonld" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
-      <Script
-        id="breadcrumbs-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+
+      <Script id="breadcrumbs-jsonld" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script
-        id="howto-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+
+      <Script id="howto-jsonld" type="application/ld+json">
         {JSON.stringify(howToLd)}
       </Script>
-      <Script
-        id="faq-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+
+      <Script id="faq-jsonld" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
 
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        crumbs={breadcrumbs}
+        scrollCta={strings.scrollCta}
+      />
+
       <DeviceHero
-        image={cfg.heroImage}
+        image={page.hero?.image || cfg.heroImage}
         alt={cfg.heroAlt}
         brandLogo={cfg.logo}
-        brandKey={cfg.brandSlug}
+        brandKey={cfg.key}
         tint={cfg.tint}
         focal="right"
+        priority
         bodyHtml={strings.heroHtml}
       />
 
@@ -358,7 +614,9 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
           <h2 id="brand-intro-h2" className={c.h2}>
             {strings.title}
           </h2>
+
           <p className={c.intro}>{strings.intro}</p>
+
           <p
             className={c.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.paragraph }}
@@ -379,17 +637,18 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
           {cfg.hasModels ? (
             <>
               <p className={c.intro}>{strings.modelsIntro}</p>
+
               <p className={c.paragraph} style={{ marginTop: 0 }}>
                 {strings.modelsNote}
               </p>
 
               <SeriesGrid
-                devices={devicesAll}
+                devices={seriesGridDevices}
                 baseHref={path}
-                brandSlug={cfg.brandSlug}
-                categorySlug="datoru-remonts"
+                brandSlug={cfg.key}
+                categorySlug={CATEGORY_KEY}
                 initialLimit={4}
-                autoExpandOnSearch={true}
+                autoExpandOnSearch
               />
 
               {brandDevices.length === 0 && (
@@ -414,28 +673,36 @@ export default function ComputerBrandPage({ brand, locale = 'lv' }) {
         </div>
       </section>
 
-      <Process locale={locale} variant="computer" headingLevel={2} />
+      {page.sections?.hasProcess && (
+        <Process locale={locale} variant="computer" headingLevel={2} />
+      )}
 
-      <section className={c.section}>
-        <Why locale={locale} />
-      </section>
+      {page.sections?.hasWhy && (
+        <section className={c.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={c.section} aria-labelledby="faq-h2">
-        <div className={c.container}>
-          <Faq
-            id="brand-faq"
-            title={strings.faqTitle}
-            items={faqItems}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasFaq && (
+        <section className={c.section} aria-labelledby="faq-h2">
+          <div className={c.container}>
+            <Faq
+              id="brand-faq"
+              title={strings.faqTitle}
+              items={faqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={c.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {page.sections?.hasConvertBand && (
+        <section className={c.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }

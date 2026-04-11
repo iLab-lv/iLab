@@ -6,7 +6,7 @@ export default function ConvertBand({
   id = 'convert',
   title = 'Vajadzīga palīdzība?',
   primary = { label: 'Sazināties ar meistaru', href: '/kontakti', variant: 'secondary' },
-  secondary = { label: 'Pieraksties uz remontu', href: '/pieraksties', variant: 'primary' },
+  secondary = { label: 'Pieraksties uz remontu', href: '/pieraksties-remontam', variant: 'primary' },
 }) {
   return (
     <section id={id} className={`${s.section} ${s.convert}`} aria-labelledby={`${id}-title`}>

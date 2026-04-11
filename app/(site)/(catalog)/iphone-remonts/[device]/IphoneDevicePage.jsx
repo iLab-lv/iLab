@@ -3,6 +3,7 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -163,7 +164,7 @@ async function buildPriceListItems(modelSlug, locale = 'lv') {
 
       const defaultTimeText =
         pickLocalizedField(service.defaultTimeText, locale) ||
-        'Tajā pašā dienā';
+        (locale === 'ru' ? 'В тот же день' : 'Tajā pašā dienā');
 
       const overrideTimeText =
         pickLocalizedField(pricing?.timeTextOverride, locale) ||
@@ -266,6 +267,10 @@ function getPageStrings(locale = 'lv') {
       defaultMetaTitle: 'Ремонт iPhone в Риге | iLab',
       defaultMetaDescription:
         'Ремонт iPhone в Риге: замена экрана, аккумулятора, разъёма зарядки, камеры и устранение других неисправностей. Быстрая диагностика и гарантия в сервисе iLab.',
+      defaultHeaderTitle: 'Ремонт iPhone',
+      defaultHeaderLead:
+        'Ремонт iPhone в Риге — замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+      pricesCtaLabel: 'Смотреть цены',
     };
   }
 
@@ -280,6 +285,10 @@ function getPageStrings(locale = 'lv') {
     defaultMetaTitle: 'iPhone remonts Rīgā | iLab',
     defaultMetaDescription:
       'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.',
+    defaultHeaderTitle: 'iPhone remonts',
+    defaultHeaderLead:
+      'iPhone remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    pricesCtaLabel: 'Skatīt cenas',
   };
 }
 
@@ -289,7 +298,6 @@ export async function getIphoneDeviceMetadata(slug, { locale = 'lv' } = {}) {
   const strings = getPageStrings(locale);
 
   const deviceName =
-    pickLocalizedField(device?.h1, locale) ||
     pickLocalizedField(device?.name, locale) ||
     device?.name ||
     'iPhone';
@@ -297,7 +305,9 @@ export async function getIphoneDeviceMetadata(slug, { locale = 'lv' } = {}) {
   const title =
     pickLocalizedField(device?.metaTitle, locale) ||
     (device
-      ? `${deviceName} | iLab`
+      ? locale === 'ru'
+        ? `Ремонт ${deviceName} в Риге | iLab`
+        : `${deviceName} remonts Rīgā | iLab`
       : strings.defaultMetaTitle);
 
   const description =
@@ -341,6 +351,10 @@ export default async function IphoneDevicePage({
             name: device.name,
             categoryKey: device.categoryKey,
             brandKey: device.brandKey,
+            h1Lv: device.h1?.lv ?? null,
+            h1Ru: device.h1?.ru ?? null,
+            metaDescriptionLv: device.metaDescription?.lv ?? null,
+            metaDescriptionRu: device.metaDescription?.ru ?? null,
             bodyHtmlLv: device.bodyHtml?.lv ?? null,
             bodyHtmlRu: device.bodyHtml?.ru ?? null,
           }
@@ -351,9 +365,21 @@ export default async function IphoneDevicePage({
   if (!device) return notFound();
 
   const strings = getPageStrings(locale);
+
   const localizedBodyHtml = pickLocalizedField(device.bodyHtml, locale) || null;
   const deviceName =
     pickLocalizedField(device.name, locale) || device.name || '';
+
+  const headerTitle =
+    pickLocalizedField(device.h1, locale) ||
+    (deviceName
+      ? `${deviceName} ${strings.serviceTypeSuffix}`
+      : strings.defaultHeaderTitle);
+
+  const headerLead =
+    pickLocalizedField(device.lead, locale) ||
+    pickLocalizedField(device.metaDescription, locale) ||
+    strings.defaultHeaderLead;
 
   const { items: priceItems, currency } = await buildPriceListItems(slug, locale);
   const modelServices = buildIphonePopularServices(locale);
@@ -367,13 +393,28 @@ export default async function IphoneDevicePage({
 
   const provider = buildProvidersFromLocations();
 
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.hubCrumb,
+      href: locale === 'ru' ? '/ru/remont-iphone' : '/iphone-remonts',
+    },
+    {
+      label: headerTitle,
+      href: modelPath,
+    },
+  ];
+
   const breadcrumbsLd = buildBreadcrumbsLd([
     { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
     {
       name: strings.hubCrumb,
       url: abs(locale === 'ru' ? '/ru/remont-iphone' : '/iphone-remonts'),
     },
-    { name: `${deviceName} ${strings.serviceTypeSuffix}`, url: abs(modelPath) },
+    { name: headerTitle, url: abs(modelPath) },
   ]);
 
   const offers = priceItems.map((item) => {
@@ -416,6 +457,10 @@ export default async function IphoneDevicePage({
 
   const howToLd = buildStandardRepairHowToLd(strings.howToName);
 
+  const headerScrollCta = priceItems.length
+    ? { label: strings.pricesCtaLabel, targetId: 'cenas' }
+    : null;
+
   return (
     <>
       <Script
@@ -451,6 +496,13 @@ export default async function IphoneDevicePage({
       >
         {JSON.stringify(howToLd)}
       </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={headerScrollCta}
+        crumbs={headerCrumbs}
+      />
 
       <DeviceHero
         image={device.image}

@@ -1,10 +1,17 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+
+import {
+  normalizeText,
+  toFaqLd,
+  toFaqRenderItems,
+} from '@sections/faq/faq.helpers';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -12,31 +19,8 @@ import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
-  buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
-
-const FAQ_ITEMS = [
-  {
-    q: 'Kādi simptomi norāda uz skaļruņu vai mikrofona problēmām?',
-    a: 'Klusa vai izkropļota skaņa, krakšķi, nav skaņas zvana laikā, sarunās nedzird vai jūsu balsi nedzird pretējā galā.',
-  },
-  {
-    q: 'Vai pietiek tikai ar tīrīšanu?',
-    a: 'Bieži skaņas problēmas izraisa putekļi vai netīrumi režģos. Ja pietiek ar tīrīšanu, maiņa nav nepieciešama — to noteiks diagnostikā.',
-  },
-  {
-    q: 'Cik ilgi ilgst remonts?',
-    a: 'Parasti 45–90 minūtes atkarībā no modeļa un bojājuma.',
-  },
-  {
-    q: 'Vai mani dati ir drošībā?',
-    a: 'Jā. Skaņas komponentu remonts neietekmē jūsu datus, tomēr drošībai iesakām izveidot dublējumu.',
-  },
-  {
-    q: 'Vai ir garantija?',
-    a: 'Jā — 90 dienas gan detaļām, gan veiktajam darbam.',
-  },
-];
+import { db } from '@/lib/firebaseAdmin';
 
 function getRoutePath(locale = 'lv') {
   return locale === 'ru'
@@ -70,12 +54,22 @@ function getPageStrings(locale = 'lv') {
         { title: 'Гарантия', text: 'Гарантия 90 дней на детали и выполненные работы.' },
       ],
       faqTitle: 'Часто задаваемые вопросы',
-      faqGroupLabel: 'Звук',
+      serviceFaqGroupLabel: 'Ремонт динамика и микрофона',
+      basicFaqGroupLabel: 'Общие вопросы',
       breadcrumbServiceName: 'Ремонт динамика и микрофона',
       serviceName: 'Ремонт динамика и микрофона iPhone в Риге',
       serviceType: 'Ремонт динамика и микрофона iPhone',
       serviceDescription:
         'Ремонт динамика и микрофона iPhone в Риге: диагностика, чистка или замена модуля, тесты и гарантия 90 дней.',
+      homeCrumb: 'Главная',
+      hubCrumb: 'Ремонт iPhone',
+      headerTitle: 'Ремонт динамика и микрофона iPhone в Риге',
+      headerLead:
+        'Ремонтируем динамик и микрофон iPhone при тихом звуке, хрипах и проблемах во время разговора. До ремонта проводим диагностику, согласовываем решение и после ремонта выдаём гарантию 90 дней.',
+      headerCtaLabel: 'Оставить заявку',
+      serviceFaqDocId: 'service_skalruni-mikrofona-remonts_ru',
+      basicFaqDocId: 'basic_ru',
+      applyAria: 'Записаться на ремонт',
     };
   }
 
@@ -99,12 +93,22 @@ function getPageStrings(locale = 'lv') {
       { title: 'Garantija', text: '90 dienu garantija gan detaļām, gan darbam.' },
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
-    faqGroupLabel: 'Skaņa',
+    serviceFaqGroupLabel: 'Skaļruņu un mikrofona remonts',
+    basicFaqGroupLabel: 'Vispārīgi jautājumi',
     breadcrumbServiceName: 'Skaļruņu un mikrofona remonts',
     serviceName: 'iPhone skaļruņu un mikrofona remonts Rīgā',
     serviceType: 'iPhone skaļruņu un mikrofona remonts',
     serviceDescription:
       'iPhone skaļruņu un mikrofona remonts Rīgā: diagnostika, tīrīšana vai moduļa nomaiņa, testi un 90 dienu garantija.',
+    homeCrumb: 'Sākums',
+    hubCrumb: 'iPhone remonts',
+    headerTitle: 'iPhone skaļruņu un mikrofona remonts Rīgā',
+    headerLead:
+      'Remontējam iPhone skaļruni un mikrofonu, ja skaņa ir klusa, krakšķ vai sarunās nedzird. Pirms remonta veicam diagnostiku, izvērtējam, vai pietiek ar tīrīšanu vai nepieciešama nomaiņa, un pēc remonta sniedzam 90 dienu garantiju.',
+    headerCtaLabel: 'Pieteikties',
+    serviceFaqDocId: 'service_skalruni-mikrofona-remonts_lv',
+    basicFaqDocId: 'basic_lv',
+    applyAria: 'Pieteikties remontam',
   };
 }
 
@@ -126,16 +130,12 @@ export function getIphoneAudioServiceMetadata(locale = 'lv') {
   };
 }
 
-function buildFaqLd() {
-  return buildFaqLdFromPairs(FAQ_ITEMS);
-}
-
 function buildBreadcrumbs(locale = 'lv') {
   const strings = getPageStrings(locale);
 
   return buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: 'iPhone remonts', url: abs(getHubPath(locale)) },
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.hubCrumb, url: abs(getHubPath(locale)) },
     { name: strings.breadcrumbServiceName, url: abs(getRoutePath(locale)) },
   ]);
 }
@@ -151,13 +151,136 @@ function buildServiceLd(locale = 'lv') {
   });
 }
 
-export default function IphoneAudioServicePage({ locale = 'lv', searchParams }) {
+function dedupeFaqItems(items = []) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = normalizeText(item?.q || '').toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortFaqItems(items = []) {
+  return [...items].sort((a, b) => {
+    const ao = typeof a?.order === 'number' ? a.order : 9999;
+    const bo = typeof b?.order === 'number' ? b.order : 9999;
+    if (ao !== bo) return ao - bo;
+
+    const aq = String(a?.q || '');
+    const bq = String(b?.q || '');
+    return aq.localeCompare(bq);
+  });
+}
+
+async function getFaqSections(locale = 'lv') {
+  const strings = getPageStrings(locale);
+
+  const [serviceDoc, basicDoc] = await Promise.all([
+    db.collection('faqGroups').doc(strings.serviceFaqDocId).get(),
+    db.collection('faqGroups').doc(strings.basicFaqDocId).get(),
+  ]);
+
+  const sections = [];
+
+  const serviceData = serviceDoc.exists ? serviceDoc.data() || {} : {};
+  const basicData = basicDoc.exists ? basicDoc.data() || {} : {};
+
+  const serviceItems = sortFaqItems(
+    (Array.isArray(serviceData.items) ? serviceData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (serviceItems.length) {
+    sections.push({
+      id: strings.serviceFaqDocId,
+      title: strings.serviceFaqGroupLabel,
+      items: serviceItems,
+    });
+  }
+
+  const basicItems = sortFaqItems(
+    (Array.isArray(basicData.items) ? basicData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (basicItems.length) {
+    sections.push({
+      id: strings.basicFaqDocId,
+      title: strings.basicFaqGroupLabel,
+      items: basicItems,
+    });
+  }
+
+  return sections;
+}
+
+export default async function IphoneAudioServicePage({
+  locale = 'lv',
+  searchParams,
+}) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
 
   const strings = getPageStrings(locale);
-  const faqLd = buildFaqLd();
   const breadcrumbsLd = buildBreadcrumbs(locale);
   const serviceLd = buildServiceLd(locale);
+  const sections = await getFaqSections(locale);
+
+  const mergedFaqItems = dedupeFaqItems(
+    sections.flatMap((section) => section.items || [])
+  );
+
+  const faqLd = toFaqLd(mergedFaqItems);
+
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.hubCrumb,
+      href: getHubPath(locale),
+    },
+    {
+      label: strings.breadcrumbServiceName,
+      href: getRoutePath(locale),
+    },
+  ];
 
   return (
     <>
@@ -173,6 +296,13 @@ export default function IphoneAudioServicePage({ locale = 'lv', searchParams }) 
         {JSON.stringify(serviceLd)}
       </Script>
 
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        scrollCta={{ label: strings.headerCtaLabel, targetId: 'pieteikties' }}
+        crumbs={headerCrumbs}
+      />
+
       <DeviceHero
         image="/images/categories/mikrofona_remonts.webp"
         alt={strings.heroAlt}
@@ -183,7 +313,7 @@ export default function IphoneAudioServicePage({ locale = 'lv', searchParams }) 
 
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h2 id="intro-h2" className={s.h1}>
+          <h2 id="intro-h2" className={s.h2}>
             {strings.introTitle}
           </h2>
 
@@ -223,23 +353,40 @@ export default function IphoneAudioServicePage({ locale = 'lv', searchParams }) 
         <Why locale={locale} />
       </section>
 
-      <section className={s.section} aria-labelledby="faq-h2">
-        <div className={s.container}>
-          <Faq
-            id="faq"
-            title={strings.faqTitle}
-            groups={[{ label: strings.faqGroupLabel, items: FAQ_ITEMS }]}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {!!sections.length && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <h2 id="faq-h2" className={s.h2}>
+              {strings.faqTitle}
+            </h2>
 
-      <section id="pieteikties" className={s.section} aria-label="Pieteikties remontam">
-        <div className={s.container}>
+            {sections.map((section, index) => (
+              <div
+                key={`faq-group-${index}-${section.id}`}
+                className={index > 0 ? s.stackLg : ''}
+              >
+                <Faq
+                  id={`faq-group-${index + 1}`}
+                  title={section.title}
+                  items={toFaqRenderItems(section.items)}
+                  headingLevel={3}
+                  variant="accordion"
+                  locale={locale}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section
+        id="pieteikties"
+        className={s.section}
+        aria-label={strings.applyAria}
+      >
+
           <ConvertBand locale={locale} />
-        </div>
+
       </section>
     </>
   );

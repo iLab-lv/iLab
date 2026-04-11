@@ -1,5 +1,6 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
@@ -23,6 +24,9 @@ function getPageStrings(locale = 'lv') {
         'Цены на ремонт iLab по модели. Выберите бренд и модель устройства, чтобы увидеть все цены на услуги в одном месте.',
       homeCrumb: 'Главная',
       pageCrumb: 'Цены',
+      headerTitle: 'Цены на ремонт',
+      headerLead:
+        'Выберите бренд и модель устройства, чтобы посмотреть опубликованные цены на ремонт, сроки и доступные услуги в одном месте.',
       brandPickerTitle: 'Выберите бренд',
       pricelistTitle: 'Цены по модели',
       ctaLabel: 'Записаться на ремонт',
@@ -71,6 +75,9 @@ function getPageStrings(locale = 'lv') {
       'iLab remonta cenas pēc modeļa. Izvēlies zīmolu un ierīces modeli, lai redzētu visu pakalpojumu cenas vienuviet.',
     homeCrumb: 'Sākums',
     pageCrumb: 'Cenas',
+    headerTitle: 'Remonta cenas',
+    headerLead:
+      'Izvēlies ierīces zīmolu un modeli, lai vienuviet apskatītu publicētās remonta cenas, termiņus un pieejamos pakalpojumus.',
     brandPickerTitle: 'Izvēlies zīmolu',
     pricelistTitle: 'Cenas pēc modeļa',
     ctaLabel: 'Pieteikties remontam',
@@ -320,6 +327,17 @@ export default async function CenasPage({ locale = 'lv', searchParams }) {
   const webPageLd = buildWebPageLd(strings);
   const faqLd = buildFaqLd(strings);
 
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.pageCrumb,
+      href: strings.servicePath,
+    },
+  ];
+
   return (
     <>
       <Script
@@ -341,6 +359,12 @@ export default async function CenasPage({ locale = 'lv', searchParams }) {
       <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(faqLd)}
       </Script>
+
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        crumbs={headerCrumbs}
+      />
 
       <section
         id="brand-list"

@@ -5,6 +5,7 @@ import { getDevices } from '@/lib/content/devices';
 import { getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
 import { resolveDedicatedBrandHubPage } from '@/lib/content/resolvers/catalogPages';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import {
@@ -41,30 +42,34 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт iPhone в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрый и безопасный ремонт iPhone в Риге</strong> — замена дисплея, батареи и камеры в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт.</p>',
+        '<p><strong>Ремонт iPhone в Риге</strong> в сервисе iLab — замена экрана, аккумулятора, камеры и ремонт разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>. Самые частые ремонты iPhone выполняем в тот же день.</p>',
       introTitle: 'Ремонт iPhone в Риге — что мы делаем',
       introBody:
-        'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> — от <strong>замены экрана</strong> и <strong>батареи</strong> до <strong>ремонта разъёма зарядки</strong>, <strong>камеры</strong> и устранения <strong>повреждений после попадания влаги</strong>. Перед началом работ проводим <strong>бесплатную диагностику</strong> и согласовываем точную цену и срок выполнения. Самые частые ремонты выполняем в тот же день. Используем <strong>оригинальные или качественные OEM детали</strong> и даём <strong>гарантию 90 дней</strong> на каждый ремонт.',
+        'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> — от <strong>замены экрана</strong>, <strong>аккумулятора</strong>, <strong>ремонта камеры</strong> и <strong>разъёма зарядки</strong> до замены <strong>динамика</strong>, <strong>микрофона</strong> и других компонентов. Перед ремонтом проводим <strong>бесплатную диагностику</strong>, согласовываем стоимость и срок выполнения, а после завершения работ выдаём <strong>гарантию 90 дней</strong> на детали и работу. Используем качественные оригинальные или OEM запчасти, чтобы iPhone после ремонта работал стабильно и надёжно каждый день.',
       howToName: 'Ремонт iPhone',
       modelGridHeading: 'Выберите модель iPhone',
       modelGridIntro:
-        'Быстро найдите нужный iPhone по названию или откройте нужную серию и выберите свою модель.',
+        'Найдите нужный iPhone по названию или выберите серию.',
+      scrollCta: { label: 'Смотреть модели', targetId: 'iphone-modeli' },
+      fallbackTitle: 'Ремонт iPhone в Риге',
     };
   }
 
   return {
     heroAlt: 'iPhone remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs iPhone remonts Rīgā</strong> — displeja, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantiju</strong> katram remontam.</p>',
+      '<p><strong>iPhone remonts Rīgā</strong> iLab servisā — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>. Biežākos iPhone remontdarbus paveicam tajā pašā dienā.</p>',
     introTitle: 'iPhone remonts Rīgā — ko mēs darām',
     introBody:
-      'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas</strong> un <strong>kameras remontam</strong>, kā arī <strong>ūdens bojājumu</strong> novēršanai. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un saskaņojam precīzu cenu un izpildes laiku. Biežākos remontdarbus paveicam tajā pašā dienā. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong> katram remontam.',
+      'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> — sākot ar <strong>ekrāna maiņu</strong>, <strong>baterijas nomaiņu</strong>, <strong>kameras remontu</strong> un <strong>uzlādes ligzdas remontu</strong>, līdz <strong>skaļruņa</strong>, <strong>mikrofona</strong> un citu detaļu nomaiņai. Pirms remonta veicam <strong>bezmaksas diagnostiku</strong>, saskaņojam izmaksas un izpildes termiņu, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam. Izmantojam kvalitatīvas oriģinālās vai OEM detaļas, lai iPhone pēc remonta darbotos stabili un droši ikdienā.',
     howToName: 'iPhone remonts',
     modelGridHeading:
       cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli',
     modelGridIntro:
       cat?.sections?.modelGrid?.intro ??
-      'Atrodi vajadzīgo iPhone pēc nosaukuma vai atver sēriju un izvēlies savu modeli.',
+      'Atrodi vajadzīgo iPhone vai izvēlies sēriju.',
+    scrollCta: { label: 'Skatīt modeļus', targetId: 'iphone-modeli' },
+    fallbackTitle: 'iPhone remonts Rīgā',
   };
 }
 
@@ -78,9 +83,37 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
     getCategoryFaqGroup(HUB_KEY, locale),
   ]);
 
-  if (!page) {
-    return null;
-  }
+  if (!page) return null;
+
+  /* =========================
+     HEADER (FIXED)
+  ========================== */
+
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || 'Sākums',
+      href: '/',
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: page.route?.publicPath || '/iphone-remonts',
+    },
+  ];
+
+  /* =========================
+     OTHER DATA
+  ========================== */
 
   const popularServices = buildIphonePopularServices(locale);
   const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
@@ -89,56 +122,67 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
   const faqLd = toFaqLd(faq.items);
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    {
-      name: page.labels.homeCrumb,
-      url: abs(locale === 'ru' ? '/ru' : '/'),
-    },
-    {
-      name: page.seo.breadcrumbName,
-      url: abs(page.route.publicPath),
-    },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
-    path: page.route.publicPath,
-    name: page.seo.schemaName,
-    description: page.seo.schemaDescription,
+    path: page.route?.publicPath,
+    name: page.seo?.schemaName,
+    description: page.seo?.schemaDescription,
   });
 
   const howToLd = buildStandardRepairHowToLd(strings.howToName);
 
-  const selectorTitle = page.selector.heading || strings.modelGridHeading;
-  const selectorIntro = page.selector.intro || strings.modelGridIntro;
+  const selectorTitle =
+    page.selector?.heading || strings.modelGridHeading;
+
+  const selectorIntro =
+    page.selector?.intro || strings.modelGridIntro;
+
+  /* =========================
+     RENDER
+  ========================== */
 
   return (
     <>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="faq-jsonld" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
-      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
+
+      <Script id="howto-jsonld" type="application/ld+json">
         {JSON.stringify(howToLd)}
       </Script>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+
+      <Script id="breadcrumbs-jsonld" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+
+      <Script id="service-jsonld" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
 
+      {/* ✅ HEADER */}
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={strings.scrollCta}
+        crumbs={breadcrumbs}
+      />
+
+      {/* ✅ HERO */}
       <DeviceHero
-        image={page.hero.image || '/images/categories/iphone_remonts.webp'}
+        image={page.hero?.image || '/images/categories/iphone_remonts.webp'}
         alt={strings.heroAlt}
         focal="right"
-        className="category"
         priority
         bodyHtml={strings.heroBodyHtml}
       />
 
-      <section className={s.section} aria-labelledby="iphone-intro-h2">
+      {/* INTRO */}
+      <section className={s.section}>
         <div className={s.container}>
-          <h2 id="iphone-intro-h2" className={s.h2}>
-            {strings.introTitle}
-          </h2>
+          <h2 className={s.h2}>{strings.introTitle}</h2>
           <p
             className={s.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.introBody }}
@@ -146,7 +190,8 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      <section className={s.section} aria-labelledby="iphone-services-h2">
+      {/* SERVICES */}
+      <section className={s.section}>
         <div className={s.container}>
           <Services
             id="iphone-services"
@@ -156,23 +201,24 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
+      {/* DEVICES */}
       <DeviceSelector
         id="iphone-modeli"
         locale={locale}
         title={selectorTitle}
         intro={selectorIntro}
         devices={devicesAll}
-        baseHref={page.route.publicPath}
+        baseHref={page.route?.publicPath}
         brandKey={BRAND_KEY}
         categoryKey={CATEGORY_KEY}
         seriesMeta={seriesMeta}
         initialLimit={4}
-        autoExpandOnSearch={true}
+        autoExpandOnSearch
       />
 
-      {page.sections.hasReviews && <Reviews locale={locale} />}
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
 
-      {page.sections.hasGuide && cat?.show?.guide !== false && cat?.sections?.guide && (
+      {page.sections?.hasGuide && cat?.sections?.guide && (
         <Guide
           id="guide"
           title={cat.sections.guide.heading}
@@ -181,23 +227,23 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         />
       )}
 
-      {page.sections.hasProcess && <Process locale={locale} />}
+      {page.sections?.hasProcess && <Process locale={locale} />}
 
-      {page.sections.hasWhy && (
+      {page.sections?.hasWhy && (
         <section className={s.section}>
           <Why locale={locale} />
         </section>
       )}
 
-      {page.sections.hasFaq && (
-        <section className={s.section} aria-labelledby="iphone-faq-title">
+      {page.sections?.hasFaq && (
+        <section className={s.section}>
           <div className={s.container}>
             <Faq id="iphone-faq" title={faq.title} items={faqItems} />
           </div>
         </section>
       )}
 
-      {page.sections.hasConvertBand && (
+      {page.sections?.hasConvertBand && (
         <section className={s.section}>
           <ConvertBand locale={locale} />
         </section>
