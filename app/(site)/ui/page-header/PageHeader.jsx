@@ -1,7 +1,5 @@
 // app/(site)/ui/page-header/PageHeader.jsx
-'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 
 import ScrollCta from '@components/button/ScrollCta';
@@ -11,22 +9,9 @@ export default function PageHeader({
   title,
   lead,
   scrollCta,
-  image,
-  imageSrc,
-  imageAlt,
   crumbs = [],
   showBreadcrumbs = true,
 }) {
-  const [imgVisible, setImgVisible] = useState(true);
-
-  const computedImage = image?.src || imageSrc
-    ? {
-        src: image?.src || imageSrc,
-        alt: image?.alt || imageAlt || title || '',
-      }
-    : null;
-
-  // Current page crumb is already represented by H1
   const displayCrumbs =
     crumbs && crumbs.length > 1 ? crumbs.slice(0, -1) : crumbs || [];
 
@@ -58,19 +43,6 @@ export default function PageHeader({
               />
             ) : null}
           </div>
-
-          {computedImage && imgVisible ? (
-            <div className={s.media}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={computedImage.src}
-                alt={computedImage.alt}
-                loading="lazy"
-                decoding="async"
-                onError={() => setImgVisible(false)}
-              />
-            </div>
-          ) : null}
         </div>
       </div>
     </header>
