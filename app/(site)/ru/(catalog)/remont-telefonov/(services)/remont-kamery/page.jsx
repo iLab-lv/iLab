@@ -1,6 +1,6 @@
 import PhoneCameraServicePage, {
   getPhoneCameraServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/kameras-remonts/PhoneCameraServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/kameras-remonts/PhoneCameraServicePage';
 
 export const metadata = getPhoneCameraServiceMetadata('ru');
 

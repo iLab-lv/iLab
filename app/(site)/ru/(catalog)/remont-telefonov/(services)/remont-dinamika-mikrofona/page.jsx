@@ -1,6 +1,6 @@
 import PhoneAudioServicePage, {
   getPhoneAudioServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/skalruni-mikrofona-remonts/PhoneAudioServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/skalruni-mikrofona-remonts/PhoneAudioServicePage';
 
 export const metadata = getPhoneAudioServiceMetadata('ru');
 

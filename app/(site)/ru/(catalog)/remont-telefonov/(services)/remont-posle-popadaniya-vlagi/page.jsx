@@ -1,6 +1,6 @@
 import PhoneWaterDamageServicePage, {
   getPhoneWaterDamageServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/udens-bojajumu-remonts/PhoneWaterDamageServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/udens-bojajumu-remonts/PhoneWaterDamageServicePage';
 
 export const metadata = getPhoneWaterDamageServiceMetadata('ru');
 

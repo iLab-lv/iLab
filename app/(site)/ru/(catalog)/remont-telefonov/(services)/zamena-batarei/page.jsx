@@ -1,6 +1,6 @@
 import PhoneBatteryServicePage, {
   getPhoneBatteryServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/baterijas-maina/PhoneBatteryServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/baterijas-maina/PhoneBatteryServicePage';
 
 export const metadata = getPhoneBatteryServiceMetadata('ru');
 
