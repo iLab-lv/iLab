@@ -1,6 +1,7 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import PriceList from '@sections/pricing/PriceList';
 import Services from '@sections/services/Services';
@@ -528,6 +529,9 @@ function getPageStrings(locale = 'lv') {
       serviceType: (deviceName) => `${deviceName} ремонт`,
       serviceName: (deviceName) => `${deviceName} ремонт`,
       cityName: 'Рига',
+      defaultHeaderTitle: 'Ремонт компьютеров',
+      defaultHeaderLead:
+        'Ремонт компьютеров в Риге — замена аккумулятора и дисплея, восстановление после попадания жидкости, профилактика, замена клавиатуры и touchpad с быстрой диагностикой, качественными деталями и гарантией.',
     };
   }
 
@@ -551,6 +555,9 @@ function getPageStrings(locale = 'lv') {
     serviceType: (deviceName) => `${deviceName} remonts`,
     serviceName: (deviceName) => `${deviceName} remonts`,
     cityName: 'Rīga',
+    defaultHeaderTitle: 'Datoru remonts',
+    defaultHeaderLead:
+      'Datoru remonts Rīgā — akumulatora un displeja nomaiņa, atjaunošana pēc šķidruma bojājumiem, profilakse, tastatūras un touchpad remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju.',
   };
 }
 
@@ -607,6 +614,7 @@ export default async function ComputerDevicePage({
   if (!d) return notFound();
 
   const strings = getPageStrings(locale);
+  const headerUi = getComputerDevicePageHeader(locale);
   const basePath = buildCategoryHref(locale, COMPUTER_CATEGORY_KEY);
 
   const deviceName =
@@ -620,6 +628,15 @@ export default async function ComputerDevicePage({
     d.brandKey ||
     brandSlug.toUpperCase();
 
+  const headerTitle =
+    pickLocalizedField(d.h1, locale) ||
+    `${deviceName} ${strings.deviceRepairSuffix}`;
+
+  const headerLead =
+    pickLocalizedField(d.lead, locale) ||
+    pickLocalizedField(d.metaDescription, locale) ||
+    strings.defaultHeaderLead;
+
   const heroBodyHtml =
     pickLocalizedField(d.bodyHtml, locale) || null;
 
@@ -632,6 +649,25 @@ export default async function ComputerDevicePage({
 
   const provider = buildProvidersFromLocations();
 
+  const headerCrumbs = [
+    {
+      label: strings.homeLabel,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryLabel,
+      href: basePath,
+    },
+    {
+      label: `${brandLabel} ${strings.brandRepairSuffix}`,
+      href: brandPath,
+    },
+    {
+      label: headerTitle,
+      href: modelPath,
+    },
+  ];
+
   const breadcrumbsLd = buildBreadcrumbsLd([
     { name: strings.homeLabel, url: abs(locale === 'ru' ? '/ru' : '/') },
     { name: strings.categoryLabel, url: abs(basePath) },
@@ -640,7 +676,7 @@ export default async function ComputerDevicePage({
       url: abs(brandPath),
     },
     {
-      name: `${deviceName} ${strings.deviceRepairSuffix}`,
+      name: headerTitle,
       url: abs(modelPath),
     },
   ]);
@@ -686,11 +722,12 @@ export default async function ComputerDevicePage({
   const processHowToLd = buildProcessHowToLd(modelPath, deviceName, locale);
 
   const heroAlt = `${deviceName} ${strings.heroAltSuffix}`;
+  const headerScrollCta = priceItems.length ? headerUi.scrollCta : null;
 
   return (
     <>
       <Script
-        id={`breadcrumbs-jsonld-datoru-${locale}`}
+        id={`breadcrumbs-jsonld-datoru-${d.slug}-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -698,7 +735,7 @@ export default async function ComputerDevicePage({
       </Script>
 
       <Script
-        id={`service-jsonld-datoru-${locale}`}
+        id={`service-jsonld-datoru-${d.slug}-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -707,7 +744,7 @@ export default async function ComputerDevicePage({
 
       {faqLd && (
         <Script
-          id={`faq-jsonld-datoru-${locale}`}
+          id={`faq-jsonld-datoru-${d.slug}-${locale}`}
           type="application/ld+json"
           strategy="afterInteractive"
         >
@@ -716,12 +753,19 @@ export default async function ComputerDevicePage({
       )}
 
       <Script
-        id={`process-jsonld-datoru-${locale}`}
+        id={`process-jsonld-datoru-${d.slug}-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
         {JSON.stringify(processHowToLd)}
       </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={headerScrollCta}
+        crumbs={headerCrumbs}
+      />
 
       <DeviceHero image={d.image} alt={heroAlt} bodyHtml={heroBodyHtml} />
 

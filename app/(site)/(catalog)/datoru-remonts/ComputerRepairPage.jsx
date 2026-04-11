@@ -1,5 +1,9 @@
 import Script from 'next/script';
 
+import { resolveCategoryPage } from '@/lib/content/resolvers/catalogPages';
+
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+
 import Services from '@sections/services/Services';
 import {
   buildComputerPopularServices,
@@ -13,20 +17,47 @@ import DeviceHero from '@sections/device-hero/DeviceHero';
 import BrandList from '@sections/brand-list/BrandList';
 import Reviews from '@sections/reviews/Reviews';
 
-import categories from '@/data/categories';
-
 import s from './DatoruCategory.module.scss';
 
 import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
+  buildItemListLd,
 } from '@/lib/seo/jsonldHelpers';
 import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
-const ORIGIN = 'https://www.ilab.lv';
+const CATEGORY_KEY = 'datoru-remonts';
 
-const computerCategory = categories.find((c) => c.slug === 'datoru-remonts');
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
+
+  if (typeof value === 'string') return value || fallback;
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
+}
+
+function normalizeRoutePath(path = '', locale = 'lv') {
+  if (!path) return '';
+
+  const clean = String(path).trim();
+
+  if (locale === 'lv') return clean;
+
+  if (clean === '/') return '/ru';
+  if (clean === '/ru' || clean.startsWith('/ru/')) return clean;
+
+  return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
+}
 
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
@@ -75,6 +106,8 @@ function getPageStrings(locale = 'lv') {
           a: 'Да, после быстрой диагностики назовём диапазон стоимости и срок. Для более сложных неисправностей цену уточняем после тестов.',
         },
       ],
+      scrollCta: { label: 'Смотреть бренды', targetId: 'brand-list' },
+      fallbackTitle: 'Ремонт компьютеров в Риге',
     };
   }
 
@@ -123,6 +156,8 @@ function getPageStrings(locale = 'lv') {
         a: 'Jā, pēc ātras diagnostikas nosauksim izmaksu diapazonu un termiņu. Sarežģītākiem bojājumiem cenas precizējam pēc testiem.',
       },
     ],
+    scrollCta: { label: 'Skatīt zīmolus', targetId: 'brand-list' },
+    fallbackTitle: 'Datoru remonts Rīgā',
   };
 }
 
@@ -144,14 +179,44 @@ export function getComputerRepairMetadata(locale = 'lv') {
   };
 }
 
-export default function ComputerRepairPage({ locale = 'lv' }) {
+export default async function ComputerRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
-  const basePath = buildCategoryHref(locale, 'datoru-remonts');
-  const popularServices = buildComputerPopularServices(locale);
+
+  const page = await resolveCategoryPage(CATEGORY_KEY, locale);
+  if (!page) return null;
+
+  const basePath =
+    page.route?.publicPath || buildCategoryHref(locale, CATEGORY_KEY);
+
+  const brands = Array.isArray(page.source?.category?.brands)
+    ? page.source.category.brands
+    : [];
+
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || (locale === 'ru' ? 'Главная' : 'Sākums'),
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: headerTitle,
+      href: basePath,
+    },
+  ];
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: strings.breadcrumbName, url: abs(basePath) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(basePath) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
@@ -160,41 +225,56 @@ export default function ComputerRepairPage({ locale = 'lv' }) {
     description: strings.serviceDescription,
   });
 
-  const itemListLd =
-    computerCategory && computerCategory.brands
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'ItemList',
-          itemListElement: computerCategory.brands.map((b, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            url: `${ORIGIN}${basePath}/${b.brandSlug}/`,
-            name: `${b.name} datoru remonts`,
-          })),
-        }
-      : null;
+  const itemListLd = buildItemListLd(
+    brands.map((b) => {
+      const key = b?.key || b?.brandSlug || '';
+      const routePath =
+        normalizeRoutePath(b?.route?.brandPath || '', locale) ||
+        `${basePath}/${key}`;
+
+      return {
+        name: `${pickLocalized(b?.labels, locale, key)} datoru remonts`,
+        url: abs(routePath),
+      };
+    })
+  );
+
+  const popularServices = buildComputerPopularServices(locale);
+
+  const heroImage = '/images/categories/datoru_remonts.webp';
+
+  const heroHtml =
+    pickLocalized(page.source?.category?.bodyHtml, locale, '') ||
+    strings.heroBodyHtml;
 
   return (
     <>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="breadcrumbs-jsonld" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
+
+      <Script id="service-jsonld" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
-      {itemListLd && (
-        <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(itemListLd)}
-        </Script>
-      )}
+
+      <Script id="itemlist-jsonld" type="application/ld+json">
+        {JSON.stringify(itemListLd)}
+      </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        crumbs={breadcrumbs}
+        scrollCta={strings.scrollCta}
+      />
 
       <main className={s.main}>
         <DeviceHero
-          image="/images/categories/datoru_remonts.webp"
+          image={heroImage}
           alt={strings.heroAlt}
           focal="right"
           className="category"
-          bodyHtml={strings.heroBodyHtml}
+          bodyHtml={heroHtml}
         />
 
         <section className={s.section} aria-labelledby="computers-intro-h2">
@@ -206,7 +286,6 @@ export default function ComputerRepairPage({ locale = 'lv' }) {
             <p className={s.leadText}>{strings.introLead}</p>
 
             <p dangerouslySetInnerHTML={{ __html: strings.introP1 }} />
-
             <p dangerouslySetInnerHTML={{ __html: strings.introP2 }} />
           </div>
         </section>
@@ -221,7 +300,7 @@ export default function ComputerRepairPage({ locale = 'lv' }) {
           </div>
         </section>
 
-        {computerCategory && computerCategory.brands && (
+        {brands.length > 0 && (
           <BrandList
             id="brand-list"
             basePath={basePath}
@@ -229,33 +308,40 @@ export default function ComputerRepairPage({ locale = 'lv' }) {
             appleIntro={strings.appleIntro}
             otherTitle={strings.otherTitle}
             otherIntro={strings.otherIntro}
-            brands={computerCategory.brands}
+            brands={brands}
+            locale={locale}
           />
         )}
 
-        <Reviews locale={locale} />
-        <Process locale={locale} />
+        {page.sections?.hasReviews && <Reviews locale={locale} />}
+        {page.sections?.hasProcess && <Process locale={locale} />}
 
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
+        {page.sections?.hasWhy && (
+          <section className={s.section}>
+            <Why locale={locale} />
+          </section>
+        )}
 
-        <section className={s.section} aria-labelledby="faq-h2">
-          <div className={s.container}>
-            <Faq
-              id="computers-faq"
-              title={strings.faqTitle}
-              items={strings.faqItems}
-              headingLevel={2}
-              variant="accordion"
-              locale={locale}
-            />
-          </div>
-        </section>
+        {page.sections?.hasFaq && (
+          <section className={s.section} aria-labelledby="faq-h2">
+            <div className={s.container}>
+              <Faq
+                id="computers-faq"
+                title={strings.faqTitle}
+                items={strings.faqItems}
+                headingLevel={2}
+                variant="accordion"
+                locale={locale}
+              />
+            </div>
+          </section>
+        )}
 
-        <section className={s.section}>
-          <ConvertBand locale={locale} />
-        </section>
+        {page.sections?.hasConvertBand && (
+          <section className={s.section}>
+            <ConvertBand locale={locale} />
+          </section>
+        )}
       </main>
     </>
   );

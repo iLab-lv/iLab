@@ -1,5 +1,7 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
@@ -18,8 +20,6 @@ import {
 import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 import { LuCog, LuFilter, LuSparkles, LuWrench } from 'react-icons/lu';
-
-const ORIGIN = 'https://www.ilab.lv';
 
 const FAQ_ITEMS_LV = [
   {
@@ -105,6 +105,31 @@ function getPageStrings(locale = 'lv') {
       ],
       faqTitle: 'Часто задаваемые вопросы',
       faqItems: FAQ_ITEMS_RU,
+      processTitle: 'Как проходит ремонт',
+      processSteps: [
+        {
+          title: 'Диагностика',
+          text: 'Быстро проверяем устройство и подтверждаем неисправность.',
+        },
+        {
+          title: 'Цена и срок',
+          text: 'Согласовываем стоимость и срок выполнения до начала работ.',
+        },
+        {
+          title: 'Ремонт',
+          text: 'Выполняем чистку, замену деталей и тесты по требованиям производителя.',
+        },
+        {
+          title: 'Проверка',
+          text: 'После ремонта тестируем мощность всасывания, температуру и стабильность работы.',
+        },
+        {
+          title: 'Гарантия',
+          text: 'Гарантия 90 дней и рекомендации по обслуживанию.',
+        },
+      ],
+      scrollCta: { label: 'Смотреть услуги', targetId: 'dyson-services' },
+      fallbackTitle: 'Ремонт Dyson в Риге',
     };
   }
 
@@ -144,6 +169,31 @@ function getPageStrings(locale = 'lv') {
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
     faqItems: FAQ_ITEMS_LV,
+    processTitle: 'Kā notiek remonts',
+    processSteps: [
+      {
+        title: 'Diagnostika',
+        text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+      },
+      {
+        title: 'Cena un termiņš',
+        text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+      },
+      {
+        title: 'Remonts',
+        text: 'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši ražotāja prasībām.',
+      },
+      {
+        title: 'Pārbaude',
+        text: 'Pēc remonta testējam sūkšanas jaudu, temperatūru un darbības stabilitāti.',
+      },
+      {
+        title: 'Garantija',
+        text: '90 dienu garantija un uzturēšanas ieteikumi.',
+      },
+    ],
+    scrollCta: { label: 'Skatīt pakalpojumus', targetId: 'dyson-services' },
+    fallbackTitle: 'Dyson remonts Rīgā',
   };
 }
 
@@ -263,14 +313,29 @@ function buildHowToLd(locale = 'lv') {
 
 export default function DysonRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
+  const metadata = getDysonRepairMetadata(locale);
   const basePath = buildCategoryHref(locale, 'dyson-remonts');
+
+  const headerTitle = strings.breadcrumbName || strings.fallbackTitle;
+  const headerLead = metadata.description || null;
+
+  const breadcrumbs = [
+    {
+      label: locale === 'ru' ? 'Главная' : 'Sākums',
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: headerTitle,
+      href: basePath,
+    },
+  ];
 
   const faqLd = buildFaqLd(strings.faqItems);
   const howToLd = buildHowToLd(locale);
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: strings.breadcrumbName, url: abs(basePath) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(basePath) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
@@ -293,6 +358,13 @@ export default function DysonRepairPage({ locale = 'lv' }) {
       <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(serviceLd)}
       </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        crumbs={breadcrumbs}
+        scrollCta={strings.scrollCta}
+      />
 
       <DeviceHero
         image="/images/categories/dyson_remonts.webp"
@@ -325,7 +397,20 @@ export default function DysonRepairPage({ locale = 'lv' }) {
       </section>
 
       <Reviews locale={locale} />
-      <Process locale={locale} />
+
+      <div id="process" className={s.anchorTarget} />
+      <section className={s.section} aria-labelledby="process-h2">
+        <div className={s.container}>
+          <Process
+            id="process-content"
+            title={strings.processTitle}
+            steps={strings.processSteps}
+            headingLevel={2}
+            variant="cards"
+            locale={locale}
+          />
+        </div>
+      </section>
 
       <section className={s.section}>
         <Why locale={locale} />

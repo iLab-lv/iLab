@@ -10,6 +10,36 @@ const APPLE_DEVICE_MAP = {
   'mac-pro': 'station',
 };
 
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
+
+  if (typeof value === 'string') return value || fallback;
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
+}
+
+function normalizeBrand(brand, locale = 'lv') {
+  const slug = brand?.brandSlug || brand?.key || '';
+  const name =
+    brand?.name ||
+    pickLocalized(brand?.labels, locale, slug);
+
+  return {
+    ...brand,
+    slug,
+    name,
+  };
+}
+
 export default function BrandList({
   id = 'brand-list',
   basePath,
@@ -18,9 +48,19 @@ export default function BrandList({
   otherTitle,
   otherIntro,
   brands = [],
+  locale = 'lv',
 }) {
-  const appleBrands = brands.filter((b) => APPLE_SLUGS.includes(b.brandSlug));
-  const otherBrands = brands.filter((b) => !APPLE_SLUGS.includes(b.brandSlug));
+  const normalizedBrands = brands
+    .map((brand) => normalizeBrand(brand, locale))
+    .filter((brand) => brand.slug);
+
+  const appleBrands = normalizedBrands.filter((b) =>
+    APPLE_SLUGS.includes(b.slug)
+  );
+
+  const otherBrands = normalizedBrands.filter(
+    (b) => !APPLE_SLUGS.includes(b.slug)
+  );
 
   const appleHeadingId = `${id}-apple-heading`;
   const otherHeadingId = `${id}-other-heading`;
@@ -37,17 +77,19 @@ export default function BrandList({
             <p className={s.leadText}>{appleIntro}</p>
           </div>
 
-          <ul className={s.appleButtons} role="list" aria-label="Apple datoru zīmoli">
-            {appleBrands.map((brand) => (
-              <li key={brand.brandSlug}>
-                <DeviceButton
-                  href={`${basePath}/${brand.brandSlug}`}
-                  label={brand.name}
-                  device={APPLE_DEVICE_MAP[brand.brandSlug] || 'laptop'}
-                />
-              </li>
-            ))}
-          </ul>
+          {appleBrands.length > 0 && (
+            <ul className={s.appleButtons} role="list" aria-label="Apple datoru zīmoli">
+              {appleBrands.map((brand) => (
+                <li key={brand.slug}>
+                  <DeviceButton
+                    href={`${basePath}/${brand.slug}`}
+                    label={brand.name}
+                    device={APPLE_DEVICE_MAP[brand.slug] || 'laptop'}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {otherBrands.length > 0 && (
@@ -60,9 +102,9 @@ export default function BrandList({
 
             <ul className={s.brandGrid} aria-label="Citu datoru zīmolu saraksts">
               {otherBrands.map((brand) => (
-                <li key={brand.brandSlug} className={s.brandItem}>
+                <li key={brand.slug} className={s.brandItem}>
                   <Link
-                    href={`${basePath}/${brand.brandSlug}`}
+                    href={`${basePath}/${brand.slug}`}
                     className={s.brandLink}
                   >
                     {brand.logo ? (

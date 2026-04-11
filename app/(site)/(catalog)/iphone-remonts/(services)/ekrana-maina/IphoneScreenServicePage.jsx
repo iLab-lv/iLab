@@ -1,11 +1,18 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@sections/service-pricelist/ServicePricelist';
+
+import {
+  normalizeText,
+  toFaqLd,
+  toFaqRenderItems,
+} from '@sections/faq/faq.helpers';
 
 import { db } from '@/lib/firebaseAdmin';
 
@@ -15,18 +22,12 @@ import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
-  buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
 
 const SERVICE_IDS = [
   'phone-display-original',
   'phone-display-oled',
   'phone-display-incell',
-];
-
-const FAQ_ITEMS = [
-  { q: 'Cik ilgi ilgst ekrāna maiņa?', a: 'Parasti 1–3 stundas.' },
-  { q: 'Vai saglabājas Face ID?', a: 'Jā — ja bojāts tikai ekrāns.' },
 ];
 
 function getRoutePath(locale = 'lv') {
@@ -49,9 +50,13 @@ function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       heroAlt: 'Замена экрана iPhone',
+      heroBodyHtml:
+        '<p><strong>Замена экрана iPhone в Риге</strong> в сервисе iLab — оригинальные и качественные OEM дисплеи, быстрая диагностика и <strong>гарантия 90 дней</strong>. Часто замену экрана выполняем в тот же день.</p>',
       priceTitle: 'Цены на замену экрана по моделям',
       ctaLabel: 'Записаться на ремонт',
       faqTitle: 'Вопросы',
+      serviceFaqGroupLabel: 'Замена экрана',
+      basicFaqGroupLabel: 'Общие вопросы',
       breadcrumbServiceName: 'Замена экрана',
       serviceName: 'Замена экрана iPhone в Риге',
       serviceType: 'Замена экрана iPhone',
@@ -60,14 +65,25 @@ function getPageStrings(locale = 'lv') {
       homeCrumb: 'Главная',
       hubCrumb: 'Ремонт iPhone',
       otherModels: 'Другие модели',
+      headerTitle: 'Замена экрана iPhone в Риге',
+      headerLead:
+        'Меняем экран iPhone при трещинах, полосах, пятнах, отсутствии изображения или проблемах с сенсором. До ремонта проводим диагностику, согласовываем стоимость и после замены выдаём гарантию 90 дней.',
+      headerCtaLabel: 'Смотреть цены',
+      serviceFaqDocId: 'service_ekrana-maina_ru',
+      basicFaqDocId: 'basic_ru',
+      applyAria: 'Записаться на ремонт',
     };
   }
 
   return {
     heroAlt: 'iPhone ekrāna maiņa',
+    heroBodyHtml:
+      '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā — oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>90 dienu garantija</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
     priceTitle: 'Ekrāna maiņas cenas pēc modeļa',
     ctaLabel: 'Pieteikties remontam',
     faqTitle: 'Jautājumi',
+    serviceFaqGroupLabel: 'Ekrāna maiņa',
+    basicFaqGroupLabel: 'Vispārīgi jautājumi',
     breadcrumbServiceName: 'Ekrāna maiņa',
     serviceName: 'iPhone ekrāna maiņa Rīgā',
     serviceType: 'iPhone ekrāna maiņa',
@@ -76,6 +92,13 @@ function getPageStrings(locale = 'lv') {
     homeCrumb: 'Sākums',
     hubCrumb: 'iPhone remonts',
     otherModels: 'Citi modeļi',
+    headerTitle: 'iPhone ekrāna maiņa Rīgā',
+    headerLead:
+      'Mainām iPhone ekrānu, ja tas ir saplaisājis, rāda līnijas, plankumus, nereaģē uz pieskārienu vai nerāda attēlu. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    headerCtaLabel: 'Skatīt cenas',
+    serviceFaqDocId: 'service_ekrana-maina_lv',
+    basicFaqDocId: 'basic_lv',
+    applyAria: 'Pieteikties remontam',
   };
 }
 
@@ -120,10 +143,6 @@ export function getIphoneScreenServiceMetadata(locale = 'lv') {
   };
 }
 
-function buildFaqLd() {
-  return buildFaqLdFromPairs(FAQ_ITEMS);
-}
-
 function buildBreadcrumbs(locale = 'lv') {
   const strings = getPageStrings(locale);
 
@@ -143,6 +162,105 @@ function buildServiceLd(locale = 'lv') {
     serviceType: strings.serviceType,
     description: strings.serviceDescription,
   });
+}
+
+function dedupeFaqItems(items = []) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = normalizeText(item?.q || '').toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortFaqItems(items = []) {
+  return [...items].sort((a, b) => {
+    const ao = typeof a?.order === 'number' ? a.order : 9999;
+    const bo = typeof b?.order === 'number' ? b.order : 9999;
+    if (ao !== bo) return ao - bo;
+
+    const aq = String(a?.q || '');
+    const bq = String(b?.q || '');
+    return aq.localeCompare(bq);
+  });
+}
+
+async function getFaqSections(locale = 'lv') {
+  const strings = getPageStrings(locale);
+
+  const [serviceDoc, basicDoc] = await Promise.all([
+    db.collection('faqGroups').doc(strings.serviceFaqDocId).get(),
+    db.collection('faqGroups').doc(strings.basicFaqDocId).get(),
+  ]);
+
+  const sections = [];
+
+  const serviceData = serviceDoc.exists ? serviceDoc.data() || {} : {};
+  const basicData = basicDoc.exists ? basicDoc.data() || {} : {};
+
+  const serviceItems = sortFaqItems(
+    (Array.isArray(serviceData.items) ? serviceData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (serviceItems.length) {
+    sections.push({
+      id: strings.serviceFaqDocId,
+      title: strings.serviceFaqGroupLabel,
+      items: serviceItems,
+    });
+  }
+
+  const basicItems = sortFaqItems(
+    (Array.isArray(basicData.items) ? basicData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (basicItems.length) {
+    sections.push({
+      id: strings.basicFaqDocId,
+      title: strings.basicFaqGroupLabel,
+      items: basicItems,
+    });
+  }
+
+  return sections;
 }
 
 async function getAppleSeriesLabelMap(locale = 'lv') {
@@ -276,16 +394,37 @@ export default async function IphoneScreenServicePage({
   searchParams,
 }) {
   const selectedModel = searchParams?.model;
-  const [devices, pricing, serviceMeta] = await Promise.all([
+  const [devices, pricing, serviceMeta, sections] = await Promise.all([
     getDevicesForIphone(locale),
     buildPricing(),
     getServiceMetaMap(SERVICE_IDS),
+    getFaqSections(locale),
   ]);
 
   const strings = getPageStrings(locale);
-  const faqLd = buildFaqLd();
+
+  const mergedFaqItems = dedupeFaqItems(
+    sections.flatMap((section) => section.items || [])
+  );
+
+  const faqLd = toFaqLd(mergedFaqItems);
   const breadcrumbsLd = buildBreadcrumbs(locale);
   const serviceLd = buildServiceLd(locale);
+
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.hubCrumb,
+      href: getHubPath(locale),
+    },
+    {
+      label: strings.breadcrumbServiceName,
+      href: getRoutePath(locale),
+    },
+  ];
 
   return (
     <>
@@ -301,10 +440,17 @@ export default async function IphoneScreenServicePage({
         {JSON.stringify(serviceLd)}
       </Script>
 
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        scrollCta={{ label: strings.headerCtaLabel, targetId: 'brand-list' }}
+        crumbs={headerCrumbs}
+      />
+
       <DeviceHero
         image="/images/categories/displeja_maina.webp"
         alt={strings.heroAlt}
-        className="service"
+        bodyHtml={strings.heroBodyHtml}
       />
 
       <section id="brand-list" className={s.section}>
@@ -325,8 +471,34 @@ export default async function IphoneScreenServicePage({
 
       <Process locale={locale} />
       <Why locale={locale} />
-      <Faq title={strings.faqTitle} groups={[{ items: FAQ_ITEMS }]} locale={locale} />
-      <section id="pieteikties">
+
+      {!!sections.length && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <h2 id="faq-h2" className={s.h2}>
+              {strings.faqTitle}
+            </h2>
+
+            {sections.map((section, index) => (
+              <div
+                key={`faq-group-${index}-${section.id}`}
+                className={index > 0 ? s.stackLg : ''}
+              >
+                <Faq
+                  id={`faq-group-${index + 1}`}
+                  title={section.title}
+                  items={toFaqRenderItems(section.items)}
+                  headingLevel={3}
+                  variant="accordion"
+                  locale={locale}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section id="pieteikties" aria-label={strings.applyAria}>
         <ConvertBand locale={locale} />
       </section>
     </>

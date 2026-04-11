@@ -1,11 +1,18 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
+
+import {
+  normalizeText,
+  toFaqLd,
+  toFaqRenderItems,
+} from '@sections/faq/faq.helpers';
 
 import devices from '@/data/devices';
 
@@ -15,35 +22,11 @@ import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
-  buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
 
 import { db } from '@/lib/firebaseAdmin';
 
 const SERVICE_IDS = ['camera-glass', 'camera'];
-
-const FAQ_ITEMS = [
-  {
-    q: 'Kādi simptomi norāda uz kameras remontu?',
-    a: 'Miglainas bildes, plankumi, autofokusa problēmas, trīcēšana video režīmā vai situācijas, kad kamera neatveras.',
-  },
-  {
-    q: 'Vai vienmēr jāmaina viss kameras modulis?',
-    a: 'Nē. Ja bojāts tikai stikliņš, bieži pietiek ar stikliņa (lēcas vāciņa) nomaiņu. Moduli maina tikai tad, ja tas tiešām bojāts.',
-  },
-  {
-    q: 'Cik ilgi ilgst remonts?',
-    a: 'Parasti 45–90 minūtes atkarībā no modeļa un bojājuma. Populāros modeļos bieži pabeidzam tajā pašā dienā.',
-  },
-  {
-    q: 'Vai mani dati ir drošībā?',
-    a: 'Jā. Kameras remonts neietekmē foto un video — tie paliek neskarti. Drošībai iesakām izveidot dublējumu.',
-  },
-  {
-    q: 'Vai ir garantija?',
-    a: 'Jā — 90 dienas gan detaļai, gan veiktajam darbam.',
-  },
-];
 
 function getRoutePath(locale = 'lv') {
   return locale === 'ru'
@@ -56,7 +39,9 @@ function getHubPath(locale = 'lv') {
 }
 
 function getAllModelsHref(locale = 'lv') {
-  return locale === 'ru' ? '/ru/remont-iphone#iphone-modeli' : '/iphone-remonts#iphone-modeli';
+  return locale === 'ru'
+    ? '/ru/remont-iphone#iphone-modeli'
+    : '/iphone-remonts#iphone-modeli';
 }
 
 function getPageStrings(locale = 'lv') {
@@ -87,12 +72,22 @@ function getPageStrings(locale = 'lv') {
         { title: 'Гарантия', text: 'Гарантия 90 дней на детали и выполненные работы.' },
       ],
       faqTitle: 'Часто задаваемые вопросы',
-      faqGroupLabel: 'Камера',
+      serviceFaqGroupLabel: 'Ремонт камеры',
+      basicFaqGroupLabel: 'Общие вопросы',
       breadcrumbServiceName: 'Ремонт камеры',
       serviceName: 'Ремонт камеры iPhone в Риге',
       serviceType: 'Ремонт камеры iPhone',
       serviceDescription:
         'Ремонт камеры iPhone в Риге: диагностика, замена стекла камеры и замена модуля по необходимости. Гарантия 90 дней.',
+      homeCrumb: 'Главная',
+      hubCrumb: 'Ремонт iPhone',
+      headerTitle: 'Ремонт камеры iPhone в Риге',
+      headerLead:
+        'Ремонтируем камеру iPhone при мутных фото, пятнах, проблемах с фокусировкой и повреждённом стекле камеры. До ремонта проводим диагностику, согласовываем стоимость и после ремонта выдаём гарантию 90 дней.',
+      headerCtaLabel: 'Смотреть цены',
+      serviceFaqDocId: 'service_kameras-remonts_ru',
+      basicFaqDocId: 'basic_ru',
+      applyAria: 'Записаться на ремонт',
     };
   }
 
@@ -122,12 +117,22 @@ function getPageStrings(locale = 'lv') {
       { title: 'Garantija', text: '90 dienu garantija gan detaļām, gan darbam.' },
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
-    faqGroupLabel: 'Kamera',
+    serviceFaqGroupLabel: 'Kameras remonts',
+    basicFaqGroupLabel: 'Vispārīgi jautājumi',
     breadcrumbServiceName: 'Kameras remonts',
     serviceName: 'iPhone kameras remonts Rīgā',
     serviceType: 'iPhone kameras remonts',
     serviceDescription:
       'iPhone kameras remonts Rīgā: diagnostika, stikliņa maiņa un moduļa nomaiņa pēc vajadzības. 90 dienu garantija.',
+    homeCrumb: 'Sākums',
+    hubCrumb: 'iPhone remonts',
+    headerTitle: 'iPhone kameras remonts Rīgā',
+    headerLead:
+      'Remontējam iPhone kameru, ja attēli ir miglaini, ir plankumi, fokusēšanās problēmas vai bojāts kameras stikliņš. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc remonta sniedzam 90 dienu garantiju.',
+    headerCtaLabel: 'Skatīt cenas',
+    serviceFaqDocId: 'service_kameras-remonts_lv',
+    basicFaqDocId: 'basic_lv',
+    applyAria: 'Pieteikties remontam',
   };
 }
 
@@ -149,16 +154,12 @@ export function getIphoneCameraServiceMetadata(locale = 'lv') {
   };
 }
 
-function buildFaqLd() {
-  return buildFaqLdFromPairs(FAQ_ITEMS);
-}
-
 function buildBreadcrumbs(locale = 'lv') {
   const strings = getPageStrings(locale);
 
   return buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: 'iPhone remonts', url: abs(getHubPath(locale)) },
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.hubCrumb, url: abs(getHubPath(locale)) },
     { name: strings.breadcrumbServiceName, url: abs(getRoutePath(locale)) },
   ]);
 }
@@ -172,6 +173,105 @@ function buildServiceLd(locale = 'lv') {
     serviceType: strings.serviceType,
     description: strings.serviceDescription,
   });
+}
+
+function dedupeFaqItems(items = []) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = normalizeText(item?.q || '').toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortFaqItems(items = []) {
+  return [...items].sort((a, b) => {
+    const ao = typeof a?.order === 'number' ? a.order : 9999;
+    const bo = typeof b?.order === 'number' ? b.order : 9999;
+    if (ao !== bo) return ao - bo;
+
+    const aq = String(a?.q || '');
+    const bq = String(b?.q || '');
+    return aq.localeCompare(bq);
+  });
+}
+
+async function getFaqSections(locale = 'lv') {
+  const strings = getPageStrings(locale);
+
+  const [serviceDoc, basicDoc] = await Promise.all([
+    db.collection('faqGroups').doc(strings.serviceFaqDocId).get(),
+    db.collection('faqGroups').doc(strings.basicFaqDocId).get(),
+  ]);
+
+  const sections = [];
+
+  const serviceData = serviceDoc.exists ? serviceDoc.data() || {} : {};
+  const basicData = basicDoc.exists ? basicDoc.data() || {} : {};
+
+  const serviceItems = sortFaqItems(
+    (Array.isArray(serviceData.items) ? serviceData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (serviceItems.length) {
+    sections.push({
+      id: strings.serviceFaqDocId,
+      title: strings.serviceFaqGroupLabel,
+      items: serviceItems,
+    });
+  }
+
+  const basicItems = sortFaqItems(
+    (Array.isArray(basicData.items) ? basicData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (basicItems.length) {
+    sections.push({
+      id: strings.basicFaqDocId,
+      title: strings.basicFaqGroupLabel,
+      items: basicItems,
+    });
+  }
+
+  return sections;
 }
 
 function chunkArray(arr, size) {
@@ -239,7 +339,10 @@ async function buildPricingForBrandModels({
   return pricingObj;
 }
 
-export default async function IphoneCameraServicePage({ locale = 'lv', searchParams }) {
+export default async function IphoneCameraServicePage({
+  locale = 'lv',
+  searchParams,
+}) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
 
   const pricing = await buildPricingForBrandModels({
@@ -249,9 +352,30 @@ export default async function IphoneCameraServicePage({ locale = 'lv', searchPar
   });
 
   const strings = getPageStrings(locale);
-  const faqLd = buildFaqLd();
+  const sections = await getFaqSections(locale);
+
+  const mergedFaqItems = dedupeFaqItems(
+    sections.flatMap((section) => section.items || [])
+  );
+
+  const faqLd = toFaqLd(mergedFaqItems);
   const breadcrumbsLd = buildBreadcrumbs(locale);
   const serviceLd = buildServiceLd(locale);
+
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.hubCrumb,
+      href: getHubPath(locale),
+    },
+    {
+      label: strings.breadcrumbServiceName,
+      href: getRoutePath(locale),
+    },
+  ];
 
   return (
     <>
@@ -267,6 +391,13 @@ export default async function IphoneCameraServicePage({ locale = 'lv', searchPar
         {JSON.stringify(serviceLd)}
       </Script>
 
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        scrollCta={{ label: strings.headerCtaLabel, targetId: 'brand-list' }}
+        crumbs={headerCrumbs}
+      />
+
       <DeviceHero
         image="/images/categories/kameras_remonts.webp"
         alt={strings.heroAlt}
@@ -277,7 +408,7 @@ export default async function IphoneCameraServicePage({ locale = 'lv', searchPar
 
       <section className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h2 id="intro-h2" className={s.h1}>
+          <h2 id="intro-h2" className={s.h2}>
             {strings.introTitle}
           </h2>
 
@@ -340,18 +471,33 @@ export default async function IphoneCameraServicePage({ locale = 'lv', searchPar
         <Why locale={locale} />
       </section>
 
-      <section className={s.section}>
-        <Faq
-          id="faq"
-          title={strings.faqTitle}
-          groups={[{ label: strings.faqGroupLabel, items: FAQ_ITEMS }]}
-          headingLevel={2}
-          variant="accordion"
-          locale={locale}
-        />
-      </section>
+      {!!sections.length && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <h2 id="faq-h2" className={s.h2}>
+              {strings.faqTitle}
+            </h2>
 
-      <section id="pieteikties" className={s.section}>
+            {sections.map((section, index) => (
+              <div
+                key={`faq-group-${index}-${section.id}`}
+                className={index > 0 ? s.stackLg : ''}
+              >
+                <Faq
+                  id={`faq-group-${index + 1}`}
+                  title={section.title}
+                  items={toFaqRenderItems(section.items)}
+                  headingLevel={3}
+                  variant="accordion"
+                  locale={locale}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section id="pieteikties" className={s.section} aria-label={strings.applyAria}>
         <div className={s.container}>
           <ConvertBand locale={locale} />
         </div>

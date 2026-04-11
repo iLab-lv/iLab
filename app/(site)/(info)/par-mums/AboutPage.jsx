@@ -1,5 +1,6 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
 import Reviews from '@sections/reviews/Reviews';
@@ -15,6 +16,10 @@ function getPageStrings(locale = 'lv') {
       canonicalPath: '/ru/o-nas',
       breadcrumbHome: 'Главная',
       breadcrumbPage: 'О iLab',
+
+      headerTitle: 'О iLab',
+      headerLead:
+        'iLab — сервисный центр в Риге с более чем 10-летним опытом ремонта телефонов, планшетов, компьютеров и другой техники. Работаем быстро, понятно и с гарантией как для частных клиентов, так и для бизнеса.',
 
       aboutTitle: 'О нас',
 
@@ -68,6 +73,10 @@ function getPageStrings(locale = 'lv') {
     canonicalPath: '/par-mums',
     breadcrumbHome: 'Sākums',
     breadcrumbPage: 'Par iLab',
+
+    headerTitle: 'Par iLab',
+    headerLead:
+      'iLab ir servisa centrs Rīgā ar vairāk nekā 10 gadu pieredzi telefonu, planšetdatoru, datoru un citas tehnikas remontā. Strādājam ātri, skaidri un ar garantiju gan privātpersonām, gan uzņēmumiem.',
 
     aboutTitle: 'Par mums',
 
@@ -180,6 +189,17 @@ export default function AboutPage({ locale = 'lv' }) {
   const breadcrumbsLd = buildBreadcrumbsLd(locale);
   const orgLd = buildOrgLd(locale);
 
+  const headerCrumbs = [
+    {
+      label: strings.breadcrumbHome,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.breadcrumbPage,
+      href: strings.canonicalPath,
+    },
+  ];
+
   return (
     <>
       <Script
@@ -197,6 +217,12 @@ export default function AboutPage({ locale = 'lv' }) {
       >
         {JSON.stringify(orgLd)}
       </Script>
+
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        crumbs={headerCrumbs}
+      />
 
       <section className={s.section} aria-labelledby="about-content-h2">
         <div className={s.container}>
@@ -244,7 +270,7 @@ export default function AboutPage({ locale = 'lv' }) {
       </section>
 
       <section className={s.section}>
-          <Why locale={locale} />
+        <Why locale={locale} />
       </section>
 
       <section className={s.section}>

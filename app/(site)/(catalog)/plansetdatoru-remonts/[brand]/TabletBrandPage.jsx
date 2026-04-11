@@ -1,12 +1,11 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import { getCategoryBySlug, getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
 import { getDevices } from '@/lib/content/devices';
-import {
-  getBrandByCategory,
-  getSeriesMetaByCategoryBrand,
-} from '@/lib/content/categories';
+import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
@@ -14,12 +13,7 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-
-import {
-  getBrandContent,
-  listBrandsForCategory,
-  BRAND_CATEGORY,
-} from '@/data/brandContent';
+import Reviews from '@sections/reviews/Reviews';
 
 import {
   LuTabletSmartphone,
@@ -31,38 +25,51 @@ import {
 } from 'react-icons/lu';
 
 import {
-  ORIGIN,
   abs,
   buildBreadcrumbsLd,
-  buildProvidersFromLocations,
+  buildServiceLdForCity,
+  buildStandardRepairHowToLd,
+  buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
 import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 import c from '@styles/Catalog.module.scss';
 
+const CATEGORY_KEY = 'plansetdatoru-remonts';
+
 /* ---------------------------------------------
    Static params
 ---------------------------------------------- */
 export async function generateTabletBrandStaticParams() {
-  const brands = listBrandsForCategory(BRAND_CATEGORY.TABLETS) || [];
-  return brands.map((b) => ({ brand: String(b.slug).toLowerCase() }));
+  const category = await getCategoryBySlug(CATEGORY_KEY);
+  if (!category || !Array.isArray(category.brands)) return [];
+
+  return category.brands
+    .map((brand) => String(brand?.key || '').toLowerCase())
+    .filter(Boolean)
+    .map((brand) => ({ brand }));
 }
 
 /* ---------------------------------------------
    Helpers
 ---------------------------------------------- */
-async function getTabletBrandConfig(brandSlug) {
-  const brand = await getBrandByCategory('plansetdatoru-remonts', brandSlug);
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
 
-  return {
-    brandKey: brand?.key || brandSlug,
-    logo: brand?.logo || null,
-    tint: 'rgba(0,200,180,0.20)',
-    heroAlt:
-      brand?.labels?.lv ||
-      brand?.name ||
-      'Planšetdatoru remonts',
-  };
+  if (typeof value === 'string') {
+    return value || fallback;
+  }
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
 }
 
 const PROCESS_STEPS_LV = [
@@ -223,64 +230,82 @@ const POPULAR_SERVICES_RU = [
   },
 ];
 
-function getTabletBrandStrings(bc, locale = 'lv') {
+function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
+  const selectorHeading =
+    page?.selector?.heading ||
+    (locale === 'ru'
+      ? `Выберите модель ${brandName}`
+      : `Izvēlies savu ${brandName} modeli`);
+
+  const selectorIntro =
+    page?.selector?.intro ||
+    (locale === 'ru'
+      ? 'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.'
+      : 'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.');
+
+  const heroHtml =
+    pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
+    (locale === 'ru'
+      ? `<p><strong>${brandName} ремонт планшетов в Риге</strong> — замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
+      : `<p><strong>${brandName} planšetdatoru remonts Rīgā</strong> — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
+
   if (locale === 'ru') {
     return {
-      introTitle: `${bc.marketingName} ремонт планшетов — что мы делаем`,
+      introTitle: `${brandName} ремонт планшетов — что мы делаем`,
       introLead:
         'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели — откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>ремонт разъёма зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>ремонт камеры</strong> (мутные фото, ошибки фокусировки), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
-      modelGridHeading: `Выберите модель ${bc.marketingName}`,
-      modelGridIntro:
-        'Найдите нужную модель по названию или откройте нужную серию и выберите своё устройство.',
+      modelGridHeading: selectorHeading,
+      modelGridIntro: selectorIntro,
       modelsNote:
         'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели планшетов.',
       servicesHeading: 'Популярный ремонт',
       processTitle: 'Как проходит ремонт',
       faqTitle: 'Часто задаваемые вопросы',
-      heroHtml: bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`,
-      heroAlt: `${bc.marketingName} ремонт планшетов`,
+      heroHtml,
+      heroAlt: `${brandName} ремонт планшетов`,
       categoryName: 'Ремонт планшетов',
-      brandName: `${bc.marketingName} ремонт планшетов`,
-      serviceName: `${bc.marketingName} ремонт планшетов в Риге`,
-      serviceDescription: `${bc.marketingName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      brandName,
+      serviceName: `${brandName} ремонт планшетов в Риге`,
+      serviceDescription: `${brandName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
       homeCrumb: 'Главная',
+      scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
+      fallbackTitle: `${brandName} ремонт планшетов`,
     };
   }
 
   return {
-    introTitle: `${bc.marketingName} planšetdatoru remonts — ko mēs darām`,
+    introTitle: `${brandName} planšetdatoru remonts — ko mēs darām`,
     introLead:
       'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas remonta cenas un termiņus.',
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzdas remonts</strong> (nenoturas kabelis, lēna vai nestabila uzlāde), <strong>kameras remonts</strong> (miglaini attēli, fokusēšanās kļūdas), kā arī <strong>mitruma/ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
-    modelGridHeading:
-      bc.sections?.modelGrid?.heading ?? `Izvēlies savu ${bc.marketingName} modeli`,
-    modelGridIntro:
-      bc.sections?.modelGrid?.intro ??
-      'Atrodi vajadzīgo modeli pēc nosaukuma vai atver sēriju un izvēlies savu ierīci.',
+    modelGridHeading: selectorHeading,
+    modelGridIntro: selectorIntro,
     modelsNote:
       'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu planšetdatoru modeļu.',
     servicesHeading: 'Populārākie remonti',
     processTitle: 'Kā notiek remonts',
     faqTitle: 'Biežāk uzdotie jautājumi',
-    heroHtml: bc.hero.bodyHtml ?? `<p>${bc.hero.lead}</p>`,
-    heroAlt: `${bc.marketingName} planšetdatoru remonts`,
+    heroHtml,
+    heroAlt: `${brandName} planšetdatoru remonts`,
     categoryName: 'Planšetdatoru remonts',
-    brandName: `${bc.marketingName} planšetdatoru remonts`,
-    serviceName: `${bc.marketingName} planšetdatoru remonts Rīgā`,
-    serviceDescription: `${bc.marketingName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    brandName,
+    serviceName: `${brandName} planšetdatoru remonts Rīgā`,
+    serviceDescription: `${brandName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
     homeCrumb: 'Sākums',
+    scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
+    fallbackTitle: `${brandName} planšetdatoru remonts`,
   };
 }
 
-export function getTabletBrandMetadata(brandSlug, locale = 'lv') {
-  const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
+export async function getTabletBrandMetadata(brandSlug, locale = 'lv') {
+  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
 
-  if (!bc) {
+  if (!page) {
     return {
       title:
         locale === 'ru' ? 'Ремонт планшетов | iLab' : 'Planšetdatoru remonts | iLab',
@@ -291,201 +316,142 @@ export function getTabletBrandMetadata(brandSlug, locale = 'lv') {
     };
   }
 
-  if (locale === 'ru') {
-    return {
-      title: `${bc.marketingName} ремонт планшетов в Риге | iLab`,
-      description: `${bc.marketingName} ремонт планшетов в Риге: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
-      alternates: {
-        canonical: `${buildCategoryHref(locale, 'plansetdatoru-remonts')}/${bc.slug}`,
-      },
-    };
-  }
+  const brandName = pickLocalized(
+    page?.source?.brand?.labels,
+    locale,
+    page?.source?.brand?.name || brandSlug
+  );
+
+  const strings = getTabletBrandStrings({ brandName, page, locale });
 
   return {
-    title: bc.seo.title,
-    description: bc.seo.metaDescription,
-    alternates: { canonical: bc.canonicalPath },
+    title:
+      page.seo?.metaTitle ||
+      (locale === 'ru'
+        ? `${brandName} ремонт планшетов в Риге | iLab`
+        : `${brandName} planšetdatoru remonts Rīgā | iLab`),
+    description:
+      page.seo?.metaDescription || strings.serviceDescription,
+    alternates: {
+      canonical:
+        page.route?.canonicalPath ||
+        `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`,
+    },
   };
 }
 
+/* ---------------------------------------------
+   Page
+---------------------------------------------- */
 export default async function TabletBrandPage({ brand, locale = 'lv' }) {
   const brandSlug = String(brand || '').toLowerCase();
+  if (!brandSlug) return notFound();
 
-  const allowed = (listBrandsForCategory(BRAND_CATEGORY.TABLETS) || []).map(
-    (item) => String(item.slug).toLowerCase()
-  );
-  if (!allowed.includes(brandSlug)) return notFound();
-
-  const bc = getBrandContent(brandSlug, BRAND_CATEGORY.TABLETS);
-  if (!bc) return notFound();
-
-  const [devicesAll, heroCfg, seriesMeta] = await Promise.all([
+  const [page, devicesAll, seriesMeta] = await Promise.all([
+    resolveBrandPage(CATEGORY_KEY, brandSlug, locale),
     getDevices(),
-    getTabletBrandConfig(brandSlug),
-    getSeriesMetaByCategoryBrand('plansetdatoru-remonts', brandSlug, locale),
+    getSeriesMetaByCategoryBrand(CATEGORY_KEY, brandSlug, locale),
   ]);
 
-  const strings = getTabletBrandStrings(bc, locale);
+  if (!page) return notFound();
+
+  const brandName = pickLocalized(
+    page?.source?.brand?.labels,
+    locale,
+    page?.source?.brand?.name || brandSlug
+  );
+
+  const strings = getTabletBrandStrings({ brandName, page, locale });
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
   const processSteps = locale === 'ru' ? PROCESS_STEPS_RU : PROCESS_STEPS_LV;
   const popularServices =
     locale === 'ru' ? POPULAR_SERVICES_RU : POPULAR_SERVICES_LV;
 
-  const baseCategoryPath = buildCategoryHref(locale, 'plansetdatoru-remonts');
-  const baseHref = `${baseCategoryPath}/${bc.slug}`;
+  const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
+  const baseHref = page.route?.publicPath || `${baseCategoryPath}/${brandSlug}`;
 
   const brandTabletList = devicesAll.filter(
     (device) =>
-      device.categoryKey === 'plansetdatoru-remonts' &&
-      device.brandKey === brandSlug
+      device?.type === 'device' &&
+      device.categoryKey === CATEGORY_KEY &&
+      device.brandKey === brandSlug &&
+      device.isHidden !== true
   );
 
-  const provider = buildProvidersFromLocations();
-  const pageUrl = abs(baseHref);
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
 
-  const serviceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${ORIGIN}${baseHref}#service`,
-    serviceType: strings.brandName,
-    areaServed: { '@type': 'City', name: 'Rīga' },
-    provider,
-    url: pageUrl,
-    name: strings.serviceName,
-    description: strings.serviceDescription,
-  };
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.categoryName,
+      href: baseCategoryPath,
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: baseHref,
+    },
+  ];
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
-    { name: strings.categoryName, url: abs(baseCategoryPath) },
-    { name: strings.brandName, url: pageUrl },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
+    { name: breadcrumbs[2].label, url: abs(breadcrumbs[2].href) },
   ]);
 
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqItems.map(({ q, a }, index) => ({
-      '@type': 'Question',
-      '@id': `${ORIGIN}${baseHref}#faq-q${index + 1}`,
-      name: q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: typeof a === 'string' ? a : '',
-      },
-    })),
-  };
+  const serviceLd = buildServiceLdForCity({
+    path: baseHref,
+    name: page.seo?.schemaName || strings.serviceName,
+    description: page.seo?.schemaDescription || strings.serviceDescription,
+  });
 
-  const processHowToLd = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    '@id': `${ORIGIN}${baseHref}#howto`,
-    name:
-      locale === 'ru'
-        ? `${bc.marketingName} ремонт планшета в iLab`
-        : `${bc.marketingName} planšetdatoru remonta process iLab`,
-    description:
-      locale === 'ru'
-        ? 'Как по шагам проходит диагностика, ремонт и тестирование планшета в сервисе iLab в Риге.'
-        : 'Kā soli pa solim notiek planšetdatoru diagnostika, remonts un testēšana iLab servisā Rīgā.',
-    step:
-      locale === 'ru'
-        ? [
-            {
-              '@type': 'HowToStep',
-              name: '1. Диагностика',
-              text: 'Быстро проверяем планшет, подтверждаем проблему и оцениваем объём повреждения.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '2. Цена и срок',
-              text: 'До начала ремонта согласовываем стоимость, тип детали и срок выполнения.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '3. Ремонт',
-              text: 'Мастера выполняют ремонт экрана, батареи, разъёма зарядки, камеры или других компонентов.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '4. Проверка',
-              text: 'После ремонта тестируем экран, сенсор, звук, зарядку, сеть и другие функции.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '5. Гарантия и выдача',
-              text: 'Выдаём планшет с гарантией 90 дней на детали и работу.',
-            },
-          ]
-        : [
-            {
-              '@type': 'HowToStep',
-              name: '1. Diagnostika',
-              text: 'Ātri pārbaudām planšetdatoru, apstiprinām problēmu (displejs, baterija, uzlāde, skaņa, kamera u.c.) un izvērtējam bojājuma apmēru.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '2. Cena un termiņš',
-              text: 'Pirms remonta sākšanas saskaņojam izmaksas, detaļu veidu (oriģināls vai OEM) un izpildes termiņu.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '3. Remonts',
-              text: 'Meistari veic ekrāna, baterijas, uzlādes ligzdas, kameras vai citu komponentu remontu, izmantojot kvalitatīvas detaļas.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '4. Pārbaude',
-              text: 'Pēc remonta testējam ekrānu, skārienu, skaņu, uzlādi, tīklu un citas ikdienas funkcijas, lai pārliecinātos par stabilu darbību.',
-            },
-            {
-              '@type': 'HowToStep',
-              name: '5. Garantija un izsniegšana',
-              text: 'Izsniedzam planšetdatoru ar 90 dienu garantiju uz detaļu un darbu, sniedzam ieteikumus turpmākai lietošanai.',
-            },
-          ],
-  };
+  const faqLd = buildFaqLdFromPairs(faqItems);
+  const howToLd = buildStandardRepairHowToLd(strings.serviceName);
 
   return (
     <>
-      <Script
-        id="service-jsonld-tablet-brand"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="service-jsonld-tablet-brand" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
 
-      <Script
-        id="breadcrumbs-jsonld-tablet-brand"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="breadcrumbs-jsonld-tablet-brand" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
 
-      <Script
-        id="faq-jsonld-tablet-brand"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
+      <Script id="faq-jsonld-tablet-brand" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
 
-      <Script
-        id="process-jsonld-tablet-brand"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(processHowToLd)}
+      <Script id="process-jsonld-tablet-brand" type="application/ld+json">
+        {JSON.stringify(howToLd)}
       </Script>
 
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        crumbs={breadcrumbs}
+        scrollCta={strings.scrollCta}
+      />
+
       <DeviceHero
-        image="/images/categories/plansetdatoru_remonts.webp"
+        image='/images/categories/plansetdatoru_remonts.webp'
         alt={strings.heroAlt}
-        brandLogo={heroCfg.logo}
-        brandKey={heroCfg.brandKey}
-        tint={heroCfg.tint}
+        brandLogo={page.source?.brand?.logo || null}
+        brandKey={page.source?.brand?.key || brandSlug}
+        tint="rgba(0,200,180,0.20)"
         focal="right"
+        priority
         bodyHtml={strings.heroHtml}
       />
 
@@ -495,7 +461,10 @@ export default async function TabletBrandPage({ brand, locale = 'lv' }) {
             {strings.introTitle}
           </h2>
 
-          <p className={c.intro}>{strings.introLead}</p>
+          <p
+            className={c.intro}
+            dangerouslySetInnerHTML={{ __html: strings.introLead }}
+          />
 
           <p
             className={c.paragraph}
@@ -513,10 +482,10 @@ export default async function TabletBrandPage({ brand, locale = 'lv' }) {
         devices={devicesAll}
         baseHref={baseHref}
         brandKey={brandSlug}
-        categoryKey="plansetdatoru-remonts"
+        categoryKey={CATEGORY_KEY}
         seriesMeta={seriesMeta}
         initialLimit={4}
-        autoExpandOnSearch={true}
+        autoExpandOnSearch
       />
 
       {brandTabletList.length === 0 && (
@@ -541,41 +510,51 @@ export default async function TabletBrandPage({ brand, locale = 'lv' }) {
         </div>
       </section>
 
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
+
       <div id="process-h2" className={c.anchorTarget} />
 
-      <section className={c.section} aria-labelledby="process-h2">
-        <div className={c.container}>
-          <Process
-            id="process"
-            title={strings.processTitle}
-            steps={processSteps}
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasProcess && (
+        <section className={c.section} aria-labelledby="process-h2">
+          <div className={c.container}>
+            <Process
+              id="process"
+              title={strings.processTitle}
+              steps={processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={c.section}>
-        <Why locale={locale} />
-      </section>
+      {page.sections?.hasWhy && (
+        <section className={c.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={c.section} aria-labelledby="faq-h2">
-        <div className={c.container}>
-          <Faq
-            id="tablet-brand-faq"
-            title={strings.faqTitle}
-            items={faqItems}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasFaq && (
+        <section className={c.section} aria-labelledby="faq-h2">
+          <div className={c.container}>
+            <Faq
+              id="tablet-brand-faq"
+              title={strings.faqTitle}
+              items={faqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={c.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {page.sections?.hasConvertBand && (
+        <section className={c.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }

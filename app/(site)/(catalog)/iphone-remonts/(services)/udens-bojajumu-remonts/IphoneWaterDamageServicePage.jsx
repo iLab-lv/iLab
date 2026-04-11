@@ -1,11 +1,18 @@
 import Script from 'next/script';
 
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
+
+import {
+  normalizeText,
+  toFaqLd,
+  toFaqRenderItems,
+} from '@sections/faq/faq.helpers';
 
 import devices from '@/data/devices';
 import devicePricing from '@/data/devicePricing';
@@ -16,31 +23,8 @@ import {
   abs,
   buildBreadcrumbsLd,
   buildServiceLdForCity,
-  buildFaqLdFromPairs,
 } from '@/lib/seo/jsonldHelpers';
-
-const FAQ_ITEMS = [
-  {
-    q: 'Ko darīt, ja iPhone iekrita ūdenī?',
-    a: 'Nekavējoties izslēdziet telefonu, neuzlādējiet un atnesiet uz diagnostiku. Jo ātrāk ierīce nonāk servisā, jo lielākas iespējas to atjaunot.',
-  },
-  {
-    q: 'Vai palīdz ielikt telefonu rīsos?',
-    a: 'Nē. Rīsi neaptur oksidāciju un var radīt vēl lielāku bojājumu. Labākais risinājums ir profesionāla tīrīšana un žāvēšana.',
-  },
-  {
-    q: 'Kādi simptomi norāda uz ūdens bojājumiem?',
-    a: 'Neslēdzas, neuzlādējas, pārkarst, darbojas tikai daļēji, kamera vai skaņa nestrādā, ekrānā ir plankumi, parādās “No Service”.',
-  },
-  {
-    q: 'Vai ūdens bojājumi vienmēr ir salabojami?',
-    a: 'Atkarīgs no oksidācijas apmēra. Vairāk nekā 90% gadījumu, ja ierīce atvesta tajā pašā dienā, to izdodas atjaunot.',
-  },
-  {
-    q: 'Cik ilgi ilgst ūdens bojājumu remonts?',
-    a: 'Sākotnējā tīrīšana 1–2 stundas. Sarežģītos gadījumos nepieciešams ilgāks process vai komponentu maiņa.',
-  },
-];
+import { db } from '@/lib/firebaseAdmin';
 
 function getRoutePath(locale = 'lv') {
   return locale === 'ru'
@@ -53,7 +37,9 @@ function getHubPath(locale = 'lv') {
 }
 
 function getAllModelsHref(locale = 'lv') {
-  return locale === 'ru' ? '/ru/remont-iphone#iphone-modeli' : '/iphone-remonts#iphone-modeli';
+  return locale === 'ru'
+    ? '/ru/remont-iphone#iphone-modeli'
+    : '/iphone-remonts#iphone-modeli';
 }
 
 function getPageStrings(locale = 'lv') {
@@ -91,13 +77,23 @@ function getPageStrings(locale = 'lv') {
         { title: 'Гарантия', text: '90 дней гарантии на детали и выполненные работы.' },
       ],
       faqTitle: 'Часто задаваемые вопросы',
-      faqGroupLabel: 'Повреждение влагой',
+      serviceFaqGroupLabel: 'Ремонт после попадания влаги',
+      basicFaqGroupLabel: 'Общие вопросы',
       breadcrumbServiceName: 'Ремонт после попадания влаги',
       serviceName: 'Ремонт iPhone после попадания влаги в Риге',
       serviceType: 'Ремонт iPhone после попадания влаги',
       serviceDescription:
         'Диагностика, чистка после попадания влаги, устранение окисления и замена поврежденных деталей iPhone с гарантией.',
       applyHref: '#pieteikties',
+      homeCrumb: 'Главная',
+      hubCrumb: 'Ремонт iPhone',
+      headerTitle: 'Ремонт iPhone после попадания влаги в Риге',
+      headerLead:
+        'Если iPhone упал в воду или перестал нормально работать после влаги, принесите его на диагностику как можно быстрее. Выполняем чистку, устранение окисления и восстановление устройства с гарантией 90 дней.',
+      headerCtaLabel: 'Смотреть цены',
+      serviceFaqDocId: 'service_udens-bojajumu-remonts_ru',
+      basicFaqDocId: 'basic_ru',
+      applyAria: 'Записаться на ремонт',
     };
   }
 
@@ -134,13 +130,23 @@ function getPageStrings(locale = 'lv') {
       { title: 'Garantija', text: '90 dienas gan detaļām, gan darbam.' },
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
-    faqGroupLabel: 'Ūdens bojājumi',
+    serviceFaqGroupLabel: 'Ūdens bojājumu remonts',
+    basicFaqGroupLabel: 'Vispārīgi jautājumi',
     breadcrumbServiceName: 'Ūdens bojājumi',
     serviceName: 'iPhone ūdens bojājumi — diagnostika un remonts Rīgā',
     serviceType: 'iPhone ūdens bojājumi — diagnostika un remonts',
     serviceDescription:
       'iPhone ūdens bojājumu diagnostika, tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa ar garantiju.',
     applyHref: '/pieraksties',
+    homeCrumb: 'Sākums',
+    hubCrumb: 'iPhone remonts',
+    headerTitle: 'iPhone ūdens bojājumu diagnostika un remonts Rīgā',
+    headerLead:
+      'Ja iPhone iekritis ūdenī vai pēc mitruma vairs nedarbojas pareizi, atnes to uz diagnostiku pēc iespējas ātrāk. Veicam tīrīšanu, oksidācijas novēršanu un bojāto komponentu atjaunošanu ar 90 dienu garantiju.',
+    headerCtaLabel: 'Skatīt cenas',
+    serviceFaqDocId: 'service_udens-bojajumu-remonts_lv',
+    basicFaqDocId: 'basic_lv',
+    applyAria: 'Pieteikties remontam',
   };
 }
 
@@ -162,16 +168,12 @@ export function getIphoneWaterDamageServiceMetadata(locale = 'lv') {
   };
 }
 
-function buildFaqLd() {
-  return buildFaqLdFromPairs(FAQ_ITEMS);
-}
-
 function buildBreadcrumbs(locale = 'lv') {
   const strings = getPageStrings(locale);
 
   return buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: 'iPhone remonts', url: abs(getHubPath(locale)) },
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.hubCrumb, url: abs(getHubPath(locale)) },
     { name: strings.breadcrumbServiceName, url: abs(getRoutePath(locale)) },
   ]);
 }
@@ -187,13 +189,136 @@ function buildServiceLd(locale = 'lv') {
   });
 }
 
-export default function IphoneWaterDamageServicePage({ locale = 'lv', searchParams }) {
+function dedupeFaqItems(items = []) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = normalizeText(item?.q || '').toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function sortFaqItems(items = []) {
+  return [...items].sort((a, b) => {
+    const ao = typeof a?.order === 'number' ? a.order : 9999;
+    const bo = typeof b?.order === 'number' ? b.order : 9999;
+    if (ao !== bo) return ao - bo;
+
+    const aq = String(a?.q || '');
+    const bq = String(b?.q || '');
+    return aq.localeCompare(bq);
+  });
+}
+
+async function getFaqSections(locale = 'lv') {
+  const strings = getPageStrings(locale);
+
+  const [serviceDoc, basicDoc] = await Promise.all([
+    db.collection('faqGroups').doc(strings.serviceFaqDocId).get(),
+    db.collection('faqGroups').doc(strings.basicFaqDocId).get(),
+  ]);
+
+  const sections = [];
+
+  const serviceData = serviceDoc.exists ? serviceDoc.data() || {} : {};
+  const basicData = basicDoc.exists ? basicDoc.data() || {} : {};
+
+  const serviceItems = sortFaqItems(
+    (Array.isArray(serviceData.items) ? serviceData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (serviceItems.length) {
+    sections.push({
+      id: strings.serviceFaqDocId,
+      title: strings.serviceFaqGroupLabel,
+      items: serviceItems,
+    });
+  }
+
+  const basicItems = sortFaqItems(
+    (Array.isArray(basicData.items) ? basicData.items : [])
+      .filter((item) => {
+        if (!item) return false;
+        if (!String(item.q || '').trim()) return false;
+        if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
+          return false;
+        }
+        if (item.isHidden === true) return false;
+        return true;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  if (basicItems.length) {
+    sections.push({
+      id: strings.basicFaqDocId,
+      title: strings.basicFaqGroupLabel,
+      items: basicItems,
+    });
+  }
+
+  return sections;
+}
+
+export default async function IphoneWaterDamageServicePage({
+  locale = 'lv',
+  searchParams,
+}) {
   const selectedModel = searchParams?.model ? String(searchParams.model) : null;
 
   const strings = getPageStrings(locale);
-  const faqLd = buildFaqLd();
+  const sections = await getFaqSections(locale);
+
+  const mergedFaqItems = dedupeFaqItems(
+    sections.flatMap((section) => section.items || [])
+  );
+
+  const faqLd = toFaqLd(mergedFaqItems);
   const breadcrumbsLd = buildBreadcrumbs(locale);
   const serviceLd = buildServiceLd(locale);
+
+  const headerCrumbs = [
+    {
+      label: strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: strings.hubCrumb,
+      href: getHubPath(locale),
+    },
+    {
+      label: strings.breadcrumbServiceName,
+      href: getRoutePath(locale),
+    },
+  ];
 
   return (
     <>
@@ -209,6 +334,13 @@ export default function IphoneWaterDamageServicePage({ locale = 'lv', searchPara
         {JSON.stringify(serviceLd)}
       </Script>
 
+      <PageHeader
+        title={strings.headerTitle}
+        lead={strings.headerLead}
+        scrollCta={{ label: strings.headerCtaLabel, targetId: 'cenas' }}
+        crumbs={headerCrumbs}
+      />
+
       <DeviceHero
         image="/images/categories/udens_bojajumi.webp"
         alt={strings.heroAlt}
@@ -219,7 +351,7 @@ export default function IphoneWaterDamageServicePage({ locale = 'lv', searchPara
 
       <section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
-          <h2 id="intro-h2" className={s.h1}>
+          <h2 id="intro-h2" className={s.h2}>
             {strings.introTitle}
           </h2>
 
@@ -287,23 +419,40 @@ export default function IphoneWaterDamageServicePage({ locale = 'lv', searchPara
         <Why locale={locale} />
       </section>
 
-      <section className={s.section} aria-labelledby="faq-h2">
-        <div className={s.container}>
-          <Faq
-            id="faq"
-            title={strings.faqTitle}
-            groups={[{ label: strings.faqGroupLabel, items: FAQ_ITEMS }]}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {!!sections.length && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <h2 id="faq-h2" className={s.h2}>
+              {strings.faqTitle}
+            </h2>
 
-      <section id="pieteikties" className={s.section} aria-label="Pieteikties remontam">
-        <div className={s.container}>
+            {sections.map((section, index) => (
+              <div
+                key={`faq-group-${index}-${section.id}`}
+                className={index > 0 ? s.stackLg : ''}
+              >
+                <Faq
+                  id={`faq-group-${index + 1}`}
+                  title={section.title}
+                  items={toFaqRenderItems(section.items)}
+                  headingLevel={3}
+                  variant="accordion"
+                  locale={locale}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section
+        id="pieteikties"
+        className={s.section}
+        aria-label={strings.applyAria}
+      >
+      
           <ConvertBand locale={locale} />
-        </div>
+        
       </section>
     </>
   );

@@ -1,7 +1,9 @@
 import Script from 'next/script';
-import Link from 'next/link';
 
-import devicesAll from '@/data/devices';
+import { getDevices } from '@/lib/content/devices';
+import { resolveCategoryPage } from '@/lib/content/resolvers/catalogPages';
+
+import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import BrandPreview from '@components/model-grid/BrandPreview';
 
 import Services from '@sections/services/Services';
@@ -13,7 +15,6 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 
 import s from '@styles/Catalog.module.scss';
-import { listBrandsForCategory, BRAND_CATEGORY } from '@/data/brandContent';
 
 import {
   LuSmartphone,
@@ -36,29 +37,98 @@ import { buildCategoryHref, buildServiceHref } from '@/lib/routes/routeI18n';
 
 const CATEGORY_KEY = 'telefonu-remonts';
 
-function topModelsForBrand(list, brandSlug) {
-  const filtered = list.filter(
-    (d) => d.category === CATEGORY_KEY && (d.brandSlug || '').toLowerCase() === brandSlug
-  );
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
 
-  const seen = new Set();
-  const uniq = [];
-  for (const d of filtered) {
-    const k = `${d.category}:${d.brandSlug}:${d.slug}`;
-    if (seen.has(k)) continue;
-    seen.add(k);
-    uniq.push(d);
+  if (typeof value === 'string') return value || fallback;
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
   }
 
-  uniq.sort((a, b) => {
+  return fallback;
+}
+
+function normalizeRoutePath(path = '', locale = 'lv') {
+  if (!path) return '';
+
+  const clean = String(path).trim();
+
+  if (locale === 'lv') return clean;
+
+  if (clean === '/') return '/ru';
+  if (clean === '/ru' || clean.startsWith('/ru/')) return clean;
+
+  return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
+}
+
+function sortDevices(list = []) {
+  return [...list].sort((a, b) => {
     const ao = typeof a.order === 'number' ? a.order : 99999;
     const bo = typeof b.order === 'number' ? b.order : 99999;
     if (ao !== bo) return ao - bo;
-    if (a.year && b.year && a.year !== b.year) return b.year - a.year;
+
+    if (a.year && b.year && a.year !== b.year) {
+      return b.year - a.year;
+    }
+
     return (a.name || '').localeCompare(b.name || '', 'lv');
   });
+}
 
-  return { items: uniq.slice(0, 4), total: uniq.length };
+function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
+  const categoryBrands = Array.isArray(category?.brands) ? category.brands : [];
+
+  const phoneDevices = devices.filter((d) => {
+    if (!d) return false;
+    if (d.type !== 'device') return false;
+    if (d.categoryKey !== CATEGORY_KEY) return false;
+    if (!d.brandKey || !d.slug || !d.name) return false;
+    if (d.isHidden === true) return false;
+    return true;
+  });
+
+  const devicesByBrand = new Map();
+
+  for (const device of phoneDevices) {
+    const brandKey = String(device.brandKey).trim().toLowerCase();
+    if (!brandKey) continue;
+
+    if (!devicesByBrand.has(brandKey)) {
+      devicesByBrand.set(brandKey, []);
+    }
+
+    devicesByBrand.get(brandKey).push(device);
+  }
+
+  return categoryBrands
+    .map((brand) => {
+      const brandKey = String(brand?.key || '').trim().toLowerCase();
+      if (!brandKey) return null;
+
+      const brandDevices = sortDevices(devicesByBrand.get(brandKey) || []);
+      if (!brandDevices.length) return null;
+
+      const href =
+        normalizeRoutePath(brand?.route?.brandPath || '', locale) ||
+        `${basePath}/${brandKey}`;
+
+      return {
+        slug: brandKey,
+        name: pickLocalized(brand?.labels, locale, brandKey),
+        href,
+        items: brandDevices.slice(0, 4),
+        total: brandDevices.length,
+        order: Number.isFinite(Number(brand?.order)) ? Number(brand.order) : 9999,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.order - b.order);
 }
 
 function getPhoneFaq(locale = 'lv') {
@@ -190,6 +260,8 @@ function getPageStrings(locale = 'lv') {
           text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
         },
       ],
+      scrollCta: { label: 'Смотреть бренды', targetId: 'brand-list' },
+      fallbackTitle: 'Ремонт телефонов в Риге',
     };
   }
 
@@ -205,7 +277,7 @@ function getPageStrings(locale = 'lv') {
     introP2:
       'Strādājam ar <strong>visiem populārajiem zīmoliem</strong>: <a href="/iphone-remonts">iPhone remonts</a>, <a href="/telefonu-remonts/samsung">Samsung telefonu remonts</a>, <a href="/telefonu-remonts/huawei">Huawei remonts</a>, <a href="/telefonu-remonts/oneplus">OnePlus remonts</a> u.c. Katram zīmolam ir pieejamas atsevišķas <strong>modeļu lapas</strong> ar biežākajiem bojājumiem un risinājumiem.',
     introP3:
-      'Biežākie darbi: <strong>displeja remonts</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauji krīt uzlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi, sarunās nedzird), kā arī <strong>mitruma bojājumi</strong>. Ja neesi pārliecināts par modeļa nosaukumu, izvēlies zīmolu zemāk un atrod modeli sarakstā.',
+      'Biežākie darbi: <strong>displeja remonts</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauji krīt uzlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi, sarunās nedzird), kā arī <strong>mitruma bojājumi</strong>. Ja neesi pārliecināts par modeļa nosaukumu, izvēlies zīmolu zemāk un atrodi modeli sarakstā.',
     breadcrumbName: 'Telefonu remonts',
     serviceName: 'Telefonu remonts',
     serviceDescription:
@@ -270,6 +342,8 @@ function getPageStrings(locale = 'lv') {
         text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
       },
     ],
+    scrollCta: { label: 'Skatīt zīmolus', targetId: 'brand-list' },
+    fallbackTitle: 'Telefonu remonts Rīgā',
   };
 }
 
@@ -291,33 +365,65 @@ export function getPhoneRepairMetadata(locale = 'lv') {
   };
 }
 
-export default function PhoneRepairPage({ locale = 'lv' }) {
+export default async function PhoneRepairPage({ locale = 'lv' }) {
   const strings = getPageStrings(locale);
-  const basePath = buildCategoryHref(locale, CATEGORY_KEY);
   const faqItems = getPhoneFaq(locale);
 
-  const brands = listBrandsForCategory(BRAND_CATEGORY.PHONES);
-  const brandBlocks = brands
-    .map(({ slug, name }) => {
-      const { items, total } = topModelsForBrand(devicesAll, slug);
-      return { slug, name, href: `${basePath}/${slug}`, items, total };
-    })
-    .filter((b) => b.total > 0);
+  const [page, devices] = await Promise.all([
+    resolveCategoryPage(CATEGORY_KEY, locale),
+    getDevices(),
+  ]);
+
+  if (!page) return null;
+
+  const basePath = page.route?.publicPath || buildCategoryHref(locale, CATEGORY_KEY);
+
+  const brandBlocks = buildBrandBlocks({
+    category: page.source?.category,
+    devices,
+    locale,
+    basePath,
+  });
+
+  const headerTitle =
+    page.seo?.h1 ||
+    page.seo?.breadcrumbName ||
+    strings.fallbackTitle;
+
+  const headerLead =
+    page.intro?.lead ||
+    page.seo?.metaDescription ||
+    page.seo?.schemaDescription ||
+    null;
+
+  const breadcrumbs = [
+    {
+      label: page.labels?.homeCrumb || (locale === 'ru' ? 'Главная' : 'Sākums'),
+      href: locale === 'ru' ? '/ru' : '/',
+    },
+    {
+      label: page.seo?.breadcrumbName || headerTitle,
+      href: basePath,
+    },
+  ];
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: 'Sākums', url: abs('/') },
-    { name: strings.breadcrumbName, url: abs(basePath) },
+    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
+    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
   ]);
 
   const serviceLd = buildServiceLdForCity({
     path: basePath,
-    name: strings.serviceName,
-    description: strings.serviceDescription,
+    name: page.seo?.schemaName || strings.serviceName,
+    description: page.seo?.schemaDescription || strings.serviceDescription,
   });
 
   const itemListLd = buildItemListLd(
     brandBlocks.map((b) => ({
-      name: `${b.name} telefonu remonts`,
+      name:
+        locale === 'ru'
+          ? `Ремонт телефонов ${b.name}`
+          : `${b.name} telefonu remonts`,
       url: abs(b.href),
     }))
   );
@@ -330,27 +436,38 @@ export default function PhoneRepairPage({ locale = 'lv' }) {
 
   return (
     <>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(serviceLd)}
-      </Script>
-      <Script id="itemlist-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(itemListLd)}
-      </Script>
-      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(howToLd)}
-      </Script>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="faq-jsonld" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
 
+      <Script id="howto-jsonld" type="application/ld+json">
+        {JSON.stringify(howToLd)}
+      </Script>
+
+      <Script id="breadcrumbs-jsonld" type="application/ld+json">
+        {JSON.stringify(breadcrumbsLd)}
+      </Script>
+
+      <Script id="service-jsonld" type="application/ld+json">
+        {JSON.stringify(serviceLd)}
+      </Script>
+
+      <Script id="itemlist-jsonld" type="application/ld+json">
+        {JSON.stringify(itemListLd)}
+      </Script>
+
+      <PageHeader
+        title={headerTitle}
+        lead={headerLead}
+        scrollCta={strings.scrollCta}
+        crumbs={breadcrumbs}
+      />
+
       <DeviceHero
-        image="/images/categories/telefonu_remonts.webp"
+        image={page.hero?.image || '/images/categories/telefonu_remonts.webp'}
         alt={strings.heroAlt}
         focal="right"
-        className="category"
+        priority
         bodyHtml={strings.heroBodyHtml}
       />
 
@@ -402,41 +519,49 @@ export default function PhoneRepairPage({ locale = 'lv' }) {
         />
       ))}
 
-      <Reviews locale={locale} />
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
 
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process"
-            title={strings.processTitle}
-            steps={strings.processSteps}
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasProcess && (
+        <section className={s.section} aria-labelledby="process-h2">
+          <div className={s.container}>
+            <Process
+              id="process"
+              title={strings.processTitle}
+              steps={strings.processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={s.section}>
-        <Why locale={locale} />
-      </section>
+      {page.sections?.hasWhy && (
+        <section className={s.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={s.section} aria-labelledby="faq-h2">
-        <div className={s.container}>
-          <Faq
-            id="phones-faq"
-            title={strings.faqTitle}
-            items={faqItems}
-            headingLevel={2}
-            variant="accordion"
-            locale={locale}
-          />
-        </div>
-      </section>
+      {page.sections?.hasFaq && (
+        <section className={s.section} aria-labelledby="faq-h2">
+          <div className={s.container}>
+            <Faq
+              id="phones-faq"
+              title={strings.faqTitle}
+              items={faqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={s.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {page.sections?.hasConvertBand && (
+        <section className={s.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }
