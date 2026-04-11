@@ -1,58 +1,15 @@
-'use client';
+import PierakstiesPage from './PierakstiesPage';
 
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import BookingForm from '@components/booking/BookingForm';
+const CANONICAL_PATH = '/pieraksties-remontam';
 
-function getPageStrings(locale = 'lv') {
-  if (locale === 'ru') {
-    return {
-      canonicalPath: '/ru/zapisatsya-na-remont',
-      breadcrumbHome: 'Главная',
-      breadcrumbPage: 'Записаться на ремонт',
-      headerTitle: 'Записаться на ремонт',
-      headerLead:
-        'Заполните форму, указав устройство и проблему — наш мастер свяжется с вами, согласует стоимость и время ремонта.',
-    };
-  }
+export const metadata = {
+  title: 'Pieraksties remontam | iLab',
+  description:
+    'Aizpildi iLab remonta pieteikuma formu. Norādi ierīci un problēmu, un mūsu meistars sazināsies, lai saskaņotu izmaksas un remonta laiku.',
+  alternates: { canonical: CANONICAL_PATH },
+};
 
-  return {
-    canonicalPath: '/pieraksties-remontam',
-    breadcrumbHome: 'Sākums',
-    breadcrumbPage: 'Pieraksties remontam',
-    headerTitle: 'Pieraksties remontam',
-    headerLead:
-      'Aizpildi formu ar savu ierīci un problēmu — mūsu meistars sazināsies, saskaņos izmaksas un remonta laiku.',
-  };
+export default function Page() {
+  return <PierakstiesPage locale="lv" />;
 }
 
-export default function PierakstiesPage({ locale = 'lv' }) {
-  const strings = getPageStrings(locale);
-
-  const headerCrumbs = [
-    {
-      label: strings.breadcrumbHome,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: strings.breadcrumbPage,
-      href: strings.canonicalPath,
-    },
-  ];
-
-  return (
-    <>
-      <PageHeader
-        title={strings.headerTitle}
-        lead={strings.headerLead}
-        crumbs={headerCrumbs}
-      />
-
-      <main className="container" style={{ padding: '2rem 0' }}>
-        <BookingForm
-          submitMode="fetch"
-          onError={(msg) => alert(msg)}
-        />
-      </main>
-    </>
-  );
-}
