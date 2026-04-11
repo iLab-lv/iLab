@@ -1,6 +1,6 @@
 import PhoneChargePortServicePage, {
   getPhoneChargePortServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/uzlades-ligzdas-maina/PhoneChargePortServicePage';
+} from '@site/(catalog)/telefonu-remonts/(services)/uzlades-ligzdas-maina/PhoneChargePortServicePage';
 
 export const metadata = getPhoneChargePortServiceMetadata('ru');
 
