@@ -20,19 +20,23 @@
   align-items: center;
 }
 
-.categoryField {
-  display: flex;
-  gap: $space-sm;
-  align-items: center;
+.select {
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+  border: $border-thin solid $color-border;
+  background: $color-surface-2;
+  color: $color-text;
+  width: auto;
+  min-width: 220px;
+  max-width: 320px;
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
 }
 
-.categoryLabel {
-  min-width: 70px;
-  color: $color-text-2;
-  font-size: $font-size-sm;
-}
-
-.select,
 .input {
   height: $btn-h-md;
   padding: 0 $space-md;
@@ -80,7 +84,7 @@
 
 .groupHead {
   padding: $space-sm $space-md;
-  background: $color-surface-3;
+  background: transparent;
   color: $color-text;
   display: flex;
   align-items: center;
@@ -94,17 +98,21 @@
 
 .rows {
   display: grid;
-  gap: $space-md;
+  gap: $space-sm;
   padding: $space-md;
 }
 
 .card {
   border: $border-thin solid rgba(255, 255, 255, 0.08);
   border-radius: $radius-md;
-  background: $color-surface-2;
+  background: transparent;
   padding: $space-md;
   display: grid;
   gap: $space-md;
+}
+
+.dragging {
+  opacity: 0.7;
 }
 
 .cardTop {
@@ -115,21 +123,48 @@
   flex-wrap: wrap;
 }
 
+.serviceToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $color-text;
+  text-align: left;
+  cursor: pointer;
+}
+
 .cardTitle {
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
 
-.toggle {
-  display: inline-flex;
-  gap: $space-xs;
-  align-items: center;
+.chevron {
   color: $color-text-2;
-  font-size: $font-size-sm;
+  flex: 0 0 auto;
+}
 
-  input {
-    margin: 0;
+.dragHandle {
+  background: transparent;
+  border: none;
+  cursor: grab;
+  padding: 0 $space-sm;
+  color: $color-text-2;
+  font-size: $font-size-lg;
+  line-height: 1;
+
+  &:active {
+    cursor: grabbing;
   }
+}
+
+.panel {
+  display: grid;
+  gap: $space-md;
 }
 
 .grid {
@@ -150,4 +185,10 @@
 .label {
   color: $color-text-2;
   font-size: $font-size-sm;
+}
+
+.footer {
+  margin-top: $space-lg;
+  display: flex;
+  justify-content: flex-end;
 }

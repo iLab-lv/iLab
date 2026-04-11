@@ -1,34 +1,26 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import devices from '@/data/devices';
-
+import { useEffect, useMemo, useState } from 'react';
 import {
   collection,
   doc,
   getDocs,
   query,
+  serverTimestamp,
   where,
   writeBatch,
-  serverTimestamp,
 } from 'firebase/firestore';
-import { db } from '@/lib/firebaseClient';
 
+import { db } from '@/lib/firebaseClient';
 import Button from '@components/button/Button';
 
 import s from './PricelistScreen.module.scss';
 
-console.log('PRICELIST MODULE LOADED 2026-03-31 v3');
-
 const DEFAULT_CURRENCY = 'EUR';
-
-const BRAND_MENU = [
-  { brandSlug: 'apple', label: 'iPhone' },
-  { brandSlug: 'ipad', label: 'iPad' },
-  { brandSlug: 'macbook', label: 'MacBook' },
-  { brandSlug: 'samsung', label: 'Samsung' },
-  { brandSlug: 'xiaomi', label: 'Xiaomi' },
-];
+const DEFAULT_CATEGORY_SLUG = 'telefonu-remonts';
+const DEFAULT_BRAND_KEY = 'apple';
+const ADMIN_LOCALE = 'lv';
+const MODEL_COLLECTION_CANDIDATES = ['devices', 'models'];
 
 function normalizePriceInput(v) {
   return String(v ?? '');
@@ -37,125 +29,227 @@ function normalizePriceInput(v) {
 function parseNumericPrice(v) {
   const raw = String(v ?? '').trim();
   if (!raw) return null;
-
-  if (!/^[0-9]+([.,][0-9]+)?$/.test(raw)) {
-    return null;
-  }
+  if (!/^[0-9]+([.,][0-9]+)?$/.test(raw)) return null;
 
   const n = Number(raw.replace(',', '.'));
   return Number.isFinite(n) ? n : null;
 }
 
-function getModelMeta(modelSlug) {
-  return (devices || []).find((d) => d?.slug === modelSlug) || null;
+function getLocalizedValue(value, locale = ADMIN_LOCALE) {
+  if (typeof value === 'string') return value;
+  if (!value || typeof value !== 'object') return '';
+  return value[locale] || value.lv || value.ru || '';
+}
+
+function byOrderThenLabelAsc(a, b) {
+  const ao = typeof a.order === 'number' ? a.order : 9999;
+  const bo = typeof b.order === 'number' ? b.order : 9999;
+  if (ao !== bo) return ao - bo;
+  return String(a.label || a.key || '').localeCompare(
+    String(b.label || b.key || '')
+  );
+}
+
+function normalizeCategoryDoc(docSnap) {
+  const data = docSnap.data() || {};
+  const slug = String(data.slug || docSnap.id);
+  const key = String(data.key || slug);
+  const label = getLocalizedValue(data.labels) || slug;
+
+  const brands = Array.isArray(data.brands)
+    ? data.brands
+        .map((brand) => {
+          const brandKey = String(brand?.key || '').trim();
+          if (!brandKey) return null;
+
+          const series = Array.isArray(brand?.series)
+            ? brand.series
+                .map((seriesItem) => {
+                  const seriesKey = String(seriesItem?.key || '').trim();
+                  if (!seriesKey) return null;
+
+                  return {
+                    key: seriesKey,
+                    label: getLocalizedValue(seriesItem?.labels) || seriesKey,
+                    order:
+                      typeof seriesItem?.order === 'number'
+                        ? seriesItem.order
+                        : 9999,
+                  };
+                })
+                .filter(Boolean)
+                .sort(byOrderThenLabelAsc)
+            : [];
+
+          return {
+            key: brandKey,
+            label: getLocalizedValue(brand?.labels) || brandKey,
+            order: typeof brand?.order === 'number' ? brand.order : 9999,
+            image: typeof brand?.image === 'string' ? brand.image : '',
+            logo: typeof brand?.logo === 'string' ? brand.logo : '',
+            series,
+          };
+        })
+        .filter(Boolean)
+        .sort(byOrderThenLabelAsc)
+    : [];
+
+  return {
+    id: docSnap.id,
+    slug,
+    key,
+    label,
+    order: typeof data.order === 'number' ? data.order : 9999,
+    type: typeof data.type === 'string' ? data.type : '',
+    brands,
+  };
+}
+
+function normalizeModelDoc(docSnap) {
+  const data = docSnap.data() || {};
+
+  const slug = String(data.slug || docSnap.id);
+  const name =
+    typeof data.name === 'string' && data.name.trim() ? data.name.trim() : slug;
+
+  const year = Number.isFinite(Number(data.year)) ? Number(data.year) : null;
+  const order = typeof data.order === 'number' ? data.order : 9999;
+
+  const categoryKey = String(
+    data.categoryKey ||
+      data.categorySlug ||
+      data.category ||
+      data.deviceKey ||
+      data.deviceSlug ||
+      data.device ||
+      ''
+  ).trim();
+
+  const brandKey = String(
+    data.brandKey || data.brandSlug || data.brand || ''
+  ).trim();
+
+  const seriesKey = String(
+    data.seriesKey || data.seriesSlug || data.series || ''
+  ).trim();
+
+  const seriesLabel =
+    getLocalizedValue(data.seriesLabels) ||
+    getLocalizedValue(data.seriesLabel) ||
+    (typeof data.series === 'string' ? data.series : '') ||
+    seriesKey ||
+    'Other';
+
+  return {
+    id: docSnap.id,
+    slug,
+    name,
+    year,
+    order,
+    categoryKey,
+    brandKey,
+    seriesKey,
+    seriesLabel,
+  };
+}
+
+async function fetchCategories() {
+  const snap = await getDocs(collection(db, 'categories'));
+
+  return snap.docs
+    .map(normalizeCategoryDoc)
+    .filter((item) => item.type === 'category')
+    .sort(byOrderThenLabelAsc);
+}
+
+async function fetchModelsFromCollection(collectionName) {
+  const snap = await getDocs(collection(db, collectionName));
+  return snap.docs.map(normalizeModelDoc);
+}
+
+async function fetchModels() {
+  for (const collectionName of MODEL_COLLECTION_CANDIDATES) {
+    try {
+      const rows = await fetchModelsFromCollection(collectionName);
+      return rows;
+    } catch {}
+  }
+
+  throw new Error(
+    `Failed to load model data from collections: ${MODEL_COLLECTION_CANDIDATES.join(
+      ', '
+    )}`
+  );
 }
 
 async function fetchServicePricingRows(modelId) {
-  try {
-    const q = query(
-      collection(db, 'servicePricing'),
-      where('modelId', '==', modelId)
-    );
-    const snap = await getDocs(q);
+  const q = query(
+    collection(db, 'servicePricing'),
+    where('modelId', '==', modelId)
+  );
+  const snap = await getDocs(q);
 
-    const rows = snap.docs.map((d) => {
-      const data = d.data() || {};
-      const hasNumericPrice =
-        typeof data.price === 'number' && Number.isFinite(data.price);
+  return snap.docs.map((d) => {
+    const data = d.data() || {};
+    const hasNumericPrice =
+      typeof data.price === 'number' && Number.isFinite(data.price);
 
-      return {
-        docId: d.id,
-        serviceId: data.serviceId || '',
-        label: '',
-        order: 9999,
-        priceInput: hasNumericPrice ? String(data.price) : '',
-        isStartingFrom: hasNumericPrice && data.isStartingFrom === true,
-        hidden: data.isHidden === true,
-        _debug: {
-          rawPrice: Object.prototype.hasOwnProperty.call(data, 'price')
-            ? data.price
-            : '__missing__',
-          rawIsHidden: Object.prototype.hasOwnProperty.call(data, 'isHidden')
-            ? data.isHidden
-            : '__missing__',
-          rawIsStartingFrom: Object.prototype.hasOwnProperty.call(
-            data,
-            'isStartingFrom'
-          )
-            ? data.isStartingFrom
-            : '__missing__',
-        },
-      };
-    });
-
-    console.log('[PricelistScreen] fetchServicePricingRows()', {
-      modelId,
-      count: rows.length,
-      rows: rows.map((r) => ({
-        docId: r.docId,
-        serviceId: r.serviceId,
-        hidden: r.hidden,
-        priceInput: r.priceInput,
-        isStartingFrom: r.isStartingFrom,
-        debug: r._debug,
-      })),
-    });
-
-    return rows;
-  } catch (err) {
-    console.error('fetchServicePricingRows failed:', err);
-    throw err;
-  }
+    return {
+      docId: d.id,
+      serviceId: data.serviceId || '',
+      label: '',
+      order: 9999,
+      priceInput: hasNumericPrice ? String(data.price) : '',
+      isStartingFrom: hasNumericPrice && data.isStartingFrom === true,
+      hidden: data.isHidden === true,
+    };
+  });
 }
 
 async function fetchServicesForCategory(categoryId) {
-  try {
-    const q = query(
-      collection(db, 'services'),
-      where('categoryId', '==', categoryId),
-      where('isActive', '==', true)
-    );
+  const q = query(
+    collection(db, 'services'),
+    where('categoryId', '==', categoryId),
+    where('isActive', '==', true)
+  );
 
-    const snap = await getDocs(q);
+  const snap = await getDocs(q);
 
-    const rows = snap.docs
-      .map((d) => {
-        const data = d.data() || {};
-        return {
-          id: d.id,
-          label: data.labels?.lv || data.labels?.ru || data.title || d.id,
-          order: typeof data.order === 'number' ? data.order : 9999,
-        };
-      })
-      .sort((a, b) => {
-        if ((a.order ?? 9999) !== (b.order ?? 9999)) {
-          return (a.order ?? 9999) - (b.order ?? 9999);
-        }
-        return String(a.label || a.id).localeCompare(String(b.label || b.id));
-      });
-
-    console.log('[PricelistScreen] fetchServicesForCategory()', {
-      categoryId,
-      count: rows.length,
-      rows,
+  return snap.docs
+    .map((d) => {
+      const data = d.data() || {};
+      return {
+        id: d.id,
+        label: data.labels?.lv || data.labels?.ru || data.title || d.id,
+        order: typeof data.order === 'number' ? data.order : 9999,
+      };
+    })
+    .sort((a, b) => {
+      if ((a.order ?? 9999) !== (b.order ?? 9999)) {
+        return (a.order ?? 9999) - (b.order ?? 9999);
+      }
+      return String(a.label || a.id).localeCompare(String(b.label || b.id));
     });
-
-    return rows;
-  } catch (err) {
-    console.error('fetchServicesForCategory failed:', err);
-    throw err;
-  }
 }
 
-async function buildRowsForModel(modelSlug) {
-  const model = getModelMeta(modelSlug);
-  const categoryId = model?.category || model?.categoryKey || null;
+function getModelMeta(models, modelSlug) {
+  return models.find((d) => d.slug === modelSlug) || null;
+}
 
-  console.log('[PricelistScreen] buildRowsForModel() start', {
-    modelSlug,
-    model,
-    categoryId,
-  });
+function resolveCategoryIdForModel(model, categories) {
+  const raw = String(model?.categoryKey || '').trim();
+  if (!raw) return '';
+
+  const exact = categories.find(
+    (c) => c.id === raw || c.slug === raw || c.key === raw
+  );
+
+  return exact?.id || raw;
+}
+
+async function buildRowsForModel(modelSlug, models, categories) {
+  const model = getModelMeta(models, modelSlug);
+  const categoryId = resolveCategoryIdForModel(model, categories);
 
   if (!categoryId) return [];
 
@@ -163,28 +257,6 @@ async function buildRowsForModel(modelSlug) {
     fetchServicesForCategory(categoryId),
     fetchServicePricingRows(modelSlug),
   ]);
-
-  const duplicates = existingRows.reduce((acc, row) => {
-    acc[row.serviceId] = acc[row.serviceId] || [];
-    acc[row.serviceId].push({
-      docId: row.docId,
-      hidden: row.hidden,
-      priceInput: row.priceInput,
-      debug: row._debug,
-    });
-    return acc;
-  }, {});
-
-  const duplicateOnly = Object.fromEntries(
-    Object.entries(duplicates).filter(([, rows]) => rows.length > 1)
-  );
-
-  if (Object.keys(duplicateOnly).length > 0) {
-    console.warn('[PricelistScreen] duplicate servicePricing rows detected', {
-      modelSlug,
-      duplicates: duplicateOnly,
-    });
-  }
 
   const existingById = new Map(existingRows.map((r) => [r.serviceId, r]));
   const knownServiceIds = new Set(serviceDefs.map((s) => s.id));
@@ -200,7 +272,6 @@ async function buildRowsForModel(modelSlug) {
       priceInput: existing?.priceInput ?? '',
       isStartingFrom: existing?.isStartingFrom === true,
       hidden: existing?.hidden === true,
-      _debug: existing?._debug || null,
     };
   });
 
@@ -213,123 +284,161 @@ async function buildRowsForModel(modelSlug) {
     }))
     .sort((a, b) => String(a.serviceId).localeCompare(String(b.serviceId)));
 
-  const finalRows = [...merged, ...extras];
-
-  console.log('[PricelistScreen] buildRowsForModel() result', {
-    modelSlug,
-    merged: merged.map((r) => ({
-      docId: r.docId,
-      serviceId: r.serviceId,
-      hidden: r.hidden,
-      priceInput: r.priceInput,
-      isStartingFrom: r.isStartingFrom,
-      debug: r._debug,
-    })),
-    extras: extras.map((r) => ({
-      docId: r.docId,
-      serviceId: r.serviceId,
-      hidden: r.hidden,
-      priceInput: r.priceInput,
-      isStartingFrom: r.isStartingFrom,
-      debug: r._debug,
-    })),
-    finalCount: finalRows.length,
-  });
-
-  return finalRows;
+  return [...merged, ...extras];
 }
 
 export default function PricelistScreen({
-  initialBrand = BRAND_MENU[0]?.brandSlug || 'apple',
+  initialCategory = DEFAULT_CATEGORY_SLUG,
+  initialBrand = DEFAULT_BRAND_KEY,
 }) {
-  console.log('PRICELIST COMPONENT RENDERED 2026-03-31 v3');
+  const [categories, setCategories] = useState([]);
+  const [models, setModels] = useState([]);
 
-  const [brandSlug, setBrandSlug] = useState(initialBrand);
+  const [categorySlug, setCategorySlug] = useState(initialCategory);
+  const [brandKey, setBrandKey] = useState(initialBrand);
+
   const [openSlug, setOpenSlug] = useState(null);
   const [loading, setLoading] = useState({});
   const [rowsByModel, setRowsByModel] = useState({});
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
+  const [bootLoading, setBootLoading] = useState(true);
 
-  const filteredDevices = useMemo(() => {
-    const list = (devices || [])
-      .filter((d) => d?.brandSlug === brandSlug)
-      .map((d) => ({
-        slug: d.slug,
-        name: d.name || d.slug,
-        series: d.series || 'Other',
-        seriesSlug: d.seriesSlug || 'other',
-        year: d.year ?? null,
-        order: d.order ?? 9999,
-      }));
+  useEffect(() => {
+    let cancelled = false;
 
-    list.sort((a, b) => {
-      const ay = a.year ?? -1;
-      const by = b.year ?? -1;
-      if (by !== ay) return by - ay;
-      if ((a.order ?? 9999) !== (b.order ?? 9999)) {
-        return (a.order ?? 9999) - (b.order ?? 9999);
+    async function loadInitialData() {
+      setBootLoading(true);
+      setError('');
+      setStatus('');
+
+      try {
+        const categoryDocs = await fetchCategories();
+        if (cancelled) return;
+
+        const modelRows = await fetchModels();
+        if (cancelled) return;
+
+        setCategories(categoryDocs);
+        setModels(modelRows);
+      } catch (err) {
+        if (cancelled) return;
+        setError(
+          `${err?.code || 'error'}: ${err?.message || 'Failed to load Firebase data.'}`
+        );
+      } finally {
+        if (!cancelled) {
+          setBootLoading(false);
+        }
       }
-      return a.name.localeCompare(b.name);
-    });
+    }
 
-    console.log('[PricelistScreen] filteredDevices', {
-      brandSlug,
-      count: list.length,
-      list,
-    });
+    loadInitialData();
 
-    return list;
-  }, [brandSlug]);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const selectedCategory = useMemo(() => {
+    if (!categories.length) return null;
+
+    return (
+      categories.find((c) => c.slug === categorySlug) ||
+      categories.find((c) => c.slug === DEFAULT_CATEGORY_SLUG) ||
+      categories[0] ||
+      null
+    );
+  }, [categories, categorySlug]);
+
+  const brandOptions = useMemo(() => {
+    return selectedCategory?.brands || [];
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    if (!selectedCategory) return;
+
+    if (selectedCategory.slug !== categorySlug) {
+      setCategorySlug(selectedCategory.slug);
+      return;
+    }
+
+    const hasSelectedBrand = brandOptions.some((b) => b.key === brandKey);
+    if (hasSelectedBrand) return;
+
+    const nextBrand =
+      brandOptions.find((b) => b.key === DEFAULT_BRAND_KEY) ||
+      brandOptions[0] ||
+      null;
+
+    setBrandKey(nextBrand?.key || '');
+  }, [selectedCategory, brandOptions, categorySlug, brandKey]);
+
+  const selectedBrand = useMemo(() => {
+    return brandOptions.find((b) => b.key === brandKey) || null;
+  }, [brandOptions, brandKey]);
+
+  const filteredModels = useMemo(() => {
+    if (!selectedCategory || !brandKey) return [];
+
+    const categoryCandidates = new Set(
+      [selectedCategory.id, selectedCategory.slug, selectedCategory.key].filter(Boolean)
+    );
+
+    return [...models]
+      .filter((d) => categoryCandidates.has(d.categoryKey))
+      .filter((d) => d.brandKey === brandKey)
+      .sort((a, b) => {
+        const ay = a.year ?? -1;
+        const by = b.year ?? -1;
+        if (by !== ay) return by - ay;
+        if ((a.order ?? 9999) !== (b.order ?? 9999)) {
+          return (a.order ?? 9999) - (b.order ?? 9999);
+        }
+        return String(a.name).localeCompare(String(b.name));
+      });
+  }, [models, selectedCategory, brandKey]);
 
   const grouped = useMemo(() => {
     const map = new Map();
 
-    for (const d of filteredDevices) {
-      const key = d.seriesSlug || d.series || 'other';
+    const seriesDefs = new Map(
+      (selectedBrand?.series || []).map((item) => [item.key, item])
+    );
+
+    for (const d of filteredModels) {
+      const fallbackKey = d.seriesKey || 'other';
+      const seriesDef = seriesDefs.get(d.seriesKey);
+
+      const key = seriesDef?.key || fallbackKey;
+      const label = seriesDef?.label || d.seriesLabel || 'Other';
+      const order = typeof seriesDef?.order === 'number' ? seriesDef.order : 9999;
+
       if (!map.has(key)) {
         map.set(key, {
-          series: d.series || 'Other',
+          series: label,
           seriesSlug: key,
+          order,
           items: [],
         });
       }
+
       map.get(key).items.push(d);
     }
 
-    const groups = Array.from(map.values());
-
-    groups.sort((a, b) => {
-      const an = Number(String(a.series).match(/\d+/)?.[0] ?? NaN);
-      const bn = Number(String(b.series).match(/\d+/)?.[0] ?? NaN);
-      const aIsNum = Number.isFinite(an);
-      const bIsNum = Number.isFinite(bn);
-      if (aIsNum && bIsNum) return bn - an;
-      if (aIsNum) return -1;
-      if (bIsNum) return 1;
-      return String(a.series).localeCompare(String(b.series));
+    return Array.from(map.values()).sort((a, b) => {
+      if ((a.order ?? 9999) !== (b.order ?? 9999)) {
+        return (a.order ?? 9999) - (b.order ?? 9999);
+      }
+      return String(a.series || '').localeCompare(String(b.series || ''));
     });
-
-    console.log('[PricelistScreen] grouped', {
-      brandSlug,
-      count: groups.length,
-      groups,
-    });
-
-    return groups;
-  }, [filteredDevices, brandSlug]);
+  }, [filteredModels, selectedBrand]);
 
   async function toggleDevice(modelSlug) {
     setError('');
     setStatus('');
 
     const willOpen = openSlug !== modelSlug;
-
-    console.log('[PricelistScreen] toggleDevice()', {
-      modelSlug,
-      willOpen,
-      alreadyLoaded: !!rowsByModel[modelSlug],
-    });
 
     if (!willOpen) {
       setOpenSlug(null);
@@ -340,11 +449,11 @@ export default function PricelistScreen({
 
     if (!rowsByModel[modelSlug]) {
       setLoading((p) => ({ ...p, [modelSlug]: true }));
+
       try {
-        const rows = await buildRowsForModel(modelSlug);
+        const rows = await buildRowsForModel(modelSlug, models, categories);
         setRowsByModel((p) => ({ ...p, [modelSlug]: rows }));
       } catch (err) {
-        console.error(err);
         setError(err?.message || 'Failed to load model pricing from Firestore.');
       } finally {
         setLoading((p) => ({ ...p, [modelSlug]: false }));
@@ -356,14 +465,6 @@ export default function PricelistScreen({
     setRowsByModel((prev) => {
       const list = prev[modelSlug] ? [...prev[modelSlug]] : [];
       list[idx] = { ...list[idx], ...patch };
-
-      console.log('[PricelistScreen] updateRow()', {
-        modelSlug,
-        idx,
-        patch,
-        nextRow: list[idx],
-      });
-
       return { ...prev, [modelSlug]: list };
     });
   }
@@ -373,20 +474,8 @@ export default function PricelistScreen({
     setStatus('');
 
     const rows = rowsByModel[modelSlug] || [];
-    const model = getModelMeta(modelSlug);
-    const categoryId = model?.category || model?.categoryKey || '';
-
-    console.log('[PricelistScreen] saveModel() start', {
-      modelSlug,
-      categoryId,
-      rows: rows.map((r) => ({
-        docId: r.docId,
-        serviceId: r.serviceId,
-        hidden: r.hidden,
-        priceInput: r.priceInput,
-        isStartingFrom: r.isStartingFrom,
-      })),
-    });
+    const model = getModelMeta(models, modelSlug);
+    const categoryId = resolveCategoryIdForModel(model, categories);
 
     if (!categoryId) {
       setError(`"${modelSlug}": missing category.`);
@@ -418,18 +507,6 @@ export default function PricelistScreen({
       for (let i = 0; i < rows.length; i += CHUNK) {
         const chunk = rows.slice(i, i + CHUNK);
         const batch = writeBatch(db);
-
-        console.log('[PricelistScreen] saveModel() chunk', {
-          modelSlug,
-          chunkIndex: i / CHUNK + 1,
-          chunkRows: chunk.map((r) => ({
-            docId: r.docId,
-            serviceId: r.serviceId,
-            hidden: r.hidden,
-            priceInput: r.priceInput,
-            isStartingFrom: r.isStartingFrom,
-          })),
-        });
 
         for (const r of chunk) {
           const serviceId = r.serviceId.trim();
@@ -464,7 +541,7 @@ export default function PricelistScreen({
         await batch.commit();
       }
 
-      const fresh = await buildRowsForModel(modelSlug);
+      const fresh = await buildRowsForModel(modelSlug, models, categories);
 
       setRowsByModel((p) => ({
         ...p,
@@ -473,157 +550,204 @@ export default function PricelistScreen({
 
       setStatus(`Saved: ${modelSlug}`);
     } catch (err) {
-      console.error(err);
       setError(err?.message || 'Failed to save pricing.');
     } finally {
       setLoading((p) => ({ ...p, [modelSlug]: false }));
     }
   }
 
-  const brandLabel =
-    BRAND_MENU.find((b) => b.brandSlug === brandSlug)?.label || brandSlug;
+  function handleCategoryChange(nextCategorySlug) {
+    setCategorySlug(nextCategorySlug);
+    setOpenSlug(null);
+    setRowsByModel({});
+    setError('');
+    setStatus('');
+
+    const nextCategory =
+      categories.find((c) => c.slug === nextCategorySlug) || null;
+
+    const nextBrands = nextCategory?.brands || [];
+    const nextBrand =
+      nextBrands.find((b) => b.key === DEFAULT_BRAND_KEY) ||
+      nextBrands[0] ||
+      null;
+
+    setBrandKey(nextBrand?.key || '');
+  }
+
+  function handleBrandChange(nextBrandKey) {
+    setBrandKey(nextBrandKey);
+    setOpenSlug(null);
+    setRowsByModel({});
+    setError('');
+    setStatus('');
+  }
+
+  const headingLeft = selectedCategory?.label || 'Pricelist';
+  const headingRight = selectedBrand?.label || brandKey || '';
 
   return (
     <div className={s.wrap}>
-      <h1 className={s.h1}>Pricelist · {brandLabel}</h1>
+      <h1 className={s.h1}>
+        Pricelist · {headingLeft}
+        {headingRight ? ` · ${headingRight}` : ''}
+      </h1>
 
       <div className={s.toolbar}>
-        <label className={s.brandField}>
-          <span className={s.brandLabel}>Brand</span>
-          <select
-            className={s.select}
-            value={brandSlug}
-            onChange={(e) => {
-              setBrandSlug(e.target.value);
-              setOpenSlug(null);
-              setRowsByModel({});
-              setError('');
-              setStatus('');
-            }}
-          >
-            {BRAND_MENU.map((b) => (
-              <option key={b.brandSlug} value={b.brandSlug}>
-                {b.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <select
+          className={s.select}
+          value={selectedCategory?.slug || ''}
+          onChange={(e) => handleCategoryChange(e.target.value)}
+          aria-label="Device type"
+          disabled={bootLoading || categories.length === 0}
+        >
+          {categories.map((category) => (
+            <option key={category.id} value={category.slug}>
+              {category.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className={s.select}
+          value={brandKey}
+          onChange={(e) => handleBrandChange(e.target.value)}
+          aria-label="Brand"
+          disabled={bootLoading || brandOptions.length === 0}
+        >
+          {brandOptions.map((brand) => (
+            <option key={brand.key} value={brand.key}>
+              {brand.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {error && <div className={s.error}>{error}</div>}
       {status && <div className={s.status}>{status}</div>}
+      {bootLoading && <div className={s.status}>Loading Firebase data…</div>}
 
-      <div className={s.groups}>
-        {grouped.map((g) => (
-          <section key={g.seriesSlug} className={s.group}>
-            <div className={s.groupHead}>
-              <span className={s.groupTitle}>{g.series}</span>
-            </div>
+      {!bootLoading && grouped.length === 0 ? (
+        <div className={s.empty}>No models found for this filter.</div>
+      ) : (
+        <div className={s.groups}>
+          {grouped.map((g) => (
+            <section key={g.seriesSlug} className={s.group}>
+              <div className={s.groupHead}>
+                <span className={s.groupTitle}>{g.series}</span>
+              </div>
 
-            {g.items.map((d) => {
-              const isOpen = openSlug === d.slug;
-              const isLoading = !!loading[d.slug];
-              const rows = rowsByModel[d.slug] || [];
+              {g.items.map((d) => {
+                const isOpen = openSlug === d.slug;
+                const isLoading = !!loading[d.slug];
+                const rows = rowsByModel[d.slug] || [];
 
-              return (
-                <div key={d.slug} className={s.model}>
-                  <button
-                    type="button"
-                    onClick={() => toggleDevice(d.slug)}
-                    className={s.modelToggle}
-                  >
-                    <span className={s.modelName}>
-                      {d.name}
-                      {d.year ? <span className={s.modelYear}> · {d.year}</span> : null}
-                    </span>
+                return (
+                  <div key={d.slug} className={s.model}>
+                    <button
+                      type="button"
+                      onClick={() => toggleDevice(d.slug)}
+                      className={s.modelToggle}
+                    >
+                      <span className={s.modelName}>
+                        {d.name}
+                        {d.year ? (
+                          <span className={s.modelYear}> · {d.year}</span>
+                        ) : null}
+                      </span>
 
-                    <span className={s.modelChevron}>
-                      {isOpen ? '▾' : '▸'} {isLoading ? 'Loading…' : ''}
-                    </span>
-                  </button>
+                      <span className={s.modelChevron}>
+                        {isOpen ? '▾' : '▸'} {isLoading ? 'Loading…' : ''}
+                      </span>
+                    </button>
 
-                  {isOpen && (
-                    <div className={s.panel}>
-                      {rows.length === 0 ? (
-                        <div className={s.empty}>No services found for this category.</div>
-                      ) : (
-                        <div className={s.rows}>
-                          {rows.map((r, idx) => (
-                            <div
-                              key={`${r.docId || r.serviceId || 'row'}-${idx}`}
-                              className={s.row}
-                            >
-                              <input
-                                className={s.input}
-                                value={r.serviceId}
-                                onChange={(e) =>
-                                  updateRow(d.slug, idx, {
-                                    serviceId: e.target.value,
-                                  })
-                                }
-                                placeholder="serviceId"
-                              />
-
-                              <input
-                                className={s.input}
-                                value={String(r.priceInput ?? '')}
-                                disabled={r.hidden === true}
-                                onChange={(e) =>
-                                  updateRow(d.slug, idx, {
-                                    priceInput: normalizePriceInput(e.target.value),
-                                  })
-                                }
-                                placeholder={r.label || 'price'}
-                                title={r.label || r.serviceId}
-                              />
-
-                              <label className={s.hideToggle}>
+                    {isOpen && (
+                      <div className={s.panel}>
+                        {rows.length === 0 ? (
+                          <div className={s.empty}>
+                            No services found for this category.
+                          </div>
+                        ) : (
+                          <div className={s.rows}>
+                            {rows.map((r, idx) => (
+                              <div
+                                key={`${r.docId || r.serviceId || 'row'}-${idx}`}
+                                className={s.row}
+                              >
                                 <input
-                                  type="checkbox"
-                                  checked={r.hidden ? false : r.isStartingFrom === true}
+                                  className={s.input}
+                                  value={r.serviceId}
+                                  onChange={(e) =>
+                                    updateRow(d.slug, idx, {
+                                      serviceId: e.target.value,
+                                    })
+                                  }
+                                  placeholder="serviceId"
+                                />
+
+                                <input
+                                  className={s.input}
+                                  value={String(r.priceInput ?? '')}
                                   disabled={r.hidden === true}
                                   onChange={(e) =>
                                     updateRow(d.slug, idx, {
-                                      isStartingFrom: e.target.checked,
+                                      priceInput: normalizePriceInput(
+                                        e.target.value
+                                      ),
                                     })
                                   }
+                                  placeholder={r.label || 'price'}
+                                  title={r.label || r.serviceId}
                                 />
-                                use from
-                              </label>
 
-                              <label className={s.hideToggle}>
-                                <input
-                                  type="checkbox"
-                                  checked={r.hidden === true}
-                                  onChange={(e) =>
-                                    updateRow(d.slug, idx, {
-                                      hidden: e.target.checked,
-                                      ...(e.target.checked
-                                        ? { isStartingFrom: false }
-                                        : {}),
-                                    })
-                                  }
-                                />
-                                hide
-                              </label>
-                            </div>
-                          ))}
+                                <label className={s.hideToggle}>
+                                  <input
+                                    type="checkbox"
+                                    checked={r.hidden ? false : r.isStartingFrom === true}
+                                    disabled={r.hidden === true}
+                                    onChange={(e) =>
+                                      updateRow(d.slug, idx, {
+                                        isStartingFrom: e.target.checked,
+                                      })
+                                    }
+                                  />
+                                  use from
+                                </label>
+
+                                <label className={s.hideToggle}>
+                                  <input
+                                    type="checkbox"
+                                    checked={r.hidden === true}
+                                    onChange={(e) =>
+                                      updateRow(d.slug, idx, {
+                                        hidden: e.target.checked,
+                                        ...(e.target.checked
+                                          ? { isStartingFrom: false }
+                                          : {}),
+                                      })
+                                    }
+                                  />
+                                  hide
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        <div className={s.panelFooter}>
+                          <Button onClick={() => saveModel(d.slug)} disabled={isLoading}>
+                            Save
+                          </Button>
                         </div>
-                      )}
-
-                      <div className={s.panelFooter}>
-                        <Button onClick={() => saveModel(d.slug)} disabled={isLoading}>
-                          Save
-                        </Button>
                       </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </section>
-        ))}
-      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </section>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
