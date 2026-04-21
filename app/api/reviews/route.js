@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
+import admin from 'firebase-admin';
 import { db } from 'lib/firebaseAdmin';
 import { LOCATIONS } from '@data/site.config';
 
 export const dynamic = 'force-dynamic';
 
-// Build a simple map of { [locationId]: placeId } from LOCATIONS
 const PLACE_IDS = LOCATIONS.reduce((acc, loc) => {
   if (loc.id && loc.placeId) {
     acc[loc.id] = loc.placeId;
@@ -47,28 +47,15 @@ export async function GET() {
         const data = snap.data() || {};
         const latest = data?.latest;
 
-        const legacyFeaturedReviews = Array.isArray(data?.featuredReviews)
-          ? data.featuredReviews.map(normalizeReview)
-          : [];
-
-        const featuredReviewsByLocale = data?.featuredReviewsByLocale
-          ? normalizeFeaturedReviewsByLocale(data.featuredReviewsByLocale)
-          : {
-              lv: legacyFeaturedReviews,
-              ru: [],
-            };
-
-        out[key] = latest
-          ? {
-              rating: latest.rating,
-              count: latest.count,
-              fetchedAt: latest.fetchedAt,
-              name: data?.name ?? null,
-              featuredReviewsByLocale,
-              // temporary legacy fallback for old code/admin
-              featuredReviews: legacyFeaturedReviews,
-            }
-          : null;
+        out[key] = {
+          rating: latest?.rating ?? null,
+          count: latest?.count ?? null,
+          fetchedAt: latest?.fetchedAt ?? null,
+          name: data?.name ?? null,
+          featuredReviewsByLocale: normalizeFeaturedReviewsByLocale(
+            data?.featuredReviewsByLocale
+          ),
+        };
       } catch (err) {
         console.error('reviews api: error for place', placeId, err);
         out[key] = null;
@@ -117,40 +104,30 @@ export async function POST(req) {
       );
     }
 
-    const snap = await db.collection('places').doc(placeId).get();
-    const data = snap.data() || {};
+    const ref = db.collection('places').doc(placeId);
 
-    const currentByLocale = data?.featuredReviewsByLocale
-      ? normalizeFeaturedReviewsByLocale(data.featuredReviewsByLocale)
-      : {
-          lv: Array.isArray(data?.featuredReviews)
-            ? data.featuredReviews.map(normalizeReview)
-            : [],
-          ru: [],
-        };
+    await ref.set(
+      {
+        featuredReviewsByLocale: {
+          [locale]: featuredReviews,
+        },
+        featuredReviews: admin.firestore.FieldValue.delete(),
+        updatedAt: new Date().toISOString(),
+      },
+      { merge: true }
+    );
 
-    const nextByLocale = {
-      ...currentByLocale,
-      [locale]: featuredReviews,
-    };
+    const savedSnap = await ref.get();
+    const savedData = savedSnap.data() || {};
 
-    const payload = {
-      featuredReviewsByLocale: nextByLocale,
-      updatedAt: new Date().toISOString(),
-    };
-
-    // keep legacy LV field in sync for old consumers during migration
-    if (locale === 'lv') {
-      payload.featuredReviews = featuredReviews;
-    }
-
-    await db.collection('places').doc(placeId).set(payload, { merge: true });
-
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({
+      ok: true,
+      saved: normalizeFeaturedReviewsByLocale(savedData.featuredReviewsByLocale),
+    });
   } catch (err) {
     console.error('reviews api POST failed', err);
     return NextResponse.json(
-      { error: 'Failed to save reviews.' },
+      { error: err?.message || 'Failed to save reviews.' },
       { status: 500 }
     );
   }

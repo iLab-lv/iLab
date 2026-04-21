@@ -26,22 +26,14 @@ function normalizeReview(review = {}) {
 
 function normalizeFeaturedReviewsByLocale(place = {}) {
   const byLocale =
-    place?.featuredReviewsByLocale && typeof place.featuredReviewsByLocale === 'object'
+    place?.featuredReviewsByLocale &&
+    typeof place.featuredReviewsByLocale === 'object'
       ? place.featuredReviewsByLocale
       : null;
 
-  if (byLocale) {
-    return {
-      lv: Array.isArray(byLocale.lv) ? byLocale.lv.map(normalizeReview) : [],
-      ru: Array.isArray(byLocale.ru) ? byLocale.ru.map(normalizeReview) : [],
-    };
-  }
-
   return {
-    lv: Array.isArray(place?.featuredReviews)
-      ? place.featuredReviews.map(normalizeReview)
-      : [],
-    ru: [],
+    lv: Array.isArray(byLocale?.lv) ? byLocale.lv.map(normalizeReview) : [],
+    ru: Array.isArray(byLocale?.ru) ? byLocale.ru.map(normalizeReview) : [],
   };
 }
 
@@ -64,6 +56,19 @@ function formatFetchedAt(value) {
   } catch {}
 
   return '—';
+}
+
+function getEmptyPlace(key) {
+  return {
+    rating: null,
+    count: null,
+    fetchedAt: null,
+    name: key,
+    featuredReviewsByLocale: {
+      lv: [],
+      ru: [],
+    },
+  };
 }
 
 function getReviewList(place, locale) {
@@ -102,19 +107,11 @@ export default function ReviewsScreen() {
 
           nextData[key] = place
             ? {
+                ...getEmptyPlace(key),
                 ...place,
                 featuredReviewsByLocale: normalizeFeaturedReviewsByLocale(place),
               }
-            : {
-                rating: null,
-                count: null,
-                fetchedAt: null,
-                name: key,
-                featuredReviewsByLocale: {
-                  lv: [],
-                  ru: [],
-                },
-              };
+            : getEmptyPlace(key);
         }
 
         setData(nextData);
@@ -127,6 +124,7 @@ export default function ReviewsScreen() {
     }
 
     load();
+
     return () => {
       cancelled = true;
     };
@@ -135,8 +133,9 @@ export default function ReviewsScreen() {
   const places = useMemo(() => {
     return PLACE_KEYS.map((key) => ({
       key,
-      label: data?.[key]?.name || key,
+      ...getEmptyPlace(key),
       ...data?.[key],
+      label: data?.[key]?.name || key,
     }));
   }, [data]);
 
@@ -150,7 +149,7 @@ export default function ReviewsScreen() {
     const safeLocale = normalizeLocale(locale);
 
     setData((prev) => {
-      const place = prev[key] || { featuredReviewsByLocale: { lv: [], ru: [] } };
+      const place = prev[key] || getEmptyPlace(key);
       const byLocale = place.featuredReviewsByLocale || { lv: [], ru: [] };
       const list = [...(byLocale[safeLocale] || [])];
 
@@ -173,7 +172,7 @@ export default function ReviewsScreen() {
     const safeLocale = normalizeLocale(locale);
 
     setData((prev) => {
-      const place = prev[key] || { featuredReviewsByLocale: { lv: [], ru: [] } };
+      const place = prev[key] || getEmptyPlace(key);
       const byLocale = place.featuredReviewsByLocale || { lv: [], ru: [] };
 
       return {
@@ -202,7 +201,7 @@ export default function ReviewsScreen() {
     const safeLocale = normalizeLocale(locale);
 
     setData((prev) => {
-      const place = prev[key] || { featuredReviewsByLocale: { lv: [], ru: [] } };
+      const place = prev[key] || getEmptyPlace(key);
       const byLocale = place.featuredReviewsByLocale || { lv: [], ru: [] };
       const list = [...(byLocale[safeLocale] || [])];
 
@@ -225,7 +224,7 @@ export default function ReviewsScreen() {
     const safeLocale = normalizeLocale(locale);
 
     setData((prev) => {
-      const place = prev[key] || { featuredReviewsByLocale: { lv: [], ru: [] } };
+      const place = prev[key] || getEmptyPlace(key);
       const byLocale = place.featuredReviewsByLocale || { lv: [], ru: [] };
       const list = [...(byLocale[safeLocale] || [])];
       const nextIdx = idx + dir;
@@ -285,6 +284,22 @@ export default function ReviewsScreen() {
 
       if (!res.ok) {
         throw new Error(json?.error || 'Failed to save reviews');
+      }
+
+      if (json?.saved) {
+        setData((prev) => {
+          const place = prev[key] || getEmptyPlace(key);
+
+          return {
+            ...prev,
+            [key]: {
+              ...place,
+              featuredReviewsByLocale: normalizeFeaturedReviewsByLocale({
+                featuredReviewsByLocale: json.saved,
+              }),
+            },
+          };
+        });
       }
 
       setStatus(`Saved: ${key} (${safeLocale.toUpperCase()})`);
@@ -390,7 +405,7 @@ export default function ReviewsScreen() {
                                   onClick={() =>
                                     moveReview(place.key, activeLocale, idx, -1)
                                   }
-                                  disabled={idx === 0}
+                                  disabled={idx === 0 || isSaving}
                                 >
                                   ↑
                                 </button>
@@ -401,7 +416,7 @@ export default function ReviewsScreen() {
                                   onClick={() =>
                                     moveReview(place.key, activeLocale, idx, 1)
                                   }
-                                  disabled={idx === reviews.length - 1}
+                                  disabled={idx === reviews.length - 1 || isSaving}
                                 >
                                   ↓
                                 </button>
@@ -412,6 +427,7 @@ export default function ReviewsScreen() {
                                   onClick={() =>
                                     deleteReview(place.key, activeLocale, idx)
                                   }
+                                  disabled={isSaving}
                                 >
                                   Delete
                                 </button>
@@ -428,6 +444,7 @@ export default function ReviewsScreen() {
                                   })
                                 }
                                 placeholder="Author"
+                                disabled={isSaving}
                               />
 
                               <input
@@ -439,6 +456,7 @@ export default function ReviewsScreen() {
                                     date: e.target.value,
                                   })
                                 }
+                                disabled={isSaving}
                               />
 
                               <select
@@ -452,6 +470,7 @@ export default function ReviewsScreen() {
                                         : Number(e.target.value),
                                   })
                                 }
+                                disabled={isSaving}
                               >
                                 <option value="">Rating</option>
                                 <option value="1">1 star</option>
@@ -472,6 +491,7 @@ export default function ReviewsScreen() {
                               }
                               placeholder="Review text"
                               rows={5}
+                              disabled={isSaving}
                             />
                           </div>
                         ))}
