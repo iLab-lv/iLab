@@ -1,3 +1,4 @@
+// lib/content/categories.js
 import 'server-only';
 import admin from 'firebase-admin';
 
@@ -30,19 +31,6 @@ function initFirebaseAdmin() {
 function getDb() {
   initFirebaseAdmin();
   return admin.firestore();
-}
-
-function norm(value) {
-  return String(value || '').trim().toLowerCase();
-}
-
-function lastPathSegment(path = '') {
-  return String(path || '')
-    .trim()
-    .split('/')
-    .filter(Boolean)
-    .pop()
-    ?.toLowerCase() || '';
 }
 
 function normalizeSeries(series = {}) {
@@ -97,7 +85,6 @@ function normalizeCategory(category = {}, docId = null) {
     bodyHtml: category.bodyHtml || null,
     metaTitle: category.metaTitle || null,
     metaDescription: category.metaDescription || null,
-    sections: category.sections || null,
     brands: Array.isArray(category.brands)
       ? category.brands.map(normalizeBrand)
       : [],
@@ -117,24 +104,11 @@ export async function getCategoryBySlug(slug) {
   if (!slug) return null;
 
   const db = getDb();
+  const doc = await db.collection('categories').doc(slug).get();
 
-  const directDoc = await db.collection('categories').doc(slug).get();
-  if (directDoc.exists) {
-    return normalizeCategory(directDoc.data(), directDoc.id);
-  }
+  if (!doc.exists) return null;
 
-  const bySlugSnap = await db
-    .collection('categories')
-    .where('slug', '==', slug)
-    .limit(1)
-    .get();
-
-  if (!bySlugSnap.empty) {
-    const doc = bySlugSnap.docs[0];
-    return normalizeCategory(doc.data(), doc.id);
-  }
-
-  return null;
+  return normalizeCategory(doc.data(), doc.id);
 }
 
 export async function getBrandsByCategory(categorySlug) {
@@ -146,18 +120,11 @@ export async function getBrandByCategory(categorySlug, brandKey) {
   if (!categorySlug || !brandKey) return null;
 
   const brands = await getBrandsByCategory(categorySlug);
-  const needle = norm(brandKey);
-
-  if (!needle) return null;
 
   return (
-    brands.find((brand) => {
-      const key = norm(brand?.key);
-      const slug = norm(brand?.slug);
-      const routeSlug = lastPathSegment(brand?.route?.brandPath);
-
-      return key === needle || slug === needle || routeSlug === needle;
-    }) || null
+    brands.find(
+      (brand) => brand.key === brandKey || brand.slug === brandKey
+    ) || null
   );
 }
 

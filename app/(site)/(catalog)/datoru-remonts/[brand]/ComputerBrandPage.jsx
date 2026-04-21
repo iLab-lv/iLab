@@ -1,6 +1,9 @@
+//REPO TEST
+
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
+import { getCategoryBySlug, getBrandByCategory } from '@/lib/content/categories';
 import { getDevices } from '@/lib/content/devices';
 import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
 
@@ -134,22 +137,13 @@ function shapeDevicesForSeriesGrid(devices, brand, locale = 'lv') {
 export const dynamicParams = false;
 
 export async function generateComputerBrandStaticParams() {
-  const devices = await getDevices();
+  const category = await getCategoryBySlug(CATEGORY_KEY);
+  if (!category || !Array.isArray(category.brands)) return [];
 
-  const keys = Array.from(
-    new Set(
-      devices
-        .filter(
-          (d) =>
-            d?.type === 'device' &&
-            d.categoryKey === CATEGORY_KEY &&
-            d.brandKey
-        )
-        .map((d) => String(d.brandKey).toLowerCase())
-    )
-  );
-
-  return keys.map((brand) => ({ brand }));
+  return category.brands
+    .map((brand) => String(brand?.key || '').toLowerCase())
+    .filter(Boolean)
+    .map((brand) => ({ brand }));
 }
 
 /* ---------------------------------------------
@@ -492,14 +486,39 @@ export default async function ComputerBrandPage({
   locale = 'lv',
 }) {
   const brandSlug = String(brand || '').toLowerCase();
-  if (!brandSlug) return notFound();
+  if (!brandSlug) {
+    throw new Error(`MISSING BRAND SLUG: brand=${brand}, locale=${locale}`);
+  }
 
-  const [page, devicesFromDb] = await Promise.all([
-    resolveBrandPage(CATEGORY_KEY, brandSlug, locale),
+  const [directBrand, category, devicesFromDb] = await Promise.all([
+    getBrandByCategory(CATEGORY_KEY, brandSlug),
+    getCategoryBySlug(CATEGORY_KEY),
     getDevices(),
   ]);
 
-  if (!page) return notFound();
+  if (!category) {
+    throw new Error(`CATEGORY NOT FOUND: ${CATEGORY_KEY}`);
+  }
+
+  if (!directBrand) {
+    throw new Error(
+      `BRAND NOT FOUND: category=${CATEGORY_KEY}, brand=${brandSlug}, availableBrands=${JSON.stringify(
+        (category.brands || []).map((b) => ({
+          key: b?.key || null,
+          slug: b?.slug || null,
+          routeBrandPath: b?.route?.brandPath || null,
+        }))
+      )}`
+    );
+  }
+
+  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
+
+  if (!page) {
+    throw new Error(
+      `RESOLVER FAILED: category=${CATEGORY_KEY}, brand=${brandSlug}, directBrandKey=${directBrand.key}, directBrandSlug=${directBrand.slug}`
+    );
+  }
 
   const cfg = normalizeComputerBrand(page.source?.brand, locale);
   const strings = getPageStrings(cfg, locale);
