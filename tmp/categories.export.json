@@ -1,0 +1,1259 @@
+{
+  "exportedAt": "2026-04-29T19:12:52.447Z",
+  "projectId": "ilab-v2",
+  "collection": "categories",
+  "count": 4,
+  "items": [
+    {
+      "id": "telefonu-remonts",
+      "image": "/images/categories/telefonu_remonts.webp",
+      "metaTitle": {
+        "ru": "Ремонт телефонов в Риге, экран и батарея | iLab",
+        "lv": "Telefonu remonts Rīgā, ekrāna un baterijas maiņa | iLab"
+      },
+      "h1": {
+        "ru": "Ремонт телефонов в Риге",
+        "lv": "Telefonu remonts Rīgā"
+      },
+      "bodyHtml": {
+        "ru": "\n<p><strong>Ремонт телефонов в Риге</strong> в сервисе iLab включает замену экрана, аккумулятора, разъёма зарядки, камеры, корпусных деталей и диагностику после попадания влаги.</p>\n<p>Работаем с популярными брендами, заранее согласовываем стоимость ремонта и после выполнения выдаём <strong>гарантию 90 дней</strong> на детали и работу. Самые частые ремонты выполняем в тот же день.</p>\n      ",
+        "lv": "\n<p><strong>Telefonu remonts Rīgā</strong> iLab servisā ietver ekrāna maiņu, baterijas nomaiņu, uzlādes ligzdas remontu, kameras maiņu, korpusa detaļu nomaiņu un diagnostiku pēc mitruma bojājumiem.</p>\n<p>Strādājam ar populārākajiem zīmoliem, pirms remonta saskaņojam izmaksas, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam. Biežākos remontdarbus iespējams paveikt tajā pašā dienā.</p>\n      "
+      },
+      "type": "category",
+      "metaDescription": {
+        "ru": "Ремонт телефонов в Риге: замена экрана, батареи, камеры и разъёма зарядки, диагностика после влаги, понятные цены и гарантия 90 дней в iLab.",
+        "lv": "Telefonu remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, mitruma bojājumu diagnostika, skaidras cenas un 90 dienu garantija iLab."
+      },
+      "slug": "telefonu-remonts",
+      "lead": {
+        "ru": "Экраны, аккумуляторы, разъёмы зарядки, камеры и другие ремонты телефонов. Частые ремонты выполняем в тот же день, с понятными ценами и гарантией 90 дней.",
+        "lv": "Displeji, baterijas, uzlādes ligzdas, kameras un citi telefonu remontdarbi. Biežākos remontus paveicam tajā pašā dienā ar skaidrām cenām un 90 dienu garantiju."
+      },
+      "order": 2,
+      "labels": {
+        "ru": "Ремонт телефонов",
+        "lv": "Telefonu remonts"
+      },
+      "brands": [
+        {
+          "key": "apple",
+          "labels": {
+            "lv": "Apple iPhone",
+            "ru": "Apple iPhone"
+          },
+          "logo": "/images/logos/apple-logo.svg",
+          "image": "/images/categories/iphone_remonts.webp",
+          "order": 1,
+          "route": {
+            "brandPath": "/telefonu-remonts/apple",
+            "dedicatedHubPath": "/iphone-remonts",
+            "preferDedicatedHub": true
+          },
+          "page": {
+            "variant": "iphoneHub",
+            "h1": {
+              "lv": "iPhone remonts Rīgā",
+              "ru": "Ремонт iPhone в Риге"
+            },
+            "lead": {
+              "lv": "iLab meistari remontē iPhone ar saplaisājušu ekrānu, nolietotu bateriju, bojātu kameru un uzlādes problēmām. Ātra diagnostika, kvalitatīvas detaļas un 90 dienu garantija.",
+              "ru": "Мастера iLab ремонтируют iPhone с разбитым экраном, изношенной батареей, неисправной камерой и проблемами зарядки. Быстрая диагностика, качественные детали и гарантия 90 дней."
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "iPhone remonts Rīgā, ekrāna un baterijas maiņa | iLab",
+              "ru": "Ремонт iPhone в Риге, экран и батарея | iLab"
+            },
+            "metaDescription": {
+              "lv": "iPhone remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana, ātra diagnostika un 90 dienu garantija iLab.",
+              "ru": "Ремонт iPhone в Риге: замена экрана, батареи, камеры и разъёма зарядки, ремонт после воды, быстрая диагностика и гарантия 90 дней в iLab."
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "Izvēlies savu iPhone modeli",
+                "ru": "Выберите свою модель iPhone"
+              },
+              "intro": {
+                "lv": "Atrodi vajadzīgo iPhone pēc nosaukuma vai atver sēriju un izvēlies savu modeli.",
+                "ru": "Найдите нужный iPhone по названию или откройте серию и выберите свою модель."
+              }
+            },
+            "sections": {
+              "hasCustomGuide": true,
+              "hasFaq": true,
+              "hasProcess": true,
+              "hasReviews": true,
+              "hasWhy": true
+            }
+          },
+          "series": [
+            {
+              "key": "iphone-17",
+              "labels": {
+                "lv": "iPhone 17 sērija",
+                "ru": "Серия iPhone 17"
+              },
+              "order": 10
+            },
+            {
+              "key": "iphone-16",
+              "labels": {
+                "lv": "iPhone 16 sērija",
+                "ru": "Серия iPhone 16"
+              },
+              "order": 20
+            },
+            {
+              "key": "iphone-15",
+              "labels": {
+                "lv": "iPhone 15 sērija",
+                "ru": "Серия iPhone 15"
+              },
+              "order": 30
+            },
+            {
+              "key": "iphone-14",
+              "labels": {
+                "lv": "iPhone 14 sērija",
+                "ru": "Серия iPhone 14"
+              },
+              "order": 40
+            },
+            {
+              "key": "iphone-se",
+              "labels": {
+                "lv": "iPhone SE",
+                "ru": "iPhone SE"
+              },
+              "order": 50
+            },
+            {
+              "key": "iphone-13",
+              "labels": {
+                "lv": "iPhone 13 sērija",
+                "ru": "Серия iPhone 13"
+              },
+              "order": 60
+            },
+            {
+              "key": "iphone-12",
+              "labels": {
+                "lv": "iPhone 12 sērija",
+                "ru": "Серия iPhone 12"
+              },
+              "order": 70
+            },
+            {
+              "key": "iphone-11",
+              "labels": {
+                "lv": "iPhone 11 sērija",
+                "ru": "Серия iPhone 11"
+              },
+              "order": 80
+            },
+            {
+              "key": "iphone-x",
+              "labels": {
+                "lv": "iPhone X sērija",
+                "ru": "Серия iPhone X"
+              },
+              "order": 90
+            },
+            {
+              "key": "iphone-legacy",
+              "labels": {
+                "lv": "Vecākie iPhone modeļi",
+                "ru": "Старые модели iPhone"
+              },
+              "order": 999
+            }
+          ]
+        },
+        {
+          "key": "samsung",
+          "labels": {
+            "lv": "Samsung",
+            "ru": "Samsung"
+          },
+          "logo": "/images/logos/samsung-logo.svg",
+          "image": "/images/categories/telefonu_remonts.webp",
+          "order": 2,
+          "route": {
+            "brandPath": "/telefonu-remonts/samsung",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": [
+            {
+              "key": "galaxy-s",
+              "labels": {
+                "lv": "Galaxy S sērija",
+                "ru": "Серия Galaxy S"
+              },
+              "order": 100
+            },
+            {
+              "key": "galaxy-a",
+              "labels": {
+                "lv": "Galaxy A sērija",
+                "ru": "Серия Galaxy A"
+              },
+              "order": 110
+            },
+            {
+              "key": "galaxy-z",
+              "labels": {
+                "lv": "Galaxy Z sērija",
+                "ru": "Серия Galaxy Z"
+              },
+              "order": 120
+            },
+            {
+              "key": "galaxy-note",
+              "labels": {
+                "lv": "Galaxy Note sērija",
+                "ru": "Серия Galaxy Note"
+              },
+              "order": 130
+            },
+            {
+              "key": "galaxy-xcover",
+              "labels": {
+                "lv": "Galaxy Xcover sērija",
+                "ru": "Серия Galaxy Xcover"
+              },
+              "order": 140
+            }
+          ]
+        },
+        {
+          "key": "huawei",
+          "labels": {
+            "lv": "Huawei",
+            "ru": "Huawei"
+          },
+          "logo": "/images/logos/huawei-logo.svg",
+          "image": "/images/categories/telefonu_remonts.webp",
+          "order": 3,
+          "route": {
+            "brandPath": "/telefonu-remonts/huawei",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "sony",
+          "labels": {
+            "lv": "Sony",
+            "ru": "Sony"
+          },
+          "logo": "/images/logos/sony-logo.svg",
+          "image": "/images/categories/telefonu_remonts.webp",
+          "order": 4,
+          "route": {
+            "brandPath": "/telefonu-remonts/sony",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "oneplus",
+          "labels": {
+            "lv": "OnePlus",
+            "ru": "OnePlus"
+          },
+          "logo": "/images/logos/oneplus-logo.svg",
+          "image": "/images/categories/telefonu_remonts.webp",
+          "order": 5,
+          "route": {
+            "brandPath": "/telefonu-remonts/oneplus",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "xiaomi",
+          "labels": {
+            "lv": "Xiaomi",
+            "ru": "Xiaomi"
+          },
+          "logo": "/images/logos/xiaomi-logo.svg",
+          "image": "/images/categories/telefonu_remonts.webp",
+          "order": 6,
+          "route": {
+            "brandPath": "/telefonu-remonts/xiaomi",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": [
+            {
+              "key": "redmi-note",
+              "labels": {
+                "lv": "Redmi Note sērija",
+                "ru": "Серия Redmi Note"
+              },
+              "order": 0
+            },
+            {
+              "key": "redmi-c",
+              "labels": {
+                "lv": "C sērija",
+                "ru": "Серия Redmi C"
+              },
+              "order": 10
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-09T18:44:50.211Z"
+    },
+    {
+      "id": "plansetdatoru-remonts",
+      "image": "/images/categories/plansetdatoru-remonts.webp",
+      "metaTitle": {
+        "ru": "Ремонт планшетов в Риге, замена экрана | iLab",
+        "lv": "Planšetdatoru remonts Rīgā, ekrāna maiņa | iLab"
+      },
+      "h1": {
+        "ru": "Ремонт планшетов в Риге",
+        "lv": "Planšetdatoru remonts Rīgā"
+      },
+      "bodyHtml": {
+        "ru": "\n<p><strong>Ремонт планшетов в Риге</strong> в сервисе iLab включает замену дисплея, аккумулятора, разъёма зарядки, ремонт камеры и диагностику после попадания влаги.</p>\n<p>Ремонтируем Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi и другие планшеты. Перед началом работ проводим диагностику, согласовываем стоимость и после ремонта выдаём <strong>гарантию 90 дней</strong>.</p>\n      ",
+        "lv": "\n<p><strong>Planšetdatoru remonts Rīgā</strong> iLab servisā ietver displeja maiņu, baterijas nomaiņu, uzlādes ligzdas remontu, kameras remontu un mitruma bojājumu diagnostiku.</p>\n<p>Remontējam Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi un citus planšetdatorus. Pirms darba uzsākšanas veicam diagnostiku, saskaņojam izmaksas un pēc remonta sniedzam <strong>90 dienu garantiju</strong>.</p>\n      "
+      },
+      "type": "category",
+      "metaDescription": {
+        "ru": "Ремонт планшетов в Риге: замена экрана, батареи и разъёма зарядки, ремонт камеры, диагностика и гарантия 90 дней для Apple, Samsung и других.",
+        "lv": "Planšetdatoru remonts Rīgā — ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts, diagnostika un 90 dienu garantija Apple, Samsung un citiem."
+      },
+      "slug": "plansetdatoru-remonts",
+      "lead": {
+        "ru": "Экраны, аккумуляторы, разъёмы зарядки, камеры и другие ремонты планшетов. Быстрая диагностика, понятные цены и гарантия 90 дней в сервисе iLab.",
+        "lv": "Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā."
+      },
+      "order": 3,
+      "labels": {
+        "ru": "Ремонт планшетов",
+        "lv": "Planšetdatoru remonts"
+      },
+      "updatedAt": "2026-03-24T01:31:00.607Z",
+      "brands": [
+        {
+          "order": 1,
+          "route": {
+            "preferDedicatedHub": true,
+            "dedicatedHubPath": "/plansetdatoru-remonts/ipad",
+            "brandPath": "/plansetdatoru-remonts/apple"
+          },
+          "image": "/images/categories/plansetdatoru-remonts.webp",
+          "key": "ipad",
+          "labels": {
+            "lv": "Apple iPad",
+            "ru": "Apple iPad"
+          },
+          "logo": "/images/logos/apple-logo.svg",
+          "series": [
+            {
+              "key": "ipad-pro",
+              "labels": {
+                "lv": "iPad Pro",
+                "ru": "iPad Pro"
+              },
+              "order": 100
+            },
+            {
+              "order": 110,
+              "key": "ipad-air",
+              "labels": {
+                "lv": "iPad Air",
+                "ru": "iPad Air"
+              }
+            },
+            {
+              "order": 120,
+              "key": "ipad-mini",
+              "labels": {
+                "ru": "iPad mini",
+                "lv": "iPad mini"
+              }
+            },
+            {
+              "order": 130,
+              "labels": {
+                "ru": "iPad",
+                "lv": "iPad"
+              },
+              "key": "ipad"
+            }
+          ],
+          "page": {
+            "variant": "ipadHub"
+          }
+        },
+        {
+          "page": {
+            "variant": "brand"
+          },
+          "labels": {
+            "lv": "Samsung Galaxy Tab",
+            "ru": "Samsung Galaxy Tab"
+          },
+          "logo": "/images/logos/samsung-logo.svg",
+          "series": [],
+          "key": "samsung",
+          "route": {
+            "brandPath": "/plansetdatoru-remonts/samsung"
+          },
+          "image": "/images/categories/plansetdatoru-remonts.webp",
+          "order": 2
+        },
+        {
+          "key": "lenovo",
+          "image": "/images/categories/plansetdatoru-remonts.webp",
+          "route": {
+            "brandPath": "/plansetdatoru-remonts/lenovo"
+          },
+          "order": 3,
+          "page": {
+            "variant": "brand"
+          },
+          "logo": "/images/logos/lenovo-logo.svg",
+          "series": [],
+          "labels": {
+            "lv": "Lenovo",
+            "ru": "Lenovo"
+          }
+        },
+        {
+          "page": {
+            "variant": "brand"
+          },
+          "logo": "/images/logos/xiaomi-logo.svg",
+          "series": [],
+          "labels": {
+            "ru": "Xiaomi",
+            "lv": "Xiaomi"
+          },
+          "order": 4,
+          "key": "xiaomi",
+          "route": {
+            "brandPath": "/plansetdatoru-remonts/xiaomi"
+          },
+          "image": "/images/categories/plansetdatoru-remonts.webp"
+        },
+        {
+          "page": {
+            "variant": "brand"
+          },
+          "labels": {
+            "lv": "Huawei",
+            "ru": "Huawei"
+          },
+          "logo": "/images/logos/huawei-logo.svg",
+          "series": [],
+          "order": 5,
+          "key": "huawei",
+          "route": {
+            "brandPath": "/plansetdatoru-remonts/huawei"
+          },
+          "image": "/images/categories/plansetdatoru-remonts.webp"
+        }
+      ]
+    },
+    {
+      "id": "datoru-remonts",
+      "image": "/images/categories/datoru_remonts.webp",
+      "metaTitle": {
+        "ru": "Ремонт компьютеров в Риге, MacBook и ноутбуки | iLab",
+        "lv": "Datoru remonts Rīgā, MacBook un portatīvie datori | iLab"
+      },
+      "h1": {
+        "ru": "Ремонт компьютеров в Риге",
+        "lv": "Datoru remonts Rīgā"
+      },
+      "bodyHtml": {
+        "ru": "\n<p><strong>Ремонт компьютеров в Риге</strong> в сервисе iLab включает диагностику ноутбуков и настольных компьютеров, замену экрана, ремонт клавиатуры, материнской платы, устранение проблем с зарядкой и повышение производительности с помощью замены SSD или RAM.</p>\n<p>Ремонтируем MacBook, iMac, Mac Pro, Lenovo, HP, Dell, Asus, Acer и другие компьютеры. Перед ремонтом согласовываем стоимость и после выполнения работ выдаём <strong>гарантию 90 дней</strong>.</p>\n      ",
+        "lv": "\n<p><strong>Datoru remonts Rīgā</strong> iLab servisā ietver portatīvo un stacionāro datoru diagnostiku, ekrāna maiņu, tastatūras remontu, mātesplates remontu, uzlādes problēmu novēršanu un veiktspējas uzlabošanu ar SSD vai RAM nomaiņu.</p>\n<p>Remontējam MacBook, iMac, Mac Pro, Lenovo, HP, Dell, Asus, Acer un citus datorus. Pirms remonta saskaņojam izmaksas un pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>\n      "
+      },
+      "type": "category",
+      "metaDescription": {
+        "ru": "Ремонт компьютеров в Риге: MacBook, iMac, ноутбуки и ПК, диагностика, ремонт экрана, клавиатуры и зарядки, апгрейд SSD/RAM и гарантия.",
+        "lv": "Datoru remonts Rīgā — MacBook, iMac, portatīvo un stacionāro datoru diagnostika, ekrāna, tastatūras un uzlādes remonts, SSD/RAM uzlabojumi un garantija."
+      },
+      "slug": "datoru-remonts",
+      "lead": {
+        "ru": "Ремонт ноутбуков и настольных компьютеров — экран, клавиатура, материнская плата, зарядка, апгрейд SSD и RAM, а также диагностика после влаги.",
+        "lv": "Portatīvo un stacionāro datoru remonts — ekrāns, tastatūra, mātesplate, uzlāde, SSD un RAM uzlabošana, kā arī diagnostika pēc mitruma bojājumiem."
+      },
+      "order": 4,
+      "labels": {
+        "ru": "Ремонт компьютеров",
+        "lv": "Datoru remonts"
+      },
+      "brands": [
+        {
+          "key": "macbook",
+          "labels": {
+            "lv": "MacBook",
+            "ru": "MacBook"
+          },
+          "logo": "/images/logos/apple-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 1,
+          "route": {
+            "brandPath": "/datoru-remonts/macbook",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": [
+            {
+              "key": "macbook-air",
+              "labels": {
+                "lv": "MacBook Air sērija",
+                "ru": "Серия MacBook Air"
+              },
+              "order": 0
+            },
+            {
+              "key": "macbook-pro",
+              "labels": {
+                "lv": "MacBook Pro sērija",
+                "ru": "Серия MacBook Pro"
+              },
+              "order": 10
+            }
+          ]
+        },
+        {
+          "key": "imac",
+          "labels": {
+            "lv": "iMac",
+            "ru": "iMac"
+          },
+          "logo": "/images/logos/apple-logo.svg",
+          "image": "/images/categories/imac_remonts.webp",
+          "order": 2,
+          "route": {
+            "brandPath": "/datoru-remonts/imac",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "mac-pro",
+          "labels": {
+            "lv": "Mac Pro",
+            "ru": "Mac Pro"
+          },
+          "logo": "/images/logos/apple-logo.svg",
+          "image": "/images/categories/macpro_remonts.webp",
+          "order": 3,
+          "route": {
+            "brandPath": "/datoru-remonts/mac-pro",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "lenovo",
+          "labels": {
+            "lv": "Lenovo",
+            "ru": "Lenovo"
+          },
+          "logo": "/images/logos/lenovo-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 4,
+          "route": {
+            "brandPath": "/datoru-remonts/lenovo",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "hp",
+          "labels": {
+            "lv": "HP",
+            "ru": "HP"
+          },
+          "logo": "/images/logos/hp-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 5,
+          "route": {
+            "brandPath": "/datoru-remonts/hp",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "msi",
+          "labels": {
+            "lv": "MSI",
+            "ru": "MSI"
+          },
+          "logo": "/images/logos/msi-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 6,
+          "route": {
+            "brandPath": "/datoru-remonts/msi",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "dell",
+          "labels": {
+            "lv": "Dell",
+            "ru": "Dell"
+          },
+          "logo": "/images/logos/dell-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 7,
+          "route": {
+            "brandPath": "/datoru-remonts/dell",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "asus",
+          "labels": {
+            "lv": "Asus",
+            "ru": "Asus"
+          },
+          "logo": "/images/logos/asus-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 8,
+          "route": {
+            "brandPath": "/datoru-remonts/asus",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        },
+        {
+          "key": "acer",
+          "labels": {
+            "lv": "Acer",
+            "ru": "Acer"
+          },
+          "logo": "/images/logos/acer-logo.svg",
+          "image": "/images/categories/datoru_remonts.webp",
+          "order": 9,
+          "route": {
+            "brandPath": "/datoru-remonts/acer",
+            "dedicatedHubPath": "",
+            "preferDedicatedHub": false
+          },
+          "page": {
+            "variant": "brand",
+            "h1": {
+              "lv": "",
+              "ru": ""
+            },
+            "lead": {
+              "lv": "",
+              "ru": ""
+            },
+            "bodyHtml": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaTitle": {
+              "lv": "",
+              "ru": ""
+            },
+            "metaDescription": {
+              "lv": "",
+              "ru": ""
+            },
+            "modelGrid": {
+              "heading": {
+                "lv": "",
+                "ru": ""
+              },
+              "intro": {
+                "lv": "",
+                "ru": ""
+              }
+            },
+            "sections": {
+              "hasCustomGuide": false,
+              "hasFaq": false,
+              "hasProcess": false,
+              "hasReviews": false,
+              "hasWhy": false
+            }
+          },
+          "series": []
+        }
+      ],
+      "updatedAt": "2026-04-10T14:24:39.825Z"
+    },
+    {
+      "id": "dyson-remonts",
+      "image": "/images/categories/dyson_remonts.webp",
+      "brands": [],
+      "metaTitle": {
+        "ru": "Ремонт Dyson в Риге, батарея и мотор | iLab",
+        "lv": "Dyson remonts Rīgā, baterija un motors | iLab"
+      },
+      "h1": {
+        "ru": "Ремонт Dyson в Риге",
+        "lv": "Dyson remonts Rīgā"
+      },
+      "bodyHtml": {
+        "ru": "\n<p><strong>Ремонт Dyson в Риге</strong> в сервисе iLab включает замену батареи, ремонт мотора, замену фильтров и уплотнителей, глубокую чистку и диагностику, если устройство потеряло мощность или работает некорректно.</p>\n<p>Перед началом работ проверяем состояние устройства, согласовываем стоимость ремонта и после выполнения выдаём <strong>гарантию 90 дней</strong> на детали и работу.</p>\n      ",
+        "lv": "\n<p><strong>Dyson remonts Rīgā</strong> iLab servisā ietver baterijas maiņu, motora remontu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku, ja ierīce ir zaudējusi jaudu vai pārstājusi darboties korekti.</p>\n<p>Pirms darba uzsākšanas pārbaudām ierīces stāvokli, saskaņojam remonta izmaksas un pēc remonta sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam.</p>\n      "
+      },
+      "type": "category",
+      "metaDescription": {
+        "ru": "Ремонт Dyson в Риге: замена батареи, ремонт мотора, фильтров и уплотнителей, диагностика, понятные цены и гарантия 90 дней в сервисе iLab.",
+        "lv": "Dyson remonts Rīgā — baterijas maiņa, motora remonts, filtru un blīvējumu nomaiņa, diagnostika, skaidras cenas un 90 dienu garantija iLab servisā."
+      },
+      "slug": "dyson-remonts",
+      "lead": {
+        "ru": "Ремонт беспроводных пылесосов Dyson: батарея, мотор, фильтры и другие узлы. Быстрая проверка, понятная стоимость и гарантия 90 дней в iLab.",
+        "lv": "Dyson bezvadu putekļsūcēju baterijas, motora, filtru un citu mezglu remonts. Ātra pārbaude, skaidras izmaksas un 90 dienu garantija iLab servisā."
+      },
+      "order": 5,
+      "labels": {
+        "ru": "Ремонт Dyson",
+        "lv": "Dyson remonts"
+      },
+      "updatedAt": "2026-03-24T01:31:00.607Z"
+    }
+  ]
+}
