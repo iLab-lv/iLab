@@ -2,7 +2,7 @@
    Breakpoints:
    - Desktop (≥1360px): full nav + Locator + Sazināties buttons
    - Tablet (768–1359px): hamburger nav + Locator + Sazināties buttons
-   - Mobile (<768px): hamburger nav + Locator icon only (Sazināties in BottomBar)
+   - Mobile (<768px): Locator icon + Cenas + hamburger
 */
 @use '../../../styles/_tokens.scss' as *;
 
@@ -38,14 +38,12 @@
   gap: $space-md;
 }
 
-/* ===== Brand ===== */
-/* (brandLink + logo styles moved to Logo.module.scss) */
-
 /* ===== Desktop nav (only ≥1360px) ===== */
 .nav {
   display: none;
   align-items: center;
   gap: $space-sm;
+
   @media (min-width: 1360px) {
     display: flex;
   }
@@ -78,11 +76,14 @@
     height: 2px;
     background: transparent;
     border-radius: 1px;
-    transition: background-color $dur-base $ease-std, transform $dur-base $ease-std,
+    transition:
+      background-color $dur-base $ease-std,
+      transform $dur-base $ease-std,
       opacity $dur-base $ease-std;
     transform: scaleX(0.2);
     opacity: 0;
   }
+
   &:hover::after,
   &:focus-visible::after {
     background: $color-accent;
@@ -94,6 +95,7 @@
 .navParent {
   padding-right: 8px;
 }
+
 .chev {
   display: inline-block;
   margin-left: 6px;
@@ -101,6 +103,7 @@
   opacity: 0.7;
   transform: translateY(1px);
 }
+
 .ddWrap {
   position: relative;
 }
@@ -128,6 +131,7 @@
     background: $glass-fallback-strong;
   }
 }
+
 .open {
   opacity: 1;
   pointer-events: auto;
@@ -138,10 +142,12 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
   > li {
     margin: 0;
   }
 }
+
 .menuLink {
   display: block;
   padding: 10px 10px;
@@ -149,6 +155,7 @@
   color: $color-text;
   text-decoration: none;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
+
   &:hover,
   &:focus-visible {
     outline: none;
@@ -164,6 +171,7 @@
   gap: $space-sm;
   justify-self: end;
 }
+
 .actionsCluster {
   display: inline-flex;
   align-items: center;
@@ -176,17 +184,27 @@
   backdrop-filter: saturate($glass-saturate) blur($glass-blur);
 }
 
-/* ===== CTA visibility by breakpoint ===== */
-/* Tablet & Desktop (≥768px): show full buttons (Locator + Sazināties) */
+/* Tablet & Desktop (≥768px): show full buttons */
 .ctasTabletDesktop {
   display: none;
+
   @media (min-width: 768px) {
     display: inline-flex;
     gap: $space-sm;
   }
 }
 
-/* Mobile-only (<768px): locator icon (Sazināties moves to BottomBar) */
+/* Mobile-only prices CTA */
+.mobilePrices {
+  display: inline-flex;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+/* Mobile-only locator icon */
 .iconBtn {
   display: inline-flex;
   align-items: center;
@@ -198,7 +216,9 @@
   background: $glass-bg-weak;
   color: $color-text;
   cursor: pointer;
-  transition: background-color $dur-base $ease-std, color $dur-base $ease-std,
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
     border-color $dur-base $ease-std;
 
   &:hover,
@@ -209,23 +229,23 @@
     background: rgba(255, 255, 255, 0.06);
   }
 
-  /* hide on tablet/desktop */
   @media (min-width: 768px) {
     display: none;
   }
 }
 
-/* Language switcher ONLY on mobile (<768px) */
+/* Language switcher ONLY on mobile if used */
 .slotUtility {
   display: inline-flex;
   align-items: center;
   min-width: 0;
+
   @media (min-width: 768px) {
     display: none;
   }
 }
 
-/* Hamburger (visible <1360px) */
+/* Hamburger visible <1360px */
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -237,7 +257,9 @@
   background: $glass-bg-weak;
   color: $color-text;
   cursor: pointer;
-  transition: background-color $dur-base $ease-std, color $dur-base $ease-std,
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
     border-color $dur-base $ease-std;
 
   &:hover,
@@ -253,15 +275,21 @@
   }
 }
 
-/* Mobile ordering (<1360px): locator (left) → language → hamburger (right-most) */
+/* Mobile ordering: locator → prices → utility → hamburger */
 .iconBtn {
   order: 1;
 }
-.slotUtility {
+
+.mobilePrices {
   order: 2;
 }
-.hamburger {
+
+.slotUtility {
   order: 3;
+}
+
+.hamburger {
+  order: 4;
 }
 
 /* Locator SVG crispness */
@@ -271,12 +299,15 @@
   height: 20px;
   vector-effect: non-scaling-stroke;
 }
+
 .iconBtn :where(svg [stroke]) {
   stroke: currentColor;
 }
+
 .iconBtn :where(svg [fill='none']) {
   stroke: currentColor;
 }
+
 .iconBtn :where(svg [stroke-width]) {
   stroke-width: 1.75;
 }
@@ -296,7 +327,6 @@
   pointer-events: none;
   transition: opacity $dur-base $ease-std, transform $dur-base $ease-std;
 
-  /* New: flex column so footer can sit at viewport bottom */
   display: flex;
   flex-direction: column;
 
@@ -308,41 +338,36 @@
     display: none;
   }
 }
+
 .mobileMenu.open {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Drawer inner layout: menu (scrollable) + footer controls (fixed at bottom) */
 .mobileInner {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* allow child flex scroller */
+  min-height: 0;
   padding: $space-md;
   padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));
 }
 
-/* Menu section: scrollable area */
 .mobileMenuList {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-
-  /* Extra bottom space so last item scrolls fully above controls */
   padding-bottom: $space-lg;
 }
 
-/* Controls pinned to bottom area (non-scrolling) */
 .mobileDrawerControls {
   flex: 0 0 auto;
   padding-top: $space-md;
   border-top: 1px solid $glass-border;
 }
 
-/* Drawer items */
 .drawerItem {
   width: 100%;
   text-align: left;
@@ -354,8 +379,11 @@
   color: $color-text;
   text-decoration: none;
   border: 1px solid $glass-border;
-  transition: background-color $dur-base $ease-std, color $dur-base $ease-std,
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
     border-color $dur-base $ease-std;
+
   &:hover,
   &:focus-visible {
     outline: none;
@@ -368,16 +396,17 @@
 .emph {
   font-weight: $font-weight-semibold;
 }
+
 .drawerGroup {
   margin-bottom: 6px;
 }
+
 .drawerSubmenu {
   margin: 4px 0 10px 8px;
   padding-left: 8px;
   border-left: 1px dashed $glass-border-2;
 }
 
-/* Parent row in mobile drawer with toggle on the right */
 .drawerParent {
   display: flex;
   align-items: center;
@@ -390,7 +419,6 @@
   text-decoration: none;
 }
 
-/* + / − button */
 .drawerToggle {
   flex: 0 0 auto;
   margin-left: $space-xs;
@@ -406,7 +434,9 @@
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  transition: background-color $dur-base $ease-std, color $dur-base $ease-std,
+  transition:
+    background-color $dur-base $ease-std,
+    color $dur-base $ease-std,
     border-color $dur-base $ease-std;
 
   &:hover,
@@ -430,9 +460,7 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .dropdown {
-    transition: none;
-  }
+  .dropdown,
   .mobileMenu {
     transition: none;
   }
