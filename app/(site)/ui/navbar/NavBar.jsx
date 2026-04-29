@@ -15,6 +15,7 @@ import {
   buildNavigation,
   getNavLocaleFromPathname,
 } from './navigation.helpers';
+import { getCtaMainContent } from '../cta-main/ctaMainContent';
 
 export default function NavBar({
   showNavigation = true,
@@ -23,6 +24,7 @@ export default function NavBar({
 }) {
   const pathname = usePathname() || '/';
   const locale = getNavLocaleFromPathname(pathname);
+  const cta = getCtaMainContent(locale);
   const homeHref = logoHref || (locale === 'ru' ? '/ru' : '/');
 
   const items = useMemo(() => buildNavigation(locale), [locale]);
@@ -104,9 +106,10 @@ export default function NavBar({
                       aria-controls="locator-panel"
                       aria-expanded={locatorOpen}
                       onClick={(e) => openLocator(e.currentTarget)}
-                      title={locale === 'ru' ? 'Сервисные центры' : 'Servisa centri'}
+                      title={cta.locator.label}
+                      aria-label={cta.locator.ariaLabel}
                     >
-                      {locale === 'ru' ? 'Сервисные центры' : 'Servisa centri'}
+                      {cta.locator.label}
                     </Button>
 
                     <Button
@@ -116,8 +119,9 @@ export default function NavBar({
                       aria-controls="sazinaties-panel"
                       aria-expanded={contactOpen}
                       onClick={(e) => openContact(e.currentTarget)}
+                      aria-label={cta.contact.ariaLabel}
                     >
-                      {locale === 'ru' ? 'Связаться' : 'Sazināties'}
+                      {cta.contact.label}
                     </Button>
                   </div>
 
@@ -132,10 +136,21 @@ export default function NavBar({
                       if (openSlug) setOpenSlug(null);
                       openLocator(e.currentTarget);
                     }}
-                    aria-label={locale === 'ru' ? 'Сервисные центры' : 'Servisa centri'}
+                    aria-label={cta.locator.ariaLabel}
                   >
                     <LocationPin aria-hidden focusable="false" />
                   </button>
+
+                  <div className={s.mobilePrices}>
+                    <Button
+                      variant="secondary"
+                      size="md"
+                      href={cta.prices.href}
+                      aria-label={cta.prices.ariaLabel}
+                    >
+                      {cta.prices.label}
+                    </Button>
+                  </div>
                 </>
               )}
 

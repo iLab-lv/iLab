@@ -1,11 +1,9 @@
 @use '../../../styles/_tokens.scss' as *;
 
-/* ===== Bottom overlay (lifted above bottom, safe-area aware) ===== */
 .bottomBar {
-  /* spacing */
-  --bar-gap:        #{$space-sm};                 /* gap above device bottom area */
-  --bar-vpad:       #{$space-sm};                 /* vertical padding inside bar */
-  --safe:           env(safe-area-inset-bottom);  /* iOS home indicator etc. */
+  --bar-gap: #{$space-sm};
+  --bar-vpad: #{$space-sm};
+  --safe: env(safe-area-inset-bottom);
 
   position: fixed;
   left: 0;
@@ -13,74 +11,101 @@
   bottom: calc(var(--safe) + var(--bar-gap));
   z-index: $z-ctadock;
 
-  /* Grid layout; vertical centering guaranteed */
   display: grid;
-  grid-template-columns: 1fr; /* overridden by breakpoints */
-  align-items: center;         /* ⬅ center everything vertically */
+  grid-template-columns: 1fr;
+  align-items: center;
   column-gap: $space-sm;
 
   padding: var(--bar-vpad) $space-md;
-
-  /* keep height stable relative to lg button */
   min-height: calc(#{$btn-h-lg} + var(--bar-vpad) * 2);
 
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 
-  /* pass clicks only to children */
   pointer-events: none;
-  :where(a, button, div) { pointer-events: auto; }
 
-  /* avoid baseline quirks */
+  :where(a, button, div) {
+    pointer-events: auto;
+  }
+
   line-height: normal;
   box-sizing: border-box;
 }
 
-/* Every slot centers its content vertically */
 .controlsSlot,
 .contactSlot,
-.bookSlot {
+.bookSlot,
+.pricesSlot {
   display: flex;
-  align-items: center;  /* ⬅ ensures perfect vertical centering */
+  align-items: center;
   min-width: 0;
 }
 
-/* Neutralize outer margins on Controls, if any */
-.controlsSlot > * { margin: 0; }
+.controlsSlot > * {
+  margin: 0;
+}
 
-/* ===== Mobile (<768px): Sazināties | Pieraksties (50/50) ===== */
+/* Mobile: Contact + Booking only. Prices moves to top bar. */
 @media (max-width: 767px) {
-  .bottomBar { grid-template-columns: 1fr 1fr; }
-
-  .controlsSlot { display: none; }
-
-  .contactSlot :where(a,button),
-  .bookSlot :where(a,button) { width: 100%; } /* stretch inside halves */
-}
-
-/* ===== Tablet (768–1359px): Controls left, Pieraksties right ===== */
-@media (min-width: 768px) and (max-width: 1359px) {
-  .bottomBar { grid-template-columns: auto 1fr auto; } /* Controls | spacer | CTA */
-
-  .controlsSlot { justify-self: start; }
-  .contactSlot  { display: none; }
-
-  .bookSlot {
-    justify-self: end;           /* ⬅ flush right */
+  .bottomBar {
+    grid-template-columns: 1fr 1fr;
   }
-  .bookSlot :where(a,button) { width: auto !important; }
-}
-
-/* ===== Desktop (≥1360px): spacer | Pieraksties ===== */
-@media (min-width: 1360px) {
-  .bottomBar { grid-template-columns: 1fr auto; }
 
   .controlsSlot,
-  .contactSlot { display: none; }
+  .pricesSlot {
+    display: none;
+  }
 
-  .bookSlot {
+  .contactSlot :where(a, button),
+  .bookSlot :where(a, button) {
+    width: 100%;
+  }
+}
+
+/* Tablet: Controls left, Booking + Prices right */
+@media (min-width: 768px) and (max-width: 1359px) {
+  .bottomBar {
+    grid-template-columns: auto 1fr auto auto;
+  }
+
+  .controlsSlot {
+    justify-self: start;
+  }
+
+  .contactSlot {
+    display: none;
+  }
+
+  .bookSlot,
+  .pricesSlot {
     justify-self: end;
   }
-  .bookSlot :where(a,button) { width: auto !important; }
+
+  .bookSlot :where(a, button),
+  .pricesSlot :where(a, button) {
+    width: auto !important;
+  }
+}
+
+/* Desktop: Booking + Prices bottom-right */
+@media (min-width: 1360px) {
+  .bottomBar {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .controlsSlot,
+  .contactSlot {
+    display: none;
+  }
+
+  .bookSlot,
+  .pricesSlot {
+    justify-self: end;
+  }
+
+  .bookSlot :where(a, button),
+  .pricesSlot :where(a, button) {
+    width: auto !important;
+  }
 }

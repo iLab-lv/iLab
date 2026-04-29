@@ -104,7 +104,7 @@ export default function Hero({
 
         {sectionSubtitle && <p className={s.sub}>{sectionSubtitle}</p>}
 
-        {(sectionCta || sectionSecondaryCta) && (
+        {/* {(sectionCta || sectionSecondaryCta) && (
           <div className={s.ctaRow}>
             {sectionCta && (
               <Button
@@ -128,7 +128,7 @@ export default function Hero({
               </Button>
             )}
           </div>
-        )}
+        )} */}
       </div>
 
       {imageInlineMobile && (

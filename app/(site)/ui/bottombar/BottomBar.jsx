@@ -1,21 +1,28 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import s from './BottomBar.module.scss';
 import Button from '../../components/button/Button';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 import Controls from '../controls/Controls';
 import { SOCIALS } from '@/data/site.config';
+import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
+import { getCtaMainContent } from '../cta-main/ctaMainContent';
 
 export default function BottomBar() {
+  const pathname = usePathname() || '/';
+  const locale = getNavLocaleFromPathname(pathname);
+  const cta = getCtaMainContent(locale);
+
   const {
-    contactOpen, bookOpen,
-    openContact, openBook,
+    contactOpen,
+    openContact,
     setSelectedLocId,
   } = useUiDialogs();
 
   return (
-    <div className={s.bottomBar} role="region" aria-label="Mobilās darbības josla">
-      {/* Tablet-only: full Controls (with socials) */}
+    <nav className={s.bottomBar} aria-label={cta.bottomBar.ariaLabel}>
       <div className={s.controlsSlot}>
         <Controls
           facebookUrl={SOCIALS.facebook}
@@ -24,37 +31,47 @@ export default function BottomBar() {
         />
       </div>
 
-      {/* Mobile-only: Sazināties */}
       <div className={s.contactSlot}>
         <Button
-          variant="primary"
+          variant="secondary"
           size="lg"
           block
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
-          onClick={(e) => { setSelectedLocId(null); openContact(e.currentTarget); }}
-          aria-label="Sazināties ar mums"
+          onClick={(e) => {
+            setSelectedLocId(null);
+            openContact(e.currentTarget);
+          }}
+          aria-label={cta.contact.ariaLabel}
         >
-          Sazināties
+          {cta.contact.label}
         </Button>
       </div>
 
-      {/* Always: Pieraksties */}
       <div className={s.bookSlot}>
+        <Button
+          variant="primary"
+          size="lg"
+          block
+          href={cta.booking.href}
+          aria-label={cta.booking.ariaLabel}
+        >
+          {cta.booking.label}
+        </Button>
+      </div>
+
+      <div className={s.pricesSlot}>
         <Button
           variant="secondary"
           size="lg"
-          block   /* mobile: 100% width; CSS makes it hug content ≥768px */
-          aria-haspopup="dialog"
-          aria-controls="pieraksties-panel"
-          aria-expanded={bookOpen}
-          onClick={(e) => openBook(e.currentTarget)}
-          aria-label="Pieraksties uz remontu"
+          block
+          href={cta.prices.href}
+          aria-label={cta.prices.ariaLabel}
         >
-          Pieteikt remontu
+          {cta.prices.label}
         </Button>
       </div>
-    </div>
+    </nav>
   );
 }
