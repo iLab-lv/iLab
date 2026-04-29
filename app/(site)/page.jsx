@@ -1,5 +1,6 @@
 import HomePage from './HomePage';
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import Footer from '@site/ui/footer/Footer';
 
 export const metadata = {
   title: 'Telefonu un datoru serviss - iLab',
@@ -50,5 +51,10 @@ export const metadata = {
 export default async function Page() {
   const reviewsSummary = await getReviewsSummary();
 
-  return <HomePage locale="lv" reviewsSummary={reviewsSummary} />;
+  return (
+  <>
+  <HomePage locale="lv" reviewsSummary={reviewsSummary} />
+  <Footer locale="lv" />
+  </>
+);
 }

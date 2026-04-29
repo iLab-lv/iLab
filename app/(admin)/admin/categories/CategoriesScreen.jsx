@@ -411,47 +411,6 @@ export default function CategoriesScreen() {
     });
   }
 
-  function updateBrandPageModelGridLocaleField(categoryIdx, brandIdx, field, locale, value) {
-    setItems((prev) => {
-      const next = [...prev];
-      const brands = [...next[categoryIdx].brands];
-      brands[brandIdx] = {
-        ...brands[brandIdx],
-        page: {
-          ...brands[brandIdx].page,
-          modelGrid: {
-            ...brands[brandIdx].page?.modelGrid,
-            [field]: {
-              ...brands[brandIdx].page?.modelGrid?.[field],
-              [locale]: value,
-            },
-          },
-        },
-      };
-      next[categoryIdx] = { ...next[categoryIdx], brands };
-      return next;
-    });
-  }
-
-  function updateBrandPageSectionFlag(categoryIdx, brandIdx, field, checked) {
-    setItems((prev) => {
-      const next = [...prev];
-      const brands = [...next[categoryIdx].brands];
-      brands[brandIdx] = {
-        ...brands[brandIdx],
-        page: {
-          ...brands[brandIdx].page,
-          sections: {
-            ...brands[brandIdx].page?.sections,
-            [field]: checked,
-          },
-        },
-      };
-      next[categoryIdx] = { ...next[categoryIdx], brands };
-      return next;
-    });
-  }
-
   function deleteBrand(categoryIdx, brandIdx) {
     setItems((prev) => {
       const next = [...prev];
@@ -828,23 +787,24 @@ export default function CategoriesScreen() {
                                 placeholder={`h1 (${activeLocale})`}
                               />
                             </Field>
-
-                            <Field label={`Lead (${activeLocale.toUpperCase()})`}>
-                              <input
-                                className={s.input}
-                                value={item.lead[activeLocale]}
-                                onChange={(e) =>
-                                  updateCategoryLocaleField(
-                                    originalIdx,
-                                    'lead',
-                                    activeLocale,
-                                    e.target.value
-                                  )
-                                }
-                                placeholder={`lead (${activeLocale})`}
-                              />
-                            </Field>
                           </div>
+
+                          <Field label={`Lead (${activeLocale.toUpperCase()})`}>
+                            <textarea
+                              className={s.textarea}
+                              rows={3}
+                              value={item.lead[activeLocale]}
+                              onChange={(e) =>
+                                updateCategoryLocaleField(
+                                  originalIdx,
+                                  'lead',
+                                  activeLocale,
+                                  e.target.value
+                                )
+                              }
+                              placeholder={`lead (${activeLocale})`}
+                            />
+                          </Field>
 
                           <Field label={`Meta title (${activeLocale.toUpperCase()})`}>
                             <textarea
@@ -1015,76 +975,57 @@ export default function CategoriesScreen() {
                                               </Field>
                                             </div>
 
-                                            <div className={s.formGrid}>
-                                              <Field label={`Brand label (${activeLocale.toUpperCase()})`}>
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.labels[activeLocale]}
-                                                  onChange={(e) =>
-                                                    updateBrandLocaleField(
-                                                      originalIdx,
-                                                      brandIdx,
-                                                      'labels',
-                                                      activeLocale,
-                                                      e.target.value
-                                                    )
-                                                  }
-                                                  placeholder={`brand label (${activeLocale})`}
-                                                />
-                                              </Field>
+                                            <Field label={`Brand label (${activeLocale.toUpperCase()})`}>
+                                              <input
+                                                className={s.input}
+                                                value={brand.labels[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'labels',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`brand label (${activeLocale})`}
+                                              />
+                                            </Field>
 
-                                              <Field label="brandPath">
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.route.brandPath}
-                                                  onChange={(e) =>
-                                                    updateBrand(originalIdx, brandIdx, {
-                                                      route: {
-                                                        ...brand.route,
-                                                        brandPath: e.target.value,
-                                                      },
-                                                    })
-                                                  }
-                                                  placeholder="brandPath"
-                                                />
-                                              </Field>
-                                            </div>
+                                            <Field label={`Page H1 (${activeLocale.toUpperCase()})`}>
+                                              <input
+                                                className={s.input}
+                                                value={brand.page.h1[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandPageLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'h1',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`page.h1 (${activeLocale})`}
+                                              />
+                                            </Field>
 
-                                            <div className={s.formGrid}>
-                                              <Field label={`Page H1 (${activeLocale.toUpperCase()})`}>
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.page.h1[activeLocale]}
-                                                  onChange={(e) =>
-                                                    updateBrandPageLocaleField(
-                                                      originalIdx,
-                                                      brandIdx,
-                                                      'h1',
-                                                      activeLocale,
-                                                      e.target.value
-                                                    )
-                                                  }
-                                                  placeholder={`page.h1 (${activeLocale})`}
-                                                />
-                                              </Field>
-
-                                              <Field label={`Page lead (${activeLocale.toUpperCase()})`}>
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.page.lead[activeLocale]}
-                                                  onChange={(e) =>
-                                                    updateBrandPageLocaleField(
-                                                      originalIdx,
-                                                      brandIdx,
-                                                      'lead',
-                                                      activeLocale,
-                                                      e.target.value
-                                                    )
-                                                  }
-                                                  placeholder={`page.lead (${activeLocale})`}
-                                                />
-                                              </Field>
-                                            </div>
+                                            <Field label={`Page lead (${activeLocale.toUpperCase()})`}>
+                                              <textarea
+                                                className={s.textarea}
+                                                rows={3}
+                                                value={brand.page.lead[activeLocale]}
+                                                onChange={(e) =>
+                                                  updateBrandPageLocaleField(
+                                                    originalIdx,
+                                                    brandIdx,
+                                                    'lead',
+                                                    activeLocale,
+                                                    e.target.value
+                                                  )
+                                                }
+                                                placeholder={`page.lead (${activeLocale})`}
+                                              />
+                                            </Field>
 
                                             <Field label={`Page meta title (${activeLocale.toUpperCase()})`}>
                                               <textarea
@@ -1139,134 +1080,6 @@ export default function CategoriesScreen() {
                                                 placeholder={`page.bodyHtml (${activeLocale})`}
                                               />
                                             </Field>
-
-                                            <div className={s.formGrid}>
-                                              <Field label={`Model grid heading (${activeLocale.toUpperCase()})`}>
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.page.modelGrid.heading[activeLocale]}
-                                                  onChange={(e) =>
-                                                    updateBrandPageModelGridLocaleField(
-                                                      originalIdx,
-                                                      brandIdx,
-                                                      'heading',
-                                                      activeLocale,
-                                                      e.target.value
-                                                    )
-                                                  }
-                                                  placeholder={`modelGrid.heading (${activeLocale})`}
-                                                />
-                                              </Field>
-
-                                              <Field label={`Model grid intro (${activeLocale.toUpperCase()})`}>
-                                                <input
-                                                  className={s.input}
-                                                  value={brand.page.modelGrid.intro[activeLocale]}
-                                                  onChange={(e) =>
-                                                    updateBrandPageModelGridLocaleField(
-                                                      originalIdx,
-                                                      brandIdx,
-                                                      'intro',
-                                                      activeLocale,
-                                                      e.target.value
-                                                    )
-                                                  }
-                                                  placeholder={`modelGrid.intro (${activeLocale})`}
-                                                />
-                                              </Field>
-                                            </div>
-
-                                            <div className={s.formGrid}>
-                                              <Field label="Sections">
-                                                <label className={s.check}>
-                                                  <input
-                                                    type="checkbox"
-                                                    checked={brand.page.sections.hasCustomGuide}
-                                                    onChange={(e) =>
-                                                      updateBrandPageSectionFlag(
-                                                        originalIdx,
-                                                        brandIdx,
-                                                        'hasCustomGuide',
-                                                        e.target.checked
-                                                      )
-                                                    }
-                                                  />
-                                                  hasCustomGuide
-                                                </label>
-                                              </Field>
-
-                                              <Field label=" ">
-                                                <label className={s.check}>
-                                                  <input
-                                                    type="checkbox"
-                                                    checked={brand.page.sections.hasFaq}
-                                                    onChange={(e) =>
-                                                      updateBrandPageSectionFlag(
-                                                        originalIdx,
-                                                        brandIdx,
-                                                        'hasFaq',
-                                                        e.target.checked
-                                                      )
-                                                    }
-                                                  />
-                                                  hasFaq
-                                                </label>
-                                              </Field>
-
-                                              <Field label=" ">
-                                                <label className={s.check}>
-                                                  <input
-                                                    type="checkbox"
-                                                    checked={brand.page.sections.hasProcess}
-                                                    onChange={(e) =>
-                                                      updateBrandPageSectionFlag(
-                                                        originalIdx,
-                                                        brandIdx,
-                                                        'hasProcess',
-                                                        e.target.checked
-                                                      )
-                                                    }
-                                                  />
-                                                  hasProcess
-                                                </label>
-                                              </Field>
-
-                                              <Field label=" ">
-                                                <label className={s.check}>
-                                                  <input
-                                                    type="checkbox"
-                                                    checked={brand.page.sections.hasReviews}
-                                                    onChange={(e) =>
-                                                      updateBrandPageSectionFlag(
-                                                        originalIdx,
-                                                        brandIdx,
-                                                        'hasReviews',
-                                                        e.target.checked
-                                                      )
-                                                    }
-                                                  />
-                                                  hasReviews
-                                                </label>
-                                              </Field>
-
-                                              <Field label=" ">
-                                                <label className={s.check}>
-                                                  <input
-                                                    type="checkbox"
-                                                    checked={brand.page.sections.hasWhy}
-                                                    onChange={(e) =>
-                                                      updateBrandPageSectionFlag(
-                                                        originalIdx,
-                                                        brandIdx,
-                                                        'hasWhy',
-                                                        e.target.checked
-                                                      )
-                                                    }
-                                                  />
-                                                  hasWhy
-                                                </label>
-                                              </Field>
-                                            </div>
                                           </div>
                                         )}
                                       </div>
