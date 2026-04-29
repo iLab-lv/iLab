@@ -1,18 +1,20 @@
-// app/(site)/sections/hero/Hero.jsx
-
-'use client';
-
 import Image from 'next/image';
 import Button from '@components/button/Button';
 import GoogleReviewsBadge from '../reviews/GoogleReviewsBadge';
+import { getHeroContent } from './hero.i18n';
 import s from './Hero.module.scss';
 
 export default function Hero({
   id = 'hero',
+  locale = 'lv',
+  variant = 'default',
+
   title,
   subtitle,
-  cta,            // { label, href, variant? }
-  secondaryCta,   // { label, href, variant? }
+  cta,
+  secondaryCta,
+  reviewsSummary,
+
   align = 'center',
   background = 'gradient',
 
@@ -27,6 +29,13 @@ export default function Hero({
   imageHeight = 900,
   imageAlt,
 }) {
+  const content = getHeroContent(locale, variant);
+
+  const sectionTitle = title || content.title;
+  const sectionSubtitle = subtitle || content.subtitle;
+  const sectionCta = cta || content.cta;
+  const sectionSecondaryCta = secondaryCta || content.secondaryCta;
+
   const sectionClass = [
     s.hero,
     align === 'start' ? s.alignStart : s.alignCenter,
@@ -70,8 +79,9 @@ export default function Hero({
 
   const computedAlt =
     imageAlt ||
-    (title
-      ? `${title} — iLab serviss Rīgā`
+    content.imageAlt ||
+    (sectionTitle
+      ? `${sectionTitle} — iLab serviss Rīgā`
       : 'iLab — mobilo telefonu, planšetdatoru un datoru remonts Rīgā');
 
   return (
@@ -83,38 +93,38 @@ export default function Hero({
     >
       <div className={s.container}>
         <div className={s.rating}>
-          <GoogleReviewsBadge />
+          <GoogleReviewsBadge locale={locale} data={reviewsSummary} />
         </div>
 
-        {title && (
+        {sectionTitle && (
           <h1 id={`${id}-title`} className={s.heading}>
-            {title}
+            {sectionTitle}
           </h1>
         )}
 
-        {subtitle && <p className={s.sub}>{subtitle}</p>}
+        {sectionSubtitle && <p className={s.sub}>{sectionSubtitle}</p>}
 
-        {(cta || secondaryCta) && (
+        {(sectionCta || sectionSecondaryCta) && (
           <div className={s.ctaRow}>
-            {cta && (
+            {sectionCta && (
               <Button
-                variant={cta.variant || 'secondary'}  // outlined by default
+                variant={sectionCta.variant || 'secondary'}
                 size="lg"
-                href={cta.href}
-                aria-label={cta.label}
+                href={sectionCta.href}
+                aria-label={sectionCta.label}
               >
-                {cta.label}
+                {sectionCta.label}
               </Button>
             )}
 
-            {secondaryCta && (
+            {sectionSecondaryCta && (
               <Button
-                variant={secondaryCta.variant || 'primary'} // solid by default
+                variant={sectionSecondaryCta.variant || 'primary'}
                 size="lg"
-                href={secondaryCta.href}
-                aria-label={secondaryCta.label}
+                href={sectionSecondaryCta.href}
+                aria-label={sectionSecondaryCta.label}
               >
-                {secondaryCta.label}
+                {sectionSecondaryCta.label}
               </Button>
             )}
           </div>

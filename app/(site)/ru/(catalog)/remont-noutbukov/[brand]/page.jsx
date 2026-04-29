@@ -2,6 +2,7 @@ import ComputerBrandPage, {
   generateComputerBrandStaticParams,
   getComputerBrandMetadata,
 } from '@site/(catalog)/datoru-remonts/[brand]/ComputerBrandPage';
+import Footer from '@site/ui/footer/Footer';
 
 export const dynamicParams = false;
 
@@ -14,5 +15,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default function Page({ params }) {
-  return <ComputerBrandPage brand={params.brand} locale="ru" />;
+  return (
+    <>
+      <ComputerBrandPage brand={params.brand} locale="ru" />
+      <Footer locale="ru" />
+    </>
+  );
 }

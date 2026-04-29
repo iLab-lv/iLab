@@ -12,34 +12,19 @@ import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import { FAQ_CONTEXT, getFaqItems, getFaqLd } from '@/data/faq';
 
-export default function HomeScreen({ locale = 'lv' }) {
+export default function HomeScreen({ locale = 'lv', reviewsSummary }) {
   const { items: HOME_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.HOME);
   const HOME_FAQ_LD = getFaqLd(FAQ_CONTEXT.HOME);
 
   return (
     <>
-      {/* Homepage FAQ JSON-LD (from centralized data) */}
       <Script id="home-faq-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(HOME_FAQ_LD)}
       </Script>
 
       <Hero
-        title="Ātrs mobilo ierīču servisa centrs"
-        imageAlt="iLab serviss — mobilo ierīču remonts Rīgā (Domina un Spice Home)"
-        subtitle={
-          <>
-            Remonts tajā pašā dienā. 90&nbsp;dienu garantija. Divas filiāles&nbsp;Rīgā: Domina un Spice Home.
-          </>
-        }
-        rating={{
-          value: 4.9,
-          count: 230,
-          sourceLabel: 'Google',
-          href: '#reviews',
-          ariaLabel: 'Google vērtējums 4.9 no 5, 230 atsauksmes',
-        }}
-        cta={{ label: 'Apskatīt pakalpojumus', href: '#services' }}
-        secondaryCta={{ label: 'Pakalpojumu cenas', href: '/cenas' }}
+        locale={locale}
+        reviewsSummary={reviewsSummary}
         align="center"
         background="gradient"
         imageSrc="/images/hero.webp"
@@ -52,14 +37,12 @@ export default function HomeScreen({ locale = 'lv' }) {
 
       <div id="services" />
 
-      <Services />
-
-      {/* <Devices /> */}
+      <Services locale={locale} />
 
       <div id="reviews" />
       <Reviews locale={locale} />
 
-      <Process />
+      <Process locale={locale} />
 
       <Why locale={locale} />
 
@@ -67,11 +50,11 @@ export default function HomeScreen({ locale = 'lv' }) {
 
       <Faq
         id="home-faq"
-        title="Biežāk uzdotie jautājumi"
+        title={locale === 'ru' ? 'Часто задаваемые вопросы' : 'Biežāk uzdotie jautājumi'}
         items={HOME_FAQ_ITEMS}
       />
 
-      <ConvertBand />
+      <ConvertBand locale={locale} />
     </>
   );
 }

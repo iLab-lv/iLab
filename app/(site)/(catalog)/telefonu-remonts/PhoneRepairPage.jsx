@@ -114,9 +114,7 @@ function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
       const brandDevices = sortDevices(devicesByBrand.get(brandKey) || []);
       if (!brandDevices.length) return null;
 
-      const href =
-        normalizeRoutePath(brand?.route?.brandPath || '', locale) ||
-        `${basePath}/${brandKey}`;
+      const href = `${basePath}/${brandKey}`;
 
       return {
         slug: brandKey,
@@ -376,7 +374,7 @@ export default async function PhoneRepairPage({ locale = 'lv' }) {
 
   if (!page) return null;
 
-  const basePath = page.route?.publicPath || buildCategoryHref(locale, CATEGORY_KEY);
+  const basePath = buildCategoryHref(locale, CATEGORY_KEY);
 
   const brandBlocks = buildBrandBlocks({
     category: page.source?.category,
@@ -516,6 +514,7 @@ export default async function PhoneRepairPage({ locale = 'lv' }) {
           items={b.items}
           total={b.total}
           href={b.href}
+          locale={locale}
         />
       ))}
 

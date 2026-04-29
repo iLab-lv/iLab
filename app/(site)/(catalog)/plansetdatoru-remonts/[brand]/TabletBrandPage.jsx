@@ -368,7 +368,7 @@ export default async function TabletBrandPage({ brand, locale = 'lv' }) {
     locale === 'ru' ? POPULAR_SERVICES_RU : POPULAR_SERVICES_LV;
 
   const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
-  const baseHref = page.route?.publicPath || `${baseCategoryPath}/${brandSlug}`;
+  const baseHref = `${baseCategoryPath}/${brandSlug}`;
 
   const brandTabletList = devicesAll.filter(
     (device) =>

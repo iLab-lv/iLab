@@ -31,6 +31,8 @@ import {
   buildStandardRepairHowToLd,
 } from '@/lib/seo/jsonldHelpers';
 
+import { buildCategoryHref } from '@/lib/routes/routeI18n';
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const HUB_KEY = 'iphone-remonts';
@@ -52,6 +54,7 @@ function getPageStrings(locale = 'lv') {
         'Найдите нужный iPhone по названию или выберите серию.',
       scrollCta: { label: 'Смотреть модели', targetId: 'iphone-modeli' },
       fallbackTitle: 'Ремонт iPhone в Риге',
+      homeCrumb: 'Главная',
     };
   }
 
@@ -70,6 +73,7 @@ function getPageStrings(locale = 'lv') {
       'Atrodi vajadzīgo iPhone vai izvēlies sēriju.',
     scrollCta: { label: 'Skatīt modeļus', targetId: 'iphone-modeli' },
     fallbackTitle: 'iPhone remonts Rīgā',
+    homeCrumb: 'Sākums',
   };
 }
 
@@ -85,9 +89,7 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
 
   if (!page) return null;
 
-  /* =========================
-     HEADER (FIXED)
-  ========================== */
+  const baseHref = buildCategoryHref(locale, HUB_KEY);
 
   const headerTitle =
     page.seo?.h1 ||
@@ -102,18 +104,14 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
 
   const breadcrumbs = [
     {
-      label: page.labels?.homeCrumb || 'Sākums',
-      href: '/',
+      label: page.labels?.homeCrumb || strings.homeCrumb,
+      href: locale === 'ru' ? '/ru' : '/',
     },
     {
       label: page.seo?.breadcrumbName || headerTitle,
-      href: page.route?.publicPath || '/iphone-remonts',
+      href: baseHref,
     },
   ];
-
-  /* =========================
-     OTHER DATA
-  ========================== */
 
   const popularServices = buildIphonePopularServices(locale);
   const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
@@ -127,22 +125,15 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
   ]);
 
   const serviceLd = buildServiceLdForCity({
-    path: page.route?.publicPath,
+    path: baseHref,
     name: page.seo?.schemaName,
     description: page.seo?.schemaDescription,
   });
 
   const howToLd = buildStandardRepairHowToLd(strings.howToName);
 
-  const selectorTitle =
-    page.selector?.heading || strings.modelGridHeading;
-
-  const selectorIntro =
-    page.selector?.intro || strings.modelGridIntro;
-
-  /* =========================
-     RENDER
-  ========================== */
+  const selectorTitle = page.selector?.heading || strings.modelGridHeading;
+  const selectorIntro = page.selector?.intro || strings.modelGridIntro;
 
   return (
     <>
@@ -162,7 +153,6 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         {JSON.stringify(serviceLd)}
       </Script>
 
-      {/* ✅ HEADER */}
       <PageHeader
         title={headerTitle}
         lead={headerLead}
@@ -170,7 +160,6 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         crumbs={breadcrumbs}
       />
 
-      {/* ✅ HERO */}
       <DeviceHero
         image={page.hero?.image || '/images/categories/iphone_remonts.webp'}
         alt={strings.heroAlt}
@@ -179,7 +168,6 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         bodyHtml={strings.heroBodyHtml}
       />
 
-      {/* INTRO */}
       <section className={s.section}>
         <div className={s.container}>
           <h2 className={s.h2}>{strings.introTitle}</h2>
@@ -190,7 +178,6 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      {/* SERVICES */}
       <section className={s.section}>
         <div className={s.container}>
           <Services
@@ -201,14 +188,13 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      {/* DEVICES */}
       <DeviceSelector
         id="iphone-modeli"
         locale={locale}
         title={selectorTitle}
         intro={selectorIntro}
         devices={devicesAll}
-        baseHref={page.route?.publicPath}
+        baseHref={baseHref}
         brandKey={BRAND_KEY}
         categoryKey={CATEGORY_KEY}
         seriesMeta={seriesMeta}
@@ -218,14 +204,14 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
 
       {page.sections?.hasReviews && <Reviews locale={locale} />}
 
-      {page.sections?.hasGuide && cat?.sections?.guide && (
-        <Guide
-          id="guide"
-          title={cat.sections.guide.heading}
-          parts={cat.sections.guide.parts}
-          headingLevel={2}
-        />
-      )}
+      {page.sections?.hasGuide && (
+  <Guide
+    id="guide"
+    locale={locale}
+    variant="iphone"
+    headingLevel={2}
+  />
+)}
 
       {page.sections?.hasProcess && <Process locale={locale} />}
 

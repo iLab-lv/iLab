@@ -385,7 +385,7 @@ export default async function PhoneBrandPage({ brand, locale = 'lv' }) {
   const popularRepairs = getPopularRepairs(locale);
 
   const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
-  const baseHref = page.route?.publicPath || `${baseCategoryPath}/${brandSlug}`;
+  const baseHref = `${baseCategoryPath}/${brandSlug}`;
 
   const brandPhoneList = devicesAll.filter(
     (device) =>

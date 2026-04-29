@@ -164,6 +164,7 @@ export default function DeviceGrid({
         groupsSearched.map((group) => (
           <DeviceGridSection
             key={group.slug}
+            locale={locale}
             group={group}
             baseHref={baseHref}
             initialLimit={initialLimit}

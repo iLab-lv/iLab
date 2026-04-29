@@ -19,10 +19,11 @@ import {
 export default function NavBar({
   showNavigation = true,
   showHeaderCtas = true,
-  logoHref = '/',
+  logoHref,
 }) {
   const pathname = usePathname() || '/';
   const locale = getNavLocaleFromPathname(pathname);
+  const homeHref = logoHref || (locale === 'ru' ? '/ru' : '/');
 
   const items = useMemo(() => buildNavigation(locale), [locale]);
 
@@ -76,7 +77,7 @@ export default function NavBar({
       <header className={s.header} role="banner">
         <div className={s.container}>
           <div className={s.brand}>
-            <Logo href={logoHref} />
+            <Logo href={homeHref} />
           </div>
 
           {showNavigation && (

@@ -339,7 +339,7 @@ export default async function ComputerRepairPage({ locale = 'lv' }) {
 
         {page.sections?.hasConvertBand && (
           <section className={s.section}>
-            <ConvertBand locale={locale} />
+            <ConvertBand locale={locale}  />
           </section>
         )}
       </main>

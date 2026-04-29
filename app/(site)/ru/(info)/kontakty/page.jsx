@@ -1,4 +1,5 @@
 import ContactsPage from '@site/(info)/kontakti/ContactsPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/ru/kontakty';
 
@@ -10,5 +11,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <ContactsPage locale="ru" />;
+  return (
+  <>
+  <ContactsPage locale="ru" />
+  <Footer locale="ru" />
+      </>
+      );
 }

@@ -52,7 +52,7 @@ export default function BottomBar() {
           onClick={(e) => openBook(e.currentTarget)}
           aria-label="Pieraksties uz remontu"
         >
-          Pieraksties
+          Pieteikt remontu
         </Button>
       </div>
     </div>

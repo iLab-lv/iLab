@@ -6,6 +6,8 @@ export default function IphoneRemonts({
   title = 'Apple ierīču remonts',
   introHTML,
   links = [],
+  mobileLinksLabel = 'Apple mobilo ierīču saīsnes',
+  computerLinksLabel = 'Apple datoru saīsnes',
   imageSrc = '/images/home/apple.webp',
 }) {
   const bid = `${idBase}-apple`;
@@ -36,7 +38,7 @@ export default function IphoneRemonts({
       </div>
 
       {!!topLinks.length && (
-        <ul className={s.appleLinksTop} role="list" aria-label="Apple mobilo ierīču saīsnes">
+        <ul className={s.appleLinksTop} role="list" aria-label={mobileLinksLabel}>
           {topLinks.map((link) => (
             <li key={link.href}>
               <DeviceButton
@@ -50,7 +52,7 @@ export default function IphoneRemonts({
       )}
 
       {!!bottomLinks.length && (
-        <ul className={s.appleLinksBottom} role="list" aria-label="Apple datoru saīsnes">
+        <ul className={s.appleLinksBottom} role="list" aria-label={computerLinksLabel}>
           {bottomLinks.map((link) => (
             <li key={link.href}>
               <DeviceButton

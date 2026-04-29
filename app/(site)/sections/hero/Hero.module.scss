@@ -113,14 +113,21 @@
 
 /* ===== Type & UI ===== */
 .heading {
-  font-size: t.$font-size-h3;
-  line-height: t.$line-height-heading;
+  font-size: clamp(2.1rem, 6vw, t.$font-size-h3);
+  line-height: 1.08;
   font-weight: t.$font-weight-extrabold;
-  letter-spacing: -0.01em;
-  margin: 0 0 8px;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+  margin: 0 auto 8px;
 
   @media (min-width: t.$bp-lg) {
-    font-size: t.$font-size-h2;
+    font-size: clamp(3rem, 5vw, 4.85rem);
+    max-width: 18ch;
+  }
+
+  .alignStart & {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

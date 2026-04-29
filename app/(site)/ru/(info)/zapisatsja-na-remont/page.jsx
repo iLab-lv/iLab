@@ -1,4 +1,5 @@
 import PierakstiesPage from '@site/(info)/pieraksties-remontam/PierakstiesPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/ru/zapisatsya-na-remont';
 
@@ -10,5 +11,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <PierakstiesPage locale="ru" />;
+  return (
+  <>
+  <PierakstiesPage locale="ru" />
+  <Footer locale="ru" />
+      </>
+      );
 }

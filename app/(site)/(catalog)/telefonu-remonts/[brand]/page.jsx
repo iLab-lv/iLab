@@ -2,6 +2,7 @@ import PhoneBrandPage, {
   generatePhoneBrandStaticParams,
   getPhoneBrandMetadata,
 } from './PhoneBrandPage';
+import Footer from '@site/ui/footer/Footer';
 
 export const dynamicParams = false;
 
@@ -14,5 +15,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default function Page({ params }) {
-  return <PhoneBrandPage brand={params.brand} locale="lv" />;
+  return (
+  <>
+  <PhoneBrandPage brand={params.brand} locale="lv" />
+  <Footer locale="lv" />
+  </>
+
+  );
 }

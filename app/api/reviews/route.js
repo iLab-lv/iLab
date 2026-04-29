@@ -1,73 +1,25 @@
 import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
-import { db } from 'lib/firebaseAdmin';
-import { LOCATIONS } from '@data/site.config';
+
+import { db } from '@/lib/firebaseAdmin';
+import {
+  PLACE_IDS,
+  getReviewsSummary,
+  normalizeReview,
+  normalizeFeaturedReviewsByLocale,
+} from '@/lib/reviews/getReviewsSummary';
 
 export const dynamic = 'force-dynamic';
 
-const PLACE_IDS = LOCATIONS.reduce((acc, loc) => {
-  if (loc.id && loc.placeId) {
-    acc[loc.id] = loc.placeId;
-  }
-  return acc;
-}, {});
-
-function normalizeReview(review = {}) {
-  return {
-    author: typeof review.author === 'string' ? review.author.trim() : '',
-    text: typeof review.text === 'string' ? review.text.trim() : '',
-    ...(typeof review.date === 'string' && review.date.trim()
-      ? { date: review.date.trim() }
-      : {}),
-    ...(typeof review.rating === 'number' && Number.isFinite(review.rating)
-      ? { rating: review.rating }
-      : {}),
-    ...(typeof review.id === 'string' && review.id.trim()
-      ? { id: review.id.trim() }
-      : {}),
-  };
-}
-
-function normalizeFeaturedReviewsByLocale(value) {
-  const source = value && typeof value === 'object' ? value : {};
-
-  return {
-    lv: Array.isArray(source.lv) ? source.lv.map(normalizeReview) : [],
-    ru: Array.isArray(source.ru) ? source.ru.map(normalizeReview) : [],
-  };
-}
-
 export async function GET() {
-  const out = {};
-
-  await Promise.all(
-    Object.entries(PLACE_IDS).map(async ([key, placeId]) => {
-      try {
-        const snap = await db.collection('places').doc(placeId).get();
-        const data = snap.data() || {};
-        const latest = data?.latest;
-
-        out[key] = {
-          rating: latest?.rating ?? null,
-          count: latest?.count ?? null,
-          fetchedAt: latest?.fetchedAt ?? null,
-          name: data?.name ?? null,
-          featuredReviewsByLocale: normalizeFeaturedReviewsByLocale(
-            data?.featuredReviewsByLocale
-          ),
-        };
-      } catch (err) {
-        console.error('reviews api: error for place', placeId, err);
-        out[key] = null;
-      }
-    })
-  );
+  const out = await getReviewsSummary();
 
   const res = NextResponse.json(out);
   res.headers.set(
     'Cache-Control',
     's-maxage=300, stale-while-revalidate=1800'
   );
+
   return res;
 }
 
@@ -122,10 +74,13 @@ export async function POST(req) {
 
     return NextResponse.json({
       ok: true,
-      saved: normalizeFeaturedReviewsByLocale(savedData.featuredReviewsByLocale),
+      saved: normalizeFeaturedReviewsByLocale(
+        savedData.featuredReviewsByLocale
+      ),
     });
   } catch (err) {
     console.error('reviews api POST failed', err);
+
     return NextResponse.json(
       { error: err?.message || 'Failed to save reviews.' },
       { status: 500 }

@@ -3,6 +3,7 @@ import ComputerDevicePage, {
   getComputerDevicePageHeader,
   revalidate,
 } from './ComputerDevicePage';
+import Footer from '@site/ui/footer/Footer';
 
 export { revalidate };
 
@@ -15,10 +16,13 @@ export async function generateMetadata({ params }) {
 
 export default function Page({ params }) {
   return (
-    <ComputerDevicePage
-      brand={params.brand}
-      device={params.device}
-      locale="lv"
-    />
+    <>
+      <ComputerDevicePage
+        brand={params.brand}
+        device={params.device}
+        locale="lv"
+      />
+      <Footer locale="lv" />
+    </>
   );
 }

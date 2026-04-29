@@ -526,7 +526,7 @@ export default async function ComputerBrandPage({
   const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
 
   const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
-  const path = page.route?.publicPath || `${baseCategoryPath}/${cfg.key}`;
+  const path = `${baseCategoryPath}/${cfg.key}`;
 
   const brandDevices = devicesFromDb.filter(
     (d) =>

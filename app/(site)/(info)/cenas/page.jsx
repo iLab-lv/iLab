@@ -1,4 +1,5 @@
 import CenasPage from './CenasPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/cenas';
 
@@ -10,5 +11,10 @@ export const metadata = {
 };
 
 export default function Page({ searchParams }) {
-  return <CenasPage locale="lv" searchParams={searchParams} />;
+  return (
+  <>
+  <CenasPage locale="lv" searchParams={searchParams} />
+  <Footer locale="lv" />
+    </>
+    );
 }

@@ -9,6 +9,7 @@ import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Reviews from '@sections/reviews/Reviews';
+import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -397,6 +398,13 @@ export default function DysonRepairPage({ locale = 'lv' }) {
       </section>
 
       <Reviews locale={locale} />
+
+      <Guide
+  id="guide"
+  locale={locale}
+  variant="dyson"
+  headingLevel={2}
+/>
 
       <div id="process" className={s.anchorTarget} />
       <section className={s.section} aria-labelledby="process-h2">

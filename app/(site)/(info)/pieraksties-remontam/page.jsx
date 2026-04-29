@@ -1,4 +1,5 @@
 import PierakstiesPage from './PierakstiesPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/pieraksties-remontam';
 
@@ -10,6 +11,11 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <PierakstiesPage locale="lv" />;
+  return (
+  <>
+  <PierakstiesPage locale="lv" />
+  <Footer locale="lv" />
+    </>
+    );
 }
 

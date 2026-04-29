@@ -1,4 +1,5 @@
 import AboutPage from '@site/(info)/par-mums/AboutPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/ru/o-nas';
 
@@ -10,5 +11,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <AboutPage locale="ru" />;
+  return (
+  <>
+  <AboutPage locale="ru" />
+  <Footer locale="ru" />
+      </>
+      );
 }

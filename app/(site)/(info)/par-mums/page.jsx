@@ -1,4 +1,5 @@
 import AboutPage from './AboutPage';
+import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/par-mums';
 
@@ -10,5 +11,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <AboutPage locale="lv" />;
+  return (
+  <>
+  <AboutPage locale="lv" />
+  <Footer locale="lv" />
+    </>
+    );
 }

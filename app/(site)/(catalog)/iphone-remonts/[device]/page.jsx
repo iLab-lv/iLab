@@ -4,6 +4,7 @@ import {
   getIphoneDeviceMetadata,
 } from '@site/(catalog)/iphone-remonts/[device]/IphoneDevicePage';
 import IphoneDevicePage from '@site/(catalog)/iphone-remonts/[device]/IphoneDevicePage';
+import Footer from '@site/ui/footer/Footer';
 
 export const revalidate = 0;
 
@@ -20,5 +21,10 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const slug = decodeURIComponent(params.device);
-  return <IphoneDevicePage deviceSlug={slug} locale="lv" />;
+  return (
+  <>
+  <IphoneDevicePage deviceSlug={slug} locale="lv" />
+  <Footer locale="lv" />
+  </>
+);
 }

@@ -5,20 +5,21 @@ export default function AndroidRemonts({
   title = 'Android — Telefonu un planšetdatoru remonts',
   introHTML,
   brands = [],
+  brandsLabel = 'Android zīmoli',
   allBrandsHref = '/telefonu-remonts',
+  allBrandsLabel = 'Skatīt visus zīmolus →',
   imageSrc = '/images/home/android.webp',
+  seoBlurbs = {},
 }) {
   const bid = `${idBase}-android`;
 
-  // map brand name -> logo in /public/images/home (override per brand with b.logoSrc if needed)
   const logoMap = {
     samsung: '/images/home/samsung-logo.svg',
     xiaomi: '/images/home/xiaomi-logo.svg',
     huawei: '/images/home/huawei-logo.svg',
   };
 
-  // unique, concise blurbs (examples only — not exhaustive)
-  const seoBlurbMap = {
+  const fallbackSeoBlurbs = {
     samsung:
       'Servisējam Galaxy un citus Samsung — ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
     xiaomi:
@@ -29,12 +30,18 @@ export default function AndroidRemonts({
       'Android ierīču remonts — ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
   };
 
+  const blurbMap = {
+    ...fallbackSeoBlurbs,
+    ...seoBlurbs,
+  };
+
   const normalizedBrands = brands.map((b) => {
     const key = (b.name || '').toLowerCase();
+
     return {
       ...b,
       logoSrc: b.logoSrc || logoMap[key] || '/images/home/android-badge.png',
-      seoText: seoBlurbMap[key] || seoBlurbMap.default,
+      seoText: b.seoText || blurbMap[key] || blurbMap.default,
     };
   });
 
@@ -45,7 +52,11 @@ export default function AndroidRemonts({
           <h3 id={`${bid}-title`} className={s.blockTitle}>
             {title}
           </h3>
-          <p className={s.blockIntro} dangerouslySetInnerHTML={{ __html: introHTML }} />
+
+          <p
+            className={s.blockIntro}
+            dangerouslySetInnerHTML={{ __html: introHTML }}
+          />
         </div>
 
         <div className={s.androidVisual} aria-hidden="true">
@@ -56,20 +67,17 @@ export default function AndroidRemonts({
         </div>
       </div>
 
-      {/* Brand grid */}
-      <ul className={s.brandGrid} role="list" aria-label="Android zīmoli">
+      <ul className={s.brandGrid} role="list" aria-label={brandsLabel}>
         {normalizedBrands.map((b) => (
           <li key={b.name} className={s.brandTile}>
             <a className={s.brandTitleLink} href={b.hrefTitle}>
               {b.name}
             </a>
 
-            {/* Logo BELOW the brand name */}
             <div className={s.brandMarkWrap} aria-hidden="true">
               <img className={s.brandMark} src={b.logoSrc} alt="" />
             </div>
 
-            {/* Short SEO blurb (small type, extra space after) */}
             <p className={s.brandBlurb}>{b.seoText}</p>
 
             <div className={s.brandLinks}>
@@ -83,7 +91,7 @@ export default function AndroidRemonts({
 
       <div className={s.androidMore}>
         <a className={s.cardLink} href={allBrandsHref}>
-          Skatīt visus zīmolus →
+          {allBrandsLabel}
         </a>
       </div>
     </article>

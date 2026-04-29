@@ -1,116 +1,46 @@
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
-import { COMPANY, SOCIALS, LOCATIONS } from '@/data/site.config';
+import { SOCIALS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
-import Footer from './ui/footer/Footer';
+import Script from 'next/script';
+import { headers } from 'next/headers';
 import l from './Layout.module.scss';
 
-// ✅ Canonical origin (force non-www)
-const ORIGIN = 'https://ilab.lv';
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-// ✅ Next.js metadata base for absolute canonicals/OG URLs
-export const metadata = {
-  metadataBase: new URL(ORIGIN),
-};
+function getLocaleFromPathname(pathname = '/') {
+  return pathname.startsWith('/ru') ? 'ru' : 'lv';
+}
 
-// Map your internal day codes to Schema.org day names
-const DAY_MAP = {
-  P: 'Monday',
-  O: 'Tuesday',
-  T: 'Wednesday',
-  C: 'Thursday',
-  Pk: 'Friday',
-  S: 'Saturday',
-  Sv: 'Sunday',
-};
+export default async function SiteLayout({ children }) {
+  const headersList = await headers();
+  const pathname =
+    headersList.get('x-pathname') ||
+    headersList.get('x-invoke-path') ||
+    headersList.get('referer') ||
+    '/';
 
-export default function SiteLayout({ children }) {
-  const orgLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${ORIGIN}#organization`,
-    name: COMPANY.name,
-    url: ORIGIN,
-    email: COMPANY.email,
-    telephone: COMPANY.phoneMain,
-    logo: `${ORIGIN}${COMPANY.logo}`,
-    sameAs: [SOCIALS.facebook, SOCIALS.instagram, SOCIALS.tiktok].filter(Boolean),
-  };
-
-  const webSiteLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${ORIGIN}#website`,
-    url: ORIGIN,
-    name: COMPANY.name,
-    publisher: { '@id': `${ORIGIN}#organization` },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${ORIGIN}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
-  const localBusinessLd = LOCATIONS.map((loc) => {
-    const openingHoursSpecification = (loc.hours || [])
-      .map((h) => {
-        const dayOfWeek = DAY_MAP[h.day];
-        if (!dayOfWeek) return null;
-        return {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek,
-          opens: h.opens,
-          closes: h.closes,
-        };
-      })
-      .filter(Boolean);
-
-    const base = {
-      '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      '@id': `${ORIGIN}#${loc.id}`,
-      name: `${COMPANY.name} ${loc.label}`,
-      url: ORIGIN,
-      telephone: loc.tel,
-      email: loc.email || COMPANY.email,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: loc.address,
-        addressLocality: 'Rīga',
-        addressCountry: 'LV',
-      },
-      openingHoursSpecification,
-      branchOf: {
-        '@id': `${ORIGIN}#organization`,
-      },
-    };
-
-    if (loc.geo && typeof loc.geo.lat === 'number' && typeof loc.geo.lng === 'number') {
-      base.geo = {
-        '@type': 'GeoCoordinates',
-        latitude: loc.geo.lat,
-        longitude: loc.geo.lng,
-      };
-    }
-
-    return base;
-  });
+  const locale = getLocaleFromPathname(pathname);
 
   return (
     <div className={l.siteRoot}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
-      />
+      {GTM_ID && (
+        <Script id="gtm" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){
+              w[l]=w[l]||[];
+              w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+              var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),
+              dl=l!='dataLayer'?'&l='+l:'';
+              j.async=true;
+              j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+              f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${GTM_ID}');
+          `}
+        </Script>
+      )}
 
       <UiDialogsProvider>
         <a
@@ -141,7 +71,7 @@ export default function SiteLayout({ children }) {
 
         <main id="main">{children}</main>
 
-        <Footer />
+
       </UiDialogsProvider>
     </div>
   );

@@ -1,4 +1,5 @@
 import PhoneDevicePage from './PhoneDevicePage';
+import Footer from '@site/ui/footer/Footer';
 
 export const revalidate = 0;
 
@@ -13,5 +14,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  return <PhoneDevicePage params={params} locale="lv" />;
+  return (
+  <>
+  <PhoneDevicePage params={params} locale="lv" />
+  <Footer locale="lv" />
+  </>
+  );
 }

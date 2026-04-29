@@ -3,6 +3,7 @@ import ComputerDevicePage, {
   getComputerDevicePageHeader,
   revalidate,
 } from '@site/(catalog)/datoru-remonts/[brand]/[device]/ComputerDevicePage';
+import Footer from '@site/ui/footer/Footer';
 
 export { revalidate };
 
@@ -15,10 +16,13 @@ export async function generateMetadata({ params }) {
 
 export default function Page({ params }) {
   return (
-    <ComputerDevicePage
-      brand={params.brand}
-      device={params.device}
-      locale="ru"
-    />
+    <>
+      <ComputerDevicePage
+        brand={params.brand}
+        device={params.device}
+        locale="ru"
+      />
+      <Footer locale="ru" />
+    </>
   );
 }
