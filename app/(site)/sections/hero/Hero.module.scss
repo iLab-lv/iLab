@@ -3,21 +3,15 @@
 
 /* ===== Hero base ===== */
 .hero {
-  /* defaults (override via style={} on the section if needed) */
   --hero-image: url('/images/hero.webp');
   --hero-pos-x-d: 50%;
   --hero-pos-y-d: 20%;
   --hero-offset-d: -6vh;
-  --hero-offset-m: -2vh;
+  --hero-offset-m: 0px;
 
-  /* mobile inline image defaults */
-  --hero-media-lift-m: 0px;       /* ↑ translate image UP from bottom, does NOT change hero height */
-  --hero-media-maxw-m: 1100px;    /* inline image max-width on mobile */
+  --hero-media-lift-m: 0px;
+  --hero-media-maxw-m: 1100px;
 
-  /* NEW: sticky bottom UI default height (override per page if different) */
-  --bottom-ui-h: 48px;
-
-  /* resolved */
   --hero-pos-x: var(--hero-pos-x-d);
   --hero-pos-y: var(--hero-pos-y-d);
   --hero-offset: var(--hero-offset-d);
@@ -33,25 +27,19 @@
   background-color: t.$color-background;
 }
 
-@media (max-width: t.$bp-md) {
+/* Mobile + tablet: no reserved full-screen hero height */
+@media (max-width: 1024px) {
   .hero {
-    /* Shorter hero on mobile: use visible viewport and reserve space for sticky bottom UI */
-    min-height: calc(100svh - var(--bottom-ui-h) - 12px);
-
-    /* keep content clear of fixed mobile header + top safe area */
+    min-height: auto;
     padding-top: calc(#{t.$header-mobile-height} + env(safe-area-inset-top));
+    padding-bottom: t.$space-lg;
+    align-content: start;
 
-    /* keep content clear of sticky bottom UI + bottom safe area */
-    padding-bottom: calc(var(--bottom-ui-h) + env(safe-area-inset-bottom));
-
-    align-content: stretch;
-
-    /* switch to mobile offset for the text container */
     --hero-offset: var(--hero-offset-m);
   }
 }
 
-/* desktop/tablet background (cover) */
+/* desktop/tablet background */
 .bgGradient {
   background-image: var(--hero-image);
   background-size: cover;
@@ -64,28 +52,25 @@
 .alignCenter .container {
   text-align: center;
 }
+
 .alignStart .container {
   text-align: left;
 }
 
-/* text container — physical vertical move */
+/* text container */
 .container {
   @include layout.container;
   position: relative;
   z-index: 1;
-  margin-top: var(--hero-offset); /* negative lifts, positive pushes down */
+  margin-top: var(--hero-offset);
 }
 
 /* ===== Mobile inline image mode ===== */
-/* off by default */
 .mediaWrap {
   display: none;
 }
 
-@media (max-width: t.$bp-md) {
-  /* When .mobileInline is present:
-     - disable background image on mobile
-     - show inline image anchored to the bottom, then lift up via translateY */
+@media (max-width: 1024px) {
   .mobileInline.bgGradient {
     background-image: none;
   }
@@ -95,11 +80,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
-    /* anchor block to bottom of hero without increasing overall height */
-    margin-top: auto;
-
-    /* lift image up from bottom WITHOUT changing layout height */
+    margin-top: t.$space-md;
     transform: translateY(calc(-1 * var(--hero-media-lift-m)));
   }
 
@@ -135,7 +116,9 @@
   color: t.$color-text-2;
   max-width: 62ch;
   margin: 0 auto 10px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.35);
 
   .alignStart & {
     margin-left: 0;
@@ -143,12 +126,10 @@
   }
 }
 
-/* container for the badge */
 .rating {
   margin: 0 0 10px;
 }
 
-/* CTA row now uses shared <Button> (ctaChip) */
 .ctaRow {
   margin-top: 12px;
   display: inline-flex;

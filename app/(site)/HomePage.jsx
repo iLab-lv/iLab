@@ -35,12 +35,14 @@ export default function HomeScreen({ locale = 'lv', reviewsSummary }) {
         imageLiftMobile={124}
       />
 
+      <div id="reviews" />
+      <Reviews locale={locale} />
+
       <div id="services" />
 
       <Services locale={locale} />
 
-      <div id="reviews" />
-      <Reviews locale={locale} />
+      
 
       <Process locale={locale} />
 
