@@ -156,7 +156,7 @@ function getPageStrings(locale = 'lv') {
       ],
       defaultHeaderTitle: 'Ремонт планшета',
       defaultHeaderLead:
-        'Ремонт планшетов в Риге — замена экрана, батареи, разъёма зарядки и других компонентов с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+        'Ремонт планшетов в Риге - замена экрана, батареи, разъёма зарядки и других компонентов с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
       pricesCtaLabel: 'Смотреть цены',
     };
   }
@@ -254,7 +254,7 @@ function getPageStrings(locale = 'lv') {
     ],
     defaultHeaderTitle: 'Planšetdatoru remonts',
     defaultHeaderLead:
-      'Planšetdatoru remonts Rīgā — ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+      'Planšetdatoru remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
     pricesCtaLabel: 'Skatīt cenas',
   };
 }
@@ -577,7 +577,7 @@ async function TabletDevicePage({ params, locale = 'lv' }) {
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${modelName} — ${it.title}`,
+        name: `${modelName} - ${it.title}`,
         serviceType: it.title,
         provider,
       },

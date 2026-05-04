@@ -102,7 +102,7 @@ export default function IphoneBatteryReplacementAdsLandingPage() {
         </div>
       </section>
 
-      {/* Price teaser — battery only */}
+      {/* Price teaser - battery only */}
       <div id="price-teaser">
         <IphonePriceTeaser
           title="iPhone baterijas maiņas cena"

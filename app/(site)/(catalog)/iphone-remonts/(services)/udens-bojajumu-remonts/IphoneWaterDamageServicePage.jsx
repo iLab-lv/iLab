@@ -47,8 +47,8 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Повреждение iPhone после попадания влаги',
       heroBodyHtml:
-        '<p><strong>iPhone упал в воду или перестал включаться после влаги?</strong> Выполняем <strong>диагностику и ремонт после попадания влаги</strong> в Риге — чистка, устранение окисления и замена поврежденных деталей. Чем быстрее принесёте, тем выше шанс восстановления. <strong>Гарантия 90 дней</strong>.</p>',
-      introTitle: 'Повреждение iPhone водой — что делать?',
+        '<p><strong>iPhone упал в воду или перестал включаться после влаги?</strong> Выполняем <strong>диагностику и ремонт после попадания влаги</strong> в Риге - чистка, устранение окисления и замена поврежденных деталей. Чем быстрее принесёте, тем выше шанс восстановления. <strong>Гарантия 90 дней</strong>.</p>',
+      introTitle: 'Повреждение iPhone водой - что делать?',
       introP1:
         'Если <strong>iPhone упал в воду</strong>, в море, бассейн или на него попала жидкость, важно действовать сразу. Вода вызывает <strong>окисление и коррозию</strong>, повреждает соединения и может привести к короткому замыканию. Правильные действия в первые минуты заметно повышают шанс полного восстановления устройства.',
       introP2: 'Наши специалисты чаще всего сталкиваются с ситуациями, когда телефон:',
@@ -60,7 +60,7 @@ function getPageStrings(locale = 'lv') {
         'на экране появляются <strong>пятна</strong> или полосы.',
       ],
       introP3:
-        'Хорошая новость — если принести устройство в тот же день, <strong>более чем в 90% случаев</strong> его удаётся полностью восстановить.',
+        'Хорошая новость - если принести устройство в тот же день, <strong>более чем в 90% случаев</strong> его удаётся полностью восстановить.',
       selectedModelPrefix: 'Выбрана модель:',
       selectedModelSuffix: 'Прокрутите к',
       selectedModelLink: 'ценам',
@@ -100,8 +100,8 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone ūdens bojājumi',
     heroBodyHtml:
-      '<p><strong>IPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas?</strong> Veicam <strong>ūdens bojājumu diagnostiku un remontu</strong> Rīgā — tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Jo ātrāk atnesīsi, jo labākas izredzes. <strong>90 dienu garantija</strong>.</p>',
-    introTitle: 'iPhone ūdens bojājumi — ko darīt?',
+      '<p><strong>IPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas?</strong> Veicam <strong>ūdens bojājumu diagnostiku un remontu</strong> Rīgā - tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Jo ātrāk atnesīsi, jo labākas izredzes. <strong>90 dienu garantija</strong>.</p>',
+    introTitle: 'iPhone ūdens bojājumi - ko darīt?',
     introP1:
       'Ja <strong>iPhone iekrita ūdenī</strong>, jūrā, baseinā vai uz tā izlija šķidrums, svarīgi rīkoties nekavējoties. Ūdens izraisa <strong>oksidāciju un koroziju</strong>, bojā savienojumus un var radīt īssavienojumu. Pareiza rīcība pirmajās minūtēs ievērojami palielina iespēju ierīci pilnībā atjaunot.',
     introP2: 'Mūsu speciālisti visbiežāk saskaras ar situācijām, kad telefons:',
@@ -113,7 +113,7 @@ function getPageStrings(locale = 'lv') {
       'ekrānā parādās <strong>plankumi</strong> vai līnijas.',
     ],
     introP3:
-      'Labā ziņa — ja ierīci atnes tajā pašā dienā, <strong>vairāk nekā 90% gadījumu</strong> izdodas to pilnībā atjaunot.',
+      'Labā ziņa - ja ierīci atnes tajā pašā dienā, <strong>vairāk nekā 90% gadījumu</strong> izdodas to pilnībā atjaunot.',
     selectedModelPrefix: 'Atlasīts modelis:',
     selectedModelSuffix: 'Ritiniet uz',
     selectedModelLink: 'cenām',
@@ -133,8 +133,8 @@ function getPageStrings(locale = 'lv') {
     serviceFaqGroupLabel: 'Ūdens bojājumu remonts',
     basicFaqGroupLabel: 'Vispārīgi jautājumi',
     breadcrumbServiceName: 'Ūdens bojājumi',
-    serviceName: 'iPhone ūdens bojājumi — diagnostika un remonts Rīgā',
-    serviceType: 'iPhone ūdens bojājumi — diagnostika un remonts',
+    serviceName: 'iPhone ūdens bojājumi - diagnostika un remonts Rīgā',
+    serviceType: 'iPhone ūdens bojājumi - diagnostika un remonts',
     serviceDescription:
       'iPhone ūdens bojājumu diagnostika, tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa ar garantiju.',
     applyHref: '/pieraksties',
@@ -161,7 +161,7 @@ export function getIphoneWaterDamageServiceMetadata(locale = 'lv') {
   }
 
   return {
-    title: 'iPhone ūdens bojājumi — diagnostika un remonts Rīgā | iLab',
+    title: 'iPhone ūdens bojājumi - diagnostika un remonts Rīgā | iLab',
     description:
       'iPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas? Veicam ūdens bojājumu diagnostiku, tīrīšanu un oksidācijas novēršanu. Ātra palīdzība un 90 dienu garantija.',
     alternates: { canonical: getRoutePath(locale) },

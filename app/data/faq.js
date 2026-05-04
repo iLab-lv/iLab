@@ -92,7 +92,7 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Cena atkarīga no modeļa un bojājuma. Skati cenas attiecīgajā kategorijā — piemēram,{' '}
+        Cena atkarīga no modeļa un bojājuma. Skati cenas attiecīgajā kategorijā - piemēram,{' '}
         <Link href="/iphone-remonts">iPhone remonts</Link> vai{' '}
         <Link href="/telefonu-remonts">telefonu remonts</Link>. Pirms darba uzsākšanas
         vienmēr saskaņojam izmaksas un termiņu.
@@ -153,18 +153,18 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Jā — visiem remontiem nodrošinām <strong>90 dienu garantiju</strong>. Izmantojam
+        Jā - visiem remontiem nodrošinām <strong>90 dienu garantiju</strong>. Izmantojam
         oriģinālas vai augstas kvalitātes OEM detaļas (vienojamies ar klientu pirms
         darba).
       </>
     ),
     aText:
-      'Jā — visiem remontiem nodrošinām 90 dienu garantiju; izmantojam oriģinālas vai augstas kvalitātes OEM detaļas.',
+      'Jā - visiem remontiem nodrošinām 90 dienu garantiju; izmantojam oriģinālas vai augstas kvalitātes OEM detaļas.',
     variants: {
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
           <>
-            <strong>iPhone remontiem</strong> — <strong>90 dienu garantija</strong> gan
+            <strong>iPhone remontiem</strong> - <strong>90 dienu garantija</strong> gan
             darbam, gan detaļām. Pēc vienošanās izmantojam oriģinālās vai augstas
             kvalitātes OEM komponentes.
           </>
@@ -176,12 +176,12 @@ const QUESTIONS = [
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Jā — veiktajiem darbiem nodrošinām <strong>90 dienu garantiju</strong>.
+            Jā - veiktajiem darbiem nodrošinām <strong>90 dienu garantiju</strong>.
             Garantijas nosacījumi tiek izskaidroti uz vietas.
           </>
         ),
         aText:
-          'Jā — veiktajiem darbiem nodrošinām 90 dienu garantiju; nosacījumus izskaidrojam uz vietas.',
+          'Jā - veiktajiem darbiem nodrošinām 90 dienu garantiju; nosacījumus izskaidrojam uz vietas.',
       },
     },
     weight: 30,
@@ -200,7 +200,7 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Vari droši atnest uz vietas — <strong>bez pieraksta</strong>. Ja vēlies, vari
+        Vari droši atnest uz vietas - <strong>bez pieraksta</strong>. Ja vēlies, vari
         arī pieteikt laiku vai uzdot jautājumu pa tālruni: kontakti un darba laiks ir
         sadaļā <Link href="/kontakti">Kontakti</Link>.
       </>
@@ -212,7 +212,7 @@ const QUESTIONS = [
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Vari droši atnest ierīci uz vietas — <strong>bez pieraksta</strong>.
+            Vari droši atnest ierīci uz vietas - <strong>bez pieraksta</strong>.
             Darba laiks un atrašanās vietas ir norādītas šajā lapā zemāk.
           </>
         ),
@@ -236,23 +236,23 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+        Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
         Adreses, tālruņi un darba laiki:{' '}
         <Link href="/kontakti">Kontakti</Link>.
       </>
     ),
     aText:
-      'Rīgā — T/C Domina Shopping un T/C Spice Home; adreses un darba laiki pieejami sadaļā Kontakti.',
+      'Rīgā - T/C Domina Shopping un T/C Spice Home; adreses un darba laiki pieejami sadaļā Kontakti.',
     variants: {
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+            Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
             Precīzas adreses un darba laiks ir norādīti šajā lapā zemāk.
           </>
         ),
         aText:
-          'Rīgā — T/C Domina Shopping un T/C Spice Home; adreses un darba laiks ir norādīti lapā.',
+          'Rīgā - T/C Domina Shopping un T/C Spice Home; adreses un darba laiks ir norādīti lapā.',
       },
     },
     weight: 50,
@@ -270,7 +270,7 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Jā — strādājam uzmanīgi, bet pirms remonta iesakām izveidot{' '}
+        Jā - strādājam uzmanīgi, bet pirms remonta iesakām izveidot{' '}
         <em>rezerves kopiju</em> (backup). Biežākajās situācijās (piem.,{' '}
         <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> vai{' '}
         <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>) dati parasti
@@ -283,9 +283,9 @@ const QUESTIONS = [
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
           <>
-            <strong>iPhone</strong> datu integritāte ir prioritāte. Tipiskos darbos —{' '}
+            <strong>iPhone</strong> datu integritāte ir prioritāte. Tipiskos darbos -{' '}
             <Link href="/iphone-remonts/ekrana-maina">ekrāna maiņa</Link> un{' '}
-            <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link> —
+            <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link> -
             lietotāja dati parasti netiek skarti, tomēr rekomendējam <em>backup</em>.
           </>
         ),
@@ -314,14 +314,14 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.HOME],
     aHtml: (
       <>
-        Jā — droši <Link href="/kontakti">sazinies ar mums</Link>. Papildus
+        Jā - droši <Link href="/kontakti">sazinies ar mums</Link>. Papildus
         populārākajām kategorijām varam palīdzēt arī ar{' '}
         <strong>skeneriem/skaļruņiem</strong>, <strong>fotoaparātiem</strong> un citiem
         portatīvajiem gadžetiem (pēc pieprasījuma).
       </>
     ),
     aText:
-      'Jā — sazinieties ar mums. Remontējam arī skaļruņus, fotoaparātus un citas portatīvās ierīces pēc pieprasījuma.',
+      'Jā - sazinieties ar mums. Remontējam arī skaļruņus, fotoaparātus un citas portatīvās ierīces pēc pieprasījuma.',
     weight: 65,
   },
 
@@ -379,7 +379,7 @@ const QUESTIONS = [
     scopes: [FAQ_CONTEXT.IPHONE],
     aHtml: (
       <>
-        Jā — izmantojam oriģinālās vai augstas kvalitātes OEM detaļas (vienojamies pirms
+        Jā - izmantojam oriģinālās vai augstas kvalitātes OEM detaļas (vienojamies pirms
         darba). Skati:{' '}
         <Link href="/iphone-remonts/ekrana-maina">displeja maiņa</Link> un{' '}
         <Link href="/iphone-remonts/baterijas-maina">baterijas maiņa</Link>.

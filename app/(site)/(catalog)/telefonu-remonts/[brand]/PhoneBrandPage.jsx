@@ -133,7 +133,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
-    a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
+    a: 'Izmantojam oriģinālas vai augstas kvalitātes OEM - izvēli saskaņojam ar klientu.',
   },
   {
     q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
@@ -156,7 +156,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Доступны ли оригинальные детали?',
-    a: 'Используем оригинальные или качественные OEM детали — выбор согласовываем с клиентом.',
+    a: 'Используем оригинальные или качественные OEM детали - выбор согласовываем с клиентом.',
   },
   {
     q: 'Можно ли узнать примерную цену до ремонта?',
@@ -262,21 +262,21 @@ function getPageStrings({ brandName, page, locale = 'lv' }) {
   const heroHtml =
     pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
     (locale === 'ru'
-      ? `<p><strong>${brandName} ремонт телефонов в Риге</strong> — замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
-      : `<p><strong>${brandName} telefonu remonts Rīgā</strong> — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
+      ? `<p><strong>${brandName} ремонт телефонов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
+      : `<p><strong>${brandName} telefonu remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
 
   if (locale === 'ru') {
     return {
-      introTitle: `${brandName} ремонт телефонов — что мы делаем`,
+      introTitle: `${brandName} ремонт телефонов - что мы делаем`,
       introLead:
-        'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели — откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
+        'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели - откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>разъём зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>камера</strong> (мутные фото, ошибки фокусировки), <strong>динамики/микрофон</strong> (тихий звук, хрипы), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       servicesTitle: 'Популярный ремонт',
       modelGridHeading: selectorHeading,
       modelGridIntro: selectorIntro,
       modelsNote:
-        'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
+        'Цена зависит от модели - откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели.',
       processTitle: 'Как проходит ремонт',
       faqTitle: 'Часто задаваемые вопросы',
@@ -293,16 +293,16 @@ function getPageStrings({ brandName, page, locale = 'lv' }) {
   }
 
   return {
-    introTitle: `${brandName} telefonu remonts — ko mēs darām`,
+    introTitle: `${brandName} telefonu remonts - ko mēs darām`,
     introLead:
-      'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas <strong>remonta cenas</strong> un termiņus.',
+      'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa - atver sava modeļa lapu, lai redzētu konkrētas <strong>remonta cenas</strong> un termiņus.',
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzda</strong> (nenoturas kabelis, lēna/nekonsekventa uzlāde), <strong>kamera</strong> (miglaini attēli, fokusēšanās kļūdas), <strong>skaļruņi/mikrofons</strong> (klusa skaņa, krakšķi), kā arī <strong>mitruma bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     servicesTitle: 'Populārākie remonti',
     modelGridHeading: selectorHeading,
     modelGridIntro: selectorIntro,
     modelsNote:
-      'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
+      'Cenas atšķiras pēc modeļa - atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu modeļu.',
     processTitle: 'Kā notiek remonts',
     faqTitle: 'Biežāk uzdotie jautājumi',
@@ -327,8 +327,8 @@ export async function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
         locale === 'ru' ? 'Ремонт телефонов | iLab' : 'Telefonu remonts | iLab',
       description:
         locale === 'ru'
-          ? 'Ремонт телефонов в Риге — быстрая диагностика, честные цены, гарантия.'
-          : 'Telefonu remonts Rīgā — ātra diagnostika, godīgas cenas, garantija.',
+          ? 'Ремонт телефонов в Риге - быстрая диагностика, честные цены, гарантия.'
+          : 'Telefonu remonts Rīgā - ātra diagnostika, godīgas cenas, garantija.',
     };
   }
 

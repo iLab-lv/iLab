@@ -51,7 +51,7 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Замена экрана iPhone',
       heroBodyHtml:
-        '<p><strong>Замена экрана iPhone в Риге</strong> в сервисе iLab — оригинальные и качественные OEM дисплеи, быстрая диагностика и <strong>гарантия 90 дней</strong>. Часто замену экрана выполняем в тот же день.</p>',
+        '<p><strong>Замена экрана iPhone в Риге</strong> в сервисе iLab - оригинальные и качественные OEM дисплеи, быстрая диагностика и <strong>гарантия 90 дней</strong>. Часто замену экрана выполняем в тот же день.</p>',
       priceTitle: 'Цены на замену экрана по моделям',
       ctaLabel: 'Записаться на ремонт',
       faqTitle: 'Вопросы',
@@ -78,7 +78,7 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone ekrāna maiņa',
     heroBodyHtml:
-      '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā — oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>90 dienu garantija</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
+      '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā - oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>90 dienu garantija</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
     priceTitle: 'Ekrāna maiņas cenas pēc modeļa',
     ctaLabel: 'Pieteikties remontam',
     faqTitle: 'Jautājumi',
@@ -126,7 +126,7 @@ export function getIphoneScreenServiceMetadata(locale = 'lv') {
     return {
       title: 'Замена экрана iPhone в Риге | iLab',
       description:
-        'Замена экрана iPhone в Риге — оригинальные или OEM дисплеи, бесплатная диагностика и гарантия 90 дней.',
+        'Замена экрана iPhone в Риге - оригинальные или OEM дисплеи, бесплатная диагностика и гарантия 90 дней.',
       alternates: {
         canonical: getRoutePath(locale),
       },
@@ -136,7 +136,7 @@ export function getIphoneScreenServiceMetadata(locale = 'lv') {
   return {
     title: 'iPhone ekrāna maiņa Rīgā | iLab',
     description:
-      'iPhone ekrāna maiņa Rīgā — oriģināli vai OEM displeji, bezmaksas diagnostika un 90 dienu garantija.',
+      'iPhone ekrāna maiņa Rīgā - oriģināli vai OEM displeji, bezmaksas diagnostika un 90 dienu garantija.',
     alternates: {
       canonical: getRoutePath(locale),
     },

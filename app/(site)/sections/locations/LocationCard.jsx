@@ -52,10 +52,10 @@ function computeOpenState(hoursArr, overrideForToday) {
   }
   
   if (nowM >= openM && nowM < closeM) {
-    return { open: true, badgeText: `Atvērts — līdz ${today.closes}`, today };
+    return { open: true, badgeText: `Atvērts - līdz ${today.closes}`, today };
   }
   
-  return { open: false, badgeText: `Slēgts — atvērsies ${today.opens}`, today };
+  return { open: false, badgeText: `Slēgts - atvērsies ${today.opens}`, today };
 }
 
 /**

@@ -19,12 +19,12 @@ function getPageStrings(locale = 'lv') {
 
       headerTitle: 'О iLab',
       headerLead:
-        'iLab — сервисный центр в Риге с более чем 10-летним опытом ремонта телефонов, планшетов, компьютеров и другой техники. Работаем быстро, понятно и с гарантией как для частных клиентов, так и для бизнеса.',
+        'iLab - сервисный центр в Риге с более чем 10-летним опытом ремонта телефонов, планшетов, компьютеров и другой техники. Работаем быстро, понятно и с гарантией как для частных клиентов, так и для бизнеса.',
 
       aboutTitle: 'О нас',
 
       intro:
-        ' <strong>SIA iLab</strong> — профессиональный сервис по ремонту телефонов и компьютеров в Риге с более чем <strong>10-летним опытом</strong> в сфере обслуживания и ремонта техники. Мы обеспечиваем быстрый и качественный ремонт техники как для частных клиентов, так и для компаний (B2B), предоставляя полный спектр сервисных услуг.',
+        ' <strong>SIA iLab</strong> - профессиональный сервис по ремонту телефонов и компьютеров в Риге с более чем <strong>10-летним опытом</strong> в сфере обслуживания и ремонта техники. Мы обеспечиваем быстрый и качественный ремонт техники как для частных клиентов, так и для компаний (B2B), предоставляя полный спектр сервисных услуг.',
 
       locationsTitle: 'iLab вы найдёте в T/C Domina Shopping и TC Spice Home',
       locationsText:
@@ -32,16 +32,16 @@ function getPageStrings(locale = 'lv') {
 
       missionTitle: 'Наша миссия',
       missionText:
-        'Ваши устройства, наш опыт — надёжный сервис каждый день как для частных клиентов, так и для бизнеса. Наша задача — сделать так, чтобы телефон, компьютер, планшет или другое устройство снова работало как новое. Технологии должны облегчать жизнь, а не создавать проблемы — и именно это мы обеспечиваем каждый день.',
+        'Ваши устройства, наш опыт - надёжный сервис каждый день как для частных клиентов, так и для бизнеса. Наша задача - сделать так, чтобы телефон, компьютер, планшет или другое устройство снова работало как новое. Технологии должны облегчать жизнь, а не создавать проблемы - и именно это мы обеспечиваем каждый день.',
 
       teamTitle: 'Команда iLab',
       teamText:
-        'Техники iLab — обученные специалисты, которые постоянно совершенствуют знания, следя за новейшими технологическими тенденциями. Это позволяет нам обеспечивать высокое качество ремонта устройств <strong>Apple, Samsung, Huawei, Xiaomi, Lenovo, Dyson</strong> и других брендов. Мы обслуживаем клиентов по всей Латвии — как частных лиц, так и B2B.',
+        'Техники iLab - обученные специалисты, которые постоянно совершенствуют знания, следя за новейшими технологическими тенденциями. Это позволяет нам обеспечивать высокое качество ремонта устройств <strong>Apple, Samsung, Huawei, Xiaomi, Lenovo, Dyson</strong> и других брендов. Мы обслуживаем клиентов по всей Латвии - как частных лиц, так и B2B.',
 
       whyChooseTitle: 'Почему выбирают iLab',
       whyChooseItems: [
         '10+ лет опыта в ремонте устройств;',
-        'Ремонт телефонов и компьютеров в Риге — в двух удобных локациях: TC Domina Shopping и TC Spice Home;',
+        'Ремонт телефонов и компьютеров в Риге - в двух удобных локациях: TC Domina Shopping и TC Spice Home;',
         'Работаем каждый день, включая выходные;',
         'Обслуживаем частных клиентов и B2B по всей Латвии;',
         'Качественные запчасти и профессиональная диагностика;',
@@ -52,10 +52,10 @@ function getPageStrings(locale = 'lv') {
 
       valuesTitle: 'Ценности iLab',
       valuesItems: [
-        '<strong>Точность и скорость</strong> — устройство ремонтируется в максимально короткие сроки;',
-        '<strong>Развитие и качество</strong> — наши техники постоянно совершенствуют знания;',
-        '<strong>Ответственность и честность</strong> — никаких скрытых расходов или расплывчатых обещаний;',
-        '<strong>Надёжность</strong> — мы отвечаем за каждый выполненный ремонт.',
+        '<strong>Точность и скорость</strong> - устройство ремонтируется в максимально короткие сроки;',
+        '<strong>Развитие и качество</strong> - наши техники постоянно совершенствуют знания;',
+        '<strong>Ответственность и честность</strong> - никаких скрытых расходов или расплывчатых обещаний;',
+        '<strong>Надёжность</strong> - мы отвечаем за каждый выполненный ремонт.',
       ],
 
       orgName: 'iLab',
@@ -63,8 +63,8 @@ function getPageStrings(locale = 'lv') {
       orgVatId: 'Reģ. nr. 40203288307',
       orgDescription:
         'Профессиональный сервис по ремонту телефонов, планшетов, компьютеров и Dyson в Риге.',
-      dominaName: 'iLab — Domina Shopping',
-      spiceName: 'iLab — Spice Home',
+      dominaName: 'iLab - Domina Shopping',
+      spiceName: 'iLab - Spice Home',
       contactsPath: '/ru/kontakty',
     };
   }
@@ -81,7 +81,7 @@ function getPageStrings(locale = 'lv') {
     aboutTitle: 'Par mums',
 
     intro:
-      '<strong>SIA iLab</strong> — profesionāls telefona un datoru serviss Rīgā ar vairāk nekā <strong>10 gadu pieredzi</strong> tehnoloģiju apkalpošanas un remonta jomā. Mēs sniedzam ātru un kvalitatīvu tehnikas remontu gan privātpersonām, gan uzņēmumiem (B2B), nodrošinot pilnu servisa pakalpojumu klāstu.',
+      '<strong>SIA iLab</strong> - profesionāls telefona un datoru serviss Rīgā ar vairāk nekā <strong>10 gadu pieredzi</strong> tehnoloģiju apkalpošanas un remonta jomā. Mēs sniedzam ātru un kvalitatīvu tehnikas remontu gan privātpersonām, gan uzņēmumiem (B2B), nodrošinot pilnu servisa pakalpojumu klāstu.',
 
     locationsTitle: 'iLab atradīsi: T/C Domina Shopping un TC Spice Home',
     locationsText:
@@ -89,7 +89,7 @@ function getPageStrings(locale = 'lv') {
 
     missionTitle: 'Mūsu misija',
     missionText:
-      'Jūsu ierīces, mūsu pieredze — uzticams serviss katru dienu, gan privātpersonām, gan uzņēmumiem. Mūsu uzdevums ir nodrošināt, lai telefons, dators, planšetdators vai citas ierīces atkal strādātu kā jaunas. Tehnoloģijām ir jāatvieglo dzīve, nevis jārada problēmas — un tieši to mēs nodrošinām katru dienu.',
+      'Jūsu ierīces, mūsu pieredze - uzticams serviss katru dienu, gan privātpersonām, gan uzņēmumiem. Mūsu uzdevums ir nodrošināt, lai telefons, dators, planšetdators vai citas ierīces atkal strādātu kā jaunas. Tehnoloģijām ir jāatvieglo dzīve, nevis jārada problēmas - un tieši to mēs nodrošinām katru dienu.',
 
     teamTitle: 'iLab komanda',
     teamText:
@@ -98,7 +98,7 @@ function getPageStrings(locale = 'lv') {
     whyChooseTitle: 'Kāpēc izvēlēties iLab',
     whyChooseItems: [
       '10+ gadu pieredze ierīču remontā;',
-      'Telefona un datoru remonts Rīgā — divās ērtās lokācijās: TC Domina Shopping un TC Spice Home;',
+      'Telefona un datoru remonts Rīgā - divās ērtās lokācijās: TC Domina Shopping un TC Spice Home;',
       'Darbojamies katru dienu, arī brīvdienās;',
       'Apkalpojam privātpersonas un B2B klientus visā Latvijā;',
       'Kvalitatīvas rezerves daļas un profesionāla diagnostika;',
@@ -109,10 +109,10 @@ function getPageStrings(locale = 'lv') {
 
     valuesTitle: 'iLab vērtības',
     valuesItems: [
-      '<strong>Precizitāte un ātrums</strong> — ierīce tiek salabota pēc iespējas īsākā laikā;',
-      '<strong>Attīstība un kvalitāte</strong> — mūsu tehniķi nepārtraukti pilnveido zināšanas;',
-      '<strong>Atbildība un godīgums</strong> — nekādu slēptu izmaksu vai neskaidru solījumu;',
-      '<strong>Uzticamība</strong> — mēs atbildam par katru paveikto remontu.',
+      '<strong>Precizitāte un ātrums</strong> - ierīce tiek salabota pēc iespējas īsākā laikā;',
+      '<strong>Attīstība un kvalitāte</strong> - mūsu tehniķi nepārtraukti pilnveido zināšanas;',
+      '<strong>Atbildība un godīgums</strong> - nekādu slēptu izmaksu vai neskaidru solījumu;',
+      '<strong>Uzticamība</strong> - mēs atbildam par katru paveikto remontu.',
     ],
 
     orgName: 'iLab',
@@ -120,8 +120,8 @@ function getPageStrings(locale = 'lv') {
     orgVatId: 'Reģ. nr. 40203288307',
     orgDescription:
       'Profesionāls telefonu, planšetdatoru, datoru un Dyson serviss Rīgā.',
-    dominaName: 'iLab — Domina Shopping',
-    spiceName: 'iLab — Spice Home',
+    dominaName: 'iLab - Domina Shopping',
+    spiceName: 'iLab - Spice Home',
     contactsPath: '/kontakti',
   };
 }

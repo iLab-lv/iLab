@@ -132,7 +132,7 @@ export default function ServicePricelist({
     if (!p) return { line: null, sid: null };
     const items = Array.isArray(p.items) ? p.items : [];
 
-    // 1) priority by serviceIds (in given order) — only when provided
+    // 1) priority by serviceIds (in given order) - only when provided
     if (hasPriority) {
       for (const sid of normalizedServiceIds) {
         const found = items.find((it) => it.id === sid && !isRequestPrice(it.price));
@@ -144,7 +144,7 @@ export default function ServicePricelist({
     const pop = items.find((it) => it.popular && !isRequestPrice(it.price));
     if (pop) return { line: pop, sid: pop.id || null };
 
-    // 3) any priced (including "pēc pieprasījuma" allowed as fallback? no — keep real price first)
+    // 3) any priced (including "pēc pieprasījuma" allowed as fallback? no - keep real price first)
     const anyPriced = items.find((it) => !isRequestPrice(it.price)) || null;
     if (anyPriced) return { line: anyPriced, sid: anyPriced?.id || null };
 

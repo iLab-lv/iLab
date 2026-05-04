@@ -184,7 +184,7 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
         <div className={styles.bottomInner}>
           <div className={styles.ruleWide} aria-hidden="true" />
           <div className={styles.copy}>
-            © {year} iLab.lv — {content.copyright}
+            © {year} iLab.lv - {content.copyright}
           </div>
         </div>
       </div>

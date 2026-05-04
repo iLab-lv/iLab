@@ -30,11 +30,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Cik tas ilgst un ko sagaidīt',
           text: `
-<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā — piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
+<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā - piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
 
 <p>Ja bojājums ir sarežģītāks (piemēram, ūdens bojājums vai mātesplates defekts), serviss informē par nepieciešamo laiku un detaļu pieejamību. Cenu un termiņu vienmēr saskaņojam pirms darba uzsākšanas, tāpēc klients zina, ko sagaidīt.</p>
 
-<p>Remonta gaitā varat sekot līdzi statusam vai saņemt paziņojumu, kad ierīce ir gatava. Mērķis — nodrošināt ātru, caurspīdīgu un drošu iPhone remontu Rīgā.</p>
+<p>Remonta gaitā varat sekot līdzi statusam vai saņemt paziņojumu, kad ierīce ir gatava. Mērķis - nodrošināt ātru, caurspīdīgu un drošu iPhone remontu Rīgā.</p>
           `,
         },
         {
@@ -44,13 +44,13 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 
 <p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam 90 dienu garantiju gan detaļām, gan darbam.</p>
 
-<p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam — pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
+<p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam - pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
           `,
         },
         {
           title: 'Datu drošība un sagatavošanās remontam',
           text: `
-<p>Pirms ierīces nodošanas servisā iesakām izveidot datu rezerves kopiju iCloud vai iTunes vidē. iLab meistari ievēro stingrus datu drošības principus — mēs nepiekļūstam personīgajai informācijai un apstrādājam datus tikai remonta vajadzībām.</p>
+<p>Pirms ierīces nodošanas servisā iesakām izveidot datu rezerves kopiju iCloud vai iTunes vidē. iLab meistari ievēro stingrus datu drošības principus - mēs nepiekļūstam personīgajai informācijai un apstrādājam datus tikai remonta vajadzībām.</p>
 
 <p>Ja ierīce ir aizsargāta ar paroli, Face ID vai Touch ID, meistars ieteiks, kā rīkoties, lai pārbaude būtu iespējama. iLab serviss Rīgā nodrošina, ka katrs iPhone tiek apstrādāts droši, konfidenciāli un atbildīgi.</p>
           `,
@@ -58,11 +58,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Kur nodot iPhone remontam',
           text: `
-<p>iLab servisa centri atrodas Rīgā — <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu — sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
+<p>iLab servisa centri atrodas Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu - sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
 
 <p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/servisa-centri">Servisa centri</a>.</p>
 
-<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostika</a> — mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
+<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostika</a> - mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
           `,
         },
       ],
@@ -86,7 +86,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 После контакта с жидкостью телефон может выглядеть сухим, но внутри уже начинается окисление. Чем быстрее устройство попадёт в сервис, тем выше шанс его восстановить. Мы выполняем <a href="/ru/iphone-remonts/remont-posle-vody">диагностику и очистку после влаги</a>.</p>
 
 <p><strong>Проблемы с экраном или сенсором</strong><br>
-Треснувший экран, мерцание, полосы или отсутствие отклика сенсора указывают на повреждение дисплея. Решение — <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> с гарантией.</p>
+Треснувший экран, мерцание, полосы или отсутствие отклика сенсора указывают на повреждение дисплея. Решение - <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> с гарантией.</p>
 
 <p><strong>Неисправности камеры или звука</strong><br>
 Размытое изображение, проблемы с фокусом или отсутствие звука могут быть вызваны влагой, повреждением модуля или загрязнением. После диагностики мастер предложит <a href="/ru/iphone-remonts/remont-kamery">ремонт камеры</a> или <a href="/ru/iphone-remonts/remont-dinamika-mikrofona">динамиков и микрофона</a>.</p>
@@ -98,11 +98,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Сроки ремонта и что ожидать',
           text: `
-<p>Большинство ремонтов iPhone выполняются в тот же день — например, <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> или <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> обычно занимает 1–3 часа. Перед началом мастер проводит диагностику и сообщает ориентировочное время.</p>
+<p>Большинство ремонтов iPhone выполняются в тот же день - например, <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> или <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> обычно занимает 1–3 часа. Перед началом мастер проводит диагностику и сообщает ориентировочное время.</p>
 
 <p>Если повреждение сложное (например, после воды или проблемы с платой), мы сообщаем сроки и наличие деталей заранее. Стоимость и время всегда согласовываются до начала работ.</p>
 
-<p>Во время ремонта вы можете отслеживать статус или получить уведомление, когда устройство готово. Наша цель — быстрый и прозрачный ремонт iPhone в Риге.</p>
+<p>Во время ремонта вы можете отслеживать статус или получить уведомление, когда устройство готово. Наша цель - быстрый и прозрачный ремонт iPhone в Риге.</p>
           `,
         },
         {
@@ -112,13 +112,13 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 
 <p>Оригинальные детали обеспечивают максимальную совместимость, а OEM-аналоги позволяют снизить стоимость без потери качества. На все ремонты предоставляется гарантия 90 дней.</p>
 
-<p>После ремонта каждый iPhone проходит тестирование — проверяется экран, сенсор, батарея и скорость зарядки.</p>
+<p>После ремонта каждый iPhone проходит тестирование - проверяется экран, сенсор, батарея и скорость зарядки.</p>
           `,
         },
         {
           title: 'Безопасность данных и подготовка',
           text: `
-<p>Перед сдачей устройства в ремонт рекомендуется сделать резервную копию в iCloud или iTunes. Мастера iLab соблюдают строгие правила безопасности — мы не получаем доступ к личным данным.</p>
+<p>Перед сдачей устройства в ремонт рекомендуется сделать резервную копию в iCloud или iTunes. Мастера iLab соблюдают строгие правила безопасности - мы не получаем доступ к личным данным.</p>
 
 <p>Если устройство защищено паролем, Face ID или Touch ID, мастер подскажет, как подготовить его к диагностике. В iLab каждый iPhone обрабатывается безопасно и конфиденциально.</p>
           `,
@@ -126,11 +126,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Где сдать iPhone в ремонт',
           text: `
-<p>Сервисные центры iLab находятся в Риге — <strong>ТЦ Domina Shopping</strong> и <strong>ТЦ Spice Home</strong>. Мы выполняем все виды ремонта — от диагностики до сложных работ.</p>
+<p>Сервисные центры iLab находятся в Риге - <strong>ТЦ Domina Shopping</strong> и <strong>ТЦ Spice Home</strong>. Мы выполняем все виды ремонта - от диагностики до сложных работ.</p>
 
 <p>Вы можете принести устройство лично или отправить по почте. Контакты и адреса доступны в разделе <a href="/ru/kontakty">Контакты</a> или <a href="/ru/servisa-centri">Сервисные центры</a>.</p>
 
-<p>Независимо от проблемы — будь то <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a>, <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> или <a href="/ru/iphone-remonts/remont-posle-vody">ремонт после воды</a> — наши мастера помогут восстановить ваш iPhone в кратчайшие сроки.</p>
+<p>Независимо от проблемы - будь то <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a>, <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> или <a href="/ru/iphone-remonts/remont-posle-vody">ремонт после воды</a> - наши мастера помогут восстановить ваш iPhone в кратчайшие сроки.</p>
           `,
         },
       ],
@@ -147,10 +147,10 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
 <p>Viena no biežākajām sūdzībām. Putekļsūcējs darbojas, bet slikti savāc netīrumus.</p>
 
 <p><strong>Galvenie iemesli:</strong><br>
-— Aizsērējuši filtri<br>
-— Ciklona bloks aizsērējis ar smalkiem putekļiem<br>
-— Aizsērējusi caurule vai uzgalis<br>
-— Gaisa noplūde caur korpusa plaisām kritienu rezultātā vai nolietotiem blīvējumiem</p>
+- Aizsērējuši filtri<br>
+- Ciklona bloks aizsērējis ar smalkiem putekļiem<br>
+- Aizsērējusi caurule vai uzgalis<br>
+- Gaisa noplūde caur korpusa plaisām kritienu rezultātā vai nolietotiem blīvējumiem</p>
 
 <p><strong>Risinājums:</strong><br>
 Vairumā gadījumu problēma tiek atrisināta ar apkopi. Ja to ignorē, tas var izraisīt motora pārkaršanu un dārgāku remontu.</p>
@@ -162,10 +162,10 @@ Vairumā gadījumu problēma tiek atrisināta ar apkopi. Ja to ignorē, tas var 
 <p>Putekļsūcējs nereaģē uz pogas nospiešanu.</p>
 
 <p><strong>Biežākie iemesli:</strong><br>
-— Bojāts akumulators<br>
-— Slēdža jeb ieslēgšanas pogas bojājums<br>
-— Vadības plates bojājums<br>
-— Vadības plates oksidācija vai kontaktu pārrāvums</p>
+- Bojāts akumulators<br>
+- Slēdža jeb ieslēgšanas pogas bojājums<br>
+- Vadības plates bojājums<br>
+- Vadības plates oksidācija vai kontaktu pārrāvums</p>
 
 <p><strong>Risinājums:</strong><br>
 Bezvadu modeļos visbiežāk tā ir akumulatora nomaiņa vai slēdža remonts.</p>
@@ -186,10 +186,10 @@ Visbiežāk nepieciešama akumulatora nomaiņa.</p>
 <p>Putekļsūcējs nereaģē uz pieslēgšanu lādētājam vai neuzkrāj uzlādi.</p>
 
 <p><strong>Biežākie iemesli:</strong><br>
-— Vadības plates bojājums<br>
-— Bojāts barošanas bloks<br>
-— Bojāti kontakti<br>
-— Akumulatora defekts</p>
+- Vadības plates bojājums<br>
+- Bojāts barošanas bloks<br>
+- Bojāti kontakti<br>
+- Akumulatora defekts</p>
 
 <p><strong>Risinājums:</strong><br>
 Nepieciešama diagnostika, lai noteiktu cēloni.</p>
@@ -201,10 +201,10 @@ Nepieciešama diagnostika, lai noteiktu cēloni.</p>
 <p>Putekļsūcējs ieslēdzas, bet pēc neilga laika izslēdzas.</p>
 
 <p><strong>Biežākie iemesli:</strong><br>
-— Mitruma nokļūšana uz vadības plates<br>
-— Motora bojājums<br>
-— Termoaizsardzības nostrādāšana<br>
-— Akumulatora problēmas</p>
+- Mitruma nokļūšana uz vadības plates<br>
+- Motora bojājums<br>
+- Termoaizsardzības nostrādāšana<br>
+- Akumulatora problēmas</p>
 
 <p><strong>Risinājums:</strong><br>
 Nepieciešama diagnostika, lai noteiktu cēloni.</p>
@@ -216,10 +216,10 @@ Nepieciešama diagnostika, lai noteiktu cēloni.</p>
 <p>Birste negriežas, lai gan putekļsūcējs darbojas.</p>
 
 <p><strong>Biežākie iemesli:</strong><br>
-— Mati un diegi aptinušies ap rotējošo birsti<br>
-— Bojāts motoriņš uzgaļa iekšpusē<br>
-— Vadu pārrāvums locījuma vietā<br>
-— Vadības plates bojājums</p>
+- Mati un diegi aptinušies ap rotējošo birsti<br>
+- Bojāts motoriņš uzgaļa iekšpusē<br>
+- Vadu pārrāvums locījuma vietā<br>
+- Vadības plates bojājums</p>
 
 <p><strong>Risinājums:</strong><br>
 Dažreiz pietiek ar turbo birstes tīrīšanu. Ja tas nepalīdz, nepieciešama diagnostika, lai noteiktu cēloni.</p>
@@ -231,9 +231,9 @@ Dažreiz pietiek ar turbo birstes tīrīšanu. Ja tas nepalīdz, nepieciešama d
 <p>Plaisas, kustība savienojumos, slikti aizveras konteiners, korpuss vairs nav hermētisks.</p>
 
 <p><strong>Biežākie iemesli:</strong><br>
-— Kritieni<br>
-— Plastmasas elementu nolietojums<br>
-— Fiksatoru bojājumi</p>
+- Kritieni<br>
+- Plastmasas elementu nolietojums<br>
+- Fiksatoru bojājumi</p>
 
 <p><strong>Risinājums:</strong><br>
 Bojāto detaļu nomaiņa vai atjaunošana.</p>
@@ -259,10 +259,10 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Одна из самых частых жалоб. Пылесос работает, но плохо собирает мусор.</p>
 
 <p><strong>Основные причины:</strong><br>
-— Засор фильтров<br>
-— Забит циклонный блок мелкой пылью<br>
-— Засор трубки или насадки<br>
-— Подсос воздуха через трещины в корпусе в результате падений или изношенные уплотнения</p>
+- Засор фильтров<br>
+- Забит циклонный блок мелкой пылью<br>
+- Засор трубки или насадки<br>
+- Подсос воздуха через трещины в корпусе в результате падений или изношенные уплотнения</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 В большинстве случаев проблема решается обслуживанием. Если игнорировать это может привести к перегреву мотора и более дорогому ремонту.</p>
@@ -274,10 +274,10 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Пылесос не реагирует на нажатие кнопки.</p>
 
 <p><strong>Наиболее распространённые причины:</strong><br>
-— Вышедший из строя аккумулятор<br>
-— Поломка курка (кнопки включения)<br>
-— Неисправность платы управления<br>
-— Окисление платы управления или обрыв контактов</p>
+- Вышедший из строя аккумулятор<br>
+- Поломка курка (кнопки включения)<br>
+- Неисправность платы управления<br>
+- Окисление платы управления или обрыв контактов</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 В беспроводных моделях чаще всего это замена аккумулятора или ремонт курка.</p>
@@ -298,10 +298,10 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Пылесос не реагирует на подключение к зарядному устройству или не набирает заряд.</p>
 
 <p><strong>Наиболее распространённые причины:</strong><br>
-— Неисправность платы управления<br>
-— Неисправный блок питания<br>
-— Поврежденные контакты<br>
-— Дефект аккумулятора</p>
+- Неисправность платы управления<br>
+- Неисправный блок питания<br>
+- Поврежденные контакты<br>
+- Дефект аккумулятора</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 Необходимо произвести диагностику, чтобы выявить причину.</p>
@@ -313,10 +313,10 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Пылесос запускается, но через короткое время выключается.</p>
 
 <p><strong>Наиболее распространённые причины:</strong><br>
-— Попадание влаги на плату управления<br>
-— Выход из строя мотора<br>
-— Срабатывание термозащиты<br>
-— Проблемы с аккумулятором</p>
+- Попадание влаги на плату управления<br>
+- Выход из строя мотора<br>
+- Срабатывание термозащиты<br>
+- Проблемы с аккумулятором</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 Необходимо произвести диагностику, чтобы выявить причину.</p>
@@ -328,10 +328,10 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Щетка не крутится, хотя пылесос работает.</p>
 
 <p><strong>Наиболее распространённые причины:</strong><br>
-— Намотка волос и ниток на вращающуюся щетку<br>
-— Поломка моторчика внутри насадки<br>
-— Обрыв проводки в месте изгиба<br>
-— Выход из строя платы управления</p>
+- Намотка волос и ниток на вращающуюся щетку<br>
+- Поломка моторчика внутри насадки<br>
+- Обрыв проводки в месте изгиба<br>
+- Выход из строя платы управления</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 Иногда достаточно очистить турбощетку, если это не помогает необходимо произвести диагностику чтобы выявить причину.</p>
@@ -343,9 +343,9 @@ Bojāto detaļu nomaiņa vai atjaunošana.</p>
 <p>Трещины, люфты, плохо закрывается контейнер, нарушение герметичности корпуса.</p>
 
 <p><strong>Наиболее распространённые причины:</strong><br>
-— Падения<br>
-— Износ пластиковых элементов<br>
-— Поломка защелок</p>
+- Падения<br>
+- Износ пластиковых элементов<br>
+- Поломка защелок</p>
 
 <p><strong>Устранение неисправности:</strong><br>
 Замена или восстановление поврежденных частей.</p>

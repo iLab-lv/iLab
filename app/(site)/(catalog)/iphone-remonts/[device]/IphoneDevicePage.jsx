@@ -269,7 +269,7 @@ function getPageStrings(locale = 'lv') {
         'Ремонт iPhone в Риге: замена экрана, аккумулятора, разъёма зарядки, камеры и устранение других неисправностей. Быстрая диагностика и гарантия в сервисе iLab.',
       defaultHeaderTitle: 'Ремонт iPhone',
       defaultHeaderLead:
-        'Ремонт iPhone в Риге — замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+        'Ремонт iPhone в Риге - замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
       pricesCtaLabel: 'Смотреть цены',
     };
   }
@@ -287,7 +287,7 @@ function getPageStrings(locale = 'lv') {
       'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.',
     defaultHeaderTitle: 'iPhone remonts',
     defaultHeaderLead:
-      'iPhone remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+      'iPhone remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
     pricesCtaLabel: 'Skatīt cenas',
   };
 }
@@ -435,7 +435,7 @@ export default async function IphoneDevicePage({
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${deviceName} — ${item.title}`,
+        name: `${deviceName} - ${item.title}`,
         serviceType: item.title,
         provider,
       },

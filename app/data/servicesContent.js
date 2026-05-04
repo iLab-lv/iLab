@@ -38,7 +38,7 @@ const servicesContent = {
         id: 'tastaturas-maina',
         title: 'Tastatūras maiņa',
         text:
-          'Nomainām bojātas vai nereaģējošas klaviatūras uz jaunām — portatīvajiem datoriem ar garantiju.',
+          'Nomainām bojātas vai nereaģējošas klaviatūras uz jaunām - portatīvajiem datoriem ar garantiju.',
         icon: 'LuKeyboard',
       },
       {
@@ -52,7 +52,7 @@ const servicesContent = {
         id: 'matesplates-remonts',
         title: 'Mātesplates remonts',
         text:
-          'Sarežģīti remonti pēc pārkaršanas vai mitruma — komponentu diagnostika, lodēšana un atjaunošana.',
+          'Sarežģīti remonti pēc pārkaršanas vai mitruma - komponentu diagnostika, lodēšana un atjaunošana.',
         icon: 'LuCpu',
       },
       {

@@ -34,10 +34,10 @@ function getPageStrings(locale = 'lv') {
       processSteps: [
         {
           title: 'Выберите модель',
-          text: 'Найдите свой бренд и модель в прайс-листе — вы увидите опубликованные цены и типовые услуги.',
+          text: 'Найдите свой бренд и модель в прайс-листе - вы увидите опубликованные цены и типовые услуги.',
         },
         {
-          title: 'Если цены нет — свяжитесь с нами',
+          title: 'Если цены нет - свяжитесь с нами',
           text: 'Для некоторых более редких моделей или работ цена определяется после диагностики и проверки наличия деталей.',
         },
         {
@@ -53,15 +53,15 @@ function getPageStrings(locale = 'lv') {
       faqItems: [
         {
           q: 'Почему для некоторых моделей не отображается цена?',
-          a: 'Не для всех моделей и услуг цены опубликованы. В таких случаях свяжитесь с нами — мы уточним стоимость и срок после диагностики.',
+          a: 'Не для всех моделей и услуг цены опубликованы. В таких случаях свяжитесь с нами - мы уточним стоимость и срок после диагностики.',
         },
         {
           q: 'Может ли цена измениться после диагностики?',
-          a: 'Иногда да — если дополнительно обнаруживаются другие повреждения, например проблемы с цепью зарядки или последствия попадания влаги, перед ремонтом мы согласуем обновлённую смету.',
+          a: 'Иногда да - если дополнительно обнаруживаются другие повреждения, например проблемы с цепью зарядки или последствия попадания влаги, перед ремонтом мы согласуем обновлённую смету.',
         },
         {
           q: 'Есть ли гарантия?',
-          a: 'Да — на ремонт обычно предоставляется гарантия. Конкретный срок может отличаться в зависимости от услуги и типа детали.',
+          a: 'Да - на ремонт обычно предоставляется гарантия. Конкретный срок может отличаться в зависимости от услуги и типа детали.',
         },
       ],
       bookingAria: 'Записаться на ремонт',
@@ -85,10 +85,10 @@ function getPageStrings(locale = 'lv') {
     processSteps: [
       {
         title: 'Izvēlies modeli',
-        text: 'Atrodi savu zīmolu un modeli cenrādī — redzēsi publicētās cenas un tipiskos pakalpojumus.',
+        text: 'Atrodi savu zīmolu un modeli cenrādī - redzēsi publicētās cenas un tipiskos pakalpojumus.',
       },
       {
-        title: 'Ja cena nav redzama — sazinies',
+        title: 'Ja cena nav redzama - sazinies',
         text: 'Dažiem retākiem modeļiem vai darbiem cenu nosakām pēc diagnostikas un detaļu pieejamības.',
       },
       {
@@ -104,15 +104,15 @@ function getPageStrings(locale = 'lv') {
     faqItems: [
       {
         q: 'Kāpēc dažiem modeļiem cena nav redzama?',
-        a: 'Ne visiem modeļiem un pakalpojumiem cenas ir publicētas. Šādos gadījumos sazinieties ar mums — precizēsim cenu un termiņu pēc diagnostikas.',
+        a: 'Ne visiem modeļiem un pakalpojumiem cenas ir publicētas. Šādos gadījumos sazinieties ar mums - precizēsim cenu un termiņu pēc diagnostikas.',
       },
       {
         q: 'Vai cena var atšķirties pēc diagnostikas?',
-        a: 'Dažreiz jā — ja papildus konstatējam citus bojājumus, piemēram, uzlādes ķēdes vai mitruma sekas, pirms remonta saskaņojam atjauninātu tāmi.',
+        a: 'Dažreiz jā - ja papildus konstatējam citus bojājumus, piemēram, uzlādes ķēdes vai mitruma sekas, pirms remonta saskaņojam atjauninātu tāmi.',
       },
       {
         q: 'Vai ir garantija?',
-        a: 'Jā — remontiem parasti ir garantija. Konkrētais termiņš var atšķirties atkarībā no pakalpojuma un detaļas veida.',
+        a: 'Jā - remontiem parasti ir garantija. Konkrētais termiņš var atšķirties atkarībā no pakalpojuma un detaļas veida.',
       },
     ],
     bookingAria: 'Pieteikties remontam',
@@ -121,7 +121,7 @@ function getPageStrings(locale = 'lv') {
 
 function titleCaseSlug(slug = '') {
   const txt = String(slug || '').replace(/[-_]+/g, ' ').trim();
-  if (!txt) return '—';
+  if (!txt) return '-';
 
   return txt
     .split(' ')

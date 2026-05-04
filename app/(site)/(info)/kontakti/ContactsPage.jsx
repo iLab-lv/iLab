@@ -16,7 +16,7 @@ function getPageStrings(locale = 'lv') {
 
       headerTitle: 'Контакты',
       headerLead:
-        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге — Domina Shopping или Spice Home. Работаем каждый день.',
+        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - Domina Shopping или Spice Home. Работаем каждый день.',
 
       sectionTitle: 'Связь и время работы',
       phoneLabel: 'Телефон',
@@ -39,7 +39,7 @@ function getPageStrings(locale = 'lv') {
 
     headerTitle: 'Kontakti',
     headerLead:
-      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā — Domina Shopping vai Spice Home. Strādājam katru dienu.',
+      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - Domina Shopping vai Spice Home. Strādājam katru dienu.',
 
     sectionTitle: 'Saziņa un darba laiks',
     phoneLabel: 'Tālrunis',
@@ -100,7 +100,7 @@ function buildLocalBusinessLd(locale = 'lv') {
     department: [
       {
         '@type': 'LocalBusiness',
-        name: `iLab — ${strings.dominaLabel}`,
+        name: `iLab - ${strings.dominaLabel}`,
         url: `${ORIGIN}${strings.canonicalPath}`,
         telephone: '+37123370088',
         email: 'info@ilab.lv',
@@ -129,7 +129,7 @@ function buildLocalBusinessLd(locale = 'lv') {
       },
       {
         '@type': 'LocalBusiness',
-        name: `iLab — ${strings.spiceLabel}`,
+        name: `iLab - ${strings.spiceLabel}`,
         url: `${ORIGIN}${strings.canonicalPath}`,
         telephone: '+37123370088',
         email: 'info@ilab.lv',
@@ -218,9 +218,9 @@ export default function ContactsPage({ locale = 'lv' }) {
           <p className={s.paragraph}>
             {strings.addressesLabel}:
             <br />
-            — <strong>{strings.dominaLabel}</strong>, {strings.dominaAddress}
+            - <strong>{strings.dominaLabel}</strong>, {strings.dominaAddress}
             <br />
-            — <strong>{strings.spiceLabel}</strong>, {strings.spiceAddress}
+            - <strong>{strings.spiceLabel}</strong>, {strings.spiceAddress}
           </p>
         </div>
       </section>

@@ -50,13 +50,13 @@ function getPageStrings(locale = 'lv') {
 
       heroAlt: 'Замена батареи телефона в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрая и безопасная замена батареи телефона в Риге</strong> — если устройство быстро разряжается, выключается при 20% или заряжается слишком медленно, поможем. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
+        '<p><strong>Быстрая и безопасная замена батареи телефона в Риге</strong> - если устройство быстро разряжается, выключается при 20% или заряжается слишком медленно, поможем. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
 
       introTitle: 'Замена батареи телефона в Риге',
       introP1:
         'Если телефон <strong>быстро теряет заряд</strong>, <strong>выключается при 10–20%</strong>, <strong>нагревается</strong> или <strong>заряжается слишком медленно</strong>, скорее всего требуется <strong>замена батареи телефона</strong>. Мастера iLab выполняют быструю и качественную замену, используя <strong>оригинальные или качественные OEM батареи</strong>. Перед началом работ проводим <strong>бесплатную диагностику</strong>, чтобы убедиться, что проблема действительно в батарее, а не, например, в разъёме зарядки или программной части.',
       introP2:
-        'После замены выполняем <strong>калибровку батареи</strong> и тесты — стабильность зарядки/разрядки, температуру и программные показатели. Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На детали и работу действует <strong>гарантия 90 дней</strong>.',
+        'После замены выполняем <strong>калибровку батареи</strong> и тесты - стабильность зарядки/разрядки, температуру и программные показатели. Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На детали и работу действует <strong>гарантия 90 дней</strong>.',
       selectedModelPrefix: 'Выбрана модель:',
       selectedModelSuffix: 'Прокрутите к',
       selectedModelLink: 'ценам',
@@ -130,13 +130,13 @@ function getPageStrings(locale = 'lv') {
 
     heroAlt: 'Telefonu baterijas maiņa Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātra un droša telefonu baterijas maiņa Rīgā</strong> — ja tālrunis ātri izlādējas, izslēdzas pie 20% vai lādējas ļoti lēni, palīdzēsim. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
+      '<p><strong>Ātra un droša telefonu baterijas maiņa Rīgā</strong> - ja tālrunis ātri izlādējas, izslēdzas pie 20% vai lādējas ļoti lēni, palīdzēsim. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
 
     introTitle: 'Telefonu baterijas maiņa Rīgā',
     introP1:
       'Ja tālrunis <strong>ātri zaudē uzlādi</strong>, <strong>izslēdzas pie 10–20%</strong>, <strong>uzkarst</strong> vai <strong>lādējas ļoti lēni</strong>, visticamāk nepieciešama <strong>telefonu baterijas (akumulatora) maiņa</strong>. iLab meistari veic ātru un kvalitatīvu nomaiņu, izmantojot <strong>oriģinālas vai augstas kvalitātes OEM baterijas</strong>. Pirms darba uzsākšanas veicam <strong>bezmaksas diagnostiku</strong>, lai pārliecinātos, ka problēma tiešām ir baterijā, nevis, piemēram, uzlādes ligzdā vai programmatūrā.',
     introP2:
-      'Pēc nomaiņas veicam <strong>baterijas kalibrāciju</strong> un pārbaudes — uzlādes/izlādes stabilitāti, temperatūras kontroli un programmatūras rādītājus. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+      'Pēc nomaiņas veicam <strong>baterijas kalibrāciju</strong> un pārbaudes - uzlādes/izlādes stabilitāti, temperatūras kontroli un programmatūras rādītājus. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
     selectedModelPrefix: 'Atlasīts modelis:',
     selectedModelSuffix: 'Ritiniet uz',
     selectedModelLink: 'cenām',

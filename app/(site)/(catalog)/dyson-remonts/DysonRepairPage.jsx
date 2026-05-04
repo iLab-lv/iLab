@@ -25,7 +25,7 @@ import { LuCog, LuFilter, LuSparkles, LuWrench } from 'react-icons/lu';
 const FAQ_ITEMS_LV = [
   {
     q: 'Cik ilgi ilgst Dyson diagnostika un remonts?',
-    a: 'Ātrā diagnostika parasti tajā pašā dienā. Remonta ilgums atkarīgs no bojājuma un detaļu pieejamības — populāros darbus bieži paveicam 1–3 dienās.',
+    a: 'Ātrā diagnostika parasti tajā pašā dienā. Remonta ilgums atkarīgs no bojājuma un detaļu pieejamības - populāros darbus bieži paveicam 1–3 dienās.',
   },
   {
     q: 'Vai izmantojat oriģinālās vai OEM detaļas?',
@@ -41,14 +41,14 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai pieņemat dažādus Dyson modeļus (V7, V8, V10, V11, V15 u.c.)?',
-    a: 'Jā, strādājam ar populārajām Dyson bezvadu līnijām un citiem modeļiem. Ja rodas jautājumi, sazinieties — pārbaudīsim pēc sērijas numura.',
+    a: 'Jā, strādājam ar populārajām Dyson bezvadu līnijām un citiem modeļiem. Ja rodas jautājumi, sazinieties - pārbaudīsim pēc sērijas numura.',
   },
 ];
 
 const FAQ_ITEMS_RU = [
   {
     q: 'Сколько занимает диагностика и ремонт Dyson?',
-    a: 'Быстрая диагностика обычно выполняется в тот же день. Срок ремонта зависит от неисправности и наличия деталей — популярные работы часто выполняем за 1–3 дня.',
+    a: 'Быстрая диагностика обычно выполняется в тот же день. Срок ремонта зависит от неисправности и наличия деталей - популярные работы часто выполняем за 1–3 дня.',
   },
   {
     q: 'Используете ли вы оригинальные или OEM детали?',
@@ -64,7 +64,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Принимаете ли вы разные модели Dyson (V7, V8, V10, V11, V15 и др.)?',
-    a: 'Да, работаем с популярными беспроводными линейками Dyson и другими моделями. Если есть сомнения, свяжитесь с нами — проверим по серийному номеру.',
+    a: 'Да, работаем с популярными беспроводными линейками Dyson и другими моделями. Если есть сомнения, свяжитесь с нами - проверим по серийному номеру.',
   },
 ];
 
@@ -73,10 +73,10 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт Dyson в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрый и безопасный ремонт Dyson в Риге</strong> — чистка, замена мотора и батареи, замена фильтров и уплотнений. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт.</p>',
-      introTitle: 'Ремонт Dyson в Риге — что мы делаем',
+        '<p><strong>Быстрый и безопасный ремонт Dyson в Риге</strong> - чистка, замена мотора и батареи, замена фильтров и уплотнений. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт.</p>',
+      introTitle: 'Ремонт Dyson в Риге - что мы делаем',
       introBody:
-        'Выполняем полный спектр <strong>ремонта Dyson</strong> — от <strong>глубокой чистки и диагностики</strong> до <strong>замены мотора и батареи</strong>, а также <strong>замены фильтров и уплотнений</strong> и <strong>устранения механических повреждений</strong>. До начала работ проводим <strong>бесплатную диагностику</strong> и согласовываем точную стоимость и срок. Используем <strong>оригинальные или качественные OEM детали</strong> и даём <strong>гарантию 90 дней</strong>.',
+        'Выполняем полный спектр <strong>ремонта Dyson</strong> - от <strong>глубокой чистки и диагностики</strong> до <strong>замены мотора и батареи</strong>, а также <strong>замены фильтров и уплотнений</strong> и <strong>устранения механических повреждений</strong>. До начала работ проводим <strong>бесплатную диагностику</strong> и согласовываем точную стоимость и срок. Используем <strong>оригинальные или качественные OEM детали</strong> и даём <strong>гарантию 90 дней</strong>.',
       breadcrumbName: 'Ремонт Dyson',
       serviceName: 'Ремонт Dyson в Риге',
       serviceDescription:
@@ -137,10 +137,10 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'Dyson remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs Dyson remonts Rīgā</strong> — tīrīšana, motora un baterijas maiņa, filtru un blīvējumu nomaiņa. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>',
-    introTitle: 'Dyson remonts Rīgā — ko mēs darām',
+      '<p><strong>Ātrs un drošs Dyson remonts Rīgā</strong> - tīrīšana, motora un baterijas maiņa, filtru un blīvējumu nomaiņa. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>',
+    introTitle: 'Dyson remonts Rīgā - ko mēs darām',
     introBody:
-      'Veicam pilna spektra <strong>Dyson remontu</strong> — no <strong>dziļās tīrīšanas un diagnostikas</strong> līdz <strong>motora un baterijas maiņai</strong>, kā arī <strong>filtru un blīvējumu nomaiņai</strong> un <strong>mehānisku bojājumu labojumiem</strong>. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un precīzu izmaksu/termiņa saskaņošanu. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong>.',
+      'Veicam pilna spektra <strong>Dyson remontu</strong> - no <strong>dziļās tīrīšanas un diagnostikas</strong> līdz <strong>motora un baterijas maiņai</strong>, kā arī <strong>filtru un blīvējumu nomaiņai</strong> un <strong>mehānisku bojājumu labojumiem</strong>. Pirms darba uzsākšanas nodrošinām <strong>bezmaksas diagnostiku</strong> un precīzu izmaksu/termiņa saskaņošanu. Izmantojam <strong>oriģinālās vai augstas kvalitātes OEM detaļas</strong> un sniedzam <strong>90 dienu garantiju</strong>.',
     breadcrumbName: 'Dyson remonts',
     serviceName: 'Dyson remonts Rīgā',
     serviceDescription:
@@ -203,7 +203,7 @@ export function getDysonRepairMetadata(locale = 'lv') {
     return {
       title: 'Ремонт Dyson в Риге | iLab',
       description:
-        'Ремонт пылесосов Dyson в Риге — замена мотора и батареи, фильтров и уплотнений, чистка и диагностика, устранение механических повреждений. Быстрая диагностика и гарантия 90 дней.',
+        'Ремонт пылесосов Dyson в Риге - замена мотора и батареи, фильтров и уплотнений, чистка и диагностика, устранение механических повреждений. Быстрая диагностика и гарантия 90 дней.',
       alternates: { canonical: '/ru/remont-dyson' },
     };
   }
@@ -211,7 +211,7 @@ export function getDysonRepairMetadata(locale = 'lv') {
   return {
     title: 'Dyson remonts Rīgā | iLab',
     description:
-      'Dyson putekļsūcēju remonts Rīgā — motora un baterijas maiņa, filtru un blīvējumu nomaiņa, tīrīšana un diagnostika, mehānisku bojājumu labošana. Ātra diagnostika un 90 dienu garantija.',
+      'Dyson putekļsūcēju remonts Rīgā - motora un baterijas maiņa, filtru un blīvējumu nomaiņa, tīrīšana un diagnostika, mehānisku bojājumu labošana. Ātra diagnostika un 90 dienu garantija.',
     alternates: { canonical: '/dyson-remonts' },
   };
 }

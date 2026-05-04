@@ -81,8 +81,8 @@ export default function Hero({
     imageAlt ||
     content.imageAlt ||
     (sectionTitle
-      ? `${sectionTitle} — iLab serviss Rīgā`
-      : 'iLab — mobilo telefonu, planšetdatoru un datoru remonts Rīgā');
+      ? `${sectionTitle} - iLab serviss Rīgā`
+      : 'iLab - mobilo telefonu, planšetdatoru un datoru remonts Rīgā');
 
   return (
     <section

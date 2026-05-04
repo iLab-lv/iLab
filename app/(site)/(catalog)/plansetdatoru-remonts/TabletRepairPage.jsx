@@ -131,7 +131,7 @@ function getFaqItems(locale = 'lv') {
     return [
       {
         q: 'Сколько занимает замена экрана планшета?',
-        a: 'Часто в тот же день — зависит от конкретной модели, наличия деталей и загрузки сервиса.',
+        a: 'Часто в тот же день - зависит от конкретной модели, наличия деталей и загрузки сервиса.',
       },
       {
         q: 'Сохранятся ли мои данные?',
@@ -139,7 +139,7 @@ function getFaqItems(locale = 'lv') {
       },
       {
         q: 'Есть ли гарантия на детали?',
-        a: 'Да — на детали и выполненные работы действует гарантия 90 дней, если нет новых механических повреждений или повреждений от жидкости.',
+        a: 'Да - на детали и выполненные работы действует гарантия 90 дней, если нет новых механических повреждений или повреждений от жидкости.',
       },
       {
         q: 'Доступны ли оригинальные детали?',
@@ -147,7 +147,7 @@ function getFaqItems(locale = 'lv') {
       },
       {
         q: 'Можно ли узнать примерную цену до ремонта?',
-        a: 'Да — после быстрой диагностики называем диапазон стоимости и срок. Для некоторых неисправностей точная цена зависит от объёма повреждения.',
+        a: 'Да - после быстрой диагностики называем диапазон стоимости и срок. Для некоторых неисправностей точная цена зависит от объёма повреждения.',
       },
     ];
   }
@@ -155,7 +155,7 @@ function getFaqItems(locale = 'lv') {
   return [
     {
       q: 'Cik ilgi ilgst ekrāna maiņa planšetdatoram?',
-      a: 'Bieži tajā pašā dienā — atkarīgs no konkrētā modeļa, detaļu pieejamības un servisa noslodzes.',
+      a: 'Bieži tajā pašā dienā - atkarīgs no konkrētā modeļa, detaļu pieejamības un servisa noslodzes.',
     },
     {
       q: 'Vai mani dati saglabāsies?',
@@ -163,7 +163,7 @@ function getFaqItems(locale = 'lv') {
     },
     {
       q: 'Vai detaļām ir garantija?',
-      a: 'Jā — gan uz rezerves detaļām, gan uz paveikto darbu ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
+      a: 'Jā - gan uz rezerves detaļām, gan uz paveikto darbu ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
     },
     {
       q: 'Vai pieejamas oriģinālas detaļas?',
@@ -171,7 +171,7 @@ function getFaqItems(locale = 'lv') {
     },
     {
       q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
-      a: 'Jā — pēc ātras diagnostikas sniedzam izmaksu diapazonu un termiņu. Dažiem bojājumiem precīza cena atkarīga no bojājuma apjoma.',
+      a: 'Jā - pēc ātras diagnostikas sniedzam izmaksu diapazonu un termiņu. Dažiem bojājumiem precīza cena atkarīga no bojājuma apjoma.',
     },
   ];
 }
@@ -180,13 +180,13 @@ function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       heroAlt: 'ремонт планшетов в Риге',
-      introTitle: 'Ремонт планшетов — что мы делаем',
+      introTitle: 'Ремонт планшетов - что мы делаем',
       introLead:
         'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы для планшетов. Стоимость согласовываем до начала работ, самые частые ремонты выполняем в тот же день. Выберите свой бренд и откройте страницу конкретной модели.',
       introP1:
         'Работаем с <strong>iPad</strong>, <strong>Samsung Galaxy Tab</strong> и другими популярными планшетами. Самые частые работы: <strong>замена экрана</strong>, <strong>замена батареи</strong>, <strong>ремонт разъёма зарядки</strong>, <strong>ремонт камеры</strong>, <strong>динамики/микрофон</strong>, а также <strong>повреждения после попадания влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       introP2:
-        'Смотрите также: <a href="/ru/remont-iphone">ремонт iPhone</a> и <a href="/ru/remont-telefonov">ремонт телефонов</a> — если нужен ремонт другого устройства.',
+        'Смотрите также: <a href="/ru/remont-iphone">ремонт iPhone</a> и <a href="/ru/remont-telefonov">ремонт телефонов</a> - если нужен ремонт другого устройства.',
       breadcrumbName: 'Ремонт планшетов',
       serviceName: 'Ремонт планшетов в Риге',
       serviceDescription:
@@ -255,13 +255,13 @@ function getPageStrings(locale = 'lv') {
 
   return {
     heroAlt: 'Planšetdatoru remonts Rīgā',
-    introTitle: 'Planšetdatoru remonts — ko mēs darām',
+    introTitle: 'Planšetdatoru remonts - ko mēs darām',
     introLead:
       'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi remonta darbi planšetdatoriem. Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.',
     introP1:
       'Strādājam ar <strong>iPad</strong>, <strong>Samsung Galaxy Tab</strong> un citiem populāriem planšetdatoriem. Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>baterijas nomaiņa</strong>, <strong>uzlādes ligzdas remonts</strong>, <strong>kameras remonts</strong>, <strong>skaļruņi/mikrofons</strong>, kā arī <strong>ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     introP2:
-      'Skaties arī: <a href="/iphone-remonts">iPhone remonts</a> un <a href="/telefonu-remonts">telefonu remonts</a> — ja meklē remontu citai ierīcei.',
+      'Skaties arī: <a href="/iphone-remonts">iPhone remonts</a> un <a href="/telefonu-remonts">telefonu remonts</a> - ja meklē remontu citai ierīcei.',
     breadcrumbName: 'Planšetdatoru remonts',
     serviceName: 'Planšetdatoru remonts Rīgā',
     serviceDescription:
@@ -331,7 +331,7 @@ function getPageStrings(locale = 'lv') {
 export function getTabletRepairMetadata(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      title: 'Ремонт планшетов в Риге — цены, быстро, гарантия | iLab',
+      title: 'Ремонт планшетов в Риге - цены, быстро, гарантия | iLab',
       description:
         'Ремонт планшетов в Риге: экран, батарея, разъём зарядки, камера, повреждения после попадания влаги. Быстрая диагностика, честные цены, гарантия 90 дней.',
       alternates: { canonical: '/ru/remont-planshetov' },
@@ -339,7 +339,7 @@ export function getTabletRepairMetadata(locale = 'lv') {
   }
 
   return {
-    title: 'Planšetdatoru remonts Rīgā — cenas, ātri, garantija | iLab',
+    title: 'Planšetdatoru remonts Rīgā - cenas, ātri, garantija | iLab',
     description:
       'Planšetdatoru remonts Rīgā: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
     alternates: { canonical: '/plansetdatoru-remonts' },

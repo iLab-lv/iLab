@@ -54,9 +54,9 @@ function getPageStrings(locale = 'lv') {
 
       introTitle: 'Ремонт телефона после попадания влаги в Риге',
       introP1:
-        'После контакта с водой или другой жидкостью повреждения не всегда видны сразу — внутри начинается <strong>окисление и коррозия</strong>. В iLab выполняем <strong>диагностику</strong>, <strong>глубокую чистку</strong>, восстановление соединений и, при необходимости, <strong>замену повреждённых деталей</strong>, например дисплея, батареи, цепи зарядки или динамиков.',
+        'После контакта с водой или другой жидкостью повреждения не всегда видны сразу - внутри начинается <strong>окисление и коррозия</strong>. В iLab выполняем <strong>диагностику</strong>, <strong>глубокую чистку</strong>, восстановление соединений и, при необходимости, <strong>замену повреждённых деталей</strong>, например дисплея, батареи, цепи зарядки или динамиков.',
       introP2:
-        'Важно: после попадания жидкости <strong>не заряжайте</strong> и <strong>не включайте</strong> устройство, не используйте фен и не кладите телефон в рис. Как можно быстрее доставьте его в сервис — это существенно повышает шанс успешного <strong>ремонта телефона после попадания влаги</strong>.',
+        'Важно: после попадания жидкости <strong>не заряжайте</strong> и <strong>не включайте</strong> устройство, не используйте фен и не кладите телефон в рис. Как можно быстрее доставьте его в сервис - это существенно повышает шанс успешного <strong>ремонта телефона после попадания влаги</strong>.',
       selectedModelPrefix: 'Выбрана модель:',
       selectedModelSuffix: 'Прокрутите к',
       selectedModelLink: 'ценам',
@@ -134,9 +134,9 @@ function getPageStrings(locale = 'lv') {
 
     introTitle: 'Telefonu ūdens bojājumu remonts Rīgā',
     introP1:
-      'Pēc saskares ar ūdeni vai citiem šķidrumiem bojājumi ne vienmēr ir redzami uzreiz — iekšpusē sākas <strong>oksidācija un korozija</strong>. iLab veicam <strong>diagnostiku</strong>, <strong>dziļo tīrīšanu</strong>, savienojumu atjaunošanu un, ja nepieciešams, <strong>bojāto detaļu nomaiņu</strong>, piemēram, displeju, bateriju, uzlādes ķēdi vai skaļruņus.',
+      'Pēc saskares ar ūdeni vai citiem šķidrumiem bojājumi ne vienmēr ir redzami uzreiz - iekšpusē sākas <strong>oksidācija un korozija</strong>. iLab veicam <strong>diagnostiku</strong>, <strong>dziļo tīrīšanu</strong>, savienojumu atjaunošanu un, ja nepieciešams, <strong>bojāto detaļu nomaiņu</strong>, piemēram, displeju, bateriju, uzlādes ķēdi vai skaļruņus.',
     introP2:
-      'Svarīgi: pēc applūšanas <strong>neuzlādējiet</strong> un <strong>neieslēdziet</strong> ierīci, neizmantojiet fēnu un nelieciet telefonu rīsos. Nogādājiet to servisā pēc iespējas ātrāk — tas būtiski palielina <strong>telefonu ūdens bojājumu remonta</strong> izdošanās iespēju.',
+      'Svarīgi: pēc applūšanas <strong>neuzlādējiet</strong> un <strong>neieslēdziet</strong> ierīci, neizmantojiet fēnu un nelieciet telefonu rīsos. Nogādājiet to servisā pēc iespējas ātrāk - tas būtiski palielina <strong>telefonu ūdens bojājumu remonta</strong> izdošanās iespēju.',
     selectedModelPrefix: 'Atlasīts modelis:',
     selectedModelSuffix: 'Ritiniet uz',
     selectedModelLink: 'cenām',
@@ -159,7 +159,7 @@ function getPageStrings(locale = 'lv') {
       },
       {
         title: 'Detaļu nomaiņa',
-        text: 'Pēc vajadzības nomainām bojātās detaļas — displeju, bateriju, uzlādes moduli, skaļruņus vai citus komponentus.',
+        text: 'Pēc vajadzības nomainām bojātās detaļas - displeju, bateriju, uzlādes moduli, skaļruņus vai citus komponentus.',
       },
       {
         title: 'Testi',

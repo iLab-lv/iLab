@@ -226,7 +226,7 @@ export default async function IphonePriceTeaser({
   title = 'Precīzas cenas populārākajiem iPhone',
   intro = (
     <>
-      Ekrāna maiņas cenas populārākajiem iPhone modeļiem. Pārējiem modeļiem — droši jautā,
+      Ekrāna maiņas cenas populārākajiem iPhone modeļiem. Pārējiem modeļiem - droši jautā,
       atbildēsim ar konkrētu piedāvājumu.
     </>
   ),

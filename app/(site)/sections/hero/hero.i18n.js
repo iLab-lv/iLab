@@ -13,7 +13,7 @@ const HERO_CONTENT = {
         href: '/cenas',
       },
       imageAlt:
-        'iLab serviss — mobilo ierīču un datoru remonts Rīgā (Domina un Spice Home)',
+        'iLab serviss - mobilo ierīču un datoru remonts Rīgā (Domina un Spice Home)',
     },
   },
 
@@ -32,7 +32,7 @@ const HERO_CONTENT = {
         href: '/cenas',
       },
       imageAlt:
-        'iLab — ремонт мобильных устройств и компьютеров в Риге (Domina и Spice Home)',
+        'iLab - ремонт мобильных устройств и компьютеров в Риге (Domina и Spice Home)',
     },
   },
 };

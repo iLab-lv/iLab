@@ -38,7 +38,7 @@ function normalizeFeaturedReviewsByLocale(place = {}) {
 }
 
 function formatFetchedAt(value) {
-  if (!value) return '—';
+  if (!value) return '-';
 
   try {
     if (typeof value?.toDate === 'function') {
@@ -55,7 +55,7 @@ function formatFetchedAt(value) {
     }
   } catch {}
 
-  return '—';
+  return '-';
 }
 
 function getEmptyPlace(key) {
@@ -365,14 +365,14 @@ export default function ReviewsScreen() {
                       <div className={s.metaItem}>
                         <span className={s.metaLabel}>Rating</span>
                         <span className={s.metaValue}>
-                          {place.rating != null ? place.rating : '—'}
+                          {place.rating != null ? place.rating : '-'}
                         </span>
                       </div>
 
                       <div className={s.metaItem}>
                         <span className={s.metaLabel}>Count</span>
                         <span className={s.metaValue}>
-                          {place.count != null ? place.count : '—'}
+                          {place.count != null ? place.count : '-'}
                         </span>
                       </div>
 
