@@ -36,8 +36,8 @@ function computeOpenState(hoursArr, overrideForToday) {
   }
   const openM = parseHM(today?.opens), closeM = parseHM(today?.closes);
   if (openM == null || closeM == null) return { open: false, badgeText: 'Slēgts', today };
-  if (nowM >= openM && nowM < closeM) return { open: true, badgeText: `Atvērts — līdz ${today.closes}`, today };
-  return { open: false, badgeText: `Slēgts — atvērsies ${today.opens}`, today };
+  if (nowM >= openM && nowM < closeM) return { open: true, badgeText: `Atvērts - līdz ${today.closes}`, today };
+  return { open: false, badgeText: `Slēgts - atvērsies ${today.opens}`, today };
 }
 
 export default function SazinatiesPanel({ initialLocId }) {

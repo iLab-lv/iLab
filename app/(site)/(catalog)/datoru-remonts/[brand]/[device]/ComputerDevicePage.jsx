@@ -245,45 +245,31 @@ function buildModelServices(locale = 'lv') {
     return [
       {
         title: 'Замена аккумулятора',
-        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'akumulatora-nomaina'),
         text: 'если заряд быстро падает, компьютер выключается или не работает без зарядного устройства.',
         icon: LuBatteryCharging,
       },
       {
         title: 'Замена дисплея',
-        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'displeja-nomaina'),
         text: 'трещины, полосы, тёмные пятна, мерцание или отсутствие изображения.',
         icon: LuMonitor,
       },
       {
         title: 'Восстановление после попадания жидкости',
-        href: buildServiceHref(
-          locale,
-          COMPUTER_CATEGORY_KEY,
-          'atjaunosana-pec-skidruma-bojajumiem'
-        ),
         text: 'диагностика и восстановление после попадания жидкости, если ремонт возможен.',
         icon: LuDroplets,
       },
       {
         title: 'Профилактика и техническое обслуживание',
-        href: buildServiceHref(
-          locale,
-          COMPUTER_CATEGORY_KEY,
-          'profilakse-un-tehniska-apkalposana'
-        ),
         text: 'чистка, замена термопасты, проверка и стабильная работа.',
         icon: LuWrench,
       },
       {
         title: 'Замена клавиатуры',
-        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'tastaturas-nomaina'),
         text: 'не работают клавиши, залипание, следы жидкости или физические повреждения.',
         icon: LuKeyboard,
       },
       {
         title: 'Замена touchpad',
-        href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'touchpad-nomaina'),
         text: 'не реагирует, курсор двигается сам, не работает клик или есть физические повреждения.',
         icon: LuMouse,
       },
@@ -293,45 +279,31 @@ function buildModelServices(locale = 'lv') {
   return [
     {
       title: 'Akumulatora nomaiņa',
-      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'akumulatora-nomaina'),
       text: 'ja strauji krīt uzlāde, dators izslēdzas vai nedarbojas bez lādētāja.',
       icon: LuBatteryCharging,
     },
     {
       title: 'Displeja nomaiņa',
-      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'displeja-nomaina'),
       text: 'plaisas, līnijas, tumši plankumi, mirgošana vai nav attēla.',
       icon: LuMonitor,
     },
     {
       title: 'Atjaunošana pēc šķidruma bojājumiem',
-      href: buildServiceHref(
-        locale,
-        COMPUTER_CATEGORY_KEY,
-        'atjaunosana-pec-skidruma-bojajumiem'
-      ),
       text: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
       icon: LuDroplets,
     },
     {
       title: 'Profilakse un tehniskā apkalpošana',
-      href: buildServiceHref(
-        locale,
-        COMPUTER_CATEGORY_KEY,
-        'profilakse-un-tehniska-apkalposana'
-      ),
       text: 'tīrīšana, termopastas nomaiņa, pārbaude un stabila darbība.',
       icon: LuWrench,
     },
     {
       title: 'Tastatūras nomaiņa',
-      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'tastaturas-nomaina'),
       text: 'nedarbojas taustiņi, pielipšana, šķidruma bojājumi vai fiziski defekti.',
       icon: LuKeyboard,
     },
     {
       title: 'Touchpad nomaiņa',
-      href: buildServiceHref(locale, COMPUTER_CATEGORY_KEY, 'touchpad-nomaina'),
       text: 'nereaģē, “lec” kursors, klikšķis nestrādā vai ir fiziski bojājumi.',
       icon: LuMouse,
     },
@@ -531,7 +503,7 @@ function getPageStrings(locale = 'lv') {
       cityName: 'Рига',
       defaultHeaderTitle: 'Ремонт компьютеров',
       defaultHeaderLead:
-        'Ремонт компьютеров в Риге — замена аккумулятора и дисплея, восстановление после попадания жидкости, профилактика, замена клавиатуры и touchpad с быстрой диагностикой, качественными деталями и гарантией.',
+        'Ремонт компьютеров в Риге - замена аккумулятора и дисплея, восстановление после попадания жидкости, профилактика, замена клавиатуры и touchpad с быстрой диагностикой, качественными деталями и гарантией.',
     };
   }
 
@@ -557,7 +529,7 @@ function getPageStrings(locale = 'lv') {
     cityName: 'Rīga',
     defaultHeaderTitle: 'Datoru remonts',
     defaultHeaderLead:
-      'Datoru remonts Rīgā — akumulatora un displeja nomaiņa, atjaunošana pēc šķidruma bojājumiem, profilakse, tastatūras un touchpad remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju.',
+      'Datoru remonts Rīgā - akumulatora un displeja nomaiņa, atjaunošana pēc šķidruma bojājumiem, profilakse, tastatūras un touchpad remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju.',
   };
 }
 
@@ -699,7 +671,7 @@ export default async function ComputerDevicePage({
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${deviceName} — ${it.title}`,
+        name: `${deviceName} - ${it.title}`,
         serviceType: it.title,
         provider,
       },

@@ -7,7 +7,7 @@ import { LOCATIONS } from '@/data/site.config';
 import s from './BookingForm.module.scss';
 
 /**
- * BookingForm — shared form for panel + page (identical UI).
+ * BookingForm - shared form for panel + page (identical UI).
  *
  * Props:
  * - submitMode: 'fetch' | 'native'  (default 'fetch')
@@ -197,7 +197,7 @@ export default function BookingForm({
               <span>
                 {loc.label}
                 {loc.address ? (
-                  <small className={s.muted}> — {loc.address}</small>
+                  <small className={s.muted}> - {loc.address}</small>
                 ) : null}
               </span>
             </label>

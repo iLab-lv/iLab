@@ -29,7 +29,7 @@ export const metadata = {
         url: '/images/hero.webp',
         width: 1200,
         height: 630,
-        alt: 'iLab — telefonu un datoru serviss Rīgā',
+        alt: 'iLab - telefonu un datoru serviss Rīgā',
       },
     ],
   },

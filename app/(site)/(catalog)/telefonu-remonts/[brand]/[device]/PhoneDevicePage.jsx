@@ -164,7 +164,7 @@ function getPageStrings(locale = 'lv') {
       howToName: 'Ремонт телефона',
       defaultHeaderTitle: 'Ремонт телефона',
       defaultHeaderLead:
-        'Ремонт телефонов в Риге — замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
+        'Ремонт телефонов в Риге - замена экрана, аккумулятора, камеры и разъёма зарядки с быстрой диагностикой, качественными деталями и гарантией 90 дней.',
       pricesCtaLabel: 'Смотреть цены',
       services: (categoryPath) => [
         {
@@ -227,7 +227,7 @@ function getPageStrings(locale = 'lv') {
     howToName: 'Telefonu remonts',
     defaultHeaderTitle: 'Telefonu remonts',
     defaultHeaderLead:
-      'Telefonu remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+      'Telefonu remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
     pricesCtaLabel: 'Skatīt cenas',
     services: (categoryPath) => [
       {
@@ -502,7 +502,7 @@ async function PhoneDevicePage({ params, locale = 'lv' }) {
       url: abs(`${modelPath}#cenas`),
       itemOffered: {
         '@type': 'Service',
-        name: `${modelName} — ${item.title}`,
+        name: `${modelName} - ${item.title}`,
         serviceType: item.title,
         provider,
       },

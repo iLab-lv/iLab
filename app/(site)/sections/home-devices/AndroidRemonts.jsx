@@ -2,7 +2,7 @@ import s from './Services.module.scss';
 
 export default function AndroidRemonts({
   idBase = 'services',
-  title = 'Android — Telefonu un planšetdatoru remonts',
+  title = 'Android - Telefonu un planšetdatoru remonts',
   introHTML,
   brands = [],
   brandsLabel = 'Android zīmoli',
@@ -21,13 +21,13 @@ export default function AndroidRemonts({
 
   const fallbackSeoBlurbs = {
     samsung:
-      'Servisējam Galaxy un citus Samsung — ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
+      'Servisējam Galaxy un citus Samsung - ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
     xiaomi:
-      'Xiaomi, Redmi un POCO remonts — displeja remonts, baterijas/akumulatora maiņa u. c. Darbi tajā pašā dienā (atkarībā no modeļa).',
+      'Xiaomi, Redmi un POCO remonts - displeja remonts, baterijas/akumulatora maiņa u. c. Darbi tajā pašā dienā (atkarībā no modeļa).',
     huawei:
-      'Huawei P un Mate sērijai — ekrāna maiņa, uzlādes porta salabošana u. c. Kvalitatīvas detaļas un 90 dienu garantija.',
+      'Huawei P un Mate sērijai - ekrāna maiņa, uzlādes porta salabošana u. c. Kvalitatīvas detaļas un 90 dienu garantija.',
     default:
-      'Android ierīču remonts — ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
+      'Android ierīču remonts - ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
   };
 
   const blurbMap = {

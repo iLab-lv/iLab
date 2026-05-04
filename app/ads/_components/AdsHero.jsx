@@ -9,7 +9,7 @@ import s from './AdsHero.module.scss';
 export default function IphoneAdsHero({
   // Copy (ULTRA SAFE defaults)
   title = 'Ierīču apkope un tehniska palīdzība Rīgā',
-  brandLine = 'iLab — klātienes ierīču apkalpošanas centri Rīgā.',
+  brandLine = 'iLab - klātienes ierīču apkalpošanas centri Rīgā.',
   subtitle = 'Apkalpošana notiek tikai klātienē mūsu servisa centros.',
   disclaimer = 'Svarīgi: mēs nesniedzam attālinātu tehnisko atbalstu, tiešsaistes konsultācijas vai palīdzību pa telefonu.',
 

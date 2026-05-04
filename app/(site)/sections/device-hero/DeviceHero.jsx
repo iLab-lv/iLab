@@ -3,7 +3,7 @@ import Image from 'next/image';
 import s from './DeviceHero.module.scss';
 
 /**
- * DeviceHero — server-rendered hero with tint + optional brand logo overlay
+ * DeviceHero - server-rendered hero with tint + optional brand logo overlay
  * Key perf changes:
  * - No 'use client'
  * - No useEffect/useState (LCP image src is available immediately)

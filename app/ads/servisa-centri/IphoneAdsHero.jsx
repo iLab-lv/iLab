@@ -9,7 +9,7 @@ import s from './IphoneAdsHero.module.scss';
 export default function IphoneAdsHero({
   // Copy
   title = 'iPhone ierīču remontdarbnīca Rīgā',
-  brandLine = 'iLab — neatkarīga ierīču remonta darbnīca Rīgā.',
+  brandLine = 'iLab - neatkarīga ierīču remonta darbnīca Rīgā.',
   subtitle = 'Remonts tiek veikts tikai klātienē mūsu darbnīcās Rīgā.',
   disclaimer = 'Mēs nesniedzam attālinātu tehnisko atbalstu, tiešsaistes konsultācijas vai palīdzību pa telefonu.',
 

@@ -47,7 +47,7 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Замена батареи iPhone',
       heroBodyHtml:
-        '<p><strong>Замена батареи iPhone в Риге</strong> в сервисе iLab — быстрая диагностика, качественные детали и <strong>гарантия 90 дней</strong>. Часто замену аккумулятора выполняем в тот же день.</p>',
+        '<p><strong>Замена батареи iPhone в Риге</strong> в сервисе iLab - быстрая диагностика, качественные детали и <strong>гарантия 90 дней</strong>. Часто замену аккумулятора выполняем в тот же день.</p>',
       priceTitle: 'Цены на замену батареи по моделям',
       ctaLabel: 'Записаться на ремонт',
       faqTitle: 'Вопросы',
@@ -74,7 +74,7 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone baterijas maiņa',
     heroBodyHtml:
-      '<p><strong>iPhone baterijas maiņa Rīgā</strong> iLab servisā — ātra diagnostika, kvalitatīvas detaļas un <strong>90 dienu garantija</strong>. Bieži akumulatora nomaiņu paveicam tajā pašā dienā.</p>',
+      '<p><strong>iPhone baterijas maiņa Rīgā</strong> iLab servisā - ātra diagnostika, kvalitatīvas detaļas un <strong>90 dienu garantija</strong>. Bieži akumulatora nomaiņu paveicam tajā pašā dienā.</p>',
     priceTitle: 'Baterijas maiņas cenas pēc modeļa',
     ctaLabel: 'Pieteikties remontam',
     faqTitle: 'Jautājumi',

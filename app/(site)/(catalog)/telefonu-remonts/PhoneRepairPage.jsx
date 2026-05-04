@@ -146,7 +146,7 @@ function getPhoneFaq(locale = 'lv') {
       },
       {
         q: 'Доступны ли оригинальные детали?',
-        a: 'Используем оригинальные или качественные OEM детали — выбор согласовываем с клиентом.',
+        a: 'Используем оригинальные или качественные OEM детали - выбор согласовываем с клиентом.',
       },
       {
         q: 'Можно ли узнать примерную цену до ремонта?',
@@ -170,7 +170,7 @@ function getPhoneFaq(locale = 'lv') {
     },
     {
       q: 'Vai pieejamas oriģinālās detaļas?',
-      a: 'Izmantojam oriģinālās vai augstas kvalitātes OEM — izvēli saskaņojam ar klientu.',
+      a: 'Izmantojam oriģinālās vai augstas kvalitātes OEM - izvēli saskaņojam ar klientu.',
     },
     {
       q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
@@ -184,12 +184,12 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт телефонов в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрый и безопасный ремонт телефонов в Риге</strong> — замена экрана, батареи и камеры в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
-      introTitle: 'Ремонт телефонов — что мы делаем',
+        '<p><strong>Быстрый и безопасный ремонт телефонов в Риге</strong> - замена экрана, батареи и камеры в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
+      introTitle: 'Ремонт телефонов - что мы делаем',
       introLead:
         'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Стоимость согласовываем до начала работ, самые частые ремонты выполняем в тот же день. Выберите свой бренд и откройте страницу конкретной модели.',
       introP1:
-        'Ежедневно выполняем <strong>ремонт телефонов</strong> — от <strong>замены экрана</strong> и <strong>батареи</strong> до <strong>ремонта разъёма зарядки</strong>, <strong>проблем с камерой</strong> и устранения <strong>повреждений после попадания влаги</strong>. До начала работ согласовываем <strong>цену и срок</strong>, самые частые ремонты выполняем в тот же день. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
+        'Ежедневно выполняем <strong>ремонт телефонов</strong> - от <strong>замены экрана</strong> и <strong>батареи</strong> до <strong>ремонта разъёма зарядки</strong>, <strong>проблем с камерой</strong> и устранения <strong>повреждений после попадания влаги</strong>. До начала работ согласовываем <strong>цену и срок</strong>, самые частые ремонты выполняем в тот же день. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       introP2:
         'Работаем со <strong>всеми популярными брендами</strong>: <a href="/ru/remont-iphone">ремонт iPhone</a>, <a href="/ru/remont-telefonov/samsung">ремонт Samsung</a>, <a href="/ru/remont-telefonov/huawei">ремонт Huawei</a>, <a href="/ru/remont-telefonov/oneplus">ремонт OnePlus</a> и др. Для каждого бренда доступны отдельные <strong>страницы моделей</strong> с типовыми неисправностями и решениями.',
       introP3:
@@ -197,7 +197,7 @@ function getPageStrings(locale = 'lv') {
       breadcrumbName: 'Ремонт телефонов',
       serviceName: 'Ремонт телефонов',
       serviceDescription:
-        'Ремонт телефонов — дисплеи, батареи, разъёмы зарядки, камеры и другие работы. Быстрая диагностика, понятные цены, гарантия.',
+        'Ремонт телефонов - дисплеи, батареи, разъёмы зарядки, камеры и другие работы. Быстрая диагностика, понятные цены, гарантия.',
       servicesTitle: 'Популярный ремонт',
       servicesItems: [
         {
@@ -266,12 +266,12 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'telefonu remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> — ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
-    introTitle: 'Telefonu remonts — ko mēs darām',
+      '<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> - ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    introTitle: 'Telefonu remonts - ko mēs darām',
     introLead:
       'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.',
     introP1:
-      'Ikdienā veicam <strong>telefonu remontu</strong> — sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas remontam</strong>, <strong>kameras problēmām</strong> un <strong>ūdens bojājumu</strong> novēršanai. Pirms darba saskaņojam <strong>cenu un termiņu</strong>, biežākos darbus paveicam tajā pašā dienā. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
+      'Ikdienā veicam <strong>telefonu remontu</strong> - sākot ar <strong>ekrāna maiņu</strong> un <strong>baterijas nomaiņu</strong>, līdz <strong>uzlādes ligzdas remontam</strong>, <strong>kameras problēmām</strong> un <strong>ūdens bojājumu</strong> novēršanai. Pirms darba saskaņojam <strong>cenu un termiņu</strong>, biežākos darbus paveicam tajā pašā dienā. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     introP2:
       'Strādājam ar <strong>visiem populārajiem zīmoliem</strong>: <a href="/iphone-remonts">iPhone remonts</a>, <a href="/telefonu-remonts/samsung">Samsung telefonu remonts</a>, <a href="/telefonu-remonts/huawei">Huawei remonts</a>, <a href="/telefonu-remonts/oneplus">OnePlus remonts</a> u.c. Katram zīmolam ir pieejamas atsevišķas <strong>modeļu lapas</strong> ar biežākajiem bojājumiem un risinājumiem.',
     introP3:
@@ -279,7 +279,7 @@ function getPageStrings(locale = 'lv') {
     breadcrumbName: 'Telefonu remonts',
     serviceName: 'Telefonu remonts',
     serviceDescription:
-      'Telefonu remonts — displeji, baterijas, uzlādes ligzdas, kameras un citi darbi. Ātra diagnostika, godīgas cenas, garantija.',
+      'Telefonu remonts - displeji, baterijas, uzlādes ligzdas, kameras un citi darbi. Ātra diagnostika, godīgas cenas, garantija.',
     servicesTitle: 'Populārākie remonti',
     servicesItems: [
       {
@@ -348,7 +348,7 @@ function getPageStrings(locale = 'lv') {
 export function getPhoneRepairMetadata(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      title: 'Ремонт телефонов в Риге — цены, быстро, гарантия | iLab',
+      title: 'Ремонт телефонов в Риге - цены, быстро, гарантия | iLab',
       description:
         'Ремонт телефонов всех брендов: экран, батарея, разъём зарядки, камера, повреждения от влаги. Быстрая диагностика, честные цены, гарантия 90 дней.',
       alternates: { canonical: '/ru/remont-telefonov' },
@@ -356,7 +356,7 @@ export function getPhoneRepairMetadata(locale = 'lv') {
   }
 
   return {
-    title: 'Telefonu remonts Rīgā — cenas, ātri, garantija | iLab',
+    title: 'Telefonu remonts Rīgā - cenas, ātri, garantija | iLab',
     description:
       'Telefonu remonts visiem zīmoliem: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
     alternates: { canonical: '/telefonu-remonts' },

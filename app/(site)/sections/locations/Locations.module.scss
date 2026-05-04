@@ -1,7 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
-/* Section base — keep same rhythm as your old layout */
+/* Section base - keep same rhythm as your old layout */
 .section {
   padding-block: $space-3xl;
 
@@ -34,7 +34,7 @@
     max-height: 600px;
     width: 100%;
     overflow: hidden;
-    /* Fallback radii — replace with your tokens if you have them */
+    /* Fallback radii - replace with your tokens if you have them */
     border-radius: 16px;
 
     @media (max-width: $bp-md) {

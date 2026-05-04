@@ -18,7 +18,7 @@ const ICONS = {
 };
 
 /**
- * CommonIssues — FAQ Preview (mini cards grid)
+ * CommonIssues - FAQ Preview (mini cards grid)
  * Icons resolved on the client from string keys (no server → client function passing).
  *
  * Props:
@@ -78,7 +78,7 @@ export default function CommonIssues({
                 <Link
                   href={`#${faqId}-${it._slug}`}
                   className={s.cardLink}
-                  aria-label={`${it.q} — lasīt atbildi`}
+                  aria-label={`${it.q} - lasīt atbildi`}
                 >
                   <div className={s.head}>
                     {Icon ? <Icon className={s.icon} aria-hidden="true" /> : null}

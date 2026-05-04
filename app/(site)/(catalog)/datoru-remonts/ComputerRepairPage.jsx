@@ -64,10 +64,10 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт компьютеров в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрый и безопасный ремонт компьютеров в Риге</strong> — ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
-      introTitle: 'Ремонт компьютеров — что мы делаем',
+        '<p><strong>Быстрый и безопасный ремонт компьютеров в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
+      introTitle: 'Ремонт компьютеров - что мы делаем',
       introLead:
-        'Ремонтируем ноутбуки и настольные компьютеры — экран, клавиатура, система охлаждения, жёсткие диски/SSD и программное обеспечение. Стоимость и сроки согласовываем до начала работ, самые частые ремонты выполняем в тот же день.',
+        'Ремонтируем ноутбуки и настольные компьютеры - экран, клавиатура, система охлаждения, жёсткие диски/SSD и программное обеспечение. Стоимость и сроки согласовываем до начала работ, самые частые ремонты выполняем в тот же день.',
       introP1:
         'Ежедневно выполняем <strong>ремонт компьютеров</strong>: <strong>замену экрана</strong>, <strong>замену клавиатуры</strong>, <strong>чистку от пыли и замену термопасты</strong>, <strong>замену жёсткого диска/SSD</strong>, <strong>переустановку операционной системы</strong> и удаление вирусов. До начала работ согласовываем <strong>стоимость и сроки</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process">«Как проходит ремонт»</a>.',
       introP2:
@@ -75,11 +75,11 @@ function getPageStrings(locale = 'lv') {
       breadcrumbName: 'Ремонт компьютеров',
       serviceName: 'Ремонт компьютеров',
       serviceDescription:
-        'Ремонт компьютеров — диагностика и ремонт ноутбуков и настольных компьютеров: экран, клавиатура, охлаждение, диски, операционная система и другие неисправности. Быстрая диагностика, понятные цены, гарантия.',
+        'Ремонт компьютеров - диагностика и ремонт ноутбуков и настольных компьютеров: экран, клавиатура, охлаждение, диски, операционная система и другие неисправности. Быстрая диагностика, понятные цены, гарантия.',
       popularServicesTitle: getComputerPopularServicesTitle(locale),
       appleTitle: 'Ремонт компьютеров Apple',
       appleIntro:
-        'Ремонтируем все компьютеры Apple — от ноутбуков MacBook и iMac до рабочих станций Mac Pro. Выполняем профессиональную диагностику, замену повреждённых деталей, чистку системы охлаждения и улучшение производительности. Помогаем также с установкой SSD, переустановкой macOS и другими неисправностями — полный сервис Apple в одном месте.',
+        'Ремонтируем все компьютеры Apple - от ноутбуков MacBook и iMac до рабочих станций Mac Pro. Выполняем профессиональную диагностику, замену повреждённых деталей, чистку системы охлаждения и улучшение производительности. Помогаем также с установкой SSD, переустановкой macOS и другими неисправностями - полный сервис Apple в одном месте.',
       otherTitle: 'Другие бренды, которые мы ремонтируем',
       otherIntro:
         'Ремонтируем также популярные компьютеры на Windows и других производителей: Lenovo, HP, Dell, Asus, Acer, MSI и другие. Выберите бренд, чтобы посмотреть услуги и оставить заявку на ремонт.',
@@ -114,10 +114,10 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'datoru remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs datoru remonts Rīgā</strong> — portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
-    introTitle: 'Datoru remonts — ko mēs darām',
+      '<p><strong>Ātrs un drošs datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    introTitle: 'Datoru remonts - ko mēs darām',
     introLead:
-      'Remontējam portatīvos un galda datorus — ekrāns, tastatūra, dzesēšanas sistēma, cietie diski/SSD un programmatūra. Cenu un termiņu saskaņojam pirms darba uzsākšanas, biežākos remontus paveicam tajā pašā dienā.',
+      'Remontējam portatīvos un galda datorus - ekrāns, tastatūra, dzesēšanas sistēma, cietie diski/SSD un programmatūra. Cenu un termiņu saskaņojam pirms darba uzsākšanas, biežākos remontus paveicam tajā pašā dienā.',
     introP1:
       'Ikdienā veicam <strong>datoru remontu</strong>: <strong>ekrāna maiņu</strong>, <strong>tastatūras nomaiņu</strong>, <strong>putekļu tīrīšanu un termopastas maiņu</strong>, <strong>cieto disku/SSD nomaiņu</strong>, <strong>operētājsistēmas pārinstalēšanu</strong> un vīrusu noņemšanu. Pirms darba saskaņojam <strong>cenu un termiņu</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process">“Kā notiek remonts”</a>.',
     introP2:
@@ -125,11 +125,11 @@ function getPageStrings(locale = 'lv') {
     breadcrumbName: 'Datoru remonts',
     serviceName: 'Datoru remonts',
     serviceDescription:
-      'Datoru remonts — portatīvo un galda datoru diagnostika un remonts: ekrāns, tastatūra, dzesēšana, diski, operētājsistēma un citi bojājumi. Ātra diagnostika, godīgas cenas, garantija.',
+      'Datoru remonts - portatīvo un galda datoru diagnostika un remonts: ekrāns, tastatūra, dzesēšana, diski, operētājsistēma un citi bojājumi. Ātra diagnostika, godīgas cenas, garantija.',
     popularServicesTitle: getComputerPopularServicesTitle(locale),
     appleTitle: 'Apple datoru remonts',
     appleIntro:
-      'Remontējam visus Apple datorus — no MacBook portatīvajiem un iMac līdz Mac Pro darba stacijām. Veicam profesionālu diagnostiku, bojāto detaļu maiņu, dzesēšanas sistēmas tīrīšanu un veiktspējas uzlabošanu. Palīdzam arī ar SSD uzstādīšanu, macOS pārinstalāciju un citu problēmu novēršanu — pilns Apple datoru serviss vienuviet.',
+      'Remontējam visus Apple datorus - no MacBook portatīvajiem un iMac līdz Mac Pro darba stacijām. Veicam profesionālu diagnostiku, bojāto detaļu maiņu, dzesēšanas sistēmas tīrīšanu un veiktspējas uzlabošanu. Palīdzam arī ar SSD uzstādīšanu, macOS pārinstalāciju un citu problēmu novēršanu - pilns Apple datoru serviss vienuviet.',
     otherTitle: 'Citi zīmoli, ko remontējam',
     otherIntro:
       'Remontējam arī populārākos Windows un citu ražotāju datorus: Lenovo, HP, Dell, Asus, Acer, MSI u.c. Izvēlies zīmolu, lai apskatītu pakalpojumus un atstātu pieteikumu remontam.',
@@ -164,7 +164,7 @@ function getPageStrings(locale = 'lv') {
 export function getComputerRepairMetadata(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      title: 'Ремонт компьютеров в Риге — ноутбуки и настольные ПК | iLab',
+      title: 'Ремонт компьютеров в Риге - ноутбуки и настольные ПК | iLab',
       description:
         'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия 90 дней.',
       alternates: { canonical: '/ru/remont-kompjuterov' },
@@ -172,7 +172,7 @@ export function getComputerRepairMetadata(locale = 'lv') {
   }
 
   return {
-    title: 'Datoru remonts Rīgā — portatīvie un galda datori | iLab',
+    title: 'Datoru remonts Rīgā - portatīvie un galda datori | iLab',
     description:
       'Datoru remonts Rīgā: portatīvie un galda datori. Ekrāna, tastatūras, dzesēšanas, disku un programmatūras problēmu risināšana. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
     alternates: { canonical: '/datoru-remonts' },

@@ -48,7 +48,7 @@ function getPageStrings(locale = 'lv') {
     pageCrumb: 'Biežāk uzdotie jautājumi',
     headerTitle: 'Biežāk uzdotie jautājumi',
     headerLead:
-      'Apkopojām atbildes uz biežākajiem jautājumiem par telefonu, iPhone, planšetdatoru, datoru un Dyson remontu — diagnostiku, termiņiem, garantiju, cenām un populārākajiem remonta darbiem.',
+      'Apkopojām atbildes uz biežākajiem jautājumiem par telefonu, iPhone, planšetdatoru, datoru un Dyson remontu - diagnostiku, termiņiem, garantiju, cenām un populārākajiem remonta darbiem.',
     allQuestionsTitle: 'Visi jautājumi pa kategorijām',
     fallbackGroupTitle: 'Citi jautājumi',
     basicTitle: 'Vispārīgi jautājumi',

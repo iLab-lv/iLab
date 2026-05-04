@@ -12,7 +12,7 @@ function getPageStrings(locale = 'lv') {
       breadcrumbPage: 'Записаться на ремонт',
       headerTitle: 'Записаться на ремонт',
       headerLead:
-        'Заполните форму, указав устройство и проблему — наш мастер свяжется с вами, согласует стоимость и время ремонта.',
+        'Заполните форму, указав устройство и проблему - наш мастер свяжется с вами, согласует стоимость и время ремонта.',
     };
   }
 
@@ -22,7 +22,7 @@ function getPageStrings(locale = 'lv') {
     breadcrumbPage: 'Pieraksties remontam',
     headerTitle: 'Pieraksties remontam',
     headerLead:
-      'Aizpildi formu ar savu ierīci un problēmu — mūsu meistars sazināsies, saskaņos izmaksas un remonta laiku.',
+      'Aizpildi formu ar savu ierīci un problēmu - mūsu meistars sazināsies, saskaņos izmaksas un remonta laiku.',
   };
 }
 

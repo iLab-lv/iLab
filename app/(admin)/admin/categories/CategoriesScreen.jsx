@@ -710,7 +710,7 @@ export default function CategoriesScreen() {
                   className={s.modelToggle}
                 >
                   <span className={s.modelName}>
-                    {item.slug || 'New category'} ({item.labels[activeLocale] || '—'})
+                    {item.slug || 'New category'} ({item.labels[activeLocale] || '-'})
                   </span>
                   <span className={s.modelChevron}>{isOpen ? '▾' : '▸'}</span>
                 </button>
@@ -885,7 +885,7 @@ export default function CategoriesScreen() {
                                       onClick={() => toggleBrand(brandToggleKey)}
                                     >
                                       <span className={s.modelName}>
-                                        {brand.key || 'New brand'} ({brand.labels[activeLocale] || '—'})
+                                        {brand.key || 'New brand'} ({brand.labels[activeLocale] || '-'})
                                       </span>
                                       <span className={s.modelChevron}>
                                         {isBrandOpen ? '▾' : '▸'}
@@ -1129,7 +1129,7 @@ export default function CategoriesScreen() {
                                                       >
                                                         <span className={s.modelName}>
                                                           {series.key || 'New series'} (
-                                                          {series.labels[activeLocale] || '—'})
+                                                          {series.labels[activeLocale] || '-'})
                                                         </span>
                                                         <span className={s.modelChevron}>
                                                           {isSeriesOpen ? '▾' : '▸'}

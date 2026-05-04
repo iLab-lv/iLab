@@ -6,7 +6,7 @@ import LocationCard from './LocationCard';
 
 export default function LocationsMap({
   images = {
-    alt: 'Rīga — iLab lokācijas',
+    alt: 'Rīga - iLab lokācijas',
     small:  '/images/map-1024.webp',
     medium: '/images/map-1600.webp',
     large:  '/images/map-3000.webp',

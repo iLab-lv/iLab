@@ -51,13 +51,13 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Замена разъёма зарядки iPhone в Риге',
       heroBodyHtml:
-        '<p><strong>iPhone не заряжается, нужно шевелить кабель или разъём болтается?</strong> Выполняем быструю и безопасную <strong>замену разъёма зарядки в Риге</strong>, а при необходимости — профессиональную чистку и устранение окисления. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
+        '<p><strong>iPhone не заряжается, нужно шевелить кабель или разъём болтается?</strong> Выполняем быструю и безопасную <strong>замену разъёма зарядки в Риге</strong>, а при необходимости - профессиональную чистку и устранение окисления. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
       headerTitle: 'Замена разъёма зарядки iPhone в Риге',
       headerLead:
         'Решаем проблемы с зарядкой: iPhone не заряжается, кабель нужно шевелить или пропадает контакт. До ремонта проводим диагностику, при необходимости чистим порт или меняем разъём и выдаём гарантию 90 дней.',
       introTitle: 'Замена разъёма зарядки iPhone в Риге',
       introP1:
-        'Если iPhone не заряжается, соединение пропадает, кабель нужно держать под определённым углом или порт выглядит загрязнённым, <strong>скорее всего нужна чистка или замена разъёма зарядки</strong>. Мастера iLab проводят <strong>диагностику</strong>, устраняют окисление и механические повреждения или устанавливают новый разъём — в зависимости от состояния и модели.',
+        'Если iPhone не заряжается, соединение пропадает, кабель нужно держать под определённым углом или порт выглядит загрязнённым, <strong>скорее всего нужна чистка или замена разъёма зарядки</strong>. Мастера iLab проводят <strong>диагностику</strong>, устраняют окисление и механические повреждения или устанавливают новый разъём - в зависимости от состояния и модели.',
       introP2:
         'Также проверяем <strong>кабель, адаптер, цепь зарядки и батарею</strong>, чтобы исключить другие причины. Популярные модели обычно ремонтируем за <strong>60–120 минут</strong>. На все работы и детали действует <strong>гарантия 90 дней</strong>.',
       selectedModelPrefix: 'Выбрана модель:',
@@ -96,13 +96,13 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone uzlādes ligzdas maiņa Rīgā',
     heroBodyHtml:
-      '<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā — profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+      '<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā - profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
     headerTitle: 'iPhone uzlādes ligzdas maiņa Rīgā',
     headerLead:
       'Risinām uzlādes problēmas: iPhone nelādējas, jākustina vads vai savienojums ir nestabils. Pirms remonta veicam diagnostiku, tīrām portu vai nomainām ligzdu un pēc remonta sniedzam 90 dienu garantiju.',
     introTitle: 'iPhone uzlādes ligzdas maiņa Rīgā',
     introP1:
-      'Ja iPhone nelādējas, pazūd savienojums, jāpieliec kabelis noteiktā leņķī vai ports izskatās netīrs, <strong>visticamāk nepieciešama uzlādes ligzdas tīrīšana vai maiņa</strong>. iLab meistari veic <strong>diagnostiku</strong>, novērš oksidāciju un mehāniskus bojājumus vai uzstāda jaunu ligzdu — atkarībā no stāvokļa un modeļa.',
+      'Ja iPhone nelādējas, pazūd savienojums, jāpieliec kabelis noteiktā leņķī vai ports izskatās netīrs, <strong>visticamāk nepieciešama uzlādes ligzdas tīrīšana vai maiņa</strong>. iLab meistari veic <strong>diagnostiku</strong>, novērš oksidāciju un mehāniskus bojājumus vai uzstāda jaunu ligzdu - atkarībā no stāvokļa un modeļa.',
     introP2:
       'Pārbaudām arī <strong>kabeli, adapteri, uzlādes ķēdi un bateriju</strong>, lai izslēgtu citus cēloņus. Populāros modeļus parasti salabojam <strong>60–120 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
     selectedModelPrefix: 'Atlasīts modelis:',

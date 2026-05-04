@@ -37,10 +37,10 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Ремонт динамика и микрофона iPhone в Риге',
       heroBodyHtml:
-        '<p><strong>Тихий звук, хрипы или вас не слышно во время разговора?</strong> Выполняем <strong>ремонт динамика и микрофона iPhone</strong> — профессиональная чистка, замена модулей, полная проверка и <strong>гарантия 90 дней</strong>.</p>',
+        '<p><strong>Тихий звук, хрипы или вас не слышно во время разговора?</strong> Выполняем <strong>ремонт динамика и микрофона iPhone</strong> - профессиональная чистка, замена модулей, полная проверка и <strong>гарантия 90 дней</strong>.</p>',
       introTitle: 'Ремонт динамика и микрофона iPhone в Риге',
       introP1:
-        'Проблемы со звуком могут вызывать <strong>пыль, влага, окисление или изношенные модули</strong>. Выполняем <strong>диагностику</strong>, после которой определяем — достаточно ли <strong>чистки</strong> или нужна <strong>замена динамика/микрофона</strong>.',
+        'Проблемы со звуком могут вызывать <strong>пыль, влага, окисление или изношенные модули</strong>. Выполняем <strong>диагностику</strong>, после которой определяем - достаточно ли <strong>чистки</strong> или нужна <strong>замена динамика/микрофона</strong>.',
       introP2:
         'Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На все работы и детали действует <strong>гарантия 90 дней</strong>.',
       selectedModelPrefix: 'Выбрана модель:',
@@ -76,10 +76,10 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone skaļruņu un mikrofona remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Klusa skaņa, krakšķi vai sarunās nedzird?</strong> Veicam <strong>iPhone skaļruņu un mikrofona remontu</strong> — profesionāla tīrīšana, moduļu nomaiņa, pilna pārbaude un <strong>90 dienu garantija</strong>.</p>',
+      '<p><strong>Klusa skaņa, krakšķi vai sarunās nedzird?</strong> Veicam <strong>iPhone skaļruņu un mikrofona remontu</strong> - profesionāla tīrīšana, moduļu nomaiņa, pilna pārbaude un <strong>90 dienu garantija</strong>.</p>',
     introTitle: 'iPhone skaļruņu un mikrofona remonts Rīgā',
     introP1:
-      'Skaņas problēmas var izraisīt <strong>putekļi, mitrums, oksidācija vai nolietoti moduļi</strong>. Veicam <strong>diagnostiku</strong>, pēc kuras noskaidrojam — pietiek ar <strong>tīrīšanu</strong> vai nepieciešama <strong>skaļruņa/mikrofona nomaiņa</strong>.',
+      'Skaņas problēmas var izraisīt <strong>putekļi, mitrums, oksidācija vai nolietoti moduļi</strong>. Veicam <strong>diagnostiku</strong>, pēc kuras noskaidrojam - pietiek ar <strong>tīrīšanu</strong> vai nepieciešama <strong>skaļruņa/mikrofona nomaiņa</strong>.',
     introP2:
       'Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
     selectedModelPrefix: 'Atlasīts modelis:',
@@ -117,7 +117,7 @@ export function getIphoneAudioServiceMetadata(locale = 'lv') {
     return {
       title: 'Ремонт динамика и микрофона iPhone в Риге | iLab',
       description:
-        'Тихий звук, хрипы или вас не слышно во время разговора? Профессиональный ремонт динамика и микрофона iPhone в Риге — чистка, замена модулей, диагностика и гарантия 90 дней.',
+        'Тихий звук, хрипы или вас не слышно во время разговора? Профессиональный ремонт динамика и микрофона iPhone в Риге - чистка, замена модулей, диагностика и гарантия 90 дней.',
       alternates: { canonical: getRoutePath(locale) },
     };
   }
@@ -125,7 +125,7 @@ export function getIphoneAudioServiceMetadata(locale = 'lv') {
   return {
     title: 'iPhone skaļruņu un mikrofona remonts Rīgā | iLab',
     description:
-      'Klusa skaņa, krakšķi vai sarunās nedzird? Profesionāls iPhone skaļruņu un mikrofona remonts Rīgā — tīrīšana, moduļu nomaiņa, diagnostika un 90 dienu garantija.',
+      'Klusa skaņa, krakšķi vai sarunās nedzird? Profesionāls iPhone skaļruņu un mikrofona remonts Rīgā - tīrīšana, moduļu nomaiņa, diagnostika un 90 dienu garantija.',
     alternates: { canonical: getRoutePath(locale) },
   };
 }

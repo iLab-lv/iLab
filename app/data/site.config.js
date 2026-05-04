@@ -54,7 +54,7 @@ export const LOCATIONS = [
     destination:
       'https://www.google.com/maps/dir/?api=1&destination=iLab+Domina&destination_place_id=ChIJPdbptEPP7kYRsN9Te_ffHcg',
 
-    // Working hours — UNIQUE for this location
+    // Working hours - UNIQUE for this location
     // TODO: adjust to real Domina schedule if it differs.
     hours: [
       { day: 'P',  opens: '10:00', closes: '21:00' },
@@ -86,7 +86,7 @@ export const LOCATIONS = [
     destination:
       'https://www.google.com/maps/dir/?api=1&destination=iLab+Spice&destination_place_id=ChIJ-44HHgDR7kYRDtqN_4qtGn0',
 
-    // Working hours — UNIQUE for this location
+    // Working hours - UNIQUE for this location
     // TODO: adjust to real Spice Home schedule if it differs.
     hours: [
       { day: 'P',  opens: '10:00', closes: '21:00' },

@@ -129,11 +129,11 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā — gan detaļām, gan meistaru darbam ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
+    a: 'Jā - gan detaļām, gan meistaru darbam ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
-    a: 'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas — izvēli un cenu saskaņojam ar klientu pirms remonta.',
+    a: 'Atkarībā no modeļa piedāvājam oriģinālas vai augstas kvalitātes OEM detaļas - izvēli un cenu saskaņojam ar klientu pirms remonta.',
   },
   {
     q: 'Vai varu saņemt aptuveno cenu pirms remonta?',
@@ -152,11 +152,11 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Есть ли гарантия на детали?',
-    a: 'Да — и на детали, и на работу действует гарантия 90 дней, если нет новых механических или жидкостных повреждений.',
+    a: 'Да - и на детали, и на работу действует гарантия 90 дней, если нет новых механических или жидкостных повреждений.',
   },
   {
     q: 'Доступны ли оригинальные детали?',
-    a: 'В зависимости от модели предлагаем оригинальные или качественные OEM детали — выбор и цену согласовываем с клиентом до начала ремонта.',
+    a: 'В зависимости от модели предлагаем оригинальные или качественные OEM детали - выбор и цену согласовываем с клиентом до начала ремонта.',
   },
   {
     q: 'Можно ли узнать примерную цену до ремонта?',
@@ -246,20 +246,20 @@ function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
   const heroHtml =
     pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
     (locale === 'ru'
-      ? `<p><strong>${brandName} ремонт планшетов в Риге</strong> — замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
-      : `<p><strong>${brandName} planšetdatoru remonts Rīgā</strong> — ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
+      ? `<p><strong>${brandName} ремонт планшетов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
+      : `<p><strong>${brandName} planšetdatoru remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
 
   if (locale === 'ru') {
     return {
-      introTitle: `${brandName} ремонт планшетов — что мы делаем`,
+      introTitle: `${brandName} ремонт планшетов - что мы делаем`,
       introLead:
-        'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели — откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
+        'Экраны, батареи, разъёмы зарядки, камеры и другие ремонтные работы. Цена зависит от модели - откройте страницу своей модели, чтобы увидеть конкретные цены и сроки.',
       introParagraph:
         'Самые частые работы: <strong>замена экрана</strong> (трещины, тёмные пятна, сенсор не реагирует), <strong>замена батареи</strong> (быстрая разрядка, выключается при 10–20%), <strong>ремонт разъёма зарядки</strong> (кабель не держится, зарядка медленная или нестабильная), <strong>ремонт камеры</strong> (мутные фото, ошибки фокусировки), а также <strong>повреждения от влаги</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process-h2">«Как проходит ремонт»</a>.',
       modelGridHeading: selectorHeading,
       modelGridIntro: selectorIntro,
       modelsNote:
-        'Цена зависит от модели — откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
+        'Цена зависит от модели - откройте страницу своей модели, чтобы увидеть стоимость ремонта.',
       noModels: 'Пока для этого бренда не добавлены модели планшетов.',
       servicesHeading: 'Популярный ремонт',
       processTitle: 'Как проходит ремонт',
@@ -277,15 +277,15 @@ function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
   }
 
   return {
-    introTitle: `${brandName} planšetdatoru remonts — ko mēs darām`,
+    introTitle: `${brandName} planšetdatoru remonts - ko mēs darām`,
     introLead:
-      'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu konkrētas remonta cenas un termiņus.',
+      'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas atšķiras pēc modeļa - atver sava modeļa lapu, lai redzētu konkrētas remonta cenas un termiņus.',
     introParagraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong> (plaisas, tumši plankumi, nereaģē skāriens), <strong>baterijas maiņa</strong> (strauja izlāde, izslēdzas pie 10–20%), <strong>uzlādes ligzdas remonts</strong> (nenoturas kabelis, lēna vai nestabila uzlāde), <strong>kameras remonts</strong> (miglaini attēli, fokusēšanās kļūdas), kā arī <strong>mitruma/ūdens bojājumi</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process-h2">“Kā notiek remonts”</a>.',
     modelGridHeading: selectorHeading,
     modelGridIntro: selectorIntro,
     modelsNote:
-      'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
+      'Cenas atšķiras pēc modeļa - atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: 'Pagaidām šim zīmolam nav pievienotu planšetdatoru modeļu.',
     servicesHeading: 'Populārākie remonti',
     processTitle: 'Kā notiek remonts',
@@ -311,8 +311,8 @@ export async function getTabletBrandMetadata(brandSlug, locale = 'lv') {
         locale === 'ru' ? 'Ремонт планшетов | iLab' : 'Planšetdatoru remonts | iLab',
       description:
         locale === 'ru'
-          ? 'Ремонт планшетов в Риге — быстрая диагностика, честные цены, гарантия.'
-          : 'Planšetdatoru remonts Rīgā — ātra diagnostika, godīgas cenas, garantija.',
+          ? 'Ремонт планшетов в Риге - быстрая диагностика, честные цены, гарантия.'
+          : 'Planšetdatoru remonts Rīgā - ātra diagnostika, godīgas cenas, garantija.',
     };
   }
 

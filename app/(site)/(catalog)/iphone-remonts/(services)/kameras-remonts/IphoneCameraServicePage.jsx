@@ -49,10 +49,10 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'Ремонт камеры iPhone в Риге',
       heroBodyHtml:
-        '<p><strong>Мутные фото или проблемы с фокусировкой?</strong> Выполняем <strong>ремонт и замену камеры iPhone</strong> — диагностика, замена стекла камеры или модуля по необходимости. <strong>Гарантия 90 дней.</strong></p>',
+        '<p><strong>Мутные фото или проблемы с фокусировкой?</strong> Выполняем <strong>ремонт и замену камеры iPhone</strong> - диагностика, замена стекла камеры или модуля по необходимости. <strong>Гарантия 90 дней.</strong></p>',
       introTitle: 'Ремонт и замена камеры iPhone в Риге',
       introP1:
-        'Если фотографии получаются мутными, с пятнами или телефон не может сфокусироваться, сначала проверяем <strong>стекло камеры и модуль</strong>. Если повреждено только стекло, часто достаточно его замены. Если поврежден сам модуль — предложим замену модуля с полной проверкой.',
+        'Если фотографии получаются мутными, с пятнами или телефон не может сфокусироваться, сначала проверяем <strong>стекло камеры и модуль</strong>. Если повреждено только стекло, часто достаточно его замены. Если поврежден сам модуль - предложим замену модуля с полной проверкой.',
       introP2:
         'После ремонта проверяем <strong>фокусировку, стабилизацию, цветопередачу и вспышку</strong>. Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На все работы и детали действует <strong>гарантия 90 дней</strong>.',
       selectedModelPrefix: 'Выбрана модель:',
@@ -94,10 +94,10 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone kameras remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Miglainas bildes vai fokusēšanās problēmas?</strong> Veicam <strong>iPhone kameras remontu un maiņu</strong> — diagnostika, stikliņa nomaiņa vai moduļa nomaiņa pēc vajadzības. <strong>90 dienu garantija.</strong></p>',
+      '<p><strong>Miglainas bildes vai fokusēšanās problēmas?</strong> Veicam <strong>iPhone kameras remontu un maiņu</strong> - diagnostika, stikliņa nomaiņa vai moduļa nomaiņa pēc vajadzības. <strong>90 dienu garantija.</strong></p>',
     introTitle: 'iPhone kameras remonts un nomaiņa Rīgā',
     introP1:
-      'Ja fotogrāfijas ir miglainas, ar plankumiem vai telefons nevar fokusēt, vispirms pārbaudām <strong>kameras stikliņu un moduli</strong>. Ja bojāts tikai stikliņš, bieži pietiek ar tā nomaiņu. Ja bojāts pats modulis — ieteiksim moduļa nomaiņu ar pilnu pārbaudi.',
+      'Ja fotogrāfijas ir miglainas, ar plankumiem vai telefons nevar fokusēt, vispirms pārbaudām <strong>kameras stikliņu un moduli</strong>. Ja bojāts tikai stikliņš, bieži pietiek ar tā nomaiņu. Ja bojāts pats modulis - ieteiksim moduļa nomaiņu ar pilnu pārbaudi.',
     introP2:
       'Pēc remonta testējam <strong>fokusēšanu, stabilizāciju, krāsu atbilstību un zibspuldzi</strong>. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
     selectedModelPrefix: 'Atlasīts modelis:',
@@ -112,7 +112,7 @@ function getPageStrings(locale = 'lv') {
     processSteps: [
       { title: 'Diagnostika', text: 'Pārbaudām kameras stikliņu, moduli, savienojumus un programmatūru.' },
       { title: 'Cena un termiņš', text: 'Saskaņojam izmaksas un remonta laiku pirms darba sākšanas.' },
-      { title: 'Remonts', text: 'Mainām stikliņu vai moduļa komplektu, ja nepieciešams — veicam kalibrāciju.' },
+      { title: 'Remonts', text: 'Mainām stikliņu vai moduļa komplektu, ja nepieciešams - veicam kalibrāciju.' },
       { title: 'Testi', text: 'Pārbaudām fokusēšanu, stabilizāciju, zibspuldzi un attēla kvalitāti.' },
       { title: 'Garantija', text: '90 dienu garantija gan detaļām, gan darbam.' },
     ],
@@ -141,7 +141,7 @@ export function getIphoneCameraServiceMetadata(locale = 'lv') {
     return {
       title: 'Ремонт камеры iPhone в Риге | iLab',
       description:
-        'Мутные фото или проблемы с фокусировкой? Ремонт и замена камеры iPhone в Риге — диагностика, замена стекла камеры и модуля по необходимости. Гарантия 90 дней.',
+        'Мутные фото или проблемы с фокусировкой? Ремонт и замена камеры iPhone в Риге - диагностика, замена стекла камеры и модуля по необходимости. Гарантия 90 дней.',
       alternates: { canonical: getRoutePath(locale) },
     };
   }
@@ -149,7 +149,7 @@ export function getIphoneCameraServiceMetadata(locale = 'lv') {
   return {
     title: 'iPhone kameras remonts Rīgā | iLab',
     description:
-      'Miglainas bildes vai fokusēšanās problēmas? iPhone kameras remonts un nomaiņa Rīgā — diagnostika, stikliņa nomaiņa un moduļa nomaiņa pēc vajadzības. 90 dienu garantija.',
+      'Miglainas bildes vai fokusēšanās problēmas? iPhone kameras remonts un nomaiņa Rīgā - diagnostika, stikliņa nomaiņa un moduļa nomaiņa pēc vajadzības. 90 dienu garantija.',
     alternates: { canonical: getRoutePath(locale) },
   };
 }

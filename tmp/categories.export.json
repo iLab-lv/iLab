@@ -22,7 +22,7 @@
       "type": "category",
       "metaDescription": {
         "ru": "Ремонт телефонов в Риге: замена экрана, батареи, камеры и разъёма зарядки, диагностика после влаги, понятные цены и гарантия 90 дней в iLab.",
-        "lv": "Telefonu remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, mitruma bojājumu diagnostika, skaidras cenas un 90 dienu garantija iLab."
+        "lv": "Telefonu remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, mitruma bojājumu diagnostika, skaidras cenas un 90 dienu garantija iLab."
       },
       "slug": "telefonu-remonts",
       "lead": {
@@ -68,7 +68,7 @@
               "ru": "Ремонт iPhone в Риге, экран и батарея | iLab"
             },
             "metaDescription": {
-              "lv": "iPhone remonts Rīgā — ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana, ātra diagnostika un 90 dienu garantija iLab.",
+              "lv": "iPhone remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana, ātra diagnostika un 90 dienu garantija iLab.",
               "ru": "Ремонт iPhone в Риге: замена экрана, батареи, камеры и разъёма зарядки, ремонт после воды, быстрая диагностика и гарантия 90 дней в iLab."
             },
             "modelGrid": {
@@ -531,7 +531,7 @@
       "type": "category",
       "metaDescription": {
         "ru": "Ремонт планшетов в Риге: замена экрана, батареи и разъёма зарядки, ремонт камеры, диагностика и гарантия 90 дней для Apple, Samsung и других.",
-        "lv": "Planšetdatoru remonts Rīgā — ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts, diagnostika un 90 dienu garantija Apple, Samsung un citiem."
+        "lv": "Planšetdatoru remonts Rīgā - ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts, diagnostika un 90 dienu garantija Apple, Samsung un citiem."
       },
       "slug": "plansetdatoru-remonts",
       "lead": {
@@ -685,12 +685,12 @@
       "type": "category",
       "metaDescription": {
         "ru": "Ремонт компьютеров в Риге: MacBook, iMac, ноутбуки и ПК, диагностика, ремонт экрана, клавиатуры и зарядки, апгрейд SSD/RAM и гарантия.",
-        "lv": "Datoru remonts Rīgā — MacBook, iMac, portatīvo un stacionāro datoru diagnostika, ekrāna, tastatūras un uzlādes remonts, SSD/RAM uzlabojumi un garantija."
+        "lv": "Datoru remonts Rīgā - MacBook, iMac, portatīvo un stacionāro datoru diagnostika, ekrāna, tastatūras un uzlādes remonts, SSD/RAM uzlabojumi un garantija."
       },
       "slug": "datoru-remonts",
       "lead": {
-        "ru": "Ремонт ноутбуков и настольных компьютеров — экран, клавиатура, материнская плата, зарядка, апгрейд SSD и RAM, а также диагностика после влаги.",
-        "lv": "Portatīvo un stacionāro datoru remonts — ekrāns, tastatūra, mātesplate, uzlāde, SSD un RAM uzlabošana, kā arī diagnostika pēc mitruma bojājumiem."
+        "ru": "Ремонт ноутбуков и настольных компьютеров - экран, клавиатура, материнская плата, зарядка, апгрейд SSD и RAM, а также диагностика после влаги.",
+        "lv": "Portatīvo un stacionāro datoru remonts - ekrāns, tastatūra, mātesplate, uzlāde, SSD un RAM uzlabošana, kā arī diagnostika pēc mitruma bojājumiem."
       },
       "order": 4,
       "labels": {
@@ -1241,7 +1241,7 @@
       "type": "category",
       "metaDescription": {
         "ru": "Ремонт Dyson в Риге: замена батареи, ремонт мотора, фильтров и уплотнителей, диагностика, понятные цены и гарантия 90 дней в сервисе iLab.",
-        "lv": "Dyson remonts Rīgā — baterijas maiņa, motora remonts, filtru un blīvējumu nomaiņa, diagnostika, skaidras cenas un 90 dienu garantija iLab servisā."
+        "lv": "Dyson remonts Rīgā - baterijas maiņa, motora remonts, filtru un blīvējumu nomaiņa, diagnostika, skaidras cenas un 90 dienu garantija iLab servisā."
       },
       "slug": "dyson-remonts",
       "lead": {

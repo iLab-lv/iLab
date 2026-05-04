@@ -23,7 +23,7 @@ export default function LocatorPanel({ onSelectLocation }) {
           small:  '/images/map-1024.webp',
           medium: '/images/map-1600.webp',
           large:  '/images/map-3000.webp',
-          alt:    'Rīga — iLab lokācijas',
+          alt:    'Rīga - iLab lokācijas',
         }}
         locations={LOCATIONS}
         pinPositions={PIN_POSITIONS}

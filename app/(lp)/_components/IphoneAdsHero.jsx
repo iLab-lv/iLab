@@ -9,7 +9,7 @@ import s from './IphoneAdsHero.module.scss';
 export default function IphoneAdsHero({
   // Copy (Search-safe: repair wording; no "support/help/consultations" vocabulary)
   title = 'iPhone remonts Rīgā',
-  brandLine = 'iLab — neatkarīga remonta darbnīca Rīgā.',
+  brandLine = 'iLab - neatkarīga remonta darbnīca Rīgā.',
   subtitle = 'Ekrāna un baterijas nomaiņa klātienē mūsu darbnīcās Rīgā.',
   disclaimer =
     'iLab ir neatkarīga remonta darbnīca un NAV Apple autorizēts servisa centrs. iPhone ir Apple Inc. preču zīme.',

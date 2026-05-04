@@ -7,7 +7,7 @@ const CANONICAL_PATH = '/iphone-remonts';
 export const metadata = {
   title: 'iPhone remonts Rīgā | iLab',
   description:
-    'iPhone remonts Rīgā — displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
+    'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
   alternates: { canonical: CANONICAL_PATH },
 };
 

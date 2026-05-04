@@ -49,7 +49,7 @@ function getPageStrings(locale = 'lv') {
 
       heroAlt: 'Замена экрана телефона в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрая и качественная замена экрана телефона в Риге</strong> — трещины, пятна и проблемы с сенсором устраняем часто в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
+        '<p><strong>Быстрая и качественная замена экрана телефона в Риге</strong> - трещины, пятна и проблемы с сенсором устраняем часто в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
 
       introTitle: 'Замена экрана телефона в Риге',
       introP1:
@@ -129,7 +129,7 @@ function getPageStrings(locale = 'lv') {
 
     heroAlt: 'Telefonu ekrāna maiņa Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā</strong> — plaisas, plankumi vai skāriena problēmas novēršam bieži tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
+      '<p><strong>Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā</strong> - plaisas, plankumi vai skāriena problēmas novēršam bieži tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
 
     introTitle: 'Telefonu ekrāna maiņa Rīgā',
     introP1:

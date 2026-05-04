@@ -391,18 +391,18 @@ function getPopularRepairsForType(deviceType, locale = 'lv') {
 function getPageStrings(cfg, locale = 'lv') {
   if (locale === 'ru') {
     return {
-      title: `${cfg.name} ремонт компьютеров — что мы делаем`,
-      intro: `Ремонтируем ноутбуки и настольные компьютеры ${cfg.name} — экран, охлаждение, диски и программное обеспечение. Стоимость зависит от модели и сложности неисправности, поэтому точное предложение готовим после диагностики.`,
+      title: `${cfg.name} ремонт компьютеров - что мы делаем`,
+      intro: `Ремонтируем ноутбуки и настольные компьютеры ${cfg.name} - экран, охлаждение, диски и программное обеспечение. Стоимость зависит от модели и сложности неисправности, поэтому точное предложение готовим после диагностики.`,
       paragraph:
         'Самые частые работы: <strong>замена экрана</strong>, <strong>чистка системы охлаждения и замена термопасты</strong>, <strong>замена жёсткого диска/SSD</strong>, <strong>переустановка операционной системы</strong> и <strong>удаление вирусов</strong>. Узнайте, как проходит ремонт, в разделе <a href="#process">«Как проходит ремонт»</a>.',
       modelsTitle: `${cfg.name} модели, которые мы ремонтируем`,
       modelsIntro: `Ниже показаны популярные модели ${cfg.name}. Выберите свою модель, чтобы посмотреть типовые ремонты и цены, если они доступны.`,
       modelsNote:
-        'Стоимость зависит от модели — откройте страницу своей модели, чтобы увидеть цену ремонта.',
+        'Стоимость зависит от модели - откройте страницу своей модели, чтобы увидеть цену ремонта.',
       noModels: `Пока для этого бренда не добавлены модели. Свяжитесь с нами, чтобы уточнить ремонт ${cfg.name}.`,
       servicesTitle: 'Популярный ремонт',
       faqTitle: 'Часто задаваемые вопросы',
-      heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> — ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>`,
+      heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>`,
       categoryName: 'Ремонт компьютеров',
       homeCrumb: 'Главная',
       processTitle: 'Как проходит ремонт',
@@ -412,18 +412,18 @@ function getPageStrings(cfg, locale = 'lv') {
   }
 
   return {
-    title: `${cfg.name} datoru remonts — ko mēs darām`,
-    intro: `Remontējam ${cfg.name} portatīvos un galda datorus — ekrāns, dzesēšana, diski un programmatūra. Cenas atšķiras pēc modeļa un bojājuma sarežģītības, tāpēc precīzu piedāvājumu sagatavojam pēc diagnostikas.`,
+    title: `${cfg.name} datoru remonts - ko mēs darām`,
+    intro: `Remontējam ${cfg.name} portatīvos un galda datorus - ekrāns, dzesēšana, diski un programmatūra. Cenas atšķiras pēc modeļa un bojājuma sarežģītības, tāpēc precīzu piedāvājumu sagatavojam pēc diagnostikas.`,
     paragraph:
       'Biežākie darbi: <strong>ekrāna maiņa</strong>, <strong>dzesēšanas sistēmas tīrīšana un termopastas maiņa</strong>, <strong>cietā diska/SSD nomaiņa</strong>, <strong>operētājsistēmas pārinstalēšana</strong> un <strong>vīrusu noņemšana</strong>. Uzzini, kā notiek remonts sadaļā <a href="#process">“Kā notiek remonts”</a>.',
     modelsTitle: `${cfg.name} modeļi, ko remontējam`,
     modelsIntro: `Zemāk redzami populārākie ${cfg.name} modeļi. Izvēlies savu modeli, lai apskatītu biežākos remontus un cenas, ja tie pieejami.`,
     modelsNote:
-      'Cenas atšķiras pēc modeļa — atver sava modeļa lapu, lai redzētu remonta cenas.',
+      'Cenas atšķiras pēc modeļa - atver sava modeļa lapu, lai redzētu remonta cenas.',
     noModels: `Pagaidām šim zīmolam nav pievienotu modeļu. Sazinies ar mums, lai precizētu ${cfg.name} remontu.`,
     servicesTitle: 'Populārākie remonti',
     faqTitle: 'Biežāk uzdotie jautājumi',
-    heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> — portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`,
+    heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`,
     categoryName: 'Datoru remonts',
     homeCrumb: 'Sākums',
     processTitle: 'Kā notiek remonts',
@@ -447,8 +447,8 @@ export async function getComputerBrandMetadata(brandSlug, locale = 'lv') {
           : 'Datoru remonts | iLab',
       description:
         locale === 'ru'
-          ? 'Ремонт компьютеров в Риге — ноутбуки и настольные ПК. Быстрая диагностика, честные цены, гарантия.'
-          : 'Datoru remonts Rīgā — portatīvie un galda datori. Ātra diagnostika, godīgas cenas, garantija.',
+          ? 'Ремонт компьютеров в Риге - ноутбуки и настольные ПК. Быстрая диагностика, честные цены, гарантия.'
+          : 'Datoru remonts Rīgā - portatīvie un galda datori. Ātra diagnostika, godīgas cenas, garantija.',
     };
   }
 

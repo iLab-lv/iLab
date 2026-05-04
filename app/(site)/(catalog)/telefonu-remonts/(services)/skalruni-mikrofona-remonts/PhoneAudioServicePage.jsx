@@ -50,7 +50,7 @@ function getPageStrings(locale = 'lv') {
 
       heroAlt: 'Ремонт динамика и микрофона телефона в Риге',
       heroBodyHtml:
-        '<p><strong>Ремонт динамика и микрофона в Риге</strong> — если во время разговора не слышно, звук тихий, с хрипами или в записи голоса есть шум, выполним чистку или замену модулей. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
+        '<p><strong>Ремонт динамика и микрофона в Риге</strong> - если во время разговора не слышно, звук тихий, с хрипами или в записи голоса есть шум, выполним чистку или замену модулей. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
 
       introTitle: 'Ремонт динамика и микрофона телефона',
       introP1:
@@ -130,7 +130,7 @@ function getPageStrings(locale = 'lv') {
 
     heroAlt: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Skaļruņu un mikrofona remonts Rīgā</strong> — ja sarunās nedzird, skaņa ir klusa, ar krakšķiem vai balss ierakstā ir troksnis, veiksim tīrīšanu vai moduļu nomaiņu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+      '<p><strong>Skaļruņu un mikrofona remonts Rīgā</strong> - ja sarunās nedzird, skaņa ir klusa, ar krakšķiem vai balss ierakstā ir troksnis, veiksim tīrīšanu vai moduļu nomaiņu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
 
     introTitle: 'Telefonu skaļruņu un mikrofona remonts',
     introP1:

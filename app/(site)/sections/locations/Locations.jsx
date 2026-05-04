@@ -43,7 +43,7 @@ export default function Locations({
           />
         </div>
 
-        {/* Cards rail — slightly overlaps map on desktop */}
+        {/* Cards rail - slightly overlaps map on desktop */}
         <div className={s.cardsArea}>
           <div className={s.cardsInner}>
             <LocationList

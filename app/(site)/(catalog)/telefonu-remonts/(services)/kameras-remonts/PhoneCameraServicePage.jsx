@@ -49,7 +49,7 @@ function getPageStrings(locale = 'lv') {
 
       heroAlt: 'Ремонт камеры телефона в Риге',
       heroBodyHtml:
-        '<p><strong>Ремонт камеры телефона в Риге</strong> — размытое изображение, повреждённое стекло или проблемы с фокусировкой? Выполняем диагностику и при необходимости <strong>замену модуля камеры или стекла</strong>. Бесплатная проверка и <strong>гарантия 90 дней</strong>.</p>',
+        '<p><strong>Ремонт камеры телефона в Риге</strong> - размытое изображение, повреждённое стекло или проблемы с фокусировкой? Выполняем диагностику и при необходимости <strong>замену модуля камеры или стекла</strong>. Бесплатная проверка и <strong>гарантия 90 дней</strong>.</p>',
 
       introTitle: 'Ремонт камеры телефона в Риге',
       introP1:
@@ -129,7 +129,7 @@ function getPageStrings(locale = 'lv') {
 
     heroAlt: 'Telefonu kameras remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Telefonu kameras remonts Rīgā</strong> — miglains attēls, bojāts stikliņš vai fokusēšanās problēmas? Veicam diagnostiku un nepieciešamības gadījumā <strong>kameras moduļa vai stikliņa maiņu</strong>. Bezmaksas pārbaude un <strong>90 dienu garantija</strong>.</p>',
+      '<p><strong>Telefonu kameras remonts Rīgā</strong> - miglains attēls, bojāts stikliņš vai fokusēšanās problēmas? Veicam diagnostiku un nepieciešamības gadījumā <strong>kameras moduļa vai stikliņa maiņu</strong>. Bezmaksas pārbaude un <strong>90 dienu garantija</strong>.</p>',
 
     introTitle: 'Telefonu kameras remonts Rīgā',
     introP1:

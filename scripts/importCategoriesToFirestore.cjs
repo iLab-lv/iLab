@@ -1414,7 +1414,7 @@ function assertLocalizedText(obj, path) {
       throw new Error(`Missing localized text: ${path}.${lang}`);
     }
 
-    if (obj[lang].includes('—') || obj[lang].includes('–')) {
+    if (obj[lang].includes('-') || obj[lang].includes('–')) {
       throw new Error(`Long dash found in: ${path}.${lang}`);
     }
   }

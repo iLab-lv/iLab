@@ -71,7 +71,7 @@ export async function POST(req) {
       );
     }
 
-    const subject = `Jauns pieraksts (${location}) — ${device}`;
+    const subject = `Jauns pieraksts (${location}) - ${device}`;
     const text = [
       `Vārds: ${name}`,
       `Tālrunis: ${phone}`,

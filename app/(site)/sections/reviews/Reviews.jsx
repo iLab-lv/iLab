@@ -303,7 +303,7 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
                     <span className={s.ratingValue}>
                       {place.rating != null
                         ? place.rating.toFixed(1)
-                        : '—'}
+                        : '-'}
                     </span>
                   </div>
 

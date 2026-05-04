@@ -16,7 +16,7 @@ function getPageStrings(locale = 'lv') {
       headerLead:
         'На этой странице собраны условия использования сайта iLab, правила гарантии, обработка данных клиентов и политика cookies.',
 
-      tosName: 'iLab — Условия использования и политика конфиденциальности',
+      tosName: 'iLab - Условия использования и политика конфиденциальности',
       tosDescription:
         'Условия использования iLab, гарантия, обработка данных клиентов и политика cookies.',
       inLanguage: 'ru',
@@ -35,7 +35,7 @@ function getPageStrings(locale = 'lv') {
 
       section2: '2. Описание услуг',
       section2Text:
-        'iLab выполняет диагностику и ремонт мобильных телефонов, планшетов, ноутбуков и устройств Dyson. Все работы проводятся на месте в наших сервисных центрах с использованием качественных запчастей и проверенных методов. Сайт носит информационный характер — онлайн-покупки и платежи на нём не осуществляются.',
+        'iLab выполняет диагностику и ремонт мобильных телефонов, планшетов, ноутбуков и устройств Dyson. Все работы проводятся на месте в наших сервисных центрах с использованием качественных запчастей и проверенных методов. Сайт носит информационный характер - онлайн-покупки и платежи на нём не осуществляются.',
 
       section3: '3. Цены и диагностика',
       section3Text:
@@ -80,7 +80,7 @@ function getPageStrings(locale = 'lv') {
     headerLead:
       'Šajā lapā apkopoti iLab vietnes lietošanas noteikumi, garantijas nosacījumi, klientu datu apstrāde un sīkdatņu politika.',
 
-    tosName: 'iLab — Lietošanas noteikumi un privātuma politika',
+    tosName: 'iLab - Lietošanas noteikumi un privātuma politika',
     tosDescription:
       'iLab lietošanas noteikumi, garantijas, klientu datu apstrāde un sīkdatņu politika.',
     inLanguage: 'lv',
@@ -99,7 +99,7 @@ function getPageStrings(locale = 'lv') {
 
     section2: '2. Pakalpojuma raksturojums',
     section2Text:
-      'iLab nodrošina mobilo tālruņu, planšetdatoru, portatīvo datoru un Dyson ierīču diagnostiku un remontu. Visi darbi tiek veikti uz vietas mūsu servisa centros, izmantojot kvalitatīvas rezerves daļas un pārbaudītas metodes. Vietne kalpo informatīviem nolūkiem — tajā netiek veikti tiešsaistes pirkumi vai maksājumi.',
+      'iLab nodrošina mobilo tālruņu, planšetdatoru, portatīvo datoru un Dyson ierīču diagnostiku un remontu. Visi darbi tiek veikti uz vietas mūsu servisa centros, izmantojot kvalitatīvas rezerves daļas un pārbaudītas metodes. Vietne kalpo informatīviem nolūkiem - tajā netiek veikti tiešsaistes pirkumi vai maksājumi.',
 
     section3: '3. Cenas un diagnostika',
     section3Text:
@@ -224,7 +224,7 @@ export default function TermsPage({ locale = 'lv' }) {
             <br />
             <strong>{strings.addressLabel}</strong> Ieriķu iela 3 (Domina Shopping), Rīga
             <br />
-            <strong>{strings.branchLabel}</strong> Spice Home — Jaunmoku iela 13, Rīga
+            <strong>{strings.branchLabel}</strong> Spice Home - Jaunmoku iela 13, Rīga
             <br />
             <strong>{strings.emailLabel}</strong> info@ilab.lv | 
             <strong>{strings.phoneLabel}</strong> 23370088
@@ -278,7 +278,7 @@ export default function TermsPage({ locale = 'lv' }) {
             <br />
             {strings.contactsHours} P.–Sv. 10:00–21:00
             <br />
-            {strings.branchLabel} Spice Home — Jaunmoku iela 13, Rīga
+            {strings.branchLabel} Spice Home - Jaunmoku iela 13, Rīga
           </p>
         </div>
       </section>
