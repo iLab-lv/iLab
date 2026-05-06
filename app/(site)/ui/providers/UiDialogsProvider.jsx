@@ -2,60 +2,79 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { usePathname } from 'next/navigation';
 
 import FullscreenPanel from '../panels/FullscreenPanel';
 import LocatorPanel from '../panels/LocatorPanel';
 import SazinatiesPanel from '../panels/SazinatiesPanel';
 import PierakstiesPanel from '../panels/PierakstiesPanel';
+import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
 
 const UiDialogsContext = createContext(null);
 
-export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
-  // One modal, three panes
-  const [modalOpen, setModalOpen] = useState(false);
-  const [activePane, setActivePane] = useState(null); // 'locator' | 'sazinaties' | 'book' | null
+export function UiDialogsProvider({
+  children,
+  bookHref = '/pieraksties',
+  locale,
+  siteSettings,
+}) {
+  const pathname = usePathname() || '/';
 
-  // Data flowing into panes
+  const resolvedLocale = locale || getNavLocaleFromPathname(pathname);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activePane, setActivePane] = useState(null);
+
   const [selectedLocId, setSelectedLocId] = useState(null);
 
-  // Portal mount
+  const locations = siteSettings?.locations || [];
+  const defaultHours = siteSettings?.hours || [];
+
   const [mounted, setMounted] = useState(false);
   const [portalEl, setPortalEl] = useState(null);
+
   useEffect(() => {
     setMounted(true);
+
     const id = 'dialogs-root';
     let el = document.getElementById(id);
+
     if (!el) {
       el = document.createElement('div');
       el.id = id;
       document.body.appendChild(el);
     }
+
     setPortalEl(el);
   }, []);
 
-  // For aria-controls compatibility with existing triggers
-  const locatorOpen  = modalOpen && activePane === 'locator';
-  const contactOpen  = modalOpen && activePane === 'sazinaties';
-  const bookOpen     = modalOpen && activePane === 'book';
+  const locatorOpen = modalOpen && activePane === 'locator';
+  const contactOpen = modalOpen && activePane === 'sazinaties';
+  const bookOpen = modalOpen && activePane === 'book';
 
   const lastOpenerRef = useRef(null);
 
-  // Public API (kept compatible)
   const openLocator = (openerEl) => {
     lastOpenerRef.current = openerEl || null;
     setActivePane('locator');
     setModalOpen(true);
   };
+
   const closeLocator = () => {
     if (activePane === 'locator') setModalOpen(false);
   };
 
   const openContact = (openerEl, locId = null) => {
     lastOpenerRef.current = openerEl || null;
-    if (locId !== undefined && locId !== null) setSelectedLocId(locId);
+
+    if (locId !== undefined && locId !== null) {
+      setSelectedLocId(locId);
+    }
+
     setActivePane('sazinaties');
     setModalOpen(true);
   };
+
   const closeContact = () => {
     if (activePane === 'sazinaties') setModalOpen(false);
   };
@@ -65,16 +84,17 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
     setActivePane('book');
     setModalOpen(true);
   };
+
   const closeBook = () => {
     if (activePane === 'book') setModalOpen(false);
   };
 
-  // Seamless handoff: from Locator pin → Sazināties
   const openContactsFor = (locId, openerEl) => {
     lastOpenerRef.current = openerEl || lastOpenerRef.current;
     setSelectedLocId(locId || null);
+
     if (modalOpen) {
-      setActivePane('sazinaties'); // triggers in-panel cross-slide
+      setActivePane('sazinaties');
     } else {
       setActivePane('sazinaties');
       setModalOpen(true);
@@ -83,46 +103,72 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
 
   const onClose = () => setModalOpen(false);
 
-  // Title per pane
   const paneTitle =
-    activePane === 'locator' ? 'Atrast filiāli' :
-    activePane === 'sazinaties' ? 'Sazināties' :
-    activePane === 'book' ? 'Pieraksties uz remontu' :
-    '';
+    activePane === 'locator'
+      ? resolvedLocale === 'ru'
+        ? 'Найти филиал'
+        : 'Atrast filiāli'
+      : activePane === 'sazinaties'
+        ? resolvedLocale === 'ru'
+          ? 'Связаться'
+          : 'Sazināties'
+        : activePane === 'book'
+          ? resolvedLocale === 'ru'
+            ? 'Записаться на ремонт'
+            : 'Pieraksties uz remontu'
+          : '';
 
-  // Render pane by key
   const renderPane = (key) => {
     switch (key) {
       case 'locator':
         return (
           <LocatorPanel
+            locale={resolvedLocale}
+            locations={locations}
             onSelectLocation={(locId) => openContactsFor(locId)}
           />
         );
+
       case 'sazinaties':
         return (
           <SazinatiesPanel
+            locale={resolvedLocale}
             initialLocId={selectedLocId}
+            locations={locations}
+            defaultHours={defaultHours}
           />
         );
+
       case 'book':
         return (
           <PierakstiesPanel
-            onClose={onClose}  // ✅ pass close handler so "Uz sākumlapu" can close panel
+            locale={resolvedLocale}
+            locations={locations}
+            onClose={onClose}
+            bookHref={bookHref}
           />
         );
+
       default:
         return null;
     }
   };
 
   const api = {
-    // compatibility flags for triggers
-    locatorOpen, contactOpen, bookOpen, selectedLocId,
-    // actions
-    openLocator, closeLocator,
-    openContact, closeContact,
-    openBook, closeBook,
+    locatorOpen,
+    contactOpen,
+    bookOpen,
+    selectedLocId,
+
+    openLocator,
+    closeLocator,
+
+    openContact,
+    closeContact,
+
+    openBook,
+    closeBook,
+
     openContactsFor,
     setSelectedLocId,
   };
@@ -131,29 +177,35 @@ export function UiDialogsProvider({ children, bookHref = '/pieraksties' }) {
     <UiDialogsContext.Provider value={api}>
       {children}
 
-      {/* Keep aria-controls targets present for a11y (empty placeholders) */}
       <div id="locator-panel" hidden aria-hidden="true" />
       <div id="sazinaties-panel" hidden aria-hidden="true" />
       <div id="pieraksties-panel" hidden aria-hidden="true" />
 
-      {mounted && portalEl && createPortal(
-        activePane ? (
-          <FullscreenPanel
-            open={modalOpen}
-            onClose={onClose}
-            paneKey={activePane}
-            paneTitle={paneTitle}
-            renderPane={renderPane}
-          />
-        ) : null,
-        portalEl
-      )}
+      {mounted &&
+        portalEl &&
+        createPortal(
+          activePane ? (
+            <FullscreenPanel
+              open={modalOpen}
+              onClose={onClose}
+              paneKey={activePane}
+              paneTitle={paneTitle}
+              closeLabel={resolvedLocale === 'ru' ? 'Закрыть' : 'Aizvērt'}
+              renderPane={renderPane}
+            />
+          ) : null,
+          portalEl
+        )}
     </UiDialogsContext.Provider>
   );
 }
 
 export function useUiDialogs() {
   const ctx = useContext(UiDialogsContext);
-  if (!ctx) throw new Error('useUiDialogs must be used within UiDialogsProvider');
+
+  if (!ctx) {
+    throw new Error('useUiDialogs must be used within UiDialogsProvider');
+  }
+
   return ctx;
 }
