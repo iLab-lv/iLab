@@ -3,19 +3,21 @@
 import { useMemo } from 'react';
 import s from './LocationCard.module.scss';
 import Button from '@components/button/Button';
+import { getLocationsContent } from './locations.i18n';
 
-/**
- * Compute open/closed state from hours array
- */
 function parseHM(hm) {
   if (!hm) return null;
+
   const [h, m] = hm.split(':').map(Number);
+
   if (Number.isNaN(h) || Number.isNaN(m)) return null;
+
   return h * 60 + m;
 }
 
 function getRigaNow() {
   const d = new Date();
+
   const fmt = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Europe/Riga',
     year: 'numeric',
@@ -26,9 +28,22 @@ function getRigaNow() {
     minute: '2-digit',
     weekday: 'short',
   });
-  const parts = fmt.formatToParts(d).reduce((acc, p) => ((acc[p.type] = p.value), acc), {});
+
+  const parts = fmt
+    .formatToParts(d)
+    .reduce((acc, p) => ((acc[p.type] = p.value), acc), {});
+
   const date = `${parts.year}-${parts.month}-${parts.day}`;
-  const weekdayMap = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
+  const weekdayMap = {
+    Mon: 0,
+    Tue: 1,
+    Wed: 2,
+    Thu: 3,
+    Fri: 4,
+    Sat: 5,
+    Sun: 6,
+  };
+
   return {
     date,
     minutes: parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10),
@@ -36,63 +51,82 @@ function getRigaNow() {
   };
 }
 
-function computeOpenState(hoursArr, overrideForToday) {
+function computeOpenState(hoursArr, overrideForToday, t) {
   const { minutes: nowM, weekday } = getRigaNow();
+
   let today = hoursArr?.[weekday] || hoursArr?.[0];
-  
+
   if (overrideForToday?.opens && overrideForToday?.closes) {
-    today = { ...today, opens: overrideForToday.opens, closes: overrideForToday.closes };
+    today = {
+      ...today,
+      opens: overrideForToday.opens,
+      closes: overrideForToday.closes,
+    };
   }
-  
+
   const openM = parseHM(today?.opens);
   const closeM = parseHM(today?.closes);
-  
+
   if (openM == null || closeM == null) {
-    return { open: false, badgeText: 'Slēgts', today };
+    return {
+      open: false,
+      badgeText: t.closed,
+      today,
+    };
   }
-  
+
   if (nowM >= openM && nowM < closeM) {
-    return { open: true, badgeText: `Atvērts - līdz ${today.closes}`, today };
+    return {
+      open: true,
+      badgeText: t.openUntil(today.closes),
+      today,
+    };
   }
-  
-  return { open: false, badgeText: `Slēgts - atvērsies ${today.opens}`, today };
+
+  return {
+    open: false,
+    badgeText: t.closedUntil(today.opens),
+    today,
+  };
 }
 
-/**
- * Single location card - can render in 'simplified' or 'full' variant
- * 
- * @param {Object} location - Location data from site.config
- * @param {string} variant - 'simplified' | 'full'
- * @param {boolean} highlighted - External highlight state
- * @param {boolean} showActions - Show Zvanīt/WhatsApp buttons
- * @param {string} className - Additional CSS classes
- */
 export default function LocationCard({
   location,
   variant = 'simplified',
   highlighted = false,
   showActions = false,
   className = '',
+  locale = 'lv',
+  content,
 }) {
+  const t = content || getLocationsContent(locale);
+
   const { date: todayStr } = getRigaNow();
+
   const todayOverride =
     location?.hoursOverride?.date === todayStr ? location.hoursOverride : null;
 
   const state = useMemo(
-    () => computeOpenState(location.hours, todayOverride),
-    [location.hours, todayOverride]
+    () => computeOpenState(location.hours, todayOverride, t),
+    [location.hours, todayOverride, t]
   );
 
   if (variant === 'simplified') {
     return (
       <div
         id={`loc-card-${location.id}`}
-        className={`${s.card} ${s.simplified} ${highlighted ? s.highlighted : ''} ${className}`}
+        className={`${s.card} ${s.simplified} ${
+          highlighted ? s.highlighted : ''
+        } ${className}`}
       >
         <h3 className={s.title}>{location.label}</h3>
         <p className={s.address}>{location.address}</p>
 
-        <div className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}>
+        <div
+          className={`${s.badge} ${
+            state.open ? s.badgeOpen : s.badgeClosed
+          }`}
+        >
           {state.badgeText}
         </div>
 
@@ -104,29 +138,38 @@ export default function LocationCard({
           rel="noopener noreferrer"
           className={s.linkAccent}
         >
-          Norādes →
+          {t.directions} →
         </a>
       </div>
     );
   }
 
-  // Full variant (for panels)
   return (
     <div className={`${s.card} ${s.full} ${className}`}>
       <div className={s.infoGrid}>
-        {/* Hours block */}
         <div className={s.hoursBlock}>
-          <div className={`${s.badge} ${state.open ? s.badgeOpen : s.badgeClosed}`}>
+          <div
+            className={`${s.badge} ${
+              state.open ? s.badgeOpen : s.badgeClosed
+            }`}
+          >
             {state.badgeText}
           </div>
 
-          <dl className={s.hoursList} aria-label="Darba laiks">
+          <dl className={s.hoursList} aria-label={t.hoursAriaLabel}>
             {location.hours.map((h, i) => {
               const isToday = state.today && h.day === state.today.day;
+
               const rowOpens =
-                isToday && todayOverride?.opens ? todayOverride.opens : h.opens;
+                isToday && todayOverride?.opens
+                  ? todayOverride.opens
+                  : h.opens;
+
               const rowCloses =
-                isToday && todayOverride?.closes ? todayOverride.closes : h.closes;
+                isToday && todayOverride?.closes
+                  ? todayOverride.closes
+                  : h.closes;
+
               return (
                 <div key={i} className={s.hoursRow}>
                   <dt className={isToday ? s.hoursToday : ''}>{h.day}</dt>
@@ -145,11 +188,10 @@ export default function LocationCard({
           )}
         </div>
 
-        {/* Contact info */}
         <div className={s.colLeft}>
           <h3 className={s.title}>{location.label}</h3>
           <p className={s.address}>{location.address}</p>
-          
+
           <p className={s.addrLinks}>
             <a
               className={s.linkAccent}
@@ -157,24 +199,26 @@ export default function LocationCard({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Skatīt Google Maps
+              {t.viewGoogleMaps}
             </a>
+
             <span className={s.dot} aria-hidden="true">
               •
             </span>
+
             <a
               className={s.linkAccent}
               href={location.destination}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Maršruti
+              {t.routes}
             </a>
           </p>
 
           {location.tel && (
             <>
-              <p className={s.metaLabel}>Tel:</p>
+              <p className={s.metaLabel}>{t.phoneLabel}</p>
               <p className={s.phoneWrap}>
                 <span className={s.phoneText}>{location.tel}</span>
               </p>
@@ -183,7 +227,7 @@ export default function LocationCard({
 
           {location.email && (
             <>
-              <p className={s.metaLabel}>email:</p>
+              <p className={s.metaLabel}>{t.emailLabel}</p>
               <p className={s.emailWrap}>
                 <a className={s.emailBig} href={`mailto:${location.email}`}>
                   {location.email}
@@ -194,7 +238,6 @@ export default function LocationCard({
         </div>
       </div>
 
-      {/* Sticky action buttons */}
       {showActions && (
         <div className={s.actions}>
           {location.tel && (
@@ -202,12 +245,13 @@ export default function LocationCard({
               variant="primary"
               size="lg"
               href={location.telLink}
-              aria-label={`Zvanīt ${location.label}`}
+              aria-label={t.callAriaLabel(location.label)}
               block
             >
-              Zvanīt
+              {t.call}
             </Button>
           )}
+
           {location.wa && (
             <Button
               variant="secondary"
@@ -215,10 +259,10 @@ export default function LocationCard({
               href={location.wa}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`WhatsApp ${location.label}`}
+              aria-label={t.whatsappAriaLabel(location.label)}
               block
             >
-              WhatsApp
+              {t.whatsapp}
             </Button>
           )}
         </div>

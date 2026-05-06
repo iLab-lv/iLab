@@ -1,6 +1,8 @@
 import ContactsPage from '@site/(info)/kontakti/ContactsPage';
 import Footer from '@site/ui/footer/Footer';
 
+import { getSiteSettings } from '@/lib/siteSettings';
+
 const CANONICAL_PATH = '/ru/kontakty';
 
 export const metadata = {
@@ -10,11 +12,17 @@ export const metadata = {
   alternates: { canonical: CANONICAL_PATH },
 };
 
-export default function Page() {
+export default async function Page() {
+  const siteSettings = await getSiteSettings();
+
   return (
-  <>
-  <ContactsPage locale="ru" />
-  <Footer locale="ru" />
-      </>
-      );
+    <>
+      <ContactsPage
+        locale="ru"
+        siteSettings={siteSettings}
+      />
+
+      <Footer locale="ru" />
+    </>
+  );
 }
