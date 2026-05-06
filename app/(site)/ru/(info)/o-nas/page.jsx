@@ -1,6 +1,8 @@
 import AboutPage from '@site/(info)/par-mums/AboutPage';
 import Footer from '@site/ui/footer/Footer';
 
+import { getSiteSettings } from '@/lib/siteSettings';
+
 const CANONICAL_PATH = '/ru/o-nas';
 
 export const metadata = {
@@ -10,11 +12,17 @@ export const metadata = {
   alternates: { canonical: CANONICAL_PATH },
 };
 
-export default function Page() {
+export default async function Page() {
+  const siteSettings = await getSiteSettings();
+
   return (
-  <>
-  <AboutPage locale="ru" />
-  <Footer locale="ru" />
-      </>
-      );
+    <>
+      <AboutPage
+        locale="ru"
+        siteSettings={siteSettings}
+      />
+
+      <Footer locale="ru" />
+    </>
+  );
 }

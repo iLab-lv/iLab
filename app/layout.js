@@ -1,6 +1,10 @@
+// app/layout.jsx
+
 import '@/styles/globals.scss';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+
+import { getSiteSettings } from '@/lib/siteSettings';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -20,7 +24,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const siteSettings = await getSiteSettings();
+
   return (
     <html lang="lv" className={inter.className}>
       <body>
@@ -36,6 +42,17 @@ export default function RootLayout({ children }) {
         {/* End Google Tag Manager (noscript) */}
 
         {children}
+
+        {/* Temporary debug check. Remove after confirming Firestore loads. */}
+        {process.env.NODE_ENV === 'development' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `console.log('siteSettings loaded:', ${JSON.stringify(
+                siteSettings
+              )});`,
+            }}
+          />
+        )}
 
         {/* Google Tag Manager */}
         <Script id="gtm-base" strategy="afterInteractive">

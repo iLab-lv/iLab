@@ -184,7 +184,10 @@ function buildOrgLd(locale = 'lv') {
   };
 }
 
-export default function AboutPage({ locale = 'lv' }) {
+export default function AboutPage({
+  locale = 'lv',
+  siteSettings,
+}) {
   const strings = getPageStrings(locale);
   const breadcrumbsLd = buildBreadcrumbsLd(locale);
   const orgLd = buildOrgLd(locale);
@@ -203,7 +206,7 @@ export default function AboutPage({ locale = 'lv' }) {
   return (
     <>
       <Script
-        id="about-breadcrumbs"
+        id={`about-breadcrumbs-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -211,7 +214,7 @@ export default function AboutPage({ locale = 'lv' }) {
       </Script>
 
       <Script
-        id="about-organization"
+        id={`about-organization-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -274,7 +277,11 @@ export default function AboutPage({ locale = 'lv' }) {
       </section>
 
       <section className={s.section}>
-        <Locations locale={locale} />
+        <Locations
+          locale={locale}
+          locations={siteSettings?.locations || []}
+          pinPositions={siteSettings?.pinPositions || {}}
+        />
       </section>
 
       <section className={s.section}>

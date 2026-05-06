@@ -160,7 +160,10 @@ function buildLocalBusinessLd(locale = 'lv') {
   };
 }
 
-export default function ContactsPage({ locale = 'lv' }) {
+export default function ContactsPage({
+  locale = 'lv',
+  siteSettings,
+}) {
   const strings = getPageStrings(locale);
   const breadcrumbsLd = buildBreadcrumbsLd(locale);
   const localBusinessLd = buildLocalBusinessLd(locale);
@@ -226,7 +229,11 @@ export default function ContactsPage({ locale = 'lv' }) {
       </section>
 
       <section className={s.section}>
-        <Locations locale={locale} />
+        <Locations
+          locale={locale}
+          locations={siteSettings?.locations || []}
+          pinPositions={siteSettings?.pinPositions || {}}
+        />
       </section>
     </>
   );

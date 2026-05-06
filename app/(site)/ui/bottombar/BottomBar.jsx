@@ -17,7 +17,9 @@ export default function BottomBar() {
 
   const {
     contactOpen,
+    bookOpen,
     openContact,
+    openBook,
     setSelectedLocId,
   } = useUiDialogs();
 
@@ -54,7 +56,10 @@ export default function BottomBar() {
           variant="primary"
           size="lg"
           block
-          href={cta.booking.href}
+          aria-haspopup="dialog"
+          aria-controls="pieraksties-panel"
+          aria-expanded={bookOpen}
+          onClick={(e) => openBook(e.currentTarget)}
           aria-label={cta.booking.ariaLabel}
         >
           {cta.booking.label}

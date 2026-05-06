@@ -1,5 +1,6 @@
 import HomePage from '@site/HomePage';
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import { getSiteSettings } from '@/lib/siteSettings';
 import Footer from '@site/ui/footer/Footer';
 
 export const metadata = {
@@ -49,11 +50,19 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const reviewsSummary = await getReviewsSummary();
+  const [reviewsSummary, siteSettings] = await Promise.all([
+    getReviewsSummary(),
+    getSiteSettings(),
+  ]);
 
   return (
     <>
-      <HomePage locale="ru" reviewsSummary={reviewsSummary} />
+      <HomePage
+        locale="ru"
+        reviewsSummary={reviewsSummary}
+        siteSettings={siteSettings}
+      />
+
       <Footer locale="ru" />
     </>
   );

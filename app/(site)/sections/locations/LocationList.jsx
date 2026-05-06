@@ -1,20 +1,10 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import s from './LocationList.module.scss';
 import LocationCard from './LocationCard';
+import { getLocationsContent } from './locations.i18n';
 
-/**
- * Location cards list/grid wrapper
- * Handles two modes: tabbed (single card) or grid (all cards)
- * 
- * @param {Array} locations - Location data from site.config
- * @param {string} selectedLocationId - Externally controlled selection
- * @param {boolean} showAllCards - true = grid mode, false = tabbed mode
- * @param {boolean} showActions - Show action buttons on cards
- * @param {Function} onLocationChange - (locationId) => void
- * @param {string} className - Additional CSS classes
- */
 export default function LocationList({
   locations = [],
   selectedLocationId,
@@ -22,36 +12,46 @@ export default function LocationList({
   showActions = true,
   onLocationChange,
   className = '',
+  locale = 'lv',
+  content,
 }) {
-  const ids = locations.map((l) => l.id);
-  const defaultId = selectedLocationId && ids.includes(selectedLocationId) 
-    ? selectedLocationId 
-    : ids[0];
-  
+  const t = content || getLocationsContent(locale);
+
+  const ids = useMemo(() => locations.map((l) => l.id), [locations]);
+
+  const defaultId =
+    selectedLocationId && ids.includes(selectedLocationId)
+      ? selectedLocationId
+      : ids[0];
+
   const [activeId, setActiveId] = useState(defaultId);
 
-  // Sync with external selection
   useEffect(() => {
     if (selectedLocationId && ids.includes(selectedLocationId)) {
       setActiveId(selectedLocationId);
     }
   }, [selectedLocationId, ids]);
 
-  // Notify parent of changes
   useEffect(() => {
-    onLocationChange?.(activeId);
+    if (activeId) {
+      onLocationChange?.(activeId);
+    }
   }, [activeId, onLocationChange]);
 
-  const activeLocation = locations.find((l) => l.id === activeId) || locations[0];
+  const activeLocation =
+    locations.find((l) => l.id === activeId) || locations[0];
 
-  // Roving tabs keyboard navigation
   const locIndex = ids.indexOf(activeId);
+
   const onTabsKeyDown = useCallback(
     (e) => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      if (!ids.length) return;
+
       e.preventDefault();
 
       let nextIndex = locIndex;
+
       if (e.key === 'ArrowRight') {
         nextIndex = (locIndex + 1) % ids.length;
       } else if (e.key === 'ArrowLeft') {
@@ -67,7 +67,10 @@ export default function LocationList({
     [locIndex, ids]
   );
 
-  // Grid mode - all cards visible
+  if (!locations.length) {
+    return null;
+  }
+
   if (showAllCards) {
     return (
       <div className={`${s.grid} ${className}`}>
@@ -78,24 +81,25 @@ export default function LocationList({
             variant="simplified"
             highlighted={selectedLocationId === loc.id}
             showActions={false}
+            locale={locale}
+            content={t}
           />
         ))}
       </div>
     );
   }
 
-  // Tabbed mode - single card with tabs
   return (
     <div className={`${s.wrapper} ${className}`}>
-      {/* Tabs */}
       <div
         role="tablist"
-        aria-label="Filiāles"
+        aria-label={t.tabsAriaLabel}
         className={s.tabs}
         onKeyDown={onTabsKeyDown}
       >
         {locations.map((loc) => {
           const selected = loc.id === activeId;
+
           return (
             <button
               key={loc.id}
@@ -113,7 +117,6 @@ export default function LocationList({
         })}
       </div>
 
-      {/* Single active card */}
       <section
         id={`tab-panel-${activeLocation.id}`}
         role="tabpanel"
@@ -124,6 +127,8 @@ export default function LocationList({
           location={activeLocation}
           variant="full"
           showActions={showActions}
+          locale={locale}
+          content={t}
         />
       </section>
     </div>
