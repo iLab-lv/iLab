@@ -1,15 +1,13 @@
-// app/ads/layout.jsx
 import Script from 'next/script';
 
 import NavBar from '@ui/navbar/NavBar';
 import BottomBar from '@ui/bottombar/BottomBar';
-import { UiDialogsProvider } from '@ui/providers/UiDialogsProvider';
-import { COMPANY, LOCATIONS } from '@/data/site.config';
 import Footer from '@ui/footer/Footer';
+import { UiDialogsProvider } from '@ui/providers/UiDialogsProvider';
+import { getSiteSettings } from '@/lib/siteSettings';
 
 import l from './Layout.module.scss';
 
-// Same GA4 ID as your main site
 const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
 export const metadata = {
@@ -19,14 +17,17 @@ export const metadata = {
   },
 };
 
-export default function AdsLayout({ children }) {
+export default async function AdsLayout({ children }) {
+  const siteSettings = await getSiteSettings();
+  const socials = siteSettings?.socials || {};
+
   return (
     <div className={l.adsRoot}>
-      {/* GA4 global tag */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         strategy="afterInteractive"
       />
+
       <Script id="ga4-init-ads" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -38,26 +39,28 @@ export default function AdsLayout({ children }) {
         `}
       </Script>
 
-      <UiDialogsProvider>
-        {/* a11y: skip link */}
+      <UiDialogsProvider siteSettings={siteSettings}>
         <a href="#main" className={l.skipLink}>
           Skip to content
         </a>
 
-        {/* Same topbar as main site, but without navigation links */}
-        <NavBar showNavigation={false} showHeaderCtas={true} logoHref="https://ilab.lv"/>
+        <NavBar
+          showNavigation={false}
+          showHeaderCtas={true}
+          logoHref="https://ilab.lv"
+        />
 
-        {/* Mobile/Tablet bottom CTAs (unchanged) */}
-        <BottomBar />
+        <BottomBar socials={socials} />
 
-        {/* Ads page content */}
         <main id="main" className={l.main}>
           {children}
         </main>
 
-        {/* Minimal NAP footer */}
-<Footer variant="ads" />
-
+        <Footer
+          variant="ads"
+          locale="lv"
+          siteSettings={siteSettings}
+        />
       </UiDialogsProvider>
     </div>
   );
