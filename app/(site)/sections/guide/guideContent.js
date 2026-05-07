@@ -6,10 +6,10 @@ const GUIDE_CONTENT = {
         {
           title: 'Simptomi un iespējamie risinājumi',
           text: `
-<p>Ja iPhone sāk uzvesties neparasti, problēmas cēlonis ne vienmēr ir acīmredzams. Dažādi simptomi var norādīt uz vairākiem bojājumiem, tāpēc svarīga ir precīza diagnostika. iLab meistari palīdz noteikt īsto iemeslu un piedāvā drošu risinājumu.</p>
+<p>Ja iPhone sāk uzvesties neparasti, problēmas cēlonis ne vienmēr ir acīmredzams. Dažādi simptomi var norādīt uz vairākiem bojājumiem, tāpēc svarīga ir precīza diagnostika. iLab tehniķi palīdz noteikt īsto iemeslu un piedāvā drošu risinājumu.</p>
 
 <p><strong>Pārkaršana vai ātra izlādēšanās</strong><br>
-Ja telefons strauji sakarst vai akumulators izlādējas neparasti ātri, iemesls var būt gan nolietota baterija, gan programmatūras kļūda. Pēc pārbaudes meistars var piedāvāt <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņu</a> vai programmatūras atjaunošanu, lai novērstu lieku strāvas patēriņu.</p>
+Ja telefons strauji sakarst vai akumulators izlādējas neparasti ātri, iemesls var būt gan nolietota baterija, gan programmatūras kļūda. Pēc pārbaudes tehniķis var piedāvāt <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņu</a> vai programmatūras atjaunošanu, lai novērstu lieku strāvas patēriņu.</p>
 
 <p><strong>Neuzlādējas vai uzlāde pārtrūkst</strong><br>
 Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai noteiktā leņķī, bieži vainīgs ir uzlādes ports vai kontakta korozija. Šādā gadījumā palīdz <a href="/iphone-remonts/uzlades-ligzda">uzlādes ligzdas remonts</a> vai tīrīšana, dažreiz arī baterijas nomaiņa.</p>
@@ -21,7 +21,7 @@ Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpus
 Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
 
 <p><strong>Kameras vai skaņas kļūmes</strong><br>
-Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas meistars piedāvās <a href="/iphone-remonts/kamera">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofons">skaļruņu un mikrofona</a> remontu.</p>
+Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas tehniķis piedāvās <a href="/iphone-remonts/kamera">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofons">skaļruņu un mikrofona</a> remontu.</p>
 
 <p><strong>Ko darīt, ja neesi pārliecināts?</strong><br>
 Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā. Pārbaudīsim ierīci un sniegsim precīzu remonta piedāvājumu ar cenu un termiņu pirms darba sākšanas.</p>
@@ -30,7 +30,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Cik tas ilgst un ko sagaidīt',
           text: `
-<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā - piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas meistars veic diagnostiku un informē par aptuveno izpildes laiku.</p>
+<p>Vairumu iPhone remontu iespējams paveikt tajā pašā dienā - piemēram, <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> vai <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> parasti aizņem 1–3 stundas. Pirms darba sākšanas tehniķis veic diagnostiku un informē par aptuveno izpildes laiku.</p>
 
 <p>Ja bojājums ir sarežģītāks (piemēram, ūdens bojājums vai mātesplates defekts), serviss informē par nepieciešamo laiku un detaļu pieejamību. Cenu un termiņu vienmēr saskaņojam pirms darba uzsākšanas, tāpēc klients zina, ko sagaidīt.</p>
 
@@ -50,9 +50,9 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Datu drošība un sagatavošanās remontam',
           text: `
-<p>Pirms ierīces nodošanas servisā iesakām izveidot datu rezerves kopiju iCloud vai iTunes vidē. iLab meistari ievēro stingrus datu drošības principus - mēs nepiekļūstam personīgajai informācijai un apstrādājam datus tikai remonta vajadzībām.</p>
+<p>Pirms ierīces nodošanas servisā iesakām izveidot datu rezerves kopiju iCloud vai iTunes vidē. iLab tehniķi ievēro stingrus datu drošības principus - mēs nepiekļūstam personīgajai informācijai un apstrādājam datus tikai remonta vajadzībām.</p>
 
-<p>Ja ierīce ir aizsargāta ar paroli, Face ID vai Touch ID, meistars ieteiks, kā rīkoties, lai pārbaude būtu iespējama. iLab serviss Rīgā nodrošina, ka katrs iPhone tiek apstrādāts droši, konfidenciāli un atbildīgi.</p>
+<p>Ja ierīce ir aizsargāta ar paroli, Face ID vai Touch ID, tehniķis ieteiks, kā rīkoties, lai pārbaude būtu iespējama. iLab serviss Rīgā nodrošina, ka katrs iPhone tiek apstrādāts droši, konfidenciāli un atbildīgi.</p>
           `,
         },
         {
@@ -60,9 +60,9 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
           text: `
 <p>iLab servisa centri atrodas Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu - sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
 
-<p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/servisa-centri">Servisa centri</a>.</p>
+<p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/kontakti">Servisa centri</a>.</p>
 
-<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostika</a> - mūsu sertificētie meistari palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
+<p>Neatkarīgi no tā, vai nepieciešama <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a>, <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņa</a> vai <a href="/iphone-remonts/udens-bojajumu-remonts">ūdens bojājumu diagnostika</a> - mūsu sertificētie tehniķi palīdzēs atjaunot Tavu iPhone tajā pašā dienā.</p>
           `,
         },
       ],
@@ -74,22 +74,22 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Симптомы и возможные решения',
           text: `
-<p>Если iPhone начинает вести себя нестабильно, причина не всегда очевидна. Один и тот же симптом может указывать на разные неисправности, поэтому важна точная диагностика. Мастера iLab помогут определить причину и предложат безопасное решение.</p>
+<p>Если iPhone начинает вести себя нестабильно, причина не всегда очевидна. Один и тот же симптом может указывать на разные неисправности, поэтому важна точная диагностика. Техники iLab помогут определить причину и предложат безопасное решение.</p>
 
 <p><strong>Перегрев или быстрая разрядка</strong><br>
-Если телефон сильно нагревается или аккумулятор быстро разряжается, причиной может быть изношенная батарея или программная ошибка. После диагностики мастер может предложить <a href="/ru/iphone-remonts/zamena-batarei">замену батареи</a> или обновление системы.</p>
+Если телефон сильно нагревается или аккумулятор быстро разряжается, причиной может быть изношенная батарея или программная ошибка. После диагностики техник может предложить <a href="/ru/remont-iphone/zamena-batarei">замену батареи</a> или обновление системы.</p>
 
 <p><strong>Не заряжается или зарядка прерывается</strong><br>
-Если кабель держится плохо, зарядка пропадает или работает только под определённым углом, проблема чаще всего в разъёме зарядки или коррозии контактов. В этом случае помогает <a href="/ru/iphone-remonts/remont-razjema-zarjadki">ремонт разъёма</a> или чистка.</p>
+Если кабель держится плохо, зарядка пропадает или работает только под определённым углом, проблема чаще всего в разъёме зарядки или коррозии контактов. В этом случае помогает <a href="/ru/remont-iphone/zamena-razema-zaryadki">ремонт разъёма</a> или чистка.</p>
 
 <p><strong>Повреждение водой или влагой</strong><br>
-После контакта с жидкостью телефон может выглядеть сухим, но внутри уже начинается окисление. Чем быстрее устройство попадёт в сервис, тем выше шанс его восстановить. Мы выполняем <a href="/ru/iphone-remonts/remont-posle-vody">диагностику и очистку после влаги</a>.</p>
+После контакта с жидкостью телефон может выглядеть сухим, но внутри уже начинается окисление. Чем быстрее устройство попадёт в сервис, тем выше шанс его восстановить. Мы выполняем <a href="/ru/remont-iphone/remont-posle-popadaniya-vlagi">диагностику и очистку после влаги</a>.</p>
 
 <p><strong>Проблемы с экраном или сенсором</strong><br>
-Треснувший экран, мерцание, полосы или отсутствие отклика сенсора указывают на повреждение дисплея. Решение - <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> с гарантией.</p>
+Треснувший экран, мерцание, полосы или отсутствие отклика сенсора указывают на повреждение дисплея. Решение - <a href="/ru/remont-iphone/zamena-ekrana">замена экрана</a> с гарантией.</p>
 
 <p><strong>Неисправности камеры или звука</strong><br>
-Размытое изображение, проблемы с фокусом или отсутствие звука могут быть вызваны влагой, повреждением модуля или загрязнением. После диагностики мастер предложит <a href="/ru/iphone-remonts/remont-kamery">ремонт камеры</a> или <a href="/ru/iphone-remonts/remont-dinamika-mikrofona">динамиков и микрофона</a>.</p>
+Размытое изображение, проблемы с фокусом или отсутствие звука могут быть вызваны влагой, повреждением модуля или загрязнением. После диагностики техник предложит <a href="/ru/remont-iphone/remont-kamery">ремонт камеры</a> или <a href="/ru/remont-iphone/remont-dinamika-mikrofona">динамиков и микрофона</a>.</p>
 
 <p><strong>Не уверены в проблеме?</strong><br>
 Если вы не знаете точную причину, iLab предлагает бесплатную диагностику в Риге. Мы проверим устройство и сообщим стоимость и сроки до начала ремонта.</p>
@@ -98,7 +98,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Сроки ремонта и что ожидать',
           text: `
-<p>Большинство ремонтов iPhone выполняются в тот же день - например, <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a> или <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> обычно занимает 1–3 часа. Перед началом мастер проводит диагностику и сообщает ориентировочное время.</p>
+<p>Большинство ремонтов iPhone выполняются в тот же день - например, <a href="/ru/remont-iphone/zamena-ekrana">замена экрана</a> или <a href="/ru/remont-iphone/zamena-batarei">замена батареи</a> обычно занимает 1–3 часа. Перед началом техник проводит диагностику и сообщает ориентировочное время.</p>
 
 <p>Если повреждение сложное (например, после воды или проблемы с платой), мы сообщаем сроки и наличие деталей заранее. Стоимость и время всегда согласовываются до начала работ.</p>
 
@@ -118,9 +118,9 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Безопасность данных и подготовка',
           text: `
-<p>Перед сдачей устройства в ремонт рекомендуется сделать резервную копию в iCloud или iTunes. Мастера iLab соблюдают строгие правила безопасности - мы не получаем доступ к личным данным.</p>
+<p>Перед сдачей устройства в ремонт рекомендуется сделать резервную копию в iCloud или iTunes. Техники iLab соблюдают строгие правила безопасности - мы не получаем доступ к личным данным.</p>
 
-<p>Если устройство защищено паролем, Face ID или Touch ID, мастер подскажет, как подготовить его к диагностике. В iLab каждый iPhone обрабатывается безопасно и конфиденциально.</p>
+<p>Если устройство защищено паролем, Face ID или Touch ID, техник подскажет, как подготовить его к диагностике. В iLab каждый iPhone обрабатывается безопасно и конфиденциально.</p>
           `,
         },
         {
@@ -128,9 +128,9 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
           text: `
 <p>Сервисные центры iLab находятся в Риге - <strong>ТЦ Domina Shopping</strong> и <strong>ТЦ Spice Home</strong>. Мы выполняем все виды ремонта - от диагностики до сложных работ.</p>
 
-<p>Вы можете принести устройство лично или отправить по почте. Контакты и адреса доступны в разделе <a href="/ru/kontakty">Контакты</a> или <a href="/ru/servisa-centri">Сервисные центры</a>.</p>
+<p>Вы можете принести устройство лично или отправить по почте. Контакты и адреса доступны в разделе <a href="/ru/kontakty">Контакты</a> или <a href="/ru/kontakty">Сервисные центры</a>.</p>
 
-<p>Независимо от проблемы - будь то <a href="/ru/iphone-remonts/zamena-ekrana">замена экрана</a>, <a href="/ru/iphone-remonts/zamena-batarei">замена батареи</a> или <a href="/ru/iphone-remonts/remont-posle-vody">ремонт после воды</a> - наши мастера помогут восстановить ваш iPhone в кратчайшие сроки.</p>
+<p>Независимо от проблемы - будь то <a href="/ru/remont-iphone/zamena-ekrana">замена экрана</a>, <a href="/ru/remont-iphone/zamena-batarei">замена батареи</a> или <a href="/ru/remont-iphone/remont-posle-popadaniya-vlagi">ремонт после воды</a> - наши техники помогут восстановить ваш iPhone в кратчайшие сроки.</p>
           `,
         },
       ],

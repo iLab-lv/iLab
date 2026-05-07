@@ -5,7 +5,7 @@ const CONVERT_BAND_CONTENT = {
     default: {
       title: 'Vajadzīga palīdzība?',
       primary: {
-        label: 'Sazināties ar meistaru',
+        label: 'Sazināties ar tehniķi',
         href: '/kontakti',
         variant: 'secondary',
       },
@@ -18,20 +18,20 @@ const CONVERT_BAND_CONTENT = {
   },
 
   ru: {
-  default: {
-    title: 'Нужна помощь?',
-    primary: {
-      label: 'Связаться с мастером',
-      href: '/ru/kontakty',
-      variant: 'secondary',
-    },
-    secondary: {
-      label: 'Записаться на ремонт',
-      href: '/ru/zapisatsja-na-remont',
-      variant: 'primary',
+    default: {
+      title: 'Нужна помощь?',
+      primary: {
+        label: 'Связаться с техником',
+        href: '/ru/kontakty',
+        variant: 'secondary',
+      },
+      secondary: {
+        label: 'Записаться на ремонт',
+        href: '/ru/zapisatsja-na-remont',
+        variant: 'primary',
+      },
     },
   },
-},
 };
 
 export function getConvertBandContent(locale = 'lv', variant = 'default') {

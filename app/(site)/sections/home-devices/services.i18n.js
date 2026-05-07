@@ -117,37 +117,37 @@ const SERVICES_CONTENT = {
     apple: {
       title: 'Ремонт устройств Apple',
       introHTML:
-        'Сервис Apple в Риге - <a href="/iphone-remonts">ремонт iPhone</a>, <a href="/plansetdatoru-remonts/ipad">ремонт iPad</a> и <a href="/datoru-remonts/macbook">ремонт MacBook</a>. Выполняем замену экрана и аккумулятора, ремонт разъёма зарядки и диагностику в тот же день (в зависимости от модели). Используем качественные детали и предоставляем <strong>гарантию 90&nbsp;дней</strong>. Самые популярные услуги: замена экрана, замена аккумулятора и ремонт разъёма зарядки.',
+        'Сервис Apple в Риге - <a href="/ru/remont-iphone">ремонт iPhone</a>, <a href="/ru/remont-planshetov/ipad">ремонт iPad</a> и <a href="/ru/remont-noutbukov/macbook">ремонт MacBook</a>. Выполняем замену экрана и аккумулятора, ремонт разъёма зарядки и диагностику в тот же день (в зависимости от модели). Используем качественные детали и предоставляем <strong>гарантию 90&nbsp;дней</strong>. Самые популярные услуги: замена экрана, замена аккумулятора и ремонт разъёма зарядки.',
       mobileLinksLabel: 'Быстрые ссылки Apple мобильные устройства',
       computerLinksLabel: 'Быстрые ссылки Apple компьютеры',
       links: [
         {
           label: 'Ремонт iPhone',
-          href: '/iphone-remonts#iphone-modeli',
+          href: '/ru/remont-iphone#iphone-modeli',
           device: 'phone',
           group: 'mobile',
         },
         {
           label: 'Ремонт iPad',
-          href: '/plansetdatoru-remonts/ipad#brand-modeli',
+          href: '/ru/remont-planshetov/ipad#brand-modeli',
           device: 'tablet',
           group: 'mobile',
         },
         {
           label: 'Ремонт MacBook',
-          href: '/datoru-remonts/macbook#brand-modeli',
+          href: '/ru/remont-noutbukov/macbook#brand-modeli',
           device: 'laptop',
           group: 'computer',
         },
         {
           label: 'Ремонт iMac',
-          href: '/datoru-remonts/imac',
+          href: '/ru/remont-noutbukov/imac',
           device: 'imac',
           group: 'computer',
         },
         {
           label: 'Ремонт Mac Pro',
-          href: '/datoru-remonts/mac-pro',
+          href: '/ru/remont-noutbukov/mac-pro',
           device: 'station',
           group: 'computer',
         },
@@ -158,10 +158,10 @@ const SERVICES_CONTENT = {
     android: {
       title: 'Android - ремонт телефонов и планшетов',
       introHTML:
-        'Обслуживаем устройства <strong>Samsung</strong>, <strong>Xiaomi</strong> и <strong>Huawei</strong> в Риге. Выполняем замену экрана, замену аккумулятора и ремонт разъёма зарядки в тот же день (в зависимости от модели), с <strong>гарантией 90&nbsp;дней</strong>. Также смотрите страницы <a href="/telefonu-remonts">ремонт телефонов</a> и <a href="/plansetdatoru-remonts">ремонт планшетов</a>.',
+        'Обслуживаем устройства <strong>Samsung</strong>, <strong>Xiaomi</strong> и <strong>Huawei</strong> в Риге. Выполняем замену экрана, замену аккумулятора и ремонт разъёма зарядки в тот же день (в зависимости от модели), с <strong>гарантией 90&nbsp;дней</strong>. Также смотрите страницы <a href="/ru/remont-telefonov">ремонт телефонов</a> и <a href="/ru/remont-planshetov">ремонт планшетов</a>.',
       brandsLabel: 'Бренды Android',
       allBrandsLabel: 'Смотреть все бренды →',
-      allBrandsHref: '/telefonu-remonts',
+      allBrandsHref: '/ru/remont-telefonov',
       imageSrc: '/images/home/android.webp',
       seoBlurbs: {
         samsung:
@@ -176,26 +176,26 @@ const SERVICES_CONTENT = {
       brands: [
         {
           name: 'Samsung',
-          hrefTitle: '/telefonu-remonts/samsung',
-          phoneHref: '/telefonu-remonts/samsung',
+          hrefTitle: '/ru/remont-telefonov/samsung',
+          phoneHref: '/ru/remont-telefonov/samsung',
           phoneLabel: 'Ремонт телефонов Samsung',
-          tabletHref: '/plansetdatoru-remonts#samsung',
+          tabletHref: '/ru/remont-planshetov#samsung',
           tabletLabel: 'Ремонт планшетов Samsung',
         },
         {
           name: 'Xiaomi',
-          hrefTitle: '/telefonu-remonts/xiaomi',
-          phoneHref: '/telefonu-remonts/xiaomi',
+          hrefTitle: '/ru/remont-telefonov/xiaomi',
+          phoneHref: '/ru/remont-telefonov/xiaomi',
           phoneLabel: 'Ремонт телефонов Xiaomi',
-          tabletHref: '/plansetdatoru-remonts#xiaomi',
+          tabletHref: '/ru/remont-planshetov#xiaomi',
           tabletLabel: 'Ремонт планшетов Xiaomi',
         },
         {
           name: 'Huawei',
-          hrefTitle: '/telefonu-remonts/huawei',
-          phoneHref: '/telefonu-remonts/huawei',
+          hrefTitle: '/ru/remont-telefonov/huawei',
+          phoneHref: '/ru/remont-telefonov/huawei',
           phoneLabel: 'Ремонт телефонов Huawei',
-          tabletHref: '/plansetdatoru-remonts#huawei',
+          tabletHref: '/ru/remont-planshetov#huawei',
           tabletLabel: 'Ремонт планшетов Huawei',
         },
       ],
@@ -206,8 +206,8 @@ const SERVICES_CONTENT = {
         key: 'pc',
         title: 'Ремонт компьютеров',
         bodyHTML:
-          '<a href="/datoru-remonts">Ремонт компьютеров в Риге</a> - ноутбуки и настольные компьютеры. Выполняем замену клавиатуры и экрана, замену аккумулятора, чистку системы охлаждения/замену термопасты, установку SSD и переустановку ОС. Также обслуживаем <a href="/datoru-remonts/macbook">MacBook</a>, <a href="/datoru-remonts/imac">iMac</a> и <a href="/datoru-remonts/mac-pro">Mac Pro</a>. В тот же день (в зависимости от модели) и с гарантией 90&nbsp;дней.',
-        href: '/datoru-remonts',
+          '<a href="/ru/remont-noutbukov">Ремонт компьютеров в Риге</a> - ноутбуки и настольные компьютеры. Выполняем замену клавиатуры и экрана, замену аккумулятора, чистку системы охлаждения/замену термопасты, установку SSD и переустановку ОС. Также обслуживаем <a href="/ru/remont-noutbukov/macbook">MacBook</a>, <a href="/ru/remont-noutbukov/imac">iMac</a> и <a href="/ru/remont-noutbukov/mac-pro">Mac Pro</a>. В тот же день (в зависимости от модели) и с гарантией 90&nbsp;дней.',
+        href: '/ru/remont-noutbukov',
         linkLabel: 'Смотреть →',
         imageSrc: '/images/home/laptop.webp',
       },
@@ -215,8 +215,8 @@ const SERVICES_CONTENT = {
         key: 'dyson',
         title: 'Ремонт Dyson',
         bodyHTML:
-          '<a href="/dyson-remonts">Ремонт Dyson в Риге</a> - диагностика, замена фильтров и аккумуляторов, ремонт мотора и электроники, устранение проблем с зарядкой и всасыванием, полная чистка после окончания гарантии. Используем качественные детали и предоставляем гарантию 90&nbsp;дней.',
-        href: '/dyson-remonts',
+          '<a href="/ru/remont-dyson">Ремонт Dyson в Риге</a> - диагностика, замена фильтров и аккумуляторов, ремонт мотора и электроники, устранение проблем с зарядкой и всасыванием, полная чистка после окончания гарантии. Используем качественные детали и предоставляем гарантию 90&nbsp;дней.',
+        href: '/ru/remont-dyson',
         linkLabel: 'Смотреть →',
         imageSrc: '/images/home/dyson.webp',
       },
