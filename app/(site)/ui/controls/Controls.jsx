@@ -12,9 +12,9 @@ export default function Controls({ facebookUrl, instagramUrl, tiktokUrl }) {
   return (
     <div className={s.wrap} role="complementary" aria-label="Sistēmas vadīklas">
       {/* Language (desktop) */}
-      {/* <div className={s.slot}>
+      <div className={s.slot}>
         <LanguageSwitcher initial="lv" />
-      </div> */}
+      </div>
 
       {/* Socials */}
       <div className={s.socials} aria-label="Sociālie tīkli">
