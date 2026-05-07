@@ -3,7 +3,6 @@ import ComputerDevicePage, {
   getComputerDevicePageHeader,
   revalidate,
 } from './ComputerDevicePage';
-import Footer from '@site/ui/footer/Footer';
 
 export { revalidate };
 
@@ -22,7 +21,6 @@ export default function Page({ params }) {
         device={params.device}
         locale="lv"
       />
-      <Footer locale="lv" />
     </>
   );
 }

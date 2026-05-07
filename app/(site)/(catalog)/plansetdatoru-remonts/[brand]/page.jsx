@@ -2,7 +2,7 @@ import TabletBrandPage, {
   generateTabletBrandStaticParams,
   getTabletBrandMetadata,
 } from './TabletBrandPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 export const dynamicParams = false;
 
@@ -18,7 +18,6 @@ export default function Page({ params }) {
   return (
   <>
   <TabletBrandPage brand={params.brand} locale="lv" />
-  <Footer locale="lv" />
   </>
 
   );

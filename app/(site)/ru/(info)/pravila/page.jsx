@@ -1,5 +1,5 @@
 import TermsPage from '@site/(info)/noteikumi/TermsPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 const CANONICAL_PATH = '/ru/pravila';
 
@@ -14,7 +14,7 @@ export default function Page() {
   return (
   <>
   <TermsPage locale="ru" />
-  <Footer locale="ru" />
+  
       </>
       );
 }

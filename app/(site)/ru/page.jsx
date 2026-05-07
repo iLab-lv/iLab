@@ -1,7 +1,7 @@
 import HomePage from '@site/HomePage';
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 import { getSiteSettings } from '@/lib/siteSettings';
-import Footer from '@site/ui/footer/Footer';
+
 
 export const metadata = {
   title: 'Сервис телефонов и компьютеров - iLab',
@@ -63,7 +63,6 @@ export default async function Page() {
         siteSettings={siteSettings}
       />
 
-      <Footer locale="ru" />
     </>
   );
 }

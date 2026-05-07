@@ -4,7 +4,7 @@ import {
   getIphoneDeviceMetadata,
 } from '@site/(catalog)/iphone-remonts/[device]/IphoneDevicePage';
 import IphoneDevicePage from '@site/(catalog)/iphone-remonts/[device]/IphoneDevicePage';
-import Footer from '@site/ui/footer/Footer';
+
 
 export const revalidate = 0;
 
@@ -24,7 +24,6 @@ export default async function Page({ params }) {
   return (
   <>
   <IphoneDevicePage deviceSlug={slug} locale="lv" />
-  <Footer locale="lv" />
   </>
 );
 }

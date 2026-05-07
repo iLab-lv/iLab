@@ -1,5 +1,4 @@
 import TermsPage from './TermsPage';
-import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/noteikumi';
 
@@ -14,7 +13,6 @@ export default function Page() {
   return (
   <>
   <TermsPage locale="lv" />
-  <Footer locale="lv" />
     </>
     );
 }

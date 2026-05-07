@@ -1,6 +1,8 @@
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
+import Footer from './ui/footer/Footer';
+import FooterClientWrapper from './ui/footer/FooterClientWrapper';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Script from 'next/script';
 import { headers } from 'next/headers';
@@ -73,6 +75,11 @@ export default async function SiteLayout({ children }) {
         <BottomBar socials={socials} />
 
         <main id="main">{children}</main>
+
+        <FooterClientWrapper
+          lv={<Footer locale="lv" siteSettings={siteSettings} />}
+          ru={<Footer locale="ru" siteSettings={siteSettings} />}
+        />
       </UiDialogsProvider>
     </div>
   );

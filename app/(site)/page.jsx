@@ -1,7 +1,7 @@
 import HomePage from './HomePage';
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 import { getSiteSettings } from '@/lib/siteSettings';
-import Footer from '@site/ui/footer/Footer';
+
 
 export const metadata = {
   title: 'Telefonu un datoru serviss - iLab',
@@ -63,7 +63,7 @@ export default async function Page() {
         siteSettings={siteSettings}
       />
 
-      <Footer locale="lv" />
+
     </>
   );
 }
