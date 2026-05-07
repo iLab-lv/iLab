@@ -1,10 +1,10 @@
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
-import { SOCIALS } from '@/data/site.config';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import Script from 'next/script';
 import { headers } from 'next/headers';
+import { getSiteSettings } from '@/lib/siteSettings';
 import l from './Layout.module.scss';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -14,6 +14,8 @@ function getLocaleFromPathname(pathname = '/') {
 }
 
 export default async function SiteLayout({ children }) {
+  const siteSettings = await getSiteSettings();
+
   const headersList = await headers();
   const pathname =
     headersList.get('x-pathname') ||
@@ -22,6 +24,7 @@ export default async function SiteLayout({ children }) {
     '/';
 
   const locale = getLocaleFromPathname(pathname);
+  const socials = siteSettings?.socials || {};
 
   return (
     <div className={l.siteRoot}>
@@ -42,7 +45,7 @@ export default async function SiteLayout({ children }) {
         </Script>
       )}
 
-      <UiDialogsProvider>
+      <UiDialogsProvider locale={locale} siteSettings={siteSettings}>
         <a
           href="#main"
           style={{
@@ -54,24 +57,22 @@ export default async function SiteLayout({ children }) {
             overflow: 'hidden',
           }}
         >
-          Skip to content
+          {locale === 'ru' ? 'Перейти к содержанию' : 'Pāriet uz saturu'}
         </a>
 
         <NavBar />
 
         <div className={l.controlsDesktopOnly}>
           <Controls
-            facebookUrl={SOCIALS.facebook}
-            instagramUrl={SOCIALS.instagram}
-            tiktokUrl={SOCIALS.tiktok}
+            facebookUrl={socials.facebook}
+            instagramUrl={socials.instagram}
+            tiktokUrl={socials.tiktok}
           />
         </div>
 
-        <BottomBar />
+        <BottomBar socials={socials} />
 
         <main id="main">{children}</main>
-
-
       </UiDialogsProvider>
     </div>
   );

@@ -7,19 +7,19 @@ export default function FullscreenPanel({
   open,
   onClose,
   onExited,
-  onRequestOpen,            // NEW: let panel ask parent to open itself
-  paneKey,                  // externally requested pane key
+  onRequestOpen,
+  paneKey,
   paneTitle = '',
-  renderPane,              // (key, payload?) => ReactNode
+  closeLabel = 'Aizvērt',
+  renderPane,
 }) {
   const overlayRef = useRef(null);
-  const panelRef   = useRef(null);
-  const stageRef   = useRef(null);
+  const panelRef = useRef(null);
+  const stageRef = useRef(null);
   const returnFocusRef = useRef(null);
-  const swapRaf    = useRef(null);
+  const swapRaf = useRef(null);
 
-  /* ===== Open/Close phase ===== */
-  const EXIT_FALLBACK_MS = 360; // keep in sync with tokens/SCSS
+  const EXIT_FALLBACK_MS = 360;
   const [phase, setPhase] = useState('closed');
   const shouldRender = open || phase !== 'closed';
 
@@ -41,6 +41,7 @@ export default function FullscreenPanel({
       setPhase('closing');
 
       const node = panelRef.current;
+
       if (node) {
         const onEnd = (ev) => {
           if (ev.target === node && ev.propertyName === 'transform') {
@@ -48,7 +49,9 @@ export default function FullscreenPanel({
             finishClose();
           }
         };
+
         node.addEventListener('transitionend', onEnd);
+
         t = setTimeout(() => {
           node.removeEventListener('transitionend', onEnd);
           finishClose();
@@ -57,15 +60,15 @@ export default function FullscreenPanel({
         t = setTimeout(finishClose, EXIT_FALLBACK_MS);
       }
     }
+
     return () => clearTimeout(t);
   }, [open, phase, onExited]);
 
-  /* Root scroll lock */
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
 
     const docEl = document.documentElement;
-    const body  = document.body;
+    const body = document.body;
 
     const prev = {
       htmlOverflow: docEl.style.overflow,
@@ -73,37 +76,41 @@ export default function FullscreenPanel({
       htmlPaddingRight: docEl.style.paddingRight,
     };
 
-    const sbw = window.innerWidth - docEl.clientWidth; // scrollbar width
+    const sbw = window.innerWidth - docEl.clientWidth;
 
     docEl.style.overflow = 'hidden';
-    body.style.overflow  = 'hidden';
-    if (sbw > 0) docEl.style.paddingRight = `${sbw}px`;
+    body.style.overflow = 'hidden';
+
+    if (sbw > 0) {
+      docEl.style.paddingRight = `${sbw}px`;
+    }
 
     return () => {
-      docEl.style.overflow     = prev.htmlOverflow;
-      body.style.overflow      = prev.bodyOverflow;
+      docEl.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
       docEl.style.paddingRight = prev.htmlPaddingRight;
     };
   }, [phase]);
 
-  /* Focus mgmt (on open/close) */
   useEffect(() => {
     if (open) {
       returnFocusRef.current = document.activeElement;
+
       const t = setTimeout(() => {
         const container = panelRef.current;
         const first = container?.querySelector(
           '[data-pane-active="true"] button, [data-pane-active="true"] [href], [data-pane-active="true"] input, [data-pane-active="true"] select, [data-pane-active="true"] textarea, [data-pane-active="true"] [tabindex]:not([tabindex="-1"])'
         );
+
         (first || container)?.focus?.();
       }, 0);
+
       return () => clearTimeout(t);
-    } else {
-      returnFocusRef.current?.focus?.();
     }
+
+    returnFocusRef.current?.focus?.();
   }, [open]);
 
-  /* Focus trap */
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
 
@@ -113,73 +120,94 @@ export default function FullscreenPanel({
         onClose?.();
         return;
       }
+
       if (e.key === 'Tab') {
         const root = panelRef.current;
         if (!root) return;
+
         const nodes = Array.from(
           root.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           )
-        ).filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+        ).filter(
+          (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+        );
+
         if (!nodes.length) return;
-        const first = nodes[0], last = nodes[nodes.length - 1], active = document.activeElement;
-        if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
-        else if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        const active = document.activeElement;
+
+        if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        } else if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        }
       }
     };
 
     document.addEventListener('keydown', handleKey);
+
     return () => document.removeEventListener('keydown', handleKey);
   }, [phase, onClose]);
 
   const onBackdropClick = (e) => {
-    if (e.target === overlayRef.current) onClose?.();
+    if (e.target === overlayRef.current) {
+      onClose?.();
+    }
   };
 
-  /* ===== Pane swap + internal override (react to map events) ===== */
   const [internalPaneKey, setInternalPaneKey] = useState(null);
-  const [panePayload, setPanePayload] = useState(null); // e.g., { locId }
+  const [panePayload, setPanePayload] = useState(null);
 
-  // effective pane: internal override wins, else external prop
   const effectivePaneKey = internalPaneKey ?? paneKey ?? null;
 
-  // if parent drives pane explicitly, clear internal override
   useEffect(() => {
-    if (paneKey != null) setInternalPaneKey(null);
+    if (paneKey != null) {
+      setInternalPaneKey(null);
+    }
   }, [paneKey]);
 
-  // Listen for 'open-sazinies' from anywhere (e.g., Locations section on a page)
   useEffect(() => {
     const handler = (ev) => {
       const locId = ev?.detail?.locId ?? null;
+
       setPanePayload({ locId });
       setInternalPaneKey('sazinaties');
 
-      // If panel is closed, ask parent to open it
       if (phase === 'closed') {
         onRequestOpen?.();
       }
     };
 
     window.addEventListener('open-sazinies', handler);
+
     return () => window.removeEventListener('open-sazinies', handler);
   }, [phase, onRequestOpen]);
 
-  // swapping state machine
-  const [activeKey, setActiveKey]   = useState(effectivePaneKey || null);
-  const [exitKey, setExitKey]       = useState(null);
-  const [enterKey, setEnterKey]     = useState(null);
-  const [swapPhase, setSwapPhase]   = useState('idle'); // 'idle' | 'prep' | 'run'
-  const [enterDir, setEnterDir]     = useState('right');  // 'right' | 'left' | 'up' | 'down'
-  const [exitDir, setExitDir]       = useState('right');
+  const [activeKey, setActiveKey] = useState(effectivePaneKey || null);
+  const [exitKey, setExitKey] = useState(null);
+  const [enterKey, setEnterKey] = useState(null);
+  const [swapPhase, setSwapPhase] = useState('idle');
+  const [enterDir, setEnterDir] = useState('right');
+  const [exitDir, setExitDir] = useState('right');
+
   const isSwapping = swapPhase !== 'idle';
 
   const [isDesktop, setIsDesktop] = useState(false);
+
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
+
     const apply = () => setIsDesktop(mq.matches);
+
     apply();
+
     mq.addEventListener?.('change', apply);
+
     return () => mq.removeEventListener?.('change', apply);
   }, []);
 
@@ -194,11 +222,13 @@ export default function FullscreenPanel({
 
   function resolveDirs(fromKey, toKey) {
     let enter = isDesktop ? 'right' : 'up';
-    let exit  = isDesktop ? 'left'  : 'up';
+    let exit = isDesktop ? 'left' : 'up';
+
     if (fromKey === 'locator' && toKey === 'sazinaties') {
       enter = isDesktop ? 'right' : 'up';
-      exit  = isDesktop ? 'left'  : 'up';
+      exit = isDesktop ? 'left' : 'up';
     }
+
     return { enter, exit };
   }
 
@@ -208,6 +238,7 @@ export default function FullscreenPanel({
     if (swapPhase !== 'idle') return;
 
     const { enter, exit } = resolveDirs(activeKey, effectivePaneKey);
+
     setEnterDir(enter);
     setExitDir(exit);
 
@@ -217,16 +248,19 @@ export default function FullscreenPanel({
 
     const id1 = requestAnimationFrame(() => {
       const id2 = requestAnimationFrame(() => setSwapPhase('run'));
-      (swapRaf.current = [id1, id2]);
+      swapRaf.current = [id1, id2];
     });
 
     const stage = stageRef.current;
     let cleaned = false;
+
     const cleanup = () => {
       if (cleaned) return;
+
       cleaned = true;
 
       const pair = swapRaf.current;
+
       if (pair) {
         pair.forEach((id) => cancelAnimationFrame(id));
         swapRaf.current = null;
@@ -242,14 +276,18 @@ export default function FullscreenPanel({
 
     const onEnd = (ev) => {
       const el = ev.target;
+
       const isPane =
         el instanceof Element &&
-        (el.classList.contains(s.paneEnter) || el.classList.contains(s.paneExit));
+        (el.classList.contains(s.paneEnter) ||
+          el.classList.contains(s.paneExit));
+
       if (isPane && ev.propertyName === 'transform') {
         stage?.removeEventListener('transitionend', onEnd);
         cleanup();
       }
     };
+
     stage?.addEventListener('transitionend', onEnd);
 
     const fallback = setTimeout(() => {
@@ -259,10 +297,12 @@ export default function FullscreenPanel({
 
     return () => {
       const pair = swapRaf.current;
+
       if (pair) {
         pair.forEach((id) => cancelAnimationFrame(id));
         swapRaf.current = null;
       }
+
       clearTimeout(fallback);
       stage?.removeEventListener('transitionend', onEnd);
     };
@@ -279,9 +319,15 @@ export default function FullscreenPanel({
       onMouseDown={onBackdropClick}
       aria-hidden={!open}
     >
-      {/* Close button anchored to overlay (outside scrollable content) */}
       <div className={s.closeGlobal}>
-        <button type="button" className={s.close} aria-label="Aizvērt" onClick={onClose}>✕</button>
+        <button
+          type="button"
+          className={s.close}
+          aria-label={closeLabel}
+          onClick={onClose}
+        >
+          ✕
+        </button>
       </div>
 
       <div
@@ -293,8 +339,9 @@ export default function FullscreenPanel({
         aria-labelledby="panel-title"
         tabIndex={-1}
       >
-        {/* Accessible name (visually hidden) */}
-        <h2 id="panel-title" className={s.srOnly}>{paneTitle}</h2>
+        <h2 id="panel-title" className={s.srOnly}>
+          {paneTitle}
+        </h2>
 
         <div
           ref={stageRef}
@@ -302,14 +349,12 @@ export default function FullscreenPanel({
           data-swapping={isSwapping ? 'true' : 'false'}
           data-swap-phase={swapPhase}
         >
-          {/* Active (steady) */}
           {activeKey && !isSwapping && (
             <div className={s.pane} data-pane-active="true">
               {renderPane(activeKey, panePayload)}
             </div>
           )}
 
-          {/* Swap: both panes absolute (no reflow) */}
           {isSwapping && (
             <>
               <div
@@ -321,7 +366,11 @@ export default function FullscreenPanel({
               </div>
 
               <div
-                className={[s.pane, s.paneEnter, s[`enter-${enterDir}`]].join(' ')}
+                className={[
+                  s.pane,
+                  s.paneEnter,
+                  s[`enter-${enterDir}`],
+                ].join(' ')}
                 data-pane="enter"
               >
                 {enterKey && renderPane(enterKey, panePayload)}

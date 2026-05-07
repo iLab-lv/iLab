@@ -6,11 +6,10 @@ import s from './BottomBar.module.scss';
 import Button from '../../components/button/Button';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 import Controls from '../controls/Controls';
-import { SOCIALS } from '@/data/site.config';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
 import { getCtaMainContent } from '../cta-main/ctaMainContent';
 
-export default function BottomBar() {
+export default function BottomBar({ socials = {} }) {
   const pathname = usePathname() || '/';
   const locale = getNavLocaleFromPathname(pathname);
   const cta = getCtaMainContent(locale);
@@ -27,9 +26,9 @@ export default function BottomBar() {
     <nav className={s.bottomBar} aria-label={cta.bottomBar.ariaLabel}>
       <div className={s.controlsSlot}>
         <Controls
-          facebookUrl={SOCIALS.facebook}
-          instagramUrl={SOCIALS.instagram}
-          tiktokUrl={SOCIALS.tiktok}
+          facebookUrl={socials.facebook}
+          instagramUrl={socials.instagram}
+          tiktokUrl={socials.tiktok}
         />
       </div>
 
