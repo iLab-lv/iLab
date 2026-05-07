@@ -1,6 +1,6 @@
 // app/(site)/(catalog)/iphone-remonts/page.jsx
 import IphoneRepairPage from './IphoneRepairPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 const CANONICAL_PATH = '/iphone-remonts';
 
@@ -15,7 +15,6 @@ export default function Page() {
   return (
   <>
   <IphoneRepairPage locale="lv" />
-  <Footer locale="lv" />
   </>
 
   );

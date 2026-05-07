@@ -1,5 +1,5 @@
 import TabletDevicePage from '@site/(catalog)/plansetdatoru-remonts/[brand]/[device]/TabletDevicePage';
-import Footer from '@site/ui/footer/Footer';
+
 
 
 export const revalidate = 0;
@@ -18,7 +18,6 @@ export default async function Page({ params }) {
   return (
   <>
   <TabletDevicePage params={params} locale="ru" />
-  <Footer locale="lv" />
   </>
   );
 }

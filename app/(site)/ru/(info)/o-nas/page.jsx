@@ -1,5 +1,5 @@
 import AboutPage from '@site/(info)/par-mums/AboutPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 import { getSiteSettings } from '@/lib/siteSettings';
 
@@ -21,8 +21,6 @@ export default async function Page() {
         locale="ru"
         siteSettings={siteSettings}
       />
-
-      <Footer locale="ru" />
     </>
   );
 }

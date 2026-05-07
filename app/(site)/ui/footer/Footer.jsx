@@ -1,25 +1,37 @@
 import styles from './Footer.module.scss';
-import { COMPANY, LOCATIONS } from '@/data/site.config';
 import { getFooterContent } from './footer.i18n';
 
-export default function Footer({ variant = 'default', locale = 'lv' }) {
+export default function Footer({
+  variant = 'default',
+  locale = 'lv',
+  siteSettings,
+}) {
   const year = new Date().getFullYear();
   const content = getFooterContent(locale);
 
-  const loc1 = LOCATIONS?.[0];
-  const loc2 = LOCATIONS?.[1];
+  const company = siteSettings?.company || {};
+  const locations = Array.isArray(siteSettings?.locations)
+    ? siteSettings.locations
+    : [];
+
+  const loc1 = locations?.[0];
+  const loc2 = locations?.[1];
+
+  const companyName = company?.name || 'iLab';
+  const companyUrlLabel =
+    company?.url?.replace(/^https?:\/\//, '').replace(/\/$/, '') || 'iLab.lv';
 
   const renderLogo = () =>
-    COMPANY?.logo ? (
+    company?.logo ? (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        src={COMPANY.logo}
-        alt={COMPANY?.name || 'iLab'}
+        src={company.logo}
+        alt={companyName}
         className={styles.logo}
         loading="lazy"
       />
     ) : (
-      <div className={styles.logoFallback}>iLab</div>
+      <div className={styles.logoFallback}>{companyName}</div>
     );
 
   const renderLocation = (loc) => {
@@ -38,7 +50,7 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
             <>
               {content.telLabel}{' '}
               <a
-                href={`tel:${loc.tel}`}
+                href={loc.telLink || `tel:${loc.tel}`}
                 aria-label={`${content.callLabel}: ${loc.label}`}
               >
                 {loc.tel}
@@ -75,9 +87,9 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
                 <div className={styles.rule} aria-hidden="true" />
 
                 <div className={styles.brandLocations}>
-                  {(LOCATIONS || []).map((loc, idx) => (
+                  {locations.map((loc, idx) => (
                     <div
-                      key={loc.id}
+                      key={loc.id || loc.label}
                       className={`${styles.locItem} ${
                         idx > 0 ? styles.locItemDivided : ''
                       }`}
@@ -93,7 +105,7 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
                           <>
                             {content.telLabel}{' '}
                             <a
-                              href={`tel:${loc.tel}`}
+                              href={loc.telLink || `tel:${loc.tel}`}
                               aria-label={`${content.callLabel}: ${loc.label}`}
                             >
                               {loc.tel}
@@ -151,7 +163,7 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
           <div className={styles.columnsAds}>
             <section
               className={`${styles.col} ${styles.brandCol}`}
-              aria-label="iLab"
+              aria-label={companyName}
             >
               <div className={styles.brandInner}>
                 {renderLogo()}
@@ -184,7 +196,7 @@ export default function Footer({ variant = 'default', locale = 'lv' }) {
         <div className={styles.bottomInner}>
           <div className={styles.ruleWide} aria-hidden="true" />
           <div className={styles.copy}>
-            © {year} iLab.lv - {content.copyright}
+            © {year} {companyUrlLabel} - {content.copyright}
           </div>
         </div>
       </div>

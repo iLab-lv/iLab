@@ -1,5 +1,5 @@
 import DukPage from './BujPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 const CANONICAL_PATH = '/buj';
 
@@ -14,7 +14,6 @@ export default function Page() {
   return (
   <>
   <DukPage locale="lv" />
-  <Footer locale="lv" />
     </>
     );
 }

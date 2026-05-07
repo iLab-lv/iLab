@@ -1,5 +1,4 @@
 import ContactsPage from './ContactsPage';
-import Footer from '@site/ui/footer/Footer';
 
 import { getSiteSettings } from '@/lib/siteSettings';
 
@@ -21,8 +20,6 @@ export default async function Page() {
         locale="lv"
         siteSettings={siteSettings}
       />
-
-      <Footer locale="lv" />
     </>
   );
 }

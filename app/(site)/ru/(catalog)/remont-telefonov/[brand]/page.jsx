@@ -2,7 +2,7 @@ import PhoneBrandPage, {
   generatePhoneBrandStaticParams,
   getPhoneBrandMetadata,
 } from '@site/(catalog)/telefonu-remonts/[brand]/PhoneBrandPage';
-import Footer from '@site/ui/footer/Footer';
+
 
 export const dynamicParams = false;
 
@@ -18,7 +18,7 @@ export default function Page({ params }) {
   return (
   <>
   <PhoneBrandPage brand={params.brand} locale="ru" />
-  <Footer locale="ru" />
+ 
   </>
   );
 }

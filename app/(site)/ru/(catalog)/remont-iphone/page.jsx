@@ -1,6 +1,6 @@
 import IphoneRepairPage from '@site/(catalog)/iphone-remonts/IphoneRepairPage';
 import { resolveDedicatedBrandHubPage } from '@/lib/content/resolvers/catalogPages';
-import Footer from '@site/ui/footer/Footer';
+
 
 
 export async function generateMetadata() {
@@ -28,7 +28,7 @@ export default function Page() {
   return ( 
     <>
   <IphoneRepairPage locale="ru" />
-  <Footer locale="ru" />
+
   </>
 );
 }

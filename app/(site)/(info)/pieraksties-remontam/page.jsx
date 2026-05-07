@@ -1,5 +1,4 @@
 import PierakstiesPage from './PierakstiesPage';
-import Footer from '@site/ui/footer/Footer';
 
 const CANONICAL_PATH = '/pieraksties-remontam';
 
@@ -14,7 +13,6 @@ export default function Page() {
   return (
   <>
   <PierakstiesPage locale="lv" />
-  <Footer locale="lv" />
     </>
     );
 }
