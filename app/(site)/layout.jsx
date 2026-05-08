@@ -1,12 +1,16 @@
+import Script from 'next/script';
+import { headers } from 'next/headers';
+
+import { getSiteSettings } from '@/lib/siteSettings';
+
+import StructuredData from './StructuredData';
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
 import Footer from './ui/footer/Footer';
 import FooterClientWrapper from './ui/footer/FooterClientWrapper';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
-import Script from 'next/script';
-import { headers } from 'next/headers';
-import { getSiteSettings } from '@/lib/siteSettings';
+
 import l from './Layout.module.scss';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -30,6 +34,8 @@ export default async function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
+      <StructuredData />
+
       {GTM_ID && (
         <Script id="gtm" strategy="afterInteractive">
           {`

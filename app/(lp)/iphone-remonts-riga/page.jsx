@@ -7,6 +7,8 @@ import Faq from '@sections/faq/Faq';
 import AdsContactStrip from '../_components/AdsContactStrip';
 
 import { FAQ_CONTEXT, getFaqItems } from '@/data/faq';
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import { getSiteSettings } from '@/lib/siteSettings';
 import s from '@styles/Catalog.module.scss';
 
 import {
@@ -23,10 +25,17 @@ import IphoneAdsHero from '../_components/IphoneAdsHero';
 
 const { items: IPHONE_ADS_FAQ_ITEMS } = getFaqItems(FAQ_CONTEXT.IPHONE_ADS);
 
-export default function IphoneAdsLandingPage() {
+export default async function IphoneAdsLandingPage() {
+  const [reviewsSummary, siteSettings] = await Promise.all([
+    getReviewsSummary(),
+    getSiteSettings(),
+  ]);
+
   return (
     <>
       <IphoneAdsHero
+        locale="lv"
+        reviewsSummary={reviewsSummary}
         primaryCta={{
           label: 'Pakalpojumu cenas',
           href: '#price-teaser',
@@ -34,6 +43,7 @@ export default function IphoneAdsLandingPage() {
           ariaLabel: 'Skatīt pakalpojumu cenas',
         }}
       />
+
       <AdsContactStrip />
 
       <section id="services" className={s.section} aria-labelledby="iphone-services-h2">
@@ -49,7 +59,7 @@ export default function IphoneAdsLandingPage() {
               },
               {
                 title: 'Akumulatora maiņa',
-                text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10–20%.',
+                text: 'strauji krīt uzlādes līmenis, telefons izslēdzas pie 10-20%.',
                 icon: LuBatteryCharging,
               },
               {
@@ -78,16 +88,21 @@ export default function IphoneAdsLandingPage() {
       </section>
 
       <div id="reviews" />
-      <Reviews />
+      <Reviews locale="lv" />
 
       <div id="price-teaser">
         <IphonePriceTeaser />
       </div>
 
-      <Locations openPanelOnPin />
+      <Locations
+        locale="lv"
+        locations={siteSettings?.locations || []}
+        pinPositions={siteSettings?.pinPositions || {}}
+        openPanelOnPin
+      />
 
-      <Process />
-      <Why />
+      <Process locale="lv" />
+      <Why locale="lv" />
 
       <section className={s.section} aria-labelledby="iphone-ads-faq-h2">
         <div className={s.container}>

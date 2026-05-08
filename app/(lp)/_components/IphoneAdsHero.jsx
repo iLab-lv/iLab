@@ -7,7 +7,11 @@ import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 import s from './IphoneAdsHero.module.scss';
 
 export default function IphoneAdsHero({
-  // Copy (Search-safe: repair wording; no "support/help/consultations" vocabulary)
+  // Locale / reviews
+  locale = 'lv',
+  reviewsSummary,
+
+  // Copy
   title = 'iPhone remonts Rīgā',
   brandLine = 'iLab - neatkarīga remonta darbnīca Rīgā.',
   subtitle = 'Ekrāna un baterijas nomaiņa klātienē mūsu darbnīcās Rīgā.',
@@ -20,8 +24,7 @@ export default function IphoneAdsHero({
   imageWidth = 900,
   imageHeight = 900,
 
-  // Primary/Secondary in-hero buttons (anchors)
-  // Defaults point to sections that are more likely to exist.
+  // Primary/Secondary in-hero buttons
   primaryCta = {
     label: 'Pieteikt remontu',
     href: '#pieraksts',
@@ -38,17 +41,15 @@ export default function IphoneAdsHero({
   // a11y
   headingId = 'iphone-ads-hero-title',
 }) {
-  // Light safety: avoid stale anchors killing CTAs
   const primaryHref = primaryCta?.href || '#pieraksts';
   const secondaryHref = secondaryCta?.href || '#services';
 
   return (
     <section className={s.hero} aria-labelledby={headingId}>
       <div className={s.inner}>
-        {/* Text column */}
         <div className={s.textCol}>
           <div className={s.rating}>
-            <GoogleReviewsBadge />
+            <GoogleReviewsBadge locale={locale} data={reviewsSummary} />
           </div>
 
           <h1 id={headingId} className={s.heading}>
@@ -90,7 +91,6 @@ export default function IphoneAdsHero({
           </div>
         </div>
 
-        {/* Image column */}
         <div className={s.imageCol}>
           <div className={s.imageFrame}>
             <Image
