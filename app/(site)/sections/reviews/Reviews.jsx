@@ -3,26 +3,35 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import s from './Reviews.module.scss';
-import { LOCATIONS } from '@data/site.config';
 
-// List of locations we want to show reviews for (by id in LOCATIONS)
 const PLACE_KEYS = ['domina', 'spice'];
-
-function getLocationById(id) {
-  return LOCATIONS.find((loc) => loc.id === id) || null;
-}
-
-function buildGoogleReviewsUrl(placeKey) {
-  const loc = getLocationById(placeKey);
-  if (!loc || !loc.placeId) return null;
-
-  return `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${encodeURIComponent(
-    loc.placeId
-  )}`;
-}
 
 function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
+}
+
+function getPlaceName(value, fallback) {
+  return value?.latest?.name || value?.name || fallback;
+}
+
+function getPlaceReviewsUrl(value) {
+  if (value?.reviewsUrl) return value.reviewsUrl;
+  if (value?.googleReviewsUrl) return value.googleReviewsUrl;
+  if (value?.mapsUrl) return value.mapsUrl;
+
+  if (value?.placeId) {
+    return `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${encodeURIComponent(
+      value.placeId
+    )}`;
+  }
+
+  if (value?.latest?.placeId) {
+    return `https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${encodeURIComponent(
+      value.latest.placeId
+    )}`;
+  }
+
+  return null;
 }
 
 function getStrings(locale) {
@@ -39,14 +48,6 @@ function getStrings(locale) {
       empty: 'Сейчас для этого филиала ещё нет избранных отзывов.',
       viewAll: 'Смотреть все отзывы в Google Maps →',
       ratingAria: 'Оценка: {rating} из 5',
-      daysAgo: 'дн. назад',
-      dayAgo: '1 день назад',
-      weeksAgo: 'нед. назад',
-      weekAgo: '1 неделю назад',
-      monthsAgo: 'мес. назад',
-      monthAgo: '1 месяц назад',
-      yearsAgo: 'г. назад',
-      yearAgo: '1 год назад',
     };
   }
 
@@ -60,14 +61,6 @@ function getStrings(locale) {
     empty: 'Šobrīd šai filiālei vēl nav izceltu atsauksmju.',
     viewAll: 'Skatīt visas atsauksmes Google Maps →',
     ratingAria: 'Vērtējums: {rating} no 5',
-    daysAgo: 'dienām',
-    dayAgo: '1 dienas',
-    weeksAgo: 'nedēļām',
-    weekAgo: '1 nedēļas',
-    monthsAgo: 'mēnešiem',
-    monthAgo: '1 mēneša',
-    yearsAgo: 'gadiem',
-    yearAgo: '1 gada',
   };
 }
 
@@ -158,13 +151,14 @@ function formatRelativeDate(dateValue, locale) {
 
 function ReviewItem({ author, text, date, rating, locale, strings }) {
   const [expanded, setExpanded] = useState(false);
+
   const LIMIT = 220;
   const safeText = text || '';
   const isLong = safeText.length > LIMIT;
   const visibleText =
     !isLong || expanded
       ? safeText
-      : safeText.slice(0, LIMIT).trimEnd() + '…';
+      : `${safeText.slice(0, LIMIT).trimEnd()}…`;
 
   const stars = renderStars(rating);
   const relativeDate = formatRelativeDate(date, locale);
@@ -180,7 +174,10 @@ function ReviewItem({ author, text, date, rating, locale, strings }) {
           {stars ? (
             <span
               className={s.reviewRating}
-              aria-label={strings.ratingAria.replace('{rating}', String(stars.value))}
+              aria-label={strings.ratingAria.replace(
+                '{rating}',
+                String(stars.value)
+              )}
             >
               <span className={s.reviewStarsFilled}>{stars.filled}</span>
               <span className={s.reviewStarsEmpty}>{stars.empty}</span>
@@ -224,12 +221,16 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
       try {
         const res = await fetch('/api/reviews', { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed to load reviews');
+
         const json = await res.json();
+
         if (cancelled) return;
+
         setData(json || {});
         setLoading(false);
       } catch (err) {
         if (cancelled) return;
+
         console.error('Reviews section: failed to load', err);
         setError(strings.error);
         setLoading(false);
@@ -237,6 +238,7 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
     }
 
     load();
+
     return () => {
       cancelled = true;
     };
@@ -249,15 +251,12 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
       const value = data[key];
       if (!value) return null;
 
-      const loc = getLocationById(key);
-      const href = buildGoogleReviewsUrl(key);
-
       return {
         key,
-        label: loc?.label || key,
-        href,
-        rating: value.rating ?? null,
-        count: value.count ?? null,
+        label: getPlaceName(value, key),
+        href: getPlaceReviewsUrl(value),
+        rating: value.latest?.rating ?? value.rating ?? null,
+        count: value.latest?.count ?? value.count ?? null,
         featuredReviews: pickFeaturedReviews(value, safeLocale),
       };
     }).filter(Boolean);
@@ -281,9 +280,7 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
           />
         </div>
 
-        {loading && (
-          <div className={s.statusText}>{strings.loading}</div>
-        )}
+        {loading && <div className={s.statusText}>{strings.loading}</div>}
 
         {error && !loading && (
           <div className={s.statusTextError}>{error}</div>
@@ -297,13 +294,11 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
                   <h3 className={s.placeName}>{place.label}</h3>
 
                   <div className={s.ratingRow}>
-                    <span className={s.ratingStar} aria-hidden>
+                    <span className={s.ratingStar} aria-hidden="true">
                       ★
                     </span>
                     <span className={s.ratingValue}>
-                      {place.rating != null
-                        ? place.rating.toFixed(1)
-                        : '-'}
+                      {place.rating != null ? Number(place.rating).toFixed(1) : '-'}
                     </span>
                   </div>
 
@@ -329,9 +324,7 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
                     ))}
                   </ul>
                 ) : (
-                  <p className={s.emptyText}>
-                    {strings.empty}
-                  </p>
+                  <p className={s.emptyText}>{strings.empty}</p>
                 )}
 
                 {place.href && (
