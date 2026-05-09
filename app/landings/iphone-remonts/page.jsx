@@ -1,4 +1,4 @@
-import s from './Page.module.scss';
+import s from './page.module.scss';
 
 export const metadata = {
   title: 'iPhone remonts Rīgā',
