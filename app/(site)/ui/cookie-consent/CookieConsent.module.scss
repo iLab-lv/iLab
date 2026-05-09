@@ -1,0 +1,131 @@
+@use '@/styles/tokens' as *;
+
+.cookieConsent {
+  position: fixed;
+  left: max($space-md, $safe-left);
+  right: max($space-md, $safe-right);
+  bottom: calc(#{$bottombar-height} + #{$space-md} + #{$safe-bottom});
+  z-index: $z-overlay;
+
+  display: grid;
+  gap: $space-md;
+
+  padding: $space-md;
+  border: $border-thin solid $glass-border-2;
+  border-radius: $radius-lg;
+
+  color: $color-text;
+  background: $glass-bg-strong;
+  box-shadow: $shadow-soft-lg;
+
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: $glass-fallback-strong;
+  }
+}
+
+.content {
+  display: grid;
+  gap: $space-sm;
+}
+
+.title {
+  margin: 0;
+
+  font-size: $font-size-lg;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-semibold;
+}
+
+.text {
+  margin: 0;
+
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-sm;
+}
+
+.primary,
+.secondary {
+  min-height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-md;
+
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  cursor: pointer;
+  transition:
+    transform $dur-fast $ease-std,
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std;
+}
+
+.primary {
+  border: $border-thin solid transparent;
+
+  color: $color-background;
+  background: $color-accent;
+  box-shadow: $shadow-accent;
+}
+
+.primary:hover {
+  background: $color-accent-hover;
+  box-shadow: $shadow-accent-lg;
+}
+
+.secondary {
+  border: $border-thin solid $glass-border-2;
+
+  color: $color-text;
+  background: $glass-bg-weak;
+}
+
+.secondary:hover {
+  border-color: rgba($color-accent, 0.35);
+  color: $color-accent;
+  background: $accent-tint-weak;
+}
+
+.primary:active,
+.secondary:active {
+  transform: translateY(1px);
+}
+
+.primary:focus-visible,
+.secondary:focus-visible {
+  outline: $focus-ring-width solid $focus-ring-color;
+  outline-offset: $focus-ring-offset;
+}
+
+@media (min-width: $bp-md) {
+  .cookieConsent {
+    right: auto;
+    bottom: max($space-md, $safe-bottom);
+
+    width: min(420px, calc(100vw - (#{$space-md} * 2)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary,
+  .secondary {
+    transition: none;
+  }
+
+  .primary:active,
+  .secondary:active {
+    transform: none;
+  }
+}
