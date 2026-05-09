@@ -1,0 +1,184 @@
+@use '@/styles/_tokens.scss' as *;
+
+.form {
+  display: grid;
+  gap: $space-md;
+}
+
+.intro {
+  margin-bottom: $space-sm;
+
+  p {
+    margin: 0;
+    max-width: 680px;
+    color: $color-text-2;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: $line-height-body;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-md;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field,
+.fieldset {
+  display: grid;
+  gap: $space-sm;
+
+  label,
+  legend {
+    color: $color-text;
+    font-weight: $font-weight-semibold;
+    font-size: 0.95rem;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='date'],
+  textarea {
+    width: 100%;
+    color: $color-text;
+    background:
+      linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.035),
+        rgba(255, 255, 255, 0.035)
+      ),
+      $color-surface-2;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 13px 14px;
+    outline: none;
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 118px;
+  }
+}
+
+.locGrid,
+.timeGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-sm;
+}
+
+.locGrid {
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.timeGrid {
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.035)
+    ),
+    $color-surface-1;
+
+  cursor: pointer;
+
+  input[type='radio'] {
+    transform: translateY(1px);
+  }
+
+  span {
+    color: $color-text;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.muted {
+  color: $color-text-2;
+  font-weight: $font-weight-regular;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+  margin-top: $space-sm;
+}
+
+.success {
+  display: grid;
+  justify-items: start;
+  gap: $space-sm;
+
+  padding: $space-xl;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.04)
+    ),
+    $color-surface-2;
+
+  color: $color-text;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 999px;
+
+  background: $color-accent;
+  color: #000;
+
+  font-weight: $font-weight-bold;
+}
+
+.successTitle {
+  margin: $space-sm 0 0;
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+}
+
+.successText,
+.autoCloseText {
+  margin: 0;
+  color: $color-text-2;
+  line-height: $line-height-body;
+}
+
+.autoCloseText {
+  font-size: 0.9rem;
+}

@@ -1,0 +1,31 @@
+/* app/landings/Layout.module.scss */
+
+.root {
+  min-height: 100vh;
+  background: #000;
+  color: #f5f5f5;
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: 72px;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+.skipLink {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 999;
+  transform: translateY(-160%);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #22d3ee;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
