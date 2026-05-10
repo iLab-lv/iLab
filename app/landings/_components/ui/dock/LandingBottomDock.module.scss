@@ -1,17 +1,26 @@
-.bottomDock {
+@use '@/styles/_tokens.scss' as *;
+
+.mobileDock,
+.desktopDock {
   position: fixed;
-  inset: auto 0 0 0;
   z-index: 70;
+  pointer-events: none;
+}
+
+/* ===================== */
+/* Mobile */
+/* ===================== */
+
+.mobileDock {
+  inset: auto 0 0 0;
 
   padding:
     12px
     12px
     calc(12px + env(safe-area-inset-bottom));
-
-  pointer-events: none;
 }
 
-.inner {
+.mobileInner {
   width: min(680px, 100%);
   margin: 0 auto;
 
@@ -41,20 +50,149 @@
   pointer-events: auto;
 }
 
-.inner :global(button),
-.inner :global(a) {
+.mobileInner :global(button),
+.mobileInner :global(a) {
   min-height: 50px;
   border-radius: 16px;
   font-weight: 600;
 }
 
-@media (min-width: 769px) {
-  .bottomDock {
-    padding-inline: 24px;
+/* ===================== */
+/* Desktop */
+/* ===================== */
+
+.desktopDock {
+  display: none;
+}
+
+.desktopInner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 10px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  box-shadow:
+    0 -10px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  pointer-events: auto;
+}
+
+.desktopBranch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.desktopInfo {
+  display: grid;
+  gap: 2px;
+  min-width: 132px;
+}
+
+.desktopName {
+  color: $color-text-2;
+  font-size: 0.62rem;
+  line-height: 1.1;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+}
+
+.desktopPhone {
+  color: $color-text;
+  font-size: 1.05rem;
+  line-height: 1.05;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-accent;
   }
 
-  .inner {
-    width: 420px;
-    margin-left: auto;
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+.desktopActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.separator {
+  width: 1px;
+  height: 34px;
+  margin-left: 4px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.circleButton {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: $color-text;
+
+  font-size: 0.72rem;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    color: #000;
+    background: $color-accent;
+    border-color: $color-accent;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+  }
+}
+
+@media (min-width: $bp-md) {
+  .mobileDock {
+    display: none;
+  }
+
+  .desktopDock {
+    display: block;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 70;
   }
 }
