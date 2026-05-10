@@ -24,9 +24,6 @@ export default function IphoneHero({
     </>
   ),
 
-  disclaimer =
-    'iLab ir neatkarīga remonta darbnīca un NAV Apple autorizēts servisa centrs. iPhone ir Apple Inc. preču zīme.',
-
   imageSrc = '/images/categories/iphone_remonts.webp',
   imageAlt = 'iPhone remonts iLab remonta darbnīcās Rīgā',
   imageWidth = 900,
@@ -36,10 +33,8 @@ export default function IphoneHero({
 }) {
   return (
     <section className={s.hero} aria-labelledby={headingId}>
-      {/* Atmospheric background bloom */}
       <div className={s.bgGlow} aria-hidden="true" />
 
-      {/* Product image — absolutely positioned, overlapping text area */}
       <div className={s.imageCol} aria-hidden="true">
         <div className={s.imageAura} />
         <div className={s.imageFrame}>
@@ -51,12 +46,11 @@ export default function IphoneHero({
             priority
             fetchPriority="high"
             className={s.image}
-            sizes="(min-width: 1024px) 44vw, 80vw"
+            sizes="(min-width: 1024px) 44vw, (min-width: 768px) 52vw, 86vw"
           />
         </div>
       </div>
 
-      {/* Text content — z-indexed above image */}
       <div className={s.inner}>
         <div className={s.textCol}>
           <div className={s.rating}>
@@ -73,16 +67,6 @@ export default function IphoneHero({
           {subtitle ? <div className={s.sub}>{subtitle}</div> : null}
 
           <LandingTrustBar />
-
-          {disclaimer ? (
-            <p
-              className={s.disclaimer}
-              role="note"
-              aria-label="Svarīga informācija"
-            >
-              {disclaimer}
-            </p>
-          ) : null}
         </div>
       </div>
     </section>
