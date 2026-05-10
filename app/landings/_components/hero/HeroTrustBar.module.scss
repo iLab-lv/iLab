@@ -1,0 +1,121 @@
+/* LandingTrustBar.module.scss */
+
+@use '@/styles/_tokens.scss' as t;
+
+.trustBar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, auto));
+  align-items: center;
+  gap: clamp(18px, 3vw, 42px);
+
+  margin: t.$space-xl 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 999px;
+
+  color: t.$color-accent;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(34, 211, 238, 0.14),
+      rgba(34, 211, 238, 0.08)
+    );
+
+  border: 1px solid rgba(34, 211, 238, 0.18);
+
+  box-shadow:
+    0 0 24px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.icon {
+  font-size: 1.1rem;
+}
+
+.copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+
+  strong {
+    color: t.$color-text;
+    font-size: 0.92rem;
+    line-height: 1.1;
+    font-weight: t.$font-weight-bold;
+    white-space: nowrap;
+  }
+
+  span {
+    color: t.$color-text-2;
+    font-size: 0.76rem;
+    line-height: 1.1;
+    font-weight: t.$font-weight-medium;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: t.$bp-lg) {
+  .trustBar {
+    grid-template-columns: repeat(2, minmax(0, auto));
+    gap: 18px 28px;
+  }
+}
+
+@media (max-width: t.$bp-md) {
+  .trustBar {
+    justify-content: center;
+    margin-top: t.$space-lg;
+  }
+
+  .item {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: t.$bp-sm) {
+  .trustBar {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .iconWrap {
+    width: 36px;
+    height: 36px;
+  }
+
+  .icon {
+    font-size: 1rem;
+  }
+
+  .copy {
+    strong {
+      font-size: 0.82rem;
+    }
+
+    span {
+      font-size: 0.72rem;
+    }
+  }
+}

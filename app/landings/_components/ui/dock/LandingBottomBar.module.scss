@@ -1,0 +1,30 @@
+@use '@/styles/_tokens.scss' as t;
+
+.desktopBar {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.mobileBar {
+  display: none;
+}
+
+@media (max-width: t.$bp-md) {
+  .desktopBar {
+    display: none;
+  }
+
+  .mobileBar {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 70;
+
+    display: block;
+    pointer-events: none;
+  }
+}
