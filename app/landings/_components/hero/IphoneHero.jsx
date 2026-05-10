@@ -12,8 +12,6 @@ export default function IphoneHero({
   locale = 'lv',
   reviewsSummary,
 
-  eyebrow = 'iPhone remonts Rīgā',
-
   title = 'iPhone remonts',
   highlight = 'tajā pašā dienā',
 
@@ -37,6 +35,7 @@ export default function IphoneHero({
 
       <div className={s.imageCol} aria-hidden="true">
         <div className={s.imageAura} />
+
         <div className={s.imageFrame}>
           <Image
             src={imageSrc}
@@ -46,7 +45,7 @@ export default function IphoneHero({
             priority
             fetchPriority="high"
             className={s.image}
-            sizes="(min-width: 1024px) 44vw, (min-width: 768px) 52vw, 86vw"
+            sizes="(min-width: 1024px) 44vw, (min-width: 768px) 52vw, 96vw"
           />
         </div>
       </div>
@@ -56,8 +55,6 @@ export default function IphoneHero({
           <div className={s.rating}>
             <GoogleReviewsBadge locale={locale} data={reviewsSummary} />
           </div>
-
-          {eyebrow ? <p className={s.eyebrow}>{eyebrow}</p> : null}
 
           <h1 id={headingId} className={s.heading}>
             {title}

@@ -1,5 +1,7 @@
 import IphoneHero from '../_components/hero/IphoneHero';
 
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+
 import s from './page.module.scss';
 
 export const metadata = {
@@ -14,10 +16,15 @@ const repairs = [
   'Mitruma bojājumi',
 ];
 
-export default function IphoneRemontsLandingPage() {
+export default async function IphoneRemontsLandingPage() {
+  const reviewsSummary = await getReviewsSummary();
+
   return (
     <>
-      <IphoneHero />
+      <IphoneHero
+        locale="lv"
+        reviewsSummary={reviewsSummary}
+      />
 
       <section className={s.repairsNav}>
         <div className={s.container}>
@@ -48,8 +55,8 @@ export default function IphoneRemontsLandingPage() {
                 <h2>{repair}</h2>
 
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Remonts iespējams tajā pašā dienā.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Remonts iespējams tajā pašā dienā.
                 </p>
 
                 <ul>
