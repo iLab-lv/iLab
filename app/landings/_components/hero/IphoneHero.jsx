@@ -36,11 +36,12 @@ export default function IphoneHero({
 }) {
   return (
     <section className={s.hero} aria-labelledby={headingId}>
+      {/* Atmospheric background bloom */}
       <div className={s.bgGlow} aria-hidden="true" />
 
+      {/* Product image — absolutely positioned, overlapping text area */}
       <div className={s.imageCol} aria-hidden="true">
         <div className={s.imageAura} />
-
         <div className={s.imageFrame}>
           <Image
             src={imageSrc}
@@ -50,11 +51,12 @@ export default function IphoneHero({
             priority
             fetchPriority="high"
             className={s.image}
-            sizes="(min-width: 1024px) 48vw, 96vw"
+            sizes="(min-width: 1024px) 44vw, 80vw"
           />
         </div>
       </div>
 
+      {/* Text content — z-indexed above image */}
       <div className={s.inner}>
         <div className={s.textCol}>
           <div className={s.rating}>
