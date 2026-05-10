@@ -1,4 +1,5 @@
 // app/landings/layout.jsx
+
 import Script from 'next/script';
 
 import LandingCtaProvider from './_components/ui/providers/LandingCtaProvider';
@@ -6,7 +7,7 @@ import LandingCtaDock from './_components/ui/dock/LandingCtaDock';
 
 import { getSiteSettings } from '@/lib/siteSettings';
 
-import l from './Layout.module.scss';
+import l from './layout.module.scss';
 
 const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
@@ -30,8 +31,13 @@ export default async function LandingsLayout({ children }) {
       <Script id="ga4-init-landings" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+
           gtag('js', new Date());
+
           gtag('config', '${GA_MEASUREMENT_ID}', {
             page_path: window.location.pathname,
           });

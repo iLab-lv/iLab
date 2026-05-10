@@ -1,3 +1,5 @@
+import IphoneHero from '../_components/hero/IphoneHero';
+
 import s from './page.module.scss';
 
 export const metadata = {
@@ -15,27 +17,7 @@ const repairs = [
 export default function IphoneRemontsLandingPage() {
   return (
     <>
-      <section className={s.hero}>
-        <div className={s.container}>
-          <div className={s.heroContent}>
-            <div className={s.trust}>
-              ★★★★★ 4.9 Google · 800+ atsauksmes
-            </div>
-
-            <h1>iPhone remonts Rīgā</h1>
-
-            <p className={s.subtitle}>
-              Ekrāna, baterijas un citu iPhone bojājumu remonts
-              iLab servisa centros.
-            </p>
-
-            <div className={s.heroButtons}>
-              <button>Sazināt cenu</button>
-              <button>Pieteikt remontu</button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <IphoneHero />
 
       <section className={s.repairsNav}>
         <div className={s.container}>
