@@ -1,10 +1,6 @@
 @use '@/styles/_tokens.scss' as t;
 @use '@/styles/_layout.scss' as layout;
 
-/* ===================== */
-/* Hero root              */
-/* ===================== */
-
 .hero {
   --hero-pad-x: max(24px, calc((100vw - 1360px) / 2 + 40px));
 
@@ -24,10 +20,6 @@
   padding-bottom: t.$space-3xl;
 }
 
-/* ===================== */
-/* Noise texture          */
-/* ===================== */
-
 .hero::before {
   content: '';
   position: absolute;
@@ -43,10 +35,6 @@
   mix-blend-mode: overlay;
 }
 
-/* ===================== */
-/* Atmosphere overlay     */
-/* ===================== */
-
 .hero::after {
   content: '';
   position: absolute;
@@ -58,10 +46,6 @@
     linear-gradient(to top, rgba(1, 8, 9, 0.88) 0%, transparent 20%),
     linear-gradient(to right, rgba(0, 0, 0, 0.38) 0%, transparent 40%);
 }
-
-/* ===================== */
-/* Background glow        */
-/* ===================== */
 
 .bgGlow {
   position: absolute;
@@ -84,7 +68,6 @@
 .bgGlow::after {
   content: '';
   position: absolute;
-
   left: 12%;
   right: 12%;
   top: 52%;
@@ -102,10 +85,6 @@
 
   filter: blur(1px);
 }
-
-/* ===================== */
-/* Image layer            */
-/* ===================== */
 
 .imageCol {
   position: absolute;
@@ -135,11 +114,9 @@
 
 .imageAura {
   position: absolute;
-
   left: 4%;
   right: 4%;
   bottom: 0%;
-
   z-index: -1;
 
   height: 56%;
@@ -164,7 +141,6 @@
 .imageAura::after {
   content: '';
   position: absolute;
-
   right: 14%;
   top: 20%;
   bottom: 10%;
@@ -199,29 +175,19 @@
     drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
 }
 
-/* ===================== */
-/* Inner                  */
-/* ===================== */
-
 .inner {
   @include layout.container;
 
   position: relative;
   z-index: 4;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
+  display: block;
 
   min-height: calc(100svh - #{t.$header-desktop-height});
 
-  padding-top: clamp(56px, 10vh, 128px);
+  padding-top: clamp(72px, 10vh, 112px);
   padding-bottom: clamp(64px, 10vh, 128px);
 }
-
-/* ===================== */
-/* Text column            */
-/* ===================== */
 
 .textCol {
   position: relative;
@@ -248,10 +214,6 @@
   > *:nth-child(4) {
     animation-delay: 0.25s;
   }
-
-  > *:nth-child(5) {
-    animation-delay: 0.32s;
-  }
 }
 
 @keyframes textSlide {
@@ -266,55 +228,10 @@
   }
 }
 
-/* ===================== */
-/* Rating                 */
-/* ===================== */
-
 .rating {
   width: fit-content;
-  margin-bottom: t.$space-lg;
+  margin-bottom: 18px;
 }
-
-/* ===================== */
-/* Eyebrow                */
-/* ===================== */
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  margin: 0 0 t.$space-md;
-
-  color: t.$color-accent;
-
-  font-size: t.$font-size-sm;
-  font-weight: t.$font-weight-bold;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-
-  &::before {
-    content: '';
-
-    display: block;
-
-    width: 28px;
-    height: 1px;
-
-    background: linear-gradient(
-      90deg,
-      t.$color-accent,
-      rgba(34, 211, 238, 0.3)
-    );
-
-    border-radius: 1px;
-    flex-shrink: 0;
-  }
-}
-
-/* ===================== */
-/* Heading                */
-/* ===================== */
 
 .heading {
   margin: 0;
@@ -328,7 +245,6 @@
 
   span {
     display: block;
-
     color: t.$color-accent;
 
     text-shadow:
@@ -336,10 +252,6 @@
       0 0 80px rgba(34, 211, 238, 0.15);
   }
 }
-
-/* ===================== */
-/* Subtitle               */
-/* ===================== */
 
 .sub {
   max-width: 46ch;
@@ -357,13 +269,9 @@
   }
 }
 
-/* ===================== */
-/* Desktop short height   */
-/* ===================== */
-
 @media (min-width: t.$bp-lg) and (max-height: 820px) {
   .inner {
-    padding-top: 32px;
+    padding-top: 48px;
     padding-bottom: 40px;
   }
 
@@ -376,10 +284,6 @@
     font-size: clamp(3.4rem, 5.8vw, 6.4rem);
   }
 }
-
-/* ===================== */
-/* Tablet                 */
-/* ===================== */
 
 @media (max-width: t.$bp-lg) {
   .textCol {
@@ -400,10 +304,6 @@
     opacity: 0.55;
   }
 }
-
-/* ===================== */
-/* Mobile                 */
-/* ===================== */
 
 @media (max-width: t.$bp-md) {
   .hero {
@@ -434,7 +334,6 @@
 
   .inner {
     min-height: auto;
-
     display: block;
 
     padding-top: 44px;
@@ -448,7 +347,6 @@
     &::before {
       content: '';
       position: absolute;
-
       inset: 58px -20px -36px;
 
       z-index: -1;
@@ -466,19 +364,7 @@
   .rating {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: t.$space-md;
-  }
-
-  .eyebrow {
-    justify-content: center;
-    margin-bottom: 10px;
-
-    font-size: 0.68rem;
-    letter-spacing: 0.13em;
-
-    &::before {
-      width: 22px;
-    }
+    margin-bottom: 14px;
   }
 
   .heading {
@@ -531,13 +417,11 @@
   .imageAura {
     left: 0;
     right: 0;
-
     bottom: 4%;
 
     height: 48%;
 
     opacity: 0.5;
-
     filter: blur(42px);
   }
 
@@ -547,10 +431,6 @@
       drop-shadow(0 22px 52px rgba(0, 0, 0, 0.68));
   }
 }
-
-/* ===================== */
-/* Small mobile           */
-/* ===================== */
 
 @media (max-width: t.$bp-sm) {
   .heading {
@@ -575,10 +455,6 @@
     opacity: 0.32;
   }
 }
-
-/* ===================== */
-/* Reduced motion         */
-/* ===================== */
 
 @media (prefers-reduced-motion: reduce) {
   .imageCol,
