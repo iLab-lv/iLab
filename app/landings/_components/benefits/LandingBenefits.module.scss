@@ -1,0 +1,56 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: $space-lg;
+  background: $color-surface-1;
+}
+
+.container {
+  @include layout.container;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-sm;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.item {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: 0 $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  background: rgba(255, 255, 255, 0.035);
+  color: $color-text;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1.35;
+}
+
+.icon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.1);
+  color: $color-accent;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+}

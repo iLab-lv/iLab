@@ -3,10 +3,10 @@
 import {
   HiOutlineShieldCheck,
   HiOutlineWrenchScrewdriver,
+  HiOutlineLockClosed,
 } from 'react-icons/hi2';
 
 import {
-  MdOutlineFaceRetouchingNatural,
   MdOutlineHealthAndSafety,
 } from 'react-icons/md';
 
@@ -14,14 +14,9 @@ import s from './HeroTrustBar.module.scss';
 
 const TRUST_ITEMS = [
   {
-    icon: MdOutlineFaceRetouchingNatural,
-    title: 'Face ID',
-    text: 'saglabāšana',
-  },
-  {
     icon: HiOutlineShieldCheck,
-    title: '90 dienu',
-    text: 'garantija',
+    title: 'Garantija',
+    text: 'visiem remontiem',
   },
   {
     icon: MdOutlineHealthAndSafety,
@@ -32,6 +27,11 @@ const TRUST_ITEMS = [
     icon: HiOutlineWrenchScrewdriver,
     title: 'Kvalitatīvas',
     text: 'detaļas',
+  },
+  {
+    icon: HiOutlineLockClosed,
+    title: 'Datu',
+    text: 'drošība',
   },
 ];
 

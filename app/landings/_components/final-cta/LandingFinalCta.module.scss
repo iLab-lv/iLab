@@ -1,0 +1,150 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: $space-2xl;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12), transparent 34rem),
+    $color-background;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl;
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.panel {
+  padding: $space-2xl;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.14), transparent 22rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.025);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: $space-xl;
+  align-items: center;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: $space-xl;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 $space-sm;
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+}
+
+.content {
+  h2 {
+    margin: 0;
+    color: $color-text;
+    font-size: clamp(2.2rem, 5vw, $font-size-h3);
+    line-height: 0.98;
+    letter-spacing: -0.07em;
+  }
+}
+
+.text {
+  max-width: 620px;
+  margin: $space-md 0 0;
+  color: $color-text-2;
+  font-size: $font-size-p;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  @media (max-width: $bp-lg) {
+    justify-content: flex-start;
+  }
+
+  @media (max-width: $bp-sm) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+.primaryButton,
+.callButton,
+.whatsappButton {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  padding: 0 $space-lg;
+  border-radius: $radius-md;
+  font: inherit;
+  font-size: $font-size-p;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+  }
+}
+
+.primaryButton,
+.callButton {
+  border: 1px solid rgba(34, 211, 238, 0.6);
+  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
+  color: #001014;
+
+  &:hover {
+    background: $color-accent-hover;
+    border-color: $color-accent-hover;
+  }
+}
+
+.whatsappButton {
+  border: 1px solid rgba(37, 211, 102, 0.34);
+  background: rgba(37, 211, 102, 0.16);
+  color: $color-text;
+
+  &:hover {
+    color: #00140a;
+    background: #25d366;
+    border-color: #25d366;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton,
+  .callButton,
+  .whatsappButton {
+    transition: none;
+  }
+}
