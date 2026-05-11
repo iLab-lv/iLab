@@ -1,5 +1,7 @@
 'use client';
 
+import { FaPhone, FaWhatsapp } from 'react-icons/fa6';
+
 import s from './BranchContactPill.module.scss';
 
 function cleanTel(tel = '') {
@@ -19,7 +21,6 @@ function getWhatsAppHref(location = {}) {
   if (location.wa) return location.wa;
 
   const tel = cleanTel(location.tel);
-
   if (!tel) return '#';
 
   return `https://wa.me/${tel.replace(/^\+/, '')}`;
@@ -46,21 +47,21 @@ export default function BranchContactPill({ location }) {
 
       <div className={s.actions}>
         <a
-          className={s.circleButton}
+          className={`${s.circleButton} ${s.callButton}`}
           href={telHref}
           aria-label={`Zvanīt ${location.label}`}
         >
-          ☎
+          <FaPhone aria-hidden="true" />
         </a>
 
         <a
-          className={s.circleButton}
+          className={`${s.circleButton} ${s.whatsappButton}`}
           href={waHref}
           aria-label={`WhatsApp ${location.label}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          WA
+          <FaWhatsapp aria-hidden="true" />
         </a>
       </div>
     </div>

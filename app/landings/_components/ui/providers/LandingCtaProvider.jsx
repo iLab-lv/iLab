@@ -18,9 +18,32 @@ function normalizeLocations(siteSettings = {}) {
     label: loc.label || loc.name || loc.title || '',
     address: loc.address || '',
     tel: loc.tel || loc.phone || '',
+    telLink: loc.telLink || '',
     wa: loc.wa || loc.whatsapp || '',
     maps: loc.maps || loc.mapUrl || '',
+    destination: loc.destination || '',
+    email: loc.email || '',
+    hours: loc.hours || [],
+    hoursOverride: loc.hoursOverride || null,
+    specialNotice: loc.specialNotice || '',
+    lat: loc.lat || loc.geo?.lat || null,
+    lng: loc.lng || loc.geo?.lng || null,
+    geo: loc.geo || null,
+    waze: loc.waze || '',
   }));
+}
+
+function normalizeCompany(siteSettings = {}) {
+  const company = siteSettings?.company || {};
+
+  return {
+    name: company.name || 'iLab',
+    legalName: company.legalName || company.name || 'SIA “iLab”',
+    regNo: company.regNo || company.registrationNumber || '40203288307',
+    url: company.url || 'https://ilab.lv',
+    logo: company.logo || '',
+    email: company.email || '',
+  };
 }
 
 export default function LandingCtaProvider({
@@ -39,6 +62,11 @@ export default function LandingCtaProvider({
 
   const locations = useMemo(
     () => normalizeLocations(siteSettings),
+    [siteSettings]
+  );
+
+  const company = useMemo(
+    () => normalizeCompany(siteSettings),
     [siteSettings]
   );
 
@@ -80,6 +108,7 @@ export default function LandingCtaProvider({
 
   const value = useMemo(
     () => ({
+      company,
       locations,
 
       branchSheet,
@@ -94,6 +123,7 @@ export default function LandingCtaProvider({
       openBookingForm,
     }),
     [
+      company,
       locations,
 
       branchSheet,

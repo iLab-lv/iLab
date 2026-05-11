@@ -2,14 +2,11 @@
 
 .pill {
   position: relative;
-
   display: inline-flex;
   align-items: center;
   gap: 10px;
-
   min-height: 44px;
   padding: 0;
-
   color: $color-text;
   pointer-events: auto;
 }
@@ -23,10 +20,8 @@
     position: absolute;
     left: 0;
     top: 50%;
-
     width: 1px;
     height: 42px;
-
     background:
       linear-gradient(
         to bottom,
@@ -34,7 +29,6 @@
         rgba(255, 255, 255, 0.24),
         transparent
       );
-
     transform: translateY(-50%);
   }
 }
@@ -61,7 +55,6 @@
   letter-spacing: -0.03em;
   text-decoration: none;
   white-space: nowrap;
-
   transition: color 0.2s ease;
 
   &:hover {
@@ -84,36 +77,51 @@
 .circleButton {
   display: grid;
   place-items: center;
-
   width: 34px;
   height: 34px;
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.05);
-  color: $color-text;
-
-  font-size: 0.72rem;
-  font-weight: $font-weight-bold;
   text-decoration: none;
-
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
 
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
   &:hover {
-    color: #000;
-    background: $color-accent;
-    border-color: $color-accent;
     transform: translateY(-1px);
   }
 
   &:focus-visible {
     outline: 2px solid $color-accent;
     outline-offset: 3px;
+  }
+}
+
+.callButton {
+  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
+  border: 1px solid rgba(34, 211, 238, 0.6);
+  color: #001014;
+
+  &:hover {
+    background: $color-accent-hover;
+    border-color: $color-accent-hover;
+  }
+}
+
+.whatsappButton {
+  background: rgba(37, 211, 102, 0.16);
+  border: 1px solid rgba(37, 211, 102, 0.34);
+  color: $color-text;
+
+  &:hover {
+    color: #00140a;
+    background: #25d366;
+    border-color: #25d366;
   }
 }
 
@@ -129,5 +137,10 @@
   .circleButton {
     width: 32px;
     height: 32px;
+
+    svg {
+      width: 13px;
+      height: 13px;
+    }
   }
 }

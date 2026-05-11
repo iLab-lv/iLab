@@ -1,0 +1,91 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: $space-2xl;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.09), transparent 34rem),
+    $color-background;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl;
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: $space-xl;
+
+  h2 {
+    margin: 0;
+    color: $color-text;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: $line-height-heading;
+    letter-spacing: -0.05em;
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-p;
+    line-height: 1.55;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: $space-md;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  min-height: 180px;
+  padding: $space-xl;
+  border-radius: $radius-lg;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.025);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $space-lg;
+
+  strong {
+    color: $color-text;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.07em;
+  }
+
+  span:last-child {
+    max-width: 360px;
+    color: $color-text-2;
+    font-size: $font-size-p;
+    line-height: 1.45;
+  }
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.1);
+  color: $color-accent;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}

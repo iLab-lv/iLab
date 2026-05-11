@@ -1,0 +1,120 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.footer {
+  padding-block: $space-2xl;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.08);
+  background: $color-surface-1;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl calc(#{$space-3xl} + env(safe-area-inset-bottom));
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.6fr);
+  gap: $space-2xl;
+  align-items: start;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    gap: $space-xl;
+  }
+}
+
+.brand {
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-3;
+    font-size: $font-size-sm;
+    line-height: 1.45;
+  }
+}
+
+.logo {
+  display: block;
+  max-width: 170px;
+  height: auto;
+}
+
+.logoFallback {
+  color: $color-text;
+  font-size: $font-size-h5;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.05em;
+}
+
+.locations {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-xl;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+  }
+}
+
+.location {
+  h3 {
+    margin: 0 0 $space-sm;
+    color: $color-text;
+    font-size: $font-size-lg;
+    line-height: $line-height-heading;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-2;
+    font-size: $font-size-p;
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-accent;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.dot {
+  color: $color-text-3;
+}
+
+.bottom {
+  margin-top: $space-2xl;
+  padding-top: $space-lg;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: $space-sm;
+  text-align: center;
+}
+
+.copy,
+.disclaimer {
+  margin: 0;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+}
+
+.disclaimer {
+  max-width: 860px;
+  margin-inline: auto;
+}

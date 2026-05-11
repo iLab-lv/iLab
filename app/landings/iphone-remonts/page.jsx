@@ -1,86 +1,50 @@
 import IphoneHero from '../_components/hero/IphoneHero';
+import LandingReviews from '../_components/reviews/LandingReviews';
+import LandingTrust from '../_components/trust/LandingTrust';
+import LandingSpeed from '../_components/speed/LandingSpeed';
+import LandingProcess from '../_components/process/LandingProcess';
+import LandingServices from '../_components/services/LandingServices';
+import LandingLocations from '../_components/locations/LandingLocations';
+import LandingFaq from '../_components/faq/LandingFaq';
+import LandingFinalCta from '../_components/final-cta/LandingFinalCta';
+import LandingFooter from '../_components/footer/LandingFooter';
 
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 
-import s from './page.module.scss';
-
 export const metadata = {
-  title: 'iPhone remonts Rīgā',
+    title: 'iPhone remonts Rīgā',
 };
 
-const repairs = [
-  'Ekrāna maiņa',
-  'Akumulatora maiņa',
-  'Uzlāde & savienojumi',
-  'Kamera & stikls',
-  'Mitruma bojājumi',
-];
-
 export default async function IphoneRemontsLandingPage() {
-  const reviewsSummary = await getReviewsSummary();
+    const reviewsSummary = await getReviewsSummary();
 
-  return (
-    <>
-      <IphoneHero
-        locale="lv"
-        reviewsSummary={reviewsSummary}
-      />
+    return (
+        <>
+            <IphoneHero
+                locale="lv"
+                reviewsSummary={reviewsSummary}
+            />
 
-      <section className={s.repairsNav}>
-        <div className={s.container}>
-          <div className={s.cards}>
-            {repairs.map((repair) => (
-              <a
-                key={repair}
-                href={`#${repair}`}
-                className={s.card}
-              >
-                <span>{repair}</span>
-                <small>no 79€</small>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+            <LandingReviews locale="lv" />
 
-      {repairs.map((repair, index) => (
-        <section
-          key={repair}
-          id={repair}
-          className={s.repairSection}
-        >
-          <div className={s.container}>
-            <div className={s.repairGrid}>
-              <div className={s.repairContent}>
-                <h2>{repair}</h2>
+            <LandingTrust
+                locale="lv"
+                reviewsSummary={reviewsSummary}
+            />
 
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Remonts iespējams tajā pašā dienā.
-                </p>
+            <LandingServices locale="lv" />
 
-                <ul>
-                  <li>Face ID saglabāšana</li>
-                  <li>90 dienu garantija</li>
-                  <li>20–40 min remonts</li>
-                </ul>
+            <LandingSpeed locale="lv" />
 
-                <div className={s.priceBox}>
-                  <div>iPhone 13 — no 89€</div>
-                  <div>iPhone 14 Pro — no 149€</div>
-                  <div>iPhone 15 Pro — no 189€</div>
-                </div>
-              </div>
+            <LandingProcess locale="lv" />
 
-              <div className={s.visual}>
-                <div className={s.placeholder}>
-                  VISUAL {index + 1}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ))}
-    </>
-  );
+            <LandingLocations locale="lv" />
+
+            <LandingFaq locale="lv" />
+
+            <LandingFinalCta locale="lv" />
+
+            <LandingFooter locale="lv" />
+        </>
+    );
 }
