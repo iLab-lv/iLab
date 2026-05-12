@@ -29,6 +29,7 @@ function getStrings(locale) {
       viewAllSpice: 'T/C Spice',
       googleTitle: 'Google Reviews',
       empty: 'Отзывы скоро появятся.',
+      and: 'и',
     };
   }
 
@@ -45,6 +46,7 @@ function getStrings(locale) {
     viewAllSpice: 'T/C Spice',
     googleTitle: 'Google Reviews',
     empty: 'Atsauksmes drīzumā būs redzamas.',
+    and: 'un',
   };
 }
 
@@ -89,12 +91,15 @@ function pickFeaturedReviews(value, locale) {
 
 function clampRating(value) {
   const num = Number(value);
+
   if (!Number.isFinite(num)) return null;
+
   return Math.max(0, Math.min(5, Math.round(num)));
 }
 
 function renderStars(rating) {
   const safeRating = clampRating(rating);
+
   if (safeRating == null) return null;
 
   return {
@@ -122,6 +127,7 @@ function buildMixedReviews(domina, spice) {
     })) || [];
 
   const mixed = [];
+
   let d = 0;
   let sp = 0;
 
@@ -136,28 +142,42 @@ function buildMixedReviews(domina, spice) {
   return mixed;
 }
 
-function SummaryRating({ place, strings, showSeparator = false }) {
+function SummaryRating({
+  place,
+  strings,
+  showSeparator = false,
+}) {
   if (!place) return null;
 
   return (
     <div className={s.ratingSlot}>
-      {showSeparator && <span className={s.separator} aria-hidden="true" />}
+      {showSeparator && (
+        <span className={s.separator} aria-hidden="true" />
+      )}
 
       <div className={s.ratingContent}>
-        <div className={s.placeName}>{place.label}</div>
+        <div className={s.placeName}>
+          {place.label}
+        </div>
 
         <div className={s.ratingRow}>
           <span className={s.ratingStar} aria-hidden="true">
             ★
           </span>
+
           <span className={s.ratingValue}>
-            {place.rating != null ? Number(place.rating).toFixed(1) : '-'}
+            {place.rating != null
+              ? Number(place.rating).toFixed(1)
+              : '-'}
           </span>
         </div>
 
         {place.count != null && (
           <div className={s.ratingMeta}>
-            {strings.basedOn.replace('{count}', String(place.count))}
+            {strings.basedOn.replace(
+              '{count}',
+              String(place.count)
+            )}
           </div>
         )}
       </div>
@@ -165,7 +185,10 @@ function SummaryRating({ place, strings, showSeparator = false }) {
   );
 }
 
-function ReviewCard({ review, strings }) {
+function ReviewCard({
+  review,
+  strings,
+}) {
   const stars = renderStars(review.rating);
   const text = review.text || '';
 
@@ -175,7 +198,11 @@ function ReviewCard({ review, strings }) {
     <article className={s.reviewCard}>
       <div className={s.reviewTop}>
         <div className={s.reviewAuthorBlock}>
-          {review.author && <h3 className={s.author}>{review.author}</h3>}
+          {review.author && (
+            <h3 className={s.author}>
+              {review.author}
+            </h3>
+          )}
 
           {stars && (
             <div
@@ -185,23 +212,35 @@ function ReviewCard({ review, strings }) {
                 String(stars.value)
               )}
             >
-              <span className={s.starsFilled}>{stars.filled}</span>
-              <span className={s.starsEmpty}>{stars.empty}</span>
+              <span className={s.starsFilled}>
+                {stars.filled}
+              </span>
+
+              <span className={s.starsEmpty}>
+                {stars.empty}
+              </span>
             </div>
           )}
         </div>
 
         {review.placeLabel && (
-          <span className={s.placeBadge}>{review.placeLabel}</span>
+          <span className={s.placeBadge}>
+            {review.placeLabel}
+          </span>
         )}
       </div>
 
-      <p className={s.reviewText}>{text}</p>
+      <p className={s.reviewText}>
+        {text}
+      </p>
     </article>
   );
 }
 
-export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
+export default function LandingReviews({
+  id = 'reviews',
+  locale = 'lv',
+}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -212,15 +251,24 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
   const trackRef = useRef(null);
 
   const safeLocale = normalizeLocale(locale);
-  const strings = useMemo(() => getStrings(safeLocale), [safeLocale]);
+
+  const strings = useMemo(
+    () => getStrings(safeLocale),
+    [safeLocale]
+  );
 
   useEffect(() => {
     let cancelled = false;
 
     async function load() {
       try {
-        const res = await fetch('/api/reviews', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to load reviews');
+        const res = await fetch('/api/reviews', {
+          cache: 'no-store',
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to load reviews');
+        }
 
         const json = await res.json();
 
@@ -231,7 +279,11 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
       } catch (err) {
         if (cancelled) return;
 
-        console.error('LandingReviews: failed to load', err);
+        console.error(
+          'LandingReviews: failed to load',
+          err
+        );
+
         setError(strings.error);
         setLoading(false);
       }
@@ -249,21 +301,36 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
 
     return PLACE_KEYS.map((key) => {
       const value = data[key];
+
       if (!value) return null;
 
       return {
         key,
         label: getPlaceName(value, key),
         href: getPlaceReviewsUrl(value),
-        rating: value.latest?.rating ?? value.rating ?? null,
-        count: value.latest?.count ?? value.count ?? null,
-        featuredReviews: pickFeaturedReviews(value, safeLocale),
+        rating:
+          value.latest?.rating ??
+          value.rating ??
+          null,
+        count:
+          value.latest?.count ??
+          value.count ??
+          null,
+        featuredReviews: pickFeaturedReviews(
+          value,
+          safeLocale
+        ),
       };
     }).filter(Boolean);
   }, [data, safeLocale]);
 
-  const domina = places.find((place) => place.key === 'domina');
-  const spice = places.find((place) => place.key === 'spice');
+  const domina = places.find(
+    (place) => place.key === 'domina'
+  );
+
+  const spice = places.find(
+    (place) => place.key === 'spice'
+  );
 
   const mixedReviews = useMemo(
     () => buildMixedReviews(domina, spice),
@@ -272,15 +339,27 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
 
   const loopedReviews = useMemo(() => {
     if (!mixedReviews.length) return [];
-    return [...mixedReviews, ...mixedReviews, ...mixedReviews];
+
+    return [
+      ...mixedReviews,
+      ...mixedReviews,
+      ...mixedReviews,
+    ];
   }, [mixedReviews]);
 
   const getRealIndex = (index) => {
     if (!mixedReviews.length) return 0;
-    return (index + mixedReviews.length) % mixedReviews.length;
+
+    return (
+      (index + mixedReviews.length) %
+      mixedReviews.length
+    );
   };
 
-  const scrollToIndex = (index, behavior = 'smooth') => {
+  const scrollToIndex = (
+    index,
+    behavior = 'smooth'
+  ) => {
     const track = trackRef.current;
     const slide = track?.children?.[index];
 
@@ -293,13 +372,20 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
   };
 
   const goTo = (index) => {
-    if (!loopedReviews.length || !mixedReviews.length) return;
+    if (
+      !loopedReviews.length ||
+      !mixedReviews.length
+    ) {
+      return;
+    }
 
     const safeIndex =
-      ((index % loopedReviews.length) + loopedReviews.length) %
+      ((index % loopedReviews.length) +
+        loopedReviews.length) %
       loopedReviews.length;
 
     setActiveIndex(safeIndex);
+
     scrollToIndex(safeIndex);
   };
 
@@ -310,6 +396,7 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
     if (!mixedReviews.length) return;
 
     const startIndex = mixedReviews.length;
+
     setActiveIndex(startIndex);
 
     window.requestAnimationFrame(() => {
@@ -318,19 +405,34 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
   }, [mixedReviews.length]);
 
   useEffect(() => {
-    if (paused || mixedReviews.length <= 1) return undefined;
+    if (
+      paused ||
+      mixedReviews.length <= 1
+    ) {
+      return undefined;
+    }
 
     const timer = window.setInterval(() => {
       goNext();
     }, AUTO_DELAY);
 
     return () => window.clearInterval(timer);
-  }, [activeIndex, paused, mixedReviews.length]);
+  }, [
+    activeIndex,
+    paused,
+    mixedReviews.length,
+  ]);
 
   useEffect(() => {
-    if (!mixedReviews.length || !loopedReviews.length) return undefined;
+    if (
+      !mixedReviews.length ||
+      !loopedReviews.length
+    ) {
+      return undefined;
+    }
 
     const track = trackRef.current;
+
     if (!track) return undefined;
 
     let scrollTimer;
@@ -340,39 +442,84 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
 
       scrollTimer = window.setTimeout(() => {
         const slides = Array.from(track.children);
+
         if (!slides.length) return;
 
-        const nearestIndex = slides.reduce((closestIndex, slide, index) => {
-          const closest = slides[closestIndex];
-          const currentDistance = Math.abs(track.scrollLeft - slide.offsetLeft);
-          const closestDistance = Math.abs(track.scrollLeft - closest.offsetLeft);
+        const nearestIndex = slides.reduce(
+          (closestIndex, slide, index) => {
+            const closest =
+              slides[closestIndex];
 
-          return currentDistance < closestDistance ? index : closestIndex;
-        }, 0);
+            const currentDistance =
+              Math.abs(
+                track.scrollLeft -
+                  slide.offsetLeft
+              );
+
+            const closestDistance =
+              Math.abs(
+                track.scrollLeft -
+                  closest.offsetLeft
+              );
+
+            return currentDistance <
+              closestDistance
+              ? index
+              : closestIndex;
+          },
+          0
+        );
 
         setActiveIndex(nearestIndex);
 
-        if (nearestIndex < mixedReviews.length) {
-          const resetIndex = nearestIndex + mixedReviews.length;
+        if (
+          nearestIndex <
+          mixedReviews.length
+        ) {
+          const resetIndex =
+            nearestIndex +
+            mixedReviews.length;
+
           setActiveIndex(resetIndex);
+
           scrollToIndex(resetIndex, 'auto');
         }
 
-        if (nearestIndex >= mixedReviews.length * 2) {
-          const resetIndex = nearestIndex - mixedReviews.length;
+        if (
+          nearestIndex >=
+          mixedReviews.length * 2
+        ) {
+          const resetIndex =
+            nearestIndex -
+            mixedReviews.length;
+
           setActiveIndex(resetIndex);
+
           scrollToIndex(resetIndex, 'auto');
         }
       }, 120);
     };
 
-    track.addEventListener('scroll', handleScroll, { passive: true });
+    track.addEventListener(
+      'scroll',
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
 
     return () => {
       window.clearTimeout(scrollTimer);
-      track.removeEventListener('scroll', handleScroll);
+
+      track.removeEventListener(
+        'scroll',
+        handleScroll
+      );
     };
-  }, [mixedReviews.length, loopedReviews.length]);
+  }, [
+    mixedReviews.length,
+    loopedReviews.length,
+  ]);
 
   return (
     <section
@@ -385,15 +532,21 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
       onBlur={() => setPaused(false)}
     >
       <div className={s.container}>
-        {loading && <div className={s.statusText}>{strings.loading}</div>}
+        {loading && (
+          <div className={s.statusText}>
+            {strings.loading}
+          </div>
+        )}
 
         {error && !loading && (
-          <div className={s.statusTextError}>{error}</div>
+          <div className={s.statusTextError}>
+            {error}
+          </div>
         )}
 
         {!loading && !error && (
-          <>
-            <div className={s.summaryCard}>
+          <div className={s.reviewsCard}>
+            <div className={s.summaryRow}>
               <div className={s.logoSlot}>
                 <Image
                   className={s.logo}
@@ -404,60 +557,78 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
                 />
               </div>
 
-              <SummaryRating place={domina} strings={strings} />
+              <div className={s.ratingsGroup}>
+                <SummaryRating
+                  place={domina}
+                  strings={strings}
+                />
 
-              <SummaryRating
-                place={spice}
-                strings={strings}
-                showSeparator
-              />
+                <SummaryRating
+                  place={spice}
+                  strings={strings}
+                  showSeparator
+                />
+              </div>
             </div>
 
             {loopedReviews.length > 0 ? (
               <div className={s.carouselWrap}>
-                <div className={s.controls}>
-                  <button
-                    type="button"
-                    className={s.controlButton}
-                    onClick={goPrev}
-                    aria-label={strings.prev}
-                  >
-                    ←
-                  </button>
+                <button
+                  type="button"
+                  className={`${s.controlButton} ${s.controlPrev}`}
+                  onClick={goPrev}
+                  aria-label={strings.prev}
+                >
+                  ←
+                </button>
 
-                  <button
-                    type="button"
-                    className={s.controlButton}
-                    onClick={goNext}
-                    aria-label={strings.next}
-                  >
-                    →
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  className={`${s.controlButton} ${s.controlNext}`}
+                  onClick={goNext}
+                  aria-label={strings.next}
+                >
+                  →
+                </button>
 
-                <div ref={trackRef} className={s.track}>
-                  {loopedReviews.map((review, index) => (
-                    <div
-                      key={`${review.id}-${index}`}
-                      className={s.slide}
-                      aria-hidden={
-                        getRealIndex(index) !== getRealIndex(activeIndex)
-                          ? undefined
-                          : undefined
-                      }
-                    >
-                      <ReviewCard review={review} strings={strings} />
-                    </div>
-                  ))}
+                <div
+                  ref={trackRef}
+                  className={s.track}
+                >
+                  {loopedReviews.map(
+                    (review, index) => (
+                      <div
+                        key={`${review.id}-${index}`}
+                        className={s.slide}
+                        aria-hidden={
+                          getRealIndex(index) !==
+                          getRealIndex(
+                            activeIndex
+                          )
+                            ? undefined
+                            : undefined
+                        }
+                      >
+                        <ReviewCard
+                          review={review}
+                          strings={strings}
+                        />
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             ) : (
-              <p className={s.emptyText}>{strings.empty}</p>
+              <p className={s.emptyText}>
+                {strings.empty}
+              </p>
             )}
 
-            {(domina?.href || spice?.href) && (
+            {(domina?.href ||
+              spice?.href) && (
               <p className={s.linksLine}>
                 {strings.viewAllPrefix}{' '}
+
                 {spice?.href && (
                   <a
                     href={spice.href}
@@ -467,7 +638,15 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
                     {strings.viewAllSpice}
                   </a>
                 )}
-                {spice?.href && domina?.href && <span> un </span>}
+
+                {spice?.href &&
+                  domina?.href && (
+                    <span>
+                      {' '}
+                      {strings.and}{' '}
+                    </span>
+                  )}
+
                 {domina?.href && (
                   <a
                     href={domina.href}
@@ -479,7 +658,7 @@ export default function LandingReviews({ id = 'reviews', locale = 'lv' }) {
                 )}
               </p>
             )}
-          </>
+          </div>
         )}
       </div>
     </section>

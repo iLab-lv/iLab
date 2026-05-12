@@ -2,18 +2,52 @@
 @use '@/styles/_layout.scss' as layout;
 
 .section {
-  padding-block: $space-2xl;
+  position: relative;
+  padding-block: $space-3xl;
   background:
-    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.08), transparent 34rem),
-    $color-surface-1;
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(34, 211, 238, 0.16),
+      transparent 38rem
+    ),
+    radial-gradient(
+      circle at 12% 80%,
+      rgba(34, 211, 238, 0.06),
+      transparent 28rem
+    ),
+    linear-gradient(
+      180deg,
+      $color-surface-1 0%,
+      #071011 48%,
+      $color-surface-1 100%
+    );
+
+  overflow: hidden;
 
   @media (max-width: $bp-md) {
-    padding-block: $space-xl;
+    padding-block: $space-2xl;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.42),
+        transparent 32%,
+        transparent 68%,
+        rgba(0, 0, 0, 0.42)
+      );
   }
 }
 
 .container {
   @include layout.container;
+  position: relative;
+  z-index: 1;
 }
 
 .statusText,
@@ -30,22 +64,28 @@
   color: $color-accent;
 }
 
-.summaryCard {
-  min-height: 112px;
-  padding: $space-lg;
-  border: $border-thin solid rgba(255, 255, 255, 0.08);
-  border-radius: $radius-lg;
-  background: rgba(255, 255, 255, 0.035);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+.reviewsCard {
+  position: relative;
+}
+
+.summaryRow {
+  min-height: 108px;
   display: grid;
-  grid-template-columns: 1.18fr 1fr 1fr;
-  gap: $space-lg;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.25fr);
+  gap: $space-2xl;
   align-items: center;
+  padding-inline: 54px;
+  padding-bottom: $space-xl;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+    padding-inline: 54px;
+  }
 
   @media (max-width: $bp-md) {
-    grid-template-columns: 1fr;
-    gap: $space-md;
+    padding-inline: 0;
+    padding-bottom: $space-lg;
     text-align: center;
   }
 }
@@ -55,7 +95,7 @@
   align-items: center;
   min-width: 0;
 
-  @media (max-width: $bp-md) {
+  @media (max-width: $bp-lg) {
     justify-content: center;
   }
 }
@@ -63,6 +103,23 @@
 .logo {
   width: min(220px, 100%);
   height: auto;
+}
+
+.ratingsGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: end;
+  gap: $space-2xl;
+  align-items: center;
+
+  @media (max-width: $bp-lg) {
+    justify-content: center;
+  }
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 1fr;
+    gap: $space-md;
+  }
 }
 
 .ratingSlot {
@@ -78,8 +135,8 @@
 .separator {
   width: 1px;
   align-self: stretch;
-  margin-right: $space-lg;
-  background: rgba(255, 255, 255, 0.12);
+  margin-right: $space-2xl;
+  background: rgba(255, 255, 255, 0.14);
 
   @media (max-width: $bp-md) {
     display: none;
@@ -126,53 +183,10 @@
 
 .carouselWrap {
   position: relative;
-  margin-top: $space-lg;
-}
-
-.controls {
-  position: absolute;
-  right: 0;
-  top: -56px;
-  display: flex;
-  gap: $space-sm;
-  z-index: 2;
+  padding-inline: 54px;
 
   @media (max-width: $bp-md) {
-    position: static;
-    justify-content: flex-end;
-    margin-bottom: $space-sm;
-  }
-}
-
-.controlButton {
-  width: 40px;
-  height: 40px;
-  border: $border-thin solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.045);
-  color: $color-text;
-  font: inherit;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition:
-    border-color 160ms ease,
-    background 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
-
-  &:hover {
-    border-color: rgba(34, 211, 238, 0.45);
-    background: rgba(34, 211, 238, 0.1);
-    color: $color-accent;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 3px;
+    padding-inline: 0;
   }
 }
 
@@ -208,15 +222,71 @@
   }
 }
 
+.controlButton {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+
+  width: 42px;
+  height: 42px;
+  border: $border-thin solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.68);
+  color: $color-text;
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.45);
+    background: rgba(34, 211, 238, 0.14);
+    color: $color-accent;
+  }
+
+  &:active {
+    transform: translateY(calc(-50% + 1px));
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: $bp-md) {
+    display: none;
+  }
+}
+
+.controlPrev {
+  left: 0;
+}
+
+.controlNext {
+  right: 0;
+}
+
 .reviewCard {
   height: 100%;
   min-height: 190px;
   padding: $space-lg;
-  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
   border-radius: $radius-lg;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
-    rgba(255, 255, 255, 0.025);
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.03)
+    ),
+    rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(8px) saturate(130%);
+  -webkit-backdrop-filter: blur(8px) saturate(130%);
 }
 
 .reviewTop {
@@ -289,7 +359,7 @@
 }
 
 .linksLine {
-  margin: $space-lg 0 0;
+  margin: $space-xl 0 0;
   color: $color-text-2;
   font-size: $font-size-sm;
   line-height: 1.5;
