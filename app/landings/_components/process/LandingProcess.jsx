@@ -67,26 +67,30 @@ export default function LandingProcess({
       aria-labelledby={`${id}-title`}
     >
       <div className={s.container}>
-        <div className={s.header}>
-          <h2 id={`${id}-title`}>{content.title}</h2>
-          <p>{content.subtitle}</p>
-        </div>
+        <div className={s.panel}>
+          <div className={s.header}>
+            <h2 id={`${id}-title`}>{content.title}</h2>
+            <p>{content.subtitle}</p>
+          </div>
 
-        <div className={s.grid} role="list">
-          {content.steps.map((step, index) => (
-            <article
-              key={step.title}
-              className={s.card}
-              role="listitem"
-            >
-              <div className={s.badge} aria-hidden="true">
-                {index + 1}
-              </div>
+          <div className={s.grid} role="list">
+            {content.steps.map((step, index) => (
+              <article
+                key={step.title}
+                className={s.card}
+                role="listitem"
+              >
+                <div className={s.number} aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
 
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </article>
-          ))}
+                <div className={s.cardCopy}>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

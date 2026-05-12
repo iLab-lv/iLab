@@ -2,21 +2,64 @@
 @use '@/styles/_layout.scss' as layout;
 
 .section {
-  padding-block: $space-2xl;
-  background: $color-surface-1;
+  position: relative;
+  padding-block: $space-3xl;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.94) 0%,
+      rgba(0, 0, 0, 0.76) 38%,
+      rgba(0, 0, 0, 0.58) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.86)
+    ),
+    url('/images/hands-closeup.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
 
   @media (max-width: $bp-md) {
-    padding-block: $space-xl;
+    padding-block: $space-2xl;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 12% 0%,
+        rgba(34, 211, 238, 0.16),
+        transparent 28rem
+      ),
+      radial-gradient(
+        circle at 88% 100%,
+        rgba(34, 211, 238, 0.08),
+        transparent 32rem
+      );
+    pointer-events: none;
   }
 }
 
 .container {
   @include layout.container;
+  position: relative;
+  z-index: 1;
+}
+
+.panel {
+  padding: 0;
 }
 
 .header {
   max-width: 720px;
-  margin-bottom: $space-xl;
+  margin-bottom: $space-2xl;
 
   h2 {
     margin: 0;
@@ -37,85 +80,52 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: $space-md;
+  gap: $space-xl;
 
   @media (max-width: $bp-lg) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-lg;
   }
 
   @media (max-width: $bp-sm) {
     grid-template-columns: 1fr;
+    gap: $space-xl;
   }
 }
 
 .card {
   position: relative;
-  min-height: 210px;
-  padding: $space-lg;
-  border: $border-thin solid rgba(255, 255, 255, 0.08);
-  border-radius: $radius-lg;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
-    rgba(255, 255, 255, 0.025);
+  min-height: 140px;
+  display: grid;
+  align-content: start;
+  gap: $space-sm;
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.number {
+  color: $color-accent;
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
+  line-height: 0.9;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -0.08em;
+  text-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+}
 
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      circle at 100% 0%,
-      rgba(34, 211, 238, 0.11),
-      transparent 12rem
-    );
-    pointer-events: none;
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-    border-color: rgba(34, 211, 238, 0.22);
-    background: rgba(255, 255, 255, 0.04);
-  }
-
+.cardCopy {
   h3 {
-    position: relative;
-    margin: auto 0 $space-sm;
+    margin: 0 0 $space-sm;
     color: $color-text;
-    font-size: $font-size-lg;
+    font-size: clamp($font-size-lg, 1rem + 0.45vw, $font-size-xl);
     line-height: $line-height-heading;
     letter-spacing: -0.03em;
   }
 
   p {
-    position: relative;
+    max-width: 280px;
     margin: 0;
     color: $color-text-2;
     font-size: $font-size-sm;
     line-height: 1.55;
   }
-}
-
-.badge {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: #001014;
-  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
-  border: 1px solid rgba(34, 211, 238, 0.6);
-  font-size: $font-size-p;
-  font-weight: $font-weight-bold;
 }
 
 @media (prefers-reduced-motion: reduce) {
