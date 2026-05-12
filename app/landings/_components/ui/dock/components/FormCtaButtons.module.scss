@@ -9,22 +9,23 @@
 
 .buttons :global(button),
 .buttons :global(a) {
-  min-height: 48px;
-  border-radius: 16px;
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.34);
 }
 
 @media (max-width: t.$bp-md) {
   .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
     width: 100%;
+    gap: 8px;
   }
 
   .buttons :global(button),
   .buttons :global(a) {
-    width: 100%;
-    min-height: 52px;
+    flex: 1;
+    min-height: 42px;
+    height: 42px;
+    padding-inline: 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
   }
 }

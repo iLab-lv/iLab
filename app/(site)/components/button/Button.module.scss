@@ -1,7 +1,7 @@
 /* app/(site)/components/button/Button.module.scss
    Reusable Button for iLab
    Variants: primary (filled), secondary (outlined accent + glass), ghost (glassy neutral), ctaChip (pill + chip arrow)
-   Features: iconOnly, sizes (md|lg), block, link/button parity, focus ring
+   Features: iconOnly, sizes (sm|md|lg), block, link/button parity, focus ring
 */
 
 @import '@/styles/_tokens.scss';
@@ -16,10 +16,10 @@ $accent-bg-active: rgba($color-accent, 0.10);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: $space-sm;                 /* 8px between icon+label */
-  height: $btn-h-md;              /* default size */
-  padding: 0 $space-md;           /* 16px sides */
-  border-radius: $radius-lg;      /* 14px */
+  gap: $space-sm;
+  height: $btn-h-md;
+  padding: 0 $space-md;
+  border-radius: $radius-lg;
   border: 1px solid $glass-border;
   background: $glass-bg-weak;
   color: $color-text;
@@ -42,31 +42,59 @@ $accent-bg-active: rgba($color-accent, 0.10);
     outline: $focus-ring-width solid $focus-ring-color;
     outline-offset: $focus-ring-offset;
   }
-  &:active { transform: translateY(1px); }
 
-  /* Reduced motion */
+  &:active {
+    transform: translateY(1px);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-    &:active { transform: none; }
+
+    &:active {
+      transform: none;
+    }
   }
 }
 
 /* ===== Sizes ===== */
-.md { height: $btn-h-md; }
-.lg { height: $btn-h-lg; }
+.sm {
+  height: 42px;
+  padding-inline: 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.md {
+  height: $btn-h-md;
+}
+
+.lg {
+  height: $btn-h-lg;
+}
 
 /* Full-width layout */
-.block { width: 100%; }
+.block {
+  width: 100%;
+}
 
-/* ===== Icon-only (square, circular) ===== */
+/* ===== Icon-only ===== */
 .iconOnly {
   width: $btn-h-md;
   padding: 0;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
 
-  &.lg { width: $btn-h-lg; }
-  .label { display: none; }
+  &.sm {
+    width: 42px;
+  }
+
+  &.lg {
+    width: $btn-h-lg;
+  }
+
+  .label {
+    display: none;
+  }
 }
 
 /* ===== Icon wrapper ===== */
@@ -76,7 +104,11 @@ $accent-bg-active: rgba($color-accent, 0.10);
   display: inline-block;
   line-height: 0;
 
-  svg { width: 100%; height: 100%; vertical-align: -2px; }
+  svg {
+    width: 100%;
+    height: 100%;
+    vertical-align: -2px;
+  }
 }
 
 /* ===== Variants ===== */
@@ -85,7 +117,6 @@ $accent-bg-active: rgba($color-accent, 0.10);
   border-color: transparent;
   box-shadow: $shadow-accent;
 
-  /* lock readable label color across states */
   &,
   &:hover,
   &:focus-visible,
@@ -94,25 +125,32 @@ $accent-bg-active: rgba($color-accent, 0.10);
     text-decoration: none;
   }
 
-  &:hover  { background: $color-accent-hover;  box-shadow: $shadow-accent-lg; }
-  &:active { background: $color-accent-active; box-shadow: $shadow-accent-press; }
+  &:hover {
+    background: $color-accent-hover;
+    box-shadow: $shadow-accent-lg;
+  }
+
+  &:active {
+    background: $color-accent-active;
+    box-shadow: $shadow-accent-press;
+  }
 }
 
 .secondary {
-  /* keep the base glass from .button */
   color: $color-accent;
   border-color: $color-accent;
 
-  &:hover  {
-    background: $accent-bg-hover;              /* tinted over glass */
+  &:hover {
+    background: $accent-bg-hover;
     border-color: rgba($color-accent, 0.85);
-    box-shadow: $shadow-accent;                 /* glow on hover */
+    box-shadow: $shadow-accent;
   }
+
   &:active {
     background: $accent-bg-active;
     border-color: $color-accent-active;
     color: $color-accent-active;
-    box-shadow: $shadow-accent-press;           /* pressed glow */
+    box-shadow: $shadow-accent-press;
   }
 }
 
@@ -125,17 +163,17 @@ $accent-bg-active: rgba($color-accent, 0.10);
     color: $color-accent;
     border-color: rgba($color-accent, 0.45);
     background: $accent-bg-hover;
-    box-shadow: $shadow-accent;                 /* glow on hover */
+    box-shadow: $shadow-accent;
   }
+
   &:active {
     color: $color-accent-active;
     border-color: $color-accent-active;
     background: $accent-bg-active;
-    box-shadow: $shadow-accent-press;           /* pressed glow */
+    box-shadow: $shadow-accent-press;
   }
 }
 
-/* (Optional) slightly stronger focus feel */
 .secondary:focus-visible,
 .ghost:focus-visible {
   box-shadow: $shadow-accent-lg;
@@ -150,22 +188,19 @@ $accent-bg-active: rgba($color-accent, 0.10);
   box-shadow: none;
 }
 
-/* === CTA Chip variant (pill + aqua chip with directional arrow) === */
+/* === CTA Chip variant === */
 .ctaChip {
   position: relative;
   border-radius: $radius-pill;
   min-height: 60px;
 
-  // chip geometry
   $chip-md: 36px;
   $chip-lg: 40px;
   $chip-offset: $space-md;
 
-  // room for chip on the right
   padding-left: $space-xl;
   padding-right: calc(#{$space-xl} + #{$chip-md} + #{$chip-offset});
 
-  // glass base
   background: $glass-bg-weak;
   border-color: $glass-border;
   box-shadow: $shadow-soft;
@@ -175,7 +210,6 @@ $accent-bg-active: rgba($color-accent, 0.10);
     transform $dur-base $ease-emph,
     box-shadow $dur-base $ease-std;
 
-  // CHIP circle
   &::before {
     content: "";
     position: absolute;
@@ -187,10 +221,11 @@ $accent-bg-active: rgba($color-accent, 0.10);
     background: $color-accent;
     box-shadow: $shadow-accent;
     transform: translateY(-50%) scale(1);
-    transition: transform $dur-base $ease-emph, box-shadow $dur-base $ease-std;
+    transition:
+      transform $dur-base $ease-emph,
+      box-shadow $dur-base $ease-std;
   }
 
-  // Arrow inside chip (direction via data attribute)
   &::after {
     position: absolute;
     right: $chip-offset;
@@ -203,46 +238,65 @@ $accent-bg-active: rgba($color-accent, 0.10);
     font-weight: $font-weight-semibold;
     transform: translateY(-50%);
     transition: transform $dur-base $ease-emph;
-    content: "→"; // default
+    content: "→";
   }
-  &[data-chip-dir="right"]::after { content: "→"; }
-  &[data-chip-dir="down"]::after  { content: "↓"; }
+
+  &[data-chip-dir="right"]::after {
+    content: "→";
+  }
+
+  &[data-chip-dir="down"]::after {
+    content: "↓";
+  }
 
   &:hover {
     border-color: $glass-border-2;
     transform: translateY(-1px);
     box-shadow: $shadow-accent;
 
-    &::before { transform: translateY(-50%) scale(1.14); }
-    &::after  { transform: translateY(-50%) translateX(2px); }
+    &::before {
+      transform: translateY(-50%) scale(1.14);
+    }
+
+    &::after {
+      transform: translateY(-50%) translateX(2px);
+    }
   }
 
   &:active {
     transform: translateY(0);
     box-shadow: $shadow-press;
 
-    &::before { transform: translateY(-50%) scale(1.05); }
-    &::after  { transform: translateY(-50%) translateX(1px); }
+    &::before {
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    &::after {
+      transform: translateY(-50%) translateX(1px);
+    }
   }
 
-  /* Optional: when leading icon is present (Button.jsx adds .hasIcon) */
-  &.hasIcon { gap: $space-md; }
+  &.hasIcon {
+    gap: $space-md;
+  }
 
-  /* Respect block prop */
-  &.block { width: 100%; justify-content: flex-start; }
+  &.block {
+    width: 100%;
+    justify-content: flex-start;
+  }
 
   @media (max-width: $bp-md) {
     min-height: 60px;
     padding-right: calc(#{$space-xl} + #{$chip-lg} + #{$chip-offset});
 
-    &::before, &::after {
+    &::before,
+    &::after {
       width: $chip-lg;
       height: $chip-lg;
     }
   }
 }
 
-/* Keep label readable on glass across states */
 .ctaChip,
 .ctaChip:hover,
 .ctaChip:focus-visible,

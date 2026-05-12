@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { FaBolt, FaCircleCheck } from 'react-icons/fa6';
 
@@ -14,7 +14,8 @@ function getServices(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
       title: 'Популярные ремонты iPhone',
-      subtitle: 'Выберите нужный ремонт и посмотрите ориентировочные цены.',
+      subtitle:
+        'Большинство частых ремонтов iPhone выполняем в тот же день. Выберите проблему и посмотрите ориентировочные цены.',
       timeLabel: 'Время ремонта',
       ctaPrice: 'Узнать цену',
       ctaBook: 'Записаться',
@@ -22,52 +23,122 @@ function getServices(locale) {
         {
           id: 'screen',
           title: 'Замена экрана',
-          short: 'Дисплей, стекло, тачскрин',
+          cardTitle: 'Разбился экран iPhone?',
+          short: 'Разбито стекло или не работает тачскрин',
           time: '20–60 мин',
           visual: '/images/categories/displeja_maina.webp',
-          text: 'Меняем дисплейные модули iPhone с сохранением основных функций устройства.',
-          bullets: ['Face ID сохраняется', 'True Tone при возможности', 'Гарантия 90 дней'],
-          prices: ['iPhone 13 — от 89€', 'iPhone 14 Pro — от 149€', 'iPhone 15 Pro — от 189€'],
+          text:
+            'Чёрный дисплей, трещины или не работает сенсор? Большинство замен экрана iPhone выполняем в тот же день.',
+          bullets: [
+            'Face ID сохраняется',
+            'True Tone при возможности',
+            'Гарантия 90 дней',
+          ],
+          prices: [
+            'iPhone 13 — от 89€',
+            'iPhone 14 Pro — от 149€',
+            'iPhone 15 Pro — от 189€',
+          ],
         },
         {
           id: 'battery',
           title: 'Замена аккумулятора',
-          short: 'Быстро садится батарея',
+          cardTitle: 'Батарея быстро садится?',
+          short: 'Быстро садится или выключается',
           time: '20–40 мин',
           visual: '/images/categories/baterijas_maina.webp',
-          text: 'Заменим изношенный аккумулятор и проверим работу устройства после ремонта.',
-          bullets: ['Диагностика на месте', 'Аккуратная замена', 'Гарантия 90 дней'],
-          prices: ['iPhone 11 — от 39€', 'iPhone 13 — от 49€', 'iPhone 14 Pro — от 69€'],
+          text:
+            'iPhone быстро разряжается, греется или выключается при низком проценте? Заменим аккумулятор и проверим работу устройства после ремонта.',
+          bullets: [
+            'Проверка состояния батареи',
+            'Ремонт за 20–40 минут',
+            'Гарантия 90 дней',
+          ],
+          prices: [
+            'iPhone 11 — от 39€',
+            'iPhone 13 — от 49€',
+            'iPhone 14 Pro — от 69€',
+          ],
+        },
+        {
+          id: 'backGlass',
+          title: 'Замена заднего стекла',
+          cardTitle: 'Разбито заднее стекло?',
+          short: 'Разбито стекло корпуса или острые края',
+          time: '1–3 ч',
+          visual: '/images/categories/displeja_maina.webp',
+          text:
+            'Аккуратно заменим стекло корпуса и вернём iPhone опрятный внешний вид без лишней замены деталей.',
+          bullets: [
+            'Точное снятие стекла',
+            'Восстановление внешнего вида корпуса',
+            'Гарантия 90 дней',
+          ],
+          prices: [
+            'iPhone 12 — от 69€',
+            'iPhone 13 — от 79€',
+            'iPhone 14 Pro — от 109€',
+          ],
         },
         {
           id: 'charging',
           title: 'Зарядка и разъёмы',
-          short: 'Не заряжается, плохой контакт',
+          cardTitle: 'iPhone не заряжается?',
+          short: 'Не заряжается или плохой контакт',
           time: '30–90 мин',
           visual: '/images/categories/uzlades_ligzda_remonts.webp',
-          text: 'Проверим разъём, кабель, контроллер питания и устраним причину проблемы.',
-          bullets: ['Чистка разъёма', 'Замена порта', 'Проверка зарядки'],
-          prices: ['Чистка порта — от 15€', 'Замена разъёма — от 49€', 'Диагностика — бесплатно'],
+          text:
+            'Заряжается только в определённом положении или не реагирует на кабель? Найдём причину и устраним её без лишнего ремонта.',
+          bullets: [
+            'Чистка разъёма',
+            'Замена порта зарядки',
+            'Диагностика бесплатно',
+          ],
+          prices: [
+            'Чистка порта — от 15€',
+            'Замена разъёма — от 49€',
+            'Диагностика — бесплатно',
+          ],
         },
         {
           id: 'camera',
           title: 'Камера и стекло',
-          short: 'Камера, линза, защитное стекло',
+          cardTitle: 'Камера не фокусируется?',
+          short: 'Мутная камера или разбита линза',
           time: '30–60 мин',
           visual: '/images/categories/kameras_remonts.webp',
-          text: 'Меняем стекло камеры, модули камеры и проверяем качество фото после ремонта.',
-          bullets: ['Замена стекла камеры', 'Проверка фокуса', 'Гарантия 90 дней'],
-          prices: ['Стекло камеры — от 29€', 'Камера — от 59€', 'Диагностика — бесплатно'],
+          text:
+            'Изображение мутное, камера дрожит или разбито стекло камеры? Отремонтируем и проверим качество фото после ремонта.',
+          bullets: [
+            'Замена стекла камеры',
+            'Проверка фокуса',
+            'Гарантия 90 дней',
+          ],
+          prices: [
+            'Стекло камеры — от 29€',
+            'Камера — от 59€',
+            'Диагностика — бесплатно',
+          ],
         },
         {
           id: 'water',
           title: 'Влага и сложные ремонты',
-          short: 'После воды, не включается',
+          cardTitle: 'iPhone после воды?',
+          short: 'После воды или не включается',
           time: 'после диагностики',
           visual: '/images/categories/udens_bojajumi.webp',
-          text: 'Проведём диагностику после влаги и предложим решение до начала ремонта.',
-          bullets: ['Диагностика платы', 'Чистка после влаги', 'Согласование цены заранее'],
-          prices: ['Диагностика — бесплатно', 'Чистка после влаги — от 35€', 'Ремонт платы — после оценки'],
+          text:
+            'iPhone попал в воду или больше не включается? Проведём диагностику и до ремонта согласуем возможные решения и стоимость.',
+          bullets: [
+            'Диагностика платы',
+            'Чистка после влаги',
+            'Цена до ремонта',
+          ],
+          prices: [
+            'Диагностика — бесплатно',
+            'Чистка после влаги — от 35€',
+            'Ремонт платы — после оценки',
+          ],
         },
       ],
     };
@@ -75,7 +146,8 @@ function getServices(locale) {
 
   return {
     title: 'Populārākie iPhone remonti',
-    subtitle: 'Izvēlies vajadzīgo remontu un apskati orientējošās cenas.',
+    subtitle:
+      'Biežākos iPhone remontus veicam tajā pašā dienā. Izvēlies problēmu un apskati orientējošās cenas.',
     timeLabel: 'Remonta laiks',
     ctaPrice: 'Uzzināt cenu',
     ctaBook: 'Pieteikt remontu',
@@ -83,52 +155,122 @@ function getServices(locale) {
       {
         id: 'screen',
         title: 'Ekrāna maiņa',
-        short: 'Displejs, stikls, skārienjutība',
+        cardTitle: 'Saplīsis iPhone ekrāns?',
+        short: 'Saplīsis stikls vai nestrādā skārienjutība',
         time: '20–60 min',
         visual: '/images/categories/displeja_maina.webp',
-        text: 'Mainām iPhone displeja moduļus ar rūpīgu pārbaudi pēc remonta.',
-        bullets: ['Face ID saglabāšana', 'True Tone, ja iespējams', '90 dienu garantija'],
-        prices: ['iPhone 13 — no 89€', 'iPhone 14 Pro — no 149€', 'iPhone 15 Pro — no 189€'],
+        text:
+          'Melns displejs, plaisas vai nestrādā skārienjutība? Vairumu iPhone ekrāna remontu veicam tajā pašā dienā.',
+        bullets: [
+          'Face ID saglabāšana',
+          'True Tone, ja iespējams',
+          '90 dienu garantija',
+        ],
+        prices: [
+          'iPhone 13 — no 89€',
+          'iPhone 14 Pro — no 149€',
+          'iPhone 15 Pro — no 189€',
+        ],
       },
       {
         id: 'battery',
         title: 'Akumulatora maiņa',
-        short: 'Ātri izlādējas vai slēdzas ārā',
+        cardTitle: 'Akumulators ātri izlādējas?',
+        short: 'Ātri izlādējas vai izslēdzas aukstumā',
         time: '20–40 min',
         visual: '/images/categories/baterijas_maina.webp',
-        text: 'Nomainām nolietotu akumulatoru un pārbaudām ierīces darbību pēc remonta.',
-        bullets: ['Diagnostika uz vietas', 'Akumulatora veselības pārbaude', '90 dienu garantija'],
-        prices: ['iPhone 11 — no 39€', 'iPhone 13 — no 49€', 'iPhone 14 Pro — no 69€'],
+        text:
+          'iPhone ātri izlādējas, karst vai slēdzas ārā pie zemāka procenta? Nomainīsim akumulatoru un pārbaudīsim ierīces darbību pēc remonta.',
+        bullets: [
+          'Akumulatora veselības pārbaude',
+          'Remonts 20–40 minūtēs',
+          '90 dienu garantija',
+        ],
+        prices: [
+          'iPhone 11 — no 39€',
+          'iPhone 13 — no 49€',
+          'iPhone 14 Pro — no 69€',
+        ],
+      },
+      {
+        id: 'backGlass',
+        title: 'Aizmugurējā stikla maiņa',
+        cardTitle: 'Saplīsis aizmugurējais stikls?',
+        short: 'Saplīsis korpusa stikls vai asas malas',
+        time: '1–3 h',
+        visual: '/images/categories/displeja_maina.webp',
+        text:
+          'Nomainīsim bojāto korpusa stiklu un atjaunosim iPhone izskatu bez liekām detaļu maiņām.',
+        bullets: [
+          'Precīza stikla noņemšana',
+          'Korpusa vizuāla atjaunošana',
+          '90 dienu garantija',
+        ],
+        prices: [
+          'iPhone 12 — no 69€',
+          'iPhone 13 — no 79€',
+          'iPhone 14 Pro — no 109€',
+        ],
       },
       {
         id: 'charging',
         title: 'Uzlāde & savienojumi',
+        cardTitle: 'iPhone neuzlādējas?',
         short: 'Neuzlādējas vai slikts kontakts',
         time: '30–90 min',
         visual: '/images/categories/uzlades_ligzda_remonts.webp',
-        text: 'Pārbaudām uzlādes ligzdu, kabeli, barošanas ķēdi un novēršam problēmas cēloni.',
-        bullets: ['Ligzdas tīrīšana', 'Uzlādes porta maiņa', 'Uzlādes pārbaude'],
-        prices: ['Ligzdas tīrīšana — no 15€', 'Uzlādes porta maiņa — no 49€', 'Diagnostika — bez maksas'],
+        text:
+          'Lādējas tikai noteiktā pozīcijā vai nereaģē uz kabeli? Noskaidrosim problēmas cēloni un novērsīsim to bez liekiem remontiem.',
+        bullets: [
+          'Ligzdas tīrīšana',
+          'Uzlādes porta maiņa',
+          'Diagnostika bez maksas',
+        ],
+        prices: [
+          'Ligzdas tīrīšana — no 15€',
+          'Uzlādes porta maiņa — no 49€',
+          'Diagnostika — bez maksas',
+        ],
       },
       {
         id: 'camera',
         title: 'Kamera & stikls',
-        short: 'Kamera, lēca, aizsargstikls',
+        cardTitle: 'Kamera nefokusējas?',
+        short: 'Miglaina kamera vai saplīsusi lēca',
         time: '30–60 min',
         visual: '/images/categories/kameras_remonts.webp',
-        text: 'Mainām kameras stiklu un kameras moduļus, pēc remonta pārbaudot foto kvalitāti.',
-        bullets: ['Kameras stikla maiņa', 'Fokusa pārbaude', '90 dienu garantija'],
-        prices: ['Kameras stikls — no 29€', 'Kamera — no 59€', 'Diagnostika — bez maksas'],
+        text:
+          'Attēls miglains, kamera trīc vai saplīsis kameras stikls? Salabosim kameru un pārbaudīsim foto kvalitāti pēc remonta.',
+        bullets: [
+          'Kameras stikla maiņa',
+          'Fokusa pārbaude',
+          '90 dienu garantija',
+        ],
+        prices: [
+          'Kameras stikls — no 29€',
+          'Kamera — no 59€',
+          'Diagnostika — bez maksas',
+        ],
       },
       {
         id: 'water',
         title: 'Mitruma bojājumi',
+        cardTitle: 'iPhone pēc ūdens?',
         short: 'Pēc ūdens vai neieslēdzas',
         time: 'pēc diagnostikas',
         visual: '/images/categories/udens_bojajumi.webp',
-        text: 'Veicam diagnostiku pēc mitruma un pirms remonta saskaņojam iespējamos risinājumus.',
-        bullets: ['Plates diagnostika', 'Tīrīšana pēc mitruma', 'Cena pirms remonta'],
-        prices: ['Diagnostika — bez maksas', 'Tīrīšana pēc mitruma — no 35€', 'Plates remonts — pēc novērtējuma'],
+        text:
+          'iPhone nonācis saskarē ar ūdeni vai vairs neieslēdzas? Veiksim diagnostiku un pirms remonta saskaņosim iespējamos risinājumus un izmaksas.',
+        bullets: [
+          'Plates diagnostika',
+          'Tīrīšana pēc mitruma',
+          'Cena pirms remonta',
+        ],
+        prices: [
+          'Diagnostika — bez maksas',
+          'Tīrīšana pēc mitruma — no 35€',
+          'Plates remonts — pēc novērtējuma',
+        ],
       },
     ],
   };
@@ -170,10 +312,22 @@ export default function LandingServices({
 }) {
   const content = useMemo(() => getServices(locale), [locale]);
   const [activeId, setActiveId] = useState(content.services[0].id);
+  const serviceCardRef = useRef(null);
 
   const activeService =
     content.services.find((service) => service.id === activeId) ||
     content.services[0];
+
+  function handleSelect(serviceId) {
+    setActiveId(serviceId);
+
+    window.requestAnimationFrame(() => {
+      serviceCardRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  }
 
   return (
     <section
@@ -188,14 +342,7 @@ export default function LandingServices({
         </div>
 
         <div className={s.panel}>
-          <ServiceSelector
-            services={content.services}
-            activeService={activeService}
-            onSelect={setActiveId}
-            className={s.selectorDesktop}
-          />
-
-          <article className={s.contentCard}>
+          <article ref={serviceCardRef} className={s.contentCard}>
             {activeService.visual && (
               <div className={s.visual} aria-hidden="true">
                 <Image
@@ -218,7 +365,7 @@ export default function LandingServices({
                 </span>
               </div>
 
-              <h3>{activeService.title}</h3>
+              <h3>{activeService.cardTitle || activeService.title}</h3>
               <p>{activeService.text}</p>
 
               <ul className={s.bullets}>
@@ -250,7 +397,14 @@ export default function LandingServices({
           <ServiceSelector
             services={content.services}
             activeService={activeService}
-            onSelect={setActiveId}
+            onSelect={handleSelect}
+            className={s.selectorDesktop}
+          />
+
+          <ServiceSelector
+            services={content.services}
+            activeService={activeService}
+            onSelect={handleSelect}
             className={s.selectorMobile}
           />
         </div>
