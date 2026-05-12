@@ -13,9 +13,7 @@ function normalizeLocale(locale) {
 function getServices(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      title: 'Популярные ремонты iPhone',
-      subtitle:
-        'Большинство частых ремонтов iPhone выполняем в тот же день. Выберите проблему и посмотрите ориентировочные цены.',
+      eyebrow: 'Популярные ремонты',
       timeLabel: 'Время ремонта',
       ctaPrice: 'Узнать цену',
       ctaBook: 'Записаться',
@@ -35,9 +33,9 @@ function getServices(locale) {
             'Гарантия 90 дней',
           ],
           prices: [
-            'iPhone 13 — от 89€',
-            'iPhone 14 Pro — от 149€',
-            'iPhone 15 Pro — от 189€',
+            'iPhone 13 — от 110€',
+            'iPhone 14 — от 130€',
+            'iPhone 15 — от 140€',
           ],
         },
         {
@@ -145,9 +143,7 @@ function getServices(locale) {
   }
 
   return {
-    title: 'Populārākie iPhone remonti',
-    subtitle:
-      'Biežākos iPhone remontus veicam tajā pašā dienā. Izvēlies problēmu un apskati orientējošās cenas.',
+    eyebrow: 'Biežākie remonti',
     timeLabel: 'Remonta laiks',
     ctaPrice: 'Uzzināt cenu',
     ctaBook: 'Pieteikt remontu',
@@ -157,7 +153,7 @@ function getServices(locale) {
         title: 'Ekrāna maiņa',
         cardTitle: 'Saplīsis iPhone ekrāns?',
         short: 'Saplīsis stikls vai nestrādā skārienjutība',
-        time: '20–60 min',
+        time: '1-3 h',
         visual: '/images/categories/displeja_maina.webp',
         text:
           'Melns displejs, plaisas vai nestrādā skārienjutība? Vairumu iPhone ekrāna remontu veicam tajā pašā dienā.',
@@ -167,9 +163,9 @@ function getServices(locale) {
           '90 dienu garantija',
         ],
         prices: [
-          'iPhone 13 — no 89€',
-          'iPhone 14 Pro — no 149€',
-          'iPhone 15 Pro — no 189€',
+          'iPhone 13 — no 110€',
+          'iPhone 14 — no 130€',
+          'iPhone 15 — no 140€',
         ],
       },
       {
@@ -187,9 +183,9 @@ function getServices(locale) {
           '90 dienu garantija',
         ],
         prices: [
-          'iPhone 11 — no 39€',
-          'iPhone 13 — no 49€',
-          'iPhone 14 Pro — no 69€',
+          'iPhone 11 — no 60€',
+          'iPhone 13 — no 70€',
+          'iPhone 14 Pro — no 80€',
         ],
       },
       {
@@ -197,7 +193,7 @@ function getServices(locale) {
         title: 'Aizmugurējā stikla maiņa',
         cardTitle: 'Saplīsis aizmugurējais stikls?',
         short: 'Saplīsis korpusa stikls vai asas malas',
-        time: '1–3 h',
+        time: '20-60 min',
         visual: '/images/categories/displeja_maina.webp',
         text:
           'Nomainīsim bojāto korpusa stiklu un atjaunosim iPhone izskatu bez liekām detaļu maiņām.',
@@ -333,16 +329,11 @@ export default function LandingServices({
     <section
       id={id}
       className={s.section}
-      aria-labelledby={`${id}-title`}
+      aria-labelledby={`${id}-eyebrow`}
     >
       <div className={s.container}>
-        <div className={s.header}>
-          <h2 id={`${id}-title`}>{content.title}</h2>
-          <p>{content.subtitle}</p>
-        </div>
-
-        <div className={s.panel}>
-          <article ref={serviceCardRef} className={s.contentCard}>
+        <div className={s.stageWrap}>
+          <article ref={serviceCardRef} className={s.contentStage}>
             {activeService.visual && (
               <div className={s.visual} aria-hidden="true">
                 <Image
@@ -350,14 +341,19 @@ export default function LandingServices({
                   src={activeService.visual}
                   alt=""
                   fill
-                  sizes="(max-width: 1024px) 100vw, 52vw"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
                   className={s.visualImage}
+                  priority={false}
                 />
                 <div className={s.visualFade} />
               </div>
             )}
 
             <div className={s.content}>
+              <div id={`${id}-eyebrow`} className={s.eyebrow}>
+                {content.eyebrow}
+              </div>
+
               <div className={s.serviceMeta}>
                 <span>
                   <FaBolt aria-hidden="true" />
@@ -365,7 +361,7 @@ export default function LandingServices({
                 </span>
               </div>
 
-              <h3>{activeService.cardTitle || activeService.title}</h3>
+              <h2>{activeService.cardTitle || activeService.title}</h2>
               <p>{activeService.text}</p>
 
               <ul className={s.bullets}>
