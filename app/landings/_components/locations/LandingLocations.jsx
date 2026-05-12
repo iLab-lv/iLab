@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa6';
 import { SiGooglemaps } from 'react-icons/si';
 
+import LandingButton from '../ui/button/LandingButton';
 import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingLocations.module.scss';
@@ -21,8 +22,9 @@ function normalizeLocale(locale) {
 function getStrings(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      title: 'Две мастерские в Риге',
-      subtitle: 'Выберите удобный филиал и свяжитесь с нами напрямую.',
+      titleMain: 'Выберите мастерскую в',
+      titleAccent: 'Риге',
+      subtitle: 'Domina Shopping или Spice Home — звоните, пишите в WhatsApp или сразу открывайте маршрут.',
       open: 'Открыто до {time}',
       closed: 'Закрыто',
       closedUntil: 'Откроется в {time}',
@@ -36,8 +38,9 @@ function getStrings(locale) {
   }
 
   return {
-    title: 'Divas darbnīcas Rīgā',
-    subtitle: 'Izvēlies ērtāko filiāli un sazinies uzreiz.',
+    titleMain: 'Izvēlies darbnīcu',
+    titleAccent: 'Rīgā',
+    subtitle: 'Domina Shopping vai Spice Home — zvani, raksti WhatsApp vai uzreiz atver maršrutu.',
     open: 'Atvērts līdz {time}',
     closed: 'Slēgts',
     closedUntil: 'Atvērsies {time}',
@@ -61,6 +64,17 @@ function getShortLabel(label = '') {
   if (normalized.includes('spice')) return 'T/C Spice Home';
 
   return label;
+}
+
+function getLocationId(location = {}) {
+  if (location.id) return location.id;
+
+  const label = String(location.label || '').toLowerCase().trim();
+
+  if (label.includes('domina')) return 'domina';
+  if (label.includes('spice')) return 'spice';
+
+  return undefined;
 }
 
 function getTelHref(location = {}) {
@@ -120,12 +134,10 @@ function getRigaNow() {
     weekday: 'short',
   });
 
-  const parts = fmt
-    .formatToParts(d)
-    .reduce((acc, p) => {
-      acc[p.type] = p.value;
-      return acc;
-    }, {});
+  const parts = fmt.formatToParts(d).reduce((acc, p) => {
+    acc[p.type] = p.value;
+    return acc;
+  }, {});
 
   const weekdayMap = {
     Mon: 0,
@@ -187,13 +199,11 @@ function LocationCard({ location, locale }) {
   const [hoursOpen, setHoursOpen] = useState(false);
   const t = getStrings(locale);
 
-  const state = useMemo(
-    () => computeOpenState(location, t),
-    [location, t]
-  );
+  const state = useMemo(() => computeOpenState(location, t), [location, t]);
 
   if (!location) return null;
 
+  const locationId = getLocationId(location);
   const label = getShortLabel(location.label);
   const telHref = location.telLink || getTelHref(location);
   const waHref = getWhatsAppHref(location);
@@ -201,7 +211,7 @@ function LocationCard({ location, locale }) {
   const wazeHref = getWazeHref(location);
 
   return (
-    <article className={s.card}>
+    <article id={locationId} className={s.card}>
       <div className={s.cardHeader}>
         <div className={s.titleBlock}>
           <h3 className={s.name}>{label}</h3>
@@ -265,20 +275,29 @@ function LocationCard({ location, locale }) {
       {location.tel && <p className={s.phone}>{location.tel}</p>}
 
       <div className={s.actions}>
-        <a className={s.actionPrimary} href={telHref}>
-          <FaPhone aria-hidden="true" />
+        <LandingButton
+          href={telHref}
+          variant="primary"
+          tone="accent"
+          size="lg"
+          block
+          leadingIcon={FaPhone}
+        >
           {t.call}
-        </a>
+        </LandingButton>
 
-        <a
-          className={s.actionWhatsapp}
+        <LandingButton
           href={waHref}
+          variant="primary"
+          tone="whatsapp"
+          size="lg"
+          block
+          leadingIcon={FaWhatsapp}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaWhatsapp aria-hidden="true" />
           {t.whatsapp}
-        </a>
+        </LandingButton>
       </div>
 
       <div className={s.directions}>
@@ -321,7 +340,10 @@ export default function LandingLocations({
     <section id={id} className={s.section}>
       <div className={s.container}>
         <div className={s.header}>
-          <h2>{t.title}</h2>
+          <h2>
+            {t.titleMain}
+            <span>{t.titleAccent}</span>
+          </h2>
           <p>{t.subtitle}</p>
         </div>
 

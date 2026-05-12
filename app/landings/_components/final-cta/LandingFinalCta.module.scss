@@ -2,7 +2,7 @@
 @use '@/styles/_layout.scss' as layout;
 
 .section {
-  padding-block: $space-2xl;
+  padding-block: clamp(88px, 8vw, 128px);
   background:
     radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12), transparent 34rem),
     $color-background;
@@ -17,7 +17,7 @@
 }
 
 .panel {
-  padding: $space-2xl;
+  padding: clamp($space-2xl, 5vw, $space-3xl);
   border: $border-thin solid rgba(255, 255, 255, 0.08);
   border-radius: $radius-lg;
   background:
@@ -53,6 +53,14 @@
     font-size: clamp(2.2rem, 5vw, $font-size-h3);
     line-height: 0.98;
     letter-spacing: -0.07em;
+
+    span {
+      display: block;
+      color: $color-accent;
+      text-shadow:
+        0 0 24px rgba(34, 211, 238, 0.18),
+        0 0 54px rgba(34, 211, 238, 0.08);
+    }
   }
 }
 
@@ -77,74 +85,5 @@
   @media (max-width: $bp-sm) {
     display: grid;
     grid-template-columns: 1fr;
-  }
-}
-
-.primaryButton,
-.callButton,
-.whatsappButton {
-  min-height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: $space-sm;
-  padding: 0 $space-lg;
-  border-radius: $radius-md;
-  font: inherit;
-  font-size: $font-size-p;
-  font-weight: $font-weight-bold;
-  text-decoration: none;
-  cursor: pointer;
-
-  transition:
-    transform 160ms ease,
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease;
-
-  svg {
-    width: 17px;
-    height: 17px;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 3px;
-  }
-}
-
-.primaryButton,
-.callButton {
-  border: 1px solid rgba(34, 211, 238, 0.6);
-  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
-  color: #001014;
-
-  &:hover {
-    background: $color-accent-hover;
-    border-color: $color-accent-hover;
-  }
-}
-
-.whatsappButton {
-  border: 1px solid rgba(37, 211, 102, 0.34);
-  background: rgba(37, 211, 102, 0.16);
-  color: $color-text;
-
-  &:hover {
-    color: #00140a;
-    background: #25d366;
-    border-color: #25d366;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .primaryButton,
-  .callButton,
-  .whatsappButton {
-    transition: none;
   }
 }

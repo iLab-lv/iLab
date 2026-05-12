@@ -1,0 +1,28 @@
+@use '@/styles/_tokens.scss' as t;
+
+.buttons {
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+}
+
+.buttons :global(button),
+.buttons :global(a) {
+  flex: 1;
+}
+
+@media (max-width: t.$bp-md) {
+  .buttons {
+    gap: 8px;
+  }
+
+  .buttons :global(button),
+  .buttons :global(a) {
+    min-height: t.$btn-h-lg;
+    height: t.$btn-h-lg;
+  }
+}

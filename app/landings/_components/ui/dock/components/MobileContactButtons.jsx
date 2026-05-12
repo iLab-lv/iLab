@@ -1,30 +1,38 @@
 'use client';
 
-import Button from '@components/button/Button';
+import { FaPhone, FaWhatsapp } from 'react-icons/fa6';
+
+import LandingButton from '../../button/LandingButton';
 import { useLandingCta } from '../../providers/LandingCtaProvider';
 
-import s from './FormCtaButtons.module.scss';
+import s from './MobileContactButtons.module.scss';
 
 export default function MobileContactButtons() {
   const { openBranchSheet } = useLandingCta();
 
   return (
     <div className={s.buttons}>
-      <Button
+      <LandingButton
         type="button"
         variant="secondary"
+        tone="whatsapp"
+        size="lg"
+        leadingIcon={FaWhatsapp}
         onClick={() => openBranchSheet('whatsapp')}
       >
         WhatsApp
-      </Button>
+      </LandingButton>
 
-      <Button
+      <LandingButton
         type="button"
         variant="primary"
+        tone="accent"
+        size="lg"
+        leadingIcon={FaPhone}
         onClick={() => openBranchSheet('call')}
       >
         Zvanīt
-      </Button>
+      </LandingButton>
     </div>
   );
 }

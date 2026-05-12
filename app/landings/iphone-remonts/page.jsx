@@ -27,18 +27,22 @@ export default async function IphoneRemontsLandingPage() {
 
             <LandingReviews locale="lv" />
 
+             <LandingSpeed locale="lv" />
+
+             <LandingServices locale="lv" />
+
             <LandingTrust
                 locale="lv"
                 reviewsSummary={reviewsSummary}
             />
 
-            <LandingServices locale="lv" />
+            <LandingLocations locale="lv" />
 
-            <LandingSpeed locale="lv" />
+           
 
             <LandingProcess locale="lv" />
 
-            <LandingLocations locale="lv" />
+            
 
             <LandingFaq locale="lv" />
 
