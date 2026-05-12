@@ -10,6 +10,17 @@ export default function FormCtaButtons() {
 
   return (
     <div className={s.buttons}>
+
+        <LandingButton
+        type="button"
+        variant="primary"
+        tone="accent"
+        size="lg"
+        onClick={openBookingForm}
+      >
+        Pieteikt remontu
+      </LandingButton>
+      
       <LandingButton
         type="button"
         variant="secondary"
@@ -20,15 +31,7 @@ export default function FormCtaButtons() {
         Uzzināt cenu
       </LandingButton>
 
-      <LandingButton
-        type="button"
-        variant="primary"
-        tone="accent"
-        size="lg"
-        onClick={openBookingForm}
-      >
-        Pieteikt remontu
-      </LandingButton>
+      
     </div>
   );
 }

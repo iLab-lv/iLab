@@ -3,17 +3,16 @@
 import { useEffect } from 'react';
 
 import LandingLeadForm from './LandingLeadForm';
+import { getLandingLeadSheetContent } from './landingLeadForm.i18n';
 import { useLandingCta } from '../providers/LandingCtaProvider';
 
 import s from './LandingLeadSheet.module.scss';
 
-function getTitle(mode) {
-  return mode === 'booking' ? 'Pieteikt remontu' : 'Sazināt cenu';
-}
-
 export default function LandingLeadSheet() {
   const { leadSheet, closeLeadSheet, locations } = useLandingCta();
   const { open, mode } = leadSheet;
+
+  const t = getLandingLeadSheetContent('lv', mode);
 
   useEffect(() => {
     if (!open) return;
@@ -54,7 +53,8 @@ export default function LandingLeadSheet() {
 
         <div className={s.content}>
           <h2 id="landing-lead-sheet-title" className={s.title}>
-            {getTitle(mode)}
+            {t.title}
+            <span className={s.titleAccent}>{t.titleAccent}</span>
           </h2>
 
           <LandingLeadForm

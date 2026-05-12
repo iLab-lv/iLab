@@ -4,6 +4,9 @@ import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { FaBolt, FaCircleCheck } from 'react-icons/fa6';
 
+import LandingButton from '../ui/button/LandingButton';
+import { useLandingCta } from '../ui/providers/LandingCtaProvider';
+
 import s from './LandingServices.module.scss';
 
 function normalizeLocale(locale) {
@@ -15,8 +18,9 @@ function getServices(locale) {
     return {
       eyebrow: 'Популярные ремонты',
       timeLabel: 'Время ремонта',
-      ctaPrice: 'Узнать цену',
+      ctaPrice: 'Уточнить цену',
       ctaBook: 'Записаться',
+      selectorLabel: 'Виды ремонта',
       services: [
         {
           id: 'screen',
@@ -145,8 +149,9 @@ function getServices(locale) {
   return {
     eyebrow: 'Biežākie remonti',
     timeLabel: 'Remonta laiks',
-    ctaPrice: 'Uzzināt cenu',
+    ctaPrice: 'Precizēt cenu',
     ctaBook: 'Pieteikt remontu',
+    selectorLabel: 'Remonta veidi',
     services: [
       {
         id: 'screen',
@@ -276,10 +281,11 @@ function ServiceSelector({
   services,
   activeService,
   onSelect,
+  label,
   className = '',
 }) {
   return (
-    <div className={`${s.selector} ${className}`} aria-label="Remonta veidi">
+    <div className={`${s.selector} ${className}`} aria-label={label}>
       {services.map((service) => {
         const isActive = service.id === activeService.id;
 
@@ -309,6 +315,8 @@ export default function LandingServices({
   const content = useMemo(() => getServices(locale), [locale]);
   const [activeId, setActiveId] = useState(content.services[0].id);
   const serviceCardRef = useRef(null);
+
+  const { openPriceForm, openBookingForm } = useLandingCta();
 
   const activeService =
     content.services.find((service) => service.id === activeId) ||
@@ -380,12 +388,28 @@ export default function LandingServices({
               </div>
 
               <div className={s.actions}>
-                <a href="#locations" className={s.primaryCta}>
+
+                <LandingButton
+                  type="button"
+                  variant="primary"
+                  tone="accent"
+                  size="lg"
+                  onClick={openPriceForm}
+                >
                   {content.ctaPrice}
-                </a>
-                <a href="#locations" className={s.secondaryCta}>
+                </LandingButton>
+                
+                <LandingButton
+                  type="button"
+                  variant="secondary"
+                  tone="accent"
+                  size="lg"
+                  onClick={openBookingForm}
+                >
                   {content.ctaBook}
-                </a>
+                </LandingButton>
+
+                
               </div>
             </div>
           </article>
@@ -394,6 +418,7 @@ export default function LandingServices({
             services={content.services}
             activeService={activeService}
             onSelect={handleSelect}
+            label={content.selectorLabel}
             className={s.selectorDesktop}
           />
 
@@ -401,6 +426,7 @@ export default function LandingServices({
             services={content.services}
             activeService={activeService}
             onSelect={handleSelect}
+            label={content.selectorLabel}
             className={s.selectorMobile}
           />
         </div>
