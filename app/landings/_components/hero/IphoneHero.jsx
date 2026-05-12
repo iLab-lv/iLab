@@ -15,13 +15,6 @@ export default function IphoneHero({
   title = 'iPhone remonts',
   highlight = 'tajā pašā dienā',
 
-  subtitle = (
-    <>
-      Displeju, bateriju un citu iPhone bojājumu remonts mūsu servisa centros{' '}
-      <span>T/C Domina Shopping</span> un <span>T/C Spice Home</span>.
-    </>
-  ),
-
   imageSrc = '/images/categories/iphone_remonts.webp',
   imageAlt = 'iPhone remonts iLab remonta darbnīcās Rīgā',
   imageWidth = 900,
@@ -61,7 +54,19 @@ export default function IphoneHero({
             {highlight ? <span>{highlight}</span> : null}
           </h1>
 
-          {subtitle ? <div className={s.sub}>{subtitle}</div> : null}
+          <div className={s.sub}>
+            <span className={s.subDesktop}>
+              Displeju, bateriju un citu iPhone bojājumu remonts mūsu servisa
+              centros{' '}
+              <a href="#domina">T/C Domina Shopping</a> un{' '}
+              <a href="#spice">T/C Spice Home</a>.
+            </span>
+
+            <span className={s.subMobile}>
+              <a href="#domina">T/C Domina Shopping</a> un{' '}
+              <a href="#spice">T/C Spice Home</a>
+            </span>
+          </div>
 
           <LandingTrustBar />
         </div>
