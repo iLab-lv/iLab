@@ -2,6 +2,7 @@
 
 import { FaPhone, FaWhatsapp } from 'react-icons/fa6';
 
+import LandingButton from '../ui/button/LandingButton';
 import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingFinalCta.module.scss';
@@ -13,7 +14,8 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      title: 'Готовы отремонтировать iPhone?',
+      titleMain: 'Разбился iPhone?',
+      titleAccent: 'Починим быстро.',
       text: 'Уточним цену, наличие деталей и подскажем ближайший удобный филиал.',
       price: 'Узнать цену',
       call: 'Позвонить',
@@ -23,7 +25,8 @@ function getContent(locale) {
   }
 
   return {
-    title: 'Gatavs salabot iPhone?',
+    titleMain: 'Saplīsis iPhone?',
+    titleAccent: 'Salabosim ātri.',
     text: 'Precizēsim cenu, detaļu pieejamību un ieteiksim ērtāko filiāli.',
     price: 'Uzzināt cenu',
     call: 'Zvanīt',
@@ -32,33 +35,12 @@ function getContent(locale) {
   };
 }
 
-function cleanTel(tel = '') {
-  return String(tel).replace(/\s+/g, '');
-}
-
-function getWhatsAppHref(location = {}) {
-  if (location.wa) return location.wa;
-
-  const tel = cleanTel(location.tel);
-  if (!tel) return '#';
-
-  return `https://wa.me/${tel.replace(/^\+/, '')}`;
-}
-
 export default function LandingFinalCta({
   id = 'final-cta',
   locale = 'lv',
 }) {
-  const { locations, openPriceForm } = useLandingCta();
+  const { openPriceForm, openBranchSheet } = useLandingCta();
   const t = getContent(locale);
-
-  const primaryLocation = locations?.[0] || null;
-
-  const telHref = primaryLocation?.tel
-    ? primaryLocation.telLink || `tel:${cleanTel(primaryLocation.tel)}`
-    : '#';
-
-  const waHref = getWhatsAppHref(primaryLocation);
 
   return (
     <section
@@ -72,7 +54,8 @@ export default function LandingFinalCta({
             <p className={s.eyebrow}>{t.note}</p>
 
             <h2 id={`${id}-title`}>
-              {t.title}
+              {t.titleMain}
+              <span>{t.titleAccent}</span>
             </h2>
 
             <p className={s.text}>
@@ -81,28 +64,37 @@ export default function LandingFinalCta({
           </div>
 
           <div className={s.actions}>
-            <button
+            <LandingButton
               type="button"
-              className={s.primaryButton}
+              variant="primary"
+              tone="accent"
+              size="lg"
               onClick={openPriceForm}
             >
               {t.price}
-            </button>
+            </LandingButton>
 
-            <a className={s.callButton} href={telHref}>
-              <FaPhone aria-hidden="true" />
-              {t.call}
-            </a>
-
-            <a
-              className={s.whatsappButton}
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
+            <LandingButton
+              type="button"
+              variant="primary"
+              tone="accent"
+              size="lg"
+              leadingIcon={FaPhone}
+              onClick={() => openBranchSheet('call')}
             >
-              <FaWhatsapp aria-hidden="true" />
+              {t.call}
+            </LandingButton>
+
+            <LandingButton
+              type="button"
+              variant="secondary"
+              tone="whatsapp"
+              size="lg"
+              leadingIcon={FaWhatsapp}
+              onClick={() => openBranchSheet('whatsapp')}
+            >
               {t.whatsapp}
-            </a>
+            </LandingButton>
           </div>
         </div>
       </div>

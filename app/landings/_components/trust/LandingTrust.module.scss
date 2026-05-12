@@ -20,134 +20,168 @@
   @include layout.container;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: $space-md;
-
-  @media (max-width: $bp-lg) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: $bp-sm) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.card {
+.band {
   position: relative;
 
-  padding: $space-xl;
-  border-radius: $radius-lg;
-  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+
+  min-height: 148px;
+
+  border-radius: calc($radius-lg + 4px);
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
 
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.025)
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.026)
     ),
-    rgba(255, 255, 255, 0.025);
+    rgba(255, 255, 255, 0.03);
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
 
   overflow: hidden;
-
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
+
     background:
       radial-gradient(
-        circle at 100% 0%,
-        rgba(34, 211, 238, 0.12),
-        transparent 12rem
+        circle at 8% 0%,
+        rgba(34, 211, 238, 0.14),
+        transparent 16rem
+      ),
+      radial-gradient(
+        circle at 92% 100%,
+        rgba(34, 211, 238, 0.09),
+        transparent 18rem
       );
+
     pointer-events: none;
   }
 
-  &:hover {
-    transform: translateY(-2px);
-    border-color: rgba(34, 211, 238, 0.22);
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.065),
-        rgba(255, 255, 255, 0.03)
-      ),
-      rgba(255, 255, 255, 0.03);
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+
+  min-width: 0;
+  padding: $space-xl;
+
+  &:not(:last-child) {
+    border-right: $border-thin solid rgba(255, 255, 255, 0.085);
+  }
+
+  @media (max-width: $bp-lg) {
+    min-height: 118px;
+    padding: $space-lg $space-xl;
+
+    &:not(:last-child) {
+      border-right: 0;
+      border-bottom: $border-thin solid rgba(255, 255, 255, 0.085);
+    }
   }
 
   @media (max-width: $bp-sm) {
+    min-height: 104px;
+    gap: $space-md;
     padding: $space-lg;
   }
 }
 
 .icon {
-  position: relative;
+  flex: 0 0 auto;
 
-  width: 52px;
-  height: 52px;
-  margin-bottom: $space-xl;
+  width: 56px;
+  height: 56px;
 
   display: grid;
   place-items: center;
 
   border-radius: $radius-lg;
 
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.16);
-
   color: $color-accent;
+  background: rgba(34, 211, 238, 0.095);
+  border: 1px solid rgba(34, 211, 238, 0.17);
+
+  box-shadow:
+    0 10px 34px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
   svg {
     width: 20px;
     height: 20px;
   }
+
+  @media (max-width: $bp-sm) {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.copy {
+  min-width: 0;
+}
+
+.main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: $space-sm;
+  row-gap: $space-xs;
+
+  margin-bottom: $space-sm;
 }
 
 .value {
-  position: relative;
-
-  margin-bottom: $space-xs;
-
   color: $color-text;
 
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.05rem, 3vw, 3rem);
+  line-height: 0.92;
   font-weight: $font-weight-bold;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.065em;
 }
 
-.title {
-  position: relative;
-
-  margin: 0 0 $space-sm;
-
+.label {
   color: $color-text;
 
-  font-size: clamp(1.05rem, 1rem + 0.15vw, $font-size-lg);
-  line-height: $line-height-heading;
+  font-size: clamp(1.05rem, 1rem + 0.45vw, 1.45rem);
+  line-height: 1.1;
   font-weight: $font-weight-semibold;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
 }
 
 .text {
-  position: relative;
-
   margin: 0;
 
   color: $color-text-2;
 
-  font-size: $font-size-sm;
-  line-height: 1.6;
+  font-size: clamp($font-size-sm, 0.72rem + 0.18vw, 0.95rem);
+  line-height: 1.45;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card {
+  .band,
+  .item {
     transition: none;
   }
 }

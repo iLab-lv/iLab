@@ -38,7 +38,7 @@ function roundReviews(value) {
   return Math.floor(value / 10) * 10;
 }
 
-function getCards(locale, reviewsSummary) {
+function getItems(locale, reviewsSummary) {
   const totalReviews = roundReviews(
     getTotalReviews(reviewsSummary)
   );
@@ -50,20 +50,20 @@ function getCards(locale, reviewsSummary) {
       {
         icon: <FaAward />,
         value: '10+',
-        title: 'лет опыта',
-        text: 'Ремонт iPhone в Риге.',
+        label: 'лет ремонтируем iPhone',
+        text: 'в Риге',
       },
       {
         icon: <FaMobileScreenButton />,
         value: '20K+',
-        title: 'отремонтированных устройств',
-        text: 'Apple и другие смартфоны.',
+        label: 'устройств снова как новые',
+        text: 'Apple и другие смартфоны',
       },
       {
         icon: <FaStar />,
         value: `${totalReviews}+`,
-        title: 'Google отзывов',
-        text: `${avgRating}★ средний рейтинг`,
+        label: 'отзывов клиентов',
+        text: `${avgRating}★ рейтинг Google`,
       },
     ];
   }
@@ -72,20 +72,20 @@ function getCards(locale, reviewsSummary) {
     {
       icon: <FaAward />,
       value: '10+',
-      title: 'gadu pieredze',
-      text: 'iPhone remonts Rīgā.',
+      label: 'gadi remontējam iPhone',
+      text: 'Rīgā',
     },
     {
       icon: <FaMobileScreenButton />,
       value: '20K+',
-      title: 'salabotu ierīču',
-      text: 'Apple un citu telefonu remonts.',
+      label: 'ierīču atkal kā jaunas',
+      text: 'Apple un citi viedtālruņi',
     },
     {
       icon: <FaStar />,
       value: `${totalReviews}+`,
-      title: 'Google atsauksmes',
-      text: `${avgRating}★ vidējais vērtējums`,
+      label: 'klientu atsauksmes',
+      text: `${avgRating}★ Google vērtējums`,
     },
   ];
 }
@@ -95,7 +95,7 @@ export default function LandingTrust({
   locale = 'lv',
   reviewsSummary = {},
 }) {
-  const cards = getCards(locale, reviewsSummary);
+  const items = getItems(locale, reviewsSummary);
 
   return (
     <section
@@ -104,27 +104,30 @@ export default function LandingTrust({
       aria-label="iLab uzticības rādītāji"
     >
       <div className={s.container}>
-        <div className={s.grid}>
-          {cards.map((card) => (
+        <div className={s.band}>
+          {items.map((item) => (
             <article
-              key={`${card.value}-${card.title}`}
-              className={s.card}
+              key={`${item.value}-${item.label}`}
+              className={s.item}
             >
-              <div className={s.icon}>
-                {card.icon}
+              <div className={s.icon} aria-hidden="true">
+                {item.icon}
               </div>
 
-              <div className={s.value}>
-                {card.value}
+              <div className={s.copy}>
+                <div className={s.main}>
+                  <span className={s.value}>
+                    {item.value}
+                  </span>
+                  <span className={s.label}>
+                    {item.label}
+                  </span>
+                </div>
+
+                <p className={s.text}>
+                  {item.text}
+                </p>
               </div>
-
-              <h3 className={s.title}>
-                {card.title}
-              </h3>
-
-              <p className={s.text}>
-                {card.text}
-              </p>
             </article>
           ))}
         </div>

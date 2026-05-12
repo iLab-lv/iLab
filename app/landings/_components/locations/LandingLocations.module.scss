@@ -1,8 +1,11 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
+$whatsapp: #25d366;
+$closed: #ff5a5a;
+
 .section {
-  padding-block: $space-2xl;
+  padding-block: clamp(88px, 8vw, 128px);
   background: $color-surface-2;
 
   @media (max-width: $bp-md) {
@@ -15,7 +18,7 @@
 }
 
 .header {
-  max-width: 720px;
+  max-width: 760px;
   margin-bottom: $space-xl;
 
   h2 {
@@ -24,6 +27,15 @@
     font-size: clamp(2rem, 4vw, $font-size-h4);
     line-height: $line-height-heading;
     letter-spacing: -0.05em;
+
+    span {
+      display: inline-block;
+      margin-left: 0.22em;
+      color: $color-accent;
+      text-shadow:
+        0 0 24px rgba(34, 211, 238, 0.18),
+        0 0 54px rgba(34, 211, 238, 0.08);
+    }
   }
 
   p {
@@ -45,6 +57,7 @@
 }
 
 .card {
+  scroll-margin-top: 96px;
   padding: $space-xl;
   border: $border-thin solid rgba(255, 255, 255, 0.08);
   border-radius: $radius-lg;
@@ -129,26 +142,26 @@
   border-radius: 999px;
 }
 
-.badgeOpen .badgeDot {
-  background: #22d3ee;
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.9);
-}
-
-.badgeClosed .badgeDot {
-  background: #ff5a5a;
-  box-shadow: 0 0 12px rgba(255, 90, 90, 0.9);
-}
-
 .badgeOpen {
-  background: rgba(34, 211, 238, 0.12);
-  color: $color-accent;
-  border: 1px solid rgba(34, 211, 238, 0.22);
+  background: rgba($whatsapp, 0.13);
+  color: $color-text;
+  border: 1px solid rgba($whatsapp, 0.28);
+
+  .badgeDot {
+    background: $whatsapp;
+    box-shadow: 0 0 12px rgba($whatsapp, 0.85);
+  }
 }
 
 .badgeClosed {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba($closed, 0.1);
   color: $color-text-2;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba($closed, 0.24);
+
+  .badgeDot {
+    background: $closed;
+    box-shadow: 0 0 12px rgba($closed, 0.75);
+  }
 }
 
 .hoursToggle {
@@ -165,7 +178,7 @@
   align-items: center;
   gap: $space-xs;
 
-  transition: color 160ms ease;
+  transition: color $dur-base $ease-std;
 
   &:hover {
     color: $color-accent;
@@ -232,61 +245,6 @@
   gap: $space-sm;
 }
 
-.actionPrimary,
-.actionWhatsapp {
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: $space-sm;
-  padding: 0 $space-md;
-  border-radius: $radius-md;
-  font-size: $font-size-p;
-  font-weight: $font-weight-bold;
-  text-decoration: none;
-  transition:
-    transform 160ms ease,
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease;
-
-  svg {
-    font-size: 1.05rem;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 3px;
-  }
-}
-
-.actionPrimary {
-  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
-  border: 1px solid rgba(34, 211, 238, 0.6);
-  color: #001014;
-
-  &:hover {
-    background: $color-accent-hover;
-    border-color: $color-accent-hover;
-  }
-}
-
-.actionWhatsapp {
-  background: rgba(37, 211, 102, 0.16);
-  border: 1px solid rgba(37, 211, 102, 0.34);
-  color: $color-text;
-
-  &:hover {
-    color: #00140a;
-    background: #25d366;
-    border-color: #25d366;
-  }
-}
-
 .directions {
   margin-top: $space-lg;
   padding-top: $space-lg;
@@ -311,7 +269,7 @@
   svg {
     color: $color-text-2;
     font-size: 1.2rem;
-    transition: color 160ms ease;
+    transition: color $dur-base $ease-std;
   }
 
   &:hover {
@@ -365,10 +323,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .actionPrimary,
-  .actionWhatsapp,
   .hoursToggle,
-  .chevron {
+  .chevron,
+  .directionLink svg {
     transition: none;
   }
 }

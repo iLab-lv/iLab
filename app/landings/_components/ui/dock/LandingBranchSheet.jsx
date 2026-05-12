@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import Button from '@components/button/Button';
+import LandingButton from '../button/LandingButton';
 import { useLandingCta } from '../providers/LandingCtaProvider';
 
 import s from './LandingBranchSheet.module.scss';
@@ -13,13 +13,20 @@ function getActionLabel(action) {
   return 'Sazināties';
 }
 
+function cleanTel(tel = '') {
+  return String(tel).replace(/\s+/g, '');
+}
+
 function getHref(location, action) {
   if (action === 'call' && location.tel) {
-    return `tel:${location.tel}`;
+    return `tel:${cleanTel(location.tel)}`;
   }
 
-  if (action === 'whatsapp' && location.wa) {
-    return location.wa;
+  if (action === 'whatsapp') {
+    if (location.wa) return location.wa;
+
+    const tel = cleanTel(location.tel);
+    if (tel) return `https://wa.me/${tel.replace(/^\+/, '')}`;
   }
 
   return '#';
@@ -53,6 +60,7 @@ export default function LandingBranchSheet() {
   if (!open) return null;
 
   const actionLabel = getActionLabel(action);
+  const tone = action === 'whatsapp' ? 'whatsapp' : 'accent';
 
   return (
     <div className={s.overlay} onClick={closeBranchSheet}>
@@ -86,18 +94,21 @@ export default function LandingBranchSheet() {
             <div key={location.id} className={s.locationCard}>
               <div>
                 <h3 className={s.locationTitle}>{location.label}</h3>
+
                 {location.address ? (
                   <p className={s.address}>{location.address}</p>
                 ) : null}
               </div>
 
-              <Button
+              <LandingButton
                 href={getHref(location, action)}
                 variant="primary"
+                tone={tone}
+                size="md"
                 onClick={closeBranchSheet}
               >
                 {actionLabel}
-              </Button>
+              </LandingButton>
             </div>
           ))}
         </div>

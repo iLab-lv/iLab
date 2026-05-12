@@ -44,18 +44,9 @@
   font-size: 0.62rem;
   line-height: 1.1;
   font-weight: $font-weight-semibold;
-  white-space: nowrap;
-}
-
-.phone {
-  color: $color-text;
-  font-size: 1.05rem;
-  line-height: 1.05;
-  font-weight: $font-weight-bold;
-  letter-spacing: -0.03em;
   text-decoration: none;
   white-space: nowrap;
-  transition: color 0.2s ease;
+  transition: color $dur-base $ease-std;
 
   &:hover {
     color: $color-accent;
@@ -68,61 +59,19 @@
   }
 }
 
+.phone {
+  color: $color-text;
+  font-size: 1.05rem;
+  line-height: 1.05;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
 .actions {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-.circleButton {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-
-  svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid $color-accent;
-    outline-offset: 3px;
-  }
-}
-
-.callButton {
-  background: linear-gradient(180deg, $color-accent, $color-accent-hover);
-  border: 1px solid rgba(34, 211, 238, 0.6);
-  color: #001014;
-
-  &:hover {
-    background: $color-accent-hover;
-    border-color: $color-accent-hover;
-  }
-}
-
-.whatsappButton {
-  background: rgba(37, 211, 102, 0.16);
-  border: 1px solid rgba(37, 211, 102, 0.34);
-  color: $color-text;
-
-  &:hover {
-    color: #00140a;
-    background: #25d366;
-    border-color: #25d366;
-  }
 }
 
 @media (max-width: $bp-lg) {
@@ -132,15 +81,5 @@
 
   .phone {
     font-size: 0.95rem;
-  }
-
-  .circleButton {
-    width: 32px;
-    height: 32px;
-
-    svg {
-      width: 13px;
-      height: 13px;
-    }
   }
 }

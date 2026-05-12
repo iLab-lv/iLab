@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@components/button/Button';
+import LandingButton from '../../button/LandingButton';
 import { useLandingCta } from '../../providers/LandingCtaProvider';
 
 import s from './FormCtaButtons.module.scss';
@@ -10,21 +10,25 @@ export default function FormCtaButtons() {
 
   return (
     <div className={s.buttons}>
-      <Button
+      <LandingButton
         type="button"
         variant="secondary"
+        tone="accent"
+        size="lg"
         onClick={openPriceForm}
       >
-        Sazināt cenu
-      </Button>
+        Uzzināt cenu
+      </LandingButton>
 
-      <Button
+      <LandingButton
         type="button"
         variant="primary"
+        tone="accent"
+        size="lg"
         onClick={openBookingForm}
       >
         Pieteikt remontu
-      </Button>
+      </LandingButton>
     </div>
   );
 }

@@ -7,11 +7,6 @@
   gap: 10px;
 }
 
-.buttons :global(button),
-.buttons :global(a) {
-  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.34);
-}
-
 @media (max-width: t.$bp-md) {
   .buttons {
     width: 100%;
@@ -21,11 +16,10 @@
   .buttons :global(button),
   .buttons :global(a) {
     flex: 1;
-    min-height: 42px;
-    height: 42px;
-    padding-inline: 14px;
+    height: 38px;
+    min-height: 38px;
+    padding-inline: 13px;
     border-radius: 12px;
-    font-size: 0.9rem;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    font-size: t.$font-size-sm;
   }
 }
