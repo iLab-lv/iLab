@@ -1,8 +1,13 @@
+'use client';
+
 import {
   FaBolt,
   FaClock,
   FaLocationDot,
 } from 'react-icons/fa6';
+
+import LandingButton from '../ui/button/LandingButton';
+import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingSpeed.module.scss';
 
@@ -16,6 +21,13 @@ function getContent(locale) {
       title: 'Ремонт без долгого ожидания',
       subtitle:
         'Популярные ремонты выполняем быстро, если нужная деталь есть в наличии.',
+
+      bookingTitle: 'Подготовим деталь',
+      bookingAccent: 'до вашего визита',
+      bookingText:
+        'Уточним наличие и предложим удобное время для ремонта.',
+      bookingCta: 'Забронировать время',
+
       cards: [
         {
           icon: <FaClock />,
@@ -40,6 +52,13 @@ function getContent(locale) {
     title: 'Remonts bez ilgas gaidīšanas',
     subtitle:
       'Populārākos remontus veicam ātri, ja detaļa ir pieejama uz vietas.',
+
+    bookingTitle: 'Sagatavosim detaļu',
+    bookingAccent: 'pirms tava apmeklējuma',
+    bookingText:
+      'Precizēsim pieejamību un ieteiksim ērtāko laiku remontam.',
+    bookingCta: 'Rezervēt laiku',
+
     cards: [
       {
         icon: <FaClock />,
@@ -65,6 +84,7 @@ export default function LandingSpeed({
   locale = 'lv',
 }) {
   const content = getContent(locale);
+  const { openBookingForm } = useLandingCta();
 
   return (
     <section
@@ -84,10 +104,33 @@ export default function LandingSpeed({
               <span className={s.icon} aria-hidden="true">
                 {card.icon}
               </span>
+
               <strong>{card.value}</strong>
+
               <span>{card.title}</span>
             </article>
           ))}
+        </div>
+
+        <div className={s.booking}>
+          <div className={s.bookingContent}>
+            <h3>
+              {content.bookingTitle}{' '}
+              <span>{content.bookingAccent}</span>
+            </h3>
+
+            <p>{content.bookingText}</p>
+          </div>
+
+          <LandingButton
+            type="button"
+            variant="primary"
+            tone="accent"
+            size="lg"
+            onClick={openBookingForm}
+          >
+            {content.bookingCta}
+          </LandingButton>
         </div>
       </div>
     </section>

@@ -16,11 +16,23 @@ const LANDING_LEAD_FORM_CONTENT = {
       submitting: 'Sūtām…',
     },
 
+    sheet: {
+      price: {
+        title: 'Uzzini cenu jau',
+        titleAccent: 'dažu minūšu laikā',
+      },
+
+      booking: {
+        title: 'Rezervē remontu iepriekš',
+        titleAccent: 'bez liekas gaidīšanas',
+      },
+    },
+
     price: {
-      title: 'Sazināt cenu',
+      title: 'Precizēt cenu',
       intro:
-        'Atstājiet ierīces modeli un problēmu - sazināsimies ar cenu un aptuveno remonta laiku.',
-      submit: 'Sazināt cenu',
+        'Atstājiet ierīces modeli un problēmu - precizēsim cenu, detaļu pieejamību un aptuveno remonta laiku.',
+      submit: 'Precizēt cenu',
       submitAriaLabel: 'Nosūtīt cenas pieprasījumu',
       successTitle: 'Paldies, pieprasījums saņemts!',
       successText:
@@ -40,15 +52,22 @@ const LANDING_LEAD_FORM_CONTENT = {
   },
 };
 
-export function getLandingLeadFormContent(locale = 'lv', mode = 'price') {
-  const safeLocale = LANDING_LEAD_FORM_CONTENT[locale]
-    ? locale
-    : 'lv';
+function getSafeContent(locale = 'lv') {
+  const safeLocale = LANDING_LEAD_FORM_CONTENT[locale] ? locale : 'lv';
+  return LANDING_LEAD_FORM_CONTENT[safeLocale];
+}
 
-  const content = LANDING_LEAD_FORM_CONTENT[safeLocale];
+export function getLandingLeadFormContent(locale = 'lv', mode = 'price') {
+  const content = getSafeContent(locale);
 
   return {
     ...content.common,
     ...content[mode],
   };
+}
+
+export function getLandingLeadSheetContent(locale = 'lv', mode = 'price') {
+  const content = getSafeContent(locale);
+
+  return content.sheet[mode] || content.sheet.price;
 }
