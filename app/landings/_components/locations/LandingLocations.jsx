@@ -288,7 +288,7 @@ function LocationCard({ location, locale }) {
 
         <LandingButton
           href={waHref}
-          variant="primary"
+          variant="secondary"
           tone="whatsapp"
           size="lg"
           block

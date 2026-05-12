@@ -14,7 +14,7 @@ export default function MobileContactButtons() {
     <div className={s.buttons}>
       <LandingButton
         type="button"
-        variant="secondary"
+        variant="primary"
         tone="whatsapp"
         size="lg"
         leadingIcon={FaWhatsapp}
