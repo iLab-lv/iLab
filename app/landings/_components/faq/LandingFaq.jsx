@@ -17,27 +17,31 @@ function getContent(locale) {
         return {
             title: 'Частые вопросы',
             subtitle:
-                'Коротко о сроках ремонта, гарантии и оригинальных деталях.',
+                'Коротко о сроках, гарантии, деталях и том, что важно знать перед ремонтом iPhone.',
             items: [
                 {
-                    q: 'Сколько длится ремонт iPhone?',
-                    a: 'Популярные ремонты обычно выполняем в течение 20–60 минут, если нужная деталь есть в наличии.',
+                    q: 'Сколько занимает ремонт iPhone?',
+                    a: 'Самые популярные ремонты iPhone — замена дисплея, аккумулятора, разъёма зарядки или камеры — часто выполняем в тот же день. Во многих случаях работа занимает примерно 20–60 минут, если нужная деталь есть в наличии в сервисе.',
                 },
                 {
-                    q: 'Даете ли вы гарантию?',
-                    a: 'Да, на ремонты и установленные детали предоставляется гарантия.',
+                    q: 'Можно ли приехать без записи?',
+                    a: 'Да, можно приехать без предварительной записи в T/C Domina Shopping или T/C Spice Home. Но если хотите не ждать и сразу понять ориентировочную цену, лучше заранее написать или позвонить — мы проверим наличие детали под вашу модель.',
                 },
                 {
-                    q: 'Сохраняется ли Face ID после ремонта?',
-                    a: 'Да, при корректном ремонте стараемся сохранить Face ID и True Tone.',
+                    q: 'Сохраняются ли Face ID и True Tone после ремонта?',
+                    a: 'При правильной замене дисплея мы стараемся сохранить Face ID и True Tone, если эти функции работали до ремонта и повреждение не затронуло связанные модули. Перед ремонтом мастер проверит устройство и объяснит, что можно сохранить в вашем конкретном случае.',
                 },
                 {
-                    q: 'Нужна ли запись заранее?',
-                    a: 'Нет, можно приехать без записи, но перед визитом лучше уточнить наличие деталей.',
+                    q: 'Какая гарантия на ремонт iPhone?',
+                    a: 'На выполненный ремонт и установленные детали предоставляется гарантия. Срок гарантии зависит от вида ремонта и выбранной детали, но для популярных работ обычно действует гарантия до 90 дней.',
                 },
                 {
-                    q: 'Какие детали вы используете?',
-                    a: 'Предлагаем как оригинальные, так и качественные совместимые детали в зависимости от модели и бюджета.',
+                    q: 'Какие детали вы используете для ремонта?',
+                    a: 'Мы предлагаем несколько вариантов деталей: оригинальные, восстановленные оригинальные или качественные совместимые аналоги — в зависимости от модели iPhone, наличия и бюджета. Перед ремонтом объясним разницу по цене, качеству изображения, чувствительности сенсора и сроку службы.',
+                },
+                {
+                    q: 'Удалятся ли данные с iPhone во время ремонта?',
+                    a: 'Обычно при замене экрана, аккумулятора, камеры или разъёма зарядки данные не удаляются. Мы не сбрасываем телефон без необходимости. Но если устройство сильно повреждено или было залито жидкостью, перед ремонтом по возможности рекомендуем сделать резервную копию.',
                 },
             ],
         };
@@ -46,27 +50,31 @@ function getContent(locale) {
     return {
         title: 'Biežāk uzdotie jautājumi',
         subtitle:
-            'Svarīgākais par remonta laiku, garantiju un detaļām.',
+            'Svarīgākais par remonta laiku, garantiju, detaļām un to, kas jāzina pirms iPhone remonta.',
         items: [
             {
-                q: 'Cik ilgi notiek iPhone remonts?',
-                a: 'Populārākos remontus bieži paveicam 20–60 minūšu laikā, ja detaļa ir pieejama uz vietas.',
+                q: 'Cik ilgi aizņem iPhone remonts?',
+                a: 'Populārākos iPhone remontus — displeja, baterijas, uzlādes ligzdas vai kameras maiņu — bieži paveicam tajā pašā dienā. Daudzos gadījumos remonts aizņem aptuveni 20–60 minūtes, ja nepieciešamā detaļa ir pieejama servisā.',
             },
             {
-                q: 'Vai dodat garantiju?',
-                a: 'Jā, remontiem un uzstādītajām detaļām nodrošinām garantiju.',
+                q: 'Vai var ierasties bez pieraksta?',
+                a: 'Jā, vari ierasties bez iepriekšēja pieraksta T/C Domina Shopping vai T/C Spice Home servisā. Tomēr, ja vēlies izvairīties no gaidīšanas un uzreiz uzzināt orientējošu cenu, iesakām pirms braukšanas uzrakstīt vai piezvanīt — pārbaudīsim detaļas pieejamību tavam modelim.',
             },
             {
-                q: 'Vai pēc remonta saglabājas Face ID?',
-                a: 'Jā, korekta remonta gadījumā cenšamies saglabāt Face ID un True Tone funkcionalitāti.',
+                q: 'Vai pēc remonta saglabājas Face ID un True Tone?',
+                a: 'Veicot korektu displeja maiņu, cenšamies saglabāt gan Face ID, gan True Tone funkcionalitāti, ja šīs funkcijas darbojās pirms remonta un bojājums nav skāris saistītos moduļus. Pirms remonta meistars pārbaudīs ierīci un paskaidros, ko iespējams saglabāt konkrētajā gadījumā.',
             },
             {
-                q: 'Vai nepieciešams pieraksts?',
-                a: 'Nē, vari ierasties bez pieraksta, taču pirms braukšanas iesakām precizēt detaļu pieejamību.',
+                q: 'Kāda garantija ir iPhone remontam?',
+                a: 'Remontam un uzstādītajām detaļām nodrošinām garantiju. Garantijas termiņš ir atkarīgs no remonta veida un izvēlētās detaļas, bet populārākajiem remontiem parasti nodrošinām garantiju līdz 90 dienām.',
             },
             {
-                q: 'Kādas detaļas jūs izmantojat?',
-                a: 'Piedāvājam gan oriģinālās, gan kvalitatīvas alternatīvās detaļas atkarībā no modeļa un budžeta.',
+                q: 'Kādas detaļas izmantojat remontā?',
+                a: 'Piedāvājam vairākus detaļu variantus — oriģinālas, atjaunotas oriģinālās vai kvalitatīvas alternatīvās detaļas atkarībā no iPhone modeļa, pieejamības un budžeta. Pirms remonta paskaidrosim atšķirības cenā, attēla kvalitātē, skārienjutībā un kalpošanas ilgumā.',
+            },
+            {
+                q: 'Vai remonta laikā pazudīs dati?',
+                a: 'Parasti displeja, baterijas, kameras vai uzlādes ligzdas maiņas laikā dati netiek dzēsti. Telefonu bez vajadzības nepārinstalējam un neatiestatām. Ja ierīce ir stipri bojāta vai bijusi mitrumā, pirms remonta pēc iespējas iesakām izveidot rezerves kopiju.',
             },
         ],
     };
