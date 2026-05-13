@@ -212,7 +212,7 @@ function getServices(locale) {
         cardTitle: 'Saplīsis aizmugurējais stikls?',
         short: 'Saplīsis korpusa stikls vai asas malas',
         time: '20-60 min',
-        visual: '/images/categories/displeja_maina.webp',
+        visual: '/images/categories/back-cover.webp',
         text:
           'Nomainīsim bojāto korpusa stiklu un atjaunosim iPhone izskatu bez liekām detaļu maiņām.',
         bullets: [
