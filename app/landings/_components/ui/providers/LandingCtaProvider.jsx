@@ -11,6 +11,8 @@ import {
 
 const LandingCtaContext = createContext(null);
 
+const LEAD_MODES = new Set(['price', 'booking', 'delivery']);
+
 function normalizeLocations(siteSettings = {}) {
   const locations = siteSettings?.locations || [];
 
@@ -53,10 +55,7 @@ function getInitialLeadModeFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const form = params.get('form');
 
-  if (form === 'booking') return 'booking';
-  if (form === 'price') return 'price';
-
-  return null;
+  return LEAD_MODES.has(form) ? form : null;
 }
 
 export default function LandingCtaProvider({
@@ -100,7 +99,7 @@ export default function LandingCtaProvider({
   const openLeadSheet = useCallback((mode = 'price') => {
     setLeadSheet({
       open: true,
-      mode,
+      mode: LEAD_MODES.has(mode) ? mode : 'price',
     });
   }, []);
 
@@ -117,6 +116,10 @@ export default function LandingCtaProvider({
 
   const openBookingForm = useCallback(() => {
     openLeadSheet('booking');
+  }, [openLeadSheet]);
+
+  const openDeliveryForm = useCallback(() => {
+    openLeadSheet('delivery');
   }, [openLeadSheet]);
 
   useEffect(() => {
@@ -145,6 +148,7 @@ export default function LandingCtaProvider({
 
       openPriceForm,
       openBookingForm,
+      openDeliveryForm,
     }),
     [
       company,
@@ -160,6 +164,7 @@ export default function LandingCtaProvider({
 
       openPriceForm,
       openBookingForm,
+      openDeliveryForm,
     ]
   );
 

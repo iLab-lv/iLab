@@ -9,6 +9,7 @@ const FALLBACK_EMAIL = 'info@ilab.lv';
 const LEAD_TYPES = {
   BOOKING: 'booking',
   PRICE: 'price',
+  DELIVERY: 'delivery',
 };
 
 const toForLocation = (loc) => {
@@ -23,7 +24,10 @@ const toForLocation = (loc) => {
 };
 
 function normalizeLeadType(value) {
-  return value === LEAD_TYPES.PRICE ? LEAD_TYPES.PRICE : LEAD_TYPES.BOOKING;
+  if (value === LEAD_TYPES.PRICE) return LEAD_TYPES.PRICE;
+  if (value === LEAD_TYPES.DELIVERY) return LEAD_TYPES.DELIVERY;
+
+  return LEAD_TYPES.BOOKING;
 }
 
 function getRequiredFields(leadType) {
@@ -33,13 +37,35 @@ function getRequiredFields(leadType) {
     required.push('date', 'location', 'time');
   }
 
+  if (leadType === LEAD_TYPES.DELIVERY) {
+    required.push('location', 'deliveryService');
+  }
+
   return required;
 }
 
 function getLeadLabel(leadType) {
-  return leadType === LEAD_TYPES.PRICE
-    ? 'Cenas pieprasījums'
-    : 'Pieraksts remontam';
+  if (leadType === LEAD_TYPES.PRICE) {
+    return 'Cenas pieprasījums';
+  }
+
+  if (leadType === LEAD_TYPES.DELIVERY) {
+    return 'Remonts ar piegādi';
+  }
+
+  return 'Pieraksts remontam';
+}
+
+function getSubject({ leadType, device, location }) {
+  if (leadType === LEAD_TYPES.PRICE) {
+    return `Jauns cenas pieprasījums - ${device}`;
+  }
+
+  if (leadType === LEAD_TYPES.DELIVERY) {
+    return `Jauns piegādes pieteikums (${location || 'nav norādīts'}) - ${device}`;
+  }
+
+  return `Jauns pieraksts (${location}) - ${device}`;
 }
 
 export async function POST(req) {
@@ -57,13 +83,15 @@ export async function POST(req) {
       fault,
       location,
       time,
+      deliveryService,
+      returnParcel,
+      comment,
       website, // honeypot
     } = body;
 
     const leadType = normalizeLeadType(body.leadType);
     const leadLabel = getLeadLabel(leadType);
 
-    // Honeypot
     if (website) {
       return NextResponse.json({
         ok: true,
@@ -111,10 +139,11 @@ export async function POST(req) {
       );
     }
 
-    const subject =
-      leadType === LEAD_TYPES.PRICE
-        ? `Jauns cenas pieprasījums - ${device}`
-        : `Jauns pieraksts (${location}) - ${device}`;
+    const subject = getSubject({
+      leadType,
+      device,
+      location,
+    });
 
     const textLines = [
       `Tips: ${leadLabel}`,
@@ -131,6 +160,21 @@ export async function POST(req) {
       );
     }
 
+    if (leadType === LEAD_TYPES.DELIVERY) {
+      textLines.push(
+        `Filiāle, uz kuru nosūtīs: ${location}`,
+        `Piegādes serviss: ${deliveryService}`
+      );
+
+      if (returnParcel) {
+        textLines.push(`Atpakaļ pakomāts / pilsēta: ${returnParcel}`);
+      }
+
+      if (comment) {
+        textLines.push('', 'Papildu komentārs:', comment);
+      }
+    }
+
     textLines.push('', 'Problēma:', fault);
 
     const text = textLines.join('\n');
@@ -144,6 +188,27 @@ export async function POST(req) {
         `
         : '';
 
+    const deliveryDetailsHtml =
+      leadType === LEAD_TYPES.DELIVERY
+        ? `
+          <li><strong>Filiāle, uz kuru nosūtīs:</strong> ${escapeHtml(location)}</li>
+          <li><strong>Piegādes serviss:</strong> ${escapeHtml(deliveryService)}</li>
+          ${
+            returnParcel
+              ? `<li><strong>Atpakaļ pakomāts / pilsēta:</strong> ${escapeHtml(returnParcel)}</li>`
+              : ''
+          }
+        `
+        : '';
+
+    const commentHtml =
+      leadType === LEAD_TYPES.DELIVERY && comment
+        ? `
+          <p style="margin:16px 0 4px"><strong>Papildu komentārs:</strong></p>
+          <p style="white-space:pre-wrap;margin:0">${escapeHtml(comment)}</p>
+        `
+        : '';
+
     const html = `
       <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5;color:#0b0b0b">
         <h2 style="margin:0 0 12px">${escapeHtml(leadLabel)}</h2>
@@ -154,10 +219,13 @@ export async function POST(req) {
           <li><strong>Tālrunis:</strong> ${escapeHtml(phone)}</li>
           <li><strong>Ierīce:</strong> ${escapeHtml(device)}</li>
           ${bookingDetailsHtml}
+          ${deliveryDetailsHtml}
         </ul>
 
         <p style="margin:0 0 4px"><strong>Problēma:</strong></p>
         <p style="white-space:pre-wrap;margin:0">${escapeHtml(fault)}</p>
+
+        ${commentHtml}
       </div>
     `;
 

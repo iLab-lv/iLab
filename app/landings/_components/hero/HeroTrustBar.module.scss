@@ -4,9 +4,13 @@
 
 .trustBar {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, auto));
+  grid-template-columns: repeat(4, max-content);
   align-items: center;
-  gap: clamp(18px, 3vw, 42px);
+  justify-content: flex-start;
+  gap: clamp(18px, 2.2vw, 34px);
+
+  width: fit-content;
+  max-width: min(100%, 760px);
 
   margin: t.$space-xl 0 0;
   padding: 0;
@@ -17,9 +21,12 @@
 .item {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
 
   min-width: 0;
+
+  text-align: left;
 }
 
 .iconWrap {
@@ -58,6 +65,8 @@
   gap: 2px;
   min-width: 0;
 
+  text-align: left;
+
   strong {
     color: t.$color-text;
     font-size: 0.92rem;
@@ -77,27 +86,48 @@
 
 @media (max-width: t.$bp-lg) {
   .trustBar {
-    grid-template-columns: repeat(2, minmax(0, auto));
+    grid-template-columns: repeat(2, max-content);
     gap: 18px 28px;
+
+    max-width: min(100%, 520px);
   }
 }
 
 @media (max-width: t.$bp-md) {
   .trustBar {
     justify-content: center;
+
+    width: fit-content;
+    max-width: 100%;
+
     margin-top: t.$space-lg;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .item {
     justify-content: flex-start;
+    text-align: left;
+  }
+
+  .copy {
+    text-align: left;
   }
 }
 
 @media (max-width: t.$bp-sm) {
   .trustBar {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    justify-content: center;
+    gap: 16px 18px;
+
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .item {
     width: 100%;
+    max-width: 156px;
   }
 
   .iconWrap {
