@@ -11,8 +11,15 @@ const LANDING_LEAD_FORM_CONTENT = {
       faultPlaceholder:
         'Īsi aprakstiet problēmu, piemēram: saplīsis ekrāns, baterija ātri izlādējas, neuzlādējas...',
       locationLegend: 'Filiāle',
+      deliveryLocationLegend: 'Filiāle, uz kuru nosūtīsi ierīci',
       dateLabel: 'Datums',
       timeLegend: 'Vēlamais laiks',
+      deliveryServiceLegend: 'Piegādes serviss',
+      returnParcelLabel: 'Atpakaļ saņemšanas pakomāts / pilsēta',
+      returnParcelPlaceholder: 'Piemēram: Omniva Domina, DPD Āgenskalns, Jelgava...',
+      commentLabel: 'Papildu komentārs',
+      commentPlaceholder:
+        'Vari norādīt ērtāko saziņas laiku, vēlamo pakomātu vai citu svarīgu informāciju.',
       submitting: 'Sūtām…',
     },
 
@@ -25,6 +32,11 @@ const LANDING_LEAD_FORM_CONTENT = {
       booking: {
         title: 'Rezervē remontu iepriekš',
         titleAccent: 'bez liekas gaidīšanas',
+      },
+
+      delivery: {
+        title: 'Remonts ar pakomāta piegādi',
+        titleAccent: 'bez filiāles apmeklējuma',
       },
     },
 
@@ -49,6 +61,17 @@ const LANDING_LEAD_FORM_CONTENT = {
       successText:
         'Pārbaudīsim detaļu pieejamību un tuvākajā laikā sazināsimies, lai apstiprinātu pierakstu.',
     },
+
+    delivery: {
+      title: 'Pieteikt remontu ar piegādi',
+      intro:
+        'Atstājiet ierīces modeli, problēmu un norādiet filiāli, uz kuru plānojat nosūtīt ierīci. Sazināsimies, lai precizētu piegādi, cenu un remonta laiku.',
+      submit: 'Pieteikt piegādi',
+      submitAriaLabel: 'Nosūtīt remonta pieteikumu ar piegādi',
+      successTitle: 'Paldies, pieteikums saņemts!',
+      successText:
+        'Tuvākajā laikā sazināsimies, lai precizētu piegādes detaļas, cenu un remonta termiņu.',
+    },
   },
 };
 
@@ -62,7 +85,7 @@ export function getLandingLeadFormContent(locale = 'lv', mode = 'price') {
 
   return {
     ...content.common,
-    ...content[mode],
+    ...(content[mode] || content.price),
   };
 }
 

@@ -9,6 +9,13 @@ import s from './LandingLeadForm.module.scss';
 
 const AUTO_CLOSE_DELAY = 2200;
 
+const DELIVERY_SERVICES = [
+  'Omniva',
+  'DPD',
+  'SmartPosti',
+  'Latvijas Pasts',
+];
+
 export default function LandingLeadForm({
   mode = 'price',
   locale = 'lv',
@@ -22,6 +29,8 @@ export default function LandingLeadForm({
 }) {
   const t = getLandingLeadFormContent(locale, mode);
   const isBooking = mode === 'booking';
+  const isDelivery = mode === 'delivery';
+  const showLocation = isBooking || isDelivery;
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -177,37 +186,41 @@ export default function LandingLeadForm({
         />
       </div>
 
+      {showLocation ? (
+        <fieldset className={s.fieldset} aria-labelledby={`${mode}-locgroup`}>
+          <legend id={`${mode}-locgroup`}>
+            {isDelivery ? t.deliveryLocationLegend : t.locationLegend}
+          </legend>
+
+          <div className={s.locGrid}>
+            {locations.map((loc, i) => (
+              <label key={loc.id} className={s.radio}>
+                <input
+                  type="radio"
+                  name="location"
+                  value={loc.id}
+                  defaultChecked={
+                    initialValues.location
+                      ? initialValues.location === loc.id
+                      : i === 0
+                  }
+                  required={i === 0}
+                />
+
+                <span>
+                  {loc.label}
+                  {loc.address ? (
+                    <small className={s.muted}> - {loc.address}</small>
+                  ) : null}
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ) : null}
+
       {isBooking ? (
         <>
-          <fieldset className={s.fieldset} aria-labelledby={`${mode}-locgroup`}>
-            <legend id={`${mode}-locgroup`}>{t.locationLegend}</legend>
-
-            <div className={s.locGrid}>
-              {locations.map((loc, i) => (
-                <label key={loc.id} className={s.radio}>
-                  <input
-                    type="radio"
-                    name="location"
-                    value={loc.id}
-                    defaultChecked={
-                      initialValues.location
-                        ? initialValues.location === loc.id
-                        : i === 0
-                    }
-                    required={i === 0}
-                  />
-
-                  <span>
-                    {loc.label}
-                    {loc.address ? (
-                      <small className={s.muted}> - {loc.address}</small>
-                    ) : null}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
           <div className={s.field}>
             <label htmlFor={`${mode}-date`}>{t.dateLabel}</label>
             <input
@@ -245,6 +258,66 @@ export default function LandingLeadForm({
               )}
             </div>
           </fieldset>
+        </>
+      ) : null}
+
+      {isDelivery ? (
+        <>
+          <fieldset
+            className={s.fieldset}
+            aria-labelledby={`${mode}-deliverygroup`}
+          >
+            <legend id={`${mode}-deliverygroup`}>
+              {t.deliveryServiceLegend}
+            </legend>
+
+            <div className={s.timeGrid}>
+              {DELIVERY_SERVICES.map((service, index) => (
+                <label key={service} className={s.radio}>
+                  <input
+                    type="radio"
+                    name="deliveryService"
+                    value={service}
+                    required={index === 0}
+                    defaultChecked={
+                      initialValues.deliveryService
+                        ? initialValues.deliveryService === service
+                        : index === 0
+                    }
+                  />
+
+                  <span>{service}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className={s.field}>
+            <label htmlFor={`${mode}-returnParcel`}>
+              {t.returnParcelLabel}
+            </label>
+            <input
+              id={`${mode}-returnParcel`}
+              name="returnParcel"
+              type="text"
+              placeholder={t.returnParcelPlaceholder}
+              defaultValue={initialValues.returnParcel || ''}
+            />
+          </div>
+
+          <div className={s.field}>
+            <label htmlFor={`${mode}-comment`}>
+              {t.commentLabel}
+            </label>
+            <textarea
+              id={`${mode}-comment`}
+              name="comment"
+              rows={3}
+              placeholder={t.commentPlaceholder}
+              maxLength={600}
+              defaultValue={initialValues.comment || ''}
+            />
+          </div>
         </>
       ) : null}
 

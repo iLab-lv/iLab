@@ -16,7 +16,7 @@ const TRUST_ITEMS = [
   {
     icon: HiOutlineShieldCheck,
     title: 'Garantija',
-    text: 'visiem remontiem',
+    text: 'veiktajam remontam',
   },
   {
     icon: MdOutlineHealthAndSafety,

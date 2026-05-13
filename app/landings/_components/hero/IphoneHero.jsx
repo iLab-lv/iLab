@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { FaLocationDot } from 'react-icons/fa6';
 
 import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 
@@ -58,13 +59,27 @@ export default function IphoneHero({
             <span className={s.subDesktop}>
               Displeju, bateriju un citu iPhone bojājumu remonts mūsu servisa
               centros{' '}
-              <a href="#domina">T/C Domina Shopping</a> un{' '}
-              <a href="#spice">T/C Spice Life</a>.
+              <a href="#domina" className={s.locationLink}>
+                <FaLocationDot aria-hidden="true" />
+                <span>T/C Domina Shopping</span>
+              </a>{' '}
+              un{' '}
+              <a href="#spice" className={s.locationLink}>
+                <FaLocationDot aria-hidden="true" />
+                <span>T/C Spice Life</span>
+              </a>
             </span>
 
             <span className={s.subMobile}>
-              <a href="#domina">T/C Domina Shopping</a> un{' '}
-              <a href="#spice">T/C Spice Life</a>
+              <a href="#domina" className={s.locationLink}>
+                <FaLocationDot aria-hidden="true" />
+                <span>T/C Domina Shopping</span>
+              </a>{' '}
+              un{' '}
+              <a href="#spice" className={s.locationLink}>
+                <FaLocationDot aria-hidden="true" />
+                <span>T/C Spice Life</span>
+              </a>
             </span>
           </div>
 

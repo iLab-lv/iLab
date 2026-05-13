@@ -8,6 +8,7 @@ import LandingLocations from '../_components/locations/LandingLocations';
 import LandingFaq from '../_components/faq/LandingFaq';
 import LandingFinalCta from '../_components/final-cta/LandingFinalCta';
 import LandingFooter from '../_components/footer/LandingFooter';
+import LandingDelivery from '../_components/delivery/LandingDelivery';
 
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 
@@ -42,7 +43,7 @@ export default async function IphoneRemontsLandingPage() {
 
             <LandingProcess locale="lv" />
 
-            
+            <LandingDelivery locale="lv" />
 
             <LandingFaq locale="lv" />
 
