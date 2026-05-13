@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { FaBolt, FaCircleCheck } from 'react-icons/fa6';
 
@@ -11,6 +11,19 @@ import s from './LandingServices.module.scss';
 
 function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
+}
+
+function getInitialServiceId(services) {
+  if (typeof window === 'undefined') return null;
+
+  const params = new URLSearchParams(window.location.search);
+  const serviceId = params.get('service');
+
+  if (!serviceId) return null;
+
+  return services.some((service) => service.id === serviceId)
+    ? serviceId
+    : null;
 }
 
 function getServices(locale) {
@@ -313,14 +326,30 @@ export default function LandingServices({
   locale = 'lv',
 }) {
   const content = useMemo(() => getServices(locale), [locale]);
-  const [activeId, setActiveId] = useState(content.services[0].id);
-  const serviceCardRef = useRef(null);
 
+  const [activeId, setActiveId] = useState(content.services[0].id);
+
+  const serviceCardRef = useRef(null);
   const { openPriceForm, openBookingForm } = useLandingCta();
 
   const activeService =
     content.services.find((service) => service.id === activeId) ||
     content.services[0];
+
+  useEffect(() => {
+    const initialServiceId = getInitialServiceId(content.services);
+
+    if (!initialServiceId) return;
+
+    setActiveId(initialServiceId);
+
+    window.requestAnimationFrame(() => {
+      serviceCardRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  }, [content.services]);
 
   function handleSelect(serviceId) {
     setActiveId(serviceId);
@@ -388,7 +417,6 @@ export default function LandingServices({
               </div>
 
               <div className={s.actions}>
-
                 <LandingButton
                   type="button"
                   variant="primary"
@@ -398,7 +426,7 @@ export default function LandingServices({
                 >
                   {content.ctaPrice}
                 </LandingButton>
-                
+
                 <LandingButton
                   type="button"
                   variant="secondary"
@@ -408,8 +436,6 @@ export default function LandingServices({
                 >
                   {content.ctaBook}
                 </LandingButton>
-
-                
               </div>
             </div>
           </article>

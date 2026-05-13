@@ -6,7 +6,7 @@ import { getSiteSettings } from '@/lib/siteSettings';
 export const metadata = {
   title: 'Сервис телефонов и компьютеров - iLab',
   description:
-    'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Home.',
+    'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Life.',
 
   alternates: {
     canonical: '/ru',
@@ -20,7 +20,7 @@ export const metadata = {
   openGraph: {
     title: 'Сервис телефонов и компьютеров - iLab',
     description:
-      'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Home.',
+      'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Life.',
     url: '/ru',
     siteName: 'iLab',
     locale: 'ru_RU',
@@ -39,7 +39,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Сервис телефонов и компьютеров - iLab',
     description:
-      'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Home.',
+      'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina и Spice Life.',
     images: ['/images/hero.webp'],
   },
 

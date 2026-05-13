@@ -3,7 +3,7 @@ const HERO_CONTENT = {
     default: {
       title: 'Jūsu mobilo ierīču un datoru remonta eksperts Rīgā',
       subtitle:
-        'Remonts tajā pašā dienā. 90 dienu garantija. Divas filiāles Rīgā: Domina un Spice Home.',
+        'Remonts tajā pašā dienā. 90 dienu garantija. Divas filiāles Rīgā: Domina un Spice Life.',
       cta: {
         label: 'Apskatīt pakalpojumus',
         href: '#services',
@@ -13,7 +13,7 @@ const HERO_CONTENT = {
         href: '/cenas',
       },
       imageAlt:
-        'iLab serviss - mobilo ierīču un datoru remonts Rīgā (Domina un Spice Home)',
+        'iLab serviss - mobilo ierīču un datoru remonts Rīgā (Domina un Spice)',
     },
   },
 
@@ -22,7 +22,7 @@ const HERO_CONTENT = {
       title:
         'Ваш эксперт по ремонту мобильных устройств и компьютеров в Риге',
       subtitle:
-        'Ремонт в тот же день. Гарантия 90 дней. Два филиала в Риге: Domina и Spice Home.',
+        'Ремонт в тот же день. Гарантия 90 дней. Два филиала в Риге: Domina и Spice.',
       cta: {
         label: 'Посмотреть услуги',
         href: '#services',
@@ -32,7 +32,7 @@ const HERO_CONTENT = {
         href: '/cenas',
       },
       imageAlt:
-        'iLab - ремонт мобильных устройств и компьютеров в Риге (Domina и Spice Home)',
+        'iLab - ремонт мобильных устройств и компьютеров в Риге (Domina и Spice)',
     },
   },
 };

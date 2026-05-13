@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -44,6 +45,18 @@ function normalizeCompany(siteSettings = {}) {
     logo: company.logo || '',
     email: company.email || '',
   };
+}
+
+function getInitialLeadModeFromUrl() {
+  if (typeof window === 'undefined') return null;
+
+  const params = new URLSearchParams(window.location.search);
+  const form = params.get('form');
+
+  if (form === 'booking') return 'booking';
+  if (form === 'price') return 'price';
+
+  return null;
 }
 
 export default function LandingCtaProvider({
@@ -105,6 +118,17 @@ export default function LandingCtaProvider({
   const openBookingForm = useCallback(() => {
     openLeadSheet('booking');
   }, [openLeadSheet]);
+
+  useEffect(() => {
+    const initialLeadMode = getInitialLeadModeFromUrl();
+
+    if (!initialLeadMode) return;
+
+    setLeadSheet({
+      open: true,
+      mode: initialLeadMode,
+    });
+  }, []);
 
   const value = useMemo(
     () => ({

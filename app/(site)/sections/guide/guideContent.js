@@ -58,7 +58,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Kur nodot iPhone remontam',
           text: `
-<p>iLab servisa centri atrodas Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu - sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
+<p>iLab servisa centri atrodas Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Life</strong>. Abu salonu darbnīcas piedāvā pilnu pakalpojumu klāstu - sākot no diagnostikas līdz jebkura sarežģītības pakāpes remontam.</p>
 
 <p>Ierīci var nodot klātienē vai nosūtīt pa pastu, ja nevari atbraukt personīgi. Visus kontaktus, darba laikus un atrašanās vietas atradīsi sadaļā <a href="/kontakti">Kontakti</a> vai <a href="/kontakti">Servisa centri</a>.</p>
 
@@ -126,7 +126,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         {
           title: 'Где сдать iPhone в ремонт',
           text: `
-<p>Сервисные центры iLab находятся в Риге - <strong>ТЦ Domina Shopping</strong> и <strong>ТЦ Spice Home</strong>. Мы выполняем все виды ремонта - от диагностики до сложных работ.</p>
+<p>Сервисные центры iLab находятся в Риге - <strong>ТЦ Domina Shopping</strong> и <strong>ТЦ Spice Life</strong>. Мы выполняем все виды ремонта - от диагностики до сложных работ.</p>
 
 <p>Вы можете принести устройство лично или отправить по почте. Контакты и адреса доступны в разделе <a href="/ru/kontakty">Контакты</a> или <a href="/ru/kontakty">Сервисные центры</a>.</p>
 

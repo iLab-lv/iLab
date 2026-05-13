@@ -72,7 +72,7 @@ export const LOCATIONS = [
   },
   {
     id: 'spice',
-    label: 'Spice Home',
+    label: 'Spice Life',
     address: 'Jaunmoku iela 13, Rīga, LV-1046',
     tel: '+371 20887787',
     telLink: 'tel:+37120887787',

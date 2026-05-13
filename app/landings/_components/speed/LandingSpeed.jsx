@@ -42,7 +42,7 @@ function getContent(locale) {
         {
           icon: <FaLocationDot />,
           value: '2 филиала',
-          title: 'Domina Shopping и Spice Home',
+          title: 'Domina Shopping и Spice Life',
         },
       ],
     };
@@ -73,7 +73,7 @@ function getContent(locale) {
       {
         icon: <FaLocationDot />,
         value: '2 filiāles',
-        title: 'Domina Shopping un Spice Home',
+        title: 'Domina Shopping un Spice Life',
       },
     ],
   };

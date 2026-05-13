@@ -4,6 +4,7 @@
 .section {
   position: relative;
   padding-block: $space-3xl;
+
   background:
     radial-gradient(
       circle at 50% 8%,
@@ -32,7 +33,9 @@
     content: '';
     position: absolute;
     inset: 0;
+
     pointer-events: none;
+
     background:
       linear-gradient(
         90deg,
@@ -46,6 +49,7 @@
 
 .container {
   @include layout.container;
+
   position: relative;
   z-index: 1;
 }
@@ -70,23 +74,26 @@
 
 .summaryRow {
   min-height: 108px;
+
   display: grid;
   grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.25fr);
   gap: $space-2xl;
   align-items: center;
+
   padding-inline: 54px;
   padding-bottom: $space-xl;
 
   @media (max-width: $bp-lg) {
     grid-template-columns: 1fr;
+
     gap: $space-lg;
+
     padding-inline: 54px;
   }
 
   @media (max-width: $bp-md) {
     padding-inline: 0;
     padding-bottom: $space-lg;
-    text-align: center;
   }
 }
 
@@ -107,40 +114,64 @@
 
 .ratingsGroup {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, max-content));
-  justify-content: end;
-  gap: $space-2xl;
-  align-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+
+  width: min(560px, 100%);
+  margin-inline: auto;
 
   @media (max-width: $bp-lg) {
-    justify-content: center;
-  }
-
-  @media (max-width: $bp-md) {
-    grid-template-columns: 1fr;
-    gap: $space-md;
+    width: 100%;
   }
 }
 
 .ratingSlot {
   min-width: 0;
-  display: flex;
-  align-items: center;
 
-  @media (max-width: $bp-md) {
-    justify-content: center;
+  display: flex;
+  align-items: stretch;
+
+  &:first-child {
+    justify-content: flex-end;
+    text-align: right;
+
+    .ratingContent {
+      padding-right: $space-xl;
+    }
+  }
+
+  &:last-child {
+    justify-content: flex-start;
+    text-align: left;
+
+    .ratingContent {
+      padding-left: $space-xl;
+    }
+  }
+
+  @media (max-width: $bp-sm) {
+    &:first-child {
+      .ratingContent {
+        padding-right: $space-md;
+      }
+    }
+
+    &:last-child {
+      .ratingContent {
+        padding-left: $space-md;
+      }
+    }
   }
 }
 
 .separator {
   width: 1px;
+  flex: 0 0 1px;
   align-self: stretch;
-  margin-right: $space-2xl;
-  background: rgba(255, 255, 255, 0.14);
 
-  @media (max-width: $bp-md) {
-    display: none;
-  }
+  margin: 0;
+
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .ratingContent {
@@ -149,7 +180,9 @@
 
 .placeName {
   margin-bottom: $space-xs;
+
   color: $color-text;
+
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
   line-height: 1.25;
@@ -159,30 +192,36 @@
   display: inline-flex;
   align-items: center;
   gap: $space-xs;
+
   line-height: 1;
 }
 
 .ratingStar {
   color: $color-accent;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
 }
 
 .ratingValue {
   color: $color-text;
-  font-size: $font-size-h5;
-  font-weight: $font-weight-bold;
-  letter-spacing: -0.04em;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.9;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -0.06em;
 }
 
 .ratingMeta {
   margin-top: $space-xs;
+
   color: $color-text-3;
+
   font-size: $font-size-sm;
   line-height: 1.35;
 }
 
 .carouselWrap {
   position: relative;
+
   padding-inline: 54px;
 
   @media (max-width: $bp-md) {
@@ -193,9 +232,12 @@
 .track {
   display: flex;
   gap: $space-md;
+
   overflow-x: auto;
+
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 1px;
+
   scrollbar-width: none;
   overscroll-behavior-x: contain;
 
@@ -206,7 +248,9 @@
 
 .slide {
   flex: 0 0 calc((100% - (#{$space-md} * 2)) / 3);
+
   min-width: 0;
+
   scroll-snap-align: start;
 
   @media (max-width: $bp-lg) {
@@ -229,13 +273,19 @@
 
   width: 42px;
   height: 42px;
+
   border: $border-thin solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
+
   background: rgba(10, 10, 10, 0.68);
+
   color: $color-text;
+
   font: inherit;
   font-size: 1.1rem;
+
   cursor: pointer;
+
   transform: translateY(-50%);
 
   transition:
@@ -275,9 +325,12 @@
 .reviewCard {
   height: 100%;
   min-height: 190px;
+
   padding: $space-lg;
+
   border: $border-thin solid rgba(255, 255, 255, 0.09);
   border-radius: $radius-lg;
+
   background:
     linear-gradient(
       180deg,
@@ -285,6 +338,7 @@
       rgba(255, 255, 255, 0.03)
     ),
     rgba(0, 0, 0, 0.22);
+
   backdrop-filter: blur(8px) saturate(130%);
   -webkit-backdrop-filter: blur(8px) saturate(130%);
 }
@@ -294,6 +348,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: $space-md;
+
   margin-bottom: $space-md;
 }
 
@@ -303,7 +358,9 @@
 
 .author {
   margin: 0 0 $space-xs;
+
   color: $color-text;
+
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
   line-height: 1.25;
@@ -311,9 +368,11 @@
 
 .stars {
   display: inline-flex;
+
   font-size: $font-size-sm;
   letter-spacing: 0.04em;
   line-height: 1;
+
   white-space: nowrap;
 }
 
@@ -327,14 +386,21 @@
 
 .placeBadge {
   flex: 0 0 auto;
+
   max-width: 45%;
+
   padding: 5px 8px;
+
   border-radius: 999px;
+
   background: rgba(34, 211, 238, 0.09);
+
   color: $color-accent;
+
   font-size: 0.68rem;
   font-weight: $font-weight-semibold;
   line-height: 1.1;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -342,31 +408,40 @@
 
 .reviewText {
   margin: 0;
+
   color: $color-text-2;
+
   font-size: $font-size-sm;
   line-height: 1.55;
+
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+
   overflow: hidden;
 }
 
 .emptyText {
   margin: $space-lg 0 0;
+
   color: $color-text-2;
+
   font-size: $font-size-sm;
   text-align: center;
 }
 
 .linksLine {
   margin: $space-xl 0 0;
+
   color: $color-text-2;
+
   font-size: $font-size-sm;
   line-height: 1.5;
   text-align: center;
 
   a {
     color: $color-accent;
+
     font-weight: $font-weight-semibold;
     text-decoration: none;
 

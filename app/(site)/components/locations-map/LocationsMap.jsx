@@ -13,7 +13,7 @@ export default function LocationsMap({
   },
   pins = [
     { id: 'domina', label: 'Domina Shopping', xPct: 68, yPct: 40, gmaps: 'https://maps.google.com/?q=Ieriķu iela 3 Rīga', tel: 'tel:23370088' },
-    { id: 'spice',  label: 'Spice Home',      xPct: 30, yPct: 60, gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga', tel: 'tel:20887787' },
+    { id: 'spice',  label: 'Spice Life',      xPct: 30, yPct: 60, gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga', tel: 'tel:20887787' },
   ],
   locations = [
     {
@@ -28,7 +28,7 @@ export default function LocationsMap({
     },
     {
       id: 'spice',
-      title: 'Spice Home',
+      title: 'Spice Life',
       address: 'Jaunmoku iela 13, Rīga',
       tel: 'tel:20887787',
       gmaps: 'https://maps.google.com/?q=Jaunmoku iela 13 Rīga',

@@ -16,11 +16,11 @@ const BASIC_FAQ = {
     ),
     faqItem(
       'Vai nepieciešams pieraksts, vai var atnest ierīci uzreiz?',
-      'Vairumā gadījumu vari atnest ierīci <strong>bez pieraksta</strong>. iLab serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Plašāka informācija pieejama sadaļā <a href="/kontakti">Kontakti</a>.'
+      'Vairumā gadījumu vari atnest ierīci <strong>bez pieraksta</strong>. iLab serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Plašāka informācija pieejama sadaļā <a href="/kontakti">Kontakti</a>.'
     ),
     faqItem(
       'Kur Rīgā atrodas jūsu serviss?',
-      'Mūsu serviss atrodas Rīgā divās vietās - <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Adreses, tālruņi un darba laiki pieejami sadaļā <a href="/kontakti">Kontakti</a>.'
+      'Mūsu serviss atrodas Rīgā divās vietās - <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Adreses, tālruņi un darba laiki pieejami sadaļā <a href="/kontakti">Kontakti</a>.'
     ),
     faqItem(
       'Vai dati paliks droši remonta laikā?',
@@ -42,11 +42,11 @@ const BASIC_FAQ = {
     ),
     faqItem(
       'Нужно ли записываться заранее или можно принести устройство сразу?',
-      'В большинстве случаев устройство можно принести <strong>без записи</strong>. Сервис iLab в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Подробнее - в разделе <a href="/ru/kontakti">Контакты</a>.'
+      'В большинстве случаев устройство можно принести <strong>без записи</strong>. Сервис iLab в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Подробнее - в разделе <a href="/ru/kontakti">Контакты</a>.'
     ),
     faqItem(
       'Где в Риге находится ваш сервис?',
-      'Наш сервис находится в Риге в двух местах - <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Адреса, телефоны и часы работы указаны в разделе <a href="/ru/kontakti">Контакты</a>.'
+      'Наш сервис находится в Риге в двух местах - <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Адреса, телефоны и часы работы указаны в разделе <a href="/ru/kontakti">Контакты</a>.'
     ),
     faqItem(
       'Будут ли данные в безопасности во время ремонта?',
@@ -64,7 +64,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu iPhone remonta serviss?',
-        'iLab iPhone remonta serviss atrodas Rīgā divās vietās - <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Vari izvēlēties sev ērtāko filiāli un atnest iPhone bez iepriekšēja pieraksta.'
+        'iLab iPhone remonta serviss atrodas Rīgā divās vietās - <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Vari izvēlēties sev ērtāko filiāli un atnest iPhone bez iepriekšēja pieraksta.'
       ),
       faqItem(
         'Vai iPhone ekrāna maiņa tiek veikta uz vietas?',
@@ -98,7 +98,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту iPhone?',
-        'Сервис iLab по ремонту iPhone находится в Риге в двух местах - <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Вы можете выбрать удобный филиал и принести iPhone без предварительной записи.'
+        'Сервис iLab по ремонту iPhone находится в Риге в двух местах - <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Вы можете выбрать удобный филиал и принести iPhone без предварительной записи.'
       ),
       faqItem(
         'Делаете ли вы замену экрана iPhone на месте?',
@@ -151,7 +151,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu telefonu remonta serviss?',
-        'iLab telefonu remonta serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Vari izvēlēties sev tuvāko vai ērtāko filiāli.'
+        'iLab telefonu remonta serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Vari izvēlēties sev tuvāko vai ērtāko filiāli.'
       ),
       faqItem(
         'Vai pēc telefona remonta būs garantija?',
@@ -185,7 +185,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту телефонов?',
-        'Сервис iLab по ремонту телефонов в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Вы можете выбрать более удобный филиал.'
+        'Сервис iLab по ремонту телефонов в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Вы можете выбрать более удобный филиал.'
       ),
       faqItem(
         'Есть ли гарантия на ремонт телефона?',
@@ -222,7 +222,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu planšetdatoru remonta serviss?',
-        'iLab planšetdatoru remonta serviss atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong> Rīgā.'
+        'iLab planšetdatoru remonta serviss atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong> Rīgā.'
       ),
       faqItem(
         'Vai planšetdatorā būs droši dati remonta laikā?',
@@ -256,7 +256,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту планшетов?',
-        'Сервис iLab по ремонту планшетов находится в Риге в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.'
+        'Сервис iLab по ремонту планшетов находится в Риге в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.'
       ),
       faqItem(
         'Будут ли данные на планшете в безопасности во время ремонта?',
@@ -297,7 +297,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu datoru remonta serviss?',
-        'iLab datoru remonta serviss atrodas Rīgā - <strong>Domina Shopping</strong> un <strong>Spice Home</strong>.'
+        'iLab datoru remonta serviss atrodas Rīgā - <strong>Domina Shopping</strong> un <strong>Spice Life</strong>.'
       ),
       faqItem(
         'Vai datoru remontam ir garantija?',
@@ -331,7 +331,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту компьютеров?',
-        'Сервис iLab по ремонту компьютеров находится в Риге - <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.'
+        'Сервис iLab по ремонту компьютеров находится в Риге - <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.'
       ),
       faqItem(
         'Есть ли гарантия на ремонт компьютера?',
@@ -368,7 +368,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu Dyson remonta serviss?',
-        'iLab Dyson remonta serviss atrodas Rīgā - <strong>Domina Shopping</strong> un <strong>Spice Home</strong>.'
+        'iLab Dyson remonta serviss atrodas Rīgā - <strong>Domina Shopping</strong> un <strong>Spice Life</strong>.'
       ),
       faqItem(
         'Vai ir vērts remontēt Dyson vai labāk pirkt jaunu?',
@@ -402,7 +402,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту Dyson?',
-        'Сервис iLab по ремонту Dyson находится в Риге - <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.'
+        'Сервис iLab по ремонту Dyson находится в Риге - <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.'
       ),
       faqItem(
         'Стоит ли ремонтировать Dyson или лучше купить новый?',
