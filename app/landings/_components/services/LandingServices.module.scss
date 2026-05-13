@@ -500,6 +500,58 @@
 
   @media (max-width: $bp-lg) {
     transform: none;
+
+    border-color: rgba(34, 211, 238, 0.72);
+
+    background:
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(34, 211, 238, 0.3),
+        transparent 8rem
+      ),
+      linear-gradient(
+        180deg,
+        rgba(12, 104, 118, 0.92),
+        rgba(7, 57, 66, 0.9)
+      ),
+      rgba(34, 211, 238, 0.18);
+
+    box-shadow:
+      0 14px 34px rgba(34, 211, 238, 0.18),
+      0 0 0 1px rgba(34, 211, 238, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  }
+}
+
+.selectorButtonActive:hover,
+.selectorButtonActive:active,
+.selectorButtonActive:focus,
+.selectorButtonActive:focus-visible {
+  border-color: rgba(34, 211, 238, 0.72);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(34, 211, 238, 0.3),
+      transparent 8rem
+    ),
+    linear-gradient(
+      180deg,
+      rgba(12, 104, 118, 0.92),
+      rgba(7, 57, 66, 0.9)
+    ),
+    rgba(34, 211, 238, 0.18);
+
+  box-shadow:
+    0 14px 34px rgba(34, 211, 238, 0.18),
+    0 0 0 1px rgba(34, 211, 238, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  transform: none;
+  outline: none;
+
+  &::before {
+    opacity: 1;
   }
 }
 
@@ -508,7 +560,11 @@
     transition: none;
   }
 
-  .selectorButtonActive {
+  .selectorButtonActive,
+  .selectorButtonActive:hover,
+  .selectorButtonActive:active,
+  .selectorButtonActive:focus,
+  .selectorButtonActive:focus-visible {
     transform: none;
   }
 }
