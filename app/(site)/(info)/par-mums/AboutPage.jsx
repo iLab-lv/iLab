@@ -26,9 +26,9 @@ function getPageStrings(locale = 'lv') {
       intro:
         ' <strong>SIA iLab</strong> - профессиональный сервис по ремонту телефонов и компьютеров в Риге с более чем <strong>10-летним опытом</strong> в сфере обслуживания и ремонта техники. Мы обеспечиваем быстрый и качественный ремонт техники как для частных клиентов, так и для компаний (B2B), предоставляя полный спектр сервисных услуг.',
 
-      locationsTitle: 'iLab вы найдёте в T/C Domina Shopping и TC Spice Home',
+      locationsTitle: 'iLab вы найдёте в T/C Domina Shopping и TC Spice Life',
       locationsText:
-        'Наши сервисные центры находятся в <strong>TC Domina Shopping</strong> и <strong>TC Spice Home</strong>, чтобы клиентам было удобно сдавать и получать устройства в любой день. В обоих филиалах доступны ремонт смартфонов, планшетов, компьютеров и умных часов, обслуживание пылесосов, установка программного обеспечения и другие технические услуги.',
+        'Наши сервисные центры находятся в <strong>TC Domina Shopping</strong> и <strong>TC Spice Life</strong>, чтобы клиентам было удобно сдавать и получать устройства в любой день. В обоих филиалах доступны ремонт смартфонов, планшетов, компьютеров и умных часов, обслуживание пылесосов, установка программного обеспечения и другие технические услуги.',
 
       missionTitle: 'Наша миссия',
       missionText:
@@ -41,7 +41,7 @@ function getPageStrings(locale = 'lv') {
       whyChooseTitle: 'Почему выбирают iLab',
       whyChooseItems: [
         '10+ лет опыта в ремонте устройств;',
-        'Ремонт телефонов и компьютеров в Риге - в двух удобных локациях: TC Domina Shopping и TC Spice Home;',
+        'Ремонт телефонов и компьютеров в Риге - в двух удобных локациях: TC Domina Shopping и TC Spice Life;',
         'Работаем каждый день, включая выходные;',
         'Обслуживаем частных клиентов и B2B по всей Латвии;',
         'Качественные запчасти и профессиональная диагностика;',
@@ -64,7 +64,7 @@ function getPageStrings(locale = 'lv') {
       orgDescription:
         'Профессиональный сервис по ремонту телефонов, планшетов, компьютеров и Dyson в Риге.',
       dominaName: 'iLab - Domina Shopping',
-      spiceName: 'iLab - Spice Home',
+      spiceName: 'iLab - Spice Life',
       contactsPath: '/ru/kontakty',
     };
   }
@@ -83,9 +83,9 @@ function getPageStrings(locale = 'lv') {
     intro:
       '<strong>SIA iLab</strong> - profesionāls telefona un datoru serviss Rīgā ar vairāk nekā <strong>10 gadu pieredzi</strong> tehnoloģiju apkalpošanas un remonta jomā. Mēs sniedzam ātru un kvalitatīvu tehnikas remontu gan privātpersonām, gan uzņēmumiem (B2B), nodrošinot pilnu servisa pakalpojumu klāstu.',
 
-    locationsTitle: 'iLab atradīsi: T/C Domina Shopping un TC Spice Home',
+    locationsTitle: 'iLab atradīsi: T/C Domina Shopping un TC Spice Life',
     locationsText:
-      'Mūsu servisa centri atrodas <strong>TC Domina Shopping</strong> un <strong>TC Spice Home</strong>, lai klientiem būtu ērti nogādāt un saņemt ierīces jebkurā dienas laikā. Abās filiālēs pieejami viedtālruņu, planšetdatoru, datoru un viedpulksteņu remonts, putekļusūcēju apkope, programmatūras uzstādīšana un citi tehniskie pakalpojumi.',
+      'Mūsu servisa centri atrodas <strong>TC Domina Shopping</strong> un <strong>TC Spice Life</strong>, lai klientiem būtu ērti nogādāt un saņemt ierīces jebkurā dienas laikā. Abās filiālēs pieejami viedtālruņu, planšetdatoru, datoru un viedpulksteņu remonts, putekļusūcēju apkope, programmatūras uzstādīšana un citi tehniskie pakalpojumi.',
 
     missionTitle: 'Mūsu misija',
     missionText:
@@ -98,7 +98,7 @@ function getPageStrings(locale = 'lv') {
     whyChooseTitle: 'Kāpēc izvēlēties iLab',
     whyChooseItems: [
       '10+ gadu pieredze ierīču remontā;',
-      'Telefona un datoru remonts Rīgā - divās ērtās lokācijās: TC Domina Shopping un TC Spice Home;',
+      'Telefona un datoru remonts Rīgā - divās ērtās lokācijās: TC Domina Shopping un TC Spice Life;',
       'Darbojamies katru dienu, arī brīvdienās;',
       'Apkalpojam privātpersonas un B2B klientus visā Latvijā;',
       'Kvalitatīvas rezerves daļas un profesionāla diagnostika;',
@@ -121,7 +121,7 @@ function getPageStrings(locale = 'lv') {
     orgDescription:
       'Profesionāls telefonu, planšetdatoru, datoru un Dyson serviss Rīgā.',
     dominaName: 'iLab - Domina Shopping',
-    spiceName: 'iLab - Spice Home',
+    spiceName: 'iLab - Spice Life',
     contactsPath: '/kontakti',
   };
 }

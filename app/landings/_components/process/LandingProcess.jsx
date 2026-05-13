@@ -20,7 +20,7 @@ function getContent(locale) {
         },
         {
           title: 'Приносите iPhone',
-          text: 'Выберите удобный филиал: Domina Shopping или Spice Home.',
+          text: 'Выберите удобный филиал: Domina Shopping или Spice Life.',
         },
         {
           title: 'Забираете готовый',
@@ -44,7 +44,7 @@ function getContent(locale) {
       },
       {
         title: 'Atnes iPhone',
-        text: 'Izvēlies ērtāko filiāli: Domina Shopping vai Spice Home.',
+        text: 'Izvēlies ērtāko filiāli: Domina Shopping vai Spice Life.',
       },
       {
         title: 'Saņem gatavu',
@@ -67,30 +67,28 @@ export default function LandingProcess({
       aria-labelledby={`${id}-title`}
     >
       <div className={s.container}>
-        <div className={s.panel}>
-          <div className={s.header}>
-            <h2 id={`${id}-title`}>{content.title}</h2>
-            <p>{content.subtitle}</p>
-          </div>
+        <div className={s.header}>
+          <h2 id={`${id}-title`}>{content.title}</h2>
+          <p>{content.subtitle}</p>
+        </div>
 
-          <div className={s.grid} role="list">
-            {content.steps.map((step, index) => (
-              <article
-                key={step.title}
-                className={s.card}
-                role="listitem"
-              >
-                <div className={s.number} aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
+        <div className={s.grid} role="list">
+          {content.steps.map((step, index) => (
+            <article
+              key={step.title}
+              className={s.card}
+              role="listitem"
+            >
+              <div className={s.number} aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </div>
 
-                <div className={s.cardCopy}>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+              <div className={s.cardCopy}>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

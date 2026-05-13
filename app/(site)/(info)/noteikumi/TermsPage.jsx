@@ -224,7 +224,7 @@ export default function TermsPage({ locale = 'lv' }) {
             <br />
             <strong>{strings.addressLabel}</strong> Ieriķu iela 3 (Domina Shopping), Rīga
             <br />
-            <strong>{strings.branchLabel}</strong> Spice Home - Jaunmoku iela 13, Rīga
+            <strong>{strings.branchLabel}</strong> Spice Life - Jaunmoku iela 13, Rīga
             <br />
             <strong>{strings.emailLabel}</strong> info@ilab.lv | 
             <strong>{strings.phoneLabel}</strong> 23370088
@@ -278,7 +278,7 @@ export default function TermsPage({ locale = 'lv' }) {
             <br />
             {strings.contactsHours} P.–Sv. 10:00–21:00
             <br />
-            {strings.branchLabel} Spice Home - Jaunmoku iela 13, Rīga
+            {strings.branchLabel} Spice Life - Jaunmoku iela 13, Rīga
           </p>
         </div>
       </section>

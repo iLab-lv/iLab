@@ -236,23 +236,23 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+        Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Life</strong>.
         Adreses, tālruņi un darba laiki:{' '}
         <Link href="/kontakti">Kontakti</Link>.
       </>
     ),
     aText:
-      'Rīgā - T/C Domina Shopping un T/C Spice Home; adreses un darba laiki pieejami sadaļā Kontakti.',
+      'Rīgā - T/C Domina Shopping un T/C Spice Life; adreses un darba laiki pieejami sadaļā Kontakti.',
     variants: {
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Home</strong>.
+            Rīgā - <strong>T/C Domina Shopping</strong> un <strong>T/C Spice Life</strong>.
             Precīzas adreses un darba laiks ir norādīti šajā lapā zemāk.
           </>
         ),
         aText:
-          'Rīgā - T/C Domina Shopping un T/C Spice Home; adreses un darba laiks ir norādīti lapā.',
+          'Rīgā - T/C Domina Shopping un T/C Spice Life; adreses un darba laiks ir norādīti lapā.',
       },
     },
     weight: 50,

@@ -2,7 +2,7 @@
 @use '@/styles/_layout.scss' as layout;
 
 .section {
-  padding-block: $space-2xl;
+  padding-block: $space-3xl;
   background: $color-surface-1;
 
   @media (max-width: $bp-md) {

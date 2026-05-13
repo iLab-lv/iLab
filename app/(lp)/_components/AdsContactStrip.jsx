@@ -14,7 +14,7 @@ const DEFAULT_LOCATIONS = [
   },
   {
     id: 'spice',
-    label: 'Spice Home',
+    label: 'Spice Life',
     address: 'Jaunmoku iela 13, Rīga',
     hoursShort: '10:00–21:00 (Sv 10:00–20:00)',
     tel: '+371 20887787',

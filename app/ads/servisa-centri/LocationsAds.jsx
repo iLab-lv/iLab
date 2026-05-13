@@ -29,7 +29,7 @@ export default function LocationsAds({
           {title}
         </h2>
         <p className={sCatalog.paragraph}>
-          Divi iLab servisa centri Rīgā - Domina Shopping un Spice Home. Atved iPhone uz
+          Divi iLab servisa centri Rīgā - Domina Shopping un Spice Life. Atved iPhone uz
           bezmaksas diagnostiku tajā pašā dienā.
         </p>
         <p className={s.helper}>

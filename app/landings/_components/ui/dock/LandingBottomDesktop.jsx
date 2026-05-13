@@ -12,7 +12,7 @@ function shortLabel(label = '') {
   const normalized = String(label).toLowerCase();
 
   if (normalized.includes('domina')) return 'T/C Domina Shopping';
-  if (normalized.includes('spice')) return 'T/C Spice Home';
+  if (normalized.includes('spice')) return 'T/C Spice Life';
 
   return label;
 }

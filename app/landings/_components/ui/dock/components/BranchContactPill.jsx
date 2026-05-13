@@ -18,7 +18,7 @@ function getShortLabel(label = '') {
   }
 
   if (normalized.includes('spice')) {
-    return 'T/C Spice Home';
+    return 'T/C Spice Life';
   }
 
   return label;

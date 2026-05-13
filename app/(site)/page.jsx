@@ -6,7 +6,7 @@ import { getSiteSettings } from '@/lib/siteSettings';
 export const metadata = {
   title: 'Telefonu un datoru serviss - iLab',
   description:
-    'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Home.',
+    'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Life.',
 
   alternates: {
     canonical: '/',
@@ -20,7 +20,7 @@ export const metadata = {
   openGraph: {
     title: 'Telefonu un datoru serviss - iLab',
     description:
-      'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Home.',
+      'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Life.',
     url: '/',
     siteName: 'iLab',
     locale: 'lv_LV',
@@ -39,7 +39,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Telefonu un datoru serviss - iLab',
     description:
-      'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Home.',
+      'Telefonu, planšetdatoru un datoru remonts Rīgā. Remonts tajā pašā dienā, 90 dienu garantija un divas filiāles: Domina un Spice Life.',
     images: ['/images/hero.webp'],
   },
 

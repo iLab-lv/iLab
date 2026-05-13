@@ -25,7 +25,7 @@ function getContent(locale) {
                 },
                 {
                     q: 'Можно ли приехать без записи?',
-                    a: 'Да, можно приехать без предварительной записи в T/C Domina Shopping или T/C Spice Home. Но если хотите не ждать и сразу понять ориентировочную цену, лучше заранее написать или позвонить — мы проверим наличие детали под вашу модель.',
+                    a: 'Да, можно приехать без предварительной записи в T/C Domina Shopping или T/C Spice Life. Но если хотите не ждать и сразу понять ориентировочную цену, лучше заранее написать или позвонить — мы проверим наличие детали под вашу модель.',
                 },
                 {
                     q: 'Сохраняются ли Face ID и True Tone после ремонта?',
@@ -58,7 +58,7 @@ function getContent(locale) {
             },
             {
                 q: 'Vai var ierasties bez pieraksta?',
-                a: 'Jā, vari ierasties bez iepriekšēja pieraksta T/C Domina Shopping vai T/C Spice Home servisā. Tomēr, ja vēlies izvairīties no gaidīšanas un uzreiz uzzināt orientējošu cenu, iesakām pirms braukšanas uzrakstīt vai piezvanīt — pārbaudīsim detaļas pieejamību tavam modelim.',
+                a: 'Jā, vari ierasties bez iepriekšēja pieraksta T/C Domina Shopping vai T/C Spice Life servisā. Tomēr, ja vēlies izvairīties no gaidīšanas un uzreiz uzzināt orientējošu cenu, iesakām pirms braukšanas uzrakstīt vai piezvanīt — pārbaudīsim detaļas pieejamību tavam modelim.',
             },
             {
                 q: 'Vai pēc remonta saglabājas Face ID un True Tone?',

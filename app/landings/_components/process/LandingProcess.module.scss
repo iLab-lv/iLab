@@ -3,18 +3,20 @@
 
 .section {
   position: relative;
-  padding-block: $space-3xl;
+
+  padding-block: clamp($space-2xl, 7vw, 96px);
+
   background:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.94) 0%,
-      rgba(0, 0, 0, 0.76) 38%,
-      rgba(0, 0, 0, 0.58) 100%
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.5) 42%,
+      rgba(0, 0, 0, 0.34) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.35),
-      rgba(0, 0, 0, 0.86)
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.56) 100%
     ),
     url('/images/hands-closeup.png');
 
@@ -24,46 +26,63 @@
 
   overflow: hidden;
 
-  @media (max-width: $bp-md) {
-    padding-block: $space-2xl;
-  }
-
   &::before {
     content: '';
     position: absolute;
     inset: 0;
+
     background:
       radial-gradient(
-        circle at 12% 0%,
-        rgba(34, 211, 238, 0.16),
+        circle at 14% 4%,
+        rgba(34, 211, 238, 0.2),
         transparent 28rem
       ),
       radial-gradient(
-        circle at 88% 100%,
-        rgba(34, 211, 238, 0.08),
+        circle at 86% 100%,
+        rgba(34, 211, 238, 0.12),
         transparent 32rem
       );
+
     pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.12),
+        rgba(0, 0, 0, 0.42)
+      );
+
+    pointer-events: none;
+  }
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-2xl;
+    background-position: 58% center;
   }
 }
 
 .container {
   @include layout.container;
+
   position: relative;
   z-index: 1;
 }
 
-.panel {
-  padding: 0;
-}
-
 .header {
   max-width: 720px;
-  margin-bottom: $space-2xl;
+  margin-bottom: $space-xl;
 
   h2 {
     margin: 0;
+
     color: $color-text;
+
     font-size: clamp(2rem, 4vw, $font-size-h4);
     line-height: $line-height-heading;
     letter-spacing: -0.05em;
@@ -71,7 +90,9 @@
 
   p {
     margin: $space-sm 0 0;
+
     color: $color-text-2;
+
     font-size: $font-size-p;
     line-height: 1.55;
   }
@@ -80,49 +101,85 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: $space-xl;
+  gap: $space-md;
 
   @media (max-width: $bp-lg) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: $space-lg;
   }
 
   @media (max-width: $bp-sm) {
     grid-template-columns: 1fr;
-    gap: $space-xl;
   }
 }
 
 .card {
   position: relative;
-  min-height: 140px;
+
+  min-height: 168px;
+  padding: $space-lg;
+
   display: grid;
-  align-content: start;
-  gap: $space-sm;
+  align-content: space-between;
+  gap: $space-lg;
+
+  border-radius: $radius-lg;
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.026)
+    ),
+    rgba(6, 12, 13, 0.48);
+
+  box-shadow:
+    0 20px 58px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
 }
 
 .number {
-  color: $color-accent;
-  font-size: clamp(2.8rem, 6vw, 4.4rem);
-  line-height: 0.9;
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  background: rgba(34, 211, 238, 0.1);
+  border: $border-thin solid rgba(34, 211, 238, 0.18);
+
+  color: rgba(245, 245, 245, 0.78);
+
+  font-size: $font-size-sm;
+  line-height: 1;
   font-weight: $font-weight-extrabold;
-  letter-spacing: -0.08em;
-  text-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+  letter-spacing: -0.02em;
 }
 
 .cardCopy {
   h3 {
     margin: 0 0 $space-sm;
-    color: $color-text;
+
+    color: $color-accent;
+
     font-size: clamp($font-size-lg, 1rem + 0.45vw, $font-size-xl);
     line-height: $line-height-heading;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
+
+    text-shadow: 0 0 22px rgba(34, 211, 238, 0.18);
   }
 
   p {
     max-width: 280px;
     margin: 0;
+
     color: $color-text-2;
+
     font-size: $font-size-sm;
     line-height: 1.55;
   }

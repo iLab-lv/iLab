@@ -20,7 +20,7 @@ function getContent(locale) {
       price: 'Узнать цену',
       call: 'Позвонить',
       whatsapp: 'WhatsApp',
-      note: 'Domina Shopping или Spice Home',
+      note: 'Domina Shopping или Spice Life',
     };
   }
 
@@ -31,7 +31,7 @@ function getContent(locale) {
     price: 'Uzzināt cenu',
     call: 'Zvanīt',
     whatsapp: 'WhatsApp',
-    note: 'Domina Shopping vai Spice Home',
+    note: 'Domina Shopping vai Spice Life',
   };
 }
 

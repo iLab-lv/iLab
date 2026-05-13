@@ -59,12 +59,12 @@ export default function IphoneHero({
               Displeju, bateriju un citu iPhone bojājumu remonts mūsu servisa
               centros{' '}
               <a href="#domina">T/C Domina Shopping</a> un{' '}
-              <a href="#spice">T/C Spice Home</a>.
+              <a href="#spice">T/C Spice Life</a>.
             </span>
 
             <span className={s.subMobile}>
               <a href="#domina">T/C Domina Shopping</a> un{' '}
-              <a href="#spice">T/C Spice Home</a>
+              <a href="#spice">T/C Spice Life</a>
             </span>
           </div>
 

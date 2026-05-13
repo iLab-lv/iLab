@@ -10368,12 +10368,12 @@
               },
               {
                 "q": "Vai nepieciešams pieraksts, vai var atnest ierīci uzreiz?",
-                "aHtml": "Vairumā gadījumu vari atnest ierīci <strong>bez pieraksta</strong>. iLab serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Plašāka informācija pieejama sadaļā <a href=\"/kontakti\">Kontakti</a>.",
+                "aHtml": "Vairumā gadījumu vari atnest ierīci <strong>bez pieraksta</strong>. iLab serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Plašāka informācija pieejama sadaļā <a href=\"/kontakti\">Kontakti</a>.",
                 "order": 40
               },
               {
                 "q": "Kur Rīgā atrodas jūsu serviss?",
-                "aHtml": "Mūsu serviss atrodas Rīgā divās vietās — <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Adreses, tālruņi un darba laiki pieejami sadaļā <a href=\"/kontakti\">Kontakti</a>.",
+                "aHtml": "Mūsu serviss atrodas Rīgā divās vietās — <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Adreses, tālruņi un darba laiki pieejami sadaļā <a href=\"/kontakti\">Kontakti</a>.",
                 "order": 50
               },
               {
@@ -10422,12 +10422,12 @@
               },
               {
                 "q": "Нужно ли записываться заранее или можно принести устройство сразу?",
-                "aHtml": "В большинстве случаев устройство можно принести <strong>без записи</strong>. Сервис iLab в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Подробнее — в разделе <a href=\"/ru/kontakti\">Контакты</a>.",
+                "aHtml": "В большинстве случаев устройство можно принести <strong>без записи</strong>. Сервис iLab в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Подробнее — в разделе <a href=\"/ru/kontakti\">Контакты</a>.",
                 "order": 40
               },
               {
                 "q": "Где в Риге находится ваш сервис?",
-                "aHtml": "Наш сервис находится в Риге в двух местах — <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Адреса, телефоны и часы работы указаны в разделе <a href=\"/ru/kontakti\">Контакты</a>.",
+                "aHtml": "Наш сервис находится в Риге в двух местах — <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Адреса, телефоны и часы работы указаны в разделе <a href=\"/ru/kontakti\">Контакты</a>.",
                 "order": 50
               },
               {
@@ -10491,7 +10491,7 @@
               },
               {
                 "q": "Kur Rīgā atrodas jūsu datoru remonta serviss?",
-                "aHtml": "iLab datoru remonta serviss atrodas Rīgā — <strong>Domina Shopping</strong> un <strong>Spice Home</strong>.",
+                "aHtml": "iLab datoru remonta serviss atrodas Rīgā — <strong>Domina Shopping</strong> un <strong>Spice Life</strong>.",
                 "order": 70
               },
               {
@@ -10555,7 +10555,7 @@
               },
               {
                 "q": "Где в Риге находится ваш сервис по ремонту компьютеров?",
-                "aHtml": "Сервис iLab по ремонту компьютеров находится в Риге — <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.",
+                "aHtml": "Сервис iLab по ремонту компьютеров находится в Риге — <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.",
                 "order": 70
               },
               {
@@ -10619,7 +10619,7 @@
               },
               {
                 "q": "Kur Rīgā atrodas jūsu Dyson remonta serviss?",
-                "aHtml": "iLab Dyson remonta serviss atrodas Rīgā — <strong>Domina Shopping</strong> un <strong>Spice Home</strong>.",
+                "aHtml": "iLab Dyson remonta serviss atrodas Rīgā — <strong>Domina Shopping</strong> un <strong>Spice Life</strong>.",
                 "order": 70
               },
               {
@@ -10683,7 +10683,7 @@
               },
               {
                 "q": "Где в Риге находится ваш сервис по ремонту Dyson?",
-                "aHtml": "Сервис iLab по ремонту Dyson находится в Риге — <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.",
+                "aHtml": "Сервис iLab по ремонту Dyson находится в Риге — <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.",
                 "order": 70
               },
               {
@@ -10722,7 +10722,7 @@
               },
               {
                 "q": "Kur Rīgā atrodas jūsu iPhone remonta serviss?",
-                "aHtml": "iLab iPhone remonta serviss atrodas Rīgā divās vietās — <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Vari izvēlēties sev ērtāko filiāli un atnest iPhone bez iepriekšēja pieraksta.",
+                "aHtml": "iLab iPhone remonta serviss atrodas Rīgā divās vietās — <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Vari izvēlēties sev ērtāko filiāli un atnest iPhone bez iepriekšēja pieraksta.",
                 "order": 20
               },
               {
@@ -10787,7 +10787,7 @@
               },
               {
                 "q": "Где в Риге находится ваш сервис по ремонту iPhone?",
-                "aHtml": "Сервис iLab по ремонту iPhone находится в Риге в двух местах — <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Вы можете выбрать удобный филиал и принести iPhone без предварительной записи.",
+                "aHtml": "Сервис iLab по ремонту iPhone находится в Риге в двух местах — <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Вы можете выбрать удобный филиал и принести iPhone без предварительной записи.",
                 "order": 20
               },
               {
@@ -10870,7 +10870,7 @@
               },
               {
                 "q": "Kur Rīgā atrodas jūsu planšetdatoru remonta serviss?",
-                "aHtml": "iLab planšetdatoru remonta serviss atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong> Rīgā.",
+                "aHtml": "iLab planšetdatoru remonta serviss atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong> Rīgā.",
                 "order": 60
               },
               {
@@ -10934,7 +10934,7 @@
               },
               {
                 "q": "Где в Риге находится ваш сервис по ремонту планшетов?",
-                "aHtml": "Сервис iLab по ремонту планшетов находится в Риге в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>.",
+                "aHtml": "Сервис iLab по ремонту планшетов находится в Риге в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>.",
                 "order": 60
               },
               {
@@ -10998,7 +10998,7 @@
               },
               {
                 "q": "Kur Rīgā atrodas jūsu telefonu remonta serviss?",
-                "aHtml": "iLab telefonu remonta serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Home</strong>. Vari izvēlēties sev tuvāko vai ērtāko filiāli.",
+                "aHtml": "iLab telefonu remonta serviss Rīgā atrodas <strong>Domina Shopping</strong> un <strong>Spice Life</strong>. Vari izvēlēties sev tuvāko vai ērtāko filiāli.",
                 "order": 60
               },
               {
@@ -11062,7 +11062,7 @@
               },
               {
                 "q": "Где в Риге находится ваш сервис по ремонту телефонов?",
-                "aHtml": "Сервис iLab по ремонту телефонов в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Home</strong>. Вы можете выбрать более удобный филиал.",
+                "aHtml": "Сервис iLab по ремонту телефонов в Риге находится в <strong>Domina Shopping</strong> и <strong>Spice Life</strong>. Вы можете выбрать более удобный филиал.",
                 "order": 60
               },
               {
@@ -31441,7 +31441,7 @@
           "path": "places/ChIJ-44HHgDR7kYRDtqN_4qtGn0",
           "exists": true,
           "data": {
-            "name": "Spice Home",
+            "name": "Spice Life",
             "featuredReviews": [
               {
                 "author": "Andžus",

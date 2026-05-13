@@ -16,7 +16,7 @@ function getPageStrings(locale = 'lv') {
 
       headerTitle: 'Контакты',
       headerLead:
-        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - Domina Shopping или Spice Home. Работаем каждый день.',
+        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - Domina Shopping или Spice Life. Работаем каждый день.',
 
       sectionTitle: 'Связь и время работы',
       phoneLabel: 'Телефон',
@@ -26,7 +26,7 @@ function getPageStrings(locale = 'lv') {
 
       dominaLabel: 'Domina Shopping',
       dominaAddress: 'Ieriķu iela 3, Рига',
-      spiceLabel: 'Spice Home',
+      spiceLabel: 'Spice Life',
       spiceAddress: 'Jaunmoku iela 13, Рига',
       hoursValue: 'Пн.–Вс. 10:00–21:00',
     };
@@ -39,7 +39,7 @@ function getPageStrings(locale = 'lv') {
 
     headerTitle: 'Kontakti',
     headerLead:
-      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - Domina Shopping vai Spice Home. Strādājam katru dienu.',
+      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - Domina Shopping vai Spice Life. Strādājam katru dienu.',
 
     sectionTitle: 'Saziņa un darba laiks',
     phoneLabel: 'Tālrunis',
@@ -49,7 +49,7 @@ function getPageStrings(locale = 'lv') {
 
     dominaLabel: 'Domina Shopping',
     dominaAddress: 'Ieriķu iela 3, Rīga',
-    spiceLabel: 'Spice Home',
+    spiceLabel: 'Spice Life',
     spiceAddress: 'Jaunmoku iela 13, Rīga',
     hoursValue: 'P.–Sv. 10:00–21:00',
   };

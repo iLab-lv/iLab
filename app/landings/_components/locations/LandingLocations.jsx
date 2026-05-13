@@ -24,7 +24,7 @@ function getStrings(locale) {
     return {
       titleMain: 'Выберите мастерскую в',
       titleAccent: 'Риге',
-      subtitle: 'Domina Shopping или Spice Home — звоните, пишите в WhatsApp или сразу открывайте маршрут.',
+      subtitle: 'Domina Shopping или Spice Life — звоните, пишите в WhatsApp или сразу открывайте маршрут.',
       open: 'Открыто до {time}',
       closed: 'Закрыто',
       closedUntil: 'Откроется в {time}',
@@ -40,7 +40,7 @@ function getStrings(locale) {
   return {
     titleMain: 'Izvēlies darbnīcu',
     titleAccent: 'Rīgā',
-    subtitle: 'Domina Shopping vai Spice Home — zvani, raksti WhatsApp vai uzreiz atver maršrutu.',
+    subtitle: 'Domina Shopping vai Spice Life — zvani, raksti WhatsApp vai uzreiz atver maršrutu.',
     open: 'Atvērts līdz {time}',
     closed: 'Slēgts',
     closedUntil: 'Atvērsies {time}',
@@ -61,7 +61,7 @@ function getShortLabel(label = '') {
   const normalized = String(label).toLowerCase();
 
   if (normalized.includes('domina')) return 'T/C Domina Shopping';
-  if (normalized.includes('spice')) return 'T/C Spice Home';
+  if (normalized.includes('spice')) return 'T/C Spice Life';
 
   return label;
 }

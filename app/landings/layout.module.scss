@@ -9,7 +9,6 @@
 .main {
   min-height: 100vh;
   padding-top: 72px;
-  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
 .skipLink {
