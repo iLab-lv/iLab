@@ -50,14 +50,14 @@ function getItems(locale, reviewsSummary) {
       {
         icon: <FaAward />,
         value: '10+',
-        label: 'лет ремонтируем iPhone',
+        label: 'лет помогаем с устройствами',
         text: 'в Риге',
       },
       {
         icon: <FaMobileScreenButton />,
         value: '20K+',
-        label: 'устройств снова как новые',
-        text: 'Apple и другие смартфоны',
+        label: 'устройств снова в работе',
+        text: 'телефоны и другая техника',
       },
       {
         icon: <FaStar />,
@@ -72,14 +72,14 @@ function getItems(locale, reviewsSummary) {
     {
       icon: <FaAward />,
       value: '10+',
-      label: 'gadi remontējam iPhone',
+      label: 'gadi palīdzam ar ierīcēm',
       text: 'Rīgā',
     },
     {
       icon: <FaMobileScreenButton />,
       value: '20K+',
-      label: 'ierīču atkal kā jaunas',
-      text: 'Apple un citi viedtālruņi',
+      label: 'ierīču atkal darbojas',
+      text: 'telefoni un cita tehnika',
     },
     {
       icon: <FaStar />,
@@ -124,9 +124,7 @@ export default function LandingTrust({
                   </span>
                 </div>
 
-                <p className={s.text}>
-                  {item.text}
-                </p>
+                <p className={s.text}>{item.text}</p>
               </div>
             </article>
           ))}

@@ -7,7 +7,7 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      title: 'Как проходит ремонт',
+      title: 'Как всё проходит',
       subtitle: 'Простой процесс без лишней бюрократии.',
       steps: [
         {
@@ -15,23 +15,23 @@ function getContent(locale) {
           text: 'Позвоните, напишите в WhatsApp или оставьте заявку.',
         },
         {
-          title: 'Уточняем цену',
-          text: 'Подскажем ориентировочную стоимость и наличие деталей.',
+          title: 'Уточняем стоимость',
+          text: 'Подскажем ориентировочную цену и наличие деталей.',
         },
         {
-          title: 'Приносите iPhone',
+          title: 'Приносите устройство',
           text: 'Выберите удобный филиал: Domina Shopping или Spice Life.',
         },
         {
-          title: 'Забираете готовый',
-          text: 'Многие ремонты выполняем в тот же день.',
+          title: 'Забираете готовое',
+          text: 'Популярные работы часто выполняем в тот же день.',
         },
       ],
     };
   }
 
   return {
-    title: 'Kā notiek remonts',
+    title: 'Kā tas notiek',
     subtitle: 'Vienkāršs process bez liekas sarežģīšanas.',
     steps: [
       {
@@ -39,16 +39,16 @@ function getContent(locale) {
         text: 'Zvani, raksti WhatsApp vai atstāj pieteikumu.',
       },
       {
-        title: 'Precizējam cenu',
+        title: 'Precizējam izmaksas',
         text: 'Pateiksim aptuveno cenu un detaļu pieejamību.',
       },
       {
-        title: 'Atnes iPhone',
+        title: 'Atnes ierīci',
         text: 'Izvēlies ērtāko filiāli: Domina Shopping vai Spice Life.',
       },
       {
         title: 'Saņem gatavu',
-        text: 'Biežākos remontus veicam tajā pašā dienā.',
+        text: 'Biežākos darbus veicam tajā pašā dienā.',
       },
     ],
   };

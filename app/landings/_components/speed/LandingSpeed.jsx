@@ -18,21 +18,21 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      title: 'Ремонт без долгого ожидания',
+      title: 'Без долгого ожидания',
       subtitle:
-        'Популярные ремонты выполняем быстро, если нужная деталь есть в наличии.',
+        'Популярные работы выполняем быстро, если нужная деталь есть в наличии.',
 
       bookingTitle: 'Подготовим деталь',
       bookingAccent: 'до вашего визита',
       bookingText:
-        'Уточним наличие и предложим удобное время для ремонта.',
+        'Уточним наличие и предложим удобное время для диагностики или замены.',
       bookingCta: 'Забронировать время',
 
       cards: [
         {
           icon: <FaClock />,
           value: '20–40 мин',
-          title: 'популярные ремонты',
+          title: 'популярные замены и работы',
         },
         {
           icon: <FaBolt />,
@@ -49,21 +49,21 @@ function getContent(locale) {
   }
 
   return {
-    title: 'Remonts bez ilgas gaidīšanas',
+    title: 'Bez ilgas gaidīšanas',
     subtitle:
-      'Populārākos remontus veicam ātri, ja detaļa ir pieejama uz vietas.',
+      'Populārāko bojājumu novēršanu veicam ātri, ja detaļa ir pieejama uz vietas.',
 
     bookingTitle: 'Sagatavosim detaļu',
     bookingAccent: 'pirms tava apmeklējuma',
     bookingText:
-      'Precizēsim pieejamību un ieteiksim ērtāko laiku remontam.',
+      'Precizēsim pieejamību un ieteiksim ērtāko laiku diagnostikai vai detaļas maiņai.',
     bookingCta: 'Rezervēt laiku',
 
     cards: [
       {
         icon: <FaClock />,
         value: '20–40 min',
-        title: 'populārākie remonti',
+        title: 'populārākās detaļu maiņas',
       },
       {
         icon: <FaBolt />,
