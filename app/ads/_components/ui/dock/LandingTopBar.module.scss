@@ -1,0 +1,64 @@
+@use '@/styles/_tokens.scss' as t;
+
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: t.$z-nav;
+
+  background: rgba(0, 0, 0, 0.82);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.inner {
+  min-height: t.$header-desktop-height;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.$space-xl;
+
+  padding: 0 24px;
+}
+
+.desktopContacts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+
+  margin-left: auto;
+}
+
+.mobileForms {
+  display: none;
+}
+
+@media (max-width: t.$bp-md) {
+  .inner {
+    min-height: t.$header-mobile-height;
+
+    gap: t.$space-sm;
+
+    padding:
+      0
+      max(16px, env(safe-area-inset-left))
+      0
+      max(16px, env(safe-area-inset-right));
+  }
+
+  .desktopContacts {
+    display: none;
+  }
+
+  .mobileForms {
+    display: block;
+    margin-left: auto;
+    min-width: 0;
+  }
+}

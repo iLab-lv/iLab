@@ -1,0 +1,89 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp(88px, 8vw, 128px);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12), transparent 34rem),
+    $color-background;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl;
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.panel {
+  padding: clamp($space-2xl, 5vw, $space-3xl);
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.14), transparent 22rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.025);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: $space-xl;
+  align-items: center;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: $space-xl;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 $space-sm;
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+}
+
+.content {
+  h2 {
+    margin: 0;
+    color: $color-text;
+    font-size: clamp(2.2rem, 5vw, $font-size-h3);
+    line-height: 0.98;
+    letter-spacing: -0.07em;
+
+    span {
+      display: block;
+      color: $color-accent;
+      text-shadow:
+        0 0 24px rgba(34, 211, 238, 0.18),
+        0 0 54px rgba(34, 211, 238, 0.08);
+    }
+  }
+}
+
+.text {
+  max-width: 620px;
+  margin: $space-md 0 0;
+  color: $color-text-2;
+  font-size: $font-size-p;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  @media (max-width: $bp-lg) {
+    justify-content: flex-start;
+  }
+
+  @media (max-width: $bp-sm) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

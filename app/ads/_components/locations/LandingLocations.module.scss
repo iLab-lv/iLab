@@ -1,0 +1,331 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+$whatsapp: #25d366;
+$closed: #ff5a5a;
+
+.section {
+  padding-block: clamp(88px, 8vw, 128px);
+  background: $color-surface-2;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl;
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: $space-xl;
+
+  h2 {
+    margin: 0;
+    color: $color-text;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: $line-height-heading;
+    letter-spacing: -0.05em;
+
+    span {
+      display: inline-block;
+      margin-left: 0.22em;
+      color: $color-accent;
+      text-shadow:
+        0 0 24px rgba(34, 211, 238, 0.18),
+        0 0 54px rgba(34, 211, 238, 0.08);
+    }
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-p;
+    line-height: 1.55;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-lg;
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  scroll-margin-top: 96px;
+  padding: $space-xl;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.1), transparent 18rem),
+    rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+
+  @media (max-width: $bp-sm) {
+    padding: $space-lg;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+
+  @media (max-width: $bp-sm) {
+    flex-direction: column;
+  }
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  color: $color-text;
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  letter-spacing: -0.03em;
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  margin: $space-sm 0 0;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  line-height: 1.45;
+
+  svg {
+    flex: 0 0 auto;
+    margin-top: 0.12em;
+    color: $color-text-3;
+  }
+}
+
+.statusBlock {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: end;
+  gap: $space-xs;
+
+  @media (max-width: $bp-sm) {
+    justify-items: start;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+}
+
+.badgeOpen {
+  background: rgba($whatsapp, 0.13);
+  color: $color-text;
+  border: 1px solid rgba($whatsapp, 0.28);
+
+  .badgeDot {
+    background: $whatsapp;
+    box-shadow: 0 0 12px rgba($whatsapp, 0.85);
+  }
+}
+
+.badgeClosed {
+  background: rgba($closed, 0.1);
+  color: $color-text-2;
+  border: 1px solid rgba($closed, 0.24);
+
+  .badgeDot {
+    background: $closed;
+    box-shadow: 0 0 12px rgba($closed, 0.75);
+  }
+}
+
+.hoursToggle {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: $color-text-2;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+
+  transition: color $dur-base $ease-std;
+
+  &:hover {
+    color: $color-accent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+}
+
+.chevron {
+  color: currentColor;
+  font-size: 0.7rem;
+  transition: transform 180ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.hoursList {
+  margin: -$space-sm 0 $space-lg;
+  padding: $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  background: rgba(0, 0, 0, 0.16);
+  display: grid;
+  gap: $space-xs;
+}
+
+.hoursRow {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  line-height: 1.35;
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.hoursToday {
+  color: $color-accent;
+  font-weight: $font-weight-semibold;
+}
+
+.phone {
+  margin: 0 0 $space-lg;
+  color: $color-text;
+  font-size: clamp(1.55rem, 4vw, $font-size-h5);
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-sm;
+}
+
+.directions {
+  margin-top: $space-lg;
+  padding-top: $space-lg;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  flex-wrap: wrap;
+}
+
+.directionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  min-height: 40px;
+  color: $color-text;
+  font-size: $font-size-p;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  svg {
+    color: $color-text-2;
+    font-size: 1.2rem;
+    transition: color $dur-base $ease-std;
+  }
+
+  &:hover {
+    color: $color-accent;
+
+    svg {
+      color: $color-accent;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+}
+
+.directionSeparator {
+  width: 1px;
+  height: 28px;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+
+  @media (max-width: $bp-sm) {
+    display: none;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .directions {
+    align-items: stretch;
+    gap: $space-sm;
+  }
+
+  .directionLink {
+    min-height: 44px;
+    padding: 0 $space-md;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hoursToggle,
+  .chevron,
+  .directionLink svg {
+    transition: none;
+  }
+}
