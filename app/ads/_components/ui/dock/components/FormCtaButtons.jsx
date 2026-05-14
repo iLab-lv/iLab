@@ -18,7 +18,7 @@ export default function FormCtaButtons() {
         size="lg"
         onClick={openBookingForm}
       >
-        Pieteikt remontu
+        Pieteikt vizīti
       </LandingButton>
       
       <LandingButton

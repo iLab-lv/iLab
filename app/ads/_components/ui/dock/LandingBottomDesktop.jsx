@@ -33,7 +33,7 @@ export default function LandingBottomDesktop() {
   return (
     <aside
       className={s.desktopDock}
-      aria-label="Servisa centru kontakti"
+      aria-label="Kontakti"
     >
       <div className={s.desktopInner}>
         {locations.map((location, index) => {

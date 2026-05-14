@@ -8,7 +8,7 @@ import s from './LandingBottomBar.module.scss';
 export default function LandingBottomBar() {
   return (
     <>
-      <aside className={s.desktopBar} aria-label="Remonta pieteikšanas darbības">
+      <aside className={s.desktopBar} aria-label="Pieteikuma darbības">
         <FormCtaButtons />
       </aside>
 

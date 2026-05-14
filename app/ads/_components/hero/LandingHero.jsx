@@ -7,9 +7,9 @@ import GoogleReviewsBadge from '@sections/reviews/GoogleReviewsBadge';
 
 import LandingTrustBar from './HeroTrustBar';
 
-import s from './IphoneHero.module.scss';
+import s from './LandingHero.module.scss';
 
-export default function IphoneHero({
+export default function LandingHero({
   locale = 'lv',
   reviewsSummary,
 
@@ -17,7 +17,7 @@ export default function IphoneHero({
   highlight = 'tajā pašā dienā',
 
   imageSrc = '/images/categories/landing_hero.webp',
-  imageAlt = 'iLab remonta darbnīcās Rīgā',
+  imageAlt = 'iLab darbnīcās Rīgā',
   imageWidth = 900,
   imageHeight = 900,
 
