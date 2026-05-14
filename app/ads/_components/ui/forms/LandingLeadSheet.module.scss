@@ -1,0 +1,106 @@
+@use '@/styles/_tokens.scss' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  background: #050505;
+  color: $color-text;
+
+  overflow-y: auto;
+}
+
+.sheet {
+  min-height: 100dvh;
+}
+
+.close {
+  position: sticky;
+  top: 18px;
+  left: calc(100% - 62px);
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  margin: 18px 18px 0 auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+
+  background: rgba(20, 20, 20, 0.92);
+  color: $color-text;
+
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+}
+
+.content {
+  width: min(860px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 20px 0 96px;
+}
+
+.title {
+  max-width: 760px;
+  margin: 0 56px $space-lg 0;
+
+  color: $color-text;
+
+  font-size: clamp(2.4rem, 5.8vw, 4.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.065em;
+}
+
+.titleAccent {
+  display: block;
+  color: $color-accent;
+}
+
+@media (max-width: $bp-md) {
+  .close {
+    top: 12px;
+
+    width: 42px;
+    height: 42px;
+
+    margin: 12px 12px 0 auto;
+  }
+
+  .content {
+    width: calc(100% - 24px);
+    padding: 12px 0 calc(96px + env(safe-area-inset-bottom));
+  }
+
+  .title {
+    max-width: 100%;
+    margin-right: 48px;
+    margin-bottom: $space-md;
+
+    font-size: clamp(2.25rem, 11.5vw, 3.8rem);
+  }
+}

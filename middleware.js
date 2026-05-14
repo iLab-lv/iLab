@@ -5,11 +5,15 @@ export function middleware(req) {
   const host = rawHost.split(':')[0].toLowerCase();
   const pathname = req.nextUrl.pathname;
 
-  const isRigaHost = host === 'riga.ilab.lv';
+  const isAdsPreview =
+    req.nextUrl.searchParams.get('ads') === '1';
+
+  const isRigaHost =
+    host === 'riga.ilab.lv' || isAdsPreview;
+
   const isInternalAdsPath =
     pathname === '/ads' || pathname.startsWith('/ads/');
 
-  // 🚫 Never touch static assets
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/brand') ||
@@ -21,41 +25,15 @@ export function middleware(req) {
     return NextResponse.next();
   }
 
-  /**
-   * =========================
-   * riga.ilab.lv behavior
-   * =========================
-   */
-
-  // ✅ Root of riga.ilab.lv → ads landing
-  if (isRigaHost && pathname === '/') {
-    const url = req.nextUrl.clone();
-    url.pathname = '/ads/servisa-centri';
-    return NextResponse.rewrite(url);
-  }
-
-  // ✅ Any path on riga.ilab.lv → /ads/*
   if (isRigaHost) {
-    if (isInternalAdsPath) return NextResponse.next();
-
     const url = req.nextUrl.clone();
-    url.pathname = `/ads${pathname}`;
+    url.pathname = '/ads';
     return NextResponse.rewrite(url);
   }
 
-  /**
-   * =========================
-   * ilab.lv (main domain)
-   * =========================
-   */
-
-  // 🚫 Optional: block direct access to /ads/* on main domain
-  // (recommended once ads are stable)
-  /*
   if (isInternalAdsPath) {
     return new NextResponse(null, { status: 404 });
   }
-  */
 
   return NextResponse.next();
 }

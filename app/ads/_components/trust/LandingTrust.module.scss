@@ -1,0 +1,187 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: $space-2xl;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(34, 211, 238, 0.08),
+      transparent 36rem
+    ),
+    $color-surface-1;
+
+  @media (max-width: $bp-md) {
+    padding-block: $space-xl;
+  }
+}
+
+.container {
+  @include layout.container;
+}
+
+.band {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+
+  min-height: 148px;
+
+  border-radius: calc($radius-lg + 4px);
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.026)
+    ),
+    rgba(255, 255, 255, 0.03);
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background:
+      radial-gradient(
+        circle at 8% 0%,
+        rgba(34, 211, 238, 0.14),
+        transparent 16rem
+      ),
+      radial-gradient(
+        circle at 92% 100%,
+        rgba(34, 211, 238, 0.09),
+        transparent 18rem
+      );
+
+    pointer-events: none;
+  }
+
+  @media (max-width: $bp-lg) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+
+  min-width: 0;
+  padding: $space-xl;
+
+  &:not(:last-child) {
+    border-right: $border-thin solid rgba(255, 255, 255, 0.085);
+  }
+
+  @media (max-width: $bp-lg) {
+    min-height: 118px;
+    padding: $space-lg $space-xl;
+
+    &:not(:last-child) {
+      border-right: 0;
+      border-bottom: $border-thin solid rgba(255, 255, 255, 0.085);
+    }
+  }
+
+  @media (max-width: $bp-sm) {
+    min-height: 104px;
+    gap: $space-md;
+    padding: $space-lg;
+  }
+}
+
+.icon {
+  flex: 0 0 auto;
+
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: $radius-lg;
+
+  color: $color-accent;
+  background: rgba(34, 211, 238, 0.095);
+  border: 1px solid rgba(34, 211, 238, 0.17);
+
+  box-shadow:
+    0 10px 34px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: $bp-sm) {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.copy {
+  min-width: 0;
+}
+
+.main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: $space-sm;
+  row-gap: $space-xs;
+
+  margin-bottom: $space-sm;
+}
+
+.value {
+  color: $color-text;
+
+  font-size: clamp(2.05rem, 3vw, 3rem);
+  line-height: 0.92;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.065em;
+}
+
+.label {
+  color: $color-text;
+
+  font-size: clamp(1.05rem, 1rem + 0.45vw, 1.45rem);
+  line-height: 1.1;
+  font-weight: $font-weight-semibold;
+  letter-spacing: -0.035em;
+}
+
+.text {
+  margin: 0;
+
+  color: $color-text-2;
+
+  font-size: clamp($font-size-sm, 0.72rem + 0.18vw, 0.95rem);
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band,
+  .item {
+    transition: none;
+  }
+}

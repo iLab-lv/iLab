@@ -1,0 +1,85 @@
+@use '@/styles/_tokens.scss' as *;
+
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0;
+  color: $color-text;
+  pointer-events: auto;
+}
+
+.pill + .pill {
+  padding-left: 28px;
+  margin-left: 12px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 42px;
+    background:
+      linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 255, 255, 0.24),
+        transparent
+      );
+    transform: translateY(-50%);
+  }
+}
+
+.info {
+  display: grid;
+  gap: 2px;
+  min-width: 132px;
+}
+
+.name {
+  color: $color-text-2;
+  font-size: 0.62rem;
+  line-height: 1.1;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color $dur-base $ease-std;
+
+  &:hover {
+    color: $color-accent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+.phone {
+  color: $color-text;
+  font-size: 1.05rem;
+  line-height: 1.05;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: $bp-lg) {
+  .info {
+    min-width: 116px;
+  }
+
+  .phone {
+    font-size: 0.95rem;
+  }
+}
