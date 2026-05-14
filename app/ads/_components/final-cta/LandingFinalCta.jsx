@@ -31,7 +31,7 @@ function getContent(locale) {
     price: 'Uzzināt cenu',
     call: 'Zvanīt',
     whatsapp: 'WhatsApp',
-    note: 'Domina Shopping vai Spice Life',
+    note: 'T/C Domina Shopping vai T/C Spice Life',
   };
 }
 
