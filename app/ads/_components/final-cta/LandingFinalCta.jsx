@@ -14,8 +14,8 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      titleMain: 'Radusies problēma?',
-      titleAccent: 'Починим быстро.',
+      titleMain: 'Появилась проблема?',
+      titleAccent: 'Поможем быстро.',
       text: 'Уточним цену, наличие деталей и подскажем ближайший удобный филиал.',
       price: 'Узнать цену',
       call: 'Позвонить',
@@ -26,7 +26,7 @@ function getContent(locale) {
 
   return {
     titleMain: 'Radusies problēma?',
-    titleAccent: 'Salabosim ātri.',
+    titleAccent: 'Palīdzēsim ātri.',
     text: 'Precizēsim cenu, detaļu pieejamību un ieteiksim ērtāko filiāli.',
     price: 'Uzzināt cenu',
     call: 'Zvanīt',

@@ -1,4 +1,4 @@
-import IphoneHero from './_components/hero/IphoneHero';
+import LandingHero from './_components/hero/LandingHero';
 import LandingReviews from './_components/reviews/LandingReviews';
 import LandingTrust from './_components/trust/LandingTrust';
 import LandingSpeed from './_components/speed/LandingSpeed';
@@ -39,7 +39,7 @@ export default async function AdsLandingPage() {
 
   return (
     <>
-      <IphoneHero
+      <LandingHero
         locale="lv"
         reviewsSummary={reviewsSummary}
       />

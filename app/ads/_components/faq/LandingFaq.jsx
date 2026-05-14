@@ -21,7 +21,7 @@ function getContent(locale) {
       items: [
         {
           q: 'Сколько это занимает?',
-          a: 'Популярные работы — замена дисплея, аккумулятора, разъёма зарядки или камеры — часто выполняем в тот же день. Во многих случаях это занимает примерно 20–60 минут, если нужная деталь есть в наличии.',
+          a: 'Популярные работы с дисплеем, аккумулятором, разъёмом зарядки или камерой часто выполняем в тот же день. Во многих случаях это занимает примерно 20–60 минут, если нужная деталь есть в наличии.',
         },
         {
           q: 'Можно ли приехать без записи?',
@@ -29,11 +29,11 @@ function getContent(locale) {
         },
         {
           q: 'Сохраняются ли Face ID и True Tone?',
-          a: 'При аккуратной замене дисплея мы стараемся сохранить Face ID и True Tone, если эти функции работали до повреждения и проблема не затронула связанные модули. Перед началом работ мастер проверит устройство и объяснит, что можно сохранить в вашем конкретном случае.',
+          a: 'При аккуратной работе с дисплеем мы стараемся сохранить Face ID и True Tone, если эти функции работали до повреждения и проблема не затронула связанные модули. Перед началом работ специалист проверит устройство и объяснит, что можно сохранить в вашем конкретном случае.',
         },
         {
           q: 'Какая гарантия на выполненные работы?',
-          a: 'На выполненные работы и установленные детали предоставляется гарантия. Срок зависит от вида работ и выбранной детали, но для популярных замен обычно действует гарантия до 90 дней.',
+          a: 'На выполненные работы и установленные детали предоставляется гарантия. Срок зависит от вида работ и выбранной детали, но для популярных работ обычно действует гарантия до 90 дней.',
         },
         {
           q: 'Какие детали вы используете?',
@@ -41,7 +41,7 @@ function getContent(locale) {
         },
         {
           q: 'Удалятся ли данные с устройства?',
-          a: 'Обычно при замене экрана, аккумулятора, камеры или разъёма зарядки данные не удаляются. Мы не сбрасываем устройство без необходимости. Если устройство сильно повреждено или было залито жидкостью, по возможности рекомендуем заранее сделать резервную копию.',
+          a: 'Обычно при работах с экраном, аккумулятором, камерой или разъёмом зарядки данные не удаляются. Мы не сбрасываем устройство без необходимости. Если устройство сильно повреждено или было залито жидкостью, по возможности рекомендуем заранее сделать резервную копию.',
         },
       ],
     };
@@ -54,7 +54,7 @@ function getContent(locale) {
     items: [
       {
         q: 'Cik ilgi tas aizņem?',
-        a: 'Populārākos darbus — displeja, baterijas, uzlādes ligzdas vai kameras maiņu — bieži paveicam tajā pašā dienā. Daudzos gadījumos tas aizņem aptuveni 20–60 minūtes, ja nepieciešamā detaļa ir pieejama uz vietas.',
+        a: 'Populārākos darbus ar displeju, bateriju, uzlādes ligzdu vai kameru bieži paveicam tajā pašā dienā. Daudzos gadījumos tas aizņem aptuveni 20–60 minūtes, ja nepieciešamā detaļa ir pieejama uz vietas.',
       },
       {
         q: 'Vai var ierasties bez pieraksta?',
@@ -62,11 +62,11 @@ function getContent(locale) {
       },
       {
         q: 'Vai saglabājas Face ID un True Tone?',
-        a: 'Veicot korektu displeja maiņu, cenšamies saglabāt gan Face ID, gan True Tone funkcionalitāti, ja šīs funkcijas darbojās pirms bojājuma un problēma nav skārusi saistītos moduļus. Pirms darbu sākšanas meistars pārbaudīs ierīci un paskaidros, ko iespējams saglabāt konkrētajā gadījumā.',
+        a: 'Strādājot ar displeju, cenšamies saglabāt gan Face ID, gan True Tone funkcionalitāti, ja šīs funkcijas darbojās pirms bojājuma un problēma nav skārusi saistītos moduļus. Pirms darbu sākšanas speciālists pārbaudīs ierīci un paskaidros, ko iespējams saglabāt konkrētajā gadījumā.',
       },
       {
         q: 'Kāda garantija ir veiktajiem darbiem?',
-        a: 'Veiktajiem darbiem un uzstādītajām detaļām nodrošinām garantiju. Garantijas termiņš ir atkarīgs no darbu veida un izvēlētās detaļas, bet populārākajām maiņām parasti nodrošinām garantiju līdz 90 dienām.',
+        a: 'Veiktajiem darbiem un uzstādītajām detaļām nodrošinām garantiju. Garantijas termiņš ir atkarīgs no darbu veida un izvēlētās detaļas, bet populārākajiem darbiem parasti nodrošinām garantiju līdz 90 dienām.',
       },
       {
         q: 'Kādas detaļas izmantojat?',
@@ -74,7 +74,7 @@ function getContent(locale) {
       },
       {
         q: 'Vai dati pazudīs?',
-        a: 'Parasti displeja, baterijas, kameras vai uzlādes ligzdas maiņas laikā dati netiek dzēsti. Ierīci bez vajadzības nepārinstalējam un neatiestatām. Ja ierīce ir stipri bojāta vai bijusi mitrumā, pēc iespējas iesakām iepriekš izveidot rezerves kopiju.',
+        a: 'Parasti darbu laikā ar displeju, bateriju, kameru vai uzlādes ligzdu dati netiek dzēsti. Ierīci bez vajadzības nepārinstalējam un neatiestatām. Ja ierīce ir stipri bojāta vai bijusi mitrumā, pēc iespējas iesakām iepriekš izveidot rezerves kopiju.',
       },
     ],
   };
