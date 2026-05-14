@@ -13,15 +13,15 @@ export default function IphoneHero({
   locale = 'lv',
   reviewsSummary,
 
-  title = 'iPhone remonts',
+  title = 'Aifonu labošana',
   highlight = 'tajā pašā dienā',
 
   imageSrc = '/images/categories/iphone_remonts.webp',
-  imageAlt = 'iPhone remonts iLab remonta darbnīcās Rīgā',
+  imageAlt = 'iLab remonta darbnīcās Rīgā',
   imageWidth = 900,
   imageHeight = 900,
 
-  headingId = 'iphone-hero-title',
+  headingId = 'hero-title',
 }) {
   return (
     <section className={s.hero} aria-labelledby={headingId}>
@@ -57,8 +57,7 @@ export default function IphoneHero({
 
           <div className={s.sub}>
             <span className={s.subDesktop}>
-              Displeju, bateriju un citu iPhone bojājumu remonts mūsu servisa
-              centros{' '}
+              Displeju, bateriju un citu bojājumu novēršana mūsu darbnīcās{' '}
               <a href="#domina" className={s.locationLink}>
                 <FaLocationDot aria-hidden="true" />
                 <span>T/C Domina Shopping</span>

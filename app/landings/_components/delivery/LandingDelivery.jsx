@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import {
-    FaBoxOpen,
-  FaTruckFast,
+  FaBoxOpen,
   FaClipboardCheck,
+  FaTruckFast,
 } from 'react-icons/fa6';
 
 import LandingButton from '../ui/button/LandingButton';
@@ -42,75 +42,75 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      eyebrow: 'Ремонт с доставкой',
+      eyebrow: 'Помощь с доставкой',
 
-      title: 'Отправь iPhone через пакомат',
+      title: 'Отправь устройство через пакомат',
       accent: 'получи обратно бесплатно',
 
       note:
-        'Большинство ремонтов выполняем в тот же день после получения устройства.',
+        'Популярные работы часто выполняем в тот же день после получения устройства.',
 
       subtitle:
-        'Можно отправить устройство через Omniva, DPD, SmartPosti или Latvijas Pasts. Мы отремонтируем iPhone и отправим обратно в удобный пакомат без дополнительной платы.',
+        'Можно отправить устройство через Omniva, DPD, SmartPosti или Latvijas Pasts. Проверим проблему, согласуем решение и отправим обратно в удобный пакомат без дополнительной платы.',
 
-      cta: 'Записать ремонт с доставкой',
+      cta: 'Оставить заявку с доставкой',
 
       steps: [
         {
-          icon: <FaBoxOpen />,
-          title: 'Отправляешь iPhone',
+          icon: <FaClipboardCheck />,
+          title: 'Оставляешь заявку',
           text:
-            'Выбираешь удобный пакомат или почтовую доставку.',
+            'Опиши проблему и модель устройства. Проверим информацию и свяжемся с деталями.',
         },
         {
-          icon: <FaRotate />,
-          title: 'Согласуем ремонт',
+          icon: <FaBoxOpen />,
+          title: 'Отправляешь устройство',
           text:
-            'Уточняем цену и наличие деталей перед ремонтом.',
+            'После подтверждения отправь устройство удобным пакоматом или почтовой доставкой.',
         },
         {
           icon: <FaTruckFast />,
-          title: 'Отправляем обратно',
+          title: 'Получаешь обратно',
           text:
-            'Получаешь устройство в выбранном пакомате без дополнительной платы.',
+            'После завершения работ отправим устройство обратно на адрес или в пакомат без дополнительной платы.',
         },
       ],
     };
   }
 
   return {
-    eyebrow: 'Remonts ar piegādi',
+    eyebrow: 'Ar piegādi',
 
-    title: 'Nosūti iPhone ar pakomātu',
+    title: 'Nosūti ierīci ar pakomātu',
     accent: 'saņem atpakaļ bez papildu maksas',
 
     note:
-      'Vairumu remontu veicam tajā pašā dienā pēc ierīces saņemšanas.',
+      'Populārākos darbus bieži veicam tajā pašā dienā pēc ierīces saņemšanas.',
 
     subtitle:
-      'Vari nosūtīt ierīci ar Omniva, DPD, SmartPosti vai Latvijas Pastu. Salabosim iPhone un nosūtīsim atpakaļ uz tev ērtāko pakomātu.',
+      'Vari nosūtīt ierīci ar Omniva, DPD, SmartPosti vai Latvijas Pastu. Pārbaudīsim problēmu, saskaņosim risinājumu un nosūtīsim atpakaļ uz tev ērtāko pakomātu.',
 
-    cta: 'Pieteikt remontu ar piegādi',
+    cta: 'Pieteikt ar piegādi',
 
     steps: [
-  {
-    icon: <FaClipboardCheck />,
-    title: 'Aizpildi pieteikumu',
-    text:
-      'Apraksti problēmu un ierīces modeli. Izvērtēsim remontu un sazināsimies ar precīzāku informāciju.',
-  },
-  {
-    icon: <FaBoxOpen />,
-    title: 'Nosūti ierīci',
-    text:
-      'Pēc apstiprinājuma nosūti ierīci ar sev ērtāko pakomātu vai pasta piegādi.',
-  },
-  {
-    icon: <FaTruckFast />,
-    title: 'Saņem atpakaļ',
-    text:
-      'Pēc remonta nosūtām ierīci atpakaļ uz adresi vai pakomātu bez papildu maksas.',
-  },
+      {
+        icon: <FaClipboardCheck />,
+        title: 'Aizpildi pieteikumu',
+        text:
+          'Apraksti problēmu un ierīces modeli. Izvērtēsim situāciju un sazināsimies ar precīzāku informāciju.',
+      },
+      {
+        icon: <FaBoxOpen />,
+        title: 'Nosūti ierīci',
+        text:
+          'Pēc apstiprinājuma nosūti ierīci ar sev ērtāko pakomātu vai pasta piegādi.',
+      },
+      {
+        icon: <FaTruckFast />,
+        title: 'Saņem atpakaļ',
+        text:
+          'Pēc darbu pabeigšanas nosūtām ierīci atpakaļ uz adresi vai pakomātu bez papildu maksas.',
+      },
     ],
   };
 }

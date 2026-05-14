@@ -29,139 +29,139 @@ function getInitialServiceId(services) {
 function getServices(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      eyebrow: 'Популярные ремонты',
-      timeLabel: 'Время ремонта',
-      ctaPrice: 'Уточнить цену',
-      ctaBook: 'Записаться',
-      selectorLabel: 'Виды ремонта',
-      services: [
-        {
-          id: 'screen',
-          title: 'Замена экрана',
-          cardTitle: 'Разбился экран iPhone?',
-          short: 'Разбито стекло или не работает тачскрин',
-          time: '20–60 мин',
-          visual: '/images/categories/displeja_maina.webp',
-          text:
-            'Чёрный дисплей, трещины или не работает сенсор? Большинство замен экрана iPhone выполняем в тот же день.',
-          bullets: [
-            'Face ID сохраняется',
-            'True Tone при возможности',
-            'Гарантия 90 дней',
-          ],
-          prices: [
-            'iPhone 13 — от 110€',
-            'iPhone 14 — от 130€',
-            'iPhone 15 — от 140€',
-          ],
-        },
-        {
-          id: 'battery',
-          title: 'Замена аккумулятора',
-          cardTitle: 'Батарея быстро садится?',
-          short: 'Быстро садится или выключается',
-          time: '20–40 мин',
-          visual: '/images/categories/baterijas_maina.webp',
-          text:
-            'iPhone быстро разряжается, греется или выключается при низком проценте? Заменим аккумулятор и проверим работу устройства после ремонта.',
-          bullets: [
-            'Проверка состояния батареи',
-            'Ремонт за 20–40 минут',
-            'Гарантия 90 дней',
-          ],
-          prices: [
-            'iPhone 11 — от 39€',
-            'iPhone 13 — от 49€',
-            'iPhone 14 Pro — от 69€',
-          ],
-        },
-        {
-          id: 'backGlass',
-          title: 'Замена заднего стекла',
-          cardTitle: 'Разбито заднее стекло?',
-          short: 'Разбито стекло корпуса или острые края',
-          time: '1–3 ч',
-          visual: '/images/categories/displeja_maina.webp',
-          text:
-            'Аккуратно заменим стекло корпуса и вернём iPhone опрятный внешний вид без лишней замены деталей.',
-          bullets: [
-            'Точное снятие стекла',
-            'Восстановление внешнего вида корпуса',
-            'Гарантия 90 дней',
-          ],
-          prices: [
-            'iPhone 12 — от 69€',
-            'iPhone 13 — от 79€',
-            'iPhone 14 Pro — от 109€',
-          ],
-        },
-        {
-          id: 'charging',
-          title: 'Зарядка и разъёмы',
-          cardTitle: 'iPhone не заряжается?',
-          short: 'Не заряжается или плохой контакт',
-          time: '30–90 мин',
-          visual: '/images/categories/uzlades_ligzda_remonts.webp',
-          text:
-            'Заряжается только в определённом положении или не реагирует на кабель? Найдём причину и устраним её без лишнего ремонта.',
-          bullets: [
-            'Чистка разъёма',
-            'Замена порта зарядки',
-            'Диагностика бесплатно',
-          ],
-          prices: [
-            'Чистка порта — от 15€',
-            'Замена разъёма — от 49€',
-            'Диагностика — бесплатно',
-          ],
-        },
-        {
-          id: 'camera',
-          title: 'Камера и стекло',
-          cardTitle: 'Камера не фокусируется?',
-          short: 'Мутная камера или разбита линза',
-          time: '30–60 мин',
-          visual: '/images/categories/kameras_remonts.webp',
-          text:
-            'Изображение мутное, камера дрожит или разбито стекло камеры? Отремонтируем и проверим качество фото после ремонта.',
-          bullets: [
-            'Замена стекла камеры',
-            'Проверка фокуса',
-            'Гарантия 90 дней',
-          ],
-          prices: [
-            'Стекло камеры — от 29€',
-            'Камера — от 59€',
-            'Диагностика — бесплатно',
-          ],
-        },
-        {
-          id: 'water',
-          title: 'Влага и сложные ремонты',
-          cardTitle: 'iPhone после воды?',
-          short: 'После воды или не включается',
-          time: 'после диагностики',
-          visual: '/images/categories/udens_bojajumi.webp',
-          text:
-            'iPhone попал в воду или больше не включается? Проведём диагностику и до ремонта согласуем возможные решения и стоимость.',
-          bullets: [
-            'Диагностика платы',
-            'Чистка после влаги',
-            'Цена до ремонта',
-          ],
-          prices: [
-            'Диагностика — бесплатно',
-            'Чистка после влаги — от 35€',
-            'Ремонт платы — после оценки',
-          ],
-        },
+  eyebrow: 'Частые проблемы',
+  timeLabel: 'Время работы',
+  ctaPrice: 'Уточнить стоимость',
+  ctaBook: 'Записаться',
+  selectorLabel: 'Виды проблем',
+  services: [
+    {
+      id: 'screen',
+      title: 'Замена экрана',
+      cardTitle: 'Разбился экран?',
+      short: 'Треснуло стекло или не работает сенсор',
+      time: '20–60 мин',
+      visual: '/images/categories/displeja_maina.webp',
+      text:
+        'Чёрный дисплей, трещины или не работает сенсор? В большинстве случаев замену экрана выполняем в тот же день.',
+      bullets: [
+        'Face ID сохраняется',
+        'True Tone при возможности',
+        'Гарантия 90 дней',
       ],
-    };
+      prices: [
+        '13 — от 110€',
+        '14 — от 130€',
+        '15 — от 140€',
+      ],
+    },
+    {
+      id: 'battery',
+      title: 'Замена батареи',
+      cardTitle: 'Быстро разряжается?',
+      short: 'Быстро садится или выключается',
+      time: '20–40 мин',
+      visual: '/images/categories/baterijas_maina.webp',
+      text:
+        'Батарея быстро садится, устройство греется или выключается при низком проценте? Заменим аккумулятор и проверим работу устройства.',
+      bullets: [
+        'Проверка состояния батареи',
+        'Замена за 20–40 минут',
+        'Гарантия 90 дней',
+      ],
+      prices: [
+        '11 — от 60€',
+        '13 — от 70€',
+        '14 Pro — от 80€',
+      ],
+    },
+    {
+      id: 'backGlass',
+      title: 'Замена заднего стекла',
+      cardTitle: 'Разбито заднее стекло?',
+      short: 'Повреждено стекло корпуса или острые края',
+      time: '1–3 ч',
+      visual: '/images/categories/back-cover.webp',
+      text:
+        'Аккуратно заменим повреждённое стекло корпуса и вернём устройству аккуратный внешний вид без лишних работ.',
+      bullets: [
+        'Точное снятие стекла',
+        'Восстановление внешнего вида корпуса',
+        'Гарантия 90 дней',
+      ],
+      prices: [
+        '12 — от 69€',
+        '13 — от 79€',
+        '14 Pro — от 109€',
+      ],
+    },
+    {
+      id: 'charging',
+      title: 'Зарядка и разъёмы',
+      cardTitle: 'Проблемы с зарядкой?',
+      short: 'Не заряжается или плохой контакт',
+      time: '30–90 мин',
+      visual: '/images/categories/uzlades_ligzda_remonts.webp',
+      text:
+        'Заряжается только в определённом положении или не реагирует на кабель? Найдём причину и устраним её без лишних работ.',
+      bullets: [
+        'Чистка разъёма',
+        'Замена порта зарядки',
+        'Диагностика бесплатно',
+      ],
+      prices: [
+        'Чистка порта — от 15€',
+        'Замена разъёма — от 49€',
+        'Диагностика — бесплатно',
+      ],
+    },
+    {
+      id: 'camera',
+      title: 'Камера и стекло',
+      cardTitle: 'Камера не фокусируется?',
+      short: 'Мутная камера или разбита линза',
+      time: '30–60 мин',
+      visual: '/images/categories/kameras_remonts.webp',
+      text:
+        'Изображение мутное, камера дрожит или разбито стекло камеры? Проверим причину и восстановим качество фото.',
+      bullets: [
+        'Замена стекла камеры',
+        'Проверка фокуса',
+        'Гарантия 90 дней',
+      ],
+      prices: [
+        'Стекло камеры — от 29€',
+        'Камера — от 59€',
+        'Диагностика — бесплатно',
+      ],
+    },
+    {
+      id: 'water',
+      title: 'Влага и сложные случаи',
+      cardTitle: 'Попала влага?',
+      short: 'После воды или не включается',
+      time: 'после диагностики',
+      visual: '/images/categories/udens_bojajumi.webp',
+      text:
+        'Устройство попало в воду или больше не включается? Проведём диагностику и согласуем возможные решения и стоимость.',
+      bullets: [
+        'Диагностика платы',
+        'Чистка после влаги',
+        'Стоимость до начала работ',
+      ],
+      prices: [
+        'Диагностика — бесплатно',
+        'Чистка после влаги — от 35€',
+        'Работы с платой — после оценки',
+      ],
+    },
+  ],
+};
   }
 
   return {
-    eyebrow: 'Biežākie remonti',
-    timeLabel: 'Remonta laiks',
+    eyebrow: 'Biežākie bojājumi',
+    timeLabel: 'Izpildes laiks',
     ctaPrice: 'Precizēt cenu',
     ctaBook: 'Pieteikt remontu',
     selectorLabel: 'Remonta veidi',
@@ -169,12 +169,12 @@ function getServices(locale) {
       {
         id: 'screen',
         title: 'Ekrāna maiņa',
-        cardTitle: 'Saplīsis iPhone ekrāns?',
+        cardTitle: 'Saplīsis ekrāns?',
         short: 'Saplīsis stikls vai nestrādā skārienjutība',
         time: '1-3 h',
         visual: '/images/categories/displeja_maina.webp',
         text:
-          'Melns displejs, plaisas vai nestrādā skārienjutība? Vairumu iPhone ekrāna remontu veicam tajā pašā dienā.',
+          'Melns displejs, plaisas vai nestrādā skārienjutība? Ekrāna maiņa tajā pašā dienā.',
         bullets: [
           'Face ID saglabāšana',
           'True Tone, ja iespējams',
@@ -194,10 +194,10 @@ function getServices(locale) {
         time: '20–40 min',
         visual: '/images/categories/baterijas_maina.webp',
         text:
-          'iPhone ātri izlādējas, karst vai slēdzas ārā pie zemāka procenta? Nomainīsim akumulatoru un pārbaudīsim ierīces darbību pēc remonta.',
+          'Baterija ātri izlādējas, karst vai slēdzas ārā pie zemāka procenta? Nomainīsim akumulatoru un pārbaudīsim ierīces darbību.',
         bullets: [
           'Akumulatora veselības pārbaude',
-          'Remonts 20–40 minūtēs',
+          'Baterijas maiņa 20–40 minūtēs',
           '90 dienu garantija',
         ],
         prices: [
@@ -214,7 +214,7 @@ function getServices(locale) {
         time: '20-60 min',
         visual: '/images/categories/back-cover.webp',
         text:
-          'Nomainīsim bojāto korpusa stiklu un atjaunosim iPhone izskatu bez liekām detaļu maiņām.',
+          'Nomainīsim bojāto korpusa stiklu un atjaunosim ierīces izskatu bez liekiem darbiem.',
         bullets: [
           'Precīza stikla noņemšana',
           'Korpusa vizuāla atjaunošana',
@@ -229,7 +229,7 @@ function getServices(locale) {
       {
         id: 'charging',
         title: 'Uzlāde & savienojumi',
-        cardTitle: 'iPhone neuzlādējas?',
+        cardTitle: 'Uzlādes problēmas?',
         short: 'Neuzlādējas vai slikts kontakts',
         time: '30–90 min',
         visual: '/images/categories/uzlades_ligzda_remonts.webp',
@@ -269,16 +269,16 @@ function getServices(locale) {
       {
         id: 'water',
         title: 'Mitruma bojājumi',
-        cardTitle: 'iPhone pēc ūdens?',
+        cardTitle: 'Mitruma bojājumi?',
         short: 'Pēc ūdens vai neieslēdzas',
         time: 'pēc diagnostikas',
         visual: '/images/categories/udens_bojajumi.webp',
         text:
-          'iPhone nonācis saskarē ar ūdeni vai vairs neieslēdzas? Veiksim diagnostiku un pirms remonta saskaņosim iespējamos risinājumus un izmaksas.',
+          'Ierīce nonākusi saskarē ar ūdeni vai vairs neieslēdzas? Veiksim diagnostiku un saskaņosim iespējamos risinājumus un izmaksas',
         bullets: [
           'Plates diagnostika',
           'Tīrīšana pēc mitruma',
-          'Cena pirms remonta',
+          'Cena pirms darbu uzsākšanas',
         ],
         prices: [
           'Diagnostika — bez maksas',
