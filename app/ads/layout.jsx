@@ -7,7 +7,7 @@ import LandingCtaDock from './_components/ui/dock/LandingCtaDock';
 
 import { getSiteSettings } from '@/lib/siteSettings';
 
-import l from './layout.module.scss';
+import l from './layout2.module.scss';
 
 const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
