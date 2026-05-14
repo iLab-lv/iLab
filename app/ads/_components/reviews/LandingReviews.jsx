@@ -41,7 +41,7 @@ function getStrings(locale) {
     ratingAria: 'Vērtējums: {rating} no 5',
     prev: 'Iepriekšējā atsauksme',
     next: 'Nākamā atsauksme',
-    viewAllPrefix: 'Skatīt visas atsauksmes:',
+    viewAllPrefix: 'Google atsauksmes:',
     viewAllDomina: 'T/C Domina',
     viewAllSpice: 'T/C Spice',
     googleTitle: 'Google Reviews',

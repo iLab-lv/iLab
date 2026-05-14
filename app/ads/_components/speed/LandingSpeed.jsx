@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  FaBolt,
+  FaBoxOpen,
   FaClock,
   FaLocationDot,
 } from 'react-icons/fa6';
@@ -32,24 +32,25 @@ function getContent(locale) {
         {
           icon: <FaClock />,
           value: '20–40 мин',
-          title: 'популярные замены и работы',
-        },
-        {
-          icon: <FaBolt />,
-          value: 'Пока ждёте',
-          title: 'часто можно забрать в тот же визит',
+          title: 'для самых быстрых работ без очереди',
         },
         {
           icon: <FaLocationDot />,
-          value: '2 филиала',
-          title: 'Domina Shopping и Spice Life',
+          value: '2 филиала в Риге',
+          title: 'T/C Domina Shopping и T/C Spice Life',
+        },
+        {
+          icon: <FaBoxOpen />,
+          value: 'Детали на месте',
+          title:
+            'на складе доступен широкий выбор оригинальных и аналоговых деталей',
         },
       ],
     };
   }
 
   return {
-    title: 'Bez ilgas gaidīšanas',
+    title: 'Ātri, bez ilgas gaidīšanas',
     subtitle:
       'Populārāko bojājumu novēršanu veicam ātri, ja detaļa ir pieejama uz vietas.',
 
@@ -63,17 +64,18 @@ function getContent(locale) {
       {
         icon: <FaClock />,
         value: '20–40 min',
-        title: 'populārākās detaļu maiņas',
-      },
-      {
-        icon: <FaBolt />,
-        value: 'Kamēr gaidi',
-        title: 'bieži iespējams saņemt tajā pašā vizītē',
+        title: 'Ātrākajiem darbiem bez rindas',
       },
       {
         icon: <FaLocationDot />,
-        value: '2 filiāles',
-        title: 'Domina Shopping un Spice Life',
+        value: '2 filiāles Rīgā',
+        title: 'T/C Domina Shopping un T/C Spice Life',
+      },
+      {
+        icon: <FaBoxOpen />,
+        value: 'Detaļas uz vietas',
+        title:
+          'Mūsu noliktavā ir pieejama plaša oriģinālo un analogo rezerves daļu izvēle.',
       },
     ],
   };

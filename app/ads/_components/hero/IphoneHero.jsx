@@ -16,7 +16,7 @@ export default function IphoneHero({
   title = 'Aifonu labošana',
   highlight = 'tajā pašā dienā',
 
-  imageSrc = '/images/categories/iphone_remonts.webp',
+  imageSrc = '/images/categories/landing_hero.webp',
   imageAlt = 'iLab remonta darbnīcās Rīgā',
   imageWidth = 900,
   imageHeight = 900,
