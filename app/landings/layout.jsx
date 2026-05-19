@@ -8,13 +8,14 @@ import LandingCtaDock from './_components/ui/dock/LandingCtaDock';
 import { getSiteSettings } from '@/lib/siteSettings';
 
 import l from './layout.module.scss';
+import { TRUE } from 'sass';
 
 const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
 export const metadata = {
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 
