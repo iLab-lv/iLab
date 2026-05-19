@@ -15,6 +15,30 @@ export function middleware(req) {
   const isInternalAdsPath =
     pathname === '/ads' || pathname.startsWith('/ads/');
 
+  /*
+    Important:
+    This must be BEFORE isPublicAsset,
+    because /robots.txt contains a dot.
+  */
+  if (pathname === '/robots.txt' && isRigaHost) {
+    const url = req.nextUrl.clone();
+
+    /*
+      Browser URL stays:
+      https://riga.ilab.lv/robots.txt
+
+      Internally served from:
+      public/ads-robots.txt
+    */
+    url.pathname = '/ads-robots.txt';
+
+    return NextResponse.rewrite(url, {
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   const isPublicAsset =
     pathname.startsWith('/_next') ||
     pathname.startsWith('/brand') ||
@@ -54,5 +78,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/((?!api|robots.txt|sitemap.xml|favicon.ico).*)'],
+  matcher: ['/((?!api|sitemap.xml|favicon.ico).*)'],
 };
