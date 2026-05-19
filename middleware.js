@@ -5,37 +5,52 @@ export function middleware(req) {
   const host = rawHost.split(':')[0].toLowerCase();
   const pathname = req.nextUrl.pathname;
 
-  const isAdsPreview =
-    req.nextUrl.searchParams.get('ads') === '1';
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-pathname', pathname);
 
-  const isRigaHost =
-    host === 'riga.ilab.lv' || isAdsPreview;
+  const isAdsPreview = req.nextUrl.searchParams.get('ads') === '1';
+
+  const isRigaHost = host === 'riga.ilab.lv' || isAdsPreview;
 
   const isInternalAdsPath =
     pathname === '/ads' || pathname.startsWith('/ads/');
 
-  if (
+  const isPublicAsset =
     pathname.startsWith('/_next') ||
     pathname.startsWith('/brand') ||
     pathname.startsWith('/images') ||
     pathname.startsWith('/fonts') ||
     pathname.startsWith('/icons') ||
-    pathname.includes('.')
-  ) {
-    return NextResponse.next();
+    pathname.includes('.');
+
+  if (isPublicAsset) {
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (isRigaHost) {
     const url = req.nextUrl.clone();
     url.pathname = '/ads';
-    return NextResponse.rewrite(url);
+
+    return NextResponse.rewrite(url, {
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (isInternalAdsPath) {
     return new NextResponse(null, { status: 404 });
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {
