@@ -1,8 +1,5 @@
-
-'use client';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import BookingForm from '@components/booking/BookingForm';
+import BookingFormFromSettings from './BookingFormFromSettings';
 
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
@@ -49,10 +46,7 @@ export default function PierakstiesPage({ locale = 'lv' }) {
       />
 
       <main className="container" style={{ padding: '2rem 0' }}>
-        <BookingForm
-          submitMode="fetch"
-          onError={(msg) => alert(msg)}
-        />
+        <BookingFormFromSettings locale={locale} />
       </main>
     </>
   );

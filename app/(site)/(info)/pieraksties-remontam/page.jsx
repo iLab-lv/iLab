@@ -10,10 +10,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return (
-  <>
-  <PierakstiesPage locale="lv" />
-    </>
-    );
+  return <PierakstiesPage locale="lv" />;
 }
-

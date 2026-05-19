@@ -27,11 +27,18 @@ export function UiDialogsProvider({
 
   const [selectedLocId, setSelectedLocId] = useState(null);
 
-  const locations = siteSettings?.locations || [];
-  const defaultHours = siteSettings?.hours || [];
+  const locations = Array.isArray(siteSettings?.locations)
+    ? siteSettings.locations
+    : [];
+
+  const defaultHours = Array.isArray(siteSettings?.hours)
+    ? siteSettings.hours
+    : [];
 
   const [mounted, setMounted] = useState(false);
   const [portalEl, setPortalEl] = useState(null);
+
+  const lastOpenerRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -51,8 +58,6 @@ export function UiDialogsProvider({
   const locatorOpen = modalOpen && activePane === 'locator';
   const contactOpen = modalOpen && activePane === 'sazinaties';
   const bookOpen = modalOpen && activePane === 'book';
-
-  const lastOpenerRef = useRef(null);
 
   const openLocator = (openerEl) => {
     lastOpenerRef.current = openerEl || null;
@@ -155,6 +160,11 @@ export function UiDialogsProvider({
   };
 
   const api = {
+    locale: resolvedLocale,
+    siteSettings,
+    locations,
+    defaultHours,
+
     locatorOpen,
     contactOpen,
     bookOpen,
