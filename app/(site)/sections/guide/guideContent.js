@@ -12,7 +12,7 @@ const GUIDE_CONTENT = {
 Ja telefons strauji sakarst vai akumulators izlādējas neparasti ātri, iemesls var būt gan nolietota baterija, gan programmatūras kļūda. Pēc pārbaudes tehniķis var piedāvāt <a href="/iphone-remonts/baterijas-maina">baterijas nomaiņu</a> vai programmatūras atjaunošanu, lai novērstu lieku strāvas patēriņu.</p>
 
 <p><strong>Neuzlādējas vai uzlāde pārtrūkst</strong><br>
-Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai noteiktā leņķī, bieži vainīgs ir uzlādes ports vai kontakta korozija. Šādā gadījumā palīdz <a href="/iphone-remonts/uzlades-ligzda">uzlādes ligzdas remonts</a> vai tīrīšana, dažreiz arī baterijas nomaiņa.</p>
+Ja kabelis noturas vaļīgi, uzlāde pārtrūkst vai telefons uzlādējas tikai noteiktā leņķī, bieži vainīgs ir uzlādes ports vai kontakta korozija. Šādā gadījumā palīdz <a href="/iphone-remonts/uzlades-ligzdas-maina">uzlādes ligzdas remonts</a> vai tīrīšana, dažreiz arī baterijas nomaiņa.</p>
 
 <p><strong>Ūdens vai mitruma bojājumi</strong><br>
 Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpusē jau sākusies oksidācija. Jo ātrāk ierīce nonāk servisā, jo lielāka iespēja to atjaunot. Veicam <a href="/iphone-remonts/udens-bojajumu-remonts">mitruma bojājumu diagnostiku un tīrīšanu</a>, aizstājot bojātās detaļas, ja nepieciešams.</p>
@@ -21,7 +21,7 @@ Pēc saskares ar šķidrumu telefons var šķist sauss no ārpuses, bet iekšpus
 Saplaisājis vai mirgojošs ekrāns, vertikālas līnijas vai skāriena nereaģēšana var norādīt uz bojātu displeju vai savienojumu. Problēmu novērš <a href="/iphone-remonts/ekrana-maina">displeja maiņa</a> ar kvalitatīvu detaļu un garantiju.</p>
 
 <p><strong>Kameras vai skaņas kļūmes</strong><br>
-Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas tehniķis piedāvās <a href="/iphone-remonts/kamera">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofons">skaļruņu un mikrofona</a> remontu.</p>
+Miglains attēls, fokusēšanās problēmas vai pazudusi skaņa sarunu laikā var liecināt par mitruma ietekmi, bojātu moduli vai netīrumiem. Pēc bezmaksas diagnostikas tehniķis piedāvās <a href="/iphone-remonts/kameras-remonts">kameras</a> vai <a href="/iphone-remonts/skalruni-mikrofona-remonts">skaļruņu un mikrofona</a> remontu.</p>
 
 <p><strong>Ko darīt, ja neesi pārliecināts?</strong><br>
 Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā. Pārbaudīsim ierīci un sniegsim precīzu remonta piedāvājumu ar cenu un termiņu pirms darba sākšanas.</p>

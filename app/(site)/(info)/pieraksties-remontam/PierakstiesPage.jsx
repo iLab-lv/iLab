@@ -4,7 +4,7 @@ import BookingFormFromSettings from './BookingFormFromSettings';
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      canonicalPath: '/ru/zapisatsya-na-remont',
+      canonicalPath: '/ru/zapisatsja-na-remont',
       breadcrumbHome: 'Главная',
       breadcrumbPage: 'Записаться на ремонт',
       headerTitle: 'Записаться на ремонт',

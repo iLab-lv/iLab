@@ -137,7 +137,7 @@ function getPageStrings(locale = 'lv') {
     serviceType: 'iPhone ūdens bojājumi - diagnostika un remonts',
     serviceDescription:
       'iPhone ūdens bojājumu diagnostika, tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa ar garantiju.',
-    applyHref: '/pieraksties',
+    applyHref: '/pieraksties-remontam',
     homeCrumb: 'Sākums',
     hubCrumb: 'iPhone remonts',
     headerTitle: 'iPhone ūdens bojājumu diagnostika un remonts Rīgā',

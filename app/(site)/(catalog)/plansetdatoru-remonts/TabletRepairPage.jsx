@@ -65,6 +65,15 @@ function normalizeRoutePath(path = '', locale = 'lv') {
   return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
 }
 
+function getLastPathSegment(path = '') {
+  return (
+    String(path)
+      .split('/')
+      .filter(Boolean)
+      .at(-1) || ''
+  );
+}
+
 function sortDevices(list = []) {
   return [...list].sort((a, b) => {
     const ay = typeof a.year === 'number' ? a.year : -Infinity;
@@ -113,8 +122,10 @@ function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
         normalizeRoutePath(brand?.route?.brandPath || '', locale) ||
         `${basePath}/${brandKey}`;
 
+      const routeBrandSlug = getLastPathSegment(href) || brandKey;
+
       return {
-        slug: brandKey,
+        slug: routeBrandSlug,
         name: pickLocalized(brand?.labels, locale, brandKey),
         href,
         items: brandDevices.slice(0, 4),
@@ -265,7 +276,7 @@ function getPageStrings(locale = 'lv') {
     breadcrumbName: 'Planšetdatoru remonts',
     serviceName: 'Planšetdatoru remonts Rīgā',
     serviceDescription:
-      'Planšetdatoru remonts Rīgā: ekrāna maiņa, baterijas nomaiņa, uzlādes ligzda, kamera, skaņa un ūdens bojājumi. Ātra diagnostika, godīgas cenas un 90 dienu garantija.',
+      'Planšetdatoru remonts Rīgā: ekrāna maiņa, baterija, uzlādes ligzda, kamera, skaņa un ūdens bojājumi. Ātra diagnostika, godīgas cenas un 90 dienu garantija.',
     servicesTitle: 'Populārākie planšetdatoru remonti',
     servicesItems: [
       {
@@ -524,15 +535,19 @@ export default async function TabletRepairPage({ locale = 'lv' }) {
       <Script id="breadcrumbs-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(breadcrumbsLd)}
       </Script>
+
       <Script id="service-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(serviceLd)}
       </Script>
+
       <Script id="itemlist-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(itemListLd)}
       </Script>
+
       <Script id="faq-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(faqLd)}
       </Script>
+
       <Script id="process-jsonld-tablets" type="application/ld+json">
         {JSON.stringify(processHowToLd)}
       </Script>
@@ -580,6 +595,7 @@ export default async function TabletRepairPage({ locale = 'lv' }) {
           items={b.items}
           total={b.total}
           href={b.href}
+          locale={locale}
         />
       ))}
 
@@ -598,6 +614,7 @@ export default async function TabletRepairPage({ locale = 'lv' }) {
       {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       <div id="process-h2" className={s.anchorTarget} />
+
       {page.sections?.hasProcess && (
         <section className={s.section} aria-labelledby="process-h2">
           <div className={s.container}>

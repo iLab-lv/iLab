@@ -1,0 +1,274 @@
+@use '@styles/tokens' as *;
+
+.section {
+  padding: clamp($space-2xl, 7vw, $space-3xl) 0;
+}
+
+.locationsSection {
+  padding: clamp($space-xl, 5vw, $space-2xl) 0 clamp($space-2xl, 7vw, $space-3xl);
+}
+
+.container {
+  width: min(100% - 32px, $container-max);
+  margin: 0 auto;
+
+  @media (min-width: $bp-md) {
+    width: min(100% - 48px, $container-max);
+  }
+}
+
+.sectionHeader {
+  max-width: 760px;
+  margin-bottom: clamp($space-lg, 4vw, $space-2xl);
+}
+
+.eyebrow {
+  margin: 0 0 $space-sm;
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.h2 {
+  margin: 0;
+  color: $color-text;
+  font-size: clamp($font-size-h5, 5vw, $font-size-h3);
+  line-height: $line-height-heading;
+  letter-spacing: -0.04em;
+}
+
+.lead {
+  max-width: 760px;
+  margin: $space-md 0 0;
+  color: $color-text-2;
+  font-size: clamp($font-size-p, 2vw, $font-size-lg);
+  line-height: $line-height-body;
+}
+
+.paragraph {
+  margin: 0;
+  color: $color-text-2;
+  font-size: $font-size-p;
+  line-height: $line-height-body;
+
+  a {
+    color: $color-text;
+    text-decoration: underline;
+    text-decoration-color: rgba($color-accent, 0.55);
+    text-underline-offset: 0.22em;
+    transition:
+      color $dur-base $ease-std,
+      text-decoration-color $dur-base $ease-std;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-accent;
+      text-decoration-color: $color-accent;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-ring-color;
+      outline-offset: $focus-ring-offset;
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+.copyStack {
+  display: grid;
+  gap: $space-md;
+  margin-top: $space-xl;
+}
+
+.infoLayout {
+  display: grid;
+  gap: $space-xl;
+  align-items: start;
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.65fr);
+    gap: $space-2xl;
+  }
+}
+
+.infoMain {
+  position: relative;
+  padding: clamp($space-lg, 4vw, $space-2xl);
+  overflow: hidden;
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-lg;
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba($color-accent, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.015)
+    );
+  box-shadow: $shadow-soft;
+
+  &::after {
+    position: absolute;
+    right: -80px;
+    bottom: -120px;
+    width: 240px;
+    height: 240px;
+    pointer-events: none;
+    content: '';
+    border-radius: 50%;
+    background: rgba($color-accent, 0.08);
+    filter: blur(36px);
+  }
+}
+
+.factsPanel {
+  padding: clamp($space-lg, 4vw, $space-xl);
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-lg;
+  background: $glass-bg-weak;
+  box-shadow: $shadow-soft;
+
+  @supports (backdrop-filter: blur($glass-blur)) {
+    backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  }
+
+  h3 {
+    margin: 0 0 $space-lg;
+    color: $color-text;
+    font-size: $font-size-xl;
+    line-height: $line-height-heading;
+    letter-spacing: -0.02em;
+  }
+}
+
+.factsGrid {
+  display: grid;
+  gap: $space-sm;
+  margin: 0;
+}
+
+.factCard {
+  display: grid;
+  gap: $space-xs;
+  padding: $space-md;
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.025);
+
+  dt {
+    color: $color-text-3;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    color: $color-text;
+    font-size: $font-size-p;
+    line-height: 1.45;
+  }
+}
+
+.benefitsGrid {
+  display: grid;
+  gap: $space-md;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.benefitCard {
+  position: relative;
+  min-height: 190px;
+  padding: $space-lg;
+  overflow: hidden;
+  border: $border-thin solid $glass-border;
+  border-radius: $radius-lg;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    );
+  box-shadow: $shadow-soft;
+  transition:
+    transform $dur-base $ease-emph,
+    border-color $dur-base $ease-std,
+    background $dur-base $ease-std;
+
+  &::before {
+    display: block;
+    width: 34px;
+    height: 3px;
+    margin-bottom: $space-lg;
+    content: '';
+    border-radius: $radius-pill;
+    background: $color-accent;
+    box-shadow: 0 0 18px rgba($color-accent, 0.35);
+  }
+
+  &::after {
+    position: absolute;
+    right: -36px;
+    bottom: -54px;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    content: '';
+    border-radius: 50%;
+    background: rgba($color-accent, 0.07);
+    filter: blur(24px);
+  }
+
+  h3 {
+    margin: 0;
+    color: $color-text;
+    font-size: $font-size-lg;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-p;
+    line-height: 1.55;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba($color-accent, 0.28);
+    background:
+      linear-gradient(
+        180deg,
+        rgba($color-accent, 0.07),
+        rgba(255, 255, 255, 0.02)
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefitCard {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .paragraph a {
+    transition: none;
+  }
+}
