@@ -181,7 +181,7 @@ function getPageStrings(locale = 'lv') {
         },
         {
           title: 'Замена разъёма зарядки',
-          href: `${categoryPath}/remont-razema-zaryadki`,
+          href: `${categoryPath}/zamena-razema-zaryadki`,
           text: 'кабель не держится, зарядка медленная или нестабильная.',
           icon: LuPlugZap,
         },

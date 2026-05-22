@@ -11,7 +11,7 @@ function stripTrailingSlash(pathname) {
   return pathname.replace(/\/$/, '');
 }
 
-function flattenRouteTranslations() {
+function buildSegmentMaps() {
   const lvToRu = {};
   const ruToLv = {};
 
@@ -19,18 +19,61 @@ function flattenRouteTranslations() {
     Object.values(group).forEach((entry) => {
       if (!entry?.lv || !entry?.ru) return;
 
-      lvToRu[`/${entry.lv}`] = `/ru/${entry.ru}`;
-      ruToLv[`/ru/${entry.ru}`] = `/${entry.lv}`;
+      lvToRu[entry.lv] = entry.ru;
+      ruToLv[entry.ru] = entry.lv;
     });
   });
-
-  lvToRu['/'] = '/ru';
-  ruToLv['/ru'] = '/';
 
   return { lvToRu, ruToLv };
 }
 
-const { lvToRu, ruToLv } = flattenRouteTranslations();
+const { lvToRu, ruToLv } = buildSegmentMaps();
+
+function splitLocaleFromPath(pathname) {
+  const cleanPath = stripTrailingSlash(pathname);
+
+  if (cleanPath === '/ru') {
+    return {
+      locale: 'ru',
+      segments: [],
+    };
+  }
+
+  if (cleanPath.startsWith('/ru/')) {
+    return {
+      locale: 'ru',
+      segments: cleanPath.replace(/^\/ru\//, '').split('/').filter(Boolean),
+    };
+  }
+
+  if (cleanPath === '/') {
+    return {
+      locale: 'lv',
+      segments: [],
+    };
+  }
+
+  return {
+    locale: 'lv',
+    segments: cleanPath.replace(/^\//, '').split('/').filter(Boolean),
+  };
+}
+
+function translateSegments(segments, nextLocale) {
+  const map = nextLocale === 'ru' ? lvToRu : ruToLv;
+
+  return segments.map((segment) => map[segment] || segment);
+}
+
+function buildPathFromSegments(segments, locale) {
+  if (!segments.length) {
+    return locale === 'ru' ? '/ru' : '/';
+  }
+
+  const path = `/${segments.join('/')}`;
+
+  return locale === 'ru' ? `/ru${path}` : path;
+}
 
 function getLocalizedPath(pathname, nextLocale) {
   const cleanPath = stripTrailingSlash(pathname);
@@ -38,21 +81,10 @@ function getLocalizedPath(pathname, nextLocale) {
 
   if (nextLocale === currentLocale) return cleanPath;
 
-  if (nextLocale === 'ru') {
-    if (lvToRu[cleanPath]) return lvToRu[cleanPath];
-    return cleanPath === '/' ? '/ru' : `/ru${cleanPath}`;
-  }
+  const { segments } = splitLocaleFromPath(cleanPath);
+  const translatedSegments = translateSegments(segments, nextLocale);
 
-  if (nextLocale === 'lv') {
-    if (ruToLv[cleanPath]) return ruToLv[cleanPath];
-    if (cleanPath === '/ru') return '/';
-
-    return cleanPath.startsWith('/ru/')
-      ? cleanPath.replace(/^\/ru/, '') || '/'
-      : cleanPath;
-  }
-
-  return cleanPath;
+  return buildPathFromSegments(translatedSegments, nextLocale);
 }
 
 export default function LanguageSwitcher({ onChange }) {

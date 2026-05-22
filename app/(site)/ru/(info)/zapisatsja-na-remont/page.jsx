@@ -1,6 +1,6 @@
 import PierakstiesPage from '@site/(info)/pieraksties-remontam/PierakstiesPage';
 
-const CANONICAL_PATH = '/ru/zapisatsya-na-remont';
+const CANONICAL_PATH = '/ru/zapisatsja-na-remont';
 
 export const metadata = {
   title: 'Записаться на ремонт | iLab',
