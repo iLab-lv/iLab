@@ -8,9 +8,12 @@ const LOCATIONS_CONTENT = {
     closedUntil: (time) => `Slēgts - atvērsies ${time}`,
 
     directions: 'Norādes',
+    hours: 'Darba laiks',
+    hideHours: 'Paslēpt laiku',
     hoursAriaLabel: 'Darba laiks',
     viewGoogleMaps: 'Skatīt Google Maps',
     routes: 'Maršruti',
+    waze: 'Waze',
 
     phoneLabel: 'Tel:',
     emailLabel: 'email:',
@@ -31,9 +34,12 @@ const LOCATIONS_CONTENT = {
     closedUntil: (time) => `Закрыто - откроется в ${time}`,
 
     directions: 'Маршрут',
+    hours: 'Время работы',
+    hideHours: 'Скрыть время',
     hoursAriaLabel: 'Время работы',
     viewGoogleMaps: 'Открыть в Google Maps',
     routes: 'Маршруты',
+    waze: 'Waze',
 
     phoneLabel: 'Тел:',
     emailLabel: 'email:',

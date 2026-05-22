@@ -1,265 +1,419 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* Card base */
+$whatsapp: #25d366;
+$closed: #ff5a5a;
+
 .card {
-  /* softer, more transparent glass vs. previous strong */
-  background: rgba($color-surface-1, 0.42);
-  border: $border-thin solid rgba($glass-border, 0.8);
+  scroll-margin-top: calc(#{$header-desktop-height} + #{$space-lg});
+  padding: $space-xl;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
   border-radius: $radius-lg;
-  padding: $space-lg;
-
-  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-
-  display: flex;
-  flex-direction: column;
-  gap: $space-md;
-
-  box-shadow: inset 0 0 0 1px $glass-tint-weak;
-  transition: border-color 300ms ease, box-shadow 300ms ease, transform 200ms ease;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba($color-accent, 0.1),
+      transparent 18rem
+    ),
+    rgba(255, 255, 255, 0.035);
+  box-shadow:
+    $shadow-soft,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  -webkit-backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  backdrop-filter: blur($glass-blur) saturate($glass-saturate);
+  transition:
+    transform $dur-base $ease-emph,
+    border-color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std;
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    /* fallback stays lighter as well */
-    background: rgba(#0b0f10, 0.5);
+    background: $glass-fallback-weak;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: $space-lg;
   }
 }
 
-/* Simplified variant (homepage) */
-.card.simplified {
+.simplified {
   &:hover {
-    border-color: rgba($color-accent, 0.4);
     transform: translateY(-2px);
-  }
-
-  &.highlighted {
-    border-color: $color-accent;
-    box-shadow: 0 0 0 2px rgba($color-accent, 0.3), 0 8px 24px rgba($color-accent, 0.15);
-  }
-
-  .phone {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    margin: $space-sm 0;
-  }
-
-  .linkAccent {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: $space-sm;
+    border-color: rgba($color-accent, 0.28);
+    box-shadow:
+      $shadow-soft-lg,
+      inset 0 0 0 1px rgba($color-accent, 0.08);
   }
 }
 
-/* Full variant (panel) */
-.card.full {
+.highlighted {
+  border-color: rgba($color-accent, 0.52);
+  box-shadow:
+    0 0 0 2px rgba($color-accent, 0.18),
+    0 14px 32px rgba($color-accent, 0.12),
+    inset 0 0 0 1px rgba($color-accent, 0.1);
+}
+
+.full {
   min-height: 0;
 }
 
-/* ===== Typography ===== */
-.title {
-  margin: -2px 0 2px;
-  font-size: $font-size-h4;
-  line-height: $line-height-heading;
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+
+  @media (max-width: $bp-sm) {
+    flex-direction: column;
+  }
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
   color: $color-text;
+  font-size: clamp($font-size-xl, 3vw, $font-size-h5);
+  line-height: $line-height-heading;
+  letter-spacing: -0.04em;
 }
 
 .address {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  margin: $space-sm 0 0;
   color: $color-text-2;
-  margin: 0 0 $space-2xs;
-  font-size: $font-size-base;
-}
-
-.addrLinks {
-  margin: $space-md 0 $space-xl;
   font-size: $font-size-sm;
-}
+  line-height: 1.45;
 
-/* Remove dashed underline */
-.linkAccent {
-  color: $color-accent;
-  text-decoration: none;            /* no underline */
-  border-bottom: none;              /* remove dashed rule */
-  transition: opacity $dur-base $ease-std;
-
-  &:hover,
-  &:focus-visible {
-    outline: none;
-    opacity: 0.85;
+  svg {
+    flex: 0 0 auto;
+    margin-top: 0.12em;
+    color: $color-text-3;
   }
 }
 
-.dot {
-  margin: 0 8px;
-  opacity: 0.7;
-}
-
-.metaLabel {
-  margin: $space-md 0 $space-2xs;
-  color: $color-text-2;
-  font-size: 0.95rem;
-}
-
-.phoneWrap {
-  margin: -6px 0 $space-sm;
-}
-
-.phoneText {
-  display: inline-block;
-  font-size: clamp($font-size-h4, 6vw, $font-size-h2);
-  font-weight: $font-weight-semibold;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  color: $color-text;
-}
-
-.emailWrap {
-  margin: -2px 0 $space-md 0;
-}
-
-/* Remove dashed underline */
-.emailBig {
-  display: inline-block;
-  font-size: clamp($font-size-lg, 3vw, $font-size-h4);
-  font-weight: $font-weight-medium;
-  line-height: 1.08;
-  color: $color-text;
-  text-decoration: none;           /* no underline */
-  border-bottom: none;             /* remove dashed rule */
-
-  &:hover,
-  &:focus-visible {
-    color: $color-accent;
-    outline: none;
-  }
-}
-
-/* ===== Info Grid (full variant) ===== */
-.infoGrid {
+.statusBlock {
+  flex: 0 0 auto;
   display: grid;
-  grid-template-areas:
-    'hours'
-    'left';
-  grid-template-columns: 1fr;
-  gap: $space-lg;
+  justify-items: end;
+  gap: $space-xs;
 
-  @media (min-width: $bp-md) {
-    grid-template-areas: 'left hours';
-    grid-template-columns: 1.2fr 0.8fr;
-    align-items: start;
+  @media (max-width: $bp-sm) {
+    justify-items: start;
   }
-}
-
-.colLeft {
-  grid-area: left;
-  min-width: 0;
-}
-
-/* ===== Hours Block ===== */
-.hoursBlock {
-  grid-area: hours;
-  min-width: 0;
-  text-align: right;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
+  gap: 7px;
+  min-height: 32px;
+  padding: 7px 11px;
+  border: $border-thin solid transparent;
   border-radius: $radius-pill;
-  margin: 0 0 $space-sm 0;
-  min-width: 200px;
-  font-weight: $font-weight-medium;
+  color: $color-text;
   font-size: $font-size-sm;
-  letter-spacing: 0.01em;
-  border: 1px solid rgba($color-accent, 0.35);
-  box-shadow: 0 6px 18px rgba($color-accent, 0.22), inset 0 0 0 1px rgba(#000, 0.08);
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: $radius-pill;
 }
 
 .badgeOpen {
-  background: rgba($color-accent, 0.2);
-  color: $color-accent;
+  border-color: rgba($whatsapp, 0.28);
+  background: rgba($whatsapp, 0.13);
+
+  .badgeDot {
+    background: $whatsapp;
+    box-shadow: 0 0 12px rgba($whatsapp, 0.85);
+  }
 }
 
 .badgeClosed {
-  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba($closed, 0.24);
+  background: rgba($closed, 0.1);
   color: $color-text-2;
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: none;
+
+  .badgeDot {
+    background: $closed;
+    box-shadow: 0 0 12px rgba($closed, 0.75);
+  }
+}
+
+.hoursToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $color-text-2;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: color $dur-base $ease-std;
+
+  &:hover {
+    color: $color-accent;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: 4px;
+    border-radius: $radius-sm;
+  }
+}
+
+.chevron {
+  color: currentColor;
+  font-size: 0.7rem;
+  transition: transform $dur-base $ease-std;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
 }
 
 .hoursList {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: $space-lg;
-  row-gap: 6px;
-  margin: 0;
-  padding: 0;
-  font-size: $font-size-sm;
+  gap: $space-xs;
+  margin: -$space-sm 0 $space-lg;
+  padding: $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.06);
+  border-radius: $radius-md;
+  background: rgba(0, 0, 0, 0.16);
 }
 
 .hoursRow {
-  display: contents;
+  display: flex;
+  justify-content: space-between;
+  gap: $space-md;
+  color: $color-text-2;
+  font-size: $font-size-sm;
+  line-height: 1.35;
 
-  dt {
-    color: $color-text-2;
-  }
-
+  dt,
   dd {
     margin: 0;
-    text-align: right;
-    color: $color-text-2;
   }
 }
 
 .hoursToday {
-  color: $color-text !important;
-  font-weight: $font-weight-medium !important;
+  color: $color-accent;
+  font-weight: $font-weight-semibold;
 }
 
 .specialNote {
-  margin-top: $space-sm;
-  color: #ff5a5a;
-  font-weight: $font-weight-medium;
+  margin: -$space-sm 0 $space-lg;
+  color: $closed;
   font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: 1.45;
 }
 
-/* ===== Bottom Actions (Always Sticky) ===== */
-.actions {
-  margin-top: auto;
+.phone {
+  margin: 0 0 $space-lg;
+  color: $color-text;
+  font-size: clamp(1.55rem, 4vw, $font-size-h5);
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
 
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $space-sm;
+.email {
+  margin: -$space-sm 0 $space-lg;
+  color: $color-text-2;
+  font-size: $font-size-p;
+  line-height: 1.45;
 
-  position: sticky;
-  bottom: 0;
+  a {
+    color: $color-text;
+    text-decoration: none;
+    transition: color $dur-base $ease-std;
 
-  /* keep visual separation but match the lighter glass tone */
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba($color-surface-1, 0.42) 40%);
+    &:hover,
+    &:focus-visible {
+      color: $color-accent;
+    }
 
-  padding-top: $space-md;
-
-  margin-bottom: calc(-1 * $space-lg);
-  padding-bottom: $space-lg;
-
-  :where(a, button) {
-    width: 100%;
-  }
-
-  @media (min-width: $bp-md) {
-    display: flex;
-    justify-content: flex-end;
-    gap: $space-sm;
-
-    :where(a, button) {
-      width: auto;
-      flex: 0 1 360px;
-      min-width: 260px;
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-ring-color;
+      outline-offset: $focus-ring-offset;
+      border-radius: $radius-sm;
     }
   }
 }
 
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-sm;
+  margin-top: $space-lg;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  min-height: $btn-h-lg;
+  padding: 0 $space-lg;
+  border: $border-thin solid transparent;
+  border-radius: $radius-md;
+  font-size: $font-size-p;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform $dur-fast $ease-std,
+    background $dur-base $ease-std,
+    border-color $dur-base $ease-std,
+    color $dur-base $ease-std,
+    box-shadow $dur-base $ease-std;
+
+  svg {
+    flex: 0 0 auto;
+    font-size: 1rem;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.actionPrimary {
+  background: $color-accent;
+  color: #001014;
+  box-shadow: $shadow-accent;
+
+  &:hover {
+    background: $color-accent-hover;
+    box-shadow: $shadow-accent-lg;
+  }
+}
+
+.actionSecondary {
+  border-color: rgba($whatsapp, 0.34);
+  background: rgba($whatsapp, 0.1);
+  color: $color-text;
+
+  &:hover {
+    border-color: rgba($whatsapp, 0.52);
+    background: rgba($whatsapp, 0.16);
+  }
+}
+
+.directions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-md;
+  margin-top: $space-lg;
+  padding-top: $space-lg;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.1);
+
+  &:empty {
+    display: none;
+  }
+
+  @media (max-width: $bp-sm) {
+    align-items: stretch;
+    gap: $space-sm;
+  }
+}
+
+.directionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  min-height: 40px;
+  color: $color-text;
+  font-size: $font-size-p;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  transition: color $dur-base $ease-std;
+
+  svg {
+    color: $color-text-2;
+    font-size: 1.2rem;
+    transition: color $dur-base $ease-std;
+  }
+
+  &:hover {
+    color: $color-accent;
+
+    svg {
+      color: $color-accent;
+    }
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-color;
+    outline-offset: 4px;
+    border-radius: $radius-sm;
+  }
+
+  @media (max-width: $bp-sm) {
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 $space-md;
+    border-radius: $radius-pill;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.directionSeparator {
+  width: 1px;
+  height: 28px;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+
+  @media (max-width: $bp-sm) {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .card { transition: none; }
+  .card,
+  .hoursToggle,
+  .chevron,
+  .actionButton,
+  .directionLink,
+  .directionLink svg,
+  .email a {
+    transition: none;
+  }
+
+  .simplified:hover,
+  .actionButton:hover {
+    transform: none;
+  }
 }

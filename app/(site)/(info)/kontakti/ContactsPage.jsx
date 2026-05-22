@@ -30,17 +30,17 @@ function getPageStrings(locale = 'lv') {
 
       headerTitle: 'Контакты',
       headerLead:
-        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге — T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
+        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
 
       contactTitle: 'Как связаться с iLab',
       contactIntro:
-        'iLab — сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. На этой странице можно выбрать удобный филиал, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
+        'iLab - сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. На этой странице можно выбрать удобный филиал, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
 
       servicesIntro:
         'С iLab можно связаться по вопросам диагностики устройства, стоимости ремонта, наличия деталей или записи в выбранный филиал.',
 
       popularServicesPrefix: 'Чаще всего мы помогаем с',
-      popularWorksPrefix: 'Популярные работы —',
+      popularWorksPrefix: 'Популярные работы -',
       and: 'и',
 
       serviceArea:
@@ -52,7 +52,7 @@ function getPageStrings(locale = 'lv') {
       benefits: [
         {
           title: '2 сервисных центра в Риге',
-          text: 'Domina Shopping и Spice Home — можно выбрать филиал, который удобнее по расположению.',
+          text: 'Domina Shopping и Spice Home - можно выбрать филиал, который удобнее по расположению.',
         },
         {
           title: 'Быстрая диагностика',
@@ -117,11 +117,11 @@ function getPageStrings(locale = 'lv') {
 
     headerTitle: 'Kontakti',
     headerLead:
-      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā — T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
 
     contactTitle: 'Kā sazināties ar iLab',
     contactIntro:
-      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā — T/C Domina Shopping un T/C Spice Home. Šajā lapā vari izvēlēties sev ērtāko filiāli, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
+      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā - T/C Domina Shopping un T/C Spice Home. Šajā lapā vari izvēlēties sev ērtāko filiāli, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
 
     servicesIntro:
       'Ar iLab vari sazināties par ierīces diagnostiku, remonta cenu, detaļu pieejamību vai pierakstu izvēlētajā filiālē.',
@@ -131,7 +131,7 @@ function getPageStrings(locale = 'lv') {
     and: 'un',
 
     serviceArea:
-      'Apkalpojam klientus no visas Rīgas un tuvākās apkārtnes — Teikas, Purvciema, centra, Juglas, Pārdaugavas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
+      'Apkalpojam klientus no visas Rīgas un tuvākās apkārtnes - Teikas, Purvciema, centra, Juglas, Pārdaugavas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
 
     benefitsTitle: 'Kāpēc izvēlēties iLab?',
     benefitsLead:
@@ -139,7 +139,7 @@ function getPageStrings(locale = 'lv') {
     benefits: [
       {
         title: '2 servisa centri Rīgā',
-        text: 'Domina Shopping un Spice Home — vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
+        text: 'Domina Shopping un Spice Home - vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
       },
       {
         title: 'Ātra diagnostika',

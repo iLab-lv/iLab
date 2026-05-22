@@ -1,212 +1,440 @@
+import React from 'react';
 import Script from 'next/script';
+import Link from 'next/link';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import Process from '@sections/process/Process';
 import Why from '@sections/why/Why';
 import Locations from '@sections/locations/Locations';
 import Reviews from '@sections/reviews/Reviews';
+import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
-import s from '@styles/Catalog.module.scss';
+import {
+  toFaqLd,
+  toFaqRenderItems,
+} from '@sections/faq/faq.helpers';
 
-const ORIGIN = 'https://www.ilab.lv';
+import { db } from '@/lib/firebaseAdmin';
+import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
 
-function getPageStrings(locale = 'lv') {
+import s from './AboutPage.module.scss';
+
+function withLocalePath(path, locale = 'lv') {
+  if (locale !== 'ru') return path;
+  if (path === '/') return '/ru';
+
+  return `/ru${path}`;
+}
+
+function getAboutStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      canonicalPath: '/ru/o-nas',
-      breadcrumbHome: 'Главная',
-      breadcrumbPage: 'О iLab',
+      pagePath: '/ru/o-nas',
+      homeCrumb: 'Главная',
+      pageCrumb: 'О нас',
 
       headerTitle: 'О iLab',
       headerLead:
-        'iLab - сервисный центр в Риге с более чем 10-летним опытом ремонта телефонов, планшетов, компьютеров и другой техники. Работаем быстро, понятно и с гарантией как для частных клиентов, так и для бизнеса.',
+        'iLab - местный сервис устройств в Риге, который с 2013 года помогает клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
 
-      aboutTitle: 'О нас',
+      introEyebrow: 'О iLab',
+      introTitle: 'Местный сервис устройств в Риге с 2013 года',
+      introText:
+        'iLab - сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. Каждый день мы помогаем клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
+      introTextSecond:
+        'Наша задача - не просто выполнить ремонт, а понятно объяснить возможное решение, уточнить стоимость до начала работы и помочь выбрать удобный способ обращения в сервис.',
 
-      intro:
-        ' <strong>SIA iLab</strong> - профессиональный сервис по ремонту телефонов и компьютеров в Риге с более чем <strong>10-летним опытом</strong> в сфере обслуживания и ремонта техники. Мы обеспечиваем быстрый и качественный ремонт техники как для частных клиентов, так и для компаний (B2B), предоставляя полный спектр сервисных услуг.',
+      servicesTitle: 'С какими устройствами мы работаем',
+      servicesLead:
+        'Чаще всего к нам обращаются по вопросам диагностики, ремонта и замены деталей для популярных устройств.',
+      popularServicesPrefix: 'Основные направления:',
+      popularWorksPrefix: 'Популярные работы:',
+      and: 'и',
 
-      locationsTitle: 'iLab вы найдёте в T/C Domina Shopping и TC Spice Life',
-      locationsText:
-        'Наши сервисные центры находятся в <strong>TC Domina Shopping</strong> и <strong>TC Spice Life</strong>, чтобы клиентам было удобно сдавать и получать устройства в любой день. В обоих филиалах доступны ремонт смартфонов, планшетов, компьютеров и умных часов, обслуживание пылесосов, установка программного обеспечения и другие технические услуги.',
+      links: {
+        iphone: 'ремонт iPhone',
+        phones: 'ремонт телефонов',
+        tablets: 'ремонт планшетов',
+        computers: 'ремонт компьютеров',
+        dyson: 'ремонт Dyson',
+        screen: 'замена экрана',
+        battery: 'замена батареи',
+        charging: 'ремонт разъёма зарядки',
+      },
 
-      missionTitle: 'Наша миссия',
-      missionText:
-        'Ваши устройства, наш опыт - надёжный сервис каждый день как для частных клиентов, так и для бизнеса. Наша задача - сделать так, чтобы телефон, компьютер, планшет или другое устройство снова работало как новое. Технологии должны облегчать жизнь, а не создавать проблемы - и именно это мы обеспечиваем каждый день.',
+      factsTitle: 'Коротко об iLab',
+      factsLead:
+        'Эта информация помогает быстро понять, кто мы, где находимся и с какими задачами работаем.',
+      facts: {
+        brand: 'Бренд',
+        since: 'Работаем с',
+        city: 'Город',
+        locations: 'Филиалы',
+        services: 'Услуги',
+        languages: 'Языки общения',
+        payments: 'Оплата',
+        warranty: 'Гарантия',
+        legal: 'Юридическая информация',
+        registration: 'Рег. №',
+        vat: 'PVN / VAT №',
+        legalAddress: 'Юридический адрес',
+      },
+      factsValues: {
+        brand: 'iLab',
+        since: '2013 года',
+        city: 'Рига',
+        locations: 'T/C Domina Shopping и T/C Spice Home',
+        services: 'диагностика, ремонт, замена деталей',
+        languages: 'латышский, русский',
+        payments: 'наличные, карта, Apple Pay, Google Pay',
+        warranty: '90 дней на выполненные работы и использованные детали',
+      },
 
-      teamTitle: 'Команда iLab',
-      teamText:
-        'Техники iLab - обученные специалисты, которые постоянно совершенствуют знания, следя за новейшими технологическими тенденциями. Это позволяет нам обеспечивать высокое качество ремонта устройств <strong>Apple, Samsung, Huawei, Xiaomi, Lenovo, Dyson</strong> и других брендов. Мы обслуживаем клиентов по всей Латвии - как частных лиц, так и B2B.',
+      locationsAnchorTitle: 'Где нас найти',
+      locationsAnchorText:
+        'Клиентские пункты iLab находятся в T/C Domina Shopping и T/C Spice Home. В разделе контактов можно посмотреть время работы, телефоны, WhatsApp и маршруты.',
+      contactsCta: 'Открыть контакты',
 
-      whyChooseTitle: 'Почему выбирают iLab',
-      whyChooseItems: [
-        '10+ лет опыта в ремонте устройств;',
-        'Ремонт телефонов и компьютеров в Риге - в двух удобных локациях: TC Domina Shopping и TC Spice Life;',
-        'Работаем каждый день, включая выходные;',
-        'Обслуживаем частных клиентов и B2B по всей Латвии;',
-        'Качественные запчасти и профессиональная диагностика;',
-        'Подготовка акта дефектации для страховой компании клиента;',
-        'Честная ценовая политика и понятная коммуникация;',
-        '90 дней гарантии на выполненный ремонт.',
-      ],
-
-      valuesTitle: 'Ценности iLab',
-      valuesItems: [
-        '<strong>Точность и скорость</strong> - устройство ремонтируется в максимально короткие сроки;',
-        '<strong>Развитие и качество</strong> - наши техники постоянно совершенствуют знания;',
-        '<strong>Ответственность и честность</strong> - никаких скрытых расходов или расплывчатых обещаний;',
-        '<strong>Надёжность</strong> - мы отвечаем за каждый выполненный ремонт.',
-      ],
-
-      orgName: 'iLab',
-      orgLegalName: 'SIA “iLab”',
-      orgVatId: 'Reģ. nr. 40203288307',
-      orgDescription:
-        'Профессиональный сервис по ремонту телефонов, планшетов, компьютеров и Dyson в Риге.',
-      dominaName: 'iLab - Domina Shopping',
-      spiceName: 'iLab - Spice Life',
-      contactsPath: '/ru/kontakty',
+      faqTitle: 'Часто задаваемые вопросы',
     };
   }
 
   return {
-    canonicalPath: '/par-mums',
-    breadcrumbHome: 'Sākums',
-    breadcrumbPage: 'Par iLab',
+    pagePath: '/par-mums',
+    homeCrumb: 'Sākums',
+    pageCrumb: 'Par mums',
 
     headerTitle: 'Par iLab',
     headerLead:
-      'iLab ir servisa centrs Rīgā ar vairāk nekā 10 gadu pieredzi telefonu, planšetdatoru, datoru un citas tehnikas remontā. Strādājam ātri, skaidri un ar garantiju gan privātpersonām, gan uzņēmumiem.',
+      'iLab ir vietējais ierīču serviss Rīgā, kas kopš 2013. gada palīdz klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
 
-    aboutTitle: 'Par mums',
+    introEyebrow: 'Par iLab',
+    introTitle: 'Vietējais ierīču serviss Rīgā kopš 2013. gada',
+    introText:
+      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā - T/C Domina Shopping un T/C Spice Home. Ikdienā palīdzam klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+    introTextSecond:
+      'Mūsu mērķis nav tikai veikt remontu, bet arī saprotami izskaidrot iespējamo risinājumu, precizēt cenu pirms darba sākšanas un palīdzēt izvēlēties ērtāko veidu, kā nodot ierīci servisā.',
 
-    intro:
-      '<strong>SIA iLab</strong> - profesionāls telefona un datoru serviss Rīgā ar vairāk nekā <strong>10 gadu pieredzi</strong> tehnoloģiju apkalpošanas un remonta jomā. Mēs sniedzam ātru un kvalitatīvu tehnikas remontu gan privātpersonām, gan uzņēmumiem (B2B), nodrošinot pilnu servisa pakalpojumu klāstu.',
+    servicesTitle: 'Ar kādām ierīcēm strādājam',
+    servicesLead:
+      'Visbiežāk pie mums vēršas par populārāko ierīču diagnostiku, remontu un detaļu maiņu.',
+    popularServicesPrefix: 'Galvenie virzieni:',
+    popularWorksPrefix: 'Populārākie darbi:',
+    and: 'un',
 
-    locationsTitle: 'iLab atradīsi: T/C Domina Shopping un TC Spice Life',
-    locationsText:
-      'Mūsu servisa centri atrodas <strong>TC Domina Shopping</strong> un <strong>TC Spice Life</strong>, lai klientiem būtu ērti nogādāt un saņemt ierīces jebkurā dienas laikā. Abās filiālēs pieejami viedtālruņu, planšetdatoru, datoru un viedpulksteņu remonts, putekļusūcēju apkope, programmatūras uzstādīšana un citi tehniskie pakalpojumi.',
-
-    missionTitle: 'Mūsu misija',
-    missionText:
-      'Jūsu ierīces, mūsu pieredze - uzticams serviss katru dienu, gan privātpersonām, gan uzņēmumiem. Mūsu uzdevums ir nodrošināt, lai telefons, dators, planšetdators vai citas ierīces atkal strādātu kā jaunas. Tehnoloģijām ir jāatvieglo dzīve, nevis jārada problēmas - un tieši to mēs nodrošinām katru dienu.',
-
-    teamTitle: 'iLab komanda',
-    teamText:
-      'iLab tehniķi ir apmācīti speciālisti, kas nepārtraukti pilnveido zināšanas, sekojot līdzi jaunākajām tehnoloģiju tendencēm. Tas ļauj mums nodrošināt augstāko kvalitāti <strong>Apple, Samsung, Huawei, Xiaomi, Lenovo, Dyson</strong> un citu zīmolu ierīču remontā. Sniedzam pakalpojumu visā Latvijā privātpersonām un B2B.',
-
-    whyChooseTitle: 'Kāpēc izvēlēties iLab',
-    whyChooseItems: [
-      '10+ gadu pieredze ierīču remontā;',
-      'Telefona un datoru remonts Rīgā - divās ērtās lokācijās: TC Domina Shopping un TC Spice Life;',
-      'Darbojamies katru dienu, arī brīvdienās;',
-      'Apkalpojam privātpersonas un B2B klientus visā Latvijā;',
-      'Kvalitatīvas rezerves daļas un profesionāla diagnostika;',
-      'Defektācijas aktu sagatavošana klienta apdrošināšanas uzņēmumam;',
-      'Godīga cenu politika un skaidra saziņa ar klientu;',
-      '90 dienu garantija veiktajam remontam.',
-    ],
-
-    valuesTitle: 'iLab vērtības',
-    valuesItems: [
-      '<strong>Precizitāte un ātrums</strong> - ierīce tiek salabota pēc iespējas īsākā laikā;',
-      '<strong>Attīstība un kvalitāte</strong> - mūsu tehniķi nepārtraukti pilnveido zināšanas;',
-      '<strong>Atbildība un godīgums</strong> - nekādu slēptu izmaksu vai neskaidru solījumu;',
-      '<strong>Uzticamība</strong> - mēs atbildam par katru paveikto remontu.',
-    ],
-
-    orgName: 'iLab',
-    orgLegalName: 'SIA “iLab”',
-    orgVatId: 'Reģ. nr. 40203288307',
-    orgDescription:
-      'Profesionāls telefonu, planšetdatoru, datoru un Dyson serviss Rīgā.',
-    dominaName: 'iLab - Domina Shopping',
-    spiceName: 'iLab - Spice Life',
-    contactsPath: '/kontakti',
-  };
-}
-
-function buildBreadcrumbsLd(locale = 'lv') {
-  const strings = getPageStrings(locale);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: strings.breadcrumbHome,
-        item: `${ORIGIN}${locale === 'ru' ? '/ru' : '/'}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: strings.breadcrumbPage,
-        item: `${ORIGIN}${strings.canonicalPath}/`,
-      },
-    ],
-  };
-}
-
-function buildOrgLd(locale = 'lv') {
-  const strings = getPageStrings(locale);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${ORIGIN}#organization`,
-    name: strings.orgName,
-    legalName: strings.orgLegalName,
-    vatID: strings.orgVatId,
-    url: ORIGIN,
-    description: strings.orgDescription,
-    sameAs: [],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Rīga',
-      addressCountry: 'LV',
+    links: {
+      iphone: 'iPhone remonts',
+      phones: 'telefonu remonts',
+      tablets: 'planšetdatoru remonts',
+      computers: 'datoru remonts',
+      dyson: 'Dyson remonts',
+      screen: 'ekrāna maiņa',
+      battery: 'baterijas maiņa',
+      charging: 'uzlādes ligzdas remonts',
     },
-    department: [
-      {
-        '@type': 'LocalBusiness',
-        name: strings.dominaName,
-        url: `${ORIGIN}${strings.contactsPath}`,
-        areaServed: { '@type': 'City', name: 'Rīga' },
-      },
-      {
-        '@type': 'LocalBusiness',
-        name: strings.spiceName,
-        url: `${ORIGIN}${strings.contactsPath}`,
-        areaServed: { '@type': 'City', name: 'Rīga' },
-      },
-    ],
+
+    factsTitle: 'Īsumā par iLab',
+    factsLead:
+      'Šī informācija palīdz ātri saprast, kas mēs esam, kur atrodamies un ar kādiem darbiem ikdienā strādājam.',
+    facts: {
+      brand: 'Zīmols',
+      since: 'Strādājam kopš',
+      city: 'Pilsēta',
+      locations: 'Filiāles',
+      services: 'Pakalpojumi',
+      languages: 'Saziņas valodas',
+      payments: 'Apmaksa',
+      warranty: 'Garantija',
+      legal: 'Juridiskā informācija',
+      registration: 'Reģ. Nr.',
+      vat: 'PVN / VAT Nr.',
+      legalAddress: 'Juridiskā adrese',
+    },
+    factsValues: {
+      brand: 'iLab',
+      since: '2013. gada',
+      city: 'Rīga',
+      locations: 'T/C Domina Shopping un T/C Spice Home',
+      services: 'diagnostika, remonts, detaļu maiņa',
+      languages: 'latviešu, krievu',
+      payments: 'skaidra nauda, karte, Apple Pay, Google Pay',
+      warranty: '90 dienas veiktajiem darbiem un izmantotajām detaļām',
+    },
+
+    locationsAnchorTitle: 'Kur mūs atrast',
+    locationsAnchorText:
+      'iLab klientu pieņemšanas punkti atrodas T/C Domina Shopping un T/C Spice Home. Kontaktlapā vari apskatīt darba laiku, tālruņus, WhatsApp saziņu un maršrutus.',
+    contactsCta: 'Skatīt kontaktus',
+
+    faqTitle: 'Biežāk uzdotie jautājumi',
   };
 }
 
-export default function AboutPage({
+function sortFaqItems(items = []) {
+  return [...items].sort((a, b) => {
+    const ao = typeof a?.order === 'number' ? a.order : 9999;
+    const bo = typeof b?.order === 'number' ? b.order : 9999;
+
+    if (ao !== bo) return ao - bo;
+
+    return String(a?.q || '').localeCompare(String(b?.q || ''));
+  });
+}
+
+async function getBasicFaq(locale = 'lv') {
+  const strings = getAboutStrings(locale);
+  const docId = `basic_${locale}`;
+  const snap = await db.collection('faqGroups').doc(docId).get();
+
+  if (!snap.exists) {
+    return {
+      title: strings.faqTitle,
+      items: [],
+    };
+  }
+
+  const data = snap.data() || {};
+  const rawItems = Array.isArray(data.items) ? data.items : [];
+
+  const items = sortFaqItems(
+    rawItems
+      .filter((item) => {
+        if (!item) return false;
+        if (item.isHidden === true) return false;
+
+        const q = String(item.q || '').trim();
+        const answer = String(item.aHtml || item.a || '').trim();
+
+        return q && answer;
+      })
+      .map((item) => ({
+        q: String(item.q || '').trim(),
+        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
+        a: typeof item.a === 'string' ? item.a.trim() : '',
+        order:
+          typeof item.order === 'number' && Number.isFinite(item.order)
+            ? item.order
+            : 9999,
+      }))
+  );
+
+  return {
+    title:
+      typeof data.title === 'string' && data.title.trim()
+        ? data.title.trim()
+        : strings.faqTitle,
+    items,
+  };
+}
+
+function buildAboutPageLd(strings, locale = 'lv') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${abs(strings.pagePath)}#about-page`,
+    url: abs(strings.pagePath),
+    name: strings.pageCrumb,
+    description: strings.headerLead,
+    inLanguage: locale,
+    isPartOf: {
+      '@id': `${abs('/')}#website`,
+    },
+    about: {
+      '@id': `${abs('/')}#organization`,
+    },
+  };
+}
+
+function getLegalFacts(company = {}, strings) {
+  const legalName =
+    company.legalName ||
+    company.legalEntity ||
+    company.companyName ||
+    '';
+
+  const registrationNumber =
+    company.registrationNumber ||
+    company.regNumber ||
+    company.regNr ||
+    '';
+
+  const vatNumber =
+    company.vatNumber ||
+    company.vat ||
+    company.pvn ||
+    '';
+
+  const legalAddress =
+    company.legalAddress ||
+    company.registeredAddress ||
+    '';
+
+  return [
+    legalName
+      ? {
+          label: strings.facts.legal,
+          value: legalName,
+        }
+      : null,
+    registrationNumber
+      ? {
+          label: strings.facts.registration,
+          value: registrationNumber,
+        }
+      : null,
+    vatNumber
+      ? {
+          label: strings.facts.vat,
+          value: vatNumber,
+        }
+      : null,
+    legalAddress
+      ? {
+          label: strings.facts.legalAddress,
+          value: legalAddress,
+        }
+      : null,
+  ].filter(Boolean);
+}
+
+function getBusinessFacts(siteSettings = {}, strings) {
+  const company = siteSettings?.company || {};
+  const legalFacts = getLegalFacts(company, strings);
+
+  return [
+    {
+      label: strings.facts.brand,
+      value: company.name || strings.factsValues.brand,
+    },
+    {
+      label: strings.facts.since,
+      value: company.foundingDate || strings.factsValues.since,
+    },
+    {
+      label: strings.facts.city,
+      value: strings.factsValues.city,
+    },
+    {
+      label: strings.facts.locations,
+      value: strings.factsValues.locations,
+    },
+    {
+      label: strings.facts.services,
+      value: strings.factsValues.services,
+    },
+    {
+      label: strings.facts.languages,
+      value: strings.factsValues.languages,
+    },
+    {
+      label: strings.facts.payments,
+      value: company.paymentAccepted || strings.factsValues.payments,
+    },
+    {
+      label: strings.facts.warranty,
+      value: company.warranty || strings.factsValues.warranty,
+    },
+    ...legalFacts,
+  ].filter((item) => item.value);
+}
+
+function ServiceLinks({ locale, strings }) {
+  return (
+    <div className={s.linkCopy}>
+      <p>
+        <strong>{strings.popularServicesPrefix}</strong>{' '}
+        <Link href={withLocalePath('/iphone-remonts', locale)}>
+          {strings.links.iphone}
+        </Link>
+        ,{' '}
+        <Link href={withLocalePath('/telefonu-remonts', locale)}>
+          {strings.links.phones}
+        </Link>
+        ,{' '}
+        <Link href={withLocalePath('/plansetdatoru-remonts', locale)}>
+          {strings.links.tablets}
+        </Link>
+        ,{' '}
+        <Link href={withLocalePath('/datoru-remonts', locale)}>
+          {strings.links.computers}
+        </Link>
+        {' '}
+        {strings.and}{' '}
+        <Link href={withLocalePath('/dyson-remonts', locale)}>
+          {strings.links.dyson}
+        </Link>
+        .
+      </p>
+
+      <p>
+        <strong>{strings.popularWorksPrefix}</strong>{' '}
+        <Link href={withLocalePath('/iphone-remonts/ekrana-maina', locale)}>
+          {strings.links.screen}
+        </Link>
+        ,{' '}
+        <Link href={withLocalePath('/iphone-remonts/baterijas-maina', locale)}>
+          {strings.links.battery}
+        </Link>
+        {' '}
+        {strings.and}{' '}
+        <Link href={withLocalePath('/iphone-remonts/uzlades-ligzdas-maina', locale)}>
+          {strings.links.charging}
+        </Link>
+        .
+      </p>
+    </div>
+  );
+}
+
+function BusinessFacts({ facts }) {
+  if (!facts.length) return null;
+
+  return (
+    <dl className={s.factsGrid}>
+      {facts.map((fact) => (
+        <div key={fact.label} className={s.factCard}>
+          <dt>{fact.label}</dt>
+          <dd>{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+export default async function AboutPage({
   locale = 'lv',
   siteSettings,
 }) {
-  const strings = getPageStrings(locale);
-  const breadcrumbsLd = buildBreadcrumbsLd(locale);
-  const orgLd = buildOrgLd(locale);
+  const strings = getAboutStrings(locale);
+  const basicFaq = await getBasicFaq(locale);
+  const businessFacts = getBusinessFacts(siteSettings, strings);
+
+  const faqRenderItems = toFaqRenderItems(basicFaq.items);
+  const faqLd = toFaqLd(basicFaq.items);
+
+  const breadcrumbsLd = buildBreadcrumbsLd([
+    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.pageCrumb, url: abs(strings.pagePath) },
+  ]);
+
+  const aboutPageLd = buildAboutPageLd(strings, locale);
 
   const headerCrumbs = [
     {
-      label: strings.breadcrumbHome,
+      label: strings.homeCrumb,
       href: locale === 'ru' ? '/ru' : '/',
     },
     {
-      label: strings.breadcrumbPage,
-      href: strings.canonicalPath,
+      label: strings.pageCrumb,
+      href: strings.pagePath,
     },
   ];
 
   return (
     <>
       <Script
-        id={`about-breadcrumbs-${locale}`}
+        id={`about-breadcrumbs-jsonld-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
@@ -214,12 +442,22 @@ export default function AboutPage({
       </Script>
 
       <Script
-        id={`about-organization-${locale}`}
+        id={`about-page-jsonld-${locale}`}
         type="application/ld+json"
         strategy="afterInteractive"
       >
-        {JSON.stringify(orgLd)}
+        {JSON.stringify(aboutPageLd)}
       </Script>
+
+      {basicFaq.items.length > 0 ? (
+        <Script
+          id={`about-faq-jsonld-${locale}`}
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(faqLd)}
+        </Script>
+      ) : null}
 
       <PageHeader
         title={strings.headerTitle}
@@ -227,70 +465,105 @@ export default function AboutPage({
         crumbs={headerCrumbs}
       />
 
-      <section className={s.section} aria-labelledby="about-content-h2">
+      <section className={s.section} aria-labelledby="about-intro-h2">
         <div className={s.container}>
-          <h2 id="about-content-h2" className={s.h2}>
-            {strings.aboutTitle}
-          </h2>
+          <div className={s.introGrid}>
+            <div className={s.introCard}>
+              <p className={s.eyebrow}>{strings.introEyebrow}</p>
 
-          <p
-            className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.intro }}
-          />
+              <h2 id="about-intro-h2" className={s.h2}>
+                {strings.introTitle}
+              </h2>
 
-          <h3 className={s.h3}>{strings.locationsTitle}</h3>
-          <p
-            className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.locationsText }}
-          />
+              <div className={s.copy}>
+                <p>{strings.introText}</p>
+                <p>{strings.introTextSecond}</p>
+              </div>
+            </div>
 
-          <h3 className={s.h3}>{strings.missionTitle}</h3>
-          <p className={s.paragraph}>{strings.missionText}</p>
+            <aside className={s.factsPanel} aria-labelledby="about-facts-h3">
+              <p className={s.eyebrow}>iLab</p>
 
-          <h3 className={s.h3}>{strings.teamTitle}</h3>
-          <p
-            className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.teamText }}
-          />
+              <h3 id="about-facts-h3">
+                {strings.factsTitle}
+              </h3>
 
-          <h3 className={s.h3}>{strings.whyChooseTitle}</h3>
-          <ul className={s.list}>
-            {strings.whyChooseItems.map((item, index) => (
-              <li key={`why-choose-${index}`}>{item}</li>
-            ))}
-          </ul>
+              <p className={s.factsLead}>
+                {strings.factsLead}
+              </p>
 
-          <h3 className={s.h3}>{strings.valuesTitle}</h3>
-          <ul className={s.list}>
-            {strings.valuesItems.map((item, index) => (
-              <li
-                key={`values-${index}`}
-                dangerouslySetInnerHTML={{ __html: item }}
-              />
-            ))}
-          </ul>
+              <BusinessFacts facts={businessFacts} />
+            </aside>
+          </div>
         </div>
       </section>
 
-      <section className={s.section}>
-        <Why locale={locale} />
+      <section className={s.section} aria-labelledby="about-services-h2">
+        <div className={s.container}>
+          <div className={s.servicesCard}>
+            <div className={s.sectionHeader}>
+              <p className={s.eyebrow}>Services</p>
+
+              <h2 id="about-services-h2" className={s.h2}>
+                {strings.servicesTitle}
+              </h2>
+
+              <p className={s.lead}>
+                {strings.servicesLead}
+              </p>
+            </div>
+
+            <ServiceLinks locale={locale} strings={strings} />
+          </div>
+        </div>
       </section>
 
-      <section className={s.section}>
-        <Locations
-          locale={locale}
-          locations={siteSettings?.locations || []}
-          pinPositions={siteSettings?.pinPositions || {}}
+      <Why locale={locale} />
+
+      <Process locale={locale} />
+
+      <section className={s.locationsTeaser} aria-labelledby="about-locations-h2">
+        <div className={s.container}>
+          <div className={s.locationsTeaserInner}>
+            <div>
+              <p className={s.eyebrow}>Locations</p>
+
+              <h2 id="about-locations-h2" className={s.h2}>
+                {strings.locationsAnchorTitle}
+              </h2>
+
+              <p className={s.lead}>
+                {strings.locationsAnchorText}
+              </p>
+            </div>
+
+            <Link
+              className={s.ctaLink}
+              href={withLocalePath('/kontakti', locale)}
+            >
+              {strings.contactsCta}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Locations
+        locale={locale}
+        locations={siteSettings?.locations || []}
+        pinPositions={siteSettings?.pinPositions || {}}
+      />
+
+      <Reviews locale={locale} />
+
+      {faqRenderItems.length > 0 ? (
+        <Faq
+          id="about-faq"
+          title={basicFaq.title}
+          items={faqRenderItems}
         />
-      </section>
+      ) : null}
 
-      <section className={s.section}>
-        <Reviews locale={locale} />
-      </section>
-
-      <section className={s.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      <ConvertBand locale={locale} />
     </>
   );
 }
