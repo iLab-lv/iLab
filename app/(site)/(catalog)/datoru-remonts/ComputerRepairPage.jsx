@@ -167,7 +167,7 @@ export function getComputerRepairMetadata(locale = 'lv') {
       title: 'Ремонт компьютеров в Риге - ноутбуки и настольные ПК | iLab',
       description:
         'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия 90 дней.',
-      alternates: { canonical: '/ru/remont-kompjuterov' },
+      alternates: { canonical: '/ru/remont-noutbukov' },
     };
   }
 
