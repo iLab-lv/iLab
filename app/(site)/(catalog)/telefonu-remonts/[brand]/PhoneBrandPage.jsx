@@ -339,6 +339,7 @@ export async function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
   );
 
   const strings = getPageStrings({ brandName, page, locale });
+  const canonicalPath = `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`;
 
   return {
     title:
@@ -349,9 +350,7 @@ export async function getPhoneBrandMetadata(brandSlug, locale = 'lv') {
     description:
       page.seo?.metaDescription || strings.serviceDescription,
     alternates: {
-      canonical:
-        page.route?.canonicalPath ||
-        `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`,
+      canonical: canonicalPath,
     },
   };
 }
