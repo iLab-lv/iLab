@@ -17,33 +17,34 @@ import {
 
 import { db } from '@/lib/firebaseAdmin';
 import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
+import {
+  localizedCategoryPath,
+  localizedHomePath,
+  localizedInfoPath,
+  localizedServicePath,
+} from '@/lib/routes/localizedPath';
 
 import s from './AboutPage.module.scss';
 
-function withLocalePath(path, locale = 'lv') {
-  if (locale !== 'ru') return path;
-  if (path === '/') return '/ru';
-
-  return `/ru${path}`;
-}
-
 function getAboutStrings(locale = 'lv') {
+  const pagePath = localizedInfoPath('par-mums', locale);
+
   if (locale === 'ru') {
     return {
-      pagePath: '/ru/o-nas',
+      pagePath,
       homeCrumb: 'Главная',
       pageCrumb: 'О нас',
 
       headerTitle: 'О iLab',
       headerLead:
-        'iLab - местный сервис устройств в Риге, который с 2013 года помогает клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
+        'iLab — местный сервис устройств в Риге, который с 2013 года помогает клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
 
       introEyebrow: 'О iLab',
       introTitle: 'Местный сервис устройств в Риге с 2013 года',
       introText:
-        'iLab - сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. Каждый день мы помогаем клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
+        'iLab — сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. Каждый день мы помогаем клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
       introTextSecond:
-        'Наша задача - не просто выполнить ремонт, а понятно объяснить возможное решение, уточнить стоимость до начала работы и помочь выбрать удобный способ обращения в сервис.',
+        'Наша задача — не просто выполнить ремонт, а понятно объяснить возможное решение, уточнить стоимость до начала работы и помочь выбрать удобный способ обращения в сервис.',
 
       servicesTitle: 'С какими устройствами мы работаем',
       servicesLead:
@@ -101,7 +102,7 @@ function getAboutStrings(locale = 'lv') {
   }
 
   return {
-    pagePath: '/par-mums',
+    pagePath,
     homeCrumb: 'Sākums',
     pageCrumb: 'Par mums',
 
@@ -112,7 +113,7 @@ function getAboutStrings(locale = 'lv') {
     introEyebrow: 'Par iLab',
     introTitle: 'Vietējais ierīču serviss Rīgā kopš 2013. gada',
     introText:
-      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā - T/C Domina Shopping un T/C Spice Home. Ikdienā palīdzam klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā — T/C Domina Shopping un T/C Spice Home. Ikdienā palīdzam klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
     introTextSecond:
       'Mūsu mērķis nav tikai veikt remontu, bet arī saprotami izskaidrot iespējamo risinājumu, precizēt cenu pirms darba sākšanas un palīdzēt izvēlēties ērtāko veidu, kā nodot ierīci servisā.',
 
@@ -344,24 +345,24 @@ function ServiceLinks({ locale, strings }) {
     <div className={s.linkCopy}>
       <p>
         <strong>{strings.popularServicesPrefix}</strong>{' '}
-        <Link href={withLocalePath('/iphone-remonts', locale)}>
+        <Link href={localizedCategoryPath('iphone-remonts', locale)}>
           {strings.links.iphone}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/telefonu-remonts', locale)}>
+        <Link href={localizedCategoryPath('telefonu-remonts', locale)}>
           {strings.links.phones}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/plansetdatoru-remonts', locale)}>
+        <Link href={localizedCategoryPath('plansetdatoru-remonts', locale)}>
           {strings.links.tablets}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/datoru-remonts', locale)}>
+        <Link href={localizedCategoryPath('datoru-remonts', locale)}>
           {strings.links.computers}
         </Link>
         {' '}
         {strings.and}{' '}
-        <Link href={withLocalePath('/dyson-remonts', locale)}>
+        <Link href={localizedCategoryPath('dyson-remonts', locale)}>
           {strings.links.dyson}
         </Link>
         .
@@ -369,16 +370,34 @@ function ServiceLinks({ locale, strings }) {
 
       <p>
         <strong>{strings.popularWorksPrefix}</strong>{' '}
-        <Link href={withLocalePath('/iphone-remonts/ekrana-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'ekrana-maina',
+            locale
+          )}
+        >
           {strings.links.screen}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/iphone-remonts/baterijas-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'baterijas-maina',
+            locale
+          )}
+        >
           {strings.links.battery}
         </Link>
         {' '}
         {strings.and}{' '}
-        <Link href={withLocalePath('/iphone-remonts/uzlades-ligzdas-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'uzlades-ligzdas-maina',
+            locale
+          )}
+        >
           {strings.links.charging}
         </Link>
         .
@@ -414,7 +433,7 @@ export default async function AboutPage({
   const faqLd = toFaqLd(basicFaq.items);
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.homeCrumb, url: abs(localizedHomePath(locale)) },
     { name: strings.pageCrumb, url: abs(strings.pagePath) },
   ]);
 
@@ -423,7 +442,7 @@ export default async function AboutPage({
   const headerCrumbs = [
     {
       label: strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
+      href: localizedHomePath(locale),
     },
     {
       label: strings.pageCrumb,
@@ -539,7 +558,7 @@ export default async function AboutPage({
 
             <Link
               className={s.ctaLink}
-              href={withLocalePath('/kontakti', locale)}
+              href={localizedInfoPath('kontakti', locale)}
             >
               {strings.contactsCta}
             </Link>

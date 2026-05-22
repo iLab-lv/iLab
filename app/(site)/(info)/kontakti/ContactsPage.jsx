@@ -11,36 +11,37 @@ import {
 
 import { db } from '@/lib/firebaseAdmin';
 import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
+import {
+  localizedCategoryPath,
+  localizedHomePath,
+  localizedInfoPath,
+  localizedServicePath,
+} from '@/lib/routes/localizedPath';
 
 import s from './ContactsPage.module.scss';
 
-function withLocalePath(path, locale = 'lv') {
-  if (locale !== 'ru') return path;
-  if (path === '/') return '/ru';
-
-  return `/ru${path}`;
-}
-
 function getPageStrings(locale = 'lv') {
+  const pagePath = localizedInfoPath('kontakti', locale);
+
   if (locale === 'ru') {
     return {
-      pagePath: '/ru/kontakty',
+      pagePath,
       homeCrumb: 'Главная',
       pageCrumb: 'Контакты',
 
       headerTitle: 'Контакты',
       headerLead:
-        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
+        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге — T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
 
       contactTitle: 'Как связаться с iLab',
       contactIntro:
-        'iLab - сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. На этой странице можно выбрать удобный филиал, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
+        'iLab — сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. На этой странице можно выбрать удобный филиал, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
 
       servicesIntro:
         'С iLab можно связаться по вопросам диагностики устройства, стоимости ремонта, наличия деталей или записи в выбранный филиал.',
 
       popularServicesPrefix: 'Чаще всего мы помогаем с',
-      popularWorksPrefix: 'Популярные работы -',
+      popularWorksPrefix: 'Популярные работы —',
       and: 'и',
 
       serviceArea:
@@ -52,23 +53,28 @@ function getPageStrings(locale = 'lv') {
       benefits: [
         {
           title: '2 сервисных центра в Риге',
-          text: 'Domina Shopping и Spice Home - можно выбрать филиал, который удобнее по расположению.',
+          text:
+            'Domina Shopping и Spice Home — можно выбрать филиал, который удобнее по расположению.',
         },
         {
           title: 'Быстрая диагностика',
-          text: 'По частым неисправностям можем быстро сориентировать по срокам, цене и наличию деталей.',
+          text:
+            'По частым неисправностям можем быстро сориентировать по срокам, цене и наличию деталей.',
         },
         {
           title: 'Цена до начала ремонта',
-          text: 'Перед выполнением работ уточняем стоимость и согласовываем её с клиентом.',
+          text:
+            'Перед выполнением работ уточняем стоимость и согласовываем её с клиентом.',
         },
         {
           title: '90 дней гарантии',
-          text: 'Предоставляем гарантию на выполненные работы и использованные детали.',
+          text:
+            'Предоставляем гарантию на выполненные работы и использованные детали.',
         },
         {
           title: 'Удобная связь',
-          text: 'Можно позвонить, написать в WhatsApp или сразу открыть маршрут в Google Maps и Waze.',
+          text:
+            'Можно позвонить, написать в WhatsApp или сразу открыть маршрут в Google Maps и Waze.',
         },
       ],
 
@@ -111,17 +117,17 @@ function getPageStrings(locale = 'lv') {
   }
 
   return {
-    pagePath: '/kontakti',
+    pagePath,
     homeCrumb: 'Sākums',
     pageCrumb: 'Kontakti',
 
     headerTitle: 'Kontakti',
     headerLead:
-      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā — T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
 
     contactTitle: 'Kā sazināties ar iLab',
     contactIntro:
-      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā - T/C Domina Shopping un T/C Spice Home. Šajā lapā vari izvēlēties sev ērtāko filiāli, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
+      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā — T/C Domina Shopping un T/C Spice Home. Šajā lapā vari izvēlēties sev ērtāko filiāli, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
 
     servicesIntro:
       'Ar iLab vari sazināties par ierīces diagnostiku, remonta cenu, detaļu pieejamību vai pierakstu izvēlētajā filiālē.',
@@ -131,7 +137,7 @@ function getPageStrings(locale = 'lv') {
     and: 'un',
 
     serviceArea:
-      'Apkalpojam klientus no visas Rīgas un tuvākās apkārtnes - Teikas, Purvciema, centra, Juglas, Pārdaugavas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
+      'Apkalpojam klientus no visas Rīgas un tuvākās apkārtnes — Teikas, Purvciema, centra, Juglas, Pārdaugavas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
 
     benefitsTitle: 'Kāpēc izvēlēties iLab?',
     benefitsLead:
@@ -139,23 +145,28 @@ function getPageStrings(locale = 'lv') {
     benefits: [
       {
         title: '2 servisa centri Rīgā',
-        text: 'Domina Shopping un Spice Home - vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
+        text:
+          'Domina Shopping un Spice Home — vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
       },
       {
         title: 'Ātra diagnostika',
-        text: 'Par biežākajiem bojājumiem varam ātri precizēt termiņu, cenu un detaļu pieejamību.',
+        text:
+          'Par biežākajiem bojājumiem varam ātri precizēt termiņu, cenu un detaļu pieejamību.',
       },
       {
         title: 'Cena pirms remonta',
-        text: 'Pirms darba uzsākšanas precizējam izmaksas un saskaņojam tās ar klientu.',
+        text:
+          'Pirms darba uzsākšanas precizējam izmaksas un saskaņojam tās ar klientu.',
       },
       {
         title: '90 dienu garantija',
-        text: 'Nodrošinām garantiju veiktajiem darbiem un izmantotajām detaļām.',
+        text:
+          'Nodrošinām garantiju veiktajiem darbiem un izmantotajām detaļām.',
       },
       {
         title: 'Ērta saziņa',
-        text: 'Vari piezvanīt, uzrakstīt WhatsApp vai uzreiz atvērt maršrutu Google Maps un Waze.',
+        text:
+          'Vari piezvanīt, uzrakstīt WhatsApp vai uzreiz atvērt maršrutu Google Maps un Waze.',
       },
     ],
 
@@ -365,37 +376,55 @@ function InternalServiceLinks({ locale, strings }) {
 
       <p className={s.paragraph}>
         {strings.popularServicesPrefix}{' '}
-        <Link href={withLocalePath('/iphone-remonts', locale)}>
+        <Link href={localizedCategoryPath('iphone-remonts', locale)}>
           {strings.links.iphone}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/telefonu-remonts', locale)}>
+        <Link href={localizedCategoryPath('telefonu-remonts', locale)}>
           {strings.links.phones}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/plansetdatoru-remonts', locale)}>
+        <Link href={localizedCategoryPath('plansetdatoru-remonts', locale)}>
           {strings.links.tablets}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/datoru-remonts', locale)}>
+        <Link href={localizedCategoryPath('datoru-remonts', locale)}>
           {strings.links.computers}
         </Link>
         {' '}
         {strings.and}{' '}
-        <Link href={withLocalePath('/dyson-remonts', locale)}>
+        <Link href={localizedCategoryPath('dyson-remonts', locale)}>
           {strings.links.dyson}
         </Link>
         . {strings.popularWorksPrefix}{' '}
-        <Link href={withLocalePath('/iphone-remonts/ekrana-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'ekrana-maina',
+            locale
+          )}
+        >
           {strings.links.screen}
         </Link>
         ,{' '}
-        <Link href={withLocalePath('/iphone-remonts/baterijas-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'baterijas-maina',
+            locale
+          )}
+        >
           {strings.links.battery}
         </Link>
         {' '}
         {strings.and}{' '}
-        <Link href={withLocalePath('/iphone-remonts/uzlades-ligzdas-maina', locale)}>
+        <Link
+          href={localizedServicePath(
+            'iphone-remonts',
+            'uzlades-ligzdas-maina',
+            locale
+          )}
+        >
           {strings.links.charging}
         </Link>
         .
@@ -461,7 +490,7 @@ export default async function ContactsPage({
   const businessFacts = getBusinessFacts(siteSettings, strings);
 
   const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
+    { name: strings.homeCrumb, url: abs(localizedHomePath(locale)) },
     { name: strings.pageCrumb, url: abs(strings.pagePath) },
   ]);
 
@@ -471,7 +500,7 @@ export default async function ContactsPage({
   const headerCrumbs = [
     {
       label: strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
+      href: localizedHomePath(locale),
     },
     {
       label: strings.pageCrumb,
