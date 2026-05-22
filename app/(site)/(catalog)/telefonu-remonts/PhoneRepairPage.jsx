@@ -54,19 +54,6 @@ function pickLocalized(value, locale = 'lv', fallback = '') {
   return fallback;
 }
 
-function normalizeRoutePath(path = '', locale = 'lv') {
-  if (!path) return '';
-
-  const clean = String(path).trim();
-
-  if (locale === 'lv') return clean;
-
-  if (clean === '/') return '/ru';
-  if (clean === '/ru' || clean.startsWith('/ru/')) return clean;
-
-  return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
-}
-
 function sortDevices(list = []) {
   return [...list].sort((a, b) => {
     const ao = typeof a.order === 'number' ? a.order : 99999;
@@ -79,6 +66,14 @@ function sortDevices(list = []) {
 
     return (a.name || '').localeCompare(b.name || '', 'lv');
   });
+}
+
+function getPhoneBrandHref({ brandKey, locale = 'lv', basePath }) {
+  if (brandKey === 'apple') {
+    return locale === 'ru' ? '/ru/remont-iphone' : '/iphone-remonts';
+  }
+
+  return `${basePath}/${brandKey}`;
 }
 
 function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
@@ -114,7 +109,11 @@ function buildBrandBlocks({ category, devices, locale = 'lv', basePath }) {
       const brandDevices = sortDevices(devicesByBrand.get(brandKey) || []);
       if (!brandDevices.length) return null;
 
-      const href = `${basePath}/${brandKey}`;
+      const href = getPhoneBrandHref({
+        brandKey,
+        locale,
+        basePath,
+      });
 
       return {
         slug: brandKey,
@@ -240,7 +239,10 @@ function getPageStrings(locale = 'lv') {
       faqTitle: 'Часто задаваемые вопросы',
       processTitle: 'Как проходит ремонт',
       processSteps: [
-        { title: 'Диагностика', text: 'Быстро проверяем устройство и подтверждаем проблему.' },
+        {
+          title: 'Диагностика',
+          text: 'Быстро проверяем устройство и подтверждаем проблему.',
+        },
         {
           title: 'Цена и срок',
           text: 'Согласовываем стоимость и срок выполнения до начала работ.',
@@ -322,7 +324,10 @@ function getPageStrings(locale = 'lv') {
     faqTitle: 'Biežāk uzdotie jautājumi',
     processTitle: 'Kā notiek remonts',
     processSteps: [
-      { title: 'Diagnostika', text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.' },
+      {
+        title: 'Diagnostika',
+        text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
+      },
       {
         title: 'Cena un termiņš',
         text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',

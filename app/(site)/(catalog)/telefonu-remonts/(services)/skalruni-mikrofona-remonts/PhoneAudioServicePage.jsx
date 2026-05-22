@@ -32,7 +32,7 @@ import s from '@styles/Catalog.module.scss';
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
-      servicePath: '/ru/remont-telefonov/remont-dinamika-i-mikrofona',
+      servicePath: '/ru/remont-telefonov/remont-dinamika-mikrofona',
       categoryPath: '/ru/remont-telefonov',
       allModelsHref: '/ru/remont-telefonov#brand-list',
 

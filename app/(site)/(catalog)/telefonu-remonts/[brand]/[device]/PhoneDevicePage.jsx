@@ -193,7 +193,7 @@ function getPageStrings(locale = 'lv') {
         },
         {
           title: 'Ремонт динамика и микрофона',
-          href: `${categoryPath}/remont-dinamika-i-mikrofona`,
+          href: `${categoryPath}/remont-dinamika-mikrofona`,
           text: 'тихий звук, хрипы, во время звонка не слышно вас или собеседника.',
           icon: LuVolume2,
         },
