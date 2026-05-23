@@ -31,30 +31,32 @@ function getPageStrings(locale = 'lv') {
 
       headerTitle: 'Контакты',
       headerLead:
-        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге — T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
+        'Свяжитесь с iLab или посетите один из наших сервисных центров в Риге - T/C Domina Shopping или T/C Spice Home. Поможем с диагностикой, ремонтом и заменой деталей для телефонов, компьютеров и Dyson.',
 
       contactTitle: 'Как связаться с iLab',
       contactIntro:
-        'iLab — сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. На этой странице можно выбрать удобный филиал, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
+        'iLab - сервисный центр в Риге с двумя удобными локациями - T/C Domina Shopping и T/C Spice Home. Google Maps и Waze покажут маршрут к нам.',
+      contactNote: 'Работаем без выходных.',
 
       servicesIntro:
         'С iLab можно связаться по вопросам диагностики устройства, стоимости ремонта, наличия деталей или записи в выбранный филиал.',
 
       popularServicesPrefix: 'Чаще всего мы помогаем с',
-      popularWorksPrefix: 'Популярные работы —',
+      popularWorksPrefix: 'Популярные работы -',
       and: 'и',
 
       serviceArea:
-        'Обслуживаем клиентов из всей Риги и ближайших районов: Тейка, Пурвциемс, центр, Югла, Пардаугава, Иманта, Золитуде, Марупе и другие районы.',
+        'Обслуживаем клиентов из всей Риги - Тейка, Пурвциемс, центр, Пардаугава, Югла, Иманта, Золитуде, Марупе и другие районы.',
+
+      deliveryArea:
+        'Также принимаем устройства из других городов Латвии с возможностью доставки через курьера.',
 
       benefitsTitle: 'Почему выбирают iLab?',
-      benefitsLead:
-        'Контакты — это не только адреса. Здесь важно быстро понять, куда обратиться, как связаться и чего ожидать перед визитом.',
       benefits: [
         {
           title: '2 сервисных центра в Риге',
           text:
-            'Domina Shopping и Spice Home — можно выбрать филиал, который удобнее по расположению.',
+            'Domina Shopping и Spice Home - можно выбрать филиал, который удобнее по расположению.',
         },
         {
           title: 'Быстрая диагностика',
@@ -84,7 +86,6 @@ function getPageStrings(locale = 'lv') {
         city: 'Город',
         locations: 'Филиалы',
         languages: 'Языки общения',
-        payments: 'Оплата',
         warranty: 'Гарантия',
         legal: 'Юридическая информация',
         registration: 'Рег. №',
@@ -94,11 +95,10 @@ function getPageStrings(locale = 'lv') {
 
       factsValues: {
         brand: 'iLab',
-        city: 'Рига',
+        city: 'Рига, Латвия',
         locations: 'T/C Domina Shopping и T/C Spice Home',
-        languages: 'латышский, русский',
-        payments: 'наличные, карта, Apple Pay, Google Pay',
-        warranty: '90 дней на выполненные работы и использованные детали',
+        languages: 'латышский, русский, английский',
+        warranty: 'до 90 дней на выполненные работы и использованные детали',
       },
 
       links: {
@@ -123,30 +123,32 @@ function getPageStrings(locale = 'lv') {
 
     headerTitle: 'Kontakti',
     headerLead:
-      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā — T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+      'Sazinies ar iLab vai apmeklē kādu no mūsu servisa centriem Rīgā - T/C Domina Shopping vai T/C Spice Home. Palīdzēsim ar telefonu, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
 
     contactTitle: 'Kā sazināties ar iLab',
     contactIntro:
-      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā — T/C Domina Shopping un T/C Spice Home. Šajā lapā vari izvēlēties sev ērtāko filiāli, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
+      'iLab ir servisa centrs Rīgā ar divām ērtām lokācijām - T/C Domina Shopping un T/C Spice Home. Google Maps un Waze parādīs maršrutu pie mums.',
+    contactNote: 'Strādājam bez brīvdienām.',
 
     servicesIntro:
-      'Ar iLab vari sazināties par ierīces diagnostiku, remonta cenu, detaļu pieejamību vai pierakstu izvēlētajā filiālē.',
+      'Sazinies ar iLab par Tev aktuālo - diagnostiku, remonta cenu, detaļu pieejamību vai pierakstu izvēlētajā filiālē.',
 
     popularServicesPrefix: 'Visbiežāk palīdzam ar',
     popularWorksPrefix: 'Populārākie darbi ir',
     and: 'un',
 
     serviceArea:
-      'Apkalpojam klientus no visas Rīgas un tuvākās apkārtnes — Teikas, Purvciema, centra, Juglas, Pārdaugavas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
+      'Apkalpojam klientus no visas Rīgas - Teikas, Purvciema, centra, Pārdaugavas, Juglas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
+
+    deliveryArea:
+      'Pieņemam ierīces arī no citām Latvijas pilsētām ar iespēju nosūtīt tās ar kurjera starpniecību.',
 
     benefitsTitle: 'Kāpēc izvēlēties iLab?',
-    benefitsLead:
-      'Kontaktu lapā svarīgākais ir ātri saprast, kur vērsties, kā sazināties un ko sagaidīt pirms ierašanās servisā.',
     benefits: [
       {
         title: '2 servisa centri Rīgā',
         text:
-          'Domina Shopping un Spice Home — vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
+          'Domina Shopping un Spice Home - vari izvēlēties sev ērtāko filiāli pēc atrašanās vietas.',
       },
       {
         title: 'Ātra diagnostika',
@@ -166,7 +168,7 @@ function getPageStrings(locale = 'lv') {
       {
         title: 'Ērta saziņa',
         text:
-          'Vari piezvanīt, uzrakstīt WhatsApp vai uzreiz atvērt maršrutu Google Maps un Waze.',
+          'Vari piezvanīt, uzrakstīt WhatsApp vai uzreiz atvērt maršrutu Google Maps vai Waze.',
       },
     ],
 
@@ -176,7 +178,6 @@ function getPageStrings(locale = 'lv') {
       city: 'Pilsēta',
       locations: 'Filiāles',
       languages: 'Saziņas valodas',
-      payments: 'Apmaksa',
       warranty: 'Garantija',
       legal: 'Juridiskā informācija',
       registration: 'Reģ. Nr.',
@@ -188,9 +189,8 @@ function getPageStrings(locale = 'lv') {
       brand: 'iLab',
       city: 'Rīga',
       locations: 'T/C Domina Shopping un T/C Spice Home',
-      languages: 'latviešu, krievu',
-      payments: 'skaidra nauda, karte, Apple Pay, Google Pay',
-      warranty: '90 dienas veiktajiem darbiem un izmantotajām detaļām',
+      languages: 'latviešu, krievu, angļu',
+      warranty: 'līdz 90 dienām veiktajiem darbiem un uzstādītajām detaļām',
     },
 
     links: {
@@ -356,10 +356,6 @@ function getBusinessFacts(siteSettings = {}, strings) {
       value: strings.factsValues.languages,
     },
     {
-      label: strings.facts.payments,
-      value: company.paymentAccepted || strings.factsValues.payments,
-    },
-    {
       label: strings.facts.warranty,
       value: company.warranty || strings.factsValues.warranty,
     },
@@ -433,6 +429,12 @@ function InternalServiceLinks({ locale, strings }) {
       <p className={s.paragraph}>
         {strings.serviceArea}
       </p>
+
+      {strings.deliveryArea ? (
+        <p className={s.paragraph}>
+          {strings.deliveryArea}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -462,10 +464,6 @@ function Benefits({ strings }) {
           <h2 id="contacts-benefits-h2" className={s.h2}>
             {strings.benefitsTitle}
           </h2>
-
-          <p className={s.lead}>
-            {strings.benefitsLead}
-          </p>
         </div>
 
         <div className={s.benefitsGrid}>
@@ -564,9 +562,17 @@ export default async function ContactsPage({
                 {strings.contactTitle}
               </h2>
 
-              <p className={s.lead}>
-                {strings.contactIntro}
-              </p>
+              <div className={s.leadBlock}>
+                <p className={s.lead}>
+                  {strings.contactIntro}
+                </p>
+
+                {strings.contactNote ? (
+                  <p className={s.contactNote}>
+                    {strings.contactNote}
+                  </p>
+                ) : null}
+              </div>
 
               <InternalServiceLinks locale={locale} strings={strings} />
             </div>

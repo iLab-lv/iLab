@@ -37,14 +37,14 @@ function getAboutStrings(locale = 'lv') {
 
       headerTitle: 'О iLab',
       headerLead:
-        'iLab — местный сервис устройств в Риге, который с 2013 года помогает клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
+        'iLab - местный сервис устройств в Риге, который с 2013 года помогает клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
 
       introEyebrow: 'О iLab',
       introTitle: 'Местный сервис устройств в Риге с 2013 года',
       introText:
-        'iLab — сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. Каждый день мы помогаем клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
+        'iLab - сервисный бренд с двумя пунктами приёма клиентов в Риге: T/C Domina Shopping и T/C Spice Home. Каждый день мы помогаем клиентам с диагностикой, ремонтом и заменой деталей для телефонов, iPhone, планшетов, компьютеров и Dyson.',
       introTextSecond:
-        'Наша задача — не просто выполнить ремонт, а понятно объяснить возможное решение, уточнить стоимость до начала работы и помочь выбрать удобный способ обращения в сервис.',
+        'Наша задача - не просто выполнить ремонт, а понятно объяснить возможное решение, уточнить стоимость до начала работы и помочь выбрать удобный способ обращения в сервис.',
 
       servicesTitle: 'С какими устройствами мы работаем',
       servicesLead:
@@ -74,7 +74,6 @@ function getAboutStrings(locale = 'lv') {
         locations: 'Филиалы',
         services: 'Услуги',
         languages: 'Языки общения',
-        payments: 'Оплата',
         warranty: 'Гарантия',
         legal: 'Юридическая информация',
         registration: 'Рег. №',
@@ -87,9 +86,8 @@ function getAboutStrings(locale = 'lv') {
         city: 'Рига',
         locations: 'T/C Domina Shopping и T/C Spice Home',
         services: 'диагностика, ремонт, замена деталей',
-        languages: 'латышский, русский',
-        payments: 'наличные, карта, Apple Pay, Google Pay',
-        warranty: '90 дней на выполненные работы и использованные детали',
+        languages: 'латышский, русский, английский',
+        warranty: 'от 90 дней на выполненные работы и установленные детали',
       },
 
       locationsAnchorTitle: 'Где нас найти',
@@ -113,13 +111,13 @@ function getAboutStrings(locale = 'lv') {
     introEyebrow: 'Par iLab',
     introTitle: 'Vietējais ierīču serviss Rīgā kopš 2013. gada',
     introText:
-      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā — T/C Domina Shopping un T/C Spice Home. Ikdienā palīdzam klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
+      'iLab ir servisa zīmols ar diviem klientu pieņemšanas punktiem Rīgā - T/C Domina Shopping un T/C Spice Home. Ikdienā palīdzam klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
     introTextSecond:
       'Mūsu mērķis nav tikai veikt remontu, bet arī saprotami izskaidrot iespējamo risinājumu, precizēt cenu pirms darba sākšanas un palīdzēt izvēlēties ērtāko veidu, kā nodot ierīci servisā.',
 
     servicesTitle: 'Ar kādām ierīcēm strādājam',
     servicesLead:
-      'Visbiežāk pie mums vēršas par populārāko ierīču diagnostiku, remontu un detaļu maiņu.',
+      'Vienmēr pie mums vēršas par dažādāko ierīču diagnostiku, remontu un detaļu maiņu.',
     popularServicesPrefix: 'Galvenie virzieni:',
     popularWorksPrefix: 'Populārākie darbi:',
     and: 'un',
@@ -145,7 +143,6 @@ function getAboutStrings(locale = 'lv') {
       locations: 'Filiāles',
       services: 'Pakalpojumi',
       languages: 'Saziņas valodas',
-      payments: 'Apmaksa',
       warranty: 'Garantija',
       legal: 'Juridiskā informācija',
       registration: 'Reģ. Nr.',
@@ -158,9 +155,8 @@ function getAboutStrings(locale = 'lv') {
       city: 'Rīga',
       locations: 'T/C Domina Shopping un T/C Spice Home',
       services: 'diagnostika, remonts, detaļu maiņa',
-      languages: 'latviešu, krievu',
-      payments: 'skaidra nauda, karte, Apple Pay, Google Pay',
-      warranty: '90 dienas veiktajiem darbiem un izmantotajām detaļām',
+      languages: 'latviešu, krievu, angļu',
+      warranty: 'no 90 dienām veiktajiem darbiem un uzstādītajām detaļām',
     },
 
     locationsAnchorTitle: 'Kur mūs atrast',
@@ -327,10 +323,6 @@ function getBusinessFacts(siteSettings = {}, strings) {
     {
       label: strings.facts.languages,
       value: strings.factsValues.languages,
-    },
-    {
-      label: strings.facts.payments,
-      value: company.paymentAccepted || strings.factsValues.payments,
     },
     {
       label: strings.facts.warranty,
