@@ -1,10 +1,19 @@
 // app/layout.jsx
 
 import '@/styles/globals.scss';
+
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 
-import { getSiteSettings } from '@/lib/siteSettings';
+const SITE_URL = 'https://www.ilab.lv';
+
+const DEFAULT_TITLE = 'iLab — telefonu, datoru un Dyson remonts Rīgā';
+
+const DEFAULT_DESCRIPTION =
+  'iLab serviss Rīgā — telefonu, planšetdatoru, datoru un Dyson ierīču diagnostika, remonts un detaļu maiņa. 90 dienu garantija, filiāles Domina Shopping un Spice Life.';
+
+const DEFAULT_OG_IMAGE = '/images/hero.webp';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -12,9 +21,22 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+function getLocaleFromPathname(pathname = '/') {
+  return pathname.startsWith('/ru') ? 'ru' : 'lv';
+}
+
 export const metadata = {
-  title: 'iLab',
-  description: 'iLab site',
+  metadataBase: new URL(SITE_URL),
+
+  applicationName: 'iLab',
+
+  title: {
+    default: DEFAULT_TITLE,
+    template: '%s',
+  },
+
+  description: DEFAULT_DESCRIPTION,
+
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -22,13 +44,56 @@ export const metadata = {
     ],
     apple: [{ url: '/apple-icon.png' }],
   },
+
+  openGraph: {
+    siteName: 'iLab',
+    type: 'website',
+    url: SITE_URL,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'iLab serviss Rīgā',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
+
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
+  colorScheme: 'dark',
 };
 
 export default async function RootLayout({ children }) {
-  const siteSettings = await getSiteSettings();
+  const headersList = await headers();
+
+  const pathname =
+    headersList.get('x-pathname') ||
+    headersList.get('x-invoke-path') ||
+    '/';
+
+  const locale = getLocaleFromPathname(pathname);
 
   return (
-    <html lang="lv" className={inter.className}>
+    <html lang={locale} className={inter.className}>
       <body>
         {/* Google Tag Manager (noscript) */}
         <noscript>
@@ -42,17 +107,6 @@ export default async function RootLayout({ children }) {
         {/* End Google Tag Manager (noscript) */}
 
         {children}
-
-        {/* Temporary debug check. Remove after confirming Firestore loads. */}
-        {process.env.NODE_ENV === 'development' && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `console.log('siteSettings loaded:', ${JSON.stringify(
-                siteSettings
-              )});`,
-            }}
-          />
-        )}
 
         {/* Google Tag Manager */}
         <Script id="gtm-base" strategy="afterInteractive">
