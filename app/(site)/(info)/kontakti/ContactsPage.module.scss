@@ -47,6 +47,24 @@
   line-height: $line-height-body;
 }
 
+.leadBlock {
+  display: grid;
+  gap: $space-sm;
+  margin-top: $space-md;
+
+  .lead {
+    margin: 0;
+  }
+}
+
+.contactNote {
+  margin: 0;
+  color: $color-accent;
+  font-size: clamp($font-size-p, 2vw, $font-size-lg);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-body;
+}
+
 .paragraph {
   margin: 0;
   color: $color-text-2;
