@@ -19,13 +19,14 @@ function getLocaleFromPathname(pathname = '/') {
 }
 
 export default async function SiteLayout({ children }) {
-  const siteSettings = await getSiteSettings();
+  const [siteSettings, headersList] = await Promise.all([
+    getSiteSettings(),
+    headers(),
+  ]);
 
-  const headersList = await headers();
   const pathname =
     headersList.get('x-pathname') ||
     headersList.get('x-invoke-path') ||
-    headersList.get('referer') ||
     '/';
 
   const locale = getLocaleFromPathname(pathname);
@@ -33,7 +34,7 @@ export default async function SiteLayout({ children }) {
 
   return (
     <div className={l.siteRoot}>
-      <StructuredData />
+      <StructuredData siteSettings={siteSettings} />
       <ConsentAnalytics />
 
       <UiDialogsProvider locale={locale} siteSettings={siteSettings}>

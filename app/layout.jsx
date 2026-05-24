@@ -13,7 +13,7 @@ const DEFAULT_TITLE = 'iLab — telefonu, datoru un Dyson remonts Rīgā';
 const DEFAULT_DESCRIPTION =
   'iLab serviss Rīgā — telefonu, planšetdatoru, datoru un Dyson ierīču diagnostika, remonts un detaļu maiņa. 90 dienu garantija, filiāles Domina Shopping un Spice Life.';
 
-const DEFAULT_OG_IMAGE = '/images/hero.webp';
+const DEFAULT_OG_IMAGE = '/images/og/ilab-og.jpg';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -65,7 +65,12 @@ export const metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    images: [DEFAULT_OG_IMAGE],
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: 'iLab serviss Rīgā',
+      },
+    ],
   },
 
   formatDetection: {
@@ -95,7 +100,6 @@ export default async function RootLayout({ children }) {
   return (
     <html lang={locale} className={inter.className}>
       <body>
-        {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-K8C3GNKB"
@@ -104,11 +108,9 @@ export default async function RootLayout({ children }) {
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
 
         {children}
 
-        {/* Google Tag Manager */}
         <Script id="gtm-base" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -118,7 +120,6 @@ export default async function RootLayout({ children }) {
             })(window,document,'script','dataLayer','GTM-K8C3GNKB');
           `}
         </Script>
-        {/* End Google Tag Manager */}
       </body>
     </html>
   );

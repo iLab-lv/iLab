@@ -1,11 +1,7 @@
-import Script from 'next/script';
-
 import categoryContent from '@/data/categoryContent';
-import { getDevices } from '@/lib/content/devices';
-import { getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
-import { resolveDedicatedBrandHubPage } from '@/lib/content/resolvers/catalogPages';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import {
@@ -15,23 +11,12 @@ import {
 import Process from '@sections/process/Process';
 import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
-import { getCategoryFaqGroup } from '@sections/faq/faq.data';
-import { toFaqLd, toFaqRenderItems } from '@sections/faq/faq.helpers';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
-
-import {
-  abs,
-  buildBreadcrumbsLd,
-  buildServiceLdForCity,
-  buildStandardRepairHowToLd,
-} from '@/lib/seo/jsonldHelpers';
-
-import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
@@ -48,13 +33,10 @@ function getPageStrings(locale = 'lv') {
       introTitle: 'Ремонт iPhone в Риге - что мы делаем',
       introBody:
         'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> - от <strong>замены экрана</strong>, <strong>аккумулятора</strong>, <strong>ремонта камеры</strong> и <strong>разъёма зарядки</strong> до замены <strong>динамика</strong>, <strong>микрофона</strong> и других компонентов. Перед ремонтом проводим <strong>бесплатную диагностику</strong>, согласовываем стоимость и срок выполнения, а после завершения работ выдаём <strong>гарантию 90 дней</strong> на детали и работу. Используем качественные оригинальные или OEM запчасти, чтобы iPhone после ремонта работал стабильно и надёжно каждый день.',
-      howToName: 'Ремонт iPhone',
       modelGridHeading: 'Выберите модель iPhone',
       modelGridIntro:
         'Найдите нужный iPhone по названию или выберите серию.',
       scrollCta: { label: 'Смотреть модели', targetId: 'iphone-modeli' },
-      fallbackTitle: 'Ремонт iPhone в Риге',
-      homeCrumb: 'Главная',
     };
   }
 
@@ -65,94 +47,43 @@ function getPageStrings(locale = 'lv') {
     introTitle: 'iPhone remonts Rīgā - ko mēs darām',
     introBody:
       'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> - sākot ar <strong>ekrāna maiņu</strong>, <strong>baterijas nomaiņu</strong>, <strong>kameras remontu</strong> un <strong>uzlādes ligzdas remontu</strong>, līdz <strong>skaļruņa</strong>, <strong>mikrofona</strong> un citu detaļu nomaiņai. Pirms remonta veicam <strong>bezmaksas diagnostiku</strong>, saskaņojam izmaksas un izpildes termiņu, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam. Izmantojam kvalitatīvas oriģinālās vai OEM detaļas, lai iPhone pēc remonta darbotos stabili un droši ikdienā.',
-    howToName: 'iPhone remonts',
     modelGridHeading:
       cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli',
     modelGridIntro:
       cat?.sections?.modelGrid?.intro ??
       'Atrodi vajadzīgo iPhone vai izvēlies sēriju.',
     scrollCta: { label: 'Skatīt modeļus', targetId: 'iphone-modeli' },
-    fallbackTitle: 'iPhone remonts Rīgā',
-    homeCrumb: 'Sākums',
   };
 }
 
-export default async function IphoneRepairPage({ locale = 'lv' }) {
+export default function IphoneRepairPage({
+  locale = 'lv',
+  page,
+  devicesAll = [],
+  seriesMeta,
+  baseHref,
+  headerTitle,
+  headerLead,
+  breadcrumbs = [],
+  faqTitle,
+  faqItems = [],
+}) {
+  if (!page) {
+    return null;
+  }
+
   const strings = getPageStrings(locale);
-
-  const [page, devicesAll, seriesMeta, faq] = await Promise.all([
-    resolveDedicatedBrandHubPage(CATEGORY_KEY, BRAND_KEY, locale),
-    getDevices(),
-    getSeriesMetaByCategoryBrand(CATEGORY_KEY, BRAND_KEY, locale),
-    getCategoryFaqGroup(HUB_KEY, locale),
-  ]);
-
-  if (!page) return null;
-
-  const baseHref = buildCategoryHref(locale, HUB_KEY);
-
-  const headerTitle =
-    page.seo?.h1 ||
-    page.seo?.breadcrumbName ||
-    strings.fallbackTitle;
-
-  const headerLead =
-    page.intro?.lead ||
-    page.seo?.metaDescription ||
-    page.seo?.schemaDescription ||
-    null;
-
-  const breadcrumbs = [
-    {
-      label: page.labels?.homeCrumb || strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: page.seo?.breadcrumbName || headerTitle,
-      href: baseHref,
-    },
-  ];
 
   const popularServices = buildIphonePopularServices(locale);
   const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
 
-  const faqItems = toFaqRenderItems(faq.items);
-  const faqLd = toFaqLd(faq.items);
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
-    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
-  ]);
-
-  const serviceLd = buildServiceLdForCity({
-    path: baseHref,
-    name: page.seo?.schemaName,
-    description: page.seo?.schemaDescription,
-  });
-
-  const howToLd = buildStandardRepairHowToLd(strings.howToName);
-
   const selectorTitle = page.selector?.heading || strings.modelGridHeading;
   const selectorIntro = page.selector?.intro || strings.modelGridIntro;
 
+  const heroImage = page.hero?.image || '/images/categories/iphone_remonts.webp';
+
   return (
     <>
-      <Script id="faq-jsonld" type="application/ld+json">
-        {JSON.stringify(faqLd)}
-      </Script>
-
-      <Script id="howto-jsonld" type="application/ld+json">
-        {JSON.stringify(howToLd)}
-      </Script>
-
-      <Script id="breadcrumbs-jsonld" type="application/ld+json">
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script id="service-jsonld" type="application/ld+json">
-        {JSON.stringify(serviceLd)}
-      </Script>
-
       <PageHeader
         title={headerTitle}
         lead={headerLead}
@@ -161,7 +92,7 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
       />
 
       <DeviceHero
-        image={page.hero?.image || '/images/categories/iphone_remonts.webp'}
+        image={heroImage}
         alt={strings.heroAlt}
         focal="right"
         priority
@@ -205,13 +136,13 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
       {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       {page.sections?.hasGuide && (
-  <Guide
-    id="guide"
-    locale={locale}
-    variant="iphone"
-    headingLevel={2}
-  />
-)}
+        <Guide
+          id="guide"
+          locale={locale}
+          variant="iphone"
+          headingLevel={2}
+        />
+      )}
 
       {page.sections?.hasProcess && <Process locale={locale} />}
 
@@ -221,10 +152,10 @@ export default async function IphoneRepairPage({ locale = 'lv' }) {
         </section>
       )}
 
-      {page.sections?.hasFaq && (
+      {page.sections?.hasFaq && faqItems.length > 0 && (
         <section className={s.section}>
           <div className={s.container}>
-            <Faq id="iphone-faq" title={faq.title} items={faqItems} />
+            <Faq id="iphone-faq" title={faqTitle} items={faqItems} />
           </div>
         </section>
       )}
