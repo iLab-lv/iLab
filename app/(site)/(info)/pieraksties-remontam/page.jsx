@@ -1,14 +1,97 @@
-import PierakstiesPage from './PierakstiesPage';
+import PierakstiesPage, {
+  getPierakstiesPageStrings,
+} from './PierakstiesPage';
 
-const CANONICAL_PATH = '/pieraksties-remontam';
+import JsonLd from '@components/seo/JsonLd';
 
-export const metadata = {
-  title: 'Pieraksties remontam | iLab',
-  description:
-    'Aizpildi iLab remonta pieteikuma formu. Norādi ierīci un problēmu, un mūsu meistars sazināsies, lai saskaņotu izmaksas un remonta laiku.',
-  alternates: { canonical: CANONICAL_PATH },
-};
+import { getSiteSettings } from '@/lib/siteSettings';
+import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 
-export default function Page() {
-  return <PierakstiesPage locale="lv" />;
+const locale = 'lv';
+
+const labels = getPierakstiesPageStrings(locale);
+
+const lvPath = '/pieraksties-remontam';
+const ruPath = '/ru/zapisatsja-na-remont';
+
+function buildBreadcrumbsLd(breadcrumbs = []) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item: absoluteUrl(item.href),
+    })),
+  };
+}
+
+function buildWebPageLd(strings, locale = 'lv') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(strings.canonicalPath)}#webpage`,
+    url: absoluteUrl(strings.canonicalPath),
+    name: strings.headerTitle,
+    description: strings.metaDescription,
+    inLanguage: locale,
+    isPartOf: {
+      '@id': `${absoluteUrl('/')}#website`,
+    },
+    about: {
+      '@id': `${absoluteUrl('/')}#organization`,
+    },
+  };
+}
+
+function getPierakstiesData() {
+  const breadcrumbs = [
+    {
+      label: labels.breadcrumbHome,
+      href: '/',
+    },
+    {
+      label: labels.breadcrumbPage,
+      href: labels.canonicalPath,
+    },
+  ];
+
+  const jsonLd = [
+    buildBreadcrumbsLd(breadcrumbs),
+    buildWebPageLd(labels, locale),
+  ];
+
+  return {
+    breadcrumbs,
+    jsonLd,
+  };
+}
+
+export async function generateMetadata() {
+  return buildSeoMetadata({
+    locale,
+    title: labels.metaTitle,
+    description: labels.metaDescription,
+    lvPath,
+    ruPath,
+  });
+}
+
+export default async function Page() {
+  const { breadcrumbs, jsonLd } = getPierakstiesData();
+  const siteSettings = await getSiteSettings();
+
+  return (
+    <>
+      <JsonLd id="pieraksties-remontam-jsonld" data={jsonLd} />
+
+      <PierakstiesPage
+        locale={locale}
+        labels={labels}
+        breadcrumbs={breadcrumbs}
+        siteSettings={siteSettings}
+      />
+    </>
+  );
 }

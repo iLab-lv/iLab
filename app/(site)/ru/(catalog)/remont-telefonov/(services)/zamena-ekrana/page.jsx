@@ -1,15 +1,326 @@
-import PhoneScreenServicePage, {
-  getPhoneScreenServiceMetadata,
-} from '@site/(catalog)/telefonu-remonts/(services)/ekrana-maina/PhoneScreenServicePage';
+import PhoneScreenServicePage from '@site/(catalog)/telefonu-remonts/(services)/ekrana-maina/PhoneScreenServicePage';
 
+import JsonLd from '@components/seo/JsonLd';
 
-export const metadata = getPhoneScreenServiceMetadata('ru');
+import { db } from '@/lib/firebaseAdmin';
+import { getCategoryBySlug } from '@/lib/content/categories';
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
-export default function Page({ searchParams }) {
+import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
+
+import { toFaqRenderItems } from '@sections/faq/faq.helpers';
+
+const locale = 'ru';
+
+const CATEGORY_KEY = 'telefonu-remonts';
+const SERVICE_KEY = 'ekrana-maina';
+
+const lvPath = '/telefonu-remonts/ekrana-maina';
+const routePath = '/ru/remont-telefonov/zamena-ekrana';
+const categoryPath = '/ru/remont-telefonov';
+
+const strings = {
+  servicePath: routePath,
+  categoryPath,
+  allModelsHref: '/ru/remont-telefonov#brand-list',
+
+  title: 'Замена экрана телефона в Риге | iLab',
+  description:
+    'Быстрая и качественная замена экрана телефона в Риге. Бесплатная диагностика, гарантия 90 дней, оригинальные или OEM дисплеи. Часто в тот же день.',
+
+  pageTitle: 'Замена экрана телефона в Риге',
+  pageDescription:
+    'Быстрая и качественная замена экрана телефона в Риге. Бесплатная диагностика, гарантия 90 дней, оригинальные или OEM дисплеи. Часто в тот же день.',
+
+  homeCrumb: 'Главная',
+  categoryCrumb: 'Ремонт телефонов',
+  pageCrumb: 'Замена экрана',
+
+  headerTitle: 'Замена экрана телефона в Риге',
+  headerLead:
+    'Меняем экран телефона при трещинах, пятнах, полосах и проблемах с сенсором. До ремонта проводим диагностику и после замены выдаём гарантию 90 дней.',
+  headerCtaLabel: 'Смотреть цены',
+
+  heroAlt: 'Замена экрана телефона в Риге',
+  heroImage: '/images/categories/displeja_maina.webp',
+  heroBodyHtml:
+    '<p><strong>Быстрая и качественная замена экрана телефона в Риге</strong> - трещины, пятна и проблемы с сенсором устраняем часто в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
+
+  introTitle: 'Замена экрана телефона в Риге',
+  introP1:
+    'Если экран разбит, появились пятна, линии или не работает сенсор, скорее всего требуется <strong>замена экрана телефона</strong>. Мастера iLab в Риге выполняют быструю и безопасную замену, используя <strong>оригинальные или качественные OEM дисплеи</strong>. Перед началом работ проводим <strong>бесплатную диагностику</strong>, чтобы убедиться, что проблема действительно в дисплее, а не в программной части или других компонентах.',
+  introP2:
+    'После замены тщательно проверяем чувствительность сенсора, цветопередачу, яркость и общее качество изображения. Популярные модели обычно ремонтируем за <strong>1–3 часа</strong>. На работу и детали действует <strong>гарантия 90 дней</strong>.',
+
+  selectedModelPrefix: 'Выбрана модель:',
+  selectedModelSuffix: 'Прокрутите к',
+  selectedModelLink: 'ценам',
+
+  brandPickerTitle: 'Выберите бренд',
+  pricelistTitle: 'Цены на замену экрана по модели',
+  pricelistIntro:
+    'Выберите бренд и модель, чтобы увидеть цену замены экрана. Большинство ремонтов выполняем в тот же день.',
+  ctaLabel: 'Записаться на ремонт',
+
+  processTitle: 'Как проходит замена экрана',
+  processSteps: [
+    {
+      title: 'Диагностика',
+      text: 'Быстро проверяем устройство и подтверждаем повреждение экрана: трещины, пятна, линии и проблемы с сенсором.',
+    },
+    {
+      title: 'Цена и срок',
+      text: 'Согласовываем тип дисплея, стоимость и срок выполнения до начала ремонта.',
+    },
+    {
+      title: 'Замена экрана',
+      text: 'Сертифицированные мастера безопасно снимают повреждённый экран и устанавливают новый, при необходимости восстанавливают уплотнение.',
+    },
+    {
+      title: 'Проверка',
+      text: 'Проверяем сенсор, цвета, яркость и общее качество изображения, чтобы убедиться, что всё работает корректно.',
+    },
+    {
+      title: 'Гарантия',
+      text: 'Выдаём устройство с гарантией 90 дней на деталь и работу, а также даём рекомендации по бережному использованию экрана.',
+    },
+  ],
+
+  faqTitle: 'Часто задаваемые вопросы',
+
+  serviceName: 'Замена экрана телефона в Риге',
+  serviceType: 'Замена экрана телефона',
+  serviceDescription:
+    'Замена экрана телефона в Риге: бесплатная диагностика, оригинальные или OEM дисплеи, гарантия 90 дней. Часто в тот же день.',
+
+  processHowToName: 'Процесс замены экрана телефона в iLab',
+  processHowToDescription:
+    'Как шаг за шагом проходит замена экрана телефона в сервисе iLab в Риге.',
+
+  applyAria: 'Записаться на ремонт',
+};
+
+function pickLocalized(value, locale = 'lv', fallback = '') {
+  if (value == null) return fallback;
+
+  if (typeof value === 'string') {
+    return value || fallback;
+  }
+
+  if (typeof value === 'object') {
+    return (
+      value?.[locale] ??
+      value?.lv ??
+      Object.values(value).find(Boolean) ??
+      fallback
+    );
+  }
+
+  return fallback;
+}
+
+function dedupeFaqItems(items = []) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = String(item?.q || item?.question || '')
+      .trim()
+      .toLowerCase();
+
+    if (!key || seen.has(key)) return false;
+
+    seen.add(key);
+    return true;
+  });
+}
+
+async function getPhoneDevices() {
+  const snap = await db
+    .collection('devices')
+    .where('categoryKey', '==', CATEGORY_KEY)
+    .get();
+
+  return snap.docs
+    .map((doc) => {
+      const data = doc.data() || {};
+
+      return {
+        id: doc.id,
+        slug: data.slug || doc.id,
+        name: data.name || '',
+        image: data.image || '',
+        year: typeof data.year === 'number' ? data.year : null,
+        brandSlug: data.brandKey || data.brandSlug || '',
+        category: data.categoryKey || CATEGORY_KEY,
+        series: data.seriesLabel || data.originalSeriesLabel || '',
+        isHidden: data.isHidden === true,
+      };
+    })
+    .filter((device) => device.slug && device.brandSlug && !device.isHidden);
+}
+
+async function getPhoneBrandOptions(devices = []) {
+  const category = await getCategoryBySlug(CATEGORY_KEY);
+  const categoryBrands = Array.isArray(category?.brands) ? category.brands : [];
+
+  const devicesByBrand = new Set(
+    devices
+      .map((device) => String(device.brandSlug || '').trim().toLowerCase())
+      .filter(Boolean)
+  );
+
+  const brandOptions = categoryBrands
+    .map((brand) => {
+      const slug = String(brand?.key || brand?.slug || '').trim().toLowerCase();
+
+      if (!slug || !devicesByBrand.has(slug)) {
+        return null;
+      }
+
+      return {
+        slug,
+        name: pickLocalized(brand.labels, locale, brand.name || slug),
+        order: Number.isFinite(Number(brand.order)) ? Number(brand.order) : 9999,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.order - b.order)
+    .map(({ slug, name }) => ({ slug, name }));
+
+  const hasSamsung = brandOptions.some((brand) => brand.slug === 'samsung');
+
+  return {
+    brandOptions,
+    defaultBrand: hasSamsung ? 'samsung' : brandOptions[0]?.slug || 'samsung',
+  };
+}
+
+function buildBreadcrumbs() {
+  return [
+    {
+      label: strings.homeCrumb,
+      href: '/ru',
+    },
+    {
+      label: strings.categoryCrumb,
+      href: strings.categoryPath,
+    },
+    {
+      label: strings.pageCrumb,
+      href: strings.servicePath,
+    },
+  ];
+}
+
+function buildFaqSections(faqGroups = []) {
+  return faqGroups
+    .filter((group) => Array.isArray(group.items) && group.items.length > 0)
+    .map((group, index) => ({
+      id: group.id || group.docId || `faq-group-${index + 1}`,
+      title: group.title,
+      items: toFaqRenderItems(group.items),
+      rawItems: group.items,
+    }));
+}
+
+async function getPhoneScreenServiceData({ selectedModel }) {
+  const [devices, faq] = await Promise.all([
+    getPhoneDevices(),
+    getFaqGroups(
+      [
+        { scopeType: 'service', scopeKey: SERVICE_KEY },
+        { scopeType: 'basic' },
+      ],
+      locale
+    ),
+  ]);
+
+  const { brandOptions, defaultBrand } = await getPhoneBrandOptions(devices);
+
+  const faqSections = buildFaqSections(faq.groups);
+
+  const mergedFaqItems = dedupeFaqItems(
+    faqSections.flatMap((section) => section.rawItems || [])
+  );
+
+  const breadcrumbs = buildBreadcrumbs();
+
+  const hasVisibleFaq = mergedFaqItems.length > 0;
+
+  const jsonLd = buildRepairPageJsonLd({
+    path: strings.servicePath,
+    locale,
+
+    pageName: strings.title,
+    pageDescription: strings.description,
+
+    breadcrumbs,
+
+    serviceName: strings.serviceName,
+    serviceDescription: strings.serviceDescription,
+    serviceType: strings.serviceType,
+    serviceImage: strings.heroImage,
+
+    faqItems: mergedFaqItems,
+    includeFaq: hasVisibleFaq,
+
+    includeHowTo: true,
+    howTo: {
+      name: strings.processHowToName,
+      description: strings.processHowToDescription,
+      image: strings.heroImage,
+      steps: strings.processSteps.map((step) => ({
+        name: step.title,
+        text: step.text,
+      })),
+    },
+  });
+
+  return {
+    strings,
+
+    devices,
+    brandOptions,
+    defaultBrand,
+    selectedModel,
+
+    breadcrumbs,
+
+    faqSections,
+    hasVisibleFaq,
+
+    jsonLd,
+  };
+}
+
+export async function generateMetadata() {
+  return buildSeoMetadata({
+    locale,
+    title: strings.title,
+    description: strings.description,
+    lvPath,
+    ruPath: routePath,
+    image: '/images/og/home.jpg',
+    imageAlt: strings.heroAlt,
+  });
+}
+
+export default async function Page({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
+  const selectedModel = resolvedSearchParams?.model
+    ? String(resolvedSearchParams.model)
+    : null;
+
+  const data = await getPhoneScreenServiceData({
+    selectedModel,
+  });
+
   return (
-  <>
-  <PhoneScreenServicePage locale="ru" searchParams={searchParams} />
+    <>
+      <JsonLd id="phone-screen-service-ru-jsonld" data={data.jsonLd} />
 
-  </>
+      <PhoneScreenServicePage locale={locale} {...data} />
+    </>
   );
 }

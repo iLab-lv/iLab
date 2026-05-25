@@ -1,15 +1,7 @@
-//REPO TEST
-
-import Script from 'next/script';
-import { notFound } from 'next/navigation';
-
-import { getCategoryBySlug, getBrandByCategory } from '@/lib/content/categories';
-import { getDevices } from '@/lib/content/devices';
-import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import SeriesGrid from '@components/model-grid/SeriesGrid';
+import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
@@ -28,22 +20,13 @@ import {
 
 import c from '@styles/Catalog.module.scss';
 
-import {
-  abs,
-  buildBreadcrumbsLd,
-  buildServiceLdForCity,
-  buildStandardRepairHowToLd,
-  buildFaqLdFromPairs,
-} from '@/lib/seo/jsonldHelpers';
-import { buildCategoryHref } from '@/lib/routes/routeI18n';
-
-const CATEGORY_KEY = 'datoru-remonts';
+export const CATEGORY_KEY = 'datoru-remonts';
 
 /* ---------------------------------------------
-   Helpers
+   Shared helpers
 ---------------------------------------------- */
 
-function pickLocalized(value, locale = 'lv', fallback = '') {
+export function pickLocalized(value, locale = 'lv', fallback = '') {
   if (value == null) return fallback;
 
   if (typeof value === 'string') return value || fallback;
@@ -60,7 +43,7 @@ function pickLocalized(value, locale = 'lv', fallback = '') {
   return fallback;
 }
 
-function normalizeComputerBrand(brand, locale = 'lv') {
+export function normalizeComputerBrand(brand, locale = 'lv') {
   const key = String(brand?.key || '').toLowerCase();
   const name = pickLocalized(brand?.labels, locale, key);
 
@@ -86,68 +69,8 @@ function normalizeComputerBrand(brand, locale = 'lv') {
   };
 }
 
-function buildSeriesMetaMap(brand, locale = 'lv') {
-  const map = new Map();
-
-  if (!Array.isArray(brand?.series)) return map;
-
-  for (const item of brand.series) {
-    const key = String(item?.key || '').trim().toLowerCase();
-    if (!key) continue;
-
-    const label = pickLocalized(item?.labels, locale, key);
-    map.set(key, label);
-  }
-
-  return map;
-}
-
-function shapeDevicesForSeriesGrid(devices, brand, locale = 'lv') {
-  const seriesMetaMap = buildSeriesMetaMap(brand, locale);
-
-  return devices.map((d) => {
-    const normalizedCategory = d.category || d.categoryKey || '';
-    const normalizedBrandSlug = String(
-      d.brandSlug || d.brandKey || ''
-    ).toLowerCase();
-    const normalizedSeriesSlug = String(
-      d.seriesSlug || d.seriesKey || d.legacy?.originalSeriesSlug || ''
-    ).toLowerCase();
-
-    const seriesTitle =
-      d.series ||
-      seriesMetaMap.get(normalizedSeriesSlug) ||
-      d.legacy?.originalSeriesLabel ||
-      '';
-
-    return {
-      ...d,
-      category: normalizedCategory,
-      brandSlug: normalizedBrandSlug,
-      seriesSlug: normalizedSeriesSlug || undefined,
-      series: seriesTitle,
-    };
-  });
-}
-
 /* ---------------------------------------------
-   Static params
----------------------------------------------- */
-
-export const dynamicParams = false;
-
-export async function generateComputerBrandStaticParams() {
-  const category = await getCategoryBySlug(CATEGORY_KEY);
-  if (!category || !Array.isArray(category.brands)) return [];
-
-  return category.brands
-    .map((brand) => String(brand?.key || '').toLowerCase())
-    .filter(Boolean)
-    .map((brand) => ({ brand }));
-}
-
-/* ---------------------------------------------
-   Shared content
+   Fallback FAQ
 ---------------------------------------------- */
 
 const FAQ_ITEMS_LV = [
@@ -195,6 +118,14 @@ const FAQ_ITEMS_RU = [
     a: 'Да, после быстрой диагностики назовём диапазон стоимости и срок. Для сложных неисправностей цену уточняем после тестов.',
   },
 ];
+
+export function getComputerBrandFallbackFaqItems(locale = 'lv') {
+  return locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
+}
+
+/* ---------------------------------------------
+   Popular repairs
+---------------------------------------------- */
 
 const POPULAR_LAPTOP_REPAIRS_LV = [
   {
@@ -374,7 +305,7 @@ const POPULAR_DESKTOP_REPAIRS_RU = [
   },
 ];
 
-function getPopularRepairsForType(deviceType, locale = 'lv') {
+export function getPopularRepairsForType(deviceType, locale = 'lv') {
   const isRu = locale === 'ru';
 
   switch (deviceType) {
@@ -388,7 +319,11 @@ function getPopularRepairsForType(deviceType, locale = 'lv') {
   }
 }
 
-function getPageStrings(cfg, locale = 'lv') {
+/* ---------------------------------------------
+   Page strings
+---------------------------------------------- */
+
+export function getComputerBrandPageStrings(cfg, locale = 'lv') {
   if (locale === 'ru') {
     return {
       title: `${cfg.name} ремонт компьютеров - что мы делаем`,
@@ -406,8 +341,36 @@ function getPageStrings(cfg, locale = 'lv') {
       categoryName: 'Ремонт компьютеров',
       homeCrumb: 'Главная',
       processTitle: 'Как проходит ремонт',
+      processSteps: [
+        {
+          title: 'Диагностика',
+          text: 'Проверяем устройство, определяем неисправность и уточняем возможные варианты ремонта.',
+        },
+        {
+          title: 'Цена и срок',
+          text: 'Согласовываем стоимость и срок выполнения до начала работ.',
+        },
+        {
+          title: 'Ремонт',
+          text: 'Выполняем ремонт, замену деталей, чистку, настройку системы или программные работы.',
+        },
+        {
+          title: 'Проверка',
+          text: 'После ремонта тестируем устройство и основные функции.',
+        },
+        {
+          title: 'Гарантия',
+          text: 'Выдаём устройство с гарантией на выполненную работу и установленные детали.',
+        },
+      ],
       scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
       fallbackTitle: `${cfg.name} ремонт компьютеров`,
+      fallbackMetaTitle: `${cfg.name} ремонт компьютеров в Риге | iLab`,
+      fallbackMetaDescription: `Профессиональный ремонт компьютеров ${cfg.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      serviceName: `${cfg.name} ремонт компьютеров`,
+      serviceDescription: `${cfg.name} ремонт компьютеров: экран, охлаждение, диски, программное обеспечение и другие работы. Быстрая диагностика, честные цены, гарантия.`,
+      serviceType: 'Ремонт компьютеров',
+      imageAlt: `${cfg.name} ремонт компьютеров`,
     };
   }
 
@@ -427,189 +390,74 @@ function getPageStrings(cfg, locale = 'lv') {
     categoryName: 'Datoru remonts',
     homeCrumb: 'Sākums',
     processTitle: 'Kā notiek remonts',
+    processSteps: [
+      {
+        title: 'Diagnostika',
+        text: 'Pārbaudām ierīci, nosakām bojājumu un precizējam iespējamos remonta risinājumus.',
+      },
+      {
+        title: 'Cena un termiņš',
+        text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+      },
+      {
+        title: 'Remonts',
+        text: 'Veicam remontu, detaļu maiņu, tīrīšanu, sistēmas uzstādīšanu vai programmatūras darbus.',
+      },
+      {
+        title: 'Pārbaude',
+        text: 'Pēc remonta testējam ierīci un galvenās funkcijas.',
+      },
+      {
+        title: 'Garantija',
+        text: 'Izsniedzam ierīci ar garantiju veiktajam darbam un uzstādītajām detaļām.',
+      },
+    ],
     scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
     fallbackTitle: `${cfg.name} datoru remonts`,
+    fallbackMetaTitle: `${cfg.name} datoru remonts Rīgā | iLab`,
+    fallbackMetaDescription: `Profesionāls ${cfg.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    serviceName: `${cfg.name} datoru remonts`,
+    serviceDescription: `${cfg.name} datoru remonts: ekrāns, dzesēšana, diski, programmatūra un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
+    serviceType: 'Datoru remonts',
+    imageAlt: `${cfg.name} datoru remonts`,
   };
 }
 
 /* ---------------------------------------------
-   Metadata export
+   Render-only component
 ---------------------------------------------- */
 
-export async function getComputerBrandMetadata(brandSlug, locale = 'lv') {
-  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
-
-  if (!page) {
-    return {
-      title:
-        locale === 'ru'
-          ? 'Ремонт компьютеров | iLab'
-          : 'Datoru remonts | iLab',
-      description:
-        locale === 'ru'
-          ? 'Ремонт компьютеров в Риге - ноутбуки и настольные ПК. Быстрая диагностика, честные цены, гарантия.'
-          : 'Datoru remonts Rīgā - portatīvie un galda datori. Ātra diagnostika, godīgas cenas, garantija.',
-    };
-  }
-
-  const brand = normalizeComputerBrand(page.source?.brand, locale);
-
-  const title =
-    page.seo?.metaTitle ||
-    (locale === 'ru'
-      ? `${brand.name} ремонт компьютеров в Риге | iLab`
-      : `${brand.name} datoru remonts Rīgā | iLab`);
-
-  const description =
-    page.seo?.metaDescription ||
-    (locale === 'ru'
-      ? `Профессиональный ремонт компьютеров ${brand.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия 90 дней.`
-      : `Profesionāls ${brand.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`);
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical:
-        page.route?.canonicalPath ||
-        `${buildCategoryHref(locale, CATEGORY_KEY)}/${brandSlug}`,
-    },
-  };
-}
-
-/* ---------------------------------------------
-   Page component
----------------------------------------------- */
-
-export default async function ComputerBrandPage({
-  brand,
+export default function ComputerBrandPage({
   locale = 'lv',
+
+  page,
+  brandSlug,
+  brandConfig,
+
+  devicesAll = [],
+  seriesMeta,
+  brandDevices = [],
+  baseHref,
+
+  headerTitle,
+  headerLead,
+  breadcrumbs = [],
+
+  strings,
+  popularRepairs = [],
+
+  hasVisibleFaq = false,
+  faqTitle,
+  faqItems = [],
 }) {
-  const brandSlug = String(brand || '').toLowerCase();
-  if (!brandSlug) {
-    throw new Error(`MISSING BRAND SLUG: brand=${brand}, locale=${locale}`);
+  if (!page || !brandConfig || !strings) {
+    return null;
   }
 
-  const [directBrand, category, devicesFromDb] = await Promise.all([
-    getBrandByCategory(CATEGORY_KEY, brandSlug),
-    getCategoryBySlug(CATEGORY_KEY),
-    getDevices(),
-  ]);
-
-  if (!category) {
-    throw new Error(`CATEGORY NOT FOUND: ${CATEGORY_KEY}`);
-  }
-
-  if (!directBrand) {
-    throw new Error(
-      `BRAND NOT FOUND: category=${CATEGORY_KEY}, brand=${brandSlug}, availableBrands=${JSON.stringify(
-        (category.brands || []).map((b) => ({
-          key: b?.key || null,
-          slug: b?.slug || null,
-          routeBrandPath: b?.route?.brandPath || null,
-        }))
-      )}`
-    );
-  }
-
-  const page = await resolveBrandPage(CATEGORY_KEY, brandSlug, locale);
-
-  if (!page) {
-    throw new Error(
-      `RESOLVER FAILED: category=${CATEGORY_KEY}, brand=${brandSlug}, directBrandKey=${directBrand.key}, directBrandSlug=${directBrand.slug}`
-    );
-  }
-
-  const cfg = normalizeComputerBrand(page.source?.brand, locale);
-  const strings = getPageStrings(cfg, locale);
-  const popularRepairs = getPopularRepairsForType(cfg.deviceType, locale);
-  const faqItems = locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
-
-  const baseCategoryPath = buildCategoryHref(locale, CATEGORY_KEY);
-  const path = `${baseCategoryPath}/${cfg.key}`;
-
-  const brandDevices = devicesFromDb.filter(
-    (d) =>
-      d?.type === 'device' &&
-      d.categoryKey === CATEGORY_KEY &&
-      String(d.brandKey || '').toLowerCase() === cfg.key &&
-      d.isHidden !== true
-  );
-
-  const seriesGridDevices = shapeDevicesForSeriesGrid(
-    devicesFromDb,
-    page.source?.brand,
-    locale
-  );
-
-  const headerTitle =
-    page.seo?.h1 || page.seo?.breadcrumbName || strings.fallbackTitle;
-
-  const headerLead =
-    page.intro?.lead ||
-    page.seo?.metaDescription ||
-    page.seo?.schemaDescription ||
-    null;
-
-  const breadcrumbs = [
-    {
-      label: page.labels?.homeCrumb || strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: strings.categoryName,
-      href: baseCategoryPath,
-    },
-    {
-      label: page.seo?.breadcrumbName || headerTitle,
-      href: path,
-    },
-  ];
-
-  const serviceLd = buildServiceLdForCity({
-    path,
-    name:
-      locale === 'ru'
-        ? `${cfg.name} ремонт компьютеров`
-        : `${cfg.name} datoru remonts`,
-    description:
-      locale === 'ru'
-        ? `${cfg.name} ремонт компьютеров: экран, охлаждение, диски, программное обеспечение и другие работы. Быстрая диагностика, честные цены, гарантия.`
-        : `${cfg.name} datoru remonts: ekrāns, dzesēšana, diski, programmatūra un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
-  });
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
-    { name: breadcrumbs[1].label, url: abs(breadcrumbs[1].href) },
-    { name: breadcrumbs[2].label, url: abs(breadcrumbs[2].href) },
-  ]);
-
-  const howToLd = buildStandardRepairHowToLd(
-    locale === 'ru'
-      ? `${cfg.name} ремонт компьютеров`
-      : `${cfg.name} datoru remonts`
-  );
-
-  const faqLd = buildFaqLdFromPairs(faqItems);
+  const cfg = brandConfig;
 
   return (
     <>
-      <Script id="service-jsonld" type="application/ld+json">
-        {JSON.stringify(serviceLd)}
-      </Script>
-
-      <Script id="breadcrumbs-jsonld" type="application/ld+json">
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script id="howto-jsonld" type="application/ld+json">
-        {JSON.stringify(howToLd)}
-      </Script>
-
-      <Script id="faq-jsonld" type="application/ld+json">
-        {JSON.stringify(faqLd)}
-      </Script>
-
       <PageHeader
         title={headerTitle}
         lead={headerLead}
@@ -621,7 +469,7 @@ export default async function ComputerBrandPage({
         image={page.hero?.image || cfg.heroImage}
         alt={cfg.heroAlt}
         brandLogo={cfg.logo}
-        brandKey={cfg.key}
+        brandKey={cfg.key || brandSlug}
         tint={cfg.tint}
         focal="right"
         priority
@@ -643,57 +491,79 @@ export default async function ComputerBrandPage({
         </div>
       </section>
 
-      <section
-        id="brand-modeli"
-        className={`${c.section} ${c.anchorTarget}`}
-        aria-labelledby="brand-modeli-h2"
-      >
-        <div className={c.container}>
-          <h2 id="brand-modeli-h2" className={c.h2}>
-            {strings.modelsTitle}
-          </h2>
+      {!!popularRepairs.length && (
+        <section className={c.section} aria-labelledby="popular-services-h2">
+          <div className={c.container}>
+            <Services
+              id="brand-services"
+              title={strings.servicesTitle}
+              items={popularRepairs}
+            />
+          </div>
+        </section>
+      )}
 
-          {cfg.hasModels ? (
-            <>
-              <p className={c.intro}>{strings.modelsIntro}</p>
+      {cfg.hasModels ? (
+        <>
+          <DeviceSelector
+            id="brand-modeli"
+            locale={locale}
+            title={strings.modelsTitle}
+            intro={strings.modelsIntro}
+            devices={devicesAll}
+            baseHref={baseHref}
+            brandKey={brandSlug}
+            categoryKey={CATEGORY_KEY}
+            seriesMeta={seriesMeta}
+            initialLimit={4}
+            autoExpandOnSearch
+          />
 
+          <section className={c.section}>
+            <div className={c.container}>
               <p className={c.paragraph} style={{ marginTop: 0 }}>
                 {strings.modelsNote}
               </p>
-
-              <SeriesGrid
-                devices={seriesGridDevices}
-                baseHref={path}
-                brandSlug={cfg.key}
-                categorySlug={CATEGORY_KEY}
-                initialLimit={4}
-                autoExpandOnSearch
-              />
 
               {brandDevices.length === 0 && (
                 <p style={{ opacity: 0.8, marginTop: 16 }}>
                   {strings.noModels}
                 </p>
               )}
-            </>
-          ) : (
-            <p className={c.intro}>{strings.noModels}</p>
-          )}
-        </div>
-      </section>
+            </div>
+          </section>
+        </>
+      ) : (
+        <section
+          id="brand-modeli"
+          className={`${c.section} ${c.anchorTarget}`}
+          aria-labelledby="brand-modeli-h2"
+        >
+          <div className={c.container}>
+            <h2 id="brand-modeli-h2" className={c.h2}>
+              {strings.modelsTitle}
+            </h2>
 
-      <section className={c.section} aria-labelledby="popular-services-h2">
-        <div className={c.container}>
-          <Services
-            id="brand-services"
-            title={strings.servicesTitle}
-            items={popularRepairs}
-          />
-        </div>
-      </section>
+            <p className={c.intro}>{strings.noModels}</p>
+          </div>
+        </section>
+      )}
+
+      <div id="process-h2" className={c.anchorTarget} />
 
       {page.sections?.hasProcess && (
-        <Process locale={locale} variant="computer" headingLevel={2} />
+        <section className={c.section} aria-labelledby="process-h2">
+          <div className={c.container}>
+            <Process
+              id="process"
+              title={strings.processTitle}
+              steps={strings.processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
       )}
 
       {page.sections?.hasWhy && (
@@ -702,12 +572,12 @@ export default async function ComputerBrandPage({
         </section>
       )}
 
-      {page.sections?.hasFaq && (
+      {hasVisibleFaq && (
         <section className={c.section} aria-labelledby="faq-h2">
           <div className={c.container}>
             <Faq
               id="brand-faq"
-              title={strings.faqTitle}
+              title={faqTitle}
               items={faqItems}
               headingLevel={2}
               variant="accordion"

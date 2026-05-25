@@ -1,18 +1,93 @@
-import TermsPage from './TermsPage';
+import TermsPage, {
+  UPDATED_DATE,
+  getTermsPageStrings,
+} from './TermsPage';
 
-const CANONICAL_PATH = '/noteikumi';
+import JsonLd from '@components/seo/JsonLd';
 
-export const metadata = {
-  title: 'Lietošanas noteikumi un privātuma politika | iLab',
-  description:
-    'iLab lietošanas noteikumi, garantija, datu aizsardzība un sīkdatņu politika. Uzzini, kā tiek apstrādāti klientu dati un sniegti pakalpojumi.',
-  alternates: { canonical: CANONICAL_PATH },
-};
+import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+
+const locale = 'lv';
+
+const labels = getTermsPageStrings(locale);
+
+const lvPath = '/noteikumi';
+const ruPath = '/ru/pravila';
+
+function buildBreadcrumbsLd(breadcrumbs = []) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item: absoluteUrl(item.href),
+    })),
+  };
+}
+
+function buildTermsLd(strings) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TermsOfService',
+    '@id': `${absoluteUrl(strings.canonicalPath)}#terms`,
+    name: strings.tosName,
+    url: absoluteUrl(strings.canonicalPath),
+    provider: {
+      '@id': `${absoluteUrl('/')}#organization`,
+    },
+    inLanguage: strings.inLanguage,
+    description: strings.tosDescription,
+    dateModified: UPDATED_DATE,
+  };
+}
+
+function getTermsData() {
+  const breadcrumbs = [
+    {
+      label: labels.breadcrumbHome,
+      href: '/',
+    },
+    {
+      label: labels.breadcrumbPage,
+      href: labels.canonicalPath,
+    },
+  ];
+
+  const jsonLd = [
+    buildBreadcrumbsLd(breadcrumbs),
+    buildTermsLd(labels),
+  ];
+
+  return {
+    breadcrumbs,
+    jsonLd,
+  };
+}
+
+export async function generateMetadata() {
+  return buildSeoMetadata({
+    locale,
+    title: labels.metaTitle,
+    description: labels.metaDescription,
+    lvPath,
+    ruPath,
+  });
+}
 
 export default function Page() {
+  const { breadcrumbs, jsonLd } = getTermsData();
+
   return (
-  <>
-  <TermsPage locale="lv" />
+    <>
+      <JsonLd id="noteikumi-jsonld" data={jsonLd} />
+
+      <TermsPage
+        locale={locale}
+        labels={labels}
+        breadcrumbs={breadcrumbs}
+      />
     </>
-    );
+  );
 }
