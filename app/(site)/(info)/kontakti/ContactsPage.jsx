@@ -1,26 +1,19 @@
-import Script from 'next/script';
 import Link from 'next/link';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import Locations from '@sections/locations/Locations';
 import Faq from '@sections/faq/Faq';
-import {
-  toFaqLd,
-  toFaqRenderItems,
-} from '@sections/faq/faq.helpers';
 
-import { db } from '@/lib/firebaseAdmin';
-import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
 import {
   localizedCategoryPath,
-  localizedHomePath,
   localizedInfoPath,
+  localizedHomePath,
   localizedServicePath,
 } from '@/lib/routes/localizedPath';
 
 import s from './ContactsPage.module.scss';
 
-function getPageStrings(locale = 'lv') {
+export function getContactsPageStrings(locale = 'lv') {
   const pagePath = localizedInfoPath('kontakti', locale);
 
   if (locale === 'ru') {
@@ -28,6 +21,10 @@ function getPageStrings(locale = 'lv') {
       pagePath,
       homeCrumb: 'Главная',
       pageCrumb: 'Контакты',
+
+      metaTitle: 'Контакты | iLab',
+      metaDescription:
+        'Контакты iLab: сервисные центры в Риге - Domina Shopping и Spice Life. Телефон 23370088, e-mail info@ilab.lv. Работаем каждый день 10:00–21:00.',
 
       headerTitle: 'Контакты',
       headerLead:
@@ -113,6 +110,7 @@ function getPageStrings(locale = 'lv') {
       },
 
       faqTitleFallback: 'Частые вопросы о связи и филиалах',
+      eyebrow: 'iLab',
     };
   }
 
@@ -120,6 +118,10 @@ function getPageStrings(locale = 'lv') {
     pagePath,
     homeCrumb: 'Sākums',
     pageCrumb: 'Kontakti',
+
+    metaTitle: 'Kontakti | iLab',
+    metaDescription:
+      'iLab kontakti: servisa centri Rīgā - Domina Shopping un Spice Life. Tālrunis 23370088, e-pasts info@ilab.lv. Darba laiks katru dienu 10:00–21:00.',
 
     headerTitle: 'Kontakti',
     headerLead:
@@ -205,84 +207,13 @@ function getPageStrings(locale = 'lv') {
     },
 
     faqTitleFallback: 'Biežāk uzdotie jautājumi par saziņu un filiālēm',
+    eyebrow: 'Kontakti',
   };
 }
 
-function sortFaqItems(items = []) {
-  return [...items].sort((a, b) => {
-    const ao = typeof a?.order === 'number' ? a.order : 9999;
-    const bo = typeof b?.order === 'number' ? b.order : 9999;
+export function getBusinessFacts(siteSettings = {}, strings) {
+  const company = siteSettings?.company || {};
 
-    if (ao !== bo) return ao - bo;
-
-    return String(a?.q || '').localeCompare(String(b?.q || ''));
-  });
-}
-
-function normalizeFaqItems(items = []) {
-  return sortFaqItems(
-    items
-      .filter((item) => {
-        if (!item) return false;
-        if (item.isHidden === true) return false;
-
-        const q = String(item.q || '').trim();
-        const answer = String(item.aHtml || item.a || '').trim();
-
-        return q && answer;
-      })
-      .map((item) => ({
-        q: String(item.q || '').trim(),
-        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
-        a: typeof item.a === 'string' ? item.a.trim() : '',
-        order:
-          typeof item.order === 'number' && Number.isFinite(item.order)
-            ? item.order
-            : 9999,
-      }))
-  );
-}
-
-async function getContactFaq(locale = 'lv') {
-  const docId = `contact_${locale}`;
-  const snap = await db.collection('faqGroups').doc(docId).get();
-
-  if (!snap.exists) return null;
-
-  const data = snap.data() || {};
-
-  if (data.isPublished === false) return null;
-
-  const items = normalizeFaqItems(Array.isArray(data.items) ? data.items : []);
-
-  if (!items.length) return null;
-
-  return {
-    id: docId,
-    title: String(data.title || '').trim(),
-    items,
-  };
-}
-
-function buildContactPageLd(strings, locale = 'lv') {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    '@id': `${abs(strings.pagePath)}#contact-page`,
-    url: abs(strings.pagePath),
-    name: strings.pageCrumb,
-    description: strings.headerLead,
-    inLanguage: locale,
-    isPartOf: {
-      '@id': `${abs('/')}#website`,
-    },
-    about: {
-      '@id': `${abs('/')}#organization`,
-    },
-  };
-}
-
-function getLegalFacts(company = {}, strings) {
   const legalName =
     company.legalName ||
     company.legalEntity ||
@@ -306,7 +237,7 @@ function getLegalFacts(company = {}, strings) {
     company.registeredAddress ||
     '';
 
-  return [
+  const legalFacts = [
     legalName
       ? {
           label: strings.facts.legal,
@@ -332,11 +263,6 @@ function getLegalFacts(company = {}, strings) {
         }
       : null,
   ].filter(Boolean);
-}
-
-function getBusinessFacts(siteSettings = {}, strings) {
-  const company = siteSettings?.company || {};
-  const legalFacts = getLegalFacts(company, strings);
 
   return [
     {
@@ -366,9 +292,7 @@ function getBusinessFacts(siteSettings = {}, strings) {
 function InternalServiceLinks({ locale, strings }) {
   return (
     <div className={s.copyStack}>
-      <p className={s.paragraph}>
-        {strings.servicesIntro}
-      </p>
+      <p className={s.paragraph}>{strings.servicesIntro}</p>
 
       <p className={s.paragraph}>
         {strings.popularServicesPrefix}{' '}
@@ -386,8 +310,7 @@ function InternalServiceLinks({ locale, strings }) {
         ,{' '}
         <Link href={localizedCategoryPath('datoru-remonts', locale)}>
           {strings.links.computers}
-        </Link>
-        {' '}
+        </Link>{' '}
         {strings.and}{' '}
         <Link href={localizedCategoryPath('dyson-remonts', locale)}>
           {strings.links.dyson}
@@ -411,8 +334,7 @@ function InternalServiceLinks({ locale, strings }) {
           )}
         >
           {strings.links.battery}
-        </Link>
-        {' '}
+        </Link>{' '}
         {strings.and}{' '}
         <Link
           href={localizedServicePath(
@@ -426,14 +348,10 @@ function InternalServiceLinks({ locale, strings }) {
         .
       </p>
 
-      <p className={s.paragraph}>
-        {strings.serviceArea}
-      </p>
+      <p className={s.paragraph}>{strings.serviceArea}</p>
 
       {strings.deliveryArea ? (
-        <p className={s.paragraph}>
-          {strings.deliveryArea}
-        </p>
+        <p className={s.paragraph}>{strings.deliveryArea}</p>
       ) : null}
     </div>
   );
@@ -479,65 +397,25 @@ function Benefits({ strings }) {
   );
 }
 
-export default async function ContactsPage({
+export default function ContactsPage({
   locale = 'lv',
+
+  labels,
   siteSettings,
+  breadcrumbs = [],
+  businessFacts = [],
+
+  contactFaqTitle,
+  contactFaqItems = [],
 }) {
-  const strings = getPageStrings(locale);
-  const contactFaq = await getContactFaq(locale);
-  const businessFacts = getBusinessFacts(siteSettings, strings);
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(localizedHomePath(locale)) },
-    { name: strings.pageCrumb, url: abs(strings.pagePath) },
-  ]);
-
-  const contactPageLd = buildContactPageLd(strings, locale);
-  const faqLd = contactFaq ? toFaqLd(contactFaq.items) : null;
-
-  const headerCrumbs = [
-    {
-      label: strings.homeCrumb,
-      href: localizedHomePath(locale),
-    },
-    {
-      label: strings.pageCrumb,
-      href: strings.pagePath,
-    },
-  ];
+  const strings = labels || getContactsPageStrings(locale);
 
   return (
     <>
-      <Script
-        id={`contacts-breadcrumbs-jsonld-${locale}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script
-        id={`contacts-page-jsonld-${locale}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(contactPageLd)}
-      </Script>
-
-      {faqLd ? (
-        <Script
-          id={`contacts-faq-jsonld-${locale}`}
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(faqLd)}
-        </Script>
-      ) : null}
-
       <PageHeader
         title={strings.headerTitle}
         lead={strings.headerLead}
-        crumbs={headerCrumbs}
+        crumbs={breadcrumbs}
       />
 
       <section
@@ -556,21 +434,17 @@ export default async function ContactsPage({
         <div className={s.container}>
           <div className={s.infoLayout}>
             <div className={s.infoMain}>
-              <p className={s.eyebrow}>Kontakti</p>
+              <p className={s.eyebrow}>{strings.eyebrow}</p>
 
               <h2 id="contacts-info-h2" className={s.h2}>
                 {strings.contactTitle}
               </h2>
 
               <div className={s.leadBlock}>
-                <p className={s.lead}>
-                  {strings.contactIntro}
-                </p>
+                <p className={s.lead}>{strings.contactIntro}</p>
 
                 {strings.contactNote ? (
-                  <p className={s.contactNote}>
-                    {strings.contactNote}
-                  </p>
+                  <p className={s.contactNote}>{strings.contactNote}</p>
                 ) : null}
               </div>
 
@@ -578,9 +452,7 @@ export default async function ContactsPage({
             </div>
 
             <aside className={s.factsPanel} aria-labelledby="contacts-facts-h3">
-              <h3 id="contacts-facts-h3">
-                {strings.factsTitle}
-              </h3>
+              <h3 id="contacts-facts-h3">{strings.factsTitle}</h3>
 
               <BusinessFacts facts={businessFacts} />
             </aside>
@@ -590,13 +462,16 @@ export default async function ContactsPage({
 
       <Benefits strings={strings} />
 
-      {contactFaq ? (
+      {contactFaqItems.length > 0 ? (
         <section className={s.section} aria-labelledby="contacts-faq-h2">
           <div className={s.container}>
             <Faq
               id="contacts-faq"
-              title={contactFaq.title || strings.faqTitleFallback}
-              items={toFaqRenderItems(contactFaq.items)}
+              title={contactFaqTitle || strings.faqTitleFallback}
+              items={contactFaqItems}
+              headingLevel={2}
+              variant="accordion"
+              locale={locale}
             />
           </div>
         </section>

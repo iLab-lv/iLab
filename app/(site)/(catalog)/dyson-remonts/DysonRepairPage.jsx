@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
 import Services from '@sections/services/Services';
@@ -13,14 +11,9 @@ import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
 
-import {
-  abs,
-  buildBreadcrumbsLd,
-  buildServiceLdForCity,
-} from '@/lib/seo/jsonldHelpers';
-import { buildCategoryHref } from '@/lib/routes/routeI18n';
-
 import { LuCog, LuFilter, LuSparkles, LuWrench } from 'react-icons/lu';
+
+export const CATEGORY_KEY = 'dyson-remonts';
 
 const FAQ_ITEMS_LV = [
   {
@@ -68,9 +61,16 @@ const FAQ_ITEMS_RU = [
   },
 ];
 
-function getPageStrings(locale = 'lv') {
+export function getDysonFallbackFaqItems(locale = 'lv') {
+  return locale === 'ru' ? FAQ_ITEMS_RU : FAQ_ITEMS_LV;
+}
+
+export function getDysonPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
+      metaTitle: 'Ремонт Dyson в Риге | iLab',
+      metaDescription:
+        'Ремонт пылесосов Dyson в Риге - замена мотора и батареи, фильтров и уплотнений, чистка и диагностика, устранение механических повреждений. Быстрая диагностика и гарантия 90 дней.',
       heroAlt: 'ремонт Dyson в Риге',
       heroBodyHtml:
         '<p><strong>Быстрый и безопасный ремонт Dyson в Риге</strong> - чистка, замена мотора и батареи, замена фильтров и уплотнений. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт.</p>',
@@ -81,6 +81,7 @@ function getPageStrings(locale = 'lv') {
       serviceName: 'Ремонт Dyson в Риге',
       serviceDescription:
         'Ремонт Dyson в Риге: замена мотора и батареи, фильтры и уплотнения, глубокая чистка и диагностика, устранение механических повреждений.',
+      serviceType: 'Ремонт Dyson',
       servicesTitle: 'Популярный ремонт Dyson',
       servicesItems: [
         {
@@ -105,7 +106,6 @@ function getPageStrings(locale = 'lv') {
         },
       ],
       faqTitle: 'Часто задаваемые вопросы',
-      faqItems: FAQ_ITEMS_RU,
       processTitle: 'Как проходит ремонт',
       processSteps: [
         {
@@ -131,10 +131,15 @@ function getPageStrings(locale = 'lv') {
       ],
       scrollCta: { label: 'Смотреть услуги', targetId: 'dyson-services' },
       fallbackTitle: 'Ремонт Dyson в Риге',
+      homeCrumb: 'Главная',
+      imageAlt: 'Ремонт Dyson в Риге',
     };
   }
 
   return {
+    metaTitle: 'Dyson remonts Rīgā | iLab',
+    metaDescription:
+      'Dyson putekļsūcēju remonts Rīgā - motora un baterijas maiņa, filtru un blīvējumu nomaiņa, tīrīšana un diagnostika, mehānisku bojājumu labošana. Ātra diagnostika un 90 dienu garantija.',
     heroAlt: 'Dyson remonts Rīgā',
     heroBodyHtml:
       '<p><strong>Ātrs un drošs Dyson remonts Rīgā</strong> - tīrīšana, motora un baterijas maiņa, filtru un blīvējumu nomaiņa. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam.</p>',
@@ -145,6 +150,7 @@ function getPageStrings(locale = 'lv') {
     serviceName: 'Dyson remonts Rīgā',
     serviceDescription:
       'Dyson remonts Rīgā: motora un baterijas maiņa, filtri un blīvējumi, dziļā tīrīšana un diagnostika, mehānisku bojājumu labošana.',
+    serviceType: 'Dyson remonts',
     servicesTitle: 'Populārākie Dyson remonti',
     servicesItems: [
       {
@@ -169,7 +175,6 @@ function getPageStrings(locale = 'lv') {
       },
     ],
     faqTitle: 'Biežāk uzdotie jautājumi',
-    faqItems: FAQ_ITEMS_LV,
     processTitle: 'Kā notiek remonts',
     processSteps: [
       {
@@ -195,171 +200,30 @@ function getPageStrings(locale = 'lv') {
     ],
     scrollCta: { label: 'Skatīt pakalpojumus', targetId: 'dyson-services' },
     fallbackTitle: 'Dyson remonts Rīgā',
+    homeCrumb: 'Sākums',
+    imageAlt: 'Dyson remonts Rīgā',
   };
 }
 
-export function getDysonRepairMetadata(locale = 'lv') {
-  if (locale === 'ru') {
-    return {
-      title: 'Ремонт Dyson в Риге | iLab',
-      description:
-        'Ремонт пылесосов Dyson в Риге - замена мотора и батареи, фильтров и уплотнений, чистка и диагностика, устранение механических повреждений. Быстрая диагностика и гарантия 90 дней.',
-      alternates: { canonical: '/ru/remont-dyson' },
-    };
-  }
+export default function DysonRepairPage({
+  locale = 'lv',
 
-  return {
-    title: 'Dyson remonts Rīgā | iLab',
-    description:
-      'Dyson putekļsūcēju remonts Rīgā - motora un baterijas maiņa, filtru un blīvējumu nomaiņa, tīrīšana un diagnostika, mehānisku bojājumu labošana. Ātra diagnostika un 90 dienu garantija.',
-    alternates: { canonical: '/dyson-remonts' },
-  };
-}
+  page,
+  headerTitle,
+  headerLead,
+  breadcrumbs = [],
 
-function buildFaqLd(items) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map(({ q, a }) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
-    })),
-  };
-}
+  labels,
+  faqTitle,
+  faqItems = [],
+  hasVisibleFaq = false,
 
-function buildHowToLd(locale = 'lv') {
-  if (locale === 'ru') {
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'HowTo',
-      name: 'Как проходит ремонт Dyson',
-      description:
-        'Процесс в сервисных центрах iLab в Риге: диагностика, цена и срок, ремонт, проверка, гарантия.',
-      step: [
-        {
-          '@type': 'HowToStep',
-          position: 1,
-          name: 'Диагностика',
-          text: 'Быстро проверяем устройство и подтверждаем неисправность.',
-        },
-        {
-          '@type': 'HowToStep',
-          position: 2,
-          name: 'Цена и срок',
-          text: 'Согласовываем стоимость и срок выполнения до начала работ.',
-        },
-        {
-          '@type': 'HowToStep',
-          position: 3,
-          name: 'Ремонт',
-          text: 'Выполняем чистку, замену деталей и тесты по требованиям производителя.',
-        },
-        {
-          '@type': 'HowToStep',
-          position: 4,
-          name: 'Проверка',
-          text: 'После ремонта тестируем мощность всасывания, температуру и стабильность работы.',
-        },
-        {
-          '@type': 'HowToStep',
-          position: 5,
-          name: 'Гарантия',
-          text: 'Гарантия 90 дней и рекомендации по обслуживанию.',
-        },
-      ],
-    };
-  }
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'Kā notiek Dyson remonts',
-    description:
-      'Process iLab servisa centros Rīgā: diagnostika, cena un termiņš, remonts, pārbaude, garantija.',
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Diagnostika',
-        text: 'Ātri pārbaudām ierīci un apstiprinām problēmu.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Cena un termiņš',
-        text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Remonts',
-        text: 'Veicam tīrīšanu, detaļu nomaiņu un testus atbilstoši ražotāja prasībām.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 4,
-        name: 'Pārbaude',
-        text: 'Pēc remonta testējam sūkšanas jaudu, temperatūru un darbības stabilitāti.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 5,
-        name: 'Garantija',
-        text: '90 dienu garantija un uzturēšanas ieteikumi.',
-      },
-    ],
-  };
-}
-
-export default function DysonRepairPage({ locale = 'lv' }) {
-  const strings = getPageStrings(locale);
-  const metadata = getDysonRepairMetadata(locale);
-  const basePath = buildCategoryHref(locale, 'dyson-remonts');
-
-  const headerTitle = strings.breadcrumbName || strings.fallbackTitle;
-  const headerLead = metadata.description || null;
-
-  const breadcrumbs = [
-    {
-      label: locale === 'ru' ? 'Главная' : 'Sākums',
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: headerTitle,
-      href: basePath,
-    },
-  ];
-
-  const faqLd = buildFaqLd(strings.faqItems);
-  const howToLd = buildHowToLd(locale);
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
-    { name: breadcrumbs[1].label, url: abs(basePath) },
-  ]);
-
-  const serviceLd = buildServiceLdForCity({
-    path: basePath,
-    name: strings.serviceName,
-    description: strings.serviceDescription,
-  });
+  heroImage = '/images/categories/dyson_remonts.webp',
+}) {
+  const strings = labels || getDysonPageStrings(locale);
 
   return (
     <>
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqLd)}
-      </Script>
-      <Script id="howto-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(howToLd)}
-      </Script>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-      <Script id="service-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(serviceLd)}
-      </Script>
-
       <PageHeader
         title={headerTitle}
         lead={headerLead}
@@ -368,7 +232,7 @@ export default function DysonRepairPage({ locale = 'lv' }) {
       />
 
       <DeviceHero
-        image="/images/categories/dyson_remonts.webp"
+        image={heroImage}
         alt={strings.heroAlt}
         focal="right"
         className="category"
@@ -380,6 +244,7 @@ export default function DysonRepairPage({ locale = 'lv' }) {
           <h2 id="dyson-intro-h2" className={s.h2}>
             {strings.introTitle}
           </h2>
+
           <p
             className={s.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.introBody }}
@@ -397,49 +262,60 @@ export default function DysonRepairPage({ locale = 'lv' }) {
         </div>
       </section>
 
-      <Reviews locale={locale} />
+      {(page?.sections?.hasReviews ?? true) && <Reviews locale={locale} />}
 
-      <Guide
-  id="guide"
-  locale={locale}
-  variant="dyson"
-  headingLevel={2}
-/>
+      {(page?.sections?.hasGuide ?? true) && (
+        <Guide
+          id="guide"
+          locale={locale}
+          variant="dyson"
+          headingLevel={2}
+        />
+      )}
 
       <div id="process" className={s.anchorTarget} />
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process-content"
-            title={strings.processTitle}
-            steps={strings.processSteps}
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
 
-      <section className={s.section}>
-        <Why locale={locale} />
-      </section>
+      {(page?.sections?.hasProcess ?? true) && (
+        <section className={s.section} aria-labelledby="process-h2">
+          <div className={s.container}>
+            <Process
+              id="process-content"
+              title={strings.processTitle}
+              steps={strings.processSteps}
+              headingLevel={2}
+              variant="cards"
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
 
-      <section className={s.section} aria-labelledby="dyson-faq-h2">
-        <div className={s.container}>
-          <Faq
-            id="dyson-faq"
-            title={strings.faqTitle}
-            items={strings.faqItems}
-            variant="accordion"
-            headingLevel={2}
-            locale={locale}
-          />
-        </div>
-      </section>
+      {(page?.sections?.hasWhy ?? true) && (
+        <section className={s.section}>
+          <Why locale={locale} />
+        </section>
+      )}
 
-      <section className={s.section}>
-        <ConvertBand locale={locale} />
-      </section>
+      {hasVisibleFaq && (
+        <section className={s.section} aria-labelledby="dyson-faq-h2">
+          <div className={s.container}>
+            <Faq
+              id="dyson-faq"
+              title={faqTitle}
+              items={faqItems}
+              variant="accordion"
+              headingLevel={2}
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
+
+      {(page?.sections?.hasConvertBand ?? true) && (
+        <section className={s.section}>
+          <ConvertBand locale={locale} />
+        </section>
+      )}
     </>
   );
 }

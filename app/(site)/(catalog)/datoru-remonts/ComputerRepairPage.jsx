@@ -1,14 +1,6 @@
-import Script from 'next/script';
-
-import { resolveCategoryPage } from '@/lib/content/resolvers/catalogPages';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
 import Services from '@sections/services/Services';
-import {
-  buildComputerPopularServices,
-  getComputerPopularServicesTitle,
-} from '@sections/services/services.i18n';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
@@ -17,19 +9,13 @@ import DeviceHero from '@sections/device-hero/DeviceHero';
 import BrandList from '@sections/brand-list/BrandList';
 import Reviews from '@sections/reviews/Reviews';
 
+import {
+  getComputerPopularServicesTitle,
+} from '@sections/services/services.i18n';
+
 import s from './DatoruCategory.module.scss';
 
-import {
-  abs,
-  buildBreadcrumbsLd,
-  buildServiceLdForCity,
-  buildItemListLd,
-} from '@/lib/seo/jsonldHelpers';
-import { buildCategoryHref } from '@/lib/routes/routeI18n';
-
-const CATEGORY_KEY = 'datoru-remonts';
-
-function pickLocalized(value, locale = 'lv', fallback = '') {
+export function pickLocalized(value, locale = 'lv', fallback = '') {
   if (value == null) return fallback;
 
   if (typeof value === 'string') return value || fallback;
@@ -46,20 +32,7 @@ function pickLocalized(value, locale = 'lv', fallback = '') {
   return fallback;
 }
 
-function normalizeRoutePath(path = '', locale = 'lv') {
-  if (!path) return '';
-
-  const clean = String(path).trim();
-
-  if (locale === 'lv') return clean;
-
-  if (clean === '/') return '/ru';
-  if (clean === '/ru' || clean.startsWith('/ru/')) return clean;
-
-  return `/ru${clean.startsWith('/') ? clean : `/${clean}`}`;
-}
-
-function getPageStrings(locale = 'lv') {
+export function getComputerPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       heroAlt: 'ремонт компьютеров в Риге',
@@ -76,6 +49,11 @@ function getPageStrings(locale = 'lv') {
       serviceName: 'Ремонт компьютеров',
       serviceDescription:
         'Ремонт компьютеров - диагностика и ремонт ноутбуков и настольных компьютеров: экран, клавиатура, охлаждение, диски, операционная система и другие неисправности. Быстрая диагностика, понятные цены, гарантия.',
+      serviceType: 'Ремонт компьютеров',
+      metaTitle:
+        'Ремонт компьютеров в Риге - ноутбуки и настольные ПК | iLab',
+      metaDescription:
+        'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия 90 дней.',
       popularServicesTitle: getComputerPopularServicesTitle(locale),
       appleTitle: 'Ремонт компьютеров Apple',
       appleIntro:
@@ -106,8 +84,32 @@ function getPageStrings(locale = 'lv') {
           a: 'Да, после быстрой диагностики назовём диапазон стоимости и срок. Для более сложных неисправностей цену уточняем после тестов.',
         },
       ],
+      processTitle: 'Как проходит ремонт',
+      processSteps: [
+        {
+          title: 'Диагностика',
+          text: 'Проверяем устройство, определяем неисправность и уточняем возможные варианты ремонта.',
+        },
+        {
+          title: 'Цена и срок',
+          text: 'Согласовываем стоимость и срок выполнения до начала работ.',
+        },
+        {
+          title: 'Ремонт',
+          text: 'Выполняем ремонт, замену деталей, чистку, настройку системы или программные работы.',
+        },
+        {
+          title: 'Проверка',
+          text: 'После ремонта тестируем устройство и основные функции.',
+        },
+        {
+          title: 'Гарантия',
+          text: 'Выдаём устройство с гарантией на выполненную работу и установленные детали.',
+        },
+      ],
       scrollCta: { label: 'Смотреть бренды', targetId: 'brand-list' },
       fallbackTitle: 'Ремонт компьютеров в Риге',
+      imageAlt: 'Ремонт компьютеров в Риге',
     };
   }
 
@@ -126,6 +128,10 @@ function getPageStrings(locale = 'lv') {
     serviceName: 'Datoru remonts',
     serviceDescription:
       'Datoru remonts - portatīvo un galda datoru diagnostika un remonts: ekrāns, tastatūra, dzesēšana, diski, operētājsistēma un citi bojājumi. Ātra diagnostika, godīgas cenas, garantija.',
+    serviceType: 'Datoru remonts',
+    metaTitle: 'Datoru remonts Rīgā - portatīvie un galda datori | iLab',
+    metaDescription:
+      'Datoru remonts Rīgā: portatīvie un galda datori. Ekrāna, tastatūras, dzesēšanas, disku un programmatūras problēmu risināšana. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
     popularServicesTitle: getComputerPopularServicesTitle(locale),
     appleTitle: 'Apple datoru remonts',
     appleIntro:
@@ -156,111 +162,59 @@ function getPageStrings(locale = 'lv') {
         a: 'Jā, pēc ātras diagnostikas nosauksim izmaksu diapazonu un termiņu. Sarežģītākiem bojājumiem cenas precizējam pēc testiem.',
       },
     ],
+    processTitle: 'Kā notiek remonts',
+    processSteps: [
+      {
+        title: 'Diagnostika',
+        text: 'Pārbaudām ierīci, nosakām bojājumu un precizējam iespējamos remonta risinājumus.',
+      },
+      {
+        title: 'Cena un termiņš',
+        text: 'Saskaņojam izmaksas un izpildes laiku pirms darba uzsākšanas.',
+      },
+      {
+        title: 'Remonts',
+        text: 'Veicam remontu, detaļu maiņu, tīrīšanu, sistēmas uzstādīšanu vai programmatūras darbus.',
+      },
+      {
+        title: 'Pārbaude',
+        text: 'Pēc remonta testējam ierīci un galvenās funkcijas.',
+      },
+      {
+        title: 'Garantija',
+        text: 'Izsniedzam ierīci ar garantiju veiktajam darbam un uzstādītajām detaļām.',
+      },
+    ],
     scrollCta: { label: 'Skatīt zīmolus', targetId: 'brand-list' },
     fallbackTitle: 'Datoru remonts Rīgā',
+    imageAlt: 'Datoru remonts Rīgā',
   };
 }
 
-export function getComputerRepairMetadata(locale = 'lv') {
-  if (locale === 'ru') {
-    return {
-      title: 'Ремонт компьютеров в Риге - ноутбуки и настольные ПК | iLab',
-      description:
-        'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия 90 дней.',
-      alternates: { canonical: '/ru/remont-noutbukov' },
-    };
+export default function ComputerRepairPage({
+  locale = 'lv',
+  page,
+  basePath,
+  headerTitle,
+  headerLead,
+  breadcrumbs,
+  brands = [],
+  faqTitle,
+  faqItems = [],
+  labels,
+  popularServices = [],
+  heroImage = '/images/categories/datoru_remonts.webp',
+  heroHtml,
+}) {
+  if (!page) {
+    return null;
   }
 
-  return {
-    title: 'Datoru remonts Rīgā - portatīvie un galda datori | iLab',
-    description:
-      'Datoru remonts Rīgā: portatīvie un galda datori. Ekrāna, tastatūras, dzesēšanas, disku un programmatūras problēmu risināšana. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
-    alternates: { canonical: '/datoru-remonts' },
-  };
-}
-
-export default async function ComputerRepairPage({ locale = 'lv' }) {
-  const strings = getPageStrings(locale);
-
-  const page = await resolveCategoryPage(CATEGORY_KEY, locale);
-  if (!page) return null;
-
-  const basePath =
-    page.route?.publicPath || buildCategoryHref(locale, CATEGORY_KEY);
-
-  const brands = Array.isArray(page.source?.category?.brands)
-    ? page.source.category.brands
-    : [];
-
-  const headerTitle =
-    page.seo?.h1 ||
-    page.seo?.breadcrumbName ||
-    strings.fallbackTitle;
-
-  const headerLead =
-    page.intro?.lead ||
-    page.seo?.metaDescription ||
-    page.seo?.schemaDescription ||
-    null;
-
-  const breadcrumbs = [
-    {
-      label: page.labels?.homeCrumb || (locale === 'ru' ? 'Главная' : 'Sākums'),
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: headerTitle,
-      href: basePath,
-    },
-  ];
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: breadcrumbs[0].label, url: abs(breadcrumbs[0].href) },
-    { name: breadcrumbs[1].label, url: abs(basePath) },
-  ]);
-
-  const serviceLd = buildServiceLdForCity({
-    path: basePath,
-    name: strings.serviceName,
-    description: strings.serviceDescription,
-  });
-
-  const itemListLd = buildItemListLd(
-    brands.map((b) => {
-      const key = b?.key || b?.brandSlug || '';
-      const routePath =
-        normalizeRoutePath(b?.route?.brandPath || '', locale) ||
-        `${basePath}/${key}`;
-
-      return {
-        name: `${pickLocalized(b?.labels, locale, key)} datoru remonts`,
-        url: abs(routePath),
-      };
-    })
-  );
-
-  const popularServices = buildComputerPopularServices(locale);
-
-  const heroImage = '/images/categories/datoru_remonts.webp';
-
-  const heroHtml =
-    pickLocalized(page.source?.category?.bodyHtml, locale, '') ||
-    strings.heroBodyHtml;
+  const strings = labels || getComputerPageStrings(locale);
+  const safeHeroHtml = heroHtml || strings.heroBodyHtml;
 
   return (
     <>
-      <Script id="breadcrumbs-jsonld" type="application/ld+json">
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script id="service-jsonld" type="application/ld+json">
-        {JSON.stringify(serviceLd)}
-      </Script>
-
-      <Script id="itemlist-jsonld" type="application/ld+json">
-        {JSON.stringify(itemListLd)}
-      </Script>
-
       <PageHeader
         title={headerTitle}
         lead={headerLead}
@@ -274,7 +228,7 @@ export default async function ComputerRepairPage({ locale = 'lv' }) {
           alt={strings.heroAlt}
           focal="right"
           className="category"
-          bodyHtml={heroHtml}
+          bodyHtml={safeHeroHtml}
         />
 
         <section className={s.section} aria-labelledby="computers-intro-h2">
@@ -322,13 +276,13 @@ export default async function ComputerRepairPage({ locale = 'lv' }) {
           </section>
         )}
 
-        {page.sections?.hasFaq && (
+        {page.sections?.hasFaq && faqItems.length > 0 && (
           <section className={s.section} aria-labelledby="faq-h2">
             <div className={s.container}>
               <Faq
                 id="computers-faq"
-                title={strings.faqTitle}
-                items={strings.faqItems}
+                title={faqTitle || strings.faqTitle}
+                items={faqItems}
                 headingLevel={2}
                 variant="accordion"
                 locale={locale}
@@ -339,7 +293,7 @@ export default async function ComputerRepairPage({ locale = 'lv' }) {
 
         {page.sections?.hasConvertBand && (
           <section className={s.section}>
-            <ConvertBand locale={locale}  />
+            <ConvertBand locale={locale} />
           </section>
         )}
       </main>

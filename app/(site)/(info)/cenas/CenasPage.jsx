@@ -1,21 +1,14 @@
-import Script from 'next/script';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import BrandPickerPricelist from '@sections/service-pricelist/BrandPickerPricelist';
 
-import categories from '@/data/categories';
-import devices from '@/data/devices';
-import { db } from '@/lib/firebaseAdmin';
-
-import { ORIGIN, abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
-
 import s from '@styles/Catalog.module.scss';
 
-function getPageStrings(locale = 'lv') {
+export function getCenasPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       servicePath: '/ru/ceny',
@@ -65,6 +58,9 @@ function getPageStrings(locale = 'lv') {
         },
       ],
       bookingAria: 'Записаться на ремонт',
+      metaTitle: 'Цены | iLab',
+      metaDescription:
+        'Цены на ремонт iLab по модели. Выберите бренд и модель устройства, чтобы увидеть все цены на услуги в одном месте.',
     };
   }
 
@@ -116,254 +112,32 @@ function getPageStrings(locale = 'lv') {
       },
     ],
     bookingAria: 'Pieteikties remontam',
+    metaTitle: 'Cenas | iLab',
+    metaDescription:
+      'iLab remonta cenas pēc modeļa. Izvēlies zīmolu un ierīces modeli, lai redzētu visu pakalpojumu cenas vienuviet.',
   };
 }
 
-function titleCaseSlug(slug = '') {
-  const txt = String(slug || '').replace(/[-_]+/g, ' ').trim();
-  if (!txt) return '-';
+export default function CenasPage({
+  locale = 'lv',
 
-  return txt
-    .split(' ')
-    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(' ');
-}
+  labels,
+  breadcrumbs = [],
 
-function getPickerBrandSlug(device) {
-  const raw =
-    device?.originalBrandSlug ||
-    device?.brandSlug ||
-    device?.brandKey ||
-    '';
-
-  const slug = String(raw).toLowerCase().trim();
-
-  if (slug === 'apple' && String(device?.category || '').toLowerCase().trim() === 'telefonu-remonts') {
-    return 'iphone';
-  }
-
-  return slug;
-}
-
-function getAllBrandOptions() {
-  const nameBySlug = new Map();
-
-  if (Array.isArray(categories)) {
-    for (const c of categories) {
-      const list = Array.isArray(c?.brands) ? c.brands : [];
-      for (const b of list) {
-        const slug = String(b?.brandSlug || b?.slug || '')
-          .toLowerCase()
-          .trim();
-        const name = String(b?.name || '').trim();
-
-        if (slug && name && !nameBySlug.has(slug)) {
-          nameBySlug.set(slug, name);
-        }
-      }
-    }
-  }
-
-  nameBySlug.set('iphone', 'iPhone');
-  nameBySlug.set('ipad', 'iPad');
-  nameBySlug.set('macbook', 'MacBook');
-
-  const slugsWithDevices = new Set(
-    (Array.isArray(devices) ? devices : [])
-      .map((d) => getPickerBrandSlug(d))
-      .filter(Boolean)
-  );
-
-  const BRAND_ORDER = ['iphone', 'ipad', 'macbook', 'samsung', 'huawei'];
-
-  const brandOptions = Array.from(slugsWithDevices)
-    .sort((a, b) => {
-      const ai = BRAND_ORDER.indexOf(a);
-      const bi = BRAND_ORDER.indexOf(b);
-
-      if (ai !== -1 && bi !== -1) return ai - bi;
-      if (ai !== -1) return -1;
-      if (bi !== -1) return 1;
-
-      return a.localeCompare(b);
-    })
-    .map((slug) => {
-      const name = nameBySlug.get(slug) || titleCaseSlug(slug);
-
-      return {
-        slug,
-        name,
-        brandSlug: slug,
-        label: name,
-      };
-    });
-
-  const hasIphone = brandOptions.some((b) => b.slug === 'iphone');
-  const defaultBrand = hasIphone ? 'iphone' : brandOptions[0]?.slug || 'iphone';
-
-  return { brandOptions, defaultBrand };
-}
-
-async function getServiceMetaMap() {
-  const snap = await db
-    .collection('services')
-    .where('isActive', '==', true)
-    .get();
-
-  const map = {};
-
-  snap.forEach((doc) => {
-    const data = doc.data() || {};
-
-    map[doc.id] = {
-      id: doc.id,
-      labels: {
-        lv: data.labels?.lv || '',
-        ru: data.labels?.ru || '',
-      },
-      order: typeof data.order === 'number' ? data.order : 9999,
-      categoryId: data.categoryId || '',
-    };
-  });
-
-  return map;
-}
-
-async function getAllPricing() {
-  const pricing = {};
-
-  for (const d of Array.isArray(devices) ? devices : []) {
-    const slug = String(d?.slug || '').trim();
-    if (slug) {
-      pricing[slug] = { items: [] };
-    }
-  }
-
-  const snap = await db.collection('servicePricing').get();
-
-  snap.forEach((doc) => {
-    const data = doc.data() || {};
-    const modelId = data.modelId;
-    const serviceId = data.serviceId;
-
-    if (!modelId || !serviceId) return;
-    if (!pricing[modelId]) {
-      pricing[modelId] = { items: [] };
-    }
-
-    pricing[modelId].items.push({
-      id: serviceId,
-      price:
-        typeof data.price === 'number' && Number.isFinite(data.price)
-          ? data.price
-          : null,
-      isStartingFrom: data.isStartingFrom === true,
-      isHidden: data.isHidden === true,
-      categoryId: data.categoryId || '',
-    });
-  });
-
-  return pricing;
-}
-
-function buildWebPageLd(strings) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': `${ORIGIN}${strings.servicePath}#webpage`,
-    url: abs(strings.servicePath),
-    name: strings.pageName,
-    description: strings.pageDescription,
-  };
-}
-
-function buildFaqLd(strings) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: strings.faqItems.map(({ q, a }, index) => ({
-      '@type': 'Question',
-      '@id': `${ORIGIN}${strings.servicePath}#faq-q${index + 1}`,
-      name: q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: a,
-      },
-    })),
-  };
-}
-
-export default async function CenasPage({ locale = 'lv', searchParams }) {
-  const strings = getPageStrings(locale);
-  const { brandOptions, defaultBrand } = getAllBrandOptions();
-  const [serviceMeta, pricing] = await Promise.all([
-    getServiceMetaMap(),
-    getAllPricing(),
-  ]);
-
-  const normalizedDevices = (Array.isArray(devices) ? devices : []).map((d) => ({
-    ...d,
-    pickerBrandSlug: getPickerBrandSlug(d),
-  }));
-
-  const brandFromUrl =
-    typeof searchParams?.brand === 'string'
-      ? searchParams.brand.toLowerCase().trim()
-      : '';
-
-  const isValidBrand = brandFromUrl
-    ? brandOptions.some(
-        (b) => b.slug === brandFromUrl || b.brandSlug === brandFromUrl
-      )
-    : false;
-
-  const stableDefaultBrand = isValidBrand ? brandFromUrl : defaultBrand;
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
-    { name: strings.pageCrumb, url: abs(strings.servicePath) },
-  ]);
-
-  const webPageLd = buildWebPageLd(strings);
-  const faqLd = buildFaqLd(strings);
-
-  const headerCrumbs = [
-    {
-      label: strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: strings.pageCrumb,
-      href: strings.servicePath,
-    },
-  ];
+  devices = [],
+  pricing = {},
+  serviceMeta = {},
+  brandOptions = [],
+  defaultBrand = 'iphone',
+}) {
+  const strings = labels || getCenasPageStrings(locale);
 
   return (
     <>
-      <Script
-        id="breadcrumbs-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script
-        id="webpage-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(webPageLd)}
-      </Script>
-
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqLd)}
-      </Script>
-
       <PageHeader
         title={strings.headerTitle}
         lead={strings.headerLead}
-        crumbs={headerCrumbs}
+        crumbs={breadcrumbs}
       />
 
       <section
@@ -381,11 +155,11 @@ export default async function CenasPage({ locale = 'lv', searchParams }) {
           </h2>
 
           <BrandPickerPricelist
-            devices={normalizedDevices}
+            devices={devices}
             pricing={pricing}
             serviceMeta={serviceMeta}
             brandOptions={brandOptions}
-            defaultBrand={stableDefaultBrand}
+            defaultBrand={defaultBrand}
             categorySlug="all"
             title={strings.pricelistTitle}
             allModelsHref={locale === 'ru' ? '/ru' : '/'}
@@ -404,6 +178,7 @@ export default async function CenasPage({ locale = 'lv', searchParams }) {
             steps={strings.processSteps}
             headingLevel={2}
             variant="cards"
+            locale={locale}
           />
         </div>
       </section>
@@ -414,7 +189,14 @@ export default async function CenasPage({ locale = 'lv', searchParams }) {
 
       <section className={s.section} aria-labelledby="faq-h2">
         <div className={s.container}>
-          <Faq id="faq" title={strings.faqTitle} items={strings.faqItems} />
+          <Faq
+            id="faq"
+            title={strings.faqTitle}
+            items={strings.faqItems}
+            headingLevel={2}
+            variant="accordion"
+            locale={locale}
+          />
         </div>
       </section>
 

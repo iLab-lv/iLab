@@ -1,16 +1,19 @@
-import Script from 'next/script';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import ConvertBand from '@sections/convert-band/ConvertBand';
+
 import s from '@styles/Catalog.module.scss';
 
-const ORIGIN = 'https://www.ilab.lv';
+export const UPDATED_DATE = '2025-11-05';
 
-function getPageStrings(locale = 'lv') {
+export function getTermsPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       breadcrumbHome: 'Главная',
       breadcrumbPage: 'Условия использования и политика конфиденциальности',
+
+      metaTitle: 'Условия использования и политика конфиденциальности | iLab',
+      metaDescription:
+        'Условия использования iLab, гарантия, защита данных и политика cookies. Узнайте, как обрабатываются данные клиентов и как предоставляются услуги.',
 
       headerTitle: 'Условия использования и политика конфиденциальности',
       headerLead:
@@ -76,6 +79,10 @@ function getPageStrings(locale = 'lv') {
     breadcrumbHome: 'Sākums',
     breadcrumbPage: 'Lietošanas noteikumi un privātuma politika',
 
+    metaTitle: 'Lietošanas noteikumi un privātuma politika | iLab',
+    metaDescription:
+      'iLab lietošanas noteikumi, garantija, datu aizsardzība un sīkdatņu politika. Uzzini, kā tiek apstrādāti klientu dati un sniegti pakalpojumi.',
+
     headerTitle: 'Lietošanas noteikumi un privātuma politika',
     headerLead:
       'Šajā lapā apkopoti iLab vietnes lietošanas noteikumi, garantijas nosacījumi, klientu datu apstrāde un sīkdatņu politika.',
@@ -136,89 +143,25 @@ function getPageStrings(locale = 'lv') {
   };
 }
 
-function buildBreadcrumbsLd(locale = 'lv') {
-  const strings = getPageStrings(locale);
-  const homePath = locale === 'ru' ? '/ru' : '/';
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: strings.breadcrumbHome,
-        item: `${ORIGIN}${homePath}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: strings.breadcrumbPage,
-        item: `${ORIGIN}${strings.canonicalPath}`,
-      },
-    ],
-  };
-}
-
-function buildTosLd(locale = 'lv') {
-  const strings = getPageStrings(locale);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'TermsOfService',
-    name: strings.tosName,
-    url: `${ORIGIN}${strings.canonicalPath}`,
-    provider: { '@id': `${ORIGIN}#organization` },
-    inLanguage: strings.inLanguage,
-    description: strings.tosDescription,
-    dateModified: '2025-11-05',
-  };
-}
-
-export default function TermsPage({ locale = 'lv' }) {
-  const strings = getPageStrings(locale);
-  const breadcrumbsLd = buildBreadcrumbsLd(locale);
-  const tosLd = buildTosLd(locale);
-
-  const headerCrumbs = [
-    {
-      label: strings.breadcrumbHome,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: strings.breadcrumbPage,
-      href: strings.canonicalPath,
-    },
-  ];
+export default function TermsPage({
+  locale = 'lv',
+  labels,
+  breadcrumbs = [],
+}) {
+  const strings = labels || getTermsPageStrings(locale);
 
   return (
     <>
-      <Script
-        id="terms-breadcrumbs"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script
-        id="terms-tos"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(tosLd)}
-      </Script>
-
       <PageHeader
         title={strings.headerTitle}
         lead={strings.headerLead}
-        crumbs={headerCrumbs}
+        crumbs={breadcrumbs}
       />
 
       <section className={s.section} aria-labelledby="terms-h2">
         <div className={s.container}>
           <p className={s.paragraph}>
-            <strong>{strings.updatedLabel}</strong> 2025-11-05
+            <strong>{strings.updatedLabel}</strong> {UPDATED_DATE}
             <br />
             <strong>{strings.providerLabel}</strong> SIA “iLab” · Reģ. nr. 40203288307
             <br />

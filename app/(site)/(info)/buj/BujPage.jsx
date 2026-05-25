@@ -1,20 +1,10 @@
-import Script from 'next/script';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import {
-  normalizeText,
-  toFaqLd,
-  toFaqRenderItems,
-} from '@sections/faq/faq.helpers';
-
-import { db } from '@/lib/firebaseAdmin';
-import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
 
 import s from '@styles/Catalog.module.scss';
 
-function getPageStrings(locale = 'lv') {
+export function getBujPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
       pagePath: '/ru/faq',
@@ -26,6 +16,9 @@ function getPageStrings(locale = 'lv') {
       allQuestionsTitle: 'Все вопросы по категориям',
       fallbackGroupTitle: 'Другие вопросы',
       basicTitle: 'Общие вопросы',
+      metaTitle: 'Часто задаваемые вопросы | iLab',
+      metaDescription:
+        'iLab - ответы на частые вопросы о ремонте телефонов, iPhone, планшетов, компьютеров и Dyson: диагностика, сроки, гарантия, стоимость и популярные виды ремонта.',
       groupTitles: {
         'telefonu-remonts': 'Ремонт телефонов',
         'iphone-remonts': 'Ремонт iPhone',
@@ -43,7 +36,7 @@ function getPageStrings(locale = 'lv') {
   }
 
   return {
-    pagePath: '/duk',
+    pagePath: '/buj',
     homeCrumb: 'Sākums',
     pageCrumb: 'Biežāk uzdotie jautājumi',
     headerTitle: 'Biežāk uzdotie jautājumi',
@@ -52,6 +45,9 @@ function getPageStrings(locale = 'lv') {
     allQuestionsTitle: 'Visi jautājumi pa kategorijām',
     fallbackGroupTitle: 'Citi jautājumi',
     basicTitle: 'Vispārīgi jautājumi',
+    metaTitle: 'Biežāk uzdotie jautājumi | iLab',
+    metaDescription:
+      'iLab - biežāk uzdotie jautājumi par telefonu, iPhone, planšetdatoru, datoru un Dyson remontu, kā arī diagnostiku, termiņiem, garantiju un populārākajiem remonta darbiem.',
     groupTitles: {
       'telefonu-remonts': 'Telefonu remonts',
       'iphone-remonts': 'iPhone remonts',
@@ -68,204 +64,44 @@ function getPageStrings(locale = 'lv') {
   };
 }
 
-function dedupeFaqItems(items = []) {
-  const seen = new Set();
+export default function BujPage({
+  locale = 'lv',
 
-  return items.filter((item) => {
-    const key = normalizeText(item?.q || '').toLowerCase();
-    if (!key || seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}
+  labels,
+  sections = [],
 
-function sortFaqItems(items = []) {
-  return [...items].sort((a, b) => {
-    const ao = typeof a?.order === 'number' ? a.order : 9999;
-    const bo = typeof b?.order === 'number' ? b.order : 9999;
-    if (ao !== bo) return ao - bo;
-
-    const aq = String(a?.q || '');
-    const bq = String(b?.q || '');
-    return aq.localeCompare(bq);
-  });
-}
-
-function parseFaqGroupDocId(docId = '', locale = 'lv') {
-  const strings = getPageStrings(locale);
-  const suffix = `_${locale}`;
-  const cleanId = String(docId || '').trim();
-
-  if (!cleanId.endsWith(suffix)) {
-    return {
-      key: cleanId,
-      title: strings.fallbackGroupTitle,
-      type: 'unknown',
-      order: 999,
-    };
-  }
-
-  const base = cleanId.slice(0, -suffix.length);
-
-  if (base === 'basic') {
-    return {
-      key: base,
-      title: strings.basicTitle,
-      type: 'basic',
-      order: 0,
-    };
-  }
-
-  if (base.startsWith('category_')) {
-    const categoryKey = base.slice('category_'.length);
-
-    return {
-      key: base,
-      title: strings.groupTitles[categoryKey] || categoryKey,
-      type: 'category',
-      order: 100,
-    };
-  }
-
-  if (base.startsWith('service_')) {
-    const serviceKey = base.slice('service_'.length);
-
-    return {
-      key: base,
-      title: strings.groupTitles[serviceKey] || serviceKey,
-      type: 'service',
-      order: 200,
-    };
-  }
-
-  return {
-    key: base,
-    title: strings.groupTitles[base] || base,
-    type: 'other',
-    order: 300,
-  };
-}
-
-async function getFaqSections(locale = 'lv') {
-  const suffix = `_${locale}`;
-  const snap = await db.collection('faqGroups').get();
-
-  const sections = snap.docs
-    .map((doc) => {
-      const id = doc.id;
-      if (!id.endsWith(suffix)) return null;
-
-      const data = doc.data() || {};
-      const parsed = parseFaqGroupDocId(id, locale);
-      const rawItems = Array.isArray(data.items) ? data.items : [];
-
-      const items = sortFaqItems(
-        rawItems
-          .filter((item) => {
-            if (!item) return false;
-            if (!String(item.q || '').trim()) return false;
-            if (!(String(item.aHtml || '').trim() || String(item.a || '').trim())) {
-              return false;
-            }
-            if (item.isHidden === true) return false;
-            return true;
-          })
-          .map((item) => ({
-            q: String(item.q || '').trim(),
-            aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
-            a: typeof item.a === 'string' ? item.a.trim() : '',
-            order:
-              typeof item.order === 'number' && Number.isFinite(item.order)
-                ? item.order
-                : 9999,
-          }))
-      );
-
-      if (!items.length) return null;
-
-      return {
-        id,
-        key: parsed.key,
-        title: parsed.title,
-        type: parsed.type,
-        order: parsed.order,
-        items,
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => {
-      if (a.order !== b.order) return a.order - b.order;
-      return a.title.localeCompare(b.title);
-    });
-
-  return sections;
-}
-
-export default async function DukPage({ locale = 'lv' }) {
-  const strings = getPageStrings(locale);
-  const sections = await getFaqSections(locale);
-
-  const mergedItems = dedupeFaqItems(
-    sections.flatMap((section) => section.items || [])
-  );
-
-  const faqLd = toFaqLd(mergedItems);
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(locale === 'ru' ? '/ru' : '/') },
-    { name: strings.pageCrumb, url: abs(strings.pagePath) },
-  ]);
-
-  const headerCrumbs = [
-    {
-      label: strings.homeCrumb,
-      href: locale === 'ru' ? '/ru' : '/',
-    },
-    {
-      label: strings.pageCrumb,
-      href: strings.pagePath,
-    },
-  ];
+  headerTitle,
+  headerLead,
+  breadcrumbs = [],
+}) {
+  const strings = labels || getBujPageStrings(locale);
 
   return (
     <>
-      <Script
-        id="duk-breadcrumbs-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script
-        id="duk-faq-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(faqLd)}
-      </Script>
-
       <PageHeader
-        title={strings.headerTitle}
-        lead={strings.headerLead}
-        crumbs={headerCrumbs}
+        title={headerTitle || strings.headerTitle}
+        lead={headerLead || strings.headerLead}
+        crumbs={breadcrumbs}
       />
 
-      <section className={s.section} aria-labelledby="duk-faq-groups-h2">
+      <section className={s.section} aria-labelledby="buj-faq-groups-h2">
         <div className={s.container}>
-          <h2 id="duk-faq-groups-h2" className={s.h2}>
+          <h2 id="buj-faq-groups-h2" className={s.h2}>
             {strings.allQuestionsTitle}
           </h2>
 
           {sections.map((section, index) => (
             <div
-              key={`duk-faq-group-${index}-${section.id}`}
+              key={`buj-faq-group-${index}-${section.id}`}
               className={index > 0 ? s.stackLg : ''}
             >
               <Faq
-                id={`duk-faq-group-${index + 1}`}
+                id={`buj-faq-group-${index + 1}`}
                 title={section.title}
-                items={toFaqRenderItems(section.items)}
+                items={section.renderItems}
+                headingLevel={2}
+                variant="accordion"
+                locale={locale}
               />
             </div>
           ))}

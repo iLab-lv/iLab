@@ -1,5 +1,3 @@
-import React from 'react';
-import Script from 'next/script';
 import Link from 'next/link';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
@@ -11,22 +9,14 @@ import Faq from '@sections/faq/Faq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import {
-  toFaqLd,
-  toFaqRenderItems,
-} from '@sections/faq/faq.helpers';
-
-import { db } from '@/lib/firebaseAdmin';
-import { abs, buildBreadcrumbsLd } from '@/lib/seo/jsonldHelpers';
-import {
   localizedCategoryPath,
-  localizedHomePath,
   localizedInfoPath,
   localizedServicePath,
 } from '@/lib/routes/localizedPath';
 
 import s from './AboutPage.module.scss';
 
-function getAboutStrings(locale = 'lv') {
+export function getAboutStrings(locale = 'lv') {
   const pagePath = localizedInfoPath('par-mums', locale);
 
   if (locale === 'ru') {
@@ -34,6 +24,10 @@ function getAboutStrings(locale = 'lv') {
       pagePath,
       homeCrumb: 'Главная',
       pageCrumb: 'О нас',
+
+      metaTitle: 'О iLab | iLab',
+      metaDescription:
+        'SIA iLab - профессиональный сервис по ремонту телефонов и компьютеров в Риге с опытом более 10 лет. Ремонт для частных клиентов и B2B: смартфоны, планшеты, компьютеры, Dyson. Бесплатная диагностика и гарантия 90 дней.',
 
       headerTitle: 'О iLab',
       headerLead:
@@ -104,6 +98,10 @@ function getAboutStrings(locale = 'lv') {
     homeCrumb: 'Sākums',
     pageCrumb: 'Par mums',
 
+    metaTitle: 'Par iLab | iLab',
+    metaDescription:
+      'SIA iLab - profesionāls telefona un datoru serviss Rīgā ar 10+ gadu pieredzi. Remonts privātpersonām un B2B: viedtālruņi, planšetes, datori, Dyson. Bezmaksas diagnostika un 90 dienu garantija.',
+
     headerTitle: 'Par iLab',
     headerLead:
       'iLab ir vietējais ierīču serviss Rīgā, kas kopš 2013. gada palīdz klientiem ar telefonu, iPhone, planšetdatoru, datoru un Dyson ierīču diagnostiku, remontu un detaļu maiņu.',
@@ -168,82 +166,9 @@ function getAboutStrings(locale = 'lv') {
   };
 }
 
-function sortFaqItems(items = []) {
-  return [...items].sort((a, b) => {
-    const ao = typeof a?.order === 'number' ? a.order : 9999;
-    const bo = typeof b?.order === 'number' ? b.order : 9999;
+export function getBusinessFacts(siteSettings = {}, strings) {
+  const company = siteSettings?.company || {};
 
-    if (ao !== bo) return ao - bo;
-
-    return String(a?.q || '').localeCompare(String(b?.q || ''));
-  });
-}
-
-async function getBasicFaq(locale = 'lv') {
-  const strings = getAboutStrings(locale);
-  const docId = `basic_${locale}`;
-  const snap = await db.collection('faqGroups').doc(docId).get();
-
-  if (!snap.exists) {
-    return {
-      title: strings.faqTitle,
-      items: [],
-    };
-  }
-
-  const data = snap.data() || {};
-  const rawItems = Array.isArray(data.items) ? data.items : [];
-
-  const items = sortFaqItems(
-    rawItems
-      .filter((item) => {
-        if (!item) return false;
-        if (item.isHidden === true) return false;
-
-        const q = String(item.q || '').trim();
-        const answer = String(item.aHtml || item.a || '').trim();
-
-        return q && answer;
-      })
-      .map((item) => ({
-        q: String(item.q || '').trim(),
-        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
-        a: typeof item.a === 'string' ? item.a.trim() : '',
-        order:
-          typeof item.order === 'number' && Number.isFinite(item.order)
-            ? item.order
-            : 9999,
-      }))
-  );
-
-  return {
-    title:
-      typeof data.title === 'string' && data.title.trim()
-        ? data.title.trim()
-        : strings.faqTitle,
-    items,
-  };
-}
-
-function buildAboutPageLd(strings, locale = 'lv') {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    '@id': `${abs(strings.pagePath)}#about-page`,
-    url: abs(strings.pagePath),
-    name: strings.pageCrumb,
-    description: strings.headerLead,
-    inLanguage: locale,
-    isPartOf: {
-      '@id': `${abs('/')}#website`,
-    },
-    about: {
-      '@id': `${abs('/')}#organization`,
-    },
-  };
-}
-
-function getLegalFacts(company = {}, strings) {
   const legalName =
     company.legalName ||
     company.legalEntity ||
@@ -267,7 +192,7 @@ function getLegalFacts(company = {}, strings) {
     company.registeredAddress ||
     '';
 
-  return [
+  const legalFacts = [
     legalName
       ? {
           label: strings.facts.legal,
@@ -293,11 +218,6 @@ function getLegalFacts(company = {}, strings) {
         }
       : null,
   ].filter(Boolean);
-}
-
-function getBusinessFacts(siteSettings = {}, strings) {
-  const company = siteSettings?.company || {};
-  const legalFacts = getLegalFacts(company, strings);
 
   return [
     {
@@ -351,8 +271,7 @@ function ServiceLinks({ locale, strings }) {
         ,{' '}
         <Link href={localizedCategoryPath('datoru-remonts', locale)}>
           {strings.links.computers}
-        </Link>
-        {' '}
+        </Link>{' '}
         {strings.and}{' '}
         <Link href={localizedCategoryPath('dyson-remonts', locale)}>
           {strings.links.dyson}
@@ -380,8 +299,7 @@ function ServiceLinks({ locale, strings }) {
           )}
         >
           {strings.links.battery}
-        </Link>
-        {' '}
+        </Link>{' '}
         {strings.and}{' '}
         <Link
           href={localizedServicePath(
@@ -413,67 +331,25 @@ function BusinessFacts({ facts }) {
   );
 }
 
-export default async function AboutPage({
+export default function AboutPage({
   locale = 'lv',
+
+  labels,
   siteSettings,
+  breadcrumbs = [],
+  businessFacts = [],
+
+  faqTitle,
+  faqItems = [],
 }) {
-  const strings = getAboutStrings(locale);
-  const basicFaq = await getBasicFaq(locale);
-  const businessFacts = getBusinessFacts(siteSettings, strings);
-
-  const faqRenderItems = toFaqRenderItems(basicFaq.items);
-  const faqLd = toFaqLd(basicFaq.items);
-
-  const breadcrumbsLd = buildBreadcrumbsLd([
-    { name: strings.homeCrumb, url: abs(localizedHomePath(locale)) },
-    { name: strings.pageCrumb, url: abs(strings.pagePath) },
-  ]);
-
-  const aboutPageLd = buildAboutPageLd(strings, locale);
-
-  const headerCrumbs = [
-    {
-      label: strings.homeCrumb,
-      href: localizedHomePath(locale),
-    },
-    {
-      label: strings.pageCrumb,
-      href: strings.pagePath,
-    },
-  ];
+  const strings = labels || getAboutStrings(locale);
 
   return (
     <>
-      <Script
-        id={`about-breadcrumbs-jsonld-${locale}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(breadcrumbsLd)}
-      </Script>
-
-      <Script
-        id={`about-page-jsonld-${locale}`}
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(aboutPageLd)}
-      </Script>
-
-      {basicFaq.items.length > 0 ? (
-        <Script
-          id={`about-faq-jsonld-${locale}`}
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(faqLd)}
-        </Script>
-      ) : null}
-
       <PageHeader
         title={strings.headerTitle}
         lead={strings.headerLead}
-        crumbs={headerCrumbs}
+        crumbs={breadcrumbs}
       />
 
       <section className={s.section} aria-labelledby="about-intro-h2">
@@ -495,13 +371,9 @@ export default async function AboutPage({
             <aside className={s.factsPanel} aria-labelledby="about-facts-h3">
               <p className={s.eyebrow}>iLab</p>
 
-              <h3 id="about-facts-h3">
-                {strings.factsTitle}
-              </h3>
+              <h3 id="about-facts-h3">{strings.factsTitle}</h3>
 
-              <p className={s.factsLead}>
-                {strings.factsLead}
-              </p>
+              <p className={s.factsLead}>{strings.factsLead}</p>
 
               <BusinessFacts facts={businessFacts} />
             </aside>
@@ -519,9 +391,7 @@ export default async function AboutPage({
                 {strings.servicesTitle}
               </h2>
 
-              <p className={s.lead}>
-                {strings.servicesLead}
-              </p>
+              <p className={s.lead}>{strings.servicesLead}</p>
             </div>
 
             <ServiceLinks locale={locale} strings={strings} />
@@ -533,7 +403,10 @@ export default async function AboutPage({
 
       <Process locale={locale} />
 
-      <section className={s.locationsTeaser} aria-labelledby="about-locations-h2">
+      <section
+        className={s.locationsTeaser}
+        aria-labelledby="about-locations-h2"
+      >
         <div className={s.container}>
           <div className={s.locationsTeaserInner}>
             <div>
@@ -543,9 +416,7 @@ export default async function AboutPage({
                 {strings.locationsAnchorTitle}
               </h2>
 
-              <p className={s.lead}>
-                {strings.locationsAnchorText}
-              </p>
+              <p className={s.lead}>{strings.locationsAnchorText}</p>
             </div>
 
             <Link
@@ -566,11 +437,14 @@ export default async function AboutPage({
 
       <Reviews locale={locale} />
 
-      {faqRenderItems.length > 0 ? (
+      {faqItems.length > 0 ? (
         <Faq
           id="about-faq"
-          title={basicFaq.title}
-          items={faqRenderItems}
+          title={faqTitle || strings.faqTitle}
+          items={faqItems}
+          headingLevel={2}
+          variant="accordion"
+          locale={locale}
         />
       ) : null}
 
