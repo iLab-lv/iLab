@@ -13,8 +13,8 @@ const GA_MEASUREMENT_ID = 'G-KYDSG504F8';
 
 export const metadata = {
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

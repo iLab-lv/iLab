@@ -20,8 +20,8 @@ export const metadata = {
     canonical: 'https://riga.ilab.lv/',
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
   openGraph: {
     title: 'Displeju, bateriju un uzlādes problēmu novēršana Rīgā',
