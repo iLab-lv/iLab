@@ -6,103 +6,96 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
-const SERVICE_IDS = ['water-damage-clean'];
+const seo = getStaticPageSeo('iphoneWaterDamageRepair', locale);
+
+const SERVICE_IDS = ['water-damage'];
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'udens-bojajumu-remonts';
 
-const lvPath = '/iphone-remonts/udens-bojajumu-remonts';
-const routePath = '/ru/remont-iphone/remont-posle-popadaniya-vlagi';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 const allModelsHref = '/ru/remont-iphone#iphone-modeli';
 
 const strings = {
-  title: 'Ремонт iPhone после попадания влаги в Риге | iLab',
-  description:
-    'iPhone упал в воду или не включается после влаги? Выполняем диагностику, чистку и устранение последствий попадания влаги. Быстрая помощь и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Повреждение iPhone после попадания влаги',
-  heroImage: '/images/categories/udens_bojajumi.webp',
+  heroAlt: seo.imageAlt,
+  heroImage: '/images/categories/mitruma_bojajumi.webp',
   heroBodyHtml:
-    '<p><strong>iPhone упал в воду или перестал включаться после влаги?</strong> Выполняем <strong>диагностику и ремонт после попадания влаги</strong> в Риге - чистка, устранение окисления и замена поврежденных деталей. Чем быстрее принесёте, тем выше шанс восстановления. <strong>Гарантия 90 дней</strong>.</p>',
+    '<p><strong>iPhone после воды или влаги</strong> нужно как можно быстрее доставить в сервис. iLab проводит диагностику, чистку, устранение окисления и проверку повреждённых узлов. Цель - по возможности сохранить устройство и данные.</p>',
 
-  introTitle: 'Повреждение iPhone водой - что делать?',
+  headerTitle: 'Ремонт iPhone после влаги в Риге',
+  headerLead:
+    'Если iPhone упал в воду, получил влагу или после жидкости больше не включается, важно не рисковать повторной зарядкой. Проводим диагностику, чистку, устранение коррозии и проверяем возможность сохранить данные.',
+  headerCtaLabel: 'Записаться на диагностику',
+
+  introTitle: 'Что делать, если iPhone попал в воду?',
   introP1:
-    'Если <strong>iPhone упал в воду</strong>, в море, бассейн или на него попала жидкость, важно действовать сразу. Вода вызывает <strong>окисление и коррозию</strong>, повреждает соединения и может привести к короткому замыканию. Правильные действия в первые минуты заметно повышают шанс полного восстановления устройства.',
-  introP2: 'Наши специалисты чаще всего сталкиваются с ситуациями, когда телефон:',
-  introList: [
-    'после воды <strong>не включается</strong>;',
-    '<strong>не заряжается</strong> или зарядка прерывается;',
-    'становится <strong>горячим</strong> или быстро разряжается;',
-    'пропадает звук, камера или сеть;',
-    'на экране появляются <strong>пятна</strong> или полосы.',
-  ],
-  introP3:
-    'Хорошая новость - если принести устройство в тот же день, <strong>более чем в 90% случаев</strong> его удаётся полностью восстановить.',
+    'После попадания влаги самое важное - действовать быстро: выключить устройство, не заряжать его и не сушить на батарее или феном. Жидкость может вызвать окисление, короткое замыкание и повредить плату или другие важные узлы.',
+  introP2:
+    'В сервисе iLab выполняем профессиональную диагностику, чистку и устранение окисления. При необходимости проверяем возможность сохранить данные. Варианты ремонта и цену согласовываем после диагностики.',
 
   selectedModelPrefix: 'Выбрана модель:',
   selectedModelSuffix: 'Прокрутите к',
-  selectedModelLink: 'ценам',
+  selectedModelLink: 'информации',
 
-  priceTitle: 'Цены на ремонт после попадания влаги по моделям',
+  modelPickerTitle: 'Выберите модель iPhone',
+  priceTitle: 'Диагностика и ремонт после влаги',
   priceIntro:
-    'Выберите модель iPhone, чтобы посмотреть стоимость ремонта после попадания влаги. Цена зависит от степени повреждения и необходимых деталей.',
-  ctaLabel: 'Записаться на ремонт',
+    'При попадании воды точную цену можно определить только после диагностики. Выберите модель, чтобы записаться на проверку или консультацию.',
+  ctaLabel: 'Записаться на диагностику',
 
-  processTitle: 'Как проходит ремонт после попадания влаги',
+  processTitle: 'Как проходит диагностика после влаги',
   processSteps: [
     {
+      title: 'Быстрый приём',
+      text: 'Фиксируем ситуацию: когда и как устройство контактировало с жидкостью.',
+    },
+    {
       title: 'Диагностика',
-      text: 'Открываем устройство и оцениваем степень окисления и коррозии.',
+      text: 'Проверяем плату, соединения, дисплей, батарею и узел зарядки.',
     },
     {
-      title: 'Чистка и сушка',
-      text: 'Ультразвуковая чистка, обработка контактов и восстановление соединений.',
+      title: 'Чистка',
+      text: 'Удаляем следы влаги и окисления подходящими средствами.',
     },
     {
-      title: 'Замена поврежденных компонентов',
-      text: 'При необходимости меняем батарею, разъём зарядки, камеры и другие детали.',
+      title: 'Оценка ремонта',
+      text: 'Определяем повреждённые детали и согласовываем возможное решение.',
     },
     {
-      title: 'Полная проверка',
-      text: 'Тестируем звук, камеру, сеть, датчики и зарядку.',
-    },
-    {
-      title: 'Гарантия',
-      text: '90 дней гарантии на детали и выполненные работы.',
+      title: 'Данные',
+      text: 'Если восстановление устройства невыгодно, оцениваем возможность сохранить данные.',
     },
   ],
 
   faqTitle: 'Часто задаваемые вопросы',
 
-  breadcrumbServiceName: 'Ремонт после попадания влаги',
-  serviceName: 'Ремонт iPhone после попадания влаги в Риге',
-  serviceType: 'Ремонт iPhone после попадания влаги',
+  breadcrumbServiceName: 'Ремонт после влаги',
+  serviceName: 'Ремонт iPhone после влаги в Риге',
+  serviceType: 'Ремонт iPhone после влаги',
   serviceDescription:
-    'Диагностика, чистка после попадания влаги, устранение окисления и замена поврежденных деталей iPhone с гарантией.',
-
-  applyHref: '#pieteikties',
+    'Диагностика iPhone после влаги в Риге: чистка, устранение окисления, проверка повреждённых узлов и возможность сохранить данные.',
 
   homeCrumb: 'Главная',
   hubCrumb: 'Ремонт iPhone',
 
-  headerTitle: 'Ремонт iPhone после попадания влаги в Риге',
-  headerLead:
-    'Если iPhone упал в воду или перестал нормально работать после влаги, принесите его на диагностику как можно быстрее. Выполняем чистку, устранение окисления и восстановление устройства с гарантией 90 дней.',
-  headerCtaLabel: 'Смотреть цены',
+  applyAria: 'Записаться на диагностику',
 
-  applyAria: 'Записаться на ремонт',
-
-  processName: 'Ремонт iPhone после попадания влаги',
+  processName: 'Диагностика iPhone после влаги',
   processDescription:
-    'Как проходит ремонт iPhone после попадания влаги в iLab: диагностика, чистка, устранение окисления, замена повреждённых деталей и проверка.',
+    'Как проходит диагностика iPhone после влаги в iLab: приём, проверка, чистка, оценка ремонта и проверка возможности сохранить данные.',
 };
 
 function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
@@ -200,7 +193,8 @@ async function getDevicesForIphone() {
         seriesLabelMap.get(seriesKey) ||
         data.seriesLabel ||
         data.originalSeriesLabel ||
-        strings.otherModels || 'Другие модели',
+        strings.otherModels ||
+        'Другие модели',
     };
   });
 }
@@ -378,15 +372,7 @@ async function getIphoneWaterDamageServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

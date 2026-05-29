@@ -6,13 +6,16 @@ import JsonLd from '@components/seo/JsonLd';
 
 import { getSiteSettings } from '@/lib/siteSettings';
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 const locale = 'lv';
 
 const labels = getPierakstiesPageStrings(locale);
 
-const lvPath = '/pieraksties-remontam';
-const ruPath = '/ru/zapisatsja-na-remont';
+const seo = getStaticPageSeo('booking', locale);
+
+const lvPath = seo.lvPath;
+const ruPath = seo.ruPath;
 
 function buildBreadcrumbsLd(breadcrumbs = []) {
   return {
@@ -69,13 +72,7 @@ function getPierakstiesData() {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: labels.metaTitle,
-    description: labels.metaDescription,
-    lvPath,
-    ruPath,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page() {

@@ -7,6 +7,7 @@ import { getSiteSettings } from '@/lib/siteSettings';
 import { getFaqGroups, getHomeBreadcrumbLabel } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 import {
   absoluteUrl,
@@ -20,32 +21,18 @@ import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
-const title = 'Сервис телефонов и компьютеров в Риге | iLab';
+const seo = getStaticPageSeo('home', locale);
 
-const description =
-  'Ремонт телефонов, планшетов и компьютеров в Риге. Ремонт в тот же день, гарантия 90 дней и два филиала: Domina Shopping и Spice Life.';
+const breadcrumbId = `${absoluteUrl(seo.ruPath)}#breadcrumb`;
+const faqId = `${absoluteUrl(seo.ruPath)}#faq`;
 
-const lvPath = '/';
-const ruPath = '/ru';
-
-const breadcrumbId = `${absoluteUrl(ruPath)}#breadcrumb`;
-const faqId = `${absoluteUrl(ruPath)}#faq`;
-
-export const metadata = buildSeoMetadata({
-  locale,
-  title,
-  description,
-  lvPath,
-  ruPath,
-  image: '/images/og/home.jpg',
-  imageAlt: 'iLab сервис телефонов и компьютеров в Риге',
-});
+export const metadata = buildSeoMetadata(seo);
 
 export default async function Page() {
   const [reviewsSummary, siteSettings, faq] = await Promise.all([
     getReviewsSummary(),
     getSiteSettings(),
-    getFaqGroups(['basic'], locale),
+    getFaqGroups([{ scopeType: 'basic' }], locale),
   ]);
 
   const faqRenderItems = toFaqRenderItems(faq.items);
@@ -56,16 +43,16 @@ export default async function Page() {
 
   const jsonLd = buildJsonLdGraph([
     buildWebPageLd({
-      path: ruPath,
-      name: title,
-      description,
+      path: seo.ruPath,
+      name: seo.title,
+      description: seo.description,
       locale,
       breadcrumbId,
       primaryEntityId: faqLd ? faqId : undefined,
     }),
 
     buildBreadcrumbsLd(
-      [{ name: getHomeBreadcrumbLabel(locale), url: ruPath }],
+      [{ name: getHomeBreadcrumbLabel(locale), url: seo.ruPath }],
       { id: breadcrumbId }
     ),
 

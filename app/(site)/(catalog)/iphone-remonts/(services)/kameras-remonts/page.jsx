@@ -6,70 +6,77 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
-const SERVICE_IDS = ['camera-glass', 'camera'];
+const seo = getStaticPageSeo('iphoneCameraRepair', locale);
+
+const SERVICE_IDS = ['phone-camera'];
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'kameras-remonts';
 
-const routePath = '/iphone-remonts/kameras-remonts';
-const ruPath = '/ru/remont-iphone/remont-kamery';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const hubPath = '/iphone-remonts';
 const allModelsHref = '/iphone-remonts#iphone-modeli';
 
 const strings = {
-  title: 'iPhone kameras remonts Rīgā | iLab',
-  description:
-    'Miglainas bildes vai fokusēšanās problēmas? iPhone kameras remonts un nomaiņa Rīgā - diagnostika, stikliņa nomaiņa un moduļa nomaiņa pēc vajadzības. 90 dienu garantija.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'iPhone kameras remonts Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/kameras_remonts.webp',
   heroBodyHtml:
-    '<p><strong>Miglainas bildes vai fokusēšanās problēmas?</strong> Veicam <strong>iPhone kameras remontu un maiņu</strong> - diagnostika, stikliņa nomaiņa vai moduļa nomaiņa pēc vajadzības. <strong>90 dienu garantija.</strong></p>',
+    '<p><strong>iPhone kameras remonts Rīgā</strong> iLab servisā - kameras stikliņa maiņa, kameras moduļa nomaiņa, fokusēšanas un attēla kvalitātes problēmu diagnostika. Skaidra cena pirms darba un <strong>90 dienu garantija</strong>.</p>',
 
-  introTitle: 'iPhone kameras remonts un nomaiņa Rīgā',
+  headerTitle: 'iPhone kameras remonts Rīgā',
+  headerLead:
+    'Palīdzam, ja iPhone kamera nefokusējas, rāda melnu ekrānu, attēls ir miglains, stikliņš ir saplaisājis vai kamera pēc kritiena vairs darbojas nekorekti. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc darba sniedzam 90 dienu garantiju.',
+  headerCtaLabel: 'Skatīt cenas',
+
+  introTitle: 'iPhone kameras remonts un stikliņa maiņa',
   introP1:
-    'Ja fotogrāfijas ir miglainas, ar plankumiem vai telefons nevar fokusēt, vispirms pārbaudām <strong>kameras stikliņu un moduli</strong>. Ja bojāts tikai stikliņš, bieži pietiek ar tā nomaiņu. Ja bojāts pats modulis - ieteiksim moduļa nomaiņu ar pilnu pārbaudi.',
+    'Kameras problēmas ne vienmēr nozīmē, ka jāmaina viss modulis. Dažreiz pietiek ar <strong>kameras stikliņa maiņu</strong>, tīrīšanu vai savienojumu pārbaudi. Ja kamera nefokusējas, kratās, nerāda attēlu vai pēc kritiena darbojas nestabili, iLab servisā veicam diagnostiku un piemeklējam atbilstošu risinājumu.',
   introP2:
-    'Pēc remonta testējam <strong>fokusēšanu, stabilizāciju, krāsu atbilstību un zibspuldzi</strong>. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pārbaudām priekšējo un aizmugurējo kameru, zibspuldzi, fokusēšanu un attēla kvalitāti. Pirms darba sākšanas saskaņojam cenu un pēc remonta veicam gala testus. Darbam un uzstādītajām detaļām ir <strong>90 dienu garantija</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
   selectedModelLink: 'cenām',
 
   modelPickerTitle: 'Izvēlies iPhone modeli',
-  priceTitle: 'Kameras stikliņa un moduļa maiņas cenas pēc modeļa',
+  priceTitle: 'Kameras remonta cenas pēc modeļa',
   priceIntro:
-    'Apskati iPhone kameras stikliņa un moduļa maiņas izmaksas pēc modeļa. Sākumā veicam diagnostiku, lai noteiktu, kurš variants nepieciešams.',
+    'Izvēlies savu iPhone modeli, lai redzētu kameras remonta cenu. Daudzos gadījumos kameras stikliņu vai moduli iespējams nomainīt tajā pašā dienā.',
   ctaLabel: 'Pieteikties remontam',
 
-  processTitle: 'Kā notiek remonts',
+  processTitle: 'Kā notiek kameras remonts',
   processSteps: [
     {
       title: 'Diagnostika',
-      text: 'Pārbaudām kameras stikliņu, moduli, savienojumus un programmatūru.',
+      text: 'Pārbaudām kameru, fokusēšanu, stikliņu, zibspuldzi un savienojumus.',
     },
     {
-      title: 'Cena un termiņš',
-      text: 'Saskaņojam izmaksas un remonta laiku pirms darba sākšanas.',
+      title: 'Risinājums',
+      text: 'Nosakām, vai nepieciešama tīrīšana, stikliņa maiņa vai kameras moduļa nomaiņa.',
     },
     {
       title: 'Remonts',
-      text: 'Mainām stikliņu vai moduļa komplektu, ja nepieciešams - veicam kalibrāciju.',
+      text: 'Veicam detaļas maiņu vai savienojumu atjaunošanu atbilstoši bojājumam.',
     },
     {
       title: 'Testi',
-      text: 'Pārbaudām fokusēšanu, stabilizāciju, zibspuldzi un attēla kvalitāti.',
+      text: 'Pārbaudām foto, video, fokusēšanu, portreta režīmu un zibspuldzi.',
     },
     {
       title: 'Garantija',
-      text: '90 dienu garantija gan detaļām, gan darbam.',
+      text: 'Pēc remonta sniedzam 90 dienu garantiju darbam un uzstādītajām detaļām.',
     },
   ],
 
@@ -79,22 +86,16 @@ const strings = {
   serviceName: 'iPhone kameras remonts Rīgā',
   serviceType: 'iPhone kameras remonts',
   serviceDescription:
-    'iPhone kameras remonts Rīgā: diagnostika, stikliņa maiņa un moduļa nomaiņa pēc vajadzības. 90 dienu garantija.',
+    'iPhone kameras remonts Rīgā: kameras stikliņa maiņa, kameras moduļa nomaiņa, diagnostika, skaidra cena un 90 dienu garantija.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',
-  otherModels: 'Citi modeļi',
-
-  headerTitle: 'iPhone kameras remonts Rīgā',
-  headerLead:
-    'Remontējam iPhone kameru, ja attēli ir miglaini, ir plankumi, fokusēšanās problēmas vai bojāts kameras stikliņš. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc remonta sniedzam 90 dienu garantiju.',
-  headerCtaLabel: 'Skatīt cenas',
 
   applyAria: 'Pieteikties remontam',
 
   processName: 'iPhone kameras remonts',
   processDescription:
-    'Kā iLab servisā notiek iPhone kameras remonts: diagnostika, cenas saskaņošana, stikliņa vai moduļa maiņa, testi un garantija.',
+    'Kā iLab servisā notiek iPhone kameras remonts: diagnostika, risinājuma izvēle, detaļas maiņa, testi un garantija.',
 };
 
 function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
@@ -192,7 +193,8 @@ async function getDevicesForIphone() {
         seriesLabelMap.get(seriesKey) ||
         data.seriesLabel ||
         data.originalSeriesLabel ||
-        strings.otherModels,
+        strings.otherModels ||
+        'Citi modeļi',
     };
   });
 }
@@ -370,15 +372,7 @@ async function getIphoneCameraServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

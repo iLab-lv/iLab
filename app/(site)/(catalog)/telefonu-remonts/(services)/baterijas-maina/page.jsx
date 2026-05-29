@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
+const seo = getStaticPageSeo('phoneBatteryReplacement', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'baterijas-maina';
 
-const routePath = '/telefonu-remonts/baterijas-maina';
-const ruPath = '/ru/remont-telefonov/zamena-batarei';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const categoryPath = '/telefonu-remonts';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/telefonu-remonts#brand-list',
 
-  title: 'Telefonu baterijas maiņa Rīgā | iLab',
-  description:
-    'Ātra un kvalitatīva telefonu baterijas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģinālas vai OEM baterijas. Bieži tajā pašā dienā.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Telefonu baterijas maiņa Rīgā',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Mainām telefonu bateriju, ja ierīce ātri izlādējas, izslēdzas pie 10–20%, uzkarst vai nestabili tur uzlādi. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam 90 dienu garantiju.',
   headerCtaLabel: 'Skatīt cenas',
 
-  heroAlt: 'Telefonu baterijas maiņa Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/baterijas_maina.webp',
   heroBodyHtml:
     '<p><strong>Ātra un droša telefonu baterijas maiņa Rīgā</strong> - ja tālrunis ātri izlādējas, izslēdzas pie 20% vai lādējas ļoti lēni, palīdzēsim. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
@@ -295,15 +297,7 @@ async function getPhoneBatteryServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

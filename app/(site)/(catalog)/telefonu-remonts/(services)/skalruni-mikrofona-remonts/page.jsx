@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
+const seo = getStaticPageSeo('phoneAudioRepair', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'skalruni-mikrofona-remonts';
 
-const routePath = '/telefonu-remonts/skalruni-mikrofona-remonts';
-const ruPath = '/ru/remont-telefonov/remont-dinamika-mikrofona';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const categoryPath = '/telefonu-remonts';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/telefonu-remonts#brand-list',
 
-  title: 'Telefonu skaļruņu un mikrofona remonts Rīgā | iLab',
-  description:
-    'Klusa skaņa, krakšķi vai sarunās nedzird? Telefonu skaļruņu un mikrofona remonts un tīrīšana Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Remontējam telefonu skaļruni un mikrofonu, ja skaņa ir klusa, kropļota, ar krakšķiem vai sarunās nedzird. Pirms remonta veicam diagnostiku un pēc remonta sniedzam 90 dienu garantiju.',
   headerCtaLabel: 'Skatīt cenas',
 
-  heroAlt: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/mikrofona_remonts.webp',
   heroBodyHtml:
     '<p><strong>Skaļruņu un mikrofona remonts Rīgā</strong> - ja sarunās nedzird, skaņa ir klusa, ar krakšķiem vai balss ierakstā ir troksnis, veiksim tīrīšanu vai moduļu nomaiņu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
@@ -295,15 +297,7 @@ async function getPhoneAudioServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

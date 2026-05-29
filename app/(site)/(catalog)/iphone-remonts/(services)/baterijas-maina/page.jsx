@@ -6,28 +6,30 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
+const seo = getStaticPageSeo('iphoneBatteryReplacement', locale);
+
 const SERVICE_IDS = ['phone-battery'];
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'baterijas-maina';
 
-const routePath = '/iphone-remonts/baterijas-maina';
-const ruPath = '/ru/remont-iphone/zamena-batarei';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const hubPath = '/iphone-remonts';
 const allModelsHref = '/iphone-remonts#iphone-modeli';
 
 const strings = {
-  title: 'iPhone baterijas maiņa Rīgā | iLab',
-  description:
-    'Ātra un kvalitatīva iPhone baterijas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģinālas vai OEM detaļas. Bieži tajā pašā dienā.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'iPhone baterijas maiņa',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/baterijas_maina.webp',
   heroBodyHtml:
     '<p><strong>iPhone baterijas maiņa Rīgā</strong> iLab servisā - ātra diagnostika, kvalitatīvas detaļas un <strong>90 dienu garantija</strong>. Bieži akumulatora nomaiņu paveicam tajā pašā dienā.</p>',
@@ -351,15 +353,7 @@ async function getIphoneBatteryServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

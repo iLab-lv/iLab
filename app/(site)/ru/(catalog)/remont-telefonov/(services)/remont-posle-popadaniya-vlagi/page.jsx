@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('phoneWaterDamageRepair', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'udens-bojajumu-remonts';
 
-const lvPath = '/telefonu-remonts/udens-bojajumu-remonts';
-const routePath = '/ru/remont-telefonov/remont-posle-popadaniya-vlagi';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const categoryPath = '/ru/remont-telefonov';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/ru/remont-telefonov#brand-list',
 
-  title: 'Ремонт телефона после попадания влаги в Риге | iLab',
-  description:
-    'Ремонт телефона после попадания влаги в Риге: диагностика, чистка и устранение окисления после контакта с жидкостью. Замена повреждённых деталей и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Ремонт телефона после попадания влаги в Риге',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Ремонтируем телефоны после контакта с водой и другими жидкостями: диагностика, глубокая чистка, устранение окисления и замена повреждённых деталей. После ремонта выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
-  heroAlt: 'Ремонт телефона после попадания влаги в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/udens_bojajumi.webp',
   heroBodyHtml:
     '<p><strong>Контакт с водой или другой жидкостью?</strong> Выполняем диагностику, глубокую чистку и <strong>устранение окисления</strong>, а также замену повреждённых деталей. Чем быстрее устройство попадёт в сервис, тем выше шанс восстановить его работу. <strong>Бесплатная проверка</strong> и <strong>гарантия 90 дней</strong>.</p>',
@@ -295,15 +297,7 @@ async function getPhoneWaterDamageServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

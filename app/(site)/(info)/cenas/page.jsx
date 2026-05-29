@@ -8,13 +8,16 @@ import devices from '@/data/devices';
 import { db } from '@/lib/firebaseAdmin';
 
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 const locale = 'lv';
 
 const labels = getCenasPageStrings(locale);
 
-const lvPath = '/cenas';
-const ruPath = '/ru/ceny';
+const seo = getStaticPageSeo('prices', locale);
+
+const lvPath = seo.lvPath;
+const ruPath = seo.ruPath;
 
 function titleCaseSlug(slug = '') {
   const txt = String(slug || '').replace(/[-_]+/g, ' ').trim();
@@ -281,13 +284,7 @@ async function getCenasData(searchParams) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: labels.metaTitle,
-    description: labels.metaDescription,
-    lvPath,
-    ruPath,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

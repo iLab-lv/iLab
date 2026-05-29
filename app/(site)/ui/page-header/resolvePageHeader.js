@@ -1,7 +1,6 @@
 // app/(site)/ui/page-header/resolvePageHeader.js
 import categories from '@/data/categories';
 import contentRegistry from '@/data/contentRegistry';
-import categoryContent from '@/data/categoryContent';
 import { getBrandContent, BRAND_CATEGORY } from '@/data/brandContent';
 
 import {
@@ -36,6 +35,7 @@ function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
     if (typeof value[locale] === 'string' && value[locale].trim()) {
       return value[locale].trim();
     }
+
     if (typeof value[fallback] === 'string' && value[fallback].trim()) {
       return value[fallback].trim();
     }
@@ -46,39 +46,34 @@ function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
 
 function getCategory(slug) {
   if (!slug || !categories) return null;
-  if (Array.isArray(categories)) return categories.find((c) => c.slug === slug) || null;
+
+  if (Array.isArray(categories)) {
+    return categories.find((c) => c.slug === slug) || null;
+  }
+
   return categories[slug] || null;
 }
 
 function getBrand(category, brandSlug) {
-  if (!category || !brandSlug || !Array.isArray(category.brands)) return null;
+  if (!category || !brandSlug || !Array.isArray(category.brands)) {
+    return null;
+  }
+
   return category.brands.find((b) => (b.brandSlug || b.slug) === brandSlug) || null;
 }
 
 function getCategoryHero(categorySlug) {
-  const registryHero = contentRegistry?.categories?.[categorySlug]?.hero || null;
-  if (registryHero) return registryHero;
-
-  const legacy = categoryContent?.[categorySlug];
-  if (!legacy) return null;
-
-  return {
-    h1: legacy.h1 || legacy.hero?.h1 || null,
-    lead: legacy.lead || legacy.hero?.lead || null,
-    scrollCta: legacy.scrollCta || legacy.hero?.scrollCta || null,
-    image: legacy.image || legacy.hero?.image || null,
-  };
+  return contentRegistry?.categories?.[categorySlug]?.hero || null;
 }
 
 function getComputerBrandHero(brandSlug) {
-  const category = Array.isArray(categories)
-    ? categories.find((c) => c.slug === 'datoru-remonts')
-    : categories?.['datoru-remonts'];
+  const category = getCategory('datoru-remonts');
 
   if (!category || !Array.isArray(category.brands)) return null;
 
   const brand =
-    category.brands.find((b) => norm(b.brandSlug || '') === norm(brandSlug)) || null;
+    category.brands.find((b) => norm(b.brandSlug || b.slug) === norm(brandSlug)) ||
+    null;
 
   if (!brand) return null;
 
@@ -89,7 +84,10 @@ function getComputerBrandHero(brandSlug) {
     lead:
       brand.lead ||
       `Profesionāls ${brandName} datoru remonts Rīgā - portatīvie un galda datori, ekrāns, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un 90 dienu garantija.`,
-    scrollCta: { label: 'Skatīt modeļus un cenas', targetId: 'brand-modeli' },
+    scrollCta: {
+      label: 'Skatīt modeļus un cenas',
+      targetId: 'brand-modeli',
+    },
     image: brand.image || null,
   };
 }
@@ -163,10 +161,14 @@ async function getDeviceByRoute({
     if (snap.empty) return null;
 
     const doc = snap.docs[0];
-    return { id: doc.id, ...doc.data() };
+
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
   }
 
-  // generic route: /<category>/<brand>/<device>
+  // Generic route: /<category>/<brand>/<device>
   if (categorySlug && secondSeg && thirdSeg && segmentsLength >= 3) {
     const snap = await db
       .collection('devices')
@@ -176,57 +178,37 @@ async function getDeviceByRoute({
       .limit(1)
       .get();
 
-    if (!snap.empty) {
-      const doc = snap.docs[0];
-      return { id: doc.id, ...doc.data() };
-    }
+    if (snap.empty) return null;
 
-    const fallbackSnap = await db
-      .collection('devices')
-      .where('slug', '==', thirdSeg)
-      .where('categoryKey', '==', categorySlug)
-      .limit(10)
-      .get();
-
-    if (fallbackSnap.empty) return null;
-
-    const match =
-      fallbackSnap.docs.find((doc) => {
-        const data = doc.data() || {};
-        const candidates = [
-          data.brandKey,
-          data.brandSlug,
-          data.brandId,
-          data.brand,
-        ]
-          .filter(Boolean)
-          .map((v) => norm(v));
-
-        return candidates.includes(norm(secondSeg));
-      }) || null;
-
-    if (!match) return null;
+    const doc = snap.docs[0];
 
     return {
-      id: match.id,
-      ...match.data(),
+      id: doc.id,
+      ...doc.data(),
     };
   }
 
   return null;
 }
 
+async function hasDevicePrices(deviceSlug) {
+  if (!deviceSlug) return false;
+
+  const snap = await db
+    .collection('modelServices')
+    .where('modelId', '==', deviceSlug)
+    .limit(1)
+    .get();
+
+  return !snap.empty;
+}
+
 async function getDeviceHero(device, locale = 'lv') {
   if (!device) return null;
 
-  const deviceName =
-    pickLocalizedField(device.name, locale) ||
-    device.name ||
-    '';
+  const deviceName = pickLocalizedField(device.name, locale) || device.name || '';
 
-  const h1 =
-    pickLocalizedField(device.h1, locale) ||
-    `${deviceName} remonts`;
+  const h1 = pickLocalizedField(device.h1, locale) || `${deviceName} remonts`;
 
   const lead =
     pickLocalizedField(device.lead, locale) ||
@@ -235,18 +217,17 @@ async function getDeviceHero(device, locale = 'lv') {
       ? `Ремонт ${deviceName}: экран, аккумулятор, зарядка, камера. Быстрая диагностика и гарантия.`
       : `Remontējam ${deviceName}: displejs, baterija, uzlāde, kamera. Ātra diagnostika un garantija.`);
 
-  const pricingSnap = await db
-    .collection('servicePricing')
-    .where('modelId', '==', device.slug)
-    .limit(1)
-    .get();
-
-  const hasPrices = !pricingSnap.empty;
+  const hasPrices = await hasDevicePrices(device.slug);
 
   return {
     h1,
     lead,
-    scrollCta: hasPrices ? { label: 'Skatīt cenas', targetId: 'cenas' } : null,
+    scrollCta: hasPrices
+      ? {
+          label: 'Skatīt cenas',
+          targetId: 'cenas',
+        }
+      : null,
     image: device.image || null,
   };
 }
@@ -272,16 +253,17 @@ function makeResult({
 
 function getBaseMeta(categorySlug, secondSeg, device = null, locale = 'lv') {
   const category = getCategory(categorySlug);
+
   const categoryLabel = categorySlug
     ? category?.name || category?.label || titleize(categorySlug)
     : '';
 
   const brand = getBrand(category, secondSeg);
+
   const brandLabel =
     brand?.name || brand?.label || (secondSeg ? titleize(secondSeg) : null);
 
-  const deviceLabel =
-    pickLocalizedField(device?.name, locale) || device?.name || null;
+  const deviceLabel = pickLocalizedField(device?.name, locale) || device?.name || null;
 
   return {
     category,
@@ -313,7 +295,7 @@ export async function resolvePageHeader(pathname = '/') {
   const [categorySlug, secondSeg, thirdSeg] = canonicalSegments;
   const segmentsLength = canonicalSegments.length;
 
-  // info page
+  // Info page
   if (segmentsLength === 1) {
     const infoKey = firstInfoCanonical || '';
     const infoEntry = infoKey ? contentRegistry?.info?.[infoKey] : null;
@@ -325,7 +307,10 @@ export async function resolvePageHeader(pathname = '/') {
         scrollCta: infoEntry.scrollCta || null,
         image: infoEntry.image || null,
         crumbs: [
-          { label: 'Sākums', href: '/' },
+          {
+            label: 'Sākums',
+            href: '/',
+          },
           {
             label: infoEntry.h1 || titleize(infoKey),
             href: buildInfoHref(locale, infoKey),
@@ -342,7 +327,7 @@ export async function resolvePageHeader(pathname = '/') {
     locale
   );
 
-  // category page
+  // Category page
   if (segmentsLength === 1) {
     const hero = getCategoryHero(categorySlug);
 
@@ -356,7 +341,10 @@ export async function resolvePageHeader(pathname = '/') {
       scrollCta: hero?.scrollCta || null,
       image: hero?.image || null,
       crumbs: [
-        { label: 'Sākums', href: '/' },
+        {
+          label: 'Sākums',
+          href: '/',
+        },
         {
           label: hero?.h1 || categoryLabel || titleize(categorySlug),
           href: buildCategoryHref(locale, categorySlug),
@@ -365,7 +353,7 @@ export async function resolvePageHeader(pathname = '/') {
     });
   }
 
-  // service page
+  // Service page
   if (segmentsLength === 2) {
     const serviceKey = `${categorySlug}/${secondSeg}`;
     const serviceEntry = contentRegistry?.services?.[serviceKey];
@@ -379,7 +367,10 @@ export async function resolvePageHeader(pathname = '/') {
         scrollCta: serviceEntry.scrollCta ?? categoryHero?.scrollCta ?? null,
         image: serviceEntry.image || categoryHero?.image || null,
         crumbs: [
-          { label: 'Sākums', href: '/' },
+          {
+            label: 'Sākums',
+            href: '/',
+          },
           {
             label: categoryLabel,
             href: buildCategoryHref(locale, categorySlug),
@@ -393,7 +384,7 @@ export async function resolvePageHeader(pathname = '/') {
     }
   }
 
-  // device page
+  // Device page
   const device = await getDeviceByRoute({
     categorySlug,
     secondSeg,
@@ -403,13 +394,13 @@ export async function resolvePageHeader(pathname = '/') {
 
   if (device) {
     const hero = await getDeviceHero(device, locale);
-    const deviceName =
-      pickLocalizedField(device.name, locale) ||
-      device.name ||
-      '';
+    const deviceName = pickLocalizedField(device.name, locale) || device.name || '';
 
     const crumbs = [
-      { label: 'Sākums', href: '/' },
+      {
+        label: 'Sākums',
+        href: '/',
+      },
       {
         label: categoryLabel,
         href: buildCategoryHref(locale, categorySlug),
@@ -444,18 +435,23 @@ export async function resolvePageHeader(pathname = '/') {
     });
   }
 
-  // brand page
+  // Brand page
   if (segmentsLength === 2) {
     const hero = getBrandHero(categorySlug, secondSeg);
 
     if (hero) {
       return makeResult({
-        title: hero.h1 || `${brandLabel} ${categoryLabel?.toLowerCase?.() || ''}`.trim(),
+        title:
+          hero.h1 ||
+          `${brandLabel} ${categoryLabel?.toLowerCase?.() || ''}`.trim(),
         lead: hero.lead || null,
         scrollCta: hero.scrollCta || null,
         image: hero.image || null,
         crumbs: [
-          { label: 'Sākums', href: '/' },
+          {
+            label: 'Sākums',
+            href: '/',
+          },
           {
             label: categoryLabel,
             href: buildCategoryHref(locale, categorySlug),
