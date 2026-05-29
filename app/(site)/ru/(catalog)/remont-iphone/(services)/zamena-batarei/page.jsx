@@ -6,28 +6,30 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('iphoneBatteryReplacement', locale);
+
 const SERVICE_IDS = ['phone-battery'];
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'baterijas-maina';
 
-const lvPath = '/iphone-remonts/baterijas-maina';
-const routePath = '/ru/remont-iphone/zamena-batarei';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 const allModelsHref = '/ru/remont-iphone#iphone-modeli';
 
 const strings = {
-  title: 'Замена батареи iPhone в Риге | iLab',
-  description:
-    'Быстрая и качественная замена батареи iPhone в Риге. Бесплатная диагностика, гарантия 90 дней, оригинальные или OEM детали. Часто в тот же день.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Замена батареи iPhone',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/baterijas_maina.webp',
   heroBodyHtml:
     '<p><strong>Замена батареи iPhone в Риге</strong> в сервисе iLab - быстрая диагностика, качественные детали и <strong>гарантия 90 дней</strong>. Часто замену аккумулятора выполняем в тот же день.</p>',
@@ -49,7 +51,7 @@ const strings = {
 
   headerTitle: 'Замена батареи iPhone в Риге',
   headerLead:
-    'Меняем аккумулятор iPhone при быстром разряде, отключениях, перегреве и других признаках износа батареи. До ремонта проводим диагностику, согласовываем стоимость и после замены выдаём гарантию 90 дней.',
+    'Меняем аккумулятор iPhone, если батарея быстро разряжается, телефон выключается, греется или нестабильно показывает заряд. До ремонта проводим диагностику, согласовываем стоимость и после замены выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
   applyAria: 'Записаться на ремонт',
@@ -351,15 +353,7 @@ async function getIphoneBatteryServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

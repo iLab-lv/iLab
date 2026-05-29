@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('phoneChargePortReplacement', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'uzlades-ligzdas-maina';
 
-const lvPath = '/telefonu-remonts/uzlades-ligzdas-maina';
-const routePath = '/ru/remont-telefonov/zamena-razema-zaryadki';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const categoryPath = '/ru/remont-telefonov';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/ru/remont-telefonov#brand-list',
 
-  title: 'Замена разъёма зарядки телефона в Риге | iLab',
-  description:
-    'Не заряжается, нужно шевелить кабель или порт болтается? Чистка и замена разъёма зарядки телефона в Риге. Бесплатная диагностика и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Замена разъёма зарядки телефона в Риге',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Ремонтируем и меняем разъём зарядки телефона, если зарядка прерывается, кабель нужно шевелить или порт не реагирует. До ремонта проводим диагностику и после ремонта выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
-  heroAlt: 'Замена разъёма зарядки телефона в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/uzlades_ligzda_remonts.webp',
   heroBodyHtml:
     '<p><strong>Не заряжается или нужно шевелить кабель?</strong> Выполняем <strong>чистку разъёма зарядки</strong> и при необходимости <strong>замену разъёма</strong>. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
@@ -294,15 +296,7 @@ async function getPhoneChargePortServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

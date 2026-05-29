@@ -7,6 +7,7 @@ import JsonLd from '@components/seo/JsonLd';
 import { db } from '@/lib/firebaseAdmin';
 
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 import {
   normalizeText,
@@ -17,8 +18,10 @@ const locale = 'ru';
 
 const labels = getBujPageStrings(locale);
 
-const lvPath = '/buj';
-const ruPath = '/ru/faq';
+const seo = getStaticPageSeo('faq', locale);
+
+const lvPath = seo.lvPath;
+const ruPath = seo.ruPath;
 
 function cleanSchemaText(value = '') {
   return String(value || '')
@@ -237,13 +240,7 @@ async function getBujData() {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: labels.metaTitle,
-    description: labels.metaDescription,
-    lvPath,
-    ruPath,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page() {

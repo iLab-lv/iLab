@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
+const seo = getStaticPageSeo('phoneWaterDamageRepair', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'udens-bojajumu-remonts';
 
-const routePath = '/telefonu-remonts/udens-bojajumu-remonts';
-const ruPath = '/ru/remont-telefonov/remont-posle-popadaniya-vlagi';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const categoryPath = '/telefonu-remonts';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/telefonu-remonts#brand-list',
 
-  title: 'Telefonu ūdens bojājumu remonts Rīgā | iLab',
-  description:
-    'Telefonu ūdens bojājumu remonts Rīgā: diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar šķidrumu. Bojāto detaļu nomaiņa un 90 dienu garantija.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Telefonu ūdens bojājumu remonts Rīgā',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Remontējam telefonus pēc saskares ar ūdeni un citiem šķidrumiem: diagnostika, dziļā tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Pēc remonta sniedzam 90 dienu garantiju.',
   headerCtaLabel: 'Skatīt cenas',
 
-  heroAlt: 'Telefonu ūdens bojājumu remonts Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/udens_bojajumi.webp',
   heroBodyHtml:
     '<p><strong>Ūdens vai citu šķidrumu ietekme?</strong> Veicam diagnostiku, dziļo tīrīšanu un <strong>oksidācijas novēršanu</strong>, kā arī bojāto detaļu maiņu. Jo ātrāk ierīce nonāk servisā, jo lielākas izredzes atjaunot tās darbību. <strong>Bezmaksas pārbaude</strong> un <strong>90 dienu garantija</strong>.</p>',
@@ -295,15 +297,7 @@ async function getPhoneWaterDamageServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

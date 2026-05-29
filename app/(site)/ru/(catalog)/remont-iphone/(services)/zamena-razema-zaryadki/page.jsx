@@ -6,11 +6,14 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
+
+const seo = getStaticPageSeo('iphoneChargePortReplacement', locale);
 
 const SERVICE_IDS = ['charge-port'];
 
@@ -18,17 +21,16 @@ const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'uzlades-ligzdas-maina';
 
-const lvPath = '/iphone-remonts/uzlades-ligzdas-maina';
-const routePath = '/ru/remont-iphone/zamena-razema-zaryadki';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 const allModelsHref = '/ru/remont-iphone#iphone-modeli';
 
 const strings = {
-  title: 'Замена разъёма зарядки iPhone в Риге | iLab',
-  description:
-    'Быстрая и профессиональная замена разъёма зарядки iPhone в Риге. Бесплатная диагностика, гарантия 90 дней. Решаем проблемы “не заряжается”, “нужно шевелить кабель”, “нет реакции на зарядку” и другие.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Замена разъёма зарядки iPhone в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/uzlades_ligzda_remonts.webp',
   heroBodyHtml:
     '<p><strong>iPhone не заряжается, нужно шевелить кабель или разъём болтается?</strong> Выполняем быструю и безопасную <strong>замену разъёма зарядки в Риге</strong>, а при необходимости - профессиональную чистку и устранение окисления. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
@@ -370,15 +372,7 @@ async function getIphoneChargePortServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

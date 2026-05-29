@@ -6,103 +6,96 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
-const SERVICE_IDS = ['water-damage-clean'];
+const seo = getStaticPageSeo('iphoneWaterDamageRepair', locale);
+
+const SERVICE_IDS = ['water-damage'];
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'udens-bojajumu-remonts';
 
-const routePath = '/iphone-remonts/udens-bojajumu-remonts';
-const ruPath = '/ru/remont-iphone/remont-posle-popadaniya-vlagi';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const hubPath = '/iphone-remonts';
 const allModelsHref = '/iphone-remonts#iphone-modeli';
 
 const strings = {
-  title: 'iPhone ūdens bojājumi - diagnostika un remonts Rīgā | iLab',
-  description:
-    'iPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas? Veicam ūdens bojājumu diagnostiku, tīrīšanu un oksidācijas novēršanu. Ātra palīdzība un 90 dienu garantija.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'iPhone ūdens bojājumi',
-  heroImage: '/images/categories/udens_bojajumi.webp',
+  heroAlt: seo.imageAlt,
+  heroImage: '/images/categories/mitruma_bojajumi.webp',
   heroBodyHtml:
-    '<p><strong>IPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas?</strong> Veicam <strong>ūdens bojājumu diagnostiku un remontu</strong> Rīgā - tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Jo ātrāk atnesīsi, jo labākas izredzes. <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>iPhone pēc ūdens vai mitruma</strong> jānogādā servisā pēc iespējas ātrāk. iLab veic diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto mezglu pārbaudi. Mērķis - pēc iespējas saglabāt ierīci un datus.</p>',
 
-  introTitle: 'iPhone ūdens bojājumi - ko darīt?',
+  headerTitle: 'iPhone ūdens bojājumu remonts Rīgā',
+  headerLead:
+    'Ja iPhone iekritis ūdenī, saņēmis mitrumu vai pēc šķidruma vairs neieslēdzas, svarīgi neriskēt ar atkārtotu lādēšanu. Veicam diagnostiku, tīrīšanu, korozijas novēršanu un pārbaudām, vai iespējams saglabāt datus.',
+  headerCtaLabel: 'Pieteikt diagnostiku',
+
+  introTitle: 'Ko darīt, ja iPhone bijis ūdenī?',
   introP1:
-    'Ja <strong>iPhone iekrita ūdenī</strong>, jūrā, baseinā vai uz tā izlija šķidrums, svarīgi rīkoties nekavējoties. Ūdens izraisa <strong>oksidāciju un koroziju</strong>, bojā savienojumus un var radīt īssavienojumu. Pareiza rīcība pirmajās minūtēs ievērojami palielina iespēju ierīci pilnībā atjaunot.',
-  introP2: 'Mūsu speciālisti visbiežāk saskaras ar situācijām, kad telefons:',
-  introList: [
-    'vairs <strong>neieslēdzas</strong> pēc ūdens;',
-    '<strong>neuzlādējas</strong> vai uzlāde pārtrūkst;',
-    'kļūst <strong>karsts</strong> vai strauji izlādējas;',
-    'pazūd skaņa, kamera vai tīkls;',
-    'ekrānā parādās <strong>plankumi</strong> vai līnijas.',
-  ],
-  introP3:
-    'Labā ziņa - ja ierīci atnes tajā pašā dienā, <strong>vairāk nekā 90% gadījumu</strong> izdodas to pilnībā atjaunot.',
+    'Pēc mitruma bojājuma svarīgākais ir rīkoties ātri: izslēgt ierīci, nelādēt to un nenodarboties ar žāvēšanu uz radiatora vai ar fēnu. Šķidrums var izraisīt oksidāciju, īssavienojumu un bojāt mātesplati vai citus svarīgus mezglus.',
+  introP2:
+    'iLab servisā veicam profesionālu diagnostiku, tīrīšanu un oksidācijas novēršanu. Ja nepieciešams, pārbaudām arī datu saglabāšanas iespējas. Remonta iespējas un cenu saskaņojam pēc diagnostikas.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
-  selectedModelLink: 'cenām',
+  selectedModelLink: 'informācijai',
 
-  priceTitle: 'Ūdens bojājumu remonta cenas pēc modeļa',
+  modelPickerTitle: 'Izvēlies iPhone modeli',
+  priceTitle: 'Ūdens bojājumu diagnostika un remonts',
   priceIntro:
-    'Izvēlies savu iPhone modeli, lai redzētu ūdens bojājumu remonta izmaksas. Izmaksas atkarīgas no bojājuma apmēra un nepieciešamajām detaļām.',
-  ctaLabel: 'Pieteikties remontam',
+    'Ūdens bojājumu gadījumā precīzu cenu iespējams noteikt tikai pēc diagnostikas. Izvēlies modeli, lai pieteiktu pārbaudi vai konsultāciju.',
+  ctaLabel: 'Pieteikt diagnostiku',
 
-  processTitle: 'Kā notiek ūdens bojājumu remonts',
+  processTitle: 'Kā notiek ūdens bojājumu diagnostika',
   processSteps: [
     {
+      title: 'Ātra pieņemšana',
+      text: 'Piefiksējam situāciju, kad un kā ierīce saskārās ar šķidrumu.',
+    },
+    {
       title: 'Diagnostika',
-      text: 'Atveram ierīci un novērtējam oksidācijas un korozijas apmēru.',
+      text: 'Pārbaudām mātesplati, savienojumus, displeju, bateriju un uzlādes mezglu.',
     },
     {
-      title: 'Tīrīšana un žāvēšana',
-      text: 'Ultraskaņas tīrīšana, kontakti, savienojumu atjaunošana.',
+      title: 'Tīrīšana',
+      text: 'Veicam mitruma un oksidācijas pēdu tīrīšanu ar piemērotiem līdzekļiem.',
     },
     {
-      title: 'Bojāto komponentu maiņa',
-      text: 'Pēc vajadzības mainām bateriju, uzlādes portu, kameras u.c.',
+      title: 'Remonta izvērtēšana',
+      text: 'Nosakām bojātās detaļas un saskaņojam iespējamo remonta risinājumu.',
     },
     {
-      title: 'Pilna pārbaude',
-      text: 'Testējam skaņu, kameru, tīklu, sensorus un uzlādi.',
-    },
-    {
-      title: 'Garantija',
-      text: '90 dienas gan detaļām, gan darbam.',
+      title: 'Datu iespējas',
+      text: 'Ja ierīces atjaunošana nav izdevīga, izvērtējam datu saglabāšanas iespējas.',
     },
   ],
 
   faqTitle: 'Biežāk uzdotie jautājumi',
 
-  breadcrumbServiceName: 'Ūdens bojājumi',
-  serviceName: 'iPhone ūdens bojājumi - diagnostika un remonts Rīgā',
-  serviceType: 'iPhone ūdens bojājumi - diagnostika un remonts',
+  breadcrumbServiceName: 'Ūdens bojājumu remonts',
+  serviceName: 'iPhone ūdens bojājumu remonts Rīgā',
+  serviceType: 'iPhone ūdens bojājumu remonts',
   serviceDescription:
-    'iPhone ūdens bojājumu diagnostika, tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa ar garantiju.',
-
-  applyHref: '#pieteikties',
+    'iPhone ūdens bojājumu diagnostika Rīgā: tīrīšana, oksidācijas novēršana, bojāto mezglu pārbaude un datu saglabāšanas iespējas.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',
 
-  headerTitle: 'iPhone ūdens bojājumu diagnostika un remonts Rīgā',
-  headerLead:
-    'Ja iPhone iekritis ūdenī vai pēc mitruma vairs nedarbojas pareizi, atnes to uz diagnostiku pēc iespējas ātrāk. Veicam tīrīšanu, oksidācijas novēršanu un bojāto komponentu atjaunošanu ar 90 dienu garantiju.',
-  headerCtaLabel: 'Skatīt cenas',
+  applyAria: 'Pieteikt diagnostiku',
 
-  applyAria: 'Pieteikties remontam',
-
-  processName: 'iPhone ūdens bojājumu remonts',
+  processName: 'iPhone ūdens bojājumu diagnostika',
   processDescription:
-    'Kā iLab servisā notiek iPhone ūdens bojājumu remonts: diagnostika, tīrīšana, oksidācijas novēršana, bojāto detaļu maiņa un pārbaude.',
+    'Kā iLab servisā notiek iPhone ūdens bojājumu diagnostika: pieņemšana, pārbaude, tīrīšana, remonta izvērtēšana un datu iespēju pārbaude.',
 };
 
 function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
@@ -200,7 +193,8 @@ async function getDevicesForIphone() {
         seriesLabelMap.get(seriesKey) ||
         data.seriesLabel ||
         data.originalSeriesLabel ||
-        strings.otherModels || 'Citi modeļi',
+        strings.otherModels ||
+        'Citi modeļi',
     };
   });
 }
@@ -378,15 +372,7 @@ async function getIphoneWaterDamageServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

@@ -6,11 +6,14 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
+
+const seo = getStaticPageSeo('iphoneChargePortReplacement', locale);
 
 const SERVICE_IDS = ['charge-port'];
 
@@ -18,17 +21,16 @@ const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'uzlades-ligzdas-maina';
 
-const routePath = '/iphone-remonts/uzlades-ligzdas-maina';
-const ruPath = '/ru/remont-iphone/zamena-razema-zaryadki';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const hubPath = '/iphone-remonts';
 const allModelsHref = '/iphone-remonts#iphone-modeli';
 
 const strings = {
-  title: 'iPhone uzlādes ligzdas maiņa Rīgā | iLab',
-  description:
-    'Ātra un profesionāla iPhone uzlādes ligzdas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija. Risinām “nelādējas”, “jākustina vads”, “nereaģē uzlāde” u.c. problēmas, bieži tajā pašā dienā.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'iPhone uzlādes ligzdas maiņa Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/uzlades_ligzda_remonts.webp',
   heroBodyHtml:
     '<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā - profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
@@ -370,15 +372,7 @@ async function getIphoneChargePortServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

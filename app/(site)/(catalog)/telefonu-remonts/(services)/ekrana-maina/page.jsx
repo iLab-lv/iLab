@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
 
+const seo = getStaticPageSeo('phoneScreenReplacement', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'ekrana-maina';
 
-const routePath = '/telefonu-remonts/ekrana-maina';
-const ruPath = '/ru/remont-telefonov/zamena-ekrana';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const categoryPath = '/telefonu-remonts';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/telefonu-remonts#brand-list',
 
-  title: 'Telefonu ekrāna maiņa Rīgā | iLab',
-  description:
-    'Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģināli vai OEM displeji. Bieži tajā pašā dienā.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Telefonu ekrāna maiņa Rīgā',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Mainām telefonu ekrānu, ja tas ir saplaisājis, rāda plankumus, līnijas vai nereaģē uz pieskārienu. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam 90 dienu garantiju.',
   headerCtaLabel: 'Skatīt cenas',
 
-  heroAlt: 'Telefonu ekrāna maiņa Rīgā',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
     '<p><strong>Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā</strong> - plaisas, plankumi vai skāriena problēmas novēršam bieži tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
@@ -295,15 +297,7 @@ async function getPhoneScreenServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

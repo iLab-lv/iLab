@@ -6,13 +6,16 @@ import TermsPage, {
 import JsonLd from '@components/seo/JsonLd';
 
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 const locale = 'lv';
 
 const labels = getTermsPageStrings(locale);
 
-const lvPath = '/noteikumi';
-const ruPath = '/ru/pravila';
+const seo = getStaticPageSeo('terms', locale);
+
+const lvPath = seo.lvPath;
+const ruPath = seo.ruPath;
 
 function buildBreadcrumbsLd(breadcrumbs = []) {
   return {
@@ -67,13 +70,7 @@ function getTermsData() {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: labels.metaTitle,
-    description: labels.metaDescription,
-    lvPath,
-    ruPath,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default function Page() {

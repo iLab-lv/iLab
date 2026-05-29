@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('phoneScreenReplacement', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'ekrana-maina';
 
-const lvPath = '/telefonu-remonts/ekrana-maina';
-const routePath = '/ru/remont-telefonov/zamena-ekrana';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const categoryPath = '/ru/remont-telefonov';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/ru/remont-telefonov#brand-list',
 
-  title: 'Замена экрана телефона в Риге | iLab',
-  description:
-    'Быстрая и качественная замена экрана телефона в Риге. Бесплатная диагностика, гарантия 90 дней, оригинальные или OEM дисплеи. Часто в тот же день.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Замена экрана телефона в Риге',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Меняем экран телефона при трещинах, пятнах, полосах и проблемах с сенсором. До ремонта проводим диагностику и после замены выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
-  heroAlt: 'Замена экрана телефона в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
     '<p><strong>Быстрая и качественная замена экрана телефона в Риге</strong> - трещины, пятна и проблемы с сенсором устраняем часто в тот же день. Бесплатная диагностика и <strong>гарантия 90 дней</strong> на каждый ремонт в iLab.</p>',
@@ -295,15 +297,7 @@ async function getPhoneScreenServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

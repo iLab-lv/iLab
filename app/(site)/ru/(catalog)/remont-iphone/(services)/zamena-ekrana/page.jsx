@@ -6,11 +6,14 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
+
+const seo = getStaticPageSeo('iphoneScreenReplacement', locale);
 
 const SERVICE_IDS = [
   'phone-display-original',
@@ -22,20 +25,19 @@ const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'ekrana-maina';
 
-const lvPath = '/iphone-remonts/ekrana-maina';
-const routePath = '/ru/remont-iphone/zamena-ekrana';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 const allModelsHref = '/ru/remont-iphone#iphone-modeli';
 
 const strings = {
-  title: 'Замена экрана iPhone в Риге | iLab',
-  description:
-    'Замена экрана iPhone в Риге - оригинальные или OEM дисплеи, бесплатная диагностика и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Замена экрана iPhone',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
-    '<p><strong>Замена экрана iPhone в Риге</strong> в сервисе iLab - оригинальные и качественные OEM дисплеи, быстрая диагностика и <strong>гарантия 90 дней</strong>. Часто замену экрана выполняем в тот же день.</p>',
+    '<p><strong>Замена экрана iPhone в Риге</strong> в сервисе iLab - качественные дисплеи, быстрая диагностика и <strong>гарантия 90 дней</strong>. Часто замену экрана выполняем в тот же день.</p>',
 
   priceTitle: 'Цены на замену экрана по моделям',
   ctaLabel: 'Записаться на ремонт',
@@ -356,15 +358,7 @@ async function getIphoneScreenServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

@@ -6,70 +6,77 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
-const SERVICE_IDS = ['camera-glass', 'camera'];
+const seo = getStaticPageSeo('iphoneCameraRepair', locale);
+
+const SERVICE_IDS = ['phone-camera'];
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'kameras-remonts';
 
-const lvPath = '/iphone-remonts/kameras-remonts';
-const routePath = '/ru/remont-iphone/remont-kamery';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 const allModelsHref = '/ru/remont-iphone#iphone-modeli';
 
 const strings = {
-  title: 'Ремонт камеры iPhone в Риге | iLab',
-  description:
-    'Мутные фото или проблемы с фокусировкой? Ремонт и замена камеры iPhone в Риге - диагностика, замена стекла камеры и модуля по необходимости. Гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Ремонт камеры iPhone в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/kameras_remonts.webp',
   heroBodyHtml:
-    '<p><strong>Мутные фото или проблемы с фокусировкой?</strong> Выполняем <strong>ремонт и замену камеры iPhone</strong> - диагностика, замена стекла камеры или модуля по необходимости. <strong>Гарантия 90 дней.</strong></p>',
+    '<p><strong>Ремонт камеры iPhone в Риге</strong> в сервисе iLab - замена стекла камеры, замена модуля, диагностика проблем с фокусировкой и качеством изображения. Согласованная цена до начала работ и <strong>гарантия 90 дней</strong>.</p>',
 
-  introTitle: 'Ремонт и замена камеры iPhone в Риге',
+  headerTitle: 'Ремонт камеры iPhone в Риге',
+  headerLead:
+    'Помогаем, если камера iPhone не фокусируется, показывает чёрный экран, снимки мутные, стекло камеры треснуло или после падения камера работает нестабильно. До ремонта проводим диагностику, согласовываем стоимость и после работы выдаём гарантию 90 дней.',
+  headerCtaLabel: 'Смотреть цены',
+
+  introTitle: 'Ремонт камеры iPhone и замена стекла',
   introP1:
-    'Если фотографии получаются мутными, с пятнами или телефон не может сфокусироваться, сначала проверяем <strong>стекло камеры и модуль</strong>. Если повреждено только стекло, часто достаточно его замены. Если поврежден сам модуль - предложим замену модуля с полной проверкой.',
+    'Проблемы с камерой не всегда означают, что нужно менять весь модуль. Иногда достаточно <strong>замены стекла камеры</strong>, чистки или проверки соединений. Если камера не фокусируется, трясётся, не показывает изображение или после падения работает нестабильно, в сервисе iLab проводим диагностику и подбираем правильное решение.',
   introP2:
-    'После ремонта проверяем <strong>фокусировку, стабилизацию, цветопередачу и вспышку</strong>. Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На все работы и детали действует <strong>гарантия 90 дней</strong>.',
+    'Проверяем переднюю и заднюю камеру, вспышку, фокусировку и качество изображения. До начала работы согласовываем цену, а после ремонта выполняем финальные тесты. На работу и установленные детали действует <strong>гарантия 90 дней</strong>.',
 
   selectedModelPrefix: 'Выбрана модель:',
   selectedModelSuffix: 'Прокрутите к',
   selectedModelLink: 'ценам',
 
   modelPickerTitle: 'Выберите модель iPhone',
-  priceTitle: 'Цены на замену стекла камеры и модуля по моделям',
+  priceTitle: 'Цены на ремонт камеры по моделям',
   priceIntro:
-    'Посмотрите стоимость замены стекла камеры и модуля iPhone по моделям. Сначала проводим диагностику, чтобы определить, какой вариант нужен.',
+    'Выберите модель iPhone, чтобы посмотреть цену ремонта камеры. Во многих случаях стекло камеры или модуль можно заменить в тот же день.',
   ctaLabel: 'Записаться на ремонт',
 
-  processTitle: 'Как проходит ремонт',
+  processTitle: 'Как проходит ремонт камеры',
   processSteps: [
     {
       title: 'Диагностика',
-      text: 'Проверяем стекло камеры, модуль, соединения и программную часть.',
+      text: 'Проверяем камеру, фокусировку, стекло, вспышку и соединения.',
     },
     {
-      title: 'Цена и срок',
-      text: 'Согласовываем стоимость и время ремонта до начала работ.',
+      title: 'Решение',
+      text: 'Определяем, нужна ли чистка, замена стекла или замена модуля камеры.',
     },
     {
       title: 'Ремонт',
-      text: 'Меняем стекло или модуль камеры, при необходимости выполняем калибровку.',
+      text: 'Меняем деталь или восстанавливаем соединения в зависимости от поломки.',
     },
     {
       title: 'Тесты',
-      text: 'Проверяем фокусировку, стабилизацию, вспышку и качество изображения.',
+      text: 'Проверяем фото, видео, фокусировку, портретный режим и вспышку.',
     },
     {
       title: 'Гарантия',
-      text: 'Гарантия 90 дней на детали и выполненные работы.',
+      text: 'После ремонта предоставляем гарантию 90 дней на работу и установленные детали.',
     },
   ],
 
@@ -79,22 +86,16 @@ const strings = {
   serviceName: 'Ремонт камеры iPhone в Риге',
   serviceType: 'Ремонт камеры iPhone',
   serviceDescription:
-    'Ремонт камеры iPhone в Риге: диагностика, замена стекла камеры и замена модуля по необходимости. Гарантия 90 дней.',
+    'Ремонт камеры iPhone в Риге: замена стекла камеры, замена модуля, диагностика, согласованная цена и гарантия 90 дней.',
 
   homeCrumb: 'Главная',
   hubCrumb: 'Ремонт iPhone',
-  otherModels: 'Другие модели',
-
-  headerTitle: 'Ремонт камеры iPhone в Риге',
-  headerLead:
-    'Ремонтируем камеру iPhone при мутных фото, пятнах, проблемах с фокусировкой и повреждённом стекле камеры. До ремонта проводим диагностику, согласовываем стоимость и после ремонта выдаём гарантию 90 дней.',
-  headerCtaLabel: 'Смотреть цены',
 
   applyAria: 'Записаться на ремонт',
 
   processName: 'Ремонт камеры iPhone',
   processDescription:
-    'Как проходит ремонт камеры iPhone в iLab: диагностика, согласование цены, замена стекла или модуля, тесты и гарантия.',
+    'Как проходит ремонт камеры iPhone в iLab: диагностика, выбор решения, замена детали, тесты и гарантия.',
 };
 
 function pickLocalizedField(value, locale = 'lv', fallback = 'lv') {
@@ -192,7 +193,8 @@ async function getDevicesForIphone() {
         seriesLabelMap.get(seriesKey) ||
         data.seriesLabel ||
         data.originalSeriesLabel ||
-        strings.otherModels,
+        strings.otherModels ||
+        'Другие модели',
     };
   });
 }
@@ -370,15 +372,7 @@ async function getIphoneCameraServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

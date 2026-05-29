@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('phoneCameraRepair', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'kameras-remonts';
 
-const lvPath = '/telefonu-remonts/kameras-remonts';
-const routePath = '/ru/remont-telefonov/remont-kamery';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const categoryPath = '/ru/remont-telefonov';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/ru/remont-telefonov#brand-list',
 
-  title: 'Ремонт камеры телефона в Риге | iLab',
-  description:
-    'Размытые фото, проблемы с фокусировкой или не работает камера? Ремонт и замена камеры телефона в Риге. Бесплатная диагностика и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Ремонт камеры телефона в Риге',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Ремонтируем камеру телефона при размытых фото, проблемах с фокусировкой, повреждённом стекле камеры или ошибках камеры. До ремонта проводим диагностику и после ремонта выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
-  heroAlt: 'Ремонт камеры телефона в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/kameras_remonts.webp',
   heroBodyHtml:
     '<p><strong>Ремонт камеры телефона в Риге</strong> - размытое изображение, повреждённое стекло или проблемы с фокусировкой? Выполняем диагностику и при необходимости <strong>замену модуля камеры или стекла</strong>. Бесплатная проверка и <strong>гарантия 90 дней</strong>.</p>',
@@ -295,15 +297,7 @@ async function getPhoneCameraServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

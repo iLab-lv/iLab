@@ -6,11 +6,14 @@ import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
+
+const seo = getStaticPageSeo('iphoneScreenReplacement', locale);
 
 const SERVICE_IDS = [
   'phone-display-original',
@@ -22,17 +25,16 @@ const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 const SERVICE_KEY = 'ekrana-maina';
 
-const routePath = '/iphone-remonts/ekrana-maina';
-const ruPath = '/ru/remont-iphone/zamena-ekrana';
+const routePath = seo.lvPath;
+const ruPath = seo.ruPath;
 const hubPath = '/iphone-remonts';
 const allModelsHref = '/iphone-remonts#iphone-modeli';
 
 const strings = {
-  title: 'iPhone ekrāna maiņa Rīgā | iLab',
-  description:
-    'iPhone ekrāna maiņa Rīgā - oriģināli vai OEM displeji, bezmaksas diagnostika un 90 dienu garantija.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'iPhone ekrāna maiņa',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
     '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā - oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>90 dienu garantija</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
@@ -356,15 +358,7 @@ async function getIphoneScreenServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath: routePath,
-    ruPath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

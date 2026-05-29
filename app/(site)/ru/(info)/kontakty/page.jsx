@@ -9,6 +9,7 @@ import { db } from '@/lib/firebaseAdmin';
 import { getSiteSettings } from '@/lib/siteSettings';
 
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 
 import {
   localizedHomePath,
@@ -21,8 +22,10 @@ const locale = 'ru';
 
 const labels = getContactsPageStrings(locale);
 
-const lvPath = localizedInfoPath('kontakti', 'lv');
-const ruPath = localizedInfoPath('kontakti', 'ru');
+const seo = getStaticPageSeo('contacts', locale);
+
+const lvPath = seo.lvPath;
+const ruPath = seo.ruPath;
 
 function sortFaqItems(items = []) {
   return [...items].sort((a, b) => {
@@ -171,13 +174,7 @@ async function getContactsData() {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: labels.metaTitle,
-    description: labels.metaDescription,
-    lvPath,
-    ruPath,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page() {

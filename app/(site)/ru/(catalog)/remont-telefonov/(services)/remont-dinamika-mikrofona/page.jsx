@@ -7,17 +7,20 @@ import { getCategoryBySlug } from '@/lib/content/categories';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
+const seo = getStaticPageSeo('phoneAudioRepair', locale);
+
 const CATEGORY_KEY = 'telefonu-remonts';
 const SERVICE_KEY = 'skalruni-mikrofona-remonts';
 
-const lvPath = '/telefonu-remonts/skalruni-mikrofona-remonts';
-const routePath = '/ru/remont-telefonov/remont-dinamika-mikrofona';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const categoryPath = '/ru/remont-telefonov';
 
 const strings = {
@@ -25,9 +28,8 @@ const strings = {
   categoryPath,
   allModelsHref: '/ru/remont-telefonov#brand-list',
 
-  title: 'Ремонт динамика и микрофона телефона в Риге | iLab',
-  description:
-    'Тихий звук, хрипы или во время разговора не слышно? Ремонт и чистка динамика и микрофона телефона в Риге. Бесплатная диагностика и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
   pageTitle: 'Ремонт динамика и микрофона телефона в Риге',
   pageDescription:
@@ -42,7 +44,7 @@ const strings = {
     'Ремонтируем динамик и микрофон телефона, если звук тихий, искажённый, с хрипами или вас не слышно во время разговора. До ремонта проводим диагностику и после ремонта выдаём гарантию 90 дней.',
   headerCtaLabel: 'Смотреть цены',
 
-  heroAlt: 'Ремонт динамика и микрофона телефона в Риге',
+  heroAlt: seo.imageAlt,
   heroImage: '/images/categories/mikrofona_remonts.webp',
   heroBodyHtml:
     '<p><strong>Ремонт динамика и микрофона в Риге</strong> - если во время разговора не слышно, звук тихий, с хрипами или в записи голоса есть шум, выполним чистку или замену модулей. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
@@ -295,15 +297,7 @@ async function getPhoneAudioServiceData({ selectedModel }) {
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
 export default async function Page({ searchParams }) {

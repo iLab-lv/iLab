@@ -2,103 +2,73 @@ import IphoneAudioServicePage from '@site/(catalog)/iphone-remonts/(services)/sk
 
 import JsonLd from '@components/seo/JsonLd';
 
-import { getFaqGroups } from '@/lib/faq/getFaqGroups';
-
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
+import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
-
-import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'ru';
 
-const SERVICE_KEY = 'skalruni-mikrofona-remonts';
+const seo = getStaticPageSeo('iphoneAudioRepair', locale);
 
-const lvPath = '/iphone-remonts/skalruni-mikrofona-remonts';
-const routePath = '/ru/remont-iphone/remont-dinamika-mikrofona';
+const lvPath = seo.lvPath;
+const routePath = seo.ruPath;
 const hubPath = '/ru/remont-iphone';
 
 const strings = {
-  title: 'Ремонт динамика и микрофона iPhone в Риге | iLab',
-  description:
-    'Тихий звук, хрипы или вас не слышно во время разговора? Профессиональный ремонт динамика и микрофона iPhone в Риге - чистка, замена модулей, диагностика и гарантия 90 дней.',
+  title: seo.title,
+  description: seo.description,
 
-  heroAlt: 'Ремонт динамика и микрофона iPhone в Риге',
-  heroImage: '/images/categories/mikrofona_remonts.webp',
-  heroBodyHtml:
-    '<p><strong>Тихий звук, хрипы или вас не слышно во время разговора?</strong> Выполняем <strong>ремонт динамика и микрофона iPhone</strong> - профессиональная чистка, замена модулей, полная проверка и <strong>гарантия 90 дней</strong>.</p>',
+  heroAlt: seo.imageAlt,
+  heroImage: '/images/categories/audio_remonts.webp',
 
-  introTitle: 'Ремонт динамика и микрофона iPhone в Риге',
+  homeCrumb: 'Главная',
+  hubCrumb: 'Ремонт iPhone',
+  breadcrumbServiceName: 'Ремонт динамика и микрофона',
+
+  headerTitle: 'Ремонт динамика и микрофона iPhone в Риге',
+  headerLead:
+    'Помогаем, если во время разговора плохо слышно собеседника, не работает микрофон, динамик хрипит, стал тихим или после влаги/падения звук работает нестабильно.',
+  headerCtaLabel: 'Записаться на ремонт',
+
+  introTitle: 'Когда нужен ремонт динамика или микрофона?',
   introP1:
-    'Проблемы со звуком могут вызывать <strong>пыль, влага, окисление или изношенные модули</strong>. Выполняем <strong>диагностику</strong>, после которой определяем - достаточно ли <strong>чистки</strong> или нужна <strong>замена динамика/микрофона</strong>.',
+    'Проблемы со звуком могут появиться из-за загрязнения, влаги, повреждённого динамика, микрофона, соединений или программной ошибки. В сервисе iLab сначала проводим диагностику, чтобы понять, достаточно ли чистки или нужна замена детали.',
   introP2:
-    'Популярные модели обычно ремонтируем за <strong>45–90 минут</strong>. На все работы и детали действует <strong>гарантия 90 дней</strong>.',
+    'После ремонта проверяем звук во время звонка, динамик, микрофон, запись видео и основные функции. На работу и установленные детали предоставляем гарантию 90 дней.',
 
-  selectedModelPrefix: 'Выбрана модель:',
-  selectedModelSuffix: 'Если нужна точная цена, оставьте заявку ниже.',
+  ctaLabel: 'Записаться на ремонт',
 
   processTitle: 'Как проходит ремонт',
   processSteps: [
     {
       title: 'Диагностика',
-      text: 'Проверяем динамики, микрофон, сетки и соединения.',
+      text: 'Проверяем динамики, микрофоны, качество разговора и запись.',
     },
     {
       title: 'Чистка или замена',
-      text: 'Удаляем загрязнения, следы окисления или меняем поврежденный модуль.',
+      text: 'В зависимости от поломки выполняем профессиональную чистку или замену детали.',
     },
     {
       title: 'Тесты',
-      text: 'Проверяем звук звонка, мультимедиа, качество разговора и работу микрофона.',
-    },
-    {
-      title: 'Завершение',
-      text: 'Контроль качества и рекомендации по дальнейшему использованию.',
+      text: 'Проверяем звонки, видео, микрофон и работу динамика.',
     },
     {
       title: 'Гарантия',
-      text: 'Гарантия 90 дней на детали и выполненные работы.',
+      text: 'После ремонта предоставляем гарантию 90 дней на работу и детали.',
     },
   ],
 
   faqTitle: 'Часто задаваемые вопросы',
 
-  breadcrumbServiceName: 'Ремонт динамика и микрофона',
   serviceName: 'Ремонт динамика и микрофона iPhone в Риге',
-  serviceType: 'Ремонт динамика и микрофона iPhone',
+  serviceType: 'Ремонт аудио iPhone',
   serviceDescription:
-    'Ремонт динамика и микрофона iPhone в Риге: диагностика, чистка или замена модуля, тесты и гарантия 90 дней.',
-
-  homeCrumb: 'Главная',
-  hubCrumb: 'Ремонт iPhone',
-
-  headerTitle: 'Ремонт динамика и микрофона iPhone в Риге',
-  headerLead:
-    'Ремонтируем динамик и микрофон iPhone при тихом звуке, хрипах и проблемах во время разговора. До ремонта проводим диагностику, согласовываем решение и после ремонта выдаём гарантию 90 дней.',
-  headerCtaLabel: 'Оставить заявку',
-
-  applyAria: 'Записаться на ремонт',
+    'Ремонт динамика и микрофона iPhone в Риге: диагностика, чистка или замена детали, гарантия 90 дней.',
 
   processName: 'Ремонт динамика и микрофона iPhone',
   processDescription:
-    'Как проходит ремонт динамика и микрофона iPhone в iLab: диагностика, чистка или замена модуля, тесты и гарантия.',
+    'Как проходит ремонт динамика и микрофона iPhone в iLab: диагностика, чистка или замена детали, тесты и гарантия.',
 };
-
-function dedupeFaqItems(items = []) {
-  const seen = new Set();
-
-  return items.filter((item) => {
-    const key = String(item?.q || item?.question || '')
-      .trim()
-      .toLowerCase();
-
-    if (!key || seen.has(key)) {
-      return false;
-    }
-
-    seen.add(key);
-    return true;
-  });
-}
 
 function buildBreadcrumbs() {
   return [
@@ -117,35 +87,8 @@ function buildBreadcrumbs() {
   ];
 }
 
-function buildFaqSections(faqGroups = []) {
-  return faqGroups
-    .filter((group) => Array.isArray(group.items) && group.items.length > 0)
-    .map((group, index) => ({
-      id: group.id || group.docId || `faq-group-${index + 1}`,
-      title: group.title,
-      items: toFaqRenderItems(group.items),
-      rawItems: group.items,
-    }));
-}
-
-async function getIphoneAudioServiceData({ selectedModel }) {
-  const faq = await getFaqGroups(
-    [
-      { scopeType: 'service', scopeKey: SERVICE_KEY },
-      { scopeType: 'basic' },
-    ],
-    locale
-  );
-
-  const faqSections = buildFaqSections(faq.groups);
-
-  const mergedFaqItems = dedupeFaqItems(
-    faqSections.flatMap((section) => section.rawItems || [])
-  );
-
+async function getIphoneAudioServiceData() {
   const breadcrumbs = buildBreadcrumbs();
-
-  const hasVisibleFaq = mergedFaqItems.length > 0;
 
   const jsonLd = buildRepairPageJsonLd({
     path: routePath,
@@ -161,8 +104,7 @@ async function getIphoneAudioServiceData({ selectedModel }) {
     serviceType: strings.serviceType,
     serviceImage: strings.heroImage,
 
-    faqItems: mergedFaqItems,
-    includeFaq: hasVisibleFaq,
+    includeFaq: false,
 
     includeHowTo: true,
     howTo: {
@@ -178,42 +120,20 @@ async function getIphoneAudioServiceData({ selectedModel }) {
 
   return {
     strings,
-
-    selectedModel,
-
     routePath,
+    lvPath,
     hubPath,
-
     breadcrumbs,
-
-    faqSections,
-    hasVisibleFaq,
-
     jsonLd,
   };
 }
 
 export async function generateMetadata() {
-  return buildSeoMetadata({
-    locale,
-    title: strings.title,
-    description: strings.description,
-    lvPath,
-    ruPath: routePath,
-    image: '/images/og/home.jpg',
-    imageAlt: strings.heroAlt,
-  });
+  return buildSeoMetadata(seo);
 }
 
-export default async function Page({ searchParams }) {
-  const resolvedSearchParams = await searchParams;
-  const selectedModel = resolvedSearchParams?.model
-    ? String(resolvedSearchParams.model)
-    : null;
-
-  const data = await getIphoneAudioServiceData({
-    selectedModel,
-  });
+export default async function Page() {
+  const data = await getIphoneAudioServiceData();
 
   return (
     <>
