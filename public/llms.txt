@@ -1,0 +1,62 @@
+# iLab
+
+> iLab is a mobile device, computer and Dyson repair service in Riga, Latvia, with locations in T/C Domina Shopping and T/C Spice Home. The site provides information about repair services, device categories, prices, diagnostics, warranty, booking and contact options.
+
+## Main pages
+
+- [Homepage](https://ilab.lv/): Overview of iLab repair services, locations, warranty and contact options.
+- [Cenas](https://ilab.lv/cenas): Full price list for iPhone, Samsung, computer, tablet, and Dyson repairs.
+- [Biežāk uzdotie jautājumi](https://ilab.lv/buj): FAQ regarding repair diagnostics, wait times, pricing, and warranty rules.
+- [Kontakti](https://ilab.lv/kontakti): Contact details, working hours, locations and booking options for iLab branches in Riga.
+- [Par iLab](https://ilab.lv/par-mums): Information about iLab, repair approach, service quality and customer support.
+- [Noteikumi](https://ilab.lv/noteikumi): Service terms and conditions regarding repairs, diagnostics, and item drop-off/collection.
+- [Pieraksties remontam](https://ilab.lv/pieraksties-remontam): Online booking form to schedule a repair slot and confirm part availability.
+
+## Repair categories
+
+- [iPhone remonts](https://ilab.lv/iphone-remonts): iPhone repair services in Riga, including screen, battery, camera and charging issues.
+- [Telefonu remonts](https://ilab.lv/telefonu-remonts): Phone repair services for iPhone, Samsung, Huawei, Xiaomi, OnePlus and other models.
+- [Planšetdatoru remonts](https://ilab.lv/plansetdatoru-remonts): Tablet and iPad repair services in Riga.
+- [Datoru remonts](https://ilab.lv/datoru-remonts): Computer, laptop, MacBook and iMac repair services.
+- [Dyson remonts](https://ilab.lv/dyson-remonts): Dyson vacuum cleaner diagnostics and repair services.
+
+## Specific iPhone Repairs
+
+- [iPhone ekrāna maiņa](https://ilab.lv/iphone-remonts/ekrana-maina): Dedicated iPhone screen and display panel replacement.
+- [iPhone baterijas maiņa](https://ilab.lv/iphone-remonts/baterijas-maina): Dedicated iPhone battery replacement, often completed in 30 minutes.
+- [iPhone uzlādes ligzdas maiņa](https://ilab.lv/iphone-remonts/uzlades-ligzdas-maina): iPhone charging port cleaning or lightning/USB-C port replacement.
+- [iPhone kameras remonts](https://ilab.lv/iphone-remonts/kameras-remonts): iPhone primary camera module or lens glass repair.
+- [iPhone skaļruņa un mikrofona remonts](https://ilab.lv/iphone-remonts/skalruni-mikrofona-remonts): Audio hardware diagnostics, speaker mesh cleaning, and module swaps.
+- [iPhone ūdens bojājumu remonts](https://ilab.lv/iphone-remonts/udens-bojajumu-remonts): Liquid contact diagnostics, corrosion removal, and data recovery options.
+
+## General Phone Repairs (All Brands)
+
+- [Telefona ekrāna maiņa](https://ilab.lv/telefonu-remonts/ekrana-maina): Universal phone screen replacement and diagnostics in Riga.
+- [Telefona baterijas maiņa](https://ilab.lv/telefonu-remonts/baterijas-maina): Universal phone battery replacement with part availability check.
+- [Uzlādes ligzdas maiņa](https://ilab.lv/telefonu-remonts/uzlades-ligzdas-maina): Charging port diagnostics, cleaning, and replacement for alternative phone brands.
+- [Telefona kameras remonts](https://ilab.lv/telefonu-remonts/kameras-remonts): Universal phone camera repair for focus, image, and lens issues.
+- [Skaļruņa un mikrofona remonts](https://ilab.lv/telefonu-remonts/skalruni-mikrofona-remonts): General audio hardware cleaning or component replacement.
+- [Telefona ūdens bojājumu remonts](https://ilab.lv/telefonu-remonts/udens-bojajumu-remonts): Liquid exposure diagnostics, component cleaning, and data protection.
+
+## Locations
+
+- [iLab Domina Shopping](https://ilab.lv/kontakti): iLab branch at T/C Domina Shopping, Ieriķu iela 3, Riga.
+- [iLab Spice Home](https://ilab.lv/kontakti): iLab branch at T/C Spice Home, Jaunmoku iela 13, Riga.
+
+## Key service information
+
+- Diagnostics are available before repair work starts.
+- Price and part availability are confirmed before repair whenever possible.
+- Common repairs are often completed on the same day (frequently within 30 minutes) depending on part stocks.
+- iLab provides a 90-day warranty for all completed repair services.
+- Payment options include cash, card, Apple Pay, and Google Pay.
+
+## Languages
+
+- [Latvian site (Default)](https://ilab.lv/)
+- [Russian site](https://ilab.lv/ru)
+
+## Technical Assets
+
+- [Sitemap](https://ilab.lv/sitemap.xml): XML sitemap listing all indexable URLs.
+- [Robots.txt](https://ilab.lv/robots.txt): Crawling rules for search engine spiders and AI agents.
