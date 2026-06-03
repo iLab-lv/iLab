@@ -7,6 +7,8 @@ import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingFinalCta.module.scss';
 
+const PRICE_PAGE_URL = 'https://ilab.lv/cenas';
+
 function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
 }
@@ -14,8 +16,8 @@ function normalizeLocale(locale) {
 function getContent(locale) {
   if (normalizeLocale(locale) === 'ru') {
     return {
-      titleMain: 'Появилась проблема?',
-      titleAccent: 'Поможем быстро.',
+      titleMain: 'Radusies problēma?',
+      titleAccent: 'Починим быстро.',
       text: 'Уточним цену, наличие деталей и подскажем ближайший удобный филиал.',
       price: 'Узнать цену',
       call: 'Позвонить',
@@ -26,12 +28,12 @@ function getContent(locale) {
 
   return {
     titleMain: 'Radusies problēma?',
-    titleAccent: 'Palīdzēsim ātri.',
+    titleAccent: 'Salabosim ātri.',
     text: 'Precizēsim cenu, detaļu pieejamību un ieteiksim ērtāko filiāli.',
     price: 'Uzzināt cenu',
     call: 'Zvanīt',
     whatsapp: 'WhatsApp',
-    note: 'T/C Domina Shopping vai T/C Spice Life',
+    note: 'Domina Shopping vai Spice Life',
   };
 }
 
@@ -39,7 +41,7 @@ export default function LandingFinalCta({
   id = 'final-cta',
   locale = 'lv',
 }) {
-  const { openPriceForm, openBranchSheet } = useLandingCta();
+  const { openBranchSheet } = useLandingCta();
   const t = getContent(locale);
 
   return (
@@ -65,11 +67,11 @@ export default function LandingFinalCta({
 
           <div className={s.actions}>
             <LandingButton
-              type="button"
+              href={PRICE_PAGE_URL}
+              target="_self"
               variant="primary"
               tone="accent"
               size="lg"
-              onClick={openPriceForm}
             >
               {t.price}
             </LandingButton>
