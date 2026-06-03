@@ -13,6 +13,7 @@ const SERVICE_IDS = ['phone-battery'];
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
 
+
 export default function IphoneBatteryServicePage({
   locale = 'lv',
 
