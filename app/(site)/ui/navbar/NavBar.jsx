@@ -185,6 +185,7 @@ export default function NavBar({
       {showNavigation && (
         <MobileNavDrawer
           items={items}
+          locale={locale}
           pathname={pathname}
           mobileOpen={mobileOpen}
           mobileExpandedSlug={mobileExpandedSlug}

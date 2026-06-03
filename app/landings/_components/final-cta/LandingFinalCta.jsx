@@ -7,6 +7,8 @@ import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingFinalCta.module.scss';
 
+const PRICE_PAGE_URL = 'https://ilab.lv/cenas';
+
 function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
 }
@@ -39,7 +41,7 @@ export default function LandingFinalCta({
   id = 'final-cta',
   locale = 'lv',
 }) {
-  const { openPriceForm, openBranchSheet } = useLandingCta();
+  const { openBranchSheet } = useLandingCta();
   const t = getContent(locale);
 
   return (
@@ -65,11 +67,11 @@ export default function LandingFinalCta({
 
           <div className={s.actions}>
             <LandingButton
-              type="button"
+              href={PRICE_PAGE_URL}
+              target="_self"
               variant="primary"
               tone="accent"
               size="lg"
-              onClick={openPriceForm}
             >
               {t.price}
             </LandingButton>

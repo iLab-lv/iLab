@@ -8,12 +8,12 @@ import Facebook from '../../components/icons/Facebook';
 import Instagram from '../../components/icons/Instagram';
 import TikTok from '../../components/icons/TikTok';
 
-export default function Controls({ facebookUrl, instagramUrl, tiktokUrl }) {
+export default function Controls({ facebookUrl, instagramUrl, tiktokUrl, onLanguageChange }) {
   return (
     <div className={s.wrap} role="complementary" aria-label="Sistēmas vadīklas">
       {/* Language (desktop) */}
       <div className={s.slot}>
-        <LanguageSwitcher initial="lv" />
+        <LanguageSwitcher initial="lv" onChange={onLanguageChange} />
       </div>
 
       {/* Socials */}
