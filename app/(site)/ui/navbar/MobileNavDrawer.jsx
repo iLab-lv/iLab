@@ -8,12 +8,22 @@ import s from './NavBar.module.scss';
 
 export default function MobileNavDrawer({
   items,
+  locale,
   pathname,
   mobileOpen,
   mobileExpandedSlug,
   setMobileExpandedSlug,
   setMobileOpen,
 }) {
+  const contactsHref = locale === 'ru' ? '/ru/kontakty' : '/kontakti';
+  const contactsLabel = locale === 'ru' ? 'Контакты' : 'Kontakti';
+  const contactsActive = isNavItemActive(pathname, contactsHref);
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setMobileExpandedSlug(null);
+  };
+
   return (
     <div
       id="mobile-drawer"
@@ -35,7 +45,7 @@ export default function MobileNavDrawer({
                   href={item.href}
                   className={`${s.drawerItem} ${topActive ? s.active : ''}`}
                   aria-current={topActive ? 'page' : undefined}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={closeMobileMenu}
                 >
                   {item.label}
                 </Link>
@@ -53,7 +63,7 @@ export default function MobileNavDrawer({
                     href={item.href}
                     className={s.drawerParentLabel}
                     aria-current={topActive ? 'page' : undefined}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={closeMobileMenu}
                   >
                     {item.label}
                   </Link>
@@ -80,7 +90,7 @@ export default function MobileNavDrawer({
                         href={child.href}
                         className={`${s.drawerItem} ${subActive ? s.active : ''}`}
                         aria-current={subActive ? 'page' : undefined}
-                        onClick={() => setMobileOpen(false)}
+                        onClick={closeMobileMenu}
                       >
                         {child.label}
                       </Link>
@@ -90,6 +100,18 @@ export default function MobileNavDrawer({
               </div>
             );
           })}
+
+
+          <div className={s.mobileMenuSecondary}>
+            <Link
+              href={contactsHref}
+              className={`${s.drawerItem} ${s.drawerContactItem} ${contactsActive ? s.active : ''}`}
+              aria-current={contactsActive ? 'page' : undefined}
+              onClick={closeMobileMenu}
+            >
+              {contactsLabel}
+            </Link>
+          </div>
         </div>
 
         <div className={s.mobileDrawerControls}>
@@ -97,6 +119,7 @@ export default function MobileNavDrawer({
             facebookUrl={SOCIALS.facebook}
             instagramUrl={SOCIALS.instagram}
             tiktokUrl={SOCIALS.tiktok}
+            onLanguageChange={closeMobileMenu}
           />
         </div>
       </nav>

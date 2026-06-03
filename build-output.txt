@@ -1,0 +1,675 @@
+
+> ilab-website@0.1.0 build
+> next build
+
+   ▲ Next.js 15.4.8
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings in 5.6min
+
+./app/(admin)/admin/AdminShell.module.scss
+Deprecation Warning on line 0, column 8 of file:///C:/Users/info/Desktop/website/iLab/app/(admin)/admin/AdminShell.module.scss:0:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+0 | @import '@/styles/tokens';
+
+app\(admin)\admin\AdminShell.module.scss 1:9  root stylesheet
+
+Import trace for requested module:
+./app/(admin)/admin/AdminShell.module.scss
+./app/(admin)/admin/AdminShell.jsx
+
+./app/(lp)/Layout.module.scss
+Deprecation Warning on line 10, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(lp)/Layout.module.scss:10:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+10 |   background: $color-surface-1;
+
+app\(lp)\Layout.module.scss 11:3  root stylesheet
+
+Import trace for requested module:
+./app/(lp)/Layout.module.scss
+./app/(lp)/layout.jsx
+
+./app/(lp)/Layout.module.scss
+Deprecation Warning on line 11, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(lp)/Layout.module.scss:11:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+11 |   min-height: 100vh;
+
+app\(lp)\Layout.module.scss 12:3  root stylesheet
+
+Import trace for requested module:
+./app/(lp)/Layout.module.scss
+./app/(lp)/layout.jsx
+
+./app/(lp)/Layout.module.scss
+Deprecation Warning on line 12, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(lp)/Layout.module.scss:12:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+12 |   color: $color-text;
+
+app\(lp)\Layout.module.scss 13:3  root stylesheet
+
+Import trace for requested module:
+./app/(lp)/Layout.module.scss
+./app/(lp)/layout.jsx
+
+./app/(lp)/Layout.module.scss
+Deprecation Warning on line 13, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(lp)/Layout.module.scss:13:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+13 |   display: flex;
+
+app\(lp)\Layout.module.scss 14:3  root stylesheet
+
+Import trace for requested module:
+./app/(lp)/Layout.module.scss
+./app/(lp)/layout.jsx
+
+./app/(lp)/Layout.module.scss
+Deprecation Warning on line 14, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(lp)/Layout.module.scss:14:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+14 |   flex-direction: column;
+
+app\(lp)\Layout.module.scss 15:3  root stylesheet
+
+Import trace for requested module:
+./app/(lp)/Layout.module.scss
+./app/(lp)/layout.jsx
+
+./app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss
+Deprecation Warning on line 86, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/(catalog)/iphone-remonts/%5Bdevice%5D/Device.module.scss:86:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+86 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\(site)\(catalog)\iphone-remonts\[device]\Device.module.scss 87:12  root stylesheet
+
+Import trace for requested module:
+./app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss
+./app/(site)/(catalog)/iphone-remonts/[device]/IphoneDevicePage.jsx
+./app/(site)/(catalog)/iphone-remonts/[device]/page.jsx
+
+./app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss
+Deprecation Warning on line 91, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/(catalog)/iphone-remonts/%5Bdevice%5D/Device.module.scss:91:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+91 |   transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+
+app\(site)\(catalog)\iphone-remonts\[device]\Device.module.scss 92:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss
+./app/(site)/(catalog)/iphone-remonts/[device]/IphoneDevicePage.jsx
+./app/(site)/(catalog)/iphone-remonts/[device]/page.jsx
+
+./app/(site)/(catalog)/telefonu-remonts/[brand]/[device]/Device.module.scss
+Deprecation Warning on line 86, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/(catalog)/telefonu-remonts/%5Bbrand%5D/%5Bdevice%5D/Device.module.scss:86:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+86 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\(site)\(catalog)\telefonu-remonts\[brand]\[device]\Device.module.scss 87:12  root stylesheet
+
+Import trace for requested module:
+./app/(site)/(catalog)/telefonu-remonts/[brand]/[device]/Device.module.scss
+./app/(site)/(catalog)/datoru-remonts/[brand]/[device]/ComputerDevicePage.jsx
+./app/(site)/(catalog)/datoru-remonts/[brand]/[device]/page.jsx
+
+./app/(site)/(catalog)/telefonu-remonts/[brand]/[device]/Device.module.scss
+Deprecation Warning on line 91, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/(catalog)/telefonu-remonts/%5Bbrand%5D/%5Bdevice%5D/Device.module.scss:91:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+91 |   transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+
+app\(site)\(catalog)\telefonu-remonts\[brand]\[device]\Device.module.scss 92:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/(catalog)/telefonu-remonts/[brand]/[device]/Device.module.scss
+./app/(site)/(catalog)/datoru-remonts/[brand]/[device]/ComputerDevicePage.jsx
+./app/(site)/(catalog)/datoru-remonts/[brand]/[device]/page.jsx
+
+./app/(site)/Layout.module.scss
+Deprecation Warning on line 10, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/Layout.module.scss:10:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+10 |   background: $color-surface-1; /* keep if you want a default site bg */
+
+app\(site)\Layout.module.scss 11:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/Layout.module.scss
+./app/(site)/layout.jsx
+
+./app/(site)/components/button/Button.module.scss
+Deprecation Warning on line 6, column 8 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/components/button/Button.module.scss:6:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+6 | @import '@/styles/_tokens.scss';
+
+app\(site)\components\button\Button.module.scss 7:9  root stylesheet
+
+Import trace for requested module:
+./app/(site)/components/button/Button.module.scss
+./app/(site)/components/button/Button.jsx
+
+./app/(site)/components/button/ScrollCta.module.scss
+Deprecation Warning on line 21, column 9 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/components/button/ScrollCta.module.scss:21:9:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+21 |   $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\(site)\components\button\ScrollCta.module.scss 22:10  root stylesheet
+
+Import trace for requested module:
+./app/(site)/components/button/ScrollCta.module.scss
+./app/(site)/components/button/ScrollCta.jsx
+./app/(site)/ui/page-header/PageHeader.jsx
+./app/(site)/(catalog)/iphone-remonts/IphoneRepairPage.jsx
+./app/(site)/(catalog)/iphone-remonts/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+Deprecation Warning on line 136, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/home-devices/Services.module.scss:136:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+136 |   border-radius: $radius-lg;
+
+app\(site)\sections\home-devices\Services.module.scss 137:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+Deprecation Warning on line 137, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/home-devices/Services.module.scss:137:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+137 |   padding: $space-xl;
+
+app\(site)\sections\home-devices\Services.module.scss 138:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+Deprecation Warning on line 138, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/home-devices/Services.module.scss:138:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+138 |   margin-top: $space-xl;
+
+app\(site)\sections\home-devices\Services.module.scss 139:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+Deprecation Warning on line 225, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/home-devices/Services.module.scss:225:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+225 |   border-radius: $radius-lg;
+
+app\(site)\sections\home-devices\Services.module.scss 226:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+Deprecation Warning on line 226, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/home-devices/Services.module.scss:226:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+226 |   padding: $space-xl;
+
+app\(site)\sections\home-devices\Services.module.scss 227:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/home-devices/Services.module.scss
+11 repetitive deprecation warnings omitted.
+
+Import trace for requested module:
+./app/(site)/sections/home-devices/Services.module.scss
+./app/(site)/sections/home-devices/Services.jsx
+./app/(site)/HomePage.jsx
+./app/(site)/page.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 7, column 70 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:7:70:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+7 | .table { display: none; @media (min-width: $bp-lg) { display: grid; } border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; }
+
+app\(site)\sections\pricing\PriceList.module.scss 8:71  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 7, column 112 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:7:112:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+7 | .table { display: none; @media (min-width: $bp-lg) { display: grid; } border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; }
+
+app\(site)\sections\pricing\PriceList.module.scss 8:113  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 7, column 139 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:7:139:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+7 | .table { display: none; @media (min-width: $bp-lg) { display: grid; } border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; }
+
+app\(site)\sections\pricing\PriceList.module.scss 8:140  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 7, column 157 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:7:157:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+7 | .table { display: none; @media (min-width: $bp-lg) { display: grid; } border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; }
+
+app\(site)\sections\pricing\PriceList.module.scss 8:158  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 26, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:26:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+26 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\(site)\sections\pricing\PriceList.module.scss 27:12  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/pricing/PriceList.module.scss
+Deprecation Warning on line 29, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/pricing/PriceList.module.scss:29:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+29 |   transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std;
+
+app\(site)\sections\pricing\PriceList.module.scss 30:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/pricing/PriceList.module.scss
+./app/(site)/sections/pricing/PriceList.jsx
+
+./app/(site)/sections/process/Process.module.scss
+Deprecation Warning on line 154, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/process/Process.module.scss:154:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+154 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\(site)\sections\process\Process.module.scss 155:12  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/process/Process.module.scss
+./app/(site)/sections/process/Process.jsx
+./app/(lp)/iphone-remonts-riga/page.jsx
+
+./app/(site)/sections/process/Process.module.scss
+Deprecation Warning on line 160, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/sections/process/Process.module.scss:160:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+160 |   transition:
+    transform $dur-base $ease-std,
+    box-shadow $dur-base $ease-std,
+    background-color $dur-base $ease-std,
+    border-color $dur-base $ease-std;
+
+app\(site)\sections\process\Process.module.scss 161:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/sections/process/Process.module.scss
+./app/(site)/sections/process/Process.jsx
+./app/(lp)/iphone-remonts-riga/page.jsx
+
+./app/(site)/ui/bottombar/BottomBar.module.scss
+Deprecation Warning on line 31, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/ui/bottombar/BottomBar.module.scss:31:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+31 |   line-height: normal;
+
+app\(site)\ui\bottombar\BottomBar.module.scss 32:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/ui/bottombar/BottomBar.module.scss
+./app/(site)/ui/bottombar/BottomBar.jsx
+
+./app/(site)/ui/bottombar/BottomBar.module.scss
+Deprecation Warning on line 32, column 2 of file:///C:/Users/info/Desktop/website/iLab/app/(site)/ui/bottombar/BottomBar.module.scss:32:2:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+32 |   box-sizing: border-box;
+
+app\(site)\ui\bottombar\BottomBar.module.scss 33:3  root stylesheet
+
+Import trace for requested module:
+./app/(site)/ui/bottombar/BottomBar.module.scss
+./app/(site)/ui/bottombar/BottomBar.jsx
+
+./app/styles/Catalog.module.scss
+Deprecation Warning on line 69, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/styles/Catalog.module.scss:69:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+69 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\styles\Catalog.module.scss 70:12  root stylesheet
+
+Import trace for requested module:
+./app/styles/Catalog.module.scss
+./app/(lp)/iphone-remonts-riga/page.jsx
+
+./app/styles/Catalog.module.scss
+Deprecation Warning on line 69, column 11 of file:///C:/Users/info/Desktop/website/iLab/app/styles/Catalog.module.scss:69:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+69 |     $__bf: unquote("blur(#{$glass-blur}) saturate(#{$glass-saturate})");
+
+app\styles\Catalog.module.scss 70:12  root stylesheet
+
+Import trace for requested module:
+./app/styles/Catalog.module.scss
+./app/(site)/components/model-grid/BrandPreview.jsx
+
+./app/api/reviews/route.js
+Attempted import error: 'PLACE_IDS' is not exported from '@/lib/reviews/getReviewsSummary' (imported as 'PLACE_IDS').
+
+Import trace for requested module:
+./app/api/reviews/route.js
+
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/109) ...
+   Generating static pages (27/109) 
+   Generating static pages (54/109) 
+   Generating static pages (81/109) 
+ ✓ Generating static pages (109/109)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                Size  First Load JS
+┌ ƒ /                                                     161 B         128 kB
+├ ƒ /_not-found                                           165 B         100 kB
+├ ƒ /admin                                                165 B         100 kB
+├ ƒ /admin/categories                                   5.76 kB         125 kB
+├ ƒ /admin/devices                                      5.48 kB         124 kB
+├ ƒ /admin/faq                                          3.18 kB         107 kB
+├ ƒ /admin/login                                        1.21 kB         215 kB
+├ ƒ /admin/pricelist                                    5.12 kB         222 kB
+├ ƒ /admin/reviews                                      3.69 kB         107 kB
+├ ƒ /admin/services                                     5.09 kB         237 kB
+├ ƒ /ads                                                18.8 kB         133 kB
+├ ƒ /api/admin/categories                                 165 B         100 kB
+├ ƒ /api/admin/devices                                    165 B         100 kB
+├ ƒ /api/booking                                          165 B         100 kB
+├ ƒ /api/env-test                                         165 B         100 kB
+├ ƒ /api/faq                                              165 B         100 kB
+├ ƒ /api/page-header                                      165 B         100 kB
+├ ƒ /api/ping                                             165 B         100 kB
+├ ƒ /api/reviews                                          165 B         100 kB
+├ ƒ /api/reviews/cron                                     165 B         100 kB
+├ ○ /apple-icon.png                                         0 B            0 B
+├ ƒ /buj                                                2.05 kB         106 kB
+├ ƒ /cenas                                              1.52 kB         118 kB
+├ ƒ /datoru-remonts                                     1.93 kB         119 kB
+├ ● /datoru-remonts/[brand]                             2.65 kB         117 kB
+├   ├ /datoru-remonts/macbook
+├   ├ /datoru-remonts/imac
+├   ├ /datoru-remonts/mac-pro
+├   └ [+6 more paths]
+├ ƒ /datoru-remonts/[brand]/[device]                      459 B         127 kB
+├ ƒ /dyson-remonts                                      1.01 kB         124 kB
+├ ○ /icon.png                                               0 B            0 B
+├ ○ /icon.svg                                               0 B            0 B
+├ ƒ /iphone-baterijas-maina                              2.6 kB         137 kB
+├ ƒ /iphone-ekrana-maina                                 2.6 kB         137 kB
+├ ƒ /iphone-remonts                                       273 B         127 kB
+├ ƒ /iphone-remonts-riga                                2.77 kB         137 kB
+├ ƒ /iphone-remonts/[device]                              458 B         127 kB
+├ ƒ /iphone-remonts/baterijas-maina                       447 B         117 kB
+├ ƒ /iphone-remonts/ekrana-maina                          447 B         117 kB
+├ ƒ /iphone-remonts/kameras-remonts                       267 B         117 kB
+├ ƒ /iphone-remonts/skalruni-mikrofona-remonts          3.22 kB         113 kB
+├ ƒ /iphone-remonts/udens-bojajumu-remonts                267 B         117 kB
+├ ƒ /iphone-remonts/uzlades-ligzdas-maina                 267 B         117 kB
+├ ƒ /kontakti                                             146 B         115 kB
+├ ƒ /landings/iphone-remonts                            18.7 kB         133 kB
+├ ƒ /noteikumi                                           1.5 kB         105 kB
+├ ƒ /par-mums                                           2.87 kB         126 kB
+├ ƒ /pieraksties-remontam                                 138 B         107 kB
+├ ƒ /plansetdatoru-remonts                              2.61 kB         118 kB
+├ ● /plansetdatoru-remonts/[brand]                        271 B         120 kB
+├   ├ /plansetdatoru-remonts/ipad
+├   ├ /plansetdatoru-remonts/samsung
+├   ├ /plansetdatoru-remonts/lenovo
+├   └ [+2 more paths]
+├ ƒ /plansetdatoru-remonts/[brand]/[device]               268 B         127 kB
+├ ○ /robots.txt                                           165 B         100 kB
+├ ƒ /ru                                                   161 B         128 kB
+├ ƒ /ru/ceny                                            1.52 kB         118 kB
+├ ƒ /ru/faq                                             2.05 kB         106 kB
+├ ƒ /ru/kontakty                                          146 B         115 kB
+├ ƒ /ru/o-nas                                           2.87 kB         126 kB
+├ ƒ /ru/pravila                                          1.5 kB         105 kB
+├ ƒ /ru/remont-dyson                                    1.01 kB         124 kB
+├ ƒ /ru/remont-iphone                                     273 B         127 kB
+├ ƒ /ru/remont-iphone/[device]                            458 B         127 kB
+├ ƒ /ru/remont-iphone/remont-dinamika-mikrofona         3.22 kB         113 kB
+├ ƒ /ru/remont-iphone/remont-kamery                       267 B         117 kB
+├ ƒ /ru/remont-iphone/remont-posle-popadaniya-vlagi       267 B         117 kB
+├ ƒ /ru/remont-iphone/zamena-batarei                      447 B         117 kB
+├ ƒ /ru/remont-iphone/zamena-ekrana                       447 B         117 kB
+├ ƒ /ru/remont-iphone/zamena-razema-zaryadki              267 B         117 kB
+├ ƒ /ru/remont-noutbukov                                1.93 kB         119 kB
+├ ● /ru/remont-noutbukov/[brand]                        2.65 kB         117 kB
+├   ├ /ru/remont-noutbukov/macbook
+├   ├ /ru/remont-noutbukov/imac
+├   ├ /ru/remont-noutbukov/mac-pro
+├   └ [+6 more paths]
+├ ƒ /ru/remont-noutbukov/[brand]/[device]                 459 B         127 kB
+├ ƒ /ru/remont-planshetov                               2.61 kB         118 kB
+├ ● /ru/remont-planshetov/[brand]                         271 B         120 kB
+├   ├ /ru/remont-planshetov/ipad
+├   ├ /ru/remont-planshetov/samsung
+├   ├ /ru/remont-planshetov/lenovo
+├   └ [+2 more paths]
+├ ƒ /ru/remont-planshetov/[brand]/[device]                268 B         127 kB
+├ ƒ /ru/remont-telefonov                                2.61 kB         118 kB
+├ ● /ru/remont-telefonov/[brand]                          271 B         120 kB
+├   ├ /ru/remont-telefonov/samsung
+├   ├ /ru/remont-telefonov/huawei
+├   ├ /ru/remont-telefonov/sony
+├   └ [+3 more paths]
+├ ƒ /ru/remont-telefonov/[brand]/[device]                 459 B         127 kB
+├ ƒ /ru/remont-telefonov/remont-dinamika-mikrofona       2.3 kB         232 kB
+├ ƒ /ru/remont-telefonov/remont-kamery                   2.3 kB         232 kB
+├ ƒ /ru/remont-telefonov/remont-posle-popadaniya-vlagi   2.3 kB         232 kB
+├ ƒ /ru/remont-telefonov/zamena-batarei                  2.3 kB         232 kB
+├ ƒ /ru/remont-telefonov/zamena-ekrana                   2.3 kB         232 kB
+├ ƒ /ru/remont-telefonov/zamena-razema-zaryadki          2.3 kB         232 kB
+├ ƒ /ru/zapisatsja-na-remont                              138 B         107 kB
+├ ○ /sitemap.xml                                          165 B         100 kB
+├ ƒ /telefonu-remonts                                   2.61 kB         118 kB
+├ ● /telefonu-remonts/[brand]                             271 B         120 kB
+├   ├ /telefonu-remonts/samsung
+├   ├ /telefonu-remonts/huawei
+├   ├ /telefonu-remonts/sony
+├   └ [+3 more paths]
+├ ƒ /telefonu-remonts/[brand]/[device]                    459 B         127 kB
+├ ƒ /telefonu-remonts/baterijas-maina                    2.3 kB         232 kB
+├ ƒ /telefonu-remonts/ekrana-maina                       2.3 kB         232 kB
+├ ƒ /telefonu-remonts/kameras-remonts                    2.3 kB         232 kB
+├ ƒ /telefonu-remonts/skalruni-mikrofona-remonts         2.3 kB         232 kB
+├ ƒ /telefonu-remonts/udens-bojajumu-remonts             2.3 kB         232 kB
+└ ƒ /telefonu-remonts/uzlades-ligzdas-maina              2.3 kB         232 kB
++ First Load JS shared by all                            100 kB
+  ├ chunks/4bd1b696-cc729d47eba2cee4.js                 54.1 kB
+  ├ chunks/5964-909c2aa918bcc589.js                     43.9 kB
+  └ other shared chunks (total)                         2.21 kB
+
+
+ƒ Middleware                                            32.8 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
