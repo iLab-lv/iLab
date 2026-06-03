@@ -5,33 +5,32 @@ import { useLandingCta } from '../../providers/LandingCtaProvider';
 
 import s from './FormCtaButtons.module.scss';
 
+const PRICE_PAGE_URL = 'https://ilab.lv/cenas';
+
 export default function FormCtaButtons() {
-  const { openPriceForm, openBookingForm } = useLandingCta();
+  const { openBookingForm } = useLandingCta();
 
   return (
     <div className={s.buttons}>
-
-        <LandingButton
+      <LandingButton
         type="button"
         variant="primary"
         tone="accent"
         size="lg"
         onClick={openBookingForm}
       >
-        Pieteikt vizīti
+        Pieteikt remontu
       </LandingButton>
-      
+
       <LandingButton
-        type="button"
+        href={PRICE_PAGE_URL}
+        target="_self"
         variant="secondary"
         tone="accent"
         size="lg"
-        onClick={openPriceForm}
       >
         Uzzināt cenu
       </LandingButton>
-
-      
     </div>
   );
 }
