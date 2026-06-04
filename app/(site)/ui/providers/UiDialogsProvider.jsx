@@ -3,14 +3,24 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 import FullscreenPanel from '../panels/FullscreenPanel';
-import LocatorPanel from '../panels/LocatorPanel';
-import SazinatiesPanel from '../panels/SazinatiesPanel';
-import PierakstiesPanel from '../panels/PierakstiesPanel';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
 
 const UiDialogsContext = createContext(null);
+
+const LocatorPanel = dynamic(() => import('../panels/LocatorPanel'), {
+  ssr: false,
+});
+
+const SazinatiesPanel = dynamic(() => import('../panels/SazinatiesPanel'), {
+  ssr: false,
+});
+
+const PierakstiesPanel = dynamic(() => import('../panels/PierakstiesPanel'), {
+  ssr: false,
+});
 
 export function UiDialogsProvider({
   children,

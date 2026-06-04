@@ -138,6 +138,13 @@
   transform: translateY(0);
 }
 
+.ddWrap:hover .dropdown,
+.ddWrap:focus-within .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .menuCol {
   list-style: none;
   margin: 0;

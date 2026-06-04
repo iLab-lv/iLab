@@ -7,7 +7,6 @@ import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
 import BottomBar from './ui/bottombar/BottomBar';
 import Footer from './ui/footer/Footer';
-import FooterClientWrapper from './ui/footer/FooterClientWrapper';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import CookieConsent from './ui/cookie-consent/CookieConsent';
 import ConsentAnalytics from './ui/cookie-consent/ConsentAnalytics';
@@ -52,7 +51,7 @@ export default async function SiteLayout({ children }) {
           {locale === 'ru' ? 'Перейти к содержанию' : 'Pāriet uz saturu'}
         </a>
 
-        <NavBar />
+        <NavBar locale={locale} pathname={pathname} />
 
         <div className={l.controlsDesktopOnly}>
           <Controls
@@ -66,10 +65,7 @@ export default async function SiteLayout({ children }) {
 
         <main id="main">{children}</main>
 
-        <FooterClientWrapper
-          lv={<Footer locale="lv" siteSettings={siteSettings} />}
-          ru={<Footer locale="ru" siteSettings={siteSettings} />}
-        />
+        <Footer locale={locale} siteSettings={siteSettings} />
 
         <CookieConsent locale={locale} />
       </UiDialogsProvider>
