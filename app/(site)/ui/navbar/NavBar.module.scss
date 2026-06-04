@@ -323,6 +323,7 @@
 .mobileMenu {
   position: fixed;
   inset: calc(#{$header-mobile-height} + env(safe-area-inset-top)) 0 0 0;
+  height: calc(100dvh - #{$header-mobile-height} - env(safe-area-inset-top));
   background: $glass-bg-strong;
   -webkit-backdrop-filter: saturate($glass-saturate) blur(12px);
   backdrop-filter: saturate($glass-saturate) blur(12px);
@@ -356,6 +357,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-height: 0;
   padding: $space-md;
   padding-bottom: calc(#{$space-md} + env(safe-area-inset-bottom));

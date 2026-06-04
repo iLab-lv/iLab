@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { createPortal } from 'react-dom';
 import Controls from '../controls/Controls';
 import { SOCIALS } from '@/data/site.config';
 import { hasChildren, isNavItemActive } from './navigation.helpers';
@@ -24,7 +25,7 @@ export default function MobileNavDrawer({
     setMobileExpandedSlug(null);
   };
 
-  return (
+  const drawer = (
     <div
       id="mobile-drawer"
       className={`${s.mobileMenu} ${mobileOpen ? s.open : ''}`}
@@ -120,9 +121,12 @@ export default function MobileNavDrawer({
             instagramUrl={SOCIALS.instagram}
             tiktokUrl={SOCIALS.tiktok}
             onLanguageChange={closeMobileMenu}
+            placement="inline"
           />
         </div>
       </nav>
     </div>
   );
+
+  return createPortal(drawer, document.body);
 }
