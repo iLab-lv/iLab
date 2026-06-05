@@ -13,7 +13,7 @@ const DEFAULT_TITLE = 'iLab — telefonu, datoru un Dyson remonts Rīgā';
 const DEFAULT_DESCRIPTION =
   'iLab serviss Rīgā — telefonu, planšetdatoru, datoru un Dyson ierīču diagnostika, remonts un detaļu maiņa. 90 dienu garantija, filiāles Domina Shopping un Spice Life.';
 
-const DEFAULT_OG_IMAGE = '/images/og/ilab-og.jpg';
+const DEFAULT_OG_IMAGE = '/images/og/home.jpg';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
