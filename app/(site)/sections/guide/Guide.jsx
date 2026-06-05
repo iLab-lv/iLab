@@ -1,5 +1,3 @@
-'use client';
-
 import s from './Guide.module.scss';
 import { getGuideContent } from './guideContent';
 

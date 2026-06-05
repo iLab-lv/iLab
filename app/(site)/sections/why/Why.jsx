@@ -1,5 +1,4 @@
 // app/(site)/sections/Why/Why.jsx
-'use client';
 
 import s from './Why.module.scss';
 import whyContent from './why.content';

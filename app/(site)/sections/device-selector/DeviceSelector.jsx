@@ -1,5 +1,6 @@
 // sections/device-selector/DeviceSelector.jsx
-import DeviceGrid from '@components/device-grid/DeviceGrid';
+import DeviceGridIsland from '@components/device-grid/DeviceGridIsland';
+import DeviceGridStaticPreview from '@components/device-grid/DeviceGridStaticPreview';
 import { getDeviceSelectorStrings } from './deviceSelector.i18n';
 import s from '@styles/Catalog.module.scss';
 
@@ -45,7 +46,7 @@ export default function DeviceSelector({
           </p>
         ) : null}
 
-        <DeviceGrid
+        <DeviceGridIsland
           locale={locale}
           devices={devices}
           baseHref={baseHref}
@@ -54,7 +55,17 @@ export default function DeviceSelector({
           seriesMeta={seriesMeta}
           initialLimit={initialLimit}
           autoExpandOnSearch={autoExpandOnSearch}
-        />
+        >
+          <DeviceGridStaticPreview
+            locale={locale}
+            devices={devices}
+            baseHref={baseHref}
+            brandKey={brandKey}
+            categoryKey={categoryKey}
+            seriesMeta={seriesMeta}
+            initialLimit={initialLimit}
+          />
+        </DeviceGridIsland>
       </div>
     </section>
   );
