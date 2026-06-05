@@ -13,6 +13,15 @@ $color-accent: #22D3EE;
   gap: 12px;
 }
 
+.inline {
+  position: static;
+  left: auto;
+  bottom: auto;
+  z-index: auto;
+  justify-content: center;
+  width: 100%;
+}
+
 .slot,
 .socials {
   display: inline-flex;
