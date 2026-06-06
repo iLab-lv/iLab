@@ -1,5 +1,7 @@
+'use client';
+
 import s from './PriceList.module.scss';
-import BookRepairButton from './BookRepairButton';
+import { useUiDialogs } from '../../ui/providers/UiDialogsProvider';
 
 function getStrings(locale = 'lv') {
   if (locale === 'ru') {
@@ -104,6 +106,7 @@ export default function PriceList({
   locale = 'lv',
 }) {
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
+  const { openBook } = useUiDialogs();
   const strings = getStrings(locale);
   const resolvedBookLabel = bookLabel || strings.bookLabel;
 
@@ -155,7 +158,15 @@ export default function PriceList({
               </div>
 
               <div className={s.td} role="cell">
-                <BookRepairButton label={resolvedBookLabel} />
+                <button
+                  type="button"
+                  className={s.bookBtn}
+                  onClick={(e) => openBook?.(e.currentTarget)}
+                  aria-haspopup="dialog"
+                  aria-controls="pieraksties-panel"
+                >
+                  {resolvedBookLabel}
+                </button>
               </div>
             </div>
           ))}
@@ -178,7 +189,15 @@ export default function PriceList({
               </div>
 
               <div className={s.ctaRow}>
-                <BookRepairButton label={resolvedBookLabel} />
+                <button
+                  type="button"
+                  className={s.bookBtn}
+                  onClick={(e) => openBook?.(e.currentTarget)}
+                  aria-haspopup="dialog"
+                  aria-controls="pieraksties-panel"
+                >
+                  {resolvedBookLabel}
+                </button>
               </div>
             </article>
           ))}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import ReviewTextToggle from './ReviewTextToggle';
 import s from './Reviews.module.scss';
 
 const PLACE_KEYS = ['domina', 'spice'];
@@ -163,7 +164,11 @@ function ReviewItem({ author, text, date, rating, locale, strings }) {
         </div>
       )}
 
-      <p className={s.reviewText}>{safeText}</p>
+      <ReviewTextToggle
+        text={safeText}
+        moreLabel={strings.more}
+        lessLabel={strings.less}
+      />
     </li>
   );
 }
