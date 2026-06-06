@@ -196,24 +196,10 @@
   color: $color-text-2;
   font-size: $font-size-p;
   line-height: 1.55;
-}
-
-/* Expand button */
-
-.reviewMore {
-  border: none;
-  background: none;
-  padding: 0;
-  margin-left: 6px;
-  font: inherit;
-  font-size: $font-size-sm;
-  color: $color-accent;
-  cursor: pointer;
-  text-decoration: underline;
-
-  &:hover {
-    color: $color-accent-hover;
-  }
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
 }
 
 /* Empty text */
