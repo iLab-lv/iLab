@@ -1,5 +1,3 @@
-import { headers } from 'next/headers';
-
 import { getSiteSettings } from '@/lib/siteSettings';
 
 import StructuredData from './StructuredData';
@@ -12,29 +10,15 @@ import DeferredCookieConsent from './ui/cookie-consent/DeferredCookieConsent';
 
 import l from './Layout.module.scss';
 
-function getLocaleFromPathname(pathname = '/') {
-  return pathname.startsWith('/ru') ? 'ru' : 'lv';
-}
-
 export default async function SiteLayout({ children }) {
-  const [siteSettings, headersList] = await Promise.all([
-    getSiteSettings(),
-    headers(),
-  ]);
-
-  const pathname =
-    headersList.get('x-pathname') ||
-    headersList.get('x-invoke-path') ||
-    '/';
-
-  const locale = getLocaleFromPathname(pathname);
+  const siteSettings = await getSiteSettings();
   const socials = siteSettings?.socials || {};
 
   return (
     <div className={l.siteRoot}>
       <StructuredData siteSettings={siteSettings} />
 
-      <UiDialogsProvider locale={locale} siteSettings={siteSettings}>
+      <UiDialogsProvider siteSettings={siteSettings}>
         <a
           href="#main"
           style={{
@@ -46,10 +30,10 @@ export default async function SiteLayout({ children }) {
             overflow: 'hidden',
           }}
         >
-          {locale === 'ru' ? 'Перейти к содержанию' : 'Pāriet uz saturu'}
+          Pāriet uz saturu
         </a>
 
-        <NavBar locale={locale} pathname={pathname} />
+        <NavBar />
 
         <div className={l.controlsDesktopOnly}>
           <Controls
@@ -63,9 +47,9 @@ export default async function SiteLayout({ children }) {
 
         <main id="main">{children}</main>
 
-        <Footer locale={locale} siteSettings={siteSettings} />
+        <Footer siteSettings={siteSettings} />
 
-        <DeferredCookieConsent locale={locale} />
+        <DeferredCookieConsent />
       </UiDialogsProvider>
     </div>
   );
