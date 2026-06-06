@@ -5,6 +5,9 @@ export function middleware(req) {
   const host = rawHost.split(':')[0].toLowerCase();
   const pathname = req.nextUrl.pathname;
 
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-pathname', pathname);
+
   const isAdsPreview = req.nextUrl.searchParams.get('ads') === '1';
 
   const isRigaHost = host === 'riga.ilab.lv' || isAdsPreview;
@@ -29,7 +32,11 @@ export function middleware(req) {
     */
     url.pathname = '/ads-robots.txt';
 
-    return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url, {
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   const isPublicAsset =
@@ -41,21 +48,33 @@ export function middleware(req) {
     pathname.includes('.');
 
   if (isPublicAsset) {
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (isRigaHost) {
     const url = req.nextUrl.clone();
     url.pathname = '/ads';
 
-    return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url, {
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (isInternalAdsPath) {
     return new NextResponse(null, { status: 404 });
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {
