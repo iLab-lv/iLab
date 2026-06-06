@@ -1,23 +1,13 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
-
 import styles from './Footer.module.scss';
 import { getFooterContent } from './footer.i18n';
 
-function getLocaleFromPathname(pathname = '/') {
-  return pathname === '/ru' || pathname.startsWith('/ru/') ? 'ru' : 'lv';
-}
-
 export default function Footer({
   variant = 'default',
-  locale,
+  locale = 'lv',
   siteSettings,
 }) {
-  const pathname = usePathname() || '/';
-  const resolvedLocale = locale || getLocaleFromPathname(pathname);
   const year = new Date().getFullYear();
-  const content = getFooterContent(resolvedLocale);
+  const content = getFooterContent(locale);
 
   const company = siteSettings?.company || {};
   const locations = Array.isArray(siteSettings?.locations)

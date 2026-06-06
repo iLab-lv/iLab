@@ -1,24 +1,42 @@
+import { headers } from 'next/headers';
+
 import { getSiteSettings } from '@/lib/siteSettings';
 
 import StructuredData from './StructuredData';
 import NavBar from './ui/navbar/NavBar';
 import Controls from './ui/controls/Controls';
-import DeferredBottomBar from './ui/bottombar/DeferredBottomBar';
+import BottomBar from './ui/bottombar/BottomBar';
 import Footer from './ui/footer/Footer';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
-import DeferredCookieConsent from './ui/cookie-consent/DeferredCookieConsent';
+import CookieConsent from './ui/cookie-consent/CookieConsent';
+import ConsentAnalytics from './ui/cookie-consent/ConsentAnalytics';
 
 import l from './Layout.module.scss';
 
+function getLocaleFromPathname(pathname = '/') {
+  return pathname.startsWith('/ru') ? 'ru' : 'lv';
+}
+
 export default async function SiteLayout({ children }) {
-  const siteSettings = await getSiteSettings();
+  const [siteSettings, headersList] = await Promise.all([
+    getSiteSettings(),
+    headers(),
+  ]);
+
+  const pathname =
+    headersList.get('x-pathname') ||
+    headersList.get('x-invoke-path') ||
+    '/';
+
+  const locale = getLocaleFromPathname(pathname);
   const socials = siteSettings?.socials || {};
 
   return (
     <div className={l.siteRoot}>
       <StructuredData siteSettings={siteSettings} />
+      <ConsentAnalytics />
 
-      <UiDialogsProvider siteSettings={siteSettings}>
+      <UiDialogsProvider locale={locale} siteSettings={siteSettings}>
         <a
           href="#main"
           style={{
@@ -30,10 +48,10 @@ export default async function SiteLayout({ children }) {
             overflow: 'hidden',
           }}
         >
-          Pāriet uz saturu
+          {locale === 'ru' ? 'Перейти к содержанию' : 'Pāriet uz saturu'}
         </a>
 
-        <NavBar />
+        <NavBar locale={locale} pathname={pathname} />
 
         <div className={l.controlsDesktopOnly}>
           <Controls
@@ -43,13 +61,13 @@ export default async function SiteLayout({ children }) {
           />
         </div>
 
-        <DeferredBottomBar socials={socials} />
+        <BottomBar socials={socials} />
 
         <main id="main">{children}</main>
 
-        <Footer siteSettings={siteSettings} />
+        <Footer locale={locale} siteSettings={siteSettings} />
 
-        <DeferredCookieConsent />
+        <CookieConsent locale={locale} />
       </UiDialogsProvider>
     </div>
   );
