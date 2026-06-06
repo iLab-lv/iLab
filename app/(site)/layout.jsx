@@ -9,7 +9,6 @@ import BottomBar from './ui/bottombar/BottomBar';
 import Footer from './ui/footer/Footer';
 import { UiDialogsProvider } from './ui/providers/UiDialogsProvider';
 import CookieConsent from './ui/cookie-consent/CookieConsent';
-import ConsentAnalytics from './ui/cookie-consent/ConsentAnalytics';
 
 import l from './Layout.module.scss';
 
@@ -34,7 +33,6 @@ export default async function SiteLayout({ children }) {
   return (
     <div className={l.siteRoot}>
       <StructuredData siteSettings={siteSettings} />
-      <ConsentAnalytics />
 
       <UiDialogsProvider locale={locale} siteSettings={siteSettings}>
         <a
