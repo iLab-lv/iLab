@@ -42,6 +42,7 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-a5-2016-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a3-2016-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
+      
       { source: '/:lang(ru)?/samsung-galaxy-j8-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-j7-2017-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-j6-plus-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
