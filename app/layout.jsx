@@ -4,7 +4,8 @@ import '@/styles/globals.scss';
 
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { headers } from 'next/headers';
+
+import HtmlLangSync from './HtmlLangSync';
 
 const SITE_URL = 'https://www.ilab.lv';
 
@@ -20,10 +21,6 @@ const inter = Inter({
   display: 'swap',
   variable: '--font-inter',
 });
-
-function getLocaleFromPathname(pathname = '/') {
-  return pathname.startsWith('/ru') ? 'ru' : 'lv';
-}
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -87,19 +84,12 @@ export const viewport = {
   colorScheme: 'dark',
 };
 
-export default async function RootLayout({ children }) {
-  const headersList = await headers();
-
-  const pathname =
-    headersList.get('x-pathname') ||
-    headersList.get('x-invoke-path') ||
-    '/';
-
-  const locale = getLocaleFromPathname(pathname);
-
+export default function RootLayout({ children }) {
   return (
-    <html lang={locale} className={inter.className}>
+    <html lang="lv" className={inter.className}>
       <body>
+        <HtmlLangSync />
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-K8C3GNKB"
@@ -111,7 +101,7 @@ export default async function RootLayout({ children }) {
 
         {children}
 
-        <Script id="gtm-base" strategy="afterInteractive">
+        <Script id="gtm-base" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
