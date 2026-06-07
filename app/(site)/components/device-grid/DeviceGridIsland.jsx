@@ -29,7 +29,7 @@ export default function DeviceGridIsland({ children, ...props }) {
           observer.disconnect();
         }
       },
-      { rootMargin: '100px 0px' }
+      { rootMargin: '600px 0px' }
     );
 
     observer.observe(node);
