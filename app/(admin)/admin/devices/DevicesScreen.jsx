@@ -11,6 +11,10 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 
 import Button from '@components/button/Button';
+import {
+  createDeviceContentTemplate,
+  fillEmptyDeviceContent,
+} from './templates';
 import s from './DevicesScreen.module.scss';
 
 const LOCALES = ['lv', 'ru'];
@@ -273,6 +277,35 @@ export default function DevicesScreen() {
           [locale]: value,
         },
       };
+      return next;
+    });
+  }
+
+  function prefillDeviceContents(idx) {
+    setItems((prev) => {
+      const item = prev[idx];
+
+      if (!item || item.__originalSlug || !String(item.name || '').trim()) {
+        return prev;
+      }
+
+      const category = categories.find(
+        (entry) => entry.slug === item.categoryKey
+      );
+      const brand = category?.brands?.find(
+        (entry) => entry.key === item.brandKey
+      );
+      const template = createDeviceContentTemplate({
+        deviceName: item.name,
+        category,
+        brand,
+      });
+
+      if (!template) return prev;
+
+      const filledItem = fillEmptyDeviceContent(item, template.content);
+      const next = [...prev];
+      next[idx] = filledItem;
       return next;
     });
   }
@@ -864,6 +897,11 @@ export default function DevicesScreen() {
                                                                                 {
                                                                                   name: e.target.value,
                                                                                 }
+                                                                              )
+                                                                            }
+                                                                            onBlur={() =>
+                                                                              prefillDeviceContents(
+                                                                                originalIdx
                                                                               )
                                                                             }
                                                                             placeholder="name"

@@ -9,6 +9,8 @@ import { useLandingCta } from '../ui/providers/LandingCtaProvider';
 
 import s from './LandingServices.module.scss';
 
+const PRICE_PAGE_URL = 'https://ilab.lv/cenas';
+
 function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
 }
@@ -330,7 +332,7 @@ export default function LandingServices({
   const [activeId, setActiveId] = useState(content.services[0].id);
 
   const serviceCardRef = useRef(null);
-  const { openPriceForm, openBookingForm } = useLandingCta();
+  const { openBookingForm } = useLandingCta();
 
   const activeService =
     content.services.find((service) => service.id === activeId) ||
@@ -418,11 +420,11 @@ export default function LandingServices({
 
               <div className={s.actions}>
                 <LandingButton
-                  type="button"
+                  href={PRICE_PAGE_URL}
+                  target="_self"
                   variant="primary"
                   tone="accent"
                   size="lg"
-                  onClick={openPriceForm}
                 >
                   {content.ctaPrice}
                 </LandingButton>
