@@ -111,7 +111,7 @@
 /* ===== Dropdown ===== */
 .dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 0;
   min-width: 220px;
   background: $glass-bg-strong;
