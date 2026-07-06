@@ -5,6 +5,8 @@ import {
   LuCamera,
   LuVolume2,
   LuDroplets,
+  LuTabletSmartphone,
+  LuCircuitBoard,
   LuBug,
   LuKeyboard,
   LuMonitor,
@@ -85,6 +87,30 @@ const IPHONE_POPULAR_SERVICES = [
     text: {
       lv: 'diagnostika un atjaunošana pēc šķidruma iekļūšanas, ja tas iespējams.',
       ru: 'диагностика и восстановление после попадания жидкости, если это возможно.',
+    },
+  },
+  {
+    serviceKey: 'aizmugures-vacina-maina',
+    icon: LuTabletSmartphone,
+    title: {
+      lv: 'Aizmugures vāciņa maiņa',
+      ru: 'Замена задней крышки',
+    },
+    text: {
+      lv: 'saplaisājis aizmugures stikls, bojāts korpuss vai vāciņš pēc kritiena.',
+      ru: 'треснувшее заднее стекло, повреждённый корпус или крышка после падения.',
+    },
+  },
+  {
+    serviceKey: 'iphone-plates-remonts',
+    icon: LuCircuitBoard,
+    title: {
+      lv: 'iPhone plates remonts',
+      ru: 'Ремонт платы iPhone',
+    },
+    text: {
+      lv: 'diagnostika un mikrolodēšana, ja iPhone neieslēdzas, restartējas vai nelādējas.',
+      ru: 'диагностика и микропайка, если iPhone не включается, перезагружается или не заряжается.',
     },
   },
 ];
