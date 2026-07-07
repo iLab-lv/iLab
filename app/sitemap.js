@@ -12,7 +12,7 @@ import {
 import {
   INFO_PAGE_KEYS,
   CATEGORY_PAGE_KEYS,
-  SEO_SERVICE_PAGE_KEYS,
+  getSeoServicePageKeys,
   SITE_LAST_MODIFIED,
 } from '@/lib/routes/sitemapRouteKeys';
 
@@ -145,7 +145,7 @@ function buildCategoryEntries() {
 }
 
 function buildSeoServiceEntries() {
-  return SEO_SERVICE_PAGE_KEYS.flatMap(({ categoryKey, serviceKey }) =>
+  return getSeoServicePageKeys().flatMap(({ categoryKey, serviceKey }) =>
     createPairedEntries({
       lvPath: localizedServicePath(categoryKey, serviceKey, 'lv'),
       ruPath: localizedServicePath(categoryKey, serviceKey, 'ru'),
