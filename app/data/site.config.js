@@ -1,9 +1,11 @@
 // app/data/site.config.js
 
+export const SITE_URL = 'https://ilab.lv';
+
 // Company basics (handy for JSON-LD later)
 export const COMPANY = {
   name: 'iLab',
-  url: 'https://www.ilab.lv',
+  url: SITE_URL,
   email: 'info@ilab.lv',
   phoneMain: '+37123370088',
   logo: '/brand/logo.svg',

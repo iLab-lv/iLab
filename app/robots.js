@@ -1,6 +1,8 @@
 // app/robots.js
 
-const ORIGIN = 'https://www.ilab.lv';
+import { SITE_URL } from './data/site.config.js';
+
+const ORIGIN = SITE_URL.replace(/\/+$/, '');
 
 export default function robots() {
   return {

@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { headers } from 'next/headers';
 
-const SITE_URL = 'https://www.ilab.lv';
+import { SITE_URL } from './data/site.config.js';
 
 const DEFAULT_TITLE = 'iLab — telefonu, datoru un Dyson remonts Rīgā';
 
