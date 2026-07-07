@@ -16,7 +16,9 @@ import {
   SITE_LAST_MODIFIED,
 } from '@/lib/routes/sitemapRouteKeys';
 
-const ORIGIN = 'https://www.ilab.lv';
+import { SITE_URL } from './data/site.config.js';
+
+const ORIGIN = SITE_URL.replace(/\/+$/, '');
 
 const LOCALES = ['lv', 'ru'];
 

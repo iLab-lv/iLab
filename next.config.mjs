@@ -10,6 +10,12 @@ const nextConfig = {
     return [
 
 
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.ilab.lv" }],
+        destination: "https://ilab.lv/:path*",
+        permanent: true,
+      },
 
       { source: '/:lang(ru)?/samsung-galaxy-note-7-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-tab-s5e-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
