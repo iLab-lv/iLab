@@ -2,6 +2,8 @@ import categoryContent from '@/data/categoryContent';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
+import IphoneQuickFacts from './IphoneQuickFacts';
+
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import {
@@ -99,6 +101,8 @@ export default function IphoneRepairPage({
         priority
         bodyHtml={strings.heroBodyHtml}
       />
+
+      <IphoneQuickFacts />
 
       <section className={s.section}>
         <div className={s.container}>

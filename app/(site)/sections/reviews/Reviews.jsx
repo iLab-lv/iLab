@@ -206,9 +206,9 @@ function ReviewItem({ author, text, date, rating, locale, strings }) {
   );
 }
 
-export default function Reviews({ id = 'reviews', locale = 'lv' }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+export default function Reviews({ id = 'reviews', locale = 'lv', initialData = null }) {
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(null);
 
   const safeLocale = normalizeLocale(locale);
@@ -237,12 +237,21 @@ export default function Reviews({ id = 'reviews', locale = 'lv' }) {
       }
     }
 
+    if (initialData) {
+      setData(initialData);
+      setLoading(false);
+      setError(null);
+      return () => {
+        cancelled = true;
+      };
+    }
+
     load();
 
     return () => {
       cancelled = true;
     };
-  }, [strings.error]);
+  }, [initialData, strings.error]);
 
   const places = useMemo(() => {
     if (!data) return null;

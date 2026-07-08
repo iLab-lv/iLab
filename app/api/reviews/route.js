@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 
 import { db } from '@/lib/firebaseAdmin';
 import {
-  PLACE_IDS,
+  getPlaceIds,
   getReviewsSummary,
   normalizeReview,
   normalizeFeaturedReviewsByLocale,
@@ -47,7 +47,8 @@ export async function POST(req) {
       );
     }
 
-    const placeId = PLACE_IDS[key];
+    const placeIds = await getPlaceIds();
+    const placeId = placeIds[key];
 
     if (!placeId) {
       return NextResponse.json(

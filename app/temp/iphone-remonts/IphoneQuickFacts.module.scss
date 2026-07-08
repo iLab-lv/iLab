@@ -1,0 +1,153 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  position: relative;
+  padding-block: clamp($space-md, 3vw, $space-xl);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(34, 211, 238, 0.1), transparent 26rem),
+    radial-gradient(circle at 88% 100%, rgba(34, 211, 238, 0.07), transparent 24rem),
+    linear-gradient(180deg, rgba(2, 11, 12, 0.96), rgba(3, 3, 3, 0.98));
+}
+
+.container {
+  @include layout.container;
+}
+
+.band {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  overflow: hidden;
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 20px 64px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(34, 211, 238, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.16), transparent 14rem),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent 34%, rgba(34, 211, 238, 0.04));
+    pointer-events: none;
+  }
+}
+
+.item {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 92px;
+  padding: $space-md;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  &:not(:last-child) {
+    border-right: $border-thin solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+.icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 8px;
+  color: $color-accent;
+  background: rgba(34, 211, 238, 0.1);
+  box-shadow:
+    0 10px 28px rgba(34, 211, 238, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.text {
+  min-width: 0;
+  color: $color-text;
+  font-size: clamp($font-size-sm, 0.78rem + 0.18vw, 0.98rem);
+  line-height: 1.24;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0;
+}
+
+@media (max-width: $bp-xl) {
+  .band {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .item {
+    &:not(:last-child) {
+      border-right: 0;
+    }
+
+    &:not(:nth-child(3n)) {
+      border-right: $border-thin solid rgba(255, 255, 255, 0.08);
+    }
+
+    &:nth-child(-n + 3) {
+      border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+@media (max-width: $bp-md) {
+  .section {
+    padding-block: $space-md;
+  }
+
+  .band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .item {
+    min-height: 82px;
+    padding: $space-sm;
+    gap: $space-xs;
+
+    &:not(:nth-child(3n)) {
+      border-right: 0;
+    }
+
+    &:not(:nth-child(2n)) {
+      border-right: $border-thin solid rgba(255, 255, 255, 0.08);
+    }
+
+    &:nth-child(-n + 4) {
+      border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .text {
+    font-size: 0.82rem;
+  }
+}
