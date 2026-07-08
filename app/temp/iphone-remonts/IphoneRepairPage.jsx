@@ -3,20 +3,20 @@ import categoryContent from '@/data/categoryContent';
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
 import IphoneQuickFacts from './IphoneQuickFacts';
+import IphoneQualitySection from './IphoneQualitySection';
+import IphoneLocationsSection from './IphoneLocationsSection';
+import IphoneProblemAnswers from './IphoneProblemAnswers';
+import IphoneRepairDecisionSection from './IphoneRepairDecisionSection';
+import IphoneRepairStepsSection from './IphoneRepairStepsSection';
+import IphoneSeoGuide from './IphoneSeoGuide';
+import PopularServices from './PopularServices';
 
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Services from '@sections/services/Services';
-import {
-  buildIphonePopularServices,
-  getIphonePopularServicesTitle,
-} from '@sections/services/services.i18n';
-import Process from '@sections/process/Process';
 import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -77,9 +77,6 @@ export default function IphoneRepairPage({
 
   const strings = getPageStrings(locale);
 
-  const popularServices = buildIphonePopularServices(locale);
-  const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
-
   const selectorTitle = page.selector?.heading || strings.modelGridHeading;
   const selectorIntro = page.selector?.intro || strings.modelGridIntro;
 
@@ -114,15 +111,9 @@ export default function IphoneRepairPage({
         </div>
       </section>
 
-      <section className={s.section}>
-        <div className={s.container}>
-          <Services
-            id="iphone-services"
-            title={popularServicesTitle}
-            items={popularServices}
-          />
-        </div>
-      </section>
+      <PopularServices />
+
+      <IphoneProblemAnswers />
 
       <DeviceSelector
         id="iphone-modeli"
@@ -138,20 +129,19 @@ export default function IphoneRepairPage({
         autoExpandOnSearch
       />
 
+      <IphoneQualitySection />
+
+      <IphoneLocationsSection />
+
       {page.sections?.hasReviews && (
         <Reviews locale={locale} initialData={reviewsSummary} />
       )}
 
-      {page.sections?.hasGuide && (
-        <Guide
-          id="guide"
-          locale={locale}
-          variant="iphone"
-          headingLevel={2}
-        />
-      )}
+      <IphoneRepairDecisionSection />
 
-      {page.sections?.hasProcess && <Process locale={locale} />}
+      {page.sections?.hasProcess && <IphoneRepairStepsSection />}
+
+      {page.sections?.hasGuide && <IphoneSeoGuide />}
 
       {page.sections?.hasWhy && (
         <section className={s.section}>
