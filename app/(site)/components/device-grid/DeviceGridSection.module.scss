@@ -75,6 +75,10 @@
   gap: $space-md;
 }
 
+.collapsedCard {
+  display: none;
+}
+
 .emptySection {
   opacity: 0.8;
   padding: $space-sm 0 $space-md;

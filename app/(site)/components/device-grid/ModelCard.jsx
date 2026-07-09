@@ -67,7 +67,13 @@ function ImgWithFallback({ src, alt, className }) {
   );
 }
 
-export default function ModelCard({ device, baseHref, locale = 'lv' }) {
+export default function ModelCard({
+  device,
+  baseHref,
+  locale = 'lv',
+  className = '',
+  ...linkProps
+}) {
   const strings = getCardStrings(locale);
   const name = device?.name || '';
   const href = `${baseHref}/${device.slug}`;
@@ -81,7 +87,12 @@ export default function ModelCard({ device, baseHref, locale = 'lv' }) {
     strings.fallbackAlt;
 
   return (
-    <Link href={href} className={s.card} aria-label={fullLabel}>
+    <Link
+      href={href}
+      className={`${s.card} ${className || ''}`}
+      aria-label={fullLabel}
+      {...linkProps}
+    >
       <ImgWithFallback src={src} alt={alt} className={s.img} />
 
       <div className={s.meta}>

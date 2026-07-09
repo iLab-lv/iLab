@@ -2,19 +2,21 @@ import categoryContent from '@/data/categoryContent';
 
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
+import IphoneQuickFacts from './IphoneQuickFacts';
+import IphoneQualitySection from './IphoneQualitySection';
+import IphoneLocationsSection from './IphoneLocationsSection';
+import IphoneClientChoiceSection from './IphoneClientChoiceSection';
+import IphoneLandingReviewsSection from './IphoneLandingReviewsSection';
+import IphoneProblemAnswers from './IphoneProblemAnswers';
+import IphoneRepairDecisionSection from './IphoneRepairDecisionSection';
+import IphoneRepairStepsSection from './IphoneRepairStepsSection';
+import IphoneSeoGuide from './IphoneSeoGuide';
+import IphoneLandingFinalCta from './IphoneLandingFinalCta';
+import PopularServices from './PopularServices';
+
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Services from '@sections/services/Services';
-import {
-  buildIphonePopularServices,
-  getIphonePopularServicesTitle,
-} from '@sections/services/services.i18n';
-import Process from '@sections/process/Process';
-import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
-import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -75,9 +77,6 @@ export default function IphoneRepairPage({
 
   const strings = getPageStrings(locale);
 
-  const popularServices = buildIphonePopularServices(locale);
-  const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
-
   const selectorTitle = page.selector?.heading || strings.modelGridHeading;
   const selectorIntro = page.selector?.intro || strings.modelGridIntro;
 
@@ -100,6 +99,8 @@ export default function IphoneRepairPage({
         bodyHtml={strings.heroBodyHtml}
       />
 
+      <IphoneQuickFacts />
+
       <section className={s.section}>
         <div className={s.container}>
           <h2 className={s.h2}>{strings.introTitle}</h2>
@@ -110,15 +111,9 @@ export default function IphoneRepairPage({
         </div>
       </section>
 
-      <section className={s.section}>
-        <div className={s.container}>
-          <Services
-            id="iphone-services"
-            title={popularServicesTitle}
-            items={popularServices}
-          />
-        </div>
-      </section>
+      <PopularServices />
+
+      <IphoneProblemAnswers />
 
       <DeviceSelector
         id="iphone-modeli"
@@ -134,26 +129,21 @@ export default function IphoneRepairPage({
         autoExpandOnSearch
       />
 
+      {page.sections?.hasWhy && <IphoneClientChoiceSection />}
+
       {page.sections?.hasReviews && (
-        <Reviews locale={locale} initialData={reviewsSummary} />
+        <IphoneLandingReviewsSection reviewsSummary={reviewsSummary} />
       )}
 
-      {page.sections?.hasGuide && (
-        <Guide
-          id="guide"
-          locale={locale}
-          variant="iphone"
-          headingLevel={2}
-        />
-      )}
+      <IphoneQualitySection />
 
-      {page.sections?.hasProcess && <Process locale={locale} />}
+      <IphoneLocationsSection />
 
-      {page.sections?.hasWhy && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
-      )}
+      <IphoneRepairDecisionSection />
+
+      {page.sections?.hasProcess && <IphoneRepairStepsSection />}
+
+      {page.sections?.hasGuide && <IphoneSeoGuide />}
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
         <section className={s.section}>
@@ -163,11 +153,7 @@ export default function IphoneRepairPage({
         </section>
       )}
 
-      {page.sections?.hasConvertBand && (
-        <section className={s.section}>
-          <ConvertBand locale={locale} />
-        </section>
-      )}
+      {page.sections?.hasConvertBand && <IphoneLandingFinalCta />}
     </>
   );
 }

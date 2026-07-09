@@ -24,7 +24,6 @@ export default function DeviceGridSection({
       : group.items;
 
   const itemsSorted = [...itemsByYear].sort(byYearDescThenNameAsc);
-  const visible = isExpanded ? itemsSorted : itemsSorted.slice(0, initialLimit);
   const canExpand = itemsSorted.length > initialLimit;
 
   return (
@@ -34,9 +33,9 @@ export default function DeviceGridSection({
       id={sectionId}
     >
       <div className={s.sectionHeader}>
-        <h2 id={`${sectionId}-title`} className={s.sectionTitle}>
+        <h3 id={`${sectionId}-title`} className={s.sectionTitle}>
           {group.title} <span className={s.count}>({group.items.length})</span>
-        </h2>
+        </h3>
 
         {canExpand ? (
           <button
@@ -84,14 +83,20 @@ export default function DeviceGridSection({
         <p className={s.emptySection}>{strings.emptyYear}</p>
       ) : (
         <div className={s.grid} id={`${sectionId}-grid`}>
-          {visible.map((device) => (
-            <ModelCard
-              key={`${device.brandSlug}:${device.slug}`}
-              device={device}
-              baseHref={baseHref}
-              locale={strings.locale}
-            />
-          ))}
+          {itemsSorted.map((device, index) => {
+            const isCollapsed = !isExpanded && index >= initialLimit;
+
+            return (
+              <ModelCard
+                key={`${device.brandSlug}:${device.slug}`}
+                device={device}
+                baseHref={baseHref}
+                locale={strings.locale}
+                className={isCollapsed ? s.collapsedCard : ''}
+                aria-hidden={isCollapsed ? 'true' : undefined}
+              />
+            );
+          })}
         </div>
       )}
     </section>
