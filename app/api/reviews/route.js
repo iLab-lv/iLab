@@ -9,7 +9,7 @@ import {
   normalizeFeaturedReviewsByLocale,
 } from '@/lib/reviews/getReviewsSummary';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 1800;
 
 export async function GET() {
   const out = await getReviewsSummary();
