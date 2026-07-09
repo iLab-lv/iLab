@@ -1,5 +1,4 @@
 import {
-  LuBadgeCheck,
   LuClipboardList,
   LuMapPin,
   LuSearchCheck,
@@ -9,12 +8,6 @@ import {
 import s from './IphoneClientChoiceSection.module.scss';
 
 const points = [
-  {
-    icon: LuBadgeCheck,
-    title: '15+ gadu pieredze',
-    text:
-      '15+ gadu pieredze ierīču remontā palīdz ātrāk saprast bojājuma iemeslu, ieteikt piemērotāko risinājumu un izvairīties no liekiem remonta darbiem.',
-  },
   {
     icon: LuSearchCheck,
     title: 'Sākotnējā pārbaude pirms remonta',
@@ -54,13 +47,22 @@ export default function IphoneClientChoiceSection() {
             </h2>
 
             <p>
-              15+ gadu pieredze, saprotama diagnostika un skaidrs remonta
-              process - bez liekiem solījumiem un pārsteigumiem cenā.
+              Saprotama diagnostika un skaidrs remonta process - bez liekiem
+              solījumiem un pārsteigumiem cenā.
             </p>
 
             <div className={s.stat} aria-label="15+ gadu pieredze">
               <strong>15+</strong>
-              <span>gadu pieredze ierīču remontā</span>
+              <div>
+                <span>gadu pieredze ierīču remontā</span>
+                <p>
+                  Pieredze palīdz ātrāk saprast bojājuma iemeslu, izvēlēties
+                  piemērotāko risinājumu un izvairīties no liekiem remonta
+                  darbiem. Klientam pirms darba sākšanas paskaidrojam, kas ir
+                  bojāts, kādi ir remonta varianti un kāds risinājums konkrētajā
+                  gadījumā ir pamatots.
+                </p>
+              </div>
             </div>
           </div>
 

@@ -55,7 +55,7 @@
 .card {
   position: relative;
   min-width: 0;
-  min-height: 218px;
+  min-height: 270px;
   display: grid;
   grid-template-columns: 76px minmax(0, 1fr);
   gap: $space-lg;
@@ -125,6 +125,9 @@
   position: relative;
   z-index: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   h3 {
     margin: 0 0 $space-sm;
@@ -147,15 +150,45 @@
   }
 }
 
-.priceLine {
-  margin-top: $space-sm !important;
-  color: rgba(245, 245, 245, 0.82) !important;
+.priceBlock {
+  width: 100%;
+  margin-top: $space-md;
+  padding: $space-sm;
+  border: $border-thin solid rgba(255, 255, 255, 0.075);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.1), transparent 72%),
+    rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.priceLink {
+.priceValue {
+  display: block;
+  color: $color-text;
+  font-size: clamp(1.05rem, 0.96rem + 0.32vw, 1.28rem);
+  line-height: 1.1;
+  font-weight: $font-weight-extrabold;
+}
+
+.priceLine {
+  margin-top: 5px !important;
+  color: rgba(245, 245, 245, 0.62) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.38 !important;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  align-items: center;
+  margin-top: $space-md;
+}
+
+.priceLink,
+.serviceLink {
   display: inline-flex;
   align-items: flex-start;
-  margin-top: $space-sm;
   color: $color-accent;
   font-size: $font-size-sm;
   line-height: 1.45;
@@ -175,6 +208,33 @@
     outline: 2px solid rgba(34, 211, 238, 0.74);
     outline-offset: 4px;
     border-radius: 6px;
+  }
+}
+
+.priceLink {
+  margin-top: $space-xs;
+  color: rgba(34, 211, 238, 0.92);
+  font-size: 0.82rem;
+}
+
+.serviceLink {
+  min-height: 40px;
+  align-items: center;
+  padding: 0 $space-md;
+  border: $border-thin solid rgba(34, 211, 238, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(34, 211, 238, 0.18), rgba(34, 211, 238, 0.1)),
+    rgba(34, 211, 238, 0.09);
+  line-height: 1.2;
+  box-shadow:
+    0 12px 28px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  &:hover {
+    background:
+      linear-gradient(180deg, rgba(34, 211, 238, 0.24), rgba(34, 211, 238, 0.14)),
+      rgba(34, 211, 238, 0.12);
   }
 }
 

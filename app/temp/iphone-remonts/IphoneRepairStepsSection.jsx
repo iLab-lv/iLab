@@ -2,9 +2,9 @@ import s from './IphoneRepairStepsSection.module.scss';
 
 const steps = [
   {
-    title: 'Sazinies vai izvēlies modeli',
+    title: 'Atnes ierīci vai nosūti ar kurjeru',
     text:
-      'Apraksti problēmu vai izvēlies savu iPhone modeli, lai apskatītu pieejamos remonta variantus un cenas.',
+      'iPhone vari nodot iLab servisā Rīgā vai nosūtīt ar kurjeru. Pievieno īsu aprakstu par problēmu, lai meistars var sākt ar pareizu pārbaudi.',
   },
   {
     title: 'Veicam diagnostiku',

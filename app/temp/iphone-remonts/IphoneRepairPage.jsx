@@ -129,21 +129,21 @@ export default function IphoneRepairPage({
         autoExpandOnSearch
       />
 
-      <IphoneQualitySection />
-
-      <IphoneLocationsSection />
+      {page.sections?.hasWhy && <IphoneClientChoiceSection />}
 
       {page.sections?.hasReviews && (
         <IphoneLandingReviewsSection reviewsSummary={reviewsSummary} />
       )}
+
+      <IphoneQualitySection />
+
+      <IphoneLocationsSection />
 
       <IphoneRepairDecisionSection />
 
       {page.sections?.hasProcess && <IphoneRepairStepsSection />}
 
       {page.sections?.hasGuide && <IphoneSeoGuide />}
-
-      {page.sections?.hasWhy && <IphoneClientChoiceSection />}
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
         <section className={s.section}>

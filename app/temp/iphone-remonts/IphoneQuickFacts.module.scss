@@ -3,60 +3,61 @@
 
 .section {
   position: relative;
-  padding-block: clamp($space-md, 3vw, $space-xl);
+  padding-block: clamp($space-lg, 3.5vw, $space-2xl);
   border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(circle at 14% 0%, rgba(34, 211, 238, 0.1), transparent 26rem),
-    radial-gradient(circle at 88% 100%, rgba(34, 211, 238, 0.07), transparent 24rem),
+    radial-gradient(circle at 14% 0%, rgba(34, 211, 238, 0.18), transparent 30rem),
+    radial-gradient(circle at 88% 100%, rgba(34, 211, 238, 0.1), transparent 28rem),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent 28%, rgba(34, 211, 238, 0.05)),
     linear-gradient(180deg, rgba(2, 11, 12, 0.96), rgba(3, 3, 3, 0.98));
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035),
+      transparent 32%,
+      transparent 68%,
+      rgba(255, 255, 255, 0.02)
+    );
+    pointer-events: none;
+  }
 }
 
 .container {
   @include layout.container;
+  position: relative;
+  z-index: 1;
 }
 
 .band {
   position: relative;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  overflow: hidden;
-  border: $border-thin solid rgba(255, 255, 255, 0.09);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(34, 211, 238, 0.12), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
-    rgba(255, 255, 255, 0.03);
-  box-shadow:
-    0 20px 64px rgba(0, 0, 0, 0.34),
-    0 0 0 1px rgba(34, 211, 238, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.16), transparent 14rem),
-      linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent 34%, rgba(34, 211, 238, 0.04));
-    pointer-events: none;
-  }
+  gap: $space-sm;
 }
 
 .item {
   position: relative;
-  z-index: 1;
   min-width: 0;
-  min-height: 92px;
+  min-height: 78px;
   padding: $space-md;
   display: flex;
   align-items: center;
   gap: $space-sm;
-
-  &:not(:last-child) {
-    border-right: $border-thin solid rgba(255, 255, 255, 0.08);
-  }
+  border: $border-thin solid rgba(255, 255, 255, 0.085);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.026);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 14px 38px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .icon {
@@ -92,20 +93,6 @@
   .band {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  .item {
-    &:not(:last-child) {
-      border-right: 0;
-    }
-
-    &:not(:nth-child(3n)) {
-      border-right: $border-thin solid rgba(255, 255, 255, 0.08);
-    }
-
-    &:nth-child(-n + 3) {
-      border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
-    }
-  }
 }
 
 @media (max-width: $bp-md) {
@@ -118,21 +105,9 @@
   }
 
   .item {
-    min-height: 82px;
+    min-height: 76px;
     padding: $space-sm;
     gap: $space-xs;
-
-    &:not(:nth-child(3n)) {
-      border-right: 0;
-    }
-
-    &:not(:nth-child(2n)) {
-      border-right: $border-thin solid rgba(255, 255, 255, 0.08);
-    }
-
-    &:nth-child(-n + 4) {
-      border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
-    }
   }
 
   .icon {

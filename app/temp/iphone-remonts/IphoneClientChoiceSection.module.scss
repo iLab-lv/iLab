@@ -96,8 +96,8 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: $space-md;
-  align-items: center;
-  max-width: 440px;
+  align-items: start;
+  max-width: 560px;
   margin-top: $space-xl;
   padding: $space-lg;
   border: $border-thin solid rgba(34, 211, 238, 0.2);
@@ -115,10 +115,18 @@
   }
 
   span {
+    display: block;
     color: $color-text;
     font-size: $font-size-lg;
     line-height: 1.25;
     font-weight: $font-weight-bold;
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-sm;
+    line-height: 1.56;
   }
 }
 

@@ -1,6 +1,7 @@
 import {
   LuBatteryCharging,
   LuCamera,
+  LuCircuitBoard,
   LuDroplets,
   LuPlugZap,
   LuSmartphone,
@@ -14,42 +15,64 @@ const services = [
   {
     icon: LuSmartphone,
     title: 'Ekrāna maiņa',
+    href: '/iphone-remonts/ekrana-maina',
+    price: 'No 110 €',
     description:
       'Bojāta iPhone ekrāna maiņa ar attēla un skārienjutības pārbaudi pēc remonta.',
   },
   {
     icon: LuBatteryCharging,
     title: 'Baterijas maiņa',
+    href: '/iphone-remonts/baterijas-maina',
+    price: 'No 60 €',
     description:
       'Nolietotas iPhone baterijas maiņa pēc baterijas un uzlādes darbības pārbaudes.',
   },
   {
     icon: LuPlugZap,
     title: 'Uzlādes ligzdas remonts',
+    href: '/iphone-remonts/uzlades-ligzdas-maina',
+    price: 'No 15 €',
     description:
       'Uzlādes ligzdas pārbaude, tīrīšana vai maiņa, ja savienojums vairs nestrādā stabili.',
   },
   {
     icon: LuCamera,
     title: 'Kameras remonts',
+    href: '/iphone-remonts/kameras-remonts',
+    price: 'No 29 €',
     description:
       'iPhone kameras moduļa vai stikla pārbaude un remonts, ja kamera nestrādā stabili.',
   },
   {
     icon: LuVolume2,
     title: 'Skaļruņa un mikrofona remonts',
+    href: '/iphone-remonts/skalruni-mikrofona-remonts',
+    price: 'Pēc modeļa',
     description:
       'Skaļruņa, mikrofona un sarunas kvalitātes pārbaude ar tīrīšanu vai detaļas maiņu.',
   },
   {
     icon: LuDroplets,
     title: 'Ūdens bojājumu diagnostika',
+    href: '/iphone-remonts/udens-bojajumu-remonts',
+    price: 'No 35 €',
     description:
       'Diagnostika un tīrīšana pēc mitruma, lai novērtētu bojājumu un remonta iespējas.',
   },
   {
+    icon: LuCircuitBoard,
+    title: 'Mātesplates remonts',
+    href: '/iphone-remonts/iphone-plates-remonts',
+    price: 'Pēc diagnostikas',
+    description:
+      'iPhone plates diagnostika un mikrolodēšana, ja ierīce neieslēdzas, nelādējas vai bojājums ir plates līmenī.',
+  },
+  {
     icon: LuTabletSmartphone,
     title: 'Aizmugurējā stikla maiņa',
+    href: '/iphone-remonts/aizmugures-vacina-maina',
+    price: 'Pēc modeļa',
     description:
       'Saplaisājuša vai bojāta aizmugurējā stikla maiņa atbilstoši iPhone modelim.',
   },
@@ -89,13 +112,21 @@ export default function PopularServices() {
 
                   <p>{service.description}</p>
 
-                  <p className={s.priceLine}>
-                    Cena ir atkarīga no iPhone modeļa un detaļas veida.
-                  </p>
+                  <div className={s.priceBlock}>
+                    <span className={s.priceValue}>{service.price}</span>
+                    <p className={s.priceLine}>
+                      Cena ir atkarīga no iPhone modeļa un detaļas veida.
+                    </p>
+                    <a className={s.priceLink} href="#iphone-modeli">
+                      <span>Izvēlies modeli precīzai cenai</span>
+                    </a>
+                  </div>
 
-                  <a className={s.priceLink} href="#iphone-modeli">
-                    <span>Izvēlies modeli un skaties cenu</span>
-                  </a>
+                  <div className={s.actions}>
+                    <a className={s.serviceLink} href={service.href}>
+                      <span>Skatīt pakalpojumu</span>
+                    </a>
+                  </div>
                 </div>
               </article>
             );
