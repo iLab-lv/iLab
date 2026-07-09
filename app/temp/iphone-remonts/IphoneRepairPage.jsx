@@ -5,17 +5,17 @@ import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 import IphoneQuickFacts from './IphoneQuickFacts';
 import IphoneQualitySection from './IphoneQualitySection';
 import IphoneLocationsSection from './IphoneLocationsSection';
+import IphoneClientChoiceSection from './IphoneClientChoiceSection';
+import IphoneLandingReviewsSection from './IphoneLandingReviewsSection';
 import IphoneProblemAnswers from './IphoneProblemAnswers';
 import IphoneRepairDecisionSection from './IphoneRepairDecisionSection';
 import IphoneRepairStepsSection from './IphoneRepairStepsSection';
 import IphoneSeoGuide from './IphoneSeoGuide';
+import IphoneLandingFinalCta from './IphoneLandingFinalCta';
 import PopularServices from './PopularServices';
 
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
-import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
 
 import s from '@styles/Catalog.module.scss';
@@ -134,7 +134,7 @@ export default function IphoneRepairPage({
       <IphoneLocationsSection />
 
       {page.sections?.hasReviews && (
-        <Reviews locale={locale} initialData={reviewsSummary} />
+        <IphoneLandingReviewsSection reviewsSummary={reviewsSummary} />
       )}
 
       <IphoneRepairDecisionSection />
@@ -143,11 +143,7 @@ export default function IphoneRepairPage({
 
       {page.sections?.hasGuide && <IphoneSeoGuide />}
 
-      {page.sections?.hasWhy && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
-      )}
+      {page.sections?.hasWhy && <IphoneClientChoiceSection />}
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
         <section className={s.section}>
@@ -157,11 +153,7 @@ export default function IphoneRepairPage({
         </section>
       )}
 
-      {page.sections?.hasConvertBand && (
-        <section className={s.section}>
-          <ConvertBand locale={locale} />
-        </section>
-      )}
+      {page.sections?.hasConvertBand && <IphoneLandingFinalCta />}
     </>
   );
 }
