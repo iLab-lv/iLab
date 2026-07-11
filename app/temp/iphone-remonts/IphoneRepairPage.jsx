@@ -8,6 +8,7 @@ import IphoneLocationsSection from './IphoneLocationsSection';
 import IphoneClientChoiceSection from './IphoneClientChoiceSection';
 import IphoneLandingReviewsSection from './IphoneLandingReviewsSection';
 import IphoneProblemAnswers from './IphoneProblemAnswers';
+import IphoneExpertNotes from './IphoneExpertNotes';
 import IphoneRepairDecisionSection from './IphoneRepairDecisionSection';
 import IphoneRepairStepsSection from './IphoneRepairStepsSection';
 import IphoneSeoGuide from './IphoneSeoGuide';
@@ -114,6 +115,8 @@ export default function IphoneRepairPage({
       <PopularServices />
 
       <IphoneProblemAnswers />
+
+      <IphoneExpertNotes />
 
       <DeviceSelector
         id="iphone-modeli"

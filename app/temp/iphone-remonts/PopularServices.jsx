@@ -19,6 +19,7 @@ const services = [
     price: 'No 110 €',
     description:
       'Bojāta iPhone ekrāna maiņa ar attēla un skārienjutības pārbaudi pēc remonta.',
+    note: 'Dažiem modeļiem pēc displeja maiņas var parādīties Apple detaļas paziņojums — pirms remonta paskaidrojam, ko tas nozīmē.',
   },
   {
     icon: LuBatteryCharging,
@@ -35,6 +36,7 @@ const services = [
     price: 'No 15 €',
     description:
       'Uzlādes ligzdas pārbaude, tīrīšana vai maiņa, ja savienojums vairs nestrādā stabili.',
+    note: 'Bieži vispirms pārbaudām, vai pietiek ar ligzdas tīrīšanu.',
   },
   {
     icon: LuCamera,
@@ -51,6 +53,7 @@ const services = [
     price: 'Pēc modeļa',
     description:
       'Skaļruņa, mikrofona un sarunas kvalitātes pārbaude ar tīrīšanu vai detaļas maiņu.',
+    note: 'Klusa skaņa bieži sākas ar aizsērējušu sietiņu, tāpēc pirms detaļas maiņas pārbaudām tīrīšanas iespēju.',
   },
   {
     icon: LuDroplets,
@@ -59,6 +62,7 @@ const services = [
     price: 'No 35 €',
     description:
       'Diagnostika un tīrīšana pēc mitruma, lai novērtētu bojājumu un remonta iespējas.',
+    note: 'Pēc šķidruma bojājumiem precīzu termiņu var noteikt tikai pēc diagnostikas.',
   },
   {
     icon: LuCircuitBoard,
@@ -111,6 +115,12 @@ export default function PopularServices() {
                   <h3>{service.title}</h3>
 
                   <p>{service.description}</p>
+
+                  {service.note && (
+                    <p className={s.masterNote}>
+                      <span>Meistara piezīme:</span> {service.note}
+                    </p>
+                  )}
 
                   <div className={s.priceBlock}>
                     <span className={s.priceValue}>{service.price}</span>

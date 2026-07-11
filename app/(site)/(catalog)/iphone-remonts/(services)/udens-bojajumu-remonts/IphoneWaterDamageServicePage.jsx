@@ -17,7 +17,7 @@ const BRAND_KEY = 'apple';
 export default function IphoneWaterDamageServicePage({
   locale = 'lv',
 
-  strings,
+  strings = {},
 
   devices = [],
   pricing = {},
@@ -30,6 +30,8 @@ export default function IphoneWaterDamageServicePage({
   faqSections = [],
   hasVisibleFaq = false,
 }) {
+  const introList = Array.isArray(strings.introList) ? strings.introList : [];
+
   return (
     <>
       <PageHeader
@@ -60,16 +62,20 @@ export default function IphoneWaterDamageServicePage({
 
           <p className={s.paragraph}>{strings.introP2}</p>
 
-          <ul className={s.list}>
-            {strings.introList.map((item, index) => (
-              <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-            ))}
-          </ul>
+          {introList.length > 0 && (
+            <ul className={s.list}>
+              {introList.map((item, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+          )}
 
-          <p
-            className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.introP3 }}
-          />
+          {strings.introP3 && (
+            <p
+              className={s.paragraph}
+              dangerouslySetInnerHTML={{ __html: strings.introP3 }}
+            />
+          )}
 
           {selectedModel && (
             <p className={s.note}>
@@ -94,7 +100,7 @@ export default function IphoneWaterDamageServicePage({
           intro={strings.priceIntro}
           initialLimit={8}
           allModelsHref={allModelsHref}
-          cta={{ label: strings.ctaLabel, href: strings.applyHref }}
+          cta={{ label: strings.ctaLabel, href: '#pieteikties' }}
           selectedModel={selectedModel}
           locale={locale}
         />
