@@ -31,7 +31,7 @@ const strings = {
   description: seo.description,
 
   heroAlt: seo.imageAlt,
-  heroImage: '/images/categories/mitruma_bojajumi.webp',
+  heroImage: '/images/categories/udens_bojajumi.webp',
   heroBodyHtml:
     '<p><strong>iPhone после воды или влаги</strong> нужно как можно быстрее доставить в сервис. iLab проводит диагностику, чистку, устранение окисления и проверку повреждённых узлов. Цель - по возможности сохранить устройство и данные.</p>',
 

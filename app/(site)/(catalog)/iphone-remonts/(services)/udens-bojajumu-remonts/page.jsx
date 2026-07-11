@@ -31,7 +31,7 @@ const strings = {
   description: seo.description,
 
   heroAlt: seo.imageAlt,
-  heroImage: '/images/categories/mitruma_bojajumi.webp',
+  heroImage: '/images/categories/udens_bojajumi.webp',
   heroBodyHtml:
     '<p><strong>iPhone pēc ūdens vai mitruma</strong> jānogādā servisā pēc iespējas ātrāk. iLab veic diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto mezglu pārbaudi. Mērķis - pēc iespējas saglabāt ierīci un datus.</p>',
 
