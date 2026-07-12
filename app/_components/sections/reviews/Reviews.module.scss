@@ -1,0 +1,15 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+.section { position:relative; isolation:isolate; padding-block:clamp($space-2xl,6vw,88px); overflow:hidden; border-bottom:$border-thin solid rgba(255,255,255,.08); background:radial-gradient(circle at 12% 8%,rgba(34,211,238,.12),transparent 30rem),radial-gradient(circle at 88% 88%,rgba(34,211,238,.06),transparent 32rem),linear-gradient(180deg,#020707,#030303); }
+.container { @include layout.catalog-container; }
+.logoRow { position:relative; display:flex; justify-content:center; margin-bottom:$space-xl; padding-bottom:$space-md; border-bottom:$border-thin solid rgba(255,255,255,.09); img { width:260px; max-width:100%; height:auto; filter:drop-shadow(0 12px 24px rgba(0,0,0,.22)); } }
+.grid { position:relative; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:$space-lg; }
+.place { position:relative; display:flex; flex-direction:column; min-width:0; padding:$space-xl; overflow:hidden; border:$border-thin solid rgba(255,255,255,.1); border-radius:12px; background:linear-gradient(135deg,rgba(34,211,238,.11),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),rgba(5,10,11,.6); box-shadow:0 22px 60px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06); h3 { margin:0 0 $space-xs; color:$color-text; font-size:$font-size-xl; } ul { margin:$space-lg 0; padding:0; list-style:none; } li { padding:$space-md 0; border-top:$border-thin solid rgba(255,255,255,.1); } li:first-child { padding-top:0; border-top:0; } }
+.rating { display:flex; align-items:center; gap:$space-xs; color:$color-accent; span { font-size:1.45rem; } strong { color:$color-text; font-size:clamp(1.55rem,1.2rem + .5vw,$font-size-h4); } }
+.meta,.empty { margin:$space-xs 0 0; color:$color-text-2; font-size:$font-size-sm; }
+.author { display:block; margin-bottom:$space-xs; color:$color-text; font-weight:$font-weight-semibold; }
+.stars { display:block; margin-bottom:$space-xs; color:$color-accent; letter-spacing:.07em; span { color:rgba(255,255,255,.24); } }
+.reviewText { margin:0; color:$color-text-2; line-height:1.6; }
+.more { border:0; padding:0; color:$color-accent; background:none; cursor:pointer; font:inherit; text-decoration:underline; text-underline-offset:3px; }
+.link { margin-top:auto; padding-top:$space-md; color:$color-accent; font-size:$font-size-sm; font-weight:$font-weight-semibold; text-decoration:none; &:hover { text-decoration:underline; text-underline-offset:4px; } }
+@media (max-width:$bp-lg) { .grid { grid-template-columns:1fr; } }

@@ -24,6 +24,10 @@
   border-bottom: $border-thin solid $color-border;
 }
 
+.introSection {
+  padding-top: clamp($space-2xl, 5vw, $space-3xl);
+}
+
 .h2 {
   margin: 0 0 $space-sm 0;
   font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);

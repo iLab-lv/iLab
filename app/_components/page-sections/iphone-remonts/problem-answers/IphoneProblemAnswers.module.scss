@@ -1,0 +1,30 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section { padding-block: clamp($space-2xl, 7vw, 96px); border-bottom: $border-thin solid rgba(255,255,255,.08); background: linear-gradient(180deg, #020606, #030303); }
+.container { @include layout.catalog-container; }
+.header { max-width: 860px; margin-bottom: $space-xl;
+  h2 { margin: 0; color: $color-text; font-size: clamp(2rem,4vw,$font-size-h4); line-height: $line-height-heading; font-weight: $font-weight-bold;
+    span { color: $color-accent; }
+  }
+  p { margin: $space-sm 0 0; color: $color-text-2; font-size: $font-size-lg; line-height: 1.62; }
+}
+.eyebrow { display: inline-flex; min-height: 34px; align-items: center; margin-bottom: $space-md; padding: 0 $space-sm; border: $border-thin solid rgba(34,211,238,.2); border-radius: 999px; color: $color-accent; background: rgba(34,211,238,.1); font-size: $font-size-sm; font-weight: $font-weight-semibold; }
+.grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: $space-md; }
+.card { min-width: 0; padding: $space-lg; border: $border-thin solid rgba(255,255,255,.075); border-radius: 8px; background: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)),rgba(5,10,11,.42); }
+.cardHeader { display: grid; grid-template-columns: 42px minmax(0,1fr); align-items: center; gap: $space-md;
+  h3 { margin: 0; color: $color-text; font-size: $font-size-xl; line-height: $line-height-heading; }
+}
+.icon { display: grid; width: 42px; height: 42px; place-items: center; border: $border-thin solid rgba(34,211,238,.22); border-radius: 999px; color: $color-accent; background: rgba(34,211,238,.1);
+  svg { width: 19px; height: 19px; }
+}
+.answerList { display: grid; gap: $space-sm; margin: $space-sm 0 0;
+  div { padding-top: $space-sm; border-top: $border-thin solid rgba(255,255,255,.08); }
+  dt { margin-bottom: $space-xs; color: $color-accent; font-size: $font-size-sm; font-weight: $font-weight-semibold; }
+  dd { margin: 0; color: $color-text-2; font-size: $font-size-p; line-height: 1.54; }
+}
+.shortAnswer { padding: $space-sm; border: $border-thin solid rgba(34,211,238,.16) !important; border-radius: 8px; background: rgba(34,211,238,.04);
+  dd { color: $color-text; font-weight: $font-weight-semibold; }
+}
+@media (max-width: $bp-lg) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: $bp-sm) { .section { padding-block: $space-xl; } .header { margin-bottom: $space-lg; } .cardHeader { grid-template-columns: 1fr; } }

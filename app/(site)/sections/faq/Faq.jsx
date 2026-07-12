@@ -47,7 +47,7 @@ export default function Faq({
               <details
                 key={`${id}-item-${i}-${String(q)}`}
                 className={s.faqItem}
-                {...(openAll ? { open: true } : {})}
+                open={openAll || i === 0}
               >
                 <summary className={s.summary}>
                   <span>{q}</span>

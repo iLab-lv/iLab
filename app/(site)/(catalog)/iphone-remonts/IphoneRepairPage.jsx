@@ -1,29 +1,25 @@
-import categoryContent from '@/data/categoryContent';
-
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import DeviceGrid from '@/_components/sections/device-grid/DeviceGrid';
+import Reviews from '@/_components/sections/reviews/Reviews';
+import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
+import PopularServices from '@/_components/sections/popular-services/PopularServices';
+import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
+import Guide from '@/_components/sections/guide/Guide';
+import FinalCta from '@/_components/sections/final-cta/FinalCta';
+import IphoneExpertNotes from '@/_components/page-sections/iphone-remonts/expert-notes/IphoneExpertNotes';
+import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
+import IphoneProblemAnswers from '@/_components/page-sections/iphone-remonts/problem-answers/IphoneProblemAnswers';
+import IphoneQualitySection from '@/_components/page-sections/iphone-remonts/quality/IphoneQualitySection';
+import IphoneRepairDecisionSection from '@/_components/page-sections/iphone-remonts/repair-decision/IphoneRepairDecisionSection';
+import WhyUs from '@/_components/sections/why-us/WhyUs';
 
-import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Services from '@sections/services/Services';
-import {
-  buildIphonePopularServices,
-  getIphonePopularServicesTitle,
-} from '@sections/services/services.i18n';
-import Process from '@sections/process/Process';
-import Reviews from '@sections/reviews/Reviews';
 import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
-import ConvertBand from '@sections/convert-band/ConvertBand';
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import Guide from '@sections/guide/Guide';
 
 import s from '@styles/Catalog.module.scss';
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
-const HUB_KEY = 'iphone-remonts';
-
-const cat = categoryContent[HUB_KEY];
-
 function getPageStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
@@ -33,9 +29,6 @@ function getPageStrings(locale = 'lv') {
       introTitle: 'Ремонт iPhone в Риге - что мы делаем',
       introBody:
         'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> - от <strong>замены экрана</strong>, <strong>аккумулятора</strong>, <strong>ремонта камеры</strong> и <strong>разъёма зарядки</strong> до замены <strong>динамика</strong>, <strong>микрофона</strong> и других компонентов. Перед ремонтом проводим <strong>бесплатную диагностику</strong>, согласовываем стоимость и срок выполнения, а после завершения работ выдаём <strong>гарантию 90 дней</strong> на детали и работу. Используем качественные оригинальные или OEM запчасти, чтобы iPhone после ремонта работал стабильно и надёжно каждый день.',
-      modelGridHeading: 'Выберите модель iPhone',
-      modelGridIntro:
-        'Найдите нужный iPhone по названию или выберите серию.',
       scrollCta: { label: 'Смотреть модели', targetId: 'iphone-modeli' },
     };
   }
@@ -47,11 +40,6 @@ function getPageStrings(locale = 'lv') {
     introTitle: 'iPhone remonts Rīgā - ko mēs darām',
     introBody:
       'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> - sākot ar <strong>ekrāna maiņu</strong>, <strong>baterijas nomaiņu</strong>, <strong>kameras remontu</strong> un <strong>uzlādes ligzdas remontu</strong>, līdz <strong>skaļruņa</strong>, <strong>mikrofona</strong> un citu detaļu nomaiņai. Pirms remonta veicam <strong>bezmaksas diagnostiku</strong>, saskaņojam izmaksas un izpildes termiņu, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam. Izmantojam kvalitatīvas oriģinālās vai OEM detaļas, lai iPhone pēc remonta darbotos stabili un droši ikdienā.',
-    modelGridHeading:
-      cat?.sections?.modelGrid?.heading ?? 'Izvēlies savu iPhone modeli',
-    modelGridIntro:
-      cat?.sections?.modelGrid?.intro ??
-      'Atrodi vajadzīgo iPhone vai izvēlies sēriju.',
     scrollCta: { label: 'Skatīt modeļus', targetId: 'iphone-modeli' },
   };
 }
@@ -75,12 +63,6 @@ export default function IphoneRepairPage({
 
   const strings = getPageStrings(locale);
 
-  const popularServices = buildIphonePopularServices(locale);
-  const popularServicesTitle = getIphonePopularServicesTitle('iPhone', locale);
-
-  const selectorTitle = page.selector?.heading || strings.modelGridHeading;
-  const selectorIntro = page.selector?.intro || strings.modelGridIntro;
-
   const heroImage = page.hero?.image || '/images/categories/iphone_remonts.webp';
 
   return (
@@ -100,7 +82,9 @@ export default function IphoneRepairPage({
         bodyHtml={strings.heroBodyHtml}
       />
 
-      <section className={s.section}>
+      <QuickFacts variant="iphone" locale={locale} />
+
+      <section className={`${s.section} ${s.introSection}`}>
         <div className={s.container}>
           <h2 className={s.h2}>{strings.introTitle}</h2>
           <p
@@ -110,33 +94,35 @@ export default function IphoneRepairPage({
         </div>
       </section>
 
-      <section className={s.section}>
-        <div className={s.container}>
-          <Services
-            id="iphone-services"
-            title={popularServicesTitle}
-            items={popularServices}
-          />
-        </div>
-      </section>
+      <PopularServices locale={locale} />
 
-      <DeviceSelector
+      <IphoneProblemAnswers locale={locale} />
+
+      <IphoneExpertNotes locale={locale} />
+
+      <DeviceGrid
         id="iphone-modeli"
         locale={locale}
-        title={selectorTitle}
-        intro={selectorIntro}
         devices={devicesAll}
         baseHref={baseHref}
         brandKey={BRAND_KEY}
         categoryKey={CATEGORY_KEY}
         seriesMeta={seriesMeta}
-        initialLimit={4}
-        autoExpandOnSearch
       />
 
+      {page.sections?.hasWhy && <WhyUs locale={locale} variant="iphone" />}
+
       {page.sections?.hasReviews && (
-        <Reviews locale={locale} initialData={reviewsSummary} />
+        <Reviews locale={locale} reviewsSummary={reviewsSummary} />
       )}
+
+      <IphoneQualitySection locale={locale} />
+
+      <IphoneLocationsSection locale={locale} />
+
+      <IphoneRepairDecisionSection locale={locale} />
+
+      {page.sections?.hasProcess && <RepairProcess id="iphone-repair-steps" locale={locale} variant="iphone" backgroundImage="/images/hands-closeup.png" />}
 
       {page.sections?.hasGuide && (
         <Guide
@@ -145,14 +131,6 @@ export default function IphoneRepairPage({
           variant="iphone"
           headingLevel={2}
         />
-      )}
-
-      {page.sections?.hasProcess && <Process locale={locale} />}
-
-      {page.sections?.hasWhy && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
       )}
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
@@ -164,9 +142,7 @@ export default function IphoneRepairPage({
       )}
 
       {page.sections?.hasConvertBand && (
-        <section className={s.section}>
-          <ConvertBand locale={locale} />
-        </section>
+        <FinalCta locale={locale} variant="iphone" />
       )}
     </>
   );
