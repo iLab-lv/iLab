@@ -68,10 +68,38 @@ const CONTENT = {
   },
 };
 
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Baterijas nolietojuma pazīmes',
+    titleStart: 'Kad vajadzīga iPhone',
+    titleAccent: 'baterijas maiņa?',
+    intro: 'Baterijas nolietojums ne vienmēr nozīmē tikai īsāku darbības laiku. Nolietota baterija var izraisīt arī pēkšņu izslēgšanos, lēnāku darbību, pārkaršanu vai situāciju, kad telefons strādā tikai pie lādētāja.',
+    symptoms: [
+      { title: 'iPhone ātri izlādējas', description: 'Telefons zaudē uzlādi daudz ātrāk nekā iepriekš, pat ja lietošanas paradumi nav mainījušies.' },
+      { title: 'Izslēdzas pie atlikušiem procentiem', description: 'iPhone var izslēgties pie 10–30% vai restartēties slodzes laikā.' },
+      { title: 'Zema baterijas veselība', description: 'Iestatījumos redzama zema maksimālā kapacitāte vai brīdinājums par baterijas servisu.' },
+      { title: 'Telefons karst vai darbojas nestabili', description: 'Baterijas nolietojums var izpausties kā uzkaršana, lēnāka darbība vai negaidīta izslēgšanās.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Признаки износа батареи',
+    titleStart: 'Когда нужна',
+    titleAccent: 'замена батареи iPhone?',
+    intro: 'Износ батареи означает не только меньшее время работы. Он также может вызывать внезапные выключения, замедление, перегрев или ситуацию, когда телефон работает только при подключённой зарядке.',
+    symptoms: [
+      { title: 'iPhone быстро разряжается', description: 'Телефон теряет заряд намного быстрее, чем раньше, хотя привычки использования не изменились.' },
+      { title: 'Выключается при оставшихся процентах', description: 'iPhone может выключаться при 10–30% заряда или перезагружаться под нагрузкой.' },
+      { title: 'Низкое состояние батареи', description: 'В настройках показана низкая максимальная ёмкость или предупреждение о сервисе батареи.' },
+      { title: 'Телефон нагревается или работает нестабильно', description: 'Износ батареи может проявляться нагревом, замедлением или неожиданными выключениями.' },
+    ],
+  },
+};
+
 const ICONS = [LuSmartphone, LuScanLine, LuTouchpadOff, LuMonitorOff];
 
-export default function IphoneScreenSymptoms({ locale = 'lv' }) {
-  const content = CONTENT[locale] || CONTENT.lv;
+export default function IphoneScreenSymptoms({ locale = 'lv', variant = 'iphone-screen' }) {
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const content = source[locale] || source.lv;
 
   return (
     <section className={s.section} aria-labelledby="iphone-screen-symptoms-title">

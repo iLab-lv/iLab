@@ -259,7 +259,7 @@ export default function ServicePricelist({
   if (!groups.length) {
     return (
       <section
-        className={`${s.section} ${variant === 'iphone-screen' ? s.iphoneScreen : ''} ${className || ''}`}
+        className={`${s.section} ${variant === 'iphone-screen' || variant === 'iphone-battery' ? s.iphoneScreen : ''} ${className || ''}`}
         aria-labelledby="sp-title"
       >
         <div className={s.container}>
@@ -277,7 +277,7 @@ export default function ServicePricelist({
 
   return (
     <section
-      className={`${s.section} ${variant === 'iphone-screen' ? s.iphoneScreen : ''} ${className || ''}`}
+      className={`${s.section} ${variant === 'iphone-screen' || variant === 'iphone-battery' ? s.iphoneScreen : ''} ${className || ''}`}
       aria-labelledby="sp-title"
     >
       <div className={s.container}>

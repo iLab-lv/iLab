@@ -63,7 +63,37 @@ const SCREEN_CONTENT = {
   },
 };
 
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Baterijas kvalitāte, garantija un datu drošība',
+    titleStart: 'Piemērota baterija un ', titleAccent: 'skaidri nosacījumi',
+    intro: 'Baterijas maiņai izmantojam konkrētajam iPhone modelim piemērotu detaļu. Pirms remonta izskaidrojam, kāds risinājums ir pieejams, kāda ir cena un kādi garantijas nosacījumi attiecas uz izvēlēto remontu. Dažos modeļos pēc maiņas sistēmā var parādīties paziņojums par nomainītu detaļu vai servisa informāciju — ja tas attiecas uz konkrēto modeli, to izskaidrojam pirms remonta.',
+    facts: ['Detaļa konkrētam modelim','Pārbaude pēc remonta','90 dienu garantija','Dati parasti netiek dzēsti'],
+    cards: [
+      { title:'Piemērota detaļa konkrētam modelim', text:'Baterijas un remonta iespējas atšķiras pēc iPhone modeļa, tāpēc pirms darba precizējam detaļas pieejamību.' },
+      { title:'Pārbaude pēc remonta', text:'Pēc baterijas maiņas pārbaudām uzlādi, ieslēgšanos, stabilitāti un pamata funkcijas.' },
+      { title:'90 dienu garantija', text:'Veiktajam remontam tiek piemērota 90 dienu garantija saskaņā ar remonta nosacījumiem.' },
+      { title:'Datu drošība', text:'Baterijas maiņa parasti nav saistīta ar datu dzēšanu, tomēr pirms remonta iesakām izveidot rezerves kopiju, ja tas ir iespējams.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Качество батареи, гарантия и безопасность данных',
+    titleStart: 'Подходящая батарея и ', titleAccent: 'понятные условия',
+    intro: 'Для замены используем батарею, подходящую конкретной модели iPhone. До ремонта объясняем доступное решение, цену и условия гарантии. На некоторых моделях после замены в системе может появиться сообщение о заменённой детали или сервисная информация — если это относится к модели, объясняем заранее.',
+    facts: ['Деталь для конкретной модели','Проверка после ремонта','Гарантия 90 дней','Данные обычно не удаляются'],
+    cards: [
+      { title:'Подходящая деталь для модели', text:'Варианты батареи и ремонта отличаются по модели iPhone, поэтому заранее уточняем наличие детали.' },
+      { title:'Проверка после ремонта', text:'После замены батареи проверяем зарядку, включение, стабильность и основные функции.' },
+      { title:'Гарантия 90 дней', text:'На выполненный ремонт действует гарантия 90 дней согласно условиям ремонта.' },
+      { title:'Безопасность данных', text:'Замена батареи обычно не связана с удалением данных, однако перед ремонтом рекомендуем сделать резервную копию, если это возможно.' },
+    ],
+  },
+};
+
 export function getIphoneQualityContent(locale = 'lv', variant = 'iphone') {
+  if (variant === 'iphone-battery') {
+    return BATTERY_CONTENT[locale] || BATTERY_CONTENT.lv;
+  }
   if (variant === 'iphone-screen') {
     return SCREEN_CONTENT[locale] || SCREEN_CONTENT.lv;
   }

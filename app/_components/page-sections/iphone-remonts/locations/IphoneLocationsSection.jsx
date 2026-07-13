@@ -16,11 +16,24 @@ const SCREEN_HEADING = {
   },
 };
 
+const BATTERY_HEADING = {
+  lv: {
+    titleMain: 'Kur veikt iPhone baterijas maiņu ', titleAccent: 'Rīgā?',
+    subtitle: 'iPhone baterijas maiņu vari pieteikt iLab filiālēs T/C Domina Shopping un T/C Spice Home. Pirms apmeklējuma vari sazināties ar sev ērtāko filiāli, lai precizētu baterijas pieejamību, cenu un aptuveno remonta laiku.',
+  },
+  ru: {
+    titleMain: 'Где заменить батарею iPhone ', titleAccent: 'в Риге?',
+    subtitle: 'Замену батареи iPhone можно оформить в филиалах iLab в Т/Ц Domina Shopping и Т/Ц Spice Home. Перед посещением свяжитесь с удобным филиалом, чтобы уточнить наличие батареи, цену и примерное время ремонта.',
+  },
+};
+
 export default async function IphoneLocationsSection({ locale = 'lv', variant = 'iphone' }) {
   const siteSettings = await getSiteSettings();
   const heading = variant === 'iphone-screen'
     ? SCREEN_HEADING[locale] || SCREEN_HEADING.lv
-    : undefined;
+    : variant === 'iphone-battery'
+      ? BATTERY_HEADING[locale] || BATTERY_HEADING.lv
+      : undefined;
 
   return (
     <LandingCtaProvider siteSettings={siteSettings}>

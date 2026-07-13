@@ -63,10 +63,38 @@ const CONTENT = {
   },
 };
 
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Cenas skaidrojums',
+    titleStart: 'No kā atkarīga iPhone',
+    titleAccent: 'baterijas maiņas cena?',
+    intro: 'Cena var atšķirties atkarībā no iPhone modeļa, baterijas detaļas pieejamības un konkrētās ierīces stāvokļa. Ja baterija ir uzpūtusies, ierīce ir kritusi vai bijis mitruma bojājums, pirms baterijas maiņas var būt nepieciešama papildu pārbaude.',
+    factors: [
+      { title: 'iPhone modelis', description: 'Dažādiem iPhone modeļiem ir atšķirīgas baterijas, konstrukcija un izjaukšanas sarežģītība.' },
+      { title: 'Detaļas pieejamība', description: 'Ja baterija nav uz vietas, cenu un piegādes iespēju precizējam pirms remonta.' },
+      { title: 'Ierīces stāvoklis', description: 'Uzpūtusies baterija, bojāts korpuss, mitrums vai uzlādes problēmas var ietekmēt remonta gaitu.' },
+      { title: 'Papildu bojājumi', description: 'Ja telefons nelādējas vai karst, problēma var nebūt tikai baterijā.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Как формируется цена',
+    titleStart: 'От чего зависит цена',
+    titleAccent: 'замены батареи iPhone?',
+    intro: 'Цена может отличаться в зависимости от модели iPhone, наличия батареи и состояния конкретного устройства. Если батарея вздулась, телефон падал или контактировал с влагой, перед заменой может потребоваться дополнительная проверка.',
+    factors: [
+      { title: 'Модель iPhone', description: 'У разных моделей iPhone отличаются батареи, конструкция и сложность разборки.' },
+      { title: 'Наличие детали', description: 'Если батареи нет на месте, цену и возможность поставки уточняем до ремонта.' },
+      { title: 'Состояние устройства', description: 'Вздутая батарея, повреждённый корпус, влага или проблемы зарядки могут повлиять на ремонт.' },
+      { title: 'Дополнительные повреждения', description: 'Если телефон не заряжается или нагревается, проблема может быть не только в батарее.' },
+    ],
+  },
+};
+
 const ICONS = [LuSmartphone, LuLayers3, LuBoxes, LuScanSearch];
 
-export default function IphoneScreenPriceFactors({ locale = 'lv' }) {
-  const content = CONTENT[locale] || CONTENT.lv;
+export default function IphoneScreenPriceFactors({ locale = 'lv', variant = 'iphone-screen' }) {
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const content = source[locale] || source.lv;
 
   return (
     <section className={s.section} aria-labelledby="iphone-screen-price-factors-title">

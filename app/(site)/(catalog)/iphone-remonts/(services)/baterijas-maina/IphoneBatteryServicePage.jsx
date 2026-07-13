@@ -1,11 +1,22 @@
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
-import ConvertBand from '@sections/convert-band/ConvertBand';
 import ServicePricelist from '@sections/service-pricelist/ServicePricelist';
+import QuickAnswer from '@/_components/sections/quick-answer/QuickAnswer';
+import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
+import IphoneScreenSymptoms from '@/_components/page-sections/iphone-screen-repair/symptoms/IphoneScreenSymptoms';
+import IphoneScreenDamageGuide from '@/_components/page-sections/iphone-screen-repair/damage-guide/IphoneScreenDamageGuide';
+import IphoneScreenPriceFactors from '@/_components/page-sections/iphone-screen-repair/price-factors/IphoneScreenPriceFactors';
+import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
+import IphoneScreenPostRepairChecks from '@/_components/page-sections/iphone-screen-repair/post-repair-checks/IphoneScreenPostRepairChecks';
+import IphoneQualitySection from '@/_components/page-sections/iphone-remonts/quality/IphoneQualitySection';
+import PopularServices from '@/_components/sections/popular-services/PopularServices';
+import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
+import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
+import FinalCta from '@/_components/sections/final-cta/FinalCta';
+import IphoneBatteryLifecycle from '@/_components/page-sections/iphone-battery-repair/lifecycle/IphoneBatteryLifecycle';
+import IphoneBatteryOrCharging from '@/_components/page-sections/iphone-battery-repair/battery-or-charging/IphoneBatteryOrCharging';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -29,6 +40,7 @@ export default function IphoneBatteryServicePage({
 
   faqSections = [],
   hasVisibleFaq = false,
+  reviewsSummary = null,
 }) {
   return (
     <>
@@ -45,6 +57,18 @@ export default function IphoneBatteryServicePage({
         bodyHtml={strings.heroBodyHtml}
       />
 
+      <QuickAnswer locale={locale} variant="iphone-battery" />
+
+      <QuickFacts variant="iphone-battery" locale={locale} />
+
+      <IphoneScreenSymptoms locale={locale} variant="iphone-battery" />
+
+      <IphoneScreenDamageGuide locale={locale} variant="iphone-battery" />
+
+      <IphoneBatteryLifecycle locale={locale} />
+
+      <IphoneBatteryOrCharging locale={locale} />
+
       <section id="brand-list" className={s.section}>
         <ServicePricelist
           devices={devices}
@@ -58,12 +82,28 @@ export default function IphoneBatteryServicePage({
           cta={{ label: strings.ctaLabel, href: '#pieteikties' }}
           selectedModel={selectedModel}
           locale={locale}
+          variant="iphone-battery"
         />
       </section>
 
-      <Process locale={locale} />
+      <IphoneScreenPriceFactors locale={locale} variant="iphone-battery" />
 
-      <Why locale={locale} />
+      <RepairProcess
+        id="iphone-battery-replacement-steps"
+        locale={locale}
+        variant="iphone-battery"
+        backgroundImage="/images/hands-closeup.png"
+      />
+
+      <IphoneScreenPostRepairChecks locale={locale} variant="iphone-battery" />
+
+      <IphoneQualitySection locale={locale} variant="iphone-battery" />
+
+      <PopularServices locale={locale} variant="other-services" excludeServiceKey="baterijas-maina" />
+
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
+
+      <IphoneLocationsSection locale={locale} variant="iphone-battery" />
 
       {hasVisibleFaq && (
         <section className={s.section} aria-labelledby="faq-h2">
@@ -91,9 +131,7 @@ export default function IphoneBatteryServicePage({
         </section>
       )}
 
-      <section id="pieteikties" aria-label={strings.applyAria}>
-        <ConvertBand locale={locale} />
-      </section>
+      <FinalCta id="pieteikties" locale={locale} variant="iphone" />
     </>
   );
 }

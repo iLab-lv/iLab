@@ -77,10 +77,40 @@ const CONTENT = {
   },
 };
 
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Meistara skaidrojums',
+    titleStart: 'Ko nozīmē dažādi iPhone',
+    titleAccent: 'baterijas simptomi?',
+    intro: 'Ne katra uzlādes problēma nozīmē, ka uzreiz jāmaina baterija. Simptomi palīdz saprast, vai problēma vairāk izskatās pēc nolietotas baterijas, uzlādes ligzdas bojājuma vai citas ierīces kļūmes.',
+    adviceLabel: 'Ieteikums',
+    items: [
+      { title: 'Telefons ātri izlādējas', description: 'Ja iPhone ātri izlādējas arī pēc pilnas uzlādes, bieži iemesls ir baterijas nolietojums. Īpaši tas redzams vecākiem modeļiem vai telefonos, kas ikdienā tiek intensīvi lietoti navigācijai, video, spēlēm vai darbam ar internetu.', advice: 'Ja baterijas darbības laiks pēkšņi būtiski samazinās, ir vērts pārbaudīt gan bateriju, gan programmatūras fonā strādājošos procesus.' },
+      { title: 'iPhone izslēdzas, lai gan vēl ir procenti', description: 'Ja telefons izslēdzas pie atlikušiem procentiem vai restartējas slodzes laikā, baterija var vairs nespēt stabili nodrošināt vajadzīgo jaudu. Šādos gadījumos baterijas maiņa bieži palīdz atjaunot stabilāku darbību.' },
+      { title: 'Baterija ir uzpūtusies', description: 'Ja ekrāns vai korpuss sāk celties, starp detaļām parādās sprauga vai telefons izskatās deformēts, iespējams, baterija ir uzpūtusies. Šādā gadījumā telefonu nevajadzētu spiest ciet, sildīt, caurdurt vai turpināt intensīvi lietot.', advice: 'Ja baterija ir uzpūtusies, labāk pārtraukt lietošanu un pēc iespējas ātrāk atnest ierīci uz servisu. Uzpūtusies baterija var bojāt ekrānu, korpusu vai citas iekšējās detaļas.' },
+      { title: 'Telefons karst un ātri izlādējas', description: 'Uzkaršana kopā ar ātru izlādi var būt saistīta ar bateriju, bet dažreiz iemesls ir programmatūra, uzlādes problēma vai mitruma bojājums. Tāpēc pirms remonta ir svarīgi pārbaudīt ierīci, nevis automātiski mainīt bateriju.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Объяснение мастера',
+    titleStart: 'Что означают разные',
+    titleAccent: 'симптомы батареи iPhone?',
+    intro: 'Не каждая проблема с зарядкой означает, что батарею нужно сразу менять. Симптомы помогают понять, больше ли неисправность похожа на износ батареи, повреждение разъёма зарядки или другую ошибку устройства.',
+    adviceLabel: 'Рекомендация',
+    items: [
+      { title: 'Телефон быстро разряжается', description: 'Если iPhone быстро разряжается даже после полной зарядки, причиной часто бывает износ батареи. Особенно это заметно на старых моделях и телефонах, которые интенсивно используют для навигации, видео, игр или интернета.', advice: 'Если время работы батареи внезапно заметно сократилось, стоит проверить и батарею, и фоновые программные процессы.' },
+      { title: 'iPhone выключается, хотя заряд ещё есть', description: 'Если телефон выключается при оставшихся процентах или перезагружается под нагрузкой, батарея может больше не обеспечивать необходимую мощность стабильно. В таких случаях замена батареи часто помогает восстановить стабильную работу.' },
+      { title: 'Батарея вздулась', description: 'Если экран или корпус начинает приподниматься, между деталями появляется щель или телефон деформирован, батарея могла вздуться. Телефон нельзя сдавливать, нагревать, прокалывать или продолжать интенсивно использовать.', advice: 'При вздутии батареи лучше прекратить использование и как можно скорее принести устройство в сервис. Вздутая батарея может повредить экран, корпус и другие внутренние детали.' },
+      { title: 'Телефон нагревается и быстро разряжается', description: 'Нагрев вместе с быстрым разрядом может быть связан с батареей, но причиной также бывает программное обеспечение, проблема зарядки или повреждение влагой. Поэтому перед ремонтом важно проверить устройство, а не менять батарею автоматически.' },
+    ],
+  },
+};
+
 const ICONS = [LuCircleAlert, LuInfo, LuShieldAlert, LuTouchpadOff];
 
-export default function IphoneScreenDamageGuide({ locale = 'lv' }) {
-  const content = CONTENT[locale] || CONTENT.lv;
+export default function IphoneScreenDamageGuide({ locale = 'lv', variant = 'iphone-screen' }) {
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const content = source[locale] || source.lv;
 
   return (
     <section className={s.section} aria-labelledby="iphone-screen-damage-title">

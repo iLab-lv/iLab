@@ -39,8 +39,24 @@ const CONTENT = {
   },
 };
 
-export default function IphoneScreenPostRepairChecks({ locale = 'lv' }) {
-  const content = CONTENT[locale] || CONTENT.lv;
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Kvalitātes kontrole', titleStart: 'Ko pārbaudām pēc', titleAccent: 'baterijas maiņas?',
+    intro: 'Pēc baterijas maiņas ir svarīgi pārliecināties ne tikai par to, ka telefons ieslēdzas. Pārbaudām arī uzlādi, stabilitāti un pamata funkcijas, lai pārliecinātos, ka iPhone pēc remonta darbojas korekti.',
+    checks: ['Vai iPhone ieslēdzas un darbojas stabili','Vai telefons pieņem uzlādi','Vai uzlādes savienojums ir stabils','Vai ierīce nepārstartējas','Vai nav acīmredzamu pārkaršanas pazīmju','Vai darbojas pamata funkcijas','Vai korpuss pēc remonta ir korekti salikts'],
+    closing: 'Ierīci izsniedzam pēc uzlādes, stabilitātes un galveno funkciju pārbaudes.',
+  },
+  ru: {
+    eyebrow: 'Контроль качества', titleStart: 'Что проверяем после', titleAccent: 'замены батареи?',
+    intro: 'После замены батареи важно убедиться не только в том, что телефон включается. Проверяем зарядку, стабильность и основные функции, чтобы iPhone после ремонта работал корректно.',
+    checks: ['Включается ли iPhone и работает ли стабильно','Принимает ли телефон заряд','Стабильно ли соединение зарядки','Не перезагружается ли устройство','Нет ли явных признаков перегрева','Работают ли основные функции','Правильно ли собран корпус после ремонта'],
+    closing: 'Выдаём устройство после проверки зарядки, стабильности и основных функций.',
+  },
+};
+
+export default function IphoneScreenPostRepairChecks({ locale = 'lv', variant = 'iphone-screen' }) {
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const content = source[locale] || source.lv;
 
   return (
     <section className={s.section} aria-labelledby="iphone-screen-post-repair-title">

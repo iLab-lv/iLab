@@ -25,6 +25,14 @@ const QUICK_FACTS = {
     ariaLabel: 'Svarīgākais par remontu',
     locationJoiner: ' un ',
     variants: {
+      'iphone-battery': [
+        { key: 'parts', title: 'Pakalpojums', description: 'iPhone baterijas / akumulatora maiņa' },
+        { key: 'price', title: 'Cena', description: 'Atkarīga no iPhone modeļa un detaļas pieejamības' },
+        { key: 'diagnostics', title: 'Pārbaude', description: 'Baterija, uzlāde, savienojums un ierīces stabilitāte' },
+        { key: 'warranty', title: 'Garantija', description: '90 dienas veiktajam remontam' },
+        { key: 'locations', title: 'Filiāles', description: 'T/C Domina Shopping un T/C Spice Home' },
+        { key: 'finalCheck', title: 'Pārbaude pēc remonta', description: 'Testējam uzlādi, ieslēgšanos un stabilu darbību' },
+      ],
       'iphone-screen': [
         {
           key: 'parts',
@@ -119,6 +127,14 @@ const QUICK_FACTS = {
     ariaLabel: 'Главное о ремонте',
     locationJoiner: ' и ',
     variants: {
+      'iphone-battery': [
+        { key: 'parts', title: 'Услуга', description: 'Замена батареи / аккумулятора iPhone' },
+        { key: 'price', title: 'Цена', description: 'Зависит от модели iPhone и наличия детали' },
+        { key: 'diagnostics', title: 'Проверка', description: 'Батарея, зарядка, соединение и стабильность устройства' },
+        { key: 'warranty', title: 'Гарантия', description: '90 дней на выполненный ремонт' },
+        { key: 'locations', title: 'Филиалы', description: 'Т/Ц Domina Shopping и Т/Ц Spice Home' },
+        { key: 'finalCheck', title: 'Проверка после ремонта', description: 'Тестируем зарядку, включение и стабильную работу' },
+      ],
       'iphone-screen': [
         {
           key: 'parts',

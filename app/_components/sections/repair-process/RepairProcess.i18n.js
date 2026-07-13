@@ -1,5 +1,12 @@
 const CONTENT = {
   lv: {
+    'iphone-battery': { eyebrow:'Baterijas maiņas process', titleStart:'Kā notiek iPhone ', titleAccent:'baterijas maiņa?', intro:'No baterijas simptomu pārbaudes līdz uzlādes un stabilas darbības testam.', steps:[
+      ['Pārbaudām ierīci','Novērtējam baterijas simptomus, uzlādi, ierīces stāvokli un redzamus bojājumus.'],
+      ['Nosakām precīzu iPhone modeli','Pārbaudām modeli un baterijas detaļas pieejamību.'],
+      ['Saskaņojam cenu','Pirms darba sākšanas izskaidrojam cenu, remonta iespējas un garantijas nosacījumus.'],
+      ['Nomainām bateriju','Veicam baterijas maiņu atbilstoši konkrētā iPhone modeļa konstrukcijai.'],
+      ['Pārbaudām pēc remonta','Testējam uzlādi, ierīces ieslēgšanos, stabilitāti un pamata funkcijas.'],
+    ]},
     'iphone-screen': { eyebrow:'Ekrāna maiņas process', titleStart:'Kā notiek iPhone ', titleAccent:'ekrāna maiņa?', intro:'No bojājuma pārbaudes līdz jaunā ekrāna un svarīgāko iPhone funkciju testam.', steps:[
       ['Pārbaudām ekrāna bojājumu','Novērtējam stiklu, displeju, skārienu un redzamus kritiena vai mitruma bojājumus.'],
       ['Nosakām precīzu iPhone modeli','Pārbaudām modeli un pieejamos ekrāna maiņas variantus.'],
@@ -15,6 +22,13 @@ const CONTENT = {
     ]},
   },
   ru: {
+    'iphone-battery': { eyebrow:'Процесс замены батареи', titleStart:'Как проходит ', titleAccent:'замена батареи iPhone?', intro:'От проверки симптомов батареи до тестирования зарядки и стабильной работы.', steps:[
+      ['Проверяем устройство','Оцениваем симптомы батареи, зарядку, состояние устройства и видимые повреждения.'],
+      ['Определяем точную модель iPhone','Проверяем модель и наличие подходящей батареи.'],
+      ['Согласовываем цену','До начала работы объясняем стоимость, варианты ремонта и условия гарантии.'],
+      ['Меняем батарею','Выполняем замену батареи с учётом конструкции конкретной модели iPhone.'],
+      ['Проверяем после ремонта','Тестируем зарядку, включение устройства, стабильность и основные функции.'],
+    ]},
     'iphone-screen': { eyebrow:'Процесс замены экрана', titleStart:'Как проходит ', titleAccent:'замена экрана iPhone?', intro:'От проверки повреждения до тестирования нового экрана и важных функций iPhone.', steps:[
       ['Проверяем повреждение экрана','Оцениваем стекло, дисплей, сенсор и видимые повреждения после падения или контакта с влагой.'],
       ['Определяем точную модель iPhone','Проверяем модель и доступные варианты замены экрана.'],

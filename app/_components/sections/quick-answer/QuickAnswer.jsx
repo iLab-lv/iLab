@@ -17,8 +17,24 @@ const CONTENT = {
   },
 };
 
-export default function QuickAnswer({ locale = 'lv' }) {
-  const content = CONTENT[locale] || CONTENT.lv;
+const BATTERY_CONTENT = {
+  lv: {
+    eyebrow: 'Īsā atbilde',
+    title: 'iPhone baterijas maiņa',
+    accent: 'īsumā',
+    copy: 'iPhone baterijas maiņa parasti ir nepieciešama, ja telefons ātri izlādējas, izslēdzas pie atlikušiem procentiem, strauji zaudē uzlādi, uzkarst ikdienas lietošanā vai baterijas veselība ir būtiski samazinājusies. iLab pārbauda ierīci, precizē iPhone modeli, izskaidro remonta iespējas un saskaņo cenu pirms darba sākšanas.',
+  },
+  ru: {
+    eyebrow: 'Короткий ответ',
+    title: 'Замена батареи iPhone',
+    accent: 'вкратце',
+    copy: 'Замена батареи iPhone обычно необходима, если телефон быстро разряжается, выключается при оставшихся процентах, резко теряет заряд, нагревается при обычном использовании или состояние аккумулятора заметно ухудшилось. iLab проверяет устройство, уточняет модель iPhone, объясняет варианты ремонта и согласовывает цену до начала работы.',
+  },
+};
+
+export default function QuickAnswer({ locale = 'lv', variant = 'iphone-screen' }) {
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const content = source[locale] || source.lv;
 
   return (
     <section className={s.section} aria-labelledby="screen-quick-answer-title">
