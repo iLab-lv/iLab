@@ -95,11 +95,27 @@ const BATTERY_CONTENT = {
   },
 };
 
+const BACK_COVER_CONTENT = {
+  lv: { eyebrow:'Aizmugures bojājuma pazīmes', titleStart:'Kad vajadzīga iPhone', titleAccent:'aizmugures vāciņa maiņa?', intro:'Aizmugures bojājums ne vienmēr ir tikai vizuāla problēma. Saplaisājis stikls var kļūt ass, stikla gabali var izkrist, bet bojājuma vietā var iekļūt putekļi un mitrums. Ja plaisas atrodas kameras, bezvadu uzlādes vai korpusa savienojumu tuvumā, telefonu ieteicams pārbaudīt servisā.', symptoms:[
+    { title:'Saplaisājis aizmugurējais stikls', description:'Telefona aizmugure ir sasista, plaisas kļūst lielākas vai stikla malas ir asas.' },
+    { title:'Izbiruši stikla gabali', description:'No aizmugures vāciņa izkrituši stikla gabali, un bojājuma vietā var iekļūt putekļi vai mitrums.' },
+    { title:'Bojājums pie kameras', description:'Plaisas atrodas ap kameras laukumu, kamera sāk migloties, attēlā redzami plankumi vai bojāts kameras stikliņš.' },
+    { title:'Atlīmējies vai deformēts korpuss', description:'Aizmugure vairs cieši nepieguļ korpusam, pēc kritiena parādījusies sprauga vai telefons izskatās deformēts.' },
+  ]},
+  ru: { eyebrow:'Признаки повреждения задней части', titleStart:'Когда нужна', titleAccent:'замена задней крышки iPhone?', intro:'Повреждение задней части — не всегда только визуальная проблема. Треснувшее стекло может стать острым, кусочки могут выпасть, а внутрь через повреждение могут попасть пыль и влага. Если трещины рядом с камерой, зоной беспроводной зарядки или соединениями корпуса, телефон стоит проверить в сервисе.', symptoms:[
+    { title:'Треснувшее заднее стекло', description:'Задняя часть телефона разбита, трещины увеличиваются или края стекла стали острыми.' },
+    { title:'Выпали кусочки стекла', description:'Из задней крышки выпали кусочки стекла, и через повреждение могут попасть пыль или влага.' },
+    { title:'Повреждение возле камеры', description:'Трещины находятся вокруг камеры, камера запотевает, на изображении появились пятна или повреждено стекло камеры.' },
+    { title:'Крышка отклеилась или корпус деформирован', description:'Задняя часть больше не прилегает плотно, после падения появилась щель или телефон выглядит деформированным.' },
+  ]},
+};
+
 const ICONS = [LuSmartphone, LuScanLine, LuTouchpadOff, LuMonitorOff];
 
 export default function IphoneScreenSymptoms({ locale = 'lv', variant = 'iphone-screen' }) {
   const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
-  const content = source[locale] || source.lv;
+  const resolvedSource = variant === 'iphone-back-cover' ? BACK_COVER_CONTENT : source;
+  const content = resolvedSource[locale] || resolvedSource.lv;
 
   return (
     <section className={s.section} aria-labelledby="iphone-screen-symptoms-title">

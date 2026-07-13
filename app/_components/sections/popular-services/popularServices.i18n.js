@@ -191,7 +191,7 @@ const SECTION_COPY = {
     noteLabel: 'Заметка мастера:',
     priceLine: 'Стоимость зависит от модели iPhone и типа детали.',
     priceLink: 'Выбрать модель и узнать цену',
-    serviceLink: 'Открыть услугу',
+    serviceLink: 'Подробнее',
   },
 };
 

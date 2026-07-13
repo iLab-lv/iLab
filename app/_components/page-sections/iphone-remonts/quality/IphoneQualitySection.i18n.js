@@ -90,7 +90,35 @@ const BATTERY_CONTENT = {
   },
 };
 
+const BACK_COVER_CONTENT = {
+  lv: {
+    eyebrow: 'Garantija, mitruma risks un datu drošība', titleStart: 'Skaidri nosacījumi pēc ', titleAccent: 'aizmugures remonta',
+    intro: 'Saplīsusi iPhone aizmugure samazina korpusa aizsardzību pret putekļiem un mitrumu. Pirms darba saskaņojam cenu, bet pēc remonta sniedzam 90 dienu garantiju darbam un uzstādītajai detaļai.',
+    facts: ['90 dienu garantija','Cena pirms darba','Dati parasti netiek dzēsti','Mitruma risks izskaidrots'],
+    cards: [
+      { title:'90 dienu garantija', text:'Veiktajam remontam un uzstādītajai detaļai tiek piemērota 90 dienu garantija saskaņā ar remonta nosacījumiem.' },
+      { title:'Cena pirms darba', text:'Pirms remonta sākšanas pārbaudām ierīci, precizējam detaļas pieejamību un saskaņojam izmaksas.' },
+      { title:'Datu drošība', text:'Aizmugures vāciņa maiņa parasti nav saistīta ar datu dzēšanu, tomēr pirms remonta iesakām izveidot rezerves kopiju, ja tas ir iespējams.' },
+      { title:'Mitruma risks', text:'Pēc remonta nesolām rūpnīcas ūdensizturības atjaunošanu. iPhone konstrukcija pēc kritiena vai atvēršanas var zaudēt sākotnējo aizsardzību pret mitrumu, tāpēc arī pēc remonta telefonu nevajadzētu apzināti pakļaut ūdenim.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Гарантия, риск влаги и безопасность данных', titleStart: 'Понятные условия после ', titleAccent: 'ремонта задней части',
+    intro: 'Разбитая задняя часть iPhone снижает защиту корпуса от пыли и влаги. До начала работы согласовываем цену, а после ремонта предоставляем гарантию 90 дней на работу и установленную деталь.',
+    facts: ['Гарантия 90 дней','Цена до начала работы','Данные обычно не удаляются','Риск влаги объяснён'],
+    cards: [
+      { title:'Гарантия 90 дней', text:'На выполненный ремонт и установленную деталь действует гарантия 90 дней согласно условиям ремонта.' },
+      { title:'Цена до начала работы', text:'До ремонта проверяем устройство, уточняем наличие детали и согласовываем стоимость.' },
+      { title:'Безопасность данных', text:'Замена задней крышки обычно не связана с удалением данных, но перед ремонтом рекомендуем сделать резервную копию, если это возможно.' },
+      { title:'Риск влаги', text:'После ремонта мы не обещаем восстановление заводской водостойкости. После падения или вскрытия конструкция iPhone может потерять первоначальную защиту от влаги, поэтому и после ремонта телефон не следует намеренно подвергать воздействию воды.' },
+    ],
+  },
+};
+
 export function getIphoneQualityContent(locale = 'lv', variant = 'iphone') {
+  if (variant === 'iphone-back-cover') {
+    return BACK_COVER_CONTENT[locale] || BACK_COVER_CONTENT.lv;
+  }
   if (variant === 'iphone-battery') {
     return BATTERY_CONTENT[locale] || BATTERY_CONTENT.lv;
   }

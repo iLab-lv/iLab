@@ -3,7 +3,8 @@ import Image from 'next/image';
 import s from './DeviceHero.module.scss';
 
 /**
- * DeviceHero - server-rendered hero with tint + optional brand logo overlay
+ * DeviceHero - server-rendered hero with a shared media treatment and optional
+ * brand logo overlay.
  * Key perf changes:
  * - No 'use client'
  * - No useEffect/useState (LCP image src is available immediately)
@@ -19,8 +20,6 @@ export default function DeviceHero({
   // Brand visuals (optional)
   brandLogo = null,
   brandKey = null,
-  tint = null,
-
   // Logo placement tunables
   logoShift = '220px',
   logoShiftMobile = '0px',
@@ -39,7 +38,6 @@ export default function DeviceHero({
     focal === 'left' ? s.focalLeft : focal === 'center' ? s.focalCenter : s.focalRight;
 
   const styleVars = {
-    ...(tint ? { ['--brand-tint']: tint } : null),
     ...(logoShift ? { ['--logo-shift']: logoShift } : null),
     ...(logoShiftMobile ? { ['--logo-shift-mobile']: logoShiftMobile } : null),
   };

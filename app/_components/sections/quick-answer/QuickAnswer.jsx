@@ -32,8 +32,24 @@ const BATTERY_CONTENT = {
   },
 };
 
+const BACK_COVER_CONTENT = {
+  lv: { eyebrow:'Īsā atbilde', title:'iPhone aizmugures vāciņa maiņa', accent:'īsumā', copy:'iPhone aizmugures vāciņa vai aizmugurējā stikla maiņa parasti ir nepieciešama, ja telefona aizmugure ir saplaisājusi, stikla gabali ir izbiruši, vāciņš ir atlīmējies vai bojājums atrodas kameras tuvumā. iLab pārbauda bojājuma apjomu, precizē iPhone modeli, izskaidro remonta iespējas un saskaņo cenu pirms darba sākšanas.' },
+  ru: { eyebrow:'Короткий ответ', title:'Замена задней крышки iPhone', accent:'вкратце', copy:'Замена задней крышки или заднего стекла iPhone обычно необходима, если задняя часть телефона треснула, кусочки стекла выпали, крышка отклеилась или повреждение находится рядом с камерой. iLab проверяет степень повреждения, уточняет модель iPhone, объясняет варианты ремонта и согласовывает цену до начала работы.' },
+};
+
+const WATER_DAMAGE_CONTENT = {
+  lv: { eyebrow:'Īsā atbilde', title:'iPhone ūdens bojājumi', accent:'īsumā', copy:'iPhone ūdens bojājumu diagnostika ir nepieciešama, ja telefons bijis kontaktā ar ūdeni, mitrumu, jūras vai baseina ūdeni, kafiju, sulu vai citu šķidrumu. Pat ja iPhone sākumā darbojas, šķidrums var izraisīt oksidāciju, uzlādes problēmas, ekrāna mirgošanu, skaņas traucējumus vai vēlākus plates bojājumus. Nelādē ierīci un pēc iespējas ātrāk piesaki diagnostiku.' },
+  ru: { eyebrow:'Короткий ответ', title:'Повреждение iPhone жидкостью', accent:'вкратце', copy:'Диагностика повреждения iPhone жидкостью нужна после контакта с водой, влагой, морской или бассейновой водой, кофе, соком и другими жидкостями. Даже если iPhone сначала работает, жидкость может вызвать окисление, проблемы с зарядкой, мерцание экрана, нарушения звука или поздние повреждения платы. Не заряжайте устройство и как можно скорее запишитесь на диагностику.' },
+};
+
 export default function QuickAnswer({ locale = 'lv', variant = 'iphone-screen' }) {
-  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const source = variant === 'iphone-battery'
+    ? BATTERY_CONTENT
+    : variant === 'iphone-back-cover'
+      ? BACK_COVER_CONTENT
+      : variant === 'iphone-water-damage'
+        ? WATER_DAMAGE_CONTENT
+        : CONTENT;
   const content = source[locale] || source.lv;
 
   return (

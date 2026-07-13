@@ -1,4 +1,4 @@
-import { LuBoxes, LuLayers3, LuScanSearch, LuSmartphone } from 'react-icons/lu';
+import { LuBoxes, LuCamera, LuLayers3, LuScanSearch, LuSmartphone } from 'react-icons/lu';
 
 import s from './IphoneScreenPriceFactors.module.scss';
 
@@ -90,10 +90,35 @@ const BATTERY_CONTENT = {
   },
 };
 
-const ICONS = [LuSmartphone, LuLayers3, LuBoxes, LuScanSearch];
+const BACK_COVER_CONTENT = {
+  lv: {
+    eyebrow: 'Cenas skaidrojums', titleStart: 'No kā atkarīga iPhone', titleAccent: 'aizmugures vāciņa maiņas cena?',
+    intro: 'Cena var atšķirties atkarībā no iPhone modeļa, aizmugures konstrukcijas, detaļas pieejamības un bojājuma apjoma. Ja pēc kritiena skarta kamera, korpuss vai bezvadu uzlādes zona, pirms remonta var būt nepieciešama papildu pārbaude.',
+    factors: [
+      { title: 'iPhone modelis', description: 'Dažādiem iPhone modeļiem atšķiras aizmugures konstrukcija un remonta sarežģītība.' },
+      { title: 'Bojājuma apjoms', description: 'Remonta gaitu ietekmē tas, vai ir tikai plaisas vai arī dziļi bojāts un iztrūkst stikls.' },
+      { title: 'Kameras zona', description: 'Ja bojājums ir pie kameras, pārbaudām kameras stikliņu un attēla kvalitāti.' },
+      { title: 'Korpusa stāvoklis', description: 'Deformācija, spraugas vai slikti pieguļošas detaļas var prasīt papildu diagnostiku.' },
+      { title: 'Detaļas pieejamība', description: 'Pirms remonta precizējam piemērotās detaļas pieejamību, cenu un piegādes iespēju.' },
+    ],
+  },
+  ru: {
+    eyebrow: 'Как формируется цена', titleStart: 'От чего зависит цена', titleAccent: 'замены задней крышки iPhone?',
+    intro: 'Цена зависит от модели iPhone, конструкции задней части, наличия детали и степени повреждения. Если после падения пострадали камера, корпус или зона беспроводной зарядки, перед ремонтом может потребоваться дополнительная проверка.',
+    factors: [
+      { title: 'Модель iPhone', description: 'У разных моделей отличается конструкция задней части и сложность ремонта.' },
+      { title: 'Степень повреждения', description: 'На ход ремонта влияет, есть ли только трещины или стекло повреждено глубоко и частично отсутствует.' },
+      { title: 'Зона камеры', description: 'При повреждении рядом с камерой проверяем защитное стекло и качество изображения.' },
+      { title: 'Состояние корпуса', description: 'Деформация, зазоры или неплотно прилегающие детали могут потребовать дополнительной диагностики.' },
+      { title: 'Наличие детали', description: 'До ремонта уточняем наличие подходящей детали, цену и возможность поставки.' },
+    ],
+  },
+};
+
+const ICONS = [LuSmartphone, LuLayers3, LuCamera, LuScanSearch, LuBoxes];
 
 export default function IphoneScreenPriceFactors({ locale = 'lv', variant = 'iphone-screen' }) {
-  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : variant === 'iphone-back-cover' ? BACK_COVER_CONTENT : CONTENT;
   const content = source[locale] || source.lv;
 
   return (
@@ -107,7 +132,7 @@ export default function IphoneScreenPriceFactors({ locale = 'lv', variant = 'iph
           <p>{content.intro}</p>
         </header>
 
-        <ol className={s.factors}>
+        <ol className={`${s.factors} ${content.factors.length === 5 ? s.fiveFactors : ''}`}>
           {content.factors.map((factor, index) => {
             const Icon = ICONS[index];
 

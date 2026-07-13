@@ -54,6 +54,10 @@
   list-style: none;
 }
 
+.fiveFactors {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .factor {
   position: relative;
   min-height: 250px;
@@ -106,7 +110,8 @@
 }
 
 @media (max-width: $bp-lg) {
-  .factors {
+  .factors,
+  .fiveFactors {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

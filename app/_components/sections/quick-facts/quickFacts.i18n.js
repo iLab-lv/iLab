@@ -25,6 +25,21 @@ const QUICK_FACTS = {
     ariaLabel: 'Svarīgākais par remontu',
     locationJoiner: ' un ',
     variants: {
+      'iphone-water-damage': [
+        { key:'diagnostics', title:'Pakalpojums', description:'iPhone ūdens un šķidruma bojājumu diagnostika' },
+        { key:'price', title:'Cena', description:'Diagnostika no 50 €, remonts pēc pārbaudes' },
+        { key:'finalCheck', title:'Svarīgākais', description:'Nelādēt, nežāvēt ar karstumu un nelikt rīsos' },
+        { key:'parts', title:'Pārbaude', description:'Mitrums, oksidācija, uzlāde, ekrāns, skaņa un plate' },
+        { key:'locations', title:'Mērķis', description:'Novērtēt remonta un datu saglabāšanas iespējas' },
+      ],
+      'iphone-back-cover': [
+        { key:'parts', title:'Pakalpojums', description:'iPhone aizmugures vāciņa / aizmugurējā stikla maiņa' },
+        { key:'price', title:'Cena', description:'Atkarīga no iPhone modeļa un bojājuma apjoma' },
+        { key:'diagnostics', title:'Pārbaude', description:'Aizmugure, kamera, korpuss un bezvadu uzlādes zona' },
+        { key:'warranty', title:'Garantija', description:'90 dienas veiktajam remontam' },
+        { key:'locations', title:'Filiāles', description:'T/C Domina Shopping un T/C Spice Home' },
+        { key:'finalCheck', title:'Pārbaude pēc remonta', description:'Kamera, korpusa salikums, uzlāde un pamata funkcijas' },
+      ],
       'iphone-battery': [
         { key: 'parts', title: 'Pakalpojums', description: 'iPhone baterijas / akumulatora maiņa' },
         { key: 'price', title: 'Cena', description: 'Atkarīga no iPhone modeļa un detaļas pieejamības' },
@@ -127,6 +142,21 @@ const QUICK_FACTS = {
     ariaLabel: 'Главное о ремонте',
     locationJoiner: ' и ',
     variants: {
+      'iphone-water-damage': [
+        { key:'diagnostics', title:'Услуга', description:'Диагностика повреждения iPhone водой и жидкостью' },
+        { key:'price', title:'Цена', description:'Диагностика от 50 €, ремонт после проверки' },
+        { key:'finalCheck', title:'Главное', description:'Не заряжать, не нагревать и не класть в рис' },
+        { key:'parts', title:'Проверка', description:'Влага, окисление, зарядка, экран, звук и плата' },
+        { key:'locations', title:'Цель', description:'Оценить возможность ремонта и сохранения данных' },
+      ],
+      'iphone-back-cover': [
+        { key:'parts', title:'Услуга', description:'Замена задней крышки / заднего стекла iPhone' },
+        { key:'price', title:'Цена', description:'Зависит от модели iPhone и степени повреждения' },
+        { key:'diagnostics', title:'Проверка', description:'Задняя часть, камера, корпус и зона беспроводной зарядки' },
+        { key:'warranty', title:'Гарантия', description:'90 дней на выполненный ремонт' },
+        { key:'locations', title:'Филиалы', description:'Т/Ц Domina Shopping и Т/Ц Spice Home' },
+        { key:'finalCheck', title:'Проверка после ремонта', description:'Камера, сборка корпуса, зарядка и основные функции' },
+      ],
       'iphone-battery': [
         { key: 'parts', title: 'Услуга', description: 'Замена батареи / аккумулятора iPhone' },
         { key: 'price', title: 'Цена', description: 'Зависит от модели iPhone и наличия детали' },

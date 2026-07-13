@@ -1,0 +1,58 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp($space-xl, 6vw, 82px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, #020607, #050505);
+}
+
+.container { @include layout.catalog-container; }
+
+.header {
+  max-width: 920px;
+  margin-bottom: $space-xl;
+
+  > span { color: $color-accent; font-size: $font-size-sm; font-weight: $font-weight-semibold; letter-spacing: .08em; text-transform: uppercase; }
+  h2 { margin: $space-sm 0 0; color: $color-text; font-size: clamp(2rem, 4vw, $font-size-h4); line-height: 1.12; }
+  em { color: $color-accent; font-style: normal; }
+  p { margin: $space-md 0 0; color: $color-text-2; font-size: $font-size-lg; line-height: 1.62; }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  overflow: hidden;
+  border: $border-thin solid rgba(34, 211, 238, .18);
+  border-radius: 12px;
+  background: rgba(7, 13, 14, .62);
+}
+
+.item {
+  padding: $space-lg;
+  border-bottom: $border-thin solid rgba(255,255,255,.08);
+  &:nth-child(odd) { border-right: $border-thin solid rgba(255,255,255,.08); }
+  &:nth-last-child(-n + 2) { border-bottom: 0; }
+  dt { display: flex; align-items: center; gap: $space-sm; color: $color-text; font-size: $font-size-xl; font-weight: $font-weight-semibold; }
+  dt span { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 auto; border-radius: 10px; color: $color-accent; background: rgba(34,211,238,.1); }
+  dd { margin: $space-sm 0 0 54px; color: $color-text-2; line-height: 1.6; }
+}
+
+.link {
+  display: block;
+  width: fit-content;
+  margin-top: $space-sm;
+  color: $color-accent;
+  font-weight: $font-weight-semibold;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: $bp-sm) {
+  .list { grid-template-columns: 1fr; }
+  .item, .item:nth-child(odd), .item:nth-last-child(-n + 2) { border-right: 0; border-bottom: $border-thin solid rgba(255,255,255,.08); }
+  .item:last-child { border-bottom: 0; }
+  .item dd { margin-left: 0; }
+}

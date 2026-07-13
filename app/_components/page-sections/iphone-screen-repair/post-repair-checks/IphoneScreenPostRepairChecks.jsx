@@ -54,8 +54,23 @@ const BATTERY_CONTENT = {
   },
 };
 
+const BACK_COVER_CONTENT = {
+  lv: {
+    eyebrow: 'Kvalitātes kontrole', titleStart: 'Ko pārbaudām pēc', titleAccent: 'aizmugures vāciņa maiņas?',
+    intro: 'Pēc remonta pārbaudām ne tikai jaunās detaļas izskatu, bet arī zonas un funkcijas, kuras varēja ietekmēt kritiens vai ierīces izjaukšana.',
+    checks: ['Vai aizmugures detaļa ir korekti nostiprināta','Vai korpuss ir pareizi salikts','Vai kameras attēls nav miglains','Vai kameras stikliņš nav bojāts','Vai telefons pieņem uzlādi','Vai darbojas bezvadu uzlāde, ja modelis to atbalsta','Vai nav redzamu papildu trieciena bojājumu','Vai darbojas ierīces pamata funkcijas'],
+    closing: 'Ierīci izsniedzam pēc korpusa, kameras, uzlādes un galveno funkciju pārbaudes.',
+  },
+  ru: {
+    eyebrow: 'Контроль качества', titleStart: 'Что проверяем после', titleAccent: 'замены задней крышки?',
+    intro: 'После ремонта проверяем не только внешний вид новой детали, но и зоны и функции, на которые могло повлиять падение или разборка устройства.',
+    checks: ['Правильно ли закреплена задняя деталь','Правильно ли собран корпус','Не стало ли изображение камеры мутным','Не повреждено ли стекло камеры','Принимает ли телефон заряд','Работает ли беспроводная зарядка, если модель её поддерживает','Нет ли видимых дополнительных повреждений после удара','Работают ли основные функции устройства'],
+    closing: 'Выдаём устройство после проверки корпуса, камеры, зарядки и основных функций.',
+  },
+};
+
 export default function IphoneScreenPostRepairChecks({ locale = 'lv', variant = 'iphone-screen' }) {
-  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : variant === 'iphone-back-cover' ? BACK_COVER_CONTENT : CONTENT;
   const content = source[locale] || source.lv;
 
   return (

@@ -106,10 +106,29 @@ const BATTERY_CONTENT = {
   },
 };
 
+const BACK_COVER_CONTENT = {
+  lv: { eyebrow:'Meistara skaidrojums', titleStart:'Ko nozīmē dažādi iPhone', titleAccent:'aizmugures bojājumi?', intro:'Ne katrs aizmugures bojājums nozīmē vienādu remontu. Dažreiz bojāts ir tikai aizmugurējais stikls, bet citreiz pēc kritiena var būt skarta arī kameras zona, korpuss, bezvadu uzlādes daļa vai iekšējie savienojumi.', adviceLabel:'Ieteikums', items:[
+    { title:'Saplaisājis stikls, bet telefons darbojas', description:'Ja aizmugurējais stikls ir saplaisājis, bet telefons darbojas, bojājumu nevajadzētu ignorēt. Plaisas var kļūt lielākas, stikla gabali var izkrist, un caur bojājuma vietu ierīcē vieglāk iekļūst mitrums un putekļi.', advice:'Kā pagaidu risinājumu var lietot aizsargvāciņu vai uzmanīgi nosegt asākās plaisas, bet tas nav remonts. Telefonu ieteicams atnest uz pārbaudi, īpaši, ja plaisas ir dziļas vai tuvu kamerai.' },
+    { title:'Izbiruši stikla gabali', description:'Ja no aizmugures izbiruši stikla gabali vai redzamas iekšējās zonas, telefonu labāk nelietot mitrā vai putekļainā vidē. Šādā stāvoklī bojājums var kļūt lielāks un radīt papildu risku kamerai, savienojumiem vai korpusa iekšējām daļām.', advice:'Ja bojājums ir dziļš, neliec telefonu uz mitras virsmas, nelieto to lietū un necenties līmēt aizmuguri ar šķidru līmi. Labāk atnest ierīci uz servisu pārbaudei.' },
+    { title:'Plaisas ap kameru', description:'Ja aizmugures bojājums atrodas ap kameru, var tikt skarts arī kameras stikliņš vai kamera var sākt uzņemt miglainus attēlus. Putekļi un stikla daļiņas kameras zonā var ietekmēt attēla kvalitāti.', advice:'Šādā gadījumā remonta laikā ir vērts pārbaudīt ne tikai aizmuguri, bet arī kameras darbību.' },
+    { title:'Aizmugure paceļas vai parādās sprauga', description:'Ja aizmugure sāk celties, parādās sprauga vai telefons izskatās uzpūties, problēma var nebūt tikai stiklā. Dažreiz šādu deformāciju var izraisīt trieciens, korpusa bojājums vai uzpūtusies baterija.', advice:'Šādā gadījumā nevajadzētu spiest telefonu ciet. Ierīci labāk pārbaudīt servisā, lai saprastu, vai nepieciešama tikai aizmugures maiņa vai arī citas detaļas pārbaude.' },
+  ]},
+  ru: { eyebrow:'Объяснение мастера', titleStart:'Что означают разные повреждения', titleAccent:'задней части iPhone?', intro:'Не каждое повреждение задней части требует одинакового ремонта. Иногда повреждено только заднее стекло, а после сильного падения также могут пострадать зона камеры, корпус, беспроводная зарядка или внутренние соединения.', adviceLabel:'Рекомендация', items:[
+    { title:'Стекло треснуло, но телефон работает', description:'Если заднее стекло треснуло, но телефон работает, повреждение не стоит игнорировать. Трещины могут увеличиться, кусочки стекла выпасть, а через повреждение внутрь легче попадают влага и пыль.', advice:'Временно можно использовать чехол или аккуратно закрыть самые острые трещины, но это не ремонт. Телефон стоит принести на проверку, особенно при глубоких трещинах рядом с камерой.' },
+    { title:'Выпали кусочки стекла', description:'Если из задней части выпали кусочки стекла или видны внутренние зоны, телефоном лучше не пользоваться во влажной или пыльной среде. Повреждение может увеличиться и создать дополнительный риск для камеры, соединений и внутренних частей корпуса.', advice:'При глубоком повреждении не кладите телефон на влажную поверхность, не используйте под дождём и не пытайтесь заливать заднюю часть жидким клеем. Лучше принести устройство на проверку.' },
+    { title:'Трещины вокруг камеры', description:'Если повреждение находится вокруг камеры, может пострадать стекло камеры или снимки станут мутными. Пыль и частицы стекла возле камеры могут повлиять на качество изображения.', advice:'Во время ремонта стоит проверить не только заднюю часть, но и работу камеры.' },
+    { title:'Задняя часть приподнялась или появилась щель', description:'Если задняя часть поднимается, появилась щель или телефон выглядит вздутым, проблема может быть не только в стекле. Причиной бывает удар, деформация корпуса или вздутая батарея.', advice:'Не пытайтесь сдавить телефон. Устройство лучше проверить в сервисе, чтобы понять, достаточно ли замены задней части или нужна проверка другой детали.' },
+  ]},
+};
+
 const ICONS = [LuCircleAlert, LuInfo, LuShieldAlert, LuTouchpadOff];
 
 export default function IphoneScreenDamageGuide({ locale = 'lv', variant = 'iphone-screen' }) {
-  const source = variant === 'iphone-battery' ? BATTERY_CONTENT : CONTENT;
+  const source = variant === 'iphone-battery'
+    ? BATTERY_CONTENT
+    : variant === 'iphone-back-cover'
+      ? BACK_COVER_CONTENT
+      : CONTENT;
   const content = source[locale] || source.lv;
 
   return (

@@ -351,7 +351,6 @@ export default function TabletBrandPage({
         alt={strings.heroAlt}
         brandLogo={page.source?.brand?.logo || null}
         brandKey={page.source?.brand?.key || brandSlug}
-        tint="rgba(0,200,180,0.20)"
         focal="right"
         priority
         bodyHtml={strings.heroHtml}

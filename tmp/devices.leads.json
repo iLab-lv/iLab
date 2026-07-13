@@ -1,0 +1,2306 @@
+{
+  "generatedAt": "2026-07-13T20:58:28.220Z",
+  "source": "tmp\\devices.export.json",
+  "collection": "devices",
+  "count": 208,
+  "validation": {
+    "locales": [
+      "lv",
+      "ru"
+    ],
+    "minimumWords": 20,
+    "maximumWords": 30,
+    "shortestLead": 22,
+    "longestLead": 30
+  },
+  "items": [
+    {
+      "id": "xiaomi-redmi-13-c",
+      "slug": "xiaomi-redmi-13-c",
+      "name": "Redmi 13C",
+      "brandKey": "xiaomi",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Xiaomi Redmi 13C remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Xiaomi Redmi 13C в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "xiaomi-redmi-note-10-4g",
+      "slug": "xiaomi-redmi-note-10-4g",
+      "name": "Redmi Note 10 (4g)",
+      "brandKey": "xiaomi",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Xiaomi Redmi Note 10 (4g) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Xiaomi Redmi Note 10 (4g) в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-17-pro-max",
+      "slug": "iphone-17-pro-max",
+      "name": "iPhone 17 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 17 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 17 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-17-pro",
+      "slug": "iphone-17-pro",
+      "name": "iPhone 17 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 17 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 17 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-air",
+      "slug": "iphone-air",
+      "name": "iPhone Air",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone Air remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone Air в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-17",
+      "slug": "iphone-17",
+      "name": "iPhone 17",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 17 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 17 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-16-pro-max",
+      "slug": "iphone-16-pro-max",
+      "name": "iPhone 16 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 16 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 16 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-16-pro",
+      "slug": "iphone-16-pro",
+      "name": "iPhone 16 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 16 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 16 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-16-plus",
+      "slug": "iphone-16-plus",
+      "name": "iPhone 16 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 16 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 16 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-16e",
+      "slug": "iphone-16e",
+      "name": "iPhone 16e",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 16e remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 16e в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-16",
+      "slug": "iphone-16",
+      "name": "iPhone 16",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 16 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 16 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-15-pro-max",
+      "slug": "iphone-15-pro-max",
+      "name": "iPhone 15 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 15 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 15 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-15-pro",
+      "slug": "iphone-15-pro",
+      "name": "iPhone 15 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 15 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 15 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-15-plus",
+      "slug": "iphone-15-plus",
+      "name": "iPhone 15 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 15 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 15 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-15",
+      "slug": "iphone-15",
+      "name": "iPhone 15",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 15 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 15 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-14-pro-max",
+      "slug": "iphone-14-pro-max",
+      "name": "iPhone 14 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 14 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 14 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-14-pro",
+      "slug": "iphone-14-pro",
+      "name": "iPhone 14 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 14 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 14 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-14-plus",
+      "slug": "iphone-14-plus",
+      "name": "iPhone 14 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 14 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 14 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-14",
+      "slug": "iphone-14",
+      "name": "iPhone 14",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 14 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 14 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "9-7-5th-gen-2017",
+      "slug": "9-7-5th-gen-2017",
+      "name": "iPad 9.7\" (5 gen. 2017) (A1822, A1823)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 9.7\" (5 gen. 2017) (A1822, A1823) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 9.7\" (5 gen. 2017) (A1822, A1823) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-13-pro-max",
+      "slug": "iphone-13-pro-max",
+      "name": "iPhone 13 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 13 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 13 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-13-pro",
+      "slug": "iphone-13-pro",
+      "name": "iPhone 13 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 13 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 13 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-13",
+      "slug": "iphone-13",
+      "name": "iPhone 13",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 13 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 13 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-13-mini",
+      "slug": "iphone-13-mini",
+      "name": "iPhone 13 mini",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 13 mini remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 13 mini в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "9-7-6th-gen-2018",
+      "slug": "9-7-6th-gen-2018",
+      "name": "iPad 9.7\" (6 gen. 2018) (A1893, A1954)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 9.7\" (6 gen. 2018) (A1893, A1954) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 9.7\" (6 gen. 2018) (A1893, A1954) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-12-pro-max",
+      "slug": "iphone-12-pro-max",
+      "name": "iPhone 12 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 12 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 12 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-12-pro",
+      "slug": "iphone-12-pro",
+      "name": "iPhone 12 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 12 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 12 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-12",
+      "slug": "iphone-12",
+      "name": "iPhone 12",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 12 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 12 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-12-mini",
+      "slug": "iphone-12-mini",
+      "name": "iPhone 12 mini",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 12 mini remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 12 mini в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "10-2-7th-gen-2019",
+      "slug": "10-2-7th-gen-2019",
+      "name": "iPad 10.2\" (7 gen. 2019) (A2198, A2197)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 10.2\" (7 gen. 2019) (A2198, A2197) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 10.2\" (7 gen. 2019) (A2198, A2197) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-11-pro-max",
+      "slug": "iphone-11-pro-max",
+      "name": "iPhone 11 Pro Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 11 Pro Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 11 Pro Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-11-pro",
+      "slug": "iphone-11-pro",
+      "name": "iPhone 11 Pro",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 11 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 11 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-11",
+      "slug": "iphone-11",
+      "name": "iPhone 11",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 11 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 11 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "10-2-8th-gen-2020",
+      "slug": "10-2-8th-gen-2020",
+      "name": "iPad 10.2\" (8 gen. 2020) (A2270, A2429)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 10.2\" (8 gen. 2020) (A2270, A2429) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 10.2\" (8 gen. 2020) (A2270, A2429) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-xs-max",
+      "slug": "iphone-xs-max",
+      "name": "iPhone XS Max",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone XS Max remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone XS Max в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-xs",
+      "slug": "iphone-xs",
+      "name": "iPhone XS",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone XS remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone XS в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-xr",
+      "slug": "iphone-xr",
+      "name": "iPhone XR",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone XR remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone XR в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-x",
+      "slug": "iphone-x",
+      "name": "iPhone X",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone X remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone X в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "10-2-9th-gen-2021",
+      "slug": "10-2-9th-gen-2021",
+      "name": "iPad 10.2\" (9 gen. 2021) (A2602, A2604)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 10.2\" (9 gen. 2021) (A2602, A2604) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 10.2\" (9 gen. 2021) (A2602, A2604) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-se-3",
+      "slug": "iphone-se-3",
+      "name": "iPhone SE (3. paaudze)",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone SE (3. paaudze) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone SE (3. paaudze) в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-se-2",
+      "slug": "iphone-se-2",
+      "name": "iPhone SE (2. paaudze)",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone SE (2. paaudze) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone SE (2. paaudze) в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-se-1",
+      "slug": "iphone-se-1",
+      "name": "iPhone SE (1. paaudze)",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone SE (1. paaudze) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone SE (1. paaudze) в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "10-9-10th-gen-2022",
+      "slug": "10-9-10th-gen-2022",
+      "name": "iPad 10.9\" (10 gen. 2022) (A2696, A2757)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad 10.9\" (10 gen. 2022) (A2696, A2757) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad 10.9\" (10 gen. 2022) (A2696, A2757) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-8-plus",
+      "slug": "iphone-8-plus",
+      "name": "iPhone 8 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 8 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 8 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-8",
+      "slug": "iphone-8",
+      "name": "iPhone 8",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 8 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 8 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-7-plus",
+      "slug": "iphone-7-plus",
+      "name": "iPhone 7 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 7 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 7 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-7",
+      "slug": "iphone-7",
+      "name": "iPhone 7",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 7 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 7 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-6s-plus",
+      "slug": "iphone-6s-plus",
+      "name": "iPhone 6s Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 6s Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 6s Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-6s",
+      "slug": "iphone-6s",
+      "name": "iPhone 6s",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 6s remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 6s в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-6-plus",
+      "slug": "iphone-6-plus",
+      "name": "iPhone 6 Plus",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 6 Plus remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 6 Plus в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-6",
+      "slug": "iphone-6",
+      "name": "iPhone 6",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 6 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 6 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-5s",
+      "slug": "iphone-5s",
+      "name": "iPhone 5s",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 5s remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 5s в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-5c",
+      "slug": "iphone-5c",
+      "name": "iPhone 5c",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 5c remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 5c в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-5",
+      "slug": "iphone-5",
+      "name": "iPhone 5",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 5 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 5 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-4s",
+      "slug": "iphone-4s",
+      "name": "iPhone 4s",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 4s remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 4s в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "iphone-4",
+      "slug": "iphone-4",
+      "name": "iPhone 4",
+      "brandKey": "apple",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Apple iPhone 4 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Apple iPhone 4 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "mini-4th-gen-2015",
+      "slug": "mini-4th-gen-2015",
+      "name": "iPad mini 4 (2015) (A1550)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad mini 4 (2015) (A1550) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad mini 4 (2015) (A1550) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "mini-5th-gen-2019",
+      "slug": "mini-5th-gen-2019",
+      "name": "iPad mini 5 (2019) (A2124, A2133)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad mini 5 (2019) (A2124, A2133) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad mini 5 (2019) (A2124, A2133) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "mini-6th-gen-2021",
+      "slug": "mini-6th-gen-2021",
+      "name": "iPad mini 6 (2021) (A2567, A2568)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad mini 6 (2021) (A2567, A2568) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad mini 6 (2021) (A2567, A2568) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s25-edge",
+      "slug": "galaxy-s25-edge",
+      "name": "Galaxy S25 Edge (SM-S937B) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S25 Edge (SM-S937B) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S25 Edge (SM-S937B) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "mini-7th-gen-2024",
+      "slug": "mini-7th-gen-2024",
+      "name": "iPad mini 7 (2024)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad mini 7 (2024) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad mini 7 (2024) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s25-ultra",
+      "slug": "galaxy-s25-ultra",
+      "name": "Galaxy S25 Ultra (SM-S938B) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S25 Ultra (SM-S938B) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S25 Ultra (SM-S938B) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s25-plus",
+      "slug": "galaxy-s25-plus",
+      "name": "Galaxy S25+ (SM-S936B) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S25+ (SM-S936B) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S25+ (SM-S936B) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s25",
+      "slug": "galaxy-s25",
+      "name": "Galaxy S25 (SM-S931B) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S25 (SM-S931B) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S25 (SM-S931B) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s24-ultra",
+      "slug": "galaxy-s24-ultra",
+      "name": "Galaxy S24 Ultra (SM-S928B) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S24 Ultra (SM-S928B) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S24 Ultra (SM-S928B) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s24-plus",
+      "slug": "galaxy-s24-plus",
+      "name": "Galaxy S24+ (SM-S926B) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S24+ (SM-S926B) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S24+ (SM-S926B) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s24",
+      "slug": "galaxy-s24",
+      "name": "Galaxy S24 (SM-S921B) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S24 (SM-S921B) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S24 (SM-S921B) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s24-fe",
+      "slug": "galaxy-s24-fe",
+      "name": "Galaxy S24 FE (SM-S721B) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S24 FE (SM-S721B) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S24 FE (SM-S721B) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s23-ultra",
+      "slug": "galaxy-s23-ultra",
+      "name": "Galaxy S23 Ultra (SM-S918B) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S23 Ultra (SM-S918B) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S23 Ultra (SM-S918B) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s23-plus",
+      "slug": "galaxy-s23-plus",
+      "name": "Galaxy S23+ (SM-S916B) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S23+ (SM-S916B) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S23+ (SM-S916B) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s23",
+      "slug": "galaxy-s23",
+      "name": "Galaxy S23 (SM-S918) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S23 (SM-S918) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S23 (SM-S918) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s23-fe",
+      "slug": "galaxy-s23-fe",
+      "name": "Galaxy S23 FE (SM-S718) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S23 FE (SM-S718) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S23 FE (SM-S718) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s22-ultra",
+      "slug": "galaxy-s22-ultra",
+      "name": "Galaxy S22 Ultra (SM-S908) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S22 Ultra (SM-S908) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S22 Ultra (SM-S908) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s22-plus",
+      "slug": "galaxy-s22-plus",
+      "name": "Galaxy S22+ (SM-S906) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S22+ (SM-S906) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S22+ (SM-S906) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s22",
+      "slug": "galaxy-s22",
+      "name": "Galaxy S22 (SM-S901) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S22 (SM-S901) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S22 (SM-S901) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s21-ultra",
+      "slug": "galaxy-s21-ultra",
+      "name": "Galaxy S21 Ultra (SM-G998) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S21 Ultra (SM-G998) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S21 Ultra (SM-G998) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s21-plus",
+      "slug": "galaxy-s21-plus",
+      "name": "Galaxy S21+ (SM-G996) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S21+ (SM-G996) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S21+ (SM-G996) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s21",
+      "slug": "galaxy-s21",
+      "name": "Galaxy S21 (SM-G991) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S21 (SM-G991) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S21 (SM-G991) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s21-fe",
+      "slug": "galaxy-s21-fe",
+      "name": "Galaxy S21 FE (SM-G990) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S21 FE (SM-G990) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S21 FE (SM-G990) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s20-ultra",
+      "slug": "galaxy-s20-ultra",
+      "name": "Galaxy S20 Ultra (SM-G988) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S20 Ultra (SM-G988) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S20 Ultra (SM-G988) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s20-plus",
+      "slug": "galaxy-s20-plus",
+      "name": "Galaxy S20+ (SM-G986) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S20+ (SM-G986) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S20+ (SM-G986) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s20-fe",
+      "slug": "galaxy-s20-fe",
+      "name": "Galaxy S20 FE (SM-G780) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S20 FE (SM-G780) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S20 FE (SM-G780) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s20",
+      "slug": "galaxy-s20",
+      "name": "Galaxy S20 (SM-G980) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S20 (SM-G980) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S20 (SM-G980) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s26",
+      "slug": "galaxy-s26",
+      "name": "Galaxy S26 (SM-S942B) 2026",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S26 (SM-S942B) 2026 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S26 (SM-S942B) 2026 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip7",
+      "slug": "galaxy-z-flip7",
+      "name": "Galaxy Z Flip7 (SM-F761) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip7 (SM-F761) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip7 (SM-F761) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip6",
+      "slug": "galaxy-z-flip6",
+      "name": "Galaxy Z Flip6 (SM-F751) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip6 (SM-F751) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip6 (SM-F751) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "p30-pro",
+      "slug": "p30-pro",
+      "name": "Huawei P30 Pro",
+      "brandKey": "huawei",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Huawei P30 Pro remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Huawei P30 Pro в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-1st-gen-2013",
+      "slug": "air-1st-gen-2013",
+      "name": "iPad Air (1 gen. 2013) (A1474, A1475)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air (1 gen. 2013) (A1474, A1475) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air (1 gen. 2013) (A1474, A1475) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip5",
+      "slug": "galaxy-z-flip5",
+      "name": "Galaxy Z Flip5 (SM-F741) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip5 (SM-F741) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip5 (SM-F741) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s26-plus",
+      "slug": "galaxy-s26-plus",
+      "name": "Galaxy S26+ (SM-S947B) 2026",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S26+ (SM-S947B) 2026 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S26+ (SM-S947B) 2026 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip4",
+      "slug": "galaxy-z-flip4",
+      "name": "Galaxy Z Flip4 (SM-F731) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip4 (SM-F731) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip4 (SM-F731) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip3",
+      "slug": "galaxy-z-flip3",
+      "name": "Galaxy Z Flip3 (SM-F721) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip3 (SM-F721) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip3 (SM-F721) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-flip",
+      "slug": "galaxy-z-flip",
+      "name": "Galaxy Z Flip (SM-F700X) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Flip (SM-F700X) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Flip (SM-F700X) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold7",
+      "slug": "galaxy-z-fold7",
+      "name": "Galaxy Z Fold7 (SM-F966) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold7 (SM-F966) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold7 (SM-F966) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold6",
+      "slug": "galaxy-z-fold6",
+      "name": "Galaxy Z Fold6 (SM-F956) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold6 (SM-F956) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold6 (SM-F956) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold5",
+      "slug": "galaxy-z-fold5",
+      "name": "Galaxy Z Fold5 (SM-F946) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold5 (SM-F946) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold5 (SM-F946) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold4",
+      "slug": "galaxy-z-fold4",
+      "name": "Galaxy Z Fold4 (SM-F936) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold4 (SM-F936) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold4 (SM-F936) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold3",
+      "slug": "galaxy-z-fold3",
+      "name": "Galaxy Z Fold3 (SM-F926) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold3 (SM-F926) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold3 (SM-F926) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold2",
+      "slug": "galaxy-z-fold2",
+      "name": "Galaxy Z Fold2 (SM-F916) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold2 (SM-F916) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold2 (SM-F916) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-2nd-gen-2014",
+      "slug": "air-2nd-gen-2014",
+      "name": "iPad Air 2 (2014) (A1566, A1567)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 2 (2014) (A1566, A1567) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 2 (2014) (A1566, A1567) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-z-fold",
+      "slug": "galaxy-z-fold",
+      "name": "Galaxy Z Fold (SM-F900) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Z Fold (SM-F900) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Z Fold (SM-F900) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-note20-ultra",
+      "slug": "galaxy-note20-ultra",
+      "name": "Galaxy Note20 Ultra (SM-N986B) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Note20 Ultra (SM-N986B) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Note20 Ultra (SM-N986B) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-s26-ultra",
+      "slug": "galaxy-s26-ultra",
+      "name": "Galaxy S26 Ultra (SM-S948B) 2026",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy S26 Ultra (SM-S948B) 2026 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy S26 Ultra (SM-S948B) 2026 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-note20",
+      "slug": "galaxy-note20",
+      "name": "Galaxy Note20 (SM-N980) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Note20 (SM-N980) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Note20 (SM-N980) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-note10-plus",
+      "slug": "galaxy-note10-plus",
+      "name": "Galaxy Note10+ (SM-N975) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Note10+ (SM-N975) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Note10+ (SM-N975) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-note10",
+      "slug": "galaxy-note10",
+      "name": "Galaxy Note10 (SM-N970) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Note10 (SM-N970) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Note10 (SM-N970) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-note10-lite",
+      "slug": "galaxy-note10-lite",
+      "name": "Galaxy Note10 Lite (SM-N770) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy Note10 Lite (SM-N770) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy Note10 Lite (SM-N770) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a72",
+      "slug": "galaxy-a72",
+      "name": "Galaxy A72 (SM-A725) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A72 (SM-A725) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A72 (SM-A725) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a71",
+      "slug": "galaxy-a71",
+      "name": "Galaxy A71 (SM-A715) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A71 (SM-A715) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A71 (SM-A715) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a70",
+      "slug": "galaxy-a70",
+      "name": "Galaxy A70 (SM-A705) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A70 (SM-A705) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A70 (SM-A705) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a56",
+      "slug": "galaxy-a56",
+      "name": "Galaxy A56 (SM-A566) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A56 (SM-A566) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A56 (SM-A566) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-10-5-3rd-gen-2019",
+      "slug": "air-10-5-3rd-gen-2019",
+      "name": "iPad Air 10.5\" (3 gen. 2019) (A2152)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 10.5\" (3 gen. 2019) (A2152) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 10.5\" (3 gen. 2019) (A2152) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a55",
+      "slug": "galaxy-a55",
+      "name": "Galaxy A55 (SM-A556) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A55 (SM-A556) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A55 (SM-A556) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a54",
+      "slug": "galaxy-a54",
+      "name": "Galaxy A54 (SM-A546) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A54 (SM-A546) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A54 (SM-A546) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a53-5g",
+      "slug": "galaxy-a53-5g",
+      "name": "Galaxy A53 5G (SM-A536) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A53 5G (SM-A536) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A53 5G (SM-A536) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a52s",
+      "slug": "galaxy-a52s",
+      "name": "Galaxy A52s (SM-A528) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A52s (SM-A528) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A52s (SM-A528) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a52",
+      "slug": "galaxy-a52",
+      "name": "Galaxy A52 (SM-A525) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A52 (SM-A525) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A52 (SM-A525) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a51",
+      "slug": "galaxy-a51",
+      "name": "Galaxy A51 (SM-A515) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A51 (SM-A515) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A51 (SM-A515) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a50",
+      "slug": "galaxy-a50",
+      "name": "Galaxy A50 (SM-A505) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A50 (SM-A505) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A50 (SM-A505) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a41",
+      "slug": "galaxy-a41",
+      "name": "Galaxy A41 (SM-A415) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A41 (SM-A415) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A41 (SM-A415) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a40",
+      "slug": "galaxy-a40",
+      "name": "Galaxy A40 (SM-A405) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A40 (SM-A405) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A40 (SM-A405) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a36",
+      "slug": "galaxy-a36",
+      "name": "Galaxy A36 (SM-A366) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A36 (SM-A366) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A36 (SM-A366) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-10-9-4th-gen-2020",
+      "slug": "air-10-9-4th-gen-2020",
+      "name": "iPad Air 10.9\" (4 gen. 2020) (A2072, A2316)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 10.9\" (4 gen. 2020) (A2072, A2316) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 10.9\" (4 gen. 2020) (A2072, A2316) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a35",
+      "slug": "galaxy-a35",
+      "name": "Galaxy A35 (SM-A356) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A35 (SM-A356) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A35 (SM-A356) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a34",
+      "slug": "galaxy-a34",
+      "name": "Galaxy A34 (SM-A346) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A34 (SM-A346) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A34 (SM-A346) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a33",
+      "slug": "galaxy-a33",
+      "name": "Galaxy A33 (SM-A336) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A33 (SM-A336) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A33 (SM-A336) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a32-5g",
+      "slug": "galaxy-a32-5g",
+      "name": "Galaxy A32 5G (SM-A326) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A32 5G (SM-A326) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A32 5G (SM-A326) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a32-4g",
+      "slug": "galaxy-a32-4g",
+      "name": "Galaxy A32 4G (SM-A325) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A32 4G (SM-A325) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A32 4G (SM-A325) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a25-5g",
+      "slug": "galaxy-a25-5g",
+      "name": "Galaxy A25 5G (SM-A256) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A25 5G (SM-A256) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A25 5G (SM-A256) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a24-4g",
+      "slug": "galaxy-a24-4g",
+      "name": "Galaxy A24 4G (SM-A245) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A24 4G (SM-A245) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A24 4G (SM-A245) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a23-5g",
+      "slug": "galaxy-a23-5g",
+      "name": "Galaxy A23 5G (SM-A236) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A23 5G (SM-A236) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A23 5G (SM-A236) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a22-4g",
+      "slug": "galaxy-a22-4g",
+      "name": "Galaxy A22 4G (SM-A225) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A22 4G (SM-A225) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A22 4G (SM-A225) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a22-5g",
+      "slug": "galaxy-a22-5g",
+      "name": "Galaxy A22 5G (SM-A226) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A22 5G (SM-A226) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A22 5G (SM-A226) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-10-9-5th-gen-m1-2022",
+      "slug": "air-10-9-5th-gen-m1-2022",
+      "name": "iPad Air 10.9\" (5 gen. M1, 2022) (A2588)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 10.9\" (5 gen. M1, 2022) (A2588) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 10.9\" (5 gen. M1, 2022) (A2588) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a21s",
+      "slug": "galaxy-a21s",
+      "name": "Galaxy A21s (SM-A217) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A21s (SM-A217) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A21s (SM-A217) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a20e",
+      "slug": "galaxy-a20e",
+      "name": "Galaxy A20e (SM-A202) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A20e (SM-A202) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A20e (SM-A202) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a16-5g",
+      "slug": "galaxy-a16-5g",
+      "name": "Galaxy A16 5G (SM-A166) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A16 5G (SM-A166) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A16 5G (SM-A166) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a16-4g",
+      "slug": "galaxy-a16-4g",
+      "name": "Galaxy A16 4G (SM-A165) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A16 4G (SM-A165) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A16 4G (SM-A165) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a15-5g",
+      "slug": "galaxy-a15-5g",
+      "name": "Galaxy A15 5G (SM-A156) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A15 5G (SM-A156) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A15 5G (SM-A156) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a15-4g",
+      "slug": "galaxy-a15-4g",
+      "name": "Galaxy A15 4G (SM-A155) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A15 4G (SM-A155) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A15 4G (SM-A155) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a14-5g",
+      "slug": "galaxy-a14-5g",
+      "name": "Galaxy A14 5G (SM-A146) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A14 5G (SM-A146) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A14 5G (SM-A146) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a14-4g",
+      "slug": "galaxy-a14-4g",
+      "name": "Galaxy A14 4G (SM-A145) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A14 4G (SM-A145) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A14 4G (SM-A145) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a13",
+      "slug": "galaxy-a13",
+      "name": "Galaxy A13 (SM-A136, A137) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A13 (SM-A136, A137) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A13 (SM-A136, A137) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a12",
+      "slug": "galaxy-a12",
+      "name": "Galaxy A12 (SM-A125. A-127) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A12 (SM-A125. A-127) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A12 (SM-A125. A-127) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-11-6th-gen-m2-2024",
+      "slug": "air-11-6th-gen-m2-2024",
+      "name": "iPad Air 11\" (6 gen. M2, 2024)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 11\" (6 gen. M2, 2024) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 11\" (6 gen. M2, 2024) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a10s",
+      "slug": "galaxy-a10s",
+      "name": "Galaxy A10s (SM-A107) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A10s (SM-A107) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A10s (SM-A107) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a10",
+      "slug": "galaxy-a10",
+      "name": "Galaxy A10 (SM-A105) 2019",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A10 (SM-A105) 2019 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A10 (SM-A105) 2019 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a7",
+      "slug": "galaxy-a7",
+      "name": "Galaxy A7 (SM-A750) 2018",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A7 (SM-A750) 2018 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A7 (SM-A750) 2018 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a06",
+      "slug": "galaxy-a06",
+      "name": "Galaxy A06 (SM-A065) 2025",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A06 (SM-A065) 2025 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A06 (SM-A065) 2025 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a05s",
+      "slug": "galaxy-a05s",
+      "name": "Galaxy A05s (SM-A057) 2023",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A05s (SM-A057) 2023 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A05s (SM-A057) 2023 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a04s",
+      "slug": "galaxy-a04s",
+      "name": "Galaxy A04s (SM-A047) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A04s (SM-A047) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A04s (SM-A047) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a03",
+      "slug": "galaxy-a03",
+      "name": "Galaxy A03 (SM-A035) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A03 (SM-A035) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A03 (SM-A035) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a02",
+      "slug": "galaxy-a02",
+      "name": "Galaxy A02 (SM-A025) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A02 (SM-A025) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A02 (SM-A025) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-xcover-5",
+      "slug": "galaxy-xcover-5",
+      "name": "Galaxy XCover 5 (SM-G525) 2021",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy XCover 5 (SM-G525) 2021 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy XCover 5 (SM-G525) 2021 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-xcover-pro",
+      "slug": "galaxy-xcover-pro",
+      "name": "Galaxy XCover Pro (SM-G715) 2020",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy XCover Pro (SM-G715) 2020 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy XCover Pro (SM-G715) 2020 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "air-13-6th-gen-m2-2024",
+      "slug": "air-13-6th-gen-m2-2024",
+      "name": "iPad Air 13\" (6 gen. M2, 2024)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Air 13\" (6 gen. M2, 2024) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Air 13\" (6 gen. M2, 2024) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-xcover-6",
+      "slug": "galaxy-xcover-6",
+      "name": "Galaxy XCover 6 (SM-G736) 2022",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy XCover 6 (SM-G736) 2022 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy XCover 6 (SM-G736) 2022 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-xcover-7",
+      "slug": "galaxy-xcover-7",
+      "name": "Galaxy XCover 7 (SM-G556) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy XCover 7 (SM-G556) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy XCover 7 (SM-G556) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-xcover-7-pro",
+      "slug": "galaxy-xcover-7-pro",
+      "name": "Galaxy XCover 7 Pro (SM-G766) 2024",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy XCover 7 Pro (SM-G766) 2024 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy XCover 7 Pro (SM-G766) 2024 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a17-4g",
+      "slug": "galaxy-a17-4g",
+      "name": "Galaxy A17 4G (SM-A175) 2026",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A17 4G (SM-A175) 2026 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A17 4G (SM-A175) 2026 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "galaxy-a17-5g",
+      "slug": "galaxy-a17-5g",
+      "name": "Galaxy A17 5G (SM-A176B) 2026",
+      "brandKey": "samsung",
+      "categoryKey": "telefonu-remonts",
+      "lead": {
+        "lv": "Samsung Galaxy A17 5G (SM-A176B) 2026 remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, kameru un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт Samsung Galaxy A17 5G (SM-A176B) 2026 в Риге: проверяем экран, аккумулятор, зарядку, камеру и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-9-7-2016",
+      "slug": "pro-9-7-2016",
+      "name": "iPad Pro 9.7\" (2016)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 9.7\" (2016) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 9.7\" (2016) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-10-5-2017",
+      "slug": "pro-10-5-2017",
+      "name": "iPad Pro 10.5\" (2017)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 10.5\" (2017) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 10.5\" (2017) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-11-2018",
+      "slug": "pro-11-2018",
+      "name": "iPad Pro 11\" (1 gen. 2018) (A1934, A1980)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 11\" (1 gen. 2018) (A1934, A1980) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 11\" (1 gen. 2018) (A1934, A1980) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-11-2020",
+      "slug": "pro-11-2020",
+      "name": "iPad Pro 11\" (2 gen. 2020) (A2230)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 11\" (2 gen. 2020) (A2230) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 11\" (2 gen. 2020) (A2230) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-11-m1-2021",
+      "slug": "pro-11-m1-2021",
+      "name": "iPad Pro 11\" (3 gen. M1, 2021) (A2377, A2459)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 11\" (3 gen. M1, 2021) (A2377, A2459) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 11\" (3 gen. M1, 2021) (A2377, A2459) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-11-m2-2022",
+      "slug": "pro-11-m2-2022",
+      "name": "iPad Pro 11\" (4 gen. M2, 2022) (A2759)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 11\" (4 gen. M2, 2022) (A2759) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 11\" (4 gen. M2, 2022) (A2759) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-11-m4-2024",
+      "slug": "pro-11-m4-2024",
+      "name": "iPad Pro 11\" (7 gen. M4, 2024)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 11\" (7 gen. M4, 2024) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 11\" (7 gen. M4, 2024) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-2015",
+      "slug": "pro-12-9-2015",
+      "name": "iPad Pro 12.9\" (1 gen. 2015) (A1584)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (1 gen. 2015) (A1584) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (1 gen. 2015) (A1584) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-2017",
+      "slug": "pro-12-9-2017",
+      "name": "iPad Pro 12.9\" (2 gen. 2017)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (2 gen. 2017) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (2 gen. 2017) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-2018",
+      "slug": "pro-12-9-2018",
+      "name": "iPad Pro 12.9\" (3 gen. 2018)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (3 gen. 2018) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (3 gen. 2018) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-2020",
+      "slug": "pro-12-9-2020",
+      "name": "iPad Pro 12.9\" (4 gen. 2020) (A2232)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (4 gen. 2020) (A2232) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (4 gen. 2020) (A2232) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-m1-2021",
+      "slug": "pro-12-9-m1-2021",
+      "name": "iPad Pro 12.9\" (5 gen. M1, 2021)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (5 gen. M1, 2021) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (5 gen. M1, 2021) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-12-9-m2-2022",
+      "slug": "pro-12-9-m2-2022",
+      "name": "iPad Pro 12.9\" (6 gen. M2, 2022)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 12.9\" (6 gen. M2, 2022) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 12.9\" (6 gen. M2, 2022) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "pro-13-m4-2024",
+      "slug": "pro-13-m4-2024",
+      "name": "iPad Pro 13\" (M4, 2024)",
+      "brandKey": "ipad",
+      "categoryKey": "plansetdatoru-remonts",
+      "lead": {
+        "lv": "iPad Pro 13\" (M4, 2024) planšetdatora remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi un citus bojājumus, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт планшета iPad Pro 13\" (M4, 2024) в Риге: проверяем экран, аккумулятор, зарядку и другие неисправности, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-2015-a1502",
+      "slug": "macbook-pro-13-2015-a1502",
+      "name": "MacBook Pro 13\" (2015) (A1502)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" (2015) (A1502) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" (2015) (A1502) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-15-2015-a1398",
+      "slug": "macbook-pro-15-2015-a1398",
+      "name": "MacBook Pro 15\" (2015) (A1398)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 15\" (2015) (A1398) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 15\" (2015) (A1398) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-2016-a1708-a1706",
+      "slug": "macbook-pro-13-2016-a1708-a1706",
+      "name": "MacBook Pro 13\" (2016) (A1708, A1706)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" (2016) (A1708, A1706) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" (2016) (A1708, A1706) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-15-2016-a1707",
+      "slug": "macbook-pro-15-2016-a1707",
+      "name": "MacBook Pro 15\" (2016) (A1707)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 15\" (2016) (A1707) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 15\" (2016) (A1707) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-2018-a1989",
+      "slug": "macbook-pro-13-2018-a1989",
+      "name": "MacBook Pro 13\" (2018) (A1989)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" (2018) (A1989) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" (2018) (A1989) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-15-2018-a1990",
+      "slug": "macbook-pro-15-2018-a1990",
+      "name": "MacBook Pro 15\" (2018) (A1990)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 15\" (2018) (A1990) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 15\" (2018) (A1990) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-2019-a1989-a2159",
+      "slug": "macbook-pro-13-2019-a1989-a2159",
+      "name": "MacBook Pro 13\" (2019) (A1989, A2159)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" (2019) (A1989, A2159) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" (2019) (A1989, A2159) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-15-2019-a1990",
+      "slug": "macbook-pro-15-2019-a1990",
+      "name": "MacBook Pro 15\" (2019) (A1990)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 15\" (2019) (A1990) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 15\" (2019) (A1990) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-16-2019-a2141",
+      "slug": "macbook-pro-16-2019-a2141",
+      "name": "MacBook Pro 16\" (2019) (A2141)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 16\" (2019) (A2141) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 16\" (2019) (A2141) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-intel-2020-a2251-a2289",
+      "slug": "macbook-pro-13-intel-2020-a2251-a2289",
+      "name": "MacBook Pro 13\" Intel (2020) (A2251, A2289)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" Intel (2020) (A2251, A2289) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" Intel (2020) (A2251, A2289) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-11-2015-a1465",
+      "slug": "macbook-air-11-2015-a1465",
+      "name": "MacBook Air 11\" (2015) (A1465)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 11\" (2015) (A1465) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 11\" (2015) (A1465) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-m1-2020-a2338",
+      "slug": "macbook-pro-13-m1-2020-a2338",
+      "name": "MacBook Pro 13\" M1 (2020) (A2338)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" M1 (2020) (A2338) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" M1 (2020) (A2338) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-2015-a1466",
+      "slug": "macbook-air-13-2015-a1466",
+      "name": "MacBook Air 13\" (2015) (A1466)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" (2015) (A1466) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" (2015) (A1466) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-2017-a1466",
+      "slug": "macbook-air-13-2017-a1466",
+      "name": "MacBook Air 13\" (2017) (A1466)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" (2017) (A1466) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" (2017) (A1466) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-2018-a1932",
+      "slug": "macbook-air-13-2018-a1932",
+      "name": "MacBook Air 13\" (2018) (A1932)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" (2018) (A1932) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" (2018) (A1932) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-2019-a1932",
+      "slug": "macbook-air-13-2019-a1932",
+      "name": "MacBook Air 13\" (2019) (A1932)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" (2019) (A1932) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" (2019) (A1932) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-intel-2020-a2179",
+      "slug": "macbook-air-13-intel-2020-a2179",
+      "name": "MacBook Air 13\" Intel (2020) (A2179)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" Intel (2020) (A2179) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" Intel (2020) (A2179) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-m1-2020-a2337",
+      "slug": "macbook-air-13-m1-2020-a2337",
+      "name": "MacBook Air 13\" M1 (2020) (A2337)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" M1 (2020) (A2337) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" M1 (2020) (A2337) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-m2-2022-a2681",
+      "slug": "macbook-air-13-m2-2022-a2681",
+      "name": "MacBook Air 13\" M2 (2022) (A2681)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" M2 (2022) (A2681) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" M2 (2022) (A2681) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-15-m2-2023-a2941",
+      "slug": "macbook-air-15-m2-2023-a2941",
+      "name": "MacBook Air 15\" M2 (2023) (A2941)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 15\" M2 (2023) (A2941) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 15\" M2 (2023) (A2941) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-m3-2024-a3113",
+      "slug": "macbook-air-13-m3-2024-a3113",
+      "name": "MacBook Air 13\" M3 (2024) (A3113)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" M3 (2024) (A3113) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" M3 (2024) (A3113) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-15-m3-2024-a3114",
+      "slug": "macbook-air-15-m3-2024-a3114",
+      "name": "MacBook Air 15\" M3 (2024) (A3114)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 15\" M3 (2024) (A3114) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 15\" M3 (2024) (A3114) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-14-m1-pro-max-2021-a2442",
+      "slug": "macbook-pro-14-m1-pro-max-2021-a2442",
+      "name": "MacBook Pro 14\" M1 Pro/Max (2021) (A2442)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 14\" M1 Pro/Max (2021) (A2442) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 14\" M1 Pro/Max (2021) (A2442) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-13-m4-2025-a3240",
+      "slug": "macbook-air-13-m4-2025-a3240",
+      "name": "MacBook Air 13\" M4 (2025) (A3240)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 13\" M4 (2025) (A3240) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 13\" M4 (2025) (A3240) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-air-15-m4-2025-a3241",
+      "slug": "macbook-air-15-m4-2025-a3241",
+      "name": "MacBook Air 15\" M4 (2025) (A3241)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Air 15\" M4 (2025) (A3241) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Air 15\" M4 (2025) (A3241) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-16-m1-pro-max-2021-a2485",
+      "slug": "macbook-pro-16-m1-pro-max-2021-a2485",
+      "name": "MacBook Pro 16\" M1 Pro/Max (2021) (A2485)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 16\" M1 Pro/Max (2021) (A2485) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 16\" M1 Pro/Max (2021) (A2485) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-13-m2-2022-a2338",
+      "slug": "macbook-pro-13-m2-2022-a2338",
+      "name": "MacBook Pro 13\" M2 (2022) (A2338)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 13\" M2 (2022) (A2338) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 13\" M2 (2022) (A2338) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-14-m2-pro-max-2023-a2779",
+      "slug": "macbook-pro-14-m2-pro-max-2023-a2779",
+      "name": "MacBook Pro 14\" M2 Pro/Max (2023) (A2779)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 14\" M2 Pro/Max (2023) (A2779) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 14\" M2 Pro/Max (2023) (A2779) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-16-m2-pro-max-2023-a2780",
+      "slug": "macbook-pro-16-m2-pro-max-2023-a2780",
+      "name": "MacBook Pro 16\" M2 Pro/Max (2023) (A2780)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 16\" M2 Pro/Max (2023) (A2780) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 16\" M2 Pro/Max (2023) (A2780) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-14-m3-pro-max-2024-a2992",
+      "slug": "macbook-pro-14-m3-pro-max-2024-a2992",
+      "name": "MacBook Pro 14\" M3/Pro/Max (2024) (A2992)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 14\" M3/Pro/Max (2024) (A2992) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 14\" M3/Pro/Max (2024) (A2992) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-16-m3-pro-max-2024-a2991",
+      "slug": "macbook-pro-16-m3-pro-max-2024-a2991",
+      "name": "MacBook Pro 16\" M3 Pro/Max (2024) (A2991)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 16\" M3 Pro/Max (2024) (A2991) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 16\" M3 Pro/Max (2024) (A2991) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-14-m4-pro-max-2025-a3185",
+      "slug": "macbook-pro-14-m4-pro-max-2025-a3185",
+      "name": "MacBook Pro 14\" M4/Pro/Max (2025) (A3185)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 14\" M4/Pro/Max (2025) (A3185) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 14\" M4/Pro/Max (2025) (A3185) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    },
+    {
+      "id": "macbook-pro-16-m4-pro-max-2025-a3186",
+      "slug": "macbook-pro-16-m4-pro-max-2025-a3186",
+      "name": "MacBook Pro 16\" M4/Pro/Max (2025) (A3186)",
+      "brandKey": "macbook",
+      "categoryKey": "datoru-remonts",
+      "lead": {
+        "lv": "MacBook Pro 16\" M4/Pro/Max (2025) (A3186) remonts Rīgā: pārbaudām ekrānu, bateriju, uzlādi, tastatūru un sistēmas darbību, pēc diagnostikas saskaņojot piemērotāko risinājumu un cenu pirms darba.",
+        "ru": "Ремонт MacBook Pro 16\" M4/Pro/Max (2025) (A3186) в Риге: проверяем экран, аккумулятор, зарядку, клавиатуру и работу системы, после диагностики согласовывая подходящее решение и стоимость до начала работы."
+      }
+    }
+  ]
+}
