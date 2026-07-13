@@ -11,8 +11,8 @@ import s from './IphoneQualitySection.module.scss';
 
 const ICONS = [LuClipboardCheck, LuCpu, LuBadgeCheck, LuSearchCheck];
 
-export default function IphoneQualitySection({ locale = 'lv' }) {
-  const content = getIphoneQualityContent(locale);
+export default function IphoneQualitySection({ locale = 'lv', variant = 'iphone' }) {
+  const content = getIphoneQualityContent(locale, variant);
 
   return (
     <section className={s.section} aria-labelledby="iphone-quality-title">

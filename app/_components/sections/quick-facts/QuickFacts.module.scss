@@ -39,6 +39,10 @@
   gap: $space-sm;
 }
 
+.richBand {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .item {
   display: flex;
   align-items: center;
@@ -86,8 +90,36 @@
   line-height: 1.24;
 }
 
+.richItem {
+  align-items: flex-start;
+  min-height: 0;
+}
+
+.copy {
+  display: grid;
+  gap: $space-xs;
+  min-width: 0;
+
+  strong {
+    color: $color-text;
+    font-size: clamp($font-size-sm, 0.78rem + 0.18vw, 0.98rem);
+    font-weight: $font-weight-semibold;
+    line-height: 1.24;
+  }
+
+  span {
+    color: $color-text-2;
+    font-size: $font-size-sm;
+    line-height: $line-height-body;
+  }
+}
+
 @media (max-width: $bp-xl) {
   .band {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .richBand {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -119,6 +151,10 @@
 }
 
 @media (max-width: $bp-sm) {
+  .richBand {
+    grid-template-columns: 1fr;
+  }
+
   .text {
     font-size: 0.82rem;
   }

@@ -1,0 +1,134 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp($space-xl, 6vw, 82px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 100%, rgba(34, 211, 238, 0.1), transparent 35rem),
+    linear-gradient(180deg, #030303, #020607);
+}
+
+.container {
+  @include layout.catalog-container;
+}
+
+.header {
+  max-width: 900px;
+  margin-bottom: $space-xl;
+
+  h2 {
+    margin: $space-sm 0 0;
+    color: $color-text;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: 1.12;
+
+    em {
+      color: $color-accent;
+      font-style: normal;
+    }
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-lg;
+    line-height: 1.62;
+  }
+}
+
+.eyebrow {
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.factors {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-md;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.factor {
+  position: relative;
+  min-height: 250px;
+  padding: $space-lg;
+  overflow: hidden;
+  border: $border-thin solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(34, 211, 238, 0.1), transparent 42%),
+    rgba(7, 13, 14, 0.56);
+
+  h3 {
+    margin: $space-lg 0 $space-sm;
+    color: $color-text;
+    font-size: $font-size-xl;
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-2;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+  }
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: $border-thin solid rgba(34, 211, 238, 0.22);
+  border-radius: 10px;
+  color: $color-accent;
+  background: rgba(34, 211, 238, 0.1);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.index {
+  position: absolute;
+  top: $space-md;
+  right: $space-md;
+  color: rgba(34, 211, 238, 0.2);
+  font-size: $font-size-h5;
+  font-weight: $font-weight-semibold;
+}
+
+@media (max-width: $bp-lg) {
+  .factors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .factor {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .section {
+    padding-block: $space-xl;
+  }
+
+  .header p {
+    font-size: $font-size-p;
+  }
+
+  .factors {
+    grid-template-columns: 1fr;
+  }
+
+  .factor {
+    min-height: 0;
+  }
+}

@@ -1,4 +1,73 @@
-export function getIphoneQualityContent(locale = 'lv') {
+const SCREEN_CONTENT = {
+  lv: {
+    eyebrow: 'Detaļas, garantija un datu drošība',
+    titleStart: 'Skaidri nosacījumi pirms ',
+    titleAccent: 'ekrāna maiņas',
+    intro:
+      'iPhone ekrāna maiņai pieejamie detaļu varianti ir atkarīgi no konkrētā modeļa un detaļu pieejamības. Pirms remonta izskaidrojam, kādi varianti ir pieejami, kāda ir cena un kādi garantijas nosacījumi attiecas uz izvēlēto remontu.',
+    facts: [
+      'Detaļas variants pēc modeļa',
+      '90 dienu garantija',
+      'Cena pirms darba',
+      'Dati parasti netiek dzēsti',
+    ],
+    cards: [
+      {
+        title: 'Pieejamie ekrāna varianti',
+        text: 'Ekrāna varianti un to pieejamība atšķiras atkarībā no konkrētā iPhone modeļa. Pirms remonta izskaidrojam pieejamās izvēles un to atšķirības.',
+      },
+      {
+        title: '90 dienu garantija',
+        text: 'Veiktajam remontam tiek piemērota 90 dienu garantija saskaņā ar remonta nosacījumiem.',
+      },
+      {
+        title: 'Cena pirms darba',
+        text: 'Pirms remonta sākšanas saskaņojam izmaksas un pieejamo detaļas variantu.',
+      },
+      {
+        title: 'Datu drošība',
+        text: 'Ekrāna maiņa parasti nav saistīta ar datu dzēšanu, tomēr pirms jebkura remonta iesakām izveidot rezerves kopiju, ja tas ir iespējams.',
+      },
+    ],
+  },
+  ru: {
+    eyebrow: 'Детали, гарантия и безопасность данных',
+    titleStart: 'Понятные условия перед ',
+    titleAccent: 'заменой экрана',
+    intro:
+      'Доступные варианты деталей для замены экрана iPhone зависят от конкретной модели и наличия. До ремонта объясняем, какие варианты доступны, сколько они стоят и какие условия гарантии относятся к выбранному ремонту.',
+    facts: [
+      'Вариант детали по модели',
+      'Гарантия 90 дней',
+      'Цена до начала работы',
+      'Данные обычно не удаляются',
+    ],
+    cards: [
+      {
+        title: 'Доступные варианты экрана',
+        text: 'Варианты экрана и их наличие зависят от конкретной модели iPhone. До ремонта объясняем доступный выбор и различия между вариантами.',
+      },
+      {
+        title: 'Гарантия 90 дней',
+        text: 'На выполненный ремонт действует гарантия 90 дней в соответствии с условиями ремонта.',
+      },
+      {
+        title: 'Цена до начала работы',
+        text: 'До начала ремонта согласовываем стоимость и доступный вариант детали.',
+      },
+      {
+        title: 'Безопасность данных',
+        text: 'Замена экрана обычно не связана с удалением данных, однако перед любым ремонтом рекомендуем создать резервную копию, если это возможно.',
+      },
+    ],
+  },
+};
+
+export function getIphoneQualityContent(locale = 'lv', variant = 'iphone') {
+  if (variant === 'iphone-screen') {
+    return SCREEN_CONTENT[locale] || SCREEN_CONTENT.lv;
+  }
+
   const content = {
     lv: {
       eyebrow: 'Kvalitāte un garantija',

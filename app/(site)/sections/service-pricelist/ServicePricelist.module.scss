@@ -140,8 +140,89 @@
   text-decoration: none;
   box-shadow: $shadow-accent;
 
-  &:hover { background: $color-accent-hover; box-shadow: $shadow-accent-lg; }
-  &:active { background: $color-accent-active; box-shadow: $shadow-accent-press; }
+  &:hover {
+    background: $color-accent-hover;
+    color: #001012;
+    box-shadow: $shadow-accent-lg;
+  }
+  &:active {
+    background: $color-accent-active;
+    color: #001012;
+    box-shadow: $shadow-accent-press;
+  }
+  &:focus-visible {
+    color: #001012;
+    outline: 2px solid $color-text;
+    outline-offset: 3px;
+  }
+}
+
+/* Screen-replacement service page: same interaction model, refined presentation. */
+.iphoneScreen {
+  position: relative;
+  padding-block: clamp($space-xl, 6vw, 82px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 4%, rgba(34, 211, 238, 0.14), transparent 30rem),
+    radial-gradient(circle at 92% 88%, rgba(34, 211, 238, 0.08), transparent 25rem),
+    linear-gradient(180deg, #020708, #030303);
+
+  .header {
+    max-width: 880px;
+  }
+
+  .sectionTitle {
+    margin-bottom: $space-sm;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: 1.12;
+
+    &::after {
+      display: block;
+      width: 72px;
+      height: 3px;
+      margin-top: $space-sm;
+      border-radius: $radius-pill;
+      content: '';
+      background: $color-accent;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.34);
+    }
+  }
+
+  .previewCard,
+  .accItem {
+    border-color: rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(145deg, rgba(34, 211, 238, 0.06), transparent 38%),
+      rgba(8, 14, 15, 0.82);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.055),
+      0 20px 54px rgba(0, 0, 0, 0.2);
+  }
+
+  .previewHeader {
+    border-color: rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .imageWrap {
+    background:
+      radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.1), transparent 48%),
+      rgba(2, 8, 9, 0.7);
+  }
+
+  .priceRow {
+    border-color: rgba(34, 211, 238, 0.2);
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.11), rgba(255, 255, 255, 0.025));
+  }
+
+  .priceValue {
+    color: $color-accent;
+    font-size: $font-size-xl;
+  }
+
+  .modelLinkActive {
+    font-weight: $font-weight-semibold;
+  }
 }
 
 /* =================== RIGHT (FAQ-LIKE ACCORDION) =================== */

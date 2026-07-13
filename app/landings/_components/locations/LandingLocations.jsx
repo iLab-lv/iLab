@@ -330,9 +330,13 @@ function LocationCard({ location, locale }) {
 export default function LandingLocations({
   id = 'locations',
   locale = 'lv',
+  heading,
 }) {
   const { locations } = useLandingCta();
   const t = getStrings(locale);
+  const titleMain = heading?.titleMain || t.titleMain;
+  const titleAccent = heading?.titleAccent || t.titleAccent;
+  const subtitle = heading?.subtitle || t.subtitle;
 
   if (!locations.length) return null;
 
@@ -341,10 +345,10 @@ export default function LandingLocations({
       <div className={s.container}>
         <div className={s.header}>
           <h2>
-            {t.titleMain}
-            <span>{t.titleAccent}</span>
+            {titleMain}
+            <span>{titleAccent}</span>
           </h2>
-          <p>{t.subtitle}</p>
+          <p>{subtitle}</p>
         </div>
 
         <div className={s.grid}>

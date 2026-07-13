@@ -1,0 +1,207 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp($space-xl, 6vw, 88px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(34, 211, 238, 0.2), transparent 30rem),
+    radial-gradient(circle at 90% 85%, rgba(34, 211, 238, 0.11), transparent 26rem),
+    linear-gradient(180deg, #020708, #020303);
+}
+
+.container {
+  @include layout.catalog-container;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.55fr);
+  gap: clamp($space-xl, 5vw, $space-3xl);
+  align-items: stretch;
+}
+
+.header {
+  max-width: 850px;
+
+  h2 {
+    margin: $space-sm 0 0;
+    color: $color-text;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: 1.12;
+
+    em {
+      color: $color-accent;
+      font-style: normal;
+    }
+  }
+
+  p {
+    margin: $space-md 0 0;
+    color: $color-text-2;
+    font-size: $font-size-lg;
+    line-height: 1.64;
+  }
+}
+
+.eyebrow {
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.benefits {
+  display: grid;
+  gap: $space-sm;
+  margin-top: $space-xl;
+}
+
+.benefit {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: $space-md;
+  align-items: start;
+  padding: $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+
+  > span {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    color: $color-accent;
+    background: rgba(34, 211, 238, 0.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  h3 {
+    margin: 0 0 $space-xs;
+    color: $color-text;
+    font-size: $font-size-lg;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-2;
+    font-size: $font-size-sm;
+    line-height: 1.55;
+  }
+}
+
+.offer {
+  padding: clamp($space-lg, 3vw, $space-xl);
+  border: $border-thin solid rgba(34, 211, 238, 0.22);
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, rgba(34, 211, 238, 0.16), transparent 45%),
+    rgba(7, 14, 15, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 28px 70px rgba(0, 0, 0, 0.24);
+
+  > h3 {
+    margin: $space-md 0 $space-lg;
+    color: $color-text;
+    font-size: $font-size-xl;
+    line-height: 1.25;
+  }
+}
+
+.offerIcon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  color: #001012;
+  background: $color-accent;
+  box-shadow: $shadow-accent;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.prices {
+  display: grid;
+  gap: $space-sm;
+  margin: 0;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-md;
+    align-items: baseline;
+    padding: $space-md;
+    border: $border-thin solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  dt {
+    color: $color-text-2;
+    font-size: $font-size-sm;
+  }
+
+  dd {
+    margin: 0;
+    color: $color-accent;
+    font-size: $font-size-h5;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.glassNote {
+  margin-top: $space-lg;
+  padding-top: $space-md;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.09);
+
+  strong {
+    color: $color-text;
+    font-size: $font-size-sm;
+  }
+
+  p {
+    margin: $space-xs 0 0;
+    color: $color-text-2;
+    font-size: $font-size-sm;
+    line-height: 1.55;
+  }
+}
+
+.note {
+  margin: $space-xl 0 0;
+  color: $color-text-3;
+  font-size: $font-size-sm;
+  line-height: 1.55;
+}
+
+@media (max-width: $bp-lg) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .section {
+    padding-block: $space-xl;
+  }
+
+  .header p {
+    font-size: $font-size-p;
+  }
+
+  .benefit {
+    grid-template-columns: 1fr;
+  }
+}

@@ -87,6 +87,7 @@ export default function ServicePricelist({
   cta = { label: 'Pieteikties', href: '#pieteikties' },
   seriesExtractor,
   className,
+  variant = 'default',
   locale = 'lv',
   selectedModel = null,
 }) {
@@ -257,7 +258,10 @@ export default function ServicePricelist({
 
   if (!groups.length) {
     return (
-      <section className={`${s.section} ${className || ''}`} aria-labelledby="sp-title">
+      <section
+        className={`${s.section} ${variant === 'iphone-screen' ? s.iphoneScreen : ''} ${className || ''}`}
+        aria-labelledby="sp-title"
+      >
         <div className={s.container}>
           <header className={s.header}>
             <h2 id="sp-title" className={s.sectionTitle}>
@@ -272,7 +276,10 @@ export default function ServicePricelist({
   }
 
   return (
-    <section className={`${s.section} ${className || ''}`} aria-labelledby="sp-title">
+    <section
+      className={`${s.section} ${variant === 'iphone-screen' ? s.iphoneScreen : ''} ${className || ''}`}
+      aria-labelledby="sp-title"
+    >
       <div className={s.container}>
         <header className={s.header}>
           <h2 id="sp-title" className={s.sectionTitle}>

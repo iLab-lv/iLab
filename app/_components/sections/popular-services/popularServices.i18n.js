@@ -195,6 +195,45 @@ const SECTION_COPY = {
   },
 };
 
+const MODEL_SECTION_COPY = {
+  lv: {
+    titleSuffix: 'remonta pakalpojumi',
+    intro:
+      'Izvēlies remonta veidu, lai uzzinātu vairāk par pakalpojumu, vai apskati cenu šim iPhone modelim zemāk esošajā cenrādī. Ja bojājums nav skaidrs, vispirms veicam diagnostiku.',
+    serviceLink: 'Uzzināt par pakalpojumu',
+    priceLink: 'Skatīt cenu',
+    titles: [
+      'Ekrāna maiņa',
+      'Baterijas maiņa',
+      'Uzlādes ligzdas remonts',
+      'Kameras remonts',
+      'Skaļruņa un mikrofona remonts',
+      'Mitruma bojājumu diagnostika',
+      'Aizmugures vāciņa maiņa',
+      'Mātesplates remonts',
+    ],
+  },
+  ru: {
+    titleSuffix: '— услуги по ремонту',
+    intro:
+      'Выберите вид ремонта, чтобы узнать больше об услуге, или посмотрите цену для этой модели iPhone в прайс-листе ниже. Если причина неисправности неясна, сначала проводим диагностику.',
+    serviceLink: 'Узнать об услуге',
+    priceLink: 'Посмотреть цену',
+    titles: [
+      'Замена экрана',
+      'Замена батареи',
+      'Ремонт разъёма зарядки',
+      'Ремонт камеры',
+      'Ремонт динамика и микрофона',
+      'Диагностика после попадания влаги',
+      'Замена задней крышки',
+      'Ремонт материнской платы',
+    ],
+  },
+};
+
+const MODEL_SERVICE_ORDER = [0, 1, 2, 3, 4, 5, 7, 6];
+
 export function getIphonePopularServices(locale = 'lv') {
   const resolvedLocale = SECTION_COPY[locale] ? locale : 'lv';
 
@@ -202,8 +241,37 @@ export function getIphonePopularServices(locale = 'lv') {
     copy: SECTION_COPY[resolvedLocale],
     services: IPHONE_SERVICE_DEFINITIONS.map(({ serviceKey, Icon, copy }) => ({
       ...copy[resolvedLocale],
+      serviceKey,
       Icon,
       href: buildServiceHref(resolvedLocale, 'iphone-remonts', serviceKey),
     })),
+  };
+}
+
+export function getIphoneModelServices(modelName, locale = 'lv') {
+  const resolvedLocale = MODEL_SECTION_COPY[locale] ? locale : 'lv';
+  const copy = MODEL_SECTION_COPY[resolvedLocale];
+
+  return {
+    copy: {
+      title: `${modelName} ${copy.titleSuffix}`,
+      intro: copy.intro,
+      serviceLink: copy.serviceLink,
+      priceLink: copy.priceLink,
+    },
+    services: MODEL_SERVICE_ORDER.map((definitionIndex, index) => {
+      const { serviceKey, Icon, copy: serviceCopy } =
+        IPHONE_SERVICE_DEFINITIONS[definitionIndex];
+
+      return {
+        title: copy.titles[index],
+        description: serviceCopy[resolvedLocale].description.replace(
+          /iPhone/g,
+          modelName
+        ),
+        Icon,
+        href: buildServiceHref(resolvedLocale, 'iphone-remonts', serviceKey),
+      };
+    }),
   };
 }

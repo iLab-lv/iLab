@@ -4,6 +4,7 @@ import JsonLd from '@components/seo/JsonLd';
 
 import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
@@ -287,17 +288,17 @@ function buildFaqSections(faqGroups = []) {
 }
 
 async function getIphoneScreenServiceData({ selectedModel }) {
-  const [devices, pricing, serviceMeta, faq] = await Promise.all([
+  const [devices, pricing, serviceMeta, faq, reviewsSummary] = await Promise.all([
     getDevicesForIphone(),
     buildPricing(),
     getServiceMetaMap(SERVICE_IDS),
     getFaqGroups(
       [
         { scopeType: 'service', scopeKey: SERVICE_KEY },
-        { scopeType: 'basic' },
       ],
       locale
     ),
+    getReviewsSummary(),
   ]);
 
   const faqSections = buildFaqSections(faq.groups);
@@ -352,6 +353,7 @@ async function getIphoneScreenServiceData({ selectedModel }) {
 
     faqSections,
     hasVisibleFaq,
+    reviewsSummary,
 
     jsonLd,
   };

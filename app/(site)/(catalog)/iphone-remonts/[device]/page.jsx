@@ -13,6 +13,8 @@ import {
 } from '@/lib/content/catalogDevices';
 
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
@@ -21,10 +23,6 @@ import { localizedCategoryPath } from '@/lib/routes/localizedPath';
 import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
-import {
-  buildIphonePopularServices,
-  getIphonePopularServicesTitle,
-} from '@sections/services/services.i18n';
 
 export const revalidate = 0;
 
@@ -160,20 +158,19 @@ async function getIphoneDevicePageData(slug) {
   const deviceName = getDeviceName(device);
   const modelPath = getModelPath(device.slug || deviceSlug);
 
-  const [{ items: priceItems, currency }, faq] = await Promise.all([
+  const [{ items: priceItems, currency }, faq, reviewsSummary, relatedDevices] = await Promise.all([
     buildPriceListItems(device.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: HUB_KEY }], locale),
+    getReviewsSummary(),
+    getDevicesByCategoryAndBrand(CATEGORY_KEY, BRAND_KEY),
   ]);
 
   const headerTitle = getHeaderTitle(device, deviceName);
   const headerLead = getHeaderLead(device);
   const breadcrumbs = getBreadcrumbs(headerTitle, modelPath);
-
-  const modelServices = buildIphonePopularServices(locale);
-  const modelServicesTitle = getIphonePopularServicesTitle(deviceName, locale);
 
   const faqRenderItems = toFaqRenderItems(faq.items);
   const hasVisibleFaq = faq.items.length > 0;
@@ -236,11 +233,12 @@ async function getIphoneDevicePageData(slug) {
     heroImage: device.image,
     heroAlt: `${deviceName} ${labels.heroAltSuffix}`,
     bodyHtml: pickLocalizedField(device.bodyHtml, locale) || null,
-    modelServices,
-    modelServicesTitle,
     priceItems,
     currency,
     pricesTitle: labels.pricesTitle,
+    reviewsSummary,
+    relatedDevices,
+    relatedBaseHref: lvHubPath,
     faqTitle: faq.title,
     faqItems: faqRenderItems,
     jsonLd,

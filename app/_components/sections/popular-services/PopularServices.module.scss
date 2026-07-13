@@ -196,8 +196,19 @@
   padding-top: $space-md;
 }
 
+.modelCard {
+  min-height: 0;
+}
+
+.modelActions {
+  justify-content: flex-start;
+  margin-top: $space-lg;
+  padding-top: 0;
+}
+
 .priceLink,
-.serviceLink {
+.serviceLink,
+.priceAction {
   color: $color-accent;
   font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
@@ -243,6 +254,23 @@
     background:
       linear-gradient(180deg, rgba(34, 211, 238, 0.24), rgba(34, 211, 238, 0.14)),
       rgba(34, 211, 238, 0.12);
+  }
+}
+
+.priceAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 $space-md;
+  border: $border-thin solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  color: $color-text;
+  background: rgba(255, 255, 255, 0.045);
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.28);
+    text-decoration: none;
+    background: rgba(34, 211, 238, 0.08);
   }
 }
 
