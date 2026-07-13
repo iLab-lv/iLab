@@ -6,6 +6,7 @@ import { getDevices } from '@/lib/content/devices';
 import { getSeriesMetaByCategoryBrand } from '@/lib/content/categories';
 import { resolveDedicatedBrandHubPage } from '@/lib/content/resolvers/catalogPages';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
@@ -138,11 +139,12 @@ function getBreadcrumbs(page, headerTitle, baseHref) {
 }
 
 async function getIphoneRepairData() {
-  const [page, devicesAll, seriesMeta, faq] = await Promise.all([
+  const [page, devicesAll, seriesMeta, faq, reviewsSummary] = await Promise.all([
     resolveDedicatedBrandHubPage(CATEGORY_KEY, BRAND_KEY, locale),
     getDevices(),
     getSeriesMetaByCategoryBrand(CATEGORY_KEY, BRAND_KEY, locale),
     getFaqGroups([{ scopeType: 'category', scopeKey: HUB_KEY }], locale),
+    getReviewsSummary(),
   ]);
 
   return {
@@ -150,6 +152,7 @@ async function getIphoneRepairData() {
     devicesAll,
     seriesMeta,
     faq,
+    reviewsSummary,
   };
 }
 
@@ -183,7 +186,8 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const { page, devicesAll, seriesMeta, faq } = await getIphoneRepairData();
+  const { page, devicesAll, seriesMeta, faq, reviewsSummary } =
+    await getIphoneRepairData();
 
   if (!page) {
     return null;
@@ -250,6 +254,7 @@ export default async function Page() {
         breadcrumbs={breadcrumbs}
         faqTitle={faq.title}
         faqItems={faqRenderItems}
+        reviewsSummary={reviewsSummary}
       />
     </>
   );

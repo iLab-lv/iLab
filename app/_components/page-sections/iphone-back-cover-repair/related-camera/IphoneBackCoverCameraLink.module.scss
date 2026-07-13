@@ -1,0 +1,66 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp($space-lg, 4vw, $space-xl);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background: #020607;
+}
+
+.container { @include layout.catalog-container; }
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+  gap: $space-xl;
+  align-items: center;
+  padding: clamp($space-lg, 4vw, $space-xl);
+  border: $border-thin solid rgba(34, 211, 238, 0.22);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(34, 211, 238, 0.13), transparent 24rem),
+    rgba(7, 13, 14, 0.7);
+}
+
+.eyebrow {
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.copy {
+  h2 {
+    margin: $space-sm 0 0;
+    color: $color-text;
+    font-size: clamp(1.75rem, 3vw, 2.7rem);
+    line-height: 1.15;
+  }
+
+  em { color: $color-accent; font-style: normal; }
+  p { margin: $space-md 0 0; color: $color-text-2; line-height: 1.65; }
+}
+
+.actions { display: grid; gap: $space-md; }
+.labels { display: grid; gap: $space-sm; }
+.labels span { display: flex; align-items: center; gap: $space-sm; color: $color-text-2; }
+.labels svg { flex: 0 0 auto; color: $color-accent; }
+
+.actions > a {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-sm;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  color: #001013;
+  font-weight: $font-weight-semibold;
+  background: $color-accent;
+
+  &:hover { color: #001013; background: #67e8f9; }
+}
+
+@media (max-width: $bp-md) {
+  .panel { grid-template-columns: 1fr; gap: $space-lg; }
+}

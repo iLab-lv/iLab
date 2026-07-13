@@ -1,0 +1,22 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section { padding-block: clamp($space-xl, 5vw, 72px); border-bottom: $border-thin solid $color-border; background: linear-gradient(180deg, rgba(2, 8, 9, .98), rgba(3, 3, 3, 1)); }
+.container { @include layout.catalog-container; }
+.title { margin: 0 0 $space-xl; color: $color-text; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: $line-height-heading; font-weight: $font-weight-bold; }
+.title span { color: $color-accent; text-shadow: 0 0 34px rgba(34, 211, 238, .34), 0 0 72px rgba(34, 211, 238, .12); }
+.table { display: none; border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; @media (min-width: $bp-lg) { display: grid; } }
+.tr { display: grid; grid-template-columns: 1.4fr .8fr .8fr auto; align-items: center; gap: $space-md; padding: $space-md; border-top: $border-thin solid $color-border; }
+.tr:first-child { border-top: 0; }
+.head { background: $glass-bg-weak-active; }
+.th { color: $color-text-3; font-size: .85rem; }
+.td { color: $color-text; }
+.serviceTitle { color: $color-text; font-weight: $font-weight-medium; }
+.chip { display: inline-flex; align-items: center; height: 28px; padding: 0 $space-sm; border: $border-thin solid $color-border; border-radius: $radius-pill; color: $color-text-2; background: $glass-bg-weak; font-size: .85rem; }
+.price { color: $color-text; font-weight: $font-weight-semibold; }
+.bookBtn { display: inline-flex; align-items: center; justify-content: center; height: $btn-h-md; padding: 0 $space-lg; border: $border-thin solid $color-accent; border-radius: $radius-pill; color: $color-accent; background: $glass-bg-weak; transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std; &:hover { background: $accent-tint-weak; } &:active { background: $accent-tint-strong; box-shadow: $shadow-accent-press; } }
+.cards { display: grid; gap: $space-md; @media (min-width: $bp-lg) { display: none; } }
+.card { padding: $space-md; border: $border-thin solid $color-border; border-radius: $radius-lg; background: $glass-bg-weak; }
+.metaRow { display: flex; gap: $space-sm; margin-top: $space-sm; }
+.ctaRow { margin-top: $space-sm; }
+.notes { margin: $space-md 0 0; padding-left: 1.1em; color: $color-text-3; font-size: .92rem; li { margin-bottom: 4px; } }

@@ -1,37 +1,29 @@
 import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
 
 import DeviceHero from '@sections/device-hero/DeviceHero';
-import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
-import ConvertBand from '@sections/convert-band/ConvertBand';
-import ServicePricelist from '@components/service-pricelist/ServicePricelist';
+import QuickAnswer from '@/_components/sections/quick-answer/QuickAnswer';
+import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
+import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
+import PopularServices from '@/_components/sections/popular-services/PopularServices';
+import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
+import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
+import FinalCta from '@/_components/sections/final-cta/FinalCta';
+import {
+  WaterDiagnosticPrice,
+  WaterEffects,
+  WaterEmergency,
+  WaterModelLinks,
+  WaterProtection,
+  WaterTechnical,
+} from '@/_components/page-sections/iphone-water-damage/WaterDamageSections';
 
 import s from '@styles/Catalog.module.scss';
 
-const SERVICE_IDS = ['water-damage-clean'];
-
-const CATEGORY_KEY = 'telefonu-remonts';
-const BRAND_KEY = 'apple';
-
 export default function IphoneWaterDamageServicePage({
-  locale = 'lv',
-
-  strings = {},
-
-  devices = [],
-  pricing = {},
-  serviceMeta = {},
-  selectedModel = null,
-
-  allModelsHref,
-  breadcrumbs = [],
-
-  faqSections = [],
-  hasVisibleFaq = false,
+  locale = 'lv', strings = {}, breadcrumbs = [], faqSections = [],
+  hasVisibleFaq = false, reviewsSummary = null,
 }) {
-  const introList = Array.isArray(strings.introList) ? strings.introList : [];
-
   return (
     <>
       <PageHeader
@@ -40,122 +32,35 @@ export default function IphoneWaterDamageServicePage({
         scrollCta={{ label: strings.headerCtaLabel, targetId: 'cenas' }}
         crumbs={breadcrumbs}
       />
+      <DeviceHero image={strings.heroImage} alt={strings.heroAlt} focal="right" className="service" bodyHtml={strings.heroBodyHtml} />
 
-      <DeviceHero
-        image={strings.heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        className="service"
-        bodyHtml={strings.heroBodyHtml}
-      />
-
-      <section id="parskats" className={s.section} aria-labelledby="intro-h2">
-        <div className={s.container}>
-          <h2 id="intro-h2" className={s.h2}>
-            {strings.introTitle}
-          </h2>
-
-          <p
-            className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.introP1 }}
-          />
-
-          <p className={s.paragraph}>{strings.introP2}</p>
-
-          {introList.length > 0 && (
-            <ul className={s.list}>
-              {introList.map((item, index) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-              ))}
-            </ul>
-          )}
-
-          {strings.introP3 && (
-            <p
-              className={s.paragraph}
-              dangerouslySetInnerHTML={{ __html: strings.introP3 }}
-            />
-          )}
-
-          {selectedModel && (
-            <p className={s.note}>
-              {strings.selectedModelPrefix}{' '}
-              <strong>{decodeURIComponent(selectedModel)}</strong>.{' '}
-              {strings.selectedModelSuffix}{' '}
-              <a href="#cenas">{strings.selectedModelLink}</a>.
-            </p>
-          )}
-        </div>
-      </section>
-
-      <section id="cenas" className={s.section} aria-labelledby="prices-h2">
-        <ServicePricelist
-          devices={devices}
-          pricing={pricing}
-          serviceMeta={serviceMeta}
-          brandSlug={BRAND_KEY}
-          categorySlug={CATEGORY_KEY}
-          serviceIds={SERVICE_IDS}
-          title={strings.priceTitle}
-          intro={strings.priceIntro}
-          initialLimit={8}
-          allModelsHref={allModelsHref}
-          cta={{ label: strings.ctaLabel, href: '#pieteikties' }}
-          selectedModel={selectedModel}
-          locale={locale}
-        />
-      </section>
-
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
-            id="process"
-            title={strings.processTitle}
-            steps={strings.processSteps}
-            headingLevel={2}
-            variant="cards"
-            locale={locale}
-          />
-        </div>
-      </section>
-
-      <section className={s.section}>
-        <Why locale={locale} />
-      </section>
+      <QuickAnswer locale={locale} variant="iphone-water-damage" />
+      <QuickFacts locale={locale} variant="iphone-water-damage" />
+      <WaterProtection locale={locale} />
+      <WaterEmergency locale={locale} />
+      <WaterEffects locale={locale} />
+      <WaterDiagnosticPrice locale={locale} />
+      <RepairProcess id="iphone-water-damage-steps" locale={locale} variant="iphone-water-damage" backgroundImage="/images/hands-closeup.png" />
+      <WaterTechnical locale={locale} />
+      <WaterModelLinks locale={locale} />
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
+      <IphoneLocationsSection locale={locale} variant="iphone-water-damage" />
+      <PopularServices locale={locale} variant="other-services" excludeServiceKey="udens-bojajumu-remonts" />
 
       {hasVisibleFaq && (
         <section className={s.section} aria-labelledby="faq-h2">
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>
-              {strings.faqTitle}
-            </h2>
-
+            <h2 id="faq-h2" className={s.h2}>{strings.faqTitle}</h2>
             {faqSections.map((section, index) => (
-              <div
-                key={`faq-group-${index}-${section.id}`}
-                className={index > 0 ? s.stackLg : ''}
-              >
-                <Faq
-                  id={`faq-group-${index + 1}`}
-                  title={section.title}
-                  items={section.items}
-                  headingLevel={3}
-                  variant="accordion"
-                  locale={locale}
-                />
+              <div key={`faq-group-${index}-${section.id}`} className={index > 0 ? s.stackLg : ''}>
+                <Faq id={`faq-group-${index + 1}`} title={section.title} items={section.items} headingLevel={3} variant="accordion" locale={locale} />
               </div>
             ))}
           </div>
         </section>
       )}
 
-      <section
-        id="pieteikties"
-        className={s.section}
-        aria-label={strings.applyAria}
-      >
-        <ConvertBand locale={locale} />
-      </section>
+      <FinalCta id="pieteikties" locale={locale} variant="iphone" />
     </>
   );
 }

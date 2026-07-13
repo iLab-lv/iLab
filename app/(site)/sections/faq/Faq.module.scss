@@ -1,18 +1,7 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* ===== Local fallbacks for missing tokens (safe defaults) ===== */
-$container-max: 1200px !default;
-$border-thin: 1px !default;
-$radius-lg: 12px !default;
-$glass-bg-weak: rgba(255, 255, 255, 0.03) !default;
-$glass-border: rgba(255, 255, 255, 0.08) !default;
-$dur-base: 0.2s !default;
-$ease-std: ease !default;
-
-/* ===== Section ===== */
 .section {
-  padding-block: $space-lg;
-  border-bottom: $border-thin solid $color-border;
+  padding-block: $space-xl;
 }
 
 .container {
@@ -21,125 +10,91 @@ $ease-std: ease !default;
   padding-inline: $space-md;
 }
 
-/* Heading */
 .sectionTitle {
-  margin: 0 0 $space-lg 0;
-  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
-  line-height: $line-height-heading;
-  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-xl;
   color: $color-text;
+  font-size: clamp(2rem, 4vw, $font-size-h4);
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-heading;
 }
 
-/* ===== FAQ (accordion) ===== */
-.faqList {
-  display: grid;
-  gap: $space-sm;
-}
+.faqList { display: grid; gap: $space-sm; }
 
 .faqItem {
-  border: $border-thin solid $color-border;
-  border-radius: $radius-lg;
-  background: $color-surface-2;
   overflow: hidden;
-
-  /* Offset for fixed header when deep-linking to an item */
+  border: $border-thin solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
   scroll-margin-top: calc($header-desktop-height + $space-lg);
+  transition: border-color 160ms ease, background 160ms ease;
 
-  @media (max-width: $bp-md) {
-    scroll-margin-top: calc($header-mobile-height + $space-md);
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.18);
+    background: rgba(255, 255, 255, 0.04);
   }
+
+  @media (max-width: $bp-md) { scroll-margin-top: calc($header-mobile-height + $space-md); }
 }
 
-/* Summary row */
 .summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-sm;
-
+  gap: $space-md;
+  min-height: 72px;
+  padding: $space-lg;
   cursor: pointer;
-  padding: $space-md;
   list-style: none;
-
-  font-weight: $font-weight-medium;
   color: $color-text;
-  border-radius: inherit;
+  font-size: clamp(1rem, 0.96rem + 0.1vw, $font-size-p);
+  font-weight: $font-weight-semibold;
+  line-height: 1.45;
 
-  /* Remove default marker */
   &::-webkit-details-marker { display: none; }
+  &:focus-visible { outline: 2px solid $color-accent; outline-offset: -2px; }
 
-  /* Neutral hover */
-  &:hover { background: $glass-bg-weak; }
-
-  /* Keyboard focus ring */
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 $border-thin $glass-border;
-  }
+  @media (max-width: $bp-sm) { min-height: 64px; padding: $space-md; }
 }
 
-/* Plus/Minus indicator */
 .chev {
   position: relative;
-  inline-size: 14px;
-  block-size: 14px;
+  inline-size: 18px;
+  block-size: 18px;
   flex: 0 0 auto;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: $color-accent;
+    border-radius: 2px;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  &::before { inline-size: 14px; block-size: 2px; transform: translate(-50%, -50%); }
+  &::after { inline-size: 2px; block-size: 14px; transform: translate(-50%, -50%); }
 }
 
-.chev::before,
-.chev::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  background: currentColor;
-  transition: transform $dur-base $ease-std, opacity $dur-base $ease-std;
-  will-change: transform, opacity;
-}
+.faqItem[open] .chev::after { opacity: 0; transform: translate(-50%, -50%) scaleY(0); }
 
-/* "+" default (horizontal + vertical) */
-.chev::before {
-  inline-size: 12px;
-  block-size: 2px;
-  transform: translate(-50%, -50%);
-}
-.chev::after {
-  inline-size: 2px;
-  block-size: 12px;
-  transform: translate(-50%, -50%);
-}
-
-/* When open → "-" (hide vertical stroke) */
-.faqItem[open] .chev::after {
-  transform: translate(-50%, -50%) scaleY(0);
-  opacity: 0;
-}
-
-/* Answer body */
 .answer {
-  padding: $space-md;
-  border-top: $border-thin solid $color-border;
+  padding: 0 $space-lg $space-lg;
   color: $color-text-2;
-  line-height: $line-height-body;
+  font-size: $font-size-p;
+  line-height: 1.65;
 
-  p {
-    margin: 0;
+  p { margin: 0; }
+  a { color: $color-accent; text-decoration: none; &:hover { text-decoration: underline; } }
 
-    a {
-      color: $color-accent;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color $dur-base $ease-std;
-
-      &:hover { border-color: currentColor; }
-    }
-  }
+  @media (max-width: $bp-sm) { padding: 0 $space-md $space-md; }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .faqItem,
   .chev::before,
-  .chev::after {
-    transition: none;
-  }
+  .chev::after { transition: none; }
 }

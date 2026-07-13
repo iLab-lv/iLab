@@ -1,0 +1,138 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  padding-block: clamp($space-xl, 6vw, 82px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 92% 30%, rgba(34, 211, 238, 0.1), transparent 30rem),
+    linear-gradient(180deg, #030303, #020607);
+}
+
+.container {
+  @include layout.catalog-container;
+}
+
+.header {
+  max-width: 900px;
+  margin-bottom: $space-xl;
+
+  h2 {
+    margin: $space-sm 0 0;
+    color: $color-text;
+    font-size: clamp(2rem, 4vw, $font-size-h4);
+    line-height: 1.12;
+
+    em {
+      color: $color-accent;
+      font-style: normal;
+    }
+  }
+
+  p {
+    margin: $space-sm 0 0;
+    color: $color-text-2;
+    font-size: $font-size-lg;
+    line-height: 1.62;
+  }
+}
+
+.eyebrow {
+  color: $color-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.list {
+  display: grid;
+  border-top: $border-thin solid rgba(255, 255, 255, 0.1);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 48px 52px minmax(0, 1fr);
+  gap: $space-lg;
+  align-items: start;
+  padding-block: $space-xl;
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.1);
+}
+
+.number {
+  padding-top: 3px;
+  color: rgba(34, 211, 238, 0.58);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.12em;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: $border-thin solid rgba(34, 211, 238, 0.22);
+  border-radius: 50%;
+  color: $color-accent;
+  background: rgba(34, 211, 238, 0.09);
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.copy {
+  max-width: 920px;
+
+  h3 {
+    margin: 0 0 $space-sm;
+    color: $color-text;
+    font-size: $font-size-xl;
+    line-height: 1.28;
+  }
+
+  > p {
+    margin: 0;
+    color: $color-text-2;
+    line-height: 1.64;
+  }
+}
+
+.advice {
+  margin-top: $space-md !important;
+  padding: $space-sm $space-md;
+  border-left: 3px solid $color-accent;
+  color: $color-text !important;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.1), transparent 70%);
+
+  strong {
+    color: $color-accent;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .section {
+    padding-block: $space-xl;
+  }
+
+  .header p {
+    font-size: $font-size-p;
+  }
+
+  .item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: $space-md;
+    padding-block: $space-lg;
+  }
+
+  .number {
+    display: none;
+  }
+
+  .icon {
+    width: 42px;
+    height: 42px;
+  }
+}

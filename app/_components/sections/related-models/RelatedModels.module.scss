@@ -1,0 +1,14 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section { padding-block:clamp($space-xl,5vw,72px); border-bottom:$border-thin solid rgba(255,255,255,.08); background:linear-gradient(180deg,rgba(3,3,3,1),rgba(3,11,12,.98)); }
+.container { @include layout.catalog-container; }
+.header { max-width:820px; margin-bottom:$space-xl; h2 { margin:0; color:$color-text; font-size:clamp(1.9rem,3.4vw,2.8rem); line-height:$line-height-heading; span { color:$color-accent; text-shadow:0 0 34px rgba(34,211,238,.3); } } p { margin:$space-sm 0 0; color:$color-text-2; line-height:1.6; } }
+.carousel { position:relative; padding-inline:52px; }
+.track { display:flex; gap:$space-md; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; &::-webkit-scrollbar { display:none; } }
+.card { flex:0 0 calc((100% - (#{$space-md} * 4)) / 5); min-width:0; padding:$space-md; border:$border-thin solid rgba(255,255,255,.09); border-radius:10px; color:$color-text; background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022)); text-align:center; text-decoration:none; scroll-snap-align:start; transition:border-color $dur-base $ease-std,transform $dur-base $ease-std; &:hover { border-color:rgba(34,211,238,.32); transform:translateY(-2px); } img { display:block; width:100%; aspect-ratio:1/1; object-fit:contain; margin-bottom:$space-sm; } span { display:block; font-weight:$font-weight-semibold; line-height:1.3; } small { display:block; margin-top:$space-xs; color:$color-accent; } }
+.control { position:absolute; top:50%; z-index:2; width:40px; height:40px; border:$border-thin solid rgba(255,255,255,.13); border-radius:50%; color:$color-text; background:rgba(10,10,10,.75); cursor:pointer; transform:translateY(-50%); &:hover { color:$color-accent; border-color:rgba(34,211,238,.4); } }
+.prev { left:0; }.next { right:0; }
+@media(max-width:$bp-lg){.card{flex-basis:calc((100% - (#{$space-md} * 2)) / 3)}}
+@media(max-width:$bp-md){.carousel{padding-inline:0}.control{display:none}.card{flex-basis:42%}}
+@media(max-width:$bp-sm){.card{flex-basis:72%}}

@@ -470,7 +470,6 @@ export default function ComputerBrandPage({
         alt={cfg.heroAlt}
         brandLogo={cfg.logo}
         brandKey={cfg.key || brandSlug}
-        tint={cfg.tint}
         focal="right"
         priority
         bodyHtml={strings.heroHtml}

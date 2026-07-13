@@ -4,6 +4,7 @@ import JsonLd from '@components/seo/JsonLd';
 
 import { db } from '@/lib/firebaseAdmin';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { getStaticPageSeo } from '@/lib/seo/getStaticPageSeo';
@@ -35,7 +36,7 @@ const strings = {
   heroBodyHtml:
     '<p><strong>iPhone pēc ūdens vai mitruma</strong> jānogādā servisā pēc iespējas ātrāk. iLab veic diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto mezglu pārbaudi. Mērķis - pēc iespējas saglabāt ierīci un datus.</p>',
 
-  headerTitle: 'iPhone ūdens bojājumu remonts Rīgā',
+  headerTitle: 'iPhone ūdens bojājumu diagnostika Rīgā',
   headerLead:
     'Ja iPhone iekritis ūdenī, saņēmis mitrumu vai pēc šķidruma vairs neieslēdzas, svarīgi neriskēt ar atkārtotu lādēšanu. Veicam diagnostiku, tīrīšanu, korozijas novēršanu un pārbaudām, vai iespējams saglabāt datus.',
   headerCtaLabel: 'Pieteikt diagnostiku',
@@ -82,9 +83,9 @@ const strings = {
 
   faqTitle: 'Biežāk uzdotie jautājumi',
 
-  breadcrumbServiceName: 'Ūdens bojājumu remonts',
-  serviceName: 'iPhone ūdens bojājumu remonts Rīgā',
-  serviceType: 'iPhone ūdens bojājumu remonts',
+  breadcrumbServiceName: 'iPhone ūdens bojājumu diagnostika',
+  serviceName: 'iPhone ūdens bojājumu diagnostika Rīgā',
+  serviceType: 'iPhone ūdens bojājumu diagnostika',
   serviceDescription:
     'iPhone ūdens bojājumu diagnostika Rīgā: tīrīšana, oksidācijas novēršana, bojāto mezglu pārbaude un datu saglabāšanas iespējas.',
 
@@ -298,17 +299,15 @@ function buildFaqSections(faqGroups = []) {
 }
 
 async function getIphoneWaterDamageServiceData({ selectedModel }) {
-  const [devices, pricing, serviceMeta, faq] = await Promise.all([
+  const [devices, pricing, serviceMeta, faq, reviewsSummary] = await Promise.all([
     getDevicesForIphone(),
     buildPricing(),
     getServiceMetaMap(SERVICE_IDS),
     getFaqGroups(
-      [
-        { scopeType: 'service', scopeKey: SERVICE_KEY },
-        { scopeType: 'basic' },
-      ],
+      [{ scopeType: 'service', scopeKey: SERVICE_KEY }],
       locale
     ),
+    getReviewsSummary(),
   ]);
 
   const faqSections = buildFaqSections(faq.groups);
@@ -338,7 +337,7 @@ async function getIphoneWaterDamageServiceData({ selectedModel }) {
     faqItems: mergedFaqItems,
     includeFaq: hasVisibleFaq,
 
-    includeHowTo: true,
+    includeHowTo: false,
     howTo: {
       name: strings.processName,
       description: strings.processDescription,
@@ -366,6 +365,7 @@ async function getIphoneWaterDamageServiceData({ selectedModel }) {
 
     faqSections,
     hasVisibleFaq,
+    reviewsSummary,
 
     jsonLd,
   };

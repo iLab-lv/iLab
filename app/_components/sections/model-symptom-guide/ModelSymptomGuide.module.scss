@@ -1,0 +1,26 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.section {
+  position: relative;
+  padding-block: clamp($space-xl, 5vw, 76px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, .08);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(34, 211, 238, .09), transparent 30rem),
+    linear-gradient(180deg, rgba(3, 3, 3, 1), rgba(2, 10, 11, .98));
+}
+
+.container { @include layout.catalog-container; }
+.header { max-width: 880px; margin-bottom: $space-xl; }
+.header h2 { margin: 0; color: $color-text; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: $line-height-heading; font-weight: $font-weight-bold; }
+.header p { margin: $space-sm 0 0; color: $color-text-2; font-size: clamp($font-size-p, .96rem + .18vw, $font-size-lg); line-height: 1.6; }
+.list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: $space-sm; }
+.item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: $space-md; padding: $space-lg; border: $border-thin solid rgba(255, 255, 255, .09); border-radius: 8px; background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .022)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045); }
+.dot { width: 10px; height: 10px; margin-top: 7px; border-radius: 999px; background: $color-accent; box-shadow: 0 0 18px rgba(34, 211, 238, .58); }
+.item h3 { margin: 0; color: $color-text; font-size: clamp(1rem, .94rem + .2vw, 1.16rem); line-height: 1.3; font-weight: $font-weight-semibold; }
+.item p { margin: $space-xs 0 0; color: $color-text-2; font-size: $font-size-sm; line-height: 1.55; }
+
+@media (max-width: $bp-md) {
+  .list { grid-template-columns: 1fr; }
+  .item { padding: $space-md; }
+}
