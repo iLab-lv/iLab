@@ -11,6 +11,10 @@ export function getIphoneDeviceGridStrings(locale = 'lv') {
       showMoreSeries: (count) => `Больше моделей этой серии (${count})`,
       yearFilterAria: 'Фильтр по году',
       allYears: 'Все годы',
+      searchLabel: 'Поиск модели iPhone',
+      searchPlaceholder: 'Найти модель iPhone',
+      clearSearch: 'Очистить поиск',
+      noResults: 'По вашему запросу модели iPhone не найдены.',
     };
   }
 
@@ -25,5 +29,9 @@ export function getIphoneDeviceGridStrings(locale = 'lv') {
     showMoreSeries: (count) => `Vairāk šīs sērijas modeļu (${count})`,
     yearFilterAria: 'Filtrs pēc gada',
     allYears: 'Visi gadi',
+    searchLabel: 'Meklēt iPhone modeli',
+    searchPlaceholder: 'Atrodi savu iPhone modeli',
+    clearSearch: 'Notīrīt meklēšanu',
+    noResults: 'Neviens iPhone modelis neatbilst meklējumam.',
   };
 }
