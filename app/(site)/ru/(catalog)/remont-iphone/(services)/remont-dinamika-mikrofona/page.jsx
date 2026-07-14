@@ -19,7 +19,7 @@ const strings = {
   description: seo.description,
 
   heroAlt: seo.imageAlt,
-  heroImage: '/images/categories/audio_remonts.webp',
+  heroImage: '/images/categories/mikrofona_remonts.webp',
 
   homeCrumb: 'Главная',
   hubCrumb: 'Ремонт iPhone',
