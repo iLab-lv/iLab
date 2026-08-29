@@ -10,7 +10,10 @@ import ComputerBrandPage, {
 
 import JsonLd from '@components/seo/JsonLd';
 
-import { getCategoryBySlug } from '@/lib/content/categories';
+import {
+  getCategoryBySlug,
+  getSeriesMetaByCategoryBrand,
+} from '@/lib/content/categories';
 import { getDevices } from '@/lib/content/devices';
 import { resolveBrandPage } from '@/lib/content/resolvers/catalogPages';
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
@@ -160,15 +163,17 @@ function buildModelItemList(brandDevices = [], path) {
 }
 
 async function getComputerBrandData(brandSlug) {
-  const [page, devices, faq] = await Promise.all([
+  const [page, devices, seriesMeta, faq] = await Promise.all([
     resolveBrandPage(CATEGORY_KEY, brandSlug, locale),
     getDevices(),
+    getSeriesMetaByCategoryBrand(CATEGORY_KEY, brandSlug, locale),
     getFaqGroups([{ scopeType: 'category', scopeKey: CATEGORY_KEY }], locale),
   ]);
 
   return {
     page,
     devices,
+    seriesMeta,
     faq,
   };
 }
@@ -221,7 +226,7 @@ export default async function Page({ params }) {
     notFound();
   }
 
-  const { page, devices, faq } = await getComputerBrandData(brandSlug);
+  const { page, devices, seriesMeta, faq } = await getComputerBrandData(brandSlug);
 
   if (!page) {
     notFound();
@@ -305,7 +310,7 @@ export default async function Page({ params }) {
         brandSlug={cfg.key}
         brandConfig={cfg}
         devicesAll={devices}
-        seriesMeta={page.source?.brand?.series}
+        seriesMeta={seriesMeta}
         brandDevices={brandDevices}
         baseHref={path}
         headerTitle={headerTitle}
