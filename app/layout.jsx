@@ -7,13 +7,14 @@ import Script from 'next/script';
 import { headers } from 'next/headers';
 
 import { SITE_URL } from './data/site.config.js';
+import { getDefaultOgImage } from '@/lib/seo/buildSeoMetadata';
 
 const DEFAULT_TITLE = 'iLab — telefonu, datoru un Dyson remonts Rīgā';
 
 const DEFAULT_DESCRIPTION =
   'iLab serviss Rīgā — telefonu, planšetdatoru, datoru un Dyson ierīču diagnostika, remonts un detaļu maiņa. 90 dienu garantija, filiāles Domina Shopping un Spice Life.';
 
-const DEFAULT_OG_IMAGE = '/images/og/home.jpg';
+const DEFAULT_OG_IMAGE = getDefaultOgImage('lv');
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
