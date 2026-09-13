@@ -78,5 +78,21 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/((?!api|sitemap.xml|favicon.ico).*)'],
+  /*
+    The shop is a separate Next.js/Vercel application.
+
+    /shop and /shop/* must bypass the main iLab middleware completely
+    so next.config.mjs can proxy those requests to iLab-shop.
+
+    This includes:
+    /shop
+    /shop/admin
+    /shop/_next/*
+    /shop/*.css
+    /shop/*.js
+    etc.
+  */
+  matcher: [
+    '/((?!api|sitemap.xml|favicon.ico|shop(?:/|$)).*)',
+  ],
 };
