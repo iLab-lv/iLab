@@ -6,14 +6,11 @@ import path from 'path';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
-    // inside redirects()
     return [
-
-
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.ilab.lv" }],
-        destination: "https://ilab.lv/:path*",
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.ilab.lv' }],
+        destination: 'https://ilab.lv/:path*',
         permanent: true,
       },
 
@@ -48,7 +45,6 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-a5-2016-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a3-2016-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
-      
       { source: '/:lang(ru)?/samsung-galaxy-j8-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-j7-2017-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-j6-plus-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
@@ -254,7 +250,6 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-s23-fe-remonts-copy/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-note-10-remonts-3/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
-      // ADD these after your existing redirects
       { source: '/:lang(ru)?/paldies/:path*', destination: '/pieraksties', permanent: true },
       { source: '/:lang(ru)?/products/:path*', destination: '/', permanent: true },
       { source: '/:lang(ru)?/nosutit-telefonu/:path*', destination: '/kontakti', permanent: true },
@@ -294,15 +289,12 @@ const nextConfig = {
       { source: '/:lang(ru)?/apple-ipad-8-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-11-2018', permanent: true },
       { source: '/:lang(ru)?/apple-ipad-9-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/pro-9-7-2016', permanent: true },
 
-      // You already have /apple-ipad-pro-*/ and /apple-ipad-air-2-remonts-2/
-      // but these two were missing:
       { source: '/:lang(ru)?/apple-ipad-air-3-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-1st-gen-2013', permanent: true },
       { source: '/:lang(ru)?/apple-ipad-air-4-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/air-2nd-gen-2014', permanent: true },
-
       { source: '/:lang(ru)?/apple-ipad-mini-5-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
       { source: '/:lang(ru)?/apple-ipad-mini-4-remonts/:path*', destination: '/plansetdatoru-remonts/ipad/mini-4th-gen-2015', permanent: true },
 
-      // Laptop brand hubs (very important)
+      // Laptop brand hubs
       { source: '/:lang(ru)?/acer-datoru-remonts/:path*', destination: '/datoru-remonts/acer', permanent: true },
       { source: '/:lang(ru)?/asus-datoru-remonts/:path*', destination: '/datoru-remonts/asus', permanent: true },
       { source: '/:lang(ru)?/dell-datoru-remonts/:path*', destination: '/datoru-remonts/dell', permanent: true },
@@ -310,11 +302,11 @@ const nextConfig = {
       { source: '/:lang(ru)?/lenovo-datoru-remonts/:path*', destination: '/datoru-remonts/lenovo', permanent: true },
       { source: '/:lang(ru)?/samsung-datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
 
-      // Phone brand hubs (some you already have; these two were missing)
+      // Phone brand hubs
       { source: '/:lang(ru)?/xiaomi-telefonu-remonts/:path*', destination: '/telefonu-remonts/xiaomi', permanent: true },
       { source: '/:lang(ru)?/samsung-telefonu-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
-      // Old "apple-iphone-*" slugs → new iPhone model pages
+      // Old apple-iphone-* slugs
       { source: '/:lang(ru)?/apple-iphone-5s-remonts/:path*', destination: '/iphone-remonts/iphone-5s', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-6-plus-remonts/:path*', destination: '/iphone-remonts/iphone-6-plus', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-6s-remonts/:path*', destination: '/iphone-remonts/iphone-6s', permanent: true },
@@ -322,9 +314,7 @@ const nextConfig = {
       { source: '/:lang(ru)?/apple-iphone-7-remonts/:path*', destination: '/iphone-remonts/iphone-7', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-7-plus-remonts/:path*', destination: '/iphone-remonts/iphone-7-plus', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-8-plus-remonts/:path*', destination: '/iphone-remonts/iphone-8-plus', permanent: true },
-
       { source: '/:lang(ru)?/apple-iphone-se-remonts/:path*', destination: '/iphone-remonts', permanent: true },
-
       { source: '/:lang(ru)?/apple-iphone-xr-remonts/:path*', destination: '/iphone-remonts/iphone-xr', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-xs-remonts/:path*', destination: '/iphone-remonts/iphone-xs', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-xs-max-remonts/:path*', destination: '/iphone-remonts/iphone-xs-max', permanent: true },
@@ -355,13 +345,11 @@ const nextConfig = {
 
       { source: '/:lang(ru)?/apple-iphone-16-remonts/:path*', destination: '/iphone-remonts/iphone-16', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-16e-remonts/:path*', destination: '/iphone-remonts/iphone-16e', permanent: true },
-
-      // For slugs where you mapped to the generic iPhone hub (no dedicated model page yet)
       { source: '/:lang(ru)?/apple-iphone-16plus-remonts/:path*', destination: '/iphone-remonts', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-16pro-remonts/:path*', destination: '/iphone-remonts', permanent: true },
       { source: '/:lang(ru)?/apple-iphone-16-promax-remonts/:path*', destination: '/iphone-remonts', permanent: true },
 
-      // Extra Sony Xperia models → Sony phone hub
+      // Extra Sony Xperia
       { source: '/:lang(ru)?/sony-xperia-e5-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-l1-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-l2-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
@@ -369,12 +357,11 @@ const nextConfig = {
       { source: '/:lang(ru)?/sony-xperia-xz-premium-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-xzs-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
 
-      // Old brand hubs → new phone brand categories
       { source: '/:lang(ru)?/huawei-telefonu-remonts/:path*', destination: '/telefonu-remonts/huawei', permanent: true },
       { source: '/:lang(ru)?/oneplus-telefonu-remonts/:path*', destination: '/telefonu-remonts/oneplus', permanent: true },
       { source: '/:lang(ru)?/sony-telefonu-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
 
-      // Samsung A-series (non-Galaxy slugs)
+      // Samsung A-series
       { source: '/:lang(ru)?/samsung-a04s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a04s', permanent: true },
       { source: '/:lang(ru)?/samsung-a05s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a05s', permanent: true },
       { source: '/:lang(ru)?/samsung-a06s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a06', permanent: true },
@@ -387,13 +374,12 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-a54-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a54', permanent: true },
       { source: '/:lang(ru)?/samsung-a55-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a55', permanent: true },
 
-      // Samsung Galaxy A-series (old “samsung-galaxy-*” URLs)
       { source: '/:lang(ru)?/samsung-galaxy-a02s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a02', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a03s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a03', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a12-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a12', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a20e-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a20e', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a22-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a22-4g', permanent: true },
-      { source: '/:lang(ru)?/samsung-galaxy-a31-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no A31 page in sitemap
+      { source: '/:lang(ru)?/samsung-galaxy-a31-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a32-5g-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a32-5g', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a32-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a32-4g', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a41-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a41', permanent: true },
@@ -401,12 +387,12 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-a52-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a52', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a52s-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a52s', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a53-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a53-5g', permanent: true },
-      { source: '/:lang(ru)?/samsung-galaxy-a6-2018-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no A6 page
-      { source: '/:lang(ru)?/samsung-galaxy-a6s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },     // no A6s page
+      { source: '/:lang(ru)?/samsung-galaxy-a6-2018-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a6s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a71-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a71', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-a72-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-a72', permanent: true },
-      { source: '/:lang(ru)?/samsung-galaxy-a80-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },      // no A80 page
-      { source: '/:lang(ru)?/samsung-galaxy-a8s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },      // no A8s page
+      { source: '/:lang(ru)?/samsung-galaxy-a80-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
+      { source: '/:lang(ru)?/samsung-galaxy-a8s-remonts/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
       // Note series
       { source: '/:lang(ru)?/samsung-galaxy-note-10-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-note10-plus', permanent: true },
@@ -414,7 +400,7 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-note-20-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-note20-ultra', permanent: true },
 
       // S-series
-      { source: '/:lang(ru)?/samsung-galaxy-s10e-remonts-2/:path*', destination: '/telefonu-remonts/samsung', permanent: true }, // no S10e page
+      { source: '/:lang(ru)?/samsung-galaxy-s10e-remonts-2/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-s20-plus-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20-plus', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-s20-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-s20-ultra-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-s20-ultra', permanent: true },
@@ -449,92 +435,98 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-z-fold-5-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold5', permanent: true },
       { source: '/:lang(ru)?/samsung-z-fold-6-remonts/:path*', destination: '/telefonu-remonts/samsung/galaxy-z-fold6', permanent: true },
 
+      // important ru fixes
+      { source: '/:lang(ru)/par-mums/:path*', destination: '/par-mums', permanent: true },
+      { source: '/:lang(ru)/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
+      { source: '/:lang(ru)/kontakti/:path*', destination: '/kontakti', permanent: true },
 
-// important ru fixes
+      { source: '/:lang(ru)/iphone-remonts/:path*', destination: '/iphone-remonts', permanent: true },
+      { source: '/:lang(ru)/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
+      { source: '/:lang(ru)/macbook-remonts/:path*', destination: '/datoru-remonts/macbook', permanent: true },
+      { source: '/:lang(ru)/datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
 
-{ source: '/:lang(ru)/par-mums/:path*', destination: '/par-mums', permanent: true },
-{ source: '/:lang(ru)/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
-{ source: '/:lang(ru)/kontakti/:path*', destination: '/kontakti', permanent: true },
+      // LAST MISSING REDIRECTS
+      { source: '/vakances/', destination: '/', permanent: true },
+      { source: '/apple-iphone-remonts/', destination: '/iphone-remonts', permanent: true },
 
-{ source: '/:lang(ru)/iphone-remonts/:path*', destination: '/iphone-remonts', permanent: true },
-{ source: '/:lang(ru)/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
-{ source: '/:lang(ru)/macbook-remonts/:path*', destination: '/datoru-remonts/macbook', permanent: true },
-{ source: '/:lang(ru)/datoru-remonts/:path*', destination: '/datoru-remonts', permanent: true },
+      { source: '/huawei-ascend-mate-7-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-honor-10-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-honor-7-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-honor-8-pro-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-mate-10-pro-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-mate-10-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-mate-9-pro-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-p9-eva-l19-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-p9-lite-mini-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-p9-lite-pra-lx1-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/huawei-p9-lite-vns-l21-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
 
+      { source: '/macbook-portativo-datoru-remonts/', destination: '/datoru-remonts/macbook', permanent: true },
 
+      // www.ilab.lv legacy RU
+      { source: '/ru/apple-iphone-5-remonts/', destination: '/iphone-remonts/iphone-5', permanent: true },
 
-// LAST MISSING REDIRECTS
-// ilab.lv legacy
-      { source: "/vakances/", destination: "/", permanent: true },
-
-      // www.ilab.lv legacy (LV)
-      { source: "/apple-iphone-remonts/", destination: "/iphone-remonts", permanent: true },
-
-      { source: "/huawei-ascend-mate-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-honor-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-honor-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-honor-8-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-mate-10-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-mate-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-mate-9-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-p9-eva-l19-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-p9-lite-mini-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-p9-lite-pra-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/huawei-p9-lite-vns-l21-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-
-      { source: "/macbook-portativo-datoru-remonts/", destination: "/datoru-remonts/macbook", permanent: true },
-
-      // www.ilab.lv legacy (RU)
-      { source: "/ru/apple-iphone-5-remonts/", destination: "/iphone-remonts/iphone-5", permanent: true },
-
-      { source: "/ru/huawei-ascend-mate-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-honor-10-2018-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-honor-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-honor-7-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-honor-7x-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-honor-9-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-mate-10-lite-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-mate-10-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-mate-8-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-mate-9-pro-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-mate-s-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-p10-lite-was-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-p10-plus-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-p10-vtr-l29-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-p9-lite-mini-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
-      { source: "/ru/huawei-p9-lite-pra-lx1-remonts/", destination: "/telefonu-remonts/huawei", permanent: true },
+      { source: '/ru/huawei-ascend-mate-7-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-honor-10-2018-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-honor-10-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-honor-7-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-honor-7x-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-honor-9-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-mate-10-lite-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-mate-10-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-mate-8-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-mate-9-pro-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-mate-s-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-p10-lite-was-lx1-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-p10-plus-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-p10-vtr-l29-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-p9-lite-mini-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
+      { source: '/ru/huawei-p9-lite-pra-lx1-remonts/', destination: '/telefonu-remonts/huawei', permanent: true },
 
       // Redirect any legacy /LV/... URLs to homepage
-{
-  source: "/LV/:path*",
-  destination: "/",
-  permanent: true,
-},
-
-// serviss.ilab.lv → ilab.lv (everything to homepage)
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "serviss.ilab.lv" }],
-        destination: "https://ilab.lv",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.serviss.ilab.lv" }],
-        destination: "https://ilab.lv",
+        source: '/LV/:path*',
+        destination: '/',
         permanent: true,
       },
 
-
+      // serviss.ilab.lv → ilab.lv
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'serviss.ilab.lv' }],
+        destination: 'https://ilab.lv',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.serviss.ilab.lv' }],
+        destination: 'https://ilab.lv',
+        permanent: true,
+      },
     ];
+  },
 
-
+  // iLab Shop lives in a separate Vercel project.
+  // Proxy it through ilab.lv/shop while keeping the public URL unchanged.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/shop',
+          destination: 'https://i-lab-shop.vercel.app/shop',
+        },
+        {
+          source: '/shop/:path*',
+          destination: 'https://i-lab-shop.vercel.app/shop/:path*',
+        },
+      ],
+    };
   },
 
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': path.resolve(process.cwd()),           // root alias
+      '@': path.resolve(process.cwd()),
       '@app': path.resolve(process.cwd(), 'app'),
       '@site': path.resolve(process.cwd(), 'app/(site)'),
       '@lib': path.resolve(process.cwd(), 'lib'),
@@ -545,6 +537,7 @@ const nextConfig = {
       '@styles': path.resolve(process.cwd(), 'app/styles'),
       '@components': path.resolve(process.cwd(), 'app/(site)/components'),
     };
+
     return config;
   },
 };
