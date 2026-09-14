@@ -121,6 +121,61 @@ export default async function RootLayout({ children }) {
             })(window,document,'script','dataLayer','GTM-K8C3GNKB');
           `}
         </Script>
+
+        <Script id="openai-pixel" strategy="afterInteractive">
+          {`
+            (function () {
+              function hasAnalyticsConsent() {
+                return document.cookie
+                  .split(';')
+                  .map(function (cookie) {
+                    return cookie.trim();
+                  })
+                  .some(function (cookie) {
+                    return cookie === 'ilab_cookie_consent=accepted';
+                  });
+              }
+
+              function initOpenAiPixel() {
+                if (!hasAnalyticsConsent()) return;
+
+                if (window.__openAiPixelInitialized) return;
+                window.__openAiPixelInitialized = true;
+
+                !function(w,d,s,u){
+                  if(w.oaiq)return;
+                  var q=function(){
+                    q.q.push(arguments)
+                  };
+                  q.q=[];
+                  w.oaiq=q;
+                  var j=d.createElement(s);
+                  j.async=1;
+                  j.src=u;
+                  var f=d.getElementsByTagName(s)[0];
+                  f.parentNode.insertBefore(j,f)
+                }(
+                  window,
+                  document,
+                  "script",
+                  "https://bzrcdn.openai.com/sdk/oaiq.min.js"
+                );
+
+                oaiq("init", {
+                  pixelId: "3XBbQSbCjnV349BNxJcFDH",
+                  debug: true
+                });
+              }
+
+              initOpenAiPixel();
+
+              window.addEventListener(
+                'ilab-cookie-consent-change',
+                initOpenAiPixel
+              );
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );
