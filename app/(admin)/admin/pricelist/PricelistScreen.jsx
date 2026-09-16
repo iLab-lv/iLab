@@ -19,7 +19,6 @@ import s from './PricelistScreen.module.scss';
 const DEFAULT_CURRENCY = 'EUR';
 const DEFAULT_CATEGORY_SLUG = 'telefonu-remonts';
 const DEFAULT_BRAND_KEY = 'apple';
-const ADMIN_LOCALE = 'lv';
 const MODEL_COLLECTION_CANDIDATES = ['devices', 'models'];
 
 function normalizePriceInput(v) {
@@ -35,7 +34,7 @@ function parseNumericPrice(v) {
   return Number.isFinite(n) ? n : null;
 }
 
-function getLocalizedValue(value, locale = ADMIN_LOCALE) {
+function getLocalizedValue(value, locale = 'lv') {
   if (typeof value === 'string') return value;
   if (!value || typeof value !== 'object') return '';
   return value[locale] || value.lv || value.ru || '';
@@ -197,10 +196,8 @@ async function fetchServicePricingRows(modelId) {
     return {
       docId: d.id,
       serviceId: data.serviceId || '',
-      label: '',
-      order: 9999,
       priceInput: hasNumericPrice ? String(data.price) : '',
-      isStartingFrom: hasNumericPrice && data.isStartingFrom === true,
+      isStartingFrom: data.isStartingFrom === true,
       hidden: data.isHidden === true,
     };
   });
@@ -209,8 +206,7 @@ async function fetchServicePricingRows(modelId) {
 async function fetchServicesForCategory(categoryId) {
   const q = query(
     collection(db, 'services'),
-    where('categoryId', '==', categoryId),
-    where('isActive', '==', true)
+    where('categoryId', '==', categoryId)
   );
 
   const snap = await getDocs(q);
@@ -220,8 +216,10 @@ async function fetchServicesForCategory(categoryId) {
       const data = d.data() || {};
       return {
         id: d.id,
-        label: data.labels?.lv || data.labels?.ru || data.title || d.id,
+        label: data.labels?.ru || data.labels?.lv || d.id,
         order: typeof data.order === 'number' ? data.order : 9999,
+        isActive: data.isActive !== false,
+        iphoneOnly: data.iphoneOnly === true,
       };
     })
     .sort((a, b) => {
@@ -251,17 +249,21 @@ async function buildRowsForModel(modelSlug, models, categories) {
   const model = getModelMeta(models, modelSlug);
   const categoryId = resolveCategoryIdForModel(model, categories);
 
-  if (!categoryId) return [];
+  if (!categoryId) return { rows: [], orphans: [] };
 
   const [serviceDefs, existingRows] = await Promise.all([
     fetchServicesForCategory(categoryId),
     fetchServicePricingRows(modelSlug),
   ]);
 
-  const existingById = new Map(existingRows.map((r) => [r.serviceId, r]));
   const knownServiceIds = new Set(serviceDefs.map((s) => s.id));
+  const isAppleModel = String(model?.brandKey || '').toLowerCase() === 'apple';
+  const applicableServices = serviceDefs.filter(
+    (service) => service.isActive && (!service.iphoneOnly || isAppleModel)
+  );
+  const existingById = new Map(existingRows.map((r) => [r.serviceId, r]));
 
-  const merged = serviceDefs.map((svc) => {
+  const rows = applicableServices.map((svc) => {
     const existing = existingById.get(svc.id);
 
     return {
@@ -275,16 +277,12 @@ async function buildRowsForModel(modelSlug, models, categories) {
     };
   });
 
-  const extras = existingRows
+  const orphans = existingRows
     .filter((r) => r.serviceId && !knownServiceIds.has(r.serviceId))
-    .map((r) => ({
-      ...r,
-      label: r.serviceId,
-      order: 9999,
-    }))
+    .map((r) => ({ docId: r.docId, serviceId: r.serviceId }))
     .sort((a, b) => String(a.serviceId).localeCompare(String(b.serviceId)));
 
-  return [...merged, ...extras];
+  return { rows, orphans };
 }
 
 export default function PricelistScreen({
@@ -451,8 +449,12 @@ export default function PricelistScreen({
       setLoading((p) => ({ ...p, [modelSlug]: true }));
 
       try {
-        const rows = await buildRowsForModel(modelSlug, models, categories);
-        setRowsByModel((p) => ({ ...p, [modelSlug]: rows }));
+        const modelPricing = await buildRowsForModel(
+          modelSlug,
+          models,
+          categories
+        );
+        setRowsByModel((p) => ({ ...p, [modelSlug]: modelPricing }));
       } catch (err) {
         setError(err?.message || 'Failed to load model pricing from Firestore.');
       } finally {
@@ -463,9 +465,10 @@ export default function PricelistScreen({
 
   function updateRow(modelSlug, idx, patch) {
     setRowsByModel((prev) => {
-      const list = prev[modelSlug] ? [...prev[modelSlug]] : [];
+      const current = prev[modelSlug] || { rows: [], orphans: [] };
+      const list = [...current.rows];
       list[idx] = { ...list[idx], ...patch };
-      return { ...prev, [modelSlug]: list };
+      return { ...prev, [modelSlug]: { ...current, rows: list } };
     });
   }
 
@@ -473,7 +476,7 @@ export default function PricelistScreen({
     setError('');
     setStatus('');
 
-    const rows = rowsByModel[modelSlug] || [];
+    const rows = rowsByModel[modelSlug]?.rows || [];
     const model = getModelMeta(models, modelSlug);
     const categoryId = resolveCategoryIdForModel(model, categories);
 
@@ -483,19 +486,12 @@ export default function PricelistScreen({
     }
 
     for (const r of rows) {
-      if (!r.serviceId || !r.serviceId.trim()) {
-        setError(`"${modelSlug}": every row must have serviceId.`);
+      const raw = String(r.priceInput ?? '').trim();
+      if (raw && parseNumericPrice(raw) === null) {
+        setError(
+          `"${modelSlug}" / "${r.serviceId}": price must be numeric, for example 89 or 89.99`
+        );
         return;
-      }
-
-      if (r.hidden !== true) {
-        const raw = String(r.priceInput ?? '').trim();
-        if (raw && parseNumericPrice(raw) === null) {
-          setError(
-            `"${modelSlug}" / "${r.serviceId}": price must be numeric, for example 89 or 89.99`
-          );
-          return;
-        }
       }
     }
 
@@ -507,45 +503,55 @@ export default function PricelistScreen({
       for (let i = 0; i < rows.length; i += CHUNK) {
         const chunk = rows.slice(i, i + CHUNK);
         const batch = writeBatch(db);
+        let mutationCount = 0;
 
         for (const r of chunk) {
-          const serviceId = r.serviceId.trim();
-          const nextDocId = `${modelSlug}__${serviceId}`;
+          const serviceId = r.serviceId;
           const prevDocId = r.docId?.trim() || '';
           const numericPrice = parseNumericPrice(r.priceInput);
+          const isStartingFrom = r.isStartingFrom === true;
+          const isHidden = r.hidden === true;
+          const hasOverride =
+            numericPrice !== null || isStartingFrom || isHidden;
 
-          if (prevDocId && prevDocId !== nextDocId) {
-            batch.delete(doc(db, 'servicePricing', prevDocId));
+          if (!hasOverride) {
+            if (prevDocId) {
+              batch.delete(doc(db, 'servicePricing', prevDocId));
+              mutationCount += 1;
+            }
+            continue;
           }
 
+          const targetDocId = prevDocId || `${modelSlug}__${serviceId}`;
+
           batch.set(
-            doc(db, 'servicePricing', nextDocId),
+            doc(db, 'servicePricing', targetDocId),
             {
               modelId: modelSlug,
               serviceId,
               categoryId,
               price: numericPrice,
-              isHidden: r.hidden === true,
-              isStartingFrom:
-                r.hidden === true
-                  ? false
-                  : numericPrice !== null && r.isStartingFrom === true,
+              isHidden,
+              isStartingFrom,
               currency: DEFAULT_CURRENCY,
               isActive: true,
               updatedAt: serverTimestamp(),
             },
             { merge: true }
           );
+          mutationCount += 1;
         }
 
-        await batch.commit();
+        if (mutationCount > 0) {
+          await batch.commit();
+        }
       }
 
       const fresh = await buildRowsForModel(modelSlug, models, categories);
 
       setRowsByModel((p) => ({
         ...p,
-        [modelSlug]: fresh.length ? fresh : p[modelSlug] || [],
+        [modelSlug]: fresh,
       }));
 
       setStatus(`Saved: ${modelSlug}`);
@@ -640,7 +646,12 @@ export default function PricelistScreen({
               {g.items.map((d) => {
                 const isOpen = openSlug === d.slug;
                 const isLoading = !!loading[d.slug];
-                const rows = rowsByModel[d.slug] || [];
+                const modelPricing = rowsByModel[d.slug] || {
+                  rows: [],
+                  orphans: [],
+                };
+                const rows = modelPricing.rows;
+                const orphans = modelPricing.orphans;
 
                 return (
                   <div key={d.slug} className={s.model}>
@@ -674,16 +685,12 @@ export default function PricelistScreen({
                                 key={`${r.docId || r.serviceId || 'row'}-${idx}`}
                                 className={s.row}
                               >
-                                <input
-                                  className={s.input}
-                                  value={r.serviceId}
-                                  onChange={(e) =>
-                                    updateRow(d.slug, idx, {
-                                      serviceId: e.target.value,
-                                    })
-                                  }
-                                  placeholder="serviceId"
-                                />
+                                <span
+                                  className={s.serviceName}
+                                  title={r.serviceId}
+                                >
+                                  {r.label}
+                                </span>
 
                                 <input
                                   className={s.input}
@@ -732,6 +739,19 @@ export default function PricelistScreen({
                               </div>
                             ))}
                           </div>
+                        )}
+
+                        {orphans.length > 0 && (
+                          <aside className={s.legacyWarning}>
+                            <div className={s.legacyTitle}>
+                              Legacy pricing records not linked to a current service
+                            </div>
+                            <ul className={s.legacyList}>
+                              {orphans.map((orphan) => (
+                                <li key={orphan.docId}>{orphan.serviceId}</li>
+                              ))}
+                            </ul>
+                          </aside>
                         )}
 
                         <div className={s.panelFooter}>

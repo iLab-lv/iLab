@@ -170,6 +170,13 @@
   }
 }
 
+.serviceName {
+  min-width: 0;
+  color: $color-text;
+  font-weight: $font-weight-medium;
+  overflow-wrap: anywhere;
+}
+
 .hideToggle {
   display: inline-flex;
   gap: $space-xs;
@@ -192,4 +199,22 @@
   margin-top: $space-md;
   display: flex;
   justify-content: flex-end;
+}
+
+.legacyWarning {
+  margin-top: $space-md;
+  padding: $space-sm $space-md;
+  border: $border-thin solid rgba(245, 158, 11, 0.45);
+  border-radius: $radius-md;
+  color: $color-text-2;
+}
+
+.legacyTitle {
+  color: #f59e0b;
+  font-weight: $font-weight-semibold;
+}
+
+.legacyList {
+  margin: $space-xs 0 0;
+  padding-left: $space-lg;
 }
