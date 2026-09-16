@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   where,
@@ -35,7 +36,7 @@ const DEFAULT_CATEGORY_SLUG = 'telefonu-remonts';
 const CATEGORY_COLLECTION = 'categories';
 const ORDER_STEP = 10;
 
-function emptyRow(categoryId = DEFAULT_CATEGORY_SLUG, family = '') {
+function emptyRow(categoryId = DEFAULT_CATEGORY_SLUG) {
   return {
     docId: '',
     id: '',
@@ -43,7 +44,8 @@ function emptyRow(categoryId = DEFAULT_CATEGORY_SLUG, family = '') {
     isActive: true,
     order: 9999,
     categoryId,
-    family,
+    family: '',
+    iphoneOnly: false,
     slug: '',
     labels: {
       lv: '',
@@ -121,12 +123,13 @@ async function fetchServices(categoryId) {
       const data = d.data() || {};
       return {
         docId: d.id,
-        id: data.id || d.id,
+        id: d.id,
         type: data.type || 'service',
-        isActive: true,
+        isActive: data.isActive !== false,
         order: typeof data.order === 'number' ? data.order : 9999,
         categoryId: data.categoryId || categoryId,
         family: data.family || '',
+        iphoneOnly: data.iphoneOnly === true,
         slug: data.slug || '',
         labels: {
           lv: data.labels?.lv || '',
@@ -144,12 +147,14 @@ async function fetchServices(categoryId) {
       };
     })
     .sort((a, b) => {
-      const famCmp = String(a.family || '').localeCompare(String(b.family || ''));
-      if (famCmp !== 0) return famCmp;
       if ((a.order ?? 9999) !== (b.order ?? 9999)) {
         return (a.order ?? 9999) - (b.order ?? 9999);
       }
-      return String(a.labels?.lv || a.id).localeCompare(String(b.labels?.lv || b.id));
+      const labelCmp = String(a.labels?.lv || a.id).localeCompare(
+        String(b.labels?.lv || b.id)
+      );
+      if (labelCmp !== 0) return labelCmp;
+      return String(a.docId).localeCompare(String(b.docId));
     });
 }
 
@@ -158,7 +163,7 @@ function SortableServiceRow({
   row,
   isOpen,
   onToggle,
-  onRemove,
+  dragDisabled,
   children,
 }) {
   const {
@@ -168,7 +173,7 @@ function SortableServiceRow({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: itemKey });
+  } = useSortable({ id: itemKey, disabled: dragDisabled });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -197,13 +202,13 @@ function SortableServiceRow({
           type="button"
           className={s.dragHandle}
           aria-label="Reorder service"
+          disabled={dragDisabled}
           {...attributes}
           {...listeners}
         >
           ⋮⋮
         </button>
 
-        {row.isNew && <Button onClick={onRemove}>Remove</Button>}
       </div>
 
       {isOpen && <div className={s.panel}>{children}</div>}
@@ -219,9 +224,12 @@ export default function RepairServicesScreen({
   const [rows, setRows] = useState([]);
   const [openRowKey, setOpenRowKey] = useState('');
   const [loading, setLoading] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [savingRows, setSavingRows] = useState({});
+  const [deletingRows, setDeletingRows] = useState({});
+  const [orderSaving, setOrderSaving] = useState(false);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
+  const orderSaveRef = useRef(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -309,41 +317,6 @@ export default function RepairServicesScreen({
       (c) => c.id === categoryId || c.slug === categoryId || c.key === categoryId
     )?.label || categoryId;
 
-  const grouped = useMemo(() => {
-    const map = new Map();
-
-    for (const row of rows) {
-      const rawFamily = normalizeText(row.family).trim();
-      const key = rawFamily || '__ungrouped__';
-      const title = rawFamily || 'Ungrouped';
-
-      if (!map.has(key)) {
-        map.set(key, {
-          familyKey: key,
-          familyValue: rawFamily,
-          familyLabel: title,
-          items: [],
-        });
-      }
-
-      map.get(key).items.push(row);
-    }
-
-    return Array.from(map.values())
-      .map((group) => ({
-        ...group,
-        items: [...group.items].sort((a, b) => {
-          if ((a.order ?? 9999) !== (b.order ?? 9999)) {
-            return (a.order ?? 9999) - (b.order ?? 9999);
-          }
-          return String(a.labels?.lv || a.id).localeCompare(
-            String(b.labels?.lv || b.id)
-          );
-        }),
-      }))
-      .sort((a, b) => String(a.familyLabel).localeCompare(String(b.familyLabel)));
-  }, [rows]);
-
   function updateRowByKey(itemKey, patch) {
     setRows((prev) =>
       prev.map((row) => {
@@ -370,9 +343,9 @@ export default function RepairServicesScreen({
     );
   }
 
-  function addRowToGroup(group) {
+  function addRow() {
     const nextRow = {
-      ...emptyRow(categoryId, group.familyValue),
+      ...emptyRow(categoryId),
       _uiKey: `new-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     };
 
@@ -395,134 +368,187 @@ export default function RepairServicesScreen({
     }
   }
 
-  function handleDragEnd(group, event) {
+  async function handleDragEnd(event) {
     const { active, over } = event;
 
-    if (!over || active.id === over.id) return;
+    if (!over || active.id === over.id || orderSaveRef.current) return;
 
-    setRows((prev) => {
-      const groupRows = prev.filter((row) => {
-        const rawFamily = normalizeText(row.family).trim();
-        const key = rawFamily || '__ungrouped__';
-        return key === group.familyKey;
-      });
+    const itemKeys = rows.map((row) => row._uiKey || row.docId || row.id);
+    const oldIndex = itemKeys.indexOf(active.id);
+    const newIndex = itemKeys.indexOf(over.id);
 
-      const groupKeys = groupRows.map((row) => row._uiKey || row.docId || row.id);
-      const oldIndex = groupKeys.indexOf(active.id);
-      const newIndex = groupKeys.indexOf(over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
 
-      if (oldIndex === -1 || newIndex === -1) return prev;
+    const previousRows = rows;
+    const previousOrderById = new Map(
+      previousRows
+        .filter((row) => !row.isNew)
+        .map((row) => [row.docId, row.order])
+    );
+    const reorderedRows = arrayMove(rows, oldIndex, newIndex).map(
+      (row, index) => ({ ...row, order: (index + 1) * ORDER_STEP })
+    );
+    const changedRows = reorderedRows.filter(
+      (row) => !row.isNew && row.order !== previousOrderById.get(row.docId)
+    );
 
-      const reorderedGroupRows = arrayMove(groupRows, oldIndex, newIndex);
-
-      const queue = [...reorderedGroupRows];
-      const next = [];
-
-      for (const row of prev) {
-        const rawFamily = normalizeText(row.family).trim();
-        const key = rawFamily || '__ungrouped__';
-
-        if (key === group.familyKey) {
-          next.push(queue.shift());
-        } else {
-          next.push(row);
-        }
-      }
-
-      return next;
-    });
-  }
-
-  async function saveAll() {
+    setRows(reorderedRows);
     setError('');
     setStatus('');
+    setOrderSaving(true);
+    orderSaveRef.current = true;
 
-    if (!rows.length) {
-      setStatus('Nothing to save.');
+    try {
+      if (changedRows.length > 0) {
+        const batch = writeBatch(db);
+        changedRows.forEach((row) => {
+          batch.set(
+            doc(db, 'services', row.docId),
+            { order: row.order },
+            { merge: true }
+          );
+        });
+        await batch.commit();
+      }
+      setStatus('Order saved.');
+    } catch (err) {
+      setRows(previousRows);
+      setError(err?.message || 'Failed to save service order.');
+    } finally {
+      orderSaveRef.current = false;
+      setOrderSaving(false);
+    }
+  }
+
+  async function saveService(itemKey) {
+    const row = rows.find(
+      (item) => (item._uiKey || item.docId || item.id) === itemKey
+    );
+    if (!row) return;
+
+    const nextId = normalizeText(row.id).trim();
+    if (!nextId) {
+      setError('Service ID is required.');
       return;
     }
 
+    setError('');
+    setStatus('');
+    setSavingRows((prev) => ({ ...prev, [itemKey]: true }));
+
     try {
-      const rowsForSave = [];
-      const seenIds = new Set();
-
-      for (const group of grouped) {
-        group.items.forEach((row, index) => {
-          const nextId = normalizeText(row.id).trim();
-
-          if (!nextId) {
-            throw new Error('Every service must have an id.');
-          }
-
-          if (seenIds.has(nextId)) {
-            throw new Error(`Duplicate service id: ${nextId}`);
-          }
-
-          seenIds.add(nextId);
-
-          rowsForSave.push({
-            ...row,
-            id: nextId,
-            categoryId,
-            family: group.familyValue,
-            isActive: true,
-            order: (index + 1) * ORDER_STEP,
-          });
-        });
+      if (row.isNew) {
+        const existing = await getDoc(doc(db, 'services', nextId));
+        if (existing.exists()) {
+          throw new Error(`Service ID already exists: ${nextId}`);
+        }
       }
 
-      setSaving(true);
+      const existingRows = rows.filter((item) => !item.isNew);
+      const lastOrder = existingRows.reduce(
+        (max, item) => Math.max(max, Number(item.order) || 0),
+        0
+      );
+      const nextOrder = row.isNew
+        ? Math.ceil(lastOrder / ORDER_STEP) * ORDER_STEP + ORDER_STEP
+        : row.order;
+      const batch = writeBatch(db);
 
-      const CHUNK = 250;
+      batch.set(
+        doc(db, 'services', row.isNew ? nextId : row.docId),
+        {
+          isActive: row.isActive !== false,
+          ...(row.isNew
+            ? {
+                id: nextId,
+                type: row.type || 'service',
+                order: nextOrder,
+                categoryId,
+              }
+            : {}),
+          family: normalizeText(row.family).trim(),
+          iphoneOnly: row.iphoneOnly === true,
+          slug: normalizeSlug(row.slug),
+          labels: {
+            lv: normalizeText(row.labels?.lv).trim(),
+            ru: normalizeText(row.labels?.ru).trim(),
+          },
+          defaultTimeText: {
+            lv: normalizeText(row.defaultTimeText?.lv).trim(),
+            ru: normalizeText(row.defaultTimeText?.ru).trim(),
+          },
+          defaultWarrantyDays: parseIntOr(90, row.defaultWarrantyDays),
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+      await batch.commit();
 
-      for (let i = 0; i < rowsForSave.length; i += CHUNK) {
-        const chunk = rowsForSave.slice(i, i + CHUNK);
-        const batch = writeBatch(db);
+      setRows((prev) =>
+        prev.map((item) =>
+          (item._uiKey || item.docId || item.id) === itemKey
+            ? {
+                ...item,
+                docId: row.isNew ? nextId : row.docId,
+                id: row.isNew ? nextId : row.id,
+                order: nextOrder,
+                isNew: false,
+                _uiKey: undefined,
+              }
+            : item
+        )
+      );
+      if (row.isNew) setOpenRowKey(nextId);
+      setStatus(`Saved: ${nextId}`);
+    } catch (err) {
+      setError(err?.message || 'Failed to save service.');
+    } finally {
+      setSavingRows((prev) => ({ ...prev, [itemKey]: false }));
+    }
+  }
 
-        for (const row of chunk) {
-          const nextId = normalizeText(row.id).trim();
-          const prevId = normalizeText(row.docId).trim();
+  async function removeService(itemKey) {
+    const row = rows.find(
+      (item) => (item._uiKey || item.docId || item.id) === itemKey
+    );
+    if (!row) return;
 
-          if (prevId && prevId !== nextId) {
-            batch.delete(doc(db, 'services', prevId));
-          }
+    if (row.isNew) {
+      removeUnsavedRow(itemKey);
+      return;
+    }
 
+    if (!window.confirm('Remove this service?')) return;
+
+    setError('');
+    setStatus('');
+    setDeletingRows((prev) => ({ ...prev, [itemKey]: true }));
+
+    try {
+      const remainingRows = rows
+        .filter((item) => (item._uiKey || item.docId || item.id) !== itemKey)
+        .map((item, index) => ({ ...item, order: (index + 1) * ORDER_STEP }));
+      const batch = writeBatch(db);
+
+      batch.delete(doc(db, 'services', row.docId));
+      remainingRows.forEach((item) => {
+        if (!item.isNew) {
           batch.set(
-            doc(db, 'services', nextId),
-            {
-              id: nextId,
-              type: 'service',
-              isActive: true,
-              order: parseIntOr(9999, row.order),
-              categoryId,
-              family: normalizeText(row.family).trim(),
-              slug: normalizeSlug(row.slug),
-              labels: {
-                lv: normalizeText(row.labels?.lv).trim(),
-                ru: normalizeText(row.labels?.ru).trim(),
-              },
-              defaultTimeText: {
-                lv: normalizeText(row.defaultTimeText?.lv).trim(),
-                ru: normalizeText(row.defaultTimeText?.ru).trim(),
-              },
-              defaultWarrantyDays: parseIntOr(90, row.defaultWarrantyDays),
-              updatedAt: serverTimestamp(),
-            },
+            doc(db, 'services', item.docId),
+            { order: item.order },
             { merge: true }
           );
         }
+      });
+      await batch.commit();
 
-        await batch.commit();
-      }
-
-      const fresh = await fetchServices(categoryId);
-      setRows(fresh);
+      setRows(remainingRows);
       setOpenRowKey('');
-      setStatus(`Saved ${fresh.length} services.`);
+      setStatus(`Removed: ${row.id}`);
     } catch (err) {
-      setError(err?.message || 'Failed to save services.');
+      setError(err?.message || 'Failed to remove service.');
     } finally {
-      setSaving(false);
+      setDeletingRows((prev) => ({ ...prev, [itemKey]: false }));
     }
   }
 
@@ -560,18 +586,8 @@ export default function RepairServicesScreen({
         <div className={s.groups}>
           <section className={s.group}>
             <div className={s.groupHead}>
-              <span className={s.groupTitle}>Ungrouped</span>
-              <Button
-                onClick={() =>
-                  addRowToGroup({
-                    familyKey: '__ungrouped__',
-                    familyValue: '',
-                    familyLabel: 'Ungrouped',
-                  })
-                }
-              >
-                Add new
-              </Button>
+              <span className={s.groupTitle}>Services (0)</span>
+              <Button onClick={addRow}>Add new</Button>
             </div>
 
             <div className={s.empty}>No services found for this category.</div>
@@ -579,32 +595,28 @@ export default function RepairServicesScreen({
         </div>
       ) : (
         <div className={s.groups}>
-          {grouped.map((group) => {
-            const itemKeys = group.items.map(
-              (row) => row._uiKey || row.docId || row.id
-            );
-
-            return (
-              <section key={group.familyKey} className={s.group}>
+          <section className={s.group}>
                 <div className={s.groupHead}>
-                  <span className={s.groupTitle}>
-                    {group.familyLabel} ({group.items.length})
-                  </span>
-
-                  <Button onClick={() => addRowToGroup(group)}>Add new</Button>
+                  <span className={s.groupTitle}>Services ({rows.length})</span>
+                  <Button
+                    onClick={addRow}
+                    disabled={rows.some((row) => row.isNew)}
+                  >
+                    Add new
+                  </Button>
                 </div>
 
                 <DndContext
                   sensors={sensors}
                   collisionDetection={closestCenter}
-                  onDragEnd={(event) => handleDragEnd(group, event)}
+                  onDragEnd={handleDragEnd}
                 >
                   <SortableContext
-                    items={itemKeys}
+                    items={rows.map((row) => row._uiKey || row.docId || row.id)}
                     strategy={verticalListSortingStrategy}
                   >
                     <div className={s.rows}>
-                      {group.items.map((row) => {
+                      {rows.map((row) => {
                         const itemKey = row._uiKey || row.docId || row.id;
                         const isOpen = openRowKey === itemKey;
 
@@ -614,10 +626,12 @@ export default function RepairServicesScreen({
                             itemKey={itemKey}
                             row={row}
                             isOpen={isOpen}
+                            dragDisabled={
+                              orderSaving || rows.some((item) => item.isNew)
+                            }
                             onToggle={() =>
                               setOpenRowKey((prev) => (prev === itemKey ? '' : itemKey))
                             }
-                            onRemove={() => removeUnsavedRow(itemKey)}
                           >
                             <div className={s.grid}>
                               <label className={s.field}>
@@ -625,6 +639,7 @@ export default function RepairServicesScreen({
                                 <input
                                   className={s.input}
                                   value={row.id}
+                                  disabled={!row.isNew}
                                   onChange={(e) =>
                                     updateRowByKey(itemKey, {
                                       id: normalizeText(e.target.value),
@@ -632,6 +647,46 @@ export default function RepairServicesScreen({
                                   }
                                   placeholder="phone-battery"
                                 />
+                              </label>
+
+                              <label className={s.field}>
+                                <span className={s.label}>Family</span>
+                                <input
+                                  className={s.input}
+                                  value={row.family || ''}
+                                  onChange={(e) =>
+                                    updateRowByKey(itemKey, {
+                                      family: normalizeText(e.target.value),
+                                    })
+                                  }
+                                  placeholder="display"
+                                />
+                              </label>
+
+                              <label className={s.checkboxField}>
+                                <input
+                                  type="checkbox"
+                                  checked={row.iphoneOnly === true}
+                                  onChange={(e) =>
+                                    updateRowByKey(itemKey, {
+                                      iphoneOnly: e.target.checked,
+                                    })
+                                  }
+                                />
+                                <span>iPhone only</span>
+                              </label>
+
+                              <label className={s.checkboxField}>
+                                <input
+                                  type="checkbox"
+                                  checked={row.isActive !== false}
+                                  onChange={(e) =>
+                                    updateRowByKey(itemKey, {
+                                      isActive: e.target.checked,
+                                    })
+                                  }
+                                />
+                                <span>Active</span>
                               </label>
 
                               <label className={s.field}>
@@ -720,6 +775,29 @@ export default function RepairServicesScreen({
                                 />
                               </label>
                             </div>
+
+                            <div className={s.cardActions}>
+                              <Button
+                                onClick={() => saveService(itemKey)}
+                                disabled={
+                                  savingRows[itemKey] || deletingRows[itemKey]
+                                }
+                              >
+                                {savingRows[itemKey] ? 'Saving...' : 'Save'}
+                              </Button>
+                              <Button
+                                onClick={() => removeService(itemKey)}
+                                disabled={
+                                  savingRows[itemKey] || deletingRows[itemKey]
+                                }
+                              >
+                                {deletingRows[itemKey]
+                                  ? 'Removing...'
+                                  : row.isNew
+                                    ? 'Cancel'
+                                    : 'Remove'}
+                              </Button>
+                            </div>
                           </SortableServiceRow>
                         );
                       })}
@@ -727,16 +805,9 @@ export default function RepairServicesScreen({
                   </SortableContext>
                 </DndContext>
               </section>
-            );
-          })}
         </div>
       )}
 
-      <div className={s.footer}>
-        <Button onClick={saveAll} disabled={saving || loading}>
-          {saving ? 'Saving…' : 'Save all'}
-        </Button>
-      </div>
     </div>
   );
 }
