@@ -160,6 +160,11 @@
   &:active {
     cursor: grabbing;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: $opacity-disabled;
+  }
 }
 
 .panel {
@@ -195,8 +200,8 @@
   font-size: $font-size-sm;
 }
 
-.footer {
-  margin-top: $space-lg;
+.cardActions {
   display: flex;
+  gap: $space-sm;
   justify-content: flex-end;
 }

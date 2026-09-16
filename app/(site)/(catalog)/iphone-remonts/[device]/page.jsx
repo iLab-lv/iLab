@@ -161,6 +161,7 @@ async function getIphoneDevicePageData(slug) {
   const [{ items: priceItems, currency }, faq, reviewsSummary, relatedDevices] = await Promise.all([
     buildPriceListItems(device.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
+      model: device,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: HUB_KEY }], locale),
