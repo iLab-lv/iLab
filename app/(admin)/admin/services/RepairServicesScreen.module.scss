@@ -182,6 +182,14 @@
   gap: $space-xs;
 }
 
+.checkboxField {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  min-height: $btn-h-md;
+  color: $color-text;
+}
+
 .label {
   color: $color-text-2;
   font-size: $font-size-sm;
