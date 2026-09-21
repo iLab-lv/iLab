@@ -4,6 +4,14 @@ import {
   getIphoneModelServices,
   getIphonePopularServices,
 } from './popularServices.i18n';
+import {
+  LuCamera,
+  LuFocus,
+  LuMonitor,
+  LuPlug,
+  LuShieldAlert,
+  LuWaves,
+} from 'react-icons/lu';
 
 import s from './PopularServices.module.scss';
 
@@ -13,12 +21,15 @@ export default function PopularServices({
   modelName = 'iPhone',
   priceTargetId = 'cenas',
   excludeServiceKey = 'ekrana-maina',
+  content,
 }) {
+  const isPhoto = variant === 'photo';
   const isModelPage = variant === 'model';
   const isOtherServices = variant === 'other-services';
-  const { copy, services } = isModelPage
+  const resolved = isPhoto ? content : isModelPage
     ? getIphoneModelServices(modelName, locale)
     : getIphonePopularServices(locale);
+  const { copy, services } = resolved;
   const visibleServices = isOtherServices
     ? services.filter((service) => service.serviceKey !== excludeServiceKey)
     : services;
@@ -32,14 +43,14 @@ export default function PopularServices({
 
   return (
     <section
-      id="iphone-services"
+      id={isPhoto ? 'photo-services' : 'iphone-services'}
       className={s.section}
-      aria-labelledby="iphone-services-title"
+      aria-labelledby={isPhoto ? 'photo-services-title' : 'iphone-services-title'}
     >
       <div className={s.container}>
         <div className={s.header}>
-          <h2 id="iphone-services-title">
-            {isModelPage ? copy.title : isOtherServices ? (
+          <h2 id={isPhoto ? 'photo-services-title' : 'iphone-services-title'}>
+            {isPhoto ? <>{copy.titleStart}<span>{copy.titleAccent}</span></> : isModelPage ? copy.title : isOtherServices ? (
               locale === 'ru' ? <>Другие виды <span>ремонта iPhone</span></> : <>Citi iPhone <span>remonta veidi</span></>
             ) : <>{copy.titleStart}<span>{copy.titleAccent}</span></>}
           </h2>
@@ -49,13 +60,14 @@ export default function PopularServices({
         </div>
 
         <div className={s.grid}>
-          {visibleServices.map((service) => {
-            const { Icon } = service;
+          {visibleServices.map((service, index) => {
+            const PhotoIcon = [LuCamera, LuFocus, LuMonitor, LuPlug, LuShieldAlert, LuWaves][index];
+            const Icon = service.Icon || PhotoIcon;
 
             return (
               <article
                 className={`${s.card} ${isModelPage ? s.modelCard : ''}`}
-                key={service.href}
+                key={service.href || service.title}
               >
                 <div className={s.iconWrap} aria-hidden="true">
                   <Icon />
@@ -65,13 +77,17 @@ export default function PopularServices({
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
 
-                  {!isModelPage && !isOtherServices && service.note && (
+                  {(isPhoto || (!isModelPage && !isOtherServices)) && service.note && (
                     <p className={s.masterNote}>
                       <span>{copy.noteLabel}</span> {service.note}
                     </p>
                   )}
 
-                  {!isModelPage && !isOtherServices && (
+                  {isPhoto ? (
+                    <div className={s.priceBlock}>
+                      <span className={s.priceValue}>{service.price}</span>
+                    </div>
+                  ) : !isModelPage && !isOtherServices && (
                     <div className={s.priceBlock}>
                       <span className={s.priceValue}>{service.price}</span>
                       <p className={s.priceLine}>{copy.priceLine}</p>
@@ -81,7 +97,7 @@ export default function PopularServices({
                     </div>
                   )}
 
-                  <div
+                  {!isPhoto && <div
                     className={`${s.actions} ${isModelPage ? s.modelActions : ''}`}
                   >
                     <Link className={s.serviceLink} href={service.href}>
@@ -92,7 +108,7 @@ export default function PopularServices({
                         {copy.priceLink}
                       </a>
                     )}
-                  </div>
+                  </div>}
                 </div>
               </article>
             );

@@ -34,6 +34,8 @@
   line-height: $line-height-heading;
   font-weight: $font-weight-semibold;
   color: $color-text;
+
+  span { color: $color-accent; }
 }
 
 .h3 {

@@ -120,6 +120,14 @@ const QUICK_FACTS = {
         ['locations', '{locations}'],
         ['sameDay', 'Biežākie iPhone remonti tajā pašā dienā'],
       ],
+      photo: [
+        ['warranty', '90 dienu garantija'],
+        ['diagnostics', 'Diagnostika pirms remonta'],
+        ['price', 'Cena saskaņota pirms darba'],
+        ['parts', 'Fotoaparātu un objektīvu remonts'],
+        ['locations', '{locations}'],
+        ['finalCheck', 'Pārbaude pēc remonta'],
+      ],
       phone: [
         ['warranty', '90 dienu garantija'],
         ['diagnostics', 'Diagnostika pirms remonta'],
@@ -236,6 +244,14 @@ const QUICK_FACTS = {
         ['parts', 'Оригинальные / OEM детали'],
         ['locations', '{locations}'],
         ['sameDay', 'Популярный ремонт iPhone - в тот же день'],
+      ],
+      photo: [
+        ['warranty', 'Гарантия 90 дней'],
+        ['diagnostics', 'Диагностика до ремонта'],
+        ['price', 'Цена согласована до начала работ'],
+        ['parts', 'Ремонт фотоаппаратов и объективов'],
+        ['locations', '{locations}'],
+        ['finalCheck', 'Проверка после ремонта'],
       ],
       phone: [
         ['warranty', 'Гарантия 90 дней'],
