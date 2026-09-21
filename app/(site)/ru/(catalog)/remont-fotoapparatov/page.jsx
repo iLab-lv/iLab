@@ -13,7 +13,8 @@ const locale = 'ru';
 const copy = getPhotoRepairContent(locale);
 const lvPath = localizedCategoryPath(ROUTE_KEY, 'lv');
 const ruPath = localizedCategoryPath(ROUTE_KEY, 'ru');
-const heroImage = '/images/categories/landing_hero.webp';
+const heroImage = '/images/categories/fotoaparatu_remonts.webp';
+const lensImage = '/images/categories/lens-repair.webp';
 
 export const metadata = buildSeoMetadata({
   locale,
@@ -60,7 +61,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd id="remont-fotoapparatov-jsonld" data={jsonLd} />
-      <PhotoRepairPage locale={locale} baseHref={ruPath} siteSettings={siteSettings} reviewsSummary={reviewsSummary} />
+      <PhotoRepairPage locale={locale} baseHref={ruPath} siteSettings={siteSettings} reviewsSummary={reviewsSummary} heroImage={heroImage} lensImage={lensImage} />
     </>
   );
 }

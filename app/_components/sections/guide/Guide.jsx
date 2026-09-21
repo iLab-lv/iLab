@@ -1,10 +1,10 @@
 import { getGuideContent, getGuidePresentation } from './guide.i18n';
 import s from './Guide.module.scss';
 
-export default function Guide({ id = 'guide', locale = 'lv', variant = 'iphone', headingLevel = 2 }) {
-  const content = getGuideContent(locale, variant);
-  const parts = content.parts || [];
-  const presentation = getGuidePresentation(locale, variant, content);
+export default function Guide({ id = 'guide', locale = 'lv', variant = 'iphone', headingLevel = 2, content: suppliedContent }) {
+  const content = suppliedContent || getGuideContent(locale, variant);
+  const parts = suppliedContent?.cards || content.parts || [];
+  const presentation = suppliedContent || getGuidePresentation(locale, variant, content);
 
   if (!Array.isArray(parts) || parts.length === 0) return null;
 

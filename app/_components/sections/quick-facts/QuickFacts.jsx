@@ -2,15 +2,8 @@ import { getQuickFacts } from './quickFacts.i18n';
 
 import s from './QuickFacts.module.scss';
 
-export default function QuickFacts({
-  variant = 'phone',
-  locale = 'lv',
-  facts: suppliedFacts,
-  ariaLabel: suppliedAriaLabel,
-}) {
-  const defaults = getQuickFacts(variant, locale);
-  const facts = suppliedFacts || defaults.facts;
-  const ariaLabel = suppliedAriaLabel || defaults.ariaLabel;
+export default function QuickFacts({ variant = 'phone', locale = 'lv' }) {
+  const { ariaLabel, facts } = getQuickFacts(variant, locale);
   const hasDescriptions = facts.some((fact) => fact.description);
 
   return (

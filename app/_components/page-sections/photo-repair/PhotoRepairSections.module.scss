@@ -1,0 +1,37 @@
+@use '@/styles/_tokens.scss' as *;
+@use '@/styles/_layout.scss' as layout;
+
+.container { @include layout.catalog-container; }
+.lensSection,.brandSection { padding-block:clamp($space-2xl,7vw,96px);border-bottom:$border-thin solid rgba(255,255,255,.08);background:#030303; }
+.lensSection { background:radial-gradient(circle at 90% 10%,rgba(34,211,238,.12),transparent 32rem),#030303; }
+.eyebrow { display:inline-flex;margin-bottom:$space-md;color:$color-accent;font-size:$font-size-sm;font-weight:$font-weight-semibold;letter-spacing:.04em;text-transform:uppercase; }
+.lensLead { display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);align-items:center;gap:clamp($space-xl,6vw,80px); }
+.lensLead h2,.header h2 { margin:0;color:$color-text;font-size:clamp(2rem,4vw,$font-size-h4);line-height:$line-height-heading; }
+.lensLead h2 span,.header h2 span { color:$color-accent; }
+.lensLead p,.header p,.brandList p,.lensGrid p { color:$color-text-2;line-height:1.65; }
+.lensVisual,.lensImage { min-height:360px;border:$border-thin solid rgba(34,211,238,.2);border-radius:50% 8px 50% 8px;background-position:center;background-size:cover; }
+.lensVisual { display:grid;place-items:center;color:$color-accent;background:radial-gradient(circle,rgba(34,211,238,.18),rgba(3,3,3,.9) 62%); }
+.lensVisual svg { width:45%;height:45%;filter:drop-shadow(0 0 35px rgba(34,211,238,.25)); }
+.lensGrid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp($space-md,2vw,$space-xl);margin-top:clamp($space-xl,4vw,$space-2xl); }
+.lensGrid article { display:flex;min-width:0;flex-direction:column;padding:clamp($space-lg,2.5vw,$space-xl);border-top:2px solid rgba(34,211,238,.45);background:rgba(255,255,255,.025); }
+.lensGrid i { display:block;margin-bottom:$space-md;color:$color-accent;font-size:1.5rem;line-height:1; }
+.lensGrid h3,.brandList h3 { color:$color-text;font-size:$font-size-xl;line-height:$line-height-heading; }
+.lensGrid h3 { margin:0 0 $space-md; }
+.lensGrid article>p { margin:0;color:$color-text-2;line-height:1.7; }
+.lensGrid article>div { margin-top:$space-xl;padding-top:$space-lg;border-top:$border-thin solid rgba(255,255,255,.09); }
+.lensGrid strong { display:block;margin:0 0 $space-xs;color:$color-accent;font-size:$font-size-sm; }
+.lensGrid article>div p { margin:0;line-height:1.65; }
+.expertNote { max-width:920px;margin:$space-xl 0 0;padding:$space-lg;border-left:3px solid $color-accent;color:$color-text;background:rgba(34,211,238,.07);line-height:1.65; }
+.header { max-width:860px;margin-bottom:$space-xl; }
+.brandList { border-top:$border-thin solid rgba(255,255,255,.13); }
+.brandRow { display:grid;grid-template-columns:minmax(240px,.42fr) minmax(0,1fr);align-items:stretch;border-bottom:$border-thin solid rgba(255,255,255,.13);background:linear-gradient(90deg,rgba(34,211,238,.025),transparent 44%); }
+.brandIdentity { display:flex;min-height:138px;align-items:center;padding:clamp($space-md,2.4vw,$space-lg);overflow:hidden;background:radial-gradient(circle at 42% 50%,rgba(34,211,238,.15),transparent 68%); }
+.brandLogo { width:auto;max-width:min(230px,92%);height:auto;max-height:76px;object-fit:contain;object-position:left center;opacity:.96; }
+.brandCopy { display:flex;flex-direction:column;justify-content:center;padding:clamp($space-lg,2.8vw,$space-xl); }
+.brandCopy h3 { margin:0 0 $space-sm;font-size:clamp($font-size-xl,2.4vw,2rem); }
+.brandCopy>p { max-width:650px;margin:0; }
+.familyList { display:flex;flex-wrap:wrap;gap:$space-xs;margin:$space-md 0 0;padding:0;list-style:none; }
+.familyList li { position:relative;isolation:isolate;min-height:30px;padding:6px 12px;overflow:hidden;border:$border-thin solid $glass-border-2;border-radius:$radius-pill;color:$color-text;background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035)),$glass-bg-weak;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.18);font-size:$font-size-sm;font-weight:$font-weight-semibold;line-height:1.1;-webkit-backdrop-filter:saturate($glass-saturate) blur(8px);backdrop-filter:saturate($glass-saturate) blur(8px); }
+.familyList li::before { position:absolute;z-index:-1;top:-60%;left:8%;width:62%;height:110%;border-radius:50%;content:'';background:rgba(34,211,238,.12);filter:blur(10px); }
+@media(max-width:$bp-lg){.lensLead{grid-template-columns:1fr}.lensVisual,.lensImage{min-height:280px}.brandRow{grid-template-columns:minmax(190px,.4fr) minmax(0,1fr)}.brandLogo{max-width:min(200px,90%)}.brandCopy{padding:$space-lg}}
+@media(max-width:$bp-sm){.lensSection,.brandSection{padding-block:$space-xl}.lensGrid{grid-template-columns:1fr}.brandRow{grid-template-columns:1fr}.brandIdentity{min-height:108px;padding:$space-lg 0 $space-md}.brandLogo{max-width:210px}.brandCopy{padding:$space-md 0 $space-xl}.familyList li{padding:5px 9px}}
