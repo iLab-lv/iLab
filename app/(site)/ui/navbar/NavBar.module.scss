@@ -1,7 +1,7 @@
 /* Fixed glossy header
    Breakpoints:
-   - Desktop (≥1360px): full nav + Locator + Sazināties buttons
-   - Tablet (768–1359px): hamburger nav + Locator + Sazināties buttons
+   - Desktop (≥1200px): full nav + Locator + Sazināties buttons
+   - Tablet (768–1199px): hamburger nav + Locator + Sazināties buttons
    - Mobile (<768px): Locator icon + Cenas + hamburger
 */
 @use '../../../styles/_tokens.scss' as *;
@@ -38,13 +38,13 @@
   gap: $space-md;
 }
 
-/* ===== Desktop nav (only ≥1360px) ===== */
+/* ===== Desktop nav (only ≥1200px) ===== */
 .nav {
   display: none;
   align-items: center;
   gap: $space-sm;
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1200px) {
     display: flex;
   }
 }
@@ -252,7 +252,7 @@
   }
 }
 
-/* Hamburger visible <1360px */
+/* Hamburger visible <1200px */
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -277,7 +277,7 @@
     background: rgba(255, 255, 255, 0.06);
   }
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1200px) {
     display: none;
   }
 }
@@ -319,7 +319,7 @@
   stroke-width: 1.75;
 }
 
-/* ===== Mobile drawer (hidden ≥1360px) ===== */
+/* ===== Mobile drawer (hidden ≥1200px) ===== */
 .mobileMenu {
   position: fixed;
   inset: calc(#{$header-mobile-height} + env(safe-area-inset-top)) 0 0 0;
@@ -342,7 +342,7 @@
     background: $glass-fallback-strong;
   }
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1200px) {
     display: none;
   }
 }
@@ -471,7 +471,7 @@
 }
 
 /* Tablet/mobile: remove pill around actions for tighter right edge */
-@media (max-width: 1359px) {
+@media (max-width: 1199px) {
   .actionsCluster {
     background: transparent;
     border: 0;
