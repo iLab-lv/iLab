@@ -32,7 +32,7 @@ const strings = {
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/back-cover.webp',
   heroBodyHtml:
-    '<p><strong>iPhone aizmugures vāciņa maiņa Rīgā</strong> iLab servisā - kvalitatīva korpusa detaļas nomaiņa, precīza diagnostika un <strong>90 dienu garantija</strong>. Palīdzam, ja aizmugures stikls ir saplaisājis, atdalījies vai bojāts pēc kritiena.</p>',
+    '<p><strong>iPhone aizmugures vāciņa maiņa Rīgā</strong> iLab servisā - kvalitatīva korpusa detaļas nomaiņa, precīza diagnostika un <strong>garantija līdz 1 gadam</strong>. Palīdzam, ja aizmugures stikls ir saplaisājis, atdalījies vai bojāts pēc kritiena.</p>',
 
   priceTitle: 'Aizmugures vāciņa maiņas cenas pēc modeļa',
   ctaLabel: 'Pieteikties remontam',
@@ -43,7 +43,7 @@ const strings = {
   serviceName: 'iPhone aizmugures vāciņa maiņa Rīgā',
   serviceType: 'iPhone aizmugures vāciņa maiņa',
   serviceDescription:
-    'iPhone aizmugures vāciņa maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPhone aizmugures vāciņa maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',
@@ -51,7 +51,7 @@ const strings = {
 
   headerTitle: 'iPhone aizmugures vāciņa maiņa Rīgā',
   headerLead:
-    'Mainām iPhone aizmugures stiklu vai korpusa vāciņu, ja tas ir saplaisājis, atlīmējies, saskrāpēts vai bojāts pēc kritiena. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    'Mainām iPhone aizmugures stiklu vai korpusa vāciņu, ja tas ir saplaisājis, atlīmējies, saskrāpēts vai bojāts pēc kritiena. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   applyAria: 'Pieteikties remontam',
@@ -78,7 +78,7 @@ const strings = {
     },
     {
       name: 'Garantija',
-      text: 'Izsniedzam 90 dienu garantiju veiktajam darbam un uzstādītajai detaļai.',
+      text: 'Izsniedzam garantiju līdz 1 gadam veiktajam darbam un uzstādītajai detaļai.',
     },
   ],
 };

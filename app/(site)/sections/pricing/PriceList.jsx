@@ -13,7 +13,7 @@ function getStrings(locale = 'lv') {
       untilPrefix: 'до',
       notes: [
         'Бесплатная диагностика. Точную цену подтверждаем после проверки.',
-        'Гарантия 90 дней на все ремонтные работы.',
+        'Гарантия до 1 года на все ремонтные работы.',
         'Цены указаны с учётом стоимости детали и работы.',
         'Указанная цена действительна, если деталь есть в наличии на складе.',
       ],
@@ -31,7 +31,7 @@ function getStrings(locale = 'lv') {
     untilPrefix: 'līdz',
     notes: [
       'Bezmaksas diagnostika. Precīzu cenu apstiprinām pēc pārbaudes.',
-      '90 dienu garantija visiem remontdarbiem.',
+      'garantija līdz 1 gadam visiem remontdarbiem.',
       'Cenas norādītas ar detaļu un darba izmaksām.',
       'Norādītā cena ir spēkā, ja detaļa ir pieejama noliktavā.',
     ],

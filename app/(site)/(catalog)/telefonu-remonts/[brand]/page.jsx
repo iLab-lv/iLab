@@ -88,7 +88,7 @@ const processSteps = [
   },
   {
     title: 'Garantija',
-    text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+    text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
   },
 ];
 
@@ -147,7 +147,7 @@ function getPageStrings({ brandName, page }) {
 
   const heroHtml =
     pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
-    `<p><strong>${brandName} telefonu remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`;
+    `<p><strong>${brandName} telefonu remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>garantiju līdz 1 gadam</strong>.</p>`;
 
   return {
     introTitle: `${brandName} telefonu remonts - ko mēs darām`,

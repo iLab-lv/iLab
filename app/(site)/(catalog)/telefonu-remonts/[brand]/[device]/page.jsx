@@ -78,7 +78,7 @@ const labels = {
   howToName: 'Telefonu remonts',
   defaultHeaderTitle: 'Telefonu remonts',
   defaultHeaderLead:
-    'Telefonu remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    'Telefonu remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju līdz 1 gadam.',
   pricesCtaLabel: 'Skatīt cenas',
   metaFallbackTitle: (brandLabel) => `${brandLabel} telefonu remonts | iLab`,
   metaFallbackDescriptionModel: (name) =>
@@ -110,7 +110,7 @@ const processSteps = [
   },
   {
     name: 'Garantija',
-    text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+    text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
   },
 ];
 

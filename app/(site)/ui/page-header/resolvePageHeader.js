@@ -83,7 +83,7 @@ function getComputerBrandHero(brandSlug) {
     h1: `${brandName} datoru remonts`,
     lead:
       brand.lead ||
-      `Profesionāls ${brandName} datoru remonts Rīgā - portatīvie un galda datori, ekrāns, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un 90 dienu garantija.`,
+      `Profesionāls ${brandName} datoru remonts Rīgā - portatīvie un galda datori, ekrāns, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un garantija līdz 1 gadam.`,
     scrollCta: {
       label: 'Skatīt modeļus un cenas',
       targetId: 'brand-modeli',

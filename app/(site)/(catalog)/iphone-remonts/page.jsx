@@ -35,7 +35,7 @@ const ruPath = localizedCategoryPath(HUB_KEY, 'ru');
 const fallbackMetaTitle = 'iPhone remonts Rīgā | iLab';
 
 const fallbackDescription =
-  'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.';
+  'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un garantija līdz 1 gadam iLab servisā Rīgā.';
 
 const fallbackH1 = 'iPhone remonts Rīgā';
 
@@ -64,7 +64,7 @@ const labels = {
     },
     {
       name: 'Garantija',
-      text: 'Izsniedzam 90 dienu garantiju veiktajam darbam un uzstādītajām detaļām.',
+      text: 'Izsniedzam garantiju līdz 1 gadam veiktajam darbam un uzstādītajām detaļām.',
     },
   ],
 };

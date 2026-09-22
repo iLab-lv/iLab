@@ -3,7 +3,7 @@ const HERO_CONTENT = {
     default: {
       title: 'Jūsu mobilo ierīču un datoru remonta eksperts Rīgā',
       subtitle:
-        'Remonts tajā pašā dienā. 90 dienu garantija. Divas filiāles Rīgā: Domina un Spice Life. Strādājam kopš 2013 gada',
+        'Remonts tajā pašā dienā. garantija līdz 1 gadam. Divas filiāles Rīgā: Domina un Spice Life. Strādājam kopš 2013 gada',
       cta: {
         label: 'Apskatīt pakalpojumus',
         href: '#services',
@@ -22,7 +22,7 @@ const HERO_CONTENT = {
       title:
         'Ваш эксперт по ремонту мобильных устройств и компьютеров в Риге',
       subtitle:
-        'Ремонт в тот же день. Гарантия 90 дней. Два филиала в Риге: Domina и Spice. Работаем с 2013 года.',
+        'Ремонт в тот же день. Гарантия до 1 года. Два филиала в Риге: Domina и Spice. Работаем с 2013 года.',
       cta: {
         label: 'Посмотреть услуги',
         href: '#services',

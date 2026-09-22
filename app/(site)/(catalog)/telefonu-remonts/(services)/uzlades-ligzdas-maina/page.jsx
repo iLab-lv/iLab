@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu uzlādes ligzdas maiņa Rīgā',
   pageDescription:
-    'Neuzlādējas, jākustina vads vai ports vaļīgs? Telefonu uzlādes ligzdas tīrīšana un maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Neuzlādējas, jākustina vads vai ports vaļīgs? Telefonu uzlādes ligzdas tīrīšana un maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,13 +41,13 @@ const strings = {
 
   headerTitle: 'Telefonu uzlādes ligzdas maiņa Rīgā',
   headerLead:
-    'Remontējam un mainām telefonu uzlādes ligzdu, ja uzlāde pārtrūkst, jākustina vads vai ports nereaģē. Pirms remonta veicam diagnostiku un pēc remonta sniedzam 90 dienu garantiju.',
+    'Remontējam un mainām telefonu uzlādes ligzdu, ja uzlāde pārtrūkst, jākustina vads vai ports nereaģē. Pirms remonta veicam diagnostiku un pēc remonta sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/uzlades_ligzda_remonts.webp',
   heroBodyHtml:
-    '<p><strong>Neuzlādējas vai jākustina vads?</strong> Veicam uzlādes porta <strong>tīrīšanu</strong> un, ja nepieciešams, <strong>uzlādes ligzdas nomaiņu</strong>. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>Neuzlādējas vai jākustina vads?</strong> Veicam uzlādes porta <strong>tīrīšanu</strong> un, ja nepieciešams, <strong>uzlādes ligzdas nomaiņu</strong>. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   introTitle: 'Telefonu uzlādes ligzdas maiņa Rīgā',
   introP1:
@@ -84,7 +84,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, sniedzam ieteikumus par lādētāju un kabeļu drošu lietošanu.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, sniedzam ieteikumus par lādētāju un kabeļu drošu lietošanu.',
     },
   ],
 
@@ -93,7 +93,7 @@ const strings = {
   serviceName: 'Telefonu uzlādes ligzdas maiņa Rīgā',
   serviceType: 'Telefonu uzlādes ligzdas maiņa',
   serviceDescription:
-    'Telefonu uzlādes ligzdas tīrīšana un nomaiņa Rīgā: ja uzlāde pārtrūkst, jākustina vads vai ports nereaģē. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Telefonu uzlādes ligzdas tīrīšana un nomaiņa Rīgā: ja uzlāde pārtrūkst, jākustina vads vai ports nereaģē. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   processHowToName: 'Telefonu uzlādes ligzdas remonta process iLab',
   processHowToDescription:

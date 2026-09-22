@@ -49,7 +49,7 @@ function getServices(locale) {
       bullets: [
         'Face ID сохраняется',
         'True Tone при возможности',
-        'Гарантия 90 дней',
+        'Гарантия до 1 года',
       ],
       prices: [
         '13 — от 110€',
@@ -69,7 +69,7 @@ function getServices(locale) {
       bullets: [
         'Проверка состояния батареи',
         'Замена за 20–40 минут',
-        'Гарантия 90 дней',
+        'Гарантия до 1 года',
       ],
       prices: [
         '11 — от 60€',
@@ -89,7 +89,7 @@ function getServices(locale) {
       bullets: [
         'Точное снятие стекла',
         'Восстановление внешнего вида корпуса',
-        'Гарантия 90 дней',
+        'Гарантия до 1 года',
       ],
       prices: [
         '12 — от 69€',
@@ -129,7 +129,7 @@ function getServices(locale) {
       bullets: [
         'Замена стекла камеры',
         'Проверка фокуса',
-        'Гарантия 90 дней',
+        'Гарантия до 1 года',
       ],
       prices: [
         'Стекло камеры — от 29€',
@@ -180,7 +180,7 @@ function getServices(locale) {
         bullets: [
           'Face ID saglabāšana',
           'True Tone, ja iespējams',
-          '90 dienu garantija',
+          'garantija līdz 1 gadam',
         ],
         prices: [
           'iPhone 13 — no 110€',
@@ -200,7 +200,7 @@ function getServices(locale) {
         bullets: [
           'Akumulatora veselības pārbaude',
           'Baterijas maiņa 20–40 minūtēs',
-          '90 dienu garantija',
+          'garantija līdz 1 gadam',
         ],
         prices: [
           'iPhone 11 — no 60€',
@@ -220,7 +220,7 @@ function getServices(locale) {
         bullets: [
           'Precīza stikla noņemšana',
           'Korpusa vizuāla atjaunošana',
-          '90 dienu garantija',
+          'garantija līdz 1 gadam',
         ],
         prices: [
           'iPhone 12 — no 69€',
@@ -260,7 +260,7 @@ function getServices(locale) {
         bullets: [
           'Kameras stikla maiņa',
           'Fokusa pārbaude',
-          '90 dienu garantija',
+          'garantija līdz 1 gadam',
         ],
         prices: [
           'Kameras stikls — no 29€',

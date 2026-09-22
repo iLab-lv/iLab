@@ -19,7 +19,7 @@ const steps = [
   {
     title: 'Salabojam un pārbaudām',
     text:
-      'Veicam remontu, pārbaudām svarīgākās iPhone funkcijas un izsniedzam ierīci ar 90 dienu garantiju.',
+      'Veicam remontu, pārbaudām svarīgākās iPhone funkcijas un izsniedzam ierīci ar garantiju līdz 1 gadam.',
   },
 ];
 

@@ -28,7 +28,7 @@ export default function PhotoRepairPage({
 }) {
   const copy = getPhotoRepairContent(locale);
   const headings = locale === 'ru' ? {
-    intro: { titleStart: 'Ремонт фотоаппаратов и ', titleAccent: 'фототехники', titleEnd: ' — что мы ремонтируем' },
+    intro: { titleStart: 'Ремонт фотоаппаратов и ', titleAccent: 'фототехники', titleEnd: ' - что мы ремонтируем' },
     services: { titleStart: 'Популярные виды ', titleAccent: 'ремонта фотоаппаратов' },
     lenses: { titleStart: 'Ремонт объективов ', titleAccent: 'в Риге' },
     brands: { titleStart: 'Ремонт фотоаппаратов ', titleAccent: 'Canon, Nikon и Sony' },
@@ -39,7 +39,7 @@ export default function PhotoRepairPage({
     process: { titleStart: 'Как проходит ', titleAccent: 'ремонт фотоаппаратов' },
     guide: { titleStart: 'Что важно знать перед ', titleAccent: 'ремонтом фотоаппарата' },
   } : {
-    intro: { titleStart: 'Fotoaparātu un ', titleAccent: 'fototehnikas remonts', titleEnd: ' — ko mēs remontējam' },
+    intro: { titleStart: 'Fotoaparātu un ', titleAccent: 'fototehnikas remonts', titleEnd: ' - ko mēs remontējam' },
     services: { titleStart: 'Populārākie ', titleAccent: 'fotoaparātu remonti' },
     lenses: { titleStart: 'Objektīvu ', titleAccent: 'remonts Rīgā' },
     brands: { titleStart: 'Canon, Nikon un Sony ', titleAccent: 'fotoaparātu remonts' },
@@ -78,8 +78,8 @@ export default function PhotoRepairPage({
     ...copy.quality,
     ...headings.quality,
     facts: locale === 'ru'
-      ? ['Гарантия 90 дней', 'Цена до ремонта', 'Проверка после ремонта', 'Ремонт после диагностики']
-      : ['90 dienu garantija', 'Cena pirms remonta', 'Pārbaude pēc remonta', 'Remonts pēc diagnostikas'],
+      ? ['Гарантия до 1 года', 'Цена до ремонта', 'Проверка после ремонта', 'Ремонт после диагностики']
+      : ['Garantija līdz 1 gadam', 'Cena pirms remonta', 'Pārbaude pēc remonta', 'Remonts pēc diagnostikas'],
   };
   const problemAnswersContent = {
     eyebrow: copy.problems.eyebrow,

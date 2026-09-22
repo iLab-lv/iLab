@@ -36,7 +36,7 @@ export default function IphoneBatteryReplacementAdsLandingPage() {
         subtitle={
           <>
             Telefons ātri izlādējas vai pēkšņi izslēdzas? Nomainām bateriju tajā pašā dienā.
-            90&nbsp;dienu garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Life.
+            garantija līdz 1 gadam, divi servisa centri&nbsp;Rīgā – Domina un Spice Life.
           </>
         }
         imageSrc="/images/categories/baterijas_maina.webp"

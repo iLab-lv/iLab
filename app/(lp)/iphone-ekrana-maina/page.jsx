@@ -35,7 +35,7 @@ export default function IphoneScreenReplacementAdsLandingPage() {
         subtitle={
           <>
             Saplaisājis vai nereaģējošs ekrāns? Nomainām tajā pašā dienā.
-            90&nbsp;dienu garantija, divi servisa centri&nbsp;Rīgā – Domina un Spice Life.
+            garantija līdz 1 gadam, divi servisa centri&nbsp;Rīgā – Domina un Spice Life.
           </>
         }
         imageSrc="/images/categories/screen-replacement.webp"

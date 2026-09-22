@@ -12,7 +12,7 @@ const BASIC_FAQ = {
     ),
     faqItem(
       'Vai ir garantija uz veiktajiem darbiem?',
-      'Jā, nodrošinām <strong>90 dienu garantiju</strong> veiktajam darbam un izmantotajām detaļām. Garantijas nosacījumus izskaidrojam pirms remonta uzsākšanas.'
+      'Jā, nodrošinām <strong>garantiju līdz 1 gadam</strong> veiktajam darbam un izmantotajām detaļām. Garantijas nosacījumus izskaidrojam pirms remonta uzsākšanas.'
     ),
     faqItem(
       'Vai nepieciešams pieraksts, vai var atnest ierīci uzreiz?',
@@ -38,7 +38,7 @@ const BASIC_FAQ = {
     ),
     faqItem(
       'Есть ли гарантия на выполненные работы?',
-      'Да, мы предоставляем <strong>гарантию 90 дней</strong> на выполненные работы и установленные детали. Условия гарантии объясняем до начала ремонта.'
+      'Да, мы предоставляем <strong>гарантию до 1 года</strong> на выполненные работы и установленные детали. Условия гарантии объясняем до начала ремонта.'
     ),
     faqItem(
       'Нужно ли записываться заранее или можно принести устройство сразу?',
@@ -84,7 +84,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Vai iPhone remontam ir garantija?',
-        'Jā, nodrošinām <strong>90 dienu garantiju</strong> iPhone remontam, ieskaitot darbu un izmantotās detaļas. Nosacījumus paskaidrojam pirms remonta uzsākšanas.'
+        'Jā, nodrošinām <strong>garantiju līdz 1 gadam</strong> iPhone remontam, ieskaitot darbu un izmantotās detaļas. Nosacījumus paskaidrojam pirms remonta uzsākšanas.'
       ),
       faqItem(
         'Vai ir vērts remontēt iPhone vai labāk pirkt jaunu?',
@@ -118,7 +118,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Есть ли гарантия на ремонт iPhone?',
-        'Да, мы предоставляем <strong>гарантию 90 дней</strong> на ремонт iPhone, включая работу и установленные детали. Условия объясняем до начала ремонта.'
+        'Да, мы предоставляем <strong>гарантию до 1 года</strong> на ремонт iPhone, включая работу и установленные детали. Условия объясняем до начала ремонта.'
       ),
       faqItem(
         'Стоит ли ремонтировать iPhone или лучше купить новый?',
@@ -155,7 +155,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Vai pēc telefona remonta būs garantija?',
-        'Jā, nodrošinām <strong>90 dienu garantiju</strong> veiktajam remontam un izmantotajām detaļām.'
+        'Jā, nodrošinām <strong>garantiju līdz 1 gadam</strong> veiktajam remontam un izmantotajām detaļām.'
       ),
       faqItem(
         'Vai ir vērts remontēt telefonu ar saplaisājušu ekrānu?',
@@ -189,7 +189,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Есть ли гарантия на ремонт телефона?',
-        'Да, мы предоставляем <strong>гарантию 90 дней</strong> на выполненный ремонт и установленные детали.'
+        'Да, мы предоставляем <strong>гарантию до 1 года</strong> на выполненный ремонт и установленные детали.'
       ),
       faqItem(
         'Стоит ли ремонтировать телефон с разбитым экраном?',
@@ -218,7 +218,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Vai planšetdatora remontam ir garantija?',
-        'Jā, planšetdatoru remontam nodrošinām <strong>90 dienu garantiju</strong> veiktajam darbam un izmantotajām detaļām.'
+        'Jā, planšetdatoru remontam nodrošinām <strong>garantiju līdz 1 gadam</strong> veiktajam darbam un izmantotajām detaļām.'
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu planšetdatoru remonta serviss?',
@@ -252,7 +252,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Есть ли гарантия на ремонт планшета?',
-        'Да, на ремонт планшетов мы предоставляем <strong>гарантию 90 дней</strong> на выполненные работы и установленные детали.'
+        'Да, на ремонт планшетов мы предоставляем <strong>гарантию до 1 года</strong> на выполненные работы и установленные детали.'
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту планшетов?',
@@ -301,7 +301,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Vai datoru remontam ir garantija?',
-        'Jā, nodrošinām <strong>90 dienu garantiju</strong> darbam un izmantotajām detaļām.'
+        'Jā, nodrošinām <strong>garantiju līdz 1 gadam</strong> darbam un izmantotajām detaļām.'
       ),
     ]),
     ru: makeFaq('Часто задаваемые вопросы о ремонте компьютеров', [
@@ -335,7 +335,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Есть ли гарантия на ремонт компьютера?',
-        'Да, мы предоставляем <strong>гарантию 90 дней</strong> на выполненные работы и установленные детали.'
+        'Да, мы предоставляем <strong>гарантию до 1 года</strong> на выполненные работы и установленные детали.'
       ),
     ]),
   },
@@ -364,7 +364,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Vai Dyson remontam ir garantija?',
-        'Jā, Dyson remontam nodrošinām <strong>90 dienu garantiju</strong> veiktajam darbam un izmantotajām detaļām.'
+        'Jā, Dyson remontam nodrošinām <strong>garantiju līdz 1 gadam</strong> veiktajam darbam un izmantotajām detaļām.'
       ),
       faqItem(
         'Kur Rīgā atrodas jūsu Dyson remonta serviss?',
@@ -398,7 +398,7 @@ const CATEGORY_FAQ = {
       ),
       faqItem(
         'Есть ли гарантия на ремонт Dyson?',
-        'Да, на ремонт Dyson мы предоставляем <strong>гарантию 90 дней</strong> на выполненные работы и установленные детали.'
+        'Да, на ремонт Dyson мы предоставляем <strong>гарантию до 1 года</strong> на выполненные работы и установленные детали.'
       ),
       faqItem(
         'Где в Риге находится ваш сервис по ремонту Dyson?',

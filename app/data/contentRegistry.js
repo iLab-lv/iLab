@@ -18,7 +18,7 @@ const contentRegistry = {
       seo: {
         title: 'iPhone remonts Rīgā | iLab',
         metaDescription:
-          'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
+          'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un garantija līdz 1 gadam iLab servisā Rīgā.',
       },
       // Header (hub) content
       h1: 'iPhone remonts Rīgā',
@@ -76,7 +76,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
               text: `
 <p>iLab serviss piedāvā gan oriģinālās Apple detaļas, gan augstas kvalitātes OEM rezerves daļas. Izvēle tiek veikta kopā ar klientu, balstoties uz konkrētā modeļa īpatnībām, cenu un garantijas nosacījumiem.</p>
 
-<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam 90 dienu garantiju gan detaļām, gan darbam.</p>
+<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam garantiju līdz 1 gadam gan detaļām, gan darbam.</p>
 
 <p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam - pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
       `,
@@ -130,7 +130,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
         lead:
           'Ekrāni, baterijas, uzlādes ligzdas, kameras un citi planšetdatoru remonti. Ātra diagnostika, godīgas cenas, garantija.',
         bodyHtml:
-          '<p><strong>Planšetdatoru remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts un citi darbi. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong>.</p>',
+          '<p><strong>Planšetdatoru remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa, kameras remonts un citi darbi. Ātra diagnostika, skaidras cenas un <strong>garantija līdz 1 gadam</strong>.</p>',
         scrollCta: { label: 'Skatīt zīmolus un modeļus', targetId: 'brand-list' },
       },
     },
@@ -141,7 +141,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       hero: {
         h1: 'Datoru remonts',
         lead:
-          'Portatīvo un stacionāro datoru remonts - diagnostika, ekrāns, tastatūras, mātesplate, uzlāde, SSD/RAM uzlabošana, remonts pēc mitruma. Ātra diagnostika un 90 dienu garantija.',
+          'Portatīvo un stacionāro datoru remonts - diagnostika, ekrāns, tastatūras, mātesplate, uzlāde, SSD/RAM uzlabošana, remonts pēc mitruma. Ātra diagnostika un garantija līdz 1 gadam.',
         scrollCta: { label: 'Skatīt zīmolus un pakalpojumus', targetId: 'brand-list' },
       },
     },
@@ -151,7 +151,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       slug: 'dyson-remonts',
       h1: 'Dyson remonts Rīgā',
       lead:
-        'iLab meistari salabo Dyson bezvadu putekļsūcējus - veicam motora un baterijas maiņu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku. Ātra pārbaude pirms darba, skaidras izmaksas un 90 dienu garantija.',
+        'iLab meistari salabo Dyson bezvadu putekļsūcējus - veicam motora un baterijas maiņu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku. Ātra pārbaude pirms darba, skaidras izmaksas un garantija līdz 1 gadam.',
     },
   },
 
@@ -164,11 +164,11 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'iPhone ekrāna maiņa Rīgā | iLab',
         metaDescription:
-          'iPhone ekrāna un stikla maiņa tajā pašā dienā. Ātra diagnostika, kvalitatīvas detaļas, 90 dienu garantija.',
+          'iPhone ekrāna un stikla maiņa tajā pašā dienā. Ātra diagnostika, kvalitatīvas detaļas, garantija līdz 1 gadam.',
       },
       h1: 'iPhone ekrāna maiņa',
       lead:
-        'Nomainīsim saplaisājušu vai nereaģējošu ekrānu (displeju) tajā pašā dienā, izmantojot kvalitatīvas detaļas un sniedzot 90 dienu garantiju.',
+        'Nomainīsim saplaisājušu vai nereaģējošu ekrānu (displeju) tajā pašā dienā, izmantojot kvalitatīvas detaļas un sniedzot garantiju līdz 1 gadam.',
       scrollCta: { label: 'Skatīt ekrāna maiņas cenas', targetId: 'cenas', show: true },
     },
 
@@ -188,7 +188,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'iPhone uzlādes ligzdas maiņa Rīgā | iLab',
         metaDescription:
-          'Ātra un profesionāla iPhone uzlādes ligzdas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija. Bieži tajā pašā dienā.',
+          'Ātra un profesionāla iPhone uzlādes ligzdas maiņa Rīgā. Bezmaksas diagnostika, garantija līdz 1 gadam. Bieži tajā pašā dienā.',
       },
       h1: 'iPhone uzlādes ligzdas maiņa',
       lead:
@@ -200,7 +200,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'iPhone kameras remonts Rīgā | iLab',
         metaDescription:
-          'Miglainas bildes vai fokusēšanās problēmas? iPhone kameras remonts/maiņa ar pārbaudi un 90 dienu garantiju.',
+          'Miglainas bildes vai fokusēšanās problēmas? iPhone kameras remonts/maiņa ar pārbaudi un garantiju līdz 1 gadam.',
       },
       h1: 'iPhone kameras remonts un maiņa',
       lead:
@@ -211,7 +211,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'iPhone kameras maiņa Rīgā | iLab',
         metaDescription:
-          'Miglainas bildes vai fokusēšanās problēmas? Nomainīsim iPhone kameru ar pārbaudi un 90 dienu garantiju.',
+          'Miglainas bildes vai fokusēšanās problēmas? Nomainīsim iPhone kameru ar pārbaudi un garantiju līdz 1 gadam.',
       },
       h1: 'iPhone kameras maiņa',
       lead:
@@ -251,7 +251,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       },
       h1: 'iPhone ūdens bojājumi',
       lead:
-        'iPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas? Veicam diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto detaļu maiņu ar 90 dienu garantiju.',
+        'iPhone iekrita ūdenī vai pēc mitruma vairs neieslēdzas? Veicam diagnostiku, tīrīšanu, oksidācijas novēršanu un bojāto detaļu maiņu ar garantiju līdz 1 gadam.',
     },
 
 
@@ -260,18 +260,18 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'Telefonu ekrāna (displeja) maiņa Rīgā | iLab',
         metaDescription:
-          'Ātra un kvalitatīva telefonu ekrāna (displeja) maiņa Rīgā. Bezmaksas diagnostika, oriģinālas vai OEM detaļas, 90 dienu garantija. Bieži tajā pašā dienā.',
+          'Ātra un kvalitatīva telefonu ekrāna (displeja) maiņa Rīgā. Bezmaksas diagnostika, oriģinālas vai OEM detaļas, garantija līdz 1 gadam. Bieži tajā pašā dienā.',
       },
       h1: 'Telefonu ekrāna (displeja) maiņa',
       lead:
-        'Novēršam plaisas, tumšus plankumus un skāriena problēmas. Strādājam ātri un droši, izmantojot kvalitatīvas detaļas un sniedzot 90 dienu garantiju.',
+        'Novēršam plaisas, tumšus plankumus un skāriena problēmas. Strādājam ātri un droši, izmantojot kvalitatīvas detaļas un sniedzot garantiju līdz 1 gadam.',
     },
 
     'telefonu-remonts/baterijas-maina': {
       seo: {
         title: 'Telefonu akumulatora maiņa Rīgā | iLab',
         metaDescription:
-          'Tālrunis ātri izlādējas vai izslēdzas pie 10–20%? Telefonu akumulatora maiņa ar bezmaksas diagnostiku un 90 dienu garantiju.',
+          'Tālrunis ātri izlādējas vai izslēdzas pie 10–20%? Telefonu akumulatora maiņa ar bezmaksas diagnostiku un garantiju līdz 1 gadam.',
       },
       h1: 'Telefonu akumulatora maiņa',
       lead:
@@ -282,7 +282,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'Telefonu uzlādes ligzdas remonts/maina | iLab',
         metaDescription:
-          'Nenoturas kabelis, lēna vai nestabila uzlāde? Veicam uzlādes porta tīrīšanu, remontu vai nomaiņu ar 90 dienu garantiju.',
+          'Nenoturas kabelis, lēna vai nestabila uzlāde? Veicam uzlādes porta tīrīšanu, remontu vai nomaiņu ar garantiju līdz 1 gadam.',
       },
       h1: 'Telefonu uzlādes ligzdas remonts un maiņa',
       lead:
@@ -293,7 +293,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'Telefonu kameras remonts Rīgā | iLab',
         metaDescription:
-          'Miglaini attēli vai fokusēšanās problēmas? Telefonu kameras diagnostika un remonts/nomaiņa ar 90 dienu garantiju.',
+          'Miglaini attēli vai fokusēšanās problēmas? Telefonu kameras diagnostika un remonts/nomaiņa ar garantiju līdz 1 gadam.',
       },
       h1: 'Telefonu kameras remonts un maiņa',
       lead:
@@ -304,7 +304,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
       seo: {
         title: 'Telefonu skaļruņu un mikrofona remonts | iLab',
         metaDescription:
-          'Klusa skaņa, krakšķi vai sarunās nedzird? Telefonu skaļruņu un mikrofona remonts/tīrīšana ar 90 dienu garantiju.',
+          'Klusa skaņa, krakšķi vai sarunās nedzird? Telefonu skaļruņu un mikrofona remonts/tīrīšana ar garantiju līdz 1 gadam.',
       },
       h1: 'Telefonu skaļruņu un mikrofona remonts',
       lead:
@@ -353,14 +353,14 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     'par-ilab': {
       h1: 'Par iLab',
       lead:
-        'Mūsdienīgs remonta serviss Rīgā - tālruņi, planšetdatori, portatīvie datori un Dyson. Sertificēti meistari, ātra diagnostika un 90 dienu garantija.',
+        'Mūsdienīgs remonta serviss Rīgā - tālruņi, planšetdatori, portatīvie datori un Dyson. Sertificēti meistari, ātra diagnostika un garantija līdz 1 gadam.',
     },
 
     pieraksties: {
       seo: {
         title: 'Pieraksties remontam | iLab',
         metaDescription:
-          'Aizpildi pieteikumu telefonam, planšetdatoram, datoram vai Dyson. Sazināsimies, saskaņosim izmaksas un laiku. Ātra diagnostika un 90 dienu garantija.',
+          'Aizpildi pieteikumu telefonam, planšetdatoram, datoram vai Dyson. Sazināsimies, saskaņosim izmaksas un laiku. Ātra diagnostika un garantija līdz 1 gadam.',
       },
       h1: 'Pieraksties remontam',
       lead:

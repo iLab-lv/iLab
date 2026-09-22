@@ -33,18 +33,18 @@ const strings = {
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/kameras_remonts.webp',
   heroBodyHtml:
-    '<p><strong>iPhone kameras remonts Rīgā</strong> iLab servisā - kameras stikliņa maiņa, kameras moduļa nomaiņa, fokusēšanas un attēla kvalitātes problēmu diagnostika. Skaidra cena pirms darba un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>iPhone kameras remonts Rīgā</strong> iLab servisā - kameras stikliņa maiņa, kameras moduļa nomaiņa, fokusēšanas un attēla kvalitātes problēmu diagnostika. Skaidra cena pirms darba un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   headerTitle: 'iPhone kameras remonts Rīgā',
   headerLead:
-    'Palīdzam, ja iPhone kamera nefokusējas, rāda melnu ekrānu, attēls ir miglains, stikliņš ir saplaisājis vai kamera pēc kritiena vairs darbojas nekorekti. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc darba sniedzam 90 dienu garantiju.',
+    'Palīdzam, ja iPhone kamera nefokusējas, rāda melnu ekrānu, attēls ir miglains, stikliņš ir saplaisājis vai kamera pēc kritiena vairs darbojas nekorekti. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc darba sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   introTitle: 'iPhone kameras remonts un stikliņa maiņa',
   introP1:
     'Kameras problēmas ne vienmēr nozīmē, ka jāmaina viss modulis. Dažreiz pietiek ar <strong>kameras stikliņa maiņu</strong>, tīrīšanu vai savienojumu pārbaudi. Ja kamera nefokusējas, kratās, nerāda attēlu vai pēc kritiena darbojas nestabili, iLab servisā veicam diagnostiku un piemeklējam atbilstošu risinājumu.',
   introP2:
-    'Pārbaudām priekšējo un aizmugurējo kameru, zibspuldzi, fokusēšanu un attēla kvalitāti. Pirms darba sākšanas saskaņojam cenu un pēc remonta veicam gala testus. Darbam un uzstādītajām detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pārbaudām priekšējo un aizmugurējo kameru, zibspuldzi, fokusēšanu un attēla kvalitāti. Pirms darba sākšanas saskaņojam cenu un pēc remonta veicam gala testus. Darbam un uzstādītajām detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -76,7 +76,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Pēc remonta sniedzam 90 dienu garantiju darbam un uzstādītajām detaļām.',
+      text: 'Pēc remonta sniedzam garantiju līdz 1 gadam darbam un uzstādītajām detaļām.',
     },
   ],
 
@@ -86,7 +86,7 @@ const strings = {
   serviceName: 'iPhone kameras remonts Rīgā',
   serviceType: 'iPhone kameras remonts',
   serviceDescription:
-    'iPhone kameras remonts Rīgā: kameras stikliņa maiņa, kameras moduļa nomaiņa, diagnostika, skaidra cena un 90 dienu garantija.',
+    'iPhone kameras remonts Rīgā: kameras stikliņa maiņa, kameras moduļa nomaiņa, diagnostika, skaidra cena un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',

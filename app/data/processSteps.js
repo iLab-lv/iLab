@@ -23,7 +23,7 @@ export const processStepsLv = [
   },
   {
     title: 'Garantija',
-    text: 'Izsniedzam 90 dienu garantiju un sniedzam ieteikumus ierīces turpmākai lietošanai.',
+    text: 'Izsniedzam garantiju līdz 1 gadam un sniedzam ieteikumus ierīces turpmākai lietošanai.',
   },
 ]
 

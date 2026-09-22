@@ -33,18 +33,18 @@ const strings = {
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/uzlades_ligzda_remonts.webp',
   heroBodyHtml:
-    '<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā - profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>iPhone nelādējas, jākustina vads vai ports ir vaļīgs?</strong> Veicam ātru un drošu <strong>uzlādes ligzdas maiņu Rīgā</strong>, nepieciešamības gadījumā - profesionālu tīrīšanu un oksidācijas novēršanu. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   headerTitle: 'iPhone uzlādes ligzdas maiņa Rīgā',
   headerLead:
-    'Risinām uzlādes problēmas: iPhone nelādējas, jākustina vads vai savienojums ir nestabils. Pirms remonta veicam diagnostiku, tīrām portu vai nomainām ligzdu un pēc remonta sniedzam 90 dienu garantiju.',
+    'Risinām uzlādes problēmas: iPhone nelādējas, jākustina vads vai savienojums ir nestabils. Pirms remonta veicam diagnostiku, tīrām portu vai nomainām ligzdu un pēc remonta sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   introTitle: 'iPhone uzlādes ligzdas maiņa Rīgā',
   introP1:
     'Ja iPhone nelādējas, pazūd savienojums, jāpieliec kabelis noteiktā leņķī vai ports izskatās netīrs, <strong>visticamāk nepieciešama uzlādes ligzdas tīrīšana vai maiņa</strong>. iLab meistari veic <strong>diagnostiku</strong>, novērš oksidāciju un mehāniskus bojājumus vai uzstāda jaunu ligzdu - atkarībā no stāvokļa un modeļa.',
   introP2:
-    'Pārbaudām arī <strong>kabeli, adapteri, uzlādes ķēdi un bateriju</strong>, lai izslēgtu citus cēloņus. Populāros modeļus parasti salabojam <strong>60–120 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pārbaudām arī <strong>kabeli, adapteri, uzlādes ķēdi un bateriju</strong>, lai izslēgtu citus cēloņus. Populāros modeļus parasti salabojam <strong>60–120 minūtēs</strong>. Visam darbam un detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -76,7 +76,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+      text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
     },
   ],
 
@@ -86,7 +86,7 @@ const strings = {
   serviceName: 'iPhone uzlādes ligzdas maiņa Rīgā',
   serviceType: 'iPhone uzlādes ligzdas maiņa',
   serviceDescription:
-    'iPhone uzlādes ligzdas maiņa Rīgā: bezmaksas diagnostika, 90 dienu garantija, risinām nelādējas/oksidācijas/problēmas ar kabeli. Bieži tajā pašā dienā.',
+    'iPhone uzlādes ligzdas maiņa Rīgā: bezmaksas diagnostika, garantija līdz 1 gadam, risinām nelādējas/oksidācijas/problēmas ar kabeli. Bieži tajā pašā dienā.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',

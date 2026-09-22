@@ -66,7 +66,7 @@ export function getContactsPageStrings(locale = 'lv') {
             'Перед выполнением работ уточняем стоимость и согласовываем её с клиентом.',
         },
         {
-          title: '90 дней гарантии',
+          title: 'гарантия до 1 года',
           text:
             'Предоставляем гарантию на выполненные работы и использованные детали.',
         },
@@ -95,7 +95,7 @@ export function getContactsPageStrings(locale = 'lv') {
         city: 'Рига, Латвия',
         locations: 'T/C Domina Shopping и T/C Spice Life',
         languages: 'латышский, русский, английский',
-        warranty: 'до 90 дней на выполненные работы и использованные детали',
+        warranty: 'до 1 года на выполненные работы и использованные детали',
       },
 
       links: {
@@ -163,7 +163,7 @@ export function getContactsPageStrings(locale = 'lv') {
           'Pirms darba uzsākšanas precizējam izmaksas un saskaņojam tās ar klientu.',
       },
       {
-        title: '90 dienu garantija',
+        title: 'garantija līdz 1 gadam',
         text:
           'Nodrošinām garantiju veiktajiem darbiem un izmantotajām detaļām.',
       },
@@ -192,7 +192,7 @@ export function getContactsPageStrings(locale = 'lv') {
       city: 'Rīga',
       locations: 'T/C Domina Shopping un T/C Spice Life',
       languages: 'latviešu, krievu, angļu',
-      warranty: 'līdz 90 dienām veiktajiem darbiem un uzstādītajām detaļām',
+      warranty: 'līdz 1 gadam veiktajiem darbiem un uzstādītajām detaļām',
     },
 
     links: {

@@ -38,7 +38,7 @@ const strings = {
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
-    '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā - oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>90 dienu garantija</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
+    '<p><strong>iPhone ekrāna maiņa Rīgā</strong> iLab servisā - oriģināli un kvalitatīvi OEM displeji, ātra diagnostika un <strong>garantija līdz 1 gadam</strong>. Bieži ekrāna nomaiņu paveicam tajā pašā dienā.</p>',
 
   priceTitle: 'Ekrāna maiņas cenas pēc modeļa',
   ctaLabel: 'Pieteikties remontam',
@@ -49,7 +49,7 @@ const strings = {
   serviceName: 'iPhone ekrāna maiņa Rīgā',
   serviceType: 'iPhone ekrāna maiņa',
   serviceDescription:
-    'iPhone displeja maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPhone displeja maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',
@@ -57,7 +57,7 @@ const strings = {
 
   headerTitle: 'iPhone ekrāna maiņa Rīgā',
   headerLead:
-    'Mainām iPhone ekrānu, ja tas ir saplaisājis, rāda līnijas, plankumus, nereaģē uz pieskārienu vai nerāda attēlu. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    'Mainām iPhone ekrānu, ja tas ir saplaisājis, rāda līnijas, plankumus, nereaģē uz pieskārienu vai nerāda attēlu. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   applyAria: 'Pieteikties remontam',
@@ -84,7 +84,7 @@ const strings = {
     },
     {
       name: 'Garantija',
-      text: 'Izsniedzam 90 dienu garantiju veiktajam darbam un uzstādītajai detaļai.',
+      text: 'Izsniedzam garantiju līdz 1 gadam veiktajam darbam un uzstādītajai detaļai.',
     },
   ],
 };

@@ -11,7 +11,7 @@ const categoryContent = {
     seo: {
       title: 'iPhone remonts Rīgā | iLab',
       metaDescription:
-        'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un 90 dienu garantija iLab servisā Rīgā.',
+        'iPhone remonts Rīgā - displeja, baterijas, kameras un uzlādes ligzdas maiņa, ūdens bojājumu novēršana. Ātra diagnostika, skaidras cenas un garantija līdz 1 gadam iLab servisā Rīgā.',
     },
 
     // Header content (Header owns H1, lead, CTA)
@@ -69,7 +69,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
             text: `
 <p>iLab serviss piedāvā gan oriģinālās Apple detaļas, gan augstas kvalitātes OEM rezerves daļas. Izvēle tiek veikta kopā ar klientu, balstoties uz konkrētā modeļa īpatnībām, cenu un garantijas nosacījumiem.</p>
 
-<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam 90 dienu garantiju gan detaļām, gan darbam.</p>
+<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam garantiju līdz 1 gadam gan detaļām, gan darbam.</p>
 
 <p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam - pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
       `,
@@ -130,7 +130,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     hero: {
       h1: 'Datoru remonts',
       lead:
-        'Portatīvo un stacionāro datoru remonts - diagnostika, ekrāns, tastatūras, mātesplate, uzlāde, SSD/RAM uzlabošana, remonts pēc mitruma. Ātra diagnostika un 90 dienu garantija.',
+        'Portatīvo un stacionāro datoru remonts - diagnostika, ekrāns, tastatūras, mātesplate, uzlāde, SSD/RAM uzlabošana, remonts pēc mitruma. Ātra diagnostika un garantija līdz 1 gadam.',
       scrollCta: { label: 'Skatīt zīmolus un pakalpojumus', targetId: 'brand-list' },
     },
   },
@@ -141,7 +141,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
     // Header content (Header owns H1, lead; no scrollCta for this category)
     h1: 'Dyson remonts Rīgā',
     lead:
-      'iLab meistari salabo Dyson bezvadu putekļsūcējus - veicam motora un baterijas maiņu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku. Ātra pārbaude pirms darba, skaidras izmaksas un 90 dienu garantija.',
+      'iLab meistari salabo Dyson bezvadu putekļsūcējus - veicam motora un baterijas maiņu, filtru un blīvējumu nomaiņu, dziļo tīrīšanu un diagnostiku. Ātra pārbaude pirms darba, skaidras izmaksas un garantija līdz 1 gadam.',
   },
 };
 

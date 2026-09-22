@@ -33,7 +33,7 @@ function getContent(locale) {
         },
         {
           q: 'Какая гарантия на выполненные работы?',
-          a: 'На выполненные работы и установленные детали предоставляется гарантия. Срок зависит от вида работ и выбранной детали, но для популярных работ обычно действует гарантия до 90 дней.',
+          a: 'На выполненные работы и установленные детали предоставляется гарантия. Срок зависит от вида работ и выбранной детали, но для популярных работ обычно действует гарантия до 1 года.',
         },
         {
           q: 'Какие детали вы используете?',
@@ -66,7 +66,7 @@ function getContent(locale) {
       },
       {
         q: 'Kāda garantija ir veiktajiem darbiem?',
-        a: 'Veiktajiem darbiem un uzstādītajām detaļām nodrošinām garantiju. Garantijas termiņš ir atkarīgs no darbu veida un izvēlētās detaļas, bet populārākajiem darbiem parasti nodrošinām garantiju līdz 90 dienām.',
+        a: 'Veiktajiem darbiem un uzstādītajām detaļām nodrošinām garantiju. Garantijas termiņš ir atkarīgs no darbu veida un izvēlētās detaļas, bet populārākajiem darbiem parasti nodrošinām garantiju līdz 1 gadam.',
       },
       {
         q: 'Kādas detaļas izmantojat?',

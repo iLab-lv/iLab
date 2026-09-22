@@ -74,13 +74,13 @@ const labels = {
   howToName: 'Planšetdatoru remonts',
   defaultHeaderTitle: 'Planšetdatoru remonts',
   defaultHeaderLead:
-    'Planšetdatoru remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    'Planšetdatoru remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju līdz 1 gadam.',
   pricesCtaLabel: 'Skatīt cenas',
   metaFallbackTitle: (brandLabel) => `${brandLabel} planšetdatoru remonts | iLab`,
   metaFallbackDescriptionModel: (name) =>
-    `${name} remonts Rīgā: displejs, baterija, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika, godīgas cenas un 90 dienu garantija.`,
+    `${name} remonts Rīgā: displejs, baterija, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija līdz 1 gadam.`,
   metaFallbackDescriptionCategory:
-    'Planšetdatoru remonts: displejs, baterija, uzlāde, kamera. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Planšetdatoru remonts: displejs, baterija, uzlāde, kamera. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   brandCrumb: (brandLabel) => `${brandLabel} planšetdatoru remonts`,
   serviceLdName: (name) => `${name} remonts`,
   servicesTitle: (name) => `Populārākie ${name ?? 'šī modeļa'} remonti`,
@@ -109,7 +109,7 @@ const processSteps = [
   },
   {
     title: 'Garantija',
-    text: 'Izsniedzam planšetdatoru ar 90 dienu garantiju uz detaļu un darbu.',
+    text: 'Izsniedzam planšetdatoru ar garantiju līdz 1 gadam uz detaļu un darbu.',
   },
 ];
 

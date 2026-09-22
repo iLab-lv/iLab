@@ -34,7 +34,7 @@ const strings = {
   introP1:
     'Skaņas problēmas var rasties netīrumu, mitruma, bojāta skaļruņa, mikrofona, savienojumu vai programmatūras kļūdu dēļ. iLab servisā vispirms veicam diagnostiku, lai saprastu, vai pietiek ar tīrīšanu, vai nepieciešama detaļas maiņa.',
   introP2:
-    'Pēc remonta pārbaudām sarunu skaņu, skaļruni, mikrofonu, video ierakstu un galvenās funkcijas. Darbam un uzstādītajām detaļām sniedzam 90 dienu garantiju.',
+    'Pēc remonta pārbaudām sarunu skaņu, skaļruni, mikrofonu, video ierakstu un galvenās funkcijas. Darbam un uzstādītajām detaļām sniedzam garantiju līdz 1 gadam.',
 
   ctaLabel: 'Pieteikties remontam',
 
@@ -54,7 +54,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Pēc remonta sniedzam 90 dienu garantiju darbam un detaļām.',
+      text: 'Pēc remonta sniedzam garantiju līdz 1 gadam darbam un detaļām.',
     },
   ],
 
@@ -63,7 +63,7 @@ const strings = {
   serviceName: 'iPhone skaļruņa un mikrofona remonts Rīgā',
   serviceType: 'iPhone audio remonts',
   serviceDescription:
-    'iPhone skaļruņa un mikrofona remonts Rīgā: diagnostika, tīrīšana vai detaļas maiņa, 90 dienu garantija.',
+    'iPhone skaļruņa un mikrofona remonts Rīgā: diagnostika, tīrīšana vai detaļas maiņa, garantija līdz 1 gadam.',
 
   processName: 'iPhone skaļruņa un mikrofona remonts',
   processDescription:
