@@ -10,7 +10,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Ekrāns',
     defaultTimeText: '60–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 10,
   },
   {
@@ -20,7 +20,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Ekrāns',
     defaultTimeText: '60–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 11,
   },
   {
@@ -30,7 +30,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Ekrāns',
     defaultTimeText: '60–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 12,
   },
   {
@@ -40,7 +40,7 @@ const repairServices = [
     categories: ['plansetdatoru-remonts'],
     family: 'Ekrāns',
     defaultTimeText: '60–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 13,
   },
   {
@@ -50,7 +50,7 @@ const repairServices = [
     categories: ['plansetdatoru-remonts'],
     family: 'Ekrāns',
     defaultTimeText: '60–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 14,
   },
 
@@ -62,7 +62,7 @@ const repairServices = [
     categories: ['telefonu-remonts', 'plansetdatoru-remonts'],
     family: 'Barošana un uzlāde',
     defaultTimeText: '60–180 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 30,
   },
   {
@@ -72,7 +72,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Korpuss',
     defaultTimeText: '1–5 st',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 40,
   },
   {
@@ -82,7 +82,7 @@ const repairServices = [
     categories: ['telefonu-remonts', 'plansetdatoru-remonts'],
     family: 'Barošana un uzlāde',
     defaultTimeText: '30–120 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 20,
   },
   {
@@ -92,7 +92,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Kamera',
     defaultTimeText: '30–60 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 51,
   },
   {
@@ -102,7 +102,7 @@ const repairServices = [
     categories: ['telefonu-remonts'],
     family: 'Kamera',
     defaultTimeText: '30–60 min',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 50,
   },
   {
@@ -124,7 +124,7 @@ const repairServices = [
     categories: ['datoru-remonts'],
     family: 'Barošana un uzlāde',
     defaultTimeText: '1–3 st',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 70,
   },
   {
@@ -134,7 +134,7 @@ const repairServices = [
     categories: ['datoru-remonts'],
     family: 'Ekrāns',
     defaultTimeText: 'pēc pieprasījuma',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 71,
   },
   {
@@ -154,7 +154,7 @@ const repairServices = [
     categories: ['datoru-remonts'],
     family: 'Apkope',
     defaultTimeText: '1–2 st',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 73,
   },
   {
@@ -164,7 +164,7 @@ const repairServices = [
     categories: ['datoru-remonts'],
     family: 'Korpuss un ievade',
     defaultTimeText: 'pēc pieprasījuma',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 74,
   },
   {
@@ -174,7 +174,7 @@ const repairServices = [
     categories: ['datoru-remonts'],
     family: 'Korpuss un ievade',
     defaultTimeText: 'pēc pieprasījuma',
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     order: 75,
   },
 

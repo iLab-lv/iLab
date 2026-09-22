@@ -46,7 +46,7 @@ export function getTermsPageStrings(locale = 'lv') {
 
       section4: '4. Условия гарантии',
       section4Text:
-        'Стандартная гарантия: <strong>90 дней</strong> на заменённые детали и выполненные ремонтные работы, если в квитанции не указано иное. Гарантия распространяется только на дефекты, возникшие по причине качества детали или выполненной работы. Гарантия не распространяется на повреждения, вызванные влагой, ударом, механическим повреждением или действиями пользователя, а также если устройство вскрывалось в другом сервисе. Для гарантийного ремонта необходимо предъявить квитанцию iLab.',
+        'Стандартная гарантия: <strong>до 1 года</strong> на заменённые детали и выполненные ремонтные работы, если в квитанции не указано иное. Гарантия распространяется только на дефекты, возникшие по причине качества детали или выполненной работы. Гарантия не распространяется на повреждения, вызванные влагой, ударом, механическим повреждением или действиями пользователя, а также если устройство вскрывалось в другом сервисе. Для гарантийного ремонта необходимо предъявить квитанцию iLab.',
       section4Text2:
         'Перед ремонтом рекомендуется создать резервную копию данных; iLab не несёт ответственности за потерю данных во время ремонта.',
 
@@ -114,7 +114,7 @@ export function getTermsPageStrings(locale = 'lv') {
 
     section4: '4. Garantijas noteikumi',
     section4Text:
-      'Standarta garantija: <strong>90 dienas</strong> attiecībā uz nomainītajām detaļām un veiktajiem remontdarbiem, ja kvītī nav norādīts citādi. Garantija attiecas tikai uz defektiem, kas radušies detaļas vai darba kvalitātes dēļ. Garantija neattiecas uz bojājumiem, ko izraisījis mitrums, trieciens, mehānisks vai lietotāja radīts bojājums, vai ja ierīce tikusi atvērta citā servisā. Garantijas remontam nepieciešams uzrādīt iLab remonta kvīti.',
+      'Standarta garantija: <strong>līdz 1 gadam</strong> attiecībā uz nomainītajām detaļām un veiktajiem remontdarbiem, ja kvītī nav norādīts citādi. Garantija attiecas tikai uz defektiem, kas radušies detaļas vai darba kvalitātes dēļ. Garantija neattiecas uz bojājumiem, ko izraisījis mitrums, trieciens, mehānisks vai lietotāja radīts bojājums, vai ja ierīce tikusi atvērta citā servisā. Garantijas remontam nepieciešams uzrādīt iLab remonta kvīti.',
     section4Text2:
       'Pirms remonta ieteicams izveidot datu rezerves kopiju; iLab neatbild par datu zudumu remonta laikā.',
 

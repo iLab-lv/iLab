@@ -63,7 +63,7 @@ const labels = {
     },
     {
       name: 'Garantija',
-      text: 'Izsniedzam 90 dienu garantiju veiktajam darbam un uzstādītajām detaļām.',
+      text: 'Izsniedzam garantiju līdz 1 gadam veiktajam darbam un uzstādītajām detaļām.',
     },
   ],
   defaultMetaTitle: 'iPhone remonts Rīgā | iLab',
@@ -71,7 +71,7 @@ const labels = {
     'iPhone remonts Rīgā: ekrāna maiņa, baterijas maiņa, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika un garantija iLab servisā.',
   defaultHeaderTitle: 'iPhone remonts',
   defaultHeaderLead:
-    'iPhone remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un 90 dienu garantiju.',
+    'iPhone remonts Rīgā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju līdz 1 gadam.',
   pricesCtaLabel: 'Skatīt cenas',
   imageAlt: 'iPhone remonts Rīgā',
 };

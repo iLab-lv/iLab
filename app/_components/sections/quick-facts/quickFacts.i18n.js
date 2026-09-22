@@ -36,7 +36,7 @@ const QUICK_FACTS = {
         { key:'parts', title:'Pakalpojums', description:'iPhone aizmugures vāciņa / aizmugurējā stikla maiņa' },
         { key:'price', title:'Cena', description:'Atkarīga no iPhone modeļa un bojājuma apjoma' },
         { key:'diagnostics', title:'Pārbaude', description:'Aizmugure, kamera, korpuss un bezvadu uzlādes zona' },
-        { key:'warranty', title:'Garantija', description:'90 dienas veiktajam remontam' },
+        { key:'warranty', title:'Garantija', description:'līdz 1 gadam veiktajam remontam' },
         { key:'locations', title:'Filiāles', description:'T/C Domina Shopping un T/C Spice Home' },
         { key:'finalCheck', title:'Pārbaude pēc remonta', description:'Kamera, korpusa salikums, uzlāde un pamata funkcijas' },
       ],
@@ -44,7 +44,7 @@ const QUICK_FACTS = {
         { key: 'parts', title: 'Pakalpojums', description: 'iPhone baterijas / akumulatora maiņa' },
         { key: 'price', title: 'Cena', description: 'Atkarīga no iPhone modeļa un detaļas pieejamības' },
         { key: 'diagnostics', title: 'Pārbaude', description: 'Baterija, uzlāde, savienojums un ierīces stabilitāte' },
-        { key: 'warranty', title: 'Garantija', description: '90 dienas veiktajam remontam' },
+        { key: 'warranty', title: 'Garantija', description: 'līdz 1 gadam veiktajam remontam' },
         { key: 'locations', title: 'Filiāles', description: 'T/C Domina Shopping un T/C Spice Home' },
         { key: 'finalCheck', title: 'Pārbaude pēc remonta', description: 'Testējam uzlādi, ieslēgšanos un stabilu darbību' },
       ],
@@ -67,7 +67,7 @@ const QUICK_FACTS = {
         {
           key: 'warranty',
           title: 'Garantija',
-          description: '90 dienas veiktajam remontam',
+          description: 'līdz 1 gadam veiktajam remontam',
         },
         {
           key: 'locations',
@@ -83,7 +83,7 @@ const QUICK_FACTS = {
       'iphone-model': [
         {
           key: 'warranty',
-          title: '90 dienu garantija',
+          title: 'garantija līdz 1 gadam',
           description: 'Darbam un uzstādītajām detaļām.',
         },
         {
@@ -113,7 +113,7 @@ const QUICK_FACTS = {
         },
       ],
       iphone: [
-        ['warranty', '90 dienu garantija'],
+        ['warranty', 'garantija līdz 1 gadam'],
         ['diagnostics', 'Diagnostika pirms remonta'],
         ['price', 'Cena saskaņota pirms darba'],
         ['parts', 'Oriģinālās / OEM detaļas'],
@@ -121,7 +121,7 @@ const QUICK_FACTS = {
         ['sameDay', 'Biežākie iPhone remonti tajā pašā dienā'],
       ],
       photo: [
-        ['warranty', '90 dienu garantija'],
+        ['warranty', 'garantija līdz 1 gadam'],
         ['diagnostics', 'Diagnostika pirms remonta'],
         ['price', 'Cena saskaņota pirms darba'],
         ['parts', 'Fotoaparātu un objektīvu remonts'],
@@ -129,7 +129,7 @@ const QUICK_FACTS = {
         ['finalCheck', 'Pārbaude pēc remonta'],
       ],
       phone: [
-        ['warranty', '90 dienu garantija'],
+        ['warranty', 'garantija līdz 1 gadam'],
         ['diagnostics', 'Diagnostika pirms remonta'],
         ['price', 'Cena saskaņota pirms darba'],
         ['parts', 'Kvalitatīvas detaļas'],
@@ -137,7 +137,7 @@ const QUICK_FACTS = {
         ['sameDay', 'Biežākie telefonu remonti tajā pašā dienā'],
       ],
       tablet: [
-        ['warranty', '90 dienu garantija'],
+        ['warranty', 'garantija līdz 1 gadam'],
         ['diagnostics', 'Diagnostika pirms remonta'],
         ['price', 'Cena saskaņota pirms darba'],
         ['parts', 'Kvalitatīvas detaļas'],
@@ -161,7 +161,7 @@ const QUICK_FACTS = {
         { key:'parts', title:'Услуга', description:'Замена задней крышки / заднего стекла iPhone' },
         { key:'price', title:'Цена', description:'Зависит от модели iPhone и степени повреждения' },
         { key:'diagnostics', title:'Проверка', description:'Задняя часть, камера, корпус и зона беспроводной зарядки' },
-        { key:'warranty', title:'Гарантия', description:'90 дней на выполненный ремонт' },
+        { key:'warranty', title:'Гарантия', description:'до 1 года на выполненный ремонт' },
         { key:'locations', title:'Филиалы', description:'Т/Ц Domina Shopping и Т/Ц Spice Home' },
         { key:'finalCheck', title:'Проверка после ремонта', description:'Камера, сборка корпуса, зарядка и основные функции' },
       ],
@@ -169,7 +169,7 @@ const QUICK_FACTS = {
         { key: 'parts', title: 'Услуга', description: 'Замена батареи / аккумулятора iPhone' },
         { key: 'price', title: 'Цена', description: 'Зависит от модели iPhone и наличия детали' },
         { key: 'diagnostics', title: 'Проверка', description: 'Батарея, зарядка, соединение и стабильность устройства' },
-        { key: 'warranty', title: 'Гарантия', description: '90 дней на выполненный ремонт' },
+        { key: 'warranty', title: 'Гарантия', description: 'до 1 года на выполненный ремонт' },
         { key: 'locations', title: 'Филиалы', description: 'Т/Ц Domina Shopping и Т/Ц Spice Home' },
         { key: 'finalCheck', title: 'Проверка после ремонта', description: 'Тестируем зарядку, включение и стабильную работу' },
       ],
@@ -192,7 +192,7 @@ const QUICK_FACTS = {
         {
           key: 'warranty',
           title: 'Гарантия',
-          description: '90 дней на выполненный ремонт',
+          description: 'до 1 года на выполненный ремонт',
         },
         {
           key: 'locations',
@@ -208,7 +208,7 @@ const QUICK_FACTS = {
       'iphone-model': [
         {
           key: 'warranty',
-          title: 'Гарантия 90 дней',
+          title: 'Гарантия до 1 года',
           description: 'На работу и установленные детали.',
         },
         {
@@ -238,7 +238,7 @@ const QUICK_FACTS = {
         },
       ],
       iphone: [
-        ['warranty', 'Гарантия 90 дней'],
+        ['warranty', 'Гарантия до 1 года'],
         ['diagnostics', 'Диагностика до ремонта'],
         ['price', 'Цену согласуем до начала работы'],
         ['parts', 'Оригинальные / OEM детали'],
@@ -246,7 +246,7 @@ const QUICK_FACTS = {
         ['sameDay', 'Популярный ремонт iPhone - в тот же день'],
       ],
       photo: [
-        ['warranty', 'Гарантия 90 дней'],
+        ['warranty', 'Гарантия до 1 года'],
         ['diagnostics', 'Диагностика до ремонта'],
         ['price', 'Цена согласована до начала работ'],
         ['parts', 'Ремонт фотоаппаратов и объективов'],
@@ -254,7 +254,7 @@ const QUICK_FACTS = {
         ['finalCheck', 'Проверка после ремонта'],
       ],
       phone: [
-        ['warranty', 'Гарантия 90 дней'],
+        ['warranty', 'Гарантия до 1 года'],
         ['diagnostics', 'Диагностика до ремонта'],
         ['price', 'Цену согласуем до начала работы'],
         ['parts', 'Качественные детали'],
@@ -262,7 +262,7 @@ const QUICK_FACTS = {
         ['sameDay', 'Популярный ремонт телефонов - в тот же день'],
       ],
       tablet: [
-        ['warranty', 'Гарантия 90 дней'],
+        ['warranty', 'Гарантия до 1 года'],
         ['diagnostics', 'Диагностика до ремонта'],
         ['price', 'Цену согласуем до начала работы'],
         ['parts', 'Качественные детали'],

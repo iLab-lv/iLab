@@ -13,10 +13,10 @@ const devices = [
   popular: true,
   order: 90,
   metaTitle: "iPhone 17 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 17 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 17 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -34,10 +34,10 @@ const devices = [
   popular: true,
   order: 91,
   metaTitle: "iPhone 17 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 17 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 17 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -55,10 +55,10 @@ const devices = [
   popular: true,
   order: 92,
   metaTitle: "iPhone Air remonts Rīgā | iLab",
-  metaDescription: "iPhone Air remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone Air remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone Air</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -76,10 +76,10 @@ const devices = [
   popular: true,
   order: 93,
   metaTitle: "iPhone 17 remonts Rīgā | iLab",
-  metaDescription: "iPhone 17 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 17 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 17</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -97,10 +97,10 @@ const devices = [
   popular: true,
   order: 100,
   metaTitle: "iPhone 16 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 16 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 16 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 16 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -119,10 +119,10 @@ const devices = [
   popular: true,
   order: 101,
   metaTitle: "iPhone 16 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 16 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 16 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 16 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -141,10 +141,10 @@ const devices = [
   popular: true,
   order: 102,
   metaTitle: "iPhone 16 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 16 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 16 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 16 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -163,10 +163,10 @@ const devices = [
   popular: true,
   order: 104,
   metaTitle: "iPhone 16 remonts Rīgā | iLab",
-  metaDescription: "iPhone 16 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 16 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 16e</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -185,10 +185,10 @@ const devices = [
   popular: true,
   order: 103,
   metaTitle: "iPhone 16e remonts Rīgā | iLab",
-  metaDescription: "iPhone 16e remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 16e remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 16</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -207,10 +207,10 @@ const devices = [
   popular: true,
   order: 110,
   metaTitle: "iPhone 15 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 15 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 15 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 15 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -229,10 +229,10 @@ const devices = [
   popular: true,
   order: 111,
   metaTitle: "iPhone 15 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 15 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 15 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 15 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -251,10 +251,10 @@ const devices = [
   popular: true,
   order: 112,
   metaTitle: "iPhone 15 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 15 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostика un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 15 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostика un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 15 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -273,10 +273,10 @@ const devices = [
   popular: true,
   order: 113,
   metaTitle: "iPhone 15 remonts Rīgā | iLab",
-  metaDescription: "iPhone 15 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 15 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 15</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -295,10 +295,10 @@ const devices = [
   popular: true,
   order: 120,
   metaTitle: "iPhone 14 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 14 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 14 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 14 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -317,10 +317,10 @@ const devices = [
   popular: true,
   order: 121,
   metaTitle: "iPhone 14 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 14 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 14 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 14 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -339,10 +339,10 @@ const devices = [
   popular: true,
   order: 122,
   metaTitle: "iPhone 14 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 14 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 14 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 14 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -361,10 +361,10 @@ const devices = [
   popular: true,
   order: 123,
   metaTitle: "iPhone 14 remonts Rīgā | iLab",
-  metaDescription: "iPhone 14 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 14 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 14</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -383,10 +383,10 @@ const devices = [
   popular: true,
   order: 130,
   metaTitle: "iPhone 13 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 13 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 13 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 13 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -405,10 +405,10 @@ const devices = [
   popular: true,
   order: 131,
   metaTitle: "iPhone 13 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 13 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 13 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 13 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -427,10 +427,10 @@ const devices = [
   popular: true,
   order: 132,
   metaTitle: "iPhone 13 remonts Rīgā | iLab",
-  metaDescription: "iPhone 13 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 13 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 13</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -449,10 +449,10 @@ const devices = [
   popular: false,
   order: 133,
   metaTitle: "iPhone 13 mini remonts Rīgā | iLab",
-  metaDescription: "iPhone 13 mini remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 13 mini remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 13 mini</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -471,10 +471,10 @@ const devices = [
   popular: true,
   order: 140,
   metaTitle: "iPhone 12 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 12 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 12 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 12 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -493,10 +493,10 @@ const devices = [
   popular: true,
   order: 141,
   metaTitle: "iPhone 12 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 12 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 12 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 12 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -515,10 +515,10 @@ const devices = [
   popular: true,
   order: 142,
   metaTitle: "iPhone 12 remonts Rīgā | iLab",
-  metaDescription: "iPhone 12 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 12 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 12</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -537,10 +537,10 @@ const devices = [
   popular: false,
   order: 143,
   metaTitle: "iPhone 12 mini remonts Rīgā | iLab",
-  metaDescription: "iPhone 12 mini remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 12 mini remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 12 mini</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -559,10 +559,10 @@ const devices = [
   popular: true,
   order: 150,
   metaTitle: "iPhone 11 Pro Max remonts Rīgā | iLab",
-  metaDescription: "iPhone 11 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 11 Pro Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 11 Pro Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -581,10 +581,10 @@ const devices = [
   popular: true,
   order: 151,
   metaTitle: "iPhone 11 Pro remonts Rīgā | iLab",
-  metaDescription: "iPhone 11 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 11 Pro remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 11 Pro</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -603,10 +603,10 @@ const devices = [
   popular: true,
   order: 152,
   metaTitle: "iPhone 11 remonts Rīgā | iLab",
-  metaDescription: "iPhone 11 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 11 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 11</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -625,10 +625,10 @@ const devices = [
   popular: false,
   order: 160,
   metaTitle: "iPhone XS Max remonts Rīgā | iLab",
-  metaDescription: "iPhone XS Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone XS Max remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone XS Max</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -647,10 +647,10 @@ const devices = [
   popular: false,
   order: 161,
   metaTitle: "iPhone XS remonts Rīgā | iLab",
-  metaDescription: "iPhone XS remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone XS remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone XS</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -669,10 +669,10 @@ const devices = [
   popular: true,
   order: 162,
   metaTitle: "iPhone XR remonts Rīgā | iLab",
-  metaDescription: "iPhone XR remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone XR remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone XR</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -691,10 +691,10 @@ const devices = [
   popular: true,
   order: 163,
   metaTitle: "iPhone X remonts Rīgā | iLab",
-  metaDescription: "iPhone X remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone X remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone X</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -713,10 +713,10 @@ const devices = [
   popular: true,
   order: 170,
   metaTitle: "iPhone SE (3. paaudze) remonts Rīgā | iLab",
-  metaDescription: "iPhone SE (3. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone SE (3. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone SE (3. paaudze)</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -735,10 +735,10 @@ const devices = [
   popular: true,
   order: 171,
   metaTitle: "iPhone SE (2. paaudze) remonts Rīgā | iLab",
-  metaDescription: "iPhone SE (2. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone SE (2. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone SE (2. paaudze)</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -757,10 +757,10 @@ const devices = [
   popular: false,
   order: 172,
   metaTitle: "iPhone SE (1. paaudze) remonts Rīgā | iLab",
-  metaDescription: "iPhone SE (1. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone SE (1. paaudze) remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone SE (1. paaudze)</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 
@@ -779,10 +779,10 @@ const devices = [
   popular: false,
   order: 180,
   metaTitle: "iPhone 8 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 8 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 8 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 8 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -800,10 +800,10 @@ const devices = [
   popular: false,
   order: 181,
   metaTitle: "iPhone 8 remonts Rīgā | iLab",
-  metaDescription: "iPhone 8 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 8 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 8</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -821,10 +821,10 @@ const devices = [
   popular: false,
   order: 190,
   metaTitle: "iPhone 7 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 7 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 7 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 7 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -842,10 +842,10 @@ const devices = [
   popular: false,
   order: 191,
   metaTitle: "iPhone 7 remonts Rīgā | iLab",
-  metaDescription: "iPhone 7 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 7 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 7</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -863,10 +863,10 @@ const devices = [
   popular: false,
   order: 195,
   metaTitle: "iPhone 6s Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 6s Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 6s Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6s Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -884,10 +884,10 @@ const devices = [
   popular: false,
   order: 196,
   metaTitle: "iPhone 6s remonts Rīgā | iLab",
-  metaDescription: "iPhone 6s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 6s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6s</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -905,10 +905,10 @@ const devices = [
   popular: false,
   order: 197,
   metaTitle: "iPhone 6 Plus remonts Rīgā | iLab",
-  metaDescription: "iPhone 6 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 6 Plus remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6 Plus</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -926,10 +926,10 @@ const devices = [
   popular: false,
   order: 198,
   metaTitle: "iPhone 6 remonts Rīgā | iLab",
-  metaDescription: "iPhone 6 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 6 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 6</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -948,10 +948,10 @@ const devices = [
   popular: false,
   order: 200,
   metaTitle: "iPhone 5s remonts Rīgā | iLab",
-  metaDescription: "iPhone 5s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 5s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5s</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -969,10 +969,10 @@ const devices = [
   popular: false,
   order: 201,
   metaTitle: "iPhone 5c remonts Rīgā | iLab",
-  metaDescription: "iPhone 5c remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 5c remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5c</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -990,10 +990,10 @@ const devices = [
   popular: false,
   order: 202,
   metaTitle: "iPhone 5 remonts Rīgā | iLab",
-  metaDescription: "iPhone 5 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 5 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 5</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -1011,10 +1011,10 @@ const devices = [
   popular: false,
   order: 203,
   metaTitle: "iPhone 4s remonts Rīgā | iLab",
-  metaDescription: "iPhone 4s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 4s remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 4s</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -1032,10 +1032,10 @@ const devices = [
   popular: false,
   order: 204,
   metaTitle: "iPhone 4 remonts Rīgā | iLab",
-  metaDescription: "iPhone 4 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un 90 dienu garantija iLab Apple servisā.",
+  metaDescription: "iPhone 4 remonts Rīgā - ekrāna, baterijas un detaļu maiņa ar oriģinālām vai OEM detaļām. Bezmaksas diagnostika un garantija līdz 1 gadam iLab Apple servisā.",
   bodyHtml: `
 <p><strong>iPhone 4</strong> remonts Rīgā - ātra diagnostika, ekrāna, baterijas un kameras maiņa tajā pašā dienā. 
-    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+    Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un precīzas izmaksas pirms remonta.</p>
   `,
 },
@@ -1063,9 +1063,9 @@ const devices = [
     popular: false,
     order: 260,
     metaTitle: "Samsung Galaxy S25 Edge remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S25 Edge remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S25 Edge remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S25 Edge (SM-S937B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S25 Edge (SM-S937B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1083,9 +1083,9 @@ const devices = [
     popular: false,
     order: 261,
     metaTitle: "Samsung Galaxy S25 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S25 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S25 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S25 Ultra (SM-S938B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S25 Ultra (SM-S938B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1103,9 +1103,9 @@ const devices = [
     popular: false,
     order: 262,
     metaTitle: "Samsung Galaxy S25+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S25+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S25+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S25+ (SM-S936B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S25+ (SM-S936B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1123,9 +1123,9 @@ const devices = [
     popular: false,
     order: 263,
     metaTitle: "Samsung Galaxy S25 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S25 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S25 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S25 (SM-S931B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S25 (SM-S931B) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1143,9 +1143,9 @@ const devices = [
     popular: false,
     order: 264,
     metaTitle: "Samsung Galaxy S24 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S24 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S24 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24 Ultra (SM-S928B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24 Ultra (SM-S928B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1163,9 +1163,9 @@ const devices = [
     popular: false,
     order: 265,
     metaTitle: "Samsung Galaxy S24+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S24+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S24+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24+ (SM-S926B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24+ (SM-S926B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1183,9 +1183,9 @@ const devices = [
     popular: false,
     order: 266,
     metaTitle: "Samsung Galaxy S24 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S24 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S24 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24 (SM-S921B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24 (SM-S921B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1203,9 +1203,9 @@ const devices = [
     popular: false,
     order: 267,
     metaTitle: "Samsung Galaxy S24 FE remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S24 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S24 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S24 FE (SM-S721B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S24 FE (SM-S721B) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1223,9 +1223,9 @@ const devices = [
     popular: false,
     order: 268,
     metaTitle: "Samsung Galaxy S23 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S23 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S23 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23 Ultra (SM-S918B) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23 Ultra (SM-S918B) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1243,9 +1243,9 @@ const devices = [
     popular: false,
     order: 269,
     metaTitle: "Samsung Galaxy S23+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S23+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S23+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23+ (SM-S916B) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23+ (SM-S916B) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1263,9 +1263,9 @@ const devices = [
     popular: false,
     order: 270,
     metaTitle: "Samsung Galaxy S23 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S23 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S23 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23 (SM-S918) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23 (SM-S918) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1283,9 +1283,9 @@ const devices = [
     popular: false,
     order: 271,
     metaTitle: "Samsung Galaxy S23 FE remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S23 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S23 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S23 FE (SM-S718) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S23 FE (SM-S718) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1303,9 +1303,9 @@ const devices = [
     popular: false,
     order: 272,
     metaTitle: "Samsung Galaxy S22 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S22 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S22 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S22 Ultra (SM-S908) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S22 Ultra (SM-S908) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1323,9 +1323,9 @@ const devices = [
     popular: false,
     order: 273,
     metaTitle: "Samsung Galaxy S22+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S22+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S22+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S22+ (SM-S906) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S22+ (SM-S906) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1343,9 +1343,9 @@ const devices = [
     popular: false,
     order: 274,
     metaTitle: "Samsung Galaxy S22 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S22 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S22 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S22 (SM-S901) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S22 (SM-S901) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1363,9 +1363,9 @@ const devices = [
     popular: false,
     order: 275,
     metaTitle: "Samsung Galaxy S21 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S21 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S21 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S21 Ultra (SM-G998) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S21 Ultra (SM-G998) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1383,9 +1383,9 @@ const devices = [
     popular: false,
     order: 276,
     metaTitle: "Samsung Galaxy S21+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S21+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S21+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S21+ (SM-G996) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S21+ (SM-G996) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1403,9 +1403,9 @@ const devices = [
     popular: false,
     order: 277,
     metaTitle: "Samsung Galaxy S21 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S21 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S21 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S21 (SM-G991) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S21 (SM-G991) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1423,9 +1423,9 @@ const devices = [
     popular: false,
     order: 278,
     metaTitle: "Samsung Galaxy S21 FE remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S21 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S21 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S21 FE (SM-G990) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S21 FE (SM-G990) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1443,9 +1443,9 @@ const devices = [
     popular: false,
     order: 279,
     metaTitle: "Samsung Galaxy S20 Ultra remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S20 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S20 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S20 Ultra (SM-G988) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S20 Ultra (SM-G988) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1463,9 +1463,9 @@ const devices = [
     popular: false,
     order: 280,
     metaTitle: "Samsung Galaxy S20+ remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S20+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S20+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S20+ (SM-G986) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S20+ (SM-G986) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1483,9 +1483,9 @@ const devices = [
     popular: false,
     order: 281,
     metaTitle: "Samsung Galaxy S20 FE remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S20 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S20 FE remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S20 FE (SM-G780) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S20 FE (SM-G780) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1503,9 +1503,9 @@ const devices = [
     popular: false,
     order: 282,
     metaTitle: "Samsung Galaxy S20 remonts Rīgā | iLab",
-    metaDescription: "Samsung Galaxy S20 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    metaDescription: "Samsung Galaxy S20 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy S20 (SM-G980) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy S20 (SM-G980) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1529,9 +1529,9 @@ const devices = [
     order: 299,
     metaTitle: "Samsung Galaxy Z Flip7 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip7 (SM-F761) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip7 (SM-F761) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1550,9 +1550,9 @@ const devices = [
     order: 300,
     metaTitle: "Samsung Galaxy Z Flip6 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip6 (SM-F751) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip6 (SM-F751) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1571,9 +1571,9 @@ const devices = [
     order: 301,
     metaTitle: "Samsung Galaxy Z Flip5 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip5 (SM-F741) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip5 (SM-F741) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1592,9 +1592,9 @@ const devices = [
     order: 302,
     metaTitle: "Samsung Galaxy Z Flip4 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip4 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip4 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip4 (SM-F731) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip4 (SM-F731) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1613,9 +1613,9 @@ const devices = [
     order: 303,
     metaTitle: "Samsung Galaxy Z Flip3 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip3 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip3 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip3 (SM-F721) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip3 (SM-F721) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1636,9 +1636,9 @@ const devices = [
     order: 304,
     metaTitle: "Samsung Galaxy Z Flip remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Flip remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Flip remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Flip (SM-F700X) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Flip (SM-F700X) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1657,9 +1657,9 @@ const devices = [
     order: 305,
     metaTitle: "Samsung Galaxy Z Fold7 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold7 (SM-F966) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold7 (SM-F966) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1678,9 +1678,9 @@ const devices = [
     order: 306,
     metaTitle: "Samsung Galaxy Z Fold6 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold6 (SM-F956) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold6 (SM-F956) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1699,9 +1699,9 @@ const devices = [
     order: 307,
     metaTitle: "Samsung Galaxy Z Fold5 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold5 (SM-F946) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold5 (SM-F946) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1720,9 +1720,9 @@ const devices = [
     order: 308,
     metaTitle: "Samsung Galaxy Z Fold4 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold4 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold4 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold4 (SM-F936) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold4 (SM-F936) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1741,9 +1741,9 @@ const devices = [
     order: 309,
     metaTitle: "Samsung Galaxy Z Fold3 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold3 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold3 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold3 (SM-F926) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold3 (SM-F926) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1762,9 +1762,9 @@ const devices = [
     order: 310,
     metaTitle: "Samsung Galaxy Z Fold2 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold2 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold2 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold2 (SM-F916) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold2 (SM-F916) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1783,9 +1783,9 @@ const devices = [
     order: 311,
     metaTitle: "Samsung Galaxy Z Fold remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Z Fold remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Z Fold remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Z Fold (SM-F900) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Z Fold (SM-F900) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1809,9 +1809,9 @@ const devices = [
     order: 312,
     metaTitle: "Samsung Galaxy Note20 Ultra remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Note20 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Note20 Ultra remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note20 Ultra (SM-N986B) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Note20 Ultra (SM-N986B) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1830,9 +1830,9 @@ const devices = [
     order: 313,
     metaTitle: "Samsung Galaxy Note20 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Note20 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Note20 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note20 (SM-N980) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Note20 (SM-N980) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1851,9 +1851,9 @@ const devices = [
     order: 314,
     metaTitle: "Samsung Galaxy Note10+ remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Note10+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Note10+ remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note10+ (SM-N975) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Note10+ (SM-N975) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1872,9 +1872,9 @@ const devices = [
     order: 315,
     metaTitle: "Samsung Galaxy Note10 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Note10 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Note10 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note10 (SM-N970) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Note10 (SM-N970) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1893,9 +1893,9 @@ const devices = [
     order: 316,
     metaTitle: "Samsung Galaxy Note10 Lite remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy Note10 Lite remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy Note10 Lite remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy Note10 Lite (SM-N770) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy Note10 Lite (SM-N770) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1919,9 +1919,9 @@ const devices = [
     order: 317,
     metaTitle: "Samsung Galaxy A72 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A72 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A72 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A72 (SM-A725) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A72 (SM-A725) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1940,9 +1940,9 @@ const devices = [
     order: 318,
     metaTitle: "Samsung Galaxy A71 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A71 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A71 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A71 (SM-A715) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A71 (SM-A715) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1961,9 +1961,9 @@ const devices = [
     order: 319,
     metaTitle: "Samsung Galaxy A70 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A70 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A70 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A70 (SM-A705) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A70 (SM-A705) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -1982,9 +1982,9 @@ const devices = [
     order: 320,
     metaTitle: "Samsung Galaxy A56 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A56 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A56 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A56 (SM-A566) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A56 (SM-A566) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2003,9 +2003,9 @@ const devices = [
     order: 321,
     metaTitle: "Samsung Galaxy A55 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A55 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A55 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A55 (SM-A556) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A55 (SM-A556) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2024,9 +2024,9 @@ const devices = [
     order: 322,
     metaTitle: "Samsung Galaxy A54 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A54 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A54 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A54 (SM-A546) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A54 (SM-A546) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2045,9 +2045,9 @@ const devices = [
     order: 323,
     metaTitle: "Samsung Galaxy A53 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A53 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A53 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A53 5G (SM-A536) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A53 5G (SM-A536) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2066,9 +2066,9 @@ const devices = [
     order: 324,
     metaTitle: "Samsung Galaxy A52s remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A52s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A52s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A52s (SM-A528) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A52s (SM-A528) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2087,9 +2087,9 @@ const devices = [
     order: 325,
     metaTitle: "Samsung Galaxy A52 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A52 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A52 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A52 (SM-A525) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A52 (SM-A525) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2108,9 +2108,9 @@ const devices = [
     order: 326,
     metaTitle: "Samsung Galaxy A51 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A51 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A51 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A51 (SM-A515) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A51 (SM-A515) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2129,9 +2129,9 @@ const devices = [
     order: 327,
     metaTitle: "Samsung Galaxy A50 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A50 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A50 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A50 (SM-A505) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A50 (SM-A505) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2150,9 +2150,9 @@ const devices = [
     order: 328,
     metaTitle: "Samsung Galaxy A41 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A41 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A41 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A41 (SM-A415) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A41 (SM-A415) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2171,9 +2171,9 @@ const devices = [
     order: 329,
     metaTitle: "Samsung Galaxy A40 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A40 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A40 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A40 (SM-A405) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A40 (SM-A405) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2192,9 +2192,9 @@ const devices = [
     order: 330,
     metaTitle: "Samsung Galaxy A36 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A36 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A36 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A36 (SM-A366) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A36 (SM-A366) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2213,9 +2213,9 @@ const devices = [
     order: 331,
     metaTitle: "Samsung Galaxy A35 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A35 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A35 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A35 (SM-A356) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A35 (SM-A356) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2234,9 +2234,9 @@ const devices = [
     order: 332,
     metaTitle: "Samsung Galaxy A34 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A34 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A34 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A34 (SM-A346) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A34 (SM-A346) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2255,9 +2255,9 @@ const devices = [
     order: 333,
     metaTitle: "Samsung Galaxy A33 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A33 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A33 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A33 (SM-A336) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A33 (SM-A336) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2276,9 +2276,9 @@ const devices = [
     order: 334,
     metaTitle: "Samsung Galaxy A32 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A32 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A32 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A32 5G (SM-A326) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A32 5G (SM-A326) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2297,9 +2297,9 @@ const devices = [
     order: 335,
     metaTitle: "Samsung Galaxy A32 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A32 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A32 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A32 4G (SM-A325) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A32 4G (SM-A325) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2318,9 +2318,9 @@ const devices = [
     order: 336,
     metaTitle: "Samsung Galaxy A25 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A25 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A25 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A25 5G (SM-A256) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A25 5G (SM-A256) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2339,9 +2339,9 @@ const devices = [
     order: 337,
     metaTitle: "Samsung Galaxy A24 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A24 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A24 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A24 4G (SM-A245) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A24 4G (SM-A245) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2360,9 +2360,9 @@ const devices = [
     order: 338,
     metaTitle: "Samsung Galaxy A23 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A23 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A23 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A23 5G (SM-A236) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A23 5G (SM-A236) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2381,9 +2381,9 @@ const devices = [
     order: 339,
     metaTitle: "Samsung Galaxy A22 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A22 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A22 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A22 4G (SM-A225) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A22 4G (SM-A225) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2402,9 +2402,9 @@ const devices = [
     order: 340,
     metaTitle: "Samsung Galaxy A22 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A22 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A22 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A22 5G (SM-A226) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A22 5G (SM-A226) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2423,9 +2423,9 @@ const devices = [
     order: 341,
     metaTitle: "Samsung Galaxy A21s remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A21s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A21s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A21s (SM-A217) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A21s (SM-A217) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2444,9 +2444,9 @@ const devices = [
     order: 342,
     metaTitle: "Samsung Galaxy A20e remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A20e remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A20e remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A20e (SM-A202) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A20e (SM-A202) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2465,9 +2465,9 @@ const devices = [
     order: 343,
     metaTitle: "Samsung Galaxy A16 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A16 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A16 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A16 5G (SM-A166) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A16 5G (SM-A166) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2486,9 +2486,9 @@ const devices = [
     order: 344,
     metaTitle: "Samsung Galaxy A16 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A16 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A16 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A16 4G (SM-A165) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A16 4G (SM-A165) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2507,9 +2507,9 @@ const devices = [
     order: 345,
     metaTitle: "Samsung Galaxy A15 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A15 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A15 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A15 5G (SM-A156) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A15 5G (SM-A156) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2528,9 +2528,9 @@ const devices = [
     order: 346,
     metaTitle: "Samsung Galaxy A15 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A15 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A15 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A15 4G (SM-A155) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A15 4G (SM-A155) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2549,9 +2549,9 @@ const devices = [
     order: 347,
     metaTitle: "Samsung Galaxy A14 5G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A14 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A14 5G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A14 5G (SM-A146) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A14 5G (SM-A146) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2570,9 +2570,9 @@ const devices = [
     order: 348,
     metaTitle: "Samsung Galaxy A14 4G remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A14 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A14 4G remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A14 4G (SM-A145) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A14 4G (SM-A145) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2591,9 +2591,9 @@ const devices = [
     order: 349,
     metaTitle: "Samsung Galaxy A13 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A13 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A13 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A13 (SM-A136) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A13 (SM-A136) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2612,9 +2612,9 @@ const devices = [
     order: 350,
     metaTitle: "Samsung Galaxy A12 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A12 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A12 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A12 (SM-A125) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A12 (SM-A125) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2633,9 +2633,9 @@ const devices = [
     order: 351,
     metaTitle: "Samsung Galaxy A10s remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A10s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A10s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A10s (SM-A107) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A10s (SM-A107) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2654,9 +2654,9 @@ const devices = [
     order: 352,
     metaTitle: "Samsung Galaxy A10 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A10 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A10 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A10 (SM-A105) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A10 (SM-A105) 2019</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2675,9 +2675,9 @@ const devices = [
     order: 353,
     metaTitle: "Samsung Galaxy A7 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A7 (SM-A750) 2018</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A7 (SM-A750) 2018</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2696,9 +2696,9 @@ const devices = [
     order: 354,
     metaTitle: "Samsung Galaxy A06 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A06 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A06 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A06 (SM-A065) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A06 (SM-A065) 2025</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2717,9 +2717,9 @@ const devices = [
     order: 355,
     metaTitle: "Samsung Galaxy A05s remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A05s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A05s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A05s (SM-A057) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A05s (SM-A057) 2023</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2738,9 +2738,9 @@ const devices = [
     order: 356,
     metaTitle: "Samsung Galaxy A04s remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A04s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A04s remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A04s (SM-A047) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A04s (SM-A047) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2759,9 +2759,9 @@ const devices = [
     order: 357,
     metaTitle: "Samsung Galaxy A03 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A03 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A03 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A03 (SM-A035) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A03 (SM-A035) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2780,9 +2780,9 @@ const devices = [
     order: 358,
     metaTitle: "Samsung Galaxy A02 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy A02 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy A02 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy A02 (SM-A025) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy A02 (SM-A025) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2806,9 +2806,9 @@ const devices = [
   order: 360,
   metaTitle: "Samsung Galaxy XCover Pro remonts Rīgā | iLab",
   metaDescription:
-    "Samsung Galaxy XCover Pro remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    "Samsung Galaxy XCover Pro remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
   bodyHtml: `
-<p><strong>Galaxy XCover Pro (SM-G715) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy XCover Pro (SM-G715) 2020</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
 },
@@ -2827,9 +2827,9 @@ const devices = [
   order: 361,
   metaTitle: "Samsung Galaxy XCover 6 remonts Rīgā | iLab",
   metaDescription:
-    "Samsung Galaxy XCover 6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    "Samsung Galaxy XCover 6 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
   bodyHtml: `
-<p><strong>Galaxy XCover 6 (SM-G736) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy XCover 6 (SM-G736) 2022</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
 },
@@ -2848,9 +2848,9 @@ const devices = [
   order: 362,
   metaTitle: "Samsung Galaxy XCover 7 remonts Rīgā | iLab",
   metaDescription:
-    "Samsung Galaxy XCover 7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    "Samsung Galaxy XCover 7 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
   bodyHtml: `
-<p><strong>Galaxy XCover 7 (SM-G556) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy XCover 7 (SM-G556) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
 },
@@ -2869,9 +2869,9 @@ const devices = [
   order: 363,
   metaTitle: "Samsung Galaxy XCover 7 Pro remonts Rīgā | iLab",
   metaDescription:
-    "Samsung Galaxy XCover 7 Pro remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+    "Samsung Galaxy XCover 7 Pro remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
   bodyHtml: `
-<p><strong>Galaxy XCover 7 Pro (SM-G766) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy XCover 7 Pro (SM-G766) 2024</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
 },
@@ -2890,9 +2890,9 @@ const devices = [
     order: 359, // continue from previous order
     metaTitle: "Samsung Galaxy XCover 5 remonts Rīgā | iLab",
     metaDescription:
-      "Samsung Galaxy XCover 5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.",
+      "Samsung Galaxy XCover 5 remonts Rīgā - ekrāna, baterijas, lādētāja ligzdas un citu detaļu maiņa. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.",
     bodyHtml: `
-<p><strong>Galaxy XCover 5 (SM-G525) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām 90 dienu garantiju.</p>
+<p><strong>Galaxy XCover 5 (SM-G525) 2021</strong> remonts Rīgā - profesionāla ekrāna, baterijas un kameras nomaiņa ar ātru apkalpošanu. Izmantojam kvalitatīvas detaļas un nodrošinām garantiju līdz 1 gadam.</p>
 <p>Bezmaksas diagnostika, skaidras cenas un remonta darbi tajā pašā dienā. Pieraksties tiešsaistē vai apmeklē iLab servisu.</p>
   `,
   },
@@ -2913,7 +2913,7 @@ const devices = [
     metaDescription: "Ekrāna, baterijas un kameras remonts Huawei P30 Pro.",
     bodyHtml: `
 <p><strong>Huawei P30 Pro</strong> remonts Rīgā ar ātru diagnostiku un augstas kvalitātes detaļām. 
-    Veicam ekrāna, baterijas un kameras maiņu tajā pašā dienā ar 90 dienu garantiju.</p>
+    Veicam ekrāna, baterijas un kameras maiņu tajā pašā dienā ar garantiju līdz 1 gadam.</p>
     <p>Bezmaksas diagnostika un skaidras cenas - iLab meistari atjaunos Tavu Huawei kā jaunu.</p>
   `,
 
@@ -2945,9 +2945,9 @@ const devices = [
   order: 130,
   metaTitle: 'iPad 9.7" (5 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 9.7" (5 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 9.7" (5 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 9.7" (5 gen. 2017) (A1822, A1823)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 9.7" (5 gen. 2017) (A1822, A1823)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -2966,9 +2966,9 @@ const devices = [
   order: 140,
   metaTitle: 'iPad 9.7" (6 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 9.7" (6 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 9.7" (6 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 9.7" (6 gen. 2018) (A1893, A1954)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 9.7" (6 gen. 2018) (A1893, A1954)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -2987,9 +2987,9 @@ const devices = [
   order: 150,
   metaTitle: 'iPad 10.2" (7 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 10.2" (7 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 10.2" (7 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 10.2" (7 gen. 2019) (A2198, A2197)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 10.2" (7 gen. 2019) (A2198, A2197)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3008,9 +3008,9 @@ const devices = [
   order: 160,
   metaTitle: 'iPad 10.2" (8 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 10.2" (8 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 10.2" (8 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 10.2" (8 gen. 2020) (A2270, A2429)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 10.2" (8 gen. 2020) (A2270, A2429)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3029,9 +3029,9 @@ const devices = [
   order: 170,
   metaTitle: 'iPad 10.2" (9 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 10.2" (9 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 10.2" (9 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 10.2" (9 gen. 2021) (A2602, A2604)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 10.2" (9 gen. 2021) (A2602, A2604)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3050,9 +3050,9 @@ const devices = [
   order: 180,
   metaTitle: 'iPad 10.9" (10 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad 10.9" (10 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad 10.9" (10 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad 10.9" (10 gen. 2022) (A2696, A2757)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad 10.9" (10 gen. 2022) (A2696, A2757)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3075,9 +3075,9 @@ const devices = [
   order: 230,
   metaTitle: 'iPad mini 4 remonts Rīgā | iLab',
   metaDescription:
-    'iPad mini 4 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad mini 4 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad mini 4 (2015) (A1550)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad mini 4 (2015) (A1550)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3096,9 +3096,9 @@ const devices = [
   order: 240,
   metaTitle: 'iPad mini 5 remonts Rīgā | iLab',
   metaDescription:
-    'iPad mini 5 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad mini 5 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad mini 5 (2019) (A2124, A2133)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad mini 5 (2019) (A2124, A2133)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3117,9 +3117,9 @@ const devices = [
   order: 250,
   metaTitle: 'iPad mini 6 remonts Rīgā | iLab',
   metaDescription:
-    'iPad mini 6 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad mini 6 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad mini 6 (2021) (A2567, A2568)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad mini 6 (2021) (A2567, A2568)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3138,9 +3138,9 @@ const devices = [
   order: 260,
   metaTitle: 'iPad mini 7 remonts Rīgā | iLab',
   metaDescription:
-    'iPad mini 7 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad mini 7 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad mini 7 (2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad mini 7 (2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3163,9 +3163,9 @@ const devices = [
   order: 300,
   metaTitle: 'iPad Air (1 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air (1 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air (1 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air (1 gen. 2013) (A1474, A1475)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air (1 gen. 2013) (A1474, A1475)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3184,9 +3184,9 @@ const devices = [
   order: 310,
   metaTitle: 'iPad Air 2 remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 2 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 2 ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 2 (2014) (A1566, A1567)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 2 (2014) (A1566, A1567)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3205,9 +3205,9 @@ const devices = [
   order: 320,
   metaTitle: 'iPad Air 10.5" (3 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 10.5" (3 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 10.5" (3 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 10.5" (3 gen. 2019) (A2152)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 10.5" (3 gen. 2019) (A2152)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3226,9 +3226,9 @@ const devices = [
   order: 330,
   metaTitle: 'iPad Air 10.9" (4 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 10.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 10.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 10.9" (4 gen. 2020) (A2072, A2316)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 10.9" (4 gen. 2020) (A2072, A2316)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3247,9 +3247,9 @@ const devices = [
   order: 340,
   metaTitle: 'iPad Air 10.9" (5 gen. M1) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 10.9" (5 gen. M1) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 10.9" (5 gen. M1) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 10.9" (5 gen. M1, 2022) (A2588)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 10.9" (5 gen. M1, 2022) (A2588)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3268,9 +3268,9 @@ const devices = [
   order: 350,
   metaTitle: 'iPad Air 11" (6 gen. M2) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 11" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 11" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 11" (6 gen. M2, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 11" (6 gen. M2, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3289,9 +3289,9 @@ const devices = [
   order: 360,
   metaTitle: 'iPad Air 13" (6 gen. M2) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Air 13" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Air 13" (6 gen. M2) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Air 13" (6 gen. M2, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Air 13" (6 gen. M2, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3314,9 +3314,9 @@ const devices = [
   order: 400,
   metaTitle: 'iPad Pro 9.7" remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 9.7" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 9.7" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 9.7" (2016)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 9.7" (2016)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3335,9 +3335,9 @@ const devices = [
   order: 410,
   metaTitle: 'iPad Pro 10.5" remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 10.5" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 10.5" ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 10.5" (2017)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 10.5" (2017)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3360,9 +3360,9 @@ const devices = [
   order: 500,
   metaTitle: 'iPad Pro 11" (2018) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 11" (2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 11" (2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 11" (1 gen. 2018) (A1934, A1980)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 11" (1 gen. 2018) (A1934, A1980)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3381,9 +3381,9 @@ const devices = [
   order: 510,
   metaTitle: 'iPad Pro 11" (2 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 11" (2 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 11" (2 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 11" (2 gen. 2020) (A2230)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 11" (2 gen. 2020) (A2230)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3402,9 +3402,9 @@ const devices = [
   order: 520,
   metaTitle: 'iPad Pro 11" (M1, 2021) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 11" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 11" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 11" (3 gen. M1, 2021) (A2377, A2459)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 11" (3 gen. M1, 2021) (A2377, A2459)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3423,9 +3423,9 @@ const devices = [
   order: 530,
   metaTitle: 'iPad Pro 11" (M2, 2022) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 11" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 11" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 11" (4 gen. M2, 2022) (A2759)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 11" (4 gen. M2, 2022) (A2759)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3444,9 +3444,9 @@ const devices = [
   order: 540,
   metaTitle: 'iPad Pro 11" (M4, 2024) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 11" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 11" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 11" (7 gen. M4, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 11" (7 gen. M4, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3469,9 +3469,9 @@ const devices = [
   order: 600,
   metaTitle: 'iPad Pro 12.9" (2015) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (2015) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (2015) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (1 gen. 2015) (A1584)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (1 gen. 2015) (A1584)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3490,9 +3490,9 @@ const devices = [
   order: 610,
   metaTitle: 'iPad Pro 12.9" (2 gen. 2017) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (2 gen. 2017) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (2 gen. 2017) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (2 gen. 2017)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (2 gen. 2017)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3511,9 +3511,9 @@ const devices = [
   order: 620,
   metaTitle: 'iPad Pro 12.9" (3 gen. 2018) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (3 gen. 2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (3 gen. 2018) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (3 gen. 2018)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (3 gen. 2018)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3532,9 +3532,9 @@ const devices = [
   order: 630,
   metaTitle: 'iPad Pro 12.9" (4 gen.) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (4 gen.) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (4 gen. 2020) (A2232)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (4 gen. 2020) (A2232)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam oriģinālas vai augstas kvalitātes OEM detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3553,9 +3553,9 @@ const devices = [
   order: 640,
   metaTitle: 'iPad Pro 12.9" (M1, 2021) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (M1, 2021) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (5 gen. M1, 2021)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (5 gen. M1, 2021)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3574,9 +3574,9 @@ const devices = [
   order: 650,
   metaTitle: 'iPad Pro 12.9" (M2, 2022) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 12.9" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 12.9" (M2, 2022) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 12.9" (6 gen. M2, 2022)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 12.9" (6 gen. M2, 2022)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3595,9 +3595,9 @@ const devices = [
   order: 660,
   metaTitle: 'iPad Pro 13" (M4, 2024) remonts Rīgā | iLab',
   metaDescription:
-    'iPad Pro 13" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'iPad Pro 13" (M4, 2024) ekrāna, baterijas un citu detaļu maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
   bodyHtml: `
-<p><strong>iPad Pro 13" (M4, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar 90 dienu garantiju.</p>
+<p><strong>iPad Pro 13" (M4, 2024)</strong> remonts Rīgā - ekrāna, baterijas, uzlādes porta un citu komponentu maiņa. Izmantojam kvalitatīvas detaļas ar garantiju līdz 1 gadam.</p>
 <p>Veicam bezmaksas diagnostiku un precīzi saskaņojam izmaksas pirms remonta.</p>
   `,
 },
@@ -3624,10 +3624,10 @@ const devices = [
   order: 700,
   metaTitle: 'MacBook Pro 13" (2015) (A1502) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" (2015) (A1502) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" (2015) (A1502) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" (2015) (A1502)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3644,10 +3644,10 @@ const devices = [
   order: 710,
   metaTitle: 'MacBook Pro 15" (2015) (A1398) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 15" (2015) (A1398) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 15" (2015) (A1398) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 15" (2015) (A1398)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3664,10 +3664,10 @@ const devices = [
   order: 720,
   metaTitle: 'MacBook Pro 13" (2016) (A1708, A1706) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" (2016) (A1708, A1706) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" (2016) (A1708, A1706) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" (2016) (A1708, A1706)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3684,10 +3684,10 @@ const devices = [
   order: 730,
   metaTitle: 'MacBook Pro 15" (2016) (A1707) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 15" (2016) (A1707) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 15" (2016) (A1707) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 15" (2016) (A1707)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3704,10 +3704,10 @@ const devices = [
   order: 740,
   metaTitle: 'MacBook Pro 13" (2018) (A1989) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" (2018) (A1989) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" (2018) (A1989) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" (2018) (A1989)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3724,10 +3724,10 @@ const devices = [
   order: 750,
   metaTitle: 'MacBook Pro 15" (2018) (A1990) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 15" (2018) (A1990) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 15" (2018) (A1990) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 15" (2018) (A1990)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3744,10 +3744,10 @@ const devices = [
   order: 760,
   metaTitle: 'MacBook Pro 13" (2019) (A1989, A2159) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" (2019) (A1989, A2159) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" (2019) (A1989, A2159) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" (2019) (A1989, A2159)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3764,10 +3764,10 @@ const devices = [
   order: 770,
   metaTitle: 'MacBook Pro 15" (2019) (A1990) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 15" (2019) (A1990) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 15" (2019) (A1990) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 15" (2019) (A1990)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3784,10 +3784,10 @@ const devices = [
   order: 780,
   metaTitle: 'MacBook Pro 16" (2019) (A2141) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 16" (2019) (A2141) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 16" (2019) (A2141) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 16" (2019) (A2141)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3804,10 +3804,10 @@ const devices = [
   order: 790,
   metaTitle: 'MacBook Pro 13" Intel (2020) (A2251, A2289) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" Intel (2020) (A2251, A2289) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" Intel (2020) (A2251, A2289) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" Intel (2020) (A2251, A2289)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3824,10 +3824,10 @@ const devices = [
   order: 800,
   metaTitle: 'MacBook Pro 13" M1 (2020) (A2338) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" M1 (2020) (A2338) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" M1 (2020) (A2338) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" M1 (2020) (A2338)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3844,10 +3844,10 @@ const devices = [
   order: 810,
   metaTitle: 'MacBook Pro 14" M1 Pro/Max (2021) (A2442) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 14" M1 Pro/Max (2021) (A2442) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 14" M1 Pro/Max (2021) (A2442) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 14" M1 Pro/Max (2021) (A2442)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3864,10 +3864,10 @@ const devices = [
   order: 820,
   metaTitle: 'MacBook Pro 16" M1 Pro/Max (2021) (A2485) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 16" M1 Pro/Max (2021) (A2485) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 16" M1 Pro/Max (2021) (A2485) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 16" M1 Pro/Max (2021) (A2485)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3884,10 +3884,10 @@ const devices = [
   order: 830,
   metaTitle: 'MacBook Pro 13" M2 (2022) (A2338) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 13" M2 (2022) (A2338) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 13" M2 (2022) (A2338) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 13" M2 (2022) (A2338)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3904,10 +3904,10 @@ const devices = [
   order: 840,
   metaTitle: 'MacBook Pro 14" M2 Pro/Max (2023) (A2779) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 14" M2 Pro/Max (2023) (A2779) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 14" M2 Pro/Max (2023) (A2779) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 14" M2 Pro/Max (2023) (A2779)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3924,10 +3924,10 @@ const devices = [
   order: 850,
   metaTitle: 'MacBook Pro 16" M2 Pro/Max (2023) (A2780) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 16" M2 Pro/Max (2023) (A2780) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 16" M2 Pro/Max (2023) (A2780) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 16" M2 Pro/Max (2023) (A2780)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3944,10 +3944,10 @@ const devices = [
   order: 860,
   metaTitle: 'MacBook Pro 14" M3/Pro/Max (2024) (A2992) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 14" M3/Pro/Max (2024) (A2992) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 14" M3/Pro/Max (2024) (A2992) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 14" M3/Pro/Max (2024) (A2992)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3964,10 +3964,10 @@ const devices = [
   order: 870,
   metaTitle: 'MacBook Pro 16" M3 Pro/Max (2024) (A2991) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 16" M3 Pro/Max (2024) (A2991) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 16" M3 Pro/Max (2024) (A2991) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 16" M3 Pro/Max (2024) (A2991)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -3984,10 +3984,10 @@ const devices = [
   order: 880,
   metaTitle: 'MacBook Pro 14" M4/Pro/Max (2025) (A3185) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 14" M4/Pro/Max (2025) (A3185) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 14" M4/Pro/Max (2025) (A3185) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 14" M4/Pro/Max (2025) (A3185)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 {
@@ -4004,10 +4004,10 @@ const devices = [
   order: 890,
   metaTitle: 'MacBook Pro 16" M4/Pro/Max (2025) (A3186) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Pro 16" M4/Pro/Max (2025) (A3186) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Pro 16" M4/Pro/Max (2025) (A3186) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Pro 16" M4/Pro/Max (2025) (A3186)</strong> remonts Rīgā - diagnostika, ekrāna, baterijas, tastatūras un uzlādes remonts, dzesēšanas tīrīšana un citi darbi.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4029,10 +4029,10 @@ const devices = [
   order: 800,
   metaTitle: 'MacBook Air 11" (2015) (A1465) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 11" (2015) (A1465) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 11" (2015) (A1465) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 11" (2015) (A1465)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4050,10 +4050,10 @@ const devices = [
   order: 801,
   metaTitle: 'MacBook Air 13" (2015) (A1466) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" (2015) (A1466) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" (2015) (A1466) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" (2015) (A1466)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4071,10 +4071,10 @@ const devices = [
   order: 802,
   metaTitle: 'MacBook Air 13" (2017) (A1466) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" (2017) (A1466) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" (2017) (A1466) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" (2017) (A1466)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4092,10 +4092,10 @@ const devices = [
   order: 803,
   metaTitle: 'MacBook Air 13" (2018) (A1932) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" (2018) (A1932) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" (2018) (A1932) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" (2018) (A1932)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4113,10 +4113,10 @@ const devices = [
   order: 804,
   metaTitle: 'MacBook Air 13" (2019) (A1932) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" (2019) (A1932) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" (2019) (A1932) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" (2019) (A1932)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4134,10 +4134,10 @@ const devices = [
   order: 805,
   metaTitle: 'MacBook Air 13" Intel (2020) (A2179) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" Intel (2020) (A2179) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" Intel (2020) (A2179) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" Intel (2020) (A2179)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4155,10 +4155,10 @@ const devices = [
   order: 806,
   metaTitle: 'MacBook Air 13" M1 (2020) (A2337) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" M1 (2020) (A2337) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" M1 (2020) (A2337) remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" M1 (2020) (A2337)</strong> remonts Rīgā - diagnostika, baterijas un displeja nomaiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4176,10 +4176,10 @@ const devices = [
   order: 807,
   metaTitle: 'MacBook Air 13" M2 (2022) (A2681) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" M2 (2022) (A2681) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" M2 (2022) (A2681) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" M2 (2022) (A2681)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4197,10 +4197,10 @@ const devices = [
   order: 808,
   metaTitle: 'MacBook Air 15" M2 (2023) (A2941) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 15" M2 (2023) (A2941) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 15" M2 (2023) (A2941) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 15" M2 (2023) (A2941)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4218,10 +4218,10 @@ const devices = [
   order: 809,
   metaTitle: 'MacBook Air 13" M3 (2024) (A3113) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" M3 (2024) (A3113) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" M3 (2024) (A3113) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" M3 (2024) (A3113)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4239,10 +4239,10 @@ const devices = [
   order: 810,
   metaTitle: 'MacBook Air 15" M3 (2024) (A3114) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 15" M3 (2024) (A3114) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 15" M3 (2024) (A3114) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 15" M3 (2024) (A3114)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4260,10 +4260,10 @@ const devices = [
   order: 811,
   metaTitle: 'MacBook Air 13" M4 (2025) (A3240) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 13" M4 (2025) (A3240) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 13" M4 (2025) (A3240) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 13" M4 (2025) (A3240)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 
@@ -4281,10 +4281,10 @@ const devices = [
   order: 812,
   metaTitle: 'MacBook Air 15" M4 (2025) (A3241) remonts Rīgā | iLab',
   metaDescription:
-    'MacBook Air 15" M4 (2025) (A3241) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+    'MacBook Air 15" M4 (2025) (A3241) remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes problēmu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
   bodyHtml: `
 <p><strong>MacBook Air 15" M4 (2025) (A3241)</strong> remonts Rīgā - diagnostika, ekrāna un baterijas maiņa, tastatūras un uzlādes remonts, kā arī profilakse un dzesēšanas tīrīšana.</p>
-<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. 90 dienu garantija darbam un detaļām.</p>
+<p>Veicam bezmaksas diagnostiku un saskaņojam cenu pirms remonta. garantija līdz 1 gadam darbam un detaļām.</p>
   `,
 },
 ];

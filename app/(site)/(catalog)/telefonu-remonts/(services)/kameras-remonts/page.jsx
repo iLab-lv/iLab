@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu kameras remonts Rīgā',
   pageDescription:
-    'Miglaini attēli, fokusēšanās problēmas vai nedarbojas kamera? Telefonu kameras remonts un maiņa Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Miglaini attēli, fokusēšanās problēmas vai nedarbojas kamera? Telefonu kameras remonts un maiņa Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,19 +41,19 @@ const strings = {
 
   headerTitle: 'Telefonu kameras remonts Rīgā',
   headerLead:
-    'Remontējam telefonu kameru, ja attēli ir miglaini, ir fokusēšanās problēmas, bojāts kameras stikliņš vai kamera rāda kļūdu. Pirms remonta veicam diagnostiku un pēc remonta sniedzam 90 dienu garantiju.',
+    'Remontējam telefonu kameru, ja attēli ir miglaini, ir fokusēšanās problēmas, bojāts kameras stikliņš vai kamera rāda kļūdu. Pirms remonta veicam diagnostiku un pēc remonta sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/kameras_remonts.webp',
   heroBodyHtml:
-    '<p><strong>Telefonu kameras remonts Rīgā</strong> - miglains attēls, bojāts stikliņš vai fokusēšanās problēmas? Veicam diagnostiku un nepieciešamības gadījumā <strong>kameras moduļa vai stikliņa maiņu</strong>. Bezmaksas pārbaude un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>Telefonu kameras remonts Rīgā</strong> - miglains attēls, bojāts stikliņš vai fokusēšanās problēmas? Veicam diagnostiku un nepieciešamības gadījumā <strong>kameras moduļa vai stikliņa maiņu</strong>. Bezmaksas pārbaude un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   introTitle: 'Telefonu kameras remonts Rīgā',
   introP1:
     'Simptomi, kas norāda uz <strong>kameras bojājumu</strong>: <strong>miglains vai graudains attēls</strong>, <strong>nepareizas krāsas</strong>, <strong>švīkas vai putekļi kadrā</strong>, <strong>autofokuss “sūc”</strong>, melns ekrāns kamerā vai kameras lietotne <strong>aizveras ar kļūdu</strong>. Ja bojāts ir tikai <strong>stikliņš</strong>, parasti pietiek ar stikliņa maiņu; ja bojāts ir pats kameras modulis, nepieciešama <strong>kameras nomaiņa</strong>.',
   introP2:
-    'Pēc remonta pārbaudām fokusēšanos, stabilizāciju, foto un video kvalitāti, kā arī kameras lietotnes darbību. Populāros modeļus parasti salabojam <strong>1–3 stundu</strong> laikā. Visam veicamajam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pēc remonta pārbaudām fokusēšanos, stabilizāciju, foto un video kvalitāti, kā arī kameras lietotnes darbību. Populāros modeļus parasti salabojam <strong>1–3 stundu</strong> laikā. Visam veicamajam darbam un detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -85,7 +85,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, kā arī sniedzam ieteikumus kameras saudzīgai lietošanai.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, kā arī sniedzam ieteikumus kameras saudzīgai lietošanai.',
     },
   ],
 
@@ -94,7 +94,7 @@ const strings = {
   serviceName: 'Telefonu kameras remonts Rīgā',
   serviceType: 'Telefonu kameras remonts',
   serviceDescription:
-    'Telefonu kameras remonts un maiņa Rīgā: miglaini attēli, fokusēšanās problēmas, bojāts stikliņš. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Telefonu kameras remonts un maiņa Rīgā: miglaini attēli, fokusēšanās problēmas, bojāts stikliņš. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   processHowToName: 'Telefonu kameras remonta process iLab',
   processHowToDescription:

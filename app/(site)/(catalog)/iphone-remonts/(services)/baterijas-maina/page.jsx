@@ -33,7 +33,7 @@ const strings = {
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/baterijas_maina.webp',
   heroBodyHtml:
-    '<p><strong>iPhone baterijas maiņa Rīgā</strong> iLab servisā - ātra diagnostika, kvalitatīvas detaļas un <strong>90 dienu garantija</strong>. Bieži akumulatora nomaiņu paveicam tajā pašā dienā.</p>',
+    '<p><strong>iPhone baterijas maiņa Rīgā</strong> iLab servisā - ātra diagnostika, kvalitatīvas detaļas un <strong>garantija līdz 1 gadam</strong>. Bieži akumulatora nomaiņu paveicam tajā pašā dienā.</p>',
 
   priceTitle: 'Baterijas maiņas cenas pēc modeļa',
   ctaLabel: 'Pieteikties remontam',
@@ -44,7 +44,7 @@ const strings = {
   serviceName: 'iPhone baterijas maiņa Rīgā',
   serviceType: 'iPhone baterijas maiņa',
   serviceDescription:
-    'iPhone baterijas maiņa Rīgā: bezmaksas diagnostika, 90 dienu garantija.',
+    'iPhone baterijas maiņa Rīgā: bezmaksas diagnostika, garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   hubCrumb: 'iPhone remonts',
@@ -52,7 +52,7 @@ const strings = {
 
   headerTitle: 'iPhone baterijas maiņa Rīgā',
   headerLead:
-    'Mainām iPhone akumulatoru, ja baterija ātri izlādējas, telefons izslēdzas, sakarst vai neuzrāda stabilu uzlādi. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    'Mainām iPhone akumulatoru, ja baterija ātri izlādējas, telefons izslēdzas, sakarst vai neuzrāda stabilu uzlādi. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc nomaiņas sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   applyAria: 'Pieteikties remontam',
@@ -79,7 +79,7 @@ const strings = {
     },
     {
       name: 'Garantija',
-      text: 'Izsniedzam 90 dienu garantiju veiktajam darbam un uzstādītajai detaļai.',
+      text: 'Izsniedzam garantiju līdz 1 gadam veiktajam darbam un uzstādītajai detaļai.',
     },
   ],
 };

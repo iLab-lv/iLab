@@ -28,9 +28,9 @@ const cards = [
   },
   {
     icon: LuBadgeCheck,
-    title: '90 dienu garantija',
+    title: 'garantija līdz 1 gadam',
     text:
-      'Pēc remonta sniedzam 90 dienu garantiju darbam un izmantotajām detaļām. Garantijas nosacījumus izskaidrojam pirms remonta pabeigšanas.',
+      'Pēc remonta sniedzam garantiju līdz 1 gadam darbam un izmantotajām detaļām. Garantijas nosacījumus izskaidrojam pirms remonta pabeigšanas.',
   },
   {
     icon: LuSearchCheck,
@@ -41,7 +41,7 @@ const cards = [
 ];
 
 const facts = [
-  '90 dienu garantija',
+  'garantija līdz 1 gadam',
   'Cena pirms remonta',
   'Detaļas pēc izvēles un pieejamības',
   'Pārbaude pēc remonta',

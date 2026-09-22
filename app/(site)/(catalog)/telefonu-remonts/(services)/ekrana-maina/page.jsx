@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu ekrāna maiņa Rīgā',
   pageDescription:
-    'Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģināli vai OEM displeji. Bieži tajā pašā dienā.',
+    'Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā. Bezmaksas diagnostika, garantija līdz 1 gadam, oriģināli vai OEM displeji. Bieži tajā pašā dienā.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,19 +41,19 @@ const strings = {
 
   headerTitle: 'Telefonu ekrāna maiņa Rīgā',
   headerLead:
-    'Mainām telefonu ekrānu, ja tas ir saplaisājis, rāda plankumus, līnijas vai nereaģē uz pieskārienu. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    'Mainām telefonu ekrānu, ja tas ir saplaisājis, rāda plankumus, līnijas vai nereaģē uz pieskārienu. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/displeja_maina.webp',
   heroBodyHtml:
-    '<p><strong>Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā</strong> - plaisas, plankumi vai skāriena problēmas novēršam bieži tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
+    '<p><strong>Ātra un kvalitatīva telefonu ekrāna maiņa Rīgā</strong> - plaisas, plankumi vai skāriena problēmas novēršam bieži tajā pašā dienā. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong> katram remontam iLab servisā.</p>',
 
   introTitle: 'Telefonu ekrāna maiņa Rīgā',
   introP1:
     'Ja ekrāns ir saplīsis, parādās plankumi, līnijas vai nereaģē skāriens, visticamāk nepieciešama <strong>telefonu ekrāna (displeja) maiņa</strong>. iLab meistari Rīgā veic ātru un drošu nomaiņu, izmantojot <strong>oriģinālus vai augstas kvalitātes OEM displejus</strong>. Pirms darba uzsākšanas veicam <strong>bezmaksas diagnostiku</strong>, lai pārliecinātos, ka bojājums ir tieši displejā, nevis, piemēram, programmatūrā vai citās komponentēs.',
   introP2:
-    'Pēc nomaiņas rūpīgi pārbaudām skārienjutību, krāsu atbilstību, spilgtumu un kopējo attēla kvalitāti. Populāros modeļus parasti salabojam <strong>1–3 stundu laikā</strong>. Visam veicamajam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pēc nomaiņas rūpīgi pārbaudām skārienjutību, krāsu atbilstību, spilgtumu un kopējo attēla kvalitāti. Populāros modeļus parasti salabojam <strong>1–3 stundu laikā</strong>. Visam veicamajam darbam un detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -85,7 +85,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, kā arī sniedzam ieteikumus ekrāna saudzīgai lietošanai.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, kā arī sniedzam ieteikumus ekrāna saudzīgai lietošanai.',
     },
   ],
 
@@ -94,7 +94,7 @@ const strings = {
   serviceName: 'Telefonu ekrāna maiņa Rīgā',
   serviceType: 'Telefonu ekrāna maiņa',
   serviceDescription:
-    'Telefonu ekrāna maiņa Rīgā: bezmaksas diagnostika, oriģināli vai OEM displeji, 90 dienu garantija. Bieži tajā pašā dienā.',
+    'Telefonu ekrāna maiņa Rīgā: bezmaksas diagnostika, oriģināli vai OEM displeji, garantija līdz 1 gadam. Bieži tajā pašā dienā.',
 
   processHowToName: 'Telefonu ekrāna maiņas process iLab',
   processHowToDescription:

@@ -153,35 +153,35 @@ const QUESTIONS = [
     ],
     aHtml: (
       <>
-        Jā - visiem remontiem nodrošinām <strong>90 dienu garantiju</strong>. Izmantojam
+        Jā - visiem remontiem nodrošinām <strong>garantiju līdz 1 gadam</strong>. Izmantojam
         oriģinālas vai augstas kvalitātes OEM detaļas (vienojamies ar klientu pirms
         darba).
       </>
     ),
     aText:
-      'Jā - visiem remontiem nodrošinām 90 dienu garantiju; izmantojam oriģinālas vai augstas kvalitātes OEM detaļas.',
+      'Jā - visiem remontiem nodrošinām garantiju līdz 1 gadam; izmantojam oriģinālas vai augstas kvalitātes OEM detaļas.',
     variants: {
       [FAQ_CONTEXT.IPHONE]: {
         aHtml: (
           <>
-            <strong>iPhone remontiem</strong> - <strong>90 dienu garantija</strong> gan
+            <strong>iPhone remontiem</strong> - <strong>garantija līdz 1 gadam</strong> gan
             darbam, gan detaļām. Pēc vienošanās izmantojam oriģinālās vai augstas
             kvalitātes OEM komponentes.
           </>
         ),
         aText:
-          'iPhone remontiem ir 90 dienu garantija darbam un detaļām; izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.',
+          'iPhone remontiem ir garantija līdz 1 gadam darbam un detaļām; izmantojam oriģinālās vai augstas kvalitātes OEM komponentes.',
       },
       // Ad-optimised + policy-safe variant (no parts/OEM claims)
       [FAQ_CONTEXT.IPHONE_ADS]: {
         aHtml: (
           <>
-            Jā - veiktajiem darbiem nodrošinām <strong>90 dienu garantiju</strong>.
+            Jā - veiktajiem darbiem nodrošinām <strong>garantiju līdz 1 gadam</strong>.
             Garantijas nosacījumi tiek izskaidroti uz vietas.
           </>
         ),
         aText:
-          'Jā - veiktajiem darbiem nodrošinām 90 dienu garantiju; nosacījumus izskaidrojam uz vietas.',
+          'Jā - veiktajiem darbiem nodrošinām garantiju līdz 1 gadam; nosacījumus izskaidrojam uz vietas.',
       },
     },
     weight: 30,

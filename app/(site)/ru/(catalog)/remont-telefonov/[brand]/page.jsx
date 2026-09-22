@@ -88,7 +88,7 @@ const processSteps = [
   },
   {
     title: 'Гарантия',
-    text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
+    text: 'Гарантия до 1 года и рекомендации по дальнейшему использованию.',
   },
 ];
 
@@ -147,7 +147,7 @@ function getPageStrings({ brandName, page }) {
 
   const heroHtml =
     pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
-    `<p><strong>${brandName} ремонт телефонов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`;
+    `<p><strong>${brandName} ремонт телефонов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией до 1 года</strong>.</p>`;
 
   return {
     introTitle: `${brandName} ремонт телефонов - что мы делаем`,

@@ -84,7 +84,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju, parasti 90 dienas.',
+    a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju, parasti līdz 1 gadam.',
   },
   {
     q: 'Ko darīt, ja dators pārkarst vai ir ļoti skaļš?',
@@ -107,7 +107,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Есть ли гарантия на детали?',
-    a: 'Да, и на детали, и на выполненную работу предоставляем гарантию, обычно 90 дней.',
+    a: 'Да, и на детали, и на выполненную работу предоставляем гарантию, до 1 года.',
   },
   {
     q: 'Что делать, если компьютер перегревается или очень шумит?',
@@ -337,7 +337,7 @@ export function getComputerBrandPageStrings(cfg, locale = 'lv') {
       noModels: `Пока для этого бренда не добавлены модели. Свяжитесь с нами, чтобы уточнить ремонт ${cfg.name}.`,
       servicesTitle: 'Популярный ремонт',
       faqTitle: 'Часто задаваемые вопросы',
-      heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>`,
+      heroHtml: `<p><strong>Ремонт компьютеров ${cfg.name} в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия до 1 года</strong>.</p>`,
       categoryName: 'Ремонт компьютеров',
       homeCrumb: 'Главная',
       processTitle: 'Как проходит ремонт',
@@ -366,7 +366,7 @@ export function getComputerBrandPageStrings(cfg, locale = 'lv') {
       scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
       fallbackTitle: `${cfg.name} ремонт компьютеров`,
       fallbackMetaTitle: `${cfg.name} ремонт компьютеров в Риге | iLab`,
-      fallbackMetaDescription: `Профессиональный ремонт компьютеров ${cfg.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      fallbackMetaDescription: `Профессиональный ремонт компьютеров ${cfg.name} в Риге: экран, клавиатура, охлаждение, диски и программное обеспечение. Быстрая диагностика, честные цены, гарантия до 1 года.`,
       serviceName: `${cfg.name} ремонт компьютеров`,
       serviceDescription: `${cfg.name} ремонт компьютеров: экран, охлаждение, диски, программное обеспечение и другие работы. Быстрая диагностика, честные цены, гарантия.`,
       serviceType: 'Ремонт компьютеров',
@@ -386,7 +386,7 @@ export function getComputerBrandPageStrings(cfg, locale = 'lv') {
     noModels: `Pagaidām šim zīmolam nav pievienotu modeļu. Sazinies ar mums, lai precizētu ${cfg.name} remontu.`,
     servicesTitle: 'Populārākie remonti',
     faqTitle: 'Biežāk uzdotie jautājumi',
-    heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>`,
+    heroHtml: `<p><strong>${cfg.name} datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>`,
     categoryName: 'Datoru remonts',
     homeCrumb: 'Sākums',
     processTitle: 'Kā notiek remonts',
@@ -415,7 +415,7 @@ export function getComputerBrandPageStrings(cfg, locale = 'lv') {
     scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
     fallbackTitle: `${cfg.name} datoru remonts`,
     fallbackMetaTitle: `${cfg.name} datoru remonts Rīgā | iLab`,
-    fallbackMetaDescription: `Profesionāls ${cfg.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    fallbackMetaDescription: `Profesionāls ${cfg.name} datoru remonts Rīgā: ekrāns, tastatūra, dzesēšana, diski un programmatūra. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.`,
     serviceName: `${cfg.name} datoru remonts`,
     serviceDescription: `${cfg.name} datoru remonts: ekrāns, dzesēšana, diski, programmatūra un citi darbi. Ātra diagnostika, godīgas cenas, garantija.`,
     serviceType: 'Datoru remonts',

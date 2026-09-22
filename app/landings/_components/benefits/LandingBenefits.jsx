@@ -17,7 +17,7 @@ function getBenefits(locale) {
       { icon: <FaMagnifyingGlass />, text: 'Бесплатная диагностика' },
       { icon: <FaClipboardCheck />, text: 'Цена согласуется до ремонта' },
       { icon: <FaEye />, text: 'Без скрытых платежей' },
-      { icon: <FaShieldHalved />, text: '90 дней гарантии' },
+      { icon: <FaShieldHalved />, text: 'гарантия до 1 года' },
     ];
   }
 
@@ -25,7 +25,7 @@ function getBenefits(locale) {
     { icon: <FaMagnifyingGlass />, text: 'Bezmaksas diagnostika' },
     { icon: <FaClipboardCheck />, text: 'Cena tiek saskaņota pirms remonta' },
     { icon: <FaEye />, text: 'Bez slēptām izmaksām' },
-    { icon: <FaShieldHalved />, text: '90 dienu garantija' },
+    { icon: <FaShieldHalved />, text: 'garantija līdz 1 gadam' },
   ];
 }
 

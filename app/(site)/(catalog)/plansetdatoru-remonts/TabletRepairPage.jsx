@@ -131,7 +131,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā - gan uz rezerves detaļām, gan uz paveikto darbu ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
+    a: 'Jā - gan uz rezerves detaļām, gan uz paveikto darbu ir garantija līdz 1 gadam, ja nav jaunu mehānisku vai šķidruma bojājumu.',
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
@@ -154,7 +154,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Есть ли гарантия на детали?',
-    a: 'Да - на детали и выполненные работы действует гарантия 90 дней, если нет новых механических повреждений или повреждений от жидкости.',
+    a: 'Да - на детали и выполненные работы действует гарантия до 1 года, если нет новых механических повреждений или повреждений от жидкости.',
   },
   {
     q: 'Доступны ли оригинальные детали?',
@@ -175,7 +175,7 @@ export function getTabletPageStrings(locale = 'lv') {
     return {
       metaTitle: 'Ремонт планшетов в Риге - цены, быстро, гарантия | iLab',
       metaDescription:
-        'Ремонт планшетов в Риге: экран, батарея, разъём зарядки, камера, повреждения после попадания влаги. Быстрая диагностика, честные цены, гарантия 90 дней.',
+        'Ремонт планшетов в Риге: экран, батарея, разъём зарядки, камера, повреждения после попадания влаги. Быстрая диагностика, честные цены, гарантия до 1 года.',
       heroAlt: 'ремонт планшетов в Риге',
       introTitle: 'Ремонт планшетов - что мы делаем',
       introLead:
@@ -187,7 +187,7 @@ export function getTabletPageStrings(locale = 'lv') {
       breadcrumbName: 'Ремонт планшетов',
       serviceName: 'Ремонт планшетов в Риге',
       serviceDescription:
-        'Ремонт планшетов в Риге: замена экрана, батареи, разъёма зарядки, камеры, ремонт звука и после попадания влаги. Быстрая диагностика, честные цены и гарантия 90 дней.',
+        'Ремонт планшетов в Риге: замена экрана, батареи, разъёма зарядки, камеры, ремонт звука и после попадания влаги. Быстрая диагностика, честные цены и гарантия до 1 года.',
       serviceType: 'Ремонт планшетов',
       servicesTitle: 'Популярный ремонт планшетов',
       servicesItems: [
@@ -245,7 +245,7 @@ export function getTabletPageStrings(locale = 'lv') {
         },
         {
           title: 'Гарантия',
-          text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
+          text: 'Гарантия до 1 года и рекомендации по дальнейшему использованию.',
         },
       ],
       scrollCta: { label: 'Смотреть бренды', targetId: 'brand-list' },
@@ -258,7 +258,7 @@ export function getTabletPageStrings(locale = 'lv') {
   return {
     metaTitle: 'Planšetdatoru remonts Rīgā - cenas, ātri, garantija | iLab',
     metaDescription:
-      'Planšetdatoru remonts Rīgā: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
+      'Planšetdatoru remonts Rīgā: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.',
     heroAlt: 'Planšetdatoru remonts Rīgā',
     introTitle: 'Planšetdatoru remonts - ko mēs darām',
     introLead:
@@ -270,7 +270,7 @@ export function getTabletPageStrings(locale = 'lv') {
     breadcrumbName: 'Planšetdatoru remonts',
     serviceName: 'Planšetdatoru remonts Rīgā',
     serviceDescription:
-      'Planšetdatoru remonts Rīgā: ekrāna maiņa, baterija, uzlādes ligzda, kamera, skaņa un ūdens bojājumi. Ātra diagnostika, godīgas cenas un 90 dienu garantija.',
+      'Planšetdatoru remonts Rīgā: ekrāna maiņa, baterija, uzlādes ligzda, kamera, skaņa un ūdens bojājumi. Ātra diagnostika, godīgas cenas un garantija līdz 1 gadam.',
     serviceType: 'Planšetdatoru remonts',
     servicesTitle: 'Populārākie planšetdatoru remonti',
     servicesItems: [
@@ -328,7 +328,7 @@ export function getTabletPageStrings(locale = 'lv') {
       },
       {
         title: 'Garantija',
-        text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+        text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
       },
     ],
     scrollCta: { label: 'Skatīt zīmolus', targetId: 'brand-list' },

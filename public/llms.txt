@@ -48,7 +48,7 @@
 - Diagnostics are available before repair work starts.
 - Price and part availability are confirmed before repair whenever possible.
 - Common repairs are often completed on the same day (frequently within 30 minutes) depending on part stocks.
-- iLab provides a 90-day warranty for all completed repair services.
+- iLab provides a warranty of up to 1 year for all completed repair services.
 - Payment options include cash, card, Apple Pay, and Google Pay.
 
 ## Languages

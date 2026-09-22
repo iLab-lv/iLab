@@ -21,13 +21,13 @@ export default function AndroidRemonts({
 
   const fallbackSeoBlurbs = {
     samsung:
-      'Servisējam Galaxy un citus Samsung - ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
+      'Servisējam Galaxy un citus Samsung - ekrāna (displeja) nomaiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un garantija līdz 1 gadam.',
     xiaomi:
       'Xiaomi, Redmi un POCO remonts - displeja remonts, baterijas/akumulatora maiņa u. c. Darbi tajā pašā dienā (atkarībā no modeļa).',
     huawei:
-      'Huawei P un Mate sērijai - ekrāna maiņa, uzlādes porta salabošana u. c. Kvalitatīvas detaļas un 90 dienu garantija.',
+      'Huawei P un Mate sērijai - ekrāna maiņa, uzlādes porta salabošana u. c. Kvalitatīvas detaļas un garantija līdz 1 gadam.',
     default:
-      'Android ierīču remonts - ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un 90 dienu garantija.',
+      'Android ierīču remonts - ekrāna/displeja un baterijas maiņa, uzlādes ligzdas remonts u. c. Ātra diagnostika un garantija līdz 1 gadam.',
   };
 
   const blurbMap = {

@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
   pageDescription:
-    'Klusa skaņa, krakšķi vai sarunās nedzird? Telefonu skaļruņu un mikrofona remonts un tīrīšana Rīgā. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Klusa skaņa, krakšķi vai sarunās nedzird? Telefonu skaļruņu un mikrofona remonts un tīrīšana Rīgā. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,19 +41,19 @@ const strings = {
 
   headerTitle: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
   headerLead:
-    'Remontējam telefonu skaļruni un mikrofonu, ja skaņa ir klusa, kropļota, ar krakšķiem vai sarunās nedzird. Pirms remonta veicam diagnostiku un pēc remonta sniedzam 90 dienu garantiju.',
+    'Remontējam telefonu skaļruni un mikrofonu, ja skaņa ir klusa, kropļota, ar krakšķiem vai sarunās nedzird. Pirms remonta veicam diagnostiku un pēc remonta sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/mikrofona_remonts.webp',
   heroBodyHtml:
-    '<p><strong>Skaļruņu un mikrofona remonts Rīgā</strong> - ja sarunās nedzird, skaņa ir klusa, ar krakšķiem vai balss ierakstā ir troksnis, veiksim tīrīšanu vai moduļu nomaiņu. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>Skaļruņu un mikrofona remonts Rīgā</strong> - ja sarunās nedzird, skaņa ir klusa, ar krakšķiem vai balss ierakstā ir troksnis, veiksim tīrīšanu vai moduļu nomaiņu. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   introTitle: 'Telefonu skaļruņu un mikrofona remonts',
   introP1:
     'Tipiski simptomi: <strong>klusa skaņa</strong>, <strong>kropļota skaņa</strong>, <strong>krakšķi</strong>, <strong>sarunās nedzird</strong> vai dzird ar <strong>spēcīgu fonu/troksni</strong>, kā arī <strong>balss ieraksts bez skaņas</strong>. Bieži pietiek ar <strong>skaļruņu un mikrofonu restīšu tīrīšanu</strong>, taču, ja modulis ir bojāts vai oksidējies, veicam <strong>skaļruņa vai mikrofona nomaiņu</strong>.',
   introP2:
-    'Pēc remonta pārbaudām zvanu skaļruni, mediju skaļruni, visus mikrofonus un trokšņu slāpēšanu dažādos scenārijos: sarunas, skaļrunis un balss ieraksts. Populāros modeļus parasti salabojam <strong>45–90 minūšu</strong> laikā. Visam veicamajam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pēc remonta pārbaudām zvanu skaļruni, mediju skaļruni, visus mikrofonus un trokšņu slāpēšanu dažādos scenārijos: sarunas, skaļrunis un balss ieraksts. Populāros modeļus parasti salabojam <strong>45–90 minūšu</strong> laikā. Visam veicamajam darbam un detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -85,7 +85,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, kā arī sniedzam ieteikumus, kā pasargāt ierīci no putekļiem un mitruma.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, kā arī sniedzam ieteikumus, kā pasargāt ierīci no putekļiem un mitruma.',
     },
   ],
 
@@ -94,7 +94,7 @@ const strings = {
   serviceName: 'Telefonu skaļruņu un mikrofona remonts Rīgā',
   serviceType: 'Telefonu skaļruņu un mikrofona remonts',
   serviceDescription:
-    'Telefonu skaļruņu un mikrofona remonts un tīrīšana Rīgā: klusa skaņa, krakšķi, sarunās nedzird vai ir troksnis. Bezmaksas diagnostika un 90 dienu garantija.',
+    'Telefonu skaļruņu un mikrofona remonts un tīrīšana Rīgā: klusa skaņa, krakšķi, sarunās nedzird vai ir troksnis. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
   processHowToName: 'Telefonu skaļruņu un mikrofona remonta process iLab',
   processHowToDescription:

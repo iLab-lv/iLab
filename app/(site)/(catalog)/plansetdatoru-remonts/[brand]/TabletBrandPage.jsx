@@ -68,7 +68,7 @@ const PROCESS_STEPS_LV = [
   },
   {
     title: 'Garantija',
-    text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+    text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
   },
 ];
 
@@ -91,7 +91,7 @@ const PROCESS_STEPS_RU = [
   },
   {
     title: 'Гарантия',
-    text: 'Гарантия 90 дней и рекомендации по дальнейшему использованию.',
+    text: 'Гарантия до 1 года и рекомендации по дальнейшему использованию.',
   },
 ];
 
@@ -106,7 +106,7 @@ const FAQ_ITEMS_LV = [
   },
   {
     q: 'Vai detaļām ir garantija?',
-    a: 'Jā - gan detaļām, gan meistaru darbam ir 90 dienu garantija, ja nav jaunu mehānisku vai šķidruma bojājumu.',
+    a: 'Jā - gan detaļām, gan meistaru darbam ir garantija līdz 1 gadam, ja nav jaunu mehānisku vai šķidruma bojājumu.',
   },
   {
     q: 'Vai pieejamas oriģinālas detaļas?',
@@ -129,7 +129,7 @@ const FAQ_ITEMS_RU = [
   },
   {
     q: 'Есть ли гарантия на детали?',
-    a: 'Да - и на детали, и на работу действует гарантия 90 дней, если нет новых механических или жидкостных повреждений.',
+    a: 'Да - и на детали, и на работу действует гарантия до 1 года, если нет новых механических или жидкостных повреждений.',
   },
   {
     q: 'Доступны ли оригинальные детали?',
@@ -239,8 +239,8 @@ export function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
   const heroHtml =
     pickLocalized(page?.source?.brand?.page?.bodyHtml, locale, '') ||
     (locale === 'ru'
-      ? `<p><strong>${brandName} ремонт планшетов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>.</p>`
-      : `<p><strong>${brandName} planšetdatoru remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>.</p>`);
+      ? `<p><strong>${brandName} ремонт планшетов в Риге</strong> - замена экрана, батареи, камеры и разъёма зарядки с быстрой диагностикой и <strong>гарантией до 1 года</strong>.</p>`
+      : `<p><strong>${brandName} planšetdatoru remonts Rīgā</strong> - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>garantiju līdz 1 gadam</strong>.</p>`);
 
   if (locale === 'ru') {
     return {
@@ -264,13 +264,13 @@ export function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
       categoryName: 'Ремонт планшетов',
       brandName,
       serviceName: `${brandName} ремонт планшетов в Риге`,
-      serviceDescription: `${brandName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      serviceDescription: `${brandName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия до 1 года.`,
       serviceType: 'Ремонт планшетов',
       homeCrumb: 'Главная',
       scrollCta: { label: 'Смотреть модели', targetId: 'brand-modeli' },
       fallbackTitle: `${brandName} ремонт планшетов`,
       fallbackMetaTitle: `${brandName} ремонт планшетов в Риге | iLab`,
-      fallbackMetaDescription: `${brandName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия 90 дней.`,
+      fallbackMetaDescription: `${brandName} ремонт планшетов: дисплей, батарея, разъём зарядки, камера, звук и другие работы. Быстрая диагностика, честные цены, гарантия до 1 года.`,
       imageAlt: `${brandName} ремонт планшетов`,
     };
   }
@@ -296,13 +296,13 @@ export function getTabletBrandStrings({ brandName, page, locale = 'lv' }) {
     categoryName: 'Planšetdatoru remonts',
     brandName,
     serviceName: `${brandName} planšetdatoru remonts Rīgā`,
-    serviceDescription: `${brandName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    serviceDescription: `${brandName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.`,
     serviceType: 'Planšetdatoru remonts',
     homeCrumb: 'Sākums',
     scrollCta: { label: 'Skatīt modeļus', targetId: 'brand-modeli' },
     fallbackTitle: `${brandName} planšetdatoru remonts`,
     fallbackMetaTitle: `${brandName} planšetdatoru remonts Rīgā | iLab`,
-    fallbackMetaDescription: `${brandName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.`,
+    fallbackMetaDescription: `${brandName} planšetdatoru remonts: displejs, baterija, uzlādes ligzda, kamera, skaņa un citi darbi. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.`,
     imageAlt: `${brandName} planšetdatoru remonts`,
   };
 }

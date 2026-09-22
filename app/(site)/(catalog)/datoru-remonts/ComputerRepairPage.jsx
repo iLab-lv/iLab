@@ -37,7 +37,7 @@ export function getComputerPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт компьютеров в Риге',
       heroBodyHtml:
-        '<p><strong>Быстрый и безопасный ремонт компьютеров в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия 90 дней</strong>.</p>',
+        '<p><strong>Быстрый и безопасный ремонт компьютеров в Риге</strong> - ноутбуки и настольные компьютеры, экран, клавиатура, охлаждение, диски и программное обеспечение. Бесплатная диагностика и <strong>гарантия до 1 года</strong>.</p>',
       introTitle: 'Ремонт компьютеров - что мы делаем',
       introLead:
         'Ремонтируем ноутбуки и настольные компьютеры - экран, клавиатура, система охлаждения, жёсткие диски/SSD и программное обеспечение. Стоимость и сроки согласовываем до начала работ, самые частые ремонты выполняем в тот же день.',
@@ -53,7 +53,7 @@ export function getComputerPageStrings(locale = 'lv') {
       metaTitle:
         'Ремонт компьютеров в Риге - ноутбуки и настольные ПК | iLab',
       metaDescription:
-        'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия 90 дней.',
+        'Ремонт компьютеров в Риге: ноутбуки и настольные ПК. Экран, клавиатура, охлаждение, диски и программные неисправности. Быстрая диагностика, честные цены, гарантия до 1 года.',
       popularServicesTitle: getComputerPopularServicesTitle(locale),
       appleTitle: 'Ремонт компьютеров Apple',
       appleIntro:
@@ -73,7 +73,7 @@ export function getComputerPageStrings(locale = 'lv') {
         },
         {
           q: 'Есть ли гарантия на детали?',
-          a: 'Да, и на детали, и на выполненную работу предоставляем гарантию, обычно 90 дней.',
+          a: 'Да, и на детали, и на выполненную работу предоставляем гарантию, до 1 года.',
         },
         {
           q: 'Что делать, если компьютер перегревается или очень шумит?',
@@ -116,7 +116,7 @@ export function getComputerPageStrings(locale = 'lv') {
   return {
     heroAlt: 'datoru remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>Ātrs un drošs datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+      '<p><strong>Ātrs un drošs datoru remonts Rīgā</strong> - portatīvie un galda datori, ekrāns, tastatūra, dzesēšana, diski un programmatūra. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>',
     introTitle: 'Datoru remonts - ko mēs darām',
     introLead:
       'Remontējam portatīvos un galda datorus - ekrāns, tastatūra, dzesēšanas sistēma, cietie diski/SSD un programmatūra. Cenu un termiņu saskaņojam pirms darba uzsākšanas, biežākos remontus paveicam tajā pašā dienā.',
@@ -131,7 +131,7 @@ export function getComputerPageStrings(locale = 'lv') {
     serviceType: 'Datoru remonts',
     metaTitle: 'Datoru remonts Rīgā - portatīvie un galda datori | iLab',
     metaDescription:
-      'Datoru remonts Rīgā: portatīvie un galda datori. Ekrāna, tastatūras, dzesēšanas, disku un programmatūras problēmu risināšana. Ātra diagnostika, godīgas cenas, 90 dienu garantija.',
+      'Datoru remonts Rīgā: portatīvie un galda datori. Ekrāna, tastatūras, dzesēšanas, disku un programmatūras problēmu risināšana. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.',
     popularServicesTitle: getComputerPopularServicesTitle(locale),
     appleTitle: 'Apple datoru remonts',
     appleIntro:
@@ -151,7 +151,7 @@ export function getComputerPageStrings(locale = 'lv') {
       },
       {
         q: 'Vai detaļām ir garantija?',
-        a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju, parasti 90 dienas.',
+        a: 'Jā, gan detaļām, gan veiktajam darbam piešķiram garantiju, parasti līdz 1 gadam.',
       },
       {
         q: 'Ko darīt, ja dators pārkarst vai ir ļoti skaļš?',

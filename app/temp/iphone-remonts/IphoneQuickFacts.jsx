@@ -16,7 +16,7 @@ const locationNames = LOCATIONS.map((location) => location.label).join(' un ');
 const facts = [
   {
     icon: FaShieldHalved,
-    text: '90 dienu garantija',
+    text: 'garantija līdz 1 gadam',
   },
   {
     icon: FaMagnifyingGlass,

@@ -37,12 +37,12 @@ const fallbackMetaTitle =
   'Telefonu remonts Rīgā - cenas, ātri, garantija | iLab';
 
 const fallbackDescription =
-  'Telefonu remonts visiem zīmoliem: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, 90 dienu garantija.';
+  'Telefonu remonts visiem zīmoliem: ekrāns, baterija, uzlādes ligzda, kamera, ūdens bojājumi. Ātra diagnostika, godīgas cenas, garantija līdz 1 gadam.';
 
 const labels = {
   heroAlt: 'telefonu remonts Rīgā',
   heroBodyHtml:
-    '<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> - ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>Ātrs un drošs telefonu remonts Rīgā</strong> - ekrāna, baterijas un kameras maiņa tajā pašā dienā. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong>.</p>',
   introTitle: 'Telefonu remonts - ko mēs darām',
   introLead:
     'Displeji, baterijas, uzlādes ligzdas, kameras un citi remontdarbi. Cenas saskaņojam pirms darba uzsākšanas, biežākos darbus paveicam tajā pašā dienā. Izvēlies savu zīmolu un atver konkrēta modeļa lapu.',
@@ -80,7 +80,7 @@ const labels = {
     },
     {
       title: 'Garantija',
-      text: '90 dienu garantija un ieteikumi turpmākai lietošanai.',
+      text: 'garantija līdz 1 gadam un ieteikumi turpmākai lietošanai.',
     },
   ],
   scrollCta: {

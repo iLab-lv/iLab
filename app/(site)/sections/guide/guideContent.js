@@ -42,7 +42,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
           text: `
 <p>iLab serviss piedāvā gan oriģinālās Apple detaļas, gan augstas kvalitātes OEM rezerves daļas. Izvēle tiek veikta kopā ar klientu, balstoties uz konkrētā modeļa īpatnībām, cenu un garantijas nosacījumiem.</p>
 
-<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam 90 dienu garantiju gan detaļām, gan darbam.</p>
+<p>Oriģinālās detaļas nodrošina maksimālu saderību, savukārt OEM alternatīvas bieži ir ekonomiski izdevīgākas, nezaudējot kvalitāti. Pēc katra remonta sniedzam garantiju līdz 1 gadam gan detaļām, gan darbam.</p>
 
 <p>Neatkarīgi no izvēles, katru iPhone pēc remonta testējam - pārbaudām ekrāna krāsas, skārienjutību, baterijas darbību un uzlādes ātrumu.</p>
           `,
@@ -110,7 +110,7 @@ Ja neesi drošs, kas tieši noticis, iLab piedāvā bezmaksas diagnostiku Rīgā
           text: `
 <p>Сервис iLab предлагает как оригинальные детали Apple, так и качественные OEM-аналоги. Выбор делается вместе с клиентом с учётом модели, бюджета и условий гарантии.</p>
 
-<p>Оригинальные детали обеспечивают максимальную совместимость, а OEM-аналоги позволяют снизить стоимость без потери качества. На все ремонты предоставляется гарантия 90 дней.</p>
+<p>Оригинальные детали обеспечивают максимальную совместимость, а OEM-аналоги позволяют снизить стоимость без потери качества. На все ремонты предоставляется гарантия до 1 года.</p>
 
 <p>После ремонта каждый iPhone проходит тестирование - проверяется экран, сенсор, батарея и скорость зарядки.</p>
           `,

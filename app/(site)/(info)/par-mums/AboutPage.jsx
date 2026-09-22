@@ -27,7 +27,7 @@ export function getAboutStrings(locale = 'lv') {
 
       metaTitle: 'О iLab | iLab',
       metaDescription:
-        'SIA iLab - профессиональный сервис по ремонту телефонов и компьютеров в Риге с опытом более 10 лет. Ремонт для частных клиентов и B2B: смартфоны, планшеты, компьютеры, Dyson. Бесплатная диагностика и гарантия 90 дней.',
+        'SIA iLab - профессиональный сервис по ремонту телефонов и компьютеров в Риге с опытом более 10 лет. Ремонт для частных клиентов и B2B: смартфоны, планшеты, компьютеры, Dyson. Бесплатная диагностика и гарантия до 1 года.',
 
       headerTitle: 'О iLab',
       headerLead:
@@ -81,7 +81,7 @@ export function getAboutStrings(locale = 'lv') {
         locations: 'T/C Domina Shopping и T/C Spice Life',
         services: 'диагностика, ремонт, замена деталей',
         languages: 'латышский, русский, английский',
-        warranty: 'от 90 дней на выполненные работы и установленные детали',
+        warranty: 'до 1 года на выполненные работы и установленные детали',
       },
 
       locationsAnchorTitle: 'Где нас найти',
@@ -100,7 +100,7 @@ export function getAboutStrings(locale = 'lv') {
 
     metaTitle: 'Par iLab | iLab',
     metaDescription:
-      'SIA iLab - profesionāls telefona un datoru serviss Rīgā ar 10+ gadu pieredzi. Remonts privātpersonām un B2B: viedtālruņi, planšetes, datori, Dyson. Bezmaksas diagnostika un 90 dienu garantija.',
+      'SIA iLab - profesionāls telefona un datoru serviss Rīgā ar 10+ gadu pieredzi. Remonts privātpersonām un B2B: viedtālruņi, planšetes, datori, Dyson. Bezmaksas diagnostika un garantija līdz 1 gadam.',
 
     headerTitle: 'Par iLab',
     headerLead:
@@ -154,7 +154,7 @@ export function getAboutStrings(locale = 'lv') {
       locations: 'T/C Domina Shopping un T/C Spice Life',
       services: 'diagnostika, remonts, detaļu maiņa',
       languages: 'latviešu, krievu, angļu',
-      warranty: 'no 90 dienām veiktajiem darbiem un uzstādītajām detaļām',
+      warranty: 'līdz 1 gadam veiktajiem darbiem un uzstādītajām detaļām',
     },
 
     locationsAnchorTitle: 'Kur mūs atrast',

@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu baterijas maiņa Rīgā',
   pageDescription:
-    'Ātra un kvalitatīva telefonu baterijas maiņa Rīgā. Bezmaksas diagnostika, 90 dienu garantija, oriģinālas vai OEM baterijas. Bieži tajā pašā dienā.',
+    'Ātra un kvalitatīva telefonu baterijas maiņa Rīgā. Bezmaksas diagnostika, garantija līdz 1 gadam, oriģinālas vai OEM baterijas. Bieži tajā pašā dienā.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,19 +41,19 @@ const strings = {
 
   headerTitle: 'Telefonu baterijas maiņa Rīgā',
   headerLead:
-    'Mainām telefonu bateriju, ja ierīce ātri izlādējas, izslēdzas pie 10–20%, uzkarst vai nestabili tur uzlādi. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam 90 dienu garantiju.',
+    'Mainām telefonu bateriju, ja ierīce ātri izlādējas, izslēdzas pie 10–20%, uzkarst vai nestabili tur uzlādi. Pirms remonta veicam diagnostiku un pēc nomaiņas sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/baterijas_maina.webp',
   heroBodyHtml:
-    '<p><strong>Ātra un droša telefonu baterijas maiņa Rīgā</strong> - ja tālrunis ātri izlādējas, izslēdzas pie 20% vai lādējas ļoti lēni, palīdzēsim. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> katram remontam iLab servisā.</p>',
+    '<p><strong>Ātra un droša telefonu baterijas maiņa Rīgā</strong> - ja tālrunis ātri izlādējas, izslēdzas pie 20% vai lādējas ļoti lēni, palīdzēsim. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong> katram remontam iLab servisā.</p>',
 
   introTitle: 'Telefonu baterijas maiņa Rīgā',
   introP1:
     'Ja tālrunis <strong>ātri zaudē uzlādi</strong>, <strong>izslēdzas pie 10–20%</strong>, <strong>uzkarst</strong> vai <strong>lādējas ļoti lēni</strong>, visticamāk nepieciešama <strong>telefonu baterijas (akumulatora) maiņa</strong>. iLab meistari veic ātru un kvalitatīvu nomaiņu, izmantojot <strong>oriģinālas vai augstas kvalitātes OEM baterijas</strong>. Pirms darba uzsākšanas veicam <strong>bezmaksas diagnostiku</strong>, lai pārliecinātos, ka problēma tiešām ir baterijā, nevis, piemēram, uzlādes ligzdā vai programmatūrā.',
   introP2:
-    'Pēc nomaiņas veicam <strong>baterijas kalibrāciju</strong> un pārbaudes - uzlādes/izlādes stabilitāti, temperatūras kontroli un programmatūras rādītājus. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>90 dienu garantija</strong>.',
+    'Pēc nomaiņas veicam <strong>baterijas kalibrāciju</strong> un pārbaudes - uzlādes/izlādes stabilitāti, temperatūras kontroli un programmatūras rādītājus. Populāros modeļus parasti salabojam <strong>45–90 minūtēs</strong>. Visam darbam un detaļām ir <strong>garantija līdz 1 gadam</strong>.',
 
   selectedModelPrefix: 'Atlasīts modelis:',
   selectedModelSuffix: 'Ritiniet uz',
@@ -85,7 +85,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, kā arī sniedzam ieteikumus baterijas saudzīgai lietošanai.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, kā arī sniedzam ieteikumus baterijas saudzīgai lietošanai.',
     },
   ],
 
@@ -94,7 +94,7 @@ const strings = {
   serviceName: 'Telefonu baterijas maiņa Rīgā',
   serviceType: 'Telefonu baterijas maiņa',
   serviceDescription:
-    'Telefonu baterijas maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM baterijas, 90 dienu garantija. Bieži tajā pašā dienā.',
+    'Telefonu baterijas maiņa Rīgā: bezmaksas diagnostika, oriģinālas vai OEM baterijas, garantija līdz 1 gadam. Bieži tajā pašā dienā.',
 
   processHowToName: 'Telefonu baterijas maiņas process iLab',
   processHowToDescription:

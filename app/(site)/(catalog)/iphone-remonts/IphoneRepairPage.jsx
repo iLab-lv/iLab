@@ -25,10 +25,10 @@ function getPageStrings(locale = 'lv') {
     return {
       heroAlt: 'ремонт iPhone в Риге',
       heroBodyHtml:
-        '<p><strong>Ремонт iPhone в Риге</strong> в сервисе iLab - замена экрана, аккумулятора, камеры и ремонт разъёма зарядки с быстрой диагностикой и <strong>гарантией 90 дней</strong>. Самые частые ремонты iPhone выполняем в тот же день.</p>',
+        '<p><strong>Ремонт iPhone в Риге</strong> в сервисе iLab - замена экрана, аккумулятора, камеры и ремонт разъёма зарядки с быстрой диагностикой и <strong>гарантией до 1 года</strong>. Самые частые ремонты iPhone выполняем в тот же день.</p>',
       introTitle: 'Ремонт iPhone в Риге - что мы делаем',
       introBody:
-        'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> - от <strong>замены экрана</strong>, <strong>аккумулятора</strong>, <strong>ремонта камеры</strong> и <strong>разъёма зарядки</strong> до замены <strong>динамика</strong>, <strong>микрофона</strong> и других компонентов. Перед ремонтом проводим <strong>бесплатную диагностику</strong>, согласовываем стоимость и срок выполнения, а после завершения работ выдаём <strong>гарантию 90 дней</strong> на детали и работу. Используем качественные оригинальные или OEM запчасти, чтобы iPhone после ремонта работал стабильно и надёжно каждый день.',
+        'Выполняем полный спектр <strong>ремонта iPhone в Риге</strong> - от <strong>замены экрана</strong>, <strong>аккумулятора</strong>, <strong>ремонта камеры</strong> и <strong>разъёма зарядки</strong> до замены <strong>динамика</strong>, <strong>микрофона</strong> и других компонентов. Перед ремонтом проводим <strong>бесплатную диагностику</strong>, согласовываем стоимость и срок выполнения, а после завершения работ выдаём <strong>гарантию до 1 года</strong> на детали и работу. Используем качественные оригинальные или OEM запчасти, чтобы iPhone после ремонта работал стабильно и надёжно каждый день.',
       scrollCta: { label: 'Смотреть модели', targetId: 'iphone-modeli' },
     };
   }
@@ -36,10 +36,10 @@ function getPageStrings(locale = 'lv') {
   return {
     heroAlt: 'iPhone remonts Rīgā',
     heroBodyHtml:
-      '<p><strong>iPhone remonts Rīgā</strong> iLab servisā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>90 dienu garantiju</strong>. Biežākos iPhone remontdarbus paveicam tajā pašā dienā.</p>',
+      '<p><strong>iPhone remonts Rīgā</strong> iLab servisā - ekrāna, baterijas, kameras un uzlādes ligzdas remonts ar ātru diagnostiku un <strong>garantiju līdz 1 gadam</strong>. Biežākos iPhone remontdarbus paveicam tajā pašā dienā.</p>',
     introTitle: 'iPhone remonts Rīgā - ko mēs darām',
     introBody:
-      'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> - sākot ar <strong>ekrāna maiņu</strong>, <strong>baterijas nomaiņu</strong>, <strong>kameras remontu</strong> un <strong>uzlādes ligzdas remontu</strong>, līdz <strong>skaļruņa</strong>, <strong>mikrofona</strong> un citu detaļu nomaiņai. Pirms remonta veicam <strong>bezmaksas diagnostiku</strong>, saskaņojam izmaksas un izpildes termiņu, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong> detaļām un darbam. Izmantojam kvalitatīvas oriģinālās vai OEM detaļas, lai iPhone pēc remonta darbotos stabili un droši ikdienā.',
+      'Veicam pilna spektra <strong>iPhone remontu Rīgā</strong> - sākot ar <strong>ekrāna maiņu</strong>, <strong>baterijas nomaiņu</strong>, <strong>kameras remontu</strong> un <strong>uzlādes ligzdas remontu</strong>, līdz <strong>skaļruņa</strong>, <strong>mikrofona</strong> un citu detaļu nomaiņai. Pirms remonta veicam <strong>bezmaksas diagnostiku</strong>, saskaņojam izmaksas un izpildes termiņu, bet pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong> detaļām un darbam. Izmantojam kvalitatīvas oriģinālās vai OEM detaļas, lai iPhone pēc remonta darbotos stabili un droši ikdienā.',
     scrollCta: { label: 'Skatīt modeļus', targetId: 'iphone-modeli' },
   };
 }

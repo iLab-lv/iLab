@@ -6,7 +6,7 @@ const servicesContent = {
     seo: {
       title: 'iPhone ekrāna maiņa Rīgā | iLab',
       metaDescription:
-        'iPhone ekrāna un stikla maiņa tajā pašā dienā. Ātra diagnostika, kvalitatīvas detaļas, 90 dienu garantija.',
+        'iPhone ekrāna un stikla maiņa tajā pašā dienā. Ātra diagnostika, kvalitatīvas detaļas, garantija līdz 1 gadam.',
     },
     h1: 'iPhone ekrāna maiņa',
     lead:

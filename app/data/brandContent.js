@@ -23,7 +23,7 @@ const GENERIC = {
     title: (name) =>
       `${name} telefonu remonts Rīgā - displejs, baterija, serviss | iLab`,
     meta: (name) =>
-      `Remontējam ${name} telefonus Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.`,
+      `Remontējam ${name} telefonus Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.`,
   },
   [CATEGORY.TABLETS]: {
     heroLead:
@@ -32,7 +32,7 @@ const GENERIC = {
     title: (name) =>
       `${name} planšetdatoru remonts Rīgā - ekrāns, baterija, serviss | iLab`,
     meta: (name) =>
-      `Remontējam ${name} planšetdatorus Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.`,
+      `Remontējam ${name} planšetdatorus Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.`,
   },
 };
 
@@ -55,7 +55,7 @@ const BRANDS = {
           lead:
             'iLab sertificētie meistari salabo iPhone gan ar tipiskiem, gan sarežģītiem bojājumiem - no saplaisājuša ekrāna līdz mitruma radītām problēmām.',
           bodyHtml:
-            '<p><strong>iPhone remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>iPhone remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'iphone-modeli',
@@ -64,7 +64,7 @@ const BRANDS = {
         seo: {
           title: 'iPhone remonts Rīgā - displejs, baterija, serviss | iLab',
           metaDescription:
-            'Remontējam iPhone Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+            'Remontējam iPhone Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
         },
         sections: {
           modelGrid: {
@@ -83,7 +83,7 @@ const BRANDS = {
           lead:
             'Ekrānu un bateriju maiņa, uzlādes ligzdas un citi iPad remonti. Pēc diagnostikas vienojamies par izmaksām un termiņu.',
           bodyHtml:
-            '<p><strong>iPad remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>iPad remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa. Ātra diagnostika, skaidras cenas un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -92,7 +92,7 @@ const BRANDS = {
         seo: {
           title: 'iPad remonts Rīgā - ekrāns, baterija, serviss | iLab',
           metaDescription:
-            'Remontējam iPad Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+            'Remontējam iPad Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
         },
         sections: {
           modelGrid: {
@@ -113,7 +113,7 @@ const BRANDS = {
           h1: 'Samsung telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>Samsung telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Bezmaksas diagnostika</strong> un 90 dienu garantija iLab servisā.</p>',
+            '<p><strong>Samsung telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Bezmaksas diagnostika</strong> un garantija līdz 1 gadam iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -123,7 +123,7 @@ const BRANDS = {
           title:
             'Samsung telefonu remonts Rīgā - displejs, baterija, serviss | iLab',
           metaDescription:
-            'Remontējam Samsung telefonus Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+            'Remontējam Samsung telefonus Rīgā - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
         },
         sections: {
           modelGrid: {
@@ -138,7 +138,7 @@ const BRANDS = {
           h1: 'Samsung Galaxy Tab remonts',
           lead: GENERIC[CATEGORY.TABLETS].heroLead,
           bodyHtml:
-            '<p><strong>Samsung Galaxy Tab remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Samsung Galaxy Tab remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -148,7 +148,7 @@ const BRANDS = {
           title:
             'Samsung Galaxy Tab remonts Rīgā - ekrāns, baterija, serviss | iLab',
           metaDescription:
-            'Remontējam Samsung Galaxy Tab planšetdatorus Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un 90 dienu garantija iLab servisā.',
+            'Remontējam Samsung Galaxy Tab planšetdatorus Rīgā - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Bezmaksas diagnostika un garantija līdz 1 gadam iLab servisā.',
         },
         sections: {
           modelGrid: {
@@ -169,7 +169,7 @@ const BRANDS = {
           h1: 'Huawei telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>Huawei telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Ātra diagnostika</strong>, skaidras cenas un 90 dienu garantija iLab servisā.</p>',
+            '<p><strong>Huawei telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Ātra diagnostika</strong>, skaidras cenas un garantija līdz 1 gadam iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -192,7 +192,7 @@ const BRANDS = {
           h1: 'Huawei planšetdatoru remonts',
           lead: GENERIC[CATEGORY.TABLETS].heroLead,
           bodyHtml:
-            '<p><strong>Huawei planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Huawei planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -222,7 +222,7 @@ const BRANDS = {
           h1: 'OnePlus telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>OnePlus telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Bezmaksas diagnostika</strong> un 90 dienu garantija iLab servisā.</p>',
+            '<p><strong>OnePlus telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. <strong>Bezmaksas diagnostika</strong> un garantija līdz 1 gadam iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -245,7 +245,7 @@ const BRANDS = {
           h1: 'OnePlus planšetdatoru remonts',
           lead: GENERIC[CATEGORY.TABLETS].heroLead,
           bodyHtml:
-            '<p><strong>OnePlus planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>OnePlus planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -278,7 +278,7 @@ const BRANDS = {
           h1: 'Xiaomi telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>Xiaomi telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Xiaomi telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Ātra diagnostika, skaidras cenas un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -301,7 +301,7 @@ const BRANDS = {
           h1: 'Xiaomi planšetdatoru remonts',
           lead: GENERIC[CATEGORY.TABLETS].heroLead,
           bodyHtml:
-            '<p><strong>Xiaomi planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Xiaomi planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -334,7 +334,7 @@ const BRANDS = {
           h1: 'Lenovo telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>Lenovo telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Lenovo telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi. Ātra diagnostika un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -357,7 +357,7 @@ const BRANDS = {
           h1: 'Lenovo planšetdatoru remonts',
           lead: GENERIC[CATEGORY.TABLETS].heroLead,
           bodyHtml:
-            '<p><strong>Lenovo planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi ar <strong>90 dienu garantiju</strong> iLab servisā.</p>',
+            '<p><strong>Lenovo planšetdatoru remonts Rīgā</strong> - ekrāna un baterijas maiņa, uzlādes ligzdas remonts un citi bojājumi ar <strong>garantiju līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -387,7 +387,7 @@ const BRANDS = {
           h1: 'Sony telefonu remonts',
           lead: GENERIC[CATEGORY.PHONES].heroLead,
           bodyHtml:
-            '<p><strong>Sony (Xperia) telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>Sony (Xperia) telefonu remonts Rīgā</strong> - displeja un baterijas maiņa, uzlādes ligzdas un kameras remonts, mitruma bojājumu novēršana. Ātra diagnostika, skaidras cenas un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',
@@ -422,7 +422,7 @@ const BRANDS = {
           lead:
             'Ekrānu un bateriju maiņa, uzlādes ligzdas un citi iPad remonti. Pēc diagnostikas vienojamies par izmaksām un termiņu.',
           bodyHtml:
-            '<p><strong>iPad remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa. Ātra diagnostika, skaidras cenas un <strong>90 dienu garantija</strong> iLab servisā.</p>',
+            '<p><strong>iPad remonts Rīgā</strong> - ekrāna, baterijas un uzlādes ligzdas maiņa. Ātra diagnostika, skaidras cenas un <strong>garantija līdz 1 gadam</strong> iLab servisā.</p>',
           scrollCta: {
             label: 'Skatīt modeļus un cenas',
             targetId: 'brand-modeli',

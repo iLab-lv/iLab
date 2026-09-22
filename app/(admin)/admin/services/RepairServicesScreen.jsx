@@ -55,7 +55,7 @@ function emptyRow(categoryId = DEFAULT_CATEGORY_SLUG) {
       lv: '',
       ru: '',
     },
-    defaultWarrantyDays: 90,
+    defaultWarrantyDays: 365,
     isNew: true,
   };
 }
@@ -477,7 +477,7 @@ export default function RepairServicesScreen({
             lv: normalizeText(row.defaultTimeText?.lv).trim(),
             ru: normalizeText(row.defaultTimeText?.ru).trim(),
           },
-          defaultWarrantyDays: parseIntOr(90, row.defaultWarrantyDays),
+          defaultWarrantyDays: parseIntOr(365, row.defaultWarrantyDays),
           updatedAt: serverTimestamp(),
         },
         { merge: true }

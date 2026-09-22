@@ -33,7 +33,7 @@ const strings = {
 
   pageTitle: 'Telefonu ūdens bojājumu remonts Rīgā',
   pageDescription:
-    'Telefonu ūdens bojājumu remonts Rīgā: diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar šķidrumu. Bojāto detaļu nomaiņa un 90 dienu garantija.',
+    'Telefonu ūdens bojājumu remonts Rīgā: diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar šķidrumu. Bojāto detaļu nomaiņa un garantija līdz 1 gadam.',
 
   homeCrumb: 'Sākums',
   categoryCrumb: 'Telefonu remonts',
@@ -41,13 +41,13 @@ const strings = {
 
   headerTitle: 'Telefonu ūdens bojājumu remonts Rīgā',
   headerLead:
-    'Remontējam telefonus pēc saskares ar ūdeni un citiem šķidrumiem: diagnostika, dziļā tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Pēc remonta sniedzam 90 dienu garantiju.',
+    'Remontējam telefonus pēc saskares ar ūdeni un citiem šķidrumiem: diagnostika, dziļā tīrīšana, oksidācijas novēršana un bojāto detaļu nomaiņa. Pēc remonta sniedzam garantiju līdz 1 gadam.',
   headerCtaLabel: 'Skatīt cenas',
 
   heroAlt: seo.imageAlt,
   heroImage: '/images/categories/udens_bojajumi.webp',
   heroBodyHtml:
-    '<p><strong>Ūdens vai citu šķidrumu ietekme?</strong> Veicam diagnostiku, dziļo tīrīšanu un <strong>oksidācijas novēršanu</strong>, kā arī bojāto detaļu maiņu. Jo ātrāk ierīce nonāk servisā, jo lielākas izredzes atjaunot tās darbību. <strong>Bezmaksas pārbaude</strong> un <strong>90 dienu garantija</strong>.</p>',
+    '<p><strong>Ūdens vai citu šķidrumu ietekme?</strong> Veicam diagnostiku, dziļo tīrīšanu un <strong>oksidācijas novēršanu</strong>, kā arī bojāto detaļu maiņu. Jo ātrāk ierīce nonāk servisā, jo lielākas izredzes atjaunot tās darbību. <strong>Bezmaksas pārbaude</strong> un <strong>garantija līdz 1 gadam</strong>.</p>',
 
   introTitle: 'Telefonu ūdens bojājumu remonts Rīgā',
   introP1:
@@ -85,7 +85,7 @@ const strings = {
     },
     {
       title: 'Garantija',
-      text: 'Izsniedzam telefonu ar 90 dienu garantiju uz detaļu un darbu, izskaidrojam atlikušos riskus un sniedzam ieteikumus turpmākai lietošanai.',
+      text: 'Izsniedzam telefonu ar garantiju līdz 1 gadam uz detaļu un darbu, izskaidrojam atlikušos riskus un sniedzam ieteikumus turpmākai lietošanai.',
     },
   ],
 
@@ -94,7 +94,7 @@ const strings = {
   serviceName: 'Telefonu ūdens bojājumu remonts Rīgā',
   serviceType: 'Telefonu ūdens bojājumu remonts',
   serviceDescription:
-    'Diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar ūdeni vai citiem šķidrumiem. Bojāto detaļu nomaiņa ar 90 dienu garantiju.',
+    'Diagnostika, tīrīšana un oksidācijas novēršana pēc saskares ar ūdeni vai citiem šķidrumiem. Bojāto detaļu nomaiņa ar garantiju līdz 1 gadam.',
 
   processHowToName: 'Telefonu ūdens bojājumu remonta process iLab',
   processHowToDescription:
