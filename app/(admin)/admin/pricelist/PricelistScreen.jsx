@@ -3,12 +3,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   collection,
-  doc,
   getDocs,
   query,
-  serverTimestamp,
   where,
-  writeBatch,
 } from 'firebase/firestore';
 
 import { db } from '@/lib/firebaseClient';
@@ -16,7 +13,6 @@ import Button from '@components/button/Button';
 
 import s from './PricelistScreen.module.scss';
 
-const DEFAULT_CURRENCY = 'EUR';
 const DEFAULT_CATEGORY_SLUG = 'telefonu-remonts';
 const DEFAULT_BRAND_KEY = 'apple';
 const MODEL_COLLECTION_CANDIDATES = ['devices', 'models'];
@@ -498,53 +494,24 @@ export default function PricelistScreen({
     setLoading((p) => ({ ...p, [modelSlug]: true }));
 
     try {
-      const CHUNK = 300;
-
-      for (let i = 0; i < rows.length; i += CHUNK) {
-        const chunk = rows.slice(i, i + CHUNK);
-        const batch = writeBatch(db);
-        let mutationCount = 0;
-
-        for (const r of chunk) {
-          const serviceId = r.serviceId;
-          const prevDocId = r.docId?.trim() || '';
-          const numericPrice = parseNumericPrice(r.priceInput);
-          const isStartingFrom = r.isStartingFrom === true;
-          const isHidden = r.hidden === true;
-          const hasOverride =
-            numericPrice !== null || isStartingFrom || isHidden;
-
-          if (!hasOverride) {
-            if (prevDocId) {
-              batch.delete(doc(db, 'servicePricing', prevDocId));
-              mutationCount += 1;
-            }
-            continue;
-          }
-
-          const targetDocId = prevDocId || `${modelSlug}__${serviceId}`;
-
-          batch.set(
-            doc(db, 'servicePricing', targetDocId),
-            {
-              modelId: modelSlug,
-              serviceId,
-              categoryId,
-              price: numericPrice,
-              isHidden,
-              isStartingFrom,
-              currency: DEFAULT_CURRENCY,
-              isActive: true,
-              updatedAt: serverTimestamp(),
-            },
-            { merge: true }
-          );
-          mutationCount += 1;
-        }
-
-        if (mutationCount > 0) {
-          await batch.commit();
-        }
+      const response = await fetch('/api/admin/pricelist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          modelId: modelSlug,
+          categoryId,
+          rows: rows.map((row) => ({
+            docId: row.docId,
+            serviceId: row.serviceId,
+            price: parseNumericPrice(row.priceInput),
+            isStartingFrom: row.isStartingFrom === true,
+            isHidden: row.hidden === true,
+          })),
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to save pricing.');
       }
 
       const fresh = await buildRowsForModel(modelSlug, models, categories);

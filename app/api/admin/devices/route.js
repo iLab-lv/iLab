@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 import { db } from '@/lib/firebaseAdmin';
+import { requireServiceAdminRequest } from '@/lib/auth/serviceAdminSession';
 
 function normalizeLocalized(value) {
   if (typeof value === 'string') {
@@ -47,6 +48,9 @@ function normalizeDevice(id, data = {}) {
 }
 
 export async function GET() {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const snap = await db.collection('devices').get();
 
@@ -74,6 +78,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const body = await req.json();
     const raw = body?.item || {};
@@ -162,6 +169,9 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const { searchParams } = new URL(req.url);
     const slug = String(searchParams.get('slug') || '').trim();

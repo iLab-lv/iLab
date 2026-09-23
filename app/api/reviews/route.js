@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 
 import { db } from '@/lib/firebaseAdmin';
+import { requireServiceAdminRequest } from '@/lib/auth/serviceAdminSession';
 import {
   getPlaceIds,
   getReviewsSummary,
@@ -24,6 +25,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const body = await req.json();
     const key = typeof body?.key === 'string' ? body.key : '';

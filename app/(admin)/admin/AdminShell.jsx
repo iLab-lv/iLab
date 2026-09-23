@@ -2,13 +2,11 @@
 
 // app/(admin)/AdminShell.jsx
 // Adds mobile topbar (expandable) + desktop sidebar shell around admin pages.
-// Includes Firebase Auth guard:
-// - Unauthed users are redirected to /admin/login
-// - Authed users visiting /admin/login are redirected to /admin
+// Server authorization is enforced by the surrounding admin layout.
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { signOut } from 'firebase/auth';
 
 import styles from './AdminShell.module.scss';
 import { auth } from '@lib/firebaseClient';
@@ -18,35 +16,6 @@ export default function AdminShell({ children }) {
   const firstLinkRef = useRef(null);
 
   const router = useRouter();
-  const pathname = usePathname();
-
-  const [authReady, setAuthReady] = useState(false);
-  const [user, setUser] = useState(null);
-
-  // Auth state subscription
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u || null);
-      setAuthReady(true);
-    });
-    return () => unsub();
-  }, []);
-
-  // Route guard logic
-  useEffect(() => {
-    if (!authReady) return;
-
-    const isLogin = pathname === '/admin/login';
-
-    if (!user && !isLogin) {
-      router.replace('/admin/login');
-      return;
-    }
-
-    if (user && isLogin) {
-      router.replace('/admin');
-    }
-  }, [authReady, user, pathname, router]);
 
   // Close on Escape
   useEffect(() => {
@@ -62,25 +31,18 @@ export default function AdminShell({ children }) {
   }, [open]);
 
   async function handleLogout() {
+    setOpen(false);
     try {
-      setOpen(false);
+      const response = await fetch('/api/admin/session', { method: 'DELETE' });
+      if (!response.ok) throw new Error('Unable to clear the server session.');
       await signOut(auth);
       router.replace('/admin/login');
+      router.refresh();
     } catch {
-      // optional: add UI feedback later
+      // Keep the protected page visible if the server session could not be
+      // cleared instead of presenting a false successful logout.
     }
   }
-
-  // While checking auth, avoid flashing UI
-  if (!authReady) return null;
-
-  const isLogin = pathname === '/admin/login';
-
-  // If not authed and not on login page, we already redirected
-  if (!user && !isLogin) return null;
-
-  // For login page, do not wrap with the admin sidebar shell
-  if (isLogin) return children;
 
   return (
     <div className={styles.layout}>

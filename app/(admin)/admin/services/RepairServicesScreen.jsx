@@ -3,13 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   collection,
-  doc,
-  getDoc,
   getDocs,
   query,
   where,
-  writeBatch,
-  serverTimestamp,
 } from 'firebase/firestore';
 import {
   DndContext,
@@ -35,6 +31,17 @@ import s from './RepairServicesScreen.module.scss';
 const DEFAULT_CATEGORY_SLUG = 'telefonu-remonts';
 const CATEGORY_COLLECTION = 'categories';
 const ORDER_STEP = 10;
+
+async function mutateServices(payload, method = 'POST') {
+  const response = await fetch('/api/admin/services', {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || 'Service update failed.');
+  return result;
+}
 
 function emptyRow(categoryId = DEFAULT_CATEGORY_SLUG) {
   return {
@@ -400,15 +407,13 @@ export default function RepairServicesScreen({
 
     try {
       if (changedRows.length > 0) {
-        const batch = writeBatch(db);
-        changedRows.forEach((row) => {
-          batch.set(
-            doc(db, 'services', row.docId),
-            { order: row.order },
-            { merge: true }
-          );
+        await mutateServices({
+          action: 'reorder',
+          items: changedRows.map((row) => ({
+            docId: row.docId,
+            order: row.order,
+          })),
         });
-        await batch.commit();
       }
       setStatus('Order saved.');
     } catch (err) {
@@ -437,13 +442,6 @@ export default function RepairServicesScreen({
     setSavingRows((prev) => ({ ...prev, [itemKey]: true }));
 
     try {
-      if (row.isNew) {
-        const existing = await getDoc(doc(db, 'services', nextId));
-        if (existing.exists()) {
-          throw new Error(`Service ID already exists: ${nextId}`);
-        }
-      }
-
       const existingRows = rows.filter((item) => !item.isNew);
       const lastOrder = existingRows.reduce(
         (max, item) => Math.max(max, Number(item.order) || 0),
@@ -452,11 +450,11 @@ export default function RepairServicesScreen({
       const nextOrder = row.isNew
         ? Math.ceil(lastOrder / ORDER_STEP) * ORDER_STEP + ORDER_STEP
         : row.order;
-      const batch = writeBatch(db);
-
-      batch.set(
-        doc(db, 'services', row.isNew ? nextId : row.docId),
-        {
+      await mutateServices({
+        action: 'save',
+        isNew: row.isNew,
+        docId: row.isNew ? nextId : row.docId,
+        item: {
           isActive: row.isActive !== false,
           ...(row.isNew
             ? {
@@ -478,11 +476,8 @@ export default function RepairServicesScreen({
             ru: normalizeText(row.defaultTimeText?.ru).trim(),
           },
           defaultWarrantyDays: parseIntOr(365, row.defaultWarrantyDays),
-          updatedAt: serverTimestamp(),
         },
-        { merge: true }
-      );
-      await batch.commit();
+      });
 
       setRows((prev) =>
         prev.map((item) =>
@@ -528,19 +523,12 @@ export default function RepairServicesScreen({
       const remainingRows = rows
         .filter((item) => (item._uiKey || item.docId || item.id) !== itemKey)
         .map((item, index) => ({ ...item, order: (index + 1) * ORDER_STEP }));
-      const batch = writeBatch(db);
-
-      batch.delete(doc(db, 'services', row.docId));
-      remainingRows.forEach((item) => {
-        if (!item.isNew) {
-          batch.set(
-            doc(db, 'services', item.docId),
-            { order: item.order },
-            { merge: true }
-          );
-        }
-      });
-      await batch.commit();
+      await mutateServices({
+        docId: row.docId,
+        remainingItems: remainingRows
+          .filter((item) => !item.isNew)
+          .map((item) => ({ docId: item.docId, order: item.order })),
+      }, 'DELETE');
 
       setRows(remainingRows);
       setOpenRowKey('');
