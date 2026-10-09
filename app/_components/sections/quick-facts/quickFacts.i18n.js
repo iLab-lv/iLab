@@ -83,7 +83,7 @@ const QUICK_FACTS = {
       'iphone-model': [
         {
           key: 'warranty',
-          title: 'garantija līdz 1 gadam',
+          title: 'Garantija līdz 1 gadam',
           description: 'Darbam un uzstādītajām detaļām.',
         },
         {
