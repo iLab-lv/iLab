@@ -11,7 +11,7 @@ const whyContent = {
     title: 'Kāpēc iLab?',
     copy: 'Uzticami remonti, caurspīdīgas cenas un ātrs apgrozījums no sertificētiem tehniķiem.',
     items: [
-      { text: 'garantija līdz 1 gadam', Icon: TbShieldCheck },
+      { text: 'Garantija līdz 1 gadam', Icon: TbShieldCheck },
       { text: 'Ātrs remonts', Icon: TbBolt },
       { text: 'Sertificēti meistari', Icon: TbCertificate },
       { text: 'Bezmaksas diagnostika', Icon: TbSearch },
