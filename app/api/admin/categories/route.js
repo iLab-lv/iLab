@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 import { db } from '@/lib/firebaseAdmin';
+import { requireServiceAdminRequest } from '@/lib/auth/serviceAdminSession';
 
 function emptyLocalized() {
   return { lv: '', ru: '' };
@@ -135,6 +136,9 @@ function normalizeCategory(id, data = {}) {
 }
 
 export async function GET() {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const snap = await db.collection('categories').get();
 
@@ -159,6 +163,9 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const unauthorized = await requireServiceAdminRequest();
+  if (unauthorized) return unauthorized;
+
   try {
     const body = await req.json();
     const raw = body?.item || {};
