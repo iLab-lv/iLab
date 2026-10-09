@@ -43,7 +43,7 @@ export function getContactsPageStrings(locale = 'lv') {
       and: 'и',
 
       serviceArea:
-        'Обслуживаем клиентов из всей Риги - Тейка, Пурвциемс, центр, Пардаугава, Югла, Иманта, Золитуде, Марупе и другие районы.',
+        'Обслуживаем клиентов из всей Риги - Тейка, Пурвциемс, центр, Пардаугава, Югла, Иманта, Золитуде, Марупе, Юрмала и другие районы.',
 
       deliveryArea:
         'Также принимаем устройства из других городов Латвии с возможностью доставки через курьера.',
@@ -140,7 +140,7 @@ export function getContactsPageStrings(locale = 'lv') {
     and: 'un',
 
     serviceArea:
-      'Apkalpojam klientus no visas Rīgas - Teikas, Purvciema, centra, Pārdaugavas, Juglas, Imantas, Zolitūdes, Mārupes un citiem rajoniem.',
+      'Apkalpojam klientus no visas Rīgas - Teikas, Purvciema, centra, Pārdaugavas, Juglas, Imantas, Zolitūdes, , Jūrmalas un citiem rajoniem.',
 
     deliveryArea:
       'Pieņemam ierīces arī no citām Latvijas pilsētām ar iespēju nosūtīt tās ar kurjera starpniecību.',
