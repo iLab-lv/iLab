@@ -26,6 +26,13 @@ At widths below 1024 px the dock is Contact + Booking and panels fill the viewpo
 - `navigation.config.js` is the single source for localized service navigation destinations. `menuOnly` supports the approved desktop “Vairāk/Ещё” disclosure without inventing a destination route.
 - `Footer` is a server-rendered presentation adapter over `getSiteSettings`, `footer.i18n.js`, and the existing social registry. Do not duplicate location/contact values in footer markup.
 
+## Service homepage
+
+- `HomePage.jsx` owns the approved homepage section composition while remaining server rendered. The LV/RU route files continue to own metadata, structured data, FAQ loading, reviews loading, and settings loading.
+- `HomeInteractions.jsx` is the only homepage client boundary. `HomeBookingButton` delegates to `UiDialogsProvider`; `HomeLocations` owns ephemeral selected-branch state and consumes locations plus pin positions supplied by the server component.
+- `HomePage.module.scss` is the page-scoped presentation layer over the shared service tokens. It must not create alternate header, footer, dock, button, or drawer systems.
+- Homepage imagery lives in `public/images/home`. Production routes, reviews, settings, branch data, booking behavior, and SEO wrappers remain authoritative; redesign mock content and JavaScript are reference-only.
+
 ## Target file tree
 
 ```text

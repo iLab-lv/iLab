@@ -2,8 +2,8 @@ export const NAVIGATION_CONFIG = [
   {
     key: 'iphone-repair',
     label: {
-      lv: 'iPhone',
-      ru: 'iPhone',
+      lv: 'iPhone remonts',
+      ru: 'Ремонт iPhone',
     },
     route: {
       type: 'category',
@@ -13,8 +13,8 @@ export const NAVIGATION_CONFIG = [
   {
     key: 'phone-repair',
     label: {
-      lv: 'Telefoni',
-      ru: 'Телефоны',
+      lv: 'Telefonu remonts',
+      ru: 'Ремонт телефонов',
     },
     route: {
       type: 'category',
@@ -70,8 +70,8 @@ export const NAVIGATION_CONFIG = [
   {
     key: 'tablet-repair',
     label: {
-      lv: 'Planšetdatori',
-      ru: 'Планшеты',
+      lv: 'Planšetdatoru remonts',
+      ru: 'Ремонт планшетов',
     },
     route: {
       type: 'category',
@@ -128,8 +128,8 @@ export const NAVIGATION_CONFIG = [
   {
     key: 'computer-repair',
     label: {
-      lv: 'Datori',
-      ru: 'Компьютеры',
+      lv: 'Datoru remonts',
+      ru: 'Ремонт компьютеров',
     },
     route: {
       type: 'category',
@@ -203,8 +203,8 @@ export const NAVIGATION_CONFIG = [
   {
     key: 'dyson-repair',
     label: {
-      lv: 'Dyson',
-      ru: 'Dyson',
+      lv: 'Dyson remonts',
+      ru: 'Ремонт Dyson',
     },
     route: {
       type: 'category',

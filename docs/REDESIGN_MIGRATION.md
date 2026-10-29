@@ -21,6 +21,7 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Shop CTA Dock | Not started |
 | Shared service layout and header | Pass 2 complete; in review (2026-10-29) |
 | Navigation and footer | Pass 2 complete; in review (2026-10-29) |
+| Service homepage | Pass 3 complete; in review (2026-10-29) |
 | Existing and missing service page templates | Not started |
 | Shop catalog, product, cart, checkout surfaces | Not started |
 | Responsive, accessibility, functional, SEO, and performance QA | Not started |
@@ -41,6 +42,8 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - The service shell owns redesign-scoped layout variables: a 1440 px maximum content measure, 20/40/96 px responsive margins, 24 px grid gutters, Geologica/IBM Plex Mono roles, and the approved dark surface hierarchy. These are scoped to `SiteLayout` so admin, ads, landings, and shop are not restyled.
 - Desktop navigation switches at 1024 px and groups camera repair plus production information routes beneath the approved non-link “Vairāk/Ещё” trigger. Route configuration remains the URL authority.
 - The shared service footer consumes `getSiteSettings` company/location data and the existing social registry. Its presentation follows the redesign counter surface and 12-column responsive composition; it does not copy reference contact data.
+- The service homepage is a server-rendered presentation adapter over existing reviews, FAQ, process copy, settings, routes, and SEO wrappers. Its two small client islands reuse `UiDialogsProvider` for booking and own only branch-selection state.
+- Homepage source mapping is `iLabRedesign/src/pages/index.html` and `src/pages/ru/index.html`, with `assets/css/awwwards-home.css`, `pages.css`, `components.css`, and the approved homepage image assets. Static template JavaScript and mock data are not production dependencies.
 
 ## Known risks
 
@@ -75,6 +78,16 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - Reference template routes and hard-coded footer contacts remain visual examples only. Production configuration is authoritative for live data and URLs.
 - Page sections remain intentionally unmigrated. The new foundations expose target values but do not blanket-rewrite legacy page CSS modules; individual sections will adopt them during their dedicated passes.
 - Automated tests, lint, production build, and local browser checks at 375, 768, 1024, 1280, and 1600 px are required before this pass leaves review. Native Computer Use remains unavailable if its Windows pipe cannot be opened.
+
+## Pass 3 service homepage
+
+- Migrated the hero, branch-status strip, Apple/Android/device services, diagnostic statement, repair process, Google reviews, benefits, branch map, FAQ, and closing CTA in the approved LV section order.
+- Preserved production routes, LV/RU page wrappers and metadata, structured data, canonical handling, Firebase-backed settings, live/fallback reviews, FAQ data, branch contacts, booking drawer, and map destinations.
+- The approved raster assets are served locally from `public/images/home`; production content and configuration replace template mock values.
+- Review cards display up to four production-curated reviews per branch. If fewer are available, the layout intentionally renders the available verified content rather than inventing testimonials.
+- The reference RU template places the diagnostic statement before services while LV places it after services. Production keeps a single component order matching the primary LV approved homepage; this localization contradiction remains recorded for design confirmation.
+- Five-viewport full-page comparisons and interaction checks cover 375, 768, 1024, 1280, and 1600 px. All five render without horizontal overflow or broken images; branch selection, FAQ disclosure, booking open/Escape close, and focus return pass. Native Computer Use remains unavailable, so local Chromium CDP captures are the visual evidence for this pass.
+- `npm test` (8 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation notices remain outside the homepage scope.
 
 ## Pass requirements
 
