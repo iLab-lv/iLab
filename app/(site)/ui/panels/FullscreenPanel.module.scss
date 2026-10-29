@@ -1,156 +1,132 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* ===== Overlay ===== */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: $z-overlay;
-
-  background: $scrim-color;
-  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-
-  display: block;
+  display: flex;
+  justify-content: flex-end;
   width: 100vw;
   height: 100dvh;
-  contain: layout paint;
-  isolation: isolate;
-
+  background: rgba(0, 0, 0, .72);
   opacity: 0;
   pointer-events: none;
-  transition: opacity $panel-anim-duration $ease-std;
+  transition: opacity 300ms ease;
 
-  &[data-state='opening'],
-  &[data-state='open'],
-  &[data-state='closing'] {
+  &[data-state='opening'], &[data-state='open'], &[data-state='closing'] {
     opacity: 1;
     pointer-events: auto;
   }
-
-  @media (prefers-reduced-motion: reduce) { transition: none; }
 }
 
-/* ===== Overlay-anchored close (outside scrollable content) ===== */
-.closeGlobal {
-  position: fixed;
-  top: calc(#{$safe-top} + #{$space-sm});
-  right: max(#{$space-md}, #{$safe-right});
-  z-index: 1;
+.panel {
+  --panelContentMinH: calc(100dvh - 105px - #{$safe-bottom});
+  position: relative;
+  width: min(560px, 100%);
+  height: 100dvh;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  color: #f2f5f7;
+  border-left: 1px solid #243039;
+  background: #0c1115;
+  transform: translateX(100%);
+  transition: transform 400ms cubic-bezier(.16, 1, .3, 1);
+  font-family: 'Geologica', $font-family-base;
+  will-change: transform;
+
+  &[data-state='opening'], &[data-state='open'] { transform: translateX(0); }
+  &[data-state='closing'] { transform: translateX(100%); }
+}
+
+.panelHeader {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  min-height: 104px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: max(24px, #{$safe-top}) 32px 24px;
+  border-bottom: 1px solid #243039;
+  background: #0c1115;
+
+  h2 {
+    margin: 0;
+    color: #f2f5f7;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 600;
+    font-variation-settings: 'SHRP' 100;
+    letter-spacing: -.04em;
+    line-height: .98;
+  }
 }
 
 .close {
-  min-width: 44px;
-  height: 44px;
-  padding: 0 $space-md;
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  place-items: center;
+  padding: 0;
+  color: #f2f5f7;
+  border: 1px solid #243039;
+  border-radius: 0;
+  background: transparent;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
 
-  border: none; border-radius: $radius-md;
-  background: $color-accent; color: #000;
-  font-weight: $font-weight-medium; cursor: pointer; line-height: 1;
-
-  box-shadow: $shadow-soft-lg;
-  transition: background-color $dur-base $ease-std, transform 120ms ease;
-
-  &:hover { background: $color-accent-hover; }
-  &:active { background: $color-accent-active; transform: translateY(1px); }
-  &:focus-visible { outline: $focus-ring-width solid $focus-ring-color; outline-offset: $focus-ring-offset; }
+  svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  &:hover { color: #47c6e2; border-color: #47c6e2; background: #141c23; }
+  &:focus-visible { outline: 2px solid #47c6e2; outline-offset: 2px; }
 }
 
-/* ===== Panel (host + scroll container) ===== */
-.panel {
-  /* Visible content height (used by panes) */
-  --panelContentMinH: calc(100dvh - (#{$safe-top} + #{$safe-bottom}));
-
-  background: linear-gradient(0deg, rgba(10,10,10,0.96), rgba(10,10,10,0.96));
-  color: $color-text;
-  border-left: 1px solid $glass-border;
-  border-right: 1px solid $glass-border;
-
-  width: 100%;
-  height: 100dvh;
-
-  /* panel is the ONLY scroll container */
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-
-  /* Keep panel's own safe padding (top/bottom) so content isn't under close. */
-  padding-top: $safe-top;
-  padding-bottom: $safe-bottom;
-
-  will-change: transform;
-  backface-visibility: hidden;
-
-  /* Open/Close default from bottom (mobile) */
-  transform: translateY(100%);
-  transition: transform $panel-anim-duration $ease-std;
-
-  &[data-state='opening'],
-  &[data-state='open']   { transform: translateY(0%); }
-  &[data-state='closing']{ transform: translateY(100%); }
-
-  /* Desktop: slide from right */
-  @media (min-width: $bp-md) {
-    transform: translateX(100%);
-    &[data-state='opening'],
-    &[data-state='open']   { transform: translateX(0%); }
-    &[data-state='closing']{ transform: translateX(100%); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-    transform: none;
-  }
+.scanLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+  width: 1px;
+  background: #47c6e2;
+  pointer-events: none;
+  opacity: 0;
 }
 
-/* ===== Stage & Panes ===== */
-.stage {
-  position: relative;
-  min-height: var(--panelContentMinH);
+.panel[data-state='opening'] .scanLine { animation: drawer-scan 600ms 150ms cubic-bezier(.45, 0, .55, 1) both; }
 
-  &[data-swapping='true'] { contain: paint; }
+@keyframes drawer-scan {
+  0% { left: 0; opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
 
+.stage { position: relative; min-height: var(--panelContentMinH); }
+.stage[data-swapping='true'] { contain: paint; }
 .pane { position: relative; inset: 0; transform: translate3d(0,0,0); }
 .pane[data-pane-active='true'] { min-height: var(--panelContentMinH); }
-
-.paneEnter,
-.paneExit {
-  position: absolute;
-  inset: 0;
-  will-change: transform;
-  transition: transform $pane-swap-duration $ease-std;
-}
-
+.paneEnter, .paneExit { position: absolute; inset: 0; will-change: transform; transition: transform 360ms ease; }
 .paneExit { pointer-events: none; }
-
-/* Enter starting offsets */
 .enter-right { transform: translateX(100%); }
-.enter-left  { transform: translateX(-100%); }
-.enter-up    { transform: translateY(100%); }
-.enter-down  { transform: translateY(-100%); }
-
-/* Exit target offsets */
+.enter-left { transform: translateX(-100%); }
+.enter-up { transform: translateY(100%); }
+.enter-down { transform: translateY(-100%); }
 .stage[data-swap-phase='run'] .paneEnter { transform: translate3d(0,0,0); }
 .stage[data-swap-phase='run'] .paneExit.exit-right { transform: translateX(100%); }
-.stage[data-swap-phase='run'] .paneExit.exit-left  { transform: translateX(-100%); }
-.stage[data-swap-phase='run'] .paneExit.exit-up    { transform: translateY(-100%); }
-.stage[data-swap-phase='run'] .paneExit.exit-down  { transform: translateY(100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-left { transform: translateX(-100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-up { transform: translateY(-100%); }
+.stage[data-swap-phase='run'] .paneExit.exit-down { transform: translateY(100%); }
 
-/* ===== Utilities ===== */
-.srOnly {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0,0,0,0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
+.srOnly { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+
+@media (max-width: 1023px) {
+  .panel { width: 100%; border-left: 0; }
+  .panelHeader { min-height: 88px; padding: max(20px, #{$safe-top}) 20px 20px; }
+  .panelHeader h2 { font-size: clamp(2rem, 10vw, 3rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .overlay { transition: none; }
+  .panel { transition: opacity 150ms ease; transform: none !important; }
+  .scanLine { display: none; }
   .paneEnter, .paneExit { transition: none; transform: none !important; }
 }

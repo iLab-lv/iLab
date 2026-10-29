@@ -200,7 +200,7 @@ export default function FullscreenPanel({
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)');
+    const mq = window.matchMedia('(min-width: 1024px)');
 
     const apply = () => setIsDesktop(mq.matches);
 
@@ -319,17 +319,6 @@ export default function FullscreenPanel({
       onMouseDown={onBackdropClick}
       aria-hidden={!open}
     >
-      <div className={s.closeGlobal}>
-        <button
-          type="button"
-          className={s.close}
-          aria-label={closeLabel}
-          onClick={onClose}
-        >
-          ✕
-        </button>
-      </div>
-
       <div
         ref={panelRef}
         className={s.panel}
@@ -339,9 +328,21 @@ export default function FullscreenPanel({
         aria-labelledby="panel-title"
         tabIndex={-1}
       >
-        <h2 id="panel-title" className={s.srOnly}>
-          {paneTitle}
-        </h2>
+        <i className={s.scanLine} aria-hidden="true" />
+
+        <header className={s.panelHeader}>
+          <h2 id="panel-title">{paneTitle}</h2>
+          <button
+            type="button"
+            className={s.close}
+            aria-label={closeLabel}
+            onClick={onClose}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 5l14 14M19 5 5 19" />
+            </svg>
+          </button>
+        </header>
 
         <div
           ref={stageRef}

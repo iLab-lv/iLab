@@ -15,7 +15,7 @@
   min-height: 0;
 
   /* subtle panel background (optional) */
-  background: $color-surface-1;
+  background: #0c1115;
 }
 
 /* Let the embedded LocationsMap expand perfectly */
@@ -25,10 +25,16 @@
 
   /* Optional: soften edges to match panel visuals */
   :global(.map) {
-    border-radius: $radius-lg;
-    border: $border-thin solid $glass-border;
-    box-shadow: inset 0 0 0 1px $glass-tint-weak;
+    border-radius: 0;
+    border: $border-thin solid #243039;
+    box-shadow: none;
     overflow: hidden;
+  }
+}
+
+@media (max-width: 1023px) {
+  .wrap {
+    padding: $space-md $space-md calc(#{$space-md} + #{$safe-bottom});
   }
 }
 

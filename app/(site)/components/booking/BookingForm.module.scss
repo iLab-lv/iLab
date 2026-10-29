@@ -189,3 +189,50 @@
     outline-offset: $focus-ring-offset;
   }
 }
+
+.drawerForm {
+  gap: $space-lg;
+  font-family: 'Geologica', $font-family-base;
+
+  .field,
+  .fieldset {
+    label,
+    legend {
+      color: #f2f5f7;
+      font-weight: 400;
+    }
+
+    input[type='text'],
+    input[type='tel'],
+    input[type='date'],
+    textarea {
+      padding: 12px 0;
+      color: #f2f5f7;
+      border: 0;
+      border-bottom: 1px solid #243039;
+      border-radius: 0;
+      background: transparent;
+
+      &:focus-visible {
+        outline: 0;
+        border-bottom-color: #47c6e2;
+        box-shadow: 0 1px 0 #47c6e2;
+      }
+    }
+  }
+
+  .radio {
+    padding: 14px;
+    border: 1px solid #243039;
+    border-radius: 0;
+    background: transparent;
+
+    input[type='radio'] { accent-color: #47c6e2; }
+  }
+
+  .actions :where(button) {
+    min-height: 52px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

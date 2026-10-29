@@ -16,7 +16,7 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Phase | Status |
 | --- | --- |
 | Repository baseline and architecture audit | Complete |
-| 1A Service CTA Dock | Not started |
+| 1A Service CTA Dock | Complete (2026-10-29) |
 | Shop CTA Dock | Not started |
 | Shared service layout, header, navigation, footer | Not started |
 | Existing and missing service page templates | Not started |
@@ -29,6 +29,10 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - Keep the campaign-specific `app/landings` and `app/ads` CTA systems independent during Pass 1A unless verified reuse is behavior-preserving.
 - Resolve contact and branch data through existing production settings/fallback ownership; do not add another data registry.
 - Treat the redesign's static HTML, CSS, and JavaScript as a visual/interaction specification, not production application code.
+- The service dock switches at 1024 px: Contact + Booking form the fixed two-cell mobile bar; Booking + Prices form the floating desktop dock. This follows the rendered redesign rather than its contradictory prose notes.
+- `UiDialogsProvider` remains the interaction owner. `FullscreenPanel` owns the shared drawer shell and accessibility behavior; existing contact, location, price, and booking panes remain responsible for their production content and actions.
+- Location panels receive `getSiteSettings` locations and pin positions through the provider. Do not reintroduce a parallel static location registry.
+- Geologica is loaded through the same Google Fonts stylesheet used by the redesign and is scoped to the dock/drawers; the application-wide Inter typography remains unchanged.
 
 ## Known risks
 
@@ -36,6 +40,15 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - Locale resolution and location data currently have multiple consumers and some direct static imports.
 - Overlay focus, scroll locking, focus return, responsive behavior, and booking success/error states must survive visual migration.
 - Service and Shop are separate Next.js deployments sharing the public `ilab.lv` URL space.
+- The Google Fonts presentation has a runtime network dependency; system sans-serif remains the fallback when it is unavailable.
+
+## Pass 1A verification
+
+- Rendered LV layouts compared with the approved redesign at 375, 768, 1024, 1280, and 1600 px.
+- Verified the 1024 px dock/drawer breakpoint, full-screen mobile panel, 560 px desktop drawer, square controls, production contact/location content, and preserved booking API integration.
+- `npm test`, `npm run lint`, and `npm run build` pass. Existing Sass legacy/deprecation notices remain outside this pass.
+- RU uses the existing localized labels and production panel data; mobile action typography permits wrapping for longer translations.
+- Existing page/header and cookie-banner differences are outside the CTA Dock scope and were not changed.
 
 ## Pass requirements
 

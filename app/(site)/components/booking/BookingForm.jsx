@@ -15,6 +15,7 @@ export default function BookingForm({
   onHomeClick,
   initialValues = {},
   enableHoneypot = true,
+  presentation = 'default',
 }) {
   const t = getBookingFormContent(locale);
 
@@ -100,7 +101,7 @@ export default function BookingForm({
   }
 
   return (
-    <form className={s.form} {...formProps}>
+    <form className={`${s.form} ${presentation === 'drawer' ? s.drawerForm : ''}`} {...formProps}>
       {enableHoneypot ? (
         <input
           type="text"

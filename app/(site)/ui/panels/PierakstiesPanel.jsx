@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import BookingForm from '@components/booking/BookingForm';
 import s from './PierakstiesPanel.module.scss';
@@ -13,6 +14,7 @@ export default function PierakstiesPanel({
   const router = useRouter();
   const pathname = usePathname() || '/';
   const resolvedLocale = getNavLocaleFromPathname(pathname) || locale || 'lv';
+  const [error, setError] = useState('');
 
   const handleHomeClick = () => {
     if (onClose) onClose();
@@ -22,11 +24,14 @@ export default function PierakstiesPanel({
 
   return (
     <div className={s.root}>
+      {error ? <p className={s.error} role="alert">{error}</p> : null}
       <BookingForm
         locale={resolvedLocale}
         locations={locations}
         submitMode="fetch"
-        onError={(msg) => console.error(msg)}
+        presentation="drawer"
+        onError={setError}
+        onSuccess={() => setError('')}
         onHomeClick={handleHomeClick}
       />
     </div>

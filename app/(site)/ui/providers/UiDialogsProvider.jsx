@@ -45,6 +45,8 @@ export function UiDialogsProvider({
     ? siteSettings.hours
     : [];
 
+  const pinPositions = siteSettings?.pinPositions || {};
+
   const [mounted, setMounted] = useState(false);
   const [portalEl, setPortalEl] = useState(null);
 
@@ -140,6 +142,7 @@ export function UiDialogsProvider({
           <LocatorPanel
             locale={resolvedLocale}
             locations={locations}
+            pinPositions={pinPositions}
             onSelectLocation={(locId) => openContactsFor(locId)}
           />
         );
@@ -174,6 +177,7 @@ export function UiDialogsProvider({
     siteSettings,
     locations,
     defaultHours,
+    pinPositions,
 
     locatorOpen,
     contactOpen,

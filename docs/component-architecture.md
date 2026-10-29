@@ -4,6 +4,17 @@ This document defines the target structure for components in `app/_components`.
 
 `app/(site)/components` is legacy-only. Do not add new components there. When a legacy component is redesigned, move it into the matching target folder, update its imports, and remove the legacy version only after nothing uses it.
 
+## Service CTA shell
+
+The main service-site CTA shell is an intentionally retained legacy integration boundary during redesign migration:
+
+- `app/(site)/ui/bottombar/BottomBar.jsx` renders the responsive dock only.
+- `app/(site)/ui/providers/UiDialogsProvider.jsx` owns open/close state and supplies locale plus `getSiteSettings` location data.
+- `app/(site)/ui/panels/FullscreenPanel.jsx` owns the shared accessible drawer, focus containment/return, Escape handling, and scroll lock.
+- The existing contact, locator, pricing, and booking panes own their real actions and data. `BookingForm` continues to submit to `/api/booking`; its `drawer` presentation is styling-only.
+
+At widths below 1024 px the dock is Contact + Booking and panels fill the viewport. From 1024 px the dock is Booking + Prices and panels use a right-side 560 px drawer. Campaign-specific `app/landings`, `app/ads`, and LP CTA systems are separate and must not import this shell without a later architecture decision.
+
 ## Target file tree
 
 ```text

@@ -2,27 +2,34 @@
 
 /* ===== Layout: tabs + card ===== */
 .wrap {
+  box-sizing: border-box;
   height: var(--panelContentMinH);
   display: flex;
   flex-direction: column;
   min-height: 0; /* allow children to shrink; prevents phantom scroll */
+  padding: $space-xl;
+  background: #0c1115;
+
+  @media (max-width: 1023px) {
+    padding: $space-lg $space-md calc(#{$space-xl} + #{$safe-bottom});
+  }
 }
 
 /* ===== Tabs ===== */
 .tabs {
   display: inline-flex;
   gap: $space-sm;
-  background: $glass-bg-weak;
-  border: 1px solid $glass-border;
-  border-radius: $radius-lg;
-  padding: 4px;
+  background: transparent;
+  border: 1px solid #243039;
+  border-radius: 0;
+  padding: 0;
 }
 .tab {
   background: transparent;
   color: $color-text-2;
   border: 0;
-  border-radius: $radius-md;
-  padding: 8px 12px;
+  border-radius: 0;
+  padding: 12px 14px;
   cursor: pointer;
   transition: background-color $dur-base $ease-std, color $dur-base $ease-std;
 
@@ -34,11 +41,11 @@
   }
 }
 .tabActive {
-  color: #000;
-  background: $color-accent;
+  color: #061016;
+  background: #47c6e2;
 
   &:hover,
-  &:focus-visible { color: #000; background: $color-accent; }
+  &:focus-visible { color: #061016; background: #6fd6ec; }
 }
 
 /* ===== Card (glass shell remains full width) ===== */
@@ -54,19 +61,16 @@
   box-sizing: border-box;
 
   padding: var(--card-pad-v) var(--card-pad-h);
-  border: 1px solid $glass-border;
-  border-radius: $radius-lg;
-  background: $glass-bg-strong;
-
-  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
+  border: 1px solid #243039;
+  border-radius: 0;
+  background: #0c1115;
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     background: $glass-fallback-strong;
   }
 
   /* EXTRA top space on desktop only (keeps bottom spacing unchanged) */
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-lg) {
     padding-top: calc(var(--card-pad-v) + #{$space-xl}); /* +32px */
   }
 }
@@ -88,7 +92,7 @@
   grid-template-columns: 1fr;
   gap: $space-lg;
 
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-lg) {
     grid-template-areas: "left hours";
     grid-template-columns: 1.2fr .8fr;
     align-items: start;
@@ -105,7 +109,7 @@
   text-align: right;
   margin: 0 0 $space-md 0;
 
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-lg) {
     margin: 0;
     padding-right: $space-xl; /* right inset on desktop */
   }
@@ -116,22 +120,22 @@
   align-items: center;
   justify-content: center;
   padding: 10px 14px;             /* slightly tighter */
-  border-radius: 999px;
+  border-radius: 0;
   margin: 0 0 $space-sm 0;
   min-width: 180px;               /* down from 200 */
   font-weight: $font-weight-medium;
   letter-spacing: .01em;
-  border: 1px solid rgba($color-accent,.35);
-  box-shadow: 0 6px 18px rgba($color-accent,.22), inset 0 0 0 1px rgba(#000,.08);
+  border: 1px solid #243039;
+  box-shadow: none;
   cursor: pointer;
   user-select: none;
 }
-.badgeOpen   { background: rgba($color-accent,.20); color: $color-accent; }
+.badgeOpen   { background: transparent; color: #47c6e2; }
 .badgeClosed { background: rgba(255,255,255,.06);   color: $color-text-2; }
 
 .hoursBody {
   display: none;
-  @media (min-width: $bp-md) { display: block !important; }
+  @media (min-width: $bp-lg) { display: block !important; }
 }
 .card[data-hours-expanded="true"] .hoursBody { display: block; }
 
@@ -220,7 +224,7 @@
   :where(a, button) { width: 100%; }
 
   /* Desktop: stick to viewport bottom without extending layout */
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-lg) {
     position: sticky;
     bottom: 0;
 
@@ -241,6 +245,8 @@
       width: auto;
       flex: 0 1 360px;
       min-width: 260px;
+      border-radius: 0;
+      box-shadow: none;
     }
   }
 }
