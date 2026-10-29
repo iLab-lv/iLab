@@ -1,10 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
+import LanguageSwitcher from '../controls/LanguageSwitcher';
 import { getCtaMainContent } from '../cta-main/ctaMainContent';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
 import s from './NavBar.module.scss';
@@ -62,6 +64,13 @@ export default function HeaderActions({
     <>
       <div className={s.actions}>
         <div className={s.actionsCluster}>
+          <Link className={s.shopSwitch} href="/shop" aria-label={locale === 'ru' ? 'Перейти в магазин iLab' : 'Atvērt iLab veikalu'}>
+            <span className={s.switchTrack} aria-hidden="true"><span /></span>
+            <span className={s.switchLabel}>{locale === 'ru' ? 'Магазин' : 'Veikals'}</span>
+          </Link>
+
+          <div className={s.language}><LanguageSwitcher /></div>
+
           {showHeaderCtas && (
             <>
               <div className={s.ctasTabletDesktop}>
@@ -82,6 +91,7 @@ export default function HeaderActions({
                 <Button
                   variant="primary"
                   size="md"
+                  className={s.contactHeader}
                   aria-haspopup="dialog"
                   aria-controls="sazinaties-panel"
                   aria-expanded={contactOpen}
@@ -132,7 +142,9 @@ export default function HeaderActions({
                 setMobileOpen((value) => !value);
               }}
             >
-              ☰
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
             </button>
           )}
         </div>

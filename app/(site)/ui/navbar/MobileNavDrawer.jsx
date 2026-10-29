@@ -60,14 +60,15 @@ export default function MobileNavDrawer({
                 <div
                   className={`${s.drawerItem} ${s.drawerParent} ${topActive ? s.active : ''}`}
                 >
-                  <Link
-                    href={item.href}
-                    className={s.drawerParentLabel}
-                    aria-current={topActive ? 'page' : undefined}
-                    onClick={closeMobileMenu}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.menuOnly ? (
+                    <button type="button" className={s.drawerParentLabel} onClick={() => setMobileExpandedSlug(expanded ? null : slug)}>
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link href={item.href} className={s.drawerParentLabel} aria-current={topActive ? 'page' : undefined} onClick={closeMobileMenu}>
+                      {item.label}
+                    </Link>
+                  )}
 
                   <button
                     type="button"

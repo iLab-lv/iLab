@@ -1,14 +1,45 @@
 @use '../styles/_tokens.scss' as *;
 
-/* Public site root: define topbar height, no global padding anymore */
 .siteRoot {
-  --topbar-h: #{$header-desktop-height}; /* 72px */
-  @media (max-width: $bp-md) {
-    --topbar-h: #{$header-mobile-height}; /* 56px */
-  }
+  --topbar-h: 72px;
+  --service-paper: #070a0d;
+  --service-paper-2: #0c1115;
+  --service-paper-3: #131a20;
+  --service-ink: #f2f5f7;
+  --service-ink-2: #aeb8c0;
+  --service-ink-3: #6e7a84;
+  --service-hairline: #1c242b;
+  --service-counter-hairline: #243039;
+  --service-signal: #47c6e2;
+  --service-on-signal: #061016;
+  --service-font: 'Geologica', #{$font-family-base};
+  --service-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --service-container: 1440px;
+  --service-margin: 20px;
+  --service-gutter: 24px;
+  min-width: 0;
+  overflow-x: clip;
+  color: var(--service-ink);
+  background: var(--service-paper);
+  font-family: var(--service-font);
+  font-variation-settings: 'SHRP' 0, 'CRSV' 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 
-  /* no padding-top here - lets hero sit under the transparent topbar */
-  background: $color-surface-1; /* keep if you want a default site bg */
+  main { min-width: 0; }
+  @media (min-width: $bp-md) { --service-margin: 40px; }
+  @media (min-width: $bp-xl) { --service-margin: 96px; }
+}
+
+.skipLink {
+  position: fixed;
+  top: -100px;
+  left: var(--service-margin);
+  z-index: 300;
+  padding: 12px 16px;
+  color: var(--service-on-signal);
+  background: var(--service-signal);
+  &:focus { top: 12px; }
 }
 
 /* Desktop-only overlay Controls (≥1360px) stays the same */

@@ -44,3 +44,41 @@ test('location drawer consumes provider-owned production data', async () => {
   assert.match(locator, /locations=\{locations\}/);
   assert.doesNotMatch(locator, /LOCATIONS|PIN_POSITIONS/);
 });
+
+test('service shell uses the redesign header controls and removes legacy fixed controls', async () => {
+  const [layout, actions, navStyles, buttonStyles] = await Promise.all([
+    read('app/(site)/layout.jsx'),
+    read('app/(site)/ui/navbar/HeaderActions.jsx'),
+    read('app/(site)/ui/navbar/NavBar.module.scss'),
+    read('app/(site)/components/button/Button.module.scss'),
+  ]);
+
+  assert.doesNotMatch(layout, /controlsDesktopOnly|<Controls/);
+  assert.match(actions, /href="\/shop"/);
+  assert.match(actions, /<LanguageSwitcher/);
+  assert.match(actions, /className=\{s\.shopSwitch\}/);
+  assert.match(navStyles, /height:\s*72px/);
+  assert.match(navStyles, /border-radius:\s*0/);
+  assert.match(buttonStyles, /font-family:\s*'Geologica'/);
+  assert.match(buttonStyles, /border-radius:\s*0/);
+  assert.doesNotMatch(buttonStyles, /backdrop-filter|box-shadow:\s*\$shadow/);
+});
+
+test('service shell keeps the approved global layout and production-backed footer contracts', async () => {
+  const [layoutStyles, footer, footerStyles, navigation] = await Promise.all([
+    read('app/(site)/Layout.module.scss'),
+    read('app/(site)/ui/footer/Footer.jsx'),
+    read('app/(site)/ui/footer/Footer.module.scss'),
+    read('app/(site)/ui/navbar/navigation.config.js'),
+  ]);
+
+  assert.match(layoutStyles, /--service-container:\s*1440px/);
+  assert.match(layoutStyles, /--service-margin:\s*96px/);
+  assert.match(footer, /siteSettings\?\.locations/);
+  assert.match(footer, /Object\.entries\(SOCIALS\)/);
+  assert.match(footerStyles, /grid-template-columns:\s*repeat\(12/);
+  assert.match(footerStyles, /min-width:\s*1024px/);
+  assert.match(navigation, /menuOnly:\s*true/);
+  assert.match(navigation, /fotoaparatu-remonts/);
+  assert.match(navigation, /\/ru\/kontakty/);
+});

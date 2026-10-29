@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import s from './BottomBar.module.scss';
 import Button from '../../components/button/Button';
 import { useUiDialogs } from '../providers/UiDialogsProvider';
-import Controls from '../controls/Controls';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
 import { getCtaMainContent } from '../cta-main/ctaMainContent';
 
@@ -17,7 +16,7 @@ function BookingIcon() {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3v3M18 3v3M4 8h16M5 5h14v15H5z"/><path d="m9 14 2 2 4-5"/></svg>;
 }
 
-export default function BottomBar({ socials = {} }) {
+export default function BottomBar() {
   const pathname = usePathname() || '/';
   const locale = getNavLocaleFromPathname(pathname);
   const cta = getCtaMainContent(locale);
@@ -32,14 +31,6 @@ export default function BottomBar({ socials = {} }) {
 
   return (
     <nav className={s.bottomBar} aria-label={cta.bottomBar.ariaLabel}>
-      <div className={s.controlsSlot}>
-        <Controls
-          facebookUrl={socials.facebook}
-          instagramUrl={socials.instagram}
-          tiktokUrl={socials.tiktok}
-        />
-      </div>
-
       <div className={s.contactSlot}>
         <Button
           variant="secondary"

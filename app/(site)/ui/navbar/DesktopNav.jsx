@@ -27,18 +27,28 @@ export default function DesktopNav({ items, pathname }) {
 
         return (
           <div key={slug} className={s.ddWrap}>
-            <Link
-              href={item.href}
-              className={`${s.navItem} ${s.navParent} ${topActive ? s.active : ''}`}
-              aria-haspopup="true"
-              aria-controls={panelId}
-              aria-current={topActive ? 'page' : undefined}
-            >
-              {item.label}
-              <span className={s.chev} aria-hidden>
-                ›
-              </span>
-            </Link>
+            {item.menuOnly ? (
+              <button
+                type="button"
+                className={`${s.navItem} ${s.navParent}`}
+                aria-haspopup="true"
+                aria-controls={panelId}
+              >
+                {item.label}
+                <span className={s.chev} aria-hidden>›</span>
+              </button>
+            ) : (
+              <Link
+                href={item.href}
+                className={`${s.navItem} ${s.navParent} ${topActive ? s.active : ''}`}
+                aria-haspopup="true"
+                aria-controls={panelId}
+                aria-current={topActive ? 'page' : undefined}
+              >
+                {item.label}
+                <span className={s.chev} aria-hidden>›</span>
+              </Link>
+            )}
 
             <div id={panelId} className={s.dropdown}>
               <ul className={s.menuCol}>

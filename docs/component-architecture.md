@@ -15,6 +15,17 @@ The main service-site CTA shell is an intentionally retained legacy integration 
 
 At widths below 1024 px the dock is Contact + Booking and panels fill the viewport. From 1024 px the dock is Booking + Prices and panels use a right-side 560 px drawer. Campaign-specific `app/landings`, `app/ads`, and LP CTA systems are separate and must not import this shell without a later architecture decision.
 
+## Shared service chrome
+
+- `NavBar` owns the 72 px redesign header, production logo/home route, desktop navigation, and responsive composition.
+- `HeaderActions` owns the verified `/shop` mode switch, `LanguageSwitcher`, service-centre/contact dialog triggers, and mobile-menu trigger.
+- `Button` remains the shared semantic link/button adapter. Its primary, secondary, ghost, compact, disabled, and focus states use the redesign's square Geologica system. The `ctaChip` variant is transitional for page content scheduled for later migration.
+- `UiDialogsProvider` remains the sole owner of drawer state and production settings. `FullscreenPanel` owns the drawer shell and accessibility mechanics; panels own their real content.
+- `Controls` is no longer rendered as a fixed normal-shell control cluster. It remains available to the mobile menu until that content is finalized in Pass 1A.3.
+- `SiteLayout` scopes the approved service design foundations through `Layout.module.scss`; do not move these rules into global `body` styles because admin, ads, landing, and shop shells have independent presentation contracts.
+- `navigation.config.js` is the single source for localized service navigation destinations. `menuOnly` supports the approved desktop “Vairāk/Ещё” disclosure without inventing a destination route.
+- `Footer` is a server-rendered presentation adapter over `getSiteSettings`, `footer.i18n.js`, and the existing social registry. Do not duplicate location/contact values in footer markup.
+
 ## Target file tree
 
 ```text

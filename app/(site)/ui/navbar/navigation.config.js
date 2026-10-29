@@ -212,14 +212,22 @@ export const NAVIGATION_CONFIG = [
     },
   },
   {
-    key: 'camera-repair',
+    key: 'more',
+    menuOnly: true,
     label: {
-      lv: 'Fotoaparāti',
-      ru: 'Фотоаппараты',
+      lv: 'Vairāk',
+      ru: 'Ещё',
     },
     route: {
-      type: 'category',
-      categoryKey: 'fotoaparatu-remonts',
+      type: 'custom',
+      href: { lv: '/kontakti', ru: '/ru/kontakty' },
     },
+    children: [
+      { key: 'camera-repair', label: { lv: 'Fotoaparāti', ru: 'Фотоаппараты' }, route: { type: 'category', categoryKey: 'fotoaparatu-remonts' } },
+      { key: 'prices', label: { lv: 'Cenas', ru: 'Цены' }, route: { type: 'custom', href: { lv: '/cenas', ru: '/ru/ceny' } } },
+      { key: 'faq', label: { lv: 'BUJ', ru: 'FAQ' }, route: { type: 'custom', href: { lv: '/buj', ru: '/ru/faq' } } },
+      { key: 'about', label: { lv: 'Par mums', ru: 'О нас' }, route: { type: 'custom', href: { lv: '/par-mums', ru: '/ru/o-nas' } } },
+      { key: 'contacts', label: { lv: 'Kontakti', ru: 'Контакты' }, route: { type: 'custom', href: { lv: '/kontakti', ru: '/ru/kontakty' } } },
+    ],
   },
 ];

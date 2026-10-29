@@ -16,13 +16,11 @@
   :where(a, button, div) { pointer-events: auto; }
 }
 
-.controlsSlot, .contactSlot, .bookSlot, .pricesSlot {
+.contactSlot, .bookSlot, .pricesSlot {
   display: flex;
   align-items: center;
   min-width: 0;
 }
-
-.controlsSlot > * { margin: 0; }
 
 .dockAction {
   min-height: 52px !important;
@@ -90,15 +88,14 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1359px) {
-  .bottomBar { grid-template-columns: auto 1fr auto auto; }
-  .controlsSlot { justify-self: start; }
+  .bottomBar { grid-template-columns: 1fr auto auto; }
   .contactSlot { display: none; }
   .bookSlot, .pricesSlot { justify-self: end; }
 }
 
 @media (min-width: 1360px) {
   .bottomBar { grid-template-columns: 1fr auto auto; }
-  .controlsSlot, .contactSlot { display: none; }
+  .contactSlot { display: none; }
   .bookSlot, .pricesSlot { justify-self: end; }
 }
 
