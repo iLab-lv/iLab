@@ -1,5 +1,5 @@
 import { getRelatedModelsCopy } from './relatedModels.i18n';
-import RelatedModelsCarousel from './RelatedModelsCarousel';
+import Link from 'next/link';
 import s from './RelatedModels.module.scss';
 
 function localized(value, locale) {
@@ -47,7 +47,11 @@ export default function RelatedModels({ id = 'related-models', currentDevice, de
           <h2 id={`${id}-title`}>{copy.titleStart}<span>{copy.titleAccent}</span></h2>
           <p>{copy.intro}</p>
         </header>
-        <RelatedModelsCarousel models={models} labels={copy} />
+        <div className={s.links}>
+          {models.map((model) => (
+            <Link href={model.href} key={model.slug}>{model.name}</Link>
+          ))}
+        </div>
       </div>
     </section>
   );

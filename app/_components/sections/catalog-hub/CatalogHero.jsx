@@ -18,6 +18,7 @@ export default function CatalogHero({
   targetId = 'brand-list',
   targetLabel,
   bodyHtml,
+  placeholderLabel,
 }) {
   const copy = COPY[locale] || COPY.lv;
 
@@ -53,8 +54,10 @@ export default function CatalogHero({
             </a>
           </p>
         </div>
-        <figure className={s.visual}>
-          <img src={image} alt={imageAlt} fetchPriority="high" />
+        <figure className={`${s.visual} ${!image ? s.placeholder : ''}`}>
+          {image
+            ? <img src={image} alt={imageAlt} fetchPriority="high" />
+            : <span>{placeholderLabel || imageAlt}</span>}
         </figure>
       </section>
     </div>

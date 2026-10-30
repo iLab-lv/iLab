@@ -13,6 +13,7 @@ import {
 } from '@/lib/content/catalogDevices';
 
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
@@ -31,7 +32,7 @@ import {
 
 export const revalidate = 0;
 
-const locale = 'lv';
+const locale = 'ru';
 
 const CATEGORY_KEY = 'plansetdatoru-remonts';
 
@@ -255,12 +256,13 @@ async function getTabletDevicePageData({ brand, device }) {
     tabletDevice.slug || deviceSlug
   );
 
-  const [{ items: priceItems, currency }, faq] = await Promise.all([
+  const [{ items: priceItems, currency }, faq, relatedDevices] = await Promise.all([
     buildPriceListItems(tabletDevice.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: CATEGORY_KEY }], locale),
+    getDevicesByCategoryAndBrand(CATEGORY_KEY, brandSlug),
   ]);
 
   const headerTitle = getHeaderTitle(tabletDevice, modelName);
@@ -336,6 +338,8 @@ async function getTabletDevicePageData({ brand, device }) {
     heroImage: tabletDevice.image,
     heroAlt: `${modelName} ${labels.heroAltSuffix}`,
     bodyHtml: pickLocalizedField(tabletDevice.bodyHtml, locale) || null,
+    relatedDevices,
+    relatedBaseHref: brandPath,
 
     modelServices: getModelServices(),
     modelServicesTitle: labels.servicesTitle(modelName),

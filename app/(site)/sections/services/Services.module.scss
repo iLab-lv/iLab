@@ -106,3 +106,14 @@
   font-size: $font-size-p;
   color: $color-text-2;
 }
+
+.editorial {
+  .cards { grid-template-columns: 1fr; gap: 0; border-top: $border-thin solid $color-border; }
+  .card { border: 0; border-bottom: $border-thin solid $color-border; border-radius: 0; background: transparent; }
+  .card:hover { transform: none; box-shadow: none; background: $color-surface-2; }
+  .cardLink { grid-template-columns: minmax(0, 1fr); min-height: 96px; padding: $space-lg 0; border-radius: 0; }
+  .cardIcon { display: none; }
+  .cardContent { grid-template-columns: minmax(180px, .7fr) minmax(0, 1.3fr); align-items: baseline; gap: $space-lg; }
+  .itemTitle { font-size: clamp(1.2rem, 1rem + .7vw, 1.55rem); }
+  @media (max-width: $bp-md) { .cardContent { grid-template-columns: 1fr; gap: $space-xs; } }
+}

@@ -43,6 +43,12 @@ At widths below 1024 px the dock is Contact + Booking and panels fill the viewpo
 - `app/(site)/sections/device-selector/DeviceSelector.jsx` remains the shared server-facing boundary. It passes production device and series metadata into the progressively loaded client finder and provides an equivalent static preview before hydration.
 - `app/(site)/components/device-grid/*` owns only finder presentation and interaction: localized search, series grouping, counts, expansion, optional year filtering, empty states, and model links. It must not own model inventories, pricing, or routing rules.
 - The Samsung reference is authoritative for this presentation. Tablet and computer brand pages deliberately adapt it because the redesign has no dedicated templates for those families.
+
+## Dynamic device pages
+
+- Six LV/RU `[brand]/[device]` route adapters remain the source of device resolution, localized copy, prices, FAQ, metadata, canonicals, and JSON-LD. They load related devices by category and brand without moving data ownership into UI components.
+- `app/_components/sections/device-detail/DeviceDetailPage.jsx` is the single presentation shared by phone, tablet, and computer wrappers. It composes the approved hero, editorial service rows, production pricing, related models, trust/process, FAQ, and closing CTA.
+- The iPhone 12 redesign template is the direct phone mapping. Tablet and computer families adapt it; no per-model files or mock models/prices are introduced.
 - `CatalogBookingButton.jsx` is the only new client boundary and delegates to `UiDialogsProvider`; it does not own another booking state or submission path.
 - `CatalogHero.module.scss` and `CatalogHub.module.scss` are scoped to migrated hubs. Do not move these rules into global CSS or retrofit the protected advertising landing with them.
 - iPhone maps directly to the approved redesign template. General phone, tablet, and computer hubs adapt the same pattern because the reference repository does not contain dedicated hub templates for those routes.

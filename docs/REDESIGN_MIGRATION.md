@@ -23,7 +23,8 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Navigation and footer | Pass 2 complete; in review (2026-10-29) |
 | Service homepage | Pass 3 complete; in review (2026-10-29) |
 | Service catalog hubs | Pass 4 complete; committed locally (`e17784b`) |
-| Brand pages and model selection | Pass 5A implemented; uncommitted review state (2026-10-30) |
+| Brand pages and model selection | Pass 5A complete; committed locally (`ada4385`) |
+| Dynamic device model pages | Pass 5B implemented; uncommitted review state (2026-10-30) |
 | Existing and missing service page templates | Not started |
 | Shop catalog, product, cart, checkout surfaces | Not started |
 | Responsive, accessibility, functional, SEO, and performance QA | Not started |
@@ -108,6 +109,15 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - Restyled model selection as the approved compact finder/series list, including localized search, empty results, counts, progressive expansion, year filters, keyboard focus, and responsive columns. No redesign mock model data was imported.
 - Validation: 12/12 automated tests, lint, and the network-enabled production build pass. Representative LV/RU phone, tablet, and computer routes return 200 with their expected canonicals, four JSON-LD blocks, and the model target. The `riga.ilab.lv` host rewrite returns 200 with its existing canonical, and protected files have no diff.
 - Protected scope: `app/ads/**`, `middleware.js`, `app/(lp)/**`, and `app/landings/**` were not modified. Exact viewport screenshot QA remains pending because Windows Computer Use stopped when it could not establish the existing Chrome tab URL with sufficient confidence.
+
+## Pass 5B dynamic device model pages
+
+- Migrated the shared dynamic `[brand]/[device]` presentation for phone, tablet, and computer families in LV/RU. `iphone-remonts-iphone-12.html` is the direct phone reference; tablet and computer pages adapt the same approved editorial model-page system because dedicated templates are absent.
+- Added one shared `DeviceDetailPage` presentation while retaining all six route adapters and their `getDeviceBySlug`, production price-list, FAQ, metadata, canonical, and JSON-LD logic. New devices inherit the presentation automatically.
+- Production brand/category device data now feeds related-model navigation. Missing hero imagery renders a labelled approved-style placeholder; missing prices continue to use existing fallback behavior, and an empty price list is omitted.
+- Model services use hairline editorial rows, pricing uses the approved responsive spec table, and related models use compact text links rather than legacy rounded/glowing cards.
+- The audit found the Russian tablet model adapter incorrectly declared `locale = 'lv'`, causing an LV canonical and Latvian fallbacks on `/ru/remont-planshetov/...`; Pass 5B corrects the adapter to `ru` without changing route or schema behavior.
+- Validation: 14/14 tests, lint, and the network-enabled production build pass. Representative Samsung phone, iPad, and MacBook models render in LV/RU with correct canonicals and JSON-LD; production pricing and related-model sections are present, an unknown device returns 404, and the protected Ads host retains its canonical. Exact five-width screenshot comparison remains pending because browser-based visual automation was unavailable after the Windows control safety stop recorded in Pass 5A.
 - `npm test` (10 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation warnings remain in unrelated legacy, landing, admin, and device styles.
 
 ## Pass requirements

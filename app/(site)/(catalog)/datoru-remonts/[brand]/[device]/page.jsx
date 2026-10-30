@@ -13,6 +13,7 @@ import {
 } from '@/lib/content/catalogDevices';
 
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
@@ -261,12 +262,13 @@ async function getComputerDevicePageData({ brand, device }) {
     computerDevice.slug || deviceSlug
   );
 
-  const [{ items: priceItems, currency }, faq] = await Promise.all([
+  const [{ items: priceItems, currency }, faq, relatedDevices] = await Promise.all([
     buildPriceListItems(computerDevice.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: CATEGORY_KEY }], locale),
+    getDevicesByCategoryAndBrand(CATEGORY_KEY, brandSlug),
   ]);
 
   const headerTitle = getHeaderTitle(computerDevice, modelName);
@@ -339,6 +341,8 @@ async function getComputerDevicePageData({ brand, device }) {
     heroImage: computerDevice.image,
     heroAlt: `${modelName} ${labels.heroAltSuffix}`,
     bodyHtml: pickLocalizedField(computerDevice.bodyHtml, locale) || null,
+    relatedDevices,
+    relatedBaseHref: brandPath,
 
     modelServices: getModelServices(),
     modelServicesTitle: labels.servicesTitle(modelName),
