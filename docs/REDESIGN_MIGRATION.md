@@ -22,7 +22,8 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Shared service layout and header | Pass 2 complete; in review (2026-10-29) |
 | Navigation and footer | Pass 2 complete; in review (2026-10-29) |
 | Service homepage | Pass 3 complete; in review (2026-10-29) |
-| Service catalog hubs | Pass 4 complete; in review (2026-10-29) |
+| Service catalog hubs | Pass 4 complete; committed locally (`e17784b`) |
+| Brand pages and model selection | Pass 5A implemented; uncommitted review state (2026-10-30) |
 | Existing and missing service page templates | Not started |
 | Shop catalog, product, cart, checkout surfaces | Not started |
 | Responsive, accessibility, functional, SEO, and performance QA | Not started |
@@ -99,6 +100,14 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - The protected Google Ads landing remains isolated. No files under `app/ads`, `app/(lp)`, or `app/landings` changed; `middleware.js` still rewrites `riga.ilab.lv` to `/ads`. Catalog styling does not modify `Button`, `GoogleReviewsBadge`, global CSS, advertising CTA providers, forms, analytics, or conversion behavior.
 - Responsive browser checks cover 375, 768, 1024, 1280, and 1600 px. The long iPhone hub requires segmented capture because its full rendered height exceeds Chromium's reliable single-image limit.
 - All eight LV/RU hub routes return 200 with their existing canonical and JSON-LD output. Browser checks found no broken images; booking open/Escape close/focus return and a production brand link passed. The Ads preview retains its `https://riga.ilab.lv/` canonical, responsive layout, forms, and advertising-specific CTA presentation.
+
+## Pass 5A brand pages and model selection
+
+- Migrated the dynamic LV/RU phone, tablet, and computer brand routes. The approved `src/pages/telefonu-remonts-samsung.html` is the direct phone mapping; tablet and computer routes adapt the same approved split hero and searchable series-list language because no dedicated reference templates exist.
+- Reused `CatalogHero` and the existing production `DeviceSelector` data flow. Model lists still come from `getDevices`, `resolveBrandPage`, and category/brand/series metadata; public URLs, metadata, canonicals, JSON-LD, pricing relationships, and booking dialogs remain owned by their route modules.
+- Restyled model selection as the approved compact finder/series list, including localized search, empty results, counts, progressive expansion, year filters, keyboard focus, and responsive columns. No redesign mock model data was imported.
+- Validation: 12/12 automated tests, lint, and the network-enabled production build pass. Representative LV/RU phone, tablet, and computer routes return 200 with their expected canonicals, four JSON-LD blocks, and the model target. The `riga.ilab.lv` host rewrite returns 200 with its existing canonical, and protected files have no diff.
+- Protected scope: `app/ads/**`, `middleware.js`, `app/(lp)/**`, and `app/landings/**` were not modified. Exact viewport screenshot QA remains pending because Windows Computer Use stopped when it could not establish the existing Chrome tab URL with sufficient confidence.
 - `npm test` (10 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation warnings remain in unrelated legacy, landing, admin, and device styles.
 
 ## Pass requirements

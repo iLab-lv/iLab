@@ -60,16 +60,6 @@ function groupBySeries(devices, seriesMeta, fallbackSeriesTitle) {
   });
 }
 
-function resolveSrc(device) {
-  const direct = (device?.image && String(device.image).trim()) || '';
-  if (direct) return direct;
-
-  const pathy = (device?.imagePath && String(device.imagePath).trim()) || '';
-  if (pathy) return `/images/${pathy.replace(/^\/+/, '')}`;
-
-  return '/images/placeholders/phone.webp';
-}
-
 function getCardStrings(locale = 'lv') {
   if (locale === 'ru') {
     return {
@@ -129,10 +119,6 @@ export default function DeviceGridStaticPreview({
                 const name = device?.name || '';
                 const href = `${baseHref}/${device.slug}`;
                 const fullLabel = `${name} ${cardStrings.suffix}`.trim();
-                const alt =
-                  (name && `${name} ${cardStrings.suffix}`) ||
-                  cardStrings.fallbackAlt;
-
                 return (
                   <Link
                     key={`${device.brandKey}:${device.slug}`}
@@ -140,23 +126,13 @@ export default function DeviceGridStaticPreview({
                     className={cardStyles.card}
                     aria-label={fullLabel}
                   >
-                    <img
-                      src={resolveSrc(device)}
-                      alt={alt}
-                      className={cardStyles.img}
-                      loading="lazy"
-                      decoding="async"
-                      draggable={false}
-                    />
-
                     <div className={cardStyles.meta}>
                       <h3 className={cardStyles.name}>
                         <span className={cardStyles.modelLine}>
                           {name}
-                          <span className={cardStyles.remontsSuffix}>
-                            {' '}
-                            {cardStrings.suffix}
-                          </span>
+                          {device?.year ? (
+                            <span className={cardStyles.year}> {device.year}</span>
+                          ) : null}
                         </span>
                       </h3>
                     </div>

@@ -36,6 +36,13 @@ At widths below 1024 px the dock is Contact + Booking and panels fill the viewpo
 ## Service catalog hubs
 
 - `app/_components/sections/catalog-hub/CatalogHero.jsx` is the shared category-hub hero for iPhone, phone, tablet, and computer routes. It receives production title, lead, breadcrumbs, imagery, and model/brand target data from each route adapter.
+
+## Brand pages and model selection
+
+- Phone, tablet, and computer `[brand]` route modules remain responsible for production data, localized content, SEO, structured data, and route validation. Their page components now reuse `CatalogHero` for the approved breadcrumb/split-hero presentation.
+- `app/(site)/sections/device-selector/DeviceSelector.jsx` remains the shared server-facing boundary. It passes production device and series metadata into the progressively loaded client finder and provides an equivalent static preview before hydration.
+- `app/(site)/components/device-grid/*` owns only finder presentation and interaction: localized search, series grouping, counts, expansion, optional year filtering, empty states, and model links. It must not own model inventories, pricing, or routing rules.
+- The Samsung reference is authoritative for this presentation. Tablet and computer brand pages deliberately adapt it because the redesign has no dedicated templates for those families.
 - `CatalogBookingButton.jsx` is the only new client boundary and delegates to `UiDialogsProvider`; it does not own another booking state or submission path.
 - `CatalogHero.module.scss` and `CatalogHub.module.scss` are scoped to migrated hubs. Do not move these rules into global CSS or retrofit the protected advertising landing with them.
 - iPhone maps directly to the approved redesign template. General phone, tablet, and computer hubs adapt the same pattern because the reference repository does not contain dedicated hub templates for those routes.

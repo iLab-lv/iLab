@@ -1,6 +1,4 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-
-import DeviceHero from '@sections/device-hero/DeviceHero';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
@@ -458,20 +456,15 @@ export default function ComputerBrandPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
-        scrollCta={strings.scrollCta}
-      />
-
-      <DeviceHero
+        locale={locale}
         image={page.hero?.image || cfg.heroImage}
-        alt={cfg.heroAlt}
-        brandLogo={cfg.logo}
-        brandKey={cfg.key || brandSlug}
-        focal="right"
-        priority
+        imageAlt={cfg.heroAlt}
+        targetId="brand-modeli"
+        targetLabel={strings.scrollCta?.label}
         bodyHtml={strings.heroHtml}
       />
 
