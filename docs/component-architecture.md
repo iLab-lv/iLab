@@ -149,3 +149,10 @@ Use colocated static copy in `*.i18n.js`. Keep dynamic content in its real sourc
 4. Verify both locales where relevant.
 5. Run lint and a build check.
 6. Remove the legacy component only after repository-wide search confirms it has no imports.
+
+## Remaining-family presentation adapters
+
+- `app/(site)/(catalog)/dyson-remonts/DysonRepairPage.jsx` is the shared LV/RU Dyson presentation. Locale route adapters retain category resolution, FAQ selection, metadata, canonicals, and JSON-LD; the presentation reuses `CatalogHero`, editorial `Services`, and existing production sections.
+- `app/_components/page-sections/photo-repair/PhotoRepairPage.jsx` is the shared LV/RU camera/lens presentation. `photoRepairContent.js` owns localized production copy, while route adapters own settings, reviews, metadata, canonicals, and JSON-LD.
+- `LensRepairSection` and `CameraBrandRepairSection` remain page-specific because no other production family shares their content model. They follow the approved square hairline editorial system without creating a competing global component set.
+- The camera page currently consumes `LandingLocations` and `LandingCtaProvider` for its existing settings-backed location presentation. Do not edit or generalize the protected landing implementation during service-page passes; replace this dependency only in a separately scoped architecture pass with regression coverage.

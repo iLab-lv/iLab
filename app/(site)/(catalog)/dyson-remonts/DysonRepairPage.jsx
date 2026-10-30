@@ -1,13 +1,11 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
 import Reviews from '@sections/reviews/Reviews';
 import Guide from '@sections/guide/Guide';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -224,19 +222,17 @@ export default function DysonRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
-        scrollCta={strings.scrollCta}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        className="category"
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
+        placeholderLabel={strings.imageAlt}
       />
 
       <section className={s.section} aria-labelledby="dyson-intro-h2">
@@ -258,6 +254,7 @@ export default function DysonRepairPage({
             id="dyson-services"
             title={strings.servicesTitle}
             items={strings.servicesItems}
+            variant="editorial"
           />
         </div>
       </section>

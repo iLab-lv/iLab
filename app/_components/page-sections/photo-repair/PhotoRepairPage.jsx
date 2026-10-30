@@ -1,5 +1,3 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import DeviceHero from '@sections/device-hero/DeviceHero';
 import Faq from '@sections/faq/Faq';
 import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
 import Reviews from '@/_components/sections/reviews/Reviews';
@@ -12,6 +10,8 @@ import QualitySection from '@/_components/sections/quality/QualitySection';
 import RepairDecisionSection from '@/_components/sections/repair-decision/RepairDecisionSection';
 import LandingLocations from '@/app/landings/_components/locations/LandingLocations';
 import LandingCtaProvider from '@/app/landings/_components/ui/providers/LandingCtaProvider';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
+import FinalCta from '@/_components/sections/final-cta/FinalCta';
 
 import { getPhotoRepairContent } from './photoRepairContent';
 import LensRepairSection from './LensRepairSection';
@@ -102,18 +102,17 @@ export default function PhotoRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={copy.h1}
         lead={copy.hero[0]}
-        scrollCta={{ label: copy.scroll, targetId: 'photo-services' }}
         crumbs={breadcrumbs}
-      />
-      <DeviceHero
         image={heroImage}
-        alt={copy.meta.imageAlt}
-        focal="center"
-        priority
+        imageAlt={copy.meta.imageAlt}
         bodyHtml={`<p>${copy.hero[1]}</p>`}
+        targetId="photo-services"
+        targetLabel={copy.scroll}
+        placeholderLabel={copy.meta.imageAlt}
       />
       <QuickFacts variant="photo" locale={locale} />
       <section className={`${s.section} ${s.introSection}`}>
@@ -136,6 +135,7 @@ export default function PhotoRepairPage({
       <RepairProcess id="photo-repair-steps" locale={locale} variant="photo" content={processContent} backgroundImage="/images/hands-closeup.png" />
       <Guide id="photo-guide" locale={locale} variant="photo" content={guideContent} />
       <Faq id="photo-faq" title={copy.faqTitle} items={faqItems} />
+      <FinalCta id="photo-final-cta" locale={locale} />
     </>
   );
 }

@@ -24,8 +24,9 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Service homepage | Pass 3 complete; in review (2026-10-29) |
 | Service catalog hubs | Pass 4 complete; committed locally (`e17784b`) |
 | Brand pages and model selection | Pass 5A complete; committed locally (`ada4385`) |
-| Dynamic device model pages | Pass 5B implemented; uncommitted review state (2026-10-30) |
-| Existing and missing service page templates | Not started |
+| Dynamic device model pages | Pass 5B complete; committed locally (`9bbf177`) |
+| Dyson and photo/camera service families | Pass 6A implemented; uncommitted review state (2026-10-30) |
+| Remaining individual phone/iPhone service pages | Not started |
 | Shop catalog, product, cart, checkout surfaces | Not started |
 | Responsive, accessibility, functional, SEO, and performance QA | Not started |
 
@@ -119,6 +120,17 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - The audit found the Russian tablet model adapter incorrectly declared `locale = 'lv'`, causing an LV canonical and Latvian fallbacks on `/ru/remont-planshetov/...`; Pass 5B corrects the adapter to `ru` without changing route or schema behavior.
 - Validation: 14/14 tests, lint, and the network-enabled production build pass. Representative Samsung phone, iPad, and MacBook models render in LV/RU with correct canonicals and JSON-LD; production pricing and related-model sections are present, an unknown device returns 404, and the protected Ads host retains its canonical. Exact five-width screenshot comparison remains pending because browser-based visual automation was unavailable after the Windows control safety stop recorded in Pass 5A.
 - `npm test` (10 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation warnings remain in unrelated legacy, landing, admin, and device styles.
+
+## Pass 6A remaining service families
+
+- Migrated `/dyson-remonts`, `/ru/remont-dyson`, `/fotoaparatu-remonts`, and `/ru/remont-fotoapparatov`. All four are individual route adapters over two shared LV/RU presentations rather than dynamic model routes.
+- Dyson maps directly to `iLabRedesign/src/pages/dyson-remonts.html` and now uses the approved split `CatalogHero` and editorial service rows while preserving production services, FAQ, reviews, guide, process, trust content, booking, metadata, canonical, and JSON-LD behavior.
+- The redesign repository has no dedicated camera, lens, or photo-repair page. Those routes explicitly adapt the established approved editorial hero and square hairline treatment while retaining the production-only lens, Canon/Nikon/Sony, diagnostic, locations, review, FAQ, and repair-process sections.
+- Camera content remains data-driven through `photoRepairContent.js`; both locale route adapters continue to own settings/reviews loading and SEO/structured-data composition. Dyson continues to resolve category content, production FAQs, and section visibility in its route adapters.
+- Remaining legacy catalog work consists of the individual iPhone and general-phone service routes (screen, battery, charging, camera, audio, water damage, and iPhone-specific back-cover/board repair), with their RU counterparts.
+- Protected scope remains unchanged: no files under `app/ads/**`, `app/(lp)/**`, `app/landings/**`, or `middleware.js` were modified. The existing photo page still consumes the established landing location/provider components; this dependency is documented architecture debt, not a change to advertising code.
+- Validation: 16/16 automated tests, lint, and the production build (118 pages) pass. All four LV/RU routes return 200 with their expected canonical and four JSON-LD blocks; the protected `riga.ilab.lv` rewrite returns 200 with its existing canonical. Existing Sass deprecation notices remain in unrelated legacy/admin/landing styles.
+- Exact full-page comparison at 375, 768, 1024, 1280, and 1600 px remains pending: the Windows browser-control host was unavailable during this pass. Automated checks therefore do not constitute final visual acceptance.
 
 ## Pass requirements
 
