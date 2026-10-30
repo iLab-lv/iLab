@@ -22,6 +22,7 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 | Shared service layout and header | Pass 2 complete; in review (2026-10-29) |
 | Navigation and footer | Pass 2 complete; in review (2026-10-29) |
 | Service homepage | Pass 3 complete; in review (2026-10-29) |
+| Service catalog hubs | Pass 4 complete; in review (2026-10-29) |
 | Existing and missing service page templates | Not started |
 | Shop catalog, product, cart, checkout surfaces | Not started |
 | Responsive, accessibility, functional, SEO, and performance QA | Not started |
@@ -44,6 +45,7 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - The shared service footer consumes `getSiteSettings` company/location data and the existing social registry. Its presentation follows the redesign counter surface and 12-column responsive composition; it does not copy reference contact data.
 - The service homepage is a server-rendered presentation adapter over existing reviews, FAQ, process copy, settings, routes, and SEO wrappers. Its two small client islands reuse `UiDialogsProvider` for booking and own only branch-selection state.
 - Homepage source mapping is `iLabRedesign/src/pages/index.html` and `src/pages/ru/index.html`, with `assets/css/awwwards-home.css`, `pages.css`, `components.css`, and the approved homepage image assets. Static template JavaScript and mock data are not production dependencies.
+- Catalog hubs use the isolated `app/_components/sections/catalog-hub` presentation boundary. It owns the approved split category hero and page spacing without changing legacy globals or shared components consumed by advertising landings.
 
 ## Known risks
 
@@ -88,6 +90,16 @@ Do not copy mock data or simulated behavior from the redesign. Preserve producti
 - The reference RU template places the diagnostic statement before services while LV places it after services. Production keeps a single component order matching the primary LV approved homepage; this localization contradiction remains recorded for design confirmation.
 - Five-viewport full-page comparisons and interaction checks cover 375, 768, 1024, 1280, and 1600 px. All five render without horizontal overflow or broken images; branch selection, FAQ disclosure, booking open/Escape close, and focus return pass. Native Computer Use remains unavailable, so local Chromium CDP captures are the visual evidence for this pass.
 - `npm test` (8 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation notices remain outside the homepage scope.
+
+## Pass 4 service catalog hubs
+
+- Migrated `/iphone-remonts`, `/telefonu-remonts`, `/plansetdatoru-remonts`, and `/datoru-remonts`, together with their existing RU counterparts, to the approved catalog-hub presentation.
+- `iLabRedesign/src/pages/iphone-remonts.html` is the direct visual mapping. The redesign has no equivalent general phone, tablet, or computer hub templates; those routes are explicit adaptations of the same approved category system, not new designs.
+- Preserved production category/device/brand sources, model links, services, prices, reviews, FAQ, metadata, canonicals, JSON-LD, breadcrumbs, LV/RU routing, booking integration, and section visibility flags.
+- The protected Google Ads landing remains isolated. No files under `app/ads`, `app/(lp)`, or `app/landings` changed; `middleware.js` still rewrites `riga.ilab.lv` to `/ads`. Catalog styling does not modify `Button`, `GoogleReviewsBadge`, global CSS, advertising CTA providers, forms, analytics, or conversion behavior.
+- Responsive browser checks cover 375, 768, 1024, 1280, and 1600 px. The long iPhone hub requires segmented capture because its full rendered height exceeds Chromium's reliable single-image limit.
+- All eight LV/RU hub routes return 200 with their existing canonical and JSON-LD output. Browser checks found no broken images; booking open/Escape close/focus return and a production brand link passed. The Ads preview retains its `https://riga.ilab.lv/` canonical, responsive layout, forms, and advertising-specific CTA presentation.
+- `npm test` (10 tests), `npm run lint`, and the production build (118 routes) pass. Existing Sass deprecation warnings remain in unrelated legacy, landing, admin, and device styles.
 
 ## Pass requirements
 

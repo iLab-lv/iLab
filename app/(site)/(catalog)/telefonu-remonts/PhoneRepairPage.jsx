@@ -1,4 +1,4 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 
 import BrandPreview from '@components/model-grid/BrandPreview';
 
@@ -8,9 +8,7 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
-
-import s from '@styles/Catalog.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
 
 export default function PhoneRepairPage({
   locale = 'lv',
@@ -34,21 +32,19 @@ export default function PhoneRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={labels.scrollCta}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={page.hero?.image || '/images/categories/telefonu_remonts.webp'}
-        alt={labels.heroAlt}
-        focal="right"
-        priority
+        imageAlt={labels.heroAlt}
         bodyHtml={labels.heroBodyHtml}
+        targetId={labels.scrollCta.targetId}
+        targetLabel={labels.scrollCta.label}
       />
 
+      <main className={s.hub}>
       <section className={s.section} aria-labelledby="phones-intro-h2">
         <div className={s.container}>
           <h2 id="phones-intro-h2" className={s.h2}>
@@ -143,6 +139,7 @@ export default function PhoneRepairPage({
           <ConvertBand locale={locale} />
         </section>
       )}
+      </main>
     </>
   );
 }

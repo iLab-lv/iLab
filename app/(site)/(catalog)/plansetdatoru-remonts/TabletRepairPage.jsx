@@ -1,4 +1,4 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 import BrandPreview from '@components/model-grid/BrandPreview';
 
 import Services from '@sections/services/Services';
@@ -6,7 +6,6 @@ import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
 import Reviews from '@sections/reviews/Reviews';
 
 import {
@@ -18,7 +17,7 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-import s from '@styles/Catalog.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
 
 export const CATEGORY_KEY = 'plansetdatoru-remonts';
 
@@ -364,19 +363,19 @@ export default function TabletRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={strings.scrollCta}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={strings.heroAlt}
+        imageAlt={strings.heroAlt}
         bodyHtml={heroHtml}
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
       />
 
+      <main className={s.hub}>
       <section className={s.section} aria-labelledby="tablets-intro-h2">
         <div className={s.container}>
           <h2 id="tablets-intro-h2" className={s.h2}>
@@ -468,6 +467,7 @@ export default function TabletRepairPage({
           <ConvertBand locale={locale} />
         </section>
       )}
+      </main>
     </>
   );
 }

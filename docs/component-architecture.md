@@ -33,6 +33,13 @@ At widths below 1024 px the dock is Contact + Booking and panels fill the viewpo
 - `HomePage.module.scss` is the page-scoped presentation layer over the shared service tokens. It must not create alternate header, footer, dock, button, or drawer systems.
 - Homepage imagery lives in `public/images/home`. Production routes, reviews, settings, branch data, booking behavior, and SEO wrappers remain authoritative; redesign mock content and JavaScript are reference-only.
 
+## Service catalog hubs
+
+- `app/_components/sections/catalog-hub/CatalogHero.jsx` is the shared category-hub hero for iPhone, phone, tablet, and computer routes. It receives production title, lead, breadcrumbs, imagery, and model/brand target data from each route adapter.
+- `CatalogBookingButton.jsx` is the only new client boundary and delegates to `UiDialogsProvider`; it does not own another booking state or submission path.
+- `CatalogHero.module.scss` and `CatalogHub.module.scss` are scoped to migrated hubs. Do not move these rules into global CSS or retrofit the protected advertising landing with them.
+- iPhone maps directly to the approved redesign template. General phone, tablet, and computer hubs adapt the same pattern because the reference repository does not contain dedicated hub templates for those routes.
+
 ## Target file tree
 
 ```text

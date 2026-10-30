@@ -1,11 +1,10 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 
 import Services from '@sections/services/Services';
 import Process from '@sections/process/Process';
 import Faq from '@sections/faq/Faq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
 import BrandList from '@sections/brand-list/BrandList';
 import Reviews from '@sections/reviews/Reviews';
 
@@ -13,7 +12,7 @@ import {
   getComputerPopularServicesTitle,
 } from '@sections/services/services.i18n';
 
-import s from './DatoruCategory.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
 
 export function pickLocalized(value, locale = 'lv', fallback = '') {
   if (value == null) return fallback;
@@ -215,22 +214,19 @@ export default function ComputerRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
-        scrollCta={strings.scrollCta}
+        image={heroImage}
+        imageAlt={strings.heroAlt}
+        bodyHtml={safeHeroHtml}
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
       />
 
       <main className={s.main}>
-        <DeviceHero
-          image={heroImage}
-          alt={strings.heroAlt}
-          focal="right"
-          className="category"
-          bodyHtml={safeHeroHtml}
-        />
-
         <section className={s.section} aria-labelledby="computers-intro-h2">
           <div className={s.container}>
             <h2 id="computers-intro-h2" className={s.h2}>

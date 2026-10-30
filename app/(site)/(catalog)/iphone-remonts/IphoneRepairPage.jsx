@@ -1,4 +1,4 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 import DeviceGrid from '@/_components/sections/device-grid/DeviceGrid';
 import Reviews from '@/_components/sections/reviews/Reviews';
 import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
@@ -14,9 +14,7 @@ import IphoneRepairDecisionSection from '@/_components/page-sections/iphone-remo
 import WhyUs from '@/_components/sections/why-us/WhyUs';
 
 import Faq from '@sections/faq/Faq';
-import DeviceHero from '@sections/device-hero/DeviceHero';
-
-import s from '@styles/Catalog.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
@@ -67,21 +65,19 @@ export default function IphoneRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={strings.scrollCta}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        priority
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
       />
 
+      <main className={s.hub}>
       <QuickFacts variant="iphone" locale={locale} />
 
       <section className={`${s.section} ${s.introSection}`}>
@@ -144,6 +140,7 @@ export default function IphoneRepairPage({
       {page.sections?.hasConvertBand && (
         <FinalCta locale={locale} variant="iphone" />
       )}
+      </main>
     </>
   );
 }
