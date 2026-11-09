@@ -124,6 +124,8 @@
 .shopSwitch:hover .switchTrack span, .shopSwitch:focus-visible .switchTrack span { transform: translateX(18px); background: #061016; }
 .language { display: inline-flex; }
 .contactHeader {
+  position: relative;
+  contain: paint;
   color: #47c6e2 !important;
   border-color: rgba(71, 198, 226, .5) !important;
   background: transparent !important;
