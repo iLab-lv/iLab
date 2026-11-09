@@ -1,50 +1,86 @@
-.shell {
-  --margin: var(--service-margin);
-  width: 100%;
-  max-width: var(--service-container);
-  margin-inline: auto;
-  padding-inline: var(--margin);
-  font-family: var(--service-font);
-}
-
-.crumbs { padding-block: 22px; border-bottom: 1px solid var(--service-hairline); }
-.crumbs ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; color: var(--service-ink-3); font: 11px/1.4 var(--service-mono); text-transform: uppercase; letter-spacing: .1em; }
-.crumbs li + li::before { content: '/'; margin-right: 8px; }
+.shell { width: 100%; max-width: var(--service-container); margin-inline: auto; padding-inline: var(--service-margin); font-family: var(--service-font); }
+.crumbs { padding-block: clamp(32px, 4vw, 60px) 16px; }
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; padding: 0; list-style: none; color: var(--service-ink-3); font: 400 var(--service-tech-size)/1.55 var(--service-mono); text-transform: uppercase; letter-spacing: .14em; }
+.crumbs li + li::before { content: '/'; margin-right: 12px; }
+.crumbs li:last-child { color: var(--service-ink-2); }
 .crumbs a { color: inherit; text-decoration: none; }
-.crumbs a:hover { color: var(--service-signal); }
+.crumbs a:hover { color: var(--service-ink); }
+/* Final pages.css + inner-polish.css split hero, shared by migrated families. */
+.hero { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--service-gutter); row-gap: clamp(56px, 7vw, 104px); align-items: center; padding-block: var(--service-hero-top) var(--service-hero-bottom); }
+.copy { position: relative; z-index: 2; grid-column: 1 / -1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+.copy > * { min-width: 0; }
+.copy h1 { max-width: 12ch; margin: 0; color: var(--service-ink); font: 600 var(--service-display-size)/var(--service-display-leading) var(--service-font); font-variation-settings: 'SHRP' 100; letter-spacing: var(--service-display-tracking); overflow-wrap: break-word; }
+.lead { max-width: 54ch; margin: 0; color: var(--service-ink); font-size: var(--service-lead-size); line-height: 1.45; }
+.body { max-width: 54ch; color: var(--service-ink-3); font-size: var(--service-small-size); line-height: 1.5; }
+.body p { margin: 0; color: inherit; font: inherit; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin: 0; color: var(--service-ink); font: 400 var(--service-body-size)/1.55 var(--service-font); }
+.link { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: text-decoration-color 150ms; }
+.link:hover { text-decoration-color: var(--service-signal); }
+.visual { position: relative; z-index: 1; grid-column: 1 / -1; grid-row: auto; align-self: stretch; display: grid; min-width: 0; min-height: 480px; aspect-ratio: 4 / 5; margin: 0; overflow: hidden; border-left: 1px solid var(--service-hairline); background: var(--service-paper); }
+.visual img { width: 100%; height: 100%; min-height: 0; display: block; object-fit: cover; filter: saturate(.8) contrast(1.05); }
+.placeholder { place-items: center; padding: 32px; color: var(--service-ink-3); font: 400 var(--service-micro-size)/1.55 var(--service-font); text-align: center; }
+/* Long display words may paint over the image, as in the homepage hero.
+   Supporting copy stays inside the shrinkable text column. */
+@media (min-width: 1024px) { .copy { grid-column: 1 / 8; } .hero .copy h1 { overflow-wrap: normal; } .visual { grid-column: 8 / 13; grid-row: 1; min-height: 620px; } }
+@media (max-width: 767px) { .visual { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .link { transition: none; } }
 
-.hero { display: grid; border-bottom: 1px solid var(--service-hairline); }
-.copy { min-width: 0; display: grid; align-content: center; gap: 24px; padding-block: clamp(56px, 8vw, 112px); }
-.eyebrow { margin: 0; color: var(--service-signal); font: 11px/1.4 var(--service-mono); text-transform: uppercase; letter-spacing: .14em; }
-.copy h1 { max-width: 12ch; margin: 0; color: var(--service-ink); font-size: clamp(46px, 7vw, 104px); font-weight: 600; line-height: .9; letter-spacing: -.055em; }
-.lead { max-width: 50ch; margin: 0; color: var(--service-ink-2); font-size: clamp(18px, 2vw, 22px); line-height: 1.45; }
-.body { max-width: 58ch; color: var(--service-ink-2); font-size: 15px; line-height: 1.55; }
-.body p { margin: 0; }.body strong { color: var(--service-ink); font-weight: 500; }
-.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin: 8px 0 0; }
-.primary { min-height: 52px; padding-inline: 24px; border: 1px solid var(--service-signal); background: var(--service-signal); color: var(--service-on-signal); font: 500 15px var(--service-font); cursor: pointer; }
-.primary:hover { background: var(--service-ink); border-color: var(--service-ink); color: var(--service-paper); }
-.link { min-height: 48px; display: inline-flex; align-items: center; border-bottom: 1px solid var(--service-ink-2); color: var(--service-ink); text-decoration: none; }
-.link:hover { color: var(--service-signal); border-color: var(--service-signal); }
-.visual { min-width: 0; min-height: 440px; margin: 0; overflow: hidden; background: var(--service-paper-2); }
-.visual img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(.82) contrast(1.04); }
-.placeholder { display: grid; place-items: center; padding: 32px; color: var(--service-ink-3); font: 11px/1.5 var(--service-mono); letter-spacing: .14em; text-align: center; text-transform: uppercase; }
+/* Hub-only composition: the reference includes the service facts in this grid. */
+.hub .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
+.hub .visual { aspect-ratio: 4 / 5; }
+.hub .visual img { width: auto; min-width: 100%; max-width: none; aspect-ratio: 4 / 5; }
+@media (min-width: 1024px) { .hub .visual { box-sizing: content-box; width: calc(100% - 1px); aspect-ratio: 4 / 5; } }
+.hubBody { grid-column: 1 / -1; max-width: 68ch; }
+.hub .facts, .brand .facts { grid-column: 1 / -1; min-width: 0; }
+.facts > section { padding: 0; border: 0; background: transparent; overflow: visible; }
+.facts > section::before { content: none; }
+.facts > section > div { max-width: none; margin: 0; padding: 0; }
+.facts > section:not([data-quick-trust]) > div > div { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--service-gutter); }
+.facts > section:not([data-quick-trust]) > div > div > div { display: block; min-height: 0; padding: 12px 0 0; border: 0; border-top: 1px solid var(--service-ink-2); border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; }
+.facts > section:not([data-quick-trust]) > div > div > div > span:first-child { display: none; }
+.facts > section:not([data-quick-trust]) > div > div > div > span:last-child { color: var(--service-ink); font-size: var(--service-small-size); line-height: 1.4; font-weight: 500; }
+@media (max-width: 1023px) { .hub .visual { min-height: 480px; } .facts > section:not([data-quick-trust]) > div > div { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .hub .visual { min-height: 0; } .facts > section:not([data-quick-trust]) > div > div { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-@media (min-width: 1024px) {
-  .hero { grid-template-columns: minmax(0, 7fr) minmax(360px, 5fr); }
-  .copy { min-height: 680px; padding-right: clamp(48px, 6vw, 96px); }
-  .visual { min-height: 680px; }
-}
+/* The brand template keeps its supporting paragraph within the hero copy. */
+.brand .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
+.brand .copy h1 > span { display: block; }
+.brand .visual { align-self: start; box-sizing: content-box; width: calc(100% - 1px); aspect-ratio: 4 / 5; }
+.brand .visual img { width: auto; min-width: 100%; max-width: none; aspect-ratio: 4 / 5; }
+.brand .body strong { color: inherit; font-weight: 500; }
 
-@media (max-width: 1023px) {
-  .visual { aspect-ratio: 16 / 10; min-height: 0; }
-}
+/* Model-only composition. The device photographs remain uncropped and retain
+   their real intrinsic dimensions rather than adopting reference placeholders. */
+.model .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
+.model .body { display: grid; gap: 16px; }
+.model .body a { color: inherit; text-underline-offset: 4px; }
+.model .visual { width: 100%; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); aspect-ratio: 1; }
+.model .visual img { min-width: 0; width: 100%; height: 100%; object-fit: contain; filter: none; max-width: 100%; }
+.model .facts { grid-column: 1 / -1; min-width: 0; }
+.model .facts strong { display: block; color: var(--service-ink); font-size: var(--service-body-size); font-weight: 550; line-height: 1.2; }
+.model .facts strong + span { display: block; margin-top: 5px; color: var(--service-ink-2); font-size: var(--service-small-size); font-weight: 400; line-height: 1.35; }
+.modelSecondary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border: 1px solid var(--service-hairline); color: var(--service-ink); text-decoration: none; font-weight: 500; }
+.modelSecondary:hover { border-color: var(--service-ink); background: var(--service-paper-2); }
+.model :focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+@media (max-width: 1023px) { .model .visual { aspect-ratio: 16 / 9; min-height: 480px; } }
+@media (max-width: 767px) { .model .visual { min-height: 0; } }
 
-@media (max-width: 767px) {
-  .copy h1 { font-size: clamp(44px, 14vw, 64px); }
-  .body { display: none; }
-  .visual { margin-inline: calc(-1 * var(--margin)); aspect-ratio: 4 / 5; }
-}
+/* Repair-service template opt-in: real square repair imagery, full copy before
+   actions, and the existing service facts within the approved split grid. */
+.service .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
+.service .copy h1 > span { display: block; }
+.service .body { display: grid; gap: 16px; }
+.service .body a { color: inherit; text-underline-offset: 4px; }
+.service .visual { width: 100%; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); aspect-ratio: var(--service-repair-image-ratio, 1); }
+.service .visual img { display: block; width: 100%; min-width: 0; max-width: 100%; height: 100%; object-fit: cover; filter: none; }
+.service .facts { grid-column: 1 / -1; min-width: 0; }
+.service .facts strong { display: block; color: var(--service-ink); font-size: var(--service-body-size); font-weight: 550; line-height: 1.2; }
+.service .facts strong + span { display: block; margin-top: 5px; color: var(--service-ink-2); font-size: var(--service-small-size); font-weight: 400; line-height: 1.35; }
+.service :focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+@media (max-width: 1023px) { .service .visual { aspect-ratio: var(--service-repair-image-ratio, 1); min-height: 480px; } }
+@media (max-width: 767px) { .service .visual { min-height: 0; } }
 
-@media (prefers-reduced-motion: reduce) {
-  .primary, .link { transition: none; }
-}
+/* Keep the new isolated devices complete inside the existing hero frames. */
+.visual img[src='/images/heroes/dyson-repair-r75d.webp'],
+.visual img[src='/images/heroes/computer-repair-r75d.webp'],
+.visual img[src='/images/heroes/camera-repair-r75d.webp'] { object-fit: contain; object-position: center; }

@@ -1,11 +1,16 @@
-import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import { dedupeAndSort } from '@/app/(site)/components/device-grid/deviceGrid.groups';
+import BrandHero from '@/_components/sections/catalog-brand/BrandHero';
+import BrandServices from '@/_components/sections/catalog-brand/BrandServices';
+import brand from '@/_components/sections/catalog-brand/CatalogBrand.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Services from '@sections/services/Services';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import Reviews from '@sections/reviews/Reviews';
+import Reviews from '@/app/_components/sections/reviews/ServiceReviews';
 
 import {
   LuTabletSmartphone,
@@ -16,7 +21,6 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-import c from '@styles/Catalog.module.scss';
 
 export const CATEGORY_KEY = 'plansetdatoru-remonts';
 
@@ -336,8 +340,8 @@ export default function TabletBrandPage({
   }
 
   return (
-    <>
-      <CatalogHero
+    <div data-catalog-brand>
+      <BrandHero
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
@@ -347,27 +351,38 @@ export default function TabletBrandPage({
         targetId="brand-modeli"
         targetLabel={strings.scrollCta?.label}
         bodyHtml={strings.heroHtml}
-      />
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("tablet", locale)} />
+      </BrandHero>
 
-      <section className={c.section} aria-labelledby="tablet-brand-intro-h2">
-        <div className={c.container}>
-          <h2 id="tablet-brand-intro-h2" className={c.h2}>
+      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="tablet-brand-intro-h2">
+        <header>
+          <h2 id="tablet-brand-intro-h2">
             {strings.introTitle}
           </h2>
 
+        </header>
+        <div className={brand.prose}>
           <p
-            className={c.intro}
             dangerouslySetInnerHTML={{ __html: strings.introLead }}
           />
 
           <p
-            className={c.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
           />
         </div>
       </section>
 
+      <BrandServices
+        id="tablet-brand-services"
+        title={strings.servicesHeading}
+        items={popularServices}
+        locale={locale}
+        modelAction={dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
+      />
+
       <DeviceSelector
+        variant="brand"
         id="brand-modeli"
         locale={locale}
         title={strings.modelGridHeading}
@@ -383,8 +398,8 @@ export default function TabletBrandPage({
       />
 
       {brandTabletList.length === 0 && (
-        <section className={c.section}>
-          <div className={c.container}>
+        <section className={`${skin.section} ${brand.note}`}>
+          <div>
             <p style={{ opacity: 0.8, marginTop: 0 }}>
               {strings.noModels}
             </p>
@@ -392,30 +407,14 @@ export default function TabletBrandPage({
         </section>
       )}
 
-      {!!popularServices.length && (
-        <section className={c.section} aria-labelledby="tablet-popular-services-h2">
-          <div className={c.container}>
-            <h2 id="tablet-popular-services-h2" className={c.h2}>
-              {strings.servicesHeading}
-            </h2>
-
-            <Services
-              id="tablet-brand-services"
-              title=""
-              items={popularServices}
-            />
-          </div>
-        </section>
+      {page.sections?.hasReviews && (
+        <Reviews locale={locale} />
       )}
 
-      {page.sections?.hasReviews && <Reviews locale={locale} />}
-
-      <div id="process-h2" className={c.anchorTarget} />
+      <div id="process-h2" className={brand.anchor} />
 
       {page.sections?.hasProcess && (
-        <section className={c.section} aria-labelledby="process-h2">
-          <div className={c.container}>
-            <Process
+        <Process
               id="process"
               title={strings.processTitle}
               steps={processSteps}
@@ -423,19 +422,11 @@ export default function TabletBrandPage({
               variant="cards"
               locale={locale}
             />
-          </div>
-        </section>
-      )}
-
-      {page.sections?.hasWhy && (
-        <section className={c.section}>
-          <Why locale={locale} />
-        </section>
       )}
 
       {hasVisibleFaq && (
-        <section className={c.section} aria-labelledby="faq-h2">
-          <div className={c.container}>
+        <div data-service-section="faq" className={skin.block}>
+
             <Faq
               id="tablet-brand-faq"
               title={faqTitle}
@@ -444,15 +435,16 @@ export default function TabletBrandPage({
               variant="accordion"
               locale={locale}
             />
-          </div>
-        </section>
+        </div>
       )}
 
+      <QuickContactsSection locale={locale} />
+
       {page.sections?.hasConvertBand && (
-        <section className={c.section}>
+        <div className={`${skin.block} ${skin.closing} ${skin.genericClosing}`}><section>
           <ConvertBand locale={locale} />
-        </section>
+        </section></div>
       )}
-    </>
+    </div>
   );
 }

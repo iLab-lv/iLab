@@ -1,11 +1,13 @@
 import Link from 'next/link';
 
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import Process from '@sections/process/Process';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
+import Process from '@/app/_components/sections/process/Process';
 import Why from '@sections/why/Why';
-import Locations from '@sections/locations/Locations';
-import Reviews from '@sections/reviews/Reviews';
-import Faq from '@sections/faq/Faq';
+import FullLocations from '@/_components/sections/full-locations/FullLocations';
+import Reviews from '@/app/_components/sections/reviews/ServiceReviews';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import {
@@ -14,7 +16,7 @@ import {
   localizedServicePath,
 } from '@/lib/routes/localizedPath';
 
-import s from './AboutPage.module.scss';
+import s from '@/_components/sections/service-recovery/RemainingPages.module.scss';
 
 export function getAboutStrings(locale = 'lv') {
   const pagePath = localizedInfoPath('par-mums', locale);
@@ -345,8 +347,9 @@ export default function AboutPage({
   const strings = labels || getAboutStrings(locale);
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="par-mums" className={recovery.page}>
+      <InfoHero locale={locale} image="/images/heroes/about-locations-r75d.webp"
+        secondary={{ href: '#locations', label: strings.locationsAnchorTitle }}
         title={strings.headerTitle}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
@@ -399,9 +402,9 @@ export default function AboutPage({
         </div>
       </section>
 
-      <Why locale={locale} />
+      <ServiceBlock kind="benefits"><Why locale={locale} /></ServiceBlock>
 
-      <Process locale={locale} />
+      <Process layout="sticky" locale={locale} />
 
       <section
         className={s.locationsTeaser}
@@ -429,26 +432,27 @@ export default function AboutPage({
         </div>
       </section>
 
-      <Locations
+      <FullLocations
         locale={locale}
         locations={siteSettings?.locations || []}
         pinPositions={siteSettings?.pinPositions || {}}
+        defaultHours={siteSettings?.hours || []}
       />
 
-      <Reviews locale={locale} />
+      <Reviews variant="full" locale={locale} />
 
       {faqItems.length > 0 ? (
-        <Faq
+        <ServiceBlock kind="faq"><Faq
           id="about-faq"
           title={faqTitle || strings.faqTitle}
           items={faqItems}
           headingLevel={2}
           variant="accordion"
           locale={locale}
-        />
+        /></ServiceBlock>
       ) : null}
 
-      <ConvertBand locale={locale} />
-    </>
+      <ServiceBlock kind="genericClosing"><ConvertBand locale={locale} /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

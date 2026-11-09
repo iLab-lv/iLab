@@ -11,14 +11,21 @@ test('Dyson and photo families use the approved editorial presentation', async (
     read('app/_components/page-sections/photo-repair/PhotoRepairSections.module.scss'),
   ]);
 
-  assert.match(dyson, /CatalogHero/);
-  assert.match(dyson, /variant="editorial"/);
+  assert.match(dyson, /ServiceHero/);
+  assert.match(dyson, /ServiceRecovery/);
+  assert.match(dyson, /page\?\.sections\?\.hasReviews/);
+  assert.match(dyson, /HubLocations locale=\{locale\}/);
+  assert.match(dyson, /popular-repairs\/RepairServices/);
+  assert.match(dyson, /variant="informational"/);
   assert.match(dyson, /ConvertBand/);
-  assert.match(photo, /CatalogHero/);
+  assert.match(photo, /ServiceHero/);
+  assert.match(photo, /ServiceRecovery/);
+  assert.match(photo, /reviewsSummary=\{reviewsSummary\}/);
   assert.match(photo, /LensRepairSection/);
   assert.match(photo, /CameraBrandRepairSection/);
   assert.match(photo, /FinalCta/);
-  assert.doesNotMatch(photoStyles, /gradient|box-shadow|backdrop-filter|border-radius/);
+  assert.doesNotMatch(photoStyles, /gradient|box-shadow|backdrop-filter/);
+  assert.doesNotMatch(photoStyles, /border-radius:\s*[^0\s][^;]*/);
 });
 
 test('LV and RU route adapters retain production data, metadata, and structured data', async () => {

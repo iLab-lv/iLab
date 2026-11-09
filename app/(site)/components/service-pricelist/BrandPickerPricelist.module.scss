@@ -1,43 +1,7 @@
-@use "@styles/tokens" as *;
+@use '@styles/tokens' as *;
 
-.brandTabs {
-  display: flex;
-  gap: $space-sm;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: $space-md;
-}
-
-.tab {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  padding: 6px 2px;
-  cursor: pointer;
-
-  font-size: $font-size-lg;
-  font-weight: $font-weight-medium;
-  line-height: 1.2;
-
-  color: $color-text-2;               // inactive text
-  border-bottom: $border-thick solid transparent;
-
-  transition: color $dur-base $ease-std, border-color $dur-base $ease-std,
-    opacity $dur-base $ease-std;
-
-  &:hover {
-    color: $color-text;
-  }
-
-  &:focus-visible {
-    outline: $focus-ring-width solid $focus-ring-color;
-    outline-offset: $focus-ring-offset;
-    border-radius: $radius-sm;
-  }
-}
-
-.active {
-  color: $color-accent;                // ✅ accent active
-  border-bottom-color: $color-accent;  // ✅ underline accent
-  font-weight: $font-weight-semibold;
-}
+.brandTabs { display:flex; flex-wrap:wrap; align-items:center; gap:0; margin-bottom:$space-lg; }
+.tab { min-height:44px; appearance:none; padding:8px $space-md; border:$border-thin solid rgba(255,255,255,.16); color:$color-text-2; background:transparent; cursor:pointer; font-size:$font-size-sm; font-weight:$font-weight-medium; line-height:1.2; }
+.tab:hover { color:$color-text; border-color:rgba(255,255,255,.32); }
+.tab:focus-visible { outline:2px solid $color-text; outline-offset:3px; }
+.active { color:#001012; border-color:$color-accent; background:$color-accent; font-weight:$font-weight-semibold; }

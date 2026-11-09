@@ -169,6 +169,11 @@ function getDedicatedCategoryKeyFromPath(path) {
   return normalizeKey(firstSegment);
 }
 
+function getDedicatedSuffix(path) {
+  const segments = String(path || '').split('/').filter(Boolean);
+  return segments.length > 1 ? '/' + segments.slice(1).join('/') : '';
+}
+
 function buildBrandPathPair(category, brand) {
   const brandKey = getBrandKey(brand);
   const categoryKey = getBrandCategoryKey(category);
@@ -185,8 +190,8 @@ function buildBrandPathPair(category, brand) {
     if (!dedicatedCategoryKey) return null;
 
     return {
-      lvPath: localizedCategoryPath(dedicatedCategoryKey, 'lv'),
-      ruPath: localizedCategoryPath(dedicatedCategoryKey, 'ru'),
+      lvPath: localizedCategoryPath(dedicatedCategoryKey, 'lv') + getDedicatedSuffix(route.dedicatedHubPath),
+      ruPath: localizedCategoryPath(dedicatedCategoryKey, 'ru') + getDedicatedSuffix(route.dedicatedHubPath),
     };
   }
 

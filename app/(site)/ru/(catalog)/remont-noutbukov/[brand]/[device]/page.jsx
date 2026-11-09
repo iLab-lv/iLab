@@ -18,9 +18,10 @@ import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
-import { buildCategoryHref, buildServiceHref } from '@/lib/routes/routeI18n';
+import { buildCategoryHref } from '@/lib/routes/routeI18n';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
+import { getModelPriceCta } from '@/_components/sections/device-detail/modelPageHeader';
 
 import {
   LuBatteryCharging,
@@ -36,12 +37,6 @@ export const revalidate = 0;
 const locale = 'ru';
 
 const CATEGORY_KEY = 'datoru-remonts';
-
-export const pageHeader = {
-  scrollCta: { label: 'Смотреть цены', targetId: 'cenas' },
-};
-
-export const headerProps = pageHeader;
 
 function normalizeBrandSlug(value = '') {
   return String(value || '').trim().toLowerCase();
@@ -77,7 +72,6 @@ const labels = {
   defaultHeaderTitle: 'Ремонт компьютеров',
   defaultHeaderLead:
     'Ремонт компьютеров в Риге - замена аккумулятора и дисплея, восстановление после попадания жидкости, профилактика, замена клавиатуры и touchpad с быстрой диагностикой, качественными деталями и гарантией.',
-  pricesCtaLabel: 'Смотреть цены',
   metaFallbackTitle: (brandLabel) => `${brandLabel} ремонт компьютеров | iLab`,
   metaFallbackDescriptionModel: (name) =>
     `${name} ремонт в Риге: замена аккумулятора и дисплея, восстановление после попадания жидкости, профилактика, клавиатура, touchpad. Быстрая диагностика, честные цены и гарантия.`,
@@ -113,54 +107,34 @@ const processSteps = [
 ];
 
 function getModelServices() {
-  const categoryPath = getCategoryPath();
-
   return [
     {
       title: 'Замена аккумулятора',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'baterijas-maina') ||
-        `${categoryPath}/baterijas-maina`,
       text: 'если заряд быстро падает, компьютер выключается или не работает без зарядного устройства.',
       icon: LuBatteryCharging,
     },
     {
       title: 'Замена дисплея',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'ekrana-maina') ||
-        `${categoryPath}/ekrana-maina`,
       text: 'трещины, полосы, тёмные пятна, мерцание или отсутствие изображения.',
       icon: LuMonitor,
     },
     {
       title: 'Восстановление после попадания жидкости',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'udens-bojajumu-remonts') ||
-        `${categoryPath}/udens-bojajumu-remonts`,
       text: 'диагностика и восстановление после попадания жидкости, если ремонт возможен.',
       icon: LuDroplets,
     },
     {
       title: 'Профилактика и техническое обслуживание',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'profilakse-tirisana') ||
-        `${categoryPath}/profilakse-tirisana`,
       text: 'чистка, замена термопасты, проверка и стабильная работа.',
       icon: LuWrench,
     },
     {
       title: 'Замена клавиатуры',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'tastaturas-maina') ||
-        `${categoryPath}/tastaturas-maina`,
       text: 'не работают клавиши, залипание, следы жидкости или физические повреждения.',
       icon: LuKeyboard,
     },
     {
       title: 'Замена touchpad',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'touchpad-maina') ||
-        `${categoryPath}/touchpad-maina`,
       text: 'не реагирует, курсор двигается сам, не работает клик или есть физические повреждения.',
       icon: LuMouse,
     },
@@ -334,9 +308,7 @@ async function getComputerDevicePageData({ brand, device }) {
     headerTitle,
     headerLead,
     headerCrumbs: breadcrumbs,
-    headerScrollCta: priceItems.length
-      ? { label: labels.pricesCtaLabel, targetId: 'cenas' }
-      : null,
+    headerScrollCta: getModelPriceCta(locale, priceItems.length > 0),
 
     heroImage: computerDevice.image,
     heroAlt: `${modelName} ${labels.heroAltSuffix}`,

@@ -1,0 +1,22 @@
+.section[data-quick-contacts] {
+  box-sizing: border-box; width: 100%; max-width: 1440px; margin-inline: auto; padding: 48px var(--service-margin); border-top: 1px solid var(--service-hairline);
+  color: var(--service-ink); background: var(--service-paper); font: 400 17px/1.55 var(--service-font);
+  *,*::before,*::after { box-sizing: border-box; }
+  p { margin: 0; } a { color: inherit; text-decoration: none; } button { color: inherit; font-family: inherit; cursor: pointer; }
+  :is(a,button):focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+  .strip { display: grid; }
+  .strip > article { min-width: 0; display: grid; align-content: start; gap: 12px; padding: 24px 0; border-top: 1px solid var(--service-hairline); }
+  .branchHead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px;
+    >span,small { color: var(--service-ink-3); font: 11px/1.5 var(--service-mono); letter-spacing: .14em; text-transform: uppercase; }
+    strong { font-size: 17px; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; font-variation-settings: 'SHRP' 60; }
+  }
+  .status { display: inline-flex; align-items: center; gap: 10px; color: var(--service-ink); font: 11px/1.55 var(--service-mono); letter-spacing: .1em; text-transform: uppercase; i { width: 6px; height: 6px; flex: none; background: var(--service-ink-3); } i.isOpen { background: var(--service-signal); } }
+  .row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; >span { color: var(--service-ink-2); font-size: 15px; line-height: 1.5; } }
+  .phone { font-size: 20px; line-height: 1.3; font-weight: 500; font-variation-settings: 'SHRP' 100; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .email { width: fit-content; min-height: 28px; color: var(--service-ink-2); font-size: 14px; overflow-wrap: anywhere; }
+  .email:hover,.phone:hover { color: var(--service-signal); }
+  .availability { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .hours { flex: none; min-height: 44px; padding: 0 0 0 16px; border: 0; border-left: 2px solid var(--service-signal); background: transparent; font-size: 15px; font-weight: 500; } .hours:hover { color: var(--service-signal); }
+  @media(min-width:768px) { .strip { grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 64px; } .strip > article:nth-child(2) { border-left: 1px solid var(--service-hairline); padding-left: 32px; margin-left: -32px; } }
+  @media(min-width:1024px) { padding-block: 64px; }
+}

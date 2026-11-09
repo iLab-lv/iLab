@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import s from './LanguageSwitcher.module.scss';
 import { ROUTE_TRANSLATIONS } from '@/lib/routes/routeTranslations';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
+import { useUiDialogs } from '../providers/UiDialogsProvider';
 
 function stripTrailingSlash(pathname) {
   if (!pathname || pathname === '/') return '/';
@@ -28,6 +29,11 @@ function buildSegmentMaps() {
 }
 
 const { lvToRu, ruToLv } = buildSegmentMaps();
+
+const CATALOG_HUB_PATHS = new Set([
+  '/iphone-remonts', '/telefonu-remonts', '/plansetdatoru-remonts', '/datoru-remonts',
+  '/ru/remont-iphone', '/ru/remont-telefonov', '/ru/remont-planshetov', '/ru/remont-noutbukov',
+]);
 
 function splitLocaleFromPath(pathname) {
   const cleanPath = stripTrailingSlash(pathname);
@@ -88,6 +94,7 @@ function getLocalizedPath(pathname, nextLocale) {
 }
 
 export default function LanguageSwitcher({ onChange }) {
+  const { serviceRedesign } = useUiDialogs();
   const pathname = usePathname() || '/';
   const router = useRouter();
 
@@ -101,7 +108,20 @@ export default function LanguageSwitcher({ onChange }) {
     onChange?.(nextLocale);
 
     if (href !== pathname) {
-      router.push(href);
+      // Service pages share a server-owned localized shell. A full navigation also
+      // refreshes its document language, header, footer and dialog copy.
+      if (serviceRedesign || CATALOG_HUB_PATHS.has(stripTrailingSlash(pathname)) || document.querySelector('[data-catalog-brand]') || document.querySelector('[data-catalog-model]')) {
+        if (serviceRedesign) {
+          const request = new CustomEvent('ilab:before-navigate', {
+            cancelable: true,
+            detail: { href, navigate: destination => window.location.assign(destination) },
+          });
+          if (!window.dispatchEvent(request)) return;
+        }
+        window.location.assign(href);
+      } else {
+        router.push(href);
+      }
     }
   };
 

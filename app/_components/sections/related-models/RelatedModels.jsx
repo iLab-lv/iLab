@@ -35,13 +35,13 @@ function getRelated(currentDevice, devices, baseHref, locale) {
     }));
 }
 
-export default function RelatedModels({ id = 'related-models', currentDevice, devices = [], baseHref, locale = 'lv' }) {
+export default function RelatedModels({ id = 'related-models', currentDevice, devices = [], baseHref, locale = 'lv', variant }) {
   const copy = getRelatedModelsCopy(locale);
   const models = getRelated(currentDevice, devices, baseHref, locale);
   if (!models.length) return null;
 
   return (
-    <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
+    <section id={id} className={`${s.section} ${variant === 'model' ? s.model : ''}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <header className={s.header}>
           <h2 id={`${id}-title`}>{copy.titleStart}<span>{copy.titleAccent}</span></h2>

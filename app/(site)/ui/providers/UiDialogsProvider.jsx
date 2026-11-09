@@ -27,13 +27,25 @@ export function UiDialogsProvider({
   bookHref = '/pieraksties',
   locale,
   siteSettings,
+  serviceRedesign = false,
+  serviceClassName = '',
 }) {
   const pathname = usePathname() || '/';
 
   const resolvedLocale = locale || getNavLocaleFromPathname(pathname);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(false);
+  const setServiceNavigationOpen = (value) => {
+    setNavigationOpen((current) => typeof value === 'function' ? value(current) : value);
+    setModalOpen(false);
+  };
+  const rememberOpener = (openerEl) => {
+    if (!serviceRedesign || !modalOpen) lastOpenerRef.current = openerEl || null;
+    if (serviceRedesign) setNavigationOpen(false);
+  };
   const [activePane, setActivePane] = useState(null);
+  const [bookingContext, setBookingContext] = useState({ values: {}, version: 0 });
 
   const [selectedLocId, setSelectedLocId] = useState(null);
 
@@ -72,7 +84,7 @@ export function UiDialogsProvider({
   const bookOpen = modalOpen && activePane === 'book';
 
   const openLocator = (openerEl) => {
-    lastOpenerRef.current = openerEl || null;
+    rememberOpener(openerEl);
     setActivePane('locator');
     setModalOpen(true);
   };
@@ -82,7 +94,7 @@ export function UiDialogsProvider({
   };
 
   const openContact = (openerEl, locId = null) => {
-    lastOpenerRef.current = openerEl || null;
+    rememberOpener(openerEl);
 
     if (locId !== undefined && locId !== null) {
       setSelectedLocId(locId);
@@ -96,8 +108,11 @@ export function UiDialogsProvider({
     if (activePane === 'sazinaties') setModalOpen(false);
   };
 
-  const openBook = (openerEl) => {
-    lastOpenerRef.current = openerEl || null;
+  const openBook = (openerEl, initialValues) => {
+    rememberOpener(openerEl);
+    if (initialValues) {
+      setBookingContext((current) => ({ values: initialValues, version: current.version + 1 }));
+    }
     setActivePane('book');
     setModalOpen(true);
   };
@@ -107,7 +122,8 @@ export function UiDialogsProvider({
   };
 
   const openContactsFor = (locId, openerEl) => {
-    lastOpenerRef.current = openerEl || lastOpenerRef.current;
+    if (serviceRedesign) rememberOpener(openerEl);
+    else lastOpenerRef.current = openerEl || lastOpenerRef.current;
     setSelectedLocId(locId || null);
 
     if (modalOpen) {
@@ -143,6 +159,7 @@ export function UiDialogsProvider({
             locale={resolvedLocale}
             locations={locations}
             pinPositions={pinPositions}
+            defaultHours={defaultHours}
             onSelectLocation={(locId) => openContactsFor(locId)}
           />
         );
@@ -160,6 +177,8 @@ export function UiDialogsProvider({
       case 'book':
         return (
           <PierakstiesPanel
+            key={bookingContext.version}
+            initialValues={bookingContext.values}
             locale={resolvedLocale}
             locations={locations}
             onClose={onClose}
@@ -173,6 +192,10 @@ export function UiDialogsProvider({
   };
 
   const api = {
+    serviceRedesign,
+    serviceClassName,
+    navigationOpen,
+    setNavigationOpen: setServiceNavigationOpen,
     locale: resolvedLocale,
     siteSettings,
     locations,
@@ -201,22 +224,28 @@ export function UiDialogsProvider({
     <UiDialogsContext.Provider value={api}>
       {children}
 
-      <div id="locator-panel" hidden aria-hidden="true" />
-      <div id="sazinaties-panel" hidden aria-hidden="true" />
-      <div id="pieraksties-panel" hidden aria-hidden="true" />
+      {!serviceRedesign && <>
+        <div id="locator-panel" hidden aria-hidden="true" />
+        <div id="sazinaties-panel" hidden aria-hidden="true" />
+        <div id="pieraksties-panel" hidden aria-hidden="true" />
+      </>}
 
       {mounted &&
         portalEl &&
         createPortal(
           activePane ? (
-            <FullscreenPanel
-              open={modalOpen}
-              onClose={onClose}
-              paneKey={activePane}
-              paneTitle={paneTitle}
-              closeLabel={resolvedLocale === 'ru' ? 'Закрыть' : 'Aizvērt'}
-              renderPane={renderPane}
-            />
+            <div data-service-redesign={serviceRedesign ? '' : undefined} className={serviceRedesign ? serviceClassName : undefined}>
+              <FullscreenPanel
+                open={modalOpen}
+                openerRef={lastOpenerRef}
+                onClose={onClose}
+                paneKey={activePane}
+                serviceRedesign={serviceRedesign}
+                paneTitle={paneTitle}
+                closeLabel={resolvedLocale === 'ru' ? 'Закрыть' : 'Aizvērt'}
+                renderPane={renderPane}
+              />
+            </div>
           ) : null,
           portalEl
         )}

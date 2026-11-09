@@ -5,7 +5,7 @@ import s from './Button.module.scss';
 
 /**
  * Reusable Button
- * Variants: 'primary' | 'secondary' | 'ghost' | 'ctaChip'
+ * Variants: 'primary' | 'secondary' | 'ghost' | 'ctaChip' | 'whatsapp'
  * Sizes: 'md' | 'lg'
  * Features:
  *  - iconOnly (forces square + circular, hides label; requires aria-label)
@@ -20,6 +20,7 @@ export default function Button({
   size = 'md',
   block = false,
   iconOnly = false,
+  trace = false,
   leadingIcon: LeadingIcon,
   trailingIcon: TrailingIcon,
   chipDir = 'right',
@@ -47,6 +48,7 @@ export default function Button({
     s[variant],
     s[size],
     iconOnly && s.iconOnly,
+    trace && s.traced,
     block && s.block,
     disabled && s.disabled,
     variant === 'ctaChip' && hasLeadingIcon && s.hasIcon,
@@ -70,6 +72,12 @@ export default function Button({
 
   const content = (
     <>
+      {trace && (
+        <svg className={s.trace} aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
+          <rect className={s.traceTrail} x="0" y="0" width="100" height="100" pathLength="100" />
+          <rect x="0" y="0" width="100" height="100" pathLength="100" />
+        </svg>
+      )}
       {IconEl(LeadingIcon)}
       {!iconOnly && <span className={s.label}>{children}</span>}
       {IconEl(TrailingIcon)}

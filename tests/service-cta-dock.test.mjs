@@ -65,15 +65,20 @@ test('service shell uses the redesign header controls and removes legacy fixed c
 });
 
 test('service shell keeps the approved global layout and production-backed footer contracts', async () => {
-  const [layoutStyles, footer, footerStyles, navigation] = await Promise.all([
-    read('app/(site)/Layout.module.scss'),
+  const [foundation, shell, footer, footerStyles, navigation] = await Promise.all([
+    read('app/(site)/serviceFoundation.module.scss'),
+    read('app/(site)/layout.jsx'),
     read('app/(site)/ui/footer/Footer.jsx'),
     read('app/(site)/ui/footer/Footer.module.scss'),
     read('app/(site)/ui/navbar/navigation.config.js'),
   ]);
 
-  assert.match(layoutStyles, /--service-container:\s*1440px/);
-  assert.match(layoutStyles, /--service-margin:\s*96px/);
+  assert.match(foundation, /(?:^|\n)\.scope\s*\{/);
+  assert.match(foundation, /--service-container:\s*1440px/);
+  assert.match(foundation, /--service-margin:\s*96px/);
+  assert.doesNotMatch(foundation, /(?:^|\n)\s*(?::root|body)\s*\{/m);
+  assert.match(shell, /foundation\.scope/);
+  assert.match(shell, /data-service-redesign=""/);
   assert.match(footer, /siteSettings\?\.locations/);
   assert.match(footer, /Object\.entries\(SOCIALS\)/);
   assert.match(footerStyles, /grid-template-columns:\s*repeat\(12/);

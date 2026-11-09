@@ -1,20 +1,23 @@
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
 import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 import DeviceGrid from '@/_components/sections/device-grid/DeviceGrid';
-import Reviews from '@/_components/sections/reviews/Reviews';
-import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
-import PopularServices from '@/_components/sections/popular-services/PopularServices';
-import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
+import Reviews from '@/_components/sections/catalog-hub/HubReviews';
+import PopularServices from '@/_components/sections/catalog-hub/HubPopularServices';
+import RepairProcess from '@/_components/sections/catalog-hub/HubRepairProcess';
 import Guide from '@/_components/sections/guide/Guide';
-import FinalCta from '@/_components/sections/final-cta/FinalCta';
+import FinalCta from '@/_components/sections/catalog-hub/HubFinalCta';
 import IphoneExpertNotes from '@/_components/page-sections/iphone-remonts/expert-notes/IphoneExpertNotes';
-import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
+import IphoneLocationsSection from '@/_components/sections/catalog-hub/HubLocations';
 import IphoneProblemAnswers from '@/_components/page-sections/iphone-remonts/problem-answers/IphoneProblemAnswers';
 import IphoneQualitySection from '@/_components/page-sections/iphone-remonts/quality/IphoneQualitySection';
 import IphoneRepairDecisionSection from '@/_components/page-sections/iphone-remonts/repair-decision/IphoneRepairDecisionSection';
-import WhyUs from '@/_components/sections/why-us/WhyUs';
+import EditorialWhy from '@/_components/sections/why/EditorialWhy';
+import { getEditorialWhyContent } from '@/_components/sections/why/editorialWhy.content';
 
-import Faq from '@sections/faq/Faq';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 
 const CATEGORY_KEY = 'telefonu-remonts';
 const BRAND_KEY = 'apple';
@@ -66,20 +69,23 @@ export default function IphoneRepairPage({
   return (
     <>
       <CatalogHero
+        variant="hub"
         locale={locale}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
         image={heroImage}
+        imageWidth={1800}
+        imageHeight={2000}
         imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
         targetId={strings.scrollCta.targetId}
         targetLabel={strings.scrollCta.label}
-      />
+      >
+        <QuickTrustFacts {...getQuickTrustFacts("iphone", locale)} />
+      </CatalogHero>
 
-      <main className={s.hub}>
-      <QuickFacts variant="iphone" locale={locale} />
-
+      <div className={s.hub}>
       <section className={`${s.section} ${s.introSection}`}>
         <div className={s.container}>
           <h2 className={s.h2}>{strings.introTitle}</h2>
@@ -92,9 +98,9 @@ export default function IphoneRepairPage({
 
       <PopularServices locale={locale} />
 
-      <IphoneProblemAnswers locale={locale} />
+      <div className={`${skin.block} ${skin.problems}`}><IphoneProblemAnswers locale={locale} /></div>
 
-      <IphoneExpertNotes locale={locale} />
+      <div className={`${skin.block} ${skin.expert}`}><IphoneExpertNotes locale={locale} /></div>
 
       <DeviceGrid
         id="iphone-modeli"
@@ -106,41 +112,39 @@ export default function IphoneRepairPage({
         seriesMeta={seriesMeta}
       />
 
-      {page.sections?.hasWhy && <WhyUs locale={locale} variant="iphone" />}
+      {page.sections?.hasWhy && <div className={skin.block} data-service-section="why"><EditorialWhy {...getEditorialWhyContent(locale)} /></div>}
 
       {page.sections?.hasReviews && (
         <Reviews locale={locale} reviewsSummary={reviewsSummary} />
       )}
 
-      <IphoneQualitySection locale={locale} />
+      <div className={`${skin.block} ${skin.quality}`}><IphoneQualitySection locale={locale} /></div>
 
       <IphoneLocationsSection locale={locale} />
 
-      <IphoneRepairDecisionSection locale={locale} />
+      <div className={`${skin.block} ${skin.decision}`}><IphoneRepairDecisionSection locale={locale} /></div>
 
-      {page.sections?.hasProcess && <RepairProcess id="iphone-repair-steps" locale={locale} variant="iphone" backgroundImage="/images/hands-closeup.png" />}
+      {page.sections?.hasProcess && <RepairProcess locale={locale} />}
 
       {page.sections?.hasGuide && (
-        <Guide
+        <div className={`${skin.block} ${skin.guide}`}><Guide
           id="guide"
           locale={locale}
           variant="iphone"
           headingLevel={2}
-        />
+        /></div>
       )}
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
-        <section className={s.section}>
-          <div className={s.container}>
+        <div data-service-section="faq" className={skin.block}>
             <Faq id="iphone-faq" title={faqTitle} items={faqItems} />
-          </div>
-        </section>
+        </div>
       )}
 
       {page.sections?.hasConvertBand && (
-        <FinalCta locale={locale} variant="iphone" />
+        <FinalCta locale={locale} />
       )}
-      </main>
+      </div>
     </>
   );
 }

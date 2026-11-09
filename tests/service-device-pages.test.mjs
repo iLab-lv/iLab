@@ -13,10 +13,13 @@ test('phone, tablet, and computer model pages share one redesigned presentation'
   const shared = await read('app/_components/sections/device-detail/DeviceDetailPage.jsx');
 
   for (const source of wrappers) assert.match(source, /DeviceDetailPage/);
-  assert.match(shared, /CatalogHero/);
+  assert.match(shared, /ModelHero/);
   assert.match(shared, /ModelPriceList/);
   assert.match(shared, /RelatedModels/);
-  assert.match(shared, /placeholderLabel/);
+  const hero = await read('app/_components/sections/device-detail/ModelHero.jsx');
+  assert.match(hero, /CatalogHero/);
+  assert.match(hero, /placeholderLabel/);
+  assert.match(shared, /data-catalog-model/);
 });
 
 test('all six locale route adapters retain dynamic data and add related models', async () => {

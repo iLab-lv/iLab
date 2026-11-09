@@ -1,5 +1,8 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import Faq from '@sections/faq/Faq';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import s from '@styles/Catalog.module.scss';
@@ -25,6 +28,10 @@ export function getBujPageStrings(locale = 'lv') {
         'plansetdatoru-remonts': 'Ремонт планшетов',
         'datoru-remonts': 'Ремонт компьютеров',
         'dyson-remonts': 'Ремонт Dyson',
+        'fotoaparatu-remonts': 'Ремонт фотоаппаратов',
+        'iphone-plates-remonts': 'Ремонт платы iPhone',
+        cenas: 'Цены',
+        contacts: 'Контакты',
         'baterijas-maina': 'Замена батареи',
         'ekrana-maina': 'Замена экрана',
         'uzlades-ligzdas-maina': 'Ремонт разъёма зарядки',
@@ -54,6 +61,10 @@ export function getBujPageStrings(locale = 'lv') {
       'plansetdatoru-remonts': 'Planšetdatoru remonts',
       'datoru-remonts': 'Datoru remonts',
       'dyson-remonts': 'Dyson remonts',
+      'fotoaparatu-remonts': 'Fotoaparātu remonts',
+      'iphone-plates-remonts': 'iPhone plates remonts',
+      cenas: 'Cenas',
+      contacts: 'Kontakti',
       'baterijas-maina': 'Baterijas maiņa',
       'ekrana-maina': 'Ekrāna maiņa',
       'uzlades-ligzdas-maina': 'Uzlādes ligzdas maiņa',
@@ -75,42 +86,57 @@ export default function BujPage({
   breadcrumbs = [],
 }) {
   const strings = labels || getBujPageStrings(locale);
+  const groupTitle = section => section.title === 'contact' ? (locale === 'ru' ? 'Контакты' : 'Kontakti') : section.title;
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="buj" className={recovery.page}>
+      <InfoHero locale={locale}
+        contactPrompt
+        secondary={{ href: locale === 'ru' ? '/ru/ceny' : '/cenas', label: locale === 'ru' ? 'Цены' : 'Cenas' }}
         title={headerTitle || strings.headerTitle}
         lead={headerLead || strings.headerLead}
         crumbs={breadcrumbs}
       />
 
       <section className={s.section} aria-labelledby="buj-faq-groups-h2">
-        <div className={s.container}>
+        <div className={recovery.faqLayout}>
+          <nav className={recovery.faqToc} aria-labelledby="buj-faq-groups-h2">
           <h2 id="buj-faq-groups-h2" className={s.h2}>
             {strings.allQuestionsTitle}
           </h2>
-
+          <ol>{sections.map((section, index) => <li key={section.id || index}><a href={`#buj-faq-group-${index + 1}`}>{groupTitle(section)}</a><span>{section.renderItems.length}</span></li>)}</ol>
+          </nav>
+          <div className={recovery.faqGroups}>
           {sections.map((section, index) => (
             <div
               key={`buj-faq-group-${index}-${section.id}`}
               className={index > 0 ? s.stackLg : ''}
             >
-              <Faq
+              <ServiceBlock kind="faq"><Faq
                 id={`buj-faq-group-${index + 1}`}
-                title={section.title}
-                items={section.renderItems}
+                title={groupTitle(section)}
+                items={section.renderItems.map(item => ({
+                  ...item,
+                  a: typeof item.a === 'string'
+                    ? item.a.replace(/href=(["'])#locations\1/g, `href="${locale === 'ru' ? '/ru/kontakty' : '/kontakti'}#locations"`)
+                    : item.a,
+                }))}
                 headingLevel={2}
                 variant="accordion"
                 locale={locale}
-              />
+                openFirst={index === 0}
+              /></ServiceBlock>
             </div>
           ))}
+          </div>
         </div>
       </section>
 
+      <QuickContactsSection locale={locale} />
+
       <section className={s.section}>
-        <ConvertBand locale={locale} />
+        <ServiceBlock kind="genericClosing"><ConvertBand locale={locale} /></ServiceBlock>
       </section>
-    </>
+    </ServiceRecovery>
   );
 }

@@ -259,3 +259,182 @@
 @media (prefers-reduced-motion: reduce) {
   .dropdown, .mobileMenu, .hamburger span, .switchTrack span { transition: none; }
 }
+
+.mobileShopSwitch { display: none; }
+
+// Scope the approved service chrome because NavBar is also consumed by protected landings.
+:global([data-service-redesign]) {
+  .header { font-family: var(--service-font); line-height: 1.55; }
+  .hamburger { justify-content: center; }
+  .container { gap: 24px; }
+  .brand { height: auto; gap: 10px; padding-right: 0; border-right: 0; }
+  .brand :global(img) { width: auto; height: 26px; }
+  .nav { justify-self: start; border-left: 1px solid var(--service-hairline); padding-left: 12px; margin-left: -8px; }
+  .navItem {
+    gap: 6px;
+    padding-inline: 9px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--service-font);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.55;
+    cursor: pointer;
+    &:hover, &:focus-visible, &.active { color: var(--service-ink); background: transparent; text-decoration: none; }
+    &::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 0; height: 1px; background: var(--service-signal); opacity: 0; transition: opacity 150ms ease; }
+    &:hover::after, &:focus-visible::after, &.active::after { opacity: 1; }
+  }
+  .ddWrap:hover > .navItem::after, .ddWrap:focus-within > .navItem::after { opacity: 1; }
+  .chev { width: 12px; margin-left: 0; }
+  .dropdown { min-width: 220px; padding: 8px 0; border-color: var(--service-hairline); border-top: 0; background: var(--service-paper-2); }
+  .menuLink {
+    padding: 10px 20px;
+    color: var(--service-ink);
+    font-size: 15px;
+    line-height: 1.55;
+    &:hover, &:focus-visible, &.active { background: var(--service-paper-3); text-decoration: none; }
+  }
+  .actions { position: static; height: auto; }
+  .actionsCluster { gap: 12px; }
+  .shopSwitch { width: auto; height: 44px; padding-inline: 16px; font-weight: 500; line-height: 1; font-variation-settings: 'SHRP' 60; }
+  .switchLabel { display: inline; }
+  .contactHeader { border-color: rgba(71, 198, 226, .35) !important; }
+  .language :global(button) {
+    width: auto;
+    height: 36px;
+    padding-inline: 10px;
+    border-right: 1px solid var(--service-hairline);
+    border-left: 1px solid var(--service-hairline);
+    font-family: var(--service-font);
+    line-height: 1.55;
+    &:hover { background: transparent; }
+  }
+  .iconBtn svg { width: 22px; height: 22px; }
+  .mobilePrices { display: none; }
+
+  @media (max-width: 1023px) {
+    .container { display: flex; justify-content: space-between; gap: 12px; padding-inline: 20px; }
+    .actions { flex: none; margin-left: auto; }
+    .actionsCluster { gap: 4px; }
+    .actionsCluster > .shopSwitch, .ctasTabletDesktop { display: none; }
+    .mobileShopSwitch {
+      display: inline-flex;
+      order: 0;
+      height: 34px;
+      gap: 6px;
+      padding-inline: 7px;
+      border-color: var(--service-hairline);
+      font-family: var(--service-mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .mobileShopSwitch .switchTrack { width: 30px; height: 16px; }
+    .mobileShopSwitch .switchTrack span { width: 10px; height: 10px; }
+    .mobileShopSwitch:hover .switchTrack span, .mobileShopSwitch:focus-visible .switchTrack span { transform: translateX(14px); }
+    .iconBtn { display: inline-grid; order: -1; }
+    .language :global(button) { min-width: 40px; height: 36px; padding-inline: 8px; border-left: 0; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) { .container { padding-inline: 32px; } }
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .navItem { padding-inline: 7px; font-size: 13px; }
+    .shopSwitch { padding-inline: 12px; }
+    .actionsCluster > .shopSwitch { order: -2; }
+    .actionsCluster > .shopSwitch .switchLabel { display: none; }
+    .iconBtn { display: inline-grid; order: -1; }
+  }
+  // The reference overlaps/clips navigation at 1024px. Keep this bounded range usable.
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .container { gap: 12px; padding-inline: 20px; }
+    .nav { padding-left: 8px; margin-left: -4px; }
+    .navItem { padding-inline: 2px; font-size: 12px; gap: 4px; }
+    .actionsCluster { gap: 8px; }
+    .shopSwitch { padding-inline: 8px; }
+    .ctasTabletDesktop > :is(a, button) { padding-inline: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .navItem::after { transition: none; } }
+}
+
+.mobileMenu:global([data-service-redesign]) {
+  font-family: var(--service-font);
+  line-height: 1.55;
+  .mobileInner { padding-inline: 24px; }
+  .drawerItem { font-family: var(--service-font); font-size: 20px; font-weight: 500; font-variation-settings: 'SHRP' 60; }
+  .drawerParentLabel, .drawerToggle { font: inherit; }
+  .drawerSubmenu .drawerItem { font-size: 17px; font-weight: 400; }
+}
+.mobileScrim { position: fixed; inset: 72px 0 0; z-index: 99; background: var(--service-scrim, rgba(0, 0, 0, .72)); }
+.mobileClose { position: fixed; top: max(14px, env(safe-area-inset-top)); right: 20px; z-index: 102; display: grid; width: 44px; height: 44px; place-items: center; padding: 0; border: 0; background: #070a0d; color: var(--service-ink); cursor: pointer; }
+.mobileClose svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.mobileClose:hover { color: var(--service-signal); }
+.mobileClose:focus-visible { outline: 2px solid var(--service-signal); outline-offset: -2px; }
+.mobileMenu:global([data-service-redesign]) {
+  left: auto; right: 0; width: min(560px, 100%); overflow-y: auto; overscroll-behavior: contain; background: var(--service-paper-2);
+  .mobileInner { height: auto; min-height: 100%; padding: 24px 24px calc(96px + env(safe-area-inset-bottom)); }
+  .mobileMenuList { flex: 0 0 auto; overflow: visible; border-top: 1px solid var(--service-counter-hairline); }
+  .drawerItem { min-height: 64px; padding: 16px 0; border-bottom: 1px solid var(--service-counter-hairline); background: transparent; font-size: 20px; line-height: 1.55; }
+  .drawerGroup { border-bottom: 1px solid var(--service-counter-hairline); }
+  .drawerParent { min-height: 63px; padding-block: 9px; border-bottom: 0; }
+  .mobileMenuList > :first-child { border-top: 0; }
+  .drawerSubmenu { padding: 0 0 12px 16px; border: 0; }
+  .drawerSubmenu .drawerItem { min-height: 44px; padding: 8px 0; border: 0; color: var(--service-ink-2); font-size: 17px; }
+  .drawerSubmenu .drawerItem:hover { color: var(--service-ink); }
+  .drawerToggle { min-width: 44px; flex: 0 0 44px; font-size: 24px; cursor: pointer; }
+  .drawerExpandIcon { position: relative; display: block; width: 14px; height: 14px; transition: transform 200ms ease-out; }
+  .drawerExpandIcon::before, .drawerExpandIcon::after { content: ''; position: absolute; background: currentColor; }
+  .drawerExpandIcon::before { inset: 50% 0 auto; height: 1px; }
+  .drawerExpandIcon::after { inset: 0 auto 0 50%; width: 1px; }
+  .drawerExpandIcon[data-expanded='true'] { transform: rotate(45deg); }
+  .drawerParentLabel { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+  .drawerParentLabel:focus-visible, .drawerToggle:focus-visible { outline: 2px solid var(--service-signal); outline-offset: -2px; }
+  .mobileMenuSecondary { margin: 0; }
+  .mobileDrawerControls { margin-top: 0; padding-top: 24px; border: 0; }
+  .menuMeta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--service-ink-2); font-size: 15px; }
+  .menuMeta a { color: inherit; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--service-counter-hairline); }
+  .menuMeta a:hover { color: var(--service-signal); }
+  @media (min-width: 768px) { .mobileInner { padding-inline: 48px; } }
+  @media (prefers-reduced-motion: reduce) { .drawerExpandIcon { transition: none; } }
+}
+.mobileMenu:global([data-service-redesign]):focus-visible { outline: none; }
+:global([data-service-redesign]) {
+  .ddWrap[data-open='false'] .dropdown { opacity: 0; visibility: hidden; transform: translateY(-4px); }
+  .ddWrap[data-open='true'] .dropdown { opacity: 1; visibility: visible; transform: none; }
+}
+
+// Optional focused landing actions; normal navigation remains unchanged.
+.focusedActions { grid-column: 3; display: flex; align-items: center; justify-self: end; gap: 12px; min-width: 0; }
+@media(max-width:767px) { .focusedActions { gap: 6px; } }
+
+// Only the Service shell opts in; protected landing consumers retain their layout.
+:global([data-service-redesign]) .header[data-adaptive-header] {
+  .brand { flex-shrink: 0; gap: 16px; }
+  .brandShopSwitch { flex: none; width: auto; white-space: nowrap; }
+  .brandShopSwitch .switchLabel { display: inline; }
+  .nav { width: 100%; justify-self: stretch; margin-left: 0; min-width: 0; }
+  .nav > * { flex: none; }
+  .nav > [data-priority-hidden='true'] {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .nav .ddWrap:last-child .dropdown { left: auto; right: 0; max-height: calc(100dvh - 88px); overflow-y: auto; }
+  @media (max-width: 1023px) {
+    .container { gap: 8px; padding-inline: 12px; }
+    .brand { gap: 8px; }
+    .brandShopSwitch {
+      order: 0;
+      height: 44px;
+      gap: 6px;
+      padding-inline: 8px;
+      border-color: var(--service-hairline);
+      font-size: 12px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) { .container { padding-inline: 32px; } }
+}
+:global([data-service-redesign]) .header[data-adaptive-header] {
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .navItem { padding-inline: 7px; font-size: 14px; gap: 6px; }
+  }
+}

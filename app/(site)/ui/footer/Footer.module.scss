@@ -22,3 +22,18 @@
 @media (min-width: 1024px) { .column { grid-column: span 4; } .bottom { grid-template-columns: 1fr auto 1fr; } .socials { justify-self: start; } }
 @media (min-width: 1280px) { .inner { padding-inline: 120px; } }
 @media (max-width: 1023px) { .footer { padding-bottom: calc(48px + 60px + env(safe-area-inset-bottom)); } }
+
+:global([data-service-redesign]) {
+  .footer { border-top: 0; font-family: var(--service-font); line-height: 1.55; }
+  .label { font-family: var(--service-mono); }
+  .column address { margin: 0; line-height: 1.55; }
+  .column strong { font-weight: 400; }
+  .bottom > span:not([aria-hidden]) { text-align: center; }
+  @media (min-width: 640px) {
+    .bottom { grid-template-columns: 1fr auto 1fr; }
+    .socials { justify-self: start; }
+  }
+  @media (max-width: 639px) {
+    .bottom > [aria-hidden] { display: none; }
+  }
+}

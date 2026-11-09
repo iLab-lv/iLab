@@ -6,8 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import ServicePricelist from '@components/service-pricelist/ServicePricelist';
 import styles from './BrandPickerPricelist.module.scss';
 
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '@/lib/firebaseClient';
+import { getServiceSelectorPricing } from '@/lib/pricing/getServiceSelectorPricing.client';
 
 function normalizeBrandName(slug, name) {
   const s = String(slug || '').toLowerCase();
@@ -18,16 +17,6 @@ function normalizeBrandName(slug, name) {
   if (s === 'macbook' || n.toLowerCase() === 'macbook') return 'MacBook';
 
   return n || name || '';
-}
-
-function chunkArray(arr, size) {
-  const out = [];
-
-  for (let i = 0; i < arr.length; i += size) {
-    out.push(arr.slice(i, i + size));
-  }
-
-  return out;
 }
 
 function norm(v) {
@@ -45,6 +34,7 @@ export default function BrandPickerPricelist({
   allModelsHref,
   cta,
   className,
+  locale = 'lv',
 }) {
   const router = useRouter();
   const sp = useSearchParams();
@@ -57,6 +47,7 @@ export default function BrandPickerPricelist({
 
   const [brand, setBrand] = useState(initialBrand);
   const [pricing, setPricing] = useState({});
+  const [resolvedServiceIds, setResolvedServiceIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -97,7 +88,7 @@ export default function BrandPickerPricelist({
     if (!brandOptions?.length) return null;
 
     return (
-      <div className={styles.brandTabs} role="tablist" aria-label="Zīmola izvēle">
+      <div className={styles.brandTabs} role="tablist" aria-label={locale === 'ru' ? 'Выбор бренда' : 'Zīmola izvēle'}>
         {brandOptions.map((b) => {
           const slug = norm(b.slug);
           const active = brand === slug;
@@ -118,7 +109,7 @@ export default function BrandPickerPricelist({
         })}
       </div>
     );
-  }, [brand, brandOptions]);
+  }, [brand, brandOptions, locale]);
 
   const catKey = norm(categorySlug);
 
@@ -151,79 +142,17 @@ export default function BrandPickerPricelist({
       setError('');
 
       try {
-        const CHUNK = 30;
-        const chunks = chunkArray(modelSlugsForBrand, CHUNK);
-
-        const pricingObj = {};
-
-        for (const modelSlug of modelSlugsForBrand) {
-          pricingObj[modelSlug] = { items: [] };
-        }
-
-        for (const group of chunks) {
-          const q = query(
-            collection(db, 'modelServices'),
-            where('modelId', 'in', group)
-          );
-
-          const snap = await getDocs(q);
-          const temp = new Map();
-
-          snap.forEach((docSnap) => {
-            const data = docSnap.data() || {};
-            const modelId = data.modelId;
-            const serviceId = data.serviceId;
-
-            if (!modelId || !serviceId) return;
-
-            if (serviceIdsArr.length && !serviceIdsArr.includes(serviceId)) {
-              return;
-            }
-
-            if (!temp.has(modelId)) {
-              temp.set(modelId, new Map());
-            }
-
-            temp
-              .get(modelId)
-              .set(
-                serviceId,
-                Object.prototype.hasOwnProperty.call(data, 'price')
-                  ? data.price
-                  : ''
-              );
-          });
-
-          for (const [modelId, byService] of temp.entries()) {
-            if (serviceIdsArr.length) {
-              pricingObj[modelId] = {
-                items: serviceIdsArr
-                  .filter((sid) => byService.has(sid))
-                  .map((sid) => ({
-                    id: sid,
-                    price: byService.get(sid),
-                  })),
-              };
-            } else {
-              const items = Array.from(byService.entries())
-                .sort(([a], [b]) => String(a).localeCompare(String(b)))
-                .map(([sid, price]) => ({
-                  id: sid,
-                  price,
-                }));
-
-              pricingObj[modelId] = { items };
-            }
-          }
-        }
+        const selectedDevices = (devices || []).filter((device) => modelSlugsForBrand.includes(device.slug));
+        const result = await getServiceSelectorPricing(selectedDevices, categorySlug, serviceIdsArr, locale);
 
         if (cancelled) return;
 
-        setPricing(pricingObj);
+        setPricing(result.pricing);
+        setResolvedServiceIds(result.serviceIds);
       } catch {
         if (cancelled) return;
 
-        setError('Neizdevās ielādēt cenas no Firebase.');
+        setError(locale === 'ru' ? 'Не удалось загрузить цены из Firebase.' : 'Neizdevās ielādēt cenas no Firebase.');
         setPricing({});
       } finally {
         if (!cancelled) {
@@ -237,7 +166,7 @@ export default function BrandPickerPricelist({
     return () => {
       cancelled = true;
     };
-  }, [modelSlugsForBrand, serviceIdsKey, serviceIdsArr]);
+  }, [modelSlugsForBrand, serviceIdsKey, serviceIdsArr, devices, categorySlug, locale]);
 
   const servicePricelistCategorySlug = catKey === 'all' ? '' : categorySlug;
 
@@ -246,7 +175,7 @@ export default function BrandPickerPricelist({
       {brandList}
 
       <div style={{ marginTop: 8, marginBottom: 8 }}>
-        {loading && <div style={{ opacity: 0.7 }}>Ielādē cenas…</div>}
+        {loading && <div style={{ opacity: 0.7 }}>{locale === 'ru' ? 'Загрузка цен…' : 'Ielādē cenas…'}</div>}
         {!loading && error && <div style={{ color: 'crimson' }}>{error}</div>}
       </div>
 
@@ -255,7 +184,8 @@ export default function BrandPickerPricelist({
         pricing={pricing}
         brandSlug={brand}
         categorySlug={servicePricelistCategorySlug}
-        serviceIds={serviceIdsArr}
+        serviceIds={resolvedServiceIds.length ? resolvedServiceIds : serviceIdsArr}
+        locale={locale}
         title={title}
         intro={intro}
         viewAllHref={allModelsHref}

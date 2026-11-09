@@ -1,7 +1,10 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
 
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import BrandPickerPricelist from '@sections/service-pricelist/BrandPickerPricelist';
@@ -133,14 +136,20 @@ export default function CenasPage({
   const strings = labels || getCenasPageStrings(locale);
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="cenas" className={recovery.page}>
+      <InfoHero locale={locale}
+        contactAside
+        counterAside
+        compactContact
+        outlinedSecondary
+        aside={<h2>{strings.processSteps[1].title}</h2>}
+        secondary={{ href: '#brand-list', label: strings.pricelistTitle }}
         title={strings.headerTitle}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
       />
 
-      <section
+      <ServiceBlock kind="priceBrowser"><section
         id="brand-list"
         className={s.section}
         aria-labelledby="brand-picker-h2"
@@ -168,11 +177,9 @@ export default function CenasPage({
             locale={locale}
           />
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
+      <Process
             id="process"
             title={strings.processTitle}
             steps={strings.processSteps}
@@ -180,25 +187,25 @@ export default function CenasPage({
             variant="cards"
             locale={locale}
           />
-        </div>
-      </section>
 
       <section className={s.section}>
-        <Why locale={locale} />
+        <ServiceBlock kind="benefits"><Why locale={locale} /></ServiceBlock>
       </section>
 
       <section className={s.section} aria-labelledby="faq-h2">
         <div className={s.container}>
-          <Faq
+          <ServiceBlock kind="faq"><Faq
             id="faq"
             title={strings.faqTitle}
             items={strings.faqItems}
             headingLevel={2}
             variant="accordion"
             locale={locale}
-          />
+          /></ServiceBlock>
         </div>
       </section>
+
+      <QuickContactsSection locale={locale} />
 
       <section
         id="pieteikties"
@@ -206,9 +213,9 @@ export default function CenasPage({
         aria-label={strings.bookingAria}
       >
         <div className={s.container}>
-          <ConvertBand locale={locale} />
+          <ServiceBlock kind="genericClosing"><ConvertBand locale={locale} /></ServiceBlock>
         </div>
       </section>
-    </>
+    </ServiceRecovery>
   );
 }

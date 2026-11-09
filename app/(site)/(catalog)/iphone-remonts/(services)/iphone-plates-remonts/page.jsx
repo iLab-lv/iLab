@@ -1,5 +1,6 @@
 import IphoneBoardRepairServicePage from './IphoneBoardRepairServicePage';
 
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 import JsonLd from '@components/seo/JsonLd';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
@@ -100,7 +101,7 @@ const strings = {
   ],
 };
 
-const faqItems = [
+const legacyFaqItems = [
   {
     q: 'Cik maksā iPhone plates remonts?',
     a: 'Cena ir atkarīga no bojājuma, modeļa un nepieciešamajiem mikrolodēšanas darbiem. Precīzu cenu nosakām pēc diagnostikas.',
@@ -136,7 +137,8 @@ function buildBreadcrumbs() {
   ];
 }
 
-function getIphoneBoardRepairData() {
+async function getIphoneBoardRepairData() {
+  const faq = await getFaqGroups([{ scopeType: 'service', scopeKey: 'iphone-plates-remonts' }], locale);
   const breadcrumbs = buildBreadcrumbs();
 
   const jsonLd = buildRepairPageJsonLd({
@@ -153,8 +155,8 @@ function getIphoneBoardRepairData() {
     serviceType: strings.serviceType,
     serviceImage: strings.heroImage,
 
-    faqItems,
-    includeFaq: true,
+    faqItems: faq.items,
+    includeFaq: faq.items.length > 0,
 
     includeHowTo: true,
     howTo: {
@@ -168,7 +170,7 @@ function getIphoneBoardRepairData() {
   return {
     strings,
     breadcrumbs,
-    faqItems,
+    faqItems: faq.items,
     jsonLd,
   };
 }
@@ -177,8 +179,8 @@ export async function generateMetadata() {
   return buildSeoMetadata(seo);
 }
 
-export default function Page() {
-  const data = getIphoneBoardRepairData();
+export default async function Page() {
+  const data = await getIphoneBoardRepairData();
 
   return (
     <>

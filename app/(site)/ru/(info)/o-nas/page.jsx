@@ -5,7 +5,7 @@ import AboutPage, {
 
 import JsonLd from '@components/seo/JsonLd';
 
-import { db } from '@/lib/firebaseAdmin';
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 import { getSiteSettings } from '@/lib/siteSettings';
 
 import { absoluteUrl, buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
@@ -27,64 +27,9 @@ const seo = getStaticPageSeo('about', locale);
 const lvPath = seo.lvPath;
 const ruPath = seo.ruPath;
 
-function sortFaqItems(items = []) {
-  return [...items].sort((a, b) => {
-    const ao = typeof a?.order === 'number' ? a.order : 9999;
-    const bo = typeof b?.order === 'number' ? b.order : 9999;
-
-    if (ao !== bo) return ao - bo;
-
-    return String(a?.q || '').localeCompare(String(b?.q || ''));
-  });
-}
-
-function normalizeFaqItems(items = []) {
-  return sortFaqItems(
-    items
-      .filter((item) => {
-        if (!item) return false;
-        if (item.isHidden === true) return false;
-
-        const q = String(item.q || '').trim();
-        const answer = String(item.aHtml || item.a || '').trim();
-
-        return q && answer;
-      })
-      .map((item) => ({
-        q: String(item.q || '').trim(),
-        aHtml: typeof item.aHtml === 'string' ? item.aHtml.trim() : '',
-        a: typeof item.a === 'string' ? item.a.trim() : '',
-        order:
-          typeof item.order === 'number' && Number.isFinite(item.order)
-            ? item.order
-            : 9999,
-      }))
-  );
-}
-
 async function getBasicFaq(locale = 'lv') {
-  const docId = `basic_${locale}`;
-  const snap = await db.collection('faqGroups').doc(docId).get();
-
-  if (!snap.exists) {
-    return {
-      title: labels.faqTitle,
-      items: [],
-      renderItems: [],
-    };
-  }
-
-  const data = snap.data() || {};
-  const items = normalizeFaqItems(Array.isArray(data.items) ? data.items : []);
-
-  return {
-    title:
-      typeof data.title === 'string' && data.title.trim()
-        ? data.title.trim()
-        : labels.faqTitle,
-    items,
-    renderItems: toFaqRenderItems(items),
-  };
+  const faq = await getFaqGroups([{ scopeType: 'basic' }], locale);
+  return { ...faq, renderItems: toFaqRenderItems(faq.items) };
 }
 
 function cleanSchemaText(value = '') {

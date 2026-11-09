@@ -130,3 +130,39 @@
   .scanLine { display: none; }
   .paneEnter, .paneExit { transition: none; transform: none !important; }
 }
+
+/* Drawer shell only; pane content and integrations are retained for R3. */
+:global([data-service-redesign]) {
+  .overlay { background: var(--service-scrim); }
+  .panel {
+    --service-drawer-inset: 24px;
+    --service-drawer-top: max(32px, env(safe-area-inset-top));
+    --service-drawer-bottom: calc(64px + env(safe-area-inset-bottom));
+    --panelContentMinH: calc(100dvh - var(--service-drawer-top) - (var(--service-drawer-heading-size) * .98) - 32px);
+    width: min(560px, 100%);
+    border-left: 0;
+    color: var(--service-ink);
+    background: var(--service-paper-2);
+    font:400 var(--service-body-size)/1.55 var(--service-font);
+  }
+  .panel[data-service-pane='locator'] { width: min(820px, 100%); }
+  .panelHeader { position: relative; min-height: 0; padding:var(--service-drawer-top) var(--service-drawer-inset) 32px; border:0; background:var(--service-paper-2); }
+  .panelHeader h2 { font:600 var(--service-drawer-heading-size)/.98 var(--service-font); font-variation-settings:'SHRP' 100; letter-spacing:-.04em; }
+  .close { width:44px; height:44px; flex-basis:44px; margin-right:-12px; border:0; color:var(--service-ink); }
+  .close svg { width:20px; height:20px; }
+  .close:hover { color:var(--service-signal); background:transparent; }
+  .scanLine { background: var(--service-signal); }
+  .panel[data-state='opening'] { transform: translateX(100%); }
+  // The opening phase lasts one frame. Keep its scan alive after the panel settles.
+  .panel[data-state='opening'] .scanLine,
+  .panel[data-state='open'] .scanLine { animation: drawer-scan 600ms 150ms cubic-bezier(.45,0,.55,1) both; }
+  .panel[data-state='closing'] { transition-duration: 300ms; transition-timing-function: cubic-bezier(.55,.085,.68,.53); }
+  .panel[data-state='closing'] .scanLine { animation: drawer-scan-close 300ms cubic-bezier(.45,0,.55,1) both; }
+  @media (prefers-reduced-motion: reduce) { .scanLine { display: none; animation: none; } .panel[data-state='closing'] { transition-duration: 150ms; } }
+  @media (min-width:768px) { .panel { --service-drawer-inset:48px; --service-drawer-top:max(48px,env(safe-area-inset-top)); --service-drawer-bottom:calc(96px + env(safe-area-inset-bottom)); } }
+}
+@keyframes drawer-scan-close {
+  0% { left: 100%; opacity: 1; }
+  100% { left: 0; opacity: 0; }
+}
+:global([data-service-redesign]) .serviceStage { min-width: 0; }

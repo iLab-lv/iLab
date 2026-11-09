@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Button from '@components/button/Button';
 import s from './FaqScreen.module.scss';
+import { getFaqAdminAnswer } from '@/lib/faq/faqAdmin';
 
 const LOCALES = ['lv', 'ru'];
 
@@ -10,33 +11,15 @@ function normalizeLocale(locale) {
   return locale === 'ru' ? 'ru' : 'lv';
 }
 
-function normalizeFaqItem(item = {}) {
-  return {
-    q: typeof item.q === 'string' ? item.q : '',
-    aHtml: typeof item.aHtml === 'string' ? item.aHtml : '',
-  };
-}
-
 function normalizeFaqGroup(group = {}) {
-  return {
-    id: typeof group.id === 'string' ? group.id : '',
-    scopeType:
-      group.scopeType === 'category' || group.scopeType === 'service'
-        ? group.scopeType
-        : 'basic',
-    scopeKey: typeof group.scopeKey === 'string' ? group.scopeKey : '',
-    locale: normalizeLocale(group.locale),
-    title: typeof group.title === 'string' ? group.title : '',
-    items: Array.isArray(group.items) ? group.items.map(normalizeFaqItem) : [],
-  };
+  return { ...group, items: Array.isArray(group.items) ? group.items : [] };
 }
 
 function formatScopeLabel(group) {
-  if (group.scopeType === 'basic') {
-    return 'Basic';
-  }
-
-  return `${group.scopeType} · ${group.scopeKey}`;
+  const scope = group.scopeType === 'basic' ? 'Global'
+    : group.scopeType === 'page' && group.scopeKey === 'contacts' ? 'Contacts'
+    : `${group.scopeType} ? ${group.scopeKey}`;
+  return `${scope} ? ${String(group.locale).toUpperCase()} ? ${group.id}`;
 }
 
 export default function FaqScreen() {
@@ -119,7 +102,7 @@ export default function FaqScreen() {
 
         return {
           ...group,
-          items: [...group.items, { q: '', aHtml: '' }],
+          items: [...group.items, { q: '', aHtml: '', order: Math.max(0, ...group.items.map(item => Number(item.order) || 0)) + 10 }],
         };
       })
     );
@@ -152,7 +135,7 @@ export default function FaqScreen() {
         items[idx] = items[nextIdx];
         items[nextIdx] = temp;
 
-        return { ...group, items };
+        return { ...group, items: items.map((item, index) => ({ ...item, order: (index + 1) * 10 })) };
       })
     );
   }
@@ -164,16 +147,13 @@ export default function FaqScreen() {
 
     try {
       const payload = {
+        id: group.id,
+        revision: group.revision,
         scopeType: group.scopeType,
-        scopeKey: group.scopeType === 'basic' ? null : group.scopeKey,
+        scopeKey: group.scopeKey,
         locale: group.locale,
-        title: String(group.title || '').trim(),
-        items: (group.items || [])
-          .map((item) => ({
-            q: String(item.q || '').trim(),
-            aHtml: String(item.aHtml || '').trim(),
-          }))
-          .filter((item) => item.q && item.aHtml),
+        title: group.title,
+        items: group.items,
       };
 
       const res = await fetch('/api/faq', {
@@ -188,6 +168,12 @@ export default function FaqScreen() {
         throw new Error(json?.error || 'Failed to save FAQ group');
       }
 
+      const refreshed = await fetch('/api/faq', { cache: 'no-store' });
+      if (!refreshed.ok) throw new Error('Saved. Reload FAQ before further editing.');
+      const refreshedJson = await refreshed.json();
+      const savedGroup = refreshedJson.groups?.find(item => item.id === group.id);
+      if (!savedGroup) throw new Error('Saved. Reload FAQ before further editing.');
+      setGroups(previous => previous.map(item => item.id === group.id ? normalizeFaqGroup(savedGroup) : item));
       setStatus(`Saved: ${formatScopeLabel(group)} (${group.locale.toUpperCase()})`);
     } catch (err) {
       console.error('Failed to save FAQ group:', err);
@@ -311,7 +297,7 @@ export default function FaqScreen() {
 
                             <textarea
                               className={s.textarea}
-                              value={item.aHtml}
+                              value={getFaqAdminAnswer(item)}
                               onChange={(e) =>
                                 updateItem(group.id, idx, {
                                   aHtml: e.target.value,

@@ -1,0 +1,89 @@
+/* iLabRedesign tokens.css + base.css, confined to the service shell and its portals. */
+.scope {
+  --topbar-h: 72px;
+  --service-paper: #070a0d;
+  --service-paper-2: #0c1115;
+  --service-paper-3: #131a20;
+  --service-ink: #f2f5f7;
+  --service-ink-2: #aeb8c0;
+  --service-ink-3: #6e7a84;
+  --service-hairline: #1c242b;
+  --service-counter-hairline: #243039;
+  --service-signal: #47c6e2;
+  --service-signal-2: #6fd6ec;
+  --service-on-signal: #061016;
+  --service-whatsapp: #25d366;
+  --service-whatsapp-hover: #1fbd5a;
+  --service-whatsapp-active: #169b47;
+  --service-whatsapp-foreground: #06170c;
+  --service-counter-2: #141c23;
+  --service-error: #ff6b62;
+  --service-scrim: rgba(3, 6, 8, .72);
+  --service-font: var(--font-service-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --service-mono: var(--font-service-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+  --service-container: 1440px;
+  --service-margin: 20px;
+  --service-gutter: 24px;
+  --service-rail: 0px;
+  --service-header-h: 72px;
+  --service-dock-h: 60px;
+  --service-body-size: 17px;
+  --service-lead-size: 20px;
+  --service-small-size: 15px;
+  --service-micro-size: 13px;
+  --service-tech-size: 11px;
+  --service-display-size: clamp(64px, 7.2vw, 112px);
+  --service-display-leading: .88;
+  --service-display-tracking: -.06em;
+  --service-heading-size: clamp(48px, 5.8vw, 88px);
+  --service-basic-heading-size: clamp(30px, 3vw, 44px);
+  --service-drawer-heading-size: clamp(38px, 4.8vw, 72px);
+  --service-home-display-size: clamp(42px, 13vw, 52px);
+  --service-home-display-leading: .95;
+  --service-home-display-tracking: -.045em;
+  --service-section-space: clamp(112px, 11vw, 176px);
+  --service-hero-top: clamp(72px, 8vw, 124px);
+  --service-hero-bottom: clamp(112px, 12vw, 184px);
+  --service-space-1: 4px;
+  --service-space-2: 8px;
+  --service-space-3: 12px;
+  --service-space-4: 16px;
+  --service-space-5: 24px;
+  --service-space-6: 32px;
+  --service-space-7: 48px;
+  --service-space-8: 64px;
+  --service-space-9: 96px;
+  --service-space-10: 128px;
+  --service-space-11: 192px;
+  color: var(--service-ink);
+  font: 400 var(--service-body-size)/1.55 var(--service-font);
+  font-variation-settings: 'SHRP' 0, 'CRSV' 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  *, *::before, *::after { box-sizing: border-box; }
+  :where(button, input, textarea, select) { font-family: var(--service-font); }
+  :where(a, button, input, textarea, select, summary) { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  :where(h1, h2, h3, h4) { text-wrap: balance; }
+  :where(p) { text-wrap: pretty; }
+  :where([id]) { scroll-margin-top: calc(var(--service-header-h) + 16px); }
+  :focus-visible { outline: 2px solid var(--service-signal); outline-offset: 2px; }
+  ::selection { background: var(--service-signal); color: var(--service-on-signal); }
+
+  @media (min-width: 768px) { --service-margin: 40px; }
+  @media (min-width: 1024px) {
+    --service-home-display-size: clamp(70px, 6.4vw, 108px);
+    --service-home-display-leading: .88;
+    --service-home-display-tracking: -.06em;
+  }
+  @media (min-width: 1280px) { --service-margin: 96px; --service-rail: 96px; }
+  @media (max-width: 767px) {
+    --service-home-display-size: clamp(42px, 13vw, 58px);
+    --service-home-display-leading: .94;
+    --service-display-size: clamp(48px, 14vw, 68px);
+    --service-heading-size: clamp(42px, 13vw, 62px);
+    --service-section-space: 88px;
+    --service-hero-top: 64px;
+    --service-hero-bottom: 88px;
+  }
+}

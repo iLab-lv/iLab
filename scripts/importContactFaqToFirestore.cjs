@@ -95,7 +95,7 @@ function buildContactFaqDocs() {
             order: 10,
             q: 'Kur Rīgā atrodas iLab filiāles?',
             aHtml:
-              'iLab servisa centri atrodas divās ērtās vietās Rīgā - <strong>T/C Domina Shopping</strong>, Ieriķu ielā 3, un <strong>T/C Spice Home</strong>, Jaunmoku ielā 13. <a href="#locations">Filiāļu blokā</a> vari izvēlēties sev tuvāko servisu, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
+              'iLab servisa centri atrodas divās ērtās vietās Rīgā - <strong>T/C Domina Shopping</strong>, Ieriķu ielā 3, un <strong>T/C Spice Life</strong>, Jaunmoku ielā 13. <a href="#locations">Filiāļu blokā</a> vari izvēlēties sev tuvāko servisu, apskatīt darba laiku, piezvanīt, uzrakstīt WhatsApp vai atvērt maršrutu Google Maps un Waze.',
           },
           {
             order: 20,
@@ -105,9 +105,9 @@ function buildContactFaqDocs() {
           },
           {
             order: 30,
-            q: 'Kuru filiāli izvēlēties - Domina Shopping vai Spice Home?',
+            q: 'Kuru filiāli izvēlēties - Domina Shopping vai Spice Life?',
             aHtml:
-              '<strong>Domina Shopping</strong> ir ērta izvēle, ja esi Teikā, Purvciemā, centrā, Juglā vai tuvāk Rīgas labajam krastam. <strong>Spice Home</strong> būs ērtāka, ja esi Pārdaugavā, Imantā, Zolitūdē, Mārupē vai tuvāk lidostas pusei. Abās filiālēs vari saņemt konsultāciju, nodot ierīci diagnostikai un pieteikt remontu.',
+              '<strong>Domina Shopping</strong> ir ērta izvēle, ja esi Teikā, Purvciemā, centrā, Juglā vai tuvāk Rīgas labajam krastam. <strong>Spice Life</strong> būs ērtāka, ja esi Pārdaugavā, Imantā, Zolitūdē, Mārupē vai tuvāk lidostas pusei. Abās filiālēs vari saņemt konsultāciju, nodot ierīci diagnostikai un pieteikt remontu.',
           },
           {
             order: 40,
@@ -119,7 +119,7 @@ function buildContactFaqDocs() {
             order: 50,
             q: 'Kāds ir iLab darba laiks?',
             aHtml:
-              '<strong>Domina Shopping</strong> filiāle strādā katru dienu no 10:00 līdz 21:00. <strong>Spice Home</strong> filiāle strādā no pirmdienas līdz sestdienai no 10:00 līdz 21:00, bet svētdien no 10:00 līdz 20:00. Aktuālo darba laiku vienmēr vari pārbaudīt šajā kontaktu lapā pie konkrētās filiāles.',
+              '<strong>Domina Shopping</strong> filiāle strādā katru dienu no 10:00 līdz 21:00. <strong>Spice Life</strong> filiāle strādā no pirmdienas līdz sestdienai no 10:00 līdz 21:00, bet svētdien no 10:00 līdz 20:00. Aktuālo darba laiku vienmēr vari pārbaudīt šajā kontaktu lapā pie konkrētās filiāles.',
           },
           {
             order: 60,
@@ -152,7 +152,7 @@ function buildContactFaqDocs() {
             order: 10,
             q: 'Где в Риге находятся филиалы iLab?',
             aHtml:
-              'Сервисные центры iLab находятся в двух удобных местах в Риге - <strong>T/C Domina Shopping</strong>, Ieriķu iela 3, и <strong>T/C Spice Home</strong>, Jaunmoku iela 13. <a href="#locations">В блоке филиалов</a> можно выбрать ближайший сервис, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
+              'Сервисные центры iLab находятся в двух удобных местах в Риге - <strong>T/C Domina Shopping</strong>, Ieriķu iela 3, и <strong>T/C Spice Life</strong>, Jaunmoku iela 13. <a href="#locations">В блоке филиалов</a> можно выбрать ближайший сервис, посмотреть время работы, позвонить, написать в WhatsApp или открыть маршрут в Google Maps и Waze.',
           },
           {
             order: 20,
@@ -162,9 +162,9 @@ function buildContactFaqDocs() {
           },
           {
             order: 30,
-            q: 'Какой филиал выбрать - Domina Shopping или Spice Home?',
+            q: 'Какой филиал выбрать - Domina Shopping или Spice Life?',
             aHtml:
-              '<strong>Domina Shopping</strong> удобнее, если вы находитесь в Тейке, Пурвциемсе, центре, Югле или ближе к правому берегу Риги. <strong>Spice Home</strong> удобнее, если вы находитесь в Пардаугаве, Иманте, Золитуде, Марупе или ближе к стороне аэропорта. В обоих филиалах можно получить консультацию, оставить устройство на диагностику и оформить ремонт.',
+              '<strong>Domina Shopping</strong> удобнее, если вы находитесь в Тейке, Пурвциемсе, центре, Югле или ближе к правому берегу Риги. <strong>Spice Life</strong> удобнее, если вы находитесь в Пардаугаве, Иманте, Золитуде, Марупе или ближе к стороне аэропорта. В обоих филиалах можно получить консультацию, оставить устройство на диагностику и оформить ремонт.',
           },
           {
             order: 40,
@@ -176,7 +176,7 @@ function buildContactFaqDocs() {
             order: 50,
             q: 'Какое у iLab время работы?',
             aHtml:
-              '<strong>Domina Shopping</strong> работает каждый день с 10:00 до 21:00. <strong>Spice Home</strong> работает с понедельника по субботу с 10:00 до 21:00, а в воскресенье с 10:00 до 20:00. Актуальное время работы всегда можно проверить на этой странице возле конкретного филиала.',
+              '<strong>Domina Shopping</strong> работает каждый день с 10:00 до 21:00. <strong>Spice Life</strong> работает с понедельника по субботу с 10:00 до 21:00, а в воскресенье с 10:00 до 20:00. Актуальное время работы всегда можно проверить на этой странице возле конкретного филиала.',
           },
           {
             order: 60,

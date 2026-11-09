@@ -53,6 +53,7 @@ export default function ModelPriceList({
   id = 'cenas', modelName = 'iPhone', titleAccent = 'Cenas un remonta laiks',
   items = [], currency = 'EUR', headingLevel = 2, bookLabel, showNotes = true,
   locale = 'lv',
+  variant,
 }) {
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
   const strings = getStrings(locale);
@@ -61,7 +62,7 @@ export default function ModelPriceList({
   if (!rows.length) return null;
 
   return (
-    <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
+    <section id={id} className={`${s.section} ${variant === 'model' ? s.model : ''}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <Heading id={`${id}-title`} className={s.title}>
           {modelName} <span>{titleAccent}</span>
@@ -79,7 +80,7 @@ export default function ModelPriceList({
               <div className={s.td} role="cell"><div className={s.serviceTitle}>{item.title}</div></div>
               <div className={s.td} role="cell"><span className={s.chip}>{formatTime(item, locale)}</span></div>
               <div className={s.td} role="cell"><span className={s.price}>{formatPrice(item, currency, locale)}</span></div>
-              <div className={s.td} role="cell"><BookButton className={s.bookBtn} label={bookLabel || strings.bookLabel} /></div>
+              <div className={s.td} role="cell"><BookButton className={s.bookBtn} label={bookLabel || strings.bookLabel} initialValues={variant === 'model' ? { device: modelName, fault: item.title } : undefined} /></div>
             </div>
           ))}
         </div>
@@ -92,7 +93,7 @@ export default function ModelPriceList({
                 <span className={s.chip}>{formatTime(item, locale)}</span>
                 <span className={s.price}>{formatPrice(item, currency, locale)}</span>
               </div>
-              <div className={s.ctaRow}><BookButton className={s.bookBtn} label={bookLabel || strings.bookLabel} /></div>
+              <div className={s.ctaRow}><BookButton className={s.bookBtn} label={bookLabel || strings.bookLabel} initialValues={variant === 'model' ? { device: modelName, fault: item.title } : undefined} /></div>
             </article>
           ))}
         </div>

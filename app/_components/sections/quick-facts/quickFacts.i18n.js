@@ -37,7 +37,7 @@ const QUICK_FACTS = {
         { key:'price', title:'Cena', description:'Atkarīga no iPhone modeļa un bojājuma apjoma' },
         { key:'diagnostics', title:'Pārbaude', description:'Aizmugure, kamera, korpuss un bezvadu uzlādes zona' },
         { key:'warranty', title:'Garantija', description:'līdz 1 gadam veiktajam remontam' },
-        { key:'locations', title:'Filiāles', description:'T/C Domina Shopping un T/C Spice Home' },
+        { key:'locations', title:'Filiāles', description:'T/C Domina Shopping un T/C Spice Life' },
         { key:'finalCheck', title:'Pārbaude pēc remonta', description:'Kamera, korpusa salikums, uzlāde un pamata funkcijas' },
       ],
       'iphone-battery': [
@@ -45,7 +45,7 @@ const QUICK_FACTS = {
         { key: 'price', title: 'Cena', description: 'Atkarīga no iPhone modeļa un detaļas pieejamības' },
         { key: 'diagnostics', title: 'Pārbaude', description: 'Baterija, uzlāde, savienojums un ierīces stabilitāte' },
         { key: 'warranty', title: 'Garantija', description: 'līdz 1 gadam veiktajam remontam' },
-        { key: 'locations', title: 'Filiāles', description: 'T/C Domina Shopping un T/C Spice Home' },
+        { key: 'locations', title: 'Filiāles', description: 'T/C Domina Shopping un T/C Spice Life' },
         { key: 'finalCheck', title: 'Pārbaude pēc remonta', description: 'Testējam uzlādi, ieslēgšanos un stabilu darbību' },
       ],
       'iphone-screen': [
@@ -72,7 +72,7 @@ const QUICK_FACTS = {
         {
           key: 'locations',
           title: 'Filiāles',
-          description: 'T/C Domina Shopping un T/C Spice Home',
+          description: 'T/C Domina Shopping un T/C Spice Life',
         },
         {
           key: 'finalCheck',
@@ -162,7 +162,7 @@ const QUICK_FACTS = {
         { key:'price', title:'Цена', description:'Зависит от модели iPhone и степени повреждения' },
         { key:'diagnostics', title:'Проверка', description:'Задняя часть, камера, корпус и зона беспроводной зарядки' },
         { key:'warranty', title:'Гарантия', description:'до 1 года на выполненный ремонт' },
-        { key:'locations', title:'Филиалы', description:'Т/Ц Domina Shopping и Т/Ц Spice Home' },
+        { key:'locations', title:'Филиалы', description:'Т/Ц Domina Shopping и Т/Ц Spice Life' },
         { key:'finalCheck', title:'Проверка после ремонта', description:'Камера, сборка корпуса, зарядка и основные функции' },
       ],
       'iphone-battery': [
@@ -170,7 +170,7 @@ const QUICK_FACTS = {
         { key: 'price', title: 'Цена', description: 'Зависит от модели iPhone и наличия детали' },
         { key: 'diagnostics', title: 'Проверка', description: 'Батарея, зарядка, соединение и стабильность устройства' },
         { key: 'warranty', title: 'Гарантия', description: 'до 1 года на выполненный ремонт' },
-        { key: 'locations', title: 'Филиалы', description: 'Т/Ц Domina Shopping и Т/Ц Spice Home' },
+        { key: 'locations', title: 'Филиалы', description: 'Т/Ц Domina Shopping и Т/Ц Spice Life' },
         { key: 'finalCheck', title: 'Проверка после ремонта', description: 'Тестируем зарядку, включение и стабильную работу' },
       ],
       'iphone-screen': [
@@ -197,7 +197,7 @@ const QUICK_FACTS = {
         {
           key: 'locations',
           title: 'Филиалы',
-          description: 'Т/Ц Domina Shopping и Т/Ц Spice Home',
+          description: 'Т/Ц Domina Shopping и Т/Ц Spice Life',
         },
         {
           key: 'finalCheck',

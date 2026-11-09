@@ -69,6 +69,15 @@
   &:hover { border-color: #f2f5f7; background: #131a20; }
 }
 
+// Explicit opt-in; existing contact controls retain their presentation.
+.whatsapp {
+  color: var(--service-whatsapp-foreground, #06170c);
+  border-color: var(--service-whatsapp, #25d366);
+  background: var(--service-whatsapp, #25d366);
+  &:hover { color: var(--service-whatsapp-foreground, #06170c); border-color: var(--service-whatsapp-hover, #1fbd5a); background: var(--service-whatsapp-hover, #1fbd5a); }
+  &:active { color: var(--service-whatsapp-foreground, #06170c); border-color: var(--service-whatsapp-active, #169b47); background: var(--service-whatsapp-active, #169b47); }
+}
+
 .disabled, :global(button[disabled]).button {
   opacity: .5;
   cursor: not-allowed;
@@ -96,3 +105,64 @@
 @media (prefers-reduced-motion: reduce) {
   .button, .primary::after { transition: none; }
 }
+
+// Tracers are opt-in service presentation; shared advertising consumers keep their existing appearance.
+.trace { display: none; }
+
+:global([data-service-redesign]) {
+  .button {
+    height: 52px;
+    font-family: var(--service-font);
+    font-size: var(--service-body-size);
+    letter-spacing: normal;
+    line-height: 1;
+  }
+  .sm { height: 44px; font-size: 14px; }
+  .iconOnly { width: 48px; height: 48px; }
+  .button:hover, .button:focus-visible { text-decoration: none; }
+  .primary { color: var(--service-on-signal); border-color: var(--service-signal); background: var(--service-signal); }
+  .primary:hover { border-color: var(--service-signal-2); background: var(--service-signal-2); }
+  .primary::after { background: var(--service-ink); }
+  .text, .text:hover, .text:focus-visible {
+    min-height: 44px; height: auto; padding: 0; border: 0; background: transparent;
+    color: inherit; font-weight: inherit; line-height: 1.55;
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px;
+    &::after { display: none; }
+  }
+  .text:hover, .text:focus-visible { text-decoration-color: var(--service-signal); }
+  .secondary, .ghost { color: var(--service-ink); border-color: var(--service-ink-2); }
+  .secondary:hover, .ghost:hover { border-color: var(--service-ink); background: var(--service-paper-3); }
+  .traced {
+    overflow: visible;
+    color: var(--service-signal);
+    border-color: rgba(71, 198, 226, .35);
+    background: transparent;
+    &::after { display: none; }
+    &:hover, &:focus-visible { color: var(--service-on-signal); border-color: var(--service-signal); background: var(--service-signal); }
+    &:hover .trace, &:focus-visible .trace { opacity: 0; }
+  }
+  .trace {
+    position: absolute;
+    inset: -1px;
+    display: block;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    max-width: none;
+    overflow: visible;
+    pointer-events: none;
+    rect {
+      fill: none;
+      stroke: var(--service-signal);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 22 78;
+      animation: serviceButtonTrace 2.8s linear infinite;
+    }
+    .traceTrail { opacity: .35; stroke-dasharray: 34 66; animation-delay: .12s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trace rect { animation: none; stroke-dasharray: none; opacity: .6; }
+  }
+}
+
+@keyframes serviceButtonTrace { to { stroke-dashoffset: -100; } }

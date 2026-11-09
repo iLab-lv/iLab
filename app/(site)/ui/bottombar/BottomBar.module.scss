@@ -102,3 +102,25 @@
 @media (prefers-reduced-motion: reduce) {
   .dockAction { transition: none !important; }
 }
+
+:global([data-service-redesign]) {
+  .bottomBar { z-index: 46; }
+  .dockAction { font-family: var(--service-font) !important; font-size: 17px !important; letter-spacing: normal; }
+  .dockAction > :global(span[aria-hidden='true']) { display: none; }
+  @media (min-width: 1024px) {
+    .bottomBar { inset: auto 24px 24px auto; display: flex; padding: 0; gap: 10px; }
+    .bottomBar[data-panel-open='true'] { visibility: hidden; }
+  }
+  @media (min-width: 1280px) { .bottomBar { right: 32px; bottom: 32px; } }
+  @media (max-width: 1023px) {
+    .bottomBar { z-index: 45; min-height: calc(60px + var(--safe)); }
+    .dockAction { height: 60px !important; min-height: 60px !important; padding-inline: 6px !important; font-size: 13px !important; line-height: 1.1; }
+    .contactAction { color: var(--service-signal) !important; background: transparent !important; }
+    .contactAction > :global(svg) { inset: 0; width: 100%; height: 100%; }
+    .contactAction:hover, .contactAction:focus-visible { color: var(--service-on-signal) !important; background: var(--service-signal) !important; }
+    .bookingAction { color: var(--service-ink) !important; border-color: var(--service-counter-hairline) !important; background: transparent !important; }
+    .bookingAction::after { display: none; }
+    .bookingAction:hover { background: var(--service-counter-2) !important; }
+  }
+}
+:global([data-service-redesign]) .bottomBar[data-navigation-open='true'] { visibility: hidden; }

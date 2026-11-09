@@ -1,0 +1,10 @@
+.well { position: relative; display: block; width: 100%; height: 136px; }
+.well img { object-fit: contain; }
+.well[data-model-thumbnail='tablet'] { height: 148px; }
+.well[data-model-thumbnail='laptop'] { height: 156px; }
+.well svg { display: block; width: 100%; height: 100%; padding: 20px; color: var(--service-ink-3); opacity: .65; }
+@media (max-width: 767px) {
+  .well { height: 116px; }
+  .well[data-model-thumbnail='tablet'] { height: 128px; }
+  .well[data-model-thumbnail='laptop'] { height: 136px; }
+}

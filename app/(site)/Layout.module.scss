@@ -1,34 +1,11 @@
-@use '../styles/_tokens.scss' as *;
-
 .siteRoot {
-  --topbar-h: 72px;
-  --service-paper: #070a0d;
-  --service-paper-2: #0c1115;
-  --service-paper-3: #131a20;
-  --service-ink: #f2f5f7;
-  --service-ink-2: #aeb8c0;
-  --service-ink-3: #6e7a84;
-  --service-hairline: #1c242b;
-  --service-counter-hairline: #243039;
-  --service-signal: #47c6e2;
-  --service-on-signal: #061016;
-  --service-font: 'Geologica', #{$font-family-base};
-  --service-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --service-container: 1440px;
-  --service-margin: 20px;
-  --service-gutter: 24px;
   min-width: 0;
   overflow-x: clip;
-  color: var(--service-ink);
   background: var(--service-paper);
-  font-family: var(--service-font);
-  font-variation-settings: 'SHRP' 0, 'CRSV' 0;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  padding-bottom: calc(var(--service-dock-h) + env(safe-area-inset-bottom));
 
   main { min-width: 0; }
-  @media (min-width: $bp-md) { --service-margin: 40px; }
-  @media (min-width: $bp-xl) { --service-margin: 96px; }
+  @media (min-width: 1024px) { padding-bottom: 0; }
 }
 
 .skipLink {

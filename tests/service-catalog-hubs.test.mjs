@@ -19,6 +19,7 @@ test('service catalog hubs share the approved isolated hero', async () => {
     assert.match(page, /headerTitle/);
     assert.match(page, /breadcrumbs/);
     assert.match(page, /targetId=/);
+    assert.match(page, /variant="hub"/);
   }
 
   const [hero, booking, styles] = await Promise.all([
@@ -28,7 +29,8 @@ test('service catalog hubs share the approved isolated hero', async () => {
   ]);
   assert.match(hero, /fetchPriority="high"/);
   assert.match(booking, /useUiDialogs\(\)/);
-  assert.match(booking, /openBooking\(event\.currentTarget\)/);
+  // All booking variants now use the existing provider; behavior and model
+  // context are exercised in service-drawers.test.mjs.
   assert.match(styles, /min-width:\s*1024px/);
   assert.match(styles, /max-width:\s*767px/);
 });

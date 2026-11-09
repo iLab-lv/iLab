@@ -1,10 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import Button from '@components/button/Button';
 import s from './BookingForm.module.scss';
 import { getBookingFormContent } from './bookingForm.i18n';
+import { validateBooking } from './bookingValidation';
 
 export default function BookingForm({
   locale = 'lv',
@@ -16,11 +17,28 @@ export default function BookingForm({
   initialValues = {},
   enableHoneypot = true,
   presentation = 'default',
+  serviceInteractions = false,
 }) {
   const t = getBookingFormContent(locale);
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
+  const submittingRef = useRef(false);
+  const successRef = useRef(null);
+  const formId = useId();
+  const drawer = presentation === 'drawer' && serviceInteractions;
+  const fieldId = (name) => drawer ? `${formId}-${name}` : name;
+  const errorProps = (name) => drawer ? {
+    'aria-invalid': errors[name] ? true : undefined,
+    'aria-describedby': errors[name] ? `${fieldId(name)}-error` : undefined,
+  } : {};
+  const fieldError = (name) => drawer && errors[name]
+    ? <span id={`${fieldId(name)}-error`} className={s.fieldError}>{t[errors[name]]}</span> : null;
+
+  useEffect(() => {
+    if (drawer && success) successRef.current?.focus();
+  }, [drawer, success]);
 
   const { defaultDate, minDate } = useMemo(() => {
     const d = new Date();
@@ -38,12 +56,24 @@ export default function BookingForm({
 
     e.preventDefault();
 
-    if (submitting || success) return;
+    if (submitting || success || (drawer && submittingRef.current)) return;
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    if (drawer) {
+      const nextErrors = validateBooking(Object.fromEntries(fd), { minDate, locationIds: locations.map((location) => location.id) });
+      setErrors(nextErrors);
+      if (Object.keys(nextErrors).length) {
+        form.querySelector(`[name="${Object.keys(nextErrors)[0]}"]`)?.focus();
+        return;
+      }
+      onError?.('');
+      submittingRef.current = true;
+    }
 
     try {
       setSubmitting(true);
 
-      const fd = new FormData(e.currentTarget);
       const res = await fetch('/api/booking', {
         method: 'POST',
         body: fd,
@@ -56,7 +86,11 @@ export default function BookingForm({
         const data = await res.json().catch(() => null);
         onError?.(data?.error || t.submitError);
       }
+    } catch (error) {
+      if (!drawer) throw error;
+      onError?.(t.submitError);
     } finally {
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }
@@ -82,7 +116,7 @@ export default function BookingForm({
     };
 
     return (
-      <div className={s.success} role="status" aria-live="polite">
+      <div ref={successRef} tabIndex={drawer ? -1 : undefined} className={s.success} role="status" aria-live="polite">
         <h2 className={s.successTitle}>{t.successTitle}</h2>
 
         <p className={s.successText}>{t.successText}</p>
@@ -101,7 +135,15 @@ export default function BookingForm({
   }
 
   return (
-    <form className={`${s.form} ${presentation === 'drawer' ? s.drawerForm : ''}`} {...formProps}>
+    <form className={`${s.form} ${presentation === 'drawer' ? s.drawerForm : ''}`} {...formProps} aria-busy={drawer ? submitting : undefined}
+      onInput={drawer ? (event) => {
+        const name = event.target.name;
+        setErrors((current) => {
+          if (!current[name]) return current;
+          const next = { ...current }; delete next[name]; return next;
+        });
+      } : undefined}>
+      {drawer && Object.keys(errors).length > 0 && <p className={s.validationSummary} role="alert">{t.validationError}</p>}
       {enableHoneypot ? (
         <input
           type="text"
@@ -115,21 +157,24 @@ export default function BookingForm({
 
       <div className={s.row}>
         <div className={s.field}>
-          <label htmlFor="name">{t.nameLabel}</label>
+          <label htmlFor={fieldId('name')}>{t.nameLabel}</label>
           <input
-            id="name"
+            id={fieldId('name')}
+            {...errorProps('name')}
             name="name"
             type="text"
             required
             autoComplete="name"
             defaultValue={initialValues.name || ''}
           />
+          {fieldError('name')}
         </div>
 
         <div className={s.field}>
-          <label htmlFor="phone">{t.phoneLabel}</label>
+          <label htmlFor={fieldId('phone')}>{t.phoneLabel}</label>
           <input
-            id="phone"
+            id={fieldId('phone')}
+            {...errorProps('phone')}
             name="phone"
             type="tel"
             inputMode="tel"
@@ -138,50 +183,59 @@ export default function BookingForm({
             autoComplete="tel"
             defaultValue={initialValues.phone || ''}
           />
+          {fieldError('phone')}
         </div>
       </div>
 
       <div className={s.row}>
         <div className={s.field}>
-          <label htmlFor="device">{t.deviceLabel}</label>
+          <label htmlFor={fieldId('device')}>{t.deviceLabel}</label>
           <input
-            id="device"
+            id={fieldId('device')}
+            {...errorProps('device')}
+            autoComplete={drawer ? 'off' : undefined}
             name="device"
             type="text"
             placeholder={t.devicePlaceholder}
             required
             defaultValue={initialValues.device || ''}
           />
+          {fieldError('device')}
         </div>
 
         <div className={s.field}>
-          <label htmlFor="date">{t.dateLabel}</label>
+          <label htmlFor={fieldId('date')}>{t.dateLabel}</label>
           <input
-            id="date"
+            id={fieldId('date')}
+            {...errorProps('date')}
             name="date"
             type="date"
             defaultValue={initialValues.date || defaultDate}
             min={minDate}
             required
           />
+          {fieldError('date')}
         </div>
       </div>
 
       <div className={s.field}>
-        <label htmlFor="fault">{t.faultLabel}</label>
+        <label htmlFor={fieldId('fault')}>{t.faultLabel}</label>
         <textarea
-          id="fault"
+          id={fieldId('fault')}
+          {...errorProps('fault')}
+          autoComplete={drawer ? 'off' : undefined}
           name="fault"
-          rows={4}
+          rows={drawer ? 2 : 4}
           placeholder={t.faultPlaceholder}
           required
           maxLength={600}
           defaultValue={initialValues.fault || ''}
         />
+        {fieldError('fault')}
       </div>
 
-      <fieldset className={s.fieldset} aria-labelledby="locgroup">
-        <legend id="locgroup">{t.locationLegend}</legend>
+      <fieldset className={s.fieldset} aria-labelledby={fieldId('locgroup')} {...errorProps('location')}>
+        <legend id={fieldId('locgroup')}>{t.locationLegend}</legend>
 
         <div className={s.locGrid}>
           {locations.map((loc, i) => (
@@ -207,10 +261,11 @@ export default function BookingForm({
             </label>
           ))}
         </div>
+        {fieldError('location')}
       </fieldset>
 
-      <fieldset className={s.fieldset} aria-labelledby="timegroup">
-        <legend id="timegroup">{t.timeLegend}</legend>
+      <fieldset className={s.fieldset} aria-labelledby={fieldId('timegroup')} {...errorProps('time')}>
+        <legend id={fieldId('timegroup')}>{t.timeLegend}</legend>
 
         <div className={s.timeGrid}>
           {['10:00-13:00', '13:00-17:00', '17:00-21:00'].map((slot, index) => (
@@ -231,6 +286,7 @@ export default function BookingForm({
             </label>
           ))}
         </div>
+        {fieldError('time')}
       </fieldset>
 
       <div className={s.actions}>

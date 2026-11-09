@@ -1,5 +1,6 @@
 import CenasPage, { getCenasPageStrings } from './CenasPage';
 
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 import JsonLd from '@components/seo/JsonLd';
 
 import categories from '@/data/categories';
@@ -225,6 +226,8 @@ function buildFaqLd(strings) {
 }
 
 async function getCenasData(searchParams) {
+  const faq = await getFaqGroups([{ scopeType: 'page', scopeKey: 'cenas' }], locale);
+  const resolvedLabels = { ...labels, faqTitle: faq.title, faqItems: faq.items };
   const resolvedSearchParams = await resolveSearchParams(searchParams);
 
   const { brandOptions, defaultBrand } = getAllBrandOptions();
@@ -269,10 +272,11 @@ async function getCenasData(searchParams) {
   const jsonLd = [
     buildBreadcrumbsLd(breadcrumbs),
     buildWebPageLd(labels),
-    buildFaqLd(labels),
+    ...(faq.items.length ? [buildFaqLd(resolvedLabels)] : []),
   ];
 
   return {
+    labels: resolvedLabels,
     breadcrumbs,
     jsonLd,
     devices: normalizedDevices,
@@ -296,7 +300,7 @@ export default async function Page({ searchParams }) {
 
       <CenasPage
         locale={locale}
-        labels={labels}
+        labels={data.labels}
         breadcrumbs={data.breadcrumbs}
         devices={data.devices}
         pricing={data.pricing}

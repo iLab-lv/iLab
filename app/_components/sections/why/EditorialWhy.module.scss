@@ -1,0 +1,24 @@
+.section[data-why='editorial'] {
+  box-sizing: border-box; width: 100%; max-width: 1440px; margin-inline: auto;
+  padding: clamp(64px,7vw,112px) var(--service-margin);
+  color: var(--service-ink); font: 400 17px/1.55 var(--service-font);
+  .layout { display: grid; grid-template-columns: minmax(0,3fr) minmax(0,5fr); gap: clamp(32px,5vw,72px); align-items: start; }
+  .intro { display: block; min-width: 0; margin: 0; color: var(--service-ink); }
+  .eyebrow { margin: 0 0 16px; color: var(--service-ink-2); font-size: 15px; }
+  .intro h2 { max-width: none; margin: 0; color: var(--service-ink); font: 600 clamp(30px,3vw,44px)/1.08 var(--service-font); letter-spacing: -.03em; font-variation-settings: 'SHRP' 100; text-wrap: balance; }
+  .subtitle { margin: 20px 0 0; color: var(--service-ink-2); font-size: 20px; line-height: 1.5; max-width: 45ch; }
+  .experience { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--service-hairline); }
+  .experience p { margin: 0; font-size: 17px; line-height: 1.55; }
+  .experience p:first-child { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+  .experience strong { font-size: 36px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+  .experience span { color: var(--service-ink-2); }
+  .experience p + p { margin-top: 16px; color: var(--service-ink-2); font-size: 16px; line-height: 1.6; }
+  .entries { list-style: none; padding: 0; margin: 0; min-width: 0; display: grid; }
+  .entries li { min-width: 0; display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 16px 24px; padding: 28px 0; border-top: 1px solid var(--service-hairline); }
+  .entries li:last-child { border-bottom: 1px solid var(--service-hairline); }
+  .entries h3 { margin: 0; font: 500 22px/1.25 var(--service-font); color: var(--service-ink); letter-spacing: -.01em; }
+  .entries p { margin: 0; color: var(--service-ink-2); font-size: 17px; line-height: 1.6; }
+  @media (max-width:1023px) { .layout { grid-template-columns: minmax(0,1fr); gap: 32px; } .intro { max-width: 72ch; } }
+  @media (max-width:767px) { .entries li { grid-template-columns: minmax(0,1fr); gap: 12px; padding-block: 24px; } }
+}
+:global([data-service-section]) > .section[data-why='editorial'] { padding: 0; }

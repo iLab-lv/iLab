@@ -108,3 +108,21 @@
   background: $color-accent;
 }
 
+/* This presentation is used only by the normal bilingual board-repair pages. */
+.section { padding: 0; border: 0; }
+.container { max-width: none; padding: 0; }
+.intro { max-width: 78ch; margin-bottom: 64px; font-size: var(--service-lead-size); line-height: 1.45; }
+.h2 { font: 600 clamp(32px, 3.2vw, 44px)/1.04 var(--service-font); letter-spacing: -.04em; }
+.contentGrid { gap: clamp(64px, 8vw, 112px); }
+.contentRow { align-items: start; gap: var(--service-gutter); }
+.media { border: 0; border-radius: 0; background: var(--service-paper-2); aspect-ratio: 1; min-height: 0; }
+.media :global(img) { object-fit: contain; }
+.copy { color: var(--service-ink-2); font-size: var(--service-body-size); line-height: 1.55; }
+.copy p + p { margin-top: 24px; }
+.list { margin-top: 32px; gap: 0; }
+.list li { padding: 16px 0; border-top: 1px solid var(--service-hairline); }
+.list li::before { content: none; }
+@media (min-width: 1024px) {
+  .contentRow, .contentRowReverse { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+

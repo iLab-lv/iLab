@@ -2,6 +2,8 @@
 @use '@/styles/_layout.scss' as layout;
 
 .container { @include layout.catalog-container; }
+.mobileTitleBreak { display: none; }
+@media (max-width: 767px) { .mobileTitleBreak { display: inline; } }
 .lensSection,.brandSection { padding-block:clamp($space-2xl,7vw,96px);border-bottom:$border-thin solid rgba(255,255,255,.08);background:#030303; }
 .lensSection { background:#030303; }
 .eyebrow { display:inline-flex;margin-bottom:$space-md;color:$color-accent;font-size:$font-size-sm;font-weight:$font-weight-semibold;letter-spacing:.04em;text-transform:uppercase; }
@@ -34,3 +36,37 @@
 .familyList li { min-height:30px;padding:6px 12px;border:$border-thin solid rgba(255,255,255,.18);color:$color-text;background:#080808;font-size:$font-size-sm;font-weight:$font-weight-semibold;line-height:1.1; }
 @media(max-width:$bp-lg){.lensLead{grid-template-columns:1fr}.lensVisual,.lensImage{min-height:280px}.brandRow{grid-template-columns:minmax(190px,.4fr) minmax(0,1fr)}.brandLogo{max-width:min(200px,90%)}.brandCopy{padding:$space-lg}}
 @media(max-width:$bp-sm){.lensSection,.brandSection{padding-block:$space-xl}.lensGrid{grid-template-columns:1fr}.brandRow{grid-template-columns:1fr}.brandIdentity{min-height:108px;padding:$space-lg 0 $space-md}.brandLogo{max-width:210px}.brandCopy{padding:$space-md 0 $space-xl}.familyList li{padding:5px 9px}}
+
+/* Photo/lens pages have no direct approved template. This composition uses the
+   established editorial grid while preserving every brand family and symptom. */
+:global([data-service-recovery]) {
+  .lensSection, .brandSection { width: 100%; max-width: var(--service-container); margin-inline: auto; padding: clamp(112px, 11vw, 176px) var(--service-margin); border-color: var(--service-hairline); background: transparent; }
+  .container { width: 100%; max-width: none; margin: 0; padding: 0; }
+  .eyebrow { color: var(--service-ink-3); font: 400 var(--service-tech-size)/1.55 var(--service-mono); letter-spacing: .14em; }
+  .lensLead { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--service-gutter); align-items: start; }
+  .lensLead h2, .header h2 { max-width: none; font: 600 clamp(32px, 3.2vw, 44px)/1.04 var(--service-font); letter-spacing: -.04em; }
+  .lensLead h2 span, .header h2 span { color: inherit; }
+  .lensLead p, .header p, .brandList p, .lensGrid p { color: var(--service-ink-2); font-size: var(--service-body-size); line-height: 1.55; }
+  .lensImage, .lensVisual { width: 100%; min-height: 0; aspect-ratio: 1; border: 0; border-radius: 0; background-color: var(--service-paper-2); background-size: contain; background-repeat: no-repeat; }
+  .lensVisual { color: var(--service-ink-3); }
+  .lensGrid { margin-top: 64px; gap: 0 64px; }
+  .lensGrid article { display: block; padding: 32px 0; border-top: 1px solid var(--service-hairline); background: transparent; }
+  .lensGrid i { display: none; }
+  .lensGrid h3, .brandList h3 { font: 500 22px/1.2 var(--service-font); letter-spacing: -.02em; }
+  .lensGrid strong { color: var(--service-ink); font-size: var(--service-small-size); font-weight: 500; }
+  .lensGrid article > div { padding-top: 20px; margin-top: 20px; border-color: var(--service-hairline); }
+  .expertNote { max-width: none; margin-top: 48px; padding: 32px 0 0; border: 0; border-top: 1px solid var(--service-hairline); background: transparent; font-size: var(--service-body-size); }
+  .header { max-width: none; margin-bottom: 64px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px var(--service-gutter); }
+  .header > span { grid-column: 1; }
+  .header h2 { grid-column: 1; }
+  .header p { grid-column: 2; grid-row: 1 / 3; margin: 0; }
+  .brandList, .brandRow { border-color: var(--service-hairline); }
+  .brandRow { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--service-gutter); padding: 40px 0; }
+  .brandIdentity { padding: 0; background: transparent; align-items: flex-start; min-height: 0; }
+  .brandLogo { width: 230px; max-width: 100%; height: auto; opacity: 1; }
+  .brandCopy { padding: 0; }
+  .familyList { gap: 0 24px; margin-top: 24px; }
+  .familyList li { padding: 12px 0; border: 0; border-bottom: 1px solid var(--service-hairline); background: transparent; font: 400 var(--service-small-size)/1.4 var(--service-mono); }
+  @media (max-width: 1023px) { .lensLead, .header, .brandRow { grid-template-columns: minmax(0, 1fr); gap: 32px; } .header > span, .header h2, .header p { grid-column: 1; grid-row: auto; } }
+  @media (max-width: 767px) { .lensGrid { grid-template-columns: minmax(0, 1fr); } }
+}

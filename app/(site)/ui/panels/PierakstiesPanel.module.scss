@@ -16,3 +16,7 @@
   border: 1px solid #ff6b62;
   background: rgba(255, 107, 98, .08);
 }
+
+:global([data-service-redesign]) .root { padding: 0 var(--service-drawer-inset) var(--service-drawer-bottom); }
+.intro { margin: 0 0 32px; color: var(--service-ink-2); font: 400 17px/1.55 var(--service-font); }
+:global([data-service-redesign]) .error { margin: 0 0 24px; padding: 16px 0; border: 0; border-top: 1px solid #f2b8b5; background: transparent; }

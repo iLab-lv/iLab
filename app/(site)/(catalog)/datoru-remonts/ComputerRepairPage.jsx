@@ -1,18 +1,21 @@
+import HubLocations from '@/_components/sections/catalog-hub/HubLocations';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
 import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 
-import Services from '@sections/services/Services';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import Services from '@/_components/sections/popular-repairs/RepairServices';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 import BrandList from '@sections/brand-list/BrandList';
-import Reviews from '@sections/reviews/Reviews';
+import Reviews from '@/_components/sections/catalog-hub/HubReviews';
 
 import {
   getComputerPopularServicesTitle,
 } from '@sections/services/services.i18n';
 
 import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 
 export function pickLocalized(value, locale = 'lv', fallback = '') {
   if (value == null) return fallback;
@@ -215,16 +218,21 @@ export default function ComputerRepairPage({
   return (
     <>
       <CatalogHero
+        variant="hub"
         locale={locale}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
         image={heroImage}
+        imageWidth={1024}
+        imageHeight={1138}
         imageAlt={strings.heroAlt}
         bodyHtml={safeHeroHtml}
         targetId={strings.scrollCta.targetId}
         targetLabel={strings.scrollCta.label}
-      />
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("computer", locale)} />
+      </CatalogHero>
 
       <main className={s.main}>
         <section className={s.section} aria-labelledby="computers-intro-h2">
@@ -240,18 +248,16 @@ export default function ComputerRepairPage({
           </div>
         </section>
 
-        <section className={s.section} aria-labelledby="popular-services-h2">
-          <div className={s.container}>
-            <Services
+        <Services
               id="computer-services"
+              locale={locale}
+              variant="compact"
               title={strings.popularServicesTitle}
               items={popularServices}
             />
-          </div>
-        </section>
 
         {brands.length > 0 && (
-          <BrandList
+          <div className={`${skin.block} ${skin.brands}`}><BrandList
             id="brand-list"
             basePath={basePath}
             appleTitle={strings.appleTitle}
@@ -260,21 +266,16 @@ export default function ComputerRepairPage({
             otherIntro={strings.otherIntro}
             brands={brands}
             locale={locale}
-          />
+          /></div>
         )}
 
         {page.sections?.hasReviews && <Reviews locale={locale} />}
         {page.sections?.hasProcess && <Process locale={locale} />}
 
-        {page.sections?.hasWhy && (
-          <section className={s.section}>
-            <Why locale={locale} />
-          </section>
-        )}
+      <HubLocations id="computer-locations" locale={locale} />
 
         {page.sections?.hasFaq && faqItems.length > 0 && (
-          <section className={s.section} aria-labelledby="faq-h2">
-            <div className={s.container}>
+          <div data-service-section="faq" className={skin.block}>
               <Faq
                 id="computers-faq"
                 title={faqTitle || strings.faqTitle}
@@ -283,14 +284,13 @@ export default function ComputerRepairPage({
                 variant="accordion"
                 locale={locale}
               />
-            </div>
-          </section>
+          </div>
         )}
 
         {page.sections?.hasConvertBand && (
-          <section className={s.section}>
+          <div className={`${skin.block} ${skin.closing} ${skin.genericClosing}`}><section>
             <ConvertBand locale={locale} />
-          </section>
+          </section></div>
         )}
       </main>
     </>

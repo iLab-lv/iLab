@@ -1,21 +1,21 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-
-import DeviceHero from '@sections/device-hero/DeviceHero';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ModelHero from '@/_components/sections/device-detail/ModelHero';
+import ModelServices from '@/_components/sections/device-detail/ModelServices';
 import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
-import PopularServices from '@/_components/sections/popular-services/PopularServices';
 import ModelPriceList from '@/_components/sections/model-price-list/ModelPriceList';
 import ModelSymptomGuide from '@/_components/sections/model-symptom-guide/ModelSymptomGuide';
 import IphoneRepairDecisionSection from '@/_components/page-sections/iphone-remonts/repair-decision/IphoneRepairDecisionSection';
-import WhyUs from '@/_components/sections/why-us/WhyUs';
+import EditorialWhy from '@/_components/sections/why/EditorialWhy';
+import { getEditorialWhyContent } from '@/_components/sections/why/editorialWhy.content';
 import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
-import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
 import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
 import FinalCta from '@/_components/sections/final-cta/FinalCta';
 import RelatedModels from '@/_components/sections/related-models/RelatedModels';
 import BeforeVisiting from '@/_components/sections/before-visiting/BeforeVisiting';
-import Faq from '@sections/faq/Faq';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 
-import s from '@/app/(site)/(catalog)/iphone-remonts/[device]/Device.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
+import modelSkin from '@/_components/sections/device-detail/ModelDetailSkin.module.scss';
 
 export default function IphoneDevicePage({
   locale = 'lv',
@@ -44,31 +44,31 @@ export default function IphoneDevicePage({
   faqItems = [],
 }) {
   return (
-    <>
-      <PageHeader
+    <div data-catalog-model className={modelSkin.page}>
+      <ModelHero
+        locale={locale}
+        modelName={deviceName}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={headerScrollCta}
+        targetId={headerScrollCta?.targetId || 'cenas'}
+        targetLabel={headerScrollCta?.label}
         crumbs={headerCrumbs}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={heroAlt}
+        imageAlt={heroAlt}
         bodyHtml={bodyHtml}
-      />
+      ><QuickFacts variant="iphone-model" locale={locale} /></ModelHero>
 
-      <QuickFacts variant="iphone-model" locale={locale} />
-
-      <PopularServices
+      <ModelServices
+        id="iphone-services"
         locale={locale}
-        variant="model"
+        iphone
         modelName={deviceName}
         priceTargetId="cenas"
+        priceItems={priceItems}
+        currency={currency}
       />
 
       {!!priceItems.length && (
-        <section className={s.section}>
           <ModelPriceList
             id="cenas"
             modelName={deviceName}
@@ -77,8 +77,8 @@ export default function IphoneDevicePage({
             currency={currency}
             headingLevel={2}
             locale={locale}
+            variant="model"
           />
-        </section>
       )}
 
       <RelatedModels
@@ -86,17 +86,16 @@ export default function IphoneDevicePage({
         devices={relatedDevices}
         baseHref={relatedBaseHref}
         locale={locale}
+        variant="model"
       />
 
-      <ModelSymptomGuide locale={locale} modelName={deviceName} />
+      <div className={`${skin.block} ${modelSkin.symptoms}`}><ModelSymptomGuide locale={locale} modelName={deviceName} /></div>
 
-      <IphoneRepairDecisionSection locale={locale} />
+      <div className={`${skin.block} ${modelSkin.decision}`}><IphoneRepairDecisionSection locale={locale} /></div>
 
-      <WhyUs locale={locale} variant="iphone" />
+      <div className={skin.block} data-service-section="why"><EditorialWhy {...getEditorialWhyContent(locale)} /></div>
 
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
-
-      <IphoneLocationsSection locale={locale} />
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       <RepairProcess
         id="iphone-repair-steps"
@@ -105,20 +104,22 @@ export default function IphoneDevicePage({
         backgroundImage="/images/hands-closeup.png"
       />
 
-      <BeforeVisiting locale={locale} modelName={deviceName} />
+      <div className={`${skin.block} ${modelSkin.before}`}><BeforeVisiting locale={locale} modelName={deviceName} /></div>
 
       {!!faqItems.length && (
-        <section className={s.section}>
+        <div data-service-section="faq" className={skin.block}>
           <Faq
             id="model-faq"
             title={faqTitle}
             items={faqItems}
             locale={locale}
           />
-        </section>
+        </div>
       )}
 
-      <FinalCta locale={locale} variant="iphone" />
-    </>
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <div className={`${skin.block} ${skin.closing}`}><FinalCta locale={locale} variant="iphone" /></div>
+    </div>
   );
 }

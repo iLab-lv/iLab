@@ -250,3 +250,33 @@
     }
   }
 }
+
+:global([data-service-redesign]) .wrap { padding: 0 var(--service-drawer-inset) var(--service-drawer-bottom); }
+.serviceWrap { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; padding: 0 var(--service-drawer-inset) var(--service-drawer-bottom); color: var(--service-ink); }
+.serviceTabs { display: flex; width: 100%; border-bottom: 1px solid var(--service-counter-hairline); }
+.serviceTabs button { position: relative; min-width: 0; min-height: 53px; margin-right: 32px; padding: 14px 0; border: 0; color: var(--service-ink-2); background: transparent; font: 500 17px/1.55 var(--service-font); font-variation-settings: 'SHRP' 60; text-align: center; cursor: pointer; }
+.serviceTabs button[aria-selected='true'] { color: var(--service-ink); }
+.serviceTabs button[aria-selected='true']::after { content: ''; position: absolute; inset: auto 0 -1px; height: 1px; background: var(--service-signal); }
+.serviceBranch { display: grid; gap: 12px; width: 100%; padding: 24px 0; border-top: 1px solid var(--service-counter-hairline); }
+.serviceBranchHead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding-bottom: 12px; }
+.serviceBranch h3 { margin: 0; font: 500 17px/1.55 var(--service-font); letter-spacing: .06em; text-transform: uppercase; }
+.serviceBranchHead span { color: var(--service-ink-3); font: 400 11px/1.5 var(--service-mono); letter-spacing: .14em; text-transform: uppercase; }
+.serviceBranch address { color: var(--service-ink-2); font: 400 15px/1.55 var(--service-font); }
+.availability { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.serviceStatus { display: inline-flex; align-items: center; gap: 10px; margin: 12px 0 0; font: 400 11px/1.55 var(--service-mono); letter-spacing: .1em; text-transform: uppercase; }
+.serviceStatus i { width: 6px; height: 6px; flex: 0 0 6px; background: var(--service-ink-2); }
+.serviceStatus i[data-open='true'] { background: var(--service-signal); }
+.serviceHours { flex: 0 0 min(210px, 48%); }
+.serviceHours button { width: 100%; min-height: 44px; padding: 11px 0 11px 16px; border: 0; border-left: 2px solid var(--service-signal); background: transparent; color: var(--service-ink); font: 500 15px/1.45 var(--service-font); text-align: left; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.serviceHours dl { margin: 12px 0 0; font-size: 13px; }
+.serviceHours dl div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-top: 1px solid var(--service-counter-hairline); }
+.serviceHours dd { margin: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.servicePhone { color: var(--service-ink); font: 500 20px/1.55 var(--service-font); font-variation-settings: 'SHRP' 100; font-variant-numeric: tabular-nums; text-decoration: none; }
+.serviceLinks { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 15px; }
+.serviceLinks a { color: var(--service-ink); text-decoration: underline; text-decoration-color: var(--service-counter-hairline); text-underline-offset: 4px; overflow-wrap: anywhere; }
+.serviceWrap :is(a, button):hover { color: var(--service-signal); }
+.serviceWrap > button:hover { color: var(--service-on-signal); }
+.serviceWrap :is(a, button):focus-visible { outline: 2px solid var(--service-signal); outline-offset: 3px; }
+@media (max-width: 420px) { .availability { flex-direction: column; align-items: stretch; } .serviceStatus { margin-top: 0; } .serviceHours { flex-basis: auto; } }
+.serviceWrap { gap: 0; }
+.serviceWrap > button { margin-top: 32px; }

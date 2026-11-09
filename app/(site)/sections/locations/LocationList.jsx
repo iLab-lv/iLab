@@ -10,6 +10,7 @@ export default function LocationList({
   selectedLocationId,
   showAllCards = false,
   showActions = true,
+  showContactActions = false,
   onLocationChange,
   className = '',
   locale = 'lv',
@@ -78,9 +79,9 @@ export default function LocationList({
           <LocationCard
             key={loc.id}
             location={loc}
-            variant="simplified"
+            variant={showContactActions ? 'full' : 'simplified'}
             highlighted={selectedLocationId === loc.id}
-            showActions={false}
+            showActions={showContactActions}
             locale={locale}
             content={t}
           />

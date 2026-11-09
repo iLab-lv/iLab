@@ -1,0 +1,239 @@
+# R7.4E.2 — exact FAQ migration content diff
+
+Prepared 2026-11-06 from existing LV/RU source copy. Read-only production check: all six target records are absent. No production writes performed. This is the exact proposed create-only diff; timestamps are assigned only in the future authorized transaction. Matching records remain untouched; any conflict aborts the entire operation.
+
+Machine-readable manifest: [faqMigration.manifest.json](../../lib/faq/faqMigration.manifest.json).
+
+## category_fotoaparatu-remonts_lv
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "category",
+  "scopeKey": "fotoaparatu-remonts",
+  "locale": "lv",
+  "title": "Biežāk uzdotie jautājumi par fotoaparātu remontu",
+  "isPublished": true,
+  "order": 10,
+  "items": [
+    {
+      "q": "Vai fotoaparātu diagnostikai jānes arī objektīvs?",
+      "aHtml": "Ja problēma saistīta ar fokusēšanu, attēla asumu, kameras un objektīva savienojumu vai kļūdas paziņojumiem, diagnostikai vēlams atnest gan fotoaparātu, gan objektīvu, ar kuru problēma novērota. Tas palīdz precīzāk noteikt, vai bojājums atrodas kamerā, objektīvā vai savienojumā starp abām ierīcēm.",
+      "order": 10
+    },
+    {
+      "q": "Vai objektīvu iespējams salabot, vai tas vienmēr jāmaina?",
+      "aHtml": "Objektīvs ne vienmēr jāmaina pilnībā. Atkarībā no modeļa un bojājuma iespējams remontēt mehānismu, kontaktus, elektroniku vai atsevišķus iekšējos mezglus. Precīzu remonta iespēju nosakām pēc diagnostikas.",
+      "order": 20
+    },
+    {
+      "q": "Vai remontējat Canon, Nikon un Sony fotoaparātus?",
+      "aHtml": "Jā, veicam Canon, Nikon un Sony fotoaparātu un objektīvu diagnostiku un remontu atkarībā no konkrētā modeļa, bojājuma veida un detaļu pieejamības. Tas ietver arī Canon EOS un EOS R, Nikon DSLR un Z sērijas, kā arī Sony Alpha kameras.",
+      "order": 30
+    },
+    {
+      "q": "Ko darīt, ja fotoaparāts nokritis, bet vēl darbojas?",
+      "aHtml": "Ja pēc kritiena fotoaparāts turpina darboties, tas vēl nenozīmē, ka iekšēju bojājumu nav. Trieciens var ietekmēt objektīva stiprinājumu, fokusēšanu, vadības elementus, savienojumus vai iekšējos mezglus. Ja pēc kritiena parādījušās izmaiņas darbībā, ieteicama diagnostika.",
+      "order": 40
+    },
+    {
+      "q": "Ko darīt, ja fotoaparāts vai objektīvs samircis?",
+      "aHtml": "Neieslēdz un neuzlādē ierīci. Ja bateriju iespējams droši izņemt, atvieno to. Fototehniku vēlams pēc iespējas ātrāk nodot diagnostikai, jo mitrums var izraisīt oksidāciju arī pēc tam, kad ierīce ārēji jau šķiet sausa.",
+      "order": 50
+    },
+    {
+      "q": "Kāpēc remonta cenu nevar vienmēr pateikt uzreiz?",
+      "aHtml": "Vienam un tam pašam simptomam var būt vairāki iemesli. Piemēram, fokusēšanas problēma var būt saistīta ar objektīvu, kameru, kontaktiem vai elektroniku. Tāpēc precīzu remonta risinājumu un cenu nosakām pēc diagnostikas un saskaņojam pirms darba sākšanas.",
+      "order": 60
+    }
+  ]
+}
+```
+
+## service_iphone-plates-remonts_lv
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "service",
+  "scopeKey": "iphone-plates-remonts",
+  "locale": "lv",
+  "title": "Jautājumi par iPhone plates remontu",
+  "isPublished": true,
+  "order": 10,
+  "items": [
+    {
+      "q": "Cik maksā iPhone plates remonts?",
+      "aHtml": "Cena ir atkarīga no bojājuma, modeļa un nepieciešamajiem mikrolodēšanas darbiem. Precīzu cenu nosakām pēc diagnostikas.",
+      "order": 10
+    },
+    {
+      "q": "Vai plates remonts palīdz, ja iPhone neieslēdzas?",
+      "aHtml": "Bieži jā, bet vispirms jānoskaidro iemesls. Problēma var būt barošanas ķēdē, īssavienojumā, mitruma bojājumā vai citā plates mezglā.",
+      "order": 20
+    },
+    {
+      "q": "Vai pēc plates remonta dati saglabājas?",
+      "aHtml": "Daudzos gadījumos mērķis ir atjaunot ierīci vai piekļuvi datiem, bet garantēt datu saglabāšanu pirms diagnostikas nav iespējams. Ja dati ir īpaši svarīgi, pasaki to pirms remonta.",
+      "order": 30
+    },
+    {
+      "q": "Cik ilgi notiek mikrolodēšana?",
+      "aHtml": "Vienkāršāki darbi var aizņemt dažas stundas, bet sarežģīti plates bojājumi prasa ilgāku diagnostiku un testēšanu.",
+      "order": 40
+    }
+  ]
+}
+```
+
+## page_cenas_lv
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "page",
+  "scopeKey": "cenas",
+  "locale": "lv",
+  "title": "Biežāk uzdotie jautājumi",
+  "isPublished": true,
+  "order": 20,
+  "items": [
+    {
+      "q": "Kāpēc dažiem modeļiem cena nav redzama?",
+      "aHtml": "Ne visiem modeļiem un pakalpojumiem cenas ir publicētas. Šādos gadījumos sazinieties ar mums - precizēsim cenu un termiņu pēc diagnostikas.",
+      "order": 10
+    },
+    {
+      "q": "Vai cena var atšķirties pēc diagnostikas?",
+      "aHtml": "Dažreiz jā - ja papildus konstatējam citus bojājumus, piemēram, uzlādes ķēdes vai mitruma sekas, pirms remonta saskaņojam atjauninātu tāmi.",
+      "order": 20
+    },
+    {
+      "q": "Vai ir garantija?",
+      "aHtml": "Jā - remontiem parasti ir garantija. Konkrētais termiņš var atšķirties atkarībā no pakalpojuma un detaļas veida.",
+      "order": 30
+    }
+  ]
+}
+```
+
+## category_fotoaparatu-remonts_ru
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "category",
+  "scopeKey": "fotoaparatu-remonts",
+  "locale": "ru",
+  "title": "Частые вопросы о ремонте фотоаппаратов",
+  "isPublished": true,
+  "order": 10,
+  "items": [
+    {
+      "q": "Нужно ли приносить объектив вместе с фотоаппаратом на диагностику?",
+      "aHtml": "Если проблема связана с фокусировкой, резкостью изображения, соединением камеры и объектива или сообщениями об ошибках, желательно принести и фотоаппарат, и объектив, с которым проявляется неисправность. Это помогает точнее определить, находится ли проблема в камере, объективе или соединении между ними.",
+      "order": 10
+    },
+    {
+      "q": "Можно ли отремонтировать объектив или его всегда нужно менять?",
+      "aHtml": "Объектив не всегда нужно менять целиком. В зависимости от модели и характера неисправности возможен ремонт механизма, контактов, электроники или отдельных внутренних узлов. Точную возможность ремонта определяем после диагностики.",
+      "order": 20
+    },
+    {
+      "q": "Ремонтируете ли вы фотоаппараты Canon, Nikon и Sony?",
+      "aHtml": "Да, выполняем диагностику и ремонт фотоаппаратов и объективов Canon, Nikon и Sony в зависимости от конкретной модели, характера неисправности и доступности деталей. В том числе работаем с Canon EOS и EOS R, Nikon DSLR и серией Z, а также камерами Sony Alpha.",
+      "order": 30
+    },
+    {
+      "q": "Что делать, если фотоаппарат упал, но продолжает работать?",
+      "aHtml": "Если после падения фотоаппарат продолжает работать, это не означает, что внутренних повреждений нет. Удар может повлиять на крепление объектива, фокусировку, органы управления, соединения или внутренние узлы. Если после падения работа устройства изменилась, рекомендуется диагностика.",
+      "order": 40
+    },
+    {
+      "q": "Что делать, если фотоаппарат или объектив намок?",
+      "aHtml": "Не включайте и не заряжайте устройство. Если аккумулятор можно безопасно извлечь, отключите его. Фототехнику желательно как можно быстрее передать на диагностику, поскольку влага может вызвать окисление даже после того, как снаружи устройство уже кажется сухим.",
+      "order": 50
+    },
+    {
+      "q": "Почему стоимость ремонта не всегда можно назвать сразу?",
+      "aHtml": "Один и тот же симптом может иметь разные причины. Например, проблема с фокусировкой может быть связана с объективом, камерой, контактами или электроникой. Поэтому точный вариант ремонта и стоимость определяем после диагностики и согласовываем до начала работы.",
+      "order": 60
+    }
+  ]
+}
+```
+
+## service_iphone-plates-remonts_ru
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "service",
+  "scopeKey": "iphone-plates-remonts",
+  "locale": "ru",
+  "title": "Вопросы о ремонте платы iPhone",
+  "isPublished": true,
+  "order": 10,
+  "items": [
+    {
+      "q": "Сколько стоит ремонт платы iPhone?",
+      "aHtml": "Цена зависит от неисправности, модели и объёма микропайки. Точную стоимость называем после диагностики.",
+      "order": 10
+    },
+    {
+      "q": "Поможет ли ремонт платы, если iPhone не включается?",
+      "aHtml": "Часто да, но сначала нужно найти причину. Это может быть цепь питания, короткое замыкание, повреждение влагой или другой узел платы.",
+      "order": 20
+    },
+    {
+      "q": "Сохраняются ли данные после ремонта платы?",
+      "aHtml": "Во многих случаях цель ремонта - восстановить устройство или доступ к данным, но гарантировать сохранность данных до диагностики невозможно. Если данные особенно важны, скажите об этом заранее.",
+      "order": 30
+    },
+    {
+      "q": "Сколько времени занимает микропайка?",
+      "aHtml": "Простые работы могут занять несколько часов, а сложные повреждения платы требуют более долгой диагностики и тестирования.",
+      "order": 40
+    }
+  ]
+}
+```
+
+## page_cenas_ru
+
+Before: absent (read-only production check). After:
+
+```json
+{
+  "scopeType": "page",
+  "scopeKey": "cenas",
+  "locale": "ru",
+  "title": "Часто задаваемые вопросы",
+  "isPublished": true,
+  "order": 20,
+  "items": [
+    {
+      "q": "Почему для некоторых моделей не отображается цена?",
+      "aHtml": "Не для всех моделей и услуг цены опубликованы. В таких случаях свяжитесь с нами - мы уточним стоимость и срок после диагностики.",
+      "order": 10
+    },
+    {
+      "q": "Может ли цена измениться после диагностики?",
+      "aHtml": "Иногда да - если дополнительно обнаруживаются другие повреждения, например проблемы с цепью зарядки или последствия попадания влаги, перед ремонтом мы согласуем обновлённую смету.",
+      "order": 20
+    },
+    {
+      "q": "Есть ли гарантия?",
+      "aHtml": "Да - на ремонт обычно предоставляется гарантия. Конкретный срок может отличаться в зависимости от услуги и типа детали.",
+      "order": 30
+    }
+  ]
+}
+```
+
+Production execution is disabled in the prepared CLI. Approval of these six exact records is required before enabling a production apply path. Back-cover documents are excluded.

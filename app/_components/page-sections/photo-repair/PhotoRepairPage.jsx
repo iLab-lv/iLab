@@ -1,25 +1,29 @@
-import Faq from '@sections/faq/Faq';
-import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
+import FullLocations from '@/_components/sections/full-locations/FullLocations';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import Reviews from '@/_components/sections/reviews/Reviews';
 import PopularServices from '@/_components/sections/popular-services/PopularServices';
-import WhyUs from '@/_components/sections/why-us/WhyUs';
+import EditorialWhy from '@/_components/sections/why/EditorialWhy';
 import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
 import Guide from '@/_components/sections/guide/Guide';
 import ProblemAnswers from '@/_components/sections/problem-answers/ProblemAnswers';
 import QualitySection from '@/_components/sections/quality/QualitySection';
 import RepairDecisionSection from '@/_components/sections/repair-decision/RepairDecisionSection';
-import LandingLocations from '@/app/landings/_components/locations/LandingLocations';
-import LandingCtaProvider from '@/app/landings/_components/ui/providers/LandingCtaProvider';
-import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 import FinalCta from '@/_components/sections/final-cta/FinalCta';
 
 import { getPhotoRepairContent } from './photoRepairContent';
 import LensRepairSection from './LensRepairSection';
 import CameraBrandRepairSection from './CameraBrandRepairSection';
 import s from '@styles/Catalog.module.scss';
+import photoStyles from './PhotoRepairSections.module.scss';
 
 export default function PhotoRepairPage({
   locale = 'lv',
+  faqItems = [],
+  faqTitle,
   baseHref,
   siteSettings,
   reviewsSummary,
@@ -54,7 +58,6 @@ export default function PhotoRepairPage({
     { label: copy.home, href: locale === 'ru' ? '/ru' : '/' },
     { label: copy.breadcrumb, href: baseHref },
   ];
-  const faqItems = copy.faq.map(([q, a]) => ({ q, a }));
   const popularServicesContent = {
     copy: {
       ...headings.services,
@@ -68,11 +71,11 @@ export default function PhotoRepairPage({
       price: item.meta,
     })),
   };
-  const whyUsContent = {
+  const whyContent = {
     eyebrow: copy.why.eyebrow,
-    ...headings.why,
-    intro: copy.why.intro,
-    points: copy.why.items.map((item) => [item.title, item.text]),
+    title: copy.why.title,
+    subtitle: copy.why.intro,
+    entries: copy.why.items.map(({ title, text }) => ({ title, description: text })),
   };
   const qualityContent = {
     ...copy.quality,
@@ -101,10 +104,12 @@ export default function PhotoRepairPage({
   };
 
   return (
-    <>
-      <CatalogHero
+    <ServiceRecovery>
+      <ServiceHero
         locale={locale}
-        title={copy.h1}
+        title={copy.h1 === 'Ремонт фотоаппаратов в Риге'
+          ? <><span>Ремонт</span>{' '}<span>фото<span className={photoStyles.mobileTitleBreak}>{'\u00ad'}</span>аппаратов</span>{' '}<span>в Риге</span></>
+          : copy.h1}
         lead={copy.hero[0]}
         crumbs={breadcrumbs}
         image={heroImage}
@@ -113,29 +118,27 @@ export default function PhotoRepairPage({
         targetId="photo-services"
         targetLabel={copy.scroll}
         placeholderLabel={copy.meta.imageAlt}
-      />
-      <QuickFacts variant="photo" locale={locale} />
-      <section className={`${s.section} ${s.introSection}`}>
+      ><QuickTrustFacts {...getQuickTrustFacts("photo", locale)} /></ServiceHero>
+
+      <ServiceBlock kind="intro"><section className={`${s.section} ${s.introSection}`}>
         <div className={s.container}>
           <h2 className={s.h2}>{headings.intro.titleStart}<span>{headings.intro.titleAccent}</span>{headings.intro.titleEnd}</h2>
           {copy.intro.intro.map((paragraph) => <p className={s.paragraph} key={paragraph}>{paragraph}</p>)}
         </div>
-      </section>
+      </section></ServiceBlock>
       <PopularServices locale={locale} variant="photo" content={popularServicesContent} />
       <LensRepairSection content={{ ...copy.lenses, ...headings.lenses }} image={lensImage} />
       <CameraBrandRepairSection content={{ ...copy.brands, ...headings.brands }} />
-      <ProblemAnswers id="photo-problems" content={problemAnswersContent} variant="photo" />
-      <WhyUs locale={locale} variant="photo" content={whyUsContent} />
-      <QualitySection id="photo-quality" content={qualityContent} />
-      <RepairDecisionSection id="photo-decision" content={{ ...copy.decision, ...headings.decision }} />
+      <ServiceBlock kind="problems"><ProblemAnswers id="photo-problems" content={problemAnswersContent} variant="photo" /></ServiceBlock>
+      <ServiceBlock kind="photoWhy"><EditorialWhy {...whyContent} /></ServiceBlock>
+      <ServiceBlock kind="quality"><QualitySection id="photo-quality" content={qualityContent} /></ServiceBlock>
+      <ServiceBlock kind="photoDecision"><RepairDecisionSection id="photo-decision" content={{ ...copy.decision, ...headings.decision }} /></ServiceBlock>
       <Reviews locale={locale} reviewsSummary={reviewsSummary} />
-      <LandingCtaProvider siteSettings={siteSettings}>
-        <LandingLocations id="photo-locations" locale={locale} heading={copy.locations} />
-      </LandingCtaProvider>
+      <FullLocations id="photo-locations" locale={locale} title={copy.locations.titleMain + copy.locations.titleAccent} subtitle={copy.locations.subtitle} locations={siteSettings?.locations || []} pinPositions={siteSettings?.pinPositions || {}} defaultHours={siteSettings?.hours || []} />
       <RepairProcess id="photo-repair-steps" locale={locale} variant="photo" content={processContent} backgroundImage="/images/hands-closeup.png" />
-      <Guide id="photo-guide" locale={locale} variant="photo" content={guideContent} />
-      <Faq id="photo-faq" title={copy.faqTitle} items={faqItems} />
-      <FinalCta id="photo-final-cta" locale={locale} />
-    </>
+      <ServiceBlock kind="guide"><Guide id="photo-guide" locale={locale} variant="photo" content={guideContent} /></ServiceBlock>
+      <ServiceBlock kind="faq"><Faq id="photo-faq" title={faqTitle || copy.faqTitle} items={faqItems} /></ServiceBlock>
+      <ServiceBlock kind="closing"><FinalCta id="photo-final-cta" locale={locale} /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

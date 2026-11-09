@@ -287,7 +287,7 @@ async function getIphoneBackCoverServiceData({ selectedModel }) {
     buildPricing(),
     getServiceMetaMap(SERVICE_IDS),
     getFaqGroups(
-      [{ scopeType: 'service', scopeKey: SERVICE_KEY }],
+      [{ scopeType: 'service', scopeKey: SERVICE_KEY, fallback: 'basic' }],
       locale
     ),
     getReviewsSummary(),

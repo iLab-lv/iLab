@@ -1,10 +1,11 @@
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
 import Image from 'next/image';
 
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
@@ -18,26 +19,21 @@ export default function IphoneBoardRepairServicePage({
   faqItems = [],
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{
-          label: strings.headerCtaLabel,
-          targetId: 'plates-diagnostika',
-        }}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={strings.heroImage}
-        alt={strings.heroAlt}
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
-        focal="right"
-        priority
+        targetId="plates-diagnostika"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
       />
 
-      <section
+      <ServiceBlock kind="board"><section
         id="plates-diagnostika"
         className={s.section}
         aria-labelledby="plates-diagnostika-h2"
@@ -96,13 +92,13 @@ export default function IphoneBoardRepairServicePage({
             </article>
           </div>
         </div>
-      </section>
+      </section></ServiceBlock>
 
       <Process locale={locale} />
 
-      <Why locale={locale} />
+      <ServiceBlock kind="benefits"><Why locale={locale} /></ServiceBlock>
 
-      <section className={sCatalog.section} aria-labelledby="faq-h2">
+      <ServiceBlock kind="faq"><section className={sCatalog.section} aria-labelledby="faq-h2">
         <div className={sCatalog.container}>
           <Faq
             id="iphone-board-repair-faq"
@@ -112,12 +108,14 @@ export default function IphoneBoardRepairServicePage({
             locale={locale}
           />
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section id="pieteikties" aria-label={strings.applyAria}>
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <ServiceBlock kind="genericClosing"><section id="pieteikties" aria-label={strings.applyAria}>
         <ConvertBand locale={locale} />
-      </section>
-    </>
+      </section></ServiceBlock>
+    </ServiceRecovery>
   );
 }
 

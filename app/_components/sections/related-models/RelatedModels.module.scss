@@ -13,3 +13,14 @@
 @media(max-width:$bp-lg){.card{flex-basis:calc((100% - (#{$space-md} * 2)) / 3)}}
 @media(max-width:$bp-md){.carousel{padding-inline:0}.control{display:none}.card{flex-basis:42%}}
 @media(max-width:$bp-sm){.card{flex-basis:72%}}
+
+.model { padding-block: 64px; }
+.model .container { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px var(--service-gutter); max-width: var(--service-container); padding-inline: var(--service-margin); }
+.model .header { max-width: none; margin: 0; }
+.model .header h2 { color: var(--service-ink); font: 600 clamp(30px, 3vw, 44px)/1.04 var(--service-font); letter-spacing: -.03em; }
+.model .header h2 span { margin-left: .22em; }
+.model .header p { color: var(--service-ink-2); font-size: var(--service-body-size); line-height: 1.55; margin-top: 16px; }
+.model .links { display: flex; flex-wrap: wrap; align-content: start; gap: 12px 28px; border: 0; }
+.model .links a { display: inline-flex; min-width: 0; min-height: 44px; max-width: 100%; border: 0; color: var(--service-ink); font-size: var(--service-lead-size); line-height: 1.45; text-decoration: underline; text-decoration-color: var(--service-hairline); text-underline-offset: 4px; overflow-wrap: break-word; }
+.model .links a:hover { color: var(--service-signal); transform: none; }
+@media(max-width:1023px){.model .container{grid-template-columns:minmax(0,1fr)}}

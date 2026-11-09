@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import Button from '../../components/button/Button';
 import LocationPin from '../../components/icons/LocationPin';
@@ -15,17 +15,26 @@ const MobileNavDrawer = dynamic(() => import('./MobileNavDrawer'), {
   ssr: false,
 });
 
+function ServiceLocationPin(props) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z" /><circle cx="12" cy="11" r="2.2" /></svg>;
+}
+
 export default function HeaderActions({
   items,
   locale,
   pathname,
   showHeaderCtas,
   showNavigation,
+  showShopSwitch = true,
 }) {
   const cta = getCtaMainContent(locale);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [localMobileOpen, setLocalMobileOpen] = useState(false);
+  const menuOpenerRef = useRef(null);
   const [mobileExpandedSlug, setMobileExpandedSlug] = useState(null);
-  const { locatorOpen, contactOpen, openLocator, openContact } = useUiDialogs();
+  const { locatorOpen, contactOpen, openLocator, openContact, serviceRedesign, navigationOpen, setNavigationOpen } = useUiDialogs();
+  const mobileOpen = serviceRedesign ? navigationOpen : localMobileOpen;
+  const setMobileOpen = serviceRedesign ? setNavigationOpen : setLocalMobileOpen;
+  const LocatorIcon = serviceRedesign ? ServiceLocationPin : LocationPin;
 
   useEffect(() => {
     const onKey = (e) => {
@@ -37,9 +46,10 @@ export default function HeaderActions({
 
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, []);
+  }, [setMobileOpen]);
 
   useEffect(() => {
+    if (serviceRedesign) return;
     const body = document.body;
     const previousOverflow = body.style.overflow;
 
@@ -50,7 +60,7 @@ export default function HeaderActions({
     return () => {
       body.style.overflow = previousOverflow;
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, serviceRedesign]);
 
   const menuLabel = mobileOpen
     ? locale === 'ru'
@@ -64,10 +74,10 @@ export default function HeaderActions({
     <>
       <div className={s.actions}>
         <div className={s.actionsCluster}>
-          <Link className={s.shopSwitch} href="/shop" aria-label={locale === 'ru' ? 'Перейти в магазин iLab' : 'Atvērt iLab veikalu'}>
+          {showShopSwitch && <Link className={s.shopSwitch} href="/shop" aria-label={locale === 'ru' ? 'Перейти в магазин iLab' : 'Atvērt iLab veikalu'}>
             <span className={s.switchTrack} aria-hidden="true"><span /></span>
             <span className={s.switchLabel}>{locale === 'ru' ? 'Магазин' : 'Veikals'}</span>
-          </Link>
+          </Link>}
 
           <div className={s.language}><LanguageSwitcher /></div>
 
@@ -76,8 +86,8 @@ export default function HeaderActions({
               <div className={s.ctasTabletDesktop}>
                 <Button
                   variant="ghost"
-                  size="md"
-                  leadingIcon={LocationPin}
+                  size={serviceRedesign ? 'sm' : 'md'}
+                  leadingIcon={LocatorIcon}
                   aria-haspopup="dialog"
                   aria-controls="locator-panel"
                   aria-expanded={locatorOpen}
@@ -90,8 +100,9 @@ export default function HeaderActions({
 
                 <Button
                   variant="primary"
-                  size="md"
+                  size={serviceRedesign ? 'sm' : 'md'}
                   className={s.contactHeader}
+                  trace
                   aria-haspopup="dialog"
                   aria-controls="sazinaties-panel"
                   aria-expanded={contactOpen}
@@ -115,7 +126,7 @@ export default function HeaderActions({
                 }}
                 aria-label={cta.locator.ariaLabel}
               >
-                <LocationPin aria-hidden focusable="false" />
+                <LocatorIcon aria-hidden focusable="false" />
               </button>
 
               <div className={s.mobilePrices}>
@@ -135,6 +146,7 @@ export default function HeaderActions({
             <button
               type="button"
               className={s.hamburger}
+              ref={menuOpenerRef}
               aria-label={menuLabel}
               aria-expanded={mobileOpen}
               aria-controls="mobile-drawer"
@@ -152,6 +164,7 @@ export default function HeaderActions({
 
       {showNavigation && mobileOpen && (
         <MobileNavDrawer
+          openerRef={menuOpenerRef}
           items={items}
           locale={locale}
           pathname={pathname}

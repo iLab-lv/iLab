@@ -11,8 +11,12 @@ test('all production brand families use the approved shared hero', async () => {
     read('app/(site)/(catalog)/datoru-remonts/[brand]/ComputerBrandPage.jsx'),
   ]);
 
+  const hero = await read('app/_components/sections/catalog-brand/BrandHero.jsx');
+  assert.match(hero, /<CatalogHero/);
+  assert.match(hero, /variant="brand"/);
+
   for (const source of files) {
-    assert.match(source, /CatalogHero/);
+    assert.match(source, /BrandHero/);
     assert.match(source, /targetId="brand-modeli"/);
     assert.match(source, /DeviceSelector/);
     assert.doesNotMatch(source, /DeviceHero/);
@@ -20,14 +24,16 @@ test('all production brand families use the approved shared hero', async () => {
 });
 
 test('model finder retains production filtering and approved list presentation', async () => {
-  const [grid, section, card] = await Promise.all([
+  const [grid, section, card, groups] = await Promise.all([
     read('app/(site)/components/device-grid/DeviceGrid.jsx'),
     read('app/(site)/components/device-grid/DeviceGridSection.jsx'),
     read('app/(site)/components/device-grid/ModelCard.jsx'),
+    read('app/(site)/components/device-grid/deviceGrid.groups.js'),
   ]);
 
-  assert.match(grid, /device\.brandKey !== brandKey/);
-  assert.match(grid, /device\.categoryKey !== categoryKey/);
+  assert.match(groups, /device\.brandKey !== brandKey/);
+  assert.match(groups, /device\.categoryKey !== categoryKey/);
+  assert.match(grid, /import \{ dedupeAndSort, groupBySeries \} from '\.\/deviceGrid\.groups'/);
   assert.match(grid, /matchesQuery/);
   assert.match(section, /aria-expanded/);
   assert.match(section, /aria-pressed/);

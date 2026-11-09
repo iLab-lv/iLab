@@ -1,5 +1,9 @@
 const BOOKING_FORM_CONTENT = {
   lv: {
+    required: 'Aizpildiet šo lauku.',
+    phoneInvalid: 'Ievadiet derīgu tālruņa numuru.',
+    dateInvalid: 'Izvēlieties datumu, sākot no rītdienas.',
+    validationError: 'Pārbaudiet atzīmētos laukus.',
     submitError: 'Neizdevās nosūtīt',
 
     successTitle: 'Paldies, pieraksts saņemts!',
@@ -29,6 +33,10 @@ const BOOKING_FORM_CONTENT = {
   },
 
   ru: {
+    required: 'Заполните это поле.',
+    phoneInvalid: 'Введите корректный номер телефона.',
+    dateInvalid: 'Выберите дату, начиная с завтрашнего дня.',
+    validationError: 'Проверьте отмеченные поля.',
     submitError: 'Не удалось отправить',
 
     successTitle: 'Спасибо, запись получена!',

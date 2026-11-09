@@ -24,13 +24,16 @@ export default function BottomBar() {
   const {
     contactOpen,
     bookOpen,
+    locatorOpen,
     openContact,
     openBook,
     setSelectedLocId,
+    serviceRedesign,
+    navigationOpen,
   } = useUiDialogs();
 
   return (
-    <nav className={s.bottomBar} aria-label={cta.bottomBar.ariaLabel}>
+    <nav className={s.bottomBar} data-panel-open={contactOpen || bookOpen || locatorOpen} data-navigation-open={serviceRedesign ? navigationOpen : undefined} aria-label={cta.bottomBar.ariaLabel}>
       <div className={s.contactSlot}>
         <Button
           variant="secondary"
@@ -38,6 +41,7 @@ export default function BottomBar() {
           block
           leadingIcon={ContactIcon}
           className={`${s.dockAction} ${s.contactAction}`}
+          trace
           aria-haspopup="dialog"
           aria-controls="sazinaties-panel"
           aria-expanded={contactOpen}
