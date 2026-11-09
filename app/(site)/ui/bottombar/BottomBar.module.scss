@@ -108,7 +108,10 @@
   .dockAction { font-family: var(--service-font) !important; font-size: 17px !important; letter-spacing: normal; }
   .dockAction > :global(span[aria-hidden='true']) { display: none; }
   @media (min-width: 1024px) {
-    .bottomBar { inset: auto 24px 24px auto; display: flex; padding: 0; gap: 10px; }
+    .bottomBar { inset: auto 24px 24px auto; display: flex; padding: 0; gap: 0; }
+    .bookSlot, .pricesSlot { flex: none; }
+    .pricesSlot { margin-inline-start: 12px; }
+    .dockAction { position: relative; contain: paint; }
     .bottomBar[data-panel-open='true'] { visibility: hidden; }
   }
   @media (min-width: 1280px) { .bottomBar { right: 32px; bottom: 32px; } }
