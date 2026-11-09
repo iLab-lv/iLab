@@ -1,6 +1,7 @@
 const SAZINATIES_PANEL_CONTENT = {
   lv: {
     tabsAriaLabel: 'Filiāles',
+    days: ['P', 'O', 'T', 'C', 'Pk', 'S', 'Sv'],
 
     closed: 'Slēgts',
     openUntil: (time) => `Atvērts - līdz ${time}`,
@@ -24,6 +25,7 @@ const SAZINATIES_PANEL_CONTENT = {
 
   ru: {
     tabsAriaLabel: 'Филиалы',
+    days: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
 
     closed: 'Закрыто',
     openUntil: (time) => `Открыто - до ${time}`,

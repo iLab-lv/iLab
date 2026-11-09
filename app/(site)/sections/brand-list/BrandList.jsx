@@ -78,7 +78,7 @@ export default function BrandList({
           </div>
 
           {appleBrands.length > 0 && (
-            <ul className={s.appleButtons} role="list" aria-label="Apple datoru zīmoli">
+            <ul className={s.appleButtons} role="list" aria-label={locale === 'ru' ? 'Компьютеры Apple' : 'Apple datoru zīmoli'}>
               {appleBrands.map((brand) => (
                 <li key={brand.slug}>
                   <DeviceButton
@@ -100,7 +100,7 @@ export default function BrandList({
 
             <p className={s.leadText}>{otherIntro}</p>
 
-            <ul className={s.brandGrid} aria-label="Citu datoru zīmolu saraksts">
+            <ul className={s.brandGrid} aria-label={locale === 'ru' ? 'Другие бренды компьютеров' : 'Citu datoru zīmolu saraksts'}>
               {otherBrands.map((brand) => (
                 <li key={brand.slug} className={s.brandItem}>
                   <Link
@@ -111,7 +111,7 @@ export default function BrandList({
                       <span className={s.logoWrap}>
                         <img
                           src={brand.logo}
-                          alt={`${brand.name} datoru remonts`}
+                          alt={`${brand.name} ${locale === 'ru' ? 'ремонт компьютеров' : 'datoru remonts'}`}
                           className={s.logo}
                           loading="lazy"
                         />

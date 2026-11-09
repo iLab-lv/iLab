@@ -1,362 +1,110 @@
 @use '@/styles/_tokens.scss' as *;
 
-/* =================== CONTAINER & HEADINGS =================== */
 .section {
-  padding-block: $space-lg;
-  border-bottom: $border-thin solid $color-border;
+  padding-block: clamp($space-xl, 6vw, 88px);
+  border-bottom: $border-thin solid rgba(255, 255, 255, 0.12);
+  background: #030303;
 }
 
 .container {
-  max-width: $container-max;
-  margin: 0 auto;
-  padding: 0 $space-md;
+  width: min(100% - 40px, 1440px);
+  margin-inline: auto;
 }
 
-.header { margin-bottom: $space-lg; }
+.header { max-width: 860px; margin-bottom: clamp($space-lg, 4vw, $space-2xl); }
+.sectionTitle { margin: 0 0 $space-sm; color: $color-text; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.035em; }
+.intro,.emptyAll { margin: 0; color: $color-text-2; line-height: 1.65; }
 
-.sectionTitle {
-  margin: 0 0 $space-lg 0;
-  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
-  line-height: $line-height-heading;
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
-.intro { color: $color-text-2; margin: 0; }
-
-/* =================== LAYOUT =================== */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $space-xl;
-
-  @media (min-width: $bp-md) {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
-/* =================== LEFT PREVIEW =================== */
+.layout { display: grid; gap: clamp($space-xl, 5vw, 72px); }
 .left { position: relative; }
-
-.previewCard {
-  background: $color-surface-2;
-  border: $border-thin solid $color-border;
-  border-radius: $radius-lg;
-  overflow: hidden;
-  scroll-margin-top: calc($header-desktop-height + $space-lg);
-
-  @media (max-width: $bp-md) {
-    scroll-margin-top: calc($header-mobile-height + $space-md);
-  }
-}
-
-/* --- Header above image --- */
-.previewHeader {
-  display: flex;
-  align-items: baseline;
-  gap: $space-sm;
-  padding: $space-md;
-  border-bottom: $border-thin solid $color-border;
-  background: $color-surface-2;
-}
-
-.modelName  { font-weight: $font-weight-semibold; color: $color-text; }
-.modelYear  { color: $color-text-3; font-size: $font-size-sm; }
-
-.modelSeries {
-  margin-left: auto;
-  color: $color-text-3;
-  font-size: $font-size-sm;
-  padding: 0 $space-sm;
-  border-radius: $radius-pill;
-  border: $border-thin solid $color-border;
-}
-
-/* --- Image --- */
-.imageWrap {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  background: $color-surface-2;
-}
+.previewCard { overflow: hidden; border: $border-thin solid rgba(255,255,255,.16); background: #080808; scroll-margin-top: calc($header-desktop-height + $space-lg); }
+.previewHeader { display: flex; align-items: baseline; gap: $space-sm; padding: $space-md; border-bottom: $border-thin solid rgba(255,255,255,.14); }
+.modelName { color: $color-text; font-weight: $font-weight-semibold; }
+.modelYear,.modelSeries { color: $color-text-3; font-size: $font-size-sm; }
+.modelSeries { margin-left: auto; }
+.imageWrap { position: relative; aspect-ratio: 4 / 3; border-bottom: $border-thin solid rgba(255,255,255,.14); background: #050505; }
 .image { object-fit: contain; }
+.previewBody { display: grid; gap: 0; padding: 0 $space-md $space-md; }
+.priceRow,.altItem { display: flex; justify-content: space-between; align-items: baseline; gap: $space-md; padding: $space-md 0; border-bottom: $border-thin solid rgba(255,255,255,.14); }
+.priceLabel,.altLabel { color: $color-text-2; }
+.priceValue,.altPrice { color: $color-text; font-weight: $font-weight-semibold; font-variant-numeric: tabular-nums; }
+.priceValue { color: $color-accent; font-size: $font-size-xl; }
+.altList,.accordionList,.modelList { margin: 0; padding: 0; list-style: none; }
+.ctaBtn,.allLink { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; margin-top: $space-md; padding: 0 $space-lg; border: $border-thin solid $color-accent; color: #001012; background: $color-accent; font-weight: $font-weight-semibold; text-decoration: none; }
+.ctaBtn:hover,.allLink:hover { background: $color-accent-hover; }
+.ctaBtn:focus-visible,.allLink:focus-visible,.summary:focus-visible,.modelLink:focus-visible,.modelLinkActive:focus-visible { outline: 2px solid $color-text; outline-offset: 3px; }
+.right { display: grid; align-content: start; }
+.accItem { border-top: $border-thin solid rgba(255,255,255,.16); background: transparent; }
+.accordionList > li:last-child .accItem { border-bottom: $border-thin solid rgba(255,255,255,.16); }
+.summary { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: $space-sm; padding: $space-md 0; cursor: pointer; color: $color-text; list-style: none; }
+.summary::-webkit-details-marker { display: none; }
+.summary:hover { color: $color-accent; }
+.accTitle { font-size: clamp(1rem, .9rem + .4vw, 1.15rem); font-weight: $font-weight-semibold; }
+.chev { position: relative; width: 14px; height: 14px; flex: 0 0 auto; }
+.chev::before,.chev::after { position: absolute; top: 50%; left: 50%; background: currentColor; content: ''; transform: translate(-50%,-50%); }
+.chev::before { width: 12px; height: 1px; }
+.chev::after { width: 1px; height: 12px; }
+.accItem[open] .chev::after { display: none; }
+.panel { padding: 0 0 $space-md; border-top: $border-thin solid rgba(255,255,255,.1); }
+.modelList { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 $space-lg; }
+.modelItem { border-bottom: $border-thin solid rgba(255,255,255,.08); }
+.modelLink,.modelLinkActive { display: block; padding: 12px 0; color: $color-text-2; cursor: pointer; text-decoration: none; }
+.modelLink:hover,.modelLinkActive { color: $color-accent; }
+.allLink { width: fit-content; color: $color-text; background: transparent; border-color: rgba(255,255,255,.24); }
 
-/* --- Body --- */
-.previewBody {
-  padding: $space-md;
-  display: grid;
-  gap: $space-md;
+@media (min-width: 1024px) {
+  .container { width: min(100% - 192px, 1440px); }
+  .layout { grid-template-columns: 4fr 8fr; align-items: start; }
+  .left { position: sticky; top: calc($header-desktop-height + $space-lg); }
 }
 
-/* --- Main price row --- */
-.priceRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: $space-md;
-  padding: $space-md;
-  border-radius: $radius-lg;
-  background: $glass-bg-weak;
-  border: $border-thin solid $glass-border;
+@media (max-width: 767px) {
+  .container { width: min(100% - 40px, 1440px); }
+  .modelList { grid-template-columns: 1fr; }
+  .modelSeries { display: none; }
 }
 
-.priceLabel { color: $color-text-2; }
-.priceValue { color: $color-text; font-weight: $font-weight-semibold; }
+.iphoneScreen { background: #030303; }
 
-/* --- Variant list (other options, no highlight) --- */
-.altList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: $space-sm;
+
+/* R5 repair pages only: retain both real pricing architectures and all model /
+   option relationships, presenting the picker and selected prices editorially. */
+:global([data-service-recovery]) .section { padding: 0; border: 0; background: transparent; }
+:global([data-service-recovery]) .container { width: 100%; max-width: none; margin: 0; padding: 0; }
+:global([data-service-recovery]) .header { max-width: none; margin: 0 0 48px; }
+:global([data-service-recovery]) .sectionTitle { max-width: none; font: 600 clamp(32px, 3.2vw, 44px)/1.04 var(--service-font); letter-spacing: -.04em; }
+:global([data-service-recovery]) .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px var(--service-gutter); align-items: start; }
+:global([data-service-recovery]) .left { order: 2; position: sticky; top: 112px; min-width: 0; }
+:global([data-service-recovery]) .right { order: 1; min-width: 0; }
+:global([data-service-recovery]) .previewCard { overflow: visible; border: 0; border-top: 1px solid var(--service-hairline); background: transparent; }
+:global([data-service-recovery]) .previewHeader { display: flex; flex-wrap: wrap; padding: 24px 0; border-color: var(--service-hairline); }
+:global([data-service-recovery]) .modelName { font-size: 24px; line-height: 1.2; font-weight: 500; }
+:global([data-service-recovery]) .modelYear, :global([data-service-recovery]) .modelSeries { color: var(--service-ink-3); font: 400 var(--service-tech-size)/1.55 var(--service-mono); }
+:global([data-service-recovery]) .imageWrap { height: 260px; aspect-ratio: auto; border: 0; background: var(--service-paper-2); }
+:global([data-service-recovery]) .image { object-fit: contain; padding: 24px; }
+:global([data-service-recovery]) .previewBody { padding: 0; }
+:global([data-service-recovery]) .priceRow, :global([data-service-recovery]) .altItem { align-items: start; gap: 24px; padding: 24px 0; border-color: var(--service-hairline); }
+:global([data-service-recovery]) .priceLabel, :global([data-service-recovery]) .altLabel { min-width: 0; color: var(--service-ink-2); font-size: var(--service-body-size); }
+:global([data-service-recovery]) .priceValue, :global([data-service-recovery]) .altPrice { max-width: 50%; color: var(--service-ink); font-size: 24px; line-height: 1.2; text-align: right; font-weight: 500; overflow-wrap: anywhere; }
+:global([data-service-recovery]) .ctaBtn, :global([data-service-recovery]) .allLink { width: fit-content; max-width: 100%; height: auto; min-height: 52px; padding: 12px 24px; border-radius: 0; border-color: var(--service-hairline); font: 500 var(--service-body-size)/1.4 var(--service-font); white-space: normal; }
+:global([data-service-recovery]) .ctaBtn { color: var(--service-on-signal); border-color: var(--service-signal); background: var(--service-signal); text-decoration: none; }
+:global([data-service-recovery]) .ctaBtn.ctaBtn:hover, :global([data-service-recovery]) .ctaBtn.ctaBtn:focus-visible { background: var(--service-signal-2); border-color: var(--service-signal-2); color: var(--service-on-signal); text-decoration: none; }
+:global([data-service-recovery]) .allLink { color: var(--service-ink); background: transparent; }
+:global([data-service-recovery]) .accItem, :global([data-service-recovery]) .panel, :global([data-service-recovery]) .modelItem { border-color: var(--service-hairline); }
+:global([data-service-recovery]) .summary { min-height: 64px; color: var(--service-ink); }
+:global([data-service-recovery]) .modelList { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+:global([data-service-recovery]) .modelLink, :global([data-service-recovery]) .modelLinkActive { min-height: 44px; padding-block: 12px; color: var(--service-ink-2); font-size: var(--service-small-size); }
+:global([data-service-recovery]) .modelLinkActive { color: var(--service-signal); }
+:global([data-service-recovery]) .modelLink:hover { color: var(--service-signal); }
+@media (max-width: 1023px) {
+  :global([data-service-recovery]) .layout { grid-template-columns: minmax(0, 1fr); }
+  :global([data-service-recovery]) .left { position: static; order: 1; }
+  :global([data-service-recovery]) .right { order: 2; }
+}
+@media (max-width: 767px) {
+  :global([data-service-recovery]) .modelList { grid-template-columns: minmax(0, 1fr); }
+  :global([data-service-recovery]) .priceValue, :global([data-service-recovery]) .altPrice { font-size: 20px; }
 }
 
-.altItem {
-  display: flex;
-  justify-content: space-between;
-  gap: $space-md;
-  padding: $space-sm $space-md;
-  border-radius: $radius-md;
-  border: $border-thin solid $glass-border;
-  background: $glass-bg-weak;
-}
-
-.altLabel { color: $color-text-2; }
-.altPrice { color: $color-text; font-weight: $font-weight-medium; }
-
-/* --- CTA button --- */
-.ctaBtn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  height: $btn-h-lg;
-  padding: 0 $space-lg;
-  border-radius: $radius-pill;
-  background: $color-accent;
-  color: #000;
-  font-weight: $font-weight-semibold;
-  text-decoration: none;
-  box-shadow: $shadow-accent;
-
-  &:hover {
-    background: $color-accent-hover;
-    color: #001012;
-    box-shadow: $shadow-accent-lg;
-  }
-  &:active {
-    background: $color-accent-active;
-    color: #001012;
-    box-shadow: $shadow-accent-press;
-  }
-  &:focus-visible {
-    color: #001012;
-    outline: 2px solid $color-text;
-    outline-offset: 3px;
-  }
-}
-
-/* Screen-replacement service page: same interaction model, refined presentation. */
-.iphoneScreen {
-  position: relative;
-  padding-block: clamp($space-xl, 6vw, 82px);
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 12% 4%, rgba(34, 211, 238, 0.14), transparent 30rem),
-    radial-gradient(circle at 92% 88%, rgba(34, 211, 238, 0.08), transparent 25rem),
-    linear-gradient(180deg, #020708, #030303);
-
-  .header {
-    max-width: 880px;
-  }
-
-  .sectionTitle {
-    margin-bottom: $space-sm;
-    font-size: clamp(2rem, 4vw, $font-size-h4);
-    line-height: 1.12;
-
-    &::after {
-      display: block;
-      width: 72px;
-      height: 3px;
-      margin-top: $space-sm;
-      border-radius: $radius-pill;
-      content: '';
-      background: $color-accent;
-      box-shadow: 0 0 20px rgba(34, 211, 238, 0.34);
-    }
-  }
-
-  .previewCard,
-  .accItem {
-    border-color: rgba(255, 255, 255, 0.1);
-    background:
-      linear-gradient(145deg, rgba(34, 211, 238, 0.06), transparent 38%),
-      rgba(8, 14, 15, 0.82);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.055),
-      0 20px 54px rgba(0, 0, 0, 0.2);
-  }
-
-  .previewHeader {
-    border-color: rgba(255, 255, 255, 0.09);
-    background: rgba(255, 255, 255, 0.025);
-  }
-
-  .imageWrap {
-    background:
-      radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.1), transparent 48%),
-      rgba(2, 8, 9, 0.7);
-  }
-
-  .priceRow {
-    border-color: rgba(34, 211, 238, 0.2);
-    background: linear-gradient(90deg, rgba(34, 211, 238, 0.11), rgba(255, 255, 255, 0.025));
-  }
-
-  .priceValue {
-    color: $color-accent;
-    font-size: $font-size-xl;
-  }
-
-  .modelLinkActive {
-    font-weight: $font-weight-semibold;
-  }
-}
-
-/* =================== RIGHT (FAQ-LIKE ACCORDION) =================== */
-.right {
-  display: grid;
-  align-content: start;
-  gap: $space-sm;
-}
-
-.accordionList {
-  display: grid;
-  gap: $space-sm;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* --- Accordion item --- */
-.accItem {
-  border: $border-thin solid $color-border;
-  border-radius: $radius-lg;
-  background: $color-surface-2;
-  overflow: hidden;
-
-  scroll-margin-top: calc($header-desktop-height + $space-lg);
-
-  @media (max-width: $bp-md) {
-    scroll-margin-top: calc($header-mobile-height + $space-md);
-  }
-}
-
-/* --- Summary row (series header) --- */
-.summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: $space-sm;
-  cursor: pointer;
-  padding: $space-md;
-  list-style: none;
-  border-radius: inherit;
-  color: $color-text;
-
-  &::-webkit-details-marker { display: none; }
-  &:hover { background: $glass-bg-weak; }
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 $border-thin $glass-border;
-  }
-}
-
-.accTitle {
-  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
-  font-weight: $font-weight-semibold;
-  color: $color-text;
-}
-
-/* --- Plus/minus indicator --- */
-.chev {
-  position: relative;
-  inline-size: 14px;
-  block-size: 14px;
-  flex: 0 0 auto;
-}
-
-.chev::before,
-.chev::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  background: currentColor;
-  transition: transform $dur-base $ease-std, opacity $dur-base $ease-std;
-  will-change: transform, opacity;
-}
-
-.chev::before { inline-size: 12px; block-size: 2px; transform: translate(-50%, -50%); }
-.chev::after  { inline-size: 2px;  block-size: 12px; transform: translate(-50%, -50%); }
-
-.accItem[open] .chev::after {
-  transform: translate(-50%, -50%) scaleY(0);
-  opacity: 0;
-}
-
-/* --- Accordion panel (model list) --- */
-.panel {
-  padding: $space-md;
-  border-top: $border-thin solid $color-border;
-  color: $color-text-2;
-}
-
-.modelList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: $space-xs;
-}
-
-.modelItem { padding: $space-2xs 0; }
-
-/* --- Models are plain muted text links --- */
-.modelLink,
-.modelLinkActive {
-  color: $color-text-2;
-  text-decoration: none;
-  cursor: pointer;
-  padding: $space-2xs 0;
-
-  &:hover { color: $color-text; }
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 $border-thin $glass-border;
-    border-radius: $radius-sm;
-    color: $color-text;
-  }
-}
-
-/* Active model: accent color, still no underline */
-.modelLinkActive { color: $color-accent; }
-
-/* --- "View all" link below accordion --- */
-.allLink {
-  margin-top: $space-sm;
-  display: inline-flex;
-  align-items: center;
-  height: $btn-h-md;
-  padding: 0 $space-lg;
-  border-radius: $radius-pill;
-  border: $border-thin solid $color-border;
-  background: $glass-bg-weak;
-  color: $color-text;
-  text-decoration: none;
-
-  &:hover { background: $glass-bg-weak-hover; }
-  &:active { background: $glass-bg-weak-active; }
-}
+:global([data-service-recovery]) .priceValue, :global([data-service-recovery]) .altPrice { flex: 0 0 auto; width: max-content; max-width: 50%; overflow-wrap: normal; word-break: normal; }
+:global([data-service-recovery]) .priceLabel, :global([data-service-recovery]) .altLabel { flex: 1 1 0; min-width: 0; }

@@ -199,7 +199,7 @@ export default async function Page() {
         faqTitle={faq.title || labels.faqTitle}
         faqItems={faqRenderItems}
         hasVisibleFaq={hasVisibleFaq}
-        heroImage={heroImage}
+        heroImage="/images/heroes/dyson-repair-r75d.webp"
       />
     </>
   );

@@ -264,6 +264,7 @@ export function getIphoneModelServices(modelName, locale = 'lv') {
         IPHONE_SERVICE_DEFINITIONS[definitionIndex];
 
       return {
+        serviceKey,
         title: copy.titles[index],
         description: serviceCopy[resolvedLocale].description.replace(
           /iPhone/g,

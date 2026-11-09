@@ -1,7 +1,8 @@
-import DeviceGridClient from './DeviceGridClient';
+import { withModelThumbnail } from '../model-thumbnail/modelThumbnail.server';
+import DeviceGridClient from './HubDeviceGridClient';
 import { getIphoneDeviceGridStrings } from './deviceGrid.i18n';
 
-import s from './DeviceGrid.module.scss';
+import s from './HubDeviceGrid.module.scss';
 
 function sortDevices(devices = []) {
   return [...devices].sort((a, b) => {
@@ -47,7 +48,7 @@ function buildSeries(devices, seriesMeta, fallbackSeriesTitle) {
   }
 
   return Array.from(groups.values())
-    .map((group) => ({ ...group, devices: sortDevices(group.devices) }))
+    .map((group) => ({ ...group, devices: sortDevices(group.devices).map(withModelThumbnail) }))
     .sort((a, b) => {
       if (a.order !== b.order) return a.order - b.order;
 
@@ -83,12 +84,11 @@ export default function DeviceGrid({
 
   return (
     <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
-      <div className={s.container}>
         <header className={s.header}>
-          <h2 id={`${id}-title`} className={s.title}>
+          <h2 id={`${id}-title`}>
             {strings.heading}
           </h2>
-          <p className={s.intro}>{strings.intro}</p>
+          <p>{strings.intro}</p>
         </header>
 
         <DeviceGridClient
@@ -98,7 +98,6 @@ export default function DeviceGrid({
           baseHref={baseHref}
           initialLimit={initialLimit}
         />
-      </div>
     </section>
   );
 }

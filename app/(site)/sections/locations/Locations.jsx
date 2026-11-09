@@ -12,6 +12,7 @@ export default function Locations({
   title,
   locations = [],
   pinPositions = {},
+  showContactActions = false,
 }) {
   const [selectedLocationId, setSelectedLocationId] = useState(null);
   const t = getLocationsContent(locale);
@@ -54,6 +55,7 @@ export default function Locations({
               selectedLocationId={selectedLocationId}
               showAllCards={true}
               showActions={false}
+              showContactActions={showContactActions}
               locale={locale}
               content={t}
             />

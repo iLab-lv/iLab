@@ -1,7 +1,9 @@
 @use '@styles/_tokens.scss' as *;
 
 .section {
-  margin-bottom: $space-xl;
+  margin-bottom: 0;
+  padding: $space-md 0;
+  border-top: 1px solid $color-border;
 }
 
 .sectionHeader {
@@ -14,7 +16,7 @@
 
 .sectionTitle {
   margin: 0;
-  font-size: $font-size-h5;
+  font-size: clamp(1.1rem, 1rem + .3vw, 1.35rem);
   line-height: $line-height-heading;
 }
 
@@ -26,9 +28,10 @@
 
 .toggleBtn {
   padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid $color-border;
-  background: $color-surface-2;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
   color: $color-text;
   cursor: pointer;
   font-size: 0.875rem;
@@ -71,8 +74,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: $space-md;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 4px 24px;
 }
 
 .collapsedCard {

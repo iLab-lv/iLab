@@ -1,111 +1,129 @@
 @use '../../../styles/_tokens.scss' as *;
 
 .bottomBar {
-  --bar-gap: #{$space-sm};
-  --bar-vpad: #{$space-sm};
   --safe: env(safe-area-inset-bottom);
-
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: calc(var(--safe) + var(--bar-gap));
+  inset: auto 0 0;
   z-index: $z-ctadock;
-
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  column-gap: $space-sm;
-
-  padding: var(--bar-vpad) $space-md;
-  min-height: calc(#{$btn-h-lg} + var(--bar-vpad) * 2);
-
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-
+  gap: 10px;
+  padding: 0 24px 24px;
   pointer-events: none;
-
-  :where(a, button, div) {
-    pointer-events: auto;
-  }
-
-  line-height: normal;
   box-sizing: border-box;
+
+  :where(a, button, div) { pointer-events: auto; }
 }
 
-.controlsSlot,
-.contactSlot,
-.bookSlot,
-.pricesSlot {
+.contactSlot, .bookSlot, .pricesSlot {
   display: flex;
   align-items: center;
   min-width: 0;
 }
 
-.controlsSlot > * {
-  margin: 0;
+.dockAction {
+  min-height: 52px !important;
+  height: 52px !important;
+  border-radius: 0 !important;
+  font-family: 'Geologica', $font-family-base !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  font-variation-settings: 'SHRP' 60;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  :global(svg) {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: 1.5;
+  }
 }
 
-/* Mobile: Contact + Booking only. Prices moves to top bar. */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
+  .dockAction {
+    gap: 6px !important;
+    padding-inline: 8px !important;
+    font-size: clamp(.78rem, 3.2vw, .92rem) !important;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+.contactAction, .pricesAction {
+  color: #f2f5f7 !important;
+  border-color: #aeb8c0 !important;
+  background: #070a0d !important;
+  &:hover { border-color: #f2f5f7 !important; }
+}
+
+.bookingAction {
+  color: #061016 !important;
+  border-color: #47c6e2 !important;
+  background: #47c6e2 !important;
+  &:hover { background: #6fd6ec !important; }
+}
+
+@media (max-width: 1023px) {
   .bottomBar {
     grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(64px + var(--safe));
+    padding: 0 0 var(--safe);
+    border-top: 1px solid #243039;
+    background: #0c1115;
   }
 
-  .controlsSlot,
-  .pricesSlot {
-    display: none;
-  }
-
-  .contactSlot :where(a, button),
-  .bookSlot :where(a, button) {
-    width: 100%;
-  }
-}
-
-/* Tablet: Controls left, Booking + Prices right */
-@media (min-width: 768px) and (max-width: 1359px) {
-  .bottomBar {
-    grid-template-columns: auto 1fr auto auto;
-  }
-
-  .controlsSlot {
-    justify-self: start;
-  }
-
-  .contactSlot {
-    display: none;
-  }
-
-  .bookSlot,
-  .pricesSlot {
-    justify-self: end;
-  }
-
-  .bookSlot :where(a, button),
-  .pricesSlot :where(a, button) {
-    width: auto !important;
+  .controlsSlot, .pricesSlot { display: none; }
+  .contactSlot, .bookSlot,
+  .contactSlot :where(a, button), .bookSlot :where(a, button) { width: 100%; }
+  .contactSlot { border-right: 1px solid #243039; }
+  .contactSlot :where(a, button), .bookSlot :where(a, button) {
+    height: 64px !important;
+    border: 0 !important;
   }
 }
 
-/* Desktop: Booking + Prices bottom-right */
+@media (min-width: 1024px) and (max-width: 1359px) {
+  .bottomBar { grid-template-columns: 1fr auto auto; }
+  .contactSlot { display: none; }
+  .bookSlot, .pricesSlot { justify-self: end; }
+}
+
 @media (min-width: 1360px) {
-  .bottomBar {
-    grid-template-columns: 1fr auto auto;
-  }
+  .bottomBar { grid-template-columns: 1fr auto auto; }
+  .contactSlot { display: none; }
+  .bookSlot, .pricesSlot { justify-self: end; }
+}
 
-  .controlsSlot,
-  .contactSlot {
-    display: none;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .dockAction { transition: none !important; }
+}
 
-  .bookSlot,
-  .pricesSlot {
-    justify-self: end;
+:global([data-service-redesign]) {
+  .bottomBar { z-index: 46; }
+  .dockAction { font-family: var(--service-font) !important; font-size: 17px !important; letter-spacing: normal; }
+  .dockAction > :global(span[aria-hidden='true']) { display: none; }
+  @media (min-width: 1024px) {
+    .bottomBar { inset: auto 24px 24px auto; display: flex; padding: 0; gap: 0; }
+    .bookSlot, .pricesSlot { flex: none; }
+    .pricesSlot { margin-inline-start: 12px; }
+    .dockAction { position: relative; contain: paint; }
+    .bottomBar[data-panel-open='true'] { visibility: hidden; }
   }
-
-  .bookSlot :where(a, button),
-  .pricesSlot :where(a, button) {
-    width: auto !important;
+  @media (min-width: 1280px) { .bottomBar { right: 32px; bottom: 32px; } }
+  @media (max-width: 1023px) {
+    .bottomBar { z-index: 45; min-height: calc(60px + var(--safe)); }
+    .dockAction { height: 60px !important; min-height: 60px !important; padding-inline: 6px !important; font-size: 13px !important; line-height: 1.1; }
+    .contactAction { color: var(--service-signal) !important; background: transparent !important; }
+    .contactAction > :global(svg) { inset: 0; width: 100%; height: 100%; }
+    .contactAction:hover, .contactAction:focus-visible { color: var(--service-on-signal) !important; background: var(--service-signal) !important; }
+    .bookingAction { color: var(--service-ink) !important; border-color: var(--service-counter-hairline) !important; background: transparent !important; }
+    .bookingAction::after { display: none; }
+    .bookingAction:hover { background: var(--service-counter-2) !important; }
   }
 }
+:global([data-service-redesign]) .bottomBar[data-navigation-open='true'] { visibility: hidden; }

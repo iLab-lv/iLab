@@ -1,3 +1,4 @@
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 import JsonLd from '@components/seo/JsonLd';
 import PhotoRepairPage from '@/_components/page-sections/photo-repair/PhotoRepairPage';
 import { getPhotoRepairContent } from '@/_components/page-sections/photo-repair/photoRepairContent';
@@ -36,7 +37,8 @@ export default async function Page() {
     { label: copy.home, href: '/' },
     { label: copy.breadcrumb, href: lvPath },
   ];
-  const faqItems = copy.faq.map(([question, answer]) => ({ question, answer }));
+  const faq = await getFaqGroups([{ scopeType: 'category', scopeKey: ROUTE_KEY }], locale);
+  const faqItems = faq.items;
   const jsonLd = buildRepairPageJsonLd({
     path: lvPath,
     locale,
@@ -48,7 +50,7 @@ export default async function Page() {
     serviceType: 'fotoaparātu remonts, fotoaparātu diagnostika, objektīvu remonts, objektīvu diagnostika, fototehnikas remonts, fototehnikas diagnostika',
     serviceImage: heroImage,
     faqItems,
-    includeFaq: true,
+    includeFaq: faqItems.length > 0,
     includeHowTo: true,
     howTo: {
       name: copy.process.title,
@@ -61,7 +63,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd id="fotoaparatu-remonts-jsonld" data={jsonLd} />
-      <PhotoRepairPage locale={locale} baseHref={lvPath} siteSettings={siteSettings} reviewsSummary={reviewsSummary} heroImage={heroImage} lensImage={lensImage} />
+      <PhotoRepairPage faqItems={faqItems} faqTitle={faq.title} locale={locale} baseHref={lvPath} siteSettings={siteSettings} reviewsSummary={reviewsSummary} heroImage="/images/heroes/camera-repair-r75d.webp" lensImage={lensImage} />
     </>
   );
 }

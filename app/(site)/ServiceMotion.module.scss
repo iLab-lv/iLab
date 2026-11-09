@@ -1,0 +1,12 @@
+.scan { position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 1px; background: var(--service-signal); pointer-events: none; opacity: 0; }
+.shutter { position: fixed; inset: 0; z-index: 99; background: var(--service-paper); clip-path: inset(0 0 100% 0); pointer-events: none; }
+.scope:global([data-page-leaving]) .shutter { pointer-events: auto; }
+.scope :global([data-scan]) { position: relative; }
+.scope :global([data-scan-line]) { position: absolute; inset: 0 auto 0 0; width: 1px; background: var(--service-signal); pointer-events: none; opacity: 0; z-index: 3; }
+.scope :global([data-review-focus="false"]) > footer { opacity: .3; }
+.scope :global([data-home-review]) > footer { transition: opacity .55s ease, color .55s ease; }
+.scope :global([data-home-review]):focus-within > footer { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .scan, .shutter { display: none; }
+  .scope :global([data-home-review]) > footer { opacity: 1; transition: none; }
+}

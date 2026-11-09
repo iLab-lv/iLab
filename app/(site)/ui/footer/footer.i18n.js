@@ -14,6 +14,7 @@ export function getFooterContent(locale = 'lv') {
 
   return {
     footerLabel: isRu ? 'Подвал сайта' : 'Lapas kājene',
+    socialLabel: isRu ? 'Социальные сети' : 'Sociālie tīkli',
     locationsLabel: isRu ? 'Сервисные центры' : 'Atrašanās vietas',
     locationPrefix: isRu ? 'Сервисный центр' : 'Atrašanās vieta',
     callLabel: isRu ? 'Позвонить' : 'Zvanīt',
@@ -46,6 +47,10 @@ export function getFooterContent(locale = 'lv') {
           label: isRu ? 'Ремонт Dyson' : 'Dyson remonts',
           href: localizedHref('categories', 'dyson-remonts', locale),
         },
+        {
+          label: isRu ? 'Ремонт фотоаппаратов' : 'Fotoaparātu remonts',
+          href: localizedHref('categories', 'fotoaparatu-remonts', locale),
+        },
       ],
     },
 
@@ -63,6 +68,14 @@ export function getFooterContent(locale = 'lv') {
         {
           label: isRu ? 'FAQ' : 'BUJ',
           href: localizedHref('info', 'buj', locale),
+        },
+        {
+          label: isRu ? 'Цены' : 'Cenas',
+          href: localizedHref('info', 'cenas', locale),
+        },
+        {
+          label: isRu ? 'Записаться на ремонт' : 'Pierakstīties remontam',
+          href: localizedHref('info', 'booking', locale),
         },
         {
           label: isRu

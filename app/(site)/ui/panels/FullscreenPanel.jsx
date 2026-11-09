@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './FullscreenPanel.module.scss';
 
-export default function FullscreenPanel({
+function LegacyFullscreenPanel({
   open,
   onClose,
   onExited,
   onRequestOpen,
   paneKey,
+  serviceRedesign = false,
   paneTitle = '',
   closeLabel = 'Aizvērt',
   renderPane,
@@ -35,6 +36,9 @@ export default function FullscreenPanel({
     };
 
     if (open) {
+      // Keep the service drawer settled: reopening on every phase change
+      // continuously replaces its keyboard listener and scroll lock.
+      if (serviceRedesign && phase === 'open') return;
       setPhase('opening');
       t = setTimeout(() => setPhase('open'), 20);
     } else if (phase !== 'closed') {
@@ -62,7 +66,7 @@ export default function FullscreenPanel({
     }
 
     return () => clearTimeout(t);
-  }, [open, phase, onExited]);
+  }, [open, phase, onExited, serviceRedesign]);
 
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
@@ -114,6 +118,12 @@ export default function FullscreenPanel({
   useEffect(() => {
     if (!(phase === 'opening' || phase === 'open' || phase === 'closing')) return;
 
+    const containServiceFocus = () => {
+      const root = panelRef.current;
+      if (!serviceRedesign || !open || !root || root.contains(document.activeElement)) return;
+      root.focus();
+    };
+
     const handleKey = (e) => {
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -149,10 +159,15 @@ export default function FullscreenPanel({
       }
     };
 
+    containServiceFocus();
+    document.addEventListener('focusin', containServiceFocus);
     document.addEventListener('keydown', handleKey);
 
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [phase, onClose]);
+    return () => {
+      document.removeEventListener('focusin', containServiceFocus);
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, [phase, onClose, serviceRedesign, open]);
 
   const onBackdropClick = (e) => {
     if (e.target === overlayRef.current) {
@@ -200,7 +215,7 @@ export default function FullscreenPanel({
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)');
+    const mq = window.matchMedia('(min-width: 1024px)');
 
     const apply = () => setIsDesktop(mq.matches);
 
@@ -306,6 +321,8 @@ export default function FullscreenPanel({
       clearTimeout(fallback);
       stage?.removeEventListener('transitionend', onEnd);
     };
+  // Preserve protected consumers' existing swap behavior; service drawers use the isolated implementation below.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectivePaneKey, phase, activeKey, swapPhase, isDesktop]);
 
   if (!shouldRender) return null;
@@ -319,29 +336,31 @@ export default function FullscreenPanel({
       onMouseDown={onBackdropClick}
       aria-hidden={!open}
     >
-      <div className={s.closeGlobal}>
-        <button
-          type="button"
-          className={s.close}
-          aria-label={closeLabel}
-          onClick={onClose}
-        >
-          ✕
-        </button>
-      </div>
-
       <div
         ref={panelRef}
         className={s.panel}
         data-state={phase}
+        data-service-pane={serviceRedesign ? paneKey : undefined}
         role="dialog"
         aria-modal="true"
         aria-labelledby="panel-title"
         tabIndex={-1}
       >
-        <h2 id="panel-title" className={s.srOnly}>
-          {paneTitle}
-        </h2>
+        <i className={s.scanLine} aria-hidden="true" />
+
+        <header className={s.panelHeader}>
+          <h2 id="panel-title">{paneTitle}</h2>
+          <button
+            type="button"
+            className={s.close}
+            aria-label={closeLabel}
+            onClick={onClose}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 5l14 14M19 5 5 19" />
+            </svg>
+          </button>
+        </header>
 
         <div
           ref={stageRef}
@@ -381,4 +400,101 @@ export default function FullscreenPanel({
       </div>
     </div>
   );
+}
+
+// Service drawers share the provider's pane state. Protected consumers keep the legacy implementation above.
+function getServiceFocusable(root) {
+  return Array.from(root?.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])') || []).filter((element) =>
+    !element.disabled && element.tabIndex >= 0 && !element.closest('[hidden], [inert], [aria-hidden="true"]') && element.getClientRects().length > 0
+  );
+}
+
+function ServiceFullscreenPanel({ open, onClose, onExited, paneKey, paneTitle, closeLabel, renderPane, openerRef }) {
+  const panelRef = useRef(null);
+  const localOpenerRef = useRef(null);
+  const wasOpenRef = useRef(false);
+  const [phase, setPhase] = useState(open ? 'opening' : 'closed');
+  const visible = open || phase !== 'closed';
+
+  useEffect(() => {
+    let frame;
+    let timer;
+    if (open) {
+      setPhase('opening');
+      frame = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => setPhase('open'));
+      });
+    } else if (wasOpenRef.current) {
+      setPhase('closing');
+      timer = setTimeout(() => { setPhase('closed'); onExited?.(); }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 150 : 420);
+    }
+    wasOpenRef.current = open;
+    return () => { cancelAnimationFrame(frame); clearTimeout(timer); };
+  }, [open, onExited]);
+
+  useEffect(() => {
+    if (!open) return;
+    localOpenerRef.current = openerRef?.current || document.activeElement;
+    const html = document.documentElement;
+    const body = document.body;
+    const previous = { html: html.style.overflow, body: body.style.overflow, padding: html.style.paddingRight };
+    const scrollbar = window.innerWidth - html.clientWidth;
+    html.style.overflow = 'hidden'; body.style.overflow = 'hidden';
+    if (scrollbar > 0) html.style.paddingRight = `${scrollbar}px`;
+    return () => {
+      html.style.overflow = previous.html; body.style.overflow = previous.body; html.style.paddingRight = previous.padding;
+    };
+  }, [open, openerRef]);
+
+  useEffect(() => {
+    if (!open) return;
+    const frame = requestAnimationFrame(() => { panelRef.current?.focus({ preventScroll: true }); });
+    panelRef.current?.scrollTo(0, 0);
+    return () => cancelAnimationFrame(frame);
+  }, [open, paneKey]);
+
+  useEffect(() => {
+    if (phase !== 'closed' || !localOpenerRef.current) return;
+    // A different modal may already be opening after a rapid control sequence.
+    if (!document.querySelector('[data-service-modal="true"]')) {
+      const opener = openerRef?.current || localOpenerRef.current;
+      if (opener?.isConnected && !opener.closest('[hidden], [inert]')) opener.focus({ preventScroll: true });
+    }
+    localOpenerRef.current = null;
+  }, [phase, openerRef]);
+
+  useEffect(() => {
+    if (!open) return;
+    const containFocus = (event) => {
+      const root = panelRef.current;
+      if (root && !root.contains(event.target)) root.focus({ preventScroll: true });
+    };
+    const onKey = (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); onClose?.(); return; }
+      if (event.key !== 'Tab') return;
+      const root = panelRef.current;
+      const nodes = getServiceFocusable(root);
+      const first = nodes[0]; const last = nodes[nodes.length - 1];
+      const active = document.activeElement;
+      if (!first) { event.preventDefault(); root?.focus(); return; }
+      if (event.shiftKey && (active === first || active === root || !root.contains(active))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (active === last || active === root || !root.contains(active))) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('focusin', containFocus);
+    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('focusin', containFocus); };
+  }, [open, onClose]);
+
+  if (!visible) return null;
+  return <div className={s.overlay} data-state={phase} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose?.(); }} aria-hidden={!open} inert={!open}>
+    <div ref={panelRef} id={paneKey === 'book' ? 'pieraksties-panel' : paneKey === 'locator' ? 'locator-panel' : 'sazinaties-panel'} className={s.panel} data-state={phase} data-service-pane={paneKey} data-service-modal={open ? 'true' : undefined} role="dialog" aria-modal="true" aria-labelledby="panel-title" tabIndex={-1}>
+      <i className={s.scanLine} aria-hidden="true" />
+      <header className={s.panelHeader}><h2 id="panel-title">{paneTitle}</h2><button type="button" className={s.close} aria-label={closeLabel} onClick={onClose}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" /></svg></button></header>
+      <div className={s.serviceStage} data-pane-active="true">{renderPane(paneKey)}</div>
+    </div>
+  </div>;
+}
+
+export default function FullscreenPanel(props) {
+  return props.serviceRedesign ? <ServiceFullscreenPanel {...props} /> : <LegacyFullscreenPanel {...props} />;
 }

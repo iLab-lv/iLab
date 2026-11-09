@@ -263,7 +263,7 @@ export default async function Page() {
         faqItems={faqRenderItems}
         labels={labels}
         popularServices={buildComputerPopularServices(locale)}
-        heroImage={getHeroImage(page)}
+        heroImage="/images/heroes/computer-repair-r75d.webp"
         heroHtml={getHeroHtml(page)}
       />
     </>

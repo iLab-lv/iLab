@@ -13,13 +13,15 @@ import {
 } from '@/lib/content/catalogDevices';
 
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
 
-import { buildCategoryHref, buildDeviceHref, buildServiceHref } from '@/lib/routes/routeI18n';
+import { buildCategoryHref, buildDeviceHref } from '@/lib/routes/routeI18n';
 
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
+import { getModelPriceCta } from '@/_components/sections/device-detail/modelPageHeader';
 
 import {
   LuTabletSmartphone,
@@ -31,15 +33,9 @@ import {
 
 export const revalidate = 0;
 
-const locale = 'lv';
+const locale = 'ru';
 
 const CATEGORY_KEY = 'plansetdatoru-remonts';
-
-export const pageHeader = {
-  scrollCta: { label: 'Skatīt cenas', targetId: 'cenas' },
-};
-
-export const headerProps = pageHeader;
 
 function normalizeBrandSlug(value = '') {
   return String(value || '').trim().toLowerCase();
@@ -75,7 +71,6 @@ const labels = {
   defaultHeaderTitle: 'Planšetdatoru remonts',
   defaultHeaderLead:
     'Planšetdatoru remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un citu komponentu remonts ar ātru diagnostiku, kvalitatīvām detaļām un garantiju līdz 1 gadam.',
-  pricesCtaLabel: 'Skatīt cenas',
   metaFallbackTitle: (brandLabel) => `${brandLabel} planšetdatoru remonts | iLab`,
   metaFallbackDescriptionModel: (name) =>
     `${name} remonts Rīgā: displejs, baterija, uzlādes ligzda, kamera un citi bojājumi. Ātra diagnostika, godīgas cenas un garantija līdz 1 gadam.`,
@@ -114,46 +109,29 @@ const processSteps = [
 ];
 
 function getModelServices() {
-  const categoryPath = getCategoryPath();
-
   return [
     {
       title: 'Displeja (ekrāna) maiņa',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'ekrana-maina') ||
-        `${categoryPath}/ekrana-maina`,
       text: 'plaisas, plankumi, nereaģē skāriens.',
       icon: LuTabletSmartphone,
     },
     {
       title: 'Akumulatora maiņa',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'baterijas-maina') ||
-        `${categoryPath}/baterijas-maina`,
       text: 'strauji krīt uzlāde, izslēdzas pie 10–20%.',
       icon: LuBatteryCharging,
     },
     {
       title: 'Uzlādes ligzdas remonts',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'uzlades-ligzdas-maina') ||
-        `${categoryPath}/uzlades-ligzdas-maina`,
       text: 'nenoturas kabelis, lēna vai nestabila uzlāde.',
       icon: LuPlugZap,
     },
     {
       title: 'Kameras remonts',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'kameras-remonts') ||
-        `${categoryPath}/kameras-remonts`,
       text: 'miglaini attēli, fokusēšanās problēmas.',
       icon: LuCamera,
     },
     {
       title: 'Ūdens bojājumi',
-      href:
-        buildServiceHref(locale, CATEGORY_KEY, 'udens-bojajumu-remonts') ||
-        `${categoryPath}/udens-bojajumu-remonts`,
       text: 'diagnostika un atjaunošana, ja tas iespējams.',
       icon: LuDroplets,
     },
@@ -255,12 +233,13 @@ async function getTabletDevicePageData({ brand, device }) {
     tabletDevice.slug || deviceSlug
   );
 
-  const [{ items: priceItems, currency }, faq] = await Promise.all([
+  const [{ items: priceItems, currency }, faq, relatedDevices] = await Promise.all([
     buildPriceListItems(tabletDevice.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: CATEGORY_KEY }], locale),
+    getDevicesByCategoryAndBrand(CATEGORY_KEY, brandSlug),
   ]);
 
   const headerTitle = getHeaderTitle(tabletDevice, modelName);
@@ -329,13 +308,13 @@ async function getTabletDevicePageData({ brand, device }) {
     headerTitle,
     headerLead,
     headerCrumbs: breadcrumbs,
-    headerScrollCta: priceItems.length
-      ? { label: labels.pricesCtaLabel, targetId: 'cenas' }
-      : null,
+    headerScrollCta: getModelPriceCta(locale, priceItems.length > 0),
 
     heroImage: tabletDevice.image,
     heroAlt: `${modelName} ${labels.heroAltSuffix}`,
     bodyHtml: pickLocalizedField(tabletDevice.bodyHtml, locale) || null,
+    relatedDevices,
+    relatedBaseHref: brandPath,
 
     modelServices: getModelServices(),
     modelServicesTitle: labels.servicesTitle(modelName),

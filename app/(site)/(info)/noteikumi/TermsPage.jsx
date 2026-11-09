@@ -1,4 +1,6 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import s from '@styles/Catalog.module.scss';
@@ -150,68 +152,68 @@ export default function TermsPage({
 }) {
   const strings = labels || getTermsPageStrings(locale);
 
+  const provider = <dl className={recovery.providerFacts}>
+    <dt>{strings.providerLabel}</dt><dd>SIA “iLab” · Reģ. nr. 40203288307</dd>
+    <dt>{strings.addressLabel}</dt><dd>Ieriķu iela 3 (Domina Shopping), Rīga</dd>
+    <dt>{strings.branchLabel}</dt><dd>Spice Life - Jaunmoku iela 13, Rīga</dd>
+    <dt>{strings.emailLabel}</dt><dd><a href="mailto:info@ilab.lv">info@ilab.lv</a></dd>
+    <dt>{strings.phoneLabel}</dt><dd><a href="tel:+37123370088">23370088</a></dd>
+  </dl>;
+
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="noteikumi" className={recovery.page}>
+      <InfoHero locale={locale} booking={false} aside={provider}
+        note={`${strings.updatedLabel} ${UPDATED_DATE}`}
         title={strings.headerTitle}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
       />
 
       <section className={s.section} aria-labelledby="terms-h2">
-        <div className={s.container}>
-          <p className={s.paragraph}>
-            <strong>{strings.updatedLabel}</strong> {UPDATED_DATE}
-            <br />
-            <strong>{strings.providerLabel}</strong> SIA “iLab” · Reģ. nr. 40203288307
-            <br />
-            <strong>{strings.addressLabel}</strong> Ieriķu iela 3 (Domina Shopping), Rīga
-            <br />
-            <strong>{strings.branchLabel}</strong> Spice Life - Jaunmoku iela 13, Rīga
-            <br />
-            <strong>{strings.emailLabel}</strong> info@ilab.lv | 
-            <strong>{strings.phoneLabel}</strong> 23370088
-          </p>
+        <div className={recovery.termsLayout}>
+          <nav className={recovery.faqToc} aria-label={strings.breadcrumbPage}><ol>{Array.from({ length: 10 }, (_, index) => <li key={index}><a href={`#terms-section-${index + 1}`}>{strings[`section${index + 1}`]}</a></li>)}</ol></nav>
+          <article className={recovery.legalCopy}>
+
 
           <h2 id="terms-h2" className={s.h2}>
             {strings.breadcrumbPage}
           </h2>
 
-          <h3 className={s.h3}>{strings.section1}</h3>
+          <h3 id="terms-section-1" className={s.h3}>{strings.section1}</h3>
           <p
             className={s.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.section1Text }}
           />
 
-          <h3 className={s.h3}>{strings.section2}</h3>
+          <h3 id="terms-section-2" className={s.h3}>{strings.section2}</h3>
           <p className={s.paragraph}>{strings.section2Text}</p>
 
-          <h3 className={s.h3}>{strings.section3}</h3>
+          <h3 id="terms-section-3" className={s.h3}>{strings.section3}</h3>
           <p className={s.paragraph}>{strings.section3Text}</p>
 
-          <h3 className={s.h3}>{strings.section4}</h3>
+          <h3 id="terms-section-4" className={s.h3}>{strings.section4}</h3>
           <p
             className={s.paragraph}
             dangerouslySetInnerHTML={{ __html: strings.section4Text }}
           />
           <p className={s.paragraph}>{strings.section4Text2}</p>
 
-          <h3 className={s.h3}>{strings.section5}</h3>
+          <h3 id="terms-section-5" className={s.h3}>{strings.section5}</h3>
           <p className={s.paragraph}>{strings.section5Text}</p>
 
-          <h3 className={s.h3}>{strings.section6}</h3>
+          <h3 id="terms-section-6" className={s.h3}>{strings.section6}</h3>
           <p className={s.paragraph}>{strings.section6Text}</p>
 
-          <h3 className={s.h3}>{strings.section7}</h3>
+          <h3 id="terms-section-7" className={s.h3}>{strings.section7}</h3>
           <p className={s.paragraph}>{strings.section7Text}</p>
 
-          <h3 className={s.h3}>{strings.section8}</h3>
+          <h3 id="terms-section-8" className={s.h3}>{strings.section8}</h3>
           <p className={s.paragraph}>{strings.section8Text}</p>
 
-          <h3 className={s.h3}>{strings.section9}</h3>
+          <h3 id="terms-section-9" className={s.h3}>{strings.section9}</h3>
           <p className={s.paragraph}>{strings.section9Text}</p>
 
-          <h3 className={s.h3}>{strings.section10}</h3>
+          <h3 id="terms-section-10" className={s.h3}>{strings.section10}</h3>
           <p className={s.paragraph}>
             SIA “iLab” · Reģ. nr. 40203288307
             <br />
@@ -223,12 +225,13 @@ export default function TermsPage({
             <br />
             {strings.branchLabel} Spice Life - Jaunmoku iela 13, Rīga
           </p>
+          </article>
         </div>
       </section>
 
       <section className={s.section}>
-        <ConvertBand locale={locale} />
+        <ServiceBlock kind="genericClosing"><ConvertBand locale={locale} /></ServiceBlock>
       </section>
-    </>
+    </ServiceRecovery>
   );
 }

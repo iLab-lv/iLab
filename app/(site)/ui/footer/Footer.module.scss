@@ -1,239 +1,39 @@
 @use '@/styles/_tokens.scss' as *;
 
-.footer {
-  position: relative;
-  color: $color-text;
-  background: $color-surface-2;
-  border-top: $border-thin solid $color-border;
+.footer { position: relative; padding: 96px 0 48px; color: #f2f5f7; background: #0c1115; border-top: 1px solid #243039; font-family: 'Geologica', $font-family-base; }
+.inner { padding-inline: 20px; }
+.masthead { display: grid; justify-items: start; gap: 16px; padding-bottom: 64px; }
+.masthead p { max-width: 36ch; margin: 0; color: #aeb8c0; font-size: 15px; text-align: left; }
+.logo { display: block; width: min(68vw, 300px); height: auto; }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 32px; }
+.column { grid-column: span 12; display: grid; align-content: start; gap: 8px; min-width: 0; color: #f2f5f7; font-size: 15px; }
+.column address { margin: 0 0 16px; color: #aeb8c0; font-style: normal; line-height: 1.5; }
+.column strong { color: #f2f5f7; font-weight: 500; }
+.column a { color: inherit; text-decoration: none; }
+.column a:hover { color: inherit; text-decoration: underline; text-decoration-color: #47c6e2; text-underline-offset: 4px; }
+.label { margin: 0 0 12px; color: #aeb8c0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid #243039; display: grid; grid-template-columns: 1fr; align-items: center; gap: 12px; color: #aeb8c0; font-size: 13px; text-align: center; }
+.socials { display: flex; justify-self: center; }
+.socials a { display: grid; width: 48px; height: 48px; place-items: center; color: #aeb8c0; }
+.socials a:hover, .socials a:focus-visible { color: #47c6e2; }
+.socials svg { width: 18px; height: 18px; }
+@media (min-width: 640px) { .column { grid-column: span 6; } .logo { width: min(36vw, 440px); } }
+@media (min-width: 768px) { .inner { padding-inline: 32px; } }
+@media (min-width: 1024px) { .column { grid-column: span 4; } .bottom { grid-template-columns: 1fr auto 1fr; } .socials { justify-self: start; } }
+@media (min-width: 1280px) { .inner { padding-inline: 120px; } }
+@media (max-width: 1023px) { .footer { padding-bottom: calc(48px + 60px + env(safe-area-inset-bottom)); } }
 
-  /* FIX: avoid showing page bg stripe */
-  margin-top: 0;
-}
-
-/* Container controlling both tiers */
-.container {
-  max-width: $container-max;
-  margin: 0 auto;
-
-  /* Larger top padding inside footer (air without external gap) */
-  padding: $space-2xl $space-md 0 $space-md;
-
-  @media (min-width: $bp-md) {
-    padding: $space-3xl $space-md 0 $space-md;
+:global([data-service-redesign]) {
+  .footer { border-top: 0; font-family: var(--service-font); line-height: 1.55; }
+  .label { font-family: var(--service-mono); }
+  .column address { margin: 0; line-height: 1.55; }
+  .column strong { font-weight: 400; }
+  .bottom > span:not([aria-hidden]) { text-align: center; }
+  @media (min-width: 640px) {
+    .bottom { grid-template-columns: 1fr auto 1fr; }
+    .socials { justify-self: start; }
   }
-}
-
-/* ===== TIER 1: Brand bar (logo + SIA line) ===== */
-.brandBar {
-  /* Larger gap after brand block before columns */
-  margin-bottom: $space-2xl;
-
-  @media (min-width: $bp-md) {
-    margin-bottom: $space-3xl;
+  @media (max-width: 639px) {
+    .bottom > [aria-hidden] { display: none; }
   }
-}
-
-.brandInner {
-  display: flex;
-  flex-direction: column;   /* puts SIA line under the logo */
-  align-items: flex-start;  /* align to left edge of the logo */
-  gap: $space-xs;           /* space between logo and SIA line */
-}
-
-.logo {
-  width: 150px;
-  height: auto;
-  display: block;
-
-  @media (max-width: $bp-md) {
-    width: 130px;
-  }
-}
-
-.logoFallback {
-  width: 150px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border: $border-thin solid $color-border;
-  border-radius: $radius-sm;
-  background: $color-surface-3;
-  color: $color-text-2;
-  font-weight: $font-weight-semibold;
-
-  @media (max-width: $bp-md) {
-    width: 130px;
-    height: 34px;
-  }
-}
-
-.legalLine {
-  color: $color-text-2;
-  font-size: $font-size-sm;
-  margin: 0;                /* no extra offset; gap handles spacing */
-}
-
-/* ===== TIER 2: Columns row (default) ===== */
-.columns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $space-2xl; /* larger column gap on mobile */
-
-  @media (min-width: $bp-md) {
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: $space-3xl;           /* larger desktop gap */
-  }
-}
-
-/* ===== TIER 2: Columns row (ads variant) ===== */
-.columnsAds {
-  @extend .columns;
-
-  @media (min-width: $bp-md) {
-    grid-template-columns: 1.3fr 1fr 1fr;
-    align-items: flex-start;
-  }
-
-  /* Smaller logo only in ads variant */
-  .logo {
-    width: 110px;
-
-    @media (max-width: $bp-md) {
-      width: 100px;
-    }
-  }
-}
-
-/* Optional: specific tweaks for the brand column in ads variant */
-
-
-.col {
-  min-width: 0;
-}
-
-/* Headings + hairline (unchanged visuals) */
-.heading {
-  font-size: $font-size-sm;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: $color-text;
-  margin: 0;
-}
-
-.rule {
-  height: 1px;
-  margin: $space-xs 0 $space-lg 0; /* generous gap to content */
-  background: linear-gradient(to bottom, $glass-border, rgba($glass-border, 0));
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30);
-}
-
-/* Lists (UNCHANGED: no bullets, secondary color) */
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li + li {
-    margin-top: $space-sm;
-  }
-
-  a {
-    font-size: $font-size-p;
-    color: $color-text-2;
-    text-decoration: none;
-    border-radius: $radius-sm;
-    padding: 2px 0;
-
-    &:hover {
-      color: $color-accent;
-      text-decoration: underline;
-    }
-
-    &:active {
-      color: $color-accent-active;
-    }
-
-    &:focus-visible {
-      outline: $focus-ring-width solid $focus-ring-color;
-      outline-offset: $focus-ring-offset;
-    }
-  }
-}
-
-/* Locations - spacing only */
-.brandLocations {
-  display: grid;
-  gap: $space-xl; /* more space between locations */
-}
-
-.locItem {
-  color: $color-text-2;
-  line-height: 1.45;
-  position: relative;
-}
-
-/* REMOVE divider line between locations; keep only vertical space */
-.locItemDivided {
-  padding-top: $space-xl;  /* spacing-only; no ::before line */
-}
-
-.locLine {
-  margin: 0;
-}
-
-.locLine a {
-  color: $color-text-2;
-  text-decoration: none;
-
-  &:hover {
-    color: $color-accent;
-    text-decoration: underline;
-  }
-
-  &:focus-visible {
-    outline: $focus-ring-width solid $focus-ring-color;
-    outline-offset: $focus-ring-offset;
-  }
-}
-
-.locName {
-  color: $color-text;
-  font-weight: $font-weight-semibold;
-  display: inline-block;
-  margin-bottom: $space-2xs;
-}
-
-.dot {
-  color: $color-text-3;
-}
-
-/* ===== Copyright bar ===== */
-.bottomBar {
-  position: relative;
-}
-
-.bottomInner {
-  max-width: $container-max;
-  margin: 0 auto;
-
-  /* Larger vertical gap above & below copyright */
-  padding: $space-3xl $space-md calc(#{$space-3xl} + #{$safe-bottom}) $space-md;
-
-  @media (min-width: $bp-md) {
-    padding: $space-3xl $space-md calc(#{$space-3xl} + #{$safe-bottom}) $space-md;
-  }
-}
-
-/* Hairline above copyright (unchanged look) */
-.ruleWide {
-  height: 1px;
-  margin: 0 auto $space-md auto;
-  background: linear-gradient(to bottom, $glass-border, rgba($glass-border, 0));
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
-}
-
-.copy {
-  text-align: center;
-  color: $color-text-3;
-  font-size: $font-size-sm;
 }

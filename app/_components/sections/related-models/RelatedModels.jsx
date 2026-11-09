@@ -1,5 +1,5 @@
 import { getRelatedModelsCopy } from './relatedModels.i18n';
-import RelatedModelsCarousel from './RelatedModelsCarousel';
+import Link from 'next/link';
 import s from './RelatedModels.module.scss';
 
 function localized(value, locale) {
@@ -35,19 +35,23 @@ function getRelated(currentDevice, devices, baseHref, locale) {
     }));
 }
 
-export default function RelatedModels({ id = 'related-models', currentDevice, devices = [], baseHref, locale = 'lv' }) {
+export default function RelatedModels({ id = 'related-models', currentDevice, devices = [], baseHref, locale = 'lv', variant }) {
   const copy = getRelatedModelsCopy(locale);
   const models = getRelated(currentDevice, devices, baseHref, locale);
   if (!models.length) return null;
 
   return (
-    <section id={id} className={s.section} aria-labelledby={`${id}-title`}>
+    <section id={id} className={`${s.section} ${variant === 'model' ? s.model : ''}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <header className={s.header}>
           <h2 id={`${id}-title`}>{copy.titleStart}<span>{copy.titleAccent}</span></h2>
           <p>{copy.intro}</p>
         </header>
-        <RelatedModelsCarousel models={models} labels={copy} />
+        <div className={s.links}>
+          {models.map((model) => (
+            <Link href={model.href} key={model.slug}>{model.name}</Link>
+          ))}
+        </div>
       </div>
     </section>
   );

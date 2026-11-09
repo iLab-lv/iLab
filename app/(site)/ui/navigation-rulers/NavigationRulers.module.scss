@@ -1,0 +1,16 @@
+.rulers {
+  --hair: var(--service-hairline); --faint: var(--service-ink-3);
+  --muted: var(--service-ink-2); --paper: var(--service-paper); --signal: var(--service-signal);
+  &[hidden] { display: none; }
+  &, *, *::before, *::after { box-sizing: border-box; }
+}
+.rail { display: none; position: fixed; top: 72px; bottom: 0; width: 96px; z-index: 40; pointer-events: none; color: var(--faint); font: 11px/1.55 var(--service-mono); letter-spacing: .14em; }
+.railLeft { left: 0; border-right: 1px solid var(--hair); }
+.railRight { right: 0; border-left: 1px solid var(--hair); }
+.railSections { position: absolute; left: 50%; top: 32px; bottom: 32px; width: 1px; button { position: absolute; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 28px; display: grid; place-items: center; pointer-events: auto; padding: 0; color: var(--faint); border: 0; background: transparent; font: inherit; letter-spacing: inherit; &[aria-current],&:hover,&:focus-visible { color: var(--signal); } span { position: absolute; left: calc(100% + 4px); top: 50%; transform: translateY(-50%); padding: 6px 10px; color: var(--muted); border: 1px solid var(--hair); background: var(--paper); font: 13px/1.4 var(--service-font); letter-spacing: .02em; white-space: nowrap; opacity: 0; visibility: hidden; } &:hover span,&:focus-visible span { opacity: 1; visibility: visible; } } }
+.railSegment { position: absolute; left: 0; width: 1px; background: var(--hair); i { position: absolute; left: -2px; width: 5px; height: 1px; background: var(--hair); &:first-child { top: 0; left: -4px; width: 9px; background: var(--faint); } &:nth-child(2) { top: 50%; } &:last-child { top: 100%; left: -4px; width: 9px; background: var(--faint); } } }
+.railRuler { position: absolute; left: 50%; top: 96px; bottom: 96px; width: 1px; background: var(--hair); pointer-events: auto; i { position: absolute; left: -3px; width: 7px; height: 1px; background: var(--hair); &:nth-child(5n+1) { left: -6px; width: 13px; background: var(--faint); } } input { position: absolute; inset: 0 auto 0 -16px; width: 33px; height: 100%; margin: 0; writing-mode: vertical-lr; direction: ltr; opacity: 0; cursor: pointer; } &:has(input:focus-visible) { outline: 2px solid var(--signal); outline-offset: 12px; } }
+.railMarker { position: absolute; left: 50%; top: calc(96px + var(--progress) * (100% - 240px)); width: 1px; height: 48px; background: var(--signal); transform: translateX(-50%); }
+.railScale { position: absolute; left: calc(50% + 16px); top: 96px; bottom: 96px; span { position: absolute; transform: translateY(-50%); &:first-child { top: 0; } &:nth-child(2) { top: 50%; } &:last-child { top: 100%; } } }
+.railSections button { cursor: pointer; }
+@media (min-width: 1280px) { .rail { display: block; } }

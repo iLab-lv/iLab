@@ -1,16 +1,17 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import HubLocations from '@/_components/sections/catalog-hub/HubLocations';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
 
-import BrandPreview from '@components/model-grid/BrandPreview';
+import BrandPreview from '@/_components/sections/catalog-hub/HubBrandPreview';
 
-import Services from '@sections/services/Services';
-import Reviews from '@sections/reviews/Reviews';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import Services from '@/_components/sections/popular-repairs/RepairServices';
+import Reviews from '@/_components/sections/catalog-hub/HubReviews';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
-
-import s from '@styles/Catalog.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 
 export default function PhoneRepairPage({
   locale = 'lv',
@@ -32,23 +33,30 @@ export default function PhoneRepairPage({
     return null;
   }
 
+  const introP1 = page.sections?.hasProcess
+    ? labels.introP1.replaceAll('#process-h2', '#process')
+    : labels.introP1.replace(/<a href="#process(?:-h2)?">([\s\S]*?)<\/a>/g, '$1');
+
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        variant="hub"
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={labels.scrollCta}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={page.hero?.image || '/images/categories/telefonu_remonts.webp'}
-        alt={labels.heroAlt}
-        focal="right"
-        priority
+        imageWidth={1800}
+        imageHeight={2000}
+        imageAlt={labels.heroAlt}
         bodyHtml={labels.heroBodyHtml}
-      />
+        targetId={labels.scrollCta.targetId}
+        targetLabel={labels.scrollCta.label}
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("phone", locale)} />
+      </CatalogHero>
 
+      <div className={s.hub}>
       <section className={s.section} aria-labelledby="phones-intro-h2">
         <div className={s.container}>
           <h2 id="phones-intro-h2" className={s.h2}>
@@ -59,7 +67,7 @@ export default function PhoneRepairPage({
 
           <p
             className={s.paragraph}
-            dangerouslySetInnerHTML={{ __html: labels.introP1 }}
+            dangerouslySetInnerHTML={{ __html: introP1 }}
           />
 
           <p
@@ -75,21 +83,20 @@ export default function PhoneRepairPage({
       </section>
 
       {!!servicesItems.length && (
-        <section className={s.section} aria-labelledby="popular-services-h2">
-          <div className={s.container}>
-            <Services
+        <Services
               id="brand-services"
+              locale={locale}
+              variant="featured"
               title={labels.servicesTitle}
               items={servicesItems}
             />
-          </div>
-        </section>
       )}
 
       <div id="brand-list" className={s.anchorTarget} />
 
       {brandBlocks.map((brand) => (
         <BrandPreview
+          presentation="editorial"
           key={brand.slug}
           brandSlug={brand.slug}
           brandName={brand.name}
@@ -103,9 +110,7 @@ export default function PhoneRepairPage({
       {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       {page.sections?.hasProcess && (
-        <section className={s.section} aria-labelledby="process-h2">
-          <div className={s.container}>
-            <Process
+        <Process
               id="process"
               title={labels.processTitle}
               steps={labels.processSteps}
@@ -113,19 +118,12 @@ export default function PhoneRepairPage({
               variant="cards"
               locale={locale}
             />
-          </div>
-        </section>
       )}
 
-      {page.sections?.hasWhy && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
-      )}
+      <HubLocations id="phone-locations" locale={locale} />
 
       {page.sections?.hasFaq && faqItems.length > 0 && (
-        <section className={s.section} aria-labelledby="faq-h2">
-          <div className={s.container}>
+        <div data-service-section="faq" className={skin.block}>
             <Faq
               id="phones-faq"
               title={faqTitle}
@@ -134,15 +132,15 @@ export default function PhoneRepairPage({
               variant="accordion"
               locale={locale}
             />
-          </div>
-        </section>
+        </div>
       )}
 
       {page.sections?.hasConvertBand && (
-        <section className={s.section}>
+        <div className={`${skin.block} ${skin.closing} ${skin.genericClosing}`}><section>
           <ConvertBand locale={locale} />
-        </section>
+        </section></div>
       )}
+      </div>
     </>
   );
 }

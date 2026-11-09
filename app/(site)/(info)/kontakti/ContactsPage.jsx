@@ -1,8 +1,13 @@
+import EditorialWhy from '@/_components/sections/why/EditorialWhy';
 import Link from 'next/link';
 
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import Locations from '@sections/locations/Locations';
-import Faq from '@sections/faq/Faq';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
+import FullLocations from '@/_components/sections/full-locations/FullLocations';
+import { getLocationsContent } from '@sections/locations/locations.i18n';
+import Faq from '@/_components/sections/faq/ServiceFaq';
+import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import {
   localizedCategoryPath,
@@ -11,7 +16,7 @@ import {
   localizedServicePath,
 } from '@/lib/routes/localizedPath';
 
-import s from './ContactsPage.module.scss';
+import s from '@/_components/sections/service-recovery/RemainingPages.module.scss';
 
 export function getContactsPageStrings(locale = 'lv') {
   const pagePath = localizedInfoPath('kontakti', locale);
@@ -372,31 +377,6 @@ function BusinessFacts({ facts }) {
   );
 }
 
-function Benefits({ strings }) {
-  return (
-    <section className={s.section} aria-labelledby="contacts-benefits-h2">
-      <div className={s.container}>
-        <div className={s.sectionHeader}>
-          <p className={s.eyebrow}>iLab</p>
-
-          <h2 id="contacts-benefits-h2" className={s.h2}>
-            {strings.benefitsTitle}
-          </h2>
-        </div>
-
-        <div className={s.benefitsGrid}>
-          {strings.benefits.map((item) => (
-            <article key={item.title} className={s.benefitCard}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function ContactsPage({
   locale = 'lv',
 
@@ -411,24 +391,18 @@ export default function ContactsPage({
   const strings = labels || getContactsPageStrings(locale);
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="kontakti" className={recovery.page}>
+      <InfoHero locale={locale}
+        contactAside
+        secondary={{ href: '#locations', label: strings.pageCrumb }}
         title={strings.headerTitle}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
       />
 
-      <section
-        id="locations"
-        className={s.locationsSection}
-        aria-label={strings.pageCrumb}
-      >
-        <Locations
-          locale={locale}
-          locations={siteSettings?.locations || []}
-          pinPositions={siteSettings?.pinPositions || {}}
-        />
-      </section>
+      <div id="locations">
+        <FullLocations id="contacts-branches" title={getLocationsContent(locale).title} subtitle={strings.contactIntro} locale={locale} locations={siteSettings?.locations || []} pinPositions={siteSettings?.pinPositions || {}} defaultHours={siteSettings?.hours || []} />
+      </div>
 
       <section className={s.section} aria-labelledby="contacts-info-h2">
         <div className={s.container}>
@@ -460,22 +434,23 @@ export default function ContactsPage({
         </div>
       </section>
 
-      <Benefits strings={strings} />
+      <EditorialWhy id="contacts-benefits" headingId="contacts-benefits-h2" eyebrow="iLab" title={strings.benefitsTitle} entries={strings.benefits.map(({ title, text }) => ({ title, description: text }))} />
 
       {contactFaqItems.length > 0 ? (
         <section className={s.section} aria-labelledby="contacts-faq-h2">
           <div className={s.container}>
-            <Faq
+            <ServiceBlock kind="faq"><Faq
               id="contacts-faq"
               title={contactFaqTitle || strings.faqTitleFallback}
               items={contactFaqItems}
               headingLevel={2}
               variant="accordion"
               locale={locale}
-            />
+            /></ServiceBlock>
           </div>
         </section>
       ) : null}
-    </>
+      <ServiceBlock kind="genericClosing"><ConvertBand locale={locale} /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

@@ -28,6 +28,7 @@ export default function Services({
   items = [],
   headingLevel = 2,
   className,
+  variant,
 }) {
   if (!items || items.length === 0) return null;
 
@@ -45,7 +46,7 @@ export default function Services({
   }
 
   return (
-    <section id={id} className={`${s.section} ${className || ''}`} aria-labelledby={`${id}-title`}>
+    <section id={id} className={`${s.section} ${variant === 'editorial' ? s.editorial : ''} ${className || ''}`} aria-labelledby={`${id}-title`}>
       <div className={s.container}>
         <Heading id={`${id}-title`} className={s.sectionTitle}>{title}</Heading>
 

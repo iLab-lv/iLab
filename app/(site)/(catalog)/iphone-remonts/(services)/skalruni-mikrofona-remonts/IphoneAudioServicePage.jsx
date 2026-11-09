@@ -1,8 +1,9 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
@@ -20,23 +21,21 @@ export default function IphoneAudioServicePage({
   hasVisibleFaq = false,
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{ label: strings.headerCtaLabel, targetId: 'pieteikties' }}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={strings.heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        className="service"
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
+        targetId="pieteikties"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
       />
 
-      <section id="parskats" className={s.section} aria-labelledby="intro-h2">
+      <ServiceBlock kind="intro"><section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
           <h2 id="intro-h2" className={s.h2}>
             {strings.introTitle}
@@ -60,11 +59,9 @@ export default function IphoneAudioServicePage({
             </p>
           )}
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
+      <Process
             id="process"
             title={strings.processTitle}
             steps={strings.processSteps}
@@ -72,19 +69,15 @@ export default function IphoneAudioServicePage({
             variant="cards"
             locale={locale}
           />
-        </div>
-      </section>
 
-      <section className={s.section}>
+      <ServiceBlock kind="benefits"><section className={s.section}>
         <Why locale={locale} />
-      </section>
+      </section></ServiceBlock>
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>
-              {strings.faqTitle}
-            </h2>
+
 
             {faqSections.map((section, index) => (
               <div
@@ -93,25 +86,27 @@ export default function IphoneAudioServicePage({
               >
                 <Faq
                   id={`faq-group-${index + 1}`}
-                  title={section.title}
+                  title={section.title || strings.faqTitle}
                   items={section.items}
-                  headingLevel={3}
+                  headingLevel={2}
                   variant="accordion"
                   locale={locale}
                 />
               </div>
             ))}
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
-      <section
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <ServiceBlock kind="genericClosing"><section
         id="pieteikties"
         className={s.section}
         aria-label={strings.applyAria}
       >
         <ConvertBand locale={locale} />
-      </section>
-    </>
+      </section></ServiceBlock>
+    </ServiceRecovery>
   );
 }

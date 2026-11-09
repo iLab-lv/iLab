@@ -8,6 +8,7 @@ import s from './ServicePricelist.module.scss';
 
 // 🔸 adjust this path if needed
 import repairServices from '@/data/repairServices';
+import { pickPrimaryPriceItem, resolveSelectorServiceIds, pickLocalizedField } from '@/lib/pricing/resolveServicePricing';
 
 const PLACEHOLDER = '/images/placeholders/phone.webp';
 
@@ -32,7 +33,7 @@ const byYearDescThenNameAsc = (a, b) => {
 const serviceMap = Object.fromEntries((repairServices || []).map((svc) => [svc.id, svc]));
 
 function getServiceLabel(id) {
-  const meta = serviceMap[id];
+  const meta = serviceMap[id] || serviceMap[String(id || '').replace(/^phone-/, '')];
   if (meta?.title) return meta.title;
   // Fallback: humanize the id
   return String(id || '').replace(/-/g, ' ') || 'Remonta cena';
@@ -41,6 +42,7 @@ function getServiceLabel(id) {
 export default function ServicePricelist({
   devices = [],
   pricing = {},
+  serviceMeta = {},
   brandSlug,
   categorySlug = 'telefonu-remonts',
   serviceIds = [],
@@ -50,8 +52,12 @@ export default function ServicePricelist({
   cta = { label: 'Pieteikties', href: '#pieteikties' },
   seriesExtractor,
   className,
+  locale = 'lv',
 }) {
   const anchorRef = useRef(null);
+  const strings = locale === 'ru'
+    ? { request: 'по запросу', price: 'Цена ремонта', other: 'Другие модели', empty: 'Для этого бренда пока нет добавленных моделей.', all: 'Смотреть все модели', from: 'от' }
+    : { request: 'pēc pieprasījuma', price: 'Remonta cena', other: 'Citi modeļi', empty: 'Šim zīmolam pašlaik nav pievienotu modeļu.', all: 'Skatīt visus modeļus', from: 'no' };
 
   // Normalize serviceIds so it never crashes if null/undefined is passed
   const normalizedServiceIds = useMemo(
@@ -59,6 +65,7 @@ export default function ServicePricelist({
     [serviceIds]
   );
   const hasPriority = normalizedServiceIds.length > 0;
+  const getLineLabel = (line) => line?.title || pickLocalizedField(serviceMeta?.[line?.id]?.labels, locale) || getServiceLabel(line?.id);
 
   // Group devices by series, using proper sorting
   const groups = useMemo(() => {
@@ -77,8 +84,8 @@ export default function ServicePricelist({
     const map = new Map();
     for (const d of filtered) {
       const label =
-        (typeof seriesExtractor === 'function' ? seriesExtractor(d) : d.series || 'Citi modeļi') ||
-        'Citi modeļi';
+        (typeof seriesExtractor === 'function' ? seriesExtractor(d) : d.series || strings.other) ||
+        strings.other;
       if (!map.has(label)) map.set(label, []);
       map.get(label).push(d);
     }
@@ -98,7 +105,7 @@ export default function ServicePricelist({
     });
 
     return groupArr;
-  }, [devices, brandSlug, categorySlug, seriesExtractor]);
+  }, [devices, brandSlug, categorySlug, seriesExtractor, strings.other]);
 
   // ----- state -----
   const [expandedSeries, setExpandedSeries] = useState(() => groups[0]?.label || null);
@@ -118,11 +125,11 @@ export default function ServicePricelist({
   // ----- pricing helpers -----
   function isRequestPrice(v) {
     // Treat empty string as "pēc pieprasījuma"
-    return v == null || (typeof v === 'string' && v.trim() === '');
+    return typeof v !== 'number' || !Number.isFinite(v);
   }
 
   const formatPrice = (v) => {
-    if (isRequestPrice(v)) return 'pēc pieprasījuma';
+    if (isRequestPrice(v)) return strings.request;
     if (typeof v === 'number') return `€ ${v}`;
     return String(v);
   };
@@ -132,25 +139,8 @@ export default function ServicePricelist({
     if (!p) return { line: null, sid: null };
     const items = Array.isArray(p.items) ? p.items : [];
 
-    // 1) priority by serviceIds (in given order) - only when provided
-    if (hasPriority) {
-      for (const sid of normalizedServiceIds) {
-        const found = items.find((it) => it.id === sid && !isRequestPrice(it.price));
-        if (found) return { line: found, sid };
-      }
-    }
-
-    // 2) then popular
-    const pop = items.find((it) => it.popular && !isRequestPrice(it.price));
-    if (pop) return { line: pop, sid: pop.id || null };
-
-    // 3) any priced (including "pēc pieprasījuma" allowed as fallback? no - keep real price first)
-    const anyPriced = items.find((it) => !isRequestPrice(it.price)) || null;
-    if (anyPriced) return { line: anyPriced, sid: anyPriced?.id || null };
-
-    // 4) if everything is "pēc pieprasījuma", still show the first item
-    const any = items[0] || null;
-    return { line: any, sid: any?.id || null };
+    const line = pickPrimaryPriceItem(items, normalizedServiceIds);
+    return { line, sid: line?.id || null };
   }
 
   const { line: primaryLine, sid: primarySid } = useMemo(
@@ -190,7 +180,7 @@ export default function ServicePricelist({
     const items = Array.isArray(p.items) ? p.items : [];
 
     const ordered = hasPriority
-      ? normalizedServiceIds
+      ? resolveSelectorServiceIds(normalizedServiceIds, items)
           .map((sid) => items.find((it) => it.id === sid))
           .filter(Boolean)
       : items;
@@ -209,7 +199,7 @@ export default function ServicePricelist({
             </h2>
             {intro && <p className={s.intro}>{intro}</p>}
           </header>
-          <p className={s.emptyAll}>Šim zīmolam pašlaik nav pievienotu modeļu.</p>
+          <p className={s.emptyAll}>{strings.empty}</p>
         </div>
       </section>
     );
@@ -232,7 +222,7 @@ export default function ServicePricelist({
               <div className={s.previewHeader}>
                 <span className={s.modelName}>{activeDevice?.name}</span>
                 {activeDevice?.year && <span className={s.modelYear}>{activeDevice.year}</span>}
-                <span className={s.modelSeries}>{activeDevice?.series || 'Citi modeļi'}</span>
+                <span className={s.modelSeries}>{activeDevice?.series || strings.other}</span>
               </div>
 
               <div className={s.imageWrap}>
@@ -250,17 +240,17 @@ export default function ServicePricelist({
               <div className={s.previewBody}>
                 <div className={s.priceRow}>
                   <span className={s.priceLabel}>
-                    {primarySid ? getServiceLabel(primarySid) : 'Remonta cena'}
+                    {primaryLine ? getLineLabel(primaryLine) : strings.price}
                   </span>
-                  <span className={s.priceValue}>{formatPrice(primaryLine?.price)}</span>
+                  <span className={s.priceValue}>{primaryLine?.isStartingFrom && !isRequestPrice(primaryLine.price) ? strings.from + ' ' : ''}{formatPrice(primaryLine?.price)}</span>
                 </div>
 
                 {variantLines.length > 0 && (
                   <ul className={s.altList}>
                     {variantLines.map((line) => (
                       <li key={line.id} className={s.altItem}>
-                        <span className={s.altLabel}>{getServiceLabel(line.id)}</span>
-                        <span className={s.altPrice}>{formatPrice(line.price)}</span>
+                        <span className={s.altLabel}>{getLineLabel(line)}</span>
+                        <span className={s.altPrice}>{line.isStartingFrom && !isRequestPrice(line.price) ? strings.from + ' ' : ''}{formatPrice(line.price)}</span>
                       </li>
                     ))}
                   </ul>
@@ -333,7 +323,7 @@ export default function ServicePricelist({
 
             {viewAllHref && (
               <Link href={viewAllHref} className={s.allLink}>
-                Skatīt visus modeļus
+                {strings.all}
               </Link>
             )}
           </div>

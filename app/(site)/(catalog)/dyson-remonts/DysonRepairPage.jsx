@@ -1,13 +1,14 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-
-import Services from '@sections/services/Services';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import HubLocations from '@/_components/sections/catalog-hub/HubLocations';
+import Services from '@/_components/sections/popular-repairs/RepairServices';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Reviews from '@sections/reviews/Reviews';
+import Reviews from '@/app/_components/sections/reviews/ServiceReviews';
 import Guide from '@sections/guide/Guide';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
 import s from '@styles/Catalog.module.scss';
 
@@ -223,23 +224,24 @@ export default function DysonRepairPage({
   const strings = labels || getDysonPageStrings(locale);
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="dyson">
+      <ServiceHero
+        template="dyson"
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
-        scrollCta={strings.scrollCta}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        className="category"
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
-      />
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
+        placeholderLabel={strings.imageAlt}
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("dyson", locale)} />
+      </ServiceHero>
 
-      <section className={s.section} aria-labelledby="dyson-intro-h2">
+      <ServiceBlock kind="intro"><section className={s.section} aria-labelledby="dyson-intro-h2">
         <div className={s.container}>
           <h2 id="dyson-intro-h2" className={s.h2}>
             {strings.introTitle}
@@ -250,35 +252,29 @@ export default function DysonRepairPage({
             dangerouslySetInnerHTML={{ __html: strings.introBody }}
           />
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section className={s.section} aria-labelledby="dyson-services-h2">
-        <div className={s.container}>
-          <Services
+      <Services
             id="dyson-services"
             title={strings.servicesTitle}
             items={strings.servicesItems}
+            locale={locale}
+            variant="informational"
           />
-        </div>
-      </section>
-
-      {(page?.sections?.hasReviews ?? true) && <Reviews locale={locale} />}
 
       {(page?.sections?.hasGuide ?? true) && (
-        <Guide
+        <ServiceBlock kind="guide"><Guide
           id="guide"
           locale={locale}
           variant="dyson"
           headingLevel={2}
-        />
+        /></ServiceBlock>
       )}
 
       <div id="process" className={s.anchorTarget} />
 
       {(page?.sections?.hasProcess ?? true) && (
-        <section className={s.section} aria-labelledby="process-h2">
-          <div className={s.container}>
-            <Process
+        <Process
               id="process-content"
               title={strings.processTitle}
               steps={strings.processSteps}
@@ -286,18 +282,13 @@ export default function DysonRepairPage({
               variant="cards"
               locale={locale}
             />
-          </div>
-        </section>
       )}
 
-      {(page?.sections?.hasWhy ?? true) && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
-      )}
+      {(page?.sections?.hasReviews ?? true) && <Reviews locale={locale} />}
+      <HubLocations locale={locale} />
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="dyson-faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section} aria-labelledby="dyson-faq-h2">
           <div className={s.container}>
             <Faq
               id="dyson-faq"
@@ -308,14 +299,14 @@ export default function DysonRepairPage({
               locale={locale}
             />
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
       {(page?.sections?.hasConvertBand ?? true) && (
-        <section className={s.section}>
+        <ServiceBlock kind="genericClosing"><section className={s.section}>
           <ConvertBand locale={locale} />
-        </section>
+        </section></ServiceBlock>
       )}
-    </>
+    </ServiceRecovery>
   );
 }

@@ -1,22 +1,39 @@
 @use '@/styles/_tokens.scss' as *;
 @use '@/styles/_layout.scss' as layout;
 
-.section { padding-block: clamp($space-xl, 5vw, 72px); border-bottom: $border-thin solid $color-border; background: linear-gradient(180deg, rgba(2, 8, 9, .98), rgba(3, 3, 3, 1)); }
+.section { padding-block: clamp($space-xl, 5vw, 72px); border-bottom: $border-thin solid $color-border; background: transparent; }
 .container { @include layout.catalog-container; }
 .title { margin: 0 0 $space-xl; color: $color-text; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: $line-height-heading; font-weight: $font-weight-bold; }
-.title span { color: $color-accent; text-shadow: 0 0 34px rgba(34, 211, 238, .34), 0 0 72px rgba(34, 211, 238, .12); }
-.table { display: none; border: $border-thin solid $color-border; border-radius: $radius-lg; overflow: hidden; background: $glass-bg-weak; @media (min-width: $bp-lg) { display: grid; } }
+.title span { color: inherit; }
+.table { display: none; border-top: $border-thin solid $color-border; border-bottom: $border-thin solid $color-border; overflow: hidden; background: transparent; @media (min-width: $bp-lg) { display: grid; } }
 .tr { display: grid; grid-template-columns: 1.4fr .8fr .8fr auto; align-items: center; gap: $space-md; padding: $space-md; border-top: $border-thin solid $color-border; }
 .tr:first-child { border-top: 0; }
-.head { background: $glass-bg-weak-active; }
+.head { background: transparent; }
 .th { color: $color-text-3; font-size: .85rem; }
 .td { color: $color-text; }
 .serviceTitle { color: $color-text; font-weight: $font-weight-medium; }
-.chip { display: inline-flex; align-items: center; height: 28px; padding: 0 $space-sm; border: $border-thin solid $color-border; border-radius: $radius-pill; color: $color-text-2; background: $glass-bg-weak; font-size: .85rem; }
+.chip { display: inline-flex; align-items: center; min-height: 28px; color: $color-text-2; background: transparent; font-size: .85rem; }
 .price { color: $color-text; font-weight: $font-weight-semibold; }
-.bookBtn { display: inline-flex; align-items: center; justify-content: center; height: $btn-h-md; padding: 0 $space-lg; border: $border-thin solid $color-accent; border-radius: $radius-pill; color: $color-accent; background: $glass-bg-weak; transition: background-color $dur-base $ease-std, box-shadow $dur-base $ease-std; &:hover { background: $accent-tint-weak; } &:active { background: $accent-tint-strong; box-shadow: $shadow-accent-press; } }
-.cards { display: grid; gap: $space-md; @media (min-width: $bp-lg) { display: none; } }
-.card { padding: $space-md; border: $border-thin solid $color-border; border-radius: $radius-lg; background: $glass-bg-weak; }
+.bookBtn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0; border: 0; border-bottom: $border-thin solid currentColor; border-radius: 0; color: $color-text; background: transparent; transition: color $dur-base $ease-std; &:hover { color: $color-accent; } }
+.cards { display: grid; gap: 0; border-top: $border-thin solid $color-border; @media (min-width: $bp-lg) { display: none; } }
+.card { padding: $space-md 0; border: 0; border-bottom: $border-thin solid $color-border; border-radius: 0; background: transparent; }
 .metaRow { display: flex; gap: $space-sm; margin-top: $space-sm; }
 .ctaRow { margin-top: $space-sm; }
 .notes { margin: $space-md 0 0; padding-left: 1.1em; color: $color-text-3; font-size: .92rem; li { margin-bottom: 4px; } }
+
+.model { padding-block: clamp(112px, 11vw, 176px); }
+.model .container { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px var(--service-gutter); max-width: var(--service-container); padding-inline: var(--service-margin); }
+.model .title { grid-column: 1; grid-row: 1 / 4; margin: 0; color: var(--service-ink); font: 600 clamp(30px, 3vw, 44px)/1.04 var(--service-font); letter-spacing: -.03em; overflow-wrap: break-word; }
+.model .table, .model .cards, .model .notes { grid-column: 2; min-width: 0; }
+.model .tr { grid-template-columns: minmax(0, 1.5fr) minmax(0, .8fr) minmax(0, .7fr) auto; gap: 12px; padding: 18px 0; }
+.model .th { color: var(--service-ink-3); font: 400 var(--service-tech-size)/1.5 var(--service-mono); }
+.model .serviceTitle { color: var(--service-ink); font-size: var(--service-small-size); font-weight: 500; }
+.model .chip { color: var(--service-ink-2); font-size: var(--service-small-size); }
+.model .price { color: var(--service-ink); font-size: var(--service-small-size); font-weight: 500; font-variant-numeric: tabular-nums; }
+.model .bookBtn { color: var(--service-ink); min-height: 44px; font-size: var(--service-small-size); }
+.model .bookBtn:hover { color: var(--service-signal); }
+.model .bookBtn:focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+.model .notes { margin: 0; padding: 0; list-style: none; color: var(--service-ink-2); font-size: var(--service-small-size); line-height: 1.55; }
+.model .notes li { margin-bottom: 6px; }
+@media (max-width: 1023px) { .model .container { grid-template-columns: minmax(0, 1fr); gap: 48px; } .model .title { grid-row: auto; } .model .table, .model .cards, .model .notes { grid-column: 1; } }
+@media (max-width: 767px) { .model { padding-block: 88px; } }

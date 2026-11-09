@@ -1,7 +1,8 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Faq from '@sections/faq/Faq';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ServicePricelist from '@sections/service-pricelist/ServicePricelist';
 import QuickAnswer from '@/_components/sections/quick-answer/QuickAnswer';
 import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
@@ -13,7 +14,6 @@ import IphoneScreenPostRepairChecks from '@/_components/page-sections/iphone-scr
 import IphoneQualitySection from '@/_components/page-sections/iphone-remonts/quality/IphoneQualitySection';
 import PopularServices from '@/_components/sections/popular-services/PopularServices';
 import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
-import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
 import FinalCta from '@/_components/sections/final-cta/FinalCta';
 import IphoneBackCoverTerminology from '@/_components/page-sections/iphone-back-cover-repair/terminology/IphoneBackCoverTerminology';
 import IphoneBackCoverCameraLink from '@/_components/page-sections/iphone-back-cover-repair/related-camera/IphoneBackCoverCameraLink';
@@ -42,27 +42,27 @@ export default function IphoneBackCoverServicePage({
   reviewsSummary = null,
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{ label: strings.headerCtaLabel, targetId: 'brand-list' }}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={strings.heroImage}
-        alt={strings.heroAlt}
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
-      />
+        targetId="brand-list"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
+      ><QuickFacts locale={locale} variant="iphone-back-cover" /></ServiceHero>
 
-      <QuickAnswer locale={locale} variant="iphone-back-cover" />
-      <QuickFacts locale={locale} variant="iphone-back-cover" />
-      <IphoneScreenSymptoms locale={locale} variant="iphone-back-cover" />
-      <IphoneScreenDamageGuide locale={locale} variant="iphone-back-cover" />
-      <IphoneBackCoverTerminology locale={locale} />
+      <ServiceBlock kind="answer"><QuickAnswer locale={locale} variant="iphone-back-cover" /></ServiceBlock>
 
-      <section id="brand-list" className={s.section}>
+      <ServiceBlock kind="symptoms"><IphoneScreenSymptoms locale={locale} variant="iphone-back-cover" /></ServiceBlock>
+      <ServiceBlock kind="rows"><IphoneScreenDamageGuide locale={locale} variant="iphone-back-cover" /></ServiceBlock>
+      <ServiceBlock kind="rows"><IphoneBackCoverTerminology locale={locale} /></ServiceBlock>
+
+      <ServiceBlock kind="priceBrowser"><section id="brand-list" className={s.section}>
         <ServicePricelist
           devices={devices}
           pricing={pricing}
@@ -77,23 +77,20 @@ export default function IphoneBackCoverServicePage({
           locale={locale}
           variant="iphone-back-cover"
         />
-      </section>
+      </section></ServiceBlock>
 
-      <IphoneBackCoverCameraLink locale={locale} />
-      <IphoneScreenPriceFactors locale={locale} variant="iphone-back-cover" />
+      <ServiceBlock kind="cameraLink"><IphoneBackCoverCameraLink locale={locale} /></ServiceBlock>
+      <ServiceBlock kind="rows"><IphoneScreenPriceFactors locale={locale} variant="iphone-back-cover" /></ServiceBlock>
       <RepairProcess id="iphone-back-cover-replacement-steps" locale={locale} variant="iphone-back-cover" backgroundImage="/images/hands-closeup.png" />
-      <IphoneScreenPostRepairChecks locale={locale} variant="iphone-back-cover" />
-      <IphoneQualitySection locale={locale} variant="iphone-back-cover" />
+      <ServiceBlock kind="checks"><IphoneScreenPostRepairChecks locale={locale} variant="iphone-back-cover" /></ServiceBlock>
+      <ServiceBlock kind="quality"><IphoneQualitySection locale={locale} variant="iphone-back-cover" /></ServiceBlock>
       <PopularServices locale={locale} variant="other-services" excludeServiceKey="aizmugures-vacina-maina" />
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
-      <IphoneLocationsSection locale={locale} variant="iphone-back-cover" />
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>
-              {strings.faqTitle}
-            </h2>
+
 
             {faqSections.map((section, index) => (
               <div
@@ -102,19 +99,21 @@ export default function IphoneBackCoverServicePage({
               >
                 <Faq
                   id={`faq-group-${index + 1}`}
-                  title={section.title}
+                  title={section.title || strings.faqTitle}
                   items={section.items}
-                  headingLevel={3}
+                  headingLevel={2}
                   variant="accordion"
                   locale={locale}
                 />
               </div>
             ))}
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
-      <FinalCta id="pieteikties" locale={locale} variant="iphone" />
-    </>
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <ServiceBlock kind="closing"><FinalCta id="pieteikties" locale={locale} variant="iphone" /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

@@ -1,13 +1,13 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Faq from '@sections/faq/Faq';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import QuickAnswer from '@/_components/sections/quick-answer/QuickAnswer';
 import QuickFacts from '@/_components/sections/quick-facts/QuickFacts';
 import RepairProcess from '@/_components/sections/repair-process/RepairProcess';
 import PopularServices from '@/_components/sections/popular-services/PopularServices';
 import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
-import IphoneLocationsSection from '@/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
 import FinalCta from '@/_components/sections/final-cta/FinalCta';
 import {
   WaterDiagnosticPrice,
@@ -25,42 +25,48 @@ export default function IphoneWaterDamageServicePage({
   hasVisibleFaq = false, reviewsSummary = null,
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{ label: strings.headerCtaLabel, targetId: 'cenas' }}
         crumbs={breadcrumbs}
-      />
-      <DeviceHero image={strings.heroImage} alt={strings.heroAlt} focal="right" className="service" bodyHtml={strings.heroBodyHtml} />
+        image={strings.heroImage}
+        imageAlt={strings.heroAlt}
+        bodyHtml={strings.heroBodyHtml}
+        targetId="cenas"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
+      ><QuickFacts locale={locale} variant="iphone-water-damage" /></ServiceHero>
 
-      <QuickAnswer locale={locale} variant="iphone-water-damage" />
-      <QuickFacts locale={locale} variant="iphone-water-damage" />
-      <WaterProtection locale={locale} />
-      <WaterEmergency locale={locale} />
-      <WaterEffects locale={locale} />
-      <WaterDiagnosticPrice locale={locale} />
+      <ServiceBlock kind="answer"><QuickAnswer locale={locale} variant="iphone-water-damage" /></ServiceBlock>
+
+      <ServiceBlock kind="editorial"><WaterProtection locale={locale} /></ServiceBlock>
+      <ServiceBlock kind="waterEmergency"><WaterEmergency locale={locale} /></ServiceBlock>
+      <ServiceBlock kind="rows"><WaterEffects locale={locale} /></ServiceBlock>
+      <ServiceBlock kind="price"><WaterDiagnosticPrice locale={locale} /></ServiceBlock>
       <RepairProcess id="iphone-water-damage-steps" locale={locale} variant="iphone-water-damage" backgroundImage="/images/hands-closeup.png" />
-      <WaterTechnical locale={locale} />
-      <WaterModelLinks locale={locale} />
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
-      <IphoneLocationsSection locale={locale} variant="iphone-water-damage" />
+      <ServiceBlock kind="waterTechnical"><WaterTechnical locale={locale} /></ServiceBlock>
+      <ServiceBlock kind="links"><WaterModelLinks locale={locale} /></ServiceBlock>
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
       <PopularServices locale={locale} variant="other-services" excludeServiceKey="udens-bojajumu-remonts" />
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>{strings.faqTitle}</h2>
+
             {faqSections.map((section, index) => (
               <div key={`faq-group-${index}-${section.id}`} className={index > 0 ? s.stackLg : ''}>
-                <Faq id={`faq-group-${index + 1}`} title={section.title} items={section.items} headingLevel={3} variant="accordion" locale={locale} />
+                <Faq id={`faq-group-${index + 1}`} title={section.title || strings.faqTitle} items={section.items} headingLevel={2} variant="accordion" locale={locale} />
               </div>
             ))}
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
-      <FinalCta id="pieteikties" locale={locale} variant="iphone" />
-    </>
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <ServiceBlock kind="closing"><FinalCta id="pieteikties" locale={locale} variant="iphone" /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

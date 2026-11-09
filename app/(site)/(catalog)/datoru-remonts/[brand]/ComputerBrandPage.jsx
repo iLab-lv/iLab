@@ -1,11 +1,14 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-
-import DeviceHero from '@sections/device-hero/DeviceHero';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import { dedupeAndSort } from '@/app/(site)/components/device-grid/deviceGrid.groups';
+import BrandHero from '@/_components/sections/catalog-brand/BrandHero';
+import BrandServices from '@/_components/sections/catalog-brand/BrandServices';
+import brand from '@/_components/sections/catalog-brand/CatalogBrand.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 import DeviceSelector from '@sections/device-selector/DeviceSelector';
-import Services from '@sections/services/Services';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
 import {
@@ -18,7 +21,6 @@ import {
   LuPlugZap,
 } from 'react-icons/lu';
 
-import c from '@styles/Catalog.module.scss';
 
 export const CATEGORY_KEY = 'datoru-remonts';
 
@@ -456,55 +458,53 @@ export default function ComputerBrandPage({
 
   const cfg = brandConfig;
 
+  const introParagraph = page.sections?.hasProcess
+    ? strings.paragraph
+    : strings.paragraph.replace(/<a href="#process">([\s\S]*?)<\/a>/g, '$1');
+
   return (
-    <>
-      <PageHeader
+    <div data-catalog-brand>
+      <BrandHero
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
-        scrollCta={strings.scrollCta}
-      />
-
-      <DeviceHero
+        locale={locale}
         image={page.hero?.image || cfg.heroImage}
-        alt={cfg.heroAlt}
-        brandLogo={cfg.logo}
-        brandKey={cfg.key || brandSlug}
-        focal="right"
-        priority
+        imageAlt={cfg.heroAlt}
+        targetId="brand-modeli"
+        targetLabel={strings.scrollCta?.label}
         bodyHtml={strings.heroHtml}
-      />
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("computer", locale)} />
+      </BrandHero>
 
-      <section className={c.section} aria-labelledby="brand-intro-h2">
-        <div className={c.container}>
-          <h2 id="brand-intro-h2" className={c.h2}>
+      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="brand-intro-h2">
+        <header>
+          <h2 id="brand-intro-h2">
             {strings.title}
           </h2>
 
-          <p className={c.intro}>{strings.intro}</p>
+        </header>
+        <div className={brand.prose}>
+          <p>{strings.intro}</p>
 
           <p
-            className={c.paragraph}
-            dangerouslySetInnerHTML={{ __html: strings.paragraph }}
+            dangerouslySetInnerHTML={{ __html: introParagraph }}
           />
         </div>
       </section>
 
-      {!!popularRepairs.length && (
-        <section className={c.section} aria-labelledby="popular-services-h2">
-          <div className={c.container}>
-            <Services
-              id="brand-services"
-              title={strings.servicesTitle}
-              items={popularRepairs}
-            />
-          </div>
-        </section>
-      )}
+      <BrandServices
+        title={strings.servicesTitle}
+        items={popularRepairs}
+        locale={locale}
+        modelAction={cfg.hasModels && dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
+      />
 
       {cfg.hasModels ? (
         <>
           <DeviceSelector
+        variant="brand"
             id="brand-modeli"
             locale={locale}
             title={strings.modelsTitle}
@@ -518,9 +518,9 @@ export default function ComputerBrandPage({
             autoExpandOnSearch
           />
 
-          <section className={c.section}>
-            <div className={c.container}>
-              <p className={c.paragraph} style={{ marginTop: 0 }}>
+          <section className={`${skin.section} ${brand.note}`}>
+            <div>
+              <p style={{ marginTop: 0 }}>
                 {strings.modelsNote}
               </p>
 
@@ -535,25 +535,23 @@ export default function ComputerBrandPage({
       ) : (
         <section
           id="brand-modeli"
-          className={`${c.section} ${c.anchorTarget}`}
+          className={`${skin.section} ${brand.intro} ${brand.anchor}`}
           aria-labelledby="brand-modeli-h2"
         >
-          <div className={c.container}>
-            <h2 id="brand-modeli-h2" className={c.h2}>
+          <div>
+            <h2 id="brand-modeli-h2" >
               {strings.modelsTitle}
             </h2>
 
-            <p className={c.intro}>{strings.noModels}</p>
+            <p >{strings.noModels}</p>
           </div>
         </section>
       )}
 
-      <div id="process-h2" className={c.anchorTarget} />
+      <div id="process-h2" className={brand.anchor} />
 
       {page.sections?.hasProcess && (
-        <section className={c.section} aria-labelledby="process-h2">
-          <div className={c.container}>
-            <Process
+        <Process
               id="process"
               title={strings.processTitle}
               steps={strings.processSteps}
@@ -561,19 +559,11 @@ export default function ComputerBrandPage({
               variant="cards"
               locale={locale}
             />
-          </div>
-        </section>
-      )}
-
-      {page.sections?.hasWhy && (
-        <section className={c.section}>
-          <Why locale={locale} />
-        </section>
       )}
 
       {hasVisibleFaq && (
-        <section className={c.section} aria-labelledby="faq-h2">
-          <div className={c.container}>
+        <div data-service-section="faq" className={skin.block}>
+
             <Faq
               id="brand-faq"
               title={faqTitle}
@@ -582,15 +572,16 @@ export default function ComputerBrandPage({
               variant="accordion"
               locale={locale}
             />
-          </div>
-        </section>
+        </div>
       )}
 
+      <QuickContactsSection locale={locale} />
+
       {page.sections?.hasConvertBand && (
-        <section className={c.section}>
+        <div className={`${skin.block} ${skin.closing} ${skin.genericClosing}`}><section>
           <ConvertBand locale={locale} />
-        </section>
+        </section></div>
       )}
-    </>
+    </div>
   );
 }

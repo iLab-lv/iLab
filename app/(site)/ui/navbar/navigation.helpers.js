@@ -33,6 +33,7 @@ function resolveNavHref(route, locale = 'lv') {
 function buildNavItem(item, locale = 'lv') {
   return {
     key: item.key,
+    menuOnly: Boolean(item.menuOnly),
     label: pickLocalizedLabel(item.label, locale),
     href: resolveNavHref(item.route, locale),
     children: Array.isArray(item.children)

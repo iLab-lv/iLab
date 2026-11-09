@@ -1,0 +1,61 @@
+// Reuse the approved HomePage module; isolate its variables and typography from page skins.
+.scope.scope {
+  --margin: var(--service-margin); --hair: var(--service-hairline);
+  --ink: var(--service-ink); --muted: var(--service-ink-2); --faint: var(--service-ink-3);
+  --paper: var(--service-paper); --panel: var(--service-paper-2); --signal: var(--service-signal);
+  color: var(--ink); background: var(--panel); font: 400 17px/1.55 var(--service-font);
+  width: 100%; max-width: 1440px; margin-inline: auto;
+  padding: clamp(112px,12vw,176px) var(--margin);
+  border-bottom: 0;
+  *, *::before, *::after { box-sizing: border-box; }
+  :where(h2, h3, p, blockquote) { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  button { color: inherit; font-family: inherit; cursor: pointer; }
+  .heading h2 { max-width: 10ch; color: var(--ink); font-size: clamp(56px,6vw,92px); line-height: .92; letter-spacing: -.055em; font-weight: 600; font-variation-settings: 'SHRP' 100; }
+  .heading p { color: var(--muted); font-size: 20px; line-height: 1.45; }
+  [data-review-location] > p { color: var(--ink); }
+  [data-home-review] > p { color: var(--ink); font-size: 18px; line-height: 1.55; }
+  [data-review-rating] > strong { font-size: clamp(88px,9vw,136px); }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .scope.scope { padding-block: 96px; }
+}
+.reviewArea { position: relative; min-width: 0; }
+// Both semantic location groups share intrinsic rows, through their list wrappers.
+// Expansion and either location's pagination resize the same parent grid tracks.
+@media (min-width: 1024px) {
+  .scope .grid {
+    grid-template-rows: auto auto repeat(var(--review-rows), auto) auto auto;
+    row-gap: 0;
+  }
+  .grid > .location {
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+    > p { grid-row: 1; }
+    > [data-review-rating] { grid-row: 2; }
+    > a { grid-row: calc(var(--review-rows) + 4); }
+  }
+  .location .reviewArea {
+    display: grid;
+    grid-row: 3 / span var(--review-rows);
+    grid-template-rows: subgrid;
+  }
+  .reviewArea .list {
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+  }
+  .list > [data-home-review] { align-content: start; }
+  .location .pagination { grid-row: calc(var(--review-rows) + 3); align-self: end; }
+}
+.pagination { display: flex; align-items: center; justify-content: flex-end; gap: 16px; margin-top: 16px; }
+.pagination button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--hair); background: transparent; font-size: 20px; }
+.pagination button:hover:not([aria-disabled='true']) { border-color: var(--signal); color: var(--signal); }
+.pagination button[aria-disabled='true'] { opacity: .35; cursor: default; }
+.pagination output { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+@media (max-width: 767px) {
+  .scope.scope .heading h2 { max-width: 9ch; font-size: clamp(48px,15vw,66px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scope * { scroll-behavior: auto !important; transition: none !important; }
+}

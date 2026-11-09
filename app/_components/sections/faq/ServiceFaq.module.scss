@@ -1,0 +1,30 @@
+// Extracted from the approved HomePage FAQ. Specificity isolates internals from legacy page skins.
+.section[data-service-faq] {
+  position: relative; width: 100%; max-width: 1440px; margin-inline: auto;
+  padding: 64px var(--service-margin); border-top: 1px solid var(--service-hairline);
+  color: var(--service-ink); font: 400 17px/1.55 var(--service-font); box-sizing: border-box;
+  &::before, &::after { content: '+'; position: absolute; top: -9px; color: var(--service-ink-3); background: var(--service-paper); padding: 0 2px; font: 14px/1 var(--service-mono); }
+  &::before { left: calc(var(--service-margin) - 9px); } &::after { right: calc(var(--service-margin) - 9px); }
+  .header { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 16px 24px; margin: 0 0 48px; align-items: end; padding: 0; }
+  .header .title { grid-column: 1/-1; max-width: none; margin: 0; padding: 0; color: inherit; font: 600 clamp(30px,3vw,44px)/1.04 var(--service-font); letter-spacing: -.03em; font-variation-settings: 'SHRP' 100; }
+  .header .subtitle, .header .link { grid-column: 1/-1; margin: 0; font-size: 20px; line-height: 1.45; }
+  .header .subtitle { color: var(--service-ink-2); }
+  .list { display: block; width: 100%; max-width: none; margin: 0; padding: 0; }
+  .list details { margin: 0; padding: 0; border: 0; border-top: 1px solid var(--service-hairline); border-radius: 0; background: transparent; box-shadow: none; }
+  .list details:last-child { border-bottom: 1px solid var(--service-hairline); }
+  .list summary { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; cursor: pointer; font: inherit; font-size: 20px; color: inherit; list-style: none; box-sizing: border-box; }
+  .list summary::-webkit-details-marker { display: none; }
+  .list summary:focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+  .list summary i { position: relative; width: 14px; height: 14px; flex: none; }
+  .list summary i::before, .list summary i::after { content: ''; position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: currentColor; }
+  .list summary i::after { transform: rotate(90deg); }
+  .list details[open] summary i::after { transform: none; }
+  .list details > div { max-width: 76ch; padding: 0 0 24px; color: var(--service-ink-2); line-height: 1.55; }
+  .list p { margin: 0; font-size: inherit; line-height: inherit; color: inherit; }
+  a { color: inherit; text-decoration: underline; text-decoration-color: var(--service-hairline); text-underline-offset: 4px; }
+  a:hover { text-decoration-color: var(--service-signal); }
+  @media (min-width:1024px) { .header .title { grid-column: 1/8; } .header .subtitle, .header .link { grid-column: 9/13; } }
+  @media (min-width:1280px) { padding-block: 128px; }
+}
+// Page composition owns outer spacing; accordion internals always use the rules above.
+:global([data-service-section='faq']) .section[data-service-faq] { padding: 0; border: 0; max-width: none; &::before, &::after { content: none; } }

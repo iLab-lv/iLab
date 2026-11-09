@@ -168,17 +168,28 @@ const nextConfig = {
       { source: '/:lang(ru)?/oneplus-2-remonts/:path*', destination: '/telefonu-remonts/oneplus', permanent: true },
       { source: '/:lang(ru)?/oneplus-one-remonts/:path*', destination: '/telefonu-remonts/oneplus', permanent: true },
 
-      { source: '/:lang(ru)?/lenovo-k6-note-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-k6-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-vibe-shot-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-vibe-s1-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-vibe-p1m-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a6000-plus-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a6000-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a5000-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a319-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a316i-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
-      { source: '/:lang(ru)?/lenovo-a328-remonts/:path*', destination: '/telefonu-remonts/lenovo', permanent: true },
+      { source: '/lenovo-k6-note-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-k6-note-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-k6-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-k6-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-vibe-shot-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-vibe-shot-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-vibe-s1-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-vibe-s1-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-vibe-p1m-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-vibe-p1m-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a6000-plus-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a6000-plus-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a6000-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a6000-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a5000-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a5000-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a319-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a319-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a316i-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a316i-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
+      { source: '/lenovo-a328-remonts/:path*', destination: '/telefonu-remonts', permanent: true },
+      { source: '/ru/lenovo-a328-remonts/:path*', destination: '/ru/remont-telefonov', permanent: true },
 
       { source: '/:lang(ru)?/sony-xperia-xz3-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
       { source: '/:lang(ru)?/sony-xperia-xz2-premium-remonts/:path*', destination: '/telefonu-remonts/sony', permanent: true },
@@ -223,7 +234,8 @@ const nextConfig = {
       { source: '/:lang(ru)?/iphone-6s-remonts/:path*', destination: '/iphone-remonts/iphone-6s', permanent: true },
       { source: '/:lang(ru)?/iphone-6-plus-remonts/:path*', destination: '/iphone-remonts/iphone-6-plus', permanent: true },
       { source: '/:lang(ru)?/iphone-6-remonts/:path*', destination: '/iphone-remonts/iphone-6', permanent: true },
-      { source: '/:lang(ru)?/iphone-se-2016-remonts/:path*', destination: '/iphone-remonts/iphone-se-2016', permanent: true },
+      { source: '/iphone-se-2016-remonts/:path*', destination: '/iphone-remonts/iphone-se-1', permanent: true },
+      { source: '/ru/iphone-se-2016-remonts/:path*', destination: '/ru/remont-iphone/iphone-se-1', permanent: true },
       { source: '/:lang(ru)?/iphone-5s-remonts/:path*', destination: '/iphone-remonts/iphone-5s', permanent: true },
       { source: '/:lang(ru)?/iphone-5c-remonts/:path*', destination: '/iphone-remonts/iphone-5c', permanent: true },
       { source: '/:lang(ru)?/iphone-5-remonts/:path*', destination: '/iphone-remonts/iphone-5', permanent: true },
@@ -250,7 +262,8 @@ const nextConfig = {
       { source: '/:lang(ru)?/samsung-galaxy-s23-fe-remonts-copy/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
       { source: '/:lang(ru)?/samsung-galaxy-note-10-remonts-3/:path*', destination: '/telefonu-remonts/samsung', permanent: true },
 
-      { source: '/:lang(ru)?/paldies/:path*', destination: '/pieraksties', permanent: true },
+      { source: '/paldies/:path*', destination: '/pieraksties-remontam', permanent: true },
+      { source: '/ru/paldies/:path*', destination: '/ru/zapisatsja-na-remont', permanent: true },
       { source: '/:lang(ru)?/products/:path*', destination: '/', permanent: true },
       { source: '/:lang(ru)?/nosutit-telefonu/:path*', destination: '/kontakti', permanent: true },
 
@@ -438,7 +451,8 @@ const nextConfig = {
       // important ru fixes
       { source: '/:lang(ru)/par-mums/:path*', destination: '/par-mums', permanent: true },
       { source: '/:lang(ru)/plansetdatoru-remonts/:path*', destination: '/plansetdatoru-remonts', permanent: true },
-      { source: '/:lang(ru)/kontakti/:path*', destination: '/kontakti', permanent: true },
+      { source: '/:lang(ru)/kontakti/:path*', destination: '/ru/kontakty', permanent: true },
+      { source: '/ru/remont-kompjuterov/:path*', destination: '/ru/remont-noutbukov', permanent: true },
 
       { source: '/:lang(ru)/iphone-remonts/:path*', destination: '/iphone-remonts', permanent: true },
       { source: '/:lang(ru)/ipad-remonts/:path*', destination: '/plansetdatoru-remonts/ipad', permanent: true },
@@ -523,7 +537,18 @@ const nextConfig = {
     };
   },
 
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    // React #35494: Next 15 host replay must restore its hydration cursor.
+    if (!isServer) {
+      config.module.rules.push({
+        test: /[\\/]next[\\/]dist[\\/]compiled[\\/]react-dom[\\/]cjs[\\/]react-dom-(?:client|profiling)\.(?:production|development|profiling)\.js$/,
+        enforce: 'pre',
+        use: path.resolve(process.cwd(), 'scripts/webpack/reactHydrationReplayLoader.cjs'),
+      });
+      if (config.cache && typeof config.cache === 'object') {
+        config.cache.version = (config.cache.version || '') + '|ilab-react-35494-v1';
+      }
+    }
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(process.cwd()),

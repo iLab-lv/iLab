@@ -1,13 +1,14 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
-import BrandPreview from '@components/model-grid/BrandPreview';
+import HubLocations from '@/_components/sections/catalog-hub/HubLocations';
+import QuickTrustFacts from '@/_components/sections/quick-facts/QuickTrustFacts';
+import { getQuickTrustFacts } from '@/_components/sections/quick-facts/quickTrustFacts.content';
+import CatalogHero from '@/_components/sections/catalog-hub/CatalogHero';
+import BrandPreview from '@/_components/sections/catalog-hub/HubBrandPreview';
 
-import Services from '@sections/services/Services';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
-import Why from '@sections/why/Why';
+import Services from '@/_components/sections/popular-repairs/RepairServices';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import ConvertBand from '@sections/convert-band/ConvertBand';
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Reviews from '@sections/reviews/Reviews';
+import Reviews from '@/_components/sections/catalog-hub/HubReviews';
 
 import {
   LuTabletSmartphone,
@@ -18,7 +19,8 @@ import {
   LuDroplets,
 } from 'react-icons/lu';
 
-import s from '@styles/Catalog.module.scss';
+import s from '@/_components/sections/catalog-hub/CatalogHub.module.scss';
+import skin from '@/_components/sections/catalog-hub/CatalogHubSkin.module.scss';
 
 export const CATEGORY_KEY = 'plansetdatoru-remonts';
 
@@ -364,19 +366,24 @@ export default function TabletRepairPage({
 
   return (
     <>
-      <PageHeader
+      <CatalogHero
+        variant="hub"
+        locale={locale}
         title={headerTitle}
         lead={headerLead}
-        scrollCta={strings.scrollCta}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={heroImage}
-        alt={strings.heroAlt}
+        imageWidth={995}
+        imageHeight={1324}
+        imageAlt={strings.heroAlt}
         bodyHtml={heroHtml}
-      />
+        targetId={strings.scrollCta.targetId}
+        targetLabel={strings.scrollCta.label}
+      >
+        <QuickTrustFacts id="why" {...getQuickTrustFacts("tablet", locale)} />
+      </CatalogHero>
 
+      <main className={s.hub}>
       <section className={s.section} aria-labelledby="tablets-intro-h2">
         <div className={s.container}>
           <h2 id="tablets-intro-h2" className={s.h2}>
@@ -411,26 +418,21 @@ export default function TabletRepairPage({
         />
       ))}
 
-      <section className={s.section} aria-labelledby="popular-services-h2">
-        <div className={s.container}>
-          <Services
+      <Services
             id="tablet-services"
+              locale={locale}
+              variant="compact"
             title={strings.servicesTitle}
             items={strings.servicesItems}
             headingLevel={2}
-            variant="list"
           />
-        </div>
-      </section>
 
       {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       <div id="process-h2" className={s.anchorTarget} />
 
       {page.sections?.hasProcess && (
-        <section className={s.section} aria-labelledby="process-h2">
-          <div className={s.container}>
-            <Process
+        <Process
               id="process"
               title={strings.processTitle}
               steps={strings.processSteps}
@@ -438,19 +440,12 @@ export default function TabletRepairPage({
               variant="cards"
               locale={locale}
             />
-          </div>
-        </section>
       )}
 
-      {page.sections?.hasWhy && (
-        <section className={s.section}>
-          <Why locale={locale} />
-        </section>
-      )}
+      <HubLocations id="tablet-locations" locale={locale} />
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
-          <div className={s.container}>
+        <div data-service-section="faq" className={skin.block}>
             <Faq
               id="tablets-faq"
               title={faqTitle}
@@ -459,15 +454,15 @@ export default function TabletRepairPage({
               variant="accordion"
               locale={locale}
             />
-          </div>
-        </section>
+        </div>
       )}
 
       {page.sections?.hasConvertBand && (
-        <section className={s.section}>
+        <div className={`${skin.block} ${skin.closing} ${skin.genericClosing}`}><section>
           <ConvertBand locale={locale} />
-        </section>
+        </section></div>
       )}
+      </main>
     </>
   );
 }

@@ -1,98 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 import s from './SazinatiesPanel.module.scss';
 import Button from '../../components/button/Button';
+import { useUiDialogs } from '../providers/UiDialogsProvider';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
 import { getSazinatiesPanelContent } from './sazinatiesPanel.i18n';
 
-function parseHM(hm) {
-  if (!hm) return null;
-
-  const [h, m] = hm.split(':').map(Number);
-
-  if (Number.isNaN(h) || Number.isNaN(m)) return null;
-
-  return h * 60 + m;
-}
-
-function getRigaNow() {
-  const d = new Date();
-
-  const fmt = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Riga',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour12: false,
-    hour: '2-digit',
-    minute: '2-digit',
-    weekday: 'short',
-  });
-
-  const parts = fmt
-    .formatToParts(d)
-    .reduce((acc, p) => ((acc[p.type] = p.value), acc), {});
-
-  const date = `${parts.year}-${parts.month}-${parts.day}`;
-
-  const weekdayMap = {
-    Mon: 0,
-    Tue: 1,
-    Wed: 2,
-    Thu: 3,
-    Fri: 4,
-    Sat: 5,
-    Sun: 6,
-  };
-
-  return {
-    date,
-    minutes: parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10),
-    weekday: weekdayMap[parts.weekday] ?? 0,
-  };
-}
-
-function computeOpenState(hoursArr, overrideForToday, t) {
-  const { minutes: nowM, weekday } = getRigaNow();
-
-  let today = hoursArr?.[weekday] || hoursArr?.[0];
-
-  if (overrideForToday?.opens && overrideForToday?.closes) {
-    today = {
-      ...today,
-      opens: overrideForToday.opens,
-      closes: overrideForToday.closes,
-    };
-  }
-
-  const openM = parseHM(today?.opens);
-  const closeM = parseHM(today?.closes);
-
-  if (openM == null || closeM == null) {
-    return {
-      open: false,
-      badgeText: t.closed,
-      today,
-    };
-  }
-
-  if (nowM >= openM && nowM < closeM) {
-    return {
-      open: true,
-      badgeText: t.openUntil(today.closes),
-      today,
-    };
-  }
-
-  return {
-    open: false,
-    badgeText: t.closedUntil(today.opens),
-    today,
-  };
-}
+import { computeOpenState, getRigaNow } from './branchAvailability';
 
 export default function SazinatiesPanel({
   initialLocId,
@@ -100,6 +17,8 @@ export default function SazinatiesPanel({
   locations = [],
   defaultHours = [],
 }) {
+  const { serviceRedesign, openBook } = useUiDialogs();
+  const tabsRef = useRef(null);
   const pathname = usePathname() || '/';
   const resolvedLocale = getNavLocaleFromPathname(pathname) || locale || 'lv';
   const t = getSazinatiesPanelContent(resolvedLocale);
@@ -132,6 +51,33 @@ export default function SazinatiesPanel({
   const activeLoc =
     locations.find((l) => l.id === activeId) || locations[0];
 
+  const locIndex = ids.indexOf(activeId);
+
+  const onTabsKeyDown = useCallback(
+    (e) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      if (!ids.length) return;
+
+      e.preventDefault();
+
+      let nextIndex = locIndex;
+
+      if (e.key === 'ArrowRight') {
+        nextIndex = (locIndex + 1) % ids.length;
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = (locIndex - 1 + ids.length) % ids.length;
+      } else if (e.key === 'Home') {
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        nextIndex = ids.length - 1;
+      }
+
+      setActiveId(ids[nextIndex]);
+      if (serviceRedesign) tabsRef.current?.querySelectorAll('[role="tab"]')[nextIndex]?.focus();
+    },
+    [locIndex, ids, serviceRedesign]
+  );
+
   if (!activeLoc) {
     return null;
   }
@@ -156,35 +102,46 @@ export default function SazinatiesPanel({
   const specialNotice = activeLoc?.specialNotice || null;
   const hoursListId = `hours-${activeLoc.id}`;
 
-  const locIndex = ids.indexOf(activeId);
-
-  const onTabsKeyDown = useCallback(
-    (e) => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
-      if (!ids.length) return;
-
-      e.preventDefault();
-
-      let nextIndex = locIndex;
-
-      if (e.key === 'ArrowRight') {
-        nextIndex = (locIndex + 1) % ids.length;
-      } else if (e.key === 'ArrowLeft') {
-        nextIndex = (locIndex - 1 + ids.length) % ids.length;
-      } else if (e.key === 'Home') {
-        nextIndex = 0;
-      } else if (e.key === 'End') {
-        nextIndex = ids.length - 1;
-      }
-
-      setActiveId(ids[nextIndex]);
-    },
-    [locIndex, ids]
-  );
+  if (serviceRedesign) {
+    return <div className={s.serviceWrap}>
+      <div ref={tabsRef} role="tablist" aria-label={t.tabsAriaLabel} className={s.serviceTabs} onKeyDown={onTabsKeyDown}>
+        {locations.map((loc) => <button key={loc.id} type="button" role="tab" id={`tab-${loc.id}`} aria-selected={loc.id === activeId} aria-controls={`tab-panel-${loc.id}`} tabIndex={loc.id === activeId ? 0 : -1} onClick={() => setActiveId(loc.id)}>{loc.label}</button>)}
+      </div>
+      <section id={`tab-panel-${activeLoc.id}`} role="tabpanel" aria-labelledby={`tab-${activeLoc.id}`} className={s.serviceBranch} data-branch-card={activeLoc.id}>
+        <header className={s.serviceBranchHead}>
+          <h3>{activeLoc.label}</h3>
+          <span>{resolvedLocale === 'ru' ? 'Сервисный центр iLab' : 'iLab servisa centrs'}</span>
+        </header>
+        {activeLoc.address && <address>{activeLoc.address}</address>}
+        <div className={s.availability}>
+          <p className={s.serviceStatus}><i data-open={state.open} aria-hidden="true" />{state.badgeText}</p>
+          <div className={s.serviceHours}>
+            <button type="button" aria-controls={hoursListId} aria-expanded={showHoursMobile} onClick={() => setShowHoursMobile((value) => !value)}>{t.hoursAriaLabel}</button>
+            <dl id={hoursListId} hidden={!showHoursMobile}>{baseHours.map((hour, index) => {
+              const today = state.today && hour.day === state.today.day;
+              return <div key={index}><dt>{baseHours.length === 7 ? t.days[index] : hour.day}</dt><dd>{today && todayOverride?.opens || hour.opens} – {today && todayOverride?.closes || hour.closes}</dd></div>;
+            })}</dl>
+          </div>
+        </div>
+        {specialNotice && <p className={s.specialNote} role="status">{specialNotice}</p>}
+        {activeLoc.tel && <a className={s.servicePhone} href={activeLoc.telLink || `tel:${activeLoc.tel.replace(/\s+/g, '')}`}>{activeLoc.tel}</a>}
+        <div className={s.serviceLinks}>
+          {activeLoc.tel && <a href={activeLoc.telLink || `tel:${activeLoc.tel.replace(/\s+/g, '')}`}>{t.call}</a>}
+          {activeLoc.wa && <a href={activeLoc.wa} target="_blank" rel="noopener">{t.whatsapp}</a>}
+          {activeLoc.waze && <a href={activeLoc.waze} target="_blank" rel="noopener">Waze</a>}
+          {activeLoc.destination && <a href={dirUrl} target="_blank" rel="noopener">{t.routes}</a>}
+          {activeLoc.maps && <a href={mapsUrl} target="_blank" rel="noopener">Google Maps</a>}
+          {activeLoc.email && <a href={`mailto:${activeLoc.email}`}>{activeLoc.email}</a>}
+        </div>
+      </section>
+      <Button variant="primary" size="lg" onClick={(event) => openBook(event.currentTarget, { location: activeLoc.id })} aria-haspopup="dialog">{resolvedLocale === 'ru' ? 'Записаться на ремонт' : 'Pieteikt remontu'}</Button>
+    </div>;
+  }
 
   return (
     <div className={s.wrap}>
       <div
+        ref={tabsRef}
         role="tablist"
         aria-label={t.tabsAriaLabel}
         className={s.tabs}

@@ -1,8 +1,9 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Process from '@sections/process/Process';
-import Faq from '@sections/faq/Faq';
+import Process from '@/app/_components/sections/process/Process';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import Why from '@sections/why/Why';
 import ConvertBand from '@sections/convert-band/ConvertBand';
 
@@ -30,23 +31,21 @@ export default function PhoneChargePortServicePage({
   hasVisibleFaq = false,
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{ label: strings.headerCtaLabel, targetId: 'brand-list' }}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={strings.heroImage}
-        alt={strings.heroAlt}
-        focal="right"
-        className="service"
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
+        targetId="brand-list"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
       />
 
-      <section id="parskats" className={s.section} aria-labelledby="intro-h2">
+      <ServiceBlock kind="intro"><section id="parskats" className={s.section} aria-labelledby="intro-h2">
         <div className={s.container}>
           <h2 id="intro-h2" className={s.h2}>
             {strings.introTitle}
@@ -73,9 +72,9 @@ export default function PhoneChargePortServicePage({
             </p>
           )}
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section
+      <ServiceBlock kind="priceBrowser"><section
         id="brand-list"
         className={s.section}
         aria-labelledby="brand-picker-h2"
@@ -100,11 +99,9 @@ export default function PhoneChargePortServicePage({
             locale={locale}
           />
         </div>
-      </section>
+      </section></ServiceBlock>
 
-      <section className={s.section} aria-labelledby="process-h2">
-        <div className={s.container}>
-          <Process
+      <Process
             id="process"
             title={strings.processTitle}
             steps={strings.processSteps}
@@ -112,19 +109,15 @@ export default function PhoneChargePortServicePage({
             variant="cards"
             locale={locale}
           />
-        </div>
-      </section>
 
-      <section className={s.section}>
+      <ServiceBlock kind="benefits"><section className={s.section}>
         <Why locale={locale} />
-      </section>
+      </section></ServiceBlock>
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>
-              {strings.faqTitle}
-            </h2>
+
 
             {faqSections.map((section, index) => (
               <div
@@ -133,19 +126,21 @@ export default function PhoneChargePortServicePage({
               >
                 <Faq
                   id={`faq-group-${index + 1}`}
-                  title={section.title}
+                  title={section.title || strings.faqTitle}
                   items={section.items}
-                  headingLevel={3}
+                  headingLevel={2}
                   variant="accordion"
                   locale={locale}
                 />
               </div>
             ))}
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
-      <section
+      <QuickContactsSection locale={locale} />
+
+      <ServiceBlock kind="genericClosing"><section
         id="pieteikties"
         className={s.section}
         aria-label={strings.applyAria}
@@ -153,7 +148,7 @@ export default function PhoneChargePortServicePage({
         <div className={s.container}>
           <ConvertBand locale={locale} />
         </div>
-      </section>
-    </>
+      </section></ServiceBlock>
+    </ServiceRecovery>
   );
 }

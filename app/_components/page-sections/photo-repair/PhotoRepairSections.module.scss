@@ -2,16 +2,18 @@
 @use '@/styles/_layout.scss' as layout;
 
 .container { @include layout.catalog-container; }
+.mobileTitleBreak { display: none; }
+@media (max-width: 767px) { .mobileTitleBreak { display: inline; } }
 .lensSection,.brandSection { padding-block:clamp($space-2xl,7vw,96px);border-bottom:$border-thin solid rgba(255,255,255,.08);background:#030303; }
-.lensSection { background:radial-gradient(circle at 90% 10%,rgba(34,211,238,.12),transparent 32rem),#030303; }
+.lensSection { background:#030303; }
 .eyebrow { display:inline-flex;margin-bottom:$space-md;color:$color-accent;font-size:$font-size-sm;font-weight:$font-weight-semibold;letter-spacing:.04em;text-transform:uppercase; }
 .lensLead { display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);align-items:center;gap:clamp($space-xl,6vw,80px); }
 .lensLead h2,.header h2 { margin:0;color:$color-text;font-size:clamp(2rem,4vw,$font-size-h4);line-height:$line-height-heading; }
 .lensLead h2 span,.header h2 span { color:$color-accent; }
 .lensLead p,.header p,.brandList p,.lensGrid p { color:$color-text-2;line-height:1.65; }
-.lensVisual,.lensImage { min-height:360px;border:$border-thin solid rgba(34,211,238,.2);border-radius:50% 8px 50% 8px;background-position:center;background-size:cover; }
-.lensVisual { display:grid;place-items:center;color:$color-accent;background:radial-gradient(circle,rgba(34,211,238,.18),rgba(3,3,3,.9) 62%); }
-.lensVisual svg { width:45%;height:45%;filter:drop-shadow(0 0 35px rgba(34,211,238,.25)); }
+.lensVisual,.lensImage { min-height:360px;border:$border-thin solid rgba(255,255,255,.16);background-position:center;background-size:cover; }
+.lensVisual { display:grid;place-items:center;color:$color-accent;background:#080808; }
+.lensVisual svg { width:45%;height:45%; }
 .lensGrid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp($space-md,2vw,$space-xl);margin-top:clamp($space-xl,4vw,$space-2xl); }
 .lensGrid article { display:flex;min-width:0;flex-direction:column;padding:clamp($space-lg,2.5vw,$space-xl);border-top:2px solid rgba(34,211,238,.45);background:rgba(255,255,255,.025); }
 .lensGrid i { display:block;margin-bottom:$space-md;color:$color-accent;font-size:1.5rem;line-height:1; }
@@ -24,14 +26,47 @@
 .expertNote { max-width:920px;margin:$space-xl 0 0;padding:$space-lg;border-left:3px solid $color-accent;color:$color-text;background:rgba(34,211,238,.07);line-height:1.65; }
 .header { max-width:860px;margin-bottom:$space-xl; }
 .brandList { border-top:$border-thin solid rgba(255,255,255,.13); }
-.brandRow { display:grid;grid-template-columns:minmax(240px,.42fr) minmax(0,1fr);align-items:stretch;border-bottom:$border-thin solid rgba(255,255,255,.13);background:linear-gradient(90deg,rgba(34,211,238,.025),transparent 44%); }
-.brandIdentity { display:flex;min-height:138px;align-items:center;padding:clamp($space-md,2.4vw,$space-lg);overflow:hidden;background:radial-gradient(circle at 42% 50%,rgba(34,211,238,.15),transparent 68%); }
+.brandRow { display:grid;grid-template-columns:minmax(240px,.42fr) minmax(0,1fr);align-items:stretch;border-bottom:$border-thin solid rgba(255,255,255,.13); }
+.brandIdentity { display:flex;min-height:138px;align-items:center;padding:clamp($space-md,2.4vw,$space-lg);overflow:hidden;background:#080808; }
 .brandLogo { width:auto;max-width:min(230px,92%);height:auto;max-height:76px;object-fit:contain;object-position:left center;opacity:.96; }
 .brandCopy { display:flex;flex-direction:column;justify-content:center;padding:clamp($space-lg,2.8vw,$space-xl); }
 .brandCopy h3 { margin:0 0 $space-sm;font-size:clamp($font-size-xl,2.4vw,2rem); }
 .brandCopy>p { max-width:650px;margin:0; }
 .familyList { display:flex;flex-wrap:wrap;gap:$space-xs;margin:$space-md 0 0;padding:0;list-style:none; }
-.familyList li { position:relative;isolation:isolate;min-height:30px;padding:6px 12px;overflow:hidden;border:$border-thin solid $glass-border-2;border-radius:$radius-pill;color:$color-text;background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035)),$glass-bg-weak;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.18);font-size:$font-size-sm;font-weight:$font-weight-semibold;line-height:1.1;-webkit-backdrop-filter:saturate($glass-saturate) blur(8px);backdrop-filter:saturate($glass-saturate) blur(8px); }
-.familyList li::before { position:absolute;z-index:-1;top:-60%;left:8%;width:62%;height:110%;border-radius:50%;content:'';background:rgba(34,211,238,.12);filter:blur(10px); }
+.familyList li { min-height:30px;padding:6px 12px;border:$border-thin solid rgba(255,255,255,.18);color:$color-text;background:#080808;font-size:$font-size-sm;font-weight:$font-weight-semibold;line-height:1.1; }
 @media(max-width:$bp-lg){.lensLead{grid-template-columns:1fr}.lensVisual,.lensImage{min-height:280px}.brandRow{grid-template-columns:minmax(190px,.4fr) minmax(0,1fr)}.brandLogo{max-width:min(200px,90%)}.brandCopy{padding:$space-lg}}
 @media(max-width:$bp-sm){.lensSection,.brandSection{padding-block:$space-xl}.lensGrid{grid-template-columns:1fr}.brandRow{grid-template-columns:1fr}.brandIdentity{min-height:108px;padding:$space-lg 0 $space-md}.brandLogo{max-width:210px}.brandCopy{padding:$space-md 0 $space-xl}.familyList li{padding:5px 9px}}
+
+/* Photo/lens pages have no direct approved template. This composition uses the
+   established editorial grid while preserving every brand family and symptom. */
+:global([data-service-recovery]) {
+  .lensSection, .brandSection { width: 100%; max-width: var(--service-container); margin-inline: auto; padding: clamp(112px, 11vw, 176px) var(--service-margin); border-color: var(--service-hairline); background: transparent; }
+  .container { width: 100%; max-width: none; margin: 0; padding: 0; }
+  .eyebrow { color: var(--service-ink-3); font: 400 var(--service-tech-size)/1.55 var(--service-mono); letter-spacing: .14em; }
+  .lensLead { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--service-gutter); align-items: start; }
+  .lensLead h2, .header h2 { max-width: none; font: 600 clamp(32px, 3.2vw, 44px)/1.04 var(--service-font); letter-spacing: -.04em; }
+  .lensLead h2 span, .header h2 span { color: inherit; }
+  .lensLead p, .header p, .brandList p, .lensGrid p { color: var(--service-ink-2); font-size: var(--service-body-size); line-height: 1.55; }
+  .lensImage, .lensVisual { width: 100%; min-height: 0; aspect-ratio: 1; border: 0; border-radius: 0; background-color: var(--service-paper-2); background-size: contain; background-repeat: no-repeat; }
+  .lensVisual { color: var(--service-ink-3); }
+  .lensGrid { margin-top: 64px; gap: 0 64px; }
+  .lensGrid article { display: block; padding: 32px 0; border-top: 1px solid var(--service-hairline); background: transparent; }
+  .lensGrid i { display: none; }
+  .lensGrid h3, .brandList h3 { font: 500 22px/1.2 var(--service-font); letter-spacing: -.02em; }
+  .lensGrid strong { color: var(--service-ink); font-size: var(--service-small-size); font-weight: 500; }
+  .lensGrid article > div { padding-top: 20px; margin-top: 20px; border-color: var(--service-hairline); }
+  .expertNote { max-width: none; margin-top: 48px; padding: 32px 0 0; border: 0; border-top: 1px solid var(--service-hairline); background: transparent; font-size: var(--service-body-size); }
+  .header { max-width: none; margin-bottom: 64px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px var(--service-gutter); }
+  .header > span { grid-column: 1; }
+  .header h2 { grid-column: 1; }
+  .header p { grid-column: 2; grid-row: 1 / 3; margin: 0; }
+  .brandList, .brandRow { border-color: var(--service-hairline); }
+  .brandRow { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--service-gutter); padding: 40px 0; }
+  .brandIdentity { padding: 0; background: transparent; align-items: flex-start; min-height: 0; }
+  .brandLogo { width: 230px; max-width: 100%; height: auto; opacity: 1; }
+  .brandCopy { padding: 0; }
+  .familyList { gap: 0 24px; margin-top: 24px; }
+  .familyList li { padding: 12px 0; border: 0; border-bottom: 1px solid var(--service-hairline); background: transparent; font: 400 var(--service-small-size)/1.4 var(--service-mono); }
+  @media (max-width: 1023px) { .lensLead, .header, .brandRow { grid-template-columns: minmax(0, 1fr); gap: 32px; } .header > span, .header h2, .header p { grid-column: 1; grid-row: auto; } }
+  @media (max-width: 767px) { .lensGrid { grid-template-columns: minmax(0, 1fr); } }
+}

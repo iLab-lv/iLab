@@ -1,306 +1,168 @@
-/* app/(site)/components/button/Button.module.scss
-   Reusable Button for iLab
-   Variants: primary (filled), secondary (outlined accent + glass), ghost (glassy neutral), ctaChip (pill + chip arrow)
-   Features: iconOnly, sizes (sm|md|lg), block, link/button parity, focus ring
-*/
+@use '@/styles/_tokens.scss' as *;
 
-@import '@/styles/_tokens.scss';
-
-/* minor computed tints for hover/active on glass */
-$accent-bg-hover:  rgba($color-accent, 0.06);
-$accent-bg-active: rgba($color-accent, 0.10);
-
-/* ===== Base ===== */
 .button {
-  pointer-events: auto;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: $space-sm;
-  height: $btn-h-md;
-  padding: 0 $space-md;
-  border-radius: $radius-lg;
-  border: 1px solid $glass-border;
-  background: $glass-bg-weak;
-  color: $color-text;
-  text-decoration: none;
-  font-weight: $font-weight-semibold;
-  letter-spacing: 0.1px;
-
-  -webkit-backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-  backdrop-filter: saturate($glass-saturate) blur($glass-blur);
-
-  box-shadow: $shadow-soft;
-  transition:
-    background-color $dur-base $ease-std,
-    color            $dur-base $ease-std,
-    border-color     $dur-base $ease-std,
-    box-shadow       $dur-base $ease-std,
-    transform        $dur-fast $ease-std;
-
-  &:focus-visible {
-    outline: $focus-ring-width solid $focus-ring-color;
-    outline-offset: $focus-ring-offset;
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-
-    &:active {
-      transform: none;
-    }
-  }
-}
-
-/* ===== Sizes ===== */
-.sm {
-  height: 42px;
-  padding-inline: 14px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-}
-
-.md {
-  height: $btn-h-md;
-}
-
-.lg {
-  height: $btn-h-lg;
-}
-
-/* Full-width layout */
-.block {
-  width: 100%;
-}
-
-/* ===== Icon-only ===== */
-.iconOnly {
-  width: $btn-h-md;
-  padding: 0;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-
-  &.sm {
-    width: 42px;
-  }
-
-  &.lg {
-    width: $btn-h-lg;
-  }
-
-  .label {
-    display: none;
-  }
-}
-
-/* ===== Icon wrapper ===== */
-.icon {
-  width: $icon-size;
-  height: $icon-size;
-  display: inline-block;
-  line-height: 0;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    vertical-align: -2px;
-  }
-}
-
-/* ===== Variants ===== */
-.primary {
-  background: $color-accent;
-  border-color: transparent;
-  box-shadow: $shadow-accent;
-
-  &,
-  &:hover,
-  &:focus-visible,
-  &:active {
-    color: #00161A;
-    text-decoration: none;
-  }
-
-  &:hover {
-    background: $color-accent-hover;
-    box-shadow: $shadow-accent-lg;
-  }
-
-  &:active {
-    background: $color-accent-active;
-    box-shadow: $shadow-accent-press;
-  }
-}
-
-.secondary {
-  color: $color-accent;
-  border-color: $color-accent;
-
-  &:hover {
-    background: $accent-bg-hover;
-    border-color: rgba($color-accent, 0.85);
-    box-shadow: $shadow-accent;
-  }
-
-  &:active {
-    background: $accent-bg-active;
-    border-color: $color-accent-active;
-    color: $color-accent-active;
-    box-shadow: $shadow-accent-press;
-  }
-}
-
-.ghost {
-  background: $glass-bg-weak;
-  color: $color-text-2;
-  border-color: $glass-border;
-
-  &:hover {
-    color: $color-accent;
-    border-color: rgba($color-accent, 0.45);
-    background: $accent-bg-hover;
-    box-shadow: $shadow-accent;
-  }
-
-  &:active {
-    color: $color-accent-active;
-    border-color: $color-accent-active;
-    background: $accent-bg-active;
-    box-shadow: $shadow-accent-press;
-  }
-}
-
-.secondary:focus-visible,
-.ghost:focus-visible {
-  box-shadow: $shadow-accent-lg;
-}
-
-/* ===== Disabled ===== */
-.disabled,
-:global(button[disabled]).button {
-  opacity: 0.55;
-  cursor: default;
-  pointer-events: none;
+  gap: 10px;
+  height: 52px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #f2f5f7;
   box-shadow: none;
+  font-family: 'Geologica', $font-family-base;
+  font-size: 17px;
+  font-weight: 500;
+  font-variation-settings: 'SHRP' 60;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+
+  &:focus-visible { outline: 2px solid #47c6e2; outline-offset: 2px; }
 }
 
-/* === CTA Chip variant === */
-.ctaChip {
-  position: relative;
-  border-radius: $radius-pill;
-  min-height: 60px;
+.sm { height: 44px; padding-inline: 16px; font-size: 14px; }
+.md, .lg { height: 52px; }
+.block { width: 100%; }
+.iconOnly { width: 48px; height: 48px; padding: 0; aspect-ratio: 1; }
+.icon {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  line-height: 0;
+  svg { width: 100%; height: 100%; }
+}
 
-  $chip-md: 36px;
-  $chip-lg: 40px;
-  $chip-offset: $space-md;
-
-  padding-left: $space-xl;
-  padding-right: calc(#{$space-xl} + #{$chip-md} + #{$chip-offset});
-
-  background: $glass-bg-weak;
-  border-color: $glass-border;
-  box-shadow: $shadow-soft;
-
-  transition:
-    border-color $dur-base $ease-std,
-    transform $dur-base $ease-emph,
-    box-shadow $dur-base $ease-std;
-
-  &::before {
-    content: "";
-    position: absolute;
-    right: $chip-offset;
-    top: 50%;
-    width: $chip-md;
-    height: $chip-md;
-    border-radius: 50%;
-    background: $color-accent;
-    box-shadow: $shadow-accent;
-    transform: translateY(-50%) scale(1);
-    transition:
-      transform $dur-base $ease-emph,
-      box-shadow $dur-base $ease-std;
-  }
+.primary {
+  overflow: hidden;
+  color: #061016;
+  border-color: #47c6e2;
+  background: #47c6e2;
 
   &::after {
+    content: '';
     position: absolute;
-    right: $chip-offset;
-    top: 50%;
-    width: $chip-md;
-    height: $chip-md;
-    display: grid;
-    place-items: center;
-    color: $color-background;
-    font-weight: $font-weight-semibold;
-    transform: translateY(-50%);
-    transition: transform $dur-base $ease-emph;
-    content: "→";
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    height: 2px;
+    background: #f2f5f7;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 320ms cubic-bezier(.16, 1, .3, 1);
   }
 
-  &[data-chip-dir="right"]::after {
-    content: "→";
+  &:hover { border-color: #6fd6ec; background: #6fd6ec; }
+  &:hover::after, &:focus-visible::after { transform: scaleX(1); }
+}
+
+.secondary, .ghost {
+  color: #f2f5f7;
+  border-color: #aeb8c0;
+  background: transparent;
+  &:hover { border-color: #f2f5f7; background: #131a20; }
+}
+
+// Explicit opt-in; existing contact controls retain their presentation.
+.whatsapp {
+  color: var(--service-whatsapp-foreground, #06170c);
+  border-color: var(--service-whatsapp, #25d366);
+  background: var(--service-whatsapp, #25d366);
+  &:hover { color: var(--service-whatsapp-foreground, #06170c); border-color: var(--service-whatsapp-hover, #1fbd5a); background: var(--service-whatsapp-hover, #1fbd5a); }
+  &:active { color: var(--service-whatsapp-foreground, #06170c); border-color: var(--service-whatsapp-active, #169b47); background: var(--service-whatsapp-active, #169b47); }
+}
+
+.disabled, :global(button[disabled]).button {
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ctaChip {
+  min-height: 60px;
+  justify-content: flex-start;
+  padding-right: 68px;
+  color: #f2f5f7;
+  border-color: #aeb8c0;
+
+  &::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
   }
 
-  &[data-chip-dir="down"]::after {
-    content: "↓";
+  &[data-chip-dir='down']::after { content: '↓'; }
+  &:hover { border-color: #f2f5f7; background: #131a20; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button, .primary::after { transition: none; }
+}
+
+// Tracers are opt-in service presentation; shared advertising consumers keep their existing appearance.
+.trace { display: none; }
+
+:global([data-service-redesign]) {
+  .button {
+    height: 52px;
+    font-family: var(--service-font);
+    font-size: var(--service-body-size);
+    letter-spacing: normal;
+    line-height: 1;
   }
-
-  &:hover {
-    border-color: $glass-border-2;
-    transform: translateY(-1px);
-    box-shadow: $shadow-accent;
-
-    &::before {
-      transform: translateY(-50%) scale(1.14);
+  .sm { height: 44px; font-size: 14px; }
+  .iconOnly { width: 48px; height: 48px; }
+  .button:hover, .button:focus-visible { text-decoration: none; }
+  .primary { color: var(--service-on-signal); border-color: var(--service-signal); background: var(--service-signal); }
+  .primary:hover { border-color: var(--service-signal-2); background: var(--service-signal-2); }
+  .primary::after { background: var(--service-ink); }
+  .text, .text:hover, .text:focus-visible {
+    min-height: 44px; height: auto; padding: 0; border: 0; background: transparent;
+    color: inherit; font-weight: inherit; line-height: 1.55;
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px;
+    &::after { display: none; }
+  }
+  .text:hover, .text:focus-visible { text-decoration-color: var(--service-signal); }
+  .secondary, .ghost { color: var(--service-ink); border-color: var(--service-ink-2); }
+  .secondary:hover, .ghost:hover { border-color: var(--service-ink); background: var(--service-paper-3); }
+  .traced {
+    overflow: visible;
+    color: var(--service-signal);
+    border-color: rgba(71, 198, 226, .35);
+    background: transparent;
+    &::after { display: none; }
+    &:hover, &:focus-visible { color: var(--service-on-signal); border-color: var(--service-signal); background: var(--service-signal); }
+    &:hover .trace, &:focus-visible .trace { opacity: 0; }
+  }
+  .trace {
+    position: absolute;
+    inset: -1px;
+    display: block;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    max-width: none;
+    overflow: visible;
+    pointer-events: none;
+    rect {
+      fill: none;
+      stroke: var(--service-signal);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 22 78;
+      animation: serviceButtonTrace 2.8s linear infinite;
     }
-
-    &::after {
-      transform: translateY(-50%) translateX(2px);
-    }
+    .traceTrail { opacity: .35; stroke-dasharray: 34 66; animation-delay: .12s; }
   }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: $shadow-press;
-
-    &::before {
-      transform: translateY(-50%) scale(1.05);
-    }
-
-    &::after {
-      transform: translateY(-50%) translateX(1px);
-    }
-  }
-
-  &.hasIcon {
-    gap: $space-md;
-  }
-
-  &.block {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  @media (max-width: $bp-md) {
-    min-height: 60px;
-    padding-right: calc(#{$space-xl} + #{$chip-lg} + #{$chip-offset});
-
-    &::before,
-    &::after {
-      width: $chip-lg;
-      height: $chip-lg;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .trace rect { animation: none; stroke-dasharray: none; opacity: .6; }
   }
 }
 
-.ctaChip,
-.ctaChip:hover,
-.ctaChip:focus-visible,
-.ctaChip:active {
-  color: $color-text;
-  text-decoration: none;
-}
+@keyframes serviceButtonTrace { to { stroke-dashoffset: -100; } }

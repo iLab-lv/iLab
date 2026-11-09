@@ -67,18 +67,18 @@ const CATEGORY_DOCS = [
       "lv": "Telefonu remonts Rīgā"
     },
     "bodyHtml": {
-      "lv": "<p><strong>Telefonu remonts Rīgā</strong> iLab servisā palīdz ātri atrisināt bojāta displeja, vājas baterijas, uzlādes ligzdas, kameras, skaļruņa vai mitruma bojājumu problēmas.</p>\n<p>Remontējam Apple iPhone, Samsung, Huawei, Sony, OnePlus, Xiaomi un citus tālruņus. Pirms darba uzsākšanas pārbaudām ierīci, izskaidrojam remonta iespējas un pēc darba sniedzam <strong>90 dienu garantiju</strong>.</p>",
-      "ru": "<p><strong>Ремонт телефонов в Риге</strong> в сервисе iLab помогает быстро решить проблемы с разбитым экраном, слабой батареей, разъёмом зарядки, камерой, динамиком или повреждением после влаги.</p>\n<p>Ремонтируем Apple iPhone, Samsung, Huawei, Sony, OnePlus, Xiaomi и другие телефоны. Перед началом работ проверяем устройство, объясняем варианты ремонта и после выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+      "lv": "<p><strong>Telefonu remonts Rīgā</strong> iLab servisā palīdz ātri atrisināt bojāta displeja, vājas baterijas, uzlādes ligzdas, kameras, skaļruņa vai mitruma bojājumu problēmas.</p>\n<p>Remontējam Apple iPhone, Samsung, Huawei, Sony, OnePlus, Xiaomi un citus tālruņus. Pirms darba uzsākšanas pārbaudām ierīci, izskaidrojam remonta iespējas un pēc darba sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+      "ru": "<p><strong>Ремонт телефонов в Риге</strong> в сервисе iLab помогает быстро решить проблемы с разбитым экраном, слабой батареей, разъёмом зарядки, камерой, динамиком или повреждением после влаги.</p>\n<p>Ремонтируем Apple iPhone, Samsung, Huawei, Sony, OnePlus, Xiaomi и другие телефоны. Перед началом работ проверяем устройство, объясняем варианты ремонта и после выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
     },
     "type": "category",
     "metaDescription": {
-      "lv": "Telefonu remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas, kameras un mitruma bojājumu remonts, diagnostika un 90 dienu garantija iLab.",
-      "ru": "Ремонт телефонов в Риге - экран, батарея, разъём зарядки, камера, ремонт после влаги, диагностика и гарантия 90 дней в iLab."
+      "lv": "Telefonu remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas, kameras un mitruma bojājumu remonts, diagnostika un garantija līdz 1 gadam iLab.",
+      "ru": "Ремонт телефонов в Риге - экран, батарея, разъём зарядки, камера, ремонт после влаги, диагностика и гарантия до 1 года в iLab."
     },
     "slug": "telefonu-remonts",
     "lead": {
-      "lv": "Telefonu ekrāni, baterijas, uzlādes ligzdas, kameras un citi biežākie remontdarbi. iLab servisā veicam diagnostiku, saskaņojam cenu un sniedzam 90 dienu garantiju.",
-      "ru": "Экраны, аккумуляторы, разъёмы зарядки, камеры и другие частые ремонты телефонов. В iLab проводим диагностику, согласовываем цену и даём гарантию 90 дней."
+      "lv": "Telefonu ekrāni, baterijas, uzlādes ligzdas, kameras un citi biežākie remontdarbi. iLab servisā veicam diagnostiku, saskaņojam cenu un sniedzam garantiju līdz 1 gadam.",
+      "ru": "Экраны, аккумуляторы, разъёмы зарядки, камеры и другие частые ремонты телефонов. В iLab проводим диагностику, согласовываем цену и даём гарантию до 1 года."
     },
     "order": 2,
     "labels": {
@@ -107,20 +107,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт iPhone в Риге"
           },
           "lead": {
-            "lv": "iPhone remonts Rīgā - saplaisājis ekrāns, nolietota baterija, Face ID, kamera vai uzlādes problēmas. iLab pārbauda ierīci un dod 90 dienu garantiju.",
-            "ru": "Ремонт iPhone в Риге - разбитый экран, слабая батарея, Face ID, камера или проблемы с зарядкой. iLab проверяет устройство и даёт гарантию 90 дней."
+            "lv": "iPhone remonts Rīgā - saplaisājis ekrāns, nolietota baterija, Face ID, kamera vai uzlādes problēmas. iLab pārbauda ierīci un dod garantiju līdz 1 gadam.",
+            "ru": "Ремонт iPhone в Риге - разбитый экран, слабая батарея, Face ID, камера или проблемы с зарядкой. iLab проверяет устройство и даёт гарантию до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>iPhone remonts Rīgā</strong> iLab servisā ietver displeja maiņu, baterijas nomaiņu, uzlādes ligzdas, kameras, skaļruņa un mitruma bojājumu remontu.</p>\n<p>Strādājam ar jaunākajiem un vecākiem iPhone modeļiem. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc darba sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт iPhone в Риге</strong> в сервисе iLab включает замену дисплея, аккумулятора, разъёма зарядки, камеры, динамика и ремонт после влаги.</p>\n<p>Работаем с новыми и более старыми моделями iPhone. Перед ремонтом проводим диагностику, согласовываем стоимость и после выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>iPhone remonts Rīgā</strong> iLab servisā ietver displeja maiņu, baterijas nomaiņu, uzlādes ligzdas, kameras, skaļruņa un mitruma bojājumu remontu.</p>\n<p>Strādājam ar jaunākajiem un vecākiem iPhone modeļiem. Pirms remonta veicam diagnostiku, saskaņojam izmaksas un pēc darba sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт iPhone в Риге</strong> в сервисе iLab включает замену дисплея, аккумулятора, разъёма зарядки, камеры, динамика и ремонт после влаги.</p>\n<p>Работаем с новыми и более старыми моделями iPhone. Перед ремонтом проводим диагностику, согласовываем стоимость и после выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "iPhone remonts Rīgā, ekrāns un baterija | iLab",
             "ru": "Ремонт iPhone в Риге, экран и батарея | iLab"
           },
           "metaDescription": {
-            "lv": "iPhone remonts Rīgā - ekrāna, baterijas, uzlādes, kameras un mitruma bojājumu remonts, diagnostika un 90 dienu garantija iLab.",
-            "ru": "Ремонт iPhone в Риге - экран, батарея, зарядка, камера, ремонт после влаги, диагностика и гарантия 90 дней iLab."
+            "lv": "iPhone remonts Rīgā - ekrāna, baterijas, uzlādes, kameras un mitruma bojājumu remonts, diagnostika un garantija līdz 1 gadam iLab.",
+            "ru": "Ремонт iPhone в Риге - экран, батарея, зарядка, камера, ремонт после влаги, диагностика и гарантия до 1 года iLab."
           },
           "modelGrid": {
             "heading": {
@@ -244,12 +244,12 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт телефонов Samsung в Риге"
           },
           "lead": {
-            "lv": "Samsung telefonu remonts Rīgā - Galaxy ekrāni, baterijas, uzlādes ligzdas, kameras un mitruma bojājumi. Ātra pārbaude un 90 dienu garantija.",
-            "ru": "Ремонт телефонов Samsung в Риге - экраны Galaxy, батареи, разъёмы зарядки, камеры и повреждения после влаги. Быстрая проверка и гарантия 90 дней."
+            "lv": "Samsung telefonu remonts Rīgā - Galaxy ekrāni, baterijas, uzlādes ligzdas, kameras un mitruma bojājumi. Ātra pārbaude un garantija līdz 1 gadam.",
+            "ru": "Ремонт телефонов Samsung в Риге - экраны Galaxy, батареи, разъёмы зарядки, камеры и повреждения после влаги. Быстрая проверка и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Samsung telefonu remonts</strong> iLab servisā piemērots Galaxy S, Galaxy A, Galaxy Z, Note un Xcover sērijas modeļiem ar displeja, baterijas vai uzlādes problēmām.</p>\n<p>Pārbaudām bojājumu, piedāvājam piemērotu risinājumu un pirms darba sākšanas saskaņojam cenu. Pēc remonta detaļām un darbam sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт телефонов Samsung</strong> в сервисе iLab подходит для моделей Galaxy S, Galaxy A, Galaxy Z, Note и Xcover с проблемами экрана, батареи или зарядки.</p>\n<p>Проверяем неисправность, предлагаем подходящее решение и заранее согласовываем цену. После ремонта на детали и работу действует <strong>гарантия 90 дней</strong>.</p>"
+            "lv": "<p><strong>Samsung telefonu remonts</strong> iLab servisā piemērots Galaxy S, Galaxy A, Galaxy Z, Note un Xcover sērijas modeļiem ar displeja, baterijas vai uzlādes problēmām.</p>\n<p>Pārbaudām bojājumu, piedāvājam piemērotu risinājumu un pirms darba sākšanas saskaņojam cenu. Pēc remonta detaļām un darbam sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт телефонов Samsung</strong> в сервисе iLab подходит для моделей Galaxy S, Galaxy A, Galaxy Z, Note и Xcover с проблемами экрана, батареи или зарядки.</p>\n<p>Проверяем неисправность, предлагаем подходящее решение и заранее согласовываем цену. После ремонта на детали и работу действует <strong>гарантия до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Samsung telefonu remonts Rīgā | iLab",
@@ -257,7 +257,7 @@ const CATEGORY_DOCS = [
           },
           "metaDescription": {
             "lv": "Samsung telefonu remonts Rīgā - Galaxy ekrāna, baterijas, uzlādes ligzdas, kameras un mitruma bojājumu remonts ar garantiju.",
-            "ru": "Ремонт телефонов Samsung в Риге - экран Galaxy, батарея, зарядка, камера, ремонт после влаги и гарантия 90 дней."
+            "ru": "Ремонт телефонов Samsung в Риге - экран Galaxy, батарея, зарядка, камера, ремонт после влаги и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -345,16 +345,16 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт телефонов Huawei в Риге - замена дисплея, аккумулятора, устранение проблем с зарядкой и камерой. Диагностика и гарантия в iLab."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Huawei telefonu remonts</strong> iLab servisā palīdz, ja telefons neuzlādējas, ātri izlādējas, nereaģē ekrāns vai kamera vairs darbojas nekorekti.</p>\n<p>Veicam modeļa pārbaudi, precizējam bojājumu un saskaņojam remonta izmaksas. Pēc darba pabeigšanas klients saņem <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт телефонов Huawei</strong> в сервисе iLab помогает, если телефон не заряжается, быстро разряжается, экран не реагирует или камера работает некорректно.</p>\n<p>Проверяем модель, уточняем неисправность и согласовываем стоимость ремонта. После выполнения клиент получает <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Huawei telefonu remonts</strong> iLab servisā palīdz, ja telefons neuzlādējas, ātri izlādējas, nereaģē ekrāns vai kamera vairs darbojas nekorekti.</p>\n<p>Veicam modeļa pārbaudi, precizējam bojājumu un saskaņojam remonta izmaksas. Pēc darba pabeigšanas klients saņem <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт телефонов Huawei</strong> в сервисе iLab помогает, если телефон не заряжается, быстро разряжается, экран не реагирует или камера работает некорректно.</p>\n<p>Проверяем модель, уточняем неисправность и согласовываем стоимость ремонта. После выполнения клиент получает <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Huawei telefonu remonts Rīgā | iLab",
             "ru": "Ремонт телефонов Huawei в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Huawei telefonu remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un 90 dienu garantija iLab servisā.",
-            "ru": "Ремонт телефонов Huawei в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия 90 дней."
+            "lv": "Huawei telefonu remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un garantija līdz 1 gadam iLab servisā.",
+            "ru": "Ремонт телефонов Huawei в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -397,12 +397,12 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт телефонов Sony в Риге"
           },
           "lead": {
-            "lv": "Sony Xperia telefonu remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un kameras remonts. iLab veic diagnostiku un sniedz 90 dienu garantiju.",
-            "ru": "Ремонт телефонов Sony Xperia в Риге - экран, батарея, разъём зарядки и камера. iLab выполняет диагностику и даёт гарантию 90 дней."
+            "lv": "Sony Xperia telefonu remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas un kameras remonts. iLab veic diagnostiku un sniedz garantiju līdz 1 gadam.",
+            "ru": "Ремонт телефонов Sony Xperia в Риге - экран, батарея, разъём зарядки и камера. iLab выполняет диагностику и даёт гарантию до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Sony telefonu remonts</strong> iLab servisā paredzēts Xperia modeļiem ar saplaisājušu displeju, nolietotu bateriju, vāju uzlādi vai mitruma radītiem bojājumiem.</p>\n<p>Pirms remonta pārbaudām ierīci un izskaidrojam, kuru detaļu nepieciešams mainīt vai remontēt. Darbam un uzstādītajām detaļām tiek dota <strong>90 dienu garantija</strong>.</p>",
-            "ru": "<p><strong>Ремонт телефонов Sony</strong> в сервисе iLab подходит для моделей Xperia с разбитым дисплеем, изношенной батареей, слабой зарядкой или повреждением после влаги.</p>\n<p>Перед ремонтом проверяем устройство и объясняем, какую деталь нужно заменить или восстановить. На работу и установленные детали действует <strong>гарантия 90 дней</strong>.</p>"
+            "lv": "<p><strong>Sony telefonu remonts</strong> iLab servisā paredzēts Xperia modeļiem ar saplaisājušu displeju, nolietotu bateriju, vāju uzlādi vai mitruma radītiem bojājumiem.</p>\n<p>Pirms remonta pārbaudām ierīci un izskaidrojam, kuru detaļu nepieciešams mainīt vai remontēt. Darbam un uzstādītajām detaļām tiek dota <strong>garantija līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт телефонов Sony</strong> в сервисе iLab подходит для моделей Xperia с разбитым дисплеем, изношенной батареей, слабой зарядкой или повреждением после влаги.</p>\n<p>Перед ремонтом проверяем устройство и объясняем, какую деталь нужно заменить или восстановить. На работу и установленные детали действует <strong>гарантия до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Sony Xperia remonts Rīgā | iLab",
@@ -410,7 +410,7 @@ const CATEGORY_DOCS = [
           },
           "metaDescription": {
             "lv": "Sony Xperia remonts Rīgā - ekrāna, baterijas, uzlādes ligzdas, kameras un mitruma bojājumu remonts ar garantiju.",
-            "ru": "Ремонт Sony Xperia в Риге - экран, батарея, зарядка, камера, ремонт после влаги и гарантия 90 дней."
+            "ru": "Ремонт Sony Xperia в Риге - экран, батарея, зарядка, камера, ремонт после влаги и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -453,20 +453,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт телефонов OnePlus в Риге"
           },
           "lead": {
-            "lv": "OnePlus telefonu remonts Rīgā - displejs, baterija, uzlāde, kameras un programmatūras pārbaude. Skaidras izmaksas un 90 dienu garantija.",
-            "ru": "Ремонт телефонов OnePlus в Риге - дисплей, батарея, зарядка, камеры и проверка программной части. Понятная цена и гарантия 90 дней."
+            "lv": "OnePlus telefonu remonts Rīgā - displejs, baterija, uzlāde, kameras un programmatūras pārbaude. Skaidras izmaksas un garantija līdz 1 gadam.",
+            "ru": "Ремонт телефонов OnePlus в Риге - дисплей, батарея, зарядка, камеры и проверка программной части. Понятная цена и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>OnePlus telefonu remonts</strong> iLab servisā palīdz atjaunot ierīci pēc kritiena, nolietotas baterijas, uzlādes problēmām vai kameras defektiem.</p>\n<p>Diagnostikas laikā nosakām bojājuma iemeslu un pirms darba sākšanas saskaņojam cenu. Pēc remonta veicam testēšanu un sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт телефонов OnePlus</strong> в сервисе iLab помогает восстановить устройство после падения, износа батареи, проблем с зарядкой или неисправности камеры.</p>\n<p>Во время диагностики определяем причину поломки и заранее согласовываем цену. После ремонта тестируем устройство и выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>OnePlus telefonu remonts</strong> iLab servisā palīdz atjaunot ierīci pēc kritiena, nolietotas baterijas, uzlādes problēmām vai kameras defektiem.</p>\n<p>Diagnostikas laikā nosakām bojājuma iemeslu un pirms darba sākšanas saskaņojam cenu. Pēc remonta veicam testēšanu un sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт телефонов OnePlus</strong> в сервисе iLab помогает восстановить устройство после падения, износа батареи, проблем с зарядкой или неисправности камеры.</p>\n<p>Во время диагностики определяем причину поломки и заранее согласовываем цену. После ремонта тестируем устройство и выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "OnePlus telefonu remonts Rīgā | iLab",
             "ru": "Ремонт телефонов OnePlus в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "OnePlus telefonu remonts Rīgā - displeja, baterijas, uzlādes, kameras un mitruma bojājumu remonts ar 90 dienu garantiju.",
-            "ru": "Ремонт телефонов OnePlus в Риге - дисплей, батарея, зарядка, камера, ремонт после влаги и гарантия 90 дней."
+            "lv": "OnePlus telefonu remonts Rīgā - displeja, baterijas, uzlādes, kameras un mitruma bojājumu remonts ar garantiju līdz 1 gadam.",
+            "ru": "Ремонт телефонов OnePlus в Риге - дисплей, батарея, зарядка, камера, ремонт после влаги и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -509,20 +509,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт телефонов Xiaomi в Риге"
           },
           "lead": {
-            "lv": "Xiaomi un Redmi telefonu remonts Rīgā - ekrāna maiņa, baterija, uzlādes ligzda un kameras remonts. Ātra diagnostika un 90 dienu garantija.",
-            "ru": "Ремонт телефонов Xiaomi и Redmi в Риге - замена экрана, батарея, разъём зарядки и камера. Быстрая диагностика и гарантия 90 дней."
+            "lv": "Xiaomi un Redmi telefonu remonts Rīgā - ekrāna maiņa, baterija, uzlādes ligzda un kameras remonts. Ātra diagnostika un garantija līdz 1 gadam.",
+            "ru": "Ремонт телефонов Xiaomi и Redmi в Риге - замена экрана, батарея, разъём зарядки и камера. Быстрая диагностика и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Xiaomi telefonu remonts</strong> iLab servisā ietver Redmi Note, Redmi C un citu Xiaomi modeļu displeja, baterijas, uzlādes ligzdas un kameras remontu.</p>\n<p>Ja telefons ir kritis, neuzlādējas vai ātri izlādējas, veicam pārbaudi un piedāvājam remonta risinājumu. Pēc darba sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт телефонов Xiaomi</strong> в сервисе iLab включает ремонт дисплея, батареи, разъёма зарядки и камеры у Redmi Note, Redmi C и других моделей Xiaomi.</p>\n<p>Если телефон падал, не заряжается или быстро разряжается, проводим проверку и предлагаем вариант ремонта. После работы выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Xiaomi telefonu remonts</strong> iLab servisā ietver Redmi Note, Redmi C un citu Xiaomi modeļu displeja, baterijas, uzlādes ligzdas un kameras remontu.</p>\n<p>Ja telefons ir kritis, neuzlādējas vai ātri izlādējas, veicam pārbaudi un piedāvājam remonta risinājumu. Pēc darba sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт телефонов Xiaomi</strong> в сервисе iLab включает ремонт дисплея, батареи, разъёма зарядки и камеры у Redmi Note, Redmi C и других моделей Xiaomi.</p>\n<p>Если телефон падал, не заряжается или быстро разряжается, проводим проверку и предлагаем вариант ремонта. После работы выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Xiaomi un Redmi remonts Rīgā | iLab",
             "ru": "Ремонт Xiaomi и Redmi в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Xiaomi un Redmi remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un 90 dienu garantija iLab.",
-            "ru": "Ремонт Xiaomi и Redmi в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия 90 дней."
+            "lv": "Xiaomi un Redmi remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un garantija līdz 1 gadam iLab.",
+            "ru": "Ремонт Xiaomi и Redmi в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -576,8 +576,8 @@ const CATEGORY_DOCS = [
       "lv": "Planšetdatoru remonts Rīgā"
     },
     "bodyHtml": {
-      "lv": "<p><strong>Planšetdatoru remonts Rīgā</strong> iLab servisā ietver ekrāna maiņu, baterijas nomaiņu, uzlādes problēmu novēršanu, kameras remontu un diagnostiku pēc kritiena vai mitruma.</p>\n<p>Strādājam ar Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi un Huawei planšetdatoriem. Pirms remonta saskaņojam izmaksas, bet pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-      "ru": "<p><strong>Ремонт планшетов в Риге</strong> в сервисе iLab включает замену экрана, аккумулятора, устранение проблем с зарядкой, ремонт камеры и диагностику после падения или влаги.</p>\n<p>Работаем с Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi и Huawei планшетами. Перед ремонтом согласовываем стоимость, а после выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+      "lv": "<p><strong>Planšetdatoru remonts Rīgā</strong> iLab servisā ietver ekrāna maiņu, baterijas nomaiņu, uzlādes problēmu novēršanu, kameras remontu un diagnostiku pēc kritiena vai mitruma.</p>\n<p>Strādājam ar Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi un Huawei planšetdatoriem. Pirms remonta saskaņojam izmaksas, bet pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+      "ru": "<p><strong>Ремонт планшетов в Риге</strong> в сервисе iLab включает замену экрана, аккумулятора, устранение проблем с зарядкой, ремонт камеры и диагностику после падения или влаги.</p>\n<p>Работаем с Apple iPad, Samsung Galaxy Tab, Lenovo, Xiaomi и Huawei планшетами. Перед ремонтом согласовываем стоимость, а после выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
     },
     "type": "category",
     "metaDescription": {
@@ -586,8 +586,8 @@ const CATEGORY_DOCS = [
     },
     "slug": "plansetdatoru-remonts",
     "lead": {
-      "lv": "Planšetdatoru displeji, baterijas, uzlādes ligzdas un kameras remonts Apple iPad, Samsung, Lenovo, Xiaomi un citiem modeļiem. Skaidras cenas un 90 dienu garantija.",
-      "ru": "Ремонт дисплеев, батарей, разъёмов зарядки и камер планшетов Apple iPad, Samsung, Lenovo, Xiaomi и других моделей. Понятные цены и гарантия 90 дней."
+      "lv": "Planšetdatoru displeji, baterijas, uzlādes ligzdas un kameras remonts Apple iPad, Samsung, Lenovo, Xiaomi un citiem modeļiem. Skaidras cenas un garantija līdz 1 gadam.",
+      "ru": "Ремонт дисплеев, батарей, разъёмов зарядки и камер планшетов Apple iPad, Samsung, Lenovo, Xiaomi и других моделей. Понятные цены и гарантия до 1 года."
     },
     "order": 3,
     "labels": {
@@ -647,12 +647,12 @@ const CATEGORY_DOCS = [
         "page": {
           "variant": "ipadHub",
           "lead": {
-            "lv": "iPad remonts Rīgā - displeja maiņa, baterija, uzlādes ligzda, kameras un mitruma bojājumu diagnostika. iLab sniedz 90 dienu garantiju.",
-            "ru": "Ремонт iPad в Риге - замена дисплея, батарея, разъём зарядки, камеры и диагностика после влаги. iLab даёт гарантию 90 дней."
+            "lv": "iPad remonts Rīgā - displeja maiņa, baterija, uzlādes ligzda, kameras un mitruma bojājumu diagnostika. iLab sniedz garantiju līdz 1 gadam.",
+            "ru": "Ремонт iPad в Риге - замена дисплея, батарея, разъём зарядки, камеры и диагностика после влаги. iLab даёт гарантию до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>iPad remonts Rīgā</strong> iLab servisā ietver iPad Pro, iPad Air, iPad mini un klasisko iPad modeļu ekrāna, baterijas un uzlādes mezglu remontu.</p>\n<p>Pirms darba pārbaudām planšetdatoru, precizējam detaļu pieejamību un saskaņojam izmaksas. Pēc remonta tiek veikta testēšana un sniegta <strong>90 dienu garantija</strong>.</p>",
-            "ru": "<p><strong>Ремонт iPad в Риге</strong> в сервисе iLab включает ремонт экрана, батареи и зарядного узла у iPad Pro, iPad Air, iPad mini и классических моделей iPad.</p>\n<p>Перед работой проверяем планшет, уточняем наличие деталей и согласовываем стоимость. После ремонта выполняем тестирование и выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>iPad remonts Rīgā</strong> iLab servisā ietver iPad Pro, iPad Air, iPad mini un klasisko iPad modeļu ekrāna, baterijas un uzlādes mezglu remontu.</p>\n<p>Pirms darba pārbaudām planšetdatoru, precizējam detaļu pieejamību un saskaņojam izmaksas. Pēc remonta tiek veikta testēšana un sniegta <strong>garantija līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт iPad в Риге</strong> в сервисе iLab включает ремонт экрана, батареи и зарядного узла у iPad Pro, iPad Air, iPad mini и классических моделей iPad.</p>\n<p>Перед работой проверяем планшет, уточняем наличие деталей и согласовываем стоимость. После ремонта выполняем тестирование и выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "iPad remonts Rīgā, ekrāns un baterija | iLab",
@@ -672,12 +672,12 @@ const CATEGORY_DOCS = [
         "page": {
           "variant": "brand",
           "lead": {
-            "lv": "Samsung Galaxy Tab remonts Rīgā - ekrāni, baterijas, uzlādes ligzdas un kameras problēmas. Diagnostika, saskaņota cena un 90 dienu garantija.",
-            "ru": "Ремонт Samsung Galaxy Tab в Риге - экраны, батареи, разъёмы зарядки и проблемы камеры. Диагностика, согласованная цена и гарантия 90 дней."
+            "lv": "Samsung Galaxy Tab remonts Rīgā - ekrāni, baterijas, uzlādes ligzdas un kameras problēmas. Diagnostika, saskaņota cena un garantija līdz 1 gadam.",
+            "ru": "Ремонт Samsung Galaxy Tab в Риге - экраны, батареи, разъёмы зарядки и проблемы камеры. Диагностика, согласованная цена и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Samsung planšetdatoru remonts</strong> iLab servisā palīdz Galaxy Tab modeļiem pēc kritiena, ar bojātu displeju, vāju bateriju vai nestabilu uzlādi.</p>\n<p>Veicam diagnostiku, pārbaudām detaļu pieejamību un pirms remonta saskaņojam izmaksas. Darbam un detaļām sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт планшетов Samsung</strong> в сервисе iLab помогает моделям Galaxy Tab после падения, с повреждённым дисплеем, слабой батареей или нестабильной зарядкой.</p>\n<p>Проводим диагностику, проверяем наличие деталей и заранее согласовываем стоимость. На работу и детали действует <strong>гарантия 90 дней</strong>.</p>"
+            "lv": "<p><strong>Samsung planšetdatoru remonts</strong> iLab servisā palīdz Galaxy Tab modeļiem pēc kritiena, ar bojātu displeju, vāju bateriju vai nestabilu uzlādi.</p>\n<p>Veicam diagnostiku, pārbaudām detaļu pieejamību un pirms remonta saskaņojam izmaksas. Darbam un detaļām sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт планшетов Samsung</strong> в сервисе iLab помогает моделям Galaxy Tab после падения, с повреждённым дисплеем, слабой батареей или нестабильной зарядкой.</p>\n<p>Проводим диагностику, проверяем наличие деталей и заранее согласовываем стоимость. На работу и детали действует <strong>гарантия до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Samsung Galaxy Tab remonts Rīgā | iLab",
@@ -715,20 +715,20 @@ const CATEGORY_DOCS = [
         "page": {
           "variant": "brand",
           "lead": {
-            "lv": "Lenovo planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, programmatūras pārbaude un mitruma diagnostika. 90 dienu garantija iLab servisā.",
-            "ru": "Ремонт планшетов Lenovo в Риге - дисплей, батарея, зарядка, проверка ПО и диагностика после влаги. Гарантия 90 дней в iLab."
+            "lv": "Lenovo planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, programmatūras pārbaude un mitruma diagnostika. garantija līdz 1 gadam iLab servisā.",
+            "ru": "Ремонт планшетов Lenovo в Риге - дисплей, батарея, зарядка, проверка ПО и диагностика после влаги. Гарантия до 1 года в iLab."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Lenovo planšetdatoru remonts</strong> iLab servisā ietver skārienekrāna, baterijas, uzlādes ligzdas un citu biežāko bojājumu novēršanu.</p>\n<p>Pārbaudām ierīci, nosakām problēmas cēloni un pirms remonta saskaņojam cenu. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт планшетов Lenovo</strong> в сервисе iLab включает устранение частых проблем с сенсорным экраном, батареей, разъёмом зарядки и другими узлами.</p>\n<p>Проверяем устройство, определяем причину неисправности и до ремонта согласовываем цену. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Lenovo planšetdatoru remonts</strong> iLab servisā ietver skārienekrāna, baterijas, uzlādes ligzdas un citu biežāko bojājumu novēršanu.</p>\n<p>Pārbaudām ierīci, nosakām problēmas cēloni un pirms remonta saskaņojam cenu. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт планшетов Lenovo</strong> в сервисе iLab включает устранение частых проблем с сенсорным экраном, батареей, разъёмом зарядки и другими узлами.</p>\n<p>Проверяем устройство, определяем причину неисправности и до ремонта согласовываем цену. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Lenovo planšetdatoru remonts Rīgā | iLab",
             "ru": "Ремонт планшетов Lenovo в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Lenovo planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, diagnostika un 90 dienu garantija iLab servisā.",
-            "ru": "Ремонт планшетов Lenovo в Риге - дисплей, батарея, зарядка, диагностика и гарантия 90 дней в iLab."
+            "lv": "Lenovo planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, diagnostika un garantija līdz 1 gadam iLab servisā.",
+            "ru": "Ремонт планшетов Lenovo в Риге - дисплей, батарея, зарядка, диагностика и гарантия до 1 года в iLab."
           },
           "h1": {
             "lv": "Lenovo planšetdatoru remonts Rīgā",
@@ -746,20 +746,20 @@ const CATEGORY_DOCS = [
         "page": {
           "variant": "brand",
           "lead": {
-            "lv": "Xiaomi planšetdatoru remonts Rīgā - ekrāna maiņa, baterija, uzlādes ligzda un kameras remonts. Ātra pārbaude un 90 dienu garantija.",
-            "ru": "Ремонт планшетов Xiaomi в Риге - замена экрана, батарея, разъём зарядки и камера. Быстрая проверка и гарантия 90 дней."
+            "lv": "Xiaomi planšetdatoru remonts Rīgā - ekrāna maiņa, baterija, uzlādes ligzda un kameras remonts. Ātra pārbaude un garantija līdz 1 gadam.",
+            "ru": "Ремонт планшетов Xiaomi в Риге - замена экрана, батарея, разъём зарядки и камера. Быстрая проверка и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Xiaomi planšetdatoru remonts</strong> iLab servisā paredzēts modeļiem ar bojātu displeju, lēnu vai nestabilu uzlādi, nolietotu bateriju vai kameras defektu.</p>\n<p>Pirms darba nosakām bojājumu un saskaņojam remonta izmaksas. Pēc remonta pārbaudām planšetdatoru un sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт планшетов Xiaomi</strong> в сервисе iLab подходит для моделей с повреждённым дисплеем, медленной или нестабильной зарядкой, изношенной батареей или неисправной камерой.</p>\n<p>Перед работой определяем поломку и согласовываем стоимость ремонта. После ремонта проверяем планшет и выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Xiaomi planšetdatoru remonts</strong> iLab servisā paredzēts modeļiem ar bojātu displeju, lēnu vai nestabilu uzlādi, nolietotu bateriju vai kameras defektu.</p>\n<p>Pirms darba nosakām bojājumu un saskaņojam remonta izmaksas. Pēc remonta pārbaudām planšetdatoru un sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт планшетов Xiaomi</strong> в сервисе iLab подходит для моделей с повреждённым дисплеем, медленной или нестабильной зарядкой, изношенной батареей или неисправной камерой.</p>\n<p>Перед работой определяем поломку и согласовываем стоимость ремонта. После ремонта проверяем планшет и выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Xiaomi planšetdatoru remonts Rīgā | iLab",
             "ru": "Ремонт планшетов Xiaomi в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Xiaomi planšetdatoru remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un 90 dienu garantija.",
-            "ru": "Ремонт планшетов Xiaomi в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия 90 дней."
+            "lv": "Xiaomi planšetdatoru remonts Rīgā - ekrāns, baterija, uzlādes ligzda, kamera, diagnostika un garantija līdz 1 gadam.",
+            "ru": "Ремонт планшетов Xiaomi в Риге - экран, батарея, разъём зарядки, камера, диагностика и гарантия до 1 года."
           },
           "h1": {
             "lv": "Xiaomi planšetdatoru remonts Rīgā",
@@ -783,19 +783,19 @@ const CATEGORY_DOCS = [
         "page": {
           "variant": "brand",
           "lead": {
-            "lv": "Huawei planšetdatoru remonts Rīgā - displejs, baterija, uzlādes ligzda, kamera un mitruma bojājumi. Diagnostika un 90 dienu garantija.",
-            "ru": "Ремонт планшетов Huawei в Риге - дисплей, батарея, разъём зарядки, камера и повреждения после влаги. Диагностика и гарантия 90 дней."
+            "lv": "Huawei planšetdatoru remonts Rīgā - displejs, baterija, uzlādes ligzda, kamera un mitruma bojājumi. Diagnostika un garantija līdz 1 gadam.",
+            "ru": "Ремонт планшетов Huawei в Риге - дисплей, батарея, разъём зарядки, камера и повреждения после влаги. Диагностика и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Huawei planšetdatoru remonts</strong> iLab servisā palīdz, ja planšete neuzlādējas, ātri izlādējas, ir saplaisājis ekrāns vai pēc kritiena nedarbojas korekti.</p>\n<p>Veicam pārbaudi, saskaņojam detaļu maiņu vai remontu un pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт планшетов Huawei</strong> в сервисе iLab помогает, если планшет не заряжается, быстро разряжается, имеет разбитый экран или некорректно работает после падения.</p>\n<p>Проводим проверку, согласовываем замену деталей или ремонт и после выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Huawei planšetdatoru remonts</strong> iLab servisā palīdz, ja planšete neuzlādējas, ātri izlādējas, ir saplaisājis ekrāns vai pēc kritiena nedarbojas korekti.</p>\n<p>Veicam pārbaudi, saskaņojam detaļu maiņu vai remontu un pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт планшетов Huawei</strong> в сервисе iLab помогает, если планшет не заряжается, быстро разряжается, имеет разбитый экран или некорректно работает после падения.</p>\n<p>Проводим проверку, согласовываем замену деталей или ремонт и после выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Huawei planšetdatoru remonts Rīgā | iLab",
             "ru": "Ремонт планшетов Huawei в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Huawei planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, kamera, mitruma diagnostika un 90 dienu garantija.",
+            "lv": "Huawei planšetdatoru remonts Rīgā - displejs, baterija, uzlāde, kamera, mitruma diagnostika un garantija līdz 1 gadam.",
             "ru": "Ремонт планшетов Huawei в Риге - дисплей, батарея, зарядка, камера, диагностика после влаги и гарантия."
           },
           "h1": {
@@ -830,8 +830,8 @@ const CATEGORY_DOCS = [
       "lv": "Datoru remonts Rīgā"
     },
     "bodyHtml": {
-      "lv": "<p><strong>Datoru remonts Rīgā</strong> iLab servisā aptver MacBook, iMac, Mac Pro, Lenovo, HP, MSI, Dell, Asus, Acer un citu datoru diagnostiku un remontu.</p>\n<p>Novēršam ekrāna, tastatūras, uzlādes, pārkaršanas, mitruma un veiktspējas problēmas. Pirms remonta saskaņojam izmaksas un pēc darba sniedzam <strong>90 dienu garantiju</strong>.</p>",
-      "ru": "<p><strong>Ремонт компьютеров в Риге</strong> в сервисе iLab включает диагностику и ремонт MacBook, iMac, Mac Pro, Lenovo, HP, MSI, Dell, Asus, Acer и других компьютеров.</p>\n<p>Устраняем проблемы с экраном, клавиатурой, зарядкой, перегревом, влагой и производительностью. Перед ремонтом согласовываем стоимость и после выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+      "lv": "<p><strong>Datoru remonts Rīgā</strong> iLab servisā aptver MacBook, iMac, Mac Pro, Lenovo, HP, MSI, Dell, Asus, Acer un citu datoru diagnostiku un remontu.</p>\n<p>Novēršam ekrāna, tastatūras, uzlādes, pārkaršanas, mitruma un veiktspējas problēmas. Pirms remonta saskaņojam izmaksas un pēc darba sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+      "ru": "<p><strong>Ремонт компьютеров в Риге</strong> в сервисе iLab включает диагностику и ремонт MacBook, iMac, Mac Pro, Lenovo, HP, MSI, Dell, Asus, Acer и других компьютеров.</p>\n<p>Устраняем проблемы с экраном, клавиатурой, зарядкой, перегревом, влагой и производительностью. Перед ремонтом согласовываем стоимость и после выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
     },
     "type": "category",
     "metaDescription": {
@@ -840,8 +840,8 @@ const CATEGORY_DOCS = [
     },
     "slug": "datoru-remonts",
     "lead": {
-      "lv": "Portatīvo un stacionāro datoru remonts Rīgā - ekrāni, tastatūras, uzlāde, mātesplates diagnostika, SSD/RAM uzlabojumi un 90 dienu garantija.",
-      "ru": "Ремонт ноутбуков и настольных компьютеров в Риге - экраны, клавиатуры, зарядка, диагностика плат, апгрейд SSD/RAM и гарантия 90 дней."
+      "lv": "Portatīvo un stacionāro datoru remonts Rīgā - ekrāni, tastatūras, uzlāde, mātesplates diagnostika, SSD/RAM uzlabojumi un garantija līdz 1 gadam.",
+      "ru": "Ремонт ноутбуков и настольных компьютеров в Риге - экраны, клавиатуры, зарядка, диагностика плат, апгрейд SSD/RAM и гарантия до 1 года."
     },
     "order": 4,
     "labels": {
@@ -870,19 +870,19 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт MacBook в Риге"
           },
           "lead": {
-            "lv": "MacBook remonts Rīgā - ekrāns, baterija, tastatūra, uzlāde, mitruma diagnostika un veiktspējas pārbaude. iLab sniedz 90 dienu garantiju.",
-            "ru": "Ремонт MacBook в Риге - экран, батарея, клавиатура, зарядка, диагностика после влаги и проверка производительности. Гарантия iLab 90 дней."
+            "lv": "MacBook remonts Rīgā - ekrāns, baterija, tastatūra, uzlāde, mitruma diagnostika un veiktspējas pārbaude. iLab sniedz garantiju līdz 1 gadam.",
+            "ru": "Ремонт MacBook в Риге - экран, батарея, клавиатура, зарядка, диагностика после влаги и проверка производительности. Гарантия iLab до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>MacBook remonts</strong> iLab servisā ietver MacBook Air un MacBook Pro ekrāna, baterijas, tastatūras, skārienpaliktņa un uzlādes mezgla remontu.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт MacBook</strong> в сервисе iLab включает ремонт экрана, батареи, клавиатуры, трекпада и зарядного узла у MacBook Air и MacBook Pro.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>MacBook remonts</strong> iLab servisā ietver MacBook Air un MacBook Pro ekrāna, baterijas, tastatūras, skārienpaliktņa un uzlādes mezgla remontu.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт MacBook</strong> в сервисе iLab включает ремонт экрана, батареи, клавиатуры, трекпада и зарядного узла у MacBook Air и MacBook Pro.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "MacBook remonts Rīgā | iLab",
             "ru": "Ремонт MacBook в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "MacBook remonts Rīgā - Air un Pro ekrāns, baterija, tastatūra, uzlāde, mitruma diagnostika un 90 dienu garantija.",
+            "lv": "MacBook remonts Rīgā - Air un Pro ekrāns, baterija, tastatūra, uzlāde, mitruma diagnostika un garantija līdz 1 gadam.",
             "ru": "Ремонт MacBook в Риге - Air и Pro, экран, батарея, клавиатура, зарядка, диагностика после влаги и гарантия."
           },
           "modelGrid": {
@@ -943,20 +943,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт iMac в Риге"
           },
           "lead": {
-            "lv": "iMac remonts Rīgā - displejs, barošana, SSD uzlabojumi, sistēmas pārbaude un datu drošība. Diagnostika un 90 dienu garantija.",
-            "ru": "Ремонт iMac в Риге - дисплей, питание, апгрейд SSD, проверка системы и безопасность данных. Диагностика и гарантия 90 дней."
+            "lv": "iMac remonts Rīgā - displejs, barošana, SSD uzlabojumi, sistēmas pārbaude un datu drošība. Diagnostika un garantija līdz 1 gadam.",
+            "ru": "Ремонт iMac в Риге - дисплей, питание, апгрейд SSD, проверка системы и безопасность данных. Диагностика и гарантия до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>iMac remonts</strong> iLab servisā palīdz, ja dators neieslēdzas, darbojas lēni, pārkarst, rada attēla problēmas vai nepieciešams SSD uzlabojums.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт iMac</strong> в сервисе iLab помогает, если компьютер не включается, работает медленно, перегревается, показывает проблемы с изображением или требует апгрейда SSD.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>iMac remonts</strong> iLab servisā palīdz, ja dators neieslēdzas, darbojas lēni, pārkarst, rada attēla problēmas vai nepieciešams SSD uzlabojums.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт iMac</strong> в сервисе iLab помогает, если компьютер не включается, работает медленно, перегревается, показывает проблемы с изображением или требует апгрейда SSD.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "iMac remonts Rīgā | iLab",
             "ru": "Ремонт iMac в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "iMac remonts Rīgā - diagnostika, displejs, barošana, SSD uzlabojumi, pārkaršana un 90 dienu garantija iLab.",
-            "ru": "Ремонт iMac в Риге - диагностика, дисплей, питание, SSD, перегрев и гарантия 90 дней iLab."
+            "lv": "iMac remonts Rīgā - diagnostika, displejs, barošana, SSD uzlabojumi, pārkaršana un garantija līdz 1 gadam iLab.",
+            "ru": "Ремонт iMac в Риге - диагностика, дисплей, питание, SSD, перегрев и гарантия до 1 года iLab."
           },
           "modelGrid": {
             "heading": {
@@ -999,20 +999,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт Mac Pro в Риге"
           },
           "lead": {
-            "lv": "Mac Pro remonts Rīgā - diagnostika, barošanas problēmas, veiktspēja, datu nesēji un komponentu pārbaude. 90 dienu garantija iLab.",
-            "ru": "Ремонт Mac Pro в Риге - диагностика, питание, производительность, накопители и проверка компонентов. Гарантия iLab 90 дней."
+            "lv": "Mac Pro remonts Rīgā - diagnostika, barošanas problēmas, veiktspēja, datu nesēji un komponentu pārbaude. garantija līdz 1 gadam iLab.",
+            "ru": "Ремонт Mac Pro в Риге - диагностика, питание, производительность, накопители и проверка компонентов. Гарантия iLab до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Mac Pro remonts</strong> iLab servisā paredzēts profesionāliem Apple datoriem ar startēšanas, barošanas, datu nesēju vai veiktspējas problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт Mac Pro</strong> в сервисе iLab подходит для профессиональных компьютеров Apple с проблемами запуска, питания, накопителей или производительности.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Mac Pro remonts</strong> iLab servisā paredzēts profesionāliem Apple datoriem ar startēšanas, barošanas, datu nesēju vai veiktspējas problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт Mac Pro</strong> в сервисе iLab подходит для профессиональных компьютеров Apple с проблемами запуска, питания, накопителей или производительности.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Mac Pro remonts Rīgā | iLab",
             "ru": "Ремонт Mac Pro в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Mac Pro remonts Rīgā - diagnostika, barošana, datu nesēji, veiktspējas problēmas un 90 dienu garantija.",
-            "ru": "Ремонт Mac Pro в Риге - диагностика, питание, накопители, проблемы производительности и гарантия 90 дней."
+            "lv": "Mac Pro remonts Rīgā - diagnostika, barošana, datu nesēji, veiktspējas problēmas un garantija līdz 1 gadam.",
+            "ru": "Ремонт Mac Pro в Риге - диагностика, питание, накопители, проблемы производительности и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -1055,20 +1055,20 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров Lenovo в Риге"
           },
           "lead": {
-            "lv": "Lenovo datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, eņģes, SSD/RAM uzlabojumi un diagnostika. iLab garantija 90 dienas.",
-            "ru": "Ремонт компьютеров Lenovo в Риге - экран, клавиатура, зарядка, петли, апгрейд SSD/RAM и диагностика. Гарантия iLab 90 дней."
+            "lv": "Lenovo datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, eņģes, SSD/RAM uzlabojumi un diagnostika. iLab garantija līdz 1 gadam.",
+            "ru": "Ремонт компьютеров Lenovo в Риге - экран, клавиатура, зарядка, петли, апгрейд SSD/RAM и диагностика. Гарантия iLab до 1 года."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Lenovo datoru remonts</strong> iLab servisā palīdz ThinkPad, IdeaPad, Yoga un citiem Lenovo modeļiem ar ekrāna, tastatūras vai uzlādes defektiem.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров Lenovo</strong> в сервисе iLab помогает моделям ThinkPad, IdeaPad, Yoga и другим Lenovo с проблемами экрана, клавиатуры или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Lenovo datoru remonts</strong> iLab servisā palīdz ThinkPad, IdeaPad, Yoga un citiem Lenovo modeļiem ar ekrāna, tastatūras vai uzlādes defektiem.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров Lenovo</strong> в сервисе iLab помогает моделям ThinkPad, IdeaPad, Yoga и другим Lenovo с проблемами экрана, клавиатуры или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Lenovo datoru remonts Rīgā | iLab",
             "ru": "Ремонт компьютеров Lenovo в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Lenovo datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, eņģes, SSD/RAM, diagnostika un 90 dienu garantija.",
-            "ru": "Ремонт Lenovo в Риге - экран, клавиатура, зарядка, петли, SSD/RAM, диагностика и гарантия 90 дней."
+            "lv": "Lenovo datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, eņģes, SSD/RAM, diagnostika un garantija līdz 1 gadam.",
+            "ru": "Ремонт Lenovo в Риге - экран, клавиатура, зарядка, петли, SSD/RAM, диагностика и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -1115,16 +1115,16 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров HP в Риге - экраны ноутбуков, клавиатуры, зарядка, перегрев и апгрейд SSD/RAM с гарантией."
           },
           "bodyHtml": {
-            "lv": "<p><strong>HP datoru remonts</strong> iLab servisā aptver Pavilion, Envy, EliteBook, ProBook un citu HP datoru diagnostiku un remontu.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров HP</strong> в сервисе iLab включает диагностику и ремонт Pavilion, Envy, EliteBook, ProBook и других компьютеров HP.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>HP datoru remonts</strong> iLab servisā aptver Pavilion, Envy, EliteBook, ProBook un citu HP datoru diagnostiku un remontu.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров HP</strong> в сервисе iLab включает диагностику и ремонт Pavilion, Envy, EliteBook, ProBook и других компьютеров HP.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "HP datoru remonts Rīgā | iLab",
             "ru": "Ремонт компьютеров HP в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "HP datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, pārkaršana, SSD/RAM uzlabojumi un 90 dienu garantija.",
-            "ru": "Ремонт HP в Риге - экран, клавиатура, зарядка, перегрев, SSD/RAM и гарантия 90 дней."
+            "lv": "HP datoru remonts Rīgā - ekrāns, tastatūra, uzlāde, pārkaršana, SSD/RAM uzlabojumi un garantija līdz 1 gadam.",
+            "ru": "Ремонт HP в Риге - экран, клавиатура, зарядка, перегрев, SSD/RAM и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -1171,8 +1171,8 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров MSI в Риге - игровые ноутбуки, охлаждение, экран, клавиатура, зарядка и проверка производительности."
           },
           "bodyHtml": {
-            "lv": "<p><strong>MSI datoru remonts</strong> iLab servisā īpaši noder spēļu portatīvajiem datoriem ar pārkaršanu, trokšņainu dzesēšanu, ekrāna vai uzlādes problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров MSI</strong> в сервисе iLab особенно актуален для игровых ноутбуков с перегревом, шумным охлаждением, проблемами экрана или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>MSI datoru remonts</strong> iLab servisā īpaši noder spēļu portatīvajiem datoriem ar pārkaršanu, trokšņainu dzesēšanu, ekrāna vai uzlādes problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров MSI</strong> в сервисе iLab особенно актуален для игровых ноутбуков с перегревом, шумным охлаждением, проблемами экрана или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "MSI datoru remonts Rīgā | iLab",
@@ -1227,16 +1227,16 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров Dell в Риге - XPS, Inspiron, Latitude и другие модели, экраны, клавиатуры, зарядка и SSD/RAM."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Dell datoru remonts</strong> iLab servisā paredzēts XPS, Inspiron, Latitude un citiem modeļiem ar displeja, tastatūras, eņģu vai uzlādes defektiem.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров Dell</strong> в сервисе iLab подходит для XPS, Inspiron, Latitude и других моделей с проблемами дисплея, клавиатуры, петель или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Dell datoru remonts</strong> iLab servisā paredzēts XPS, Inspiron, Latitude un citiem modeļiem ar displeja, tastatūras, eņģu vai uzlādes defektiem.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров Dell</strong> в сервисе iLab подходит для XPS, Inspiron, Latitude и других моделей с проблемами дисплея, клавиатуры, петель или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Dell datoru remonts Rīgā | iLab",
             "ru": "Ремонт компьютеров Dell в Риге | iLab"
           },
           "metaDescription": {
-            "lv": "Dell datoru remonts Rīgā - XPS, Inspiron, Latitude, ekrāns, tastatūra, uzlāde, eņģes un 90 dienu garantija.",
-            "ru": "Ремонт Dell в Риге - XPS, Inspiron, Latitude, экран, клавиатура, зарядка, петли и гарантия 90 дней."
+            "lv": "Dell datoru remonts Rīgā - XPS, Inspiron, Latitude, ekrāns, tastatūra, uzlāde, eņģes un garantija līdz 1 gadam.",
+            "ru": "Ремонт Dell в Риге - XPS, Inspiron, Latitude, экран, клавиатура, зарядка, петли и гарантия до 1 года."
           },
           "modelGrid": {
             "heading": {
@@ -1283,8 +1283,8 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров Asus в Риге - ZenBook, VivoBook, ROG и TUF, экраны, клавиатуры, зарядка, охлаждение и диагностика."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Asus datoru remonts</strong> iLab servisā palīdz ZenBook, VivoBook, ROG, TUF un citiem Asus portatīvajiem ar ekrāna, dzesēšanas vai uzlādes problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров Asus</strong> в сервисе iLab помогает ZenBook, VivoBook, ROG, TUF и другим ноутбукам Asus с проблемами экрана, охлаждения или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Asus datoru remonts</strong> iLab servisā palīdz ZenBook, VivoBook, ROG, TUF un citiem Asus portatīvajiem ar ekrāna, dzesēšanas vai uzlādes problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров Asus</strong> в сервисе iLab помогает ZenBook, VivoBook, ROG, TUF и другим ноутбукам Asus с проблемами экрана, охлаждения или зарядки.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Asus datoru remonts Rīgā | iLab",
@@ -1339,8 +1339,8 @@ const CATEGORY_DOCS = [
             "ru": "Ремонт компьютеров Acer в Риге - Aspire, Swift, Nitro и Predator, экраны, клавиатуры, зарядка, охлаждение и SSD/RAM."
           },
           "bodyHtml": {
-            "lv": "<p><strong>Acer datoru remonts</strong> iLab servisā paredzēts Aspire, Swift, Nitro, Predator un citiem modeļiem ar ekrāna, tastatūras, uzlādes vai pārkaršanas problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>90 dienu garantiju</strong>.</p>",
-            "ru": "<p><strong>Ремонт компьютеров Acer</strong> в сервисе iLab подходит для Aspire, Swift, Nitro, Predator и других моделей с проблемами экрана, клавиатуры, зарядки или перегрева.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию 90 дней</strong>.</p>"
+            "lv": "<p><strong>Acer datoru remonts</strong> iLab servisā paredzēts Aspire, Swift, Nitro, Predator un citiem modeļiem ar ekrāna, tastatūras, uzlādes vai pārkaršanas problēmām.</p>\n<p>Pirms remonta pārbaudām datoru, izskaidrojam iespējamos risinājumus un saskaņojam izmaksas. Pēc darba pabeigšanas sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+            "ru": "<p><strong>Ремонт компьютеров Acer</strong> в сервисе iLab подходит для Aspire, Swift, Nitro, Predator и других моделей с проблемами экрана, клавиатуры, зарядки или перегрева.</p>\n<p>Перед ремонтом проверяем компьютер, объясняем возможные решения и согласовываем стоимость. После выполнения выдаём <strong>гарантию до 1 года</strong>.</p>"
           },
           "metaTitle": {
             "lv": "Acer datoru remonts Rīgā | iLab",
@@ -1386,18 +1386,18 @@ const CATEGORY_DOCS = [
       "lv": "Dyson remonts Rīgā"
     },
     "bodyHtml": {
-      "lv": "<p><strong>Dyson remonts Rīgā</strong> iLab servisā palīdz, ja putekļsūcējs ātri izlādējas, zaudē jaudu, neieslēdzas vai darbojas ar pārtraukumiem.</p>\n<p>Veicam baterijas maiņu, motora pārbaudi, filtru un blīvējumu nomaiņu, kā arī dziļo tīrīšanu. Pirms darba saskaņojam izmaksas un pēc remonta sniedzam <strong>90 dienu garantiju</strong>.</p>",
-      "ru": "<p><strong>Ремонт Dyson в Риге</strong> в сервисе iLab помогает, если пылесос быстро разряжается, потерял мощность, не включается или работает с перебоями.</p>\n<p>Выполняем замену батареи, проверку мотора, замену фильтров и уплотнителей, а также глубокую чистку. Перед работой согласовываем стоимость и после ремонта выдаём <strong>гарантию 90 дней</strong>.</p>"
+      "lv": "<p><strong>Dyson remonts Rīgā</strong> iLab servisā palīdz, ja putekļsūcējs ātri izlādējas, zaudē jaudu, neieslēdzas vai darbojas ar pārtraukumiem.</p>\n<p>Veicam baterijas maiņu, motora pārbaudi, filtru un blīvējumu nomaiņu, kā arī dziļo tīrīšanu. Pirms darba saskaņojam izmaksas un pēc remonta sniedzam <strong>garantiju līdz 1 gadam</strong>.</p>",
+      "ru": "<p><strong>Ремонт Dyson в Риге</strong> в сервисе iLab помогает, если пылесос быстро разряжается, потерял мощность, не включается или работает с перебоями.</p>\n<p>Выполняем замену батареи, проверку мотора, замену фильтров и уплотнителей, а также глубокую чистку. Перед работой согласовываем стоимость и после ремонта выдаём <strong>гарантию до 1 года</strong>.</p>"
     },
     "type": "category",
     "metaDescription": {
-      "lv": "Dyson remonts Rīgā - baterijas maiņa, motora remonts, filtri, blīvējumi, dziļā tīrīšana, diagnostika un 90 dienu garantija.",
-      "ru": "Ремонт Dyson в Риге - замена батареи, ремонт мотора, фильтры, уплотнители, глубокая чистка, диагностика и гарантия 90 дней."
+      "lv": "Dyson remonts Rīgā - baterijas maiņa, motora remonts, filtri, blīvējumi, dziļā tīrīšana, diagnostika un garantija līdz 1 gadam.",
+      "ru": "Ремонт Dyson в Риге - замена батареи, ремонт мотора, фильтры, уплотнители, глубокая чистка, диагностика и гарантия до 1 года."
     },
     "slug": "dyson-remonts",
     "lead": {
-      "lv": "Dyson bezvadu putekļsūcēju remonts Rīgā - baterija, motors, filtri, blīvējumi un dziļā tīrīšana. Ātra pārbaude un 90 dienu garantija.",
-      "ru": "Ремонт беспроводных пылесосов Dyson в Риге - батарея, мотор, фильтры, уплотнители и глубокая чистка. Быстрая проверка и гарантия 90 дней."
+      "lv": "Dyson bezvadu putekļsūcēju remonts Rīgā - baterija, motors, filtri, blīvējumi un dziļā tīrīšana. Ātra pārbaude un garantija līdz 1 gadam.",
+      "ru": "Ремонт беспроводных пылесосов Dyson в Риге - батарея, мотор, фильтры, уплотнители и глубокая чистка. Быстрая проверка и гарантия до 1 года."
     },
     "order": 5,
     "labels": {

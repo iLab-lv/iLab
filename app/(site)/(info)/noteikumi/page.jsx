@@ -33,12 +33,12 @@ function buildBreadcrumbsLd(breadcrumbs = []) {
 function buildTermsLd(strings) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'TermsOfService',
+    '@type': 'WebPage',
     '@id': `${absoluteUrl(strings.canonicalPath)}#terms`,
     name: strings.tosName,
     url: absoluteUrl(strings.canonicalPath),
     provider: {
-      '@id': `${absoluteUrl('/')}#organization`,
+      '@id': `${absoluteUrl('/').replace(/\/$/, '')}#organization`,
     },
     inLanguage: strings.inLanguage,
     description: strings.tosDescription,

@@ -13,6 +13,7 @@ import {
 } from '@/lib/content/catalogDevices';
 
 import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { getDevicesByCategoryAndBrand } from '@/lib/content/devices';
 
 import { buildSeoMetadata } from '@/lib/seo/buildSeoMetadata';
 import { buildRepairPageJsonLd } from '@/lib/seo/jsonld';
@@ -249,13 +250,14 @@ async function getPhoneDevicePageData({ brand, device }) {
   const brandPath = getBrandPath(brandSlug);
   const modelPath = getModelPath(brandSlug, phoneDevice.slug || deviceSlug);
 
-  const [{ items: priceItems, currency }, faq] = await Promise.all([
+  const [{ items: priceItems, currency }, faq, relatedDevices] = await Promise.all([
     buildPriceListItems(phoneDevice.slug || deviceSlug, {
       categoryKey: CATEGORY_KEY,
       model: phoneDevice,
       locale,
     }),
     getFaqGroups([{ scopeType: 'category', scopeKey: CATEGORY_KEY }], locale),
+    getDevicesByCategoryAndBrand(CATEGORY_KEY, brandSlug),
   ]);
 
   const headerTitle = getHeaderTitle(phoneDevice, modelName);
@@ -328,6 +330,8 @@ async function getPhoneDevicePageData({ brand, device }) {
     heroImage: phoneDevice.image,
     heroAlt: `${modelName} ${labels.heroAltSuffix}`,
     bodyHtml: pickLocalizedField(phoneDevice.bodyHtml, locale) || null,
+    relatedDevices,
+    relatedBaseHref: brandPath,
 
     modelServices: getModelServices(),
     modelServicesTitle: labels.servicesTitle(modelName),

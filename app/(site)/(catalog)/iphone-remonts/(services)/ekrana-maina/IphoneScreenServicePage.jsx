@@ -1,7 +1,8 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import QuickContactsSection from '@/_components/sections/quick-contacts/QuickContactsSection';
+import ServiceHero from '@/_components/sections/service-recovery/ServiceHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
 
-import DeviceHero from '@sections/device-hero/DeviceHero';
-import Faq from '@sections/faq/Faq';
+import Faq from '@/_components/sections/faq/ServiceFaq';
 import QuickAnswer from '@/app/_components/sections/quick-answer/QuickAnswer';
 import QuickFacts from '@/app/_components/sections/quick-facts/QuickFacts';
 import IphoneScreenSymptoms from '@/app/_components/page-sections/iphone-screen-repair/symptoms/IphoneScreenSymptoms';
@@ -14,7 +15,6 @@ import IphoneHydrogelSection from '@/app/_components/page-sections/iphone-screen
 import IphoneQualitySection from '@/app/_components/page-sections/iphone-remonts/quality/IphoneQualitySection';
 import PopularServices from '@/app/_components/sections/popular-services/PopularServices';
 import ReviewsCompact from '@/_components/sections/reviews/ReviewsCompact';
-import IphoneLocationsSection from '@/app/_components/page-sections/iphone-remonts/locations/IphoneLocationsSection';
 import FinalCta from '@/_components/sections/final-cta/FinalCta';
 
 import s from '@styles/Catalog.module.scss';
@@ -46,29 +46,29 @@ export default function IphoneScreenServicePage({
   reviewsSummary = null,
 }) {
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery>
+      <ServiceHero
+        locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
-        scrollCta={{ label: strings.headerCtaLabel, targetId: 'brand-list' }}
         crumbs={breadcrumbs}
-      />
-
-      <DeviceHero
         image={strings.heroImage}
-        alt={strings.heroAlt}
+        imageAlt={strings.heroAlt}
         bodyHtml={strings.heroBodyHtml}
-      />
+        targetId="brand-list"
+        targetLabel={strings.headerCtaLabel}
+        placeholderLabel={strings.heroAlt}
+      ><QuickFacts variant="iphone-screen" locale={locale} /></ServiceHero>
 
-      <QuickFacts variant="iphone-screen" locale={locale} />
 
-      <QuickAnswer locale={locale} />
 
-      <IphoneScreenSymptoms locale={locale} />
+      <ServiceBlock kind="answer"><QuickAnswer locale={locale} /></ServiceBlock>
 
-      <IphoneScreenDamageGuide locale={locale} />
+      <ServiceBlock kind="symptoms"><IphoneScreenSymptoms locale={locale} /></ServiceBlock>
 
-      <section id="brand-list" className={s.section}>
+      <ServiceBlock kind="rows"><IphoneScreenDamageGuide locale={locale} /></ServiceBlock>
+
+      <ServiceBlock kind="priceBrowser"><section id="brand-list" className={s.section}>
         <IphoneScreenPriceList
           devices={devices}
           pricing={pricing}
@@ -82,9 +82,9 @@ export default function IphoneScreenServicePage({
           selectedModel={selectedModel}
           locale={locale}
         />
-      </section>
+      </section></ServiceBlock>
 
-      <IphoneScreenPriceFactors locale={locale} />
+      <ServiceBlock kind="rows"><IphoneScreenPriceFactors locale={locale} /></ServiceBlock>
 
       <RepairProcess
         id="iphone-screen-replacement-steps"
@@ -93,24 +93,20 @@ export default function IphoneScreenServicePage({
         backgroundImage="/images/hands-closeup.png"
       />
 
-      <IphoneScreenPostRepairChecks locale={locale} />
+      <ServiceBlock kind="checks"><IphoneScreenPostRepairChecks locale={locale} /></ServiceBlock>
 
-      <IphoneHydrogelSection locale={locale} />
+      <ServiceBlock kind="hydrogel"><IphoneHydrogelSection locale={locale} /></ServiceBlock>
 
-      <IphoneQualitySection locale={locale} variant="iphone-screen" />
+      <ServiceBlock kind="quality"><IphoneQualitySection locale={locale} variant="iphone-screen" /></ServiceBlock>
 
       <PopularServices locale={locale} variant="other-services" />
 
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} />
-
-      <IphoneLocationsSection locale={locale} variant="iphone-screen" />
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       {hasVisibleFaq && (
-        <section className={s.section} aria-labelledby="faq-h2">
+        <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>
-            <h2 id="faq-h2" className={s.h2}>
-              {strings.faqTitle}
-            </h2>
+
 
             {faqSections.map((section, index) => (
               <div
@@ -119,19 +115,21 @@ export default function IphoneScreenServicePage({
               >
                 <Faq
                   id={`faq-group-${index + 1}`}
-                  title={section.title}
+                  title={section.title || strings.faqTitle}
                   items={section.items}
-                  headingLevel={3}
+                  headingLevel={2}
                   variant="accordion"
                   locale={locale}
                 />
               </div>
             ))}
           </div>
-        </section>
+        </section></ServiceBlock>
       )}
 
-      <FinalCta id="pieteikties" locale={locale} variant="iphone" />
-    </>
+      <QuickContactsSection locale={locale} id="iphone-locations" />
+
+      <ServiceBlock kind="closing"><FinalCta id="pieteikties" locale={locale} variant="iphone" /></ServiceBlock>
+    </ServiceRecovery>
   );
 }

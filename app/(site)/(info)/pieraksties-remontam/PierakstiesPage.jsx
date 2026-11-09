@@ -1,5 +1,13 @@
-import PageHeader from '@/app/(site)/ui/page-header/PageHeader';
+import JsonLd from '@components/seo/JsonLd';
+import { absoluteUrl, buildFaqLd } from '@/lib/seo/jsonld';
+import InfoHero from '@/_components/sections/service-recovery/InfoHero';
+import ServiceRecovery, { ServiceBlock } from '@/_components/sections/service-recovery/ServiceRecovery';
+import recovery from '@/_components/sections/service-recovery/RemainingPages.module.scss';
 import BookingFormOnPage from './BookingFormOnPage';
+import LocationList from '@/app/(site)/sections/locations/LocationList';
+import Faq from '@/_components/sections/faq/ServiceFaq';
+import { getFaqGroups } from '@/lib/faq/getFaqGroups';
+import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 export function getPierakstiesPageStrings(locale = 'lv') {
   if (locale === 'ru') {
@@ -83,7 +91,7 @@ function normalizeBookingLocations(locations = []) {
     .filter(Boolean);
 }
 
-export default function PierakstiesPage({
+export default async function PierakstiesPage({
   locale = 'lv',
   labels,
   breadcrumbs = [],
@@ -92,67 +100,22 @@ export default function PierakstiesPage({
   const strings = labels || getPierakstiesPageStrings(locale);
 
   const locations = normalizeBookingLocations(siteSettings?.locations || []);
+  const faq = await getFaqGroups(['basic'], locale);
 
   return (
-    <>
-      <PageHeader
+    <ServiceRecovery family="pieraksties-remontam" className={recovery.page}>
+      {faq.items.length > 0 && <JsonLd id="booking-faq-jsonld" data={buildFaqLd(faq.items, { id: absoluteUrl(strings.canonicalPath) + '#faq' })} />}
+      <InfoHero locale={locale} booking={false}
         title={strings.headerTitle}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
       />
 
-      <main
-        className="container"
-        style={{
-          padding: '2rem 0 0',
-        }}
-        aria-label={strings.formAriaLabel}
-      >
-        <BookingFormOnPage
-          locale={locale}
-          locations={locations}
-        />
-      </main>
-
-      <section
-        className="container"
-        style={{
-          padding: '4rem 0 4.5rem',
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 900,
-            margin: '0 auto',
-            padding: '1.5rem 1.75rem',
-            borderRadius: 20,
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <h2
-            style={{
-              margin: '0 0 0.75rem',
-              fontSize: '1.35rem',
-              lineHeight: 1.25,
-            }}
-          >
-            {strings.afterFormTitle}
-          </h2>
-
-          <p
-            style={{
-              maxWidth: 760,
-              margin: 0,
-              lineHeight: 1.7,
-              opacity: 0.86,
-            }}
-          >
-            {strings.afterFormText}
-          </p>
-        </div>
+      <section className={recovery.bookingLayout} aria-label={strings.formAriaLabel}>
+        <aside className={recovery.bookingAside}><h2>{strings.afterFormTitle}</h2><p>{strings.afterFormText}</p><div data-service-section="locations" className={recovery.bookingBranches}><LocationList locale={locale} locations={siteSettings?.locations || []} showAllCards /></div></aside>
+        <div className={recovery.bookingForm}><h2 className={recovery.formTitle}>{strings.formAriaLabel}</h2><BookingFormOnPage locale={locale} locations={locations} /></div>
       </section>
-    </>
+      {faq.items.length > 0 && <ServiceBlock kind="faq"><Faq id="booking-faq" title={faq.title} items={toFaqRenderItems(faq.items)} /></ServiceBlock>}
+    </ServiceRecovery>
   );
 }

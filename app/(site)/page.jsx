@@ -17,6 +17,8 @@ import {
   buildWebPageLd,
 } from '@/lib/seo/jsonld';
 
+import { normalizeFaqItems } from '@/lib/faq/faqModel';
+
 import { toFaqRenderItems } from '@sections/faq/faq.helpers';
 
 const locale = 'lv';
@@ -35,9 +37,10 @@ export default async function Page() {
     getFaqGroups([{ scopeType: 'basic' }], locale),
   ]);
 
-  const faqRenderItems = toFaqRenderItems(faq.items);
+  const visibleFaqItems = normalizeFaqItems(faq.items, { limit: 6 });
+  const faqRenderItems = toFaqRenderItems(visibleFaqItems);
 
-  const faqLd = buildFaqLd(faq.items, {
+  const faqLd = buildFaqLd(visibleFaqItems, {
     id: faqId,
   });
 

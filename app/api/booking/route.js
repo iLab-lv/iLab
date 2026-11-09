@@ -113,19 +113,11 @@ export async function POST(req) {
     const from = process.env.BOOKING_FROM;
     const to = toForLocation(location);
 
-    const debug = {
-      hasApiKey: Boolean(process.env.RESEND_API_KEY),
-      from,
-      to,
-      location: location || null,
-      leadType,
-    };
-
     if (!from) {
       console.error('BOOKING_FROM env var is missing');
 
       return NextResponse.json(
-        { ok: false, error: 'BOOKING_FROM is not set', debug },
+        { ok: false },
         { status: 500 }
       );
     }
@@ -134,7 +126,7 @@ export async function POST(req) {
       console.error('Recipient email not configured for location:', location);
 
       return NextResponse.json(
-        { ok: false, error: 'Recipient is not configured', debug },
+        { ok: false },
         { status: 500 }
       );
     }
@@ -250,31 +242,17 @@ export async function POST(req) {
 
     if (error) {
       return NextResponse.json(
-        {
-          ok: false,
-          error: 'Email send failed (Resend)',
-          debug: { ...debug, error },
-        },
+        { ok: false },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({
-      ok: true,
-      debug: {
-        ...debug,
-        dataId: data?.id || null,
-      },
-    });
+    return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('Booking API unexpected error:', err);
 
     return NextResponse.json(
-      {
-        ok: false,
-        error: 'Email send failed (server)',
-        debug: { message: String(err) },
-      },
+      { ok: false },
       { status: 500 }
     );
   }
