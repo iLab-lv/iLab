@@ -28,13 +28,21 @@
 .headerBook { white-space:nowrap; }
 .root .campaignHero { padding:0; }
 .root .campaignGrid { max-width:1440px; gap:24px; }
-.root .campaignCopy { padding-block:64px; gap:28px; }
+.root .campaignCopy { padding-block:48px; gap:24px; }
+.root .campaignReviews { width:fit-content; max-width:100%; gap:8px; text-decoration:none; }
+.root .campaignReviews >strong { font-size:24px; }
+.root .campaignReviews:focus-visible { outline:2px solid var(--service-signal); outline-offset:5px; }
+.root .campaignReviewCount { font-size:14px; }
+.campaignFacts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 24px; margin:0; padding:18px 0 0; border-top:1px solid var(--service-hairline); list-style:none; }
+.campaignFacts li { display:flex; align-items:flex-start; gap:10px; min-width:0; color:var(--service-ink-2); font-size:15px; line-height:1.45; }
+.campaignFacts svg { flex:none; margin-top:3px; fill:none; stroke:var(--service-signal); stroke-width:1.5; stroke-linecap:square; stroke-linejoin:miter; }
+.root .campaignCue { display:inline-flex; align-items:center; justify-self:start; gap:12px; min-height:44px; max-width:100%; color:var(--service-ink-2); font:12px/1.5 var(--service-mono); svg { display:block; flex:none; width:14px; height:36px; fill:none; stroke:var(--service-signal); stroke-width:1; } }
 .root .campaignHero h1 { font-size:var(--service-home-display-size); line-height:var(--service-home-display-leading); letter-spacing:var(--service-home-display-tracking); }
-.campaignVisual { position:relative;  figcaption { position:absolute; bottom:24px; inset-inline:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; color:#fff; font:11px/1.5 var(--service-mono); letter-spacing:.05em; } }
+.campaignVisual { position:relative; }
 .root .campaignFoot { max-width:1440px; grid-template-columns:1fr 1fr; padding-block:20px; >a { display:flex; gap:16px; align-items:center; min-height:44px; font-size:16px; text-decoration:none; >span:first-child { color:var(--service-ink-2); font-size:14px; } >span:last-child { color:var(--service-signal); margin-left:auto; } } }
 @media(min-width:1024px) { .root .campaignGrid { grid-template-columns:minmax(0,6.5fr) minmax(0,5.5fr); } .root .campaignVisual { margin-left:0 !important; >div { min-height:660px; height:min(780px,calc(100svh - 156px)); } } }
-@media(max-width:1023px) { .headerContacts { display:none; } .root .campaignCopy { padding-block:48px; } .root .campaignHero h1 { font-size:clamp(36px,7.5vw,64px); } .root .campaignGrid { gap:0; } .root .campaignVisual >div { aspect-ratio:16/10; } }
-@media(max-width:767px) { .headerPrices { padding-inline:6px; font-size:14px; } .headerBook { font-size:13px !important; padding-inline:12px !important; } .root .campaignHero h1 { font-size:clamp(38px,11.2vw,58px); } .root .campaignCopy { gap:24px; } .root .campaignFoot { grid-template-columns:1fr; gap:12px; >a+ a { border-top:1px solid var(--service-hairline); padding-top:12px; } >a { font-size:14px; >span:first-child { font-size:12px; } } } .root .campaignVisual >div { aspect-ratio:4/3; } }
+@media(max-width:1023px) { .headerContacts { display:none; } .root .campaignCopy { padding-block:32px; gap:20px; } .root .campaignHero h1 { font-size:clamp(36px,7.5vw,64px); } .root .campaignGrid { gap:0; } .root .campaignVisual >div { aspect-ratio:16/10; } }
+@media(max-width:767px) { .headerPrices { padding-inline:6px; font-size:14px; } .headerBook { font-size:13px !important; padding-inline:12px !important; } .root .campaignHero h1 { font-size:clamp(38px,11.2vw,58px); } .root .campaignCopy { gap:20px; padding-bottom:16px; } .root .campaignVisual { margin-top:0 !important; } .root .campaignReviews { gap:6px 8px; } .root .campaignReviews >strong { font-size:21px; } .root .campaignReviewCount { font-size:13px; white-space:normal; } .campaignFacts { grid-template-columns:1fr; gap:10px; padding-top:16px; } .root .campaignFoot { grid-template-columns:1fr; gap:12px; >a+ a { border-top:1px solid var(--service-hairline); padding-top:12px; } >a { font-size:14px; >span:first-child { font-size:12px; } } } .root .campaignVisual >div { aspect-ratio:4/3; } }
 .header { position:sticky; top:0; z-index:30; display:flex; align-items:center; gap:32px; min-height:80px; padding:12px var(--ads-edge); background:var(--service-paper); border-bottom:1px solid var(--service-hairline); }
 .logo { display:flex; flex:0 0 auto; width:87px; img { display:block; width:87px; height:36px; object-fit:contain; } }
 .headerPlace { color:var(--service-ink-2); font:12px/1.5 var(--service-mono); max-width:150px; }
@@ -207,7 +215,7 @@
 .root .speedBand .facts h3 { font-size:clamp(28px,3vw,44px); }
 @media(max-width:767px) { .root .speedBand .sectionHeader { margin-bottom:40px; } }
 
-@media(max-width:767px) { .root .campaignCopy >div:has(>button) { flex-direction:column; align-items:stretch; gap:12px; } }
+@media(max-width:1023px) { .root .campaignActions,.root .campaignCue { display:none; } }
 
 // Actual branch actions, main-site button sizes, and original desktop dock placement.
 .branchContact { display:flex; align-items:center; gap:8px; >div { display:grid; gap:2px; margin-right:8px; } a { text-decoration:none; } >div>a { color:var(--service-ink-2); font-size:11px; } span { font-size:17px; font-variant-numeric:tabular-nums; white-space:nowrap; } }

@@ -5,6 +5,9 @@ import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Avoid embedded BOMs turning the first rule of concatenated Sass modules
+  // into a different selector in production CSS.
+  sassOptions: { charset: false },
   async redirects() {
     return [
       {

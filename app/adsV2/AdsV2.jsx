@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { FaPhone, FaWhatsapp } from 'react-icons/fa6';
+import { FaPhone, FaStar, FaWhatsapp } from 'react-icons/fa6';
 import Button from '../(site)/components/button/Button';
 import FullscreenPanel from '../(site)/ui/panels/FullscreenPanel';
 import { computeOpenState, getRigaNow } from '../(site)/ui/panels/branchAvailability';
@@ -19,6 +19,7 @@ import motion from '../(site)/ServiceMotion.module.scss';
 import dock from '../(site)/ui/bottombar/BottomBar.module.scss';
 import { HomeReviews, HomeFaq, HomeRepairProcess } from '../(site)/HomeSections';
 import { getProcessContent as getHomeProcess } from '../(site)/sections/process/process.i18n';
+import { getQuantityReviewTitle, getTotalReviewCount } from '../_components/sections/reviews/serviceReviews.model';
 
 const LEAD_MODES = new Set(['price', 'booking', 'delivery']);
 function normalizeLocation(location) {
@@ -100,7 +101,12 @@ export default function AdsV2({ locale, siteSettings, reviewsSummary = {} }) {
   const services = getServicesContent(locale);
   const process = getHomeProcess(locale);
   const places = ['domina','spice'].map(key => { const data=reviewsSummary[key] || {}; return {key, name:data.latest?.name || data.name || (key==='domina' ? 'T/C Domina Shopping' : 'T/C Spice Life'), rating:data.latest?.rating ?? data.rating, count:data.latest?.count ?? data.count, reviews:data.featuredReviewsByLocale || {}, placeId:data.placeId || data.latest?.placeId}; });
-  const totalReviews = places.some(place => place.count != null) ? places.reduce((sum,place) => sum + (Number(place.count)||0),0) : null;
+  const totalReviews = getTotalReviewCount(places);
+  const ratingFormat = new Intl.NumberFormat(ru ? 'ru-RU' : 'lv-LV', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const ratings = places.map(place => Number(place.rating)).filter(rating => Number.isFinite(rating) && rating > 0 && rating <= 5);
+  const ratingRange = ratings.length ? [...new Set([ratingFormat.format(Math.min(...ratings)), ratingFormat.format(Math.max(...ratings))])].join('–') : null;
+  const reviewTitle = getQuantityReviewTitle(totalReviews, locale);
+  const reviewLabel = [reviewTitle, ratingRange, ru ? 'Смотреть отзывы' : 'Skatīt atsauksmes'].filter(Boolean).join('. ');
   const delivery = getDeliveryContent(locale);
   const faq = getFaqContent(locale);
   const locationText = getLocationStrings(locale);
@@ -172,13 +178,23 @@ export default function AdsV2({ locale, siteSettings, reviewsSummary = {} }) {
           <div className={h.heroGrid+' '+s.campaignGrid}>
             <div className={h.heroCopy+' '+s.campaignCopy}>
               <p className={h.eyebrow}><span>iLab / iPhone / Rīga</span><span>01</span></p>
-              <h1 id="ads-v2-title" data-rise data-rise-lines><span>{ru ? 'Ремонт iPhone' : 'Aifonu labošana'}</span><span>{ru ? 'в тот же день.' : 'tajā pašā dienā.'}</span></h1>
+              <a className={h.heroReviews+' '+s.campaignReviews} href="#reviews" aria-label={reviewLabel}>
+                {ratingRange && <span className={h.reviewStars} aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <FaStar key={index} />)}</span>}
+                {ratingRange && <strong>{ratingRange}</strong>}
+                <span className={h.heroReviewMeta+' '+s.campaignReviewCount}>{ratingRange && <span aria-hidden="true">· </span>}{reviewTitle}</span>
+                <span className={h.reviewArrow} aria-hidden="true">↗</span>
+              </a>
+              <h1 id="ads-v2-title" data-rise data-rise-lines><span>{ru ? 'Ремонт телефонов' : 'Telefonu labošana'}</span><span>{ru ? 'в тот же день.' : 'tajā pašā dienā.'}</span></h1>
               <p className={h.lead}>{ru ? 'Замена экрана, аккумулятора и устранение других неисправностей в наших мастерских в Риге.' : 'Displeju, bateriju un citu bojājumu novēršana mūsu darbnīcās Rīgā.'}</p>
-              <div className={h.proof}><a href="#reviews">{totalReviews != null ? totalReviews+' ' : ''}Google {ru ? 'отзывов' : 'atsauksmes'}</a><span>{ru ? 'Диагностика бесплатно' : 'Bezmaksas diagnostika'}</span><span>{ru ? 'Цена до начала работ' : 'Cena pirms darba'}</span></div>
-              <div className={h.actions}><Button onClick={() => open('booking')}>{ui.book}</Button><Button variant="secondary" onClick={() => open('contact')}>{ui.contact}</Button></div>
-              <a className={h.cue} href="#services"><svg viewBox="0 0 14 36" aria-hidden="true"><path d="M7 0v34M1 28l6 6 6-6" /></svg><span>{services.selectorLabel}</span></a>
+              <ul className={s.campaignFacts} aria-label={ru ? 'Условия ремонта' : 'Remonta nosacījumi'}>
+                {(ru ? ['Диагностика бесплатно', 'Цена до начала работ'] : ['Bezmaksas diagnostika', 'Cena pirms darba']).map(fact => <li key={fact}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7" /></svg><span>{fact}</span>
+                </li>)}
+              </ul>
+              <div className={h.actions+' '+s.campaignActions}><Button onClick={() => open('booking')}>{ui.book}</Button><Button variant="secondary" onClick={() => open('contact')}>{ui.contact}</Button></div>
+              <a className={s.campaignCue} href="#services"><svg width="14" height="36" viewBox="0 0 14 36" aria-hidden="true"><path d="M7 0v34M1 28l6 6 6-6" /></svg><span>{services.selectorLabel}</span></a>
             </div>
-            <figure className={h.heroVisual+' '+s.campaignVisual}><div data-scan="x"><Image data-home-hero-image src="/images/ads-v2/hero-precision-v1.webp" width={1122} height={1402} priority sizes="(min-width:1024px) 50vw,100vw" alt={ru ? 'Мастер iLab ремонтирует смартфон' : 'iLab meistars remontē viedtālruni'} /></div><figcaption><span>iLab / Rīga</span><span>Domina Shopping · Spice Life</span></figcaption></figure>
+            <figure className={h.heroVisual+' '+s.campaignVisual}><div data-scan="x"><Image data-home-hero-image src="/images/ads-v2/hero-precision-v1.webp" width={1122} height={1402} priority sizes="(min-width:1024px) 50vw,100vw" alt={ru ? 'Мастер iLab ремонтирует смартфон' : 'iLab meistars remontē viedtālruni'} /></div></figure>
           </div>
           <div className={h.heroFoot+' '+s.campaignFoot}>{locations.map(location => <a key={location.id} href="#locations" onClick={() => setSelectedLocationId(location.id)}>{location.label}<span>{location.address}</span><span aria-hidden="true">↗</span></a>)}</div>
         </section>
