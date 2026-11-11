@@ -11,7 +11,8 @@ export default function NavBar({
   showNavigation = true,
   adaptiveNavigation = false,
   actions,
-  showShopSwitch = true,
+  // Temporarily hidden until the Shop is ready to promote from Service.
+  showShopSwitch = false,
   showHeaderCtas = true,
   logoHref,
   locale = 'lv',
