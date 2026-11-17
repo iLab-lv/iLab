@@ -104,7 +104,7 @@
   transform: none;
 }
 .block article:hover { background: transparent; box-shadow: none; transform: none; border-color: var(--service-hairline); }
-.block.block h2 span, .block.block h2 em, .block.block h3 em { color: inherit; font-style: normal; text-shadow: none; }
+.block.block h2 span:not([data-signature]), .block.block h2 em, .block.block h3 em { color: inherit; font-style: normal; text-shadow: none; }
 .block > section > div > header { max-width: none; margin: 0 0 clamp(64px, 7vw, 112px); }
 .block > section > div > header h2 { max-width: 12ch; margin: 0; font-size: clamp(48px, 5.8vw, 88px); line-height: .9; letter-spacing: -.055em; }
 .block > section > div > header > span, .block > section > div > div > div > span:first-child {

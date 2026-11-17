@@ -3,6 +3,7 @@ import { buildInfoHref } from '@/lib/routes/routeI18n';
 import { getFinalCtaContent } from './finalCta.i18n';
 import FinalCtaActions from './FinalCtaActions';
 import s from './FinalCta.module.scss';
+import { SignatureAccent } from '../headings/SignatureText';
 
 export default function FinalCta({ id = 'final-cta', locale = 'lv', variant = 'iphone' }) {
   const content = getFinalCtaContent(locale, variant);
@@ -14,7 +15,7 @@ export default function FinalCta({ id = 'final-cta', locale = 'lv', variant = 'i
         <div className={s.panel}>
           <div className={s.content}>
             <p className={s.eyebrow}>{content.eyebrow}</p>
-            <h2 id={`${id}-title`}>{content.titleStart}<span>{content.titleAccent}</span></h2>
+            <h2 id={`${id}-title`}>{content.titleStart}<SignatureAccent>{content.titleAccent}</SignatureAccent></h2>
             <p className={s.text}>{content.text}</p>
           </div>
           <FinalCtaActions

@@ -226,6 +226,7 @@ export default function DysonRepairPage({
   return (
     <ServiceRecovery family="dyson">
       <ServiceHero
+        hasReviews={page?.sections?.hasReviews ?? true}
         template="dyson"
         locale={locale}
         title={headerTitle}
@@ -240,6 +241,8 @@ export default function DysonRepairPage({
       >
         <QuickTrustFacts id="why" {...getQuickTrustFacts("dyson", locale)} />
       </ServiceHero>
+
+      {(page?.sections?.hasReviews ?? true) && <Reviews locale={locale} />}
 
       <ServiceBlock kind="intro"><section className={s.section} aria-labelledby="dyson-intro-h2">
         <div className={s.container}>
@@ -284,7 +287,6 @@ export default function DysonRepairPage({
             />
       )}
 
-      {(page?.sections?.hasReviews ?? true) && <Reviews locale={locale} />}
       <HubLocations locale={locale} />
 
       {hasVisibleFaq && (

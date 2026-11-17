@@ -6,7 +6,8 @@
 .heroGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--service-gutter); row-gap: clamp(56px, 7vw, 104px); padding-block: var(--service-hero-top) var(--service-hero-bottom); }
 .heroGrid > div { grid-column: 1 / 9; min-width: 0; }
 .hero h1 { max-width: 12ch; margin: -.14em -.06em -.18em 0; padding: .14em .06em .18em 0; font: 600 var(--service-display-size)/var(--service-display-leading) var(--service-font); font-variation-settings: 'SHRP' 100; letter-spacing: var(--service-display-tracking); color: var(--service-ink); }
-.hero h1 > span { display: block; }
+.hero h1 > span:not([data-signature]) { display: block; }
+.heroReviews { margin-bottom: 24px; }
 .heroLead { max-width: 54ch; margin: 32px 0 0; color: var(--service-ink); font-size: var(--service-lead-size); line-height: 1.45; }
 .actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
 .actions button { min-height: 52px; border-radius: 0; }
@@ -26,9 +27,11 @@
 .heroAside li span { font-size: var(--service-small-size); color: var(--service-ink-2); }
 .heroAside li a { font-size: clamp(22px, 2.2vw, 32px); letter-spacing: -.03em; }
 .counterAside { padding: 32px; border: 1px solid var(--service-counter-hairline); background: var(--service-paper-3); }
-.contactFoot { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--service-counter-hairline); }
-.contactFoot p { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: var(--service-small-size); }
-.contactFoot a { text-decoration: underline; text-underline-offset: 4px; }
+.contactFoot { display: grid; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--service-counter-hairline); }
+.contactLocation { display: grid; gap: 8px; min-width: 0; }
+.heroAside .contactLocation h3 { margin: 0; color: var(--service-ink); font: 500 var(--service-body-size)/1.3 var(--service-font); letter-spacing: -.02em; }
+.contactFoot p { display: flex; align-items: center; gap: 16px; font-size: var(--service-small-size); }
+.contactFoot a { flex-shrink: 0; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
 .actions > a.outlinedSecondary { min-height: 52px; padding: 12px 24px; border: 1px solid var(--service-hairline); text-decoration: none; }
 .heroAside > button { margin-top: 24px; }
 .heroNote { margin-top: 24px; color: var(--service-ink-3); font-size: var(--service-small-size); }

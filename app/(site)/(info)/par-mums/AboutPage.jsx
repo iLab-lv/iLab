@@ -348,7 +348,7 @@ export default function AboutPage({
 
   return (
     <ServiceRecovery family="par-mums" className={recovery.page}>
-      <InfoHero locale={locale} image="/images/heroes/about-locations-r75d.webp"
+      <InfoHero hasReviews locale={locale} image="/images/heroes/about-locations-r75d.webp"
         secondary={{ href: '#locations', label: strings.locationsAnchorTitle }}
         title={strings.headerTitle}
         lead={strings.headerLead}

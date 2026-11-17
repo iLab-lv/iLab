@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import home from './HomePage.module.scss';
 import s from './HomeServices.module.scss';
+import SignatureText from '@/_components/sections/headings/SignatureText';
 
 function ServiceLinks({ links, title, numbered = false }) {
   return <nav className={numbered ? s.numberedLinks : s.links} aria-label={title}>
@@ -14,9 +15,9 @@ function ServiceLinks({ links, title, numbered = false }) {
 
 // The localized page supplies content and destinations; both languages use the
 // same composition, imagery, navigation and responsive rules.
-export default function HomeServices({ title, lead, services }) {
+export default function HomeServices({ title, headingParts, lead, services }) {
   return <section className={`${home.section} ${s.section}`} id="pakalpojumi" data-home-services>
-    <header className={home.sectionHead}><h2>{title}</h2><p>{lead}</p></header>
+    <header className={home.sectionHead}><h2><SignatureText text={title} parts={headingParts} level="section" /></h2><p>{lead}</p></header>
     <div className={s.services}>
       {services.map((service, index) => {
         const featured = index < 2;

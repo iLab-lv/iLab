@@ -88,6 +88,8 @@ test('configured hasWhy=false still renders brand Quick Trust Facts through the 
       if (id.endsWith('/quickTrustFacts.content')) return { getQuickTrustFacts };
       if (id.endsWith('/deviceGrid.groups')) return { dedupeAndSort: () => [] };
       if (id.endsWith('/BrandHero')) return pageModule('app/_components/sections/catalog-brand/BrandHero.jsx');
+      if (id.endsWith('/headings/SignatureText')) return pageModule('app/_components/sections/headings/SignatureText.jsx');
+      if (id === '@/lib/presentation/signatureHeadings') return pageModule('lib/presentation/signatureHeadings.js');
       if (id === '../catalog-hub/CatalogHero') return pageModule('app/_components/sections/catalog-hub/CatalogHero.jsx');
       if (id === 'next/link') return { __esModule: true, default: ({ children, href }) => React.createElement('a', { href }, children) };
       if (id.startsWith('node:')) return require(id);

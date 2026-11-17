@@ -10,12 +10,14 @@ import { HomeBookingButton } from './HomeInteractions';
 import Button from './components/button/Button';
 import HomeServices from './HomeServices';
 import ServiceReviews from '@/app/_components/sections/reviews/ServiceReviews';
+import HeroReviewsBadge from '@/app/_components/sections/reviews/HeroReviewsBadge';
 import MetricsWhy from '@/app/_components/sections/why/MetricsWhy';
 import { getMetricsWhyContent } from '@/app/_components/sections/why/metricsWhy.content';
 import ServiceFaq from '@/_components/sections/faq/ServiceFaq';
 import ServiceProcess from '@/app/_components/sections/process/ServiceProcess';
-import { FaFacebook, FaInstagram, FaTiktok, FaStar, FaLocationDot } from 'react-icons/fa6';
+import { FaFacebook, FaInstagram, FaTiktok, FaLocationDot } from 'react-icons/fa6';
 import s from './HomePage.module.scss';
+import SignatureText from '@/_components/sections/headings/SignatureText';
 
 const COPY = {
   lv: {
@@ -46,39 +48,11 @@ function routes(locale) {
   };
 }
 
-function reviewPlaces(summary = {}) {
-  return ['domina', 'spice'].map((key) => {
-    const value = summary?.[key] || {};
-    return { key, name: value.latest?.name || value.name || (key === 'domina' ? 'T/C Domina Shopping' : 'T/C Spice Life'), rating: value.latest?.rating ?? value.rating, count: value.latest?.count ?? value.count, reviews: value.featuredReviewsByLocale || {}, placeId: value.placeId || value.latest?.placeId };
-  });
-}
-
 export default function HomePage({ locale = 'lv', reviewsSummary, siteSettings, faqTitle, faqItems = [] }) {
   const t = COPY[locale] || COPY.lv;
   const r = routes(locale);
   const process = getProcessContent(locale);
   const locations = siteSettings?.locations || [];
-  const places = reviewPlaces(reviewsSummary);
-  const numberLocale = locale === 'ru' ? 'ru-RU' : 'lv-LV';
-  const numberFormat = new Intl.NumberFormat(numberLocale, { useGrouping: true });
-  const ratingFormat = new Intl.NumberFormat(numberLocale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-  const countLabel = (count, withGoogle = false) => {
-    const plural = new Intl.PluralRules(locale).select(count);
-    const word = locale === 'ru'
-      ? ({ one: 'отзыв', few: 'отзыва', many: 'отзывов', other: 'отзыва' })[plural]
-      : ({ one: 'atsauksme', zero: 'atsauksmju', other: 'atsauksmes' })[plural];
-    const formatted = numberFormat.format(count);
-    if (withGoogle) return locale === 'ru' ? formatted + ' ' + word + ' в Google' : formatted + ' Google ' + word;
-    return formatted + ' ' + word;
-  };
-  const hasCount = place => place.count != null && Number.isFinite(Number(place.count)) && Number(place.count) >= 0;
-  const totalReviews = places.every(hasCount) ? places.reduce((sum, place) => sum + Number(place.count), 0) : null;
-  const ratings = places.map(place => Number(place.rating)).filter(rating => rating > 0 && rating <= 5 && Number.isFinite(rating));
-  const ratingRange = ratings.length ? [...new Set([ratingFormat.format(Math.min(...ratings)), ratingFormat.format(Math.max(...ratings))])].join('–') : null;
-  const reviewDetails = places.filter(place => Number(place.rating) > 0 && Number(place.rating) <= 5).map(place => {
-    const name = locations.find(location => location.id === place.key)?.label || place.name;
-    return name + ': ' + ratingFormat.format(Number(place.rating)) + ' / 5' + (hasCount(place) ? ', ' + countLabel(Number(place.count)) : '');
-  }).join('; ');
   const heroLocations = locations.filter(location => location.id === 'domina' || location.id === 'spice');
   const services = [
     { key: 'apple', tech: 'Apple', title: locale === 'ru' ? 'Ремонт устройств Apple' : 'Apple ierīču remonts', note: 'iPhone · iPad · MacBook · iMac · Mac Pro', body: locale === 'ru' ? 'Замена экрана и аккумулятора, ремонт зарядки и диагностика. Цена согласуется до начала работ.' : 'Veicam ekrāna un baterijas maiņu, uzlādes porta remontu un diagnostiku. Cena tiek saskaņota pirms darba.', image: '/images/home/apple-ecosystem-v2.png', links: [[locale === 'ru' ? 'iPhone' : 'iPhone',r.iphone],['iPad',r.tablet],['MacBook',`${r.computers}/macbook`],['iMac',`${r.computers}/imac`],['Mac Pro',`${r.computers}/mac-pro`]] },
@@ -88,8 +62,8 @@ export default function HomePage({ locale = 'lv', reviewsSummary, siteSettings, 
     { key: 'camera', title: locale === 'ru' ? 'Ремонт фототехники' : 'Fototehnikas remonts', note: locale === 'ru' ? 'Камеры · объективы · вспышки' : 'Fotoaparāti · objektīvi · zibspuldzes', body: locale === 'ru' ? 'Диагностика корпуса, затвора и электроники, ремонт механики объективов и чистка оптики.' : 'Korpusa, slēdža un elektronikas diagnostika, objektīvu mehānikas remonts un optikas tīrīšana.', image: '/images/home/camera-repair-wide.png', links: [[locale === 'ru' ? 'Смотреть ремонт' : 'Apskatīt fototehnikas remontu',r.cameras]] },
   ];
 
-  const precisionSection = <section className={s.precision} id="precision" aria-labelledby="precision-title"><div className={s.precisionGrid}><p>{t.precisionKicker}</p><h2 id="precision-title" data-home-statement>{t.precision.map(line => <span key={line}>{line}</span>)}</h2><p>{t.precisionCopy}</p></div></section>;
-  const serviceSection = <HomeServices title={t.services} lead={t.servicesLead} services={services.map((service, index) => ({
+  const precisionSection = <section className={s.precision} id="precision" aria-labelledby="precision-title"><div className={s.precisionGrid}><p>{t.precisionKicker}</p><h2 id="precision-title" data-home-statement>{t.precision.map((line, index) => <span key={line}>{index === 1 ? <SignatureText text={line} parts={[{ accent: line }]} level="section" /> : line}</span>)}</h2><p>{t.precisionCopy}</p></div></section>;
+  const serviceSection = <HomeServices title={t.services} headingParts={locale === 'ru' ? ['Наши ', { accent: 'услуги' }] : ['Mūsu ', { accent: 'pakalpojumi' }]} lead={t.servicesLead} services={services.map((service, index) => ({
     ...service,
     href: [r.iphone, r.phones, r.computers, r.dyson, r.cameras][index],
   }))} />;
@@ -101,20 +75,17 @@ export default function HomePage({ locale = 'lv', reviewsSummary, siteSettings, 
       <div className={s.heroGrid}>
         <div className={s.heroCopy}>
           <p className={s.eyebrow}><span>{t.eyebrow}</span><span>01</span></p>
-          <a className={s.heroReviews} href="#reviews" title={reviewDetails || undefined} aria-label={['Google', reviewDetails, t.viewReviews].filter(Boolean).join('. ')}>
-            {ratingRange && <span className={s.reviewStars} aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <FaStar key={index} />)}</span>}
-            {ratingRange && <strong>{ratingRange}</strong>}
-            <span className={s.heroReviewMeta}>{ratingRange && <span aria-hidden="true">· </span>}{totalReviews != null ? countLabel(totalReviews, true) : locale === 'ru' ? 'Отзывы Google' : 'Google atsauksmes'}</span>
-            <span className={s.reviewArrow} aria-hidden="true">↗</span>
-          </a>
-          <h1 data-rise data-rise-lines>{t.title.map(line => <span key={line}>{line}</span>)}</h1>
+          <HeroReviewsBadge locale={locale} reviewsSummary={reviewsSummary} locations={locations} />
+          <h1 data-rise data-rise-lines>{t.title.map((line, index) => <span key={line}>{index === (locale === 'ru' ? 0 : 1)
+            ? <SignatureText text={line} parts={locale === 'ru' ? [{ accent: 'Ремонт телефонов' }] : [{ accent: 'remonts Rīgā.' }]} />
+            : line}</span>)}</h1>
           <p className={s.lead}>{t.intro}</p>
-          <div className={s.actions} data-stagger><HomeBookingButton>{t.book}</HomeBookingButton><Button variant="secondary" href={r.prices}>{t.prices}</Button></div>
+          <div className={s.actions} data-stagger><HomeBookingButton>{t.book}</HomeBookingButton><Button variant="secondary" glow href={r.prices}>{t.prices}</Button></div>
           {heroLocations.length > 0 && <nav className={s.heroLocations} aria-label={t.branches}>
             <span className={s.locationLabel}>{t.ourServices}</span>
             {heroLocations.map(location => <span className={s.locationEntry} key={location.id}>
               <span className={s.locationSeparator} aria-hidden="true">·</span>
-              <a href="#locations" aria-label={location.label + ' — ' + t.branches}><FaLocationDot aria-hidden="true" />{String(location.label || '').replace(/^T\/C\s+/i, '')}</a>
+              <a href="#locations" data-location-id={location.id} aria-label={location.label + ' — ' + t.branches}><FaLocationDot aria-hidden="true" />{String(location.label || '').replace(/^T\/C\s+/i, '')}</a>
             </span>)}
           </nav>}
         </div>
@@ -129,13 +100,13 @@ export default function HomePage({ locale = 'lv', reviewsSummary, siteSettings, 
     {serviceSection}
     {locale !== 'ru' && precisionSection}
 
-    <ServiceProcess variant="sticky" locale={locale} title={process.title} subtitle={t.processLead} steps={process.steps} />
-
     <ServiceReviews variant="full" locale={locale} reviewsSummary={reviewsSummary} title={t.reviews} subtitle={t.reviewsLead} />
+
+    <ServiceProcess variant="sticky" locale={locale} title={process.title} subtitle={t.processLead} steps={process.steps} />
 
     <MetricsWhy {...getMetricsWhyContent(locale)} />
     <FullLocations id="locations" title={t.branches} subtitle={t.locationsLead} locale={locale} locations={locations} pinPositions={siteSettings?.pinPositions || {}} defaultHours={siteSettings?.hours || []} />
     <ServiceFaq id="buj" limit={6} items={faqItems} title={faqTitle} href={r.faq} linkLabel={t.faqAll} />
-    <section className={s.finalCta} id="home-help"><div className={s.finalCtaGrid}><div><h2>{t.cta}</h2><p>{t.ctaCopy}</p></div><div className={s.actions} data-stagger><Button href={r.contact}>{t.contact}</Button><HomeBookingButton variant="text" className={s.textAction}>{t.book}</HomeBookingButton></div></div></section>
+    <section className={s.finalCta} id="home-help"><div className={s.finalCtaGrid}><div><h2><SignatureText text={t.cta} level="section" parts={locale === 'ru' ? ['Нужна помощь? Отвечаем ', { accent: 'в тот же день.' }] : ['Vajadzīga palīdzība? Atbildam ', { accent: 'tajā pašā dienā.' }]} /></h2><p>{t.ctaCopy}</p></div><div className={s.actions} data-stagger><Button glow href={r.contact}>{t.contact}</Button><HomeBookingButton variant="text" className={s.textAction}>{t.book}</HomeBookingButton></div></div></section>
   </div>;
 }

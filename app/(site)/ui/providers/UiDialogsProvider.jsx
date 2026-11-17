@@ -2,11 +2,13 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
 import FullscreenPanel from '../panels/FullscreenPanel';
 import { getNavLocaleFromPathname } from '../navbar/navigation.helpers';
+import { getCtaMainContent } from '../cta-main/ctaMainContent';
+import { getPageCtaActions, mergeBookingValues } from '@/lib/navigation/pageCtaContext';
 
 const UiDialogsContext = createContext(null);
 
@@ -22,17 +24,21 @@ const PierakstiesPanel = dynamic(() => import('../panels/PierakstiesPanel'), {
   ssr: false,
 });
 
-export function UiDialogsProvider({
+function DialogsProvider({
   children,
   bookHref = '/pieraksties',
   locale,
   siteSettings,
   serviceRedesign = false,
   serviceClassName = '',
+  pageCtaCatalog,
+  searchParams,
 }) {
   const pathname = usePathname() || '/';
+  const pageActions = getPageCtaActions(pathname, searchParams, pageCtaCatalog,
+    getCtaMainContent(getNavLocaleFromPathname(pathname)).prices.href);
 
-  const resolvedLocale = locale || getNavLocaleFromPathname(pathname);
+  const resolvedLocale = serviceRedesign ? getNavLocaleFromPathname(pathname) : locale || getNavLocaleFromPathname(pathname);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(false);
@@ -110,8 +116,10 @@ export function UiDialogsProvider({
 
   const openBook = (openerEl, initialValues) => {
     rememberOpener(openerEl);
-    if (initialValues) {
-      setBookingContext((current) => ({ values: initialValues, version: current.version + 1 }));
+    // Resolve at opening time, never in an effect that could overwrite an active form.
+    if (serviceRedesign ? !bookOpen : initialValues) {
+      const values = serviceRedesign ? mergeBookingValues(pageActions.booking, initialValues) : initialValues;
+      setBookingContext((current) => ({ values, version: current.version + 1 }));
     }
     setActivePane('book');
     setModalOpen(true);
@@ -192,6 +200,7 @@ export function UiDialogsProvider({
   };
 
   const api = {
+    pricesHref: pageActions.pricesHref,
     serviceRedesign,
     serviceClassName,
     navigationOpen,
@@ -251,6 +260,17 @@ export function UiDialogsProvider({
         )}
     </UiDialogsContext.Provider>
   );
+}
+
+function ContextualDialogsProvider(props) {
+  const searchParams = useSearchParams();
+  return <DialogsProvider {...props} searchParams={searchParams} />;
+}
+
+export function UiDialogsProvider(props) {
+  // Query context is confined to the dynamic Service shell; legacy landings
+  // retain their existing provider and rendering boundary.
+  return props.serviceRedesign ? <ContextualDialogsProvider {...props} /> : <DialogsProvider {...props} />;
 }
 
 export function useUiDialogs() {

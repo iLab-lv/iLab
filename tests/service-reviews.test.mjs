@@ -6,7 +6,7 @@ const read = file => readFile(new URL('../' + file, import.meta.url), 'utf8');
 const asModule = source => 'data:text/javascript;base64,' + Buffer.from(source).toString('base64');
 const helper = asModule(await read('app/_components/features/reviews/reviews.helpers.js'));
 const model = await import(asModule((await read('app/_components/sections/reviews/serviceReviews.model.js')).replace("'../../features/reviews/reviews.helpers'", JSON.stringify(helper))));
-const { getServiceReviewPlaces, getTotalReviewCount, getReviewWindow, getQuantityReviewTitle, getReviewsCopy } = model;
+const { getServiceReviewPlaces, getTotalReviewCount, getReviewWindow, getQuantityReviewTitle, getQuantityReviewTitleParts, getReviewsCopy } = model;
 
 test('location normalization preserves source content, stats, locale fallback and real Google destinations', () => {
   const lv = [{ author: 'Source author', text: 'Source text', date: '2026-01-02', rating: 4 }];
@@ -56,6 +56,14 @@ test('quantity headings use authoritative counts with LV/RU formatting and plura
   assert.ok(getQuantityReviewTitle(1245, 'ru').startsWith(new Intl.NumberFormat('ru-RU').format(1245)));
   assert.equal(getReviewsCopy('lv').title, 'Klientu atsauksmes');
   assert.equal(getReviewsCopy('ru').title, 'Отзывы клиентов');
+  for (const locale of ['lv', 'ru']) for (const total of [null, 0, 1, 21, 22, 25, 1245]) {
+    const parts = getQuantityReviewTitleParts(total, locale);
+    assert.equal(parts.map(part => typeof part === 'string' ? part : part.accent).join(''), getQuantityReviewTitle(total, locale));
+    const accents = parts.filter(part => typeof part !== 'string').map(part => part.accent);
+    assert.equal(accents.length, 1);
+    assert.match(accents[0], locale === 'ru' ? /^(Отзывы|отзыв|отзыва|отзывов)$/ : /^atsauksmes?$/);
+    assert.doesNotMatch(accents[0], /Google|\d/);
+  }
 });
 
 test('actual shared location renders four full cards or two compact cards and accessible controls', async () => {
@@ -68,7 +76,7 @@ test('actual shared location renders four full cards or two compact cards and ac
   const { code } = await transform(await read(file), {
     filename: file, jsc: { parser: { syntax: 'ecmascript', jsx: true }, transform: { react: { runtime: 'classic' } } }, module: { type: 'commonjs' },
   });
-  const module = { exports: {} };
+  const compiledModule = { exports: {} };
   new Function('require', 'module', 'exports', 'React', code)(id => {
     if (id === 'react') return React;
     if (id.endsWith('.scss')) return { __esModule: true, default: new Proxy({}, { get: (_, key) => key }) };
@@ -78,8 +86,8 @@ test('actual shared location renders four full cards or two compact cards and ac
       HomeStars: ({ rating }) => React.createElement('span', { 'data-real-rating': rating }),
     };
     throw new Error('Unexpected dependency: ' + id);
-  }, module, module.exports, React);
-  const Location = module.exports.default;
+  }, compiledModule, compiledModule.exports, React);
+  const Location = compiledModule.exports.default;
   const place = { key: 'domina', label: 'Domina Shopping', count: 120, rating: 4.1, href: 'https://maps.google.com/real', reviews: Array.from({ length: 5 }, (_, i) => ({ id: String(i), text: 'Real source ' + i })) };
   const render = (variant, source = place) => renderToStaticMarkup(React.createElement(Location, { place: source, index: 0, variant, locale: 'lv', copy: getReviewsCopy('lv') }));
   const full = render('full');
@@ -96,4 +104,38 @@ test('actual shared location renders four full cards or two compact cards and ac
   assert.match(compact, /href="https:\/\/maps.google.com\/real"/);
   const unknown = render('compact', { ...place, rating: null, count: null, reviews: [] });
   assert.doesNotMatch(unknown, /data-real-rating|<nav|120 atsauksmes|NaN/);
+});
+
+test('hero badge uses real localized totals, shares the Reviews empty-data gate and reuses supplied data', async () => {
+  const React = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const { createRequire } = await import('node:module');
+  const require = createRequire(import.meta.url);
+  const { transform } = require('next/dist/build/swc');
+  const file = 'app/_components/sections/reviews/HeroReviewsBadge.jsx';
+  const { code } = await transform(await read(file), {
+    filename: file, jsc: { parser: { syntax: 'ecmascript', jsx: true }, transform: { react: { runtime: 'classic' } } }, module: { type: 'commonjs' },
+  });
+  const summary = { domina: { rating: 4.8, count: 120 }, spice: { rating: 4.9, count: 80 } };
+  let loads = 0;
+  const compiled = { exports: {} };
+  new Function('require', 'module', 'exports', 'React', code)(id => {
+    if (id.endsWith('.scss')) return { __esModule: true, default: new Proxy({}, { get: (_, key) => key }) };
+    if (id.includes('/getReviewsSummary')) return { getReviewsSummary: async () => { loads++; return summary; } };
+    if (id === './serviceReviews.model') return model;
+    return require(id);
+  }, compiled, compiled.exports, React);
+  for (const locale of ['lv', 'ru']) {
+    const html = renderToStaticMarkup(await compiled.exports.default({ locale, reviewsSummary: summary }));
+    assert.match(html, /href="#reviews"/);
+    assert.match(html, /4,8–4,9/);
+    assert.match(html, locale === 'ru' ? /200 отзывов в Google/ : /200 Google atsauksmju/);
+    assert.equal((html.match(/<svg/g) || []).length, 5);
+    assert.equal(renderToStaticMarkup(React.createElement(compiled.exports.ReviewsBadge, { locale, reviewsSummary: { domina: null, spice: null } })), '');
+  }
+  assert.equal(loads, 0);
+  await compiled.exports.default({ locale: 'lv' });
+  assert.equal(loads, 1);
+  const unknown = renderToStaticMarkup(React.createElement(compiled.exports.ReviewsBadge, { reviewsSummary: { domina: { rating: null, count: null } } }));
+  assert.doesNotMatch(unknown, /<strong|NaN|0 Google/);
 });

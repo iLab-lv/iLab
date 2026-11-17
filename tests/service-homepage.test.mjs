@@ -12,7 +12,7 @@ test('homepage preserves production integrations and the provider booking contra
   ]);
 
   assert.match(page, /siteSettings\?\.locations/);
-  assert.match(page, /reviewPlaces\(reviewsSummary\)/);
+  assert.match(page, /<HeroReviewsBadge locale=\{locale\} reviewsSummary=\{reviewsSummary\}/);
   assert.match(page, /getProcessContent\(locale\)/);
   assert.match(interactions, /useUiDialogs\(\)/);
   assert.match(provider, /\bopenBook\b/);

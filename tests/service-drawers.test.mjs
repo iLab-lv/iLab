@@ -38,9 +38,9 @@ test('every catalog hero booking variant uses the existing provider with correct
   },compiledModule,compiledModule.exports,React);
   const Button=compiledModule.exports.default;
   const opener={id:'actual-opener'};
-  for(const props of [{},{hub:true},{brand:true},{model:true,initialValues:{device:'Future Model 2030'}}]){
+  for(const props of [{},{hub:true},{brand:true},{model:true,initialValues:{device:'Future Model 2030'}},{initialValues:{device:'Explicit device',fault:'Explicit fault'}}]){
     const element=Button({...props,children:'Book'});element.props.onClick({currentTarget:opener});
-    assert.deepEqual(calls.at(-1),props.model?[opener,props.initialValues]:[opener]);
+    assert.deepEqual(calls.at(-1),props.initialValues?[opener,props.initialValues]:[opener]);
   }
 });
 

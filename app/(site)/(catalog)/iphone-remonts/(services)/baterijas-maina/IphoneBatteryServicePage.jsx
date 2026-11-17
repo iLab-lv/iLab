@@ -45,6 +45,8 @@ export default function IphoneBatteryServicePage({
   return (
     <ServiceRecovery>
       <ServiceHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
@@ -56,6 +58,8 @@ export default function IphoneBatteryServicePage({
         targetLabel={strings.headerCtaLabel}
         placeholderLabel={strings.heroAlt}
       ><QuickFacts variant="iphone-battery" locale={locale} /></ServiceHero>
+
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       <ServiceBlock kind="answer"><QuickAnswer locale={locale} variant="iphone-battery" /></ServiceBlock>
 
@@ -100,8 +104,6 @@ export default function IphoneBatteryServicePage({
       <ServiceBlock kind="quality"><IphoneQualitySection locale={locale} variant="iphone-battery" /></ServiceBlock>
 
       <PopularServices locale={locale} variant="other-services" excludeServiceKey="baterijas-maina" />
-
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       {hasVisibleFaq && (
         <ServiceBlock kind="faq"><section className={s.section}>

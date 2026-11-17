@@ -1,4 +1,6 @@
 import s from './EditorialWhy.module.scss';
+import SignatureText from '../headings/SignatureText';
+import { getWhyHeading } from '@/lib/presentation/signatureHeadings';
 
 export default function EditorialWhy({ id = 'why-us', headingId = `${id}-title`, eyebrow, title, subtitle, experience, entries = [] }) {
   if (!entries.length) return null;
@@ -6,7 +8,7 @@ export default function EditorialWhy({ id = 'why-us', headingId = `${id}-title`,
     <div className={s.layout}>
       <header className={s.intro}>
         {eyebrow && <p className={s.eyebrow}>{eyebrow}</p>}
-        <h2 id={headingId}>{title}</h2>
+        <h2 id={headingId}><SignatureText text={title} parts={getWhyHeading(title)} level="section" /></h2>
         {subtitle && <p className={s.subtitle}>{subtitle}</p>}
         {experience?.value && <div className={s.experience}>
           <p><strong>{experience.value}</strong>{experience.label && <span>{experience.label}</span>}</p>

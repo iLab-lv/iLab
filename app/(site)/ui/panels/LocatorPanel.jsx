@@ -28,13 +28,15 @@ export default function LocatorPanel({
   if (serviceRedesign) return <div className={s.serviceWrap}>
     <p className={s.intro}>{locale === 'ru' ? 'Выберите филиал на карте, чтобы увидеть часы работы и контакты.' : 'Izvēlies filiāli kartē, lai redzētu darba laiku un kontaktus.'}</p>
     <div className={s.serviceMap}>
+      <div className={s.serviceMapStage}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/images/home/map-riga-branches.png" width={3000} height={3000} alt={locale === 'ru' ? 'Карта Риги с филиалами iLab' : 'Rīgas karte ar iLab filiālēm'} />
       {locations.map((location) => {
         const pin = pinPositions[location.id];
         if (!pin || !Number.isFinite(Number(pin.xPct)) || !Number.isFinite(Number(pin.yPct))) return null;
-        return <button key={location.id} className={s.servicePin} type="button" style={{ '--x': `${pin.xPct}%`, '--y': `${pin.yPct}%` }} aria-label={`${locale === 'ru' ? 'Контакты' : 'Kontakti'}: ${location.label}`} onClick={() => handlePinClick(location.id)}><i aria-hidden="true" /><span>{location.label}</span></button>;
+        return <button key={location.id} data-location-pin={location.id} data-label-side={Number(pin.xPct) > 50 ? 'left' : 'right'} className={s.servicePin} type="button" style={{ '--x': `${pin.xPct}%`, '--y': `${pin.yPct}%` }} aria-label={`${locale === 'ru' ? 'Контакты' : 'Kontakti'}: ${location.label}`} onClick={() => handlePinClick(location.id)}><i aria-hidden="true" /><span>{location.label}</span></button>;
       })}
+      </div>
     </div>
     <div className={s.branches}>{locations.map((location) => {
       const { date } = getRigaNow();

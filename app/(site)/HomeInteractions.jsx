@@ -13,7 +13,7 @@ export function HomeBookingButton({
   const {
     openBook
   } = useUiDialogs();
-  return <Button type="button" variant={variant} className={className} onClick={event => openBook(event.currentTarget)}>
+  return <Button type="button" variant={variant} glow={variant === 'primary'} className={className} onClick={event => openBook(event.currentTarget)}>
     {children}
   </Button>;
 }

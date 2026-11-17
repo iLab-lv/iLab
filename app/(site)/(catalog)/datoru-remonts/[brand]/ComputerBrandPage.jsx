@@ -465,6 +465,7 @@ export default function ComputerBrandPage({
   return (
     <div data-catalog-brand>
       <BrandHero
+        headingParts={page.hero?.headingParts}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
@@ -477,29 +478,6 @@ export default function ComputerBrandPage({
       >
         <QuickTrustFacts id="why" {...getQuickTrustFacts("computer", locale)} />
       </BrandHero>
-
-      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="brand-intro-h2">
-        <header>
-          <h2 id="brand-intro-h2">
-            {strings.title}
-          </h2>
-
-        </header>
-        <div className={brand.prose}>
-          <p>{strings.intro}</p>
-
-          <p
-            dangerouslySetInnerHTML={{ __html: introParagraph }}
-          />
-        </div>
-      </section>
-
-      <BrandServices
-        title={strings.servicesTitle}
-        items={popularRepairs}
-        locale={locale}
-        modelAction={cfg.hasModels && dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
-      />
 
       {cfg.hasModels ? (
         <>
@@ -547,6 +525,29 @@ export default function ComputerBrandPage({
           </div>
         </section>
       )}
+
+      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="brand-intro-h2">
+        <header>
+          <h2 id="brand-intro-h2">
+            {strings.title}
+          </h2>
+
+        </header>
+        <div className={brand.prose}>
+          <p>{strings.intro}</p>
+
+          <p
+            dangerouslySetInnerHTML={{ __html: introParagraph }}
+          />
+        </div>
+      </section>
+
+      <BrandServices
+        title={strings.servicesTitle}
+        items={popularRepairs}
+        locale={locale}
+        modelAction={cfg.hasModels && dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
+      />
 
       <div id="process-h2" className={brand.anchor} />
 

@@ -38,6 +38,13 @@
 .yearFilter button[aria-pressed='true'] { color: var(--service-signal); border-color: var(--service-signal); }
 .section :focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
 .empty { padding-block: 24px; color: var(--service-ink-3); }
+.models a { transition: box-shadow 150ms ease; }
+.models a:focus-visible { box-shadow: var(--service-glow-border); }
+.finder input:focus-visible { box-shadow: var(--service-glow-focus-line); }
+.yearFilter button:focus-visible { box-shadow: var(--service-glow-micro); }
+@media (hover: hover) and (pointer: fine) { .models a:hover { box-shadow: var(--service-glow-border); } }
+.models a:active { box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .models a { transition: none; } }
 .brand .finder label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .brand .models li { min-width: 0; }
 .brand .models a { overflow-wrap: anywhere; }

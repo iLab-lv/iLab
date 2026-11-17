@@ -44,6 +44,8 @@ export default function IphoneBackCoverServicePage({
   return (
     <ServiceRecovery>
       <ServiceHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
@@ -55,6 +57,8 @@ export default function IphoneBackCoverServicePage({
         targetLabel={strings.headerCtaLabel}
         placeholderLabel={strings.heroAlt}
       ><QuickFacts locale={locale} variant="iphone-back-cover" /></ServiceHero>
+
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       <ServiceBlock kind="answer"><QuickAnswer locale={locale} variant="iphone-back-cover" /></ServiceBlock>
 
@@ -85,8 +89,6 @@ export default function IphoneBackCoverServicePage({
       <ServiceBlock kind="checks"><IphoneScreenPostRepairChecks locale={locale} variant="iphone-back-cover" /></ServiceBlock>
       <ServiceBlock kind="quality"><IphoneQualitySection locale={locale} variant="iphone-back-cover" /></ServiceBlock>
       <PopularServices locale={locale} variant="other-services" excludeServiceKey="aizmugures-vacina-maina" />
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
-
       {hasVisibleFaq && (
         <ServiceBlock kind="faq"><section className={s.section}>
           <div className={s.container}>

@@ -145,6 +145,7 @@ export default function CenasPage({
         aside={<h2>{strings.processSteps[1].title}</h2>}
         secondary={{ href: '#brand-list', label: strings.pricelistTitle }}
         title={strings.headerTitle}
+        headingParts={locale === 'ru' ? [{ accent: 'Цены' }, ' на ремонт'] : ['Remonta ', { accent: 'cenas' }]}
         lead={strings.headerLead}
         crumbs={breadcrumbs}
       />
@@ -172,7 +173,7 @@ export default function CenasPage({
             categorySlug="all"
             title={strings.pricelistTitle}
             allModelsHref={locale === 'ru' ? '/ru' : '/'}
-            cta={{ label: strings.ctaLabel, href: '#pieteikties' }}
+            cta={null}
             className={s.section}
             locale={locale}
           />

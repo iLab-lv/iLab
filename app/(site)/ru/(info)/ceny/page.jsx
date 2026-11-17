@@ -6,7 +6,8 @@ import { getFaqGroups } from '@/lib/faq/getFaqGroups';
 import JsonLd from '@components/seo/JsonLd';
 
 import categories from '@/data/categories';
-import devices from '@/data/devices';
+import { getPriceDevices } from '@/lib/pricing/getPriceDevices';
+import { getPickerBrandSlug } from '@/lib/pricing/priceNavigation';
 
 import { db } from '@/lib/firebaseAdmin';
 
@@ -33,26 +34,7 @@ function titleCaseSlug(slug = '') {
     .join(' ');
 }
 
-function getPickerBrandSlug(device) {
-  const raw =
-    device?.originalBrandSlug ||
-    device?.brandSlug ||
-    device?.brandKey ||
-    '';
-
-  const slug = String(raw).toLowerCase().trim();
-
-  if (
-    slug === 'apple' &&
-    String(device?.category || '').toLowerCase().trim() === 'telefonu-remonts'
-  ) {
-    return 'iphone';
-  }
-
-  return slug;
-}
-
-function getAllBrandOptions() {
+function getAllBrandOptions(devices) {
   const nameBySlug = new Map();
 
   if (Array.isArray(categories)) {
@@ -141,7 +123,7 @@ async function getServiceMetaMap() {
   return map;
 }
 
-async function getAllPricing() {
+async function getAllPricing(devices) {
   const pricing = {};
 
   for (const device of Array.isArray(devices) ? devices : []) {
@@ -232,11 +214,12 @@ async function getCenasData(searchParams) {
   const resolvedLabels = { ...labels, faqTitle: faq.title, faqItems: faq.items };
   const resolvedSearchParams = await resolveSearchParams(searchParams);
 
-  const { brandOptions, defaultBrand } = getAllBrandOptions();
+  const devices = await getPriceDevices(locale);
+  const { brandOptions, defaultBrand } = getAllBrandOptions(devices);
 
   const [serviceMeta, pricing] = await Promise.all([
     getServiceMetaMap(),
-    getAllPricing(),
+    getAllPricing(devices),
   ]);
 
   const normalizedDevices = (Array.isArray(devices) ? devices : []).map(

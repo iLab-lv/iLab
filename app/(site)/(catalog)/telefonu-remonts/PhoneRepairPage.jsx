@@ -40,6 +40,7 @@ export default function PhoneRepairPage({
   return (
     <>
       <CatalogHero
+        hasReviews={page.sections?.hasReviews}
         variant="hub"
         locale={locale}
         title={headerTitle}
@@ -57,6 +58,8 @@ export default function PhoneRepairPage({
       </CatalogHero>
 
       <div className={s.hub}>
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
+
       <section className={s.section} aria-labelledby="phones-intro-h2">
         <div className={s.container}>
           <h2 id="phones-intro-h2" className={s.h2}>
@@ -106,8 +109,6 @@ export default function PhoneRepairPage({
           locale={locale}
         />
       ))}
-
-      {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       {page.sections?.hasProcess && (
         <Process

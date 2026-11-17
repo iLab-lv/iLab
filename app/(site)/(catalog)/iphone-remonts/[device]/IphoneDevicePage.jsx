@@ -46,6 +46,8 @@ export default function IphoneDevicePage({
   return (
     <div data-catalog-model className={modelSkin.page}>
       <ModelHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         modelName={deviceName}
         title={headerTitle}
@@ -58,15 +60,7 @@ export default function IphoneDevicePage({
         bodyHtml={bodyHtml}
       ><QuickFacts variant="iphone-model" locale={locale} /></ModelHero>
 
-      <ModelServices
-        id="iphone-services"
-        locale={locale}
-        iphone
-        modelName={deviceName}
-        priceTargetId="cenas"
-        priceItems={priceItems}
-        currency={currency}
-      />
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       {!!priceItems.length && (
           <ModelPriceList
@@ -81,6 +75,16 @@ export default function IphoneDevicePage({
           />
       )}
 
+      <ModelServices
+        id="iphone-services"
+        locale={locale}
+        iphone
+        modelName={deviceName}
+        priceTargetId="cenas"
+        priceItems={priceItems}
+        currency={currency}
+      />
+
       <RelatedModels
         currentDevice={device}
         devices={relatedDevices}
@@ -94,8 +98,6 @@ export default function IphoneDevicePage({
       <div className={`${skin.block} ${modelSkin.decision}`}><IphoneRepairDecisionSection locale={locale} /></div>
 
       <div className={skin.block} data-service-section="why"><EditorialWhy {...getEditorialWhyContent(locale)} /></div>
-
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       <RepairProcess
         id="iphone-repair-steps"

@@ -1,23 +1,36 @@
 'use client';
 
-import { useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import ContactActions, { ContactDirections } from '../contact-actions/ContactActions';
 import useLocationClock from './useLocationClock';
 import { getAvailability, locationLinks } from './locationState';
-import { getFullLocationsContent } from './fullLocations.content';
+import { getFullLocationsContent, getLocationPhoto } from './fullLocations.content';
 import s from './FullLocations.module.scss';
 
 export default function FullLocations({
   id = 'locations', locale = 'lv', title, subtitle, headingId,
-  locations = [], pinPositions = {}, defaultHours = [],
+  locations = [], defaultHours = [],
 }) {
   const [selectedId, setSelectedId] = useState(locations[0]?.id);
   const now = useLocationClock();
   const tabs = useRef([]);
   const uid = useId();
+  useEffect(() => {
+    // Keep incoming branch links in sync with this section's tabs and details.
+    const onLocationLinkClick = event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest?.('a[data-location-id]');
+      if (link?.getAttribute('href') !== '#' + id) return;
+      const locationId = link.dataset.locationId;
+      if (locations.some(location => location.id === locationId)) setSelectedId(locationId);
+    };
+    document.addEventListener('click', onLocationLinkClick);
+    return () => document.removeEventListener('click', onLocationLinkClick);
+  }, [id, locations]);
   const selected = locations.find(location => location.id === selectedId) || locations[0];
   if (!selected) return null;
   const t = getFullLocationsContent(locale);
+  const photo = getLocationPhoto(selected.id, locale);
   const state = getAvailability(selected, defaultHours, now, locale);
   const links = locationLinks(selected);
   const weekdays = locale === 'ru'
@@ -79,17 +92,13 @@ export default function FullLocations({
           </div>
         </div>
       </div>
-      <div className={s.map} data-scan="x">
+      <div className={s.photo} data-scan="x">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/home/map-riga-branches.png" width="3000" height="3000" loading="lazy" decoding="async" alt={t.mapAlt} />
-        {locations.map(location => {
-          const pin = pinPositions[location.id] || {};
-          return <button key={location.id} type="button" data-location-pin={location.id}
-            className={s.pin + (location.id === selected.id ? ' ' + s.selected : '')}
-            style={{ '--x': (pin.xPct ?? 50) + '%', '--y': (pin.yPct ?? 50) + '%' }}
-            aria-label={t.select + ': ' + location.label} aria-pressed={location.id === selected.id}
-            onClick={() => setSelectedId(location.id)}><i aria-hidden="true" /><span>{location.label}</span></button>;
-        })}
+        {photo && <img data-location-photo={selected.id} src={photo.src}
+          srcSet={`${photo.small} 640w, ${photo.src} ${photo.width}w`}
+          sizes="(min-width: 1024px) 720px, 100vw"
+          width={photo.width} height={photo.height} loading="lazy" decoding="async"
+          style={{ objectPosition: photo.position }} alt={photo.alt} />}
       </div>
     </div>
   </section>;

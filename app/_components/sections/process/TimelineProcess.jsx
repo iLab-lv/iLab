@@ -9,8 +9,12 @@ export default function TimelineProcess({ steps, headingLevel = 3 }) {
   const Heading = headingLevel === 4 ? 'h4' : 'h3';
   useLayoutEffect(() => {
     const element = list.current;
+    if (!element) return;
+    let disposed = false;
     const measure = () => {
+      if (disposed || !element.isConnected) return;
       const markers = [...element.querySelectorAll('[data-process-marker]')];
+      if (!markers.length) return;
       // Layout offsets exclude the entrance transforms applied by ServiceMotion.
       const center = marker => marker.parentElement.offsetTop + marker.offsetTop + marker.offsetHeight / 2;
       element.style.setProperty('--rail-start', `${center(markers[0])}px`);
@@ -18,20 +22,23 @@ export default function TimelineProcess({ steps, headingLevel = 3 }) {
     };
     const observer = new ResizeObserver(measure);
     observer.observe(element);
-    let disposed = false;
     document.fonts?.ready.then(() => { if (!disposed) measure(); });
     measure();
     return () => { disposed = true; observer.disconnect(); };
   }, [steps]);
   useEffect(() => {
+    const element = list.current;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let disposed = false;
     let frame;
     const update = () => {
+      if (disposed || !element || list.current !== element || !element.isConnected) return;
       cancelAnimationFrame(frame);
       if (media.matches) { setActive(-1); return; }
       frame = requestAnimationFrame(() => {
+        if (disposed || list.current !== element || !element.isConnected) return;
         let current = 0;
-        [...list.current.children].forEach((step, index) => {
+        [...element.children].forEach((step, index) => {
           if (step.getBoundingClientRect().top < innerHeight * .45) current = index;
         });
         setActive(current);
@@ -42,6 +49,7 @@ export default function TimelineProcess({ steps, headingLevel = 3 }) {
     media.addEventListener('change', update);
     update();
     return () => {
+      disposed = true;
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', update);
       window.removeEventListener('resize', update);

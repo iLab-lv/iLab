@@ -7,18 +7,22 @@ import { renderToStaticMarkup } from 'react-dom/server';
 const require = createRequire(import.meta.url);
 const { transform } = require('next/dist/build/swc');
 const read = file => readFile(new URL('../' + file, import.meta.url), 'utf8');
-async function load(file) {
+async function load(file, dependencies = {}) {
   const { code } = await transform(await read(file), { filename: file, jsc: { parser: { syntax: 'ecmascript', jsx: true }, transform: { react: { runtime: 'classic' } } }, module: { type: 'commonjs' } });
   const evaluated = { exports: {} };
   new Function('require', 'module', 'exports', 'React', code)(id => {
     if (id.endsWith('.scss')) return { __esModule: true, default: {} };
+    if (id in dependencies) return dependencies[id];
     throw Error('Unexpected dependency ' + id);
   }, evaluated, evaluated.exports, React);
   return evaluated.exports;
 }
 const base = 'app/_components/sections/why/';
-const Metrics = (await load(base + 'MetricsWhy.jsx')).default;
-const Editorial = (await load(base + 'EditorialWhy.jsx')).default;
+const headings = await load('lib/presentation/signatureHeadings.js');
+const signature = await load('app/_components/sections/headings/SignatureText.jsx', { '@/lib/presentation/signatureHeadings': headings });
+const headingDependencies = { '../headings/SignatureText': signature, '@/lib/presentation/signatureHeadings': headings };
+const Metrics = (await load(base + 'MetricsWhy.jsx', headingDependencies)).default;
+const Editorial = (await load(base + 'EditorialWhy.jsx', headingDependencies)).default;
 const { getMetricsWhyContent } = await load(base + 'metricsWhy.content.js');
 const { getEditorialWhyContent } = await load(base + 'editorialWhy.content.js');
 
@@ -37,7 +41,7 @@ test('home LV/RU metrics keep four consistent rows, qualified warranty and a dis
   }
 });
 
-test('extended LV/RU content retains all four explanations and the separate 15+ claim without heading accent', () => {
+test('extended LV/RU content retains explanations and accents only the approved heading phrase', () => {
   for (const locale of ['lv', 'ru']) {
     const copy = getEditorialWhyContent(locale);
     assert.equal(copy.entries.length, 4);
@@ -46,7 +50,10 @@ test('extended LV/RU content retains all four explanations and the separate 15+ 
     const html = renderToStaticMarkup(React.createElement(Editorial, copy));
     assert.equal((html.match(/<li>/g) || []).length, 4);
     for (const entry of copy.entries) assert.ok(html.includes(entry.description));
-    assert.match(html, /<h2[^>]*>[^<]+<\/h2>/);
+    const heading = html.match(/<h2[^>]*>(.*?)<\/h2>/)[1];
+    assert.equal(heading.replace(/<[^>]+>/g, ''), copy.title);
+    assert.equal((heading.match(/data-signature="section"/g) || []).length, 1);
+    assert.match(heading, /data-signature="section">iLab\?<\/span>/);
     assert.doesNotMatch(html, /13\+|<svg|<article/);
   }
 });
@@ -56,6 +63,7 @@ test('editorial accepts optional fields, independent anchors and five contact ex
   assert.match(html, /aria-labelledby="contacts-benefits-h2"/);
   assert.equal((html.match(/<li>/g) || []).length, 5);
   assert.doesNotMatch(html, /15\+|undefined/);
+  assert.doesNotMatch(html, /data-signature/, 'custom contact headings remain flat');
   assert.equal(renderToStaticMarkup(React.createElement(Editorial)), '');
   assert.equal(renderToStaticMarkup(React.createElement(Metrics)), '');
 });

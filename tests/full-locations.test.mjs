@@ -59,13 +59,15 @@ test('contact/navigation destinations preserve configured links and existing fal
   assert.equal(locationLinks({}).tel, null);
   assert.equal(locationLinks({}).wa, null);
 });
-test('LV/RU server output has one panel before the map, native hours, selected tab/marker and correct link hierarchy', () => {
+test('LV/RU server output has one panel before the branch photo, native hours, selected tab and correct link hierarchy', () => {
   for (const locale of ['lv', 'ru']) {
     const html = renderToStaticMarkup(React.createElement(FullLocations, { locale, locations: [location, { ...location, id: 'spice', label: 'Spice Life' }] }));
     assert.match(html, /role="tablist"/);
     assert.equal((html.match(/role="tabpanel"/g) || []).length, 1);
     assert.equal((html.match(/aria-selected="true"/g) || []).length, 1);
-    assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1);
+    assert.match(html, /data-location-photo="domina"/);
+    assert.match(html, /ilab-domina-shopping-remonta-serviss-riga\.webp/);
+    assert.doesNotMatch(html, /data-location-pin|map-riga-branches/);
     assert.ok(html.indexOf('role="tabpanel"') < html.indexOf('data-scan="x"'));
     assert.ok(html.indexOf('mailto:') < html.indexOf('<details'));
     assert.ok(html.indexOf('data-contact-actions') < html.indexOf('data-contact-directions'));

@@ -36,7 +36,7 @@
   line-height: .98;
   letter-spacing: -.07em;
 
-  span { display: block; color: $color-accent; text-shadow: 0 0 24px rgba(34, 211, 238, 0.18), 0 0 54px rgba(34, 211, 238, 0.08); }
+  span { display: block; }
 }
 
 .text { max-width: 620px; margin: $space-md 0 0; color: $color-text-2; font-size: $font-size-p; line-height: 1.6; }

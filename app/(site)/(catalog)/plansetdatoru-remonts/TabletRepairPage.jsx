@@ -367,6 +367,7 @@ export default function TabletRepairPage({
   return (
     <>
       <CatalogHero
+        hasReviews={page.sections?.hasReviews}
         variant="hub"
         locale={locale}
         title={headerTitle}
@@ -384,6 +385,8 @@ export default function TabletRepairPage({
       </CatalogHero>
 
       <main className={s.hub}>
+      {page.sections?.hasReviews && <Reviews locale={locale} />}
+
       <section className={s.section} aria-labelledby="tablets-intro-h2">
         <div className={s.container}>
           <h2 id="tablets-intro-h2" className={s.h2}>
@@ -426,8 +429,6 @@ export default function TabletRepairPage({
             items={strings.servicesItems}
             headingLevel={2}
           />
-
-      {page.sections?.hasReviews && <Reviews locale={locale} />}
 
       <div id="process-h2" className={s.anchorTarget} />
 

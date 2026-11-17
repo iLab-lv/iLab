@@ -46,7 +46,9 @@ test('shared price browsers use square hairline presentation without mock data',
   for (const source of styles) {
     assert.match(source, /:global\(\[data-service-recovery\]\) \.layout/);
     assert.match(source, /grid-template-columns: minmax\(0, 5fr\) minmax\(0, 7fr\)/);
-    assert.doesNotMatch(source, /gradient|box-shadow|backdrop-filter|radius-pill/);
+    // Pass 4C permits only the explicit keyboard-focus micro-glow.
+    const restingStyles = source.replace(/:global\(\[data-service-recovery\]\) :is\(\.modelLink, \.modelLinkActive\):focus-visible \{ box-shadow: var\(--service-glow-micro\); \}/g, '');
+    assert.doesNotMatch(restingStyles, /gradient|box-shadow|backdrop-filter|radius-pill/);
   }
 
   const clientPricing = await read('app/(site)/components/service-pricelist/BrandPickerPricelist.jsx');

@@ -2,6 +2,8 @@
 
 import s from './Why.module.scss';
 import whyContent from './why.content';
+import SignatureText from '@/_components/sections/headings/SignatureText';
+import { getWhyHeading } from '@/lib/presentation/signatureHeadings';
 
 // fallback icon for simple string items
 import { TbCertificate } from 'react-icons/tb';
@@ -34,7 +36,7 @@ export default function Why({
       <div className={s.container}>
         <header className={s.header}>
           <h2 id={`${id}-title`} className={s.sectionTitle}>
-            {resolvedTitle}
+            <SignatureText text={resolvedTitle} parts={getWhyHeading(resolvedTitle)} level="section" />
           </h2>
           <p className={s.copy}>{resolvedCopy}</p>
         </header>

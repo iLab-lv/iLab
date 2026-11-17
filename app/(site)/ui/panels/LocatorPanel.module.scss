@@ -50,9 +50,13 @@
 .serviceWrap { display: grid; gap: 32px; padding: 0 var(--service-drawer-inset) var(--service-drawer-bottom); color: var(--service-ink); }
 .intro { margin: 0; color: var(--service-ink-2); font: 400 17px/1.55 var(--service-font); }
 .serviceMap { position: relative; min-width: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--service-counter-2); }
+// Crop the square source as one layer, so its pixels and percentage pins stay together.
+.serviceMapStage { position: absolute; top: 50%; width: 100%; aspect-ratio: 1; transform: translateY(-50%); }
 .serviceMap img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0) brightness(1.9) contrast(1.05); display: block; }
-.servicePin { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 10px 6px 6px; color: var(--service-ink); border: 0; background: transparent; font: 500 15px/1.55 var(--service-font); cursor: pointer; }
-.servicePin i { position: relative; width: 12px; height: 12px; background: var(--service-signal); flex: 0 0 12px; }
+// Coordinates belong to the square source image. Anchor the dot, not the label's width.
+.servicePin { --marker-size: 12px; position: absolute; left: var(--x); top: var(--y); transform: translate(calc(var(--marker-size) / -2), -50%); display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 10px 6px 0; color: var(--service-ink); border: 0; background: transparent; font: 500 15px/1.55 var(--service-font); cursor: pointer; }
+.servicePin[data-label-side='left'] { flex-direction: row-reverse; padding: 6px 0 6px 10px; transform: translate(calc(-100% + var(--marker-size) / 2), -50%); }
+.servicePin i { position: relative; width: var(--marker-size); height: var(--marker-size); background: var(--service-signal); flex: 0 0 var(--marker-size); }
 .servicePin i::before, .servicePin i::after { content: ''; position: absolute; inset: -2px; border: 1px solid var(--service-signal); opacity: 0; animation: locatorPulse 2.4s ease-out infinite; }
 .servicePin i::after { animation-delay: 1.2s; }
 @keyframes locatorPulse { from { transform: scale(1); opacity: .9; } to { transform: scale(3.2); opacity: 0; } }

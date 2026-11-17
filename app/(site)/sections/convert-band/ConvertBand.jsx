@@ -17,11 +17,11 @@ export default function ConvertBand({
         <h2 id={`${id}-title`} className={s.convertTitle}>{content.title}</h2>
 
         <div className={s.ctaRow}>
-          <Button variant={content.primary.variant} size="md" href={content.primary.href}>
+          <Button glow variant={content.primary.variant} size="md" href={content.primary.href}>
             {content.primary.label}
           </Button>
 
-          <Button variant={content.secondary.variant} size="md" href={content.secondary.href}>
+          <Button glow variant={content.secondary.variant} size="md" href={content.secondary.href}>
             {content.secondary.label}
           </Button>
         </div>
