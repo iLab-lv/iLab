@@ -27,6 +27,8 @@ export default function IphoneWaterDamageServicePage({
   return (
     <ServiceRecovery>
       <ServiceHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
@@ -39,6 +41,8 @@ export default function IphoneWaterDamageServicePage({
         placeholderLabel={strings.heroAlt}
       ><QuickFacts locale={locale} variant="iphone-water-damage" /></ServiceHero>
 
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
+
       <ServiceBlock kind="answer"><QuickAnswer locale={locale} variant="iphone-water-damage" /></ServiceBlock>
 
       <ServiceBlock kind="editorial"><WaterProtection locale={locale} /></ServiceBlock>
@@ -48,7 +52,6 @@ export default function IphoneWaterDamageServicePage({
       <RepairProcess id="iphone-water-damage-steps" locale={locale} variant="iphone-water-damage" backgroundImage="/images/hands-closeup.png" />
       <ServiceBlock kind="waterTechnical"><WaterTechnical locale={locale} /></ServiceBlock>
       <ServiceBlock kind="links"><WaterModelLinks locale={locale} /></ServiceBlock>
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
       <PopularServices locale={locale} variant="other-services" excludeServiceKey="udens-bojajumu-remonts" />
 
       {hasVisibleFaq && (

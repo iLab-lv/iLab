@@ -14,7 +14,7 @@ async function evaluate(file, dependencies = {}) {
   const { code } = await transform(await read(file), { filename: file, jsc: { parser: { syntax: 'ecmascript', jsx: true }, transform: { react: { runtime: 'classic' } } }, module: { type: 'commonjs' } });
   const compiledModule = { exports: {} };
   new Function('require', 'module', 'exports', 'React', code)(id => {
-    if (id === 'react') return React;
+    if (id === 'react') return dependencies.react || React;
     if (id.endsWith('.scss')) return { __esModule: true, default: new Proxy({}, { get: (_, key) => key }) };
     if (id in dependencies) return dependencies[id];
     throw new Error('Unexpected dependency: ' + id);
@@ -69,4 +69,46 @@ test('timeline keeps a semantic ordered list and explicit scroll-reveal opt-in',
   assert.equal((html.match(/data-rise="process"/g) || []).length, 2);
   assert.match(html, /<h4>First/);
   assert.doesNotMatch(html, /style="[^"]*(?:opacity:0|display:none)/);
+});
+
+test('timeline ignores queued animation and scroll callbacks after unmount', async () => {
+  const original = Object.fromEntries(['window', 'requestAnimationFrame', 'cancelAnimationFrame'].map(key => [key, globalThis[key]]));
+  const listeners = new Map();
+  const frames = new Map();
+  const updates = [];
+  let frameId = 0;
+  let setup;
+  const element = { isConnected: true, children: [] };
+  const ref = { current: element };
+  globalThis.window = {
+    matchMedia: () => ({ matches: false, addEventListener() {}, removeEventListener() {} }),
+    addEventListener: (name, callback) => listeners.set(name, callback),
+    removeEventListener: name => listeners.delete(name),
+  };
+  globalThis.requestAnimationFrame = callback => { frames.set(++frameId, callback); return frameId; };
+  globalThis.cancelAnimationFrame = id => frames.delete(id);
+  try {
+    const { default: Timeline } = await evaluate('app/_components/sections/process/TimelineProcess.jsx', { react: {
+      ...React, useRef: () => ref, useState: () => [0, value => updates.push(value)],
+      useLayoutEffect() {}, useEffect: callback => { setup = callback; },
+    } });
+    Timeline({ steps: [{ title: 'One' }] });
+    const cleanup = setup();
+    frames.get(frameId)();
+    assert.deepEqual(updates, [0], 'mounted timeline still updates');
+    const queuedScroll = listeners.get('scroll');
+    queuedScroll();
+    const queuedFrame = frames.get(frameId);
+    ref.current = null;
+    element.isConnected = false;
+    cleanup();
+    assert.doesNotThrow(() => { queuedFrame(); queuedScroll(); });
+    assert.deepEqual(updates, [0], 'unmounted timeline cannot update state');
+    assert.equal(listeners.size, 0);
+    assert.equal(frames.has(frameId), false);
+  } finally {
+    for (const [key, value] of Object.entries(original)) {
+      if (value === undefined) delete globalThis[key]; else globalThis[key] = value;
+    }
+  }
 });

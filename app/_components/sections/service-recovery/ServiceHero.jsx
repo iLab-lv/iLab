@@ -3,6 +3,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 import CatalogHero from '../catalog-hub/CatalogHero';
 import { getSiteSettings } from '@/lib/siteSettings';
+import { SignatureAccent } from '../headings/SignatureText';
 
 async function getImage(source) {
   if (!source || source.includes('/placeholders/')) return {};
@@ -23,11 +24,11 @@ export default async function ServiceHero({ image, locale = 'lv', template, ...p
   const phone = settings?.locations?.find(location => location.telLink || location.tel);
   const href = phone?.telLink || (phone?.tel ? `tel:${phone.tel.replaceAll(' ', '')}` : settings?.company?.phoneMain ? `tel:${settings.company.phoneMain.replaceAll(' ', '')}` : null);
   const title = props.title === 'iPhone ekrāna maiņa Rīgā'
-    ? <><span>iPhone</span><span>ekrāna maiņa</span><span>Rīgā</span></>
+    ? <><span>iPhone </span><span><SignatureAccent level="hero">ekrāna maiņa</SignatureAccent> </span><span>Rīgā</span></>
     : props.title === 'Dyson remonts Rīgā'
-      ? <><span>Dyson</span><span>remonts Rīgā</span></>
-      : props.title;
-  return <CatalogHero {...props} {...resolved} title={title} locale={locale} variant="service"
+      ? <><span><SignatureAccent level="hero">Dyson</SignatureAccent> </span><span>remonts Rīgā</span></>
+      : undefined;
+  return <CatalogHero {...props} {...resolved} displayTitle={title} locale={locale} variant="service"
     imageRatio={template === 'dyson' ? '4 / 5' : '1 / 1'}
     bodyAfterActions={template === 'dyson'}
     secondaryAction={href ? { href, label: locale === 'ru' ? 'Позвонить' : 'Zvanīt' } : undefined}

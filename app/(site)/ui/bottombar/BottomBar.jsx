@@ -30,6 +30,7 @@ export default function BottomBar() {
     setSelectedLocId,
     serviceRedesign,
     navigationOpen,
+    pricesHref,
   } = useUiDialogs();
 
   return (
@@ -78,7 +79,7 @@ export default function BottomBar() {
           size="lg"
           block
           className={`${s.dockAction} ${s.pricesAction}`}
-          href={cta.prices.href}
+          href={pricesHref || cta.prices.href}
           aria-label={cta.prices.ariaLabel}
         >
           {cta.prices.label}

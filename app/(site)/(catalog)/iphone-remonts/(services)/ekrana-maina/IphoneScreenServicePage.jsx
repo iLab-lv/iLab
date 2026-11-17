@@ -48,6 +48,8 @@ export default function IphoneScreenServicePage({
   return (
     <ServiceRecovery>
       <ServiceHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         title={strings.headerTitle}
         lead={strings.headerLead}
@@ -60,7 +62,7 @@ export default function IphoneScreenServicePage({
         placeholderLabel={strings.heroAlt}
       ><QuickFacts variant="iphone-screen" locale={locale} /></ServiceHero>
 
-
+      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       <ServiceBlock kind="answer"><QuickAnswer locale={locale} /></ServiceBlock>
 
@@ -100,8 +102,6 @@ export default function IphoneScreenServicePage({
       <ServiceBlock kind="quality"><IphoneQualitySection locale={locale} variant="iphone-screen" /></ServiceBlock>
 
       <PopularServices locale={locale} variant="other-services" />
-
-      <ReviewsCompact locale={locale} reviewsSummary={reviewsSummary} variant="model" />
 
       {hasVisibleFaq && (
         <ServiceBlock kind="faq"><section className={s.section}>

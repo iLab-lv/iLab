@@ -2,6 +2,7 @@ import { access } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import CatalogHero from '../catalog-hub/CatalogHero';
+import { getIdentityHeading } from '@/lib/presentation/signatureHeadings';
 
 async function getImage(source) {
   if (!source || source.includes('/placeholders/')) return {};
@@ -18,7 +19,7 @@ async function getImage(source) {
 
 export default async function ModelHero({ image, modelName, locale = 'lv', ...props }) {
   const resolved = await getImage(image);
-  return <CatalogHero {...props} {...resolved} locale={locale} variant="model"
+  return <CatalogHero {...props} {...resolved} headingParts={getIdentityHeading(props.title, modelName, locale)} locale={locale} variant="model"
     bookingValues={{ device: modelName }}
     placeholderLabel={locale === 'ru' ? 'Изображение недоступно' : 'Attēls nav pieejams'} />;
 }

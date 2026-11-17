@@ -4,17 +4,7 @@ import { useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ServicePricelist from '@sections/service-pricelist/ServicePricelist';
 import styles from './BrandPickerPricelist.module.scss';
-
-function normalizeBrandName(slug, name) {
-  const s = String(slug || '').toLowerCase();
-  const n = String(name || '').trim();
-
-  if (s === 'ipad' || n.toLowerCase() === 'ipad') return 'iPad';
-  if (s === 'iphone' || n.toLowerCase() === 'iphone') return 'iPhone';
-  if (s === 'macbook' || n.toLowerCase() === 'macbook') return 'MacBook';
-
-  return n || name || '';
-}
+import { normalizeBrandName } from '@/lib/pricing/priceNavigation';
 
 function norm(v) {
   return String(v ?? '').toLowerCase().trim();
@@ -51,8 +41,9 @@ export default function BrandPickerPricelist({
   const sp = useSearchParams();
   const strings = getStrings(locale);
 
-  const activeBrand =
-    norm(sp.get('brand')) || norm(defaultBrand) || norm(brandOptions?.[0]?.slug) || '';
+  const requestedBrand = norm(sp.get('brand'));
+  const activeBrand = brandOptions?.some(brand => norm(brand.slug) === requestedBrand)
+    ? requestedBrand : norm(defaultBrand) || norm(brandOptions?.[0]?.slug) || '';
 
   const serviceIdsArr = useMemo(
     () => (Array.isArray(serviceIds) ? serviceIds : []),
@@ -79,6 +70,7 @@ export default function BrandPickerPricelist({
               onClick={() => {
                 const params = new URLSearchParams(sp.toString());
                 params.set('brand', slug);
+                params.delete('model');
                 router.replace(`?${params.toString()}`, { scroll: false });
               }}
             >
@@ -146,6 +138,7 @@ export default function BrandPickerPricelist({
         cta={cta}
         className={className}
         locale={locale}
+        selectedModel={sp.get('model')}
       />
     </>
   );

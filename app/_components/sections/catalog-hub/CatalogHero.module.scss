@@ -44,7 +44,7 @@
 
 /* The brand template keeps its supporting paragraph within the hero copy. */
 .brand .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
-.brand .copy h1 > span { display: block; }
+.brand .copy h1 > span:not([data-signature]) { display: block; }
 .brand .visual { align-self: start; box-sizing: content-box; width: calc(100% - 1px); aspect-ratio: 4 / 5; }
 .brand .visual img { width: auto; min-width: 100%; max-width: none; aspect-ratio: 4 / 5; }
 .brand .body strong { color: inherit; font-weight: 500; }
@@ -68,7 +68,7 @@
 /* Repair-service template opt-in: real square repair imagery, full copy before
    actions, and the existing service facts within the approved split grid. */
 .service .copy h1 { padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; }
-.service .copy h1 > span { display: block; }
+.service .copy h1 > span:not([data-signature]) { display: block; }
 .service .body { display: grid; gap: 16px; }
 .service .body a { color: inherit; text-underline-offset: 4px; }
 .service .visual { width: 100%; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); aspect-ratio: var(--service-repair-image-ratio, 1); }

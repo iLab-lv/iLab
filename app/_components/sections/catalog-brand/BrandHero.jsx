@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import CatalogHero from '../catalog-hub/CatalogHero';
+import { SignatureAccent } from '../headings/SignatureText';
 
 const IMAGE_DIMENSIONS = {
   '/images/categories/telefonu_remonts.webp': [1800, 2000],
@@ -22,18 +23,20 @@ function resolveImage(source) {
   return file.startsWith(`${publicRoot}${path.sep}`) && existsSync(file) ? image : null;
 }
 
-export default function BrandHero({ image: source, title, locale = 'lv', ...props }) {
+export default function BrandHero({ image: source, title, headingParts, locale = 'lv', ...props }) {
   const image = resolveImage(source);
   const [imageWidth, imageHeight] = IMAGE_DIMENSIONS[image] || [];
   const heading = locale === 'lv' && title === 'Samsung telefonu remonts Rīgā'
-    ? <><span>Samsung telefonu </span><span>remonts Rīgā</span></>
-    : title;
+    ? <><span><SignatureAccent level="hero">Samsung</SignatureAccent> telefonu </span><span>remonts Rīgā</span></>
+    : undefined;
 
   return <CatalogHero
     {...props}
     locale={locale}
     variant="brand"
-    title={heading}
+    title={title}
+    displayTitle={heading}
+    headingParts={headingParts}
     image={image}
     imageWidth={imageWidth}
     imageHeight={imageHeight}

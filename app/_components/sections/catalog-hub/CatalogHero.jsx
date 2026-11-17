@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import CatalogBookingButton from './CatalogBookingButton';
+import HeroReviewsBadge from '../reviews/HeroReviewsBadge';
+import SignatureText from '../headings/SignatureText';
+import { getKnownHeroHeading } from '@/lib/presentation/signatureHeadings';
 import s from './CatalogHero.module.scss';
 
 const COPY = {
@@ -11,6 +14,8 @@ const COPY = {
 export default function CatalogHero({
   locale = 'lv',
   title,
+  headingParts,
+  displayTitle,
   lead,
   crumbs = [],
   image,
@@ -26,6 +31,8 @@ export default function CatalogHero({
   bookingValues,
   bodyAfterActions = false,
   secondaryAction,
+  hasReviews = false,
+  reviewsSummary,
   children,
 }) {
   const copy = COPY[locale] || COPY.lv;
@@ -50,7 +57,8 @@ export default function CatalogHero({
 
       <section className={s.hero}>
         <div className={s.copy}>
-          <h1 data-rise>{title}</h1>
+          {hasReviews && <HeroReviewsBadge locale={locale} reviewsSummary={reviewsSummary} />}
+          <h1 data-rise>{displayTitle ?? <SignatureText text={title} parts={headingParts || getKnownHeroHeading(title, locale)} />}</h1>
           {lead && <p className={s.lead}>{lead}</p>}
           {(isModel || isService) && !bodyAfterActions && bodyHtml && <div className={s.body} dangerouslySetInnerHTML={{ __html: bodyHtml }} />}
           <p className={s.actions} data-stagger>

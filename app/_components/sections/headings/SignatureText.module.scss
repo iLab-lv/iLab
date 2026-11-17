@@ -1,0 +1,9 @@
+// Opt-in only. The scope also protects AdsV2, which imports Service components.
+:global([data-service-redesign]:not([data-ads-v2])) .accent[data-signature] {
+  color: var(--service-signature);
+  text-shadow: var(--service-glow-heading-section);
+  font-style: inherit;
+}
+:global([data-service-redesign]:not([data-ads-v2])) .accent[data-signature='hero'] {
+  text-shadow: var(--service-glow-heading-hero);
+}

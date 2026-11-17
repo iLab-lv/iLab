@@ -127,3 +127,12 @@
   }
 }
 :global([data-service-redesign]) .bottomBar[data-navigation-open='true'] { visibility: hidden; }
+
+// The dock owns its contained halo; it does not opt into Button's outer shadow.
+:global([data-service-redesign]:not([data-ads-v2])) .bottomBar {
+  .dockAction { transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease; }
+  .dockAction:focus-visible { box-shadow: var(--service-glow-inset) !important; }
+  @media (hover: hover) and (pointer: fine) { .dockAction:hover { box-shadow: var(--service-glow-inset) !important; } }
+  .dockAction:active { box-shadow: none !important; }
+  @media (prefers-reduced-motion: reduce) { .dockAction { transition: none !important; } }
+}

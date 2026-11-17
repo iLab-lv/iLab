@@ -44,6 +44,8 @@ export default function PhoneBrandPage({
   return (
     <div data-catalog-brand>
       <BrandHero
+        headingParts={page.hero?.headingParts}
+        hasReviews={page.sections?.hasReviews}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
@@ -57,30 +59,9 @@ export default function PhoneBrandPage({
         <QuickTrustFacts id="why" {...getQuickTrustFacts("phone", locale)} />
       </BrandHero>
 
-      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="brand-intro-h2">
-        <header>
-          <h2 id="brand-intro-h2">
-            {strings.introTitle}
-          </h2>
-
-        </header>
-        <div className={brand.prose}>
-          <p
-            dangerouslySetInnerHTML={{ __html: strings.introLead }}
-          />
-
-          <p
-            dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
-          />
-        </div>
-      </section>
-
-      <BrandServices
-        title={strings.servicesTitle}
-        items={popularRepairs}
-        locale={locale}
-        modelAction={dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
-      />
+      {page.sections?.hasReviews && (
+        <Reviews locale={locale} />
+      )}
 
       <DeviceSelector
         variant="brand"
@@ -109,9 +90,30 @@ export default function PhoneBrandPage({
         </div>
       </section>
 
-      {page.sections?.hasReviews && (
-        <Reviews locale={locale} />
-      )}
+      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="brand-intro-h2">
+        <header>
+          <h2 id="brand-intro-h2">
+            {strings.introTitle}
+          </h2>
+
+        </header>
+        <div className={brand.prose}>
+          <p
+            dangerouslySetInnerHTML={{ __html: strings.introLead }}
+          />
+
+          <p
+            dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
+          />
+        </div>
+      </section>
+
+      <BrandServices
+        title={strings.servicesTitle}
+        items={popularRepairs}
+        locale={locale}
+        modelAction={dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
+      />
 
       <div id="process-h2" className={brand.anchor} />
 

@@ -14,6 +14,7 @@ import s from './Button.module.scss';
  *  - disabled, target, rel
  *  - leadingIcon / trailingIcon (React component or node)
  *  - chipDir: 'right' | 'down' (for ctaChip arrow direction)
+ *  - glow: opt-in Service hover/focus illumination for primary/secondary actions
  */
 export default function Button({
   variant = 'primary',
@@ -21,6 +22,7 @@ export default function Button({
   block = false,
   iconOnly = false,
   trace = false,
+  glow = false,
   leadingIcon: LeadingIcon,
   trailingIcon: TrailingIcon,
   chipDir = 'right',
@@ -49,6 +51,7 @@ export default function Button({
     s[size],
     iconOnly && s.iconOnly,
     trace && s.traced,
+    glow && !disabled && s.glow,
     block && s.block,
     disabled && s.disabled,
     variant === 'ctaChip' && hasLeadingIcon && s.hasIcon,

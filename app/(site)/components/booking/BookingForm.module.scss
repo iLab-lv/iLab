@@ -247,6 +247,7 @@
   .drawerForm .field :is(input, textarea) { min-width: 0; min-height: 47px; padding: 10px 0; border-color: var(--service-counter-hairline); color: var(--service-ink); font: inherit; }
   .drawerForm .field :is(input, textarea)::placeholder { color: var(--service-ink-2); opacity: .8; }
   .drawerForm .field input[type='date'] { color-scheme: dark; }
+  .drawerForm .field :is(input, textarea):focus-visible { box-shadow: var(--service-glow-focus-line); }
   .drawerForm .field textarea { min-height: 96px; }
   .drawerForm .locGrid, .drawerForm .timeGrid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .drawerForm .radio { min-width: 0; align-items: flex-start; gap: 12px; margin: 0; padding: 10px 0; border: 0; border-top: 1px solid var(--service-counter-hairline); background: transparent; }

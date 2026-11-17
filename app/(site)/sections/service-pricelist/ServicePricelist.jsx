@@ -139,10 +139,12 @@ export default function ServicePricelist({
 
     const groupArr = Array.from(map.entries()).map(([label, items]) => ({
       label,
+      order: Math.min(...items.map(device => Number.isFinite(device.seriesOrder) ? device.seriesOrder : Infinity)),
       items: [...items].sort(byYearDescThenNameAsc),
     }));
 
     groupArr.sort((a, b) => {
+      if (a.order !== b.order) return a.order - b.order;
       const maxA = Math.max(...a.items.map((d) => normYear(d.year)), YEAR_FALLBACK);
       const maxB = Math.max(...b.items.map((d) => normYear(d.year)), YEAR_FALLBACK);
       if (maxA !== maxB) return maxB - maxA;

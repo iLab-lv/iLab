@@ -69,6 +69,8 @@ export default function IphoneRepairPage({
   return (
     <>
       <CatalogHero
+        hasReviews={page.sections?.hasReviews}
+        reviewsSummary={reviewsSummary}
         variant="hub"
         locale={locale}
         title={headerTitle}
@@ -86,6 +88,20 @@ export default function IphoneRepairPage({
       </CatalogHero>
 
       <div className={s.hub}>
+      {page.sections?.hasReviews && (
+        <Reviews locale={locale} reviewsSummary={reviewsSummary} />
+      )}
+
+      <DeviceGrid
+        id="iphone-modeli"
+        locale={locale}
+        devices={devicesAll}
+        baseHref={baseHref}
+        brandKey={BRAND_KEY}
+        categoryKey={CATEGORY_KEY}
+        seriesMeta={seriesMeta}
+      />
+
       <section className={`${s.section} ${s.introSection}`}>
         <div className={s.container}>
           <h2 className={s.h2}>{strings.introTitle}</h2>
@@ -102,21 +118,7 @@ export default function IphoneRepairPage({
 
       <div className={`${skin.block} ${skin.expert}`}><IphoneExpertNotes locale={locale} /></div>
 
-      <DeviceGrid
-        id="iphone-modeli"
-        locale={locale}
-        devices={devicesAll}
-        baseHref={baseHref}
-        brandKey={BRAND_KEY}
-        categoryKey={CATEGORY_KEY}
-        seriesMeta={seriesMeta}
-      />
-
       {page.sections?.hasWhy && <div className={skin.block} data-service-section="why"><EditorialWhy {...getEditorialWhyContent(locale)} /></div>}
-
-      {page.sections?.hasReviews && (
-        <Reviews locale={locale} reviewsSummary={reviewsSummary} />
-      )}
 
       <div className={`${skin.block} ${skin.quality}`}><IphoneQualitySection locale={locale} /></div>
 

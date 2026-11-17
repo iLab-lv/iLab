@@ -134,3 +134,12 @@
   font-weight: $font-weight-semibold;
   color: $color-text;
 }
+
+// Specificity beats the catalog skin's flat tile reset without altering layout.
+:global([data-service-redesign]) .brandGrid .brandLink {
+  &:focus-visible { box-shadow: var(--service-glow-border); outline: 2px solid var(--service-signal); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { &:hover { box-shadow: var(--service-glow-border); } }
+  @media (hover: none) { &:hover:not(:focus-visible) { box-shadow: none; } }
+  &:active { box-shadow: none; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}

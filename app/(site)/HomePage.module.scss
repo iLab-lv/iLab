@@ -18,14 +18,13 @@
 .eyebrow { display: flex; align-items: center; gap: 16px; &::after { content: ''; flex: 1; height: 1px; background: var(--hair); opacity: .45; } }
 .hero h1 { position: relative; color: var(--ink); font-size: var(--service-home-display-size); line-height: var(--service-home-display-leading); letter-spacing: var(--service-home-display-tracking); font-weight: 600; font-variation-settings: 'SHRP' 100; padding: .14em .06em .18em 0; margin: -.14em -.06em -.18em 0; text-wrap: balance; }
 .hero h1 span { display: block; white-space: nowrap; }
+.hero h1 span[data-signature] { display: inline; }
 .lead { width: 100%; max-width: 46ch; color: var(--muted); font-size: 20px; line-height: 1.45; overflow-wrap: break-word; }
-.heroReviews { display: flex; align-items: center; flex-wrap: nowrap; gap: 8px; width: fit-content; max-width: 100%; min-height: 44px; }
-.heroReviews > strong { color: var(--ink); font-size: 22px; line-height: 1.2; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.reviewStars { flex: none; display: inline-flex; gap: 3px; color: var(--signal); }
-.reviewStars svg { width: 13px; height: 13px; }
-.heroReviewMeta { color: var(--muted); font-size: 14px; line-height: 1.4; white-space: nowrap; }
-.reviewArrow { flex: none; color: var(--signal); }
-.heroReviews:hover .heroReviewMeta { color: var(--ink); }
+/* Compatibility exports for AdsV2; the shared badge owns all presentation. */
+.heroReviews { composes: badge from '../_components/sections/reviews/HeroReviewsBadge.module.scss'; }
+.reviewStars { composes: reviewStars from '../_components/sections/reviews/HeroReviewsBadge.module.scss'; }
+.heroReviewMeta { composes: heroReviewMeta from '../_components/sections/reviews/HeroReviewsBadge.module.scss'; }
+.reviewArrow { composes: reviewArrow from '../_components/sections/reviews/HeroReviewsBadge.module.scss'; }
 .heroLocations { display: flex; align-items: center; flex-wrap: wrap; gap: 0 12px; width: 100%; max-width: 100%; margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--hair); }
 .locationLabel { color: var(--faint); font-size: 13px; line-height: 1.4; }
 .locationEntry { display: inline-flex; align-items: center; gap: 12px; }
@@ -52,7 +51,7 @@
 .branchLinks { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 15px; a { text-decoration: underline; text-decoration-color: var(--hair); text-underline-offset: 4px; } a:hover { text-decoration-color: var(--signal); } }
 .branchHours { flex: none; min-height: 44px; padding: 0 0 0 16px; border: 0; border-left: 2px solid var(--signal); background: transparent; font-size: 15px; font-weight: 500; &:hover { color: var(--signal); } }
 .precision { width: 100%; background: #e9eef1; color: #070a0d; padding-block: clamp(104px,11vw,168px); }
-.precisionGrid { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--margin); display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: clamp(40px,5vw,72px) 24px; align-items: end; >p:first-child { grid-column: 1/4; align-self: start; font-size: 15px; color: #52616b; } h2 { grid-column: 1/12; display: grid; font-size: clamp(58px,8.6vw,138px); line-height: .86; letter-spacing: -.06em; span:last-child { padding-left: 9vw; } } >p:last-child { grid-column: 9/13; position: relative; padding-top: 24px; font-size: 20px; line-height: 1.45; color: #25323a; &::before { content: ''; position: absolute; top: 0; left: 0; width: 56px; height: 2px; background: var(--signal); } } }
+.precisionGrid { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--margin); display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: clamp(40px,5vw,72px) 24px; align-items: end; >p:first-child { grid-column: 1/4; align-self: start; font-size: 15px; color: #52616b; } h2 { grid-column: 1/12; display: grid; font-size: clamp(58px,8.6vw,138px); line-height: .86; letter-spacing: -.06em; > span:last-child { padding-left: 9vw; } } >p:last-child { grid-column: 9/13; position: relative; padding-top: 24px; font-size: 20px; line-height: 1.45; color: #25323a; &::before { content: ''; position: absolute; top: 0; left: 0; width: 56px; height: 2px; background: var(--signal); } } }
 .processLayout { display: grid; gap: 48px; >header p { color: var(--muted); font-size: 20px; line-height: 1.45; margin-top: 16px; } }
 .processStage { min-width: 0; }
 .process { display: grid; grid-template-columns: 24px 1fr; column-gap: 24px; ol { display: grid; gap: 48px; margin: 0; padding: 0; list-style: none; } li { display: grid; gap: 8px; color: var(--faint); transition: color 300ms; } li.processActive { color: var(--ink); } li>span { font-size: 13px; font-variant-numeric: tabular-nums; } h3 { color: inherit; } li p { color: var(--muted); max-width: 46ch; } }
@@ -110,11 +109,6 @@
   .precisionGrid { h2 { grid-column: 1/13; } >p:last-child { grid-column: 7/13; } }
 }
 @media (max-width:767px) {
-  .heroReviews { flex-wrap: wrap; gap: 4px 6px; }
-  .heroReviews > strong { font-size: 18px; }
-  .reviewStars { gap: 2px; }
-  .reviewStars svg { width: 11px; height: 11px; }
-  .heroReviewMeta { font-size: 12px; }
   .heroLocations { column-gap: 8px; }
   .locationEntry { gap: 8px; }
   .heroLocations a { gap: 6px; font-size: 14px; }
@@ -125,7 +119,7 @@
   .heroFoot nav a { padding-inline: 8px; font-size: 12px; }
   .branchQuick { align-items: flex-end; .branchLinks { column-gap: 16px; } }
   .precision { padding-block: 88px; }
-  .precisionGrid { row-gap: 32px; >p:first-child,h2,>p:last-child { grid-column: 1/13; } h2 { font-size: clamp(44px,13.5vw,64px); line-height: .9; span:last-child { padding-left: 0; } } >p:last-child { max-width: 30ch; font-size: 17px; } }
+  .precisionGrid { row-gap: 32px; >p:first-child,h2,>p:last-child { grid-column: 1/13; } h2 { font-size: clamp(44px,13.5vw,64px); line-height: .9; > span:last-child { padding-left: 0; } } >p:last-child { max-width: 30ch; font-size: 17px; } }
   .reviewHead { grid-template-columns: 1fr; gap: 32px; h2 { max-width: 9ch; font-size: clamp(48px,15vw,66px); } }
   .googleMark { min-height: 120px; padding-inline: 0; place-items: start; img { width: min(86%,360px); } }
   .map { width: 100%; min-height: 440px; }

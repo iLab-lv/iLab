@@ -106,6 +106,8 @@ export default function PhotoRepairPage({
   return (
     <ServiceRecovery>
       <ServiceHero
+        hasReviews={true}
+        reviewsSummary={reviewsSummary}
         locale={locale}
         title={copy.h1 === 'Ремонт фотоаппаратов в Риге'
           ? <><span>Ремонт</span>{' '}<span>фото<span className={photoStyles.mobileTitleBreak}>{'\u00ad'}</span>аппаратов</span>{' '}<span>в Риге</span></>
@@ -120,6 +122,8 @@ export default function PhotoRepairPage({
         placeholderLabel={copy.meta.imageAlt}
       ><QuickTrustFacts {...getQuickTrustFacts("photo", locale)} /></ServiceHero>
 
+      <Reviews locale={locale} reviewsSummary={reviewsSummary} />
+
       <ServiceBlock kind="intro"><section className={`${s.section} ${s.introSection}`}>
         <div className={s.container}>
           <h2 className={s.h2}>{headings.intro.titleStart}<span>{headings.intro.titleAccent}</span>{headings.intro.titleEnd}</h2>
@@ -133,7 +137,6 @@ export default function PhotoRepairPage({
       <ServiceBlock kind="photoWhy"><EditorialWhy {...whyContent} /></ServiceBlock>
       <ServiceBlock kind="quality"><QualitySection id="photo-quality" content={qualityContent} /></ServiceBlock>
       <ServiceBlock kind="photoDecision"><RepairDecisionSection id="photo-decision" content={{ ...copy.decision, ...headings.decision }} /></ServiceBlock>
-      <Reviews locale={locale} reviewsSummary={reviewsSummary} />
       <FullLocations id="photo-locations" locale={locale} title={copy.locations.titleMain + copy.locations.titleAccent} subtitle={copy.locations.subtitle} locations={siteSettings?.locations || []} pinPositions={siteSettings?.pinPositions || {}} defaultHours={siteSettings?.hours || []} />
       <RepairProcess id="photo-repair-steps" locale={locale} variant="photo" content={processContent} backgroundImage="/images/hands-closeup.png" />
       <ServiceBlock kind="guide"><Guide id="photo-guide" locale={locale} variant="photo" content={guideContent} /></ServiceBlock>

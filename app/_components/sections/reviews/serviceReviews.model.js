@@ -30,12 +30,12 @@ export function getReviewWindow(reviews, page = 0, size = 2) {
 
 export function getReviewsCopy(locale = 'lv') {
   return locale === 'ru' ? {
-    title: 'Отзывы клиентов', subtitle: 'Реальные люди. Реальный опыт. В Риге.',
+    title: 'Отзывы клиентов', titleParts: [{ accent: 'Отзывы' }, ' клиентов'], subtitle: 'Реальные люди. Реальный опыт. В Риге.',
     word: 'отзывов', location: 'Сервисный центр iLab · Рига', all: 'Смотреть все отзывы',
     previous: 'Предыдущие отзывы', next: 'Следующие отзывы', position: 'Показанные отзывы',
     empty: 'Сейчас для этого филиала ещё нет избранных отзывов.',
   } : {
-    title: 'Klientu atsauksmes', subtitle: 'Reāli cilvēki. Reāla pieredze. Rīgā.',
+    title: 'Klientu atsauksmes', titleParts: ['Klientu ', { accent: 'atsauksmes' }], subtitle: 'Reāli cilvēki. Reāla pieredze. Rīgā.',
     word: 'atsauksmes', location: 'iLab servisa centrs · Rīga', all: 'Skatīt visas atsauksmes',
     previous: 'Iepriekšējās atsauksmes', next: 'Nākamās atsauksmes', position: 'Redzamās atsauksmes',
     empty: 'Šobrīd šai filiālei vēl nav izceltu atsauksmju.',
@@ -43,11 +43,15 @@ export function getReviewsCopy(locale = 'lv') {
 }
 
 export function getQuantityReviewTitle(total, locale = 'lv') {
-  if (total == null) return locale === 'ru' ? 'Отзывы Google' : 'Google atsauksmes';
+  return getQuantityReviewTitleParts(total, locale).map(part => typeof part === 'string' ? part : part.accent).join('');
+}
+
+export function getQuantityReviewTitleParts(total, locale = 'lv') {
+  if (total == null) return locale === 'ru' ? [{ accent: 'Отзывы' }, ' Google'] : ['Google ', { accent: 'atsauksmes' }];
   const number = new Intl.NumberFormat(locale === 'ru' ? 'ru-RU' : 'lv-LV').format(total);
   const category = new Intl.PluralRules(locale).select(total);
-  const label = locale === 'ru'
-    ? category === 'one' ? 'отзыв Google' : category === 'few' ? 'отзыва Google' : 'отзывов Google'
-    : category === 'one' ? 'Google atsauksme' : 'Google atsauksmes';
-  return `${number} ${label}`;
+  const word = locale === 'ru'
+    ? category === 'one' ? 'отзыв' : category === 'few' ? 'отзыва' : 'отзывов'
+    : category === 'one' ? 'atsauksme' : 'atsauksmes';
+  return locale === 'ru' ? [`${number} `, { accent: word }, ' Google'] : [`${number} Google `, { accent: word }];
 }

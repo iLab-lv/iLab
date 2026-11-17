@@ -1,6 +1,7 @@
 import { headers } from 'next/headers';
 
 import { getSiteSettings } from '@/lib/siteSettings';
+import { getPageCtaCatalog } from '@/lib/navigation/getPageCtaCatalog';
 
 import StructuredData from './StructuredData';
 import ServiceMotion from './ServiceMotion';
@@ -21,9 +22,10 @@ function getLocaleFromPathname(pathname = '/') {
 }
 
 export default async function SiteLayout({ children }) {
-  const [siteSettings, headersList] = await Promise.all([
+  const [siteSettings, headersList, pageCtaCatalog] = await Promise.all([
     getSiteSettings(),
     headers(),
+    getPageCtaCatalog(),
   ]);
 
   const pathname =
@@ -37,7 +39,7 @@ export default async function SiteLayout({ children }) {
     <div className={`${l.siteRoot} ${serviceClassName} ${motion.scope}`} data-service-redesign="">
       <StructuredData siteSettings={siteSettings} />
 
-      <UiDialogsProvider locale={locale} siteSettings={siteSettings} serviceRedesign serviceClassName={serviceClassName}>
+      <UiDialogsProvider locale={locale} siteSettings={siteSettings} serviceRedesign serviceClassName={serviceClassName} pageCtaCatalog={pageCtaCatalog}>
         <ServiceMotion />
         <a href="#main" className={l.skipLink}>
           {locale === 'ru' ? 'Перейти к содержанию' : 'Pāriet uz saturu'}

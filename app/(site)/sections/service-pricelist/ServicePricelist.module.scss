@@ -96,6 +96,7 @@
 :global([data-service-recovery]) .modelLink, :global([data-service-recovery]) .modelLinkActive { min-height: 44px; padding-block: 12px; color: var(--service-ink-2); font-size: var(--service-small-size); }
 :global([data-service-recovery]) .modelLinkActive { color: var(--service-signal); }
 :global([data-service-recovery]) .modelLink:hover { color: var(--service-signal); }
+:global([data-service-recovery]) :is(.modelLink, .modelLinkActive):focus-visible { box-shadow: var(--service-glow-micro); }
 @media (max-width: 1023px) {
   :global([data-service-recovery]) .layout { grid-template-columns: minmax(0, 1fr); }
   :global([data-service-recovery]) .left { position: static; order: 1; }

@@ -9,6 +9,8 @@ const require = createRequire(import.meta.url);
 const { transform } = require('next/dist/build/swc');
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 const styles = { __esModule: true, default: new Proxy({}, { get: (_, key) => key }) };
+const headingSource = await read('lib/presentation/signatureHeadings.js');
+const headings = await import(`data:text/javascript;base64,${Buffer.from(headingSource).toString('base64')}`);
 
 test('model reviews forward the authoritative summary into the shared compact section', async () => {
   const Shared = () => null;
@@ -63,6 +65,7 @@ async function component(file, dependencies = {}) {
   const evaluated = { exports: {} };
   new Function('require', 'module', 'exports', 'React', code)((id) => {
     if (id.endsWith('.scss')) return styles;
+    if (id === '@/lib/presentation/signatureHeadings') return headings;
     if (id in dependencies) return dependencies[id];
     if (id === 'react' || id.startsWith('node:') || id === 'sharp') return require(id);
     throw new Error(`Unexpected dependency: ${id}`);

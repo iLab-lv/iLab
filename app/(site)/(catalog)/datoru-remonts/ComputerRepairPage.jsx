@@ -218,6 +218,7 @@ export default function ComputerRepairPage({
   return (
     <>
       <CatalogHero
+        hasReviews={page.sections?.hasReviews}
         variant="hub"
         locale={locale}
         title={headerTitle}
@@ -235,6 +236,8 @@ export default function ComputerRepairPage({
       </CatalogHero>
 
       <main className={s.main}>
+        {page.sections?.hasReviews && <Reviews locale={locale} />}
+
         <section className={s.section} aria-labelledby="computers-intro-h2">
           <div className={s.container}>
             <h2 id="computers-intro-h2" className={s.h2}>
@@ -269,7 +272,6 @@ export default function ComputerRepairPage({
           /></div>
         )}
 
-        {page.sections?.hasReviews && <Reviews locale={locale} />}
         {page.sections?.hasProcess && <Process locale={locale} />}
 
       <HubLocations id="computer-locations" locale={locale} />

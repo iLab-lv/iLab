@@ -11,6 +11,15 @@
   --service-counter-hairline: #243039;
   --service-signal: #47c6e2;
   --service-signal-2: #6fd6ec;
+  --service-signature: #22d3ee;
+  --service-glow-heading-hero: 0 0 40px rgba(34, 211, 238, .35), 0 0 80px rgba(34, 211, 238, .15);
+  --service-glow-heading-section: 0 0 24px rgba(34, 211, 238, .18), 0 0 54px rgba(34, 211, 238, .08);
+  // Service UI illumination; signature headline styling remains independent.
+  --service-glow-interactive: 0 0 12px rgba(71, 198, 226, .18), 0 0 24px rgba(71, 198, 226, .08);
+  --service-glow-border: 0 0 8px rgba(71, 198, 226, .14);
+  --service-glow-micro: 0 0 5px rgba(71, 198, 226, .22);
+  --service-glow-inset: inset 0 0 10px rgba(71, 198, 226, .2);
+  --service-glow-focus-line: 0 1px 0 var(--service-signal), 0 3px 6px -3px rgba(71, 198, 226, .4);
   --service-on-signal: #061016;
   --service-whatsapp: #25d366;
   --service-whatsapp-hover: #1fbd5a;
@@ -78,6 +87,8 @@
   }
   @media (min-width: 1280px) { --service-margin: 96px; --service-rail: 96px; }
   @media (max-width: 767px) {
+    --service-glow-heading-hero: 0 0 24px rgba(34, 211, 238, .35), 0 0 48px rgba(34, 211, 238, .15);
+    --service-glow-heading-section: 0 0 16px rgba(34, 211, 238, .18), 0 0 32px rgba(34, 211, 238, .08);
     --service-home-display-size: clamp(42px, 13vw, 58px);
     --service-home-display-leading: .94;
     --service-display-size: clamp(48px, 14vw, 68px);

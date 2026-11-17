@@ -166,3 +166,18 @@
 }
 
 @keyframes serviceButtonTrace { to { stroke-dashoffset: -100; } }
+
+// Explicit opt-in for important Service actions; utility and protected UI stay flat.
+:global([data-service-redesign]) {
+  .button.glow:is(.primary, .secondary) {
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+    &:focus-visible:not(:disabled):not([aria-disabled='true']) { box-shadow: var(--service-glow-border); }
+  }
+  .button.glow.primary:focus-visible:not(:disabled):not([aria-disabled='true']) { box-shadow: var(--service-glow-interactive); }
+  @media (hover: hover) and (pointer: fine) {
+    .button.glow.secondary:hover:not(:disabled):not([aria-disabled='true']) { box-shadow: var(--service-glow-border); }
+    .button.glow.primary:hover:not(:disabled):not([aria-disabled='true']) { box-shadow: var(--service-glow-interactive); }
+  }
+  .button.glow:is(.primary, .secondary):active:not(:disabled):not([aria-disabled='true']) { box-shadow: none; }
+  @media (prefers-reduced-motion: reduce) { .button.glow:is(.primary, .secondary) { transition: none; } }
+}

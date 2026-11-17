@@ -342,6 +342,8 @@ export default function TabletBrandPage({
   return (
     <div data-catalog-brand>
       <BrandHero
+        headingParts={page.hero?.headingParts}
+        hasReviews={page.sections?.hasReviews}
         title={headerTitle}
         lead={headerLead}
         crumbs={breadcrumbs}
@@ -355,31 +357,9 @@ export default function TabletBrandPage({
         <QuickTrustFacts id="why" {...getQuickTrustFacts("tablet", locale)} />
       </BrandHero>
 
-      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="tablet-brand-intro-h2">
-        <header>
-          <h2 id="tablet-brand-intro-h2">
-            {strings.introTitle}
-          </h2>
-
-        </header>
-        <div className={brand.prose}>
-          <p
-            dangerouslySetInnerHTML={{ __html: strings.introLead }}
-          />
-
-          <p
-            dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
-          />
-        </div>
-      </section>
-
-      <BrandServices
-        id="tablet-brand-services"
-        title={strings.servicesHeading}
-        items={popularServices}
-        locale={locale}
-        modelAction={dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
-      />
+      {page.sections?.hasReviews && (
+        <Reviews locale={locale} />
+      )}
 
       <DeviceSelector
         variant="brand"
@@ -407,9 +387,31 @@ export default function TabletBrandPage({
         </section>
       )}
 
-      {page.sections?.hasReviews && (
-        <Reviews locale={locale} />
-      )}
+      <section className={`${skin.section} ${brand.intro}`} aria-labelledby="tablet-brand-intro-h2">
+        <header>
+          <h2 id="tablet-brand-intro-h2">
+            {strings.introTitle}
+          </h2>
+
+        </header>
+        <div className={brand.prose}>
+          <p
+            dangerouslySetInnerHTML={{ __html: strings.introLead }}
+          />
+
+          <p
+            dangerouslySetInnerHTML={{ __html: strings.introParagraph }}
+          />
+        </div>
+      </section>
+
+      <BrandServices
+        id="tablet-brand-services"
+        title={strings.servicesHeading}
+        items={popularServices}
+        locale={locale}
+        modelAction={dedupeAndSort(devicesAll, brandSlug, CATEGORY_KEY).length > 0 ? { href: '#brand-modeli', label: strings.scrollCta?.label } : undefined}
+      />
 
       <div id="process-h2" className={brand.anchor} />
 

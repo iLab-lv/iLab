@@ -2,6 +2,7 @@ import { LOCATIONS } from '@/data/site.config';
 import { buildInfoHref } from '@/lib/routes/routeI18n';
 import { getFinalCtaContent } from '../final-cta/finalCta.i18n';
 import s from './CatalogHubSkin.module.scss';
+import { SignatureAccent } from '../headings/SignatureText';
 
 export default function HubFinalCta({ locale = 'lv' }) {
   const content = getFinalCtaContent(locale, 'iphone');
@@ -11,7 +12,7 @@ export default function HubFinalCta({ locale = 'lv' }) {
       <div>
         <div>
           <p className={s.processEyebrow}>{content.eyebrow}</p>
-          <h2 id="final-cta-title">{content.titleStart} {content.titleAccent}</h2>
+          <h2 id="final-cta-title">{content.titleStart} <SignatureAccent>{content.titleAccent}</SignatureAccent></h2>
           <p className={s.finalText}>{content.text}</p>
         </div>
         <div className={s.finalActions}>
