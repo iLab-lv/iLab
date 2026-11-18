@@ -6,13 +6,39 @@ import { getReviewWindow } from './serviceReviews.model';
 import home from '@/app/(site)/HomePage.module.scss';
 import s from './ServiceReviews.module.scss';
 
-export default function ReviewLocation({ place, index, variant, locale, copy }) {
+export default function ReviewLocation({ place, index, variant, locale, copy, softTransitions = false }) {
   const compact = variant === 'compact';
   const [page, setPage] = useState(0);
   const list = useRef(null), previousPage = useRef(0), paginationAnchor = useRef(null);
   const listId = useId();
+  const outgoing = useRef(null);
+  const [transitioning, setTransitioning] = useState(false);
   const pageWindow = getReviewWindow(place.reviews, page);
   const reviews = compact ? pageWindow.items : place.reviews.slice(0, 4);
+
+  useEffect(() => {
+    if (!softTransitions || !compact) return;
+    const media = matchMedia('(prefers-reduced-motion: reduce)');
+    const changed = () => { if (media.matches) outgoing.current?.finish(); };
+    media.addEventListener('change', changed);
+    return () => { const animation = outgoing.current; outgoing.current = null; animation?.cancel(); media.removeEventListener('change', changed); };
+  }, [softTransitions, compact]);
+
+  useLayoutEffect(() => {
+    if (!softTransitions || !compact || !list.current) return;
+    const element = list.current, area = element.parentElement;
+    let minimum = 0, width = 0;
+    const reserve = () => {
+      const nextWidth = element.getBoundingClientRect().width;
+      if (Math.abs(nextWidth - width) > 1) { minimum = 0; width = nextWidth; area.style.minHeight = ''; }
+      if (element.querySelector('[aria-expanded="true"]')) return;
+      minimum = Math.max(minimum, element.getBoundingClientRect().height);
+      area.style.minHeight = `${Math.ceil(minimum)}px`;
+    };
+    const observer = new ResizeObserver(reserve);
+    observer.observe(element); reserve();
+    return () => { observer.disconnect(); area.style.minHeight = ''; };
+  }, [softTransitions, compact]);
 
   useLayoutEffect(() => {
     if (compact && list.current) list.current.dispatchEvent(new CustomEvent('ilab:reviews-change', { bubbles: true }));
@@ -53,28 +79,41 @@ export default function ReviewLocation({ place, index, variant, locale, copy }) 
 
   const renderReviews = (items) => items.map((review, i) => <HomeReview key={review.id || `${page}-${i}`} review={review} locale={locale} />);
   const changePage = (direction, event) => {
-    if (direction < 0 ? !pageWindow.previous : !pageWindow.next) return;
-    const button = event.currentTarget, box = button.getBoundingClientRect();
-    if (box.top >= 0 && box.bottom <= globalThis.window.innerHeight) paginationAnchor.current = { button, top: box.top };
-    setPage(page + direction);
+    if (outgoing.current || transitioning || (direction < 0 ? !pageWindow.previous : !pageWindow.next)) return;
+    const button = event.currentTarget;
+    const commit = () => {
+      const current = button.getBoundingClientRect();
+      if (current.top >= 0 && current.bottom <= globalThis.window.innerHeight) paginationAnchor.current = { button, top: current.top };
+      setPage(page + direction);
+    };
+    if (!softTransitions || matchMedia('(prefers-reduced-motion: reduce)').matches || !list.current?.animate) {
+      commit(); return;
+    }
+    setTransitioning(true);
+    const animation = list.current.animate([{ opacity: 1 }, { opacity: .25 }], { duration: 160, easing: 'ease-out', fill: 'forwards' });
+    outgoing.current = animation;
+    animation.finished.then(() => {
+      if (outgoing.current !== animation) return;
+      outgoing.current = null; animation.cancel(); commit(); setTransitioning(false);
+    }).catch(() => {});
   };
-  return <article className={s.location} data-review-location={place.key}>
+  return <article className={s.location} data-review-location={place.key} data-review-motion={softTransitions ? 'landing' : undefined}>
     <p className={home.branchHead}><span>0{index + 1}</span><strong>{place.label}</strong><small>{copy.location}</small></p>
     <div className={home.rating} data-review-rating>
       <strong><span data-count={place.rating != null ? Number(place.rating).toFixed(1) : undefined}>{place.rating != null ? Number(place.rating).toFixed(1) : '–'}</span><small>/ 5</small></strong>
       <div>{place.rating != null && <HomeStars rating={Number(place.rating)} large />}{place.count != null && <span>{place.count} {copy.word}</span>}</div>
     </div>
     <div className={s.reviewArea} data-review-pagination={compact || undefined}>
-      <div ref={list} id={listId} className={`${home.reviewList} ${s.list}`} data-home-reviews>
+      <div ref={list} id={listId} className={`${home.reviewList} ${s.list}`} data-home-reviews aria-busy={transitioning || undefined}>
         {renderReviews(reviews)}
         {!reviews.length && <p>{copy.empty}</p>}
       </div>
     </div>
     {compact && place.reviews.length > 2 && <nav className={s.pagination} aria-label={`${copy.position}: ${place.label}`}>
       {/* Keep boundary arrows focusable so a pair change never drops keyboard focus. */}
-      <button type="button" aria-controls={listId} aria-label={`${copy.previous}: ${place.label}`} aria-disabled={!pageWindow.previous} onClick={event => changePage(-1, event)}>←</button>
+      <button type="button" aria-controls={listId} aria-label={`${copy.previous}: ${place.label}`} aria-disabled={transitioning || !pageWindow.previous} onClick={event => changePage(-1, event)}>←</button>
       <output aria-live="polite" aria-atomic="true">{pageWindow.feedback}</output>
-      <button type="button" aria-controls={listId} aria-label={`${copy.next}: ${place.label}`} aria-disabled={!pageWindow.next} onClick={event => changePage(1, event)}>→</button>
+      <button type="button" aria-controls={listId} aria-label={`${copy.next}: ${place.label}`} aria-disabled={transitioning || !pageWindow.next} onClick={event => changePage(1, event)}>→</button>
     </nav>}
     {place.href && <a className={home.more} target="_blank" rel="noopener noreferrer" href={place.href}><svg viewBox="0 0 32 10" aria-hidden="true"><path d="M0 5h30M26 1l4 4-4 4" /></svg>{copy.all}</a>}
   </article>;

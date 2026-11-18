@@ -1,0 +1,51 @@
+.locations { --location-radius: 12px; }
+.mapWrap { position: relative; }
+.map { position: relative; width: 100%; aspect-ratio: 16/8; overflow: hidden; border-radius: var(--location-radius); background: #101a20; isolation: isolate; cursor: grab; &:focus-visible { outline: 2px solid var(--service-signal); outline-offset: 5px; } &[data-dragging='true'] { cursor: grabbing; } }
+.mapPlane { position: absolute; width: 100%; aspect-ratio: 1; transform-origin: center; transition: left 260ms ease-out, top 260ms ease-out, transform 260ms ease-out;
+  > img { display: block; width: 100%; height: 100%; user-select: none; pointer-events: none; filter: saturate(0) brightness(1.7) contrast(1.05); }
+}
+.map[data-dragging='true'] .mapPlane { transition: none; }
+// V2 owns the actual square, pulse rings, label typography and selected colors.
+// Only the image-space anchor and inward label placement belong to this map.
+.locations .map .marker { position: absolute; width: 48px; height: 48px; min-height: 48px; max-width: none; padding: 0; transform: translate(-50%, -50%) scale(var(--pin-inverse-zoom)); transform-origin: center;
+  > i { position: absolute; top: 18px; left: 18px; }
+  > span { position: absolute; top: 50%; left: 40px; transform: translateY(-50%); width: max-content; max-width: 190px; white-space: normal; text-align: left; }
+  &[data-label-side='left'] > span { left: auto; right: 40px; }
+  &:focus-visible { outline: 2px solid var(--service-signal); outline-offset: 2px; }
+}
+.surface { margin-top: 24px; overflow: hidden; border-radius: var(--location-radius); background: radial-gradient(ellipse at 100% 0, rgba(34,211,238,.055), transparent 65%), var(--service-paper-2); }
+.selector { display: flex; padding-inline: 32px; gap: 32px; border-bottom: 1px solid var(--service-hairline);
+  .locations & > button { display: flex; align-items: center; gap: 10px; min-height: 72px; padding: 16px 0; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--service-ink-2); font: 500 19px/1.3 var(--service-font); text-align: left; i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; } &[aria-pressed='true'] { color: var(--service-ink); border-bottom-color: var(--service-signal); i { background: var(--service-signal); box-shadow: 0 0 12px rgba(34,211,238,.4); } } }
+}
+.panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.photo { position: relative; min-width: 0; min-height: 480px; background: #091115; }
+.photoLayer { position: absolute; inset: 0; opacity: 0; transition: opacity 220ms ease-in-out; pointer-events: none; &[data-active='true'] { opacity: 1; } img { display: block; width: 100%; height: 100%; } }
+.locations .details { display: grid; align-content: center; gap: 16px; min-width: 0; padding: 32px 40px;
+  h3 { scroll-margin-top: 112px; font-size: clamp(26px, 2.7vw, 38px); font-weight: 500; line-height: 1.1; letter-spacing: -.035em; &:focus-visible { outline: 2px solid var(--service-signal); outline-offset: 6px; } }
+  address { color: var(--service-ink-2); font-size: 16px; line-height: 1.5; font-style: normal; }
+  .phone { width: fit-content; font-size: clamp(26px, 2.5vw, 36px); font-weight: 500; letter-spacing: -.025em; font-variant-numeric: tabular-nums; text-decoration: none; }
+}
+.hours { summary { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; min-height: 44px; cursor: pointer; list-style: none; font-size: 13px; &::-webkit-details-marker { display: none; } > span:last-child { white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; } }
+  table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 14px; th, td { padding-block: 6px; border-top: 1px solid var(--service-hairline); text-align: left; font-weight: 400; } td { text-align: right; } }
+}
+.status { display: inline-flex; align-items: center; gap: 8px; color: var(--service-ink-2); i { width: 6px; height: 6px; flex: none; border-radius: 50%; background: currentColor; &[data-open='true'] { background: var(--service-signal); } } }
+.locations .notice { color: var(--service-ink-2); font-size: 14px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 1023px) {
+  .locations .details { padding: 24px; gap: 12px; }
+  .photo { min-height: 440px; }
+  .selector { padding-inline: 24px; }
+}
+@media (max-width: 767px) {
+  .map { aspect-ratio: auto; height: 260px; }
+  .locations .map .marker > span { max-width: 140px; }
+  .surface { margin-top: 16px; }
+  .selector { padding-inline: 16px; gap: 20px; .locations & > button { flex: 1; min-height: 68px; font-size: 16px; } }
+  .panel { grid-template-columns: minmax(0, 1fr); }
+  .photo { min-height: 0; height: 280px; }
+  .locations .details { padding: 24px 20px; gap: 14px; .phone { min-height: 44px; display: inline-flex; align-items: center; } }
+}
+@media (max-width: 640px) {
+  .locations .map .marker { > span { left: 34px; } &[data-label-side='left'] > span { left: auto; right: 34px; } }
+}
+@media (prefers-reduced-motion: reduce) { .mapPlane, .photoLayer, .locations .map .marker > span { transition: none; } }
