@@ -1,7 +1,7 @@
 const content = {
   lv: {
-    metaTitle: 'iLab — Landing V3 priekšskatījums',
-    metaDescription: 'iLab telefonu remonta reklāmas lapas priekšskatījums. Rīga.',
+    metaTitle: 'Telefonu remonts Rīgā — ātri un ar garantiju | iLab',
+    metaDescription: 'Telefonu remonts Rīgā: ekrāna un baterijas maiņa, bezmaksas diagnostika un garantija. Domina Shopping un Spice Life. Sazinies ar iLab un precizē remonta laiku.',
     title: 'Telefonu remonts',
     accent: 'tajā pašā dienā',
     titleEnd: 'Rīgā.',
@@ -38,8 +38,8 @@ const content = {
     },
   },
   ru: {
-    metaTitle: 'iLab — предварительный просмотр Landing V3',
-    metaDescription: 'Предварительный просмотр рекламной страницы ремонта телефонов iLab в Риге.',
+    metaTitle: 'Ремонт телефонов в Риге — быстро и с гарантией | iLab',
+    metaDescription: 'Ремонт телефонов в Риге: замена экрана и батареи, бесплатная диагностика и гарантия. Domina Shopping и Spice Life. Уточните срок ремонта — свяжитесь с iLab.',
     title: 'Ремонт телефонов в Риге',
     accent: 'в тот же день.',
     lead: 'Разбит экран, быстро садится батарея или телефон не заряжается? Поможем вернуть его в работу.',
