@@ -1,0 +1,90 @@
+// Scoped assembly variants; AdsV2 supplies the section and control layouts.
+.section {
+  max-width: 1440px;
+  scroll-margin-top: 88px;
+  border-top: 1px solid var(--service-hairline);
+  h2 { font-size: clamp(36px, 4.4vw, 64px); font-weight: 500; line-height: 1.06; letter-spacing: -.045em; text-wrap: balance; }
+  :where(p, li) { line-height: 1.55; }
+  > header > p { color: var(--service-ink-2); }
+  :is(button, a):focus-visible { outline: 2px solid var(--service-signal); outline-offset: 4px; }
+  :is(button, a)[class] { max-width: 100%; }
+}
+.section.speed {
+  background: #0b131a;
+  > header > :is(h2, p) { min-width: 0; overflow-wrap: anywhere; }
+  [data-v3-sequence='facts'] {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 28px clamp(32px, 5vw, 72px);
+    article { padding-top: 24px; }
+    h3 { font-size: clamp(28px, 2.6vw, 38px); font-weight: 500; letter-spacing: -.035em; line-height: 1.12; }
+    p { margin-top: 12px; }
+    article:first-child { grid-row: span 2; h3 { max-width: 100%; font-size: clamp(64px, 7.2vw, 112px); line-height: 1; letter-spacing: -.06em; color: var(--service-signal); } p { max-width: 24ch; margin-top: 24px; font-size: 20px; color: #d7e5eb; } }
+  }
+  .speedBooking { margin-top: 40px; padding: 28px 32px; border: 0; border-left: 2px solid var(--service-signal); background: #111f28; h3 { font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2; letter-spacing: -.025em; } }
+}
+.section.trustBand {
+  gap: clamp(28px, 4vw, 64px);
+  padding-block: clamp(64px, 7vw, 104px);
+  > article { min-width: 0; }
+  strong { display: flex; align-items: baseline; white-space: nowrap; font-size: clamp(64px, 8.2vw, 132px); overflow-wrap: normal; }
+  strong b { font-weight: inherit; }
+  p { margin-top: 20px; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.35; }
+  span { display: block; margin-top: 10px; font-size: 13px; }
+  &[data-trust-count='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 601px) and (max-width: 1023px) {
+  .section.trustBand strong { font-size: clamp(44px, 7.5vw, 64px); }
+}
+@media (max-width: 600px) {
+  .section.trustBand {
+    &, &[data-trust-count='2'] { grid-template-columns: minmax(0, 1fr); }
+    > article { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 20px; }
+    strong { grid-row: span 2; align-self: center; font-size: clamp(34px, 10vw, 48px); }
+    p { margin: 0; font-size: 16px; }
+    span { margin-top: 6px; font-size: 12px; overflow-wrap: anywhere; }
+  }
+}
+.section.repairs { background: radial-gradient(ellipse at 90% 60%, rgba(12,64,80,.12), transparent 60%); }
+.section.brands { background: linear-gradient(180deg, #0b141a, var(--service-paper));
+  figure { transition: background-color 180ms ease; &:hover { background-color: rgba(34,211,238,.025); figcaption { color: var(--service-signal); } img:not([data-brand='samsung']) { filter: drop-shadow(0 0 10px rgba(34,211,238,.15)); } } }
+}
+.section.process { background: linear-gradient(135deg, #0d171d, #091015 65%); }
+.section [data-v3-sequence] > :is(article, li) { position: relative; }
+.sequenceRule { position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: var(--service-signal); opacity: .35; transform-origin: left; }
+.section.process ol > li::before { font-size: 16px; }
+.section .meta { font-size: 13px; color: var(--service-ink-2); }
+.serviceDetail { scroll-margin-top: 100px; &:focus { outline: 2px solid var(--service-signal); outline-offset: 8px; } }
+.section.delivery { background: linear-gradient(135deg, rgba(15, 34, 43, .5), transparent 70%); }
+.partners > div { display: grid; place-items: center; min-width: 0; background: #f1f4f5; padding: 12px; img { width: 120px; max-width: 100%; object-fit: contain; } }
+.faq { scroll-margin-top: 88px;
+  > section { background: transparent; padding-block: 96px; scroll-margin-top: 88px; border-top: 1px solid var(--service-hairline); > div { width: 100%; max-width: 1440px; padding-inline: var(--service-margin); } }
+  h2 { color: var(--service-ink); font: 500 clamp(36px,4.4vw,64px)/1.06 var(--service-font); letter-spacing: -.045em; }
+  p { color: var(--service-ink-2); }
+  details { border-radius: 0; border-width: 1px 0 0; background: transparent; &:last-child { border-bottom-width: 1px; } &:hover { background: rgba(34,211,238,.025); } }
+  summary { color: var(--service-ink); padding-inline: 0; font-weight: 500; }
+  details > div { padding-left: 0; padding-right: 0; }
+}
+.section.final {
+  --service-glow-heading-section: 0 0 28px rgba(34,211,238,.25), 0 0 60px rgba(34,211,238,.1);
+  background: radial-gradient(ellipse at 20% 60%, rgba(34,211,238,.16), transparent 62%), radial-gradient(ellipse at 90% 100%, rgba(13,83,106,.13), transparent 60%), linear-gradient(130deg, #0b181f, #080e13 75%);
+  box-shadow: inset 0 1px rgba(71,198,226,.22);
+  > div > a:first-child { box-shadow: var(--service-glow-interactive); background: linear-gradient(135deg, var(--service-signal-2), var(--service-signal)); }
+}
+.section.final h2 { max-width: 18ch; font-size: clamp(48px, 7.2vw, 104px); line-height: 1.04; }
+.section .finalLead { max-width: 48ch; margin-block: 32px 40px; color: var(--service-ink-2); font-size: 20px; }
+.footer { max-width: 1440px; }
+@media (max-width: 767px) {
+  .section.speed [data-v3-sequence='facts'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px;
+    article:first-child { grid-column: 1 / -1; grid-row: auto; h3 { font-size: clamp(48px, 14vw, 80px); } p { margin-top: 16px; font-size: 18px; } }
+    h3 { font-size: clamp(24px, 6.2vw, 32px); }
+    p { font-size: 15px; }
+  }
+  .section.speed .speedBooking { padding: 24px 20px; }
+  .section h2, .faq h2 { font-size: clamp(32px, 9vw, 44px); }
+  .section.final h2 { font-size: clamp(40px, 11.5vw, 58px); }
+  .section :is(button, a)[class] { height: auto; min-height: 48px; white-space: normal; }
+  .partners { gap: 12px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .faq > section { padding-block: 56px; }
+}
+@media (prefers-reduced-motion: reduce) { .section.brands figure { transition: none; } }

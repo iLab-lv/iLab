@@ -35,20 +35,25 @@ export default function NavigationRulers() {
   const locale = pathname?.startsWith('/ru') ? 'ru' : 'lv';
   const { navigationOpen, locatorOpen, contactOpen, bookOpen } = useUiDialogs();
   const blocked = navigationOpen || locatorOpen || contactOpen || bookOpen;
-  const [page, setPage] = useState({ pathname: null, sections: [] });
+  return <PageNavigationRulers mainId="main" pageKey={pathname} locale={locale} blocked={blocked} />;
+}
+
+// Reuse the canonical controller in isolated shells without their dialog provider.
+export function PageNavigationRulers({ mainId, pageKey = mainId, locale, blocked = false, className = '' }) {
+  const [page, setPage] = useState({ pageKey: null, sections: [] });
   const [active, setActive] = useState(0);
   const right = useRef(null);
   const range = useRef(null);
-  const sections = page.pathname === pathname ? page.sections : [];
+  const sections = page.pageKey === pageKey ? page.sections : [];
 
   useEffect(() => {
-    const main = document.getElementById('main');
+    const main = document.getElementById(mainId);
     if (!main) return;
     const media = window.matchMedia('(min-width: 1280px)');
     let stop = () => {};
     const connect = () => {
       stop();
-      setPage({ pathname, sections: [] });
+      setPage({ pageKey, sections: [] });
       if (!media.matches) return;
       let frame, targets = [], positions = [], maximum = 0, current = -1;
       let measure = true, discover = true;
@@ -60,7 +65,7 @@ export default function NavigationRulers() {
             const next = getRulerSections(main);
             if (next.length !== targets.length || next.some((target, i) => target.element !== targets[i].element || target.title !== targets[i].title)) {
               targets = next;
-              setPage({ pathname, sections: targets });
+              setPage({ pageKey, sections: targets });
             }
             discover = false;
           }
@@ -97,9 +102,9 @@ export default function NavigationRulers() {
     media.addEventListener('change', connect);
     connect();
     return () => { stop(); media.removeEventListener('change', connect); };
-  }, [pathname]);
+  }, [mainId, pageKey]);
 
-  return <div className={s.rulers} data-service-rulers hidden={blocked || !sections.length} inert={blocked}>
+  return <div className={`${s.rulers} ${className}`} data-service-rulers hidden={blocked || !sections.length} inert={blocked}>
     <RulerControls locale={locale} sections={sections} active={active} rightRef={right} rangeRef={range} />
   </div>;
 }

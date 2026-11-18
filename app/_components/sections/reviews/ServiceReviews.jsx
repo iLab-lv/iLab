@@ -9,6 +9,7 @@ import s from './ServiceReviews.module.scss';
 export default async function ServiceReviews({
   id = 'reviews', locale = 'lv', reviewsSummary, variant = 'compact',
   title, subtitle, headerVariant = variant === 'full' ? 'standard' : 'quantity',
+  softTransitions = false,
 }) {
   const summary = reviewsSummary ?? await getReviewsSummary();
   const places = getServiceReviewPlaces(summary, locale);
@@ -23,7 +24,7 @@ export default async function ServiceReviews({
       <div className={home.googleMark}><img src="/images/home/google-logo-white.png" alt="Google" width="3748" height="1328" loading="lazy" decoding="async" /></div>
     </header>
     <div className={`${home.reviewGrid} ${s.grid}`} style={{ '--review-rows': variant === 'full' ? 4 : 2 }}>
-      {places.map((place, index) => <ReviewLocation key={place.key} place={place} index={index} variant={variant} locale={locale} copy={copy} />)}
+      {places.map((place, index) => <ReviewLocation key={place.key} place={place} index={index} variant={variant} locale={locale} copy={copy} softTransitions={softTransitions} />)}
     </div>
   </section>;
 }

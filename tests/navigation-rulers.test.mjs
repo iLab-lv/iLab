@@ -36,7 +36,7 @@ test('ruler SSR is deterministic and browser-independent, with localized control
   }
 });
 
-test('only the public Service shell owns the canonical ruler instance', async () => {
+test('Service owns the default rulers; V3 explicitly reuses the controller with its own main and drawer state', async () => {
   const [layout, home, motion, ads, adsV2, lp, root] = await Promise.all([
     read('app/(site)/layout.jsx'), read('app/(site)/HomePage.jsx'), read('app/(site)/HomeMotion.jsx'),
     read('app/ads/layout.jsx'), read('app/adsV2/layout.jsx'), read('app/(lp)/layout.jsx'), read('app/layout.jsx'),
@@ -44,6 +44,17 @@ test('only the public Service shell owns the canonical ruler instance', async ()
   assert.equal((layout.match(/<NavigationRulers\s*\/>/g) || []).length, 1);
   for (const source of [home, motion, ads, adsV2, lp, root]) assert.doesNotMatch(source, /<NavigationRulers|<HomeMotion/);
   assert.match(motion, /export function HomeProcess/);
+  const v3 = await read('app/adsV3/AdsV3.jsx');
+  assert.match(v3, /<PageNavigationRulers mainId="ads-v3-main" locale=\{locale\} blocked=\{Boolean\(drawer\)\}/);
+});
+
+test('isolated ruler controller renders without the main-site dialog provider and respects drawer blocking', () => {
+  const html = renderToStaticMarkup(React.createElement(compiledModule.exports.PageNavigationRulers, {
+    mainId: 'ads-v3-main', locale: 'ru', blocked: true,
+  }));
+  assert.match(html, /data-service-rulers="true" hidden="" inert=""/);
+  assert.match(html, /aria-orientation="vertical"/);
+  assert.doesNotMatch(html, /<button|aria-current/);
 });
 
 test('section-free error and utility content gains no targets; protected legacy controls remain standalone', () => {

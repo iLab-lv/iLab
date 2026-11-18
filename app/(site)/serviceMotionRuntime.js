@@ -3,7 +3,8 @@
 const clamp = value => Math.max(0, Math.min(1, value));
 const expo = 'cubic-bezier(.16,1,.3,1)';
 
-export function startServiceMotion(root) {
+export function startServiceMotion(root, { profile = 'service' } = {}) {
+  const polish = profile === 'ads-v3';
   const main = root?.querySelector('main');
   if (!main || !Element.prototype.animate) return () => {};
   const all = (selector, scope = main) => [...scope.querySelectorAll(selector)];
@@ -16,7 +17,7 @@ export function startServiceMotion(root) {
       // Persist only the requested final word opacity, never hidden entrance states.
       if (options.persist && !disposed) element.style.opacity = String(frames.at(-1).opacity);
       animation.cancel(); animations.delete(animation);
-    }).catch(() => {});
+    }).catch(() => { animations.delete(animation); });
     return animation;
   };
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -33,6 +34,7 @@ export function startServiceMotion(root) {
       pending.set(element, () => animation.play()); observer.observe(element);
     }
   };
+  if (!polish) {
   const scan = root.querySelector('[data-page-scan]');
   if (scan) animate(scan, [{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(${innerHeight}px)`, opacity: 1, offset: .85 }, { transform: `translateY(${innerHeight}px)`, opacity: 0 }], { duration: 1050, easing: 'cubic-bezier(.65,0,.35,1)' });
   const header = root.querySelector('header[role="banner"]');
@@ -74,34 +76,117 @@ export function startServiceMotion(root) {
   }
   const statement = home?.querySelector('[data-home-statement]');
   if (statement) [...statement.children].forEach((line, i) => reveal(line, [{ transform: 'translateY(45%)', opacity: .18 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 1000, delay: i * 90 }));
+  }
 
-  const hero = home?.querySelector('#home-hero');
-  const image = hero?.querySelector('[data-home-hero-image]');
+  if (polish) {
+    // Observe stable containers, animate their children, and rearm on exit.
+    // Cancelling on exit restores the fully visible CSS state between visits.
+    const repeats = new Map();
+    const repeatObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      const state = repeats.get(entry.target);
+      if (!state || state.visible === entry.isIntersecting) return;
+      state.visible = entry.isIntersecting;
+      state.active.forEach(animation => animation.cancel());
+      state.active = entry.isIntersecting ? state.play() : [];
+    }), { rootMargin: '0px 0px -12% 0px' });
+    const repeat = (target, play) => {
+      repeats.set(target, { play, active: [], visible: false });
+      repeatObserver.observe(target);
+    };
+    cleanups.push(() => { repeatObserver.disconnect(); repeats.clear(); });
+    const headingSelectors = ['#speed', '#services', '#brands', '#process', '#delivery', '#final-cta'].map(id => `${id} h2`).join(',');
+    const entrance = (element, delay = 0) => {
+      element.dataset.v3Revealed = 'true';
+      return animate(element, [{ opacity: .35, transform: 'translateY(24px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 700, delay });
+    };
+    const track = element => {
+      cleanups.push(() => { delete element.dataset.v3Revealed; });
+    };
+    all(headingSelectors).forEach(heading => {
+      const text = heading.nextElementSibling?.tagName === 'P' ? heading.nextElementSibling : null;
+      track(heading); if (text) track(text);
+      repeat(heading.parentElement, () => [entrance(heading), ...(text ? [entrance(text, 100)] : [])]);
+    });
+    // The speed promise resolves into the existing booking action, after its facts.
+    all('#speed > div:last-child').forEach(strip => {
+      const children = [...strip.children]; children.forEach(track);
+      repeat(strip, () => children.map((child, index) => entrance(child, index * 100)));
+    });
+    all('[data-v3-sequence]').forEach(sequence => {
+      const items = [...sequence.children];
+      const startItem = (item, delay) => {
+        item.dataset.v3Revealed = 'true';
+        const rule = item.querySelector('[aria-hidden="true"]'), active = [];
+        if (rule) active.push(animate(rule, [{ transform: 'scaleX(0)', opacity: 1 }, { transform: 'scaleX(1)', opacity: .35 }], { duration: 950, delay }));
+        const title = item.querySelector('h3, strong'), text = item.querySelector('p'), note = item.querySelector('span:not([aria-hidden])');
+        if (title) active.push(animate(title, [{ opacity: .4, transform: 'translateY(22px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 720, delay }));
+        if (text) active.push(animate(text, [{ opacity: .55, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 620, delay: delay + 100 }));
+        if (note) active.push(animate(note, [{ opacity: .55 }, { opacity: 1 }], { duration: 620, delay: delay + 160 }));
+        return active;
+      };
+      // Desktop rows share a stagger; stacked items replay at their own position.
+      const delivery = sequence.dataset.v3Sequence === 'delivery';
+      const targets = innerWidth >= 1024 && !delivery ? [sequence] : items;
+      targets.forEach(target => {
+        repeat(target, () => target === sequence ? items.flatMap((item, index) => startItem(item, index * 140)) : startItem(target, delivery ? items.indexOf(target) * 80 : 0));
+      });
+      cleanups.push(() => items.forEach(item => { delete item.dataset.v3Revealed; }));
+    });
+  }
+
+  const home = main.querySelector('[data-homepage]');
+  const hero = polish ? main.querySelector('[aria-labelledby="ads-v3-title"]') : home?.querySelector('#home-hero');
+  const image = hero?.querySelector(polish ? '[data-ads-v3-art]' : '[data-home-hero-image]');
   const lists = all('[data-home-reviews]').map(list => ({ list, reviews: all('[data-home-review]', list), current: -1 }));
+  const reviewPeers = group => polish && innerWidth >= 1024
+    ? lists.filter(peer => peer.list.closest('[data-service-reviews]') === group.list.closest('[data-service-reviews]'))
+    : [group];
   const originalStyles = new Map();
   const remember = element => { if (!originalStyles.has(element)) originalStyles.set(element, element.getAttribute('style')); };
   if (image) remember(image);
   const wordAnimations = new Map();
   const focus = (group, index, direction) => {
     const previous = group.current;
-    if (index === previous) return;
+    if (index === previous && !group.refresh) return;
     group.current = index;
+    group.refresh = false;
     group.reviews.forEach((review, i) => {
       review.dataset.reviewFocus = String(i === index);
       const words = all('[data-review-word]', review);
       words.forEach((word, k) => {
         remember(word);
-        if (previous === -1) { word.style.opacity = i === index ? '1' : '.2'; return; }
-        if (i !== index && i !== previous) return;
+        const floor = polish ? .65 : .2;
+        if (previous === -1) { word.style.opacity = i === index ? '1' : String(floor); return; }
+        if (i !== index && i !== previous && !polish) return;
         const opacity = getComputedStyle(word).opacity;
         wordAnimations.get(word)?.cancel();
-        wordAnimations.set(word, animate(word, [{ opacity }, { opacity: i === index ? 1 : .2 }], {
-          duration: 420, delay: (direction < 0 ? words.length - 1 - k : k) * 18,
+        wordAnimations.set(word, animate(word, [{ opacity }, { opacity: i === index ? 1 : floor }], {
+          duration: 420, delay: polish ? Math.min(k * 5, 90) : (direction < 0 ? words.length - 1 - k : k) * 18,
           easing: 'cubic-bezier(.25,.46,.45,.94)', persist: true,
         }));
       });
     });
   };
+  if (polish) lists.forEach(group => {
+    const article = group.list.closest('[data-review-location]');
+    const readable = () => {
+      if (group.reading) return;
+      group.reading = true;
+      group.refresh = true;
+      group.reviews.forEach(review => all('[data-review-word]', review).forEach(word => {
+        remember(word); wordAnimations.get(word)?.cancel(); word.style.opacity = '1';
+      }));
+    };
+    const readPeers = () => reviewPeers(group).forEach(peer => peer.readable());
+    const engage = () => { group.focused = true; readPeers(); };
+    const blur = event => { if (!article.contains(event.relatedTarget)) { group.focused = false; schedule(); } };
+    article.addEventListener('focusin', engage); article.addEventListener('focusout', blur);
+    article.addEventListener('pointerdown', readPeers);
+    group.readable = readable;
+    cleanups.push(() => {
+      article.removeEventListener('focusin', engage); article.removeEventListener('focusout', blur); article.removeEventListener('pointerdown', readPeers);
+    });
+  });
   const syncHeights = () => {
     // Canonical Reviews uses shared CSS rows, including when motion is disabled.
     const aligned = lists.filter(group => !group.list.closest('[data-service-reviews]'));
@@ -116,8 +201,33 @@ export function startServiceMotion(root) {
   };
   const counters = all('[data-count]').map(element => {
     const raw = element.dataset.count, end = Number(raw), decimals = (raw.split('.')[1] || '').length;
-    return { element, end, decimals, raw, start: 0, done: !Number.isFinite(end) };
+    const duration = polish && element.closest('[data-review-rating]') ? 600 : 1200;
+    return { element, end, decimals, raw, duration, start: 0, done: !Number.isFinite(end) };
   });
+  if (polish) {
+    const targets = new Map();
+    const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      const counter = targets.get(entry.target);
+      if (!counter || counter.visible === entry.isIntersecting) return;
+      counter.visible = entry.isIntersecting;
+      counter.start = 0;
+      counter.done = !entry.isIntersecting || !Number.isFinite(counter.end);
+      counter.element.textContent = counter.raw;
+      if (entry.isIntersecting) schedule();
+    }), { rootMargin: '0px 0px -10% 0px' });
+    counters.forEach(counter => {
+      // Reserve the final figure's width so suffixes and /5 stay in place.
+      remember(counter.element);
+      counter.element.style.fontVariantNumeric = 'tabular-nums';
+      const width = counter.element.getBoundingClientRect().width;
+      counter.element.style.display = 'inline-block';
+      counter.element.style.minWidth = `${width / parseFloat(getComputedStyle(counter.element).fontSize)}em`;
+      counter.visible = false; counter.done = true;
+      const target = counter.element.closest('[data-review-rating], #trust article') || counter.element;
+      targets.set(target, counter); counterObserver.observe(target);
+    });
+    cleanups.push(() => counterObserver.disconnect());
+  }
   let previousY = scrollY;
   const update = now => {
     if (disposed) return;
@@ -127,18 +237,32 @@ export function startServiceMotion(root) {
       const box = hero.getBoundingClientRect();
       // Direct scroll mapping: no catch-up frames or motion after scrolling stops.
       const heroProgress = clamp(-box.top / box.height);
-      image.style.transform = `translateY(${heroProgress * 4}%) scale(${1 + heroProgress * .07})`;
+      image.style.transform = `translateY(${heroProgress * (polish ? 1 : 4)}%) scale(${1 + heroProgress * .07})`;
     }
+    const visited = new Set();
     lists.forEach(group => {
-      const box = group.list.getBoundingClientRect();
-      const progress = clamp((innerHeight * .68 - box.top) / (box.height + innerHeight * .26));
-      focus(group, Math.min(group.reviews.length - 1, Math.floor(progress * group.reviews.length)), direction);
+      if (visited.has(group)) return;
+      const peers = reviewPeers(group);
+      peers.forEach(peer => visited.add(peer));
+      if (polish) {
+        const selection = window.getSelection();
+        const reading = peers.some(peer => peer.focused ||
+          (selection?.toString() && peer.list.contains(selection.anchorNode)) || peer.list.querySelector('[aria-expanded="true"]'));
+        if (reading) { peers.forEach(peer => peer.readable()); return; }
+        peers.forEach(peer => { peer.reading = false; });
+      }
+      // Side-by-side columns share one geometric timeline and transition start.
+      // Mobile columns are stacked and follow their own visible position.
+      const boxes = peers.map(peer => peer.list.getBoundingClientRect());
+      const top = Math.min(...boxes.map(box => box.top)), bottom = Math.max(...boxes.map(box => box.bottom));
+      const progress = clamp((innerHeight * .68 - top) / (bottom - top + innerHeight * .26));
+      peers.forEach(peer => focus(peer, Math.min(peer.reviews.length - 1, Math.floor(progress * peer.reviews.length)), direction));
     });
     counters.forEach(counter => {
       if (counter.done) return;
-      if (!counter.start && counter.element.getBoundingClientRect().top < innerHeight * .9) counter.start = now;
+      if (!counter.start && (polish ? counter.visible : counter.element.getBoundingClientRect().top < innerHeight * .9)) counter.start = now;
       if (!counter.start) return;
-      const progress = clamp((now - counter.start) / 1200);
+      const progress = clamp((now - counter.start) / counter.duration);
       counter.element.textContent = (counter.end * (1 - (1 - progress) ** 3)).toFixed(counter.decimals);
       counter.done = progress === 1; moving ||= !counter.done;
     });
@@ -151,7 +275,7 @@ export function startServiceMotion(root) {
     for (const [element, start] of pending) if (element.contains(event.target)) {
       start(); pending.delete(element); observer.unobserve(element);
     }
-    lists.forEach(group => { const index = group.reviews.findIndex(review => review.contains(event.target)); if (index >= 0) focus(group, index, 1); });
+    if (!polish) lists.forEach(group => { const index = group.reviews.findIndex(review => review.contains(event.target)); if (index >= 0) focus(group, index, 1); });
   };
   const expanded = event => { if (event.target.closest('[data-home-review] button')) requestAnimationFrame(resize); };
   // Pagination replaces cards in one location; refresh only that motion group.
@@ -171,6 +295,8 @@ export function startServiceMotion(root) {
       });
     });
     group.reviews = all('[data-home-review]', group.list); group.current = -1;
+    group.reading = false;
+    if (polish && group.focused) group.readable();
     resize();
   };
   const accordions = new Map();
@@ -199,7 +325,8 @@ export function startServiceMotion(root) {
   };
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', resize, { passive: true });
-  main.addEventListener('focusin', focusIn); main.addEventListener('click', expanded); main.addEventListener('click', toggleAccordion);
+  main.addEventListener('focusin', focusIn); main.addEventListener('click', expanded);
+  if (!polish) main.addEventListener('click', toggleAccordion);
   main.addEventListener('ilab:reviews-change', reviewsChanged);
   syncHeights(); schedule();
   document.fonts?.ready.then(() => { if (!disposed) resize(); });
