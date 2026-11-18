@@ -1,5 +1,6 @@
 import { getSiteSettings } from '@/lib/siteSettings';
 import { getReviewsSummary } from '@/lib/reviews/getReviewsSummary';
+import { getDefaultOgImage, getDefaultOgImageAlt } from '@/lib/seo/buildSeoMetadata';
 import HeroReviewsBadge from '../_components/sections/reviews/HeroReviewsBadge';
 import ReviewsCompact from '../_components/sections/reviews/ReviewsCompact';
 import { getServicesContent } from '../adsV2/sourceContent';
@@ -11,12 +12,13 @@ export async function generateMetadata({ searchParams }) {
   const locale = getAdsV3Locale((await searchParams)?.lang);
   const t = getAdsV3Content(locale);
   const canonical = `https://ilab.lv/adsV3${locale === 'ru' ? '?lang=ru' : ''}`;
+  const image = { url: getDefaultOgImage(locale), width: 1200, height: 630, alt: getDefaultOgImageAlt(locale) };
   return {
     title: t.metaTitle, description: t.metaDescription,
     robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
     alternates: { canonical },
-    openGraph: { title: t.metaTitle, description: t.metaDescription, url: canonical, siteName: 'iLab', type: 'website', locale: locale === 'ru' ? 'ru_LV' : 'lv_LV' },
-    twitter: { card: 'summary', title: t.metaTitle, description: t.metaDescription },
+    openGraph: { title: t.metaTitle, description: t.metaDescription, url: canonical, siteName: 'iLab', type: 'website', locale: locale === 'ru' ? 'ru_LV' : 'lv_LV', images: [image] },
+    twitter: { card: 'summary_large_image', title: t.metaTitle, description: t.metaDescription, images: [{ url: image.url, alt: image.alt }] },
   };
 }
 
