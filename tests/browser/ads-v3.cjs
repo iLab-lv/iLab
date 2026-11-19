@@ -223,7 +223,7 @@ const report = { viewports: [], original: [], flows: [], regressions: [], errors
       await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
       await load('/adsV3?lang=' + locale);
       assert.deepEqual(await page.locator('main > section, main > div > section').evaluateAll(sections => sections.map(section => section.id)), [
-        '', 'reviews', 'speed', 'trust', 'services', 'brands', 'locations', 'process', 'delivery', 'faq', 'final-cta',
+        '', 'reviews', 'speed', 'locations', 'trust', 'services', 'brands', 'process', 'delivery', 'faq', 'final-cta',
       ]);
       assert.equal(await page.locator('#process ol > li').count(), 4, 'original four-step process');
       assert.equal(await page.locator('#brands h2').innerText(), locale === 'ru' ? 'Профессиональный ремонт устройств популярных брендов' : 'Profesionāls remonts populārāko zīmolu ierīcēm');
