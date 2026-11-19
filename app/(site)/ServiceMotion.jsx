@@ -30,7 +30,7 @@ export default function ServiceMotion() {
       const motionOff = new URLSearchParams(location.search).get('motion') === 'off';
       root.toggleAttribute('data-headline-motion-off', motionOff);
       if (!media.matches && !motionOff) {
-        stop = startServiceMotion(root, { protectHeadlinePresentation: true });
+        stop = startServiceMotion(root, { protectHeadlinePresentation: true, batchLayoutReads: true });
       }
     };
     restart();
