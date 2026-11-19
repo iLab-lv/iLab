@@ -7,10 +7,14 @@ export function middleware(req) {
 
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set('x-pathname', pathname);
+  // Let Service's SSR entrance honor the existing diagnostic switch before paint.
+  requestHeaders.set('x-ilab-motion-off', req.nextUrl.searchParams.get('motion') === 'off' ? '1' : '0');
 
   const isAdsPreview = req.nextUrl.searchParams.get('ads') === '1';
 
   const isRigaHost = host === 'riga.ilab.lv' || isAdsPreview;
+  // Presentation metadata for the shared root; routing decisions stay below.
+  requestHeaders.set('x-ilab-advertising', isRigaHost ? '1' : '0');
 
   const isInternalAdsPath =
     pathname === '/ads' || pathname.startsWith('/ads/');

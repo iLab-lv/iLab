@@ -3,7 +3,7 @@
 const clamp = value => Math.max(0, Math.min(1, value));
 const expo = 'cubic-bezier(.16,1,.3,1)';
 
-export function startServiceMotion(root, { profile = 'service' } = {}) {
+export function startServiceMotion(root, { profile = 'service', protectHeadlinePresentation = false } = {}) {
   const polish = profile === 'ads-v3';
   const main = root?.querySelector('main');
   if (!main || !Element.prototype.animate) return () => {};
@@ -42,6 +42,10 @@ export function startServiceMotion(root, { profile = 'service' } = {}) {
 
   // Shared adapters opt in; no selectors reach into dialogs or interactive grids.
   all('[data-rise], h1:not([data-rise])').forEach(heading => {
+    // The main Service layout establishes H1 transitions in SSR CSS. Hydration,
+    // route effects and preference restarts must never restart their hidden frame.
+    // Advertising adapters do not opt in and retain their original WAAPI entrance.
+    if (protectHeadlinePresentation && heading.tagName === 'H1') return;
     const lines = heading.hasAttribute('data-rise-lines') ? [...heading.children] : [heading];
     lines.forEach((line, index) => reveal(line, [
       { transform: heading.dataset.rise === 'process' ? 'translateY(20px)' : 'translateY(100%)', opacity: 0 },
