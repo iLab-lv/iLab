@@ -52,7 +52,7 @@ const report = { viewports: [], reviews: [], errors: [], regressions: [] };
       assert.ok(factSizes[0] > factSizes[1] * 1.7, 'repair time leads the speed hierarchy');
       assert.deepEqual(await page.locator('#trust article strong').allTextContents().then(values => values.slice(0, 2)), ['13+', '20K+']);
       assert.ok((await page.locator('#trust article').last().innerText()).includes(await badge.locator(':scope > strong').innerText()), 'trust rating agrees with the hero range');
-      assert.equal(await page.locator('#speed + #trust + #services').count(), 1, 'V2 trust placement is preserved');
+      assert.equal(await page.locator('#speed + #locations + #trust + #services').count(), 1, 'locations sit between speed and trust');
       const documentTitleY = titleBox.y;
       await page.evaluate(() => scrollTo({ top: document.querySelector('[aria-labelledby="ads-v3-title"]').offsetHeight * .5, behavior: 'instant' }));
       await page.waitForFunction(() => new DOMMatrix(getComputedStyle(document.querySelector('[data-ads-v3-art]')).transform).a > 1.02);
@@ -95,10 +95,10 @@ const report = { viewports: [], reviews: [], errors: [], regressions: [] };
       }
       if (width >= 1280) {
         await page.waitForFunction(() => document.querySelectorAll('[data-service-rulers] nav button').length === 11);
-        const trustTarget = page.locator('[data-service-rulers] nav button').nth(3);
+        const trustTarget = page.locator('[data-service-rulers] nav button').nth(4);
         assert.match(await trustTarget.getAttribute('aria-label'), /iLab/);
         await trustTarget.click();
-        await page.waitForFunction(() => document.querySelectorAll('[data-service-rulers] nav button')[3].getAttribute('aria-current') === 'location');
+        await page.waitForFunction(() => document.querySelectorAll('[data-service-rulers] nav button')[4].getAttribute('aria-current') === 'location');
       }
       const reviews = page.locator('[data-service-reviews]'), branch = reviews.locator('[data-review-location]').first(), list = branch.locator('[data-home-reviews]');
       const source = await list.innerText(), rating = await branch.locator('[data-review-rating]').innerText();

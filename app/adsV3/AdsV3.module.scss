@@ -19,8 +19,8 @@
 .page .headerContacts { margin-left: auto; margin-right: 0; gap: clamp(20px, 3vw, 40px); }
 .page .branchContact { gap: 8px; > div { margin-right: 4px; } > div > a { display: block; min-height: 24px; color: var(--service-ink-2); font-size: 11px; text-align: left; &:hover { color: var(--service-signal); } } > div > span { font-size: 17px; } }
 .root .branchContact > a { width: 44px; height: 44px; border-radius: 0; }
-.headerContact, .locale { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border: 0; border-radius: 0; background: transparent; color: var(--service-ink); font: inherit; font-size: 14px; text-decoration: none; &:hover { color: var(--service-signal); } }
-.headerContact { display: none; }
+.locale { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border: 0; border-radius: 0; background: transparent; color: var(--service-ink); font: inherit; font-size: 14px; text-decoration: none; &:hover { color: var(--service-signal); } }
+.root .headerBooking { display: none; }
 .locale { min-width: 44px; padding-inline: 8px; }
 .page .hero { position: relative; isolation: isolate; background: radial-gradient(ellipse at 72% 43%, rgba(16, 127, 150, .15), transparent 58%), linear-gradient(115deg, #070a0d 15%, #081217 65%, #071014); }
 .page .heroGrid { position: relative; align-items: center; grid-template-areas: 'copy visual' 'branches branches'; }
@@ -73,7 +73,7 @@
   .headerInner { flex-wrap: wrap; gap: 12px; }
   .headerActions { margin-left: auto; }
   .page .headerContacts { display: none; }
-  .headerContact { display: inline-flex; }
+  .root .headerBooking { display: inline-flex; height: auto; min-height: 44px; padding: 10px 12px; font-size: 13px; line-height: 1.2; white-space: normal; }
   .root .page .copy { max-width: 680px; padding-block: 32px 24px; }
   .page .heroGrid { grid-template-areas: 'copy' 'branches' 'visual'; }
   .branches { padding: 16px 0; }
@@ -109,9 +109,11 @@
   .page .reviews [data-review-motion='landing'] [data-home-review] > footer { min-height: 88px; }
 }
 @media (max-width: 359px) {
+  .headerInner { gap: 8px; }
+  .logo { padding-right: 12px; }
   .actions { grid-template-columns: minmax(0, 1fr); }
   .root .dock > button { font-size: 13px; padding-inline: 8px; }
-  .headerContact { padding-inline: 8px; }
+  .root .headerBooking { padding-inline: 8px; }
 }
 
 // Mobile-only composition: the existing artwork becomes the hero's image layer.

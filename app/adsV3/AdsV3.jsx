@@ -88,7 +88,7 @@ export default function AdsV3({ locale, locations, defaultHours, pinPositions, c
             </div>)}
           </div>
           <div className={s.headerActions}>
-            <button className={s.headerContact} type="button" onClick={action('contact', 'header')}>{t.contact}</button>
+            <Button trace size="sm" className={s.headerBooking} onClick={action('booking', 'header')} data-ads-v3-action="header-booking" aria-haspopup="dialog" aria-expanded={drawer?.mode === 'booking'}>{t.book}</Button>
             <a className={s.locale} href={localeHref} hrefLang={locale === 'ru' ? 'lv' : 'ru'} lang={locale === 'ru' ? 'lv' : 'ru'} aria-label={t.switchLanguage}>{locale === 'ru' ? 'LV' : 'RU'}</a>
           </div>
         </div>
@@ -117,10 +117,10 @@ export default function AdsV3({ locale, locations, defaultHours, pinPositions, c
         </section>
         <div className={s.reviews}>{reviewsSection}</div>
         <AdsV3Speed locale={locale} action={action} />
+        <AdsV3Locations locale={locale} locations={locations} defaultHours={defaultHours} pinPositions={pinPositions} selectedLocationId={selectedLocationId} onSelectLocation={setSelectedLocationId} />
         <AdsV3Trust locale={locale} items={trustItems} />
         <AdsV3Services locale={locale} action={action} pricesHref={pricesHref} initialFault={initialInquiry.values.fault} onPrice={() => trackAdsV3Cta('prices', 'services', locale)} />
         <AdsV3Brands locale={locale} action={action} />
-        <AdsV3Locations locale={locale} locations={locations} defaultHours={defaultHours} pinPositions={pinPositions} selectedLocationId={selectedLocationId} onSelectLocation={setSelectedLocationId} />
         <AdsV3Process locale={locale} />
         <AdsV3Delivery locale={locale} action={action} />
         <AdsV3Faq locale={locale} />
