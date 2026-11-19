@@ -3,7 +3,7 @@
 const clamp = value => Math.max(0, Math.min(1, value));
 const expo = 'cubic-bezier(.16,1,.3,1)';
 
-export function startServiceMotion(root, { profile = 'service', protectHeadlinePresentation = false } = {}) {
+export function startServiceMotion(root, { profile = 'service', protectHeadlinePresentation = false, batchLayoutReads = false } = {}) {
   const polish = profile === 'ads-v3';
   const main = root?.querySelector('main');
   if (!main || !Element.prototype.animate) return () => {};
@@ -24,10 +24,30 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
     if (!entry.isIntersecting) return;
     pending.get(entry.target)?.(); pending.delete(entry.target); observer.unobserve(entry.target);
   }), { rootMargin: '0px 0px -15% 0px' });
+  // Only the Service adapter opts in. Snapshot natural entrance positions before
+  // WAAPI creation or scan-line insertion invalidates style/layout.
+  const initialTops = batchLayoutReads && !polish ? new Map() : null;
+  const initialViewport = initialTops ? { height: innerHeight, width: innerWidth, y: scrollY } : null;
+  if (initialTops) {
+    const targets = new Set(all('[data-scan]'));
+    all('[data-rise], h1:not([data-rise])').forEach(heading => {
+      if (protectHeadlinePresentation && heading.tagName === 'H1') return;
+      targets.add(heading);
+      if (heading.hasAttribute('data-rise-lines')) [...heading.children].forEach(line => targets.add(line));
+    });
+    all('[data-stagger], [data-rows]').forEach(list => [...list.children].forEach(child => targets.add(child)));
+    const home = main.querySelector('[data-homepage]');
+    if (!home) all('h2, h3').filter(h => !h.closest('details, [data-motion-skip], [data-rise], nav, [role="dialog"]') && !h.querySelector('a,button')).forEach(h => targets.add(h));
+    const statement = home?.querySelector('[data-home-statement]');
+    if (statement) [...statement.children].forEach(line => targets.add(line));
+    targets.forEach(element => initialTops.set(element, element.getBoundingClientRect().top));
+  }
+  const initialTop = element => initialTops ? initialTops.get(element) : element.getBoundingClientRect().top;
   const reveal = (element, frames, options = {}, threshold = .85) => {
-    const top = element.getBoundingClientRect().top;
-    if (top < innerHeight * threshold) {
-      animate(element, frames, { delay: Math.max(0, Math.min(900, top / innerHeight * 900)), ...options });
+    const top = initialTop(element);
+    const height = initialViewport ? initialViewport.height : innerHeight;
+    if (top < height * threshold) {
+      animate(element, frames, { delay: Math.max(0, Math.min(900, top / height * 900)), ...options });
     } else {
       const animation = animate(element, frames, options);
       animation.pause(); animation.currentTime = 0;
@@ -36,7 +56,7 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
   };
   if (!polish) {
   const scan = root.querySelector('[data-page-scan]');
-  if (scan) animate(scan, [{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(${innerHeight}px)`, opacity: 1, offset: .85 }, { transform: `translateY(${innerHeight}px)`, opacity: 0 }], { duration: 1050, easing: 'cubic-bezier(.65,0,.35,1)' });
+  if (scan) animate(scan, [{ transform: 'translateY(0)', opacity: 1 }, { transform: `translateY(${initialViewport ? initialViewport.height : innerHeight}px)`, opacity: 1, offset: .85 }, { transform: `translateY(${initialViewport ? initialViewport.height : innerHeight}px)`, opacity: 0 }], { duration: 1050, easing: 'cubic-bezier(.65,0,.35,1)' });
   const header = root.querySelector('header[role="banner"]');
   if (header) animate(header, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 700 });
 
@@ -50,7 +70,7 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
     lines.forEach((line, index) => reveal(line, [
       { transform: heading.dataset.rise === 'process' ? 'translateY(20px)' : 'translateY(100%)', opacity: 0 },
       { transform: 'translateY(0)', opacity: 1 },
-    ], { delay: Math.max(50, Math.min(900, heading.getBoundingClientRect().top / innerHeight * 900)) + index * 80 }));
+    ], { delay: Math.max(50, Math.min(900, initialTop(heading) / (initialViewport ? initialViewport.height : innerHeight) * 900)) + index * 80 }));
   });
   all('[data-scan]').forEach(element => {
     const horizontal = element.dataset.scan === 'x';
@@ -64,7 +84,7 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
       panel.play();
       if (horizontal) animate(line, [{ left: '0%', opacity: 1 }, { left: '100%', opacity: 1, offset: .83 }, { left: '100%', opacity: 0 }]);
     };
-    if (element.getBoundingClientRect().top < innerHeight * .8) start();
+    if (initialTop(element) < (initialViewport ? initialViewport.height : innerHeight) * .8) start();
     else { pending.set(element, start); observer.observe(element); }
   });
   all('[data-stagger], [data-rows]').forEach(list => [...list.children].forEach((child, index) => {
@@ -149,9 +169,19 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
   const remember = element => { if (!originalStyles.has(element)) originalStyles.set(element, element.getAttribute('style')); };
   if (image) remember(image);
   const wordAnimations = new Map();
-  const focus = (group, index, direction) => {
+  const readWordOpacities = (group, index) => {
+    const values = new Map();
+    if (group.current === -1 || (index === group.current && !group.refresh)) return values;
+    group.reviews.forEach((review, i) => {
+      if (i !== index && i !== group.current) return;
+      all('[data-review-word]', review).forEach(word => values.set(word, getComputedStyle(word).opacity));
+    });
+    return values;
+  };
+  const focus = (group, index, direction, measuredOpacities) => {
     const previous = group.current;
     if (index === previous && !group.refresh) return;
+    const wordOpacities = batchLayoutReads && !polish ? measuredOpacities || readWordOpacities(group, index) : null;
     group.current = index;
     group.refresh = false;
     group.reviews.forEach((review, i) => {
@@ -162,7 +192,7 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
         const floor = polish ? .65 : .2;
         if (previous === -1) { word.style.opacity = i === index ? '1' : String(floor); return; }
         if (i !== index && i !== previous && !polish) return;
-        const opacity = getComputedStyle(word).opacity;
+        const opacity = wordOpacities ? wordOpacities.get(word) : getComputedStyle(word).opacity;
         wordAnimations.get(word)?.cancel();
         wordAnimations.set(word, animate(word, [{ opacity }, { opacity: i === index ? 1 : floor }], {
           duration: 420, delay: polish ? Math.min(k * 5, 90) : (direction < 0 ? words.length - 1 - k : k) * 18,
@@ -191,11 +221,12 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
       article.removeEventListener('focusin', engage); article.removeEventListener('focusout', blur); article.removeEventListener('pointerdown', readPeers);
     });
   });
-  const syncHeights = () => {
+  const syncHeights = (measuredWidth) => {
+    const width = initialViewport ? measuredWidth ?? innerWidth : null;
     // Canonical Reviews uses shared CSS rows, including when motion is disabled.
     const aligned = lists.filter(group => !group.list.closest('[data-service-reviews]'));
     aligned.flatMap(group => group.reviews).forEach(review => { remember(review); review.style.minHeight = ''; });
-    if (innerWidth < 1024 || aligned.length < 2) return;
+    if ((initialViewport ? width : innerWidth) < 1024 || aligned.length < 2) return;
     const count = Math.max(...aligned.map(group => group.reviews.length));
     for (let i = 0; i < count; i++) {
       const peers = aligned.map(group => group.reviews[i]).filter(Boolean);
@@ -232,11 +263,44 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
     });
     cleanups.push(() => counterObserver.disconnect());
   }
-  let previousY = scrollY;
+  let previousY = initialViewport ? initialViewport.y : scrollY;
   const update = now => {
     if (disposed) return;
-    const direction = scrollY >= previousY ? 1 : -1; previousY = scrollY;
+    // Native viewport getters can flush pending layout too. Snapshot them before
+    // frame writes, just like element geometry; legacy adapters retain their path.
+    const viewport = initialViewport ? { height: innerHeight, y: scrollY } : null;
+    const direction = (viewport ? viewport.y : scrollY) >= previousY ? 1 : -1; previousY = viewport ? viewport.y : scrollY;
     let moving = false;
+    if (batchLayoutReads && !polish) {
+      // Fresh geometry and in-flight opacity are read before any frame writes.
+      // Keep snapshots local: scrolling, pagination and reversal must remeasure.
+      const heroBox = hero && image ? hero.getBoundingClientRect() : null;
+      const plans = lists.map(group => {
+        const box = group.list.getBoundingClientRect();
+        const progress = clamp((viewport.height * .68 - box.top) / (box.bottom - box.top + viewport.height * .26));
+        return { group, index: Math.min(group.reviews.length - 1, Math.floor(progress * group.reviews.length)) };
+      });
+      const counterTops = new Map();
+      counters.forEach(counter => {
+        if (!counter.done && !counter.start) counterTops.set(counter, counter.element.getBoundingClientRect().top);
+      });
+      plans.forEach(plan => { plan.opacities = readWordOpacities(plan.group, plan.index); });
+      if (heroBox) {
+        const heroProgress = clamp(-heroBox.top / heroBox.height);
+        image.style.transform = `translateY(${heroProgress * 4}%) scale(${1 + heroProgress * .07})`;
+      }
+      plans.forEach(plan => focus(plan.group, plan.index, direction, plan.opacities));
+      counters.forEach(counter => {
+        if (counter.done) return;
+        if (!counter.start && counterTops.get(counter) < viewport.height * .9) counter.start = now;
+        if (!counter.start) return;
+        const progress = clamp((now - counter.start) / counter.duration);
+        counter.element.textContent = (counter.end * (1 - (1 - progress) ** 3)).toFixed(counter.decimals);
+        counter.done = progress === 1; moving ||= !counter.done;
+      });
+      frame = moving ? requestAnimationFrame(update) : 0;
+      return;
+    }
     if (hero && image) {
       const box = hero.getBoundingClientRect();
       // Direct scroll mapping: no catch-up frames or motion after scrolling stops.
@@ -332,7 +396,7 @@ export function startServiceMotion(root, { profile = 'service', protectHeadlineP
   main.addEventListener('focusin', focusIn); main.addEventListener('click', expanded);
   if (!polish) main.addEventListener('click', toggleAccordion);
   main.addEventListener('ilab:reviews-change', reviewsChanged);
-  syncHeights(); schedule();
+  syncHeights(initialViewport?.width); schedule();
   document.fonts?.ready.then(() => { if (!disposed) resize(); });
   return () => {
     disposed = true; cancelAnimationFrame(frame); observer.disconnect();
