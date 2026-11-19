@@ -27,8 +27,10 @@ export default function ServiceMotion() {
     let stop = () => {};
     const restart = () => {
       stop();
-      if (!media.matches && new URLSearchParams(location.search).get('motion') !== 'off') {
-        stop = startServiceMotion(root);
+      const motionOff = new URLSearchParams(location.search).get('motion') === 'off';
+      root.toggleAttribute('data-headline-motion-off', motionOff);
+      if (!media.matches && !motionOff) {
+        stop = startServiceMotion(root, { protectHeadlinePresentation: true });
       }
     };
     restart();

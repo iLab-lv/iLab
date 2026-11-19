@@ -5,9 +5,22 @@ import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Opt-in local production profiling must not share a running dev server's output.
+  distDir: process.env.ILAB_BUILD_DIR || '.next',
   // Avoid embedded BOMs turning the first rule of concatenated Sass modules
   // into a different selector in production CSS.
   sassOptions: { charset: false },
+  async headers() {
+    // These URLs include their content hashes; new encodings need new filenames.
+    return [
+      'Geologica.c210244b.woff2',
+      'IBMPlexMono-Regular.13b16cd7.woff2',
+      'IBMPlexMono-Medium.0498bcb4.woff2',
+    ].map(font => ({
+      source: `/fonts/service/${font}`,
+      headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+    }));
+  },
   async redirects() {
     return [
       {

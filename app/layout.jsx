@@ -5,6 +5,10 @@ import '@/styles/globals.scss';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { headers } from 'next/headers';
+import { Suspense } from 'react';
+import LegacyFontResources from './_components/fonts/LegacyFontResources';
+import LegacyFontLinks from './_components/fonts/LegacyFontLinks';
+import { usesServiceTypography } from '@/lib/presentation/serviceTypographyRoutes.mjs';
 
 import { SITE_URL } from './data/site.config.js';
 import { getDefaultOgImage } from '@/lib/seo/buildSeoMetadata';
@@ -97,16 +101,16 @@ export default async function RootLayout({ children }) {
     '/';
 
   const locale = getLocaleFromPathname(pathname);
+  const advertising = headersList.get('x-ilab-advertising') === '1';
+  const advertisingHost = (headersList.get('host') || '').split(':')[0].toLowerCase() === 'riga.ilab.lv';
+  const serviceTypography = usesServiceTypography(pathname, { advertising });
 
   return (
     <html lang={locale} className={inter.className}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Geologica:CRSV,SHRP,slnt,wght@0..1,0..100,-12..0,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
+        <Suspense fallback={serviceTypography ? null : <LegacyFontLinks />}>
+          <LegacyFontResources advertisingHost={advertisingHost} />
+        </Suspense>
       </head>
       <body>
         <noscript>

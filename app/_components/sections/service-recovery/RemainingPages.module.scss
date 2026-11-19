@@ -9,6 +9,10 @@
 .hero h1 > span:not([data-signature]) { display: block; }
 .heroReviews { margin-bottom: 24px; }
 .heroLead { max-width: 54ch; margin: 32px 0 0; color: var(--service-ink); font-size: var(--service-lead-size); line-height: 1.45; }
+// Geologica equivalents of the existing 12ch / 54ch limits. Unlike ch,
+// these measures stay stable during the price hero's fallback-font phase.
+.page[data-service-recovery='cenas'] .hero h1 { max-width: 8.196em; }
+.page[data-service-recovery='cenas'] .heroLead { max-width: 36.693em; }
 .actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
 .actions button { min-height: 52px; border-radius: 0; }
 .splitHero .heroGrid { align-items: center; }

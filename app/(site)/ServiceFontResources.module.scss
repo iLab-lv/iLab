@@ -1,0 +1,54 @@
+// Lossless copies of the existing fonts. No subsetting or axis instancing.
+// Unique aliases isolate these faces from protected advertising consumers.
+@font-face {
+  font-family: 'iLab Service Geologica';
+  src: url('/fonts/service/Geologica.c210244b.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'iLab Service Mono';
+  src: url('/fonts/service/IBMPlexMono-Regular.13b16cd7.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'iLab Service Mono';
+  src: url('/fonts/service/IBMPlexMono-Medium.0498bcb4.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+// Match the existing Geologica metrics while its face is downloading.
+// Local fallbacks add no network requests; keep the system stack if unavailable.
+@font-face {
+  font-family: 'iLab Metric Fallback';
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Roboto');
+  font-style: normal;
+  font-weight: 100 499;
+  size-adjust: 106.870336%;
+  ascent-override: 91.232051%;
+  descent-override: 25.732117%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'iLab Metric Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Roboto Bold');
+  font-style: normal;
+  font-weight: 500 900;
+  size-adjust: 101.349645%;
+  ascent-override: 96.201619%;
+  descent-override: 27.133790%;
+  line-gap-override: 0%;
+}
+
+.scope {
+  --font-service-sans: 'iLab Service Geologica', 'iLab Metric Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-service-mono: 'iLab Service Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
